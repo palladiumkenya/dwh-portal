@@ -1,0 +1,63 @@
+.strip {
+  position: relative;
+  height: 9px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 30px;
+
+  background: #1ab394;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+.main {
+  background-color: #ffffff;
+}
+
+.pageHeading_reporting {
+  height: 68.7px;
+  margin-top: 10px;
+  border-radius: 0rem;
+  background: #f3f3f3;
+}
+
+.reporting-rates-card-title {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #000000;
+}
+
+.reporting-rates-card-separator {
+  margin-top: 10px;
+  margin-left: 0px;
+  width: 38.64px;
+  border: 1px solid #000000;
+  transform: rotate(90deg);
+}
+
+.reporting-rates-card-year {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  text-align: right;
+
+  color: #000000;
+}
+
+.reporting-rates-card-overview {
+  margin-top: 5px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  display: flex;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #000000;
+}

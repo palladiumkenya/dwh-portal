@@ -11,7 +11,7 @@ export default {
       {
           name: 'Reporting Rates',
           url: '/reporting-rates',
-          icon: 'icon-pencil'
+          icon: 'icon-pie-chart'
       }
     /*{
       title: true,
