@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Card, CardBody } from "reactstrap";
+import Filter from "../Shared/Filter";
+import UploadsReportingConsistency from "./UploadsReportingConstistency";
+import ReportingRatesTrends from "./ReportingRatesTrends";
 
 class ReportingRates extends Component {
   constructor(props) {
@@ -38,6 +41,12 @@ class ReportingRates extends Component {
             </div>
           </CardBody>
         </Card>
+
+        <Filter></Filter>
+
+        <UploadsReportingConsistency></UploadsReportingConsistency>
+
+        <ReportingRatesTrends></ReportingRatesTrends>
       </div>
     );
   }
