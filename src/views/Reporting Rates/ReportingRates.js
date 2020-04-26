@@ -1,55 +1,32 @@
 import React, { Component } from "react";
-import { Card, CardBody } from "reactstrap";
-import Filter from "../Shared/Filter";
-import UploadsReportingConsistency from "./UploadsReportingConstistency";
-import ReportingRatesTrends from "./ReportingRatesTrends";
+import ReportingRatesOverview from "./Overview/ReportingRatesOverview";
+import ReportingRatesByCounty from "./County/ReportingRatesByCounty";
+import ReportingRatesByServiceDeliveryPartner from "./Partner/ReportingRatesByServiceDeliveryPartner";
 
 class ReportingRates extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {};
-  }
+        this.state = {};
+    }
 
-  render() {
-    return (
-      <div className="animated fadeIn">
-        <div className="strip"></div>
-        <Card className="pageHeading_reporting">
-          <CardBody>
-            <div className="row">
-              <div className="col-5">
-                <div className="row">
-                  <div className="col-6">
-                    <div className="reporting-rates-card-title">
-                      REPORTING RATES
-                    </div>
-                  </div>
-                  <div className="col-1">
-                    <div className="reporting-rates-card-separator"></div>
-                  </div>
-                  <div className="col-5">
-                    <div className="reporting-rates-card-overview">
-                      OVERVIEW
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-7">
-                <div className="reporting-rates-card-year">Year 2020</div>
-              </div>
-            </div>
-          </CardBody>
-        </Card>
+    render() {
+        return (
+            <div className="animated fadeIn">
+                <div className="strip"></div>
 
-        <Filter></Filter>
+                <ReportingRatesOverview></ReportingRatesOverview>
 
-        <UploadsReportingConsistency></UploadsReportingConsistency>
+                <div className="strip"></div>
 
-        <ReportingRatesTrends></ReportingRatesTrends>
-      </div>
-    );
-  }
+                <ReportingRatesByCounty></ReportingRatesByCounty>
+
+                <div className="strip"></div>
+
+                <ReportingRatesByServiceDeliveryPartner></ReportingRatesByServiceDeliveryPartner>
+          </div>
+        );
+    }
 }
 
 export default ReportingRates;
