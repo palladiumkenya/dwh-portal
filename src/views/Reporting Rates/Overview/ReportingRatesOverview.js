@@ -1,31 +1,40 @@
-import React, { Component } from "react";
-import Filter from "../../Shared/Filter";
-import ReportingRatesOverviewHeader from "./ReportingRatesOverviewHeader";
-import UploadsReportingConsistency from "./UploadsReportingConstistency";
-import ReportingRatesTrends from "./ReportingRatesTrends";
-import ReportingRatesOverviewFooter from "./ReportingRatesOverviewFooter";
+import React, { Component, useState } from 'react';
+import Filter from '../../Shared/Filter';
+import ReportingRatesOverviewHeader from './ReportingRatesOverviewHeader';
+import UploadsReportingConsistency from './UploadsReportingConstistency';
+import ReportingRatesTrends from './ReportingRatesTrends';
+import ReportingRatesOverviewFooter from './ReportingRatesOverviewFooter';
 
-class ReportingRatesOverview extends Component {
-  constructor(props) {
-    super(props);
-  }
+const ReportingRatesOverview = () => {
 
-  render() {
+    const [globalFilter, setGlobalFilter] = useState({
+        county: '',
+        agency: '',
+        partner: '',
+        period:`${new Date().getFullYear()},${new Date().getMonth()}`
+    });
+
+    const updateGlobalFilter = (selection) => {
+        console.log(selection);
+        setGlobalFilter(selection);
+    };
+
+
     return (
-      <div>
-        <ReportingRatesOverviewHeader></ReportingRatesOverviewHeader>
+        <div>
+            <ReportingRatesOverviewHeader period={globalFilter?.period}></ReportingRatesOverviewHeader>
 
-        <Filter></Filter>
+            <Filter onFilterChange={updateGlobalFilter}></Filter>
 
-        <UploadsReportingConsistency></UploadsReportingConsistency>
+            <UploadsReportingConsistency globalFilter={globalFilter}></UploadsReportingConsistency>
 
-        <ReportingRatesTrends></ReportingRatesTrends>
+            <ReportingRatesTrends></ReportingRatesTrends>
 
-        <hr />
-        <ReportingRatesOverviewFooter></ReportingRatesOverviewFooter>
-        <hr />
-      </div>
+            <hr/>
+            <ReportingRatesOverviewFooter></ReportingRatesOverviewFooter>
+            <hr/>
+        </div>
     );
-  }
-}
+
+};
 export default ReportingRatesOverview;
