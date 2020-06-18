@@ -1,32 +1,26 @@
-import React, { Component } from "react";
-import ReportingRatesOverview from "./Overview/ReportingRatesOverview";
-import ReportingRatesByCounty from "./County/ReportingRatesByCounty";
-import ReportingRatesByServiceDeliveryPartner from "./Partner/ReportingRatesByServiceDeliveryPartner";
+import React, { Component, useState } from 'react';
+import ReportingRatesOverview from './Overview/ReportingRatesOverview';
+import ReportingRatesByCounty from './County/ReportingRatesByCounty';
+import ReportingRatesByServiceDeliveryPartner from './Partner/ReportingRatesByServiceDeliveryPartner';
 
-class ReportingRates extends Component {
-    constructor(props) {
-        super(props);
+const ReportingRates = () => {
 
-        this.state = {};
-    }
+    return (
+        <div className="animated fadeIn">
+            <div className="strip"></div>
 
-    render() {
-        return (
-            <div className="animated fadeIn">
-                <div className="strip"></div>
+            <ReportingRatesOverview></ReportingRatesOverview>
 
-                <ReportingRatesOverview></ReportingRatesOverview>
+            <div className="strip"></div>
 
-                <div className="strip"></div>
+            <ReportingRatesByCounty></ReportingRatesByCounty>
 
-                <ReportingRatesByCounty></ReportingRatesByCounty>
+            <div className="strip"></div>
 
-                <div className="strip"></div>
+            <ReportingRatesByServiceDeliveryPartner></ReportingRatesByServiceDeliveryPartner>
+        </div>
+    );
 
-                <ReportingRatesByServiceDeliveryPartner></ReportingRatesByServiceDeliveryPartner>
-          </div>
-        );
-    }
-}
+};
 
 export default ReportingRates;
