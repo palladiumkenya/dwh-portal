@@ -15,7 +15,6 @@ const ReportingRatesOverview = () => {
     });
 
     const updateGlobalFilter = (selection) => {
-        console.log(selection);
         setGlobalFilter(selection);
     };
 
@@ -28,7 +27,7 @@ const ReportingRatesOverview = () => {
 
             <UploadsReportingConsistency globalFilter={globalFilter}></UploadsReportingConsistency>
 
-            <ReportingRatesTrends></ReportingRatesTrends>
+            <ReportingRatesTrends globalFilter={globalFilter}></ReportingRatesTrends>
 
             <hr/>
             <ReportingRatesOverviewFooter></ReportingRatesOverviewFooter>
