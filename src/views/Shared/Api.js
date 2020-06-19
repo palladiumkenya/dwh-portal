@@ -27,7 +27,7 @@ export const getYearMonths = (minYear) => {
     for (let y = maxYear; y >= minYear; y--) {
         const maxMonth = y === maxYear ? new Date().getMonth() : 11;
         for (let m = maxMonth; m >= 0; m--) {
-            yearMonths.push({ value: `${y},${m}`, display: `${monthNames[m]},${y}` });
+            yearMonths.push({ value: `${y},${m}`, display: `${monthNames[m]}, ${y}` });
         }
     }
     return yearMonths;
