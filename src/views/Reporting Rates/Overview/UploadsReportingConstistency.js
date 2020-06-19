@@ -1,14 +1,11 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
+import moment from 'moment';
 import { getAll } from '../../Shared/Api';
 
 const UploadsReportingConsistency = ({ globalFilter }) => {
+    const monthYear = moment(globalFilter.period, 'YYYY,M').format('MMMM YYYY');
     const [expected, setExpected] = useState(0);
-    const [overallStats, setOverall] = useState({
-        overall: [],
-        stats: 0,
-        statsPerc: 0
-    });
     const [consistnecyStats, setConsistnecy] = useState({
         consistnecy: [],
         stats: 0,
@@ -38,7 +35,7 @@ const UploadsReportingConsistency = ({ globalFilter }) => {
     };
 
     const getPerc = (count, total) => {
-        return (count / total) * 100;
+        return parseInt((count / total) * 100);
     };
 
     const loadConsistnecy = async () => {
@@ -48,16 +45,27 @@ const UploadsReportingConsistency = ({ globalFilter }) => {
             params = { ...globalFilter };
         }
 
-        const data = await getAll('manifests/overall/CT', params);
-        setOverall({
-            overall: [],
-            stats: data.overall,
-            statsPerc: getPerc(data.overall , expected)
+        const data = await getAll('manifests/consistency/CT', params);
+        setConsistnecy({
+            consistnecy: [],
+            stats: data.consistency,
+            statsPerc: getPerc(data.consistency , expected)
         });
     };
 
-    const loadRecency = () => {
+    const loadRecency = async () => {
+        let params = null;
 
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+
+        const data = await getAll('manifests/recency/CT', params);
+        setRecency({
+            recency: [],
+            stats: data.recency,
+            statsPerc: getPerc(data.recency , expected)
+        });
     };
 
     return (
@@ -84,20 +92,20 @@ const UploadsReportingConsistency = ({ globalFilter }) => {
             <div className="col-4">
                 <Card className="card-uploads-consistency-rates">
                     <CardHeader className="expected-uploads-header">
-                        OVERALL REPORTING RATES
+                        RECENCY REPORTING RATES
                     </CardHeader>
                     <CardBody
                         className="align-items-center justify-content-center"
                         style={{ backgroundColor: '#F6F6F6', height: '100px' }}
                     >
                         <div className="col-12" style={{ textAlign: 'center' }}>
-                            <span className="overall-rates-figure">{overallStats.stats}</span>&nbsp;
-                            <sup className="overall-rates-sup">{overallStats.statsPerc} %</sup>
+                            <span className="overall-rates-figure">{recencyStats.stats}</span>&nbsp;
+                            <sup className="overall-rates-sup"> {recencyStats.statsPerc ? recencyStats.statsPerc:0}%</sup>
                         </div>
                         <div className="col-12" style={{ textAlign: 'center' }}>
-                <span className="overall-rates-text">
-                  CARE & TREATMENT {globalFilter.period}
-                </span>
+                            <span className="overall-rates-text">
+                                CARE & TREATMENT { monthYear }
+                            </span>
                         </div>
                     </CardBody>
                 </Card>
@@ -113,12 +121,12 @@ const UploadsReportingConsistency = ({ globalFilter }) => {
                     >
                         <div className="col-12" style={{ textAlign: 'center' }}>
                             <span className="consistency-reporting-figure">{consistnecyStats.stats}</span>
-                            <sup className="consistency-reporting-sup">{consistnecyStats.statsPerc} %</sup>
+                            <sup className="consistency-reporting-sup"> { consistnecyStats.statsPerc ? consistnecyStats.statsPerc:0 }%</sup>
                         </div>
                         <div className="col-12" style={{ textAlign: 'center' }}>
-                <span className="consistency-reporting-text">
-                  CONSISTENCY FOR {globalFilter.period}
-                </span>
+                            <span className="consistency-reporting-text">
+                                CONSISTENCY FOR { monthYear.toUpperCase() }
+                            </span>
                         </div>
                     </CardBody>
                 </Card>
