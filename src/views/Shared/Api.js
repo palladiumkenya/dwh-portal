@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment'
 
 const url = 'http://localhost:7000/api/';
 
@@ -19,16 +20,16 @@ export const getAll = async (endpoint, params) => {
 
 export const getYearMonths = (minYear) => {
     const yearMonths = [];
-    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-        'July', 'August', 'September', 'October', 'November', 'December'
-    ];
-    const maxYear = new Date().getFullYear();
+    const startDate = moment([minYear]);
+    const endDate = moment();
 
-    for (let y = maxYear; y >= minYear; y--) {
-        const maxMonth = y === maxYear ? new Date().getMonth() : 11;
-        for (let m = maxMonth; m >= 0; m--) {
-            yearMonths.push({ value: `${y},${m}`, display: `${monthNames[m]}, ${y}` });
+    if (endDate.isAfter(startDate)) {
+        while (endDate.isAfter(startDate)) {
+            // yearMonths.push({ value: endDate.year() + "," + endDate.month(), display: endDate.format("MMMM, YYYY")});
+            yearMonths.push({ value: endDate.format('YYYY,M'), display: endDate.format("MMMM, YYYY")});
+            endDate.subtract(1, 'month');
         }
     }
+    
     return yearMonths;
 };
