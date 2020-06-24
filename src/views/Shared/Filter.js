@@ -8,7 +8,7 @@ const Filter = ({ onFilterChange }) => {
         county: '',
         agency: '',
         partner: '',
-        period: `${new Date().getFullYear()},${new Date().getMonth()}`
+        period: `${new Date().getFullYear()},${new Date().getMonth() + 1}`
     });
 
     const [periods, setPeriods] = useState([]);
