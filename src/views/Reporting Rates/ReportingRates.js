@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React from 'react';
 import ReportingRatesOverview from './Overview/ReportingRatesOverview';
 import ReportingRatesByCounty from './County/ReportingRatesByCounty';
 import ReportingRatesByServiceDeliveryPartner from './Partner/ReportingRatesByServiceDeliveryPartner';

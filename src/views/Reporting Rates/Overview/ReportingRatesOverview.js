@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import Filter from '../../Shared/Filter';
 import ReportingRatesOverviewHeader from './ReportingRatesOverviewHeader';
 import UploadsReportingConsistency from './UploadsReportingConstistency';
