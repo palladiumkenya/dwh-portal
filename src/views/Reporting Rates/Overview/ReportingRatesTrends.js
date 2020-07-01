@@ -116,7 +116,7 @@ const ReportingRatesTrends = ({ globalFilter }) => {
             legend: { enabled: false },
             credits: { enabled: true },
             responsive: { rules: [ { condition: { maxWidth: 500, }, chartOptions: { legend: { enabled: false } } } ] },
-            series: [ { data: Object.values(data).slice(numberOfMonths*-1), color: "#1AB394" } ]
+            series: [ { data: Object.values(data).slice(numberOfMonths*-1), color: "#2F4050" } ]
         });
     };
 
