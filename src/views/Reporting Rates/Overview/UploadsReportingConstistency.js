@@ -30,7 +30,7 @@ const UploadsReportingConsistency = ({ globalFilter }) => {
             params = { ...globalFilter };
         }
 
-        const data = await getAll('manifests/expected/CT', params);
+        const data = await getAll('manifests/expected/' + params.docket, params);
         setExpected(data.expected);
     };
 
@@ -45,7 +45,7 @@ const UploadsReportingConsistency = ({ globalFilter }) => {
             params = { ...globalFilter };
         }
 
-        const data = await getAll('manifests/consistency/CT', params);
+        const data = await getAll('manifests/consistency/' + params.docket, params);
         setConsistnecy({
             consistnecy: [],
             stats: data.consistency,
@@ -60,7 +60,7 @@ const UploadsReportingConsistency = ({ globalFilter }) => {
             params = { ...globalFilter };
         }
 
-        const data = await getAll('manifests/recency/CT', params);
+        const data = await getAll('manifests/recency/' + params.docket, params);
         setRecency({
             recency: [],
             stats: data.recency,
@@ -104,7 +104,7 @@ const UploadsReportingConsistency = ({ globalFilter }) => {
                         </div>
                         <div className="col-12" style={{ textAlign: 'center' }}>
                             <span className="overall-rates-text">
-                                CARE & TREATMENT { monthYear }
+                                { globalFilter.dockets[globalFilter.docket] } { monthYear }
                             </span>
                         </div>
                     </CardBody>

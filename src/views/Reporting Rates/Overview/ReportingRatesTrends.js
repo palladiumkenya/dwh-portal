@@ -42,7 +42,7 @@ const ReportingRatesTrends = ({ globalFilter }) => {
         }
 
         delete params.period;
-        const result = await getAll('manifests/recency/trends/CT', params);
+        const result = await getAll('manifests/recency/trends/' + params.docket, params);
         const months = {};
         const data = {};
         const periodDate = moment(globalFilter.period, 'YYYY,M');
@@ -88,7 +88,7 @@ const ReportingRatesTrends = ({ globalFilter }) => {
 
         for (let i = 0; i < numberOfMonths; i++) {
             params.period = startDate.format('YYYY,M');
-            let res = await getAll('manifests/consistency/trends/CT', params);
+            let res = await getAll('manifests/consistency/trends/' + params.docket, params);
             result = result.concat(res);
             startDate.add(1, 'month');
         }
@@ -126,7 +126,7 @@ const ReportingRatesTrends = ({ globalFilter }) => {
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
                         <span className="trends-text">
-                            TRENDS IN REPORTING CARE & TREATMENT (RECENCY)
+                            TRENDS IN REPORTING ({globalFilter.dockets[globalFilter.docket]} - RECENCY)
                         </span>
                     </CardHeader>
                     <CardBody className="trends-body">
@@ -140,7 +140,7 @@ const ReportingRatesTrends = ({ globalFilter }) => {
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
                         <span className="trends-text">
-                            TRENDS IN REPORTING CARE & TREATMENT (CONSISTENCY)
+                            TRENDS IN REPORTING ({globalFilter.dockets[globalFilter.docket]} - CONSISTENCY)
                         </span>
                     </CardHeader>
                     <CardBody className="trends-body">
