@@ -7,7 +7,7 @@ import ReportingRatesOverviewFooter from './ReportingRatesOverviewFooter';
 import { Badge, Col, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
 
 const ReportingRatesOverview = () => {
-  
+
   const [globalFilter, setGlobalFilter] = useState({
     dockets: { "CT": "CARE & TREATMENT", "HTS": "HIV TESTING SERVICES", "PKV": "PATIENT KEY VALUES" },
     docket: "CT",
@@ -16,11 +16,11 @@ const ReportingRatesOverview = () => {
     partner: '',
     period: `${new Date().getFullYear()},${new Date().getMonth()}`
   });
-  
+
   const updateGlobalFilter = (selection) => {
     setGlobalFilter(selection);
   };
-  
+
   const changeDocketTo = (tab) => {
     let params = { ...globalFilter };
     params.docket = tab;
@@ -31,7 +31,7 @@ const ReportingRatesOverview = () => {
     return (
       Object.keys(globalFilter.dockets).map((value) => {
         return (
-          <NavItem>
+          <NavItem key={value}>
             <NavLink active={globalFilter.docket === value} onClick={() => { changeDocketTo(value); }} >
               {globalFilter.dockets[value]}
             </NavLink>

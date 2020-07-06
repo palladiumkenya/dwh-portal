@@ -26,7 +26,7 @@ const CountyReports = ({ globalFilter }) => {
         }
 
         const result = await getAll('manifests/emrdistribution/CT?reportingType=county', params);
-        const counties = result.map(({ county: county  }) => county);
+        const counties = result.map(({ county  }) => county);
         const counties_series = result.map(({ facilities_count }) => parseInt(facilities_count, 10));
 
         setEmrDistribution({
@@ -52,7 +52,7 @@ const CountyReports = ({ globalFilter }) => {
         }
 
         const result = await getAll('manifests/overallreporting/CT?reportingType=county', params);
-        const counties = result.map(({ county: county  }) => county);
+        const counties = result.map(({ county  }) => county);
         const counties_series = result.map(({ facilities_count }) => parseInt(facilities_count, 10));
 
         setOverAllReportingCTByCounty({
@@ -77,7 +77,7 @@ const CountyReports = ({ globalFilter }) => {
         }
 
         const result = await getAll('manifests/overallreporting/PKV?reportingType=county', params);
-        const counties = result.map(({ county: county  }) => county);
+        const counties = result.map(({ county  }) => county);
         const counties_series = result.map(({ facilities_count }) => parseInt(facilities_count, 10));
 
         setOverAllReportingPKVByCounty({
