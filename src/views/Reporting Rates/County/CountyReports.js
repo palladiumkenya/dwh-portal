@@ -14,8 +14,8 @@ const CountyReports = ({ globalFilter }) => {
 
     useEffect(() => {
         loademrDistribution();
-        loadOverAllReportingRatesByCounty();
-        loadOverAllReportingPKVByCounty();
+        loadOverAllReportingRatesCTByCounty();
+        loadOverAllReportingCTPKVByCounty();
     }, [globalFilter]);
 
     const loademrDistribution = async () => {
@@ -25,7 +25,7 @@ const CountyReports = ({ globalFilter }) => {
             params = { ...globalFilter };
         }
 
-        const result = await getAll('manifests/emrdistribution/CT', params);
+        const result = await getAll('manifests/emrdistribution/CT?reportingType=county', params);
         const counties = result.map(({ county: county  }) => county);
         const counties_series = result.map(({ facilities_count }) => parseInt(facilities_count, 10));
 
@@ -33,55 +33,64 @@ const CountyReports = ({ globalFilter }) => {
             chart: { type: 'bar' },
             title: { text: '' },
             subtitle: { text: '' },
-            xAxis: { categories: counties, title: { text: null } },
-            yAxis: { min: 0, title: { text: 'Number of Facilities by county', align: 'high' }, labels: { overflow: 'justify' } },
+            xAxis: { categories: counties, title: { text: null }, visible: true },
+            yAxis: { min: 0, title: { text: 'Number of Facilities by county', align: 'high' }, labels: { overflow: 'justify' }, visible: true },
             tooltip: { valueSuffix: '' },
             plotOptions: { bar: { dataLabels: { enabled: true } } },
-            legend: { layout: 'vertical', align: 'center', verticalAlign: 'top', floating: true, borderWidth: 1, backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF', shadow: true },
+            legend: { layout: 'vertical', align: 'center', verticalAlign: 'top', floating: true, borderWidth: 0, backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF', shadow: true },
             credits: { enabled: false },
+            responsive: { rules: [ { chartOptions: { legend: { enabled: false } } } ] },
             series: [{ data: counties_series, color: "#2F4050;", name: 'Distribution of EMR Sites by County' }]
         });
     };
 
-    const loadOverAllReportingRatesByCounty = async () => {
+    const loadOverAllReportingRatesCTByCounty = async () => {
         let params = null;
 
         if (globalFilter) {
             params = { ...globalFilter };
         }
+
+        const result = await getAll('manifests/overallreporting/CT?reportingType=county', params);
+        const counties = result.map(({ county: county  }) => county);
+        const counties_series = result.map(({ facilities_count }) => parseInt(facilities_count, 10));
 
         setOverAllReportingCTByCounty({
             chart: { type: 'bar' },
             title: { text: '' },
             subtitle: { text: '' },
-            xAxis: { categories: [], title: { text: null } },
+            xAxis: { categories: counties, title: { text: null } },
             yAxis: { min: 0, title: { text: 'Percentage (%) of uploads by county', align: 'high' }, labels: { overflow: 'justify' } },
             tooltip: { valueSuffix: '' },
             plotOptions: { bar: { dataLabels: { enabled: true } } },
             legend: { layout: 'vertical', align: 'center', verticalAlign: 'top', floating: true, borderWidth: 1, backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF', shadow: true },
             credits: { enabled: false },
-            series: [{ data: [], color: "#59A14F", name: 'Overall Reporting Care & Treatment by County' }]
+            series: [{ data: counties_series, color: "#59A14F", name: 'Overall Reporting Care & Treatment by County' }]
         });
     };
 
-    const loadOverAllReportingPKVByCounty = async () => {
+    const loadOverAllReportingCTPKVByCounty = async () => {
         let params = null;
 
         if (globalFilter) {
             params = { ...globalFilter };
         }
 
+        const result = await getAll('manifests/overallreporting/PKV?reportingType=county', params);
+        const counties = result.map(({ county: county  }) => county);
+        const counties_series = result.map(({ facilities_count }) => parseInt(facilities_count, 10));
+
         setOverAllReportingPKVByCounty({
             chart: { type: 'bar' },
             title: { text: '' },
             subtitle: { text: '' },
-            xAxis: { categories: [], title: { text: null } },
+            xAxis: { categories: counties, title: { text: null } },
             yAxis: { min: 0, title: { text: 'Reporting Rate', align: 'high' }, labels: { overflow: 'justify' } },
             tooltip: { valueSuffix: '' },
             plotOptions: { bar: { dataLabels: { enabled: true } } },
             legend: { layout: 'vertical', align: 'center', verticalAlign: 'top', floating: true, borderWidth: 1, backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF', shadow: true },
             credits: { enabled: false },
-            series: [{ data: [], color: "#F28E2B", name: 'Overall Reporting - PKVs by County' }]
+            series: [{ data: counties_series, color: "#F28E2B", name: 'Overall Reporting - PKVs by County' }]
         });
     };
 

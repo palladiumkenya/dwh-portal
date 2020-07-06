@@ -1,29 +1,34 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import ServiceDeliveryPartnerHeader from "./ServiceDeliveryPartnerHeader";
 import Filter from "../../Shared/Filter";
 import ServiceDeliveryPartnerFooter from "./ServiceDeliveryPartnerFooter";
 import ServiceDeliveryPartnerReports from "./ServiceDeliveryPartnerReports";
 
-export class ReportingRatesByServiceDeliveryPartner extends Component {
-    constructor(props) {
-        super(props);
-    }
+const ReportingRatesByServiceDeliveryPartner = () => {
+    const [globalFilter, setGlobalFilter] = useState({
+        county: '',
+        agency: '',
+        partner: '',
+        period:`${new Date().getFullYear()},${new Date().getMonth()}`
+    });
 
-    render() {
-        return (
-            <div>
-                <ServiceDeliveryPartnerHeader></ServiceDeliveryPartnerHeader>
+    const updateGlobalFilter = (selection) => {
+        setGlobalFilter(selection);
+    };
 
-                <Filter></Filter>
+    return (
+        <div>
+            <ServiceDeliveryPartnerHeader period={globalFilter?.period}></ServiceDeliveryPartnerHeader>
 
-                <ServiceDeliveryPartnerReports></ServiceDeliveryPartnerReports>
+            <Filter onFilterChange={updateGlobalFilter}></Filter>
 
-                <hr />
-                <ServiceDeliveryPartnerFooter></ServiceDeliveryPartnerFooter>
-                <hr />
-            </div>
-        );
-    }
-}
+            <ServiceDeliveryPartnerReports globalFilter={globalFilter}></ServiceDeliveryPartnerReports>
+
+            <hr />
+            <ServiceDeliveryPartnerFooter></ServiceDeliveryPartnerFooter>
+            <hr />
+        </div>
+    );
+};
 
 export default ReportingRatesByServiceDeliveryPartner;
