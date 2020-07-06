@@ -5,6 +5,8 @@ import { getAll, getYearMonths } from './Api';
 const Filter = ({ onFilterChange }) => {
 
     const [activeSelection, setActiveSelection] = useState({
+        dockets: { "CT": "CARE & TREATMENT", "HTS": "HIV TESTING SERVICES", "PKV": "PATIENT KEY VALUES" },
+        docket: "CT",
         county: '',
         agency: '',
         partner: '',
