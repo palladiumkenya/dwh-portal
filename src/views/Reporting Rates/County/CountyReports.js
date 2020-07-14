@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
+import Highstock from 'highcharts/highstock';
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from 'moment';
 
 const CountyReports = ({ globalFilter }) => {
+    const monthYear = moment(globalFilter.period, 'YYYY,M').format('MMMM YYYY');
     const [emrDistribution, setEmrDistribution] = useState({
     });
 
-    const [overAllReportingCT, setOverAllReportingCTByCounty] = useState({});
+    const [recencyOfReportingByCounty, setRecencyOfReportingByCounty] = useState({});
 
-    const [overAllReportingPKVByCounty, setOverAllReportingPKVByCounty] = useState({});
+    const [consistencyOfReportingByCounty, setConsistencyOfReportingByCounty] = useState({});
 
     useEffect(() => {
         loademrDistribution();
-        loadOverAllReportingRatesCTByCounty();
-        loadOverAllReportingCTPKVByCounty();
+        loadRecencyOfReportingByCounty();
+        loadConsistencyOfReportingByCounty();
     }, [globalFilter]);
 
     const loademrDistribution = async () => {
@@ -25,7 +28,7 @@ const CountyReports = ({ globalFilter }) => {
             params = { ...globalFilter };
         }
 
-        const result = await getAll('manifests/emrdistribution/CT?reportingType=county', params);
+        const result = await getAll('manifests/emrdistribution/' + params.docket + '?reportingType=county', params);
         const counties = result.map(({ county  }) => county);
         const counties_series = result.map(({ facilities_count }) => parseInt(facilities_count, 10));
 
@@ -33,8 +36,8 @@ const CountyReports = ({ globalFilter }) => {
             chart: { type: 'bar' },
             title: { text: '' },
             subtitle: { text: '' },
-            xAxis: { categories: counties, title: { text: null }, visible: true },
-            yAxis: { min: 0, title: { text: 'Number of Facilities by county', align: 'high' }, labels: { overflow: 'justify' }, visible: true },
+            xAxis: { categories: counties, title: { text: null }, visible: true, scrollbar: { enabled: true } },
+            yAxis: { min: 0, max: 200, title: { text: 'Number of Facilities by county', align: 'high' }, labels: { overflow: 'justify' }, visible: true },
             tooltip: { valueSuffix: '' },
             plotOptions: { bar: { dataLabels: { enabled: true } } },
             legend: { layout: 'vertical', align: 'center', verticalAlign: 'top', floating: true, borderWidth: 0, backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF', shadow: true },
@@ -44,53 +47,53 @@ const CountyReports = ({ globalFilter }) => {
         });
     };
 
-    const loadOverAllReportingRatesCTByCounty = async () => {
+    const loadRecencyOfReportingByCounty = async () => {
         let params = null;
 
         if (globalFilter) {
             params = { ...globalFilter };
         }
 
-        const result = await getAll('manifests/overallreporting/CT?reportingType=county', params);
+        const result = await getAll('manifests/recencyreportingbycounty/' + params.docket, params);
         const counties = result.map(({ county  }) => county);
-        const counties_series = result.map(({ facilities_count }) => parseInt(facilities_count, 10));
+        const counties_series = result.map(({ Percentage }) => parseInt(Percentage, 10));
 
-        setOverAllReportingCTByCounty({
+        setRecencyOfReportingByCounty({
             chart: { type: 'bar' },
             title: { text: '' },
             subtitle: { text: '' },
             xAxis: { categories: counties, title: { text: null } },
-            yAxis: { min: 0, title: { text: 'Percentage (%) of uploads by county', align: 'high' }, labels: { overflow: 'justify' } },
+            yAxis: { min: 0, max: 120, title: { text: 'Percentage (%) consistency of uploads', align: 'high' }, labels: { overflow: 'justify' } },
             tooltip: { valueSuffix: '' },
             plotOptions: { bar: { dataLabels: { enabled: true } } },
             legend: { layout: 'vertical', align: 'center', verticalAlign: 'top', floating: true, borderWidth: 1, backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF', shadow: true },
             credits: { enabled: false },
-            series: [{ data: counties_series, color: "#59A14F", name: 'Overall Reporting Care & Treatment by County' }]
+            series: [{ data: counties_series, color: "#59A14F" }]
         });
     };
 
-    const loadOverAllReportingCTPKVByCounty = async () => {
+    const loadConsistencyOfReportingByCounty = async () => {
         let params = null;
 
         if (globalFilter) {
             params = { ...globalFilter };
         }
 
-        const result = await getAll('manifests/overallreporting/PKV?reportingType=county', params);
-        const counties = result.map(({ county  }) => county);
-        const counties_series = result.map(({ facilities_count }) => parseInt(facilities_count, 10));
+        const result = await getAll('manifests/consistencyreportingbycountypartner/' + params.docket + '?reportingType=county', params);
+        const counties = Object.keys(result);
+        const counties_series = Object.values(result);
 
-        setOverAllReportingPKVByCounty({
+        setConsistencyOfReportingByCounty({
             chart: { type: 'bar' },
             title: { text: '' },
             subtitle: { text: '' },
             xAxis: { categories: counties, title: { text: null } },
-            yAxis: { min: 0, title: { text: 'Reporting Rate', align: 'high' }, labels: { overflow: 'justify' } },
+            yAxis: { min: 0, max: 100, title: { text: 'Reporting Rate', align: 'high' }, labels: { overflow: 'justify' } },
             tooltip: { valueSuffix: '' },
             plotOptions: { bar: { dataLabels: { enabled: true } } },
             legend: { layout: 'vertical', align: 'center', verticalAlign: 'top', floating: true, borderWidth: 1, backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF', shadow: true },
             credits: { enabled: false },
-            series: [{ data: counties_series, color: "#F28E2B", name: 'Overall Reporting - PKVs by County' }]
+            series: [{ data: counties_series, color: "#F28E2B", name: 'Consistency Of Reporting - ' + params.docket + ' by County' }]
         });
     };
 
@@ -103,7 +106,7 @@ const CountyReports = ({ globalFilter }) => {
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={emrDistribution} />
+                            <HighchartsReact highcharts={Highstock} options={emrDistribution} />
                         </div>
                     </CardBody>
                 </Card>
@@ -112,11 +115,11 @@ const CountyReports = ({ globalFilter }) => {
             <div className="col-4">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        Overall Reporting - Care & Treatment by County March 2020
+                        Recency Of Reporting - { globalFilter.dockets[globalFilter.docket] } by County { monthYear }
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={overAllReportingCT} />
+                            <HighchartsReact highcharts={Highcharts} options={recencyOfReportingByCounty} />
                         </div>
                     </CardBody>
                 </Card>
@@ -125,11 +128,11 @@ const CountyReports = ({ globalFilter }) => {
             <div className="col-4">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        Overall Reporting - PKVs by County March 2020
+                        Consistency Of Reporting - { globalFilter.dockets[globalFilter.docket] } by County { monthYear }
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={overAllReportingPKVByCounty} />
+                            <HighchartsReact highcharts={Highcharts} options={consistencyOfReportingByCounty} />
                         </div>
                     </CardBody>
                 </Card>

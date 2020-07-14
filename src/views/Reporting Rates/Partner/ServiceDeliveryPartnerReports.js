@@ -3,19 +3,21 @@ import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from 'moment';
 
 const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
+    const monthYear = moment(globalFilter.period, 'YYYY,M').format('MMMM YYYY');
     const [emrDistributionByPartner, setEmrDistributionByPartner] = useState({
     });
 
-    const [overAllReportingByPartnerCT, setOverAllReportingCTByCounty] = useState({});
+    const [recencyOfReportingByPartner, setRecencyOfReportingByPartner] = useState({});
 
-    const [overAllReportingByPartnerPKV, setOverAllReportingPKVByPartner] = useState({});
+    const [consistencyOfReportingByPartner, setConsistencyOfReportingByPartner] = useState({});
 
     useEffect(() => {
         loademrDistributionByPartner();
-        loadOverAllReportingRatesCTByPartner();
-        loadOverAllReportingPKVByPartner();
+        loadRecencyOfReportingByPartner();
+        loadConsistencyOfReportingByPartner();
     }, [globalFilter]);
 
     const loademrDistributionByPartner = async () => {
@@ -25,7 +27,7 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
             params = { ...globalFilter };
         }
 
-        const result = await getAll('manifests/emrdistribution/CT?reportingType=partner', params);
+        const result = await getAll('manifests/emrdistribution/' + params.docket + '?reportingType=partner', params);
         const partners = result.map(({ partner  }) => partner);
         const partners_series = result.map(({ facilities_count }) => parseInt(facilities_count, 10));
 
@@ -34,7 +36,7 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
             title: { text: '' },
             subtitle: { text: '' },
             xAxis: { categories: partners, title: { text: null } },
-            yAxis: { min: 0, title: { text: 'Number of Facilities by Partner', align: 'high' }, labels: { overflow: 'justify' } },
+            yAxis: { min: 0, max: 200, title: { text: 'Number of Facilities by Partner', align: 'high' }, labels: { overflow: 'justify' } },
             tooltip: { valueSuffix: '' },
             plotOptions: { bar: { dataLabels: { enabled: true } } },
             legend: { layout: 'vertical', align: 'right', verticalAlign: 'top', x: -40, y: 80, floating: true, borderWidth: 1, backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF', shadow: true },
@@ -43,18 +45,18 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
         });
     };
 
-    const loadOverAllReportingRatesCTByPartner = async () => {
+    const loadRecencyOfReportingByPartner = async () => {
         let params = null;
 
         if (globalFilter) {
             params = { ...globalFilter };
         }
 
-        const result = await getAll('manifests/overallreporting/CT?reportingType=partner', params);
+        const result = await getAll('manifests/recencyreportingbypartner/' + params.docket, params);
         const partners = result.map(({ partner  }) => partner);
-        const partners_series = result.map(({ facilities_count }) => parseInt(facilities_count, 10));
+        const partners_series = result.map(({ Percentage }) => parseInt(Percentage, 10));
 
-        setOverAllReportingCTByCounty({
+        setRecencyOfReportingByPartner({
             chart: { type: 'bar' },
             title: { text: '' },
             subtitle: { text: '' },
@@ -68,28 +70,28 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
         });
     };
 
-    const loadOverAllReportingPKVByPartner = async () => {
+    const loadConsistencyOfReportingByPartner = async () => {
         let params = null;
 
         if (globalFilter) {
             params = { ...globalFilter };
         }
 
-        const result = await getAll('manifests/overallreporting/PKV?reportingType=partner', params);
-        const partners = result.map(({ partner  }) => partner);
-        const partners_series = result.map(({ facilities_count }) => parseInt(facilities_count, 10));
+        const result = await getAll('manifests/consistencyreportingbycountypartner/' + params.docket + '?reportingType=partner', params);
+        const partners = Object.keys(result);
+        const partners_series = Object.values(result);
 
-        setOverAllReportingPKVByPartner({
+        setConsistencyOfReportingByPartner({
             chart: { type: 'bar' },
             title: { text: '' },
             subtitle: { text: '' },
             xAxis: { categories: partners, title: { text: null } },
-            yAxis: { min: 0, title: { text: 'Percentage (%) of Uploaded PKVs by Partner', align: 'high' }, labels: { overflow: 'justify' } },
+            yAxis: { min: 0, max: 100, title: { text: 'Percentage (%) of Uploaded PKVs by Partner', align: 'high' }, labels: { overflow: 'justify' } },
             tooltip: { valueSuffix: '' },
             plotOptions: { bar: { dataLabels: { enabled: true } } },
             legend: { layout: 'vertical', align: 'right', verticalAlign: 'top', x: -40, y: 80, floating: true, borderWidth: 1, backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF', shadow: true },
             credits: { enabled: false },
-            series: [{ data: partners_series, color: "#F28E2B", name: 'Overall Reporting - PKVs by Partner March 2020' }]
+            series: [{ data: partners_series, color: "#F28E2B", name: 'Consistency Of Reporting - ' + params.docket + ' by Partner ' + monthYear }]
         });
     };
 
@@ -111,11 +113,11 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
             <div className="col-4">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        Overall Reporting - Care & Treatement by Partner March 2020
+                        Recency Of Reporting - { globalFilter.dockets[globalFilter.docket] } by Partner { monthYear }
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={overAllReportingByPartnerCT} />
+                            <HighchartsReact highcharts={Highcharts} options={recencyOfReportingByPartner} />
                         </div>
                     </CardBody>
                 </Card>
@@ -124,11 +126,11 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
             <div className="col-4">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        Overall Reporting - PKVs by Partner March 2020
+                        Consistency Of Reporting - { globalFilter.dockets[globalFilter.docket] } by Partner { monthYear }
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={overAllReportingByPartnerPKV} />
+                            <HighchartsReact highcharts={Highcharts} options={consistencyOfReportingByPartner} />
                         </div>
                     </CardBody>
                 </Card>

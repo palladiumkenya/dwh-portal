@@ -39,7 +39,7 @@ const ReportingRatesOverview = () => {
         );
       })
     );
-  }
+  };
 
   const renderTabContent = () => {
     return (
@@ -48,7 +48,7 @@ const ReportingRatesOverview = () => {
         <ReportingRatesTrends globalFilter={globalFilter}></ReportingRatesTrends>
       </TabPane>
     );
-  }
+  };
 
   return (
     <div>
