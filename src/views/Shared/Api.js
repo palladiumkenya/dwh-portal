@@ -3,7 +3,7 @@ import moment from 'moment'
 let url = null;
 
 if(process.env.NODE_ENV.trim() === 'production') {
-    url = 'https://data.kenyahmis.org:8082/';
+    url = 'https://data.kenyahmis.org:8082/api/';
 } else {
     url = 'http://localhost:7000/api/';
 }
