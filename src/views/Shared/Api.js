@@ -1,7 +1,12 @@
 import axios from 'axios';
 import moment from 'moment'
+let url = null;
 
-const url = 'http://localhost:7000/api/';
+if(process.env.NODE_ENV.trim() === 'production') {
+    url = 'https://data.kenyahmis.org:8082/';
+} else {
+    url = 'http://localhost:7000/api/';
+}
 
 export const getAll = async (endpoint, params) => {
     let request = axios.get(`${url}${endpoint}`);
@@ -30,6 +35,6 @@ export const getYearMonths = (minYear) => {
             endDate.subtract(1, 'month');
         }
     }
-    
+
     return yearMonths;
 };
