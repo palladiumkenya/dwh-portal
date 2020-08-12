@@ -11,7 +11,19 @@ export default {
       {
           name: 'Reporting Rates',
           url: '/reporting-rates',
-          icon: 'icon-pie-chart'
+          icon: 'icon-pie-chart',
+          children: [
+              {
+                  name: 'Reporting Rates',
+                  url: '/reporting-rates',
+                  icon: 'icon-pie-chart'
+              },
+              {
+                  name: 'HTS Overview',
+                  url: '/reporting-rates/hts-overview',
+                  icon: 'cil-bar-chart',
+              },
+          ]
       }
     /*{
       title: true,
