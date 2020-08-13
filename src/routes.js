@@ -1,6 +1,7 @@
 import React from "react";
 import ReportingRates from "./views/Reporting Rates/ReportingRates";
 import HRH from "./views/HRH/HRH";
+import HtsOverview from './views/Hts Overview/HtsOverview';
 
 const Breadcrumbs = React.lazy(() => import("./views/Base/Breadcrumbs"));
 const Cards = React.lazy(() => import("./views/Base/Cards"));
@@ -46,9 +47,15 @@ const routes = [
   { path: "/", exact: true, name: "Home" },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
   {
-    path: "/reporting-rates",
-    name: "Reporting Rates",
-    component: ReportingRates,
+      path: "/reporting-rates",
+      exact: true,
+      name: "Reporting Rates",
+      component: ReportingRates,
+  },
+  {
+      path: "/reporting-rates/hts-overview",
+      name: 'HTS Overview',
+      component: HtsOverview
   },
   {
     path: "/hrh",

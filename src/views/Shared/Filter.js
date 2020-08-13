@@ -93,7 +93,7 @@ const Filter = ({ onFilterChange }) => {
     return (
         <Form>
             <div className="row">
-                <div className="col-2">
+                <div className="col-3">
                     <div className="form-group">
                         <label htmlFor="county">County</label>
                         <select className="form-control" id="county" name="county" value={activeSelection.county}
@@ -106,7 +106,7 @@ const Filter = ({ onFilterChange }) => {
                         </select>
                     </div>
                 </div>
-                <div className="col-2">
+                <div className="col-3">
                     <div className="form-group">
                         <label htmlFor="agency">Agency</label>
                         <select className="form-control" id="agency" name="agency" value={activeSelection.agency}
@@ -119,7 +119,7 @@ const Filter = ({ onFilterChange }) => {
                         </select>
                     </div>
                 </div>
-                <div className="col-4">
+                <div className="col-3">
                     <div className="form-group">
                         <label htmlFor="serviceDeliveryPartner">
                             Service Delivery Partner
