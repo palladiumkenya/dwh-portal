@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Form } from 'reactstrap';
-import { getAll, getYearMonths } from './Api';
+import { getAll, getMonths, getYears } from './Api';
 
 const HtsUptakeFilter = ({ onFilterChange }) => {
     const [activeSelection, setActiveSelection] = useState({
@@ -8,27 +8,44 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
         subCounty: '',
         facility: '',
         partner: '',
-        period: `${new Date().getFullYear()},${new Date().getMonth() + 1}`
+        year: `${new Date().getFullYear()}`,
+        month: ''
     });
 
-    const [periods, setPeriods] = useState([]);
+    const [years, setYears] = useState([]);
+    const [months, setMonths] = useState([]);
     const [counties, setCounties] = useState([]);
     const [subCounties, setSubCounties] = useState([]);
     const [facilities, setFacilities] = useState([]);
     const [partners, setPartners] = useState([]);
 
     useEffect(() => {
-        loadPeriods();
+        loadYears();
+        loadMonths();
         loadCounties();
         loadSubCounties(null);
         loadFacilities();
         loadPartners();
-
     }, [activeSelection]);
 
-    const loadPeriods = () => {
-        const data = getYearMonths(new Date().getFullYear() - 1);
-        setPeriods(data);
+    const loadYears = () => {
+        const data = getYears(new Date().getFullYear() - 10);
+        setYears(data);
+    };
+
+    const loadMonths = () => {
+        const data = getMonths();
+        let options = [];
+        Object.keys(data).map(function(key, index) {
+            options.push({
+                value: key, display: data[key]
+            });
+        });
+
+        const selectionOptions = [{ value: '', display: '(Select Month)' }].concat(
+            options
+        );
+        setMonths(selectionOptions);
     };
 
     const loadCounties = async () => {
@@ -85,7 +102,7 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
         setFacilities(selectionOptions);
     };
 
-    const loadPartners = async (selectedCounty, selectedAgency) => {
+    const loadPartners = async () => {
         let params = null;
 
         if (activeSelection) {
@@ -157,8 +174,8 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
 
                 <div className="col-2">
                     <div className="form-group">
-                        <label htmlFor="facilityName">Facility Name</label>
-                        <select className="form-control" id="facilityName" name="facilityName" value={activeSelection.facility} onChange={onSelectionChange}>
+                        <label htmlFor="facility">Facility Name</label>
+                        <select className="form-control" id="facility" name="facility" value={activeSelection.facility} onChange={onSelectionChange}>
                             {facilities.map((facility, index) => (
                                 <option key={index} value={facility.value}>
                                     {facility.display}
@@ -169,8 +186,8 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
                 </div>
                 <div className="col-2">
                     <div className="form-group">
-                        <label htmlFor="serviceDeliveryPartner">Service Delivery Partner</label>
-                        <select className="form-control" id="serviceDeliveryPartner" name="serviceDeliveryPartner" value={activeSelection.partner}
+                        <label htmlFor="partner">Service Delivery Partner</label>
+                        <select className="form-control" id="partner" name="partner" value={activeSelection.partner}
                                 onChange={onSelectionChange}>
                             {partners.map((f,index) => (
                                 <option key={index} value={f.value}>
@@ -182,15 +199,26 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
                 </div>
                 <div className="col-2">
                     <div className="form-group">
-                        <label htmlFor="testingYear">Testing Year</label>
-                        <select className="form-control" id="testingYear" name="testingYear">
+                        <label htmlFor="year">Testing Year</label>
+                        <select className="form-control" id="year" name="year" value={activeSelection.year}
+                            onChange={onSelectionChange}>
+                            {years.map((f, index) => (
+                                <option key={index} value={f.value}>
+                                    {f.display}
+                                </option>
+                            ))}
                         </select>
                     </div>
                 </div>
                 <div className="col-2">
                     <div className="form-group">
-                        <label htmlFor="testingMonth">Testing Month</label>
-                        <select className="form-control" id="testingMonth" name="testingMonth">
+                        <label htmlFor="month">Testing Month</label>
+                        <select className="form-control" id="month" name="month" value={activeSelection.month} onChange={onSelectionChange}>
+                            {months.map((f, index) => (
+                                <option key={index} value={f.value}>
+                                    {f.display}
+                                </option>
+                            ))}
                         </select>
                     </div>
                 </div>

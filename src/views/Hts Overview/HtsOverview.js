@@ -14,10 +14,12 @@ import HtsUptakeTBScreeningAndTBOutcome from './HtsUptake/Overview/HtsUptakeTBSc
 
 const HtsOverview = () => {
     const [globalFilter, setGlobalFilter] = useState({
-        county: '',
-        agency: '',
-        partner: '',
-        period:`${new Date().getFullYear()},${new Date().getMonth()}`
+            county: '',
+            subCounty: '',
+            facility: '',
+            partner: '',
+            year:`${new Date().getFullYear()}`,
+            month: ''
     });
 
     const updateGlobalFilter = (selection) => {
@@ -32,7 +34,7 @@ const HtsOverview = () => {
 
             <HtsUptakeFilter onFilterChange={updateGlobalFilter}>&nbsp;</HtsUptakeFilter>
 
-            <NumberTestedAndPositivity>&nbsp;</NumberTestedAndPositivity>
+            <NumberTestedAndPositivity globalFilter={globalFilter}>&nbsp;</NumberTestedAndPositivity>
 
             <hr />
 
@@ -44,7 +46,7 @@ const HtsOverview = () => {
 
             <p>&nbsp;</p>
 
-            <HtsUptakeByAgeSex />
+            <HtsUptakeByAgeSex globalFilter={globalFilter} />
 
             <hr/>
 
