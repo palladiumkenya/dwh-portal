@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Form } from 'reactstrap';
-import { getAll, getYearMonths, getYears } from './Api';
+import { getAll, getMonths, getYears } from './Api';
 
 const HtsUptakeFilter = ({ onFilterChange }) => {
     const [activeSelection, setActiveSelection] = useState({
@@ -13,6 +13,7 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
     });
 
     const [years, setYears] = useState([]);
+    const [months, setMonths] = useState([]);
     const [counties, setCounties] = useState([]);
     const [subCounties, setSubCounties] = useState([]);
     const [facilities, setFacilities] = useState([]);
@@ -20,16 +21,31 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
 
     useEffect(() => {
         loadYears();
+        loadMonths();
         loadCounties();
         loadSubCounties(null);
         loadFacilities();
         loadPartners();
-
     }, [activeSelection]);
 
     const loadYears = () => {
         const data = getYears(new Date().getFullYear() - 10);
         setYears(data);
+    };
+
+    const loadMonths = () => {
+        const data = getMonths();
+        let options = [];
+        Object.keys(data).map(function(key, index) {
+            options.push({
+                value: key, display: data[key]
+            });
+        });
+
+        const selectionOptions = [{ value: '', display: '(Select Month)' }].concat(
+            options
+        );
+        setMonths(selectionOptions);
     };
 
     const loadCounties = async () => {
@@ -198,6 +214,11 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
                     <div className="form-group">
                         <label htmlFor="month">Testing Month</label>
                         <select className="form-control" id="month" name="month" value={activeSelection.month} onChange={onSelectionChange}>
+                            {months.map((f, index) => (
+                                <option key={index} value={f.value}>
+                                    {f.display}
+                                </option>
+                            ))}
                         </select>
                     </div>
                 </div>
