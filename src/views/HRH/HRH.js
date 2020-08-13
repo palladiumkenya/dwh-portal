@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import HRHFilter from '../Shared/HRHFilter';
 import HRHHeader from './HRHHeader';
 import CIToHTSRatio from './CIToHTSRatio';
 import DistributionDensityHCW from './DistributionDensityHCW';
@@ -7,7 +6,6 @@ import DistributionDensityNCK from './DistributionDensityNCK';
 import DistributionDensityMPDB from './DistributionDensityMPDB';
 import DistributionDensityCOC from './DistributionDensityCOC';
 import DistributionHTSCI from './DistributionHTSCI';
-import DistributionHTSMap from './DistributionHTSMap';
 
 const HRH = () => {
 
