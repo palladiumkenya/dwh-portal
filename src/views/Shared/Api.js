@@ -38,3 +38,18 @@ export const getYearMonths = (minYear) => {
 
     return yearMonths;
 };
+
+export const getYears = (minYear) => {
+    const years = [];
+    const startDate = moment([minYear]);
+    const endDate = moment();
+
+    if (endDate.isAfter(startDate)) {
+        while (endDate.isAfter(startDate)) {
+            years.push({ value: endDate.format('YYYY'), display: endDate.format("YYYY")});
+            endDate.subtract(1, 'year');
+        }
+    }
+
+    return years;
+};
