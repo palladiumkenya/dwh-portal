@@ -1,5 +1,6 @@
 import React from "react";
 import ReportingRates from "./views/Reporting Rates/ReportingRates";
+import HRH from "./views/HRH/HRH";
 
 const Breadcrumbs = React.lazy(() => import("./views/Base/Breadcrumbs"));
 const Cards = React.lazy(() => import("./views/Base/Cards"));
@@ -48,6 +49,11 @@ const routes = [
     path: "/reporting-rates",
     name: "Reporting Rates",
     component: ReportingRates,
+  },
+  {
+    path: "/hrh",
+    name: "HRH",
+    component: HRH,
   },
   { path: "/theme", exact: true, name: "Theme", component: Colors },
   { path: "/theme/colors", name: "Colors", component: Colors },
