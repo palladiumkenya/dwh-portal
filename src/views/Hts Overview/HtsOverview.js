@@ -46,7 +46,7 @@ const HtsOverview = () => {
 
             <p>&nbsp;</p>
 
-            <HtsUptakeByAgeSex />
+            <HtsUptakeByAgeSex globalFilter={globalFilter} />
 
             <hr/>
 

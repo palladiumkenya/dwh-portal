@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from "highcharts-react-official";
+import { getAll } from '../../../Shared/Api';
 
 const HtsUptakeByPopulationType = ({ globalFilter }) => {
     const [uptakeByPopulationType, setUptakeByPopulationType] = useState({});
@@ -15,6 +16,18 @@ const HtsUptakeByPopulationType = ({ globalFilter }) => {
 
         if (globalFilter) {
             params = { ...globalFilter };
+        }
+
+        const result = await getAll('hts/uptakeByPopulationType', params);
+        let genPopVal = null;
+        let keyPopVal = null;
+
+        for(let i = 0; i < result.length; i++) {
+            if(result[i].PopulationType === 'Key Population') {
+                keyPopVal = parseInt(result[i].Tested, 10);
+            } else if(result[i].PopulationType === 'General Population') {
+                genPopVal = parseInt(result[i].Tested, 10);
+            }
         }
 
         setUptakeByPopulationType({
@@ -49,11 +62,11 @@ const HtsUptakeByPopulationType = ({ globalFilter }) => {
                 colorByPoint: true,
                 data: [{
                     name: 'GENERAL',
-                    y: 75,
+                    y: genPopVal,
                     color: "#1AB394"
                 }, {
                     name: 'KEY POPULATION',
-                    y: 25,
+                    y: keyPopVal,
                     sliced: true,
                     selected: true,
                     color: "#2F4050"

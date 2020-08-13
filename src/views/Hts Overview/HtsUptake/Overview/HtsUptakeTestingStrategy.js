@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import { getAll } from '../../../Shared/Api';
 
 const HtsUptakeTestingStrategy = ({ globalFilter }) => {
     const [hivTestingType, setHivTestingType] = useState({});
@@ -19,55 +20,88 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
             params = { ...globalFilter };
         }
 
+        const testStrategies = [];
+        let tested = [];
+        let positivity = [];
+
+        const result = await getAll('hts/uptakeByTestStrategy', params);
+        for (let i = 0; i < result.length; i++) {
+            testStrategies.push(result[i].TestStrategy);
+            tested.push(parseInt(result[i].Tested, 10));
+            positivity.push(parseFloat(result[i].positivity));
+        }
+
         setHivTestingType({
-            chart: { zoomType: 'xy' },
-            title: { text: '' },
-            subtitle: { text: '' },
-            xAxis: { categories: ['HOSPITAL PATIENT', 'NON PATIENT', 'VOLUNTARY CLIENT', 'HOME BASED TESTING'], title: { text: null }, visible: true, scrollbar: { enabled: true } },
-            yAxis: { min: 0, title: { text: 'TESTS' }, stackLabels: {
-                    enabled: true,
+            chart: {
+                zoomType: 'xy'
+            },
+            title: {
+                text: ''
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: [{
+                categories: testStrategies,
+                crosshair: true
+            }],
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    format: '{value} %',
                     style: {
-                        fontWeight: 'bold',
-                        color: ( // theme
-                            Highcharts.defaultOptions.title.style &&
-                            Highcharts.defaultOptions.title.style.color
-                        ) || 'gray'
+                        color: Highcharts.getOptions().colors[1]
                     }
-                } },
-            legend: {
-                align: 'right',
-                x: -30,
-                verticalAlign: 'top',
-                y: 25,
-                floating: true,
-                backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || 'white',
-                borderColor: '#CCC',
-                borderWidth: 1,
-                shadow: false
-            },
-            tooltip: {
-                headerFormat: '<b>{point.x}</b><br/>',
-                pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-            },
-            plotOptions: {
-                column: {
-                    stacking: 'normal',
-                    dataLabels: {
-                        enabled: true
+                },
+                title: {
+                    text: 'POSITIVITY',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
                     }
                 }
+            }, { // Secondary yAxis
+                title: {
+                    text: 'TESTS',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                labels: {
+                    format: '{value}',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                opposite: true
+            }],
+            tooltip: {
+                shared: true
             },
-            credits: { enabled: false },
-            responsive: { rules: [ { condition: { maxWidth: 400, }, chartOptions: { legend: { enabled: false } } } ] },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                x: 120,
+                verticalAlign: 'top',
+                y: 7,
+                floating: true,
+                backgroundColor:
+                    Highcharts.defaultOptions.legend.backgroundColor || // theme
+                    'rgba(255,255,255,0.25)'
+            },
             series: [{
+                name: 'TESTS',
                 type: 'column',
-                data: [5, 3, 4, 7],
-            },{
-                name: 'NS',
-                type: 'spline',
+                color: "#1AB394",
+                yAxis: 1,
+                data: tested,
+                tooltip: {
+                    valueSuffix: ' '
+                }
 
-                data: [3,2,3,5],
+            }, {
+                name: 'Positivity',
+                type: 'spline',
+                data: positivity,
+                color: "#E06F07",
                 tooltip: {
                     valueSuffix: '%'
                 }
@@ -82,56 +116,89 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
             params = { ...globalFilter };
         }
 
+        const testStrategies = [];
+        let tested = [];
+        let positivity = [];
+
+        const result = await getAll('hts/uptakeByEntryPoint', params);
+        for (let i = 0; i < result.length; i++) {
+            testStrategies.push(result[i].EntryPoint);
+            tested.push(parseInt(result[i].Tested, 10));
+            positivity.push(parseFloat(result[i].positivity));
+        }
+
 
         setUptakeByEntryPoint({
-            chart: { zoomType: 'xy' },
-            title: { text: '' },
-            subtitle: { text: '' },
-            xAxis: { categories: ['OPD', 'PMTCT', 'PNS', 'ETC'], title: { text: null }, visible: true, scrollbar: { enabled: true } },
-            yAxis: { min: 0, title: { text: 'TESTS' }, stackLabels: {
-                    enabled: true,
+            chart: {
+                zoomType: 'xy'
+            },
+            title: {
+                text: ''
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: [{
+                categories: testStrategies,
+                crosshair: true
+            }],
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    format: '{value} %',
                     style: {
-                        fontWeight: 'bold',
-                        color: ( // theme
-                            Highcharts.defaultOptions.title.style &&
-                            Highcharts.defaultOptions.title.style.color
-                        ) || 'gray'
+                        color: Highcharts.getOptions().colors[1]
                     }
-                } },
-            legend: {
-                align: 'right',
-                x: -30,
-                verticalAlign: 'top',
-                y: 25,
-                floating: true,
-                backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || 'white',
-                borderColor: '#CCC',
-                borderWidth: 1,
-                shadow: false
-            },
-            tooltip: {
-                headerFormat: '<b>{point.x}</b><br/>',
-                pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-            },
-            plotOptions: {
-                column: {
-                    stacking: 'normal',
-                    dataLabels: {
-                        enabled: true
+                },
+                title: {
+                    text: 'POSITIVITY',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
                     }
                 }
+            }, { // Secondary yAxis
+                title: {
+                    text: 'TESTS',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                labels: {
+                    format: '{value}',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                opposite: true
+            }],
+            tooltip: {
+                shared: true
             },
-            credits: { enabled: false },
-            responsive: { rules: [ { condition: { maxWidth: 400, }, chartOptions: { legend: { enabled: false } } } ] },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                x: 120,
+                verticalAlign: 'top',
+                y: 7,
+                floating: true,
+                backgroundColor:
+                    Highcharts.defaultOptions.legend.backgroundColor || // theme
+                    'rgba(255,255,255,0.25)'
+            },
             series: [{
+                name: 'TESTS',
                 type: 'column',
-                data: [5, 3, 4, 7],
-            },{
-                name: 'NS',
-                type: 'spline',
+                color: "#1AB394",
+                yAxis: 1,
+                data: tested,
+                tooltip: {
+                    valueSuffix: ' '
+                }
 
-                data: [3,2,3,5],
+            }, {
+                name: 'Positivity',
+                type: 'spline',
+                data: positivity,
+                color: "#E06F07",
                 tooltip: {
                     valueSuffix: '%'
                 }
