@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import { getAll } from '../../../Shared/Api';
 
 const HtsUptakeByPartner = ({ globalFilter }) => {
     const [uptakeByPartner, setUptakeByPartner] = useState({});
@@ -17,56 +18,88 @@ const HtsUptakeByPartner = ({ globalFilter }) => {
             params = { ...globalFilter };
         }
 
+        const partners = [];
+        let tested = [];
+        let positivity = [];
+
+        const result = await getAll('hts/uptakeByPartner', params);
+        for(let i = 0; i < result.length; i++) {
+            partners.push(result[i].Partner);
+            tested.push(parseInt(result[i].Tested, 10));
+            positivity.push(parseFloat(result[i].positivity));
+        }
+
         setUptakeByPartner({
-            chart: { zoomType: 'xy' },
-            title: { text: '' },
-            subtitle: { text: '' },
-            xAxis: { categories: ['CHS Shinda', 'EGPAF Timiza', 'UMB Timiza', 'Hope Worldwide Kenya', 'LVCT Steps', 'UCSF-FACES', 'UCSF Clinical Kisumu', 'Afya Nyota ya Bonde', 'Afya Ziwani', 'Bomu Hospital Affiliated Sites', 'UMB Pact Endeleza', 'CRISSP', 'AMREF Nairobi Kitui', 'WRP-Kisumu', 'KARP II', 'CHS Tegemeza Plus', 'Afya Kamilisha', 'WRP-Kisumu'], title: { text: null }, visible: true, scrollbar: { enabled: true } },
-            yAxis: { min: 0, title: { text: 'TESTS' }, stackLabels: {
-                    enabled: true,
+            chart: {
+                zoomType: 'xy'
+            },
+            title: {
+                text: ''
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: [{
+                categories: partners,
+                crosshair: true
+            }],
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    format: '{value} %',
                     style: {
-                        fontWeight: 'bold',
-                        color: ( // theme
-                            Highcharts.defaultOptions.title.style &&
-                            Highcharts.defaultOptions.title.style.color
-                        ) || 'gray'
+                        color: Highcharts.getOptions().colors[1]
                     }
-                } },
-            legend: {
-                align: 'right',
-                x: -30,
-                verticalAlign: 'top',
-                y: 25,
-                floating: true,
-                backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || 'white',
-                borderColor: '#CCC',
-                borderWidth: 1,
-                shadow: false
-            },
-            tooltip: {
-                headerFormat: '<b>{point.x}</b><br/>',
-                pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-            },
-            plotOptions: {
-                column: {
-                    stacking: 'normal',
-                    dataLabels: {
-                        enabled: true
+                },
+                title: {
+                    text: 'POSITIVITY',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
                     }
                 }
+            }, { // Secondary yAxis
+                title: {
+                    text: 'TESTS',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                labels: {
+                    format: '{value}',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                opposite: true
+            }],
+            tooltip: {
+                shared: true
             },
-            credits: { enabled: false },
-            responsive: { rules: [ { condition: { maxWidth: 400, }, chartOptions: { legend: { enabled: false } } } ] },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                x: 120,
+                verticalAlign: 'top',
+                y: 7,
+                floating: true,
+                backgroundColor:
+                    Highcharts.defaultOptions.legend.backgroundColor || // theme
+                    'rgba(255,255,255,0.25)'
+            },
             series: [{
+                name: 'TESTS',
                 type: 'column',
-                data: [5, 3, 4, 7, 20, 10, 6, 15, 17, 19, 22, 13, 12, 16, 11, 10, 24, 12, 13, 18, 19],
-                color: "#2F4050"
-            },{
-                name: 'NS',
-                type: 'spline',
+                color: "#1AB394",
+                yAxis: 1,
+                data: tested,
+                tooltip: {
+                    valueSuffix: ' '
+                }
 
-                data: [3, 2, 3, 5, 17, 8, 5, 10, 13, 15, 16, 20, 11, 10, 9, 8, 17, 8, 10, 15, 17],
+            }, {
+                name: 'Positivity',
+                type: 'spline',
+                data: positivity,
+                color: "#E06F07",
                 tooltip: {
                     valueSuffix: '%'
                 }
