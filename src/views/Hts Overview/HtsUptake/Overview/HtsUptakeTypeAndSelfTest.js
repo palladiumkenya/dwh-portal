@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import { getAll } from '../../../Shared/Api';
 
 const HtsUptakeTypeAndSelfTest = ({ globalFilter }) => {
     const [uptakeByType, setUptakeByType] = useState({});
@@ -17,6 +18,18 @@ const HtsUptakeTypeAndSelfTest = ({ globalFilter }) => {
 
         if (globalFilter) {
             params = { ...globalFilter };
+        }
+
+        let couple = null;
+        let individual = null;
+
+        const result = await getAll('hts/uptakeByClientTestedAs', params);
+        for (let i = 0; i < result.length; i++) {
+            if(result[i].ClientTestedAs === "Individual") {
+                individual = parseInt(result[i].Tested, 10);
+            } else if(result[i].ClientTestedAs === "Couple") {
+                couple = parseInt(result[i].Tested, 10);
+            }
         }
 
         setUptakeByType({
@@ -48,15 +61,16 @@ const HtsUptakeTypeAndSelfTest = ({ globalFilter }) => {
                 }
             },
             series: [{
+                name: 'Uptake By Type',
                 colorByPoint: true,
                 data: [{
                     name: 'COUPLE',
-                    y: 25,
+                    y: couple,
                     sliced: true,
                     selected: true
                 }, {
                     name: 'INDIVIDUAL',
-                    y: 75
+                    y: individual
                 }]
             }]
         });
@@ -67,6 +81,18 @@ const HtsUptakeTypeAndSelfTest = ({ globalFilter }) => {
 
         if (globalFilter) {
             params = { ...globalFilter };
+        }
+
+        let yes = null;
+        let no = null;
+
+        const result = await getAll('hts/uptakeByClientSelfTested', params);
+        for(let i = 0; i < result.length; i++) {
+            if(result[i].ClientSelfTested === 'No'){
+                no = parseInt(result[i].Tested, 10);
+            } else if(result[i].ClientSelfTested === 'Yes') {
+                yes = parseInt(result[i].Tested, 10);
+            }
         }
 
         setUptakeBySelfTest({
@@ -98,15 +124,16 @@ const HtsUptakeTypeAndSelfTest = ({ globalFilter }) => {
                 }
             },
             series: [{
+                name: 'Uptake By Self Test',
                 colorByPoint: true,
                 data: [{
                     name: 'YES',
-                    y: 25,
+                    y: yes,
                     sliced: true,
                     selected: true
                 }, {
                     name: 'NO',
-                    y: 75
+                    y: no
                 }]
             }]
         });
