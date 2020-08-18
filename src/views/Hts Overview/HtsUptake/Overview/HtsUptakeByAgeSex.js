@@ -62,26 +62,26 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
             }],
             yAxis: [{ // Primary yAxis
                 labels: {
-                    format: '{value} %',
+                    format: '{value}',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
                 },
                 title: {
-                    text: 'POSITIVITY',
+                    text: 'Number tested',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
                 }
-            }, { // Secondary yAxis
+            },{ // Secondary yAxis
                 title: {
-                    text: 'TESTS',
+                    text: 'HIV positivity',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
                 },
                 labels: {
-                    format: '{value}',
+                    format: '{value} %',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
@@ -111,7 +111,6 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
                 name: 'MALE',
                 type: 'column',
                 color: "#1AB394",
-                yAxis: 1,
                 data: tested_male,
                 tooltip: {
                     valueSuffix: ' '
@@ -120,14 +119,14 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
                 name: 'FEMALE',
                 type: 'column',
                 color: "#485969",
-                yAxis: 1,
                 data: tested_female,
                 tooltip: {
                     valueSuffix: ' '
                 }
             }, {
-                name: 'Positivity',
+                name: 'HIV positivity',
                 type: 'spline',
+                yAxis: 1,
                 data: positivity,
                 color: "#E06F07",
                 tooltip: {
