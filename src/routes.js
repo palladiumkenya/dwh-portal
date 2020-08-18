@@ -2,6 +2,7 @@ import React from "react";
 import ReportingRates from "./views/Reporting Rates/ReportingRates";
 import HRH from "./views/HRH/HRH";
 import HtsOverview from './views/Hts Overview/HtsOverview';
+import HtsPositivityLinkage from './views/Hts Overview/HtsPositivityLinkage';
 
 const Breadcrumbs = React.lazy(() => import("./views/Base/Breadcrumbs"));
 const Cards = React.lazy(() => import("./views/Base/Cards"));
@@ -56,6 +57,11 @@ const routes = [
       path: "/reporting-rates/hts-overview",
       name: 'HTS Overview',
       component: HtsOverview
+  },
+  {
+      path: "/reporting-rates/hts-positivity-linkage",
+      name: 'HTS Pos & Linkage',
+      component: HtsPositivityLinkage
   },
   {
     path: "/hrh",
