@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import HtsPositivityLinkageHeader from './HtsPositivityLinkage/HtsPositivityLinkageHeader';
 import HtsUptakeFilter from '../Shared/HtsUptakeFilter';
 import NumberPositiveLinked from './HtsPositivityLinkage/NumberPositiveLinked';
-import UptakeByAgeSex from './HtsPositivityLinkage/UptakeByAgeSex';
+import LinkageByAgeSex from './HtsPositivityLinkage/LinkageByAgeSex';
 import LinkageByPopulationType from './HtsPositivityLinkage/LinkageByPopulationType';
 import LinkageByPartner from './HtsPositivityLinkage/LinkageByPartner';
 import LinkageByCounty from './HtsPositivityLinkage/LinkageByCounty';
@@ -29,7 +29,7 @@ const HtsPositivityLinkage = () => {
             <HtsUptakeFilter onFilterChange={updateGlobalFilter}>&nbsp;</HtsUptakeFilter>
             <NumberPositiveLinked globalFilter={globalFilter}>&nbsp;</NumberPositiveLinked>
             <hr/><HtsPositivityLinkageFooter/><hr/><div className="strip"></div><p></p>
-            <UptakeByAgeSex globalFilter={globalFilter} />
+            <LinkageByAgeSex globalFilter={globalFilter} />
             <hr/><HtsPositivityLinkageFooter/><hr/><div className="strip"></div><p></p>
             <LinkageByPopulationType globalFilter={globalFilter}/>
             <hr/><HtsPositivityLinkageFooter/><hr/><div className="strip"></div><p></p>
