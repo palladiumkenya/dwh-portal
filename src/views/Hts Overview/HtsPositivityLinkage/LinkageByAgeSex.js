@@ -4,14 +4,14 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const UptakeByAgeSex = ({ globalFilter }) => {
-    const [uptakeByAgeSex, setUptakeByAgeSex] = useState({});
+const LinkageByAgeSex = ({ globalFilter }) => {
+    const [uptakeByAgeSex, setLinkageByAgeSex] = useState({});
 
     useEffect(() => {
-        loadUptakeByAgeSex();
+        loadLinkageByAgeSex();
     }, [globalFilter]);
 
-    const loadUptakeByAgeSex = async () => {
+    const loadLinkageByAgeSex = async () => {
         let params = null;
 
         if (globalFilter) {
@@ -53,7 +53,7 @@ const UptakeByAgeSex = ({ globalFilter }) => {
             linkage[i] = (linkageMale[i] + linkageFemale[i])/2;
         }
 
-        setUptakeByAgeSex({
+        setLinkageByAgeSex({
             chart: { zoomType: 'xy' },
             title: { text: '' },
             subtitle: { text: '' },
@@ -91,7 +91,7 @@ const UptakeByAgeSex = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        UPTAKE BY AGE AND SEX
+                        LINKAGE BY AGE AND SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -104,4 +104,4 @@ const UptakeByAgeSex = ({ globalFilter }) => {
     );
 };
 
-export default UptakeByAgeSex;
+export default LinkageByAgeSex;
