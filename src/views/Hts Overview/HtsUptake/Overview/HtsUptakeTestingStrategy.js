@@ -211,7 +211,7 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        HIV TESTING STRATEGY
+                        HTS uptake by strategy
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={hivTestingType} />
@@ -222,7 +222,7 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        UPTAKE BY ENTRY POINT
+                        Uptake and positivity by entry point
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={uptakeByEntryPoint} />

@@ -36,7 +36,6 @@ const HtsUptakeByPopulationType = ({ globalFilter }) => {
         let keyPopPositive = null;
         let genPopPositivity = null;
         let keyPopPositivity = null;
-        console.log(result);
 
         for(let i = 0; i < result.length; i++) {
             if(result[i].PopulationType === 'Key Population') {

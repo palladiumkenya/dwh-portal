@@ -55,7 +55,7 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
             params = { ...activeSelection };
         }
 
-        const data = await getAll('common/counties', params);
+        const data = await getAll('hts/counties', params);
         const options = data.map((c) => {
             return { value: c.county, display: c.county };
         });
@@ -75,7 +75,7 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
 
             county = params.county;
         }
-        const data = await getAll('common/subCounties?county=' + county);
+        const data = await getAll('hts/subCounties?county=' + county);
         const options = data.map((c) => {
             return { value: c.subCounty, display: c.subCounty };
         });
@@ -92,7 +92,7 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
             params = { ...activeSelection };
         }
 
-        const data = await getAll('common/facilities', params);
+        const data = await getAll('hts/facilities', params);
         const options = data.map((c) => {
             return { value: c.name, display: c.name };
         });
@@ -109,7 +109,7 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
             params = { ...activeSelection };
         }
 
-        const data = await getAll('common/partners', params);
+        const data = await getAll('hts/partners', params);
         const options = data.map((c) => {
             return { value: c.partner, display: c.partner };
         });
