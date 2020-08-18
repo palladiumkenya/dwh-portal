@@ -31,7 +31,7 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
         for(let i = 0; i < result.length; i++) {
             months.push(monthNames[result[i].month]);
             tested.push(parseInt(result[i].Tested, 10));
-            const val = parseFloat(parseFloat(result[i].positivity).toFixed(2));
+            const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
             positivity.push(val);
         }
 
