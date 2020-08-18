@@ -23,6 +23,11 @@ export default {
                   url: '/reporting-rates/hts-overview',
                   icon: 'cil-bar-chart',
               },
+              {
+                  name: 'HTS Pos & Linkage',
+                  url: '/reporting-rates/hts-positivity-linkage',
+                  icon: 'icon-pie-chart',
+              }
           ]
       },
       {
