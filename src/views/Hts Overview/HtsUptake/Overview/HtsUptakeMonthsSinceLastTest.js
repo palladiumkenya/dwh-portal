@@ -79,7 +79,7 @@ const HtsUptakeMonthsSinceLastTest = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        MONTHS SINCE LAST TEST
+                        HTS uptake and positivity by duration since last HIV test
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={monthsSinceLastTest} />

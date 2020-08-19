@@ -144,7 +144,7 @@ const HtsUptakeTypeAndSelfTest = ({ globalFilter }) => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        UPTAKE BY TYPE
+                        Couple testing among persons accessing HTS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={uptakeByType} />
@@ -154,7 +154,7 @@ const HtsUptakeTypeAndSelfTest = ({ globalFilter }) => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        SELF TEST
+                        Uptake of self-test among HTS clients
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={uptakeBySelfTest} />
