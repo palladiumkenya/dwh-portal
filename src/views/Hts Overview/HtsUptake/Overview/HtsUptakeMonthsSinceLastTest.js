@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import { getAll } from '../../../Shared/Api';
 
 const HtsUptakeMonthsSinceLastTest = ({ globalFilter }) => {
     const [monthsSinceLastTest, setMonthsSinceLastTest] = useState({});
@@ -17,56 +18,89 @@ const HtsUptakeMonthsSinceLastTest = ({ globalFilter }) => {
             params = { ...globalFilter };
         }
 
+        const result = await getAll('hts/monthsSinceLastTest', params);
+
+        const monthsSinceLastTest = [];
+        let tested = [];
+        let positivity = [];
+        for (let i = 0; i < result.length; i++) {
+            monthsSinceLastTest.push(result[i].MonthLastTest);
+            tested.push(parseInt(result[i].Tested, 10));
+            positivity.push(parseFloat(result[i].positivity));
+        }
+
         setMonthsSinceLastTest({
-            chart: { zoomType: 'xy' },
-            title: { text: '' },
-            subtitle: { text: '' },
-            xAxis: { categories: ['<3 MONTHS', '3-6 MONTHS', '6-9 MONTHS', '9-12 MONTHS', '18-24 MONTHS', '24-36 MONTHS', '36-48 MONTHS', '>48 MONTHS'], title: { text: null }, visible: true, scrollbar: { enabled: true } },
-            yAxis: { min: 0, title: { text: 'TESTS' }, stackLabels: {
-                    enabled: true,
+            chart: {
+                zoomType: 'xy'
+            },
+            title: {
+                useHTML: true,
+                text: ' &nbsp;',
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: [{
+                categories: monthsSinceLastTest,
+                crosshair: true
+            }],
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    format: '{value}',
                     style: {
-                        fontWeight: 'bold',
-                        color: ( // theme
-                            Highcharts.defaultOptions.title.style &&
-                            Highcharts.defaultOptions.title.style.color
-                        ) || 'gray'
+                        color: Highcharts.getOptions().colors[1]
                     }
-                } },
-            legend: {
-                align: 'right',
-                x: -30,
-                verticalAlign: 'top',
-                y: 25,
-                floating: true,
-                backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || 'white',
-                borderColor: '#CCC',
-                borderWidth: 1,
-                shadow: false
-            },
-            tooltip: {
-                headerFormat: '<b>{point.x}</b><br/>',
-                pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-            },
-            plotOptions: {
-                column: {
-                    stacking: 'normal',
-                    dataLabels: {
-                        enabled: true
+                },
+                title: {
+                    text: 'Number tested',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
                     }
                 }
+            }, { // Secondary yAxis
+                title: {
+                    text: 'HIV positivity',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                labels: {
+                    format: '{value} %',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                opposite: true
+            }],
+            tooltip: {
+                shared: true
             },
-            credits: { enabled: false },
-            responsive: { rules: [ { condition: { maxWidth: 400, }, chartOptions: { legend: { enabled: false } } } ] },
+            legend: {
+                layout: 'vertical',
+                align: 'left',
+                x: 120,
+                verticalAlign: 'top',
+                y: 7,
+                floating: true,
+                backgroundColor:
+                    Highcharts.defaultOptions.legend.backgroundColor || // theme
+                    'rgba(255,255,255,0.25)'
+            },
             series: [{
+                name: 'Number tested',
                 type: 'column',
-                data: [5, 3, 4, 7, 20, 10, 6, 15],
-                color: "#2F4050"
-            },{
-                name: 'NS',
-                type: 'spline',
+                color: "#1AB394",
+                data: tested,
+                tooltip: {
+                    valueSuffix: ' '
+                }
 
-                data: [3, 2, 3, 5, 17, 8, 5, 10],
+            }, {
+                name: 'HIV positivity',
+                type: 'spline',
+                data: positivity,
+                color: "#E06F07",
+                yAxis: 1,
                 tooltip: {
                     valueSuffix: '%'
                 }
@@ -79,7 +113,7 @@ const HtsUptakeMonthsSinceLastTest = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        MONTHS SINCE LAST TEST
+                        HTS uptake and positivity by duration since last HIV test
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={monthsSinceLastTest} />

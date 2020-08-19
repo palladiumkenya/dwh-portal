@@ -20,13 +20,30 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
 
         const ageGroups = [];
         let tested = [];
+        let tested_male = [];
+        let tested_female = [];
         let positivity = [];
+        let positivity_male = [];
+        let positivity_female = [];
 
         const result = await getAll('hts/uptakeByAgeSex', params);
         for(let i = 0; i < result.length; i++) {
-            ageGroups.push(result[i].AgeGroup);
-            tested.push(parseInt(result[i].Tested, 10));
-            positivity.push(parseFloat(result[i].positivity));
+            if(result[i].Gender === 'Male') {
+                tested_male.push(parseInt(result[i].Tested, 10));
+                ageGroups.push(result[i].AgeGroup);
+                const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
+                positivity_male.push(val);
+            } else if (result[i].Gender === 'Female') {
+                tested_female.push(parseInt(result[i].Tested, 10));
+                const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
+                positivity_female.push(val);
+            }
+        }
+
+        for(let i = 0; i < positivity_male.length; i++) {
+            let val = (positivity_male[i] + positivity_female[i])/2;
+            val = parseFloat(parseFloat(val).toFixed(1));
+            positivity[i] = val;
         }
 
         setUptakeByAgeSex({
@@ -34,7 +51,8 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
                 zoomType: 'xy'
             },
             title: {
-                text: ''
+                useHTML: true,
+                text: ' &nbsp;',
             },
             subtitle: {
                 text: ''
@@ -45,26 +63,26 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
             }],
             yAxis: [{ // Primary yAxis
                 labels: {
-                    format: '{value} %',
+                    format: '{value}',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
                 },
                 title: {
-                    text: 'POSITIVITY',
+                    text: 'Number tested',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
                 }
-            }, { // Secondary yAxis
+            },{ // Secondary yAxis
                 title: {
-                    text: 'TESTS',
+                    text: 'HIV positivity',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
                 },
                 labels: {
-                    format: '{value}',
+                    format: '{value} %',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
@@ -73,6 +91,11 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
             }],
             tooltip: {
                 shared: true
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'normal'
+                }
             },
             legend: {
                 layout: 'vertical',
@@ -86,18 +109,25 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
                     'rgba(255,255,255,0.25)'
             },
             series: [{
-                name: 'TESTS',
+                name: 'MALE',
                 type: 'column',
                 color: "#1AB394",
-                yAxis: 1,
-                data: tested,
+                data: tested_male,
                 tooltip: {
                     valueSuffix: ' '
                 }
-
             }, {
-                name: 'Positivity',
+                name: 'FEMALE',
+                type: 'column',
+                color: "#485969",
+                data: tested_female,
+                tooltip: {
+                    valueSuffix: ' '
+                }
+            }, {
+                name: 'HIV positivity',
                 type: 'spline',
+                yAxis: 1,
                 data: positivity,
                 color: "#E06F07",
                 tooltip: {
@@ -112,7 +142,7 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        UPTAKE BY AGE AND SEX
+                        HTS uptake and positivity by age and sex
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

@@ -25,13 +25,29 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
         };
 
         let months = [];
-        let tested = [];
         let positivity = [];
+        let tested_new = [];
+        let tested_retest = [];
+        let positivity_new = [];
+        let positivity_retest = [];
 
         for(let i = 0; i < result.length; i++) {
-            months.push(monthNames[result[i].month]);
-            tested.push(parseInt(result[i].Tested, 10));
-            positivity.push(parseFloat(result[i].positivity));
+            if(result[i].TestedBefore === 'New') {
+                tested_new.push(parseInt(result[i].Tested, 10));
+                months.push(monthNames[result[i].month]);
+                const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
+                positivity_new.push(val);
+            } else if(result[i].TestedBefore === 'Retest') {
+                tested_retest.push(parseInt(result[i].Tested, 10));
+                const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
+                positivity_retest.push(val);
+            }
+        }
+
+        for(let i = 0; i < positivity_new.length; i++) {
+            let val = (positivity_new[i] + positivity_retest[i])/2;
+            val = parseFloat(parseFloat(val).toFixed(1));
+            positivity[i] = val;
         }
 
         setNumberTestedPositivity({
@@ -39,10 +55,13 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
                 zoomType: 'xy'
             },
             title: {
-                text: ''
+                useHTML: true,
+                text: ' &nbsp;',
+                align: 'left'
             },
             subtitle: {
-                text: ''
+                text: ' ',
+                align: 'left'
             },
             xAxis: [{
                 categories: months,
@@ -50,65 +69,121 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
             }],
             yAxis: [{ // Primary yAxis
                 labels: {
-                    format: '{value} %',
+                    format: '{value}%',
                     style: {
-                        color: Highcharts.getOptions().colors[1]
+                        color: Highcharts.getOptions().colors[2]
                     }
                 },
                 title: {
-                    text: 'POSITIVITY',
+                    text: 'HIV positivity',
                     style: {
-                        color: Highcharts.getOptions().colors[1]
+                        color: Highcharts.getOptions().colors[2]
                     }
-                }
+                },
+                opposite: true
+
             }, { // Secondary yAxis
+                gridLineWidth: 0,
                 title: {
-                    text: 'TESTS',
+                    text: 'Number tested',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
                 },
                 labels: {
-                    format: '{value}',
+                    format: '{value} ',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
-                },
-                opposite: true
+                }
+
             }],
             tooltip: {
                 shared: true
             },
+            plotOptions: {
+                column: {
+                    stacking: 'normal'
+                }
+            },
             legend: {
                 layout: 'vertical',
                 align: 'left',
-                x: 120,
+                x: 80,
                 verticalAlign: 'top',
-                y: 7,
+                y: 55,
                 floating: true,
                 backgroundColor:
                     Highcharts.defaultOptions.legend.backgroundColor || // theme
                     'rgba(255,255,255,0.25)'
             },
-            series: [{
-                name: 'TESTS',
-                type: 'column',
-                color: "#1AB394",
-                yAxis: 1,
-                data: tested,
-                tooltip: {
-                    valueSuffix: ' '
-                }
+            series: [
+                {
+                    name: 'New',
+                    type: 'column',
+                    color: "#1AB394",
+                    yAxis: 1,
+                    data: tested_new,
+                    tooltip: {
+                        valueSuffix: ' '
+                    }
+                },
+                {
+                    name: 'Retest',
+                    type: 'column',
+                    color: "#485969",
+                    yAxis: 1,
+                    data: tested_retest,
+                    tooltip: {
+                        valueSuffix: ' '
+                    }
 
-            }, {
-                name: 'Positivity',
-                type: 'spline',
-                data: positivity,
-                color: "#E06F07",
-                tooltip: {
-                    valueSuffix: '%'
+                },
+                {
+                    name: 'HIV positivity',
+                    type: 'spline',
+                    color: "#E06F07",
+                    yAxis: 0,
+                    data: positivity,
+                    tooltip: {
+                        valueSuffix: ' %'
+                    }
                 }
-            }]
+            ],
+            responsive: {
+                rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                            floating: false,
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom',
+                            x: 0,
+                            y: 0
+                        },
+                        yAxis: [{
+                            labels: {
+                                align: 'right',
+                                x: 0,
+                                y: -6
+                            },
+                            showLastLabel: false
+                        }, {
+                            labels: {
+                                align: 'left',
+                                x: 0,
+                                y: -6
+                            },
+                            showLastLabel: false
+                        }, {
+                            visible: false
+                        }]
+                    }
+                }]
+            }
         });
     };
 
@@ -117,7 +192,7 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        NUMBER OF PATIENTS TESTED AND POSITIVITY
+                        HTS Uptake and HIV positivity by month
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

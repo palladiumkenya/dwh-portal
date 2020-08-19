@@ -67,10 +67,12 @@ const HtsUptakeTypeAndSelfTest = ({ globalFilter }) => {
                     name: 'COUPLE',
                     y: couple,
                     sliced: true,
-                    selected: true
+                    selected: true,
+                    color: "#1AB394",
                 }, {
                     name: 'INDIVIDUAL',
-                    y: individual
+                    y: individual,
+                    color: '#2F4050',
                 }]
             }]
         });
@@ -127,12 +129,14 @@ const HtsUptakeTypeAndSelfTest = ({ globalFilter }) => {
                 name: 'Uptake By Self Test',
                 colorByPoint: true,
                 data: [{
-                    name: 'YES',
+                    name: 'Self Tested',
+                    color: "#1AB394",
                     y: yes,
                     sliced: true,
                     selected: true
                 }, {
-                    name: 'NO',
+                    name: 'Did Not Self Test',
+                    color: '#2F4050',
                     y: no
                 }]
             }]
@@ -144,7 +148,7 @@ const HtsUptakeTypeAndSelfTest = ({ globalFilter }) => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        UPTAKE BY TYPE
+                        Couple testing among persons accessing HTS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={uptakeByType} />
@@ -154,7 +158,7 @@ const HtsUptakeTypeAndSelfTest = ({ globalFilter }) => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        SELF TEST
+                        Uptake of self-test among HTS clients
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={uptakeBySelfTest} />
