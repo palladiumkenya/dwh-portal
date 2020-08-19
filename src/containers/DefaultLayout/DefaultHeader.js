@@ -25,17 +25,20 @@ class DefaultHeader extends Component {
 
                 <Nav className="d-md-down-none" navbar>
                     <NavItem className="px-3">
-                        <NavLink to="/dashboard" className="nav-link" >Dashboard</NavLink>
+                        <NavLink to="/reporting-rates" className="nav-link" >Reporting Rates</NavLink>
                     </NavItem>
                     <NavItem className="px-3">
-                        <Link to="/users" className="nav-link">Users</Link>
+                        <Link to="/hts/hts-uptake" className="nav-link">HTS Uptake</Link>
                     </NavItem>
                     <NavItem className="px-3">
-                        <NavLink to="#" className="nav-link">Settings</NavLink>
+                        <NavLink to="/hts/hts-linkage" className="nav-link">HTS Uptake</NavLink>
+                    </NavItem>
+                    <NavItem className="px-3">
+                        <NavLink to="/hrh" className="nav-link">HRH</NavLink>
                     </NavItem>
                 </Nav>
                 <Nav className="ml-auto" navbar>
-                    <UncontrolledDropdown nav direction="down">
+                    {/* <UncontrolledDropdown nav direction="down">
                         <DropdownToggle nav>
                             <img src={'../../assets/img/avatars/6.png'} className="img-avatar" alt="admin@kenyahmis.org" />
                         </DropdownToggle>
@@ -54,10 +57,10 @@ class DefaultHeader extends Component {
                             <DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem>
                             <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-lock"></i> Logout</DropdownItem>
                         </DropdownMenu>
-                    </UncontrolledDropdown>
+                    </UncontrolledDropdown> */}
                 </Nav>
-                <AppAsideToggler className="d-md-down-none" />
-                {/*<AppAsideToggler className="d-lg-none" mobile />*/}
+                {/* <AppAsideToggler className="d-md-down-none" />
+                <AppAsideToggler className="d-lg-none" mobile /> */}
             </React.Fragment>
         );
     }

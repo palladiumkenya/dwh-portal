@@ -1,31 +1,31 @@
 export default {
   items: [
-      {
-          name: 'Dashboard',
-          url: '/dashboard',
-          icon: 'icon-speedometer',
-          badge: {
-              variant: 'info',
-          },
-      },
+      // {
+      //     name: 'Dashboard',
+      //     url: '/dashboard',
+      //     icon: 'icon-speedometer',
+      //     badge: {
+      //         variant: 'info',
+      //     },
+      // },
       {
           name: 'Reporting Rates',
           url: '/reporting-rates',
-          icon: 'icon-pie-chart',
+          icon: 'icon-pie-chart'
+      },
+      {
+          name: 'HTS',
+          url: '',
+          icon: 'icon-plus',
           children: [
               {
-                  name: 'Reporting Rates',
-                  url: '/reporting-rates',
-                  icon: 'icon-pie-chart'
-              },
-              {
-                  name: 'HTS Overview',
-                  url: '/reporting-rates/hts-overview',
+                  name: 'HTS Uptake',
+                  url: '/hts/hts-overview',
                   icon: 'cil-bar-chart',
               },
               {
-                  name: 'HTS Pos & Linkage',
-                  url: '/reporting-rates/hts-positivity-linkage',
+                  name: 'HTS Linkage',
+                  url: '/hts/hts-linkage',
                   icon: 'icon-pie-chart',
               }
           ]

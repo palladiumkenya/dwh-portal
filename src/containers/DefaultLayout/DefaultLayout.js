@@ -66,7 +66,8 @@ class DefaultLayout extends Component {
                                             )} />
                                         ): (null);
                                     })}
-                                    <Redirect from={"/"} to={"/dashboard"} />
+                                    {/* <Redirect from={"/"} to={"/dashboard"} /> */}
+                                    <Redirect from={"/"} to={"/reporting-rates"} />
                                 </Switch>
                             </Suspense>
                         </Container>

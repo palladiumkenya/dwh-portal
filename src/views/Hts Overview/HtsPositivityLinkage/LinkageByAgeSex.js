@@ -5,7 +5,7 @@ import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
 const LinkageByAgeSex = ({ globalFilter }) => {
-    const [uptakeByAgeSex, setLinkageByAgeSex] = useState({});
+    const [linkageByAgeSex, setLinkageByAgeSex] = useState({});
 
     useEffect(() => {
         loadLinkageByAgeSex();
@@ -19,30 +19,26 @@ const LinkageByAgeSex = ({ globalFilter }) => {
         }
 
         const ageGroupsMale = [];
-        let testedMale = [];
         let positiveMale = [];
         let linkedMale = [];
         let linkageMale = [];
 
         const ageGroupsFemale = [];
-        let testedFemale = [];
         let positiveFemale = [];
         let linkedFemale = [];
         let linkageFemale = [];
 
         let linkage = [];
 
-        const result = await getAll('hts/uptakeByAgeSexLinkage', params);
+        const result = await getAll('hts/linkageByAgeSex', params);
         for(let i = 0; i < result.length; i++) {
             if (result[i].Gender == 'Male') {
                 ageGroupsMale.push(result[i].AgeGroup.replace("to", "-") + " YRS");
-                testedMale.push(parseInt(result[i].tested, 10));
                 positiveMale.push(parseFloat(result[i].positive));
                 linkedMale.push(parseFloat(result[i].linked));
                 linkageMale.push(parseFloat(result[i].linkage));
             } else {
                 ageGroupsFemale.push(result[i].AgeGroup);
-                testedFemale.push(parseInt(result[i].tested, 10));
                 positiveFemale.push(parseFloat(result[i].positive));
                 linkedFemale.push(parseFloat(result[i].linked));
                 linkageFemale.push(parseFloat(result[i].linkage));
@@ -61,7 +57,7 @@ const LinkageByAgeSex = ({ globalFilter }) => {
             xAxis: [{ categories: ageGroupsMale, crosshair: true }],
             yAxis: [
                 {
-                    title: { text: 'TOTAL LINKED', style: { color: "#252525" } },
+                    title: { text: 'POSITIVE', style: { color: "#252525" } },
                     labels: { format: '{value}', style: { color: "#252525" } },
                     min: 0,
                 },
@@ -79,8 +75,8 @@ const LinkageByAgeSex = ({ globalFilter }) => {
                 verticalAlign: 'bottom',
             },
             series: [
-                { name: 'FEMALE', data: linkedFemale, type: 'column', color: "#2F4050", tooltip: { valueSuffix: ' ' } },
-                { name: 'MALE', data: linkedMale, type: 'column', color: "#DFDFDF", tooltip: { valueSuffix: ' ' } },
+                { name: 'FEMALE', data: positiveFemale, type: 'column', color: "#2F4050", tooltip: { valueSuffix: ' ' } },
+                { name: 'MALE', data: positiveMale, type: 'column', color: "#DFDFDF", tooltip: { valueSuffix: ' ' } },
                 { name: 'LINKAGE', data: linkage, type: 'spline', color: "#1AB394", tooltip: { valueSuffix: '%' }, dashStyle: 'ShortDot', yAxis: 1 }
             ]
         });
@@ -95,7 +91,7 @@ const LinkageByAgeSex = ({ globalFilter }) => {
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={uptakeByAgeSex} />
+                            <HighchartsReact highcharts={Highcharts} options={linkageByAgeSex} />
                         </div>
                     </CardBody>
                 </Card>
