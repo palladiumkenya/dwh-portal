@@ -30,10 +30,20 @@ const HtsUptakeMonthsSinceLastTest = ({ globalFilter }) => {
         }
 
         setMonthsSinceLastTest({
-            chart: { zoomType: 'xy' },
-            title: { text: '' },
-            subtitle: { text: '' },
-            xAxis: { categories: monthsSinceLastTest, title: { text: null }, visible: true, scrollbar: { enabled: true } },
+            chart: {
+                zoomType: 'xy'
+            },
+            title: {
+                useHTML: true,
+                text: ' &nbsp;',
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: [{
+                categories: monthsSinceLastTest,
+                crosshair: true
+            }],
             yAxis: [{ // Primary yAxis
                 labels: {
                     format: '{value}',
@@ -62,43 +72,35 @@ const HtsUptakeMonthsSinceLastTest = ({ globalFilter }) => {
                 },
                 opposite: true
             }],
+            tooltip: {
+                shared: true
+            },
             legend: {
-                align: 'right',
-                x: -30,
+                layout: 'vertical',
+                align: 'left',
+                x: 120,
                 verticalAlign: 'top',
-                y: 25,
+                y: 7,
                 floating: true,
                 backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || 'white',
-                borderColor: '#CCC',
-                borderWidth: 1,
-                shadow: false
+                    Highcharts.defaultOptions.legend.backgroundColor || // theme
+                    'rgba(255,255,255,0.25)'
             },
-            tooltip: {
-                headerFormat: '<b>{point.x}</b><br/>',
-                pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-            },
-            plotOptions: {
-                column: {
-                    stacking: 'normal',
-                    dataLabels: {
-                        enabled: true
-                    }
-                }
-            },
-            credits: { enabled: false },
-            responsive: { rules: [ { condition: { maxWidth: 400, }, chartOptions: { legend: { enabled: false } } } ] },
             series: [{
                 name: 'Number tested',
                 type: 'column',
-                data: tested,
                 color: "#1AB394",
-            },{
+                data: tested,
+                tooltip: {
+                    valueSuffix: ' '
+                }
+
+            }, {
                 name: 'HIV positivity',
                 type: 'spline',
-                yAxis: 1,
                 data: positivity,
-                color: '#E06F07',
+                color: "#E06F07",
+                yAxis: 1,
                 tooltip: {
                     valueSuffix: '%'
                 }
