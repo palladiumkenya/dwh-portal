@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
+import HighchartsExporting from 'highcharts/modules/exporting';
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+
+if (typeof Highcharts === 'object') {
+    HighchartsExporting(Highcharts)
+}
 
 const NumberTestedAndPositivity = ({ globalFilter }) => {
     const [numberPositiveLinked, setNumberPositiveLinked] = useState({});
