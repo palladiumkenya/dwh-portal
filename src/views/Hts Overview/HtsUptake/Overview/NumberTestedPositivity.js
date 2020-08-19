@@ -25,14 +25,29 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
         };
 
         let months = [];
-        let tested = [];
         let positivity = [];
+        let tested_new = [];
+        let tested_retest = [];
+        let positivity_new = [];
+        let positivity_retest = [];
 
         for(let i = 0; i < result.length; i++) {
-            months.push(monthNames[result[i].month]);
-            tested.push(parseInt(result[i].Tested, 10));
-            const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
-            positivity.push(val);
+            if(result[i].TestedBefore === 'New') {
+                tested_new.push(parseInt(result[i].Tested, 10));
+                months.push(monthNames[result[i].month]);
+                const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
+                positivity_new.push(val);
+            } else if(result[i].TestedBefore === 'Retest') {
+                tested_retest.push(parseInt(result[i].Tested, 10));
+                const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
+                positivity_retest.push(val);
+            }
+        }
+
+        for(let i = 0; i < positivity_new.length; i++) {
+            let val = (positivity_new[i] + positivity_retest[i])/2;
+            val = parseFloat(parseFloat(val).toFixed(1));
+            positivity[i] = val;
         }
 
         setNumberTestedPositivity({
@@ -86,6 +101,11 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
             tooltip: {
                 shared: true
             },
+            plotOptions: {
+                column: {
+                    stacking: 'normal'
+                }
+            },
             legend: {
                 layout: 'vertical',
                 align: 'left',
@@ -97,26 +117,39 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
                     Highcharts.defaultOptions.legend.backgroundColor || // theme
                     'rgba(255,255,255,0.25)'
             },
-            series: [{
-                name: 'Number tested',
-                type: 'column',
-                color: "#1AB394",
-                yAxis: 1,
-                data: tested,
-                tooltip: {
-                    valueSuffix: ' '
-                }
+            series: [
+                {
+                    name: 'New',
+                    type: 'column',
+                    color: "#1AB394",
+                    yAxis: 1,
+                    data: tested_new,
+                    tooltip: {
+                        valueSuffix: ' '
+                    }
+                },
+                {
+                    name: 'Retest',
+                    type: 'column',
+                    color: "#485969",
+                    yAxis: 1,
+                    data: tested_retest,
+                    tooltip: {
+                        valueSuffix: ' '
+                    }
 
-            }, {
-                name: 'HIV positivity',
-                type: 'spline',
-                color: "#E06F07",
-                yAxis: 0,
-                data: positivity,
-                tooltip: {
-                    valueSuffix: ' %'
+                },
+                {
+                    name: 'HIV positivity',
+                    type: 'spline',
+                    color: "#E06F07",
+                    yAxis: 0,
+                    data: positivity,
+                    tooltip: {
+                        valueSuffix: ' %'
+                    }
                 }
-            }],
+            ],
             responsive: {
                 rules: [{
                     condition: {

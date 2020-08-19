@@ -141,7 +141,7 @@ const HtsUptakeTBScreeningAndTBOutcome = ({ globalFilter }) => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TB SCREENING OUTCOME
+                        HIV positivity by TB screening outcomes
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={TBScreeningOutcome} />
