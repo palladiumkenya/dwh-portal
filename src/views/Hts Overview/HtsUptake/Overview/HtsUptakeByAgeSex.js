@@ -51,7 +51,8 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
                 zoomType: 'xy'
             },
             title: {
-                text: ''
+                useHTML: true,
+                text: ' &nbsp;',
             },
             subtitle: {
                 text: ''

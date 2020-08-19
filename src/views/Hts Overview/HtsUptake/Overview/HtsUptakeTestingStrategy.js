@@ -36,7 +36,8 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
                 zoomType: 'xy'
             },
             title: {
-                text: ''
+                useHTML: true,
+                text: ' &nbsp;',
             },
             subtitle: {
                 text: ''
@@ -47,26 +48,26 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
             }],
             yAxis: [{ // Primary yAxis
                 labels: {
-                    format: '{value} %',
+                    format: '{value}',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
                 },
                 title: {
-                    text: 'POSITIVITY',
+                    text: 'Number tested',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
                 }
             }, { // Secondary yAxis
                 title: {
-                    text: 'TESTS',
+                    text: 'HIV positivity',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
                 },
                 labels: {
-                    format: '{value}',
+                    format: '{value} %',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
@@ -88,20 +89,20 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
                     'rgba(255,255,255,0.25)'
             },
             series: [{
-                name: 'TESTS',
+                name: 'Number Tested',
                 type: 'column',
                 color: "#1AB394",
-                yAxis: 1,
                 data: tested,
                 tooltip: {
                     valueSuffix: ' '
                 }
 
             }, {
-                name: 'Positivity',
+                name: 'HIV Positivity',
                 type: 'spline',
                 data: positivity,
                 color: "#E06F07",
+                yAxis: 1,
                 tooltip: {
                     valueSuffix: '%'
                 }
@@ -144,26 +145,26 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
             }],
             yAxis: [{ // Primary yAxis
                 labels: {
-                    format: '{value} %',
+                    format: '{value}',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
                 },
                 title: {
-                    text: 'POSITIVITY',
+                    text: 'Number tested',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
                 }
             }, { // Secondary yAxis
                 title: {
-                    text: 'TESTS',
+                    text: 'HIV positivity',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
                 },
                 labels: {
-                    format: '{value}',
+                    format: '{value} %',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
@@ -185,20 +186,20 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
                     'rgba(255,255,255,0.25)'
             },
             series: [{
-                name: 'TESTS',
+                name: 'Number tested',
                 type: 'column',
                 color: "#1AB394",
-                yAxis: 1,
                 data: tested,
                 tooltip: {
                     valueSuffix: ' '
                 }
 
             }, {
-                name: 'Positivity',
+                name: 'HIV positivity',
                 type: 'spline',
                 data: positivity,
                 color: "#E06F07",
+                yAxis: 1,
                 tooltip: {
                     valueSuffix: '%'
                 }
