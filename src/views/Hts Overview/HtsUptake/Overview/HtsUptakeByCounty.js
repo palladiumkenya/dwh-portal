@@ -34,7 +34,8 @@ const HtsUptakeByCounty = ({ globalFilter }) => {
                 zoomType: 'xy'
             },
             title: {
-                text: ''
+                useHTML: true,
+                text: ' &nbsp;',
             },
             subtitle: {
                 text: ''
@@ -45,26 +46,26 @@ const HtsUptakeByCounty = ({ globalFilter }) => {
             }],
             yAxis: [{ // Primary yAxis
                 labels: {
-                    format: '{value} %',
+                    format: '{value}',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
                 },
                 title: {
-                    text: 'POSITIVITY',
+                    text: 'Number tested',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
                 }
             }, { // Secondary yAxis
                 title: {
-                    text: 'TESTS',
+                    text: 'HIV positivity',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
                 },
                 labels: {
-                    format: '{value}',
+                    format: '{value} %',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
@@ -86,20 +87,20 @@ const HtsUptakeByCounty = ({ globalFilter }) => {
                     'rgba(255,255,255,0.25)'
             },
             series: [{
-                name: 'TESTS',
+                name: 'Number tested',
                 type: 'column',
                 color: "#1AB394",
-                yAxis: 1,
                 data: tested,
                 tooltip: {
                     valueSuffix: ' '
                 }
 
             }, {
-                name: 'Positivity',
+                name: 'HIV positivity',
                 type: 'spline',
                 data: positivity,
                 color: "#E06F07",
+                yAxis: 1,
                 tooltip: {
                     valueSuffix: '%'
                 }
@@ -112,7 +113,7 @@ const HtsUptakeByCounty = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        UPTAKE BY COUNTY
+                        HTS uptake by County
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={uptakeByCounty} />
