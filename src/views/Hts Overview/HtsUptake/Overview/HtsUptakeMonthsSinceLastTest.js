@@ -26,7 +26,8 @@ const HtsUptakeMonthsSinceLastTest = ({ globalFilter }) => {
         for (let i = 0; i < result.length; i++) {
             monthsSinceLastTest.push(result[i].MonthLastTest);
             tested.push(parseInt(result[i].Tested, 10));
-            positivity.push(parseFloat(result[i].positivity));
+            const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
+            positivity.push(val);
         }
 
         setMonthsSinceLastTest({
@@ -52,14 +53,14 @@ const HtsUptakeMonthsSinceLastTest = ({ globalFilter }) => {
                     }
                 },
                 title: {
-                    text: 'Number tested',
+                    text: 'Number Tested',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
                 }
             }, { // Secondary yAxis
                 title: {
-                    text: 'HIV positivity',
+                    text: 'HIV Positivity',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
@@ -87,7 +88,7 @@ const HtsUptakeMonthsSinceLastTest = ({ globalFilter }) => {
                     'rgba(255,255,255,0.25)'
             },
             series: [{
-                name: 'Number tested',
+                name: 'Number Tested',
                 type: 'column',
                 color: "#1AB394",
                 data: tested,
@@ -96,7 +97,7 @@ const HtsUptakeMonthsSinceLastTest = ({ globalFilter }) => {
                 }
 
             }, {
-                name: 'HIV positivity',
+                name: 'HIV Positivity',
                 type: 'spline',
                 data: positivity,
                 color: "#E06F07",
