@@ -15,7 +15,10 @@ const HtsUptakeByPopulationType = ({ globalFilter }) => {
         keyPopPositivity: '',
         totalTested: '',
         totalPositive: '',
-        totalPercentage: ''
+        totalPercentage: '',
+        missingPopTested: '',
+        missingPopPositive: '',
+        missingPopPositivity: ''
     });
 
     useEffect(() => {
@@ -32,10 +35,13 @@ const HtsUptakeByPopulationType = ({ globalFilter }) => {
         const result = await getAll('hts/uptakeByPopulationType', params);
         let genPopVal = null;
         let keyPopVal = null;
+        let missingPopVal = null;
         let genPopPositive = null;
         let keyPopPositive = null;
+        let missingPopPositive = null;
         let genPopPositivity = null;
         let keyPopPositivity = null;
+        let missingPopPositivity = null;
 
         for(let i = 0; i < result.length; i++) {
             if(result[i].PopulationType === 'Key Population') {
@@ -48,19 +54,27 @@ const HtsUptakeByPopulationType = ({ globalFilter }) => {
                 genPopPositive = parseInt(result[i].positive, 10);
                 const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
                 keyPopPositivity = val;
+            } else if(result[i].PopulationType == null) {
+                missingPopVal = parseInt(result[i].Tested, 10);
+                missingPopPositive = parseInt(result[i].positive, 10);
+                const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
+                missingPopPositivity = val;
             }
         }
 
         setHtsOverview({
             genPopTested: genPopVal,
             keyPopTested: keyPopVal,
+            missingPopTested: missingPopVal,
             genPopPositive: genPopPositive,
             keyPopPositive: keyPopPositive,
+            missingPopPositive: missingPopPositive,
             genPopPositivity: genPopPositivity,
             keyPopPositivity: keyPopPositivity,
-            totalTested: genPopVal + keyPopVal,
-            totalPositive: genPopPositive + keyPopPositive,
-            totalPercentage: parseFloat(parseFloat(((genPopPositivity + keyPopPositivity)/2)).toFixed(1))
+            missingPopPositivity: missingPopPositivity,
+            totalTested: genPopVal + keyPopVal + missingPopVal,
+            totalPositive: genPopPositive + keyPopPositive + missingPopPositive,
+            totalPercentage: parseFloat(parseFloat(((genPopPositivity + keyPopPositivity + missingPopPositivity)/2)).toFixed(1))
         });
 
         setUptakeByPopulationType({
@@ -94,15 +108,18 @@ const HtsUptakeByPopulationType = ({ globalFilter }) => {
             series: [{
                 colorByPoint: true,
                 data: [{
-                    name: 'GENERAL',
+                    name: 'General Population',
                     y: genPopVal,
                     color: "#1AB394"
                 }, {
-                    name: 'KEY POPULATION',
+                    name: 'Key Population',
                     y: keyPopVal,
                     sliced: true,
                     selected: true,
                     color: "#2F4050"
+                }, {
+                    name: 'Missing',
+                    y: missingPopVal
                 }]
             }]
         });
@@ -124,8 +141,9 @@ const HtsUptakeByPopulationType = ({ globalFilter }) => {
                                 <table className="table table-bordered">
                                     <tbody>
                                     <tr><td>TYPE</td><td>TESTED</td><td>POSITIVE</td><td>%</td></tr>
-                                    <tr><td>GENERAL</td><td>{htsOverview.genPopTested}</td><td>{htsOverview.genPopPositive}</td><td>{htsOverview.genPopPositivity} % </td></tr>
+                                    <tr><td>GENERAL POPULATION</td><td>{htsOverview.genPopTested}</td><td>{htsOverview.genPopPositive}</td><td>{htsOverview.genPopPositivity} % </td></tr>
                                     <tr><td>KEY POPULATION</td><td>{htsOverview.keyPopTested}</td><td>{htsOverview.keyPopPositive}</td><td>{htsOverview.keyPopPositivity} % </td></tr>
+                                    <tr><td>Missing</td><td>{htsOverview.missingPopTested}</td><td>{htsOverview.missingPopPositive}</td><td>{htsOverview.missingPopPositivity} % </td></tr>
                                     <tr><td>TOTAL</td><td>{htsOverview.totalTested}</td><td>{htsOverview.totalPositive}</td><td>{htsOverview.totalPercentage} % </td></tr>
                                     </tbody>
                                 </table>

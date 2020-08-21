@@ -56,7 +56,7 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
             },
             xAxis: [{
                 categories: ageGroups,
-                crosshair: true
+                crosshair: true,
             }],
             yAxis: [{ // Primary yAxis
                 labels: {

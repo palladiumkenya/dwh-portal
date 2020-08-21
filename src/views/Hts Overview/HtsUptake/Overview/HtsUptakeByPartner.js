@@ -43,7 +43,7 @@ const HtsUptakeByPartner = ({ globalFilter }) => {
             },
             xAxis: [{
                 categories: partners,
-                crosshair: true
+                crosshair: true,
             }],
             yAxis: [{ // Primary yAxis
                 labels: {
