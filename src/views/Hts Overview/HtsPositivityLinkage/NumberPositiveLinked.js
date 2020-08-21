@@ -40,7 +40,7 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
             months.push(monthNames[result[i].month]);
             positive.push(parseInt(result[i].positive, 10));
             linked.push(parseInt(result[i].linked, 10));
-            linkage.push(parseFloat(result[i].linkage));
+            linkage.push(parseFloat(result[i].linkage).toFixed(1));
         }
 
         setNumberPositiveLinked({

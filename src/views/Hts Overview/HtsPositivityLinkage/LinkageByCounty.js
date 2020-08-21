@@ -26,7 +26,7 @@ const LinkageByCounty = ({ globalFilter }) => {
         for(let i = 0; i < result.length; i++) {
             counties.push(result[i].County);
             positive.push(parseInt(result[i].positive, 10));
-            linkage.push(parseFloat(result[i].linkage));
+            linkage.push(parseFloat(result[i].linkage).toFixed(1));
         }
 
         setLinkageByCounty({
