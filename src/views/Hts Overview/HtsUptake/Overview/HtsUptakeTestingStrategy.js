@@ -45,7 +45,10 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
             },
             xAxis: [{
                 categories: testStrategies,
-                crosshair: true
+                crosshair: true,
+                title: {
+                    text: 'Strategies'
+                }
             }],
             yAxis: [{ // Primary yAxis
                 labels: {
@@ -143,7 +146,7 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
             },
             xAxis: [{
                 categories: testStrategies,
-                crosshair: true
+                crosshair: true,
             }],
             yAxis: [{ // Primary yAxis
                 labels: {

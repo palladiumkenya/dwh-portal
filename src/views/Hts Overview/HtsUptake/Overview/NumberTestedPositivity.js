@@ -48,7 +48,7 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
 
             if(result[i].TestedBefore === 'New') {
                 tested_new.push(parseInt(result[i].Tested, 10));
-                months.push(monthNames[result[i].month]);
+                months.push(monthNames[result[i].month] + ' ' + result_year.toString());
             } else if(result[i].TestedBefore === 'Retest') {
                 tested_retest.push(parseInt(result[i].Tested, 10));
             }
@@ -80,7 +80,7 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
             },
             xAxis: [{
                 categories: months,
-                crosshair: true
+                crosshair: true,
             }],
             yAxis: [{ // Primary yAxis
                 labels: {

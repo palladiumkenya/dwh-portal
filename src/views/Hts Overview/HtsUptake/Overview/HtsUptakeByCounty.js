@@ -43,7 +43,7 @@ const HtsUptakeByCounty = ({ globalFilter }) => {
             },
             xAxis: [{
                 categories: counties,
-                crosshair: true
+                crosshair: true,
             }],
             yAxis: [{ // Primary yAxis
                 labels: {
