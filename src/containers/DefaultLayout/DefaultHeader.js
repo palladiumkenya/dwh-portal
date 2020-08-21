@@ -21,18 +21,17 @@ class DefaultHeader extends Component {
                     full={{ src: logo,  width: "auto", height: 50,  alt: 'DWH Logo' }}
                     minimized={{ src: sygnet,  alt: 'DWH Logo' }}
                 />
-                <AppSidebarToggler className="d-md-down-none" display="lg" />
-
                 <Nav className="d-md-down-none" navbar>
                     <NavItem className="px-3">
                         <NavLink to="/reporting-rates" className="nav-link" >Reporting Rates</NavLink>
                     </NavItem>
-                    <NavItem className="px-3">
-                        <Link to="/hts/hts-uptake" className="nav-link">HTS Uptake</Link>
-                    </NavItem>
-                    <NavItem className="px-3">
-                        <NavLink to="/hts/hts-linkage" className="nav-link">HTS Uptake</NavLink>
-                    </NavItem>
+                    <UncontrolledDropdown nav inNavbar>
+                        <DropdownToggle nav caret>HTS</DropdownToggle>
+                        <DropdownMenu right>
+                            <DropdownItem><Link to="/hts/hts-overview" className="nav-link">HTS Uptake</Link></DropdownItem>
+                            <DropdownItem><Link to="/hts/hts-linkage" className="nav-link">HTS Linkage</Link></DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
                     <NavItem className="px-3">
                         <NavLink to="/hrh" className="nav-link">HRH</NavLink>
                     </NavItem>
