@@ -38,11 +38,11 @@ const LinkageByPopulationType = ({ globalFilter }) => {
             if(result[i].PopulationType === 'Key Population') {
                 keyPopPositive = parseInt(result[i].positive, 10);
                 keyPopLinked = parseInt(result[i].linked, 10);
-                keyPopLinkage = parseFloat(result[i].linkage);
+                keyPopLinkage = parseFloat(result[i].linkage).toFixed(1);
             } else if(result[i].PopulationType === 'General Population') {
                 genPopPositive = parseInt(result[i].positive, 10);
                 genPopLinked = parseInt(result[i].linked, 10);
-                genPopLinkage = parseFloat(result[i].linkage);
+                genPopLinkage = parseFloat(result[i].linkage).toFixed(1);
             }
         }
 

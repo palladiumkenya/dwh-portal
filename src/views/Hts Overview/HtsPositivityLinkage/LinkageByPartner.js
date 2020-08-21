@@ -26,7 +26,7 @@ const LinkageByPartner = ({ globalFilter }) => {
         for(let i = 0; i < result.length; i++) {
             partners.push(result[i].Partner);
             positive.push(parseInt(result[i].positive, 10));
-            linkage.push(parseFloat(result[i].linkage));
+            linkage.push(parseFloat(result[i].linkage).toFixed(1));
         }
 
         setLinkageByPartner({

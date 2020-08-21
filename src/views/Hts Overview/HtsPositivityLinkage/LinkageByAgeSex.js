@@ -34,14 +34,14 @@ const LinkageByAgeSex = ({ globalFilter }) => {
         for(let i = 0; i < result.length; i++) {
             if (result[i].Gender == 'Male') {
                 ageGroupsMale.push(result[i].AgeGroup.replace("to", "-"));
-                positiveMale.push(parseFloat(result[i].positive));
-                linkedMale.push(parseFloat(result[i].linked));
-                linkageMale.push(parseFloat(result[i].linkage));
+                positiveMale.push(parseInt(result[i].positive));
+                linkedMale.push(parseInt(result[i].linked));
+                linkageMale.push(parseFloat(result[i].linkage).toFixed(1));
             } else {
                 ageGroupsFemale.push(result[i].AgeGroup);
-                positiveFemale.push(parseFloat(result[i].positive));
-                linkedFemale.push(parseFloat(result[i].linked));
-                linkageFemale.push(parseFloat(result[i].linkage));
+                positiveFemale.push(parseInt(result[i].positive));
+                linkedFemale.push(parseInt(result[i].linked));
+                linkageFemale.push(parseFloat(result[i].linkage).toFixed(1));
             }
         }
 
