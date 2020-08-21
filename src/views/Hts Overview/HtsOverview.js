@@ -30,7 +30,7 @@ const HtsOverview = () => {
         <div className="animated fadeIn">
             <div className="strip">&nbsp;</div>
 
-            <HtsUptakeOverviewHeader/>
+            <HtsUptakeOverviewHeader period={globalFilter?.year}/>
 
             <HtsUptakeFilter onFilterChange={updateGlobalFilter}>&nbsp;</HtsUptakeFilter>
 
