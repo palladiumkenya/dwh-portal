@@ -58,7 +58,7 @@ const HtsOverview = () => {
 
             <p>&nbsp;</p>
 
-            <HtsUptakeByPopulationType/>
+            <HtsUptakeByPopulationType globalFilter={globalFilter}/>
 
             <hr/>
 
@@ -70,7 +70,7 @@ const HtsOverview = () => {
 
             <p>&nbsp;</p>
 
-            <HtsUptakeTestingStrategy/>
+            <HtsUptakeTestingStrategy globalFilter={globalFilter}/>
 
             <hr/>
 
@@ -82,7 +82,7 @@ const HtsOverview = () => {
 
             <p>&nbsp;</p>
 
-            <HtsUptakeByCounty/>
+            <HtsUptakeByCounty globalFilter={globalFilter}/>
 
             <hr/>
 
@@ -94,7 +94,7 @@ const HtsOverview = () => {
 
             <p>&nbsp;</p>
 
-            <HtsUptakeByPartner/>
+            <HtsUptakeByPartner globalFilter={globalFilter}/>
 
             <hr/>
 
@@ -106,7 +106,7 @@ const HtsOverview = () => {
 
             <p>&nbsp;</p>
 
-            <HtsUptakeTypeAndSelfTest/>
+            <HtsUptakeTypeAndSelfTest globalFilter={globalFilter}/>
 
             <hr/>
 
@@ -118,7 +118,7 @@ const HtsOverview = () => {
 
             <p>&nbsp;</p>
 
-            <HtsUptakeMonthsSinceLastTest/>
+            <HtsUptakeMonthsSinceLastTest globalFilter={globalFilter}/>
 
             <hr/>
 
@@ -130,7 +130,7 @@ const HtsOverview = () => {
 
             <p>&nbsp;</p>
 
-            <HtsUptakeTBScreeningAndTBOutcome/>
+            <HtsUptakeTBScreeningAndTBOutcome globalFilter={globalFilter}/>
 
             <hr/>
 
