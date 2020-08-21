@@ -33,7 +33,7 @@ const LinkageByAgeSex = ({ globalFilter }) => {
         const result = await getAll('hts/linkageByAgeSex', params);
         for(let i = 0; i < result.length; i++) {
             if (result[i].Gender == 'Male') {
-                ageGroupsMale.push(result[i].AgeGroup.replace("to", "-") + " YRS");
+                ageGroupsMale.push(result[i].AgeGroup.replace("to", "-"));
                 positiveMale.push(parseFloat(result[i].positive));
                 linkedMale.push(parseFloat(result[i].linked));
                 linkageMale.push(parseFloat(result[i].linkage));
