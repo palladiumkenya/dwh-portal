@@ -40,15 +40,6 @@ class DefaultLayout extends Component {
                     </Suspense>
                 </AppHeader>
                 <div className="app-body">
-                    <AppSidebar fixed display={"lg"}>
-                        <AppSidebarHeader />
-                        <AppSidebarForm />
-                        <Suspense fallback={""}>
-                            <AppSidebarNav navConfig={navigation} {...this.props} router={router} />
-                        </Suspense>
-                        <AppSidebarFooter />
-                        <AppSidebarMinimizer />
-                    </AppSidebar>
                     <main className={"main"}>
                         <AppBreadcrumb appRoutes={routes} router={router} />
                         <Container fluid>
@@ -66,7 +57,8 @@ class DefaultLayout extends Component {
                                             )} />
                                         ): (null);
                                     })}
-                                    <Redirect from={"/"} to={"/dashboard"} />
+                                    {/* <Redirect from={"/"} to={"/dashboard"} /> */}
+                                    <Redirect from={"/"} to={"/reporting-rates"} />
                                 </Switch>
                             </Suspense>
                         </Container>

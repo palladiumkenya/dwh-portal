@@ -46,7 +46,7 @@ const User = React.lazy(() => import("./views/Users/User"));
 
 const routes = [
   { path: "/", exact: true, name: "Home" },
-  { path: "/dashboard", name: "Dashboard", component: Dashboard },
+  // { path: "/dashboard", name: "Dashboard", component: Dashboard },
   {
       path: "/reporting-rates",
       exact: true,
@@ -54,13 +54,13 @@ const routes = [
       component: ReportingRates,
   },
   {
-      path: "/reporting-rates/hts-overview",
-      name: 'HTS Overview',
+      path: "/hts/hts-overview",
+      name: 'HTS Uptake',
       component: HtsOverview
   },
   {
-      path: "/reporting-rates/hts-positivity-linkage",
-      name: 'HTS Pos & Linkage',
+      path: "/hts/hts-linkage",
+      name: 'HTS Linkage',
       component: HtsPositivityLinkage
   },
   {

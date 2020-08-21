@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
+import HighchartsExporting from 'highcharts/modules/exporting';
+import HighchartsExportData from 'highcharts/modules/export-data';
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+
+if (typeof Highcharts === 'object') {
+    HighchartsExporting(Highcharts);
+    HighchartsExportData(Highcharts);
+}
 
 const NumberTestedAndPositivity = ({ globalFilter }) => {
     const [numberPositiveLinked, setNumberPositiveLinked] = useState({});
@@ -18,21 +25,19 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
             params = { ...globalFilter };
         }
 
-        const result = await getAll('hts/numberPositiveLinked', params);
+        const result = await getAll('hts/linkageNumberPositive', params);
         const monthNames = {
             1: "JANUARY", 2: "FEBRUARY", 3: "MARCH", 4: "APRIL", 5: "MAY", 6: "JUNE",
             7: "JULY", 8:"AUGUST", 9: "SEPTEMBER", 10: "OCTOBER", 11: "NOVEMBER", 12: "DECEMBER"
         };
 
         let months = [];
-        let tested = [];
         let positive = [];
         let linked = [];
         let linkage = [];
 
         for(let i = 0; i < result.length; i++) {
             months.push(monthNames[result[i].month]);
-            tested.push(parseInt(result[i].tested, 10));
             positive.push(parseInt(result[i].positive, 10));
             linked.push(parseInt(result[i].linked, 10));
             linkage.push(parseFloat(result[i].linkage));
@@ -46,7 +51,7 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
             xAxis: [{ categories: months, crosshair: true }],
             yAxis: [
                 {
-                    title: { text: 'TESTS', style: { color: "#252525" } },
+                    title: { text: 'POSITIVE', style: { color: "#252525" } },
                     labels: { format: '{value}', style: { color: "#252525" } },
                     min: 0,
                 },
@@ -61,7 +66,7 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
             tooltip: { shared: true },
             legend:{ enabled:false },
             series: [
-                { name: 'TESTED', data: tested, type: 'column', color: "#2F4050", tooltip: { valueSuffix: ' ' } },
+                { name: 'POSITIVE', data: positive, type: 'column', color: "#2F4050", tooltip: { valueSuffix: ' ' } },
                 { name: 'LINKAGE', data: linkage, type: 'spline', color: "#1AB394", tooltip: { valueSuffix: '%' }, dashStyle: 'ShortDot', yAxis: 1 }
             ]
         });

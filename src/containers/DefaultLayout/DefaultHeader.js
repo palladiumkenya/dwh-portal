@@ -21,21 +21,23 @@ class DefaultHeader extends Component {
                     full={{ src: logo,  width: "auto", height: 50,  alt: 'DWH Logo' }}
                     minimized={{ src: sygnet,  alt: 'DWH Logo' }}
                 />
-                <AppSidebarToggler className="d-md-down-none" display="lg" />
-
                 <Nav className="d-md-down-none" navbar>
                     <NavItem className="px-3">
-                        <NavLink to="/dashboard" className="nav-link" >Dashboard</NavLink>
+                        <NavLink to="/reporting-rates" className="nav-link" >Reporting Rates</NavLink>
                     </NavItem>
+                    <UncontrolledDropdown nav inNavbar>
+                        <DropdownToggle nav caret>HTS</DropdownToggle>
+                        <DropdownMenu right>
+                            <DropdownItem><Link to="/hts/hts-overview" className="nav-link">HTS Uptake</Link></DropdownItem>
+                            <DropdownItem><Link to="/hts/hts-linkage" className="nav-link">HTS Linkage</Link></DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
                     <NavItem className="px-3">
-                        <Link to="/users" className="nav-link">Users</Link>
-                    </NavItem>
-                    <NavItem className="px-3">
-                        <NavLink to="#" className="nav-link">Settings</NavLink>
+                        <NavLink to="/hrh" className="nav-link">HRH</NavLink>
                     </NavItem>
                 </Nav>
                 <Nav className="ml-auto" navbar>
-                    <UncontrolledDropdown nav direction="down">
+                    {/* <UncontrolledDropdown nav direction="down">
                         <DropdownToggle nav>
                             <img src={'../../assets/img/avatars/6.png'} className="img-avatar" alt="admin@kenyahmis.org" />
                         </DropdownToggle>
@@ -54,10 +56,10 @@ class DefaultHeader extends Component {
                             <DropdownItem><i className="fa fa-shield"></i> Lock Account</DropdownItem>
                             <DropdownItem onClick={e => this.props.onLogout(e)}><i className="fa fa-lock"></i> Logout</DropdownItem>
                         </DropdownMenu>
-                    </UncontrolledDropdown>
+                    </UncontrolledDropdown> */}
                 </Nav>
-                <AppAsideToggler className="d-md-down-none" />
-                {/*<AppAsideToggler className="d-lg-none" mobile />*/}
+                {/* <AppAsideToggler className="d-md-down-none" />
+                <AppAsideToggler className="d-lg-none" mobile /> */}
             </React.Fragment>
         );
     }

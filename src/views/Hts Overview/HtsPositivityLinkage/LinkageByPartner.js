@@ -19,13 +19,13 @@ const LinkageByPartner = ({ globalFilter }) => {
         }
 
         const partners = [];
-        let tested = [];
+        let positive = [];
         let linkage = [];
 
         const result = await getAll('hts/linkageByPartner', params);
         for(let i = 0; i < result.length; i++) {
             partners.push(result[i].Partner);
-            tested.push(parseInt(result[i].tested, 10));
+            positive.push(parseInt(result[i].positive, 10));
             linkage.push(parseFloat(result[i].linkage));
         }
 
@@ -37,7 +37,7 @@ const LinkageByPartner = ({ globalFilter }) => {
             xAxis: [{ categories: partners, crosshair: true }],
             yAxis: [
                 {
-                    title: { text: 'TESTS', style: { color: "#252525" } },
+                    title: { text: 'POSITIVE', style: { color: "#252525" } },
                     labels: { format: '{value}', style: { color: "#252525" } },
                     min: 0,
                 },
@@ -52,7 +52,7 @@ const LinkageByPartner = ({ globalFilter }) => {
             tooltip: { shared: true },
             legend:{ enabled:false },
             series: [
-                { name: 'TESTED', data: tested, type: 'column', color: "#2F4050", tooltip: { valueSuffix: ' ' } },
+                { name: 'POSITIVE', data: positive, type: 'column', color: "#2F4050", tooltip: { valueSuffix: ' ' } },
                 { name: 'LINKAGE', data: linkage, type: 'spline', color: "#1AB394", tooltip: { valueSuffix: '%' }, dashStyle: 'ShortDot', yAxis: 1 }
             ]
         });
