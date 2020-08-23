@@ -26,10 +26,10 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
         const result = await getAll('hts/uptakeByAgeSex', params);
         const result_positivity = await getAll('hts/uptakeByAgeSexPositivity', params);
         for(let i = 0; i < result.length; i++) {
-            if(result[i].Gender === 'Male') {
+            if(result[i].Gender === 'Male' || result[i].Gender === 'M') {
                 tested_male.push(parseInt(result[i].Tested, 10));
                 ageGroups.push(result[i].AgeGroup);
-            } else if (result[i].Gender === 'Female') {
+            } else if (result[i].Gender === 'Female' || result[i].Gender === 'F') {
                 tested_female.push(parseInt(result[i].Tested, 10));
             }
         }
