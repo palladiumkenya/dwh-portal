@@ -43,6 +43,11 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
             }
         }
 
+        console.log(tested_male);
+        console.log(tested_female);
+        console.log(positivity);
+        console.log(ageGroups);
+
         setUptakeByAgeSex({
             chart: {
                 zoomType: 'xy'
