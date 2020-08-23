@@ -19,35 +19,50 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
         }
 
         const result = await getAll('hts/numberTestedAndPositivity', params);
+        const result_positivity = await getAll('hts/uptakeByPositivity', params);
         const monthNames = {
             1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June",
             7: "July", 8:"August", 9: "September", 10: "October", 11: "November", 12: "December"
         };
 
+        const today = new Date();
+        const today_lastyear = new Date();
+        const lastYear = new Date(today_lastyear.setFullYear(today.getFullYear() - 1));
+        const lastFullYear = lastYear.getFullYear();
+        const lastYearMonth = lastYear.getMonth() + 1;
+        const fullYear = today.getFullYear();
+        const year = params.year;
+
         let months = [];
         let positivity = [];
         let tested_new = [];
         let tested_retest = [];
-        let positivity_new = [];
-        let positivity_retest = [];
 
         for(let i = 0; i < result.length; i++) {
+            const result_month = result[i].month;
+            const result_year = result[i].year.toString();
+
+            if((year.toString() == fullYear.toString()) && (result_month <= lastYearMonth && result_year.toString() == lastFullYear.toString())) {
+                continue;
+            }
+
             if(result[i].TestedBefore === 'New') {
                 tested_new.push(parseInt(result[i].Tested, 10));
-                months.push(monthNames[result[i].month]);
-                const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
-                positivity_new.push(val);
+                months.push(monthNames[result[i].month] + ' ' + result_year.toString());
             } else if(result[i].TestedBefore === 'Retest') {
                 tested_retest.push(parseInt(result[i].Tested, 10));
-                const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
-                positivity_retest.push(val);
             }
         }
 
-        for(let i = 0; i < positivity_new.length; i++) {
-            let val = (positivity_new[i] + positivity_retest[i])/2;
-            val = parseFloat(parseFloat(val).toFixed(1));
-            positivity[i] = val;
+        for(let i = 0; i < result_positivity.length; i++) {
+            const result_month = result_positivity[i].MONTH;
+            const result_year = result_positivity[i].YEAR.toString();
+            if ((year.toString() == fullYear.toString()) && (result_month <= lastYearMonth && result_year.toString() == lastFullYear.toString())) {
+                continue;
+            }
+
+            const val = parseFloat(parseFloat(result_positivity[i].positivity).toFixed(1));
+            positivity.push(val);
         }
 
         setNumberTestedPositivity({
@@ -65,7 +80,7 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
             },
             xAxis: [{
                 categories: months,
-                crosshair: true
+                crosshair: true,
             }],
             yAxis: [{ // Primary yAxis
                 labels: {
@@ -75,7 +90,7 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
                     }
                 },
                 title: {
-                    text: 'HIV positivity',
+                    text: 'HIV Positivity',
                     style: {
                         color: Highcharts.getOptions().colors[2]
                     }
@@ -85,7 +100,7 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
             }, { // Secondary yAxis
                 gridLineWidth: 0,
                 title: {
-                    text: 'Number tested',
+                    text: 'Number Tested',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
@@ -140,7 +155,7 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
 
                 },
                 {
-                    name: 'HIV positivity',
+                    name: 'HIV Positivity',
                     type: 'spline',
                     color: "#E06F07",
                     yAxis: 0,
@@ -192,7 +207,7 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        HTS Uptake and HIV positivity by month
+                        HTS Uptake and Hiv Positivity by Month
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

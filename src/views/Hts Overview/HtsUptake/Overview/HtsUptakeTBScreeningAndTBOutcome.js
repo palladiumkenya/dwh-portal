@@ -21,8 +21,13 @@ const HtsUptakeTBScreeningAndTBOutcome = ({ globalFilter }) => {
         }
 
         const result = await getAll('hts/tbScreened', params);
-        const NotScreenedTB = parseInt(result[0].NotScreenedTB, 10);
-        const ScreenedTB = parseInt(result[0].ScreenedTB, 10);
+        let NotScreenedTB = null;
+        let ScreenedTB = null;
+        if(result.length > 0) {
+            NotScreenedTB = parseInt(result[0].NotScreenedTB, 10);
+            ScreenedTB = parseInt(result[0].ScreenedTB, 10);
+        }
+
 
         setScreenedTB({
             chart: {
@@ -83,7 +88,8 @@ const HtsUptakeTBScreeningAndTBOutcome = ({ globalFilter }) => {
         for (let i = 0; i < result.length; i++) {
             tbScreeningOutcomes.push(result[i].tbScreeningOutcomes);
             tested.push(parseInt(result[i].Tested, 10));
-            positivity.push(parseFloat(result[i].positivity));
+            const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
+            positivity.push(val);
         }
 
         setTBScreeningOutcome({
@@ -109,14 +115,14 @@ const HtsUptakeTBScreeningAndTBOutcome = ({ globalFilter }) => {
                     }
                 },
                 title: {
-                    text: 'Number tested',
+                    text: 'Number Tested',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
                 }
             }, { // Secondary yAxis
                 title: {
-                    text: 'HIV positivity',
+                    text: 'HIV Positivity',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
@@ -144,7 +150,7 @@ const HtsUptakeTBScreeningAndTBOutcome = ({ globalFilter }) => {
                     'rgba(255,255,255,0.25)'
             },
             series: [{
-                name: 'Number tested',
+                name: 'Number Tested',
                 type: 'column',
                 color: "#1AB394",
                 data: tested,
@@ -153,7 +159,7 @@ const HtsUptakeTBScreeningAndTBOutcome = ({ globalFilter }) => {
                 }
 
             }, {
-                name: 'HIV positivity',
+                name: 'HIV Positivity',
                 type: 'spline',
                 data: positivity,
                 color: "#E06F07",

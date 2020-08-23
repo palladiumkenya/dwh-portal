@@ -19,31 +19,28 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
         }
 
         const ageGroups = [];
-        let tested = [];
         let tested_male = [];
         let tested_female = [];
         let positivity = [];
-        let positivity_male = [];
-        let positivity_female = [];
 
         const result = await getAll('hts/uptakeByAgeSex', params);
+        const result_positivity = await getAll('hts/uptakeByAgeSexPositivity', params);
         for(let i = 0; i < result.length; i++) {
-            if(result[i].Gender === 'Male') {
+            if(result[i].Gender === 'Male' || result[i].Gender === 'M') {
                 tested_male.push(parseInt(result[i].Tested, 10));
                 ageGroups.push(result[i].AgeGroup);
-                const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
-                positivity_male.push(val);
-            } else if (result[i].Gender === 'Female') {
+            } else if (result[i].Gender === 'Female' || result[i].Gender === 'F') {
                 tested_female.push(parseInt(result[i].Tested, 10));
-                const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
-                positivity_female.push(val);
             }
         }
 
-        for(let i = 0; i < positivity_male.length; i++) {
-            let val = (positivity_male[i] + positivity_female[i])/2;
-            val = parseFloat(parseFloat(val).toFixed(1));
-            positivity[i] = val;
+        for(let i = 0; i < ageGroups.length; i++) {
+            for(let j = 0; j < result_positivity.length; j++) {
+                if(ageGroups[i] === result_positivity[j].AgeGroup) {
+                    const val = parseFloat(parseFloat(result_positivity[j].positivity).toFixed(1));
+                    positivity.push(val);
+                }
+            }
         }
 
         setUptakeByAgeSex({
@@ -59,7 +56,7 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
             },
             xAxis: [{
                 categories: ageGroups,
-                crosshair: true
+                crosshair: true,
             }],
             yAxis: [{ // Primary yAxis
                 labels: {
@@ -69,14 +66,14 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
                     }
                 },
                 title: {
-                    text: 'Number tested',
+                    text: 'Number Tested',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
                 }
             },{ // Secondary yAxis
                 title: {
-                    text: 'HIV positivity',
+                    text: 'HIV Positivity',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
@@ -109,7 +106,7 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
                     'rgba(255,255,255,0.25)'
             },
             series: [{
-                name: 'MALE',
+                name: 'Male',
                 type: 'column',
                 color: "#1AB394",
                 data: tested_male,
@@ -117,7 +114,7 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
                     valueSuffix: ' '
                 }
             }, {
-                name: 'FEMALE',
+                name: 'Female',
                 type: 'column',
                 color: "#485969",
                 data: tested_female,
@@ -125,7 +122,7 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
                     valueSuffix: ' '
                 }
             }, {
-                name: 'HIV positivity',
+                name: 'HIV Positivity',
                 type: 'spline',
                 yAxis: 1,
                 data: positivity,
