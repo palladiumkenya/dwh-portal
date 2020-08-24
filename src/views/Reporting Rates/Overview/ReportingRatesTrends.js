@@ -82,16 +82,14 @@ const ReportingRatesTrends = ({ globalFilter }) => {
             params = { ...globalFilter };
         }
 
-        let result = [];
-        const endDate = moment(globalFilter.period, 'YYYY,M');
-        const startDate = endDate.clone().subtract(numberOfMonths, 'month');
+        const endDate = moment(globalFilter.period, 'YYYY,M').endOf('month');
+        const startDate = endDate.clone().subtract(numberOfMonths, 'month').add(1, 'month').startOf('month');
 
-        for (let i = 0; i < numberOfMonths; i++) {
-            params.period = startDate.format('YYYY,M');
-            let res = await getAll('manifests/consistency/trends/' + params.docket, params);
-            result = result.concat(res);
-            startDate.add(1, 'month');
-        }
+        delete(params.period);
+        params.startDate = startDate.format('YYYY-MM-DD');
+        params.endDate = endDate.format('YYYY-MM-DD');
+
+        let result = await getAll('manifests/consistency/trends/' + params.docket, params);
 
         const months = {};
         const data = {};
