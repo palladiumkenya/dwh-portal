@@ -27,8 +27,8 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
 
         const result = await getAll('hts/linkageNumberPositive', params);
         const monthNames = {
-            1: "JANUARY", 2: "FEBRUARY", 3: "MARCH", 4: "APRIL", 5: "MAY", 6: "JUNE",
-            7: "JULY", 8:"AUGUST", 9: "SEPTEMBER", 10: "OCTOBER", 11: "NOVEMBER", 12: "DECEMBER"
+            1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June",
+            7: "July", 8:"August", 9: "September", 10: "October", 11: "November", 12: "December"
         };
 
         let months = [];
@@ -37,37 +37,44 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
         let linkage = [];
 
         for(let i = 0; i < result.length; i++) {
-            months.push(monthNames[result[i].month]);
+            months.push(monthNames[result[i].month] + ' ' + result[i].year.toString());
             positive.push(parseInt(result[i].positive, 10));
             linked.push(parseInt(result[i].linked, 10));
-            linkage.push(parseFloat(result[i].linkage).toFixed(1));
+            linkage.push(Number(parseFloat(result[i].linkage).toFixed(1)));
         }
+
+        months = months.slice(Math.max(months.length - 12, 0));
+        positive = positive.slice(Math.max(positive.length - 12, 0));
+        linked = linked.slice(Math.max(linked.length - 12, 0));
+        linkage = linkage.slice(Math.max(linkage.length - 12, 0));
 
         setNumberPositiveLinked({
             chart: { zoomType: 'xy' },
-            title: { text: '' },
-            subtitle: { text: '' },
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
-            xAxis: [{ categories: months, crosshair: true }],
+            title: { useHTML: true, text: ' &nbsp;', align: 'left' },
+            subtitle: { text: ' ', align: 'left' },
+            xAxis: [{ categories: months, crosshair: true, title: { text: 'Months' } }],
             yAxis: [
                 {
-                    title: { text: 'POSITIVE', style: { color: "#252525" } },
-                    labels: { format: '{value}', style: { color: "#252525" } },
+                    title: { text: 'Number Positive', style: { color: Highcharts.getOptions().colors[1] } },
+                    labels: { format: '{value}', style: { color: Highcharts.getOptions().colors[1] } },
                     min: 0,
                 },
                 {
-                    title: { text: 'LINKAGE (%)', style: { color: "#252525" } },
-                    labels: { format: '{value} %', style: { color: "#252525" } },
+                    title: { text: 'Linkage (%)', style: { color: Highcharts.getOptions().colors[0] } },
+                    labels: { format: '{value} %', style: { color: Highcharts.getOptions().colors[0] } },
                     min: 0,
                     max: 100,
                     opposite: true
                 }
             ],
             tooltip: { shared: true },
-            legend:{ enabled:false },
+            legend: {
+                floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
+                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+            },
             series: [
-                { name: 'POSITIVE', data: positive, type: 'column', color: "#2F4050", tooltip: { valueSuffix: ' ' } },
-                { name: 'LINKAGE', data: linkage, type: 'spline', color: "#1AB394", tooltip: { valueSuffix: '%' }, dashStyle: 'ShortDot', yAxis: 1 }
+                { name: 'Number Positive', data: positive, type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ' } },
+                { name: 'Linkage', data: linkage, type: 'spline', color: "#E06F07", tooltip: { valueSuffix: '%' }, yAxis: 1 }
             ]
         });
     };
