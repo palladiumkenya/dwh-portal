@@ -61,7 +61,6 @@ const UploadsReportingConsistency = ({ globalFilter }) => {
         }
 
         const data = await getAll('manifests/recency/' + params.docket, params);
-        console.log(data);
         setRecency({
             recency: [],
             stats: data.recency,
