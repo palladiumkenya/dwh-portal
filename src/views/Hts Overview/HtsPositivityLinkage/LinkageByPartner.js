@@ -26,24 +26,24 @@ const LinkageByPartner = ({ globalFilter }) => {
         for(let i = 0; i < result.length; i++) {
             partners.push(result[i].Partner);
             positive.push(parseInt(result[i].positive, 10));
-            linkage.push(parseFloat(result[i].linkage).toFixed(1));
+            linkage.push(Number(parseFloat(result[i].linkage).toFixed(1)));
         }
 
         setLinkageByPartner({
             chart: { zoomType: 'xy' },
-            title: { text: '' },
-            subtitle: { text: '' },
+            title: { useHTML: true, text: ' &nbsp;', align: 'left' },
+            subtitle: { text: ' ', align: 'left' },
             plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
-            xAxis: [{ categories: partners, crosshair: true }],
+            xAxis: [{ categories: partners, crosshair: true, title: { text: 'Partners' } }],
             yAxis: [
                 {
-                    title: { text: 'POSITIVE', style: { color: "#252525" } },
-                    labels: { format: '{value}', style: { color: "#252525" } },
+                    title: { text: 'Number Positive', style: { color: Highcharts.getOptions().colors[1] } },
+                    labels: { format: '{value}', style: { color: Highcharts.getOptions().colors[1] } },
                     min: 0,
                 },
                 {
-                    title: { text: 'LINKAGE (%)', style: { color: "#252525" } },
-                    labels: { format: '{value} %', style: { color: "#252525" } },
+                    title: { text: 'Linkage (%)', style: { color: Highcharts.getOptions().colors[0] } },
+                    labels: { format: '{value} %', style: { color: Highcharts.getOptions().colors[0] } },
                     min: 0,
                     max: 100,
                     opposite: true
@@ -52,8 +52,8 @@ const LinkageByPartner = ({ globalFilter }) => {
             tooltip: { shared: true },
             legend:{ enabled:false },
             series: [
-                { name: 'POSITIVE', data: positive, type: 'column', color: "#2F4050", tooltip: { valueSuffix: ' ' } },
-                { name: 'LINKAGE', data: linkage, type: 'spline', color: "#1AB394", tooltip: { valueSuffix: '%' }, dashStyle: 'ShortDot', yAxis: 1 }
+                { name: 'Number Positive', data: positive, type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ' } },
+                { name: 'Linkage', data: linkage, type: 'spline', color: "#E06F07", tooltip: { valueSuffix: '%' }, yAxis: 1 }
             ]
         });
     };

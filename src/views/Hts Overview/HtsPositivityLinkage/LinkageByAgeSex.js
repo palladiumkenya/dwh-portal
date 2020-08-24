@@ -18,6 +18,8 @@ const LinkageByAgeSex = ({ globalFilter }) => {
             params = { ...globalFilter };
         }
 
+        const ageGroups = [];
+
         const ageGroupsMale = [];
         let positiveMale = [];
         let linkedMale = [];
@@ -27,43 +29,60 @@ const LinkageByAgeSex = ({ globalFilter }) => {
         let positiveFemale = [];
         let linkedFemale = [];
         let linkageFemale = [];
-
         let linkage = [];
 
         const result = await getAll('hts/linkageByAgeSex', params);
+
         for(let i = 0; i < result.length; i++) {
-            if (result[i].Gender == 'Male') {
-                ageGroupsMale.push(result[i].AgeGroup.replace("to", "-"));
-                positiveMale.push(parseInt(result[i].positive));
-                linkedMale.push(parseInt(result[i].linked));
-                linkageMale.push(parseFloat(result[i].linkage).toFixed(1));
-            } else {
-                ageGroupsFemale.push(result[i].AgeGroup);
-                positiveFemale.push(parseInt(result[i].positive));
-                linkedFemale.push(parseInt(result[i].linked));
-                linkageFemale.push(parseFloat(result[i].linkage).toFixed(1));
+            if(ageGroups.indexOf(result[i].AgeGroup) !== -1){
+                continue;
+            } else{
+                ageGroups.push(result[i].AgeGroup);
             }
         }
 
-        for(let i = 0; i < linkageMale.length; i++) {
-            linkage[i] = (linkageMale[i] + linkageFemale[i])/2;
+        for(let i = 0; i < result.length; i++) {
+            let index = ageGroups.indexOf(result[i].AgeGroup);
+            if (result[i].Gender == 'Male' || result[i].Gender == 'M') {
+                ageGroupsMale.splice(index, 0, result[i].AgeGroup);
+                positiveMale.splice(index, 0, parseInt(result[i].positive));
+                linkedMale.splice(index, 0, parseInt(result[i].linked));
+                linkageMale.splice(index, 0, parseFloat(result[i].linkage));
+            } else {
+                ageGroupsFemale.splice(index, 0, result[i].AgeGroup);
+                positiveFemale.splice(index, 0, parseInt(result[i].positive));
+                linkedFemale.splice(index, 0, parseInt(result[i].linked));
+                linkageFemale.splice(index, 0, parseFloat(result[i].linkage));
+            }
+        }
+
+        for(let i = 0; i < ageGroups.length; i++) {
+            let linkageMaleSingle = 0.0;
+            let linkageFemaleSingle = 0.0;
+            if (typeof linkageMale[i] !== 'undefined') {
+                linkageMaleSingle = linkageMale[i];
+            }
+            if (typeof linkageFemale[i] !== 'undefined') {
+                linkageFemaleSingle = linkageFemale[i];
+            }
+            linkage[i] = Number(((linkageMaleSingle + linkageFemaleSingle)/2).toFixed(1));
         }
 
         setLinkageByAgeSex({
             chart: { zoomType: 'xy' },
-            title: { text: '' },
-            subtitle: { text: '' },
+            title: { useHTML: true, text: ' &nbsp;', align: 'left' },
+            subtitle: { text: ' ', align: 'left' },
             plotOptions: { column: { stacking: 'normal' } },
-            xAxis: [{ categories: ageGroupsMale, crosshair: true }],
+            xAxis: [{ categories: ageGroups, crosshair: true, title: { text: 'Ages' } }],
             yAxis: [
                 {
-                    title: { text: 'POSITIVE', style: { color: "#252525" } },
-                    labels: { format: '{value}', style: { color: "#252525" } },
+                    title: { text: 'Number Positive', style: { color: Highcharts.getOptions().colors[1] } },
+                    labels: { format: '{value}', style: { color: Highcharts.getOptions().colors[1] } },
                     min: 0,
                 },
                 {
-                    title: { text: 'LINKAGE (%)', style: { color: "#252525" } },
-                    labels: { format: '{value} %', style: { color: "#252525" } },
+                    title: { text: 'Linkage (%)', style: { color: Highcharts.getOptions().colors[0] } },
+                    labels: { format: '{value} %', style: { color: Highcharts.getOptions().colors[0] } },
                     min: 0,
                     max: 100,
                     opposite: true
@@ -71,13 +90,13 @@ const LinkageByAgeSex = ({ globalFilter }) => {
             ],
             tooltip: { shared: true },
             legend: {
-                align: 'right',
-                verticalAlign: 'bottom',
+                floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
+                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'FEMALE', data: positiveFemale, type: 'column', color: "#2F4050", tooltip: { valueSuffix: ' ' } },
-                { name: 'MALE', data: positiveMale, type: 'column', color: "#DFDFDF", tooltip: { valueSuffix: ' ' } },
-                { name: 'LINKAGE', data: linkage, type: 'spline', color: "#1AB394", tooltip: { valueSuffix: '%' }, dashStyle: 'ShortDot', yAxis: 1 }
+                { name: 'Female', data: positiveFemale, type: 'column', color: "#485969", tooltip: { valueSuffix: ' ' } },
+                { name: 'Male', data: positiveMale, type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ' } },
+                { name: 'Linkage', data: linkage, type: 'spline', color: "#E06F07", tooltip: { valueSuffix: '%' }, yAxis: 1 }
             ]
         });
     };

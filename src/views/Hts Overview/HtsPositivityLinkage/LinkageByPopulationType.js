@@ -9,10 +9,13 @@ const LinkageByPopulationType = ({ globalFilter }) => {
     const [linkage, setLinkage] = useState({
         genPopPositive: '',
         keyPopPositive: '',
+        missingPopPositive: '',
         genPopLinked: '',
         keyPopLinked: '',
+        missingPopLinked: '',
         genPopLinkage: '',
         keyPopLinkage: '',
+        missingPopLinkage: '',
     });
 
     useEffect(() => {
@@ -33,26 +36,36 @@ const LinkageByPopulationType = ({ globalFilter }) => {
         let keyPopLinked = null;
         let genPopLinkage = null;
         let keyPopLinkage = null;
+        let missingPopPositive = 0.0;
+        let missingPopLinked = 0.0;
+        let missingPopLinkage = 0.0;
 
         for(let i = 0; i < result.length; i++) {
             if(result[i].PopulationType === 'Key Population') {
                 keyPopPositive = parseInt(result[i].positive, 10);
                 keyPopLinked = parseInt(result[i].linked, 10);
-                keyPopLinkage = parseFloat(result[i].linkage).toFixed(1);
+                keyPopLinkage = Number(parseFloat(result[i].linkage).toFixed(1));
             } else if(result[i].PopulationType === 'General Population') {
                 genPopPositive = parseInt(result[i].positive, 10);
                 genPopLinked = parseInt(result[i].linked, 10);
-                genPopLinkage = parseFloat(result[i].linkage).toFixed(1);
+                genPopLinkage = Number(parseFloat(result[i].linkage).toFixed(1));
+            } else if(!result[i].PopulationType || result[i].PopulationType == null || result[i].PopulationType == '') {
+                missingPopPositive = parseInt(result[i].positive, 10);
+                missingPopLinked = parseInt(result[i].linked, 10);
+                missingPopLinkage = Number(parseFloat(result[i].linkage).toFixed(1));
             }
         }
 
         setLinkage({
             genPopPositive: genPopPositive,
             keyPopPositive: keyPopPositive,
+            missingPopPositive: missingPopPositive,
             genPopLinked: genPopLinked,
             keyPopLinked: keyPopLinked,
+            missingPopLinked: missingPopLinked,
             genPopLinkage: genPopLinkage,
             keyPopLinkage: keyPopLinkage,
+            missingPopLinkage: missingPopLinkage,
         });
 
         setLinkageByPopulationType({
@@ -62,17 +75,9 @@ const LinkageByPopulationType = ({ globalFilter }) => {
                 plotShadow: false,
                 type: 'pie'
             },
-            title: {
-                text: ''
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            accessibility: {
-                point: {
-                    valueSuffix: '%'
-                }
-            },
+            title: { text: '' },
+            tooltip: { pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>' },
+            accessibility: { point: { valueSuffix: '%' } },
             plotOptions: {
                 pie: {
                     allowPointSelect: true,
@@ -86,17 +91,11 @@ const LinkageByPopulationType = ({ globalFilter }) => {
             series: [{
                 name:"Linked",
                 colorByPoint: true,
-                data: [{
-                    name: 'GENERAL POPULATION',
-                    y: genPopLinked,
-                    color: "#1AB394"
-                }, {
-                    name: 'KEY POPULATION',
-                    y: keyPopLinked,
-                    sliced: true,
-                    selected: true,
-                    color: "#2F4050"
-                }]
+                data: [
+                    { name: 'General Population', y: genPopLinked, color: "#1AB394" },
+                    { name: 'Key Population', y: keyPopLinked, sliced: true, selected: true, color: "#2F4050" },
+                    { name: 'Missing', y: missingPopLinked, sliced: true, color: "#E06F07" }
+                ]
             }]
         });
     };
@@ -116,10 +115,11 @@ const LinkageByPopulationType = ({ globalFilter }) => {
                             <div className="col-6" style={{backgroundColor: '#ffffff', padding: '3em' }}>
                                 <table className="table table-bordered">
                                     <tbody>
-                                        <tr><td>TYPE</td><td>POSITIVE</td><td>LINKED</td><td>%</td></tr>
-                                        <tr><td>GENERAL POPULATION</td><td>{linkage.genPopPositive}</td><td>{linkage.genPopLinked}</td><td>{parseFloat(linkage.genPopLinkage).toFixed(2)} % </td></tr>
-                                        <tr><td>KEY POPULATION</td><td>{linkage.keyPopPositive}</td><td>{linkage.keyPopLinked}</td><td>{parseFloat(linkage.keyPopLinkage).toFixed(2)} % </td></tr>
-                                        <tr><td>TOTAL</td><td>{linkage.genPopPositive + linkage.keyPopPositive}</td><td>{linkage.genPopLinked + linkage.keyPopLinked}</td><td>{((linkage.genPopLinkage + linkage.keyPopLinkage)/2).toFixed(2)} % </td></tr>
+                                        <tr><th>Type</th><th>Positive</th><th>Linked</th><th>%</th></tr>
+                                        <tr><td>General Population</td><td align="right">{linkage.genPopPositive}</td><td align="right">{linkage.genPopLinked}</td><td>{parseFloat(linkage.genPopLinkage).toFixed(1)} % </td></tr>
+                                        <tr><td>Key Population</td><td align="right">{linkage.keyPopPositive}</td><td align="right">{linkage.keyPopLinked}</td><td>{parseFloat(linkage.keyPopLinkage).toFixed(1)} % </td></tr>
+                                        <tr><td>Missing</td><td align="right">{linkage.missingPopPositive}</td><td align="right">{linkage.missingPopLinked}</td><td>{parseFloat(linkage.missingPopLinkage).toFixed(1)} % </td></tr>
+                                        <tr><td>Total</td><td align="right">{linkage.genPopPositive + linkage.keyPopPositive}</td><td align="right">{linkage.genPopLinked + linkage.keyPopLinked}</td><td>{((linkage.genPopLinkage + linkage.keyPopLinkage)/2).toFixed(1)} % </td></tr>
                                     </tbody>
                                 </table>
                             </div>
