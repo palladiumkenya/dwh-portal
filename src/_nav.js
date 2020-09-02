@@ -30,10 +30,15 @@ export default {
               }
           ]
       },
+      // {
+      //     name: 'HRH',
+      //     url: '/hrh',
+      //     icon: 'icon-user'
+      // },
       {
-          name: 'HRH',
-          url: '/hrh',
-          icon: 'icon-user'
+        name: 'HIV Treatment',
+        url: '/hiv-treatment',
+        icon: 'icon-user'
       }
     /*{
       title: true,
