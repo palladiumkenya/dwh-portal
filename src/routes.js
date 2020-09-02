@@ -3,6 +3,7 @@ import ReportingRates from "./views/Reporting Rates/ReportingRates";
 import HRH from "./views/HRH/HRH";
 import HtsOverview from './views/Hts Overview/HtsOverview';
 import HtsPositivityLinkage from './views/Hts Overview/HtsPositivityLinkage';
+import CareTreatment from './views/CT/CareTreatment';
 
 const Breadcrumbs = React.lazy(() => import("./views/Base/Breadcrumbs"));
 const Cards = React.lazy(() => import("./views/Base/Cards"));
@@ -62,6 +63,11 @@ const routes = [
       path: "/hts/hts-linkage",
       name: 'HTS Linkage',
       component: HtsPositivityLinkage
+  },
+  {
+      path: "/ct/home",
+      name: "Care & Treatment",
+      component: CareTreatment
   },
   {
     path: "/hrh",
