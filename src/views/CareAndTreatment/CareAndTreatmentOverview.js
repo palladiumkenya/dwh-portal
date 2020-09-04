@@ -57,6 +57,7 @@ const CareAndTreatmentOverview = () => {
                     <NewOnArt globalFilter={globalFilter}></NewOnArt>
                 </TabPane>
             </TabContent>
+            <p></p>
         </div>
     );
 };
