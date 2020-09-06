@@ -32,8 +32,11 @@ class DefaultHeader extends Component {
                             <DropdownItem><Link to="/hts/hts-linkage" className="nav-link">HTS Linkage</Link></DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>
-                    <NavItem className="px-3">
+                    {/* <NavItem className="px-3">
                         <NavLink to="/hrh" className="nav-link">HRH</NavLink>
+                    </NavItem> */}
+                    <NavItem className="px-3">
+                        <NavLink to="/hiv-treatment" className="nav-link">HIV Treatment</NavLink>
                     </NavItem>
                 </Nav>
                 <Nav className="ml-auto" navbar>

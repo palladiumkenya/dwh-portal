@@ -4,6 +4,7 @@ import HRH from "./views/HRH/HRH";
 import HtsOverview from './views/Hts Overview/HtsOverview';
 import HtsPositivityLinkage from './views/Hts Overview/HtsPositivityLinkage';
 import CareTreatment from './views/CT/CareTreatment';
+import CareAndTreatmentOverview from "./views/CareAndTreatment/CareAndTreatmentOverview";
 
 const Breadcrumbs = React.lazy(() => import("./views/Base/Breadcrumbs"));
 const Cards = React.lazy(() => import("./views/Base/Cards"));
@@ -73,6 +74,11 @@ const routes = [
     path: "/hrh",
     name: "HRH",
     component: HRH,
+  },
+  {
+    path: "/hiv-treatment",
+    name: "HIV Treatment",
+    component: CareAndTreatmentOverview,
   },
   { path: "/theme", exact: true, name: "Theme", component: Colors },
   { path: "/theme/colors", name: "Colors", component: Colors },
