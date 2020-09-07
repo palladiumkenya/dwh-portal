@@ -194,3 +194,27 @@
 
   color: #000000;
 }
+
+.hmis_statistics_separator {
+  position: relative;
+  height: 9px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 30px;
+
+  background: #485969;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+.active_art {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.active_art_number {
+  color: #1AB394;
+  font-size: larger;
+  font-family: "Dosis", Arial, Helvetica, sans-serif;
+}
+.active_art_gender {
+  text-align: justify !important;
+}
