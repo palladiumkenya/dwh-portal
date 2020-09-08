@@ -20,6 +20,10 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
     const [ARTClientsAdolescents, setARTClientsAdolescents] = useState({
         ActiveARTAdolescents: ''
     });
+    const [ARTClientsByGender, setARTClientsByGender] = useState({
+        ActiveARTFemale: '',
+        ActiveARTMale: '',
+    });
 
     useEffect(() => {
         loadUptakeByEntryPoint();
@@ -27,6 +31,7 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
         loadActiveOnARTChildren();
         loadActiveOnARTAdults();
         loadActiveOnARTAdolescents();
+        loadActiveOnARTByGender();
     }, [globalFilter]);
 
     const loadActiveOnART = async () => {
@@ -93,6 +98,43 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
             params = { ...globalFilter };
         }
 
+        let ActiveARTAdolescents = 0;
+
+        const result = await getAll('care-treatment/activeArtAdolescents', params);
+        if(result && result.length > 0) {
+            ActiveARTAdolescents = result[0].ActiveARTAdolescents;
+        }
+
+        setARTClientsAdolescents({
+            ActiveARTAdolescents: ActiveARTAdolescents.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        });
+    };
+
+    const loadActiveOnARTByGender = async () => {
+        let params = null;
+
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+
+        let ActiveARTMale = 0;
+        let ActiveARTFemale = 0;
+
+        const result = await getAll('care-treatment/activeArtByGender', params);
+        for (let i = 0; i < result.length; i++) {
+            if(result[i].Gender.toString().toLowerCase() == 'f' || result[i].Gender.toString().toLowerCase() == 'female') {
+                ActiveARTFemale = result[i].ActiveART;
+            }
+
+            if(result[i].Gender.toString().toLowerCase() == 'm' || result[i].Gender.toString().toLowerCase() == 'male') {
+                ActiveARTMale = result[i].ActiveART;
+            }
+        }
+
+        setARTClientsByGender({
+            ActiveARTMale: ActiveARTMale.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+            ActiveARTFemale: ActiveARTFemale.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        });
     };
 
     const loadUptakeByEntryPoint = async () => {
@@ -221,7 +263,7 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
                                 <img src={AdultMan} width={"auto"} height={"50"}  alt={"Adult Man"} />
                             </div>
                             <div className="col-11 active_art_gender">
-                                237,194 males are active on ART. 93% of the males with a viral load in the last 12 months are virally suppressed.
+                                {ARTClientsByGender.ActiveARTMale} males are active on ART. 93% of the males with a viral load in the last 12 months are virally suppressed.
                             </div>
                         </div>
                     </div>
@@ -231,7 +273,7 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
                                 <img src={AdultWoman} width={"auto"} height={"50"}  alt={"Adult Woman"} />
                             </div>
                             <div className="col-11 active_art_gender">
-                                475,248 females are active on ART. 94% of the females with a viral load in the last 12 months are virally suppressed.
+                                {ARTClientsByGender.ActiveARTFemale} females are active on ART. 94% of the females with a viral load in the last 12 months are virally suppressed.
                             </div>
                         </div>
                     </div>
