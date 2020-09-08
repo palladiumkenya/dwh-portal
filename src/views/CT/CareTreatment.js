@@ -8,7 +8,14 @@ import CTHomeStabilityStatusAndTrendsInDSD from './Home/CTHomeStabilityStatusAnd
 import CTHomeReportingRates from './Home/CTHomeReportingRates';
 
 const CareTreatment = () => {
-    const [globalFilter, setGlobalFilter] = useState({});
+    const [globalFilter, setGlobalFilter] = useState({
+        county: [],
+        subCounty: [],
+        facility: [],
+        partner: [],
+        year:`${new Date().getFullYear()}`,
+        month: ''
+    });
 
     const updateGlobalFilter = (selection) => {
         setGlobalFilter(selection);
@@ -40,7 +47,7 @@ const CareTreatment = () => {
 
             <p>&nbsp;</p>
 
-            <CTHomeTXNew />
+            <CTHomeTXNew globalFilter={globalFilter} />
 
             <hr />
 

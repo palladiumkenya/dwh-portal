@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
+import { getAll } from '../../Shared/Api';
 
 const CTHomeTXNew = ({ globalFilter }) => {
     const [txNew, setTxNew] = useState({});
@@ -17,7 +18,53 @@ const CTHomeTXNew = ({ globalFilter }) => {
             params = { ...globalFilter };
         }
 
-        const months = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
+        const result = await getAll('care-treatment/txNew', params);
+
+        const monthNames = {
+            1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June",
+            7: "July", 8:"August", 9: "September", 10: "October", 11: "November", 12: "December"
+        };
+
+        const today = new Date();
+        const today_lastyear = new Date();
+        const lastYear = new Date(today_lastyear.setFullYear(today.getFullYear() - 1));
+        const lastFullYear = lastYear.getFullYear();
+        const lastYearMonth = lastYear.getMonth() + 1;
+        const fullYear = today.getFullYear();
+        const year = params.year;
+
+        let months = [];
+        let cumulative = [];
+        let male = [];
+        let female = [];
+
+        for(let i = 0; i < result.length; i++) {
+            const result_month = result[i].month;
+            const result_year = result[i].year.toString();
+
+            if((year.toString() == fullYear.toString()) && (result_month <= lastYearMonth && result_year.toString() == lastFullYear.toString())) {
+                continue;
+            }
+
+            if(result[i].Gender.toLowerCase() === 'M'.toLowerCase() || result[i].Gender.toLowerCase() === 'Male'.toLowerCase()) {
+                male.push(parseInt(result[i].tx_new, 10));
+                months.push(monthNames[result[i].month] + ' ' + result_year.toString());
+            } else if(result[i].Gender.toLowerCase() === 'F'.toLowerCase() || result[i].Gender.toLowerCase() === 'Female'.toLowerCase()) {
+                female.push(parseInt(result[i].tx_new, 10));
+            }
+        }
+
+        for(let i = 0; i < male.length; i++) {
+            let month_value = 0;
+            month_value = male[i] + female[i];
+
+            if(cumulative.length > 0) {
+                const addition = cumulative[i-1] + month_value;
+                cumulative.push(addition);
+            } else {
+                cumulative.push(month_value);
+            }
+        }
 
         setTxNew({
             chart: {
@@ -85,7 +132,7 @@ const CTHomeTXNew = ({ globalFilter }) => {
                 name: 'Male',
                 type: 'column',
                 color: "#1AB394",
-                data: [5000, 4000, 750, 5500, 3000, 750],
+                data: male,
                 tooltip: {
                     valueSuffix: ' '
                 }
@@ -93,7 +140,7 @@ const CTHomeTXNew = ({ globalFilter }) => {
                 name: 'Female',
                 type: 'column',
                 color: "#485969",
-                data: [4000, 2000, 750, 5500, 3500, 750],
+                data: female,
                 tooltip: {
                     valueSuffix: ' '
                 }
@@ -101,7 +148,7 @@ const CTHomeTXNew = ({ globalFilter }) => {
                 name: 'Cumulative Tx New',
                 type: 'spline',
                 yAxis: 1,
-                data: [0, 1000, 1250, 3000, 4000, 4250],
+                data: cumulative,
                 color: "#E06F07",
                 tooltip: {
                     valueSuffix: ''
