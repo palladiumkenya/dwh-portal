@@ -23,6 +23,8 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
     const [ARTClientsByGender, setARTClientsByGender] = useState({
         ActiveARTFemale: '',
         ActiveARTMale: '',
+        ViralSuppressionMale: 0,
+        ViralSuppressionFemale: 0
     });
 
     useEffect(() => {
@@ -119,8 +121,12 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
 
         let ActiveARTMale = 0;
         let ActiveARTFemale = 0;
+        let ViralSuppressionMale = 0
+        let ViralSuppressionFemale = 0
 
         const result = await getAll('care-treatment/activeArtByGender', params);
+        const viralLoadSuppression = await getAll('care-treatment/viralLoadSuppressionPercentageByGender', params);
+
         for (let i = 0; i < result.length; i++) {
             if(result[i].Gender.toString().toLowerCase() == 'f' || result[i].Gender.toString().toLowerCase() == 'female') {
                 ActiveARTFemale = result[i].ActiveART;
@@ -131,9 +137,25 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
             }
         }
 
+        for (let i = 0; i < viralLoadSuppression.length; i++) {
+            if(viralLoadSuppression[i].Gender.toString().toLowerCase() == 'f' || viralLoadSuppression[i].Gender.toString().toLowerCase() == 'female') {
+                const Suppressed = viralLoadSuppression[i].Suppressed;
+                const Last12MonthVL = viralLoadSuppression[i].Last12MonthVL;
+                ViralSuppressionFemale = parseFloat(((Suppressed / Last12MonthVL) * 100).toString()).toFixed(0);
+            }
+
+            if(viralLoadSuppression[i].Gender.toString().toLowerCase() == 'm' || viralLoadSuppression[i].Gender.toString().toLowerCase() == 'male') {
+                const Suppressed = viralLoadSuppression[i].Suppressed;
+                const Last12MonthVL = viralLoadSuppression[i].Last12MonthVL;
+                ViralSuppressionMale = parseFloat(((Suppressed / Last12MonthVL) * 100).toString()).toFixed(0);
+            }
+        }
+
         setARTClientsByGender({
             ActiveARTMale: ActiveARTMale.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-            ActiveARTFemale: ActiveARTFemale.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            ActiveARTFemale: ActiveARTFemale.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+            ViralSuppressionMale: ViralSuppressionMale,
+            ViralSuppressionFemale: ViralSuppressionFemale
         });
     };
 
@@ -297,7 +319,7 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
                                 <img src={AdultMan} width={"auto"} height={"50"}  alt={"Adult Man"} />
                             </div>
                             <div className="col-11 active_art_gender">
-                                <strong>{ARTClientsByGender.ActiveARTMale}</strong> males are active on ART. <strong>93%</strong> of the males with a viral load in the last 12 months are virally suppressed.
+                                <strong>{ARTClientsByGender.ActiveARTMale}</strong> males are active on ART. <strong>{ARTClientsByGender.ViralSuppressionMale}%</strong> of the males with a viral load in the last 12 months are virally suppressed.
                             </div>
                         </div>
                     </div>
@@ -307,7 +329,7 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
                                 <img src={AdultWoman} width={"auto"} height={"50"}  alt={"Adult Woman"} />
                             </div>
                             <div className="col-11 active_art_gender">
-                                <strong>{ARTClientsByGender.ActiveARTFemale}</strong> females are active on ART. <strong>94%</strong> of the females with a viral load in the last 12 months are virally suppressed.
+                                <strong>{ARTClientsByGender.ActiveARTFemale}</strong> females are active on ART. <strong>{ARTClientsByGender.ViralSuppressionFemale}%</strong> of the females with a viral load in the last 12 months are virally suppressed.
                             </div>
                         </div>
                     </div>
