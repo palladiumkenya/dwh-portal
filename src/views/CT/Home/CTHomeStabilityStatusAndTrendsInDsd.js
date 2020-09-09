@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
+import { getAll } from '../../Shared/Api';
 
 const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
     const [stabilityStatus, setStabilityStatus] = useState({});
@@ -18,6 +19,13 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
         if (globalFilter) {
             params = { ...globalFilter };
         }
+        let stable = 0;
+        let unStable = 0;
+        const result = await getAll('care-treatment/stabilityStatus', params);
+        if(result) {
+            stable = result.Stable;
+            unStable = result.Unstable;
+        }
 
         setStabilityStatus({
             chart: {
@@ -31,20 +39,26 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
             },
             plotOptions: {
                 pie: {
-                    innerSize: '60%'
+                    innerSize: '60%',
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
                 }
             },
-
             series: [
                 {
+                    name: 'STABILITY STATUS AMONG ACTIVE PATIENTS',
                     colorByPoint: true,
                     data: [{
                         name: 'UNSTABLE',
-                        y: 25,
+                        y: unStable,
                         color: "#1AB394"
                     }, {
                         name: 'STABLE',
-                        y: 75,
+                        y: stable,
                         sliced: true,
                         selected: true,
                         color: "#2F4050"

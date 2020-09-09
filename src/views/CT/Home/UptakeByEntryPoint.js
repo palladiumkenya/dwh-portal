@@ -160,7 +160,7 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'PERCENT'
+                    text: ''
                 }
             },
             tooltip: {
@@ -205,7 +205,7 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        UPTAKE BY ENTRY POINT
+                        VIRAL LOAD CASCADE - ACTIVE ART CLIENTS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -263,7 +263,7 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
                                 <img src={AdultMan} width={"auto"} height={"50"}  alt={"Adult Man"} />
                             </div>
                             <div className="col-11 active_art_gender">
-                                {ARTClientsByGender.ActiveARTMale} males are active on ART. 93% of the males with a viral load in the last 12 months are virally suppressed.
+                                <strong>{ARTClientsByGender.ActiveARTMale}</strong> males are active on ART. <strong>93%</strong> of the males with a viral load in the last 12 months are virally suppressed.
                             </div>
                         </div>
                     </div>
@@ -273,7 +273,7 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
                                 <img src={AdultWoman} width={"auto"} height={"50"}  alt={"Adult Woman"} />
                             </div>
                             <div className="col-11 active_art_gender">
-                                {ARTClientsByGender.ActiveARTFemale} females are active on ART. 94% of the females with a viral load in the last 12 months are virally suppressed.
+                                <strong>{ARTClientsByGender.ActiveARTFemale}</strong> females are active on ART. <strong>94%</strong> of the females with a viral load in the last 12 months are virally suppressed.
                             </div>
                         </div>
                     </div>

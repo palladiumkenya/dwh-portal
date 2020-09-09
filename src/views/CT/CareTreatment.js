@@ -35,7 +35,7 @@ const CareTreatment = () => {
                 As at July 2020,<strong>1035</strong> facilities had reported patients current on ART.
             </p>
 
-            <UptakeByEntryPoint />
+            <UptakeByEntryPoint globalFilter={globalFilter} />
 
             <hr />
 
@@ -59,7 +59,7 @@ const CareTreatment = () => {
 
             <p>&nbsp;</p>
 
-            <CTHomeStabilityStatusAndTrendsInDSD />
+            <CTHomeStabilityStatusAndTrendsInDSD globalFilter={globalFilter} />
 
             <hr />
 
@@ -71,7 +71,7 @@ const CareTreatment = () => {
 
             <p>&nbsp;</p>
 
-            <CTHomeReportingRates />
+            <CTHomeReportingRates globalFilter={globalFilter} />
 
         </div>
     );
