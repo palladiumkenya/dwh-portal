@@ -7,7 +7,7 @@ import AdultWoman from '../../../assets/custom/AdultWoman.png';
 import { getAll } from '../../Shared/Api';
 
 const UptakeByEntryPoint = ({ globalFilter }) => {
-    const [uptakeByEntryPoint, setUptakeByEntryPoint] = useState({});
+    const [viralLoadCascade, setViralLoadCascade] = useState({});
     const [ARTClients, setARTClients] = useState({
         activeARTClients: ''
     });
@@ -26,7 +26,7 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
     });
 
     useEffect(() => {
-        loadUptakeByEntryPoint();
+        loadViralLoadCascade();
         loadActiveOnART();
         loadActiveOnARTChildren();
         loadActiveOnARTAdults();
@@ -137,8 +137,24 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
         });
     };
 
-    const loadUptakeByEntryPoint = async () => {
-        setUptakeByEntryPoint({
+    const loadViralLoadCascade = async () => {
+        let params = null;
+
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+
+        let TX_CURR = 0;
+        let Eligible4VL = 0;
+        let Last12MonthVL = 0;
+        let Last12MVLSup = 0;
+        const result = await getAll('care-treatment/viralLoadCascade', params);
+        TX_CURR = result.TX_CURR;
+        Eligible4VL = result.Eligible4VL;
+        Last12MonthVL = result.Last12MonthVL;
+        Last12MVLSup = result.Last12MVLSup;
+
+        setViralLoadCascade({
             chart: {
                 type: 'column'
             },
@@ -163,6 +179,9 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
                     text: ''
                 }
             },
+            legend: {
+                enabled: false,
+            },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                 pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
@@ -174,26 +193,41 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
             plotOptions: {
                 column: {
                     pointPadding: 0.2,
-                    borderWidth: 0
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return '' + this.point.text;
+                        }
+                    }
                 }
             },
             series: [{
+                name: 'Viral Load Cascade - Active ART Clients',
                 data: [
                     {
-                        y: 49.9,
+                        name: 'TX CURR',
+                        y: TX_CURR,
                         color: "#3475B3",
+                        text: TX_CURR
                     },
                     {
-                        y: 71.5,
+                        name: 'ELIGIBLE FOR VL',
+                        y: Eligible4VL,
                         color: "#F28E2B",
+                        text: Eligible4VL + ' (' + parseFloat(((Eligible4VL/TX_CURR)*100).toString()).toFixed(0) + '%)'
                     },
                     {
-                        y:106.4,
+                        name: 'HAS VL AT 12 MONTHS',
+                        y: Last12MonthVL,
                         color: "#0D5647",
+                        text: Last12MonthVL + ' (' + parseFloat(((Last12MonthVL/TX_CURR)*100).toString()).toFixed(0) + '%)'
                     },
                     {
-                        y:129.2,
+                        name: 'SUPPRESSED AT 12 MONTHS',
+                        y: Last12MVLSup,
                         color: "#E15759",
+                        text: Last12MVLSup + ' (' + parseFloat(((Last12MVLSup/TX_CURR)*100).toString()).toFixed(0) + '%)'
                     }
                 ]
             }]
@@ -209,7 +243,7 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={uptakeByEntryPoint} />
+                            <HighchartsReact highcharts={Highcharts} options={viralLoadCascade} />
                         </div>
                     </CardBody>
                 </Card>
