@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import NewOnArt from './NewOnArt/NewOnArt';
 
-const CareAndTreatmentOverview = () => {
+const HIVTreatmentOverview = () => {
 
     const [globalFilter, setGlobalFilter] = useState({
         ctTabs: {
@@ -62,4 +62,4 @@ const CareAndTreatmentOverview = () => {
     );
 };
 
-export default CareAndTreatmentOverview;
+export default HIVTreatmentOverview;
