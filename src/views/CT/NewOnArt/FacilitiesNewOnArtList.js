@@ -1,21 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardHeader, CardBody } from "reactstrap";
-import DataTable, { createTheme } from 'react-data-table-component';
-import { getAll } from '../../Shared/Api';
+import DataTable from 'react-data-table-component';
 
 const FacilitiesNewOnArtList = ({ globalFilter }) => {
     const [facilitiesNewOnArt, setFacilitiesNewOnArt] = useState({});
 
-    useEffect(() => {
-        loadFacilitiesNewOnArt();
-    }, [globalFilter]);
-
     const loadFacilitiesNewOnArt = async () => {
-        let params = null;
-
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
 
         const data = [];
 
@@ -62,6 +52,10 @@ const FacilitiesNewOnArtList = ({ globalFilter }) => {
             data: data
         });
     };
+
+    useEffect(() => {
+        loadFacilitiesNewOnArt();
+    }, [globalFilter]);
 
     return (
         <div className="row">

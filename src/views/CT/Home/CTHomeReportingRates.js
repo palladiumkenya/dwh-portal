@@ -6,10 +6,6 @@ import Highcharts from 'highcharts';
 const CTHomeReportingRates = ({ globalFilter }) => {
     const [ctReportingRates, setCTReportingRates] = useState({});
 
-    useEffect(() => {
-        loadCTReportingRates();
-    }, [globalFilter]);
-
     const loadCTReportingRates = async () => {
         let params = null;
 
@@ -71,6 +67,10 @@ const CTHomeReportingRates = ({ globalFilter }) => {
             }]
         });
     };
+
+    useEffect(() => {
+        loadCTReportingRates();
+    }, [globalFilter]);
 
     return (
         <div className="row">

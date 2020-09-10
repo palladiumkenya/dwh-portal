@@ -29,9 +29,9 @@ class DefaultHeader extends Component {
                         <NavLink to="/reporting-rates" className="nav-link" >Reporting Rates</NavLink>
                     </NavItem>
                     <UncontrolledDropdown nav inNavbar>
-                        <DropdownToggle nav caret>HTS</DropdownToggle>
+                        <DropdownToggle nav caret>HIV Testing & Prevention</DropdownToggle>
                         <DropdownMenu right>
-                            <DropdownItem><Link to="/hts/hts-overview" className="nav-link">HTS Uptake</Link></DropdownItem>
+                            <DropdownItem><Link to="/hts/hts-uptake" className="nav-link">HTS Uptake</Link></DropdownItem>
                             <DropdownItem><Link to="/hts/hts-linkage" className="nav-link">HTS Linkage</Link></DropdownItem>
                         </DropdownMenu>
                     </UncontrolledDropdown>

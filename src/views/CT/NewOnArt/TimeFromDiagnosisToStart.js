@@ -6,10 +6,6 @@ import HighchartsReact from 'highcharts-react-official';
 const TimeFromDiagnosisToStart = ({ globalFilter }) => {
     const [linkageByAgeSex, setTimeFromDiagnosisToStart] = useState({});
 
-    useEffect(() => {
-        loadTimeFromDiagnosisToStart();
-    }, [globalFilter]);
-
     const loadTimeFromDiagnosisToStart = async () => {
         let params = null;
 
@@ -65,13 +61,13 @@ const TimeFromDiagnosisToStart = ({ globalFilter }) => {
 
         for(let i = 0; i < result.length; i++) {
             let index = periodGroups.indexOf(result[i].year);
-            if (result[i].period == 'firstPeriod') {
+            if (result[i].period === 'firstPeriod') {
                 firstPeriod.splice(index, 0, parseInt(result[i].txNew));
-            } else if (result[i].period == 'secondPeriod') {
+            } else if (result[i].period === 'secondPeriod') {
                 secondPeriod.splice(index, 0, parseInt(result[i].txNew));
-            } else if (result[i].period == 'thirdPeriod') {
+            } else if (result[i].period === 'thirdPeriod') {
                 thirdPeriod.splice(index, 0, parseInt(result[i].txNew));
-            } else if (result[i].period == 'fourthPeriod') {
+            } else if (result[i].period === 'fourthPeriod') {
                 fourthPeriod.splice(index, 0, parseInt(result[i].txNew));
             }
         }
@@ -103,6 +99,10 @@ const TimeFromDiagnosisToStart = ({ globalFilter }) => {
             ]
         });
     };
+
+    useEffect(() => {
+        loadTimeFromDiagnosisToStart();
+    }, [globalFilter]);
 
     return (
         <div className="row">

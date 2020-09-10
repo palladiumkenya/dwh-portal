@@ -1,6 +1,6 @@
 import React from 'react';
 
-const NewOnArtFooter = ({ }) => {
+const NewOnArtFooter = () => {
     return (
         <div className="row">
             <div className="col-12">

@@ -2,14 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { getAll } from '../../Shared/Api';
 
 const NewOnArtByMonth = ({ globalFilter }) => {
     const [newOnArt, setNewOnArt] = useState({});
-
-    useEffect(() => {
-        loadNewOnArt();
-    }, [globalFilter]);
 
     const loadNewOnArt = async () => {
         let params = null;
@@ -69,6 +64,10 @@ const NewOnArtByMonth = ({ globalFilter }) => {
             ]
         });
     };
+
+    useEffect(() => {
+        loadNewOnArt();
+    }, [globalFilter]);
 
     return (
         <div className="row">

@@ -1,13 +1,13 @@
 import React from 'react';
 
-const CTHomeFooter = () => {
+const HtsPositivityLinkageFooter = () => {
     return (
         <div className="row">
             <div className="col-12">
                 <div className="row">
                     <div className="col-6">
                         <span className="reporting-rates-overview-text">
-                            96% of the Active on ART clients were eligible for viral loads. To date the viral load uptake is at 69% while the viral suppresion rate is 94%
+                            HTS Uptake is defined as the rate at which individuals take up HIV Tests.
                         </span>
                     </div>
                     <div className="col-6">
@@ -21,4 +21,4 @@ const CTHomeFooter = () => {
     );
 };
 
-export default CTHomeFooter;
+export default HtsPositivityLinkageFooter;

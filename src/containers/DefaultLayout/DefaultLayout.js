@@ -1,11 +1,10 @@
-import { AppAside, AppFooter, AppHeader, AppBreadcrumb2 as AppBreadcrumb } from '@coreui/react';
+import { AppFooter, AppHeader, AppBreadcrumb2 as AppBreadcrumb } from '@coreui/react';
 import { Container } from 'reactstrap';
 import { Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import React, { Component, Suspense } from "react";
 import routes from '../../routes';
 
-const DefaultAside = React.lazy(() => import('./DefaultAside'));
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
@@ -47,11 +46,6 @@ class DefaultLayout extends Component {
                             </Suspense>
                         </Container>
                     </main>
-                    <AppAside fixed>
-                        <Suspense fallback={this.loading()}>
-                            <DefaultAside />
-                        </Suspense>
-                    </AppAside>
                 </div>
                 <AppFooter>
                     <Suspense fallback={this.loading()}>

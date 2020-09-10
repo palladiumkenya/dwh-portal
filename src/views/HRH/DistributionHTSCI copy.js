@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../Shared/HRHApi';
@@ -17,10 +17,6 @@ const DistributionHTSCI = ({ globalFilter }) => {
         series: [ { data: [], color: "#1AB394" } ]
     });
 
-    useEffect(() => {
-        loadChart();
-    }, [globalFilter]);
-
     const loadChart = async () => {
         let params = null;
         
@@ -29,7 +25,7 @@ const DistributionHTSCI = ({ globalFilter }) => {
         }
 
         console.log(params.docket);
-        if (params.docket == 'HTS') {
+        if (params.docket === 'HTS') {
             const data = await getAll('/getHTSDensity/');
             setChart({
                 chart: {
@@ -106,7 +102,7 @@ const DistributionHTSCI = ({ globalFilter }) => {
                 }]
             });
         }
-        else if (params.docket == 'DIST') {
+        else if (params.docket === 'DIST') {
             const data = await getAll('/getHCWDensity/0/all/all/all');
             setChart({
                 chart: {
@@ -183,7 +179,7 @@ const DistributionHTSCI = ({ globalFilter }) => {
                 }]
             });
         }
-        else if (params.docket == 'DIST2') {
+        else if (params.docket === 'DIST2') {
             const data = await getAll('/getHTSDensityScatter');
             setChart({
                 chart: {
@@ -252,6 +248,10 @@ const DistributionHTSCI = ({ globalFilter }) => {
             });
         }
     };
+
+    useEffect(() => {
+        loadChart();
+    }, [globalFilter]);
     
     return (
         <div className="row">

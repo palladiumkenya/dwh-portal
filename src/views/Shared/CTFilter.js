@@ -20,15 +20,6 @@ const CTFilter = ({ onFilterChange }) => {
     const [facilities, setFacilities] = useState([]);
     const [partners, setPartners] = useState([]);
 
-    useEffect(() => {
-        loadYears();
-        loadMonths();
-        loadCounties();
-        loadSubCounties();
-        loadFacilities();
-        loadPartners();
-    }, [activeSelection]);
-
     const loadYears = () => {
         const data = getYears(new Date().getFullYear() - 10);
         setYears(data);
@@ -150,6 +141,15 @@ const CTFilter = ({ onFilterChange }) => {
         setActiveSelection(selection);
         onFilterChange(selection);
     };
+
+    useEffect(() => {
+        loadYears();
+        loadMonths();
+        loadCounties();
+        loadSubCounties();
+        loadFacilities();
+        loadPartners();
+    }, [activeSelection]);
 
     return (
         <Form>

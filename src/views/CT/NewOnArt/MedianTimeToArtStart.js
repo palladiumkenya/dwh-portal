@@ -6,10 +6,6 @@ import HighchartsReact from "highcharts-react-official";
 const MedianTimeToArtStart = ({ globalFilter }) => {
     const [newOnArt, setMedianTimeToArtStart] = useState({});
 
-    useEffect(() => {
-        loadMedianTimeToArtStart();
-    }, [globalFilter]);
-
     const loadMedianTimeToArtStart = async () => {
         let params = null;
 
@@ -59,6 +55,10 @@ const MedianTimeToArtStart = ({ globalFilter }) => {
             ]
         });
     };
+
+    useEffect(() => {
+        loadMedianTimeToArtStart();
+    }, [globalFilter]);
 
     return (
         <div className="row">

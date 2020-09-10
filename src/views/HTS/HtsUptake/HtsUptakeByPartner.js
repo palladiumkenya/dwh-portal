@@ -1,66 +1,68 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardBody } from 'reactstrap';
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
-import { getAll } from '../Shared/HRHApi';
+import { Card, CardBody, CardHeader } from 'reactstrap';
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import { getAll } from '../../Shared/Api';
 
-const DistributionDensityMPDB = ({ globalFilter }) => {
-    const [chartData, setChart] = useState({
-        chart: { type: "column" },
-        title: { text: "", style: { display: "none" } },
-        xAxis: { categories: [], title: { text: null } },
-        yAxis: { min: 0, title: { text: "", align: "high" }, labels: { overflow: "justify" } },
-        plotOptions: { bar: { dataLabels: { enabled: true } } },
-        legend: { enabled: false },
-        credits: { enabled: true },
-        responsive: { rules: [ { condition: { maxWidth: 500, }, chartOptions: { legend: { enabled: false } } } ] },
-        series: [ { data: [], color: "#1AB394" } ]
-    });
+const HtsUptakeByPartner = ({ globalFilter }) => {
+    const [uptakeByPartner, setUptakeByPartner] = useState({});
 
-    const loadChart = async () => {
+    const loadUptakeByPartner = async () => {
         let params = null;
 
         if (globalFilter) {
             params = { ...globalFilter };
         }
-        
-        const data = await getAll('/getHCWDensity/3/all/all/all');
-        setChart({
+
+        const partners = [];
+        let tested = [];
+        let positivity = [];
+
+        const result = await getAll('hts/uptakeByPartner', params);
+        for(let i = 0; i < result.length; i++) {
+            partners.push(result[i].Partner);
+            tested.push(parseInt(result[i].Tested, 10));
+            const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
+            positivity.push(val);
+        }
+
+        setUptakeByPartner({
             chart: {
                 zoomType: 'xy'
             },
             title: {
-                text: 'Distribution and Density of Medical Doctors by County'
+                useHTML: true,
+                text: ' &nbsp;',
             },
             subtitle: {
-                text: 'Source: regulatory HRIS'
+                text: ''
             },
             xAxis: [{
-                categories: data.counties,
-                crosshair: true
+                categories: partners,
+                crosshair: true,
             }],
             yAxis: [{ // Primary yAxis
                 labels: {
-                    format: ' {value}',
+                    format: '{value}',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
                 },
                 title: {
-                    text: 'Ratio per 10,000 population',
+                    text: 'Number Tested',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
                 }
-            }, {
+            }, { // Secondary yAxis
                 title: {
-                    text: 'No of HCWs',
+                    text: 'HIV Positivity',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
                 },
                 labels: {
-                    format: '{value}',
+                    format: '{value} %',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
@@ -75,44 +77,47 @@ const DistributionDensityMPDB = ({ globalFilter }) => {
                 align: 'left',
                 x: 120,
                 verticalAlign: 'top',
-                y: 100,
+                y: 7,
                 floating: true,
                 backgroundColor:
                     Highcharts.defaultOptions.legend.backgroundColor || // theme
                     'rgba(255,255,255,0.25)'
             },
             series: [{
-                name: 'Density',
+                name: 'Number Tested',
                 type: 'column',
-                yAxis: 1,
-                data: data.count,
+                color: "#1AB394",
+                data: tested,
                 tooltip: {
-                    valueSuffix: ''
+                    valueSuffix: ' '
                 }
+
             }, {
-                name: 'Ratio to 10,000 pop',
+                name: 'HIV Positivity',
                 type: 'spline',
-                data: data.ratio,
+                data: positivity,
+                color: "#E06F07",
+                yAxis: 1,
                 tooltip: {
-                    valueSuffix: ''
+                    valueSuffix: '%'
                 }
             }]
         });
     };
-    
+
     useEffect(() => {
-        loadChart();
+        loadUptakeByPartner();
     }, [globalFilter]);
-    
+
     return (
         <div className="row">
             <div className="col-12">
-                <legend>Distribution and Density of Medical Doctors by County</legend>
                 <Card className="trends-card">
+                    <CardHeader className="trends-header">
+                        UPTAKE BY PARTNER
+                    </CardHeader>
                     <CardBody className="trends-body">
-                        <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={chartData} />
-                        </div>
+                        <HighchartsReact highcharts={Highcharts} options={uptakeByPartner} />
                     </CardBody>
                 </Card>
             </div>
@@ -120,4 +125,4 @@ const DistributionDensityMPDB = ({ globalFilter }) => {
     );
 };
 
-export default DistributionDensityMPDB;
+export default HtsUptakeByPartner;

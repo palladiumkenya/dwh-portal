@@ -8,11 +8,6 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
     const [stabilityStatus, setStabilityStatus] = useState({});
     const [trendsInDSD, setTrendsInDSD] = useState({});
 
-    useEffect(() => {
-        loadStabilityStatus();
-        loadTrendsInDSD();
-    }, [globalFilter]);
-
     const loadStabilityStatus = async () => {
         let params = null;
 
@@ -137,6 +132,11 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
             }]
         });
     };
+
+    useEffect(() => {
+        loadStabilityStatus();
+        loadTrendsInDSD();
+    }, [globalFilter]);
 
     return (
         <div className="row">

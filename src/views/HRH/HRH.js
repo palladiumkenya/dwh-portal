@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import HRHHeader from './HRHHeader';
+import { Card, CardBody } from 'reactstrap';
 import CIToHTSRatio from './CIToHTSRatio';
 import DistributionDensityHCW from './DistributionDensityHCW';
 import DistributionDensityNCK from './DistributionDensityNCK';
@@ -23,7 +23,23 @@ const HRH = () => {
         <div className="animated fadeIn">
             <div className="strip"></div>
             <div>
-                <HRHHeader></HRHHeader>
+                <div className="row">
+                    <Card className="pageHeading_reporting">
+                        <CardBody>
+                            <div className="row">
+                                <div className="col-5">
+                                    <div className="row">
+                                        <div className="col-6">
+                                            <div className="reporting-rates-card-title">
+                                                HRH
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </CardBody>
+                    </Card>
+                </div>
                 <div className="row">
                     <div className="col-6">
                         <DistributionDensityHCW globalFilter={globalFilter}></DistributionDensityHCW>

@@ -2,14 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
-import { getAll } from '../../Shared/Api';
 
 const NewOnArtByAgeSex = ({ globalFilter }) => {
     const [linkageByAgeSex, setNewOnArtByAgeSex] = useState({});
-
-    useEffect(() => {
-        loadNewOnArtByAgeSex();
-    }, [globalFilter]);
 
     const loadNewOnArtByAgeSex = async () => {
         let params = null;
@@ -65,7 +60,7 @@ const NewOnArtByAgeSex = ({ globalFilter }) => {
 
         for(let i = 0; i < result.length; i++) {
             let index = ageGroups.indexOf(result[i].AgeGroup);
-            if (result[i].Gender == 'Male' || result[i].Gender == 'M') {
+            if (result[i].Gender === 'Male' || result[i].Gender === 'M') {
                 ageGroupsMale.splice(index, 0, result[i].AgeGroup);
                 txNewMale.splice(index, 0, parseInt(result[i].txNew) * -1);
             } else {
@@ -114,6 +109,10 @@ const NewOnArtByAgeSex = ({ globalFilter }) => {
             ]
         });
     };
+
+    useEffect(() => {
+        loadNewOnArtByAgeSex();
+    }, [globalFilter]);
 
     return (
         <div className="row">
