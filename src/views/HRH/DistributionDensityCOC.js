@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../Shared/HRHApi';
@@ -17,17 +17,7 @@ const DistributionDensityCOC = ({ globalFilter }) => {
         series: [ { data: [], color: "#1AB394" } ]
     });
 
-    useEffect(() => {
-        loadChart();
-    }, [globalFilter]);
-
     const loadChart = async () => {
-        let params = null;
-
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
-        
         const data = await getAll('/getHCWDensity/2/all/all/all');
         setChart({
             chart: {
@@ -103,6 +93,10 @@ const DistributionDensityCOC = ({ globalFilter }) => {
             }]
         });
     };
+
+    useEffect(() => {
+        loadChart();
+    }, [globalFilter]);
     
     return (
         <div className="row">

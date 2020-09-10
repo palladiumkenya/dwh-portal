@@ -19,15 +19,6 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
     const [facilities, setFacilities] = useState([]);
     const [partners, setPartners] = useState([]);
 
-    useEffect(() => {
-        loadYears();
-        loadMonths();
-        loadCounties();
-        loadSubCounties(null);
-        loadFacilities();
-        loadPartners();
-    }, [activeSelection]);
-
     const loadYears = () => {
         const data = getYears(new Date().getFullYear() - 10);
         setYears(data);
@@ -66,7 +57,7 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
     };
 
     const loadSubCounties = async (county) => {
-        if(county == null) {
+        if(county === null) {
             let params = null;
 
             if (activeSelection) {
@@ -142,6 +133,15 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
         setActiveSelection(selection);
         onFilterChange(selection);
     };
+
+    useEffect(() => {
+        loadYears();
+        loadMonths();
+        loadCounties();
+        loadSubCounties(null);
+        loadFacilities();
+        loadPartners();
+    }, [activeSelection]);
 
     return (
         <Form>

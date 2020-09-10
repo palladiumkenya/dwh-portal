@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../Shared/HRHApi';
@@ -17,16 +17,7 @@ const DistributionHTSCI = ({ globalFilter }) => {
         series: [ { data: [], color: "#1AB394" } ]
     });
 
-    useEffect(() => {
-        loadChart();
-    }, [globalFilter]);
-
     const loadChart = async () => {
-        let params = null;
-        
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
 
         const data = await getAll('/getHTSDensityScatter/');
         setChart({
@@ -95,6 +86,10 @@ const DistributionHTSCI = ({ globalFilter }) => {
             }]
         });
     };
+
+    useEffect(() => {
+        loadChart();
+    }, [globalFilter]);
     
     return (
         <div className="row">
