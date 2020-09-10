@@ -20,7 +20,7 @@ export default {
           children: [
               {
                   name: 'HTS Uptake',
-                  url: '/hts/hts-overview',
+                  url: '/hts/hts-uptake',
                   icon: 'cil-bar-chart',
               },
               {

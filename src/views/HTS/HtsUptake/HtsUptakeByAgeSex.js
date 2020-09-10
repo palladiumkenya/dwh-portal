@@ -1,68 +1,45 @@
 import React, { useEffect, useState } from 'react';
+import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
-import Highcharts from 'highcharts';
 import { getAll } from '../../Shared/Api';
 
-const CTHomeTXNew = ({ globalFilter }) => {
-    const [txNew, setTxNew] = useState({});
+const HtsUptakeByAgeSex = ({ globalFilter }) => {
+    const [uptakeByAgeSex, setUptakeByAgeSex] = useState({});
 
-    const loadTxNew = async () => {
+    const loadUptakeByAgeSex = async () => {
         let params = null;
 
         if (globalFilter) {
             params = { ...globalFilter };
         }
 
-        const result = await getAll('care-treatment/txNew', params);
+        const ageGroups = [];
+        let tested_male = [];
+        let tested_female = [];
+        let positivity = [];
 
-        const monthNames = {
-            1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June",
-            7: "July", 8:"August", 9: "September", 10: "October", 11: "November", 12: "December"
-        };
-
-        const today = new Date();
-        const today_lastyear = new Date();
-        const lastYear = new Date(today_lastyear.setFullYear(today.getFullYear() - 1));
-        const lastFullYear = lastYear.getFullYear();
-        const lastYearMonth = lastYear.getMonth() + 1;
-        const fullYear = today.getFullYear();
-        const year = params.year;
-
-        let months = [];
-        let cumulative = [];
-        let male = [];
-        let female = [];
-
+        const result = await getAll('hts/uptakeByAgeSex', params);
+        const result_positivity = await getAll('hts/uptakeByAgeSexPositivity', params);
         for(let i = 0; i < result.length; i++) {
-            const result_month = result[i].month;
-            const result_year = result[i].year.toString();
-
-            if((year.toString() === fullYear.toString()) && (result_month <= lastYearMonth && result_year.toString() === lastFullYear.toString())) {
-                continue;
-            }
-
-            if(result[i].Gender.toLowerCase() === 'M'.toLowerCase() || result[i].Gender.toLowerCase() === 'Male'.toLowerCase()) {
-                male.push(parseInt(result[i].tx_new, 10));
-                months.push(monthNames[result[i].month] + ' ' + result_year.toString());
-            } else if(result[i].Gender.toLowerCase() === 'F'.toLowerCase() || result[i].Gender.toLowerCase() === 'Female'.toLowerCase()) {
-                female.push(parseInt(result[i].tx_new, 10));
+            if(result[i].Gender === 'Male' || result[i].Gender === 'M') {
+                tested_male.push(parseInt(result[i].Tested, 10));
+                ageGroups.push(result[i].AgeGroup);
+            } else if (result[i].Gender === 'Female' || result[i].Gender === 'F') {
+                tested_female.push(parseInt(result[i].Tested, 10));
             }
         }
 
-        for(let i = 0; i < male.length; i++) {
-            let month_value = 0;
-            month_value = male[i] + female[i];
-
-            if(cumulative.length > 0) {
-                const addition = cumulative[i-1] + month_value;
-                cumulative.push(addition);
-            } else {
-                cumulative.push(month_value);
+        for(let i = 0; i < ageGroups.length; i++) {
+            for(let j = 0; j < result_positivity.length; j++) {
+                if(ageGroups[i] === result_positivity[j].AgeGroup) {
+                    const val = parseFloat(parseFloat(result_positivity[j].positivity).toFixed(1));
+                    positivity.push(val);
+                }
             }
         }
 
-        setTxNew({
+        setUptakeByAgeSex({
             chart: {
                 zoomType: 'xy'
             },
@@ -74,7 +51,7 @@ const CTHomeTXNew = ({ globalFilter }) => {
                 text: ''
             },
             xAxis: [{
-                categories: months,
+                categories: ageGroups,
                 crosshair: true,
             }],
             yAxis: [{ // Primary yAxis
@@ -85,20 +62,20 @@ const CTHomeTXNew = ({ globalFilter }) => {
                     }
                 },
                 title: {
-                    text: 'NUMBER OF PATIENTS',
+                    text: 'Number Tested',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
                 }
             },{ // Secondary yAxis
                 title: {
-                    text: 'NUMBER STARTED ON ART',
+                    text: 'HIV Positivity',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
                 },
                 labels: {
-                    format: '{value}',
+                    format: '{value} %',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
@@ -128,7 +105,7 @@ const CTHomeTXNew = ({ globalFilter }) => {
                 name: 'Male',
                 type: 'column',
                 color: "#1AB394",
-                data: male,
+                data: tested_male,
                 tooltip: {
                     valueSuffix: ' '
                 }
@@ -136,25 +113,25 @@ const CTHomeTXNew = ({ globalFilter }) => {
                 name: 'Female',
                 type: 'column',
                 color: "#485969",
-                data: female,
+                data: tested_female,
                 tooltip: {
                     valueSuffix: ' '
                 }
             }, {
-                name: 'Cumulative Tx New',
+                name: 'HIV Positivity',
                 type: 'spline',
                 yAxis: 1,
-                data: cumulative,
+                data: positivity,
                 color: "#E06F07",
                 tooltip: {
-                    valueSuffix: ''
+                    valueSuffix: '%'
                 }
             }]
         });
     };
 
     useEffect(() => {
-        loadTxNew();
+        loadUptakeByAgeSex();
     }, [globalFilter]);
 
     return (
@@ -162,11 +139,11 @@ const CTHomeTXNew = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX NEW
+                        HTS uptake and positivity by age and sex
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={txNew} />
+                            <HighchartsReact highcharts={Highcharts} options={uptakeByAgeSex} />
                         </div>
                     </CardBody>
                 </Card>
@@ -175,4 +152,4 @@ const CTHomeTXNew = ({ globalFilter }) => {
     );
 };
 
-export default CTHomeTXNew;
+export default HtsUptakeByAgeSex;

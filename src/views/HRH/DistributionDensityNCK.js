@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../Shared/HRHApi';
@@ -16,10 +16,6 @@ const DistributionDensityNCK = ({ globalFilter }) => {
         responsive: { rules: [ { condition: { maxWidth: 500, }, chartOptions: { legend: { enabled: false } } } ] },
         series: [ { data: [], color: "#1AB394" } ]
     });
-
-    useEffect(() => {
-        loadChart();
-    }, [globalFilter]);
 
     const loadChart = async () => {
         let params = null;
@@ -104,6 +100,10 @@ const DistributionDensityNCK = ({ globalFilter }) => {
             }]
         });
     };
+
+    useEffect(() => {
+        loadChart();
+    }, [globalFilter]);
     
     return (
         <div className="row">

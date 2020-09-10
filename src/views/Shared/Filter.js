@@ -18,14 +18,6 @@ const Filter = ({ onFilterChange }) => {
     const [agencies, setAgencies] = useState([]);
     const [partners, setPartners] = useState([]);
 
-    useEffect(() => {
-        loadPeriods();
-        loadCounties();
-        loadAgencies();
-        loadPartners();
-
-    }, [activeSelection]);
-
     const loadPeriods = () => {
         const data = getYearMonths(new Date().getFullYear() - 1);
         setPeriods(data);
@@ -89,6 +81,13 @@ const Filter = ({ onFilterChange }) => {
         setActiveSelection(selection);
         onFilterChange(selection);
     };
+    
+    useEffect(() => {
+        loadPeriods();
+        loadCounties();
+        loadAgencies();
+        loadPartners();
+    }, [activeSelection]);
 
     return (
         <Form>
