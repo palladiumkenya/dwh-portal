@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
+import { getAll } from '../../Shared/Api';
 
 const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
     const [txCurrByAgeAndSex, setTxCurrByAgeAndSex] = useState({});
@@ -18,58 +19,16 @@ const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
         }
 
         const ageGroups = [];
-        const ageGroupsMale = [];
-        const ageGroupsFemale = [];
         let txNewMale = [];
         let txNewFemale = [];
 
-        const result = [
-            {"AgeGroup":"Under 5","Gender":"Male","txNew":"338"},
-            {"AgeGroup":"Under 5","Gender":"Female","txNew":"318"},
-            {"AgeGroup":"5 to 9","Gender":"Male","txNew":"274"},
-            {"AgeGroup":"5 to 9","Gender":"Female","txNew":"288"},
-            {"AgeGroup":"10 to 14","Gender":"Female","txNew":"315"},
-            {"AgeGroup":"10 to 14","Gender":"Male","txNew":"206"},
-            {"AgeGroup":"15 to 19","Gender":"Female","txNew":"1637"},
-            {"AgeGroup":"15 to 19","Gender":"Male","txNew":"313"},
-            {"AgeGroup":"20 to 24","Gender":"Female","txNew":"5558"},
-            {"AgeGroup":"20 to 24","Gender":"Male","txNew":"1176"},
-            {"AgeGroup":"25 to 29","Gender":"Male","txNew":"2562"},
-            {"AgeGroup":"25 to 29","Gender":"Female","txNew":"6415"},
-            {"AgeGroup":"30 to 34","Gender":"Male","txNew":"3573"},
-            {"AgeGroup":"30 to 34","Gender":"Female","txNew":"5693"},
-            {"AgeGroup":"35 to 39","Gender":"Male","txNew":"3285"},
-            {"AgeGroup":"35 to 39","Gender":"Female","txNew":"3537"},
-            {"AgeGroup":"40 to 44","Gender":"Male","txNew":"2602"},
-            {"AgeGroup":"40 to 44","Gender":"Female","txNew":"2324"},
-            {"AgeGroup":"45 to 49","Gender":"Female","txNew":"1474"},
-            {"AgeGroup":"45 to 49","Gender":"Male","txNew":"1673"},
-            {"AgeGroup":"50 to 54","Gender":"Male","txNew":"984"},
-            {"AgeGroup":"50 to 54","Gender":"Female","txNew":"838"},
-            {"AgeGroup":"55 to 59","Gender":"Female","txNew":"479"},
-            {"AgeGroup":"55 to 59","Gender":"Male","txNew":"612"},
-            {"AgeGroup":"60 to 64","Gender":"Female","txNew":"288"},
-            {"AgeGroup":"60 to 64","Gender":"Male","txNew":"337"},
-            {"AgeGroup":"65+","Gender":"Male","txNew":"1123"},
-            {"AgeGroup":"65+","Gender":"Female","txNew":"1447"}
-        ];
-
-        for(let i = 0; i < result.length; i++) {
-            if(ageGroups.indexOf(result[i].AgeGroup) !== -1){
-                continue;
-            } else{
-                ageGroups.push(result[i].AgeGroup);
-            }
-        }
-
-        for(let i = 0; i < result.length; i++) {
-            let index = ageGroups.indexOf(result[i].AgeGroup);
-            if (result[i].Gender === 'Male' || result[i].Gender === 'M') {
-                ageGroupsMale.splice(index, 0, result[i].AgeGroup);
-                txNewMale.splice(index, 0, parseInt(result[i].txNew) * -1);
-            } else {
-                ageGroupsFemale.splice(index, 0, result[i].AgeGroup);
-                txNewFemale.splice(index, 0, parseInt(result[i].txNew));
+        const txCurrResult = await getAll('care-treatment/txCurrByAgeAndSex', params);
+        for (let i = 0; i < txCurrResult.length; i++) {
+            if (txCurrResult[i].Gender.toLowerCase() === "M".toLowerCase() || txCurrResult[i].Gender.toLowerCase() === "Male".toLowerCase()) {
+                ageGroups.push(txCurrResult[i].ageGroup);
+                txNewMale.push(parseInt(-txCurrResult[i].txCurr, 10));
+            } else if (txCurrResult[i].Gender.toLowerCase() === "F".toLowerCase() || txCurrResult[i].Gender.toLowerCase() === "Female".toLowerCase()) {
+                txNewFemale.push(parseInt(txCurrResult[i].txCurr, 10));
             }
         }
 
