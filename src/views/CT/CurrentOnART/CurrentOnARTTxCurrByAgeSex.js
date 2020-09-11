@@ -3,10 +3,14 @@ import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 
-const NewOnArtByAgeSex = ({ globalFilter }) => {
-    const [linkageByAgeSex, setNewOnArtByAgeSex] = useState({});
+const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
+    const [txCurrByAgeAndSex, setTxCurrByAgeAndSex] = useState({});
 
-    const loadNewOnArtByAgeSex = async () => {
+    useEffect(() => {
+        loadTxCurrByAgeAndSex();
+    }, [globalFilter]);
+
+    const loadTxCurrByAgeAndSex = async () => {
         let params = null;
 
         if (globalFilter) {
@@ -69,7 +73,7 @@ const NewOnArtByAgeSex = ({ globalFilter }) => {
             }
         }
 
-        setNewOnArtByAgeSex({
+        setTxCurrByAgeAndSex({
             chart: { type: 'bar' },
             title: { useHTML: true, text: ' &nbsp;', align: 'left' },
             subtitle: { text: ' ', align: 'left' },
@@ -109,26 +113,22 @@ const NewOnArtByAgeSex = ({ globalFilter }) => {
         });
     };
 
-    useEffect(() => {
-        loadNewOnArtByAgeSex();
-    }, [globalFilter]);
-
     return (
         <div className="row">
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX NEW DISTRIBUTION BY AGE AND SEX
+                        TX CURR BY AGE AND SEX - JULY 2020
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={linkageByAgeSex} />
+                            <HighchartsReact highcharts={Highcharts} options={txCurrByAgeAndSex} />
                         </div>
                     </CardBody>
                 </Card>
             </div>
         </div>
     );
-};
+}
 
-export default NewOnArtByAgeSex;
+export default CurrentOnARTTxCurrByAgeSex;
