@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Form } from 'reactstrap';
 import { getAll, getMonths, getYears } from './Api';
 import { Dropdown } from 'semantic-ui-react'
@@ -20,12 +20,12 @@ const CTFilter = ({ onFilterChange }) => {
     const [facilities, setFacilities] = useState([]);
     const [partners, setPartners] = useState([]);
 
-    const loadYears = () => {
+    const loadYears = useCallback(() => {
         const data = getYears(new Date().getFullYear() - 10);
         setYears(data);
-    };
+    }, []);
 
-    const loadMonths = () => {
+    const loadMonths = useCallback(() => {
         const data = getMonths();
         let options = [];
         Object.keys(data).map(function(key, index) {
@@ -38,9 +38,9 @@ const CTFilter = ({ onFilterChange }) => {
             options
         );
         setMonths(selectionOptions);
-    };
+    }, []);
 
-    const loadCounties = async () => {
+    const loadCounties = useCallback(async () => {
         const data = await getAll('care-treatment/counties');
         const options = data.map((c) => {
             return { value: c.county, key: c.county, text: c.county };
@@ -49,9 +49,9 @@ const CTFilter = ({ onFilterChange }) => {
             options
         );
         setCounties(selectionOptions);
-    };
+    }, []);
 
-    const loadSubCounties = async () => {
+    const loadSubCounties = useCallback(async () => {
         let params = null;
 
         if (activeSelection) {
@@ -66,9 +66,9 @@ const CTFilter = ({ onFilterChange }) => {
             options
         );
         setSubCounties(selectionOptions);
-    };
+    }, [activeSelection]);
 
-    const loadFacilities = async () => {
+    const loadFacilities = useCallback(async () => {
         let params = null;
 
         if (activeSelection) {
@@ -83,9 +83,9 @@ const CTFilter = ({ onFilterChange }) => {
             options
         );
         setFacilities(selectionOptions);
-    };
+    }, [activeSelection]);
 
-    const loadPartners = async () => {
+    const loadPartners = useCallback(async () => {
         let params = null;
 
         if (activeSelection) {
@@ -100,7 +100,7 @@ const CTFilter = ({ onFilterChange }) => {
             options
         );
         setPartners(selectionOptions);
-    };
+    }, [activeSelection]);
 
     const onCountyChange = async (e, {value}) => {
         const selection = {
@@ -149,7 +149,7 @@ const CTFilter = ({ onFilterChange }) => {
         loadSubCounties();
         loadFacilities();
         loadPartners();
-    }, [activeSelection]);
+    }, [loadYears, loadMonths, loadCounties, loadSubCounties, loadFacilities, loadPartners]);
 
     return (
         <Form>
