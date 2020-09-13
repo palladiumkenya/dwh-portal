@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import DataTable from 'react-data-table-component';
 
 const FacilitiesNewOnArtList = ({ globalFilter }) => {
     const [facilitiesNewOnArt, setFacilitiesNewOnArt] = useState({});
 
-    const loadFacilitiesNewOnArt = async () => {
-
+    const loadFacilitiesNewOnArt = useCallback(async () => {
         const data = [];
-
         const result = [
             {"year":2020,"month":7,"txNew":"4345","county":"Nairobi","subCounty":"Starehe","facility":"Kenyatta Hospital","partner":"EDARP"},
             {"year":2020,"month":7,"txNew":"3454","county":"Nairobi","subCounty":"Riruta","facility":"Riruta Health Center","partner":"CHS-SHINDA"},
@@ -51,11 +49,11 @@ const FacilitiesNewOnArtList = ({ globalFilter }) => {
             ],
             data: data
         });
-    };
+    }, []);
 
     useEffect(() => {
         loadFacilitiesNewOnArt();
-    }, [globalFilter]);
+    }, [loadFacilitiesNewOnArt]);
 
     return (
         <div className="row">

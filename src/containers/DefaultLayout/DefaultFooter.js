@@ -9,7 +9,6 @@ const defaultProps = {};
 
 class DefaultFooter extends Component {
     render() {
-        const { children, ...attributes } = this.props;
         const current_date = new Date();
 
         return (

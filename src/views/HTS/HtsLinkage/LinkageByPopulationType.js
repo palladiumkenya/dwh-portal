@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from "highcharts-react-official";
@@ -18,7 +18,7 @@ const LinkageByPopulationType = ({ globalFilter }) => {
         missingPopLinkage: '',
     });
 
-    const loadLinkageByPopulationType = async () => {
+    const loadLinkageByPopulationType = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -94,11 +94,11 @@ const LinkageByPopulationType = ({ globalFilter }) => {
                 ]
             }]
         });
-    };
+    }, [globalFilter]);
 
     useEffect(() => {
         loadLinkageByPopulationType();
-    }, [globalFilter]);
+    }, [loadLinkageByPopulationType]);
 
     return (
         <div className="row">

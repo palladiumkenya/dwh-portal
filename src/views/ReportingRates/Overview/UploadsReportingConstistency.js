@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import moment from 'moment';
 import { getAll } from '../../Shared/Api';
@@ -17,13 +17,7 @@ const UploadsReportingConsistency = ({ globalFilter }) => {
         statsPerc: 0
     });
 
-    useEffect(() => {
-        loadExpected();
-        loadConsistnecy();
-        loadRecency();
-    }, [globalFilter]);
-
-    const loadExpected = async () => {
+    const loadExpected = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -32,13 +26,13 @@ const UploadsReportingConsistency = ({ globalFilter }) => {
 
         const data = await getAll('manifests/expected/' + params.docket, params);
         setExpected(data.expected);
-    };
+    }, [globalFilter]);
 
     const getPerc = (count, total) => {
         return parseInt((count / total) * 100);
     };
 
-    const loadConsistnecy = async () => {
+    const loadConsistnecy = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -51,9 +45,9 @@ const UploadsReportingConsistency = ({ globalFilter }) => {
             stats: data.consistency,
             statsPerc: getPerc(data.consistency , expected)
         });
-    };
+    }, [globalFilter, expected]);
 
-    const loadRecency = async () => {
+    const loadRecency = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -66,7 +60,13 @@ const UploadsReportingConsistency = ({ globalFilter }) => {
             stats: data.recency,
             statsPerc: getPerc(data.recency , expected)
         });
-    };
+    }, [globalFilter, expected]);
+
+    useEffect(() => {
+        loadExpected();
+        loadConsistnecy();
+        loadRecency();
+    }, [loadExpected, loadConsistnecy, loadRecency]);
 
     return (
         <div className="row">

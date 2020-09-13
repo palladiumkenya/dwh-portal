@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Form } from 'reactstrap';
 import { getAll, getMonths, getYears } from './Api';
 
@@ -19,12 +19,12 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
     const [facilities, setFacilities] = useState([]);
     const [partners, setPartners] = useState([]);
 
-    const loadYears = () => {
+    const loadYears = useCallback(() => {
         const data = getYears(new Date().getFullYear() - 10);
         setYears(data);
-    };
+    }, []);
 
-    const loadMonths = () => {
+    const loadMonths = useCallback(() => {
         const data = getMonths();
         let options = [];
         Object.keys(data).map(function(key, index) {
@@ -37,9 +37,9 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
             options
         );
         setMonths(selectionOptions);
-    };
+    }, []);
 
-    const loadCounties = async () => {
+    const loadCounties = useCallback(async () => {
         let params = null;
 
         if (activeSelection) {
@@ -54,9 +54,9 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
             options
         );
         setCounties(selectionOptions);
-    };
+    }, [activeSelection]);
 
-    const loadSubCounties = async (county) => {
+    const loadSubCounties = useCallback(async (county) => {
         if(county === null) {
             let params = null;
 
@@ -74,9 +74,9 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
             options
         );
         setSubCounties(selectionOptions);
-    };
+    }, [activeSelection]);
 
-    const loadFacilities = async () => {
+    const loadFacilities = useCallback(async () => {
         let params = null;
 
         if (activeSelection) {
@@ -91,9 +91,9 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
             options
         );
         setFacilities(selectionOptions);
-    };
+    }, [activeSelection]);
 
-    const loadPartners = async () => {
+    const loadPartners = useCallback(async () => {
         let params = null;
 
         if (activeSelection) {
@@ -108,7 +108,7 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
             options
         );
         setPartners(selectionOptions);
-    };
+    }, [activeSelection]);
 
     const onSelectionChange = async (event) => {
         const selection = {
@@ -141,7 +141,14 @@ const HtsUptakeFilter = ({ onFilterChange }) => {
         loadSubCounties(null);
         loadFacilities();
         loadPartners();
-    }, [activeSelection]);
+    }, [
+        loadYears,
+        loadMonths,
+        loadCounties,
+        loadSubCounties,
+        loadFacilities,
+        loadPartners
+    ]);
 
     return (
         <Form>
