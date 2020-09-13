@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
@@ -8,7 +8,7 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
     const [stabilityStatus, setStabilityStatus] = useState({});
     const [trendsInDSD, setTrendsInDSD] = useState({});
 
-    const loadStabilityStatus = async () => {
+    const loadStabilityStatus = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -61,14 +61,14 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
                 }
             ]
         });
-    };
+    }, [globalFilter]);
 
-    const loadTrendsInDSD = async () => {
-        let params = null;
+    const loadTrendsInDSD = useCallback(async () => {
+        // let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
+        // if (globalFilter) {
+        //     params = { ...globalFilter };
+        // }
 
         setTrendsInDSD({
             chart: {
@@ -131,12 +131,12 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
                 data: [3, 4, 4, 2, 5]
             }]
         });
-    };
+    }, []);
 
     useEffect(() => {
         loadStabilityStatus();
         loadTrendsInDSD();
-    }, [globalFilter]);
+    }, [loadStabilityStatus, loadTrendsInDSD]);
 
     return (
         <div className="row">

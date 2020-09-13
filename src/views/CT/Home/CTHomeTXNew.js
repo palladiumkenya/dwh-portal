@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
@@ -7,7 +7,7 @@ import { getAll } from '../../Shared/Api';
 const CTHomeTXNew = ({ globalFilter }) => {
     const [txNew, setTxNew] = useState({});
 
-    const loadTxNew = async () => {
+    const loadTxNew = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -151,11 +151,11 @@ const CTHomeTXNew = ({ globalFilter }) => {
                 }
             }]
         });
-    };
+    }, [globalFilter]);
 
     useEffect(() => {
         loadTxNew();
-    }, [globalFilter]);
+    }, [loadTxNew]);
 
     return (
         <div className="row">

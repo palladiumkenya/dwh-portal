@@ -9,7 +9,7 @@ import CurrentOnARTTxCurrDistributionByPartner from './CurrentOnARTTxCurrDistrib
 import CurrentOnARTTxCurrByCounty from './CurrentOnARTTxCurrByCounty';
 import CurrentOnARTTxCurrByPartner from './CurrentOnARTTxCurrByPartner';
 
-const CurrentOnART = ({ }) => {
+const CurrentOnART = () => {
     const [globalFilter, setGlobalFilter] = useState({
         county: [],
         subCounty: [],

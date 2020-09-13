@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
@@ -27,7 +27,7 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
         ViralSuppressionFemale: 0
     });
 
-    const loadActiveOnART = async () => {
+    const loadActiveOnART = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -44,9 +44,9 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
         setARTClients({
             activeARTClients: ActiveART.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
-    };
+    }, [globalFilter]);
 
-    const loadActiveOnARTChildren = async () => {
+    const loadActiveOnARTChildren = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -63,9 +63,9 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
         setARTClientsChildren({
             ActiveARTChildren: ActiveARTChildren.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
-    };
+    }, [globalFilter]);
 
-    const loadActiveOnARTAdults = async () => {
+    const loadActiveOnARTAdults = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -82,9 +82,9 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
         setARTClientsAdults({
             ActiveARTAdults: ActiveARTAdults.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
-    }
+    }, [globalFilter]);
 
-    const loadActiveOnARTAdolescents = async () => {
+    const loadActiveOnARTAdolescents = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -101,9 +101,9 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
         setARTClientsAdolescents({
             ActiveARTAdolescents: ActiveARTAdolescents.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
-    };
+    }, [globalFilter]);
 
-    const loadActiveOnARTByGender = async () => {
+    const loadActiveOnARTByGender = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -148,9 +148,9 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
             ViralSuppressionMale: ViralSuppressionMale,
             ViralSuppressionFemale: ViralSuppressionFemale
         });
-    };
+    }, [globalFilter]);
 
-    const loadViralLoadCascade = async () => {
+    const loadViralLoadCascade = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -245,7 +245,7 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
                 ]
             }]
         });
-    };
+    }, [globalFilter]);
 
     useEffect(() => {
         loadViralLoadCascade();
@@ -254,7 +254,7 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
         loadActiveOnARTAdults();
         loadActiveOnARTAdolescents();
         loadActiveOnARTByGender();
-    }, [globalFilter]);
+    }, [loadViralLoadCascade, loadActiveOnART, loadActiveOnARTChildren, loadActiveOnARTAdults, loadActiveOnARTAdolescents, loadActiveOnARTByGender]);
 
     return (
         <div className="row">
