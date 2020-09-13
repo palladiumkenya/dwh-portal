@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
@@ -7,7 +7,7 @@ import { getAll } from '../../Shared/Api';
 const HtsUptakeMonthsSinceLastTest = ({ globalFilter }) => {
     const [monthsSinceLastTest, setMonthsSinceLastTest] = useState({});
 
-    const loadMonthsSinceLastTest = async () => {
+    const loadMonthsSinceLastTest = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -103,11 +103,11 @@ const HtsUptakeMonthsSinceLastTest = ({ globalFilter }) => {
                 }
             }]
         });
-    };
+    }, [globalFilter]);
 
     useEffect(() => {
         loadMonthsSinceLastTest();
-    }, [globalFilter]);
+    }, [loadMonthsSinceLastTest]);
 
     return (
         <div className="row">

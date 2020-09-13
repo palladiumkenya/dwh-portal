@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -17,8 +17,7 @@ const DistributionHTSCI = ({ globalFilter }) => {
         series: [ { data: [], color: "#1AB394" } ]
     });
 
-    const loadChart = async () => {
-
+    const loadChart = useCallback(async () => {
         const data = await getAll('/getHTSDensityScatter/');
         setChart({
             chart: {
@@ -85,11 +84,11 @@ const DistributionHTSCI = ({ globalFilter }) => {
                 data: data.count
             }]
         });
-    };
+    }, []);
 
     useEffect(() => {
         loadChart();
-    }, [globalFilter]);
+    }, [loadChart]);
     
     return (
         <div className="row">

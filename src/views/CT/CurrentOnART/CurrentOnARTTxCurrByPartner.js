@@ -1,12 +1,16 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import React, { useEffect, useState } from 'react';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import DataTable from 'react-data-table-component';
 
-const FacilitiesNewOnArtList = ({ globalFilter }) => {
-    const [facilitiesNewOnArt, setFacilitiesNewOnArt] = useState({});
+const CurrentOnARTTxCurrByPartner = ({ globalFilter }) => {
+    const [txCurrByPartnerList, setTxCurrByPartnerList] = useState({});
+    useEffect(() => {
+        loadTxCurrByPartnerList();
+    }, [globalFilter]);
 
-    const loadFacilitiesNewOnArt = useCallback(async () => {
+    const loadTxCurrByPartnerList = async () => {
         const data = [];
+
         const result = [
             {"year":2020,"month":7,"txNew":"4345","county":"Nairobi","subCounty":"Starehe","facility":"Kenyatta Hospital","partner":"EDARP"},
             {"year":2020,"month":7,"txNew":"3454","county":"Nairobi","subCounty":"Riruta","facility":"Riruta Health Center","partner":"CHS-SHINDA"},
@@ -38,7 +42,7 @@ const FacilitiesNewOnArtList = ({ globalFilter }) => {
             });
         }
 
-        setFacilitiesNewOnArt({
+        setTxCurrByPartnerList({
             columns: [
                 { name: 'Facility', selector: 'facility', sortable: true},
                 { name: 'Partner', selector: 'partner', sortable: true},
@@ -49,28 +53,24 @@ const FacilitiesNewOnArtList = ({ globalFilter }) => {
             ],
             data: data
         });
-    }, []);
-
-    useEffect(() => {
-        loadFacilitiesNewOnArt();
-    }, [loadFacilitiesNewOnArt]);
+    };
 
     return (
         <div className="row">
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        FACILITIES WITH &gt;20% OF NEWLY DIAGNOSED PATIENTS STARTING ART &gt;14 DAYS AFTER ART START
+                        TX CURR BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <DataTable columns={facilitiesNewOnArt.columns} data={facilitiesNewOnArt.data}/>
+                            <DataTable columns={txCurrByPartnerList.columns} data={txCurrByPartnerList.data}/>
                         </div>
                     </CardBody>
                 </Card>
             </div>
         </div>
     );
-};
+}
 
-export default FacilitiesNewOnArtList;
+export default CurrentOnARTTxCurrByPartner;

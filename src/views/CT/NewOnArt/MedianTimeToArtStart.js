@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -6,13 +6,7 @@ import HighchartsReact from "highcharts-react-official";
 const MedianTimeToArtStart = ({ globalFilter }) => {
     const [newOnArt, setMedianTimeToArtStart] = useState({});
 
-    const loadMedianTimeToArtStart = async () => {
-        let params = null;
-
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
-
+    const loadMedianTimeToArtStart = useCallback(async () => {
         const result = [
             {"year":2011,"timeInDays":"644"},
             {"year":2012,"timeInDays":"614"},
@@ -54,11 +48,11 @@ const MedianTimeToArtStart = ({ globalFilter }) => {
                 { name: 'Time (Days)', data: medianTimeToArtStart, type: 'spline', color: "#E06F07" },
             ]
         });
-    };
+    }, []);
 
     useEffect(() => {
         loadMedianTimeToArtStart();
-    }, [globalFilter]);
+    }, [loadMedianTimeToArtStart]);
 
     return (
         <div className="row">

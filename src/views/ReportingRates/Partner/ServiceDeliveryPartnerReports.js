@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -14,13 +14,9 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
 
     const [consistencyOfReportingByPartner, setConsistencyOfReportingByPartner] = useState({});
 
-    useEffect(() => {
-        loademrDistributionByPartner();
-        loadRecencyOfReportingByPartner();
-        loadConsistencyOfReportingByPartner();
-    }, [globalFilter]);
+    
 
-    const loademrDistributionByPartner = async () => {
+    const loademrDistributionByPartner = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -43,9 +39,9 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
             credits: { enabled: false },
             series: [{ data: partners_series, color: "#2F4050;", name: 'Distribution of EMR Sites by Partner' }]
         });
-    };
+    }, [globalFilter]);
 
-    const loadRecencyOfReportingByPartner = async () => {
+    const loadRecencyOfReportingByPartner = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -68,9 +64,9 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
             credits: { enabled: false },
             series: [{ data: partners_series, color: "#59A14F", name: 'Overall Reporting - Care & Treatment by Partner March 2020' }]
         });
-    };
+    }, [globalFilter]);
 
-    const loadConsistencyOfReportingByPartner = async () => {
+    const loadConsistencyOfReportingByPartner = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -93,7 +89,13 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
             credits: { enabled: false },
             series: [{ data: partners_series, color: "#F28E2B", name: 'Consistency Of Reporting - ' + params.docket + ' by Partner ' + monthYear }]
         });
-    };
+    }, [globalFilter, monthYear]);
+
+    useEffect(() => {
+        loademrDistributionByPartner();
+        loadRecencyOfReportingByPartner();
+        loadConsistencyOfReportingByPartner();
+    }, [loademrDistributionByPartner, loadRecencyOfReportingByPartner, loadConsistencyOfReportingByPartner]);
 
     return (
         <div className="row">

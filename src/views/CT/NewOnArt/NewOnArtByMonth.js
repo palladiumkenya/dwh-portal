@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -6,13 +6,7 @@ import HighchartsReact from "highcharts-react-official";
 const NewOnArtByMonth = ({ globalFilter }) => {
     const [newOnArt, setNewOnArt] = useState({});
 
-    const loadNewOnArt = async () => {
-        let params = null;
-
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
-
+    const loadNewOnArt = useCallback(async () => {
         const result = [
             {"year":2020,"month":1,"txNew":"644"},
             {"year":2020,"month":2,"txNew":"614"},
@@ -63,11 +57,11 @@ const NewOnArtByMonth = ({ globalFilter }) => {
                 { name: 'Number of Patients', data: txNew, type: 'spline', color: "#E06F07" },
             ]
         });
-    };
+    }, []);
 
     useEffect(() => {
         loadNewOnArt();
-    }, [globalFilter]);
+    }, [loadNewOnArt]);
 
     return (
         <div className="row">

@@ -3,17 +3,17 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 
-const CTHomeReportingRates = ({ globalFilter }) => {
-    const [ctReportingRates, setCTReportingRates] = useState({});
+const CurrentOnARTTxCurrDistributionByPartner = ({ globalFilter }) => {
+    const [txCurrDistributionByPartner, setTxCurrDistributionByPartner] = useState({});
 
-    const loadCTReportingRates = useCallback(async () => {
+    const loadTxCurrDistributionByPartner = useCallback(async () => {
         // let params = null;
 
         // if (globalFilter) {
         //     params = { ...globalFilter };
         // }
 
-        setCTReportingRates({
+        setTxCurrDistributionByPartner({
             chart: {
                 type: 'column'
             },
@@ -25,25 +25,25 @@ const CTHomeReportingRates = ({ globalFilter }) => {
             },
             xAxis: {
                 categories: [
-                    'Jan',
-                    'Feb',
-                    'Mar',
-                    'Apr',
-                    'May',
-                    'Jun',
-                    'Jul',
-                    'Aug',
-                    'Sep',
-                    'Oct',
-                    'Nov',
-                    'Dec'
+                    'NAIROBI',
+                    'KAJIADO',
+                    'KISUMU',
+                    'MOMBASA',
+                    'MERU',
+                    'EMBU',
+                    'SIAYA',
+                    'NAKURU',
+                    'KIAMBU',
+                    'MACHAKOS',
+                    'MAKUENI',
+                    'ISIOLO'
                 ],
                 crosshair: true
             },
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'PERCENT'
+                    text: ''
                 }
             },
             tooltip: {
@@ -61,33 +61,30 @@ const CTHomeReportingRates = ({ globalFilter }) => {
                 }
             },
             series: [{
-                color: "#1AB394",
-                name: '',
+                color: "#485969",
                 data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
             }]
         });
     }, []);
-
+    
     useEffect(() => {
-        loadCTReportingRates();
-    }, [loadCTReportingRates]);
+        loadTxCurrDistributionByPartner();
+    }, [loadTxCurrDistributionByPartner]);
 
     return (
         <div className="row">
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        Reporting rates AND Care & treatment(last 12 months)(N =495)
+                        TX CURR DISTRIBUTION BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
-                        <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={ctReportingRates} />
-                        </div>
+                        <HighchartsReact highcharts={Highcharts} options={txCurrDistributionByPartner} />
                     </CardBody>
                 </Card>
             </div>
         </div>
     );
-};
+}
 
-export default CTHomeReportingRates;
+export default CurrentOnARTTxCurrDistributionByPartner;

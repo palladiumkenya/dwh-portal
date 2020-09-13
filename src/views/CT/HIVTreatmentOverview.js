@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import NewOnArt from './NewOnArt/NewOnArt';
+import CurrentOnART from './CurrentOnART/CurrentOnART';
 
 const HIVTreatmentOverview = () => {
 
@@ -22,10 +23,6 @@ const HIVTreatmentOverview = () => {
         partner: '',
         period: `${new Date().getFullYear()},${new Date().getMonth()}`
     });
-
-    const updateGlobalFilter = (selection) => {
-        setGlobalFilter(selection);
-    };
 
     const changeCtTabTo = (tab) => {
         let params = { ...globalFilter };
@@ -55,6 +52,9 @@ const HIVTreatmentOverview = () => {
             <TabContent activeTab={globalFilter.ctTab}>
                 <TabPane tabId="txNew">
                     <NewOnArt globalFilter={globalFilter}></NewOnArt>
+                </TabPane>
+                <TabPane tabId="txCurr">
+                    <CurrentOnART />
                 </TabPane>
             </TabContent>
             <p></p>

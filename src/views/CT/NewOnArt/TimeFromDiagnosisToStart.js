@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
@@ -6,15 +6,8 @@ import HighchartsReact from 'highcharts-react-official';
 const TimeFromDiagnosisToStart = ({ globalFilter }) => {
     const [linkageByAgeSex, setTimeFromDiagnosisToStart] = useState({});
 
-    const loadTimeFromDiagnosisToStart = async () => {
-        let params = null;
-
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
-
+    const loadTimeFromDiagnosisToStart = useCallback(async () => {
         const periodGroups = [];
-
         let firstPeriod = [];
         let secondPeriod = [];
         let thirdPeriod = [];
@@ -98,11 +91,11 @@ const TimeFromDiagnosisToStart = ({ globalFilter }) => {
                 { name: '14 Days', data: firstPeriod, type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ' } },
             ]
         });
-    };
+    }, []);
 
     useEffect(() => {
         loadTimeFromDiagnosisToStart();
-    }, [globalFilter]);
+    }, [loadTimeFromDiagnosisToStart]);
 
     return (
         <div className="row">

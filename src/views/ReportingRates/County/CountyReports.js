@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import Highstock from 'highcharts/highstock';
@@ -15,13 +15,9 @@ const CountyReports = ({ globalFilter }) => {
 
     const [consistencyOfReportingByCounty, setConsistencyOfReportingByCounty] = useState({});
 
-    useEffect(() => {
-        loademrDistribution();
-        loadRecencyOfReportingByCounty();
-        loadConsistencyOfReportingByCounty();
-    }, [globalFilter]);
+    
 
-    const loademrDistribution = async () => {
+    const loademrDistribution = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -45,9 +41,9 @@ const CountyReports = ({ globalFilter }) => {
             responsive: { rules: [ { chartOptions: { legend: { enabled: false } } } ] },
             series: [{ data: counties_series, color: "#2F4050;", name: 'Distribution of EMR Sites by County' }]
         });
-    };
+    }, [globalFilter]);
 
-    const loadRecencyOfReportingByCounty = async () => {
+    const loadRecencyOfReportingByCounty = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -70,9 +66,9 @@ const CountyReports = ({ globalFilter }) => {
             credits: { enabled: false },
             series: [{ data: counties_series, color: "#59A14F" }]
         });
-    };
+    }, [globalFilter]);
 
-    const loadConsistencyOfReportingByCounty = async () => {
+    const loadConsistencyOfReportingByCounty = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -95,7 +91,13 @@ const CountyReports = ({ globalFilter }) => {
             credits: { enabled: false },
             series: [{ data: counties_series, color: "#F28E2B", name: 'Consistency Of Reporting - ' + params.docket + ' by County' }]
         });
-    };
+    }, [globalFilter]);
+
+    useEffect(() => {
+        loademrDistribution();
+        loadRecencyOfReportingByCounty();
+        loadConsistencyOfReportingByCounty();
+    }, [loademrDistribution, loadRecencyOfReportingByCounty, loadConsistencyOfReportingByCounty]);
 
     return (
         <div className="row">
