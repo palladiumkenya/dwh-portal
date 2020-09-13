@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
@@ -7,7 +7,7 @@ import { getAll } from '../../Shared/Api';
 const HtsUptakeByCounty = ({ globalFilter }) => {
     const [uptakeByCounty, setUptakeByCounty] = useState({});
 
-    const loadUptakeByCounty = async () => {
+    const loadUptakeByCounty = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -103,11 +103,11 @@ const HtsUptakeByCounty = ({ globalFilter }) => {
                 }
             }]
         });
-    };
+    }, [globalFilter]);
 
     useEffect(() => {
         loadUptakeByCounty();
-    }, [globalFilter]);
+    }, [loadUptakeByCounty]);
 
     return (
         <div className="row">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
@@ -7,7 +7,7 @@ import { getAll } from '../../Shared/Api';
 const LinkageByAgeSex = ({ globalFilter }) => {
     const [linkageByAgeSex, setLinkageByAgeSex] = useState({});
 
-    const loadLinkageByAgeSex = async () => {
+    const loadLinkageByAgeSex = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -95,11 +95,11 @@ const LinkageByAgeSex = ({ globalFilter }) => {
                 { name: 'Linkage', data: linkage, type: 'spline', color: "#E06F07", tooltip: { valueSuffix: '%' }, yAxis: 1 }
             ]
         });
-    };
+    }, [globalFilter]);
 
     useEffect(() => {
         loadLinkageByAgeSex();
-    }, [globalFilter]);
+    }, [loadLinkageByAgeSex]);
 
     return (
         <div className="row">

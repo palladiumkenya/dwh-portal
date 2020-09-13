@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
@@ -7,7 +7,7 @@ import { getAll } from '../../Shared/Api';
 const HtsUptakeByAgeSex = ({ globalFilter }) => {
     const [uptakeByAgeSex, setUptakeByAgeSex] = useState({});
 
-    const loadUptakeByAgeSex = async () => {
+    const loadUptakeByAgeSex = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -128,11 +128,11 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
                 }
             }]
         });
-    };
+    }, [globalFilter]);
 
     useEffect(() => {
         loadUptakeByAgeSex();
-    }, [globalFilter]);
+    }, [loadUptakeByAgeSex]);
 
     return (
         <div className="row">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from "highcharts-react-official";
@@ -21,7 +21,7 @@ const HtsUptakeByPopulationType = ({ globalFilter }) => {
         missingPopPositivity: ''
     });
 
-    const loadHtsUptakeByPopulationType = async () => {
+    const loadHtsUptakeByPopulationType = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -119,11 +119,11 @@ const HtsUptakeByPopulationType = ({ globalFilter }) => {
                 }]
             }]
         });
-    };
+    }, [globalFilter]);
 
     useEffect(() => {
         loadHtsUptakeByPopulationType();
-    }, [globalFilter]);
+    }, [loadHtsUptakeByPopulationType]);
 
     return (
         <div className="row">

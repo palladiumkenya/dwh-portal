@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
@@ -8,7 +8,7 @@ const HtsUptakeTypeAndSelfTest = ({ globalFilter }) => {
     const [uptakeByType, setUptakeByType] = useState({});
     const [uptakeBySelfTest, setUptakeBySelfTest] = useState({});
 
-    const loadUptakeByType = async () => {
+    const loadUptakeByType = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -71,9 +71,9 @@ const HtsUptakeTypeAndSelfTest = ({ globalFilter }) => {
                 }]
             }]
         });
-    };
+    }, [globalFilter]);
 
-    const loadUptakeBySelfTest = async () => {
+    const loadUptakeBySelfTest = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -136,12 +136,12 @@ const HtsUptakeTypeAndSelfTest = ({ globalFilter }) => {
                 }]
             }]
         });
-    };
+    }, [globalFilter]);
 
     useEffect(() => {
         loadUptakeByType();
         loadUptakeBySelfTest();
-    }, [globalFilter]);
+    }, [loadUptakeByType, loadUptakeBySelfTest]);
 
     return (
         <div className="row">
