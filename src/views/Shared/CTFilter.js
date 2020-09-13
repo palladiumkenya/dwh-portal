@@ -32,6 +32,7 @@ const CTFilter = ({ onFilterChange }) => {
             options.push({
                 value: key, display: data[key]
             });
+            return null;
         });
 
         const selectionOptions = [{ value: '', display: '(Select Month)' }].concat(
