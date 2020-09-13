@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import NewOnArt from './NewOnArt/NewOnArt';
+import CurrentOnART from './CurrentOnART/CurrentOnART';
 
 const HIVTreatmentOverview = () => {
 
@@ -51,6 +52,9 @@ const HIVTreatmentOverview = () => {
             <TabContent activeTab={globalFilter.ctTab}>
                 <TabPane tabId="txNew">
                     <NewOnArt globalFilter={globalFilter}></NewOnArt>
+                </TabPane>
+                <TabPane tabId="txCurr">
+                    <CurrentOnART />
                 </TabPane>
             </TabContent>
             <p></p>
