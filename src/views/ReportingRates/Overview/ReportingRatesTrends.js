@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -29,7 +29,7 @@ const ReportingRatesTrends = ({ globalFilter }) => {
         series: [ { data: [], color: "#1AB394" } ]
     });
 
-    const loadRecencyTrend = async () => {
+    const loadRecencyTrend = useCallback(async () => {
         let params = null;
         
         if (globalFilter) {
@@ -67,9 +67,9 @@ const ReportingRatesTrends = ({ globalFilter }) => {
             responsive: { rules: [ { condition: { maxWidth: 500, }, chartOptions: { legend: { enabled: false } } } ] },
             series: [ { data: Object.values(data).slice(-12), color: "#1AB394" } ]
         });
-    };
+    }, [globalFilter]);
 
-    const loadConsistencyTrend = async () => {
+    const loadConsistencyTrend = useCallback(async () => {
         let params = null;
         const numberOfMonths = 12;
         
@@ -111,12 +111,12 @@ const ReportingRatesTrends = ({ globalFilter }) => {
             responsive: { rules: [ { condition: { maxWidth: 500, }, chartOptions: { legend: { enabled: false } } } ] },
             series: [ { data: Object.values(data).slice(numberOfMonths*-1), color: "#2F4050" } ]
         });
-    };
+    }, [globalFilter]);
 
     useEffect(() => {
         loadRecencyTrend();
         loadConsistencyTrend();
-    }, [globalFilter]);
+    }, [loadRecencyTrend, loadConsistencyTrend]);
 
     return (
         <div className="row">
