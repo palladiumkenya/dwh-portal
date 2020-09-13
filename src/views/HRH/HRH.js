@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardBody } from 'reactstrap';
 import CIToHTSRatio from './CIToHTSRatio';
 import DistributionDensityHCW from './DistributionDensityHCW';
@@ -8,17 +8,6 @@ import DistributionDensityCOC from './DistributionDensityCOC';
 import DistributionHTSCI from './DistributionHTSCI';
 
 const HRH = () => {
-
-    const [globalFilter, setGlobalFilter] = useState({
-        county: '',
-        ward: '',
-        constituency: '',
-    });
-
-    const updateGlobalFilter = (selection) => {
-        setGlobalFilter(selection);
-    };
-
     return (
         <div className="animated fadeIn">
             <div className="strip"></div>
@@ -42,22 +31,22 @@ const HRH = () => {
                 </div>
                 <div className="row">
                     <div className="col-6">
-                        <DistributionDensityHCW globalFilter={globalFilter}></DistributionDensityHCW>
+                        <DistributionDensityHCW></DistributionDensityHCW>
                     </div>
                     <div className="col-6">
-                        <DistributionDensityNCK globalFilter={globalFilter}></DistributionDensityNCK>
+                        <DistributionDensityNCK></DistributionDensityNCK>
                     </div>
                     <div className="col-6">
-                        <DistributionDensityMPDB globalFilter={globalFilter}></DistributionDensityMPDB>
+                        <DistributionDensityMPDB></DistributionDensityMPDB>
                     </div>
                     <div className="col-6">
-                        <DistributionDensityCOC globalFilter={globalFilter}></DistributionDensityCOC>
+                        <DistributionDensityCOC></DistributionDensityCOC>
                     </div>
                     <div className="col-6">
-                        <DistributionHTSCI globalFilter={globalFilter}></DistributionHTSCI>
+                        <DistributionHTSCI></DistributionHTSCI>
                     </div>
                     <div className="col-6">
-                        <CIToHTSRatio globalFilter={globalFilter}></CIToHTSRatio>
+                        <CIToHTSRatio></CIToHTSRatio>
                     </div>
                 </div>
             </div>
