@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
@@ -6,13 +6,7 @@ import HighchartsReact from 'highcharts-react-official';
 const NewOnArtByAgeSex = ({ globalFilter }) => {
     const [linkageByAgeSex, setNewOnArtByAgeSex] = useState({});
 
-    const loadNewOnArtByAgeSex = async () => {
-        let params = null;
-
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
-
+    const loadNewOnArtByAgeSex = useCallback(async () => {
         const ageGroups = [];
         const ageGroupsMale = [];
         const ageGroupsFemale = [];
@@ -92,7 +86,6 @@ const NewOnArtByAgeSex = ({ globalFilter }) => {
                     stacking: 'normal'
                 }
             },
-            tooltip: { shared: true },
             tooltip: {
                 formatter: function () {
                     return '<b>' + this.series.name + ', Age Group ' + this.point.category + '</b><br/>' +
@@ -108,11 +101,11 @@ const NewOnArtByAgeSex = ({ globalFilter }) => {
                 { name: 'Male', data: txNewMale, color: "#1AB394", tooltip: { valueSuffix: ' ' } }
             ]
         });
-    };
+    }, []);
 
     useEffect(() => {
         loadNewOnArtByAgeSex();
-    }, [globalFilter]);
+    }, [loadNewOnArtByAgeSex]);
 
     return (
         <div className="row">
