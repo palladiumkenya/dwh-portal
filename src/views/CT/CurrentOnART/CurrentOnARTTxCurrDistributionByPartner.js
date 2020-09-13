@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
@@ -6,16 +6,12 @@ import Highcharts from 'highcharts';
 const CurrentOnARTTxCurrDistributionByPartner = ({ globalFilter }) => {
     const [txCurrDistributionByPartner, setTxCurrDistributionByPartner] = useState({});
 
-    useEffect(() => {
-        loadTxCurrDistributionByPartner();
-    }, [globalFilter]);
+    const loadTxCurrDistributionByPartner = useCallback(async () => {
+        // let params = null;
 
-    const loadTxCurrDistributionByPartner = async () => {
-        let params = null;
-
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
+        // if (globalFilter) {
+        //     params = { ...globalFilter };
+        // }
 
         setTxCurrDistributionByPartner({
             chart: {
@@ -69,7 +65,11 @@ const CurrentOnARTTxCurrDistributionByPartner = ({ globalFilter }) => {
                 data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
             }]
         });
-    };
+    }, []);
+    
+    useEffect(() => {
+        loadTxCurrDistributionByPartner();
+    }, [loadTxCurrDistributionByPartner]);
 
     return (
         <div className="row">

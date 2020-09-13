@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
@@ -7,11 +7,7 @@ import { getAll } from '../../Shared/Api';
 const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
     const [txCurrByAgeAndSex, setTxCurrByAgeAndSex] = useState({});
 
-    useEffect(() => {
-        loadTxCurrByAgeAndSex();
-    }, [globalFilter]);
-
-    const loadTxCurrByAgeAndSex = async () => {
+    const loadTxCurrByAgeAndSex = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -70,7 +66,11 @@ const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
                 { name: 'Male', data: txNewMale, color: "#1AB394", tooltip: { valueSuffix: ' ' } }
             ]
         });
-    };
+    }, [globalFilter]);
+
+    useEffect(() => {
+        loadTxCurrByAgeAndSex();
+    }, [loadTxCurrByAgeAndSex]);
 
     return (
         <div className="row">
