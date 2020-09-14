@@ -2,68 +2,58 @@ import React, { useEffect, useState, useCallback } from 'react';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
+import { getAll } from '../../Shared/Api';
 
 const TimeFromDiagnosisToStart = ({ globalFilter }) => {
     const [linkageByAgeSex, setTimeFromDiagnosisToStart] = useState({});
 
     const loadTimeFromDiagnosisToStart = useCallback(async () => {
+        let params = null;
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
         const periodGroups = [];
         let firstPeriod = [];
+        let firstPeriodPercent = [];
         let secondPeriod = [];
+        let secondPeriodPercent = [];
         let thirdPeriod = [];
+        let thirdPeriodPercent = [];
         let fourthPeriod = [];
+        let fourthPeriodPercent = [];
 
-        const result = [
-            {"year":"2011","period":"firstPeriod","txNew":"25"},
-            {"year":"2011","period":"secondPeriod","txNew":"25"},
-            {"year":"2011","period":"thirdPeriod","txNew":"25"},
-            {"year":"2011","period":"fourthPeriod","txNew":"25"},
-            {"year":"2012","period":"firstPeriod","txNew":"20"},
-            {"year":"2012","period":"secondPeriod","txNew":"25"},
-            {"year":"2012","period":"thirdPeriod","txNew":"25"},
-            {"year":"2012","period":"fourthPeriod","txNew":"30"},
-            {"year":"2013","period":"firstPeriod","txNew":"32"},
-            {"year":"2013","period":"secondPeriod","txNew":"25"},
-            {"year":"2013","period":"thirdPeriod","txNew":"28"},
-            {"year":"2013","period":"fourthPeriod","txNew":"15"},
-            {"year":"2014","period":"firstPeriod","txNew":"20"},
-            {"year":"2014","period":"secondPeriod","txNew":"30"},
-            {"year":"2014","period":"thirdPeriod","txNew":"30"},
-            {"year":"2014","period":"fourthPeriod","txNew":"20"},
-            {"year":"2015","period":"firstPeriod","txNew":"15"},
-            {"year":"2015","period":"secondPeriod","txNew":"35"},
-            {"year":"2015","period":"thirdPeriod","txNew":"20"},
-            {"year":"2015","period":"fourthPeriod","txNew":"30"},
-            {"year":"2016","period":"firstPeriod","txNew":"25"},
-            {"year":"2016","period":"secondPeriod","txNew":"25"},
-            {"year":"2016","period":"thirdPeriod","txNew":"25"},
-            {"year":"2016","period":"fourthPeriod","txNew":"25"},
-            {"year":"2017","period":"firstPeriod","txNew":"30"},
-            {"year":"2017","period":"secondPeriod","txNew":"30"},
-            {"year":"2017","period":"thirdPeriod","txNew":"25"},
-            {"year":"2017","period":"fourthPeriod","txNew":"15"}
-        ];
+        const result = await getAll('care-treatment/timeToArt', params);
 
-        for(let i = 0; i < result.length; i++) {
-            if(periodGroups.indexOf(result[i].year) !== -1){
-                continue;
-            } else{
-                periodGroups.push(result[i].year);
+        result.forEach(function (res) {
+            if(periodGroups.indexOf(res.year) === -1){
+                periodGroups.push(res.year);
             }
-        }
+        });
 
-        for(let i = 0; i < result.length; i++) {
-            let index = periodGroups.indexOf(result[i].year);
-            if (result[i].period === 'firstPeriod') {
-                firstPeriod.splice(index, 0, parseInt(result[i].txNew));
-            } else if (result[i].period === 'secondPeriod') {
-                secondPeriod.splice(index, 0, parseInt(result[i].txNew));
-            } else if (result[i].period === 'thirdPeriod') {
-                thirdPeriod.splice(index, 0, parseInt(result[i].txNew));
-            } else if (result[i].period === 'fourthPeriod') {
-                fourthPeriod.splice(index, 0, parseInt(result[i].txNew));
+        result.forEach(function (res) {
+            let index = periodGroups.indexOf(res.year);
+            if (res.period === 'Same Day') {
+                firstPeriod.splice(index, 0, parseInt(res.txNew));
+            } else if (res.period === '1 to 7 Days') {
+                secondPeriod.splice(index, 0, parseInt(res.txNew));
+            } else if (res.period === '8 to 14 Days') {
+                thirdPeriod.splice(index, 0, parseInt(res.txNew));
+            } else if (res.period === '> 14 Days') {
+                fourthPeriod.splice(index, 0, parseInt(res.txNew));
             }
-        }
+        });
+
+        periodGroups.forEach(function (periodGroup, i) {
+            let total = 0;
+            total = total + firstPeriod[i];
+            total = total + secondPeriod[i];
+            total = total + thirdPeriod[i];
+            total = total + fourthPeriod[i];
+            firstPeriodPercent.splice(i, 0, Number(parseFloat((firstPeriod[i]/total)*100).toFixed(1)));
+            secondPeriodPercent.splice(i, 0, Number(parseFloat((secondPeriod[i]/total)*100).toFixed(1)));
+            thirdPeriodPercent.splice(i, 0, Number(parseFloat((thirdPeriod[i]/total)*100).toFixed(1)));
+            fourthPeriodPercent.splice(i, 0, Number(parseFloat((fourthPeriod[i]/total)*100).toFixed(1)));
+        });
 
         setTimeFromDiagnosisToStart({
             chart: { zoomType: 'xy' },
@@ -85,13 +75,13 @@ const TimeFromDiagnosisToStart = ({ globalFilter }) => {
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'Same Day', data: fourthPeriod, type: 'column', color: "#485969", tooltip: { valueSuffix: ' ' } },
-                { name: '1-7 Days', data: thirdPeriod, type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ' } },
-                { name: '8-14 Days', data: secondPeriod, type: 'column', color: "#60A6E5", tooltip: { valueSuffix: ' ' } },
-                { name: '14 Days', data: firstPeriod, type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ' } },
+                { name: 'Same Day', data: firstPeriodPercent, type: 'column', color: "#485969", tooltip: { valueSuffix: ' %' } },
+                { name: '1-7 Days', data: secondPeriodPercent, type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' %' } },
+                { name: '8-14 Days', data: thirdPeriodPercent, type: 'column', color: "#60A6E5", tooltip: { valueSuffix: ' %' } },
+                { name: '> 14 Days', data: fourthPeriodPercent, type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' %' } },
             ]
         });
-    }, []);
+    }, [globalFilter]);
 
     useEffect(() => {
         loadTimeFromDiagnosisToStart();
