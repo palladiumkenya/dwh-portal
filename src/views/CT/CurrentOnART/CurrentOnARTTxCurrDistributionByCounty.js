@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
+import { getAll } from '../../Shared/Api';
 
 const CurrentOnARTTxCurrDistributionByCounty = ({ globalFilter }) => {
     const [txCurrDistributionByCounty, setTxCurrDistributionByCounty] = useState({});
@@ -17,6 +18,15 @@ const CurrentOnARTTxCurrDistributionByCounty = ({ globalFilter }) => {
             params = { ...globalFilter };
         }
 
+        const counties = [];
+        const txCurr = [];
+
+        const result = await getAll('care-treatment/txCurrDistributionByCounty', params);
+        for(let i = 0; i < result.length; i++) {
+            counties.push(result[i].County);
+            txCurr.push(result[i].txCurr);
+        }
+
         setTxCurrDistributionByCounty({
             chart: {
                 type: 'column'
@@ -28,20 +38,7 @@ const CurrentOnARTTxCurrDistributionByCounty = ({ globalFilter }) => {
                 text: ''
             },
             xAxis: {
-                categories: [
-                    'NAIROBI',
-                    'KAJIADO',
-                    'KISUMU',
-                    'MOMBASA',
-                    'MERU',
-                    'EMBU',
-                    'SIAYA',
-                    'NAKURU',
-                    'KIAMBU',
-                    'MACHAKOS',
-                    'MAKUENI',
-                    'ISIOLO'
-                ],
+                categories: counties,
                 crosshair: true
             },
             yAxis: {
@@ -49,6 +46,9 @@ const CurrentOnARTTxCurrDistributionByCounty = ({ globalFilter }) => {
                 title: {
                     text: ''
                 }
+            },
+            legend: {
+                enabled: false,
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -65,8 +65,9 @@ const CurrentOnARTTxCurrDistributionByCounty = ({ globalFilter }) => {
                 }
             },
             series: [{
+                name: 'TX CURR DISTRIBUTION: ',
                 color: "#485969",
-                data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+                data: txCurr
             }]
         });
     };

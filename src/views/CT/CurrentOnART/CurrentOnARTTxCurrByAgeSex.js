@@ -7,6 +7,13 @@ import { getAll } from '../../Shared/Api';
 const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
     const [txCurrByAgeAndSex, setTxCurrByAgeAndSex] = useState({});
 
+    const getYear = () => {
+        if (globalFilter.year) {
+            return globalFilter.year.split(',')[0];
+        }
+        return 2020;
+    };
+
     useEffect(() => {
         loadTxCurrByAgeAndSex();
     }, [globalFilter]);
@@ -32,6 +39,21 @@ const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
             }
         }
 
+        const max_male = Math.max(...txNewMale);
+        const max_female = Math.max(...txNewFemale);
+        let max = 0;
+        max = max_male > max_female ? max_male: max_female;
+        let max_val = Math.floor(Math.log(max)/Math.log(10));
+        if (max_val === 1) {
+            max = max + 10;
+        } else if (max_val === 2) {
+            max = max + 100;
+        } else if (max_val === 3) {
+            max = max + 1000;
+        } else if (max_val > 3) {
+            max = max + 10000;
+        }
+
         setTxCurrByAgeAndSex({
             chart: { type: 'bar' },
             title: { useHTML: true, text: ' &nbsp;', align: 'left' },
@@ -42,7 +64,9 @@ const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
             ],
             yAxis: [
                 {
-                    title: { text: 'Number Positive', style: { color: Highcharts.getOptions().colors[1] } },
+                    min: -(max),
+                    max: (max),
+                    title: { text: 'TX CURR', style: { color: Highcharts.getOptions().colors[1] } },
                     labels: {
                         formatter: function () {
                             return Math.abs(this.value);
@@ -58,7 +82,7 @@ const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
             tooltip: {
                 formatter: function () {
                     return '<b>' + this.series.name + ', Age Group ' + this.point.category + '</b><br/>' +
-                        'Number Positive: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
+                        'TX CURR: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
                 }
             },
             legend: {
@@ -77,7 +101,7 @@ const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX CURR BY AGE AND SEX - JULY 2020
+                        TX CURR BY AGE AND SEX - {getYear()}
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
