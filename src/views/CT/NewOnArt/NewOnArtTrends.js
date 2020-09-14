@@ -2,30 +2,21 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import { getAll } from '../../Shared/Api';
 
-const NewOnArtByMonth = ({ globalFilter }) => {
+const NewOnArtTrends = ({ globalFilter }) => {
     const [newOnArt, setNewOnArt] = useState({});
 
     const loadNewOnArt = useCallback(async () => {
-        const result = [
-            {"year":2020,"month":1,"txNew":"644"},
-            {"year":2020,"month":2,"txNew":"614"},
-            {"year":2020,"month":3,"txNew":"689"},
-            {"year":2020,"month":4,"txNew":"659"},
-            {"year":2020,"month":5,"txNew":"564"},
-            {"year":2020,"month":6,"txNew":"414"},
-            {"year":2020,"month":7,"txNew":"644"},
-            {"year":2020,"month":8,"txNew":"614"},
-            {"year":2020,"month":9,"txNew":"689"},
-            {"year":2020,"month":10,"txNew":"659"},
-            {"year":2020,"month":11,"txNew":"564"},
-            {"year":2020,"month":12,"txNew":"414"},
-        ];
+        let params = null;
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+        const result = await getAll('care-treatment/txNewTrends', params);
         const monthNames = {
             1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June",
             7: "July", 8:"August", 9: "September", 10: "October", 11: "November", 12: "December"
         };
-
         let months = [];
         let txNew = [];
 
@@ -57,7 +48,7 @@ const NewOnArtByMonth = ({ globalFilter }) => {
                 { name: 'Number of Patients', data: txNew, type: 'spline', color: "#E06F07" },
             ]
         });
-    }, []);
+    }, [globalFilter]);
 
     useEffect(() => {
         loadNewOnArt();
@@ -81,4 +72,4 @@ const NewOnArtByMonth = ({ globalFilter }) => {
     );
 };
 
-export default NewOnArtByMonth;
+export default NewOnArtTrends;

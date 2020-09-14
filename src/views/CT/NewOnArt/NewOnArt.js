@@ -1,28 +1,41 @@
-import React from 'react';
-import HtsUptakeFilter from './../../Shared/HtsUptakeFilter';
+import React, { useState } from 'react';
+import CTFilter from '../../Shared/CTFilter';
 import NewOnArtHeader from './NewOnArtHeader';
 import NewOnArtFooter from './NewOnArtFooter';
-import NewOnArtByMonth from './NewOnArtByMonth';
+import NewOnArtTrends from './NewOnArtTrends';
 import NewOnArtByAgeSex from './NewOnArtByAgeSex';
 import MedianTimeToArtStart from './MedianTimeToArtStart';
 import TimeFromDiagnosisToStart from './TimeFromDiagnosisToStart';
 import FacilitiesNewOnArtList from './FacilitiesNewOnArtList';
 
-const NewOnArt = ({ period }) => {
+const NewOnArt = () => {
+    const [globalFilter, setGlobalFilter] = useState({
+        county: [],
+        subCounty: [],
+        facility: [],
+        partner: [],
+        year:`${new Date().getFullYear()}`,
+        month: ''
+    });
+
+    const updateGlobalFilter = (selection) => {
+        setGlobalFilter(selection);
+    };
+
     return (
         <div className="animated fadeIn">
             <div className="strip"></div>
             <NewOnArtHeader></NewOnArtHeader>
-            <HtsUptakeFilter>&nbsp;</HtsUptakeFilter>
-            <p></p><NewOnArtByMonth/>
+            <CTFilter onFilterChange={updateGlobalFilter} />
+            <p></p><NewOnArtTrends globalFilter={globalFilter}/>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><NewOnArtByAgeSex/>
+            <p></p><NewOnArtByAgeSex globalFilter={globalFilter}/>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><MedianTimeToArtStart/>
+            <p></p><MedianTimeToArtStart globalFilter={globalFilter}/>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TimeFromDiagnosisToStart/>
+            <p></p><TimeFromDiagnosisToStart globalFilter={globalFilter}/>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><FacilitiesNewOnArtList/>
+            <p></p><FacilitiesNewOnArtList globalFilter={globalFilter}/>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
         </div>
     );
