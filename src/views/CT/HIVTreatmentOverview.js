@@ -24,10 +24,6 @@ const HIVTreatmentOverview = () => {
         period: `${new Date().getFullYear()},${new Date().getMonth()}`
     });
 
-    const updateGlobalFilter = (selection) => {
-        setGlobalFilter(selection);
-    };
-
     const changeCtTabTo = (tab) => {
         let params = { ...globalFilter };
         params.ctTab = tab;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
@@ -8,7 +8,7 @@ const HtsUptakeTBScreeningAndTBOutcome = ({ globalFilter }) => {
     const [screenedTB, setScreenedTB] = useState({});
     const [TBScreeningOutcome, setTBScreeningOutcome] = useState({});
 
-    const loadScreenedTB = async () => {
+    const loadScreenedTB = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -67,9 +67,9 @@ const HtsUptakeTBScreeningAndTBOutcome = ({ globalFilter }) => {
                 }]
             }]
         });
-    };
+    }, [globalFilter]);
 
-    const loadTBScreeningOutcome = async () => {
+    const loadTBScreeningOutcome = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -164,12 +164,12 @@ const HtsUptakeTBScreeningAndTBOutcome = ({ globalFilter }) => {
                 }
             }]
         });
-    };
+    }, [globalFilter]);
 
     useEffect(() => {
         loadScreenedTB();
         loadTBScreeningOutcome();
-    }, [globalFilter]);
+    }, [loadScreenedTB, loadTBScreeningOutcome]);
 
     return (
         <div className="row">

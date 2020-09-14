@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Form } from 'reactstrap';
 import { getAll, getYearMonths } from './Api';
 
@@ -18,12 +18,12 @@ const Filter = ({ onFilterChange }) => {
     const [agencies, setAgencies] = useState([]);
     const [partners, setPartners] = useState([]);
 
-    const loadPeriods = () => {
+    const loadPeriods = useCallback(() => {
         const data = getYearMonths(new Date().getFullYear() - 1);
         setPeriods(data);
-    };
+    }, []);
 
-    const loadCounties = async () => {
+    const loadCounties = useCallback(async () => {
         let params = null;
 
         if (activeSelection) {
@@ -38,9 +38,9 @@ const Filter = ({ onFilterChange }) => {
             options
         );
         setCounties(selectionOptions);
-    };
+    }, [activeSelection]);
 
-    const loadAgencies = async () => {
+    const loadAgencies = useCallback(async () => {
         let params = null;
 
         if (activeSelection) {
@@ -55,9 +55,9 @@ const Filter = ({ onFilterChange }) => {
             options
         );
         setAgencies(selectionOptions);
-    };
+    }, [activeSelection]);
 
-    const loadPartners = async (selectedCounty, selectedAgency) => {
+    const loadPartners = useCallback(async (selectedCounty, selectedAgency) => {
         let params = null;
 
         if (activeSelection) {
@@ -72,7 +72,7 @@ const Filter = ({ onFilterChange }) => {
             options
         );
         setPartners(selectionOptions);
-    };
+    }, [activeSelection]);
 
     const onSelectionChange = async (event) => {
         const selection = {
@@ -87,7 +87,7 @@ const Filter = ({ onFilterChange }) => {
         loadCounties();
         loadAgencies();
         loadPartners();
-    }, [activeSelection]);
+    }, [loadPeriods, loadCounties, loadAgencies, loadPartners]);
 
     return (
         <Form>

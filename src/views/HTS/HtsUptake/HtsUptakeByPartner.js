@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
@@ -7,7 +7,7 @@ import { getAll } from '../../Shared/Api';
 const HtsUptakeByPartner = ({ globalFilter }) => {
     const [uptakeByPartner, setUptakeByPartner] = useState({});
 
-    const loadUptakeByPartner = async () => {
+    const loadUptakeByPartner = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -103,11 +103,11 @@ const HtsUptakeByPartner = ({ globalFilter }) => {
                 }
             }]
         });
-    };
+    }, [globalFilter]);
 
     useEffect(() => {
         loadUptakeByPartner();
-    }, [globalFilter]);
+    }, [loadUptakeByPartner]);
 
     return (
         <div className="row">

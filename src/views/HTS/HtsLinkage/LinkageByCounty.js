@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
@@ -7,7 +7,7 @@ import { getAll } from '../../Shared/Api';
 const LinkageByCounty = ({ globalFilter }) => {
     const [uptakeByCounty, setLinkageByCounty] = useState({});
 
-    const loadLinkageByCounty = async () => {
+    const loadLinkageByCounty = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -52,11 +52,11 @@ const LinkageByCounty = ({ globalFilter }) => {
                 { name: 'Linkage', data: linkage, type: 'spline', color: "#E06F07", tooltip: { valueSuffix: '%' }, yAxis: 1 }
             ]
         });
-    };
+    }, [globalFilter]);
 
     useEffect(() => {
         loadLinkageByCounty();
-    }, [globalFilter]);
+    }, [loadLinkageByCounty]);
 
     return (
         <div className="row">

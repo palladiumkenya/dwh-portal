@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -17,7 +17,7 @@ const DistributionDensityHCW = ({ globalFilter }) => {
         series: [ { data: [], color: "#1AB394" } ]
     });
 
-    const loadChart = async () => {
+    const loadChart = useCallback(async () => {
         const data = await getAll('/getHCWDensity/0/all/all/all');
         setChart({
             chart: {
@@ -93,11 +93,11 @@ const DistributionDensityHCW = ({ globalFilter }) => {
                 }
             }]
         });
-    };
+    }, []);
 
     useEffect(() => {
         loadChart();
-    }, [globalFilter]);
+    }, [loadChart]);
     
     return (
         <div className="row">

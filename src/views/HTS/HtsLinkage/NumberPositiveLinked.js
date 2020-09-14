@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsExporting from 'highcharts/modules/exporting';
@@ -14,7 +14,7 @@ if (typeof Highcharts === 'object') {
 const NumberTestedAndPositivity = ({ globalFilter }) => {
     const [numberPositiveLinked, setNumberPositiveLinked] = useState({});
 
-    const loadNumberPositiveLinked = async () => {
+    const loadNumberPositiveLinked = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -73,11 +73,11 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
                 { name: 'Linkage', data: linkage, type: 'spline', color: "#E06F07", tooltip: { valueSuffix: '%' }, yAxis: 1 }
             ]
         });
-    };
+    }, [globalFilter]);
 
     useEffect(() => {
         loadNumberPositiveLinked();
-    }, [globalFilter]);
+    }, [loadNumberPositiveLinked]);
 
     return (
         <div className="row">

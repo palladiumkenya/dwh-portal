@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
@@ -7,7 +7,7 @@ import { getAll } from '../../Shared/Api';
 const NumberTestedAndPositivity = ({ globalFilter }) => {
     const [numberTestedPositivity, setNumberTestedPositivity] = useState({});
 
-    const loadNumberTestedPositivity = async () => {
+    const loadNumberTestedPositivity = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -196,11 +196,11 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
                 }]
             }
         });
-    };
+    }, [globalFilter]);
 
     useEffect(() => {
         loadNumberTestedPositivity();
-    }, [globalFilter]);
+    }, [loadNumberTestedPositivity]);
 
     return (
         <div className="row">

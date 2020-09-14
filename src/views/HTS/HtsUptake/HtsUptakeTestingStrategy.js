@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
@@ -8,7 +8,7 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
     const [hivTestingType, setHivTestingType] = useState({});
     const [uptakeByEntryPoint, setUptakeByEntryPoint] = useState({});
 
-    const loadHivTestingType = async () => {
+    const loadHivTestingType = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -107,9 +107,9 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
                 }
             }]
         });
-    };
+    }, [globalFilter]);
 
-    const loadUptakeByEntryPoint = async () => {
+    const loadUptakeByEntryPoint = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -205,12 +205,12 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
                 }
             }]
         });
-    };
+    }, [globalFilter]);
 
     useEffect(() => {
         loadHivTestingType();
         loadUptakeByEntryPoint();
-    }, [globalFilter]);
+    }, [loadHivTestingType, loadUptakeByEntryPoint]);
 
     return (
         <div className="row">
