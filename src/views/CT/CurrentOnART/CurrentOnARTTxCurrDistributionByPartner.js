@@ -2,16 +2,26 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
+import { getAll } from '../../Shared/Api';
 
 const CurrentOnARTTxCurrDistributionByPartner = ({ globalFilter }) => {
     const [txCurrDistributionByPartner, setTxCurrDistributionByPartner] = useState({});
 
     const loadTxCurrDistributionByPartner = useCallback(async () => {
-        // let params = null;
+         let params = null;
 
-        // if (globalFilter) {
-        //     params = { ...globalFilter };
-        // }
+         if (globalFilter) {
+             params = { ...globalFilter };
+         }
+
+        const partners = [];
+        const txCurr = [];
+
+        const result = await getAll('care-treatment/txCurrDistributionByPartner', params);
+        for(let i = 0; i < result.length; i++) {
+            partners.push(result[i].CTPartner);
+            txCurr.push(result[i].txCurr);
+        }
 
         setTxCurrDistributionByPartner({
             chart: {
@@ -24,20 +34,7 @@ const CurrentOnARTTxCurrDistributionByPartner = ({ globalFilter }) => {
                 text: ''
             },
             xAxis: {
-                categories: [
-                    'NAIROBI',
-                    'KAJIADO',
-                    'KISUMU',
-                    'MOMBASA',
-                    'MERU',
-                    'EMBU',
-                    'SIAYA',
-                    'NAKURU',
-                    'KIAMBU',
-                    'MACHAKOS',
-                    'MAKUENI',
-                    'ISIOLO'
-                ],
+                categories: partners,
                 crosshair: true
             },
             yAxis: {
@@ -45,6 +42,9 @@ const CurrentOnARTTxCurrDistributionByPartner = ({ globalFilter }) => {
                 title: {
                     text: ''
                 }
+            },
+            legend: {
+                enabled: false,
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -61,12 +61,13 @@ const CurrentOnARTTxCurrDistributionByPartner = ({ globalFilter }) => {
                 }
             },
             series: [{
+                name: 'TX CURR DISTRIBUTION: ',
                 color: "#485969",
-                data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+                data: txCurr
             }]
         });
     }, []);
-    
+
     useEffect(() => {
         loadTxCurrDistributionByPartner();
     }, [loadTxCurrDistributionByPartner]);
