@@ -8,11 +8,11 @@ const CurrentOnARTTxCurrDistributionByCounty = ({ globalFilter }) => {
     const [txCurrDistributionByCounty, setTxCurrDistributionByCounty] = useState({});
 
     const loadTxCurrDistributionByCounty = useCallback(async () => {
-        // let params = null;
+        let params = null;
 
-        // if (globalFilter) {
-        //     params = { ...globalFilter };
-        // }
+        if (globalFilter) {
+             params = { ...globalFilter };
+        }
 
         const counties = [];
         const txCurr = [];

@@ -8,11 +8,11 @@ const CurrentOnARTTxCurrDistributionByPartner = ({ globalFilter }) => {
     const [txCurrDistributionByPartner, setTxCurrDistributionByPartner] = useState({});
 
     const loadTxCurrDistributionByPartner = useCallback(async () => {
-        // let params = null;
+         let params = null;
 
-        // if (globalFilter) {
-        //     params = { ...globalFilter };
-        // }
+         if (globalFilter) {
+             params = { ...globalFilter };
+         }
 
         const partners = [];
         const txCurr = [];
@@ -67,7 +67,7 @@ const CurrentOnARTTxCurrDistributionByPartner = ({ globalFilter }) => {
             }]
         });
     }, []);
-    
+
     useEffect(() => {
         loadTxCurrDistributionByPartner();
     }, [loadTxCurrDistributionByPartner]);
