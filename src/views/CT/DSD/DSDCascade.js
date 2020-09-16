@@ -1,0 +1,61 @@
+import React, { useEffect, useState, useCallback } from 'react';
+import { Card, CardHeader, CardBody } from "reactstrap";
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+import { getAll } from '../../Shared/Api';
+
+const DSDCascade = ({ globalFilter }) => {
+    const [dsdCascade, setDSDCascade] = useState({});
+
+    const loadDSDCascade = useCallback(async () => {
+        let params = null;
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+        const categories = ["TX CURR", "STABLE", "TOTAL ON MMD"];
+        const data = [549, 450, 372];
+        setDSDCascade({
+            chart: { zoomType: 'xy' },
+            title: { useHTML: true, text: ' &nbsp;', align: 'left' },
+            subtitle: { text: ' ', align: 'left' },
+            xAxis: [{ categories: categories, crosshair: true }],
+            yAxis: [
+                {
+                    title: { text: 'Number of Patients', style: { color: Highcharts.getOptions().colors[1] } },
+                    labels: { format: '{value}', style: { color: Highcharts.getOptions().colors[1] } },
+                    min: 0,
+                }
+            ],
+            legend: {
+                floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
+                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+            },
+            series: [
+                { name: 'Number of Patients', data: data, type: 'bar', color: "#485969" },
+            ]
+        });
+    }, [globalFilter]);
+
+    useEffect(() => {
+        loadDSDCascade();
+    }, [loadDSDCascade]);
+
+    return (
+        <div className="row">
+            <div className="col-12">
+                <Card className="trends-card">
+                    <CardHeader className="trends-header">
+                        DSD CASCADE
+                    </CardHeader>
+                    <CardBody className="trends-body">
+                        <div className="col-12">
+                            <HighchartsReact highcharts={Highcharts} options={dsdCascade} />
+                        </div>
+                    </CardBody>
+                </Card>
+            </div>
+        </div>
+    );
+};
+
+export default DSDCascade;

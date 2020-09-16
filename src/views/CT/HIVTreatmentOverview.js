@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import NewOnArt from './NewOnArt/NewOnArt';
 import CurrentOnART from './CurrentOnART/CurrentOnART';
+import DSD from './DSD/DSD';
 
 const HIVTreatmentOverview = () => {
 
@@ -55,6 +56,9 @@ const HIVTreatmentOverview = () => {
                 </TabPane>
                 <TabPane tabId="txCurr">
                     <CurrentOnART />
+                </TabPane>
+                <TabPane tabId="dsd">
+                    <DSD />
                 </TabPane>
             </TabContent>
             <p></p>
