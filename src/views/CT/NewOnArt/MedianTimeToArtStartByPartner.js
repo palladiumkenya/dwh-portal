@@ -10,11 +10,11 @@ const MedianTimeToArtStartByPartner = () => {
     const loadMedianTimeToArtStartByPartner = useCallback(async () => {
         const result = await getAll('care-treatment/medianTimeToArtByPartner');
 
-        let counties = [];
+        let partners = [];
         let medianTimeToArtStartByPartner = [];
 
         for(let i = 0; i < result.length; i++) {
-            counties.push(result[i].county);
+            partners.push(result[i].partner);
             medianTimeToArtStartByPartner.push(parseInt(result[i].time, 10));
         }
 
@@ -22,7 +22,7 @@ const MedianTimeToArtStartByPartner = () => {
             chart: { zoomType: 'xy' },
             title: { useHTML: true, text: ' &nbsp;', align: 'left' },
             subtitle: { text: ' ', align: 'left' },
-            xAxis: [{ categories: counties, crosshair: true, title: { text: 'Counties' } }],
+            xAxis: [{ categories: partners, crosshair: true, title: { text: 'Partners' } }],
             yAxis: [
                 {
                     title: { text: 'Time (Days)', style: { color: Highcharts.getOptions().colors[1] } },
