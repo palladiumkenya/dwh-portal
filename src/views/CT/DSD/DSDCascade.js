@@ -12,8 +12,17 @@ const DSDCascade = ({ globalFilter }) => {
         if (globalFilter) {
             params = { ...globalFilter };
         }
+        let txCurr = 0;
+        let stable = 0;
+        let mmd = 0;
+        const result = await getAll('care-treatment/dsdCascade', params);
+        if(result) {
+            txCurr = result.txCurr;
+            stable = result.stable;
+            mmd = result.mmd;
+        }
         const categories = ["TX CURR", "STABLE", "TOTAL ON MMD"];
-        const data = [549, 450, 372];
+        const data = [txCurr, stable, mmd];
         setDSDCascade({
             chart: { zoomType: 'xy' },
             title: { useHTML: true, text: ' &nbsp;', align: 'left' },
