@@ -25,7 +25,7 @@ const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
             params = { ...globalFilter };
         }
 
-        const ageGroups = [];
+        let ageGroups = [];
         let txNewMale = [];
         let txNewFemale = [];
 
@@ -36,8 +36,11 @@ const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
                 txNewMale.push(parseInt(-txCurrResult[i].txCurr, 10));
             } else if (txCurrResult[i].Gender.toLowerCase() === "F".toLowerCase() || txCurrResult[i].Gender.toLowerCase() === "Female".toLowerCase()) {
                 txNewFemale.push(parseInt(txCurrResult[i].txCurr, 10));
+                ageGroups.push(txCurrResult[i].ageGroup);
             }
         }
+        ageGroups = [...new Set(ageGroups)];
+
 
         const max_male = Math.max(...txNewMale);
         const max_female = Math.max(...txNewFemale);

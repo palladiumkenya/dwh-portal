@@ -64,11 +64,31 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
     }, [globalFilter]);
 
     const loadTrendsInDSD = useCallback(async () => {
-        // let params = null;
+        let params = null;
 
-        // if (globalFilter) {
-        //     params = { ...globalFilter };
-        // }
+        if (globalFilter) {
+             params = { ...globalFilter };
+        }
+
+
+        let appointmentCategory = ["< 1 Month", "> 4 Months", "1-2 Months", "3-4 Months"];
+        const seriesData = [];
+        const result = await getAll('care-treatment/getDsdAppointmentCategorizationByStabilityStatus', params);
+        for (let i = 0; i < appointmentCategory.length; i++) {
+            seriesData.push(
+                {
+                    name: appointmentCategory[i],
+                    data: []
+                }
+            );
+        }
+
+        for (let j = 0; j < seriesData.length; j++) {
+            for (let i = 0; i < result.length; i++) {
+                if (seriesData[j].name == result[i].AppointmentsCategory)
+                    seriesData[j].data.push(result[i].patients);
+            }
+        }
 
         setTrendsInDSD({
             chart: {
@@ -78,7 +98,7 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
                 text: ''
             },
             xAxis: {
-                categories: ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE']
+                categories: ["STABLE(YES)", "STABLE(NO)"]
             },
             yAxis: {
                 min: 0,
@@ -120,16 +140,7 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
                     }
                 }
             },
-            series: [{
-                name: 'John',
-                data: [5, 3, 4, 7, 2]
-            }, {
-                name: 'Jane',
-                data: [2, 2, 3, 2, 1]
-            }, {
-                name: 'Joe',
-                data: [3, 4, 4, 2, 5]
-            }]
+            series: seriesData
         });
     }, []);
 
@@ -155,7 +166,7 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TRENDS IN DSD (N =495)
+                        APPOINTMENT DURATION BY STABILITY IN ACTIVE PATIENTS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
