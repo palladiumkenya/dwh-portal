@@ -5,6 +5,8 @@ import NewOnArtFooter from './NewOnArtFooter';
 import NewOnArtTrends from './NewOnArtTrends';
 import NewOnArtByAgeSex from './NewOnArtByAgeSex';
 import MedianTimeToArtStart from './MedianTimeToArtStart';
+import MedianTimeToArtStartByCounty from './MedianTimeToArtStartByCounty';
+import MedianTimeToArtStartByPartner from './MedianTimeToArtStartByPartner';
 import TimeFromDiagnosisToStart from './TimeFromDiagnosisToStart';
 import FacilitiesNewOnArtList from './FacilitiesNewOnArtList';
 
@@ -31,7 +33,11 @@ const NewOnArt = () => {
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
             <p></p><NewOnArtByAgeSex globalFilter={globalFilter}/>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><MedianTimeToArtStart globalFilter={globalFilter}/>
+            <p></p><MedianTimeToArtStart/>
+            <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
+            <p></p><MedianTimeToArtStartByCounty/>
+            <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
+            <p></p><MedianTimeToArtStartByPartner/>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
             <p></p><TimeFromDiagnosisToStart globalFilter={globalFilter}/>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>

@@ -4,25 +4,25 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const MedianTimeToArtStart = () => {
-    const [medianTimeToArtStart, setMedianTimeToArtStart] = useState({});
+const MedianTimeToArtStartByPartner = () => {
+    const [medianTimeToArtStartByPartner, setMedianTimeToArtStartByPartner] = useState({});
 
-    const loadMedianTimeToArtStart = useCallback(async () => {
-        const result = await getAll('care-treatment/medianTimeToArtByYear');
+    const loadMedianTimeToArtStartByPartner = useCallback(async () => {
+        const result = await getAll('care-treatment/medianTimeToArtByPartner');
 
-        let months = [];
-        let medianTimeToArtStart = [];
+        let partners = [];
+        let medianTimeToArtStartByPartner = [];
 
         for(let i = 0; i < result.length; i++) {
-            months.push(result[i].year);
-            medianTimeToArtStart.push(parseInt(result[i].time, 10));
+            partners.push(result[i].partner);
+            medianTimeToArtStartByPartner.push(parseInt(result[i].time, 10));
         }
 
-        setMedianTimeToArtStart({
+        setMedianTimeToArtStartByPartner({
             chart: { zoomType: 'xy' },
             title: { useHTML: true, text: ' &nbsp;', align: 'left' },
             subtitle: { text: ' ', align: 'left' },
-            xAxis: [{ categories: months, crosshair: true, title: { text: 'Year of Start' } }],
+            xAxis: [{ categories: partners, crosshair: true, title: { text: 'Partners' } }],
             yAxis: [
                 {
                     title: { text: 'Time (Days)', style: { color: Highcharts.getOptions().colors[1] } },
@@ -35,25 +35,25 @@ const MedianTimeToArtStart = () => {
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'Time (Days)', data: medianTimeToArtStart, type: 'spline', color: "#E06F07" },
+                { name: 'Time (Days)', data: medianTimeToArtStartByPartner, type: 'bar', color: "#485969" },
             ]
         });
     }, []);
 
     useEffect(() => {
-        loadMedianTimeToArtStart();
-    }, [loadMedianTimeToArtStart]);
+        loadMedianTimeToArtStartByPartner();
+    }, [loadMedianTimeToArtStartByPartner]);
 
     return (
         <div className="row">
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        MEDIAN TIME TO ART START BY YEAR OF ART START
+                        MEDIAN TIME TO ART START BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={medianTimeToArtStart} />
+                            <HighchartsReact highcharts={Highcharts} options={medianTimeToArtStartByPartner} />
                         </div>
                     </CardBody>
                 </Card>
@@ -62,4 +62,4 @@ const MedianTimeToArtStart = () => {
     );
 };
 
-export default MedianTimeToArtStart;
+export default MedianTimeToArtStartByPartner;
