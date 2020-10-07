@@ -12,8 +12,21 @@ const DistributionUnstable = ({ globalFilter }) => {
         if (globalFilter) {
             params = { ...globalFilter };
         }
-        const categories = ["HIGH VL", "ART<12 MONTHS", "AGE <20 YEARS", "POOR ADHERANCE", "BMI <18.5", "OI"];
-        const data = [60, 45, 17, 73, 20, 75];
+        let highVl = 0;
+        let onArtLessThan12Months = 0;
+        let ageLessThan20Years = 0;
+        let poorAdherence = 0;
+        let bmiLessThan18 = 0;
+        const result = await getAll('care-treatment/dsdUnstable', params);
+        if(result) {
+            highVl = result.highVl;
+            onArtLessThan12Months = result.onArtLessThan12Months;
+            ageLessThan20Years = result.ageLessThan20Years;
+            poorAdherence = result.poorAdherence;
+            bmiLessThan18 = result.bmiLessThan18;
+        }
+        const categories = ["HIGH VL", "ART<12 MONTHS", "AGE <20 YEARS", "POOR ADHERANCE", "BMI <18.5"];
+        const data = [highVl, onArtLessThan12Months, ageLessThan20Years, poorAdherence, bmiLessThan18];
         setDistributionUnstable({
             chart: { zoomType: 'xy' },
             title: { useHTML: true, text: ' &nbsp;', align: 'left' },
