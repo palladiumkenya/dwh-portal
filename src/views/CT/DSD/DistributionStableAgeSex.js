@@ -12,42 +12,20 @@ const DistributionStableAgeSex = ({ globalFilter }) => {
         if (globalFilter) {
             params = { ...globalFilter };
         }
-        const result3 = await getAll('care-treatment/txNewByAgeSex', params);
-        const result = [
-            {"AgeGroup": "20 - 24 YRS", "Gender": "M", "stable": 40 },
-            {"AgeGroup": "20 - 24 YRS", "Gender": "F", "stable": 50 },
-            {"AgeGroup": "25 - 34 YRS", "Gender": "M", "stable": 55 },
-            {"AgeGroup": "25 - 34 YRS", "Gender": "F", "stable": 65 },
-            {"AgeGroup": "35 - 44 YRS", "Gender": "M", "stable": 67 },
-            {"AgeGroup": "35 - 44 YRS", "Gender": "F", "stable": 79 },
-            {"AgeGroup": "45 - 54 YRS", "Gender": "M", "stable": 67 },
-            {"AgeGroup": "45 - 54 YRS", "Gender": "F", "stable": 79 },
-            {"AgeGroup": "55 - 65 YRS", "Gender": "M", "stable": 55 },
-            {"AgeGroup": "55 - 65 YRS", "Gender": "F", "stable": 63 },
-            {"AgeGroup": "65+ YRS", "Gender": "M", "stable": 43 },
-            {"AgeGroup": "65+ YRS", "Gender": "F", "stable": 48 },
-        ];
-        const ageGroups = ["20 - 24 YRS", "25 - 34 YRS", "35 - 44 YRS", "45 - 54 YRS", "55 - 65 YRS", "65+ YRS"];
-        const ageGroupsMale = [];
-        const ageGroupsFemale = [];
+        const result = await getAll('care-treatment/dsdStabilityStatusByAgeSex', params);
+        const ageGroups = ["Under 1", "1 to 4", "5 to 9", "10 to 14", "15 to 19", "20 to 24", "25 to 29", "30 to 34", "35 to 39", "40 to 44", "45 to 49", "50 to 54", "55 to 59", "60 to 64", "65+"];
+        const ageGroupsMale = ageGroups;
+        const ageGroupsFemale = ageGroups;
         let stableMale = [];
         let stableFemale = [];
 
-        // for(let i = 0; i < result.length; i++) {
-        //     if(ageGroups.indexOf(result[i].AgeGroup) !== -1){
-        //         continue;
-        //     } else{
-        //         ageGroups.push(result[i].AgeGroup);
-        //     }
-        // }
-
         for(let i = 0; i < result.length; i++) {
-            let index = ageGroups.indexOf(result[i].AgeGroup);
-            if (result[i].Gender === 'Male' || result[i].Gender === 'M') {
-                ageGroupsMale.splice(index, 0, result[i].AgeGroup);
+            if (result[i].gender === 'Male') {
+                let index = ageGroupsMale.indexOf(result[i].ageGroup);
                 stableMale.splice(index, 0, parseInt(result[i].stable) * -1);
-            } else {
-                ageGroupsFemale.splice(index, 0, result[i].AgeGroup);
+            }
+            if (result[i].gender === 'Female') {
+                let index = ageGroupsFemale.indexOf(result[i].ageGroup);
                 stableFemale.splice(index, 0, parseInt(result[i].stable));
             }
         }
@@ -75,7 +53,7 @@ const DistributionStableAgeSex = ({ globalFilter }) => {
                     stacking: 'normal'
                 },
                 bar: {
-                    pointWidth: 40,
+                    pointWidth: 18,
                 }
             },
             tooltip: {
