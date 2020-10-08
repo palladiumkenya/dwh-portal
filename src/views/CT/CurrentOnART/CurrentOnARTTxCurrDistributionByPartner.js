@@ -66,7 +66,7 @@ const CurrentOnARTTxCurrDistributionByPartner = ({ globalFilter }) => {
                 data: txCurr
             }]
         });
-    }, []);
+    }, [globalFilter]);
 
     useEffect(() => {
         loadTxCurrDistributionByPartner();

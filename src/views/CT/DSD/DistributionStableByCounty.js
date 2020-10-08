@@ -17,9 +17,9 @@ const DistributionStableByCounty = ({ globalFilter }) => {
         const counties = [];
         const stable = [];
 
-        const result = await getAll('care-treatment/txCurrDistributionByCounty', params);
+        const result = await getAll('care-treatment/dsdStabilityStatusByCounty', params);
         for(let i = 0; i < result.length; i++) {
-            counties.push(result[i].County);
+            counties.push(result[i].county);
             stable.push(result[i].stable);
         }
 
@@ -35,12 +35,15 @@ const DistributionStableByCounty = ({ globalFilter }) => {
             },
             xAxis: {
                 categories: counties,
-                crosshair: true
+                crosshair: true,
+                title: {
+                    text: 'County'
+                }
             },
             yAxis: {
                 min: 0,
                 title: {
-                    text: ''
+                    text: 'Number of Patients'
                 }
             },
             legend: {
@@ -61,12 +64,12 @@ const DistributionStableByCounty = ({ globalFilter }) => {
                 }
             },
             series: [{
-                name: 'STABLE PATIENTS DISTRIBUTION: ',
+                name: 'Number of Patients',
                 color: "#485969",
                 data: stable
             }]
         });
-    }, []);
+    }, [globalFilter]);
 
     useEffect(() => {
         loadTxCurrDistributionByCounty();

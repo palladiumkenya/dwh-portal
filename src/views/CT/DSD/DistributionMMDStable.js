@@ -12,8 +12,22 @@ const DistributionMMDStable = ({ globalFilter }) => {
         if (globalFilter) {
             params = { ...globalFilter };
         }
-        const categories = ["STANDARD CARE", "FAST TRACK", "COMMUNITY ART DISTRIBUTION HCW LED", "COMMUNITY ART DISTRIBUTION PEER LED", "FACILITY ART DISTRIBUTION GROUP"];
-        const data = [40, 85, 63, 100, 60];
+        const categories = [
+            "Standard Care",
+            "Fast Track",
+            "Community ART Distribution HCW Led",
+            "Community ART Distribution peer led",
+            "Facility ART distribution Group"
+        ];
+        let data = [0, 0, 0, 0, 0];
+        const result = await getAll('care-treatment/dsdMmdStable', params);
+        for(let i = 0; i < result.length; i++) {
+            for(let j = 0; j < categories.length; j++) {
+                if (result[i].differentiatedCare === categories[j]) {
+                    data[j] = data[j] + parseInt(result[i].mmdModels);
+                }
+            }
+        }
         setDistributionMMDStable({
             chart: { zoomType: 'xy' },
             title: { useHTML: true, text: ' &nbsp;', align: 'left' },
@@ -21,7 +35,7 @@ const DistributionMMDStable = ({ globalFilter }) => {
             xAxis: [{ categories: categories, crosshair: true }],
             yAxis: [
                 {
-                    title: { text: 'Percentage of Patients', style: { color: Highcharts.getOptions().colors[1] } },
+                    title: { text: 'Number of Patients', style: { color: Highcharts.getOptions().colors[1] } },
                     labels: { format: '{value}', style: { color: Highcharts.getOptions().colors[1] } },
                     min: 0,
                 }
@@ -31,7 +45,7 @@ const DistributionMMDStable = ({ globalFilter }) => {
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'Percentage of Patients', data: data, type: 'bar', color: "#485969" },
+                { name: 'Number of Patients', data: data, type: 'bar', color: "#485969" },
             ]
         });
     }, [globalFilter]);

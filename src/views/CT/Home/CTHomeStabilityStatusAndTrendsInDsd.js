@@ -85,7 +85,7 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
 
         for (let j = 0; j < seriesData.length; j++) {
             for (let i = 0; i < result.length; i++) {
-                if (seriesData[j].name == result[i].AppointmentsCategory)
+                if (seriesData[j].name === result[i].AppointmentsCategory)
                     seriesData[j].data.push(result[i].patients);
             }
         }
@@ -142,7 +142,7 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
             },
             series: seriesData
         });
-    }, []);
+    }, [globalFilter]);
 
     useEffect(() => {
         loadStabilityStatus();
