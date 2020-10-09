@@ -4,17 +4,17 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const AppointmentDurationStableByCounty = ({ globalFilter }) => {
-    const [appointmentDurationStableByCounty, setAppointmentDurationStableByCounty] = useState({});
+const TreatmentOutcomesByCounty = ({ globalFilter }) => {
+    const [treatmentOutcomesByCounty, setTreatmentOutcomesByCounty] = useState({});
 
-    const loadAppointmentDurationStableByCounty = useCallback(async () => {
+    const loadTreatmentOutcomesByCounty = useCallback(async () => {
         let params = null;
         if (globalFilter) {
             params = { ...globalFilter };
         }
-        const appointmentCategories = ['< 1 Month', '1-2 Months', '3-4 Months', '> 4 Months'];
+        const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped'];
         const countyCategories = [];
-        const result = await getAll('care-treatment/dsdAppointmentDurationByCounty', params);
+        const result = await getAll('care-treatment/treatmentOutcomesByCounty', params);
         let data = [];
         for(let i = 0; i < result.length; i++) {
             if(countyCategories.indexOf(result[i].county) === -1){
@@ -22,21 +22,21 @@ const AppointmentDurationStableByCounty = ({ globalFilter }) => {
             }
         }
         // seed all values sp that missing values default to 0
-        for(let i = 0; i < appointmentCategories.length; i++) {
+        for(let i = 0; i < treatmentOutcomesCategories.length; i++) {
             data[i] = [];
             for(let j = 0; j < countyCategories.length; j++) {
                 data[i][j] = 0;
             }
         }
         for(let i = 0; i < result.length; i++) {
-            let appointmentIndex = appointmentCategories.indexOf(result[i].AppointmentsCategory);
-            let ageIndex = countyCategories.indexOf(result[i].county);
-            if(appointmentIndex === -1 || ageIndex === -1 ) { // unsupported
+            let appointmentIndex = treatmentOutcomesCategories.indexOf(result[i].artOutcome);
+            let countyIndex = countyCategories.indexOf(result[i].county);
+            if(appointmentIndex === -1 || countyIndex === -1 ) { // unsupported
                 continue;
             }
-            data[appointmentIndex][ageIndex] = data[appointmentIndex][ageIndex] + parseInt(result[i].patients);
+            data[appointmentIndex][countyIndex] = data[appointmentIndex][countyIndex] + parseInt(result[i].totalOutcomes);
         }
-        setAppointmentDurationStableByCounty({
+        setTreatmentOutcomesByCounty({
             chart: { type: 'column' },
             title: { useHTML: true, text: '&nbsp;' },
             subtitle: { text: '' },
@@ -60,28 +60,28 @@ const AppointmentDurationStableByCounty = ({ globalFilter }) => {
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: '< 1 MONTH', data: data[0], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '1-2 MONTHS', data: data[1], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '3-4 MONTHS', data: data[2], type: 'column', color: "#60A6E5", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '> 4 MONTHS', data: data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'ACTIVE', data: data[0], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'DEAD', data: data[1], type: 'column', color: "#60A6E5", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'LTFU', data: data[2], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'STOPPED', data: data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [globalFilter]);
 
     useEffect(() => {
-        loadAppointmentDurationStableByCounty();
-    }, [loadAppointmentDurationStableByCounty]);
+        loadTreatmentOutcomesByCounty();
+    }, [loadTreatmentOutcomesByCounty]);
 
     return (
         <div className="row">
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        APPOINTMENT DURATION IN ACTIVE STABLE PATIENTS BY COUNTY (N =495)
+                        ART TREATMENT OUTCOMES BY COUNTY (N =495)
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={appointmentDurationStableByCounty} />
+                            <HighchartsReact highcharts={Highcharts} options={treatmentOutcomesByCounty} />
                         </div>
                     </CardBody>
                 </Card>
@@ -90,4 +90,4 @@ const AppointmentDurationStableByCounty = ({ globalFilter }) => {
     );
 };
 
-export default AppointmentDurationStableByCounty;
+export default TreatmentOutcomesByCounty;

@@ -4,17 +4,17 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const AppointmentDurationStableByPartner = ({ globalFilter }) => {
-    const [appointmentDurationStableByPartner, setAppointmentDurationStableByPartner] = useState({});
+const TreatmentOutcomesByPartner = ({ globalFilter }) => {
+    const [treatmentOutcomesByPartner, setTreatmentOutcomesByPartner] = useState({});
 
-    const loadAppointmentDurationStableByPartner = useCallback(async () => {
+    const loadTreatmentOutcomesByPartner = useCallback(async () => {
         let params = null;
         if (globalFilter) {
             params = { ...globalFilter };
         }
-        const appointmentCategories = ['< 1 Month', '1-2 Months', '3-4 Months', '> 4 Months'];
+        const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped'];
         const partnerCategories = [];
-        const result = await getAll('care-treatment/dsdAppointmentDurationByPartner', params);
+        const result = await getAll('care-treatment/treatmentOutcomesByPartner', params);
         let data = [];
         for(let i = 0; i < result.length; i++) {
             if(partnerCategories.indexOf(result[i].partner) === -1){
@@ -22,21 +22,21 @@ const AppointmentDurationStableByPartner = ({ globalFilter }) => {
             }
         }
         // seed all values sp that missing values default to 0
-        for(let i = 0; i < appointmentCategories.length; i++) {
+        for(let i = 0; i < treatmentOutcomesCategories.length; i++) {
             data[i] = [];
             for(let j = 0; j < partnerCategories.length; j++) {
                 data[i][j] = 0;
             }
         }
         for(let i = 0; i < result.length; i++) {
-            let appointmentIndex = appointmentCategories.indexOf(result[i].AppointmentsCategory);
-            let ageIndex = partnerCategories.indexOf(result[i].partner);
-            if(appointmentIndex === -1 || ageIndex === -1 ) { // unsupported
+            let appointmentIndex = treatmentOutcomesCategories.indexOf(result[i].artOutcome);
+            let partnerIndex = partnerCategories.indexOf(result[i].partner);
+            if(appointmentIndex === -1 || partnerIndex === -1 ) { // unsupported
                 continue;
             }
-            data[appointmentIndex][ageIndex] = data[appointmentIndex][ageIndex] + parseInt(result[i].patients);
+            data[appointmentIndex][partnerIndex] = data[appointmentIndex][partnerIndex] + parseInt(result[i].totalOutcomes);
         }
-        setAppointmentDurationStableByPartner({
+        setTreatmentOutcomesByPartner({
             chart: { type: 'column' },
             title: { useHTML: true, text: '&nbsp;' },
             subtitle: { text: '' },
@@ -60,28 +60,28 @@ const AppointmentDurationStableByPartner = ({ globalFilter }) => {
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: '< 1 MONTH', data: data[0], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '1-2 MONTHS', data: data[1], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '3-4 MONTHS', data: data[2], type: 'column', color: "#60A6E5", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '> 4 MONTHS', data: data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'ACTIVE', data: data[0], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'DEAD', data: data[1], type: 'column', color: "#60A6E5", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'LTFU', data: data[2], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'STOPPED', data: data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [globalFilter]);
 
     useEffect(() => {
-        loadAppointmentDurationStableByPartner();
-    }, [loadAppointmentDurationStableByPartner]);
+        loadTreatmentOutcomesByPartner();
+    }, [loadTreatmentOutcomesByPartner]);
 
     return (
         <div className="row">
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        APPOINTMENT DURATION IN ACTIVE STABLE PATIENTS BY PARTNER (N =495)
+                        ART TREATMENT OUTCOMES BY PARTNER (N =495)
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={appointmentDurationStableByPartner} />
+                            <HighchartsReact highcharts={Highcharts} options={treatmentOutcomesByPartner} />
                         </div>
                     </CardBody>
                 </Card>
@@ -90,4 +90,4 @@ const AppointmentDurationStableByPartner = ({ globalFilter }) => {
     );
 };
 
-export default AppointmentDurationStableByPartner;
+export default TreatmentOutcomesByPartner;

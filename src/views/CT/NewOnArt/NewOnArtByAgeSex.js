@@ -14,26 +14,18 @@ const NewOnArtByAgeSex = ({ globalFilter }) => {
         }
         const result = await getAll('care-treatment/txNewByAgeSex', params);
         const ageGroups = ["Under 1", "1 to 4", "5 to 9", "10 to 14", "15 to 19", "20 to 24", "25 to 29", "30 to 34", "35 to 39", "40 to 44", "45 to 49", "50 to 54", "55 to 59", "60 to 64", "65+"];
-        const ageGroupsMale = [];
-        const ageGroupsFemale = [];
+        const ageGroupsMale = ageGroups;
+        const ageGroupsFemale = ageGroups;
         let txNewMale = [];
         let txNewFemale = [];
 
         for(let i = 0; i < result.length; i++) {
-            if(ageGroups.indexOf(result[i].AgeGroup) !== -1){
-                continue;
-            } else{
-                ageGroups.push(result[i].AgeGroup);
-            }
-        }
-
-        for(let i = 0; i < result.length; i++) {
-            let index = ageGroups.indexOf(result[i].AgeGroup);
-            if (result[i].Gender === 'Male' || result[i].Gender === 'M') {
-                ageGroupsMale.splice(index, 0, result[i].AgeGroup);
+            if (result[i].Gender === 'Male') {
+                let index = ageGroupsMale.indexOf(result[i].AgeGroup);
                 txNewMale.splice(index, 0, parseInt(result[i].txNew) * -1);
-            } else {
-                ageGroupsFemale.splice(index, 0, result[i].AgeGroup);
+            }
+            if (result[i].Gender === 'Female') {
+                let index = ageGroupsFemale.indexOf(result[i].AgeGroup);
                 txNewFemale.splice(index, 0, parseInt(result[i].txNew));
             }
         }
@@ -43,8 +35,8 @@ const NewOnArtByAgeSex = ({ globalFilter }) => {
             title: { useHTML: true, text: ' &nbsp;', align: 'left' },
             subtitle: { text: ' ', align: 'left' },
             xAxis: [
-                { categories: ageGroups, title: { text: '' }, reversed: false },
-                { categories: ageGroups, title: { text: '' }, linkedTo: 0, reversed: false, opposite: true }
+                { categories: ageGroupsMale, title: { text: '' }, reversed: false },
+                { categories: ageGroupsFemale, title: { text: '' }, linkedTo: 0, reversed: false, opposite: true }
             ],
             yAxis: [
                 {

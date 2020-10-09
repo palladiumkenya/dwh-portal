@@ -4,34 +4,34 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const AppointmentDurationBySex = ({ globalFilter }) => {
-    const [appointmentDurationBySex, setAppointmentDurationBySex] = useState({});
+const TreatmentOutcomesBySex = ({ globalFilter }) => {
+    const [treatmentOutcomesBySex, setTreatmentOutcomesBySex] = useState({});
 
-    const loadAppointmentDurationBySex = useCallback(async () => {
+    const loadTreatmentOutcomesBySex = useCallback(async () => {
         let params = null;
         if (globalFilter) {
             params = { ...globalFilter };
         }
-        const appointmentCategories = ['< 1 Month', '1-2 Months', '3-4 Months', '> 4 Months'];
+        const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped'];
         const sexCategories = ['Male', 'Female'];
-        const result = await getAll('care-treatment/dsdAppointmentDurationBySex', params);
+        const result = await getAll('care-treatment/treatmentOutcomesBySex', params);
         let data = [];
         // seed all values sp that missing values default to 0
-        for(let i = 0; i < appointmentCategories.length; i++) {
+        for(let i = 0; i < treatmentOutcomesCategories.length; i++) {
             data[i] = [];
             for(let j = 0; j < sexCategories.length; j++) {
                 data[i][j] = 0;
             }
         }
         for(let i = 0; i < result.length; i++) {
-            let appointmentIndex = appointmentCategories.indexOf(result[i].AppointmentsCategory);
-            let sexIndex = sexCategories.indexOf(result[i].Gender);
-            if(appointmentIndex === -1 || sexIndex === -1 ) { // unsupported
+            let treatmentOutcomesIndex = treatmentOutcomesCategories.indexOf(result[i].artOutcome);
+            let sexIndex = sexCategories.indexOf(result[i].gender);
+            if(treatmentOutcomesIndex === -1 || sexIndex === -1 ) { // unsupported
                 continue;
             }
-            data[appointmentIndex][sexIndex] = data[appointmentIndex][sexIndex] + parseInt(result[i].patients);
+            data[treatmentOutcomesIndex][sexIndex] = data[treatmentOutcomesIndex][sexIndex] + parseInt(result[i].totalOutcomes);
         }
-        setAppointmentDurationBySex({
+        setTreatmentOutcomesBySex({
             chart: { type: 'column' },
             title: { useHTML: true, text: '&nbsp;' },
             subtitle: { text: '' },
@@ -55,28 +55,28 @@ const AppointmentDurationBySex = ({ globalFilter }) => {
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: '< 1 MONTH', data: data[0], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '1-2 MONTHS', data: data[1], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '3-4 MONTHS', data: data[2], type: 'column', color: "#60A6E5", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '> 4 MONTHS', data: data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'ACTIVE', data: data[0], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'DEAD', data: data[1], type: 'column', color: "#60A6E5", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'LTFU', data: data[2], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'STOPPED', data: data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [globalFilter]);
 
     useEffect(() => {
-        loadAppointmentDurationBySex();
-    }, [loadAppointmentDurationBySex]);
+        loadTreatmentOutcomesBySex();
+    }, [loadTreatmentOutcomesBySex]);
 
     return (
         <div className="row">
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        APPOINTMENT DURATION PRACTICES BY SEX AMONG STABLE PATIENTS (N =495)
+                        ART TREATMENT OUTCOMES BY SEX (N =495)
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={appointmentDurationBySex} />
+                            <HighchartsReact highcharts={Highcharts} options={treatmentOutcomesBySex} />
                         </div>
                     </CardBody>
                 </Card>
@@ -85,4 +85,4 @@ const AppointmentDurationBySex = ({ globalFilter }) => {
     );
 };
 
-export default AppointmentDurationBySex;
+export default TreatmentOutcomesBySex;

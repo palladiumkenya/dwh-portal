@@ -66,7 +66,7 @@ const CurrentOnARTTxCurrDistributionByCounty = ({ globalFilter }) => {
                 data: txCurr
             }]
         });
-    }, []);
+    }, [globalFilter]);
 
     useEffect(() => {
         loadTxCurrDistributionByCounty();

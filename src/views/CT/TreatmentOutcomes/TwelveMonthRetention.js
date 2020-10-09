@@ -4,35 +4,42 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const DistributionMMDStable = ({ globalFilter }) => {
-    const [distributionMMDStable, setDistributionMMDStable] = useState({});
+const TwelveMonthRetention = ({ globalFilter }) => {
+    const [twelveMonthRetention, setTwelveMonthRetention] = useState({});
 
-    const loadDistributionMMDStable = useCallback(async () => {
+    const loadTwelveMonthRetention = useCallback(async () => {
         let params = null;
         if (globalFilter) {
             params = { ...globalFilter };
         }
-        const categories = [
-            "Standard Care",
-            "Fast Track",
-            "Community ART Distribution HCW Led",
-            "Community ART Distribution peer led",
-            "Facility ART distribution Group"
-        ];
-        let data = [0, 0, 0, 0, 0];
-        const result = await getAll('care-treatment/dsdMmdStable', params);
-        for(let i = 0; i < result.length; i++) {
-            for(let j = 0; j < categories.length; j++) {
-                if (result[i].differentiatedCare === categories[j]) {
-                    data[j] = data[j] + parseInt(result[i].mmdModels);
-                }
+        const treatmentOutcomesCategories = ['Active'];
+        const yearCategories = [2011,2012,2013,2014,2015,2016,2017,2018,2019,2020];
+        const result = await getAll('care-treatment/treatmentOutcomesByYear', params);
+        let data = [];
+        // seed all values sp that missing values default to 0
+        for(let i = 0; i < treatmentOutcomesCategories.length; i++) {
+            data[i] = [];
+            for(let j = 0; j < yearCategories.length; j++) {
+                data[i][j] = 0;
             }
         }
-        setDistributionMMDStable({
+        for(let i = 0; i < result.length; i++) {
+            let treatmentOutcomesIndex = treatmentOutcomesCategories.indexOf(result[i].artOutcome);
+            let yearIndex = yearCategories.indexOf(result[i].year);
+            if(treatmentOutcomesIndex === -1 || yearIndex === -1 ) { // unsupported
+                continue;
+            }
+            data[treatmentOutcomesIndex][yearIndex] = data[treatmentOutcomesIndex][yearIndex] + parseInt(result[i].totalOutcomes);
+        }
+        setTwelveMonthRetention({
             chart: { zoomType: 'xy' },
             title: { useHTML: true, text: ' &nbsp;', align: 'left' },
             subtitle: { text: ' ', align: 'left' },
-            xAxis: [{ categories: categories, crosshair: true }],
+            xAxis: [{
+                categories: yearCategories,
+                crosshair: true,
+                title: { text: 'Year of start from 2011' }
+            }],
             yAxis: [
                 {
                     title: { text: 'Number of Patients', style: { color: Highcharts.getOptions().colors[1] } },
@@ -45,25 +52,25 @@ const DistributionMMDStable = ({ globalFilter }) => {
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'Number of Patients', data: data, type: 'bar', color: "#485969" },
+                { name: 'Number of Patients', data: data[0], type: 'bar', color: "#485969" },
             ]
         });
     }, [globalFilter]);
 
     useEffect(() => {
-        loadDistributionMMDStable();
-    }, [loadDistributionMMDStable]);
+        loadTwelveMonthRetention();
+    }, [loadTwelveMonthRetention]);
 
     return (
         <div className="row">
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        DISTRIBUTION OF MMD MODELS AMONG STABLE TX CURR PATIENTS (N =495)
+                        12 MONTH RETENTION BY YEAR OF ART START (N =495)
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={distributionMMDStable} />
+                            <HighchartsReact highcharts={Highcharts} options={twelveMonthRetention} />
                         </div>
                     </CardBody>
                 </Card>
@@ -72,4 +79,4 @@ const DistributionMMDStable = ({ globalFilter }) => {
     );
 };
 
-export default DistributionMMDStable;
+export default TwelveMonthRetention;

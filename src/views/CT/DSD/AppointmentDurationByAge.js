@@ -12,76 +12,69 @@ const AppointmentDurationByAge = ({ globalFilter }) => {
         if (globalFilter) {
             params = { ...globalFilter };
         }
-        const periodGroups = ["20 - 24 YRS", "25 - 34 YRS", "35 - 44 YRS", "45 - 54 YRS", "55 - 65 YRS", "65+ YRS"];
-        const periodGroups2 = [];
-        let firstPeriod = [];
-        let firstPeriodPercent = [];
-        let secondPeriod = [];
-        let secondPeriodPercent = [];
-        let thirdPeriod = [];
-        let thirdPeriodPercent = [];
-        let fourthPeriod = [];
-        let fourthPeriodPercent = [];
-
-        const result = await getAll('care-treatment/timeToArt', params);
-
-        result.forEach(function (res) {
-            if(periodGroups2.indexOf(res.year) === -1){
-                periodGroups2.push(res.year);
+        const appointmentCategories = ['< 1 Month', '1-2 Months', '3-4 Months', '> 4 Months'];
+        const ageCategories = [
+            'Under 1',
+            '1 to 4',
+            '5 to 9',
+            '10 to 14',
+            '15 to 19',
+            '20 to 24',
+            '25 to 29',
+            '30 to 34',
+            '35 to 39',
+            '40 to 44',
+            '45 to 49',
+            '50 to 54',
+            '55 to 59',
+            '60 to 64',
+            '65+'
+        ];
+        const result = await getAll('care-treatment/dsdAppointmentDurationByAge', params);
+        let data = [];
+        // seed all values sp that missing values default to 0
+        for(let i = 0; i < appointmentCategories.length; i++) {
+            data[i] = [];
+            for(let j = 0; j < ageCategories.length; j++) {
+                data[i][j] = 0;
             }
-        });
-
-        result.forEach(function (res) {
-            let index = periodGroups2.indexOf(res.year);
-            if (typeof periodGroups[index] != undefined) {
-            if (res.period === 'Same Day') {
-                firstPeriod.splice(index, 0, parseInt(res.txNew));
-            } else if (res.period === '1 to 7 Days') {
-                secondPeriod.splice(index, 0, parseInt(res.txNew));
-            } else if (res.period === '8 to 14 Days') {
-                thirdPeriod.splice(index, 0, parseInt(res.txNew));
-            } else if (res.period === '> 14 Days') {
-                fourthPeriod.splice(index, 0, parseInt(res.txNew));
+        }
+        for(let i = 0; i < result.length; i++) {
+            let appointmentIndex = appointmentCategories.indexOf(result[i].AppointmentsCategory);
+            let ageIndex = ageCategories.indexOf(result[i].AgeGroup);
+            if(appointmentIndex === -1 || ageIndex === -1 ) { // unsupported
+                continue;
             }
-            }
-        });
-
-        periodGroups.forEach(function (periodGroup, i) {
-            let total = 0;
-            total = total + firstPeriod[i];
-            total = total + secondPeriod[i];
-            total = total + thirdPeriod[i];
-            total = total + fourthPeriod[i];
-            firstPeriodPercent.splice(i, 0, Number(parseFloat((firstPeriod[i]/total)*100).toFixed(1)));
-            secondPeriodPercent.splice(i, 0, Number(parseFloat((secondPeriod[i]/total)*100).toFixed(1)));
-            thirdPeriodPercent.splice(i, 0, Number(parseFloat((thirdPeriod[i]/total)*100).toFixed(1)));
-            fourthPeriodPercent.splice(i, 0, Number(parseFloat((fourthPeriod[i]/total)*100).toFixed(1)));
-        });
-
+            data[appointmentIndex][ageIndex] = data[appointmentIndex][ageIndex] + parseInt(result[i].patients);
+        }
         setAppointmentDurationByAge({
-            chart: { zoomType: 'xy' },
-            title: { useHTML: true, text: ' &nbsp;', align: 'left' },
-            subtitle: { text: ' ', align: 'left' },
-            plotOptions: { column: { stacking: 'normal' } },
-            xAxis: [{ categories: periodGroups, crosshair: true }],
-            yAxis: [
-                {
-                    title: { text: 'Percentage of Patients', style: { color: Highcharts.getOptions().colors[1] } },
-                    labels: { format: '{value}', style: { color: Highcharts.getOptions().colors[1] } },
-                    min: 0,
-                    max: 100,
-                }
-            ],
+            chart: { type: 'column' },
+            title: { useHTML: true, text: '&nbsp;' },
+            subtitle: { text: '' },
+            plotOptions: { column: { stacking: 'percent' } },
+            xAxis: [{
+                categories: ageCategories,
+                crosshair: true
+            }],
+            yAxis: [{
+                min: 0,
+                title: { text: 'Percentage of Patients' },
+            }],
             tooltip: { shared: true },
             legend: {
-                floating: true, layout: 'horizontal', align: 'left', verticalAlign: 'top', y: 0, x: 80,
+                floating: true,
+                layout: 'horizontal',
+                align: 'left',
+                verticalAlign: 'top',
+                y: 0,
+                x: 80,
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: '< 1 MONTH', data: firstPeriodPercent, type: 'column', color: "#485969", tooltip: { valueSuffix: ' %' } },
-                { name: '1-2 MONTHS', data: secondPeriodPercent, type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' %' } },
-                { name: '3-4 MONTHS', data: thirdPeriodPercent, type: 'column', color: "#60A6E5", tooltip: { valueSuffix: ' %' } },
-                { name: '> 4 MONTHS', data: fourthPeriodPercent, type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' %' } },
+                { name: '< 1 MONTH', data: data[0], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: '1-2 MONTHS', data: data[1], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: '3-4 MONTHS', data: data[2], type: 'column', color: "#60A6E5", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: '> 4 MONTHS', data: data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [globalFilter]);
