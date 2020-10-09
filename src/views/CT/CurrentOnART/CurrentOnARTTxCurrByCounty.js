@@ -98,12 +98,7 @@ const CurrentOnARTTxCurrByCounty = ({ globalFilter }) => {
                 fiftyplus: sum50plus,
                 male: summale,
                 female: sumfemale,
-                total: (sumLessThan5 + sumFiveToNine + sumTenTo14 + sumFifteenTo19 + sumTwentyTo24 + sumTwentyFiveTo34 + sumThirtyFiveTo44 + sumFourtyFiveTo49 + sum50plus),
-                /*subCounty: result[i].subCounty,
-                facility: result[i].facility,
-                partner: result[i].partner,
-                txNew: parseInt(result[i].txNew, 10),
-                monthYear: monthNames[result[i].month] + ' ' + result[i].year.toString(),*/
+                total: (sumLessThan5 + sumFiveToNine + sumTenTo14 + sumFifteenTo19 + sumTwentyTo24 + sumTwentyFiveTo34 + sumThirtyFiveTo44 + sumFourtyFiveTo49 + sum50plus)
             });
         }
 
