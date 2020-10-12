@@ -44,8 +44,8 @@ const CurrentOnARTTxCurrByCounty = ({ globalFilter }) => {
             const fourtyFiveTo49 = txCurrAgeDistributionByCounty.filter(obj => obj.County === counties[i].County && (obj.ageGroup === "45-49"));
             const fiftyplus = txCurrAgeDistributionByCounty.filter(obj => obj.County === counties[i].County && (obj.ageGroup === "50+"));
 
-            const maleGroup = txCurrAgeDistributionByCounty.filter(obj => obj.CTPartner === counties[i].CTPartner && (obj.Gender === "Male"));
-            const feMaleGroup = txCurrAgeDistributionByCounty.filter(obj => obj.CTPartner === counties[i].CTPartner && (obj.Gender === "Female"));
+            const maleGroup = txCurrAgeDistributionByCounty.filter(obj => obj.CTPartner === counties[i].CTPartner && (obj.Gender === "Male" || obj.Gender === "M"));
+            const feMaleGroup = txCurrAgeDistributionByCounty.filter(obj => obj.CTPartner === counties[i].CTPartner && (obj.Gender === "Female" || obj.Gender === "F"));
 
             if (lessThan5.length > 0) {
                 sumLessThan5 = lessThan5.map(item => item.txCurr).reduce((prev, next) => prev + next);
