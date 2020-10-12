@@ -12,24 +12,12 @@ const TwelveMonthRetention = ({ globalFilter }) => {
         if (globalFilter) {
             params = { ...globalFilter };
         }
-        const treatmentOutcomesCategories = ['Active'];
-        const yearCategories = [2011,2012,2013,2014,2015,2016,2017,2018,2019,2020];
-        const result = await getAll('care-treatment/treatmentOutcomesByYear', params);
+        const yearCategories = [];
+        const result = await getAll('care-treatment/treatmentOutcomesRetention12m', params);
         let data = [];
-        // seed all values sp that missing values default to 0
-        for(let i = 0; i < treatmentOutcomesCategories.length; i++) {
-            data[i] = [];
-            for(let j = 0; j < yearCategories.length; j++) {
-                data[i][j] = 0;
-            }
-        }
         for(let i = 0; i < result.length; i++) {
-            let treatmentOutcomesIndex = treatmentOutcomesCategories.indexOf(result[i].artOutcome);
-            let yearIndex = yearCategories.indexOf(result[i].year);
-            if(treatmentOutcomesIndex === -1 || yearIndex === -1 ) { // unsupported
-                continue;
-            }
-            data[treatmentOutcomesIndex][yearIndex] = data[treatmentOutcomesIndex][yearIndex] + parseInt(result[i].totalOutcomes);
+            yearCategories[i] = result[i].year;
+            data[i] = parseInt(result[i].retention);
         }
         setTwelveMonthRetention({
             chart: { zoomType: 'xy' },
@@ -52,7 +40,7 @@ const TwelveMonthRetention = ({ globalFilter }) => {
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'Number of Patients', data: data[0], type: 'bar', color: "#485969" },
+                { name: 'Number of Patients', data: data, type: 'bar', color: "#485969" },
             ]
         });
     }, [globalFilter]);
