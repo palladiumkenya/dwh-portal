@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import DataTable from 'react-data-table-component';
+import { getAll } from '../../Shared/Api';
+import * as _ from 'lodash';
 
 const CurrentOnARTTxCurrByCounty = ({ globalFilter }) => {
     const [txCurrByCountyList, setTxCurrByCountyList] = useState({});
@@ -9,47 +11,138 @@ const CurrentOnARTTxCurrByCounty = ({ globalFilter }) => {
     }, [globalFilter]);
 
     const loadTxCurrByCountyList = async () => {
-        const data = [];
+        let params = null;
 
-        const result = [
-            {"year":2020,"month":7,"txNew":"4345","county":"Nairobi","subCounty":"Starehe","facility":"Kenyatta Hospital","partner":"EDARP"},
-            {"year":2020,"month":7,"txNew":"3454","county":"Nairobi","subCounty":"Riruta","facility":"Riruta Health Center","partner":"CHS-SHINDA"},
-            {"year":2020,"month":7,"txNew":"4352","county":"Nairobi","subCounty":"Kilimani","facility":"Coptic Hospital","partner":"EGPAF"},
-            {"year":2020,"month":7,"txNew":"5343","county":"Nairobi","subCounty":"Embakkasi","facility":"Mama Lucy Kibaki Hospital","partner":"Afya-Ziwani"},
-            {"year":2020,"month":7,"txNew":"2324","county":"Nairobi","subCounty":"Starehe","facility":"Pumwani Maternity Hospital","partner":"Afya-Nyota"},
-            {"year":2020,"month":7,"txNew":"4532","county":"Nairobi","subCounty":"Starehe","facility":"Dandora II Health Center","partner":"CHS-Naishi"},
-            {"year":2020,"month":7,"txNew":"2323","county":"Nairobi","subCounty":"Ruaraka","facility":"Ruiru Sub District Hospital","partner":"EDARP"},
-            {"year":2020,"month":7,"txNew":"614","county":"Nairobi","subCounty":"Starehe","facility":"Homabay Hospital","partner":"EGPAF"},
-            {"year":2020,"month":7,"txNew":"689","county":"Nairobi","subCounty":"Starehe","facility":"Eldoret Hospital","partner":"UMB"},
-            {"year":2020,"month":7,"txNew":"659","county":"Nairobi","subCounty":"Starehe","facility":"Manyatta Hospital","partner":"PATH"},
-            {"year":2020,"month":7,"txNew":"564","county":"Nairobi","subCounty":"Starehe","facility":"Kipkaren Hospital","partner":"IRDO"},
-            {"year":2020,"month":7,"txNew":"414","county":"Nairobi","subCounty":"Starehe","facility":"Tutu Hospital","partner":"EDARP"},
-        ];
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+
+        const txCurrAgeDistributionByCounty = await getAll('care-treatment/getTxCurrAgeGroupDistributionByCounty', params);
+        const data = [];
 
         const monthNames = {
             1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June",
             7: "July", 8:"August", 9: "September", 10: "October", 11: "November", 12: "December"
         };
 
-        for(let i = 0; i < result.length; i++) {
+        const counties = _.uniqBy(txCurrAgeDistributionByCounty, obj => obj.County);
+        for (let i = 0; i < counties.length; i++) {
+            let sumLessThan5 = 0;
+            let sumFiveToNine = 0;
+            let sumTenTo14 = 0;
+            let sumFifteenTo19 = 0;
+            let sumTwentyTo24 = 0;
+            let sumTwentyFiveTo34 = 0;
+            let sumThirtyFiveTo44 = 0;
+            let sumFourtyFiveTo49 = 0;
+            let sum50plus = 0;
+            let sumfemale = 0;
+            let summale = 0;
+
+            const lessThan5 = txCurrAgeDistributionByCounty.filter(obj => obj.County === counties[i].County && (obj.ageGroup === "<1" || obj.ageGroup === "1-4"));
+            const fiveToNine = txCurrAgeDistributionByCounty.filter(obj => obj.County === counties[i].County && (obj.ageGroup === "5-9"));
+            const tenTo14 = txCurrAgeDistributionByCounty.filter(obj => obj.County === counties[i].County && (obj.ageGroup === "10-14"));
+            const fifteenTo19 = txCurrAgeDistributionByCounty.filter(obj => obj.County === counties[i].County && (obj.ageGroup === "15-19"));
+            const twentyTo24 = txCurrAgeDistributionByCounty.filter(obj => obj.County === counties[i].County && (obj.ageGroup === "20-24"));
+            const twentyFiveTo34 = txCurrAgeDistributionByCounty.filter(obj => obj.County === counties[i].County && (obj.ageGroup === "25-29" || obj.ageGroup === "30-34"));
+            const thirtyFiveTo44 = txCurrAgeDistributionByCounty.filter(obj => obj.County === counties[i].County && (obj.ageGroup === "35-39" || obj.ageGroup === "40-44"));
+            const fourtyFiveTo49 = txCurrAgeDistributionByCounty.filter(obj => obj.County === counties[i].County && (obj.ageGroup === "45-49"));
+            const fiftyplus = txCurrAgeDistributionByCounty.filter(obj => obj.County === counties[i].County && (obj.ageGroup === "50+"));
+
+            if (lessThan5.length > 0) {
+                sumLessThan5 = lessThan5.map(item => item.txCurr).reduce((prev, next) => prev + next);
+            }
+
+            if (fiveToNine.length > 0) {
+                sumFiveToNine = fiveToNine.map(item => item.txCurr).reduce((prev, next) => prev + next);
+            }
+
+            if (tenTo14.length > 0) {
+                sumTenTo14 = tenTo14.map(item => item.txCurr).reduce((prev, next) => prev + next);
+            }
+
+            if (fifteenTo19.length > 0) {
+                sumFifteenTo19 = fifteenTo19.map(item => item.txCurr).reduce((prev, next) => prev + next);
+            }
+
+            if (twentyTo24.length > 0) {
+                sumTwentyTo24 = twentyTo24.map(item => item.txCurr).reduce((prev, next) => prev + next);
+            }
+
+            if (twentyFiveTo34.length > 0) {
+                sumTwentyFiveTo34 = twentyFiveTo34.map(item => item.txCurr).reduce((prev, next) => prev + next);
+            }
+
+            if (thirtyFiveTo44.length > 0) {
+                sumThirtyFiveTo44 = thirtyFiveTo44.map(item => item.txCurr).reduce((prev, next) => prev + next);
+            }
+
+            if (fourtyFiveTo49.length > 0) {
+                sumFourtyFiveTo49 = fourtyFiveTo49.map(item => item.txCurr).reduce((prev, next) => prev + next);
+            }
+
+            if (fiftyplus.length > 0) {
+                sum50plus = fiftyplus.map(item => item.txCurr).reduce((prev, next) => prev + next);
+            }
+
             data.push({
-                county: result[i].county,
-                subCounty: result[i].subCounty,
-                facility: result[i].facility,
-                partner: result[i].partner,
-                txNew: parseInt(result[i].txNew, 10),
-                monthYear: monthNames[result[i].month] + ' ' + result[i].year.toString(),
+                county: counties[i].County,
+                lessThan5: sumLessThan5,
+                fiveToNine: sumFiveToNine,
+                tenTo14: sumTenTo14,
+                fifteenTo19: sumFifteenTo19,
+                twentyTo24: sumTwentyTo24,
+                twentyFiveTo34: sumTwentyFiveTo34,
+                thirtyFiveTo44: sumThirtyFiveTo44,
+                fourtyFiveTo49: sumFourtyFiveTo49,
+                fiftyplus: sum50plus,
+                male: summale,
+                female: sumfemale,
+                total: (sumLessThan5 + sumFiveToNine + sumTenTo14 + sumFifteenTo19 + sumTwentyTo24 + sumTwentyFiveTo34 + sumThirtyFiveTo44 + sumFourtyFiveTo49 + sum50plus)
             });
         }
 
         setTxCurrByCountyList({
             columns: [
-                { name: 'Facility', selector: 'facility', sortable: true},
-                { name: 'Partner', selector: 'partner', sortable: true},
-                { name: 'County', selector: 'county', sortable: true},
-                { name: 'Sub County', selector: 'subCounty', sortable: true},
-                { name: 'No of Patients starting ART more than 14 days after diagnosis', selector: 'txNew', sortable: true, right: true},
-                { name: 'Month and Year Tested', selector: 'monthYear', sortable: true, right: true },
+                {
+                    name: 'County', selector: 'county', sortable: true
+                },
+                {
+                    name: '<5', selector: 'lessThan5', sortable: true
+                },
+                {
+                    name: '5-9', selector: 'fiveToNine', sortable: true
+                },
+                {
+                    name: '10-14', selector: 'tenTo14', sortable: true
+                },
+                {
+                    name: '15-19', selector: 'fifteenTo19', sortable: true
+                },
+                {
+                    name: '20-24', selector: 'twentyTo24', sortable: true
+                },
+                {
+                    name: '25-34', selector: 'twentyFiveTo34', sortable: true
+                },
+                {
+                    name: '35-44', selector: 'thirtyFiveTo44', sortable: true
+                },
+                {
+                    name: '45-49', selector: 'fourtyFiveTo49', sortable: true
+                },
+                {
+                    name: '50+', selector: 'fiftyplus', sortable: true
+                },
+                {
+                    name: 'MALE', selector: 'male', sortable: true
+                },
+                {
+                    name: 'FEMALE', selector: 'female', sortable: true
+                },
+                {
+                    name: 'TOTAL', selector: 'total', sortable: true
+                }
             ],
             data: data
         });
