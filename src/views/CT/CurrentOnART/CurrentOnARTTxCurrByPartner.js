@@ -44,6 +44,9 @@ const CurrentOnARTTxCurrByPartner = ({ globalFilter }) => {
             const fourtyFiveTo49 = txCurrAgeDistributionByPartner.filter(obj => obj.CTPartner === partners[i].CTPartner && (obj.ageGroup === "45-49"));
             const fiftyplus = txCurrAgeDistributionByPartner.filter(obj => obj.CTPartner === partners[i].CTPartner && (obj.ageGroup === "50+"));
 
+            const maleGroup = txCurrAgeDistributionByPartner.filter(obj => obj.CTPartner === partners[i].CTPartner && (obj.Gender === "Male"));
+            const feMaleGroup = txCurrAgeDistributionByPartner.filter(obj => obj.CTPartner === partners[i].CTPartner && (obj.Gender === "Female"));
+
             if (lessThan5.length > 0) {
                 sumLessThan5 = lessThan5.map(item => item.txCurr).reduce((prev, next) => prev + next);
             }
@@ -78,6 +81,14 @@ const CurrentOnARTTxCurrByPartner = ({ globalFilter }) => {
 
             if (fiftyplus.length > 0) {
                 sum50plus = fiftyplus.map(item => item.txCurr).reduce((prev, next) => prev + next);
+            }
+
+            if (maleGroup.length > 0) {
+                summale = maleGroup.map(item => item.txCurr).reduce((prev, next) => prev + next);
+            }
+
+            if (feMaleGroup.length > 0) {
+                sumfemale = feMaleGroup.map(item => item.txCurr).reduce((prev, next) => prev + next);
             }
 
             data.push({

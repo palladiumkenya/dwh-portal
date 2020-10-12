@@ -20,11 +20,6 @@ const CurrentOnARTTxCurrByCounty = ({ globalFilter }) => {
         const txCurrAgeDistributionByCounty = await getAll('care-treatment/getTxCurrAgeGroupDistributionByCounty', params);
         const data = [];
 
-        const monthNames = {
-            1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June",
-            7: "July", 8:"August", 9: "September", 10: "October", 11: "November", 12: "December"
-        };
-
         const counties = _.uniqBy(txCurrAgeDistributionByCounty, obj => obj.County);
         for (let i = 0; i < counties.length; i++) {
             let sumLessThan5 = 0;
@@ -48,6 +43,9 @@ const CurrentOnARTTxCurrByCounty = ({ globalFilter }) => {
             const thirtyFiveTo44 = txCurrAgeDistributionByCounty.filter(obj => obj.County === counties[i].County && (obj.ageGroup === "35-39" || obj.ageGroup === "40-44"));
             const fourtyFiveTo49 = txCurrAgeDistributionByCounty.filter(obj => obj.County === counties[i].County && (obj.ageGroup === "45-49"));
             const fiftyplus = txCurrAgeDistributionByCounty.filter(obj => obj.County === counties[i].County && (obj.ageGroup === "50+"));
+
+            const maleGroup = txCurrAgeDistributionByCounty.filter(obj => obj.CTPartner === counties[i].CTPartner && (obj.Gender === "Male"));
+            const feMaleGroup = txCurrAgeDistributionByCounty.filter(obj => obj.CTPartner === counties[i].CTPartner && (obj.Gender === "Female"));
 
             if (lessThan5.length > 0) {
                 sumLessThan5 = lessThan5.map(item => item.txCurr).reduce((prev, next) => prev + next);
@@ -83,6 +81,14 @@ const CurrentOnARTTxCurrByCounty = ({ globalFilter }) => {
 
             if (fiftyplus.length > 0) {
                 sum50plus = fiftyplus.map(item => item.txCurr).reduce((prev, next) => prev + next);
+            }
+
+            if (maleGroup.length > 0) {
+                summale = maleGroup.map(item => item.txCurr).reduce((prev, next) => prev + next);
+            }
+
+            if (feMaleGroup.length > 0) {
+                sumfemale = feMaleGroup.map(item => item.txCurr).reduce((prev, next) => prev + next);
             }
 
             data.push({
