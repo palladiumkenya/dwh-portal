@@ -10,6 +10,8 @@ import VLUptakeBySex from './VLUptakeBySex';
 import VLUptakeByAge from './VLUptakeByAge';
 import VLUptakeByCounty from './VLUptakeByCounty';
 import VLUptakeByPartner from './VLUptakeByPartner';
+import VLOutcomesOverall from './VLOutcomesOverall';
+import VLOutcomesBySex from './VLOutcomesBySex';
 
 const VL = () => {
     const [globalFilter, setGlobalFilter] = useState({
@@ -57,6 +59,15 @@ const VL = () => {
             <p></p><VLUptakeByCounty globalFilter={globalFilter}/>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
             <p></p><VLUptakeByPartner globalFilter={globalFilter}/>
+            <p></p>
+            <div className="row">
+                <div className="col-4">
+                    <VLOutcomesOverall globalFilter={globalFilter}/>
+                </div>
+                <div className="col-8">
+                    <VLOutcomesBySex globalFilter={globalFilter}/>
+                </div>
+            </div>
         </div>
     );
 
