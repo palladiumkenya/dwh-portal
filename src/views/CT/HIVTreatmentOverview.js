@@ -4,6 +4,7 @@ import NewOnArt from './NewOnArt/NewOnArt';
 import CurrentOnART from './CurrentOnART/CurrentOnART';
 import DSD from './DSD/DSD';
 import TreatmentOutcomes from './TreatmentOutcomes/TreatmentOutcomes';
+import VL from './VL/VL';
 
 const HIVTreatmentOverview = () => {
 
@@ -63,6 +64,9 @@ const HIVTreatmentOverview = () => {
                 </TabPane>
                 <TabPane tabId="tOut">
                     <TreatmentOutcomes />
+                </TabPane>
+                <TabPane tabId="vl">
+                    <VL />
                 </TabPane>
             </TabContent>
             <p></p>
