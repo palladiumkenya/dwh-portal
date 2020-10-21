@@ -29,7 +29,7 @@ const VLOutcomesBySex = ({ globalFilter }) => {
         }
         setVLOutcomesBySexMale({
             chart: { type: 'pie' },
-            title: { text: '' },
+            title: { text: 'MALE', align: 'center', verticalAlign: 'middle'},
             subtitle: { text: '' },
             plotOptions: {
                 pie: {
@@ -54,7 +54,7 @@ const VLOutcomesBySex = ({ globalFilter }) => {
         });
         setVLOutcomesBySexFemale({
             chart: { type: 'pie' },
-            title: { text: '' },
+            title: { text: 'FEMALE', align: 'center', verticalAlign: 'middle'},
             subtitle: { text: '' },
             plotOptions: {
                 pie: {
@@ -94,11 +94,9 @@ const VLOutcomesBySex = ({ globalFilter }) => {
                         <div className="col-12">
                             <div className="row">
                                 <div className="col-6">
-                                    <h3>MALE</h3>
                                     <HighchartsReact highcharts={Highcharts} options={vlOutcomesBySexMale} />
                                 </div>
                                 <div className="col-6">
-                                    <h3>FEMALE</h3>
                                     <HighchartsReact highcharts={Highcharts} options={vlOutcomesBySexFemale} />
                                 </div>
                             </div>
