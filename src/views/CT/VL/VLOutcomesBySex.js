@@ -19,10 +19,10 @@ const VLOutcomesBySex = ({ globalFilter }) => {
         let dataFemale = [0, 0, 0];
         for(let i = 0; i < result.length; i++) {
             for(let j = 0; j < vlOutcomesCategories.length; j++) {
-                if (result[i].outcome === vlOutcomesCategories[j] && result[i].gender == "Male") {
+                if (result[i].outcome === vlOutcomesCategories[j] && result[i].gender === "Male") {
                     dataMale[j] = dataMale[j] + parseInt(result[i].count);
                 }
-                if (result[i].outcome === vlOutcomesCategories[j] && result[i].gender == "Female") {
+                if (result[i].outcome === vlOutcomesCategories[j] && result[i].gender === "Female") {
                     dataFemale[j] = dataFemale[j] + parseInt(result[i].count);
                 }
             }
