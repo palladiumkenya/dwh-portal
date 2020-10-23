@@ -12,6 +12,15 @@ import VLUptakeByCounty from './VLUptakeByCounty';
 import VLUptakeByPartner from './VLUptakeByPartner';
 import VLOutcomesOverall from './VLOutcomesOverall';
 import VLOutcomesBySex from './VLOutcomesBySex';
+import VLSuppressionByAge from './VLSuppressionByAge';
+import VLSuppressionByRegimen from './VLSuppressionByRegimen';
+import VLSuppressionByYear from './VLSuppressionByYear';
+import VLSuppressionByCounty from './VLSuppressionByCounty';
+import VLSuppressionByPartner from './VLSuppressionByPartner';
+import VLSuppressionByYear6Month from './VLSuppressionByYear6Month';
+import VLSuppressionByYear12Month from './VLSuppressionByYear12Month';
+import VLSuppressionByYear24Month from './VLSuppressionByYear24Month';
+import VLOverallUptakeAndSuppressionByFacility from './VLOverallUptakeAndSuppressionByFacility';
 
 const VL = () => {
     const [globalFilter, setGlobalFilter] = useState({
@@ -59,7 +68,7 @@ const VL = () => {
             <p></p><VLUptakeByCounty globalFilter={globalFilter}/>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
             <p></p><VLUptakeByPartner globalFilter={globalFilter}/>
-            <p></p>
+            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
             <div className="row">
                 <div className="col-4">
                     <VLOutcomesOverall globalFilter={globalFilter}/>
@@ -68,6 +77,35 @@ const VL = () => {
                     <VLOutcomesBySex globalFilter={globalFilter}/>
                 </div>
             </div>
+            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
+            <p></p><VLSuppressionByAge globalFilter={globalFilter}/>
+            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
+            <div className="row">
+                <div className="col-4">
+                    <VLSuppressionByRegimen globalFilter={globalFilter}/>
+                </div>
+                <div className="col-8">
+                    <VLSuppressionByYear globalFilter={globalFilter}/>
+                </div>
+            </div>
+            <p></p>
+            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
+            <p></p><VLSuppressionByCounty globalFilter={globalFilter}/>
+            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
+            <p></p><VLSuppressionByPartner globalFilter={globalFilter}/>
+            <p></p>
+            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
+            <p></p><VLSuppressionByYear6Month globalFilter={globalFilter}/>
+            <p></p>
+            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
+            <p></p><VLSuppressionByYear12Month globalFilter={globalFilter}/>
+            <p></p>
+            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
+            <p></p><VLSuppressionByYear24Month globalFilter={globalFilter}/>
+            <p></p>
+            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
+            <p></p><VLOverallUptakeAndSuppressionByFacility globalFilter={globalFilter}/>
+            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
         </div>
     );
 

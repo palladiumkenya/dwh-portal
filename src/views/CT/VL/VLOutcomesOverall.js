@@ -24,7 +24,7 @@ const VLOutcomesOverall = ({ globalFilter }) => {
         }
         setVLOutcomesOverall({
             chart: { type: 'pie' },
-            title: { text: '' },
+            title: { text: 'OVERALL', align: 'center', verticalAlign: 'middle'},
             subtitle: { text: '' },
             plotOptions: {
                 pie: {
@@ -62,7 +62,6 @@ const VLOutcomesOverall = ({ globalFilter }) => {
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <h3>OVERALL</h3>
                             <HighchartsReact highcharts={Highcharts} options={vlOutcomesOverall} />
                         </div>
                     </CardBody>

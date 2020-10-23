@@ -19,17 +19,17 @@ const VLOutcomesBySex = ({ globalFilter }) => {
         let dataFemale = [0, 0, 0];
         for(let i = 0; i < result.length; i++) {
             for(let j = 0; j < vlOutcomesCategories.length; j++) {
-                if (result[i].outcome === vlOutcomesCategories[j] && result[i].gender == "Male") {
+                if (result[i].outcome === vlOutcomesCategories[j] && result[i].gender === "Male") {
                     dataMale[j] = dataMale[j] + parseInt(result[i].count);
                 }
-                if (result[i].outcome === vlOutcomesCategories[j] && result[i].gender == "Female") {
+                if (result[i].outcome === vlOutcomesCategories[j] && result[i].gender === "Female") {
                     dataFemale[j] = dataFemale[j] + parseInt(result[i].count);
                 }
             }
         }
         setVLOutcomesBySexMale({
             chart: { type: 'pie' },
-            title: { text: '' },
+            title: { text: 'MALE', align: 'center', verticalAlign: 'middle'},
             subtitle: { text: '' },
             plotOptions: {
                 pie: {
@@ -54,7 +54,7 @@ const VLOutcomesBySex = ({ globalFilter }) => {
         });
         setVLOutcomesBySexFemale({
             chart: { type: 'pie' },
-            title: { text: '' },
+            title: { text: 'FEMALE', align: 'center', verticalAlign: 'middle'},
             subtitle: { text: '' },
             plotOptions: {
                 pie: {
@@ -94,11 +94,9 @@ const VLOutcomesBySex = ({ globalFilter }) => {
                         <div className="col-12">
                             <div className="row">
                                 <div className="col-6">
-                                    <h3>MALE</h3>
                                     <HighchartsReact highcharts={Highcharts} options={vlOutcomesBySexMale} />
                                 </div>
                                 <div className="col-6">
-                                    <h3>FEMALE</h3>
                                     <HighchartsReact highcharts={Highcharts} options={vlOutcomesBySexFemale} />
                                 </div>
                             </div>
