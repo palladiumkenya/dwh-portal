@@ -9,67 +9,56 @@ const LinkageByAgeSex = ({ globalFilter }) => {
 
     const loadLinkageByAgeSex = useCallback(async () => {
         let params = null;
-
         if (globalFilter) {
             params = { ...globalFilter };
         }
-
-        const ageGroups = [];
-
-        const ageGroupsMale = [];
-        let positiveMale = [];
-        let linkedMale = [];
-        let linkageMale = [];
-
-        const ageGroupsFemale = [];
-        let positiveFemale = [];
-        let linkedFemale = [];
-        let linkageFemale = [];
-        let linkage = [];
-
+        const sexCategories = ['MALE', 'FEMALE'];
+        const ageCategories = [
+            'Under 5',
+            '5 to 9',
+            '10 to 14',
+            '15 to 19',
+            '20 to 24',
+            '25 to 29',
+            '30 to 34',
+            '35 to 39',
+            '40 to 44',
+            '45 to 49',
+            '50 to 54',
+            '55 to 59',
+            '60 to 64',
+            '65+'
+        ];
         const result = await getAll('hts/linkageByAgeSex', params);
-
+        let positive = [];
+        let linked = [];
+        let linkage = [];
+        for(let i = 0; i < sexCategories.length; i++) {
+            positive[i] = [];
+            linked[i] = [];
+            for(let j = 0; j < ageCategories.length; j++) {
+                positive[i][j] = 0;
+                linked[i][j] = 0;
+            }
+        }
         for(let i = 0; i < result.length; i++) {
-            if(ageGroups.indexOf(result[i].AgeGroup) !== -1){
+            let sexIndex = sexCategories.indexOf(result[i].Gender);
+            let ageIndex = ageCategories.indexOf(result[i].AgeGroup);
+            if(sexIndex === -1 || ageIndex === -1) { // unsupported
                 continue;
-            } else{
-                ageGroups.push(result[i].AgeGroup);
             }
+            positive[sexIndex][ageIndex] = positive[sexIndex][ageIndex] + parseInt(result[i].positive);
+            linked[sexIndex][ageIndex] = linked[sexIndex][ageIndex] + parseInt(result[i].linked);
         }
-
-        for(let i = 0; i < result.length; i++) {
-            let index = ageGroups.indexOf(result[i].AgeGroup);
-            if (result[i].Gender === 'Male' || result[i].Gender === 'M') {
-                ageGroupsMale.splice(index, 0, result[i].AgeGroup);
-                positiveMale.splice(index, 0, parseInt(result[i].positive));
-                linkedMale.splice(index, 0, parseInt(result[i].linked));
-                linkageMale.splice(index, 0, parseFloat(result[i].linkage));
-            } else {
-                ageGroupsFemale.splice(index, 0, result[i].AgeGroup);
-                positiveFemale.splice(index, 0, parseInt(result[i].positive));
-                linkedFemale.splice(index, 0, parseInt(result[i].linked));
-                linkageFemale.splice(index, 0, parseFloat(result[i].linkage));
-            }
+        for(let j = 0; j < ageCategories.length; j++) {
+            linkage[j] = Number((((linked[0][j] + linked[1][j])/(positive[0][j] + positive[1][j])) * 100).toFixed(1));
         }
-
-        for(let i = 0; i < ageGroups.length; i++) {
-            let linkageMaleSingle = 0.0;
-            let linkageFemaleSingle = 0.0;
-            if (typeof linkageMale[i] !== 'undefined') {
-                linkageMaleSingle = linkageMale[i];
-            }
-            if (typeof linkageFemale[i] !== 'undefined') {
-                linkageFemaleSingle = linkageFemale[i];
-            }
-            linkage[i] = Number(((linkageMaleSingle + linkageFemaleSingle)/2).toFixed(1));
-        }
-
         setLinkageByAgeSex({
             chart: { zoomType: 'xy' },
             title: { useHTML: true, text: ' &nbsp;', align: 'left' },
             subtitle: { text: ' ', align: 'left' },
             plotOptions: { column: { stacking: 'normal' } },
-            xAxis: [{ categories: ageGroups, crosshair: true, title: { text: 'Ages' } }],
+            xAxis: [{ categories: ageCategories, crosshair: true, title: { text: 'Ages' } }],
             yAxis: [
                 {
                     title: { text: 'Number Positive', style: { color: Highcharts.getOptions().colors[1] } },
@@ -90,8 +79,8 @@ const LinkageByAgeSex = ({ globalFilter }) => {
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'Female', data: positiveFemale, type: 'column', color: "#485969", tooltip: { valueSuffix: ' ' } },
-                { name: 'Male', data: positiveMale, type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ' } },
+                { name: 'Female', data: positive[1], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ' } },
+                { name: 'Male', data: positive[0], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ' } },
                 { name: 'Linkage', data: linkage, type: 'spline', color: "#E06F07", tooltip: { valueSuffix: '%' }, yAxis: 1 }
             ]
         });
