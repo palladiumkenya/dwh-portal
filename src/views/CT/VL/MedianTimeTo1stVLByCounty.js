@@ -8,14 +8,14 @@ const MedianTimeTo1stVLByCounty = () => {
     const [medianTimeTo1stVLByCounty, setMedianTimeTo1stVLByCounty] = useState({});
 
     const loadMedianTimeTo1stVLByCounty = useCallback(async () => {
-        const result = await getAll('care-treatment/vlUptakeByCounty');
+        const result = await getAll('care-treatment/vlMedianTimeToFirstVlByCounty');
 
         let counties = [];
         let medianTimeTo1stVLByCounty = [];
 
         for(let i = 0; i < result.length; i++) {
             counties.push(result[i].county);
-            medianTimeTo1stVLByCounty.push(parseInt(result[i].vlDone, 10));
+            medianTimeTo1stVLByCounty.push(parseInt(result[i].time, 10));
         }
 
         setMedianTimeTo1stVLByCounty({
