@@ -8,7 +8,7 @@ const MedianTimeTo1stVL = () => {
     const [medianTimeTo1stVL, setMedianTimeTo1stVL] = useState({});
 
     const loadMedianTimeTo1stVL = useCallback(async () => {
-        const result = await getAll('care-treatment/medianTimeToArtByYear');
+        const result = await getAll('care-treatment/vlMedianTimeToFirstVlByYear');
 
         let months = [];
         let medianTimeTo1stVL = [];

@@ -8,14 +8,14 @@ const MedianTimeTo1stVLByPartner = () => {
     const [medianTimeTo1stVLByPartner, setMedianTimeTo1stVLByPartner] = useState({});
 
     const loadMedianTimeTo1stVLByPartner = useCallback(async () => {
-        const result = await getAll('care-treatment/vlUptakeByPartner');
+        const result = await getAll('care-treatment/vlMedianTimeToFirstVlByPartner');
 
         let partners = [];
         let medianTimeTo1stVLByPartner = [];
 
         for(let i = 0; i < result.length; i++) {
             partners.push(result[i].partner);
-            medianTimeTo1stVLByPartner.push(parseInt(result[i].vlDone, 10));
+            medianTimeTo1stVLByPartner.push(parseInt(result[i].time, 10));
         }
 
         setMedianTimeTo1stVLByPartner({
