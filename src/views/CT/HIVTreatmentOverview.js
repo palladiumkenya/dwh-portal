@@ -6,6 +6,7 @@ import DSD from './DSD/DSD';
 import TreatmentOutcomes from './TreatmentOutcomes/TreatmentOutcomes';
 import VL from './VL/VL';
 import AdverseEvents from './AdverseEvents/AdverseEvents';
+import TBHIV from './TBHIV/TBHIV';
 
 const HIVTreatmentOverview = () => {
 
@@ -71,6 +72,9 @@ const HIVTreatmentOverview = () => {
                 </TabPane>
                 <TabPane tabId="vl">
                     <VL />
+                </TabPane>
+                <TabPane tabId="tbHiv">
+                    <TBHIV />
                 </TabPane>
             </TabContent>
             <p></p>
