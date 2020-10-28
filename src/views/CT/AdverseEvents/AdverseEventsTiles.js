@@ -12,7 +12,13 @@ const AdverseEventsTiles = ({ globalFilter }) => {
         childrenUnder15CurrentOnART: ''
     });
     const [under15AdverseEventsDesegregation, setUnder15AdverseEventsDesegregation] = useState({});
+    const [totalChildrenAdverseEvents, setTotalChildrenAdverseEvents] = useState({
+        total: ''
+    });
     const [adults15PlusAdverseEventsDesegregation, setAdults15PlusAdverseEventsDesegregation] = useState({});
+    const [totalAdultsAdverseEvents, setTotalAdultsAdverseEvents] = useState({
+        total: ''
+    });
 
     const loadActiveOnARTAdults = useCallback(async () => {
         let params = null;
@@ -61,9 +67,8 @@ const AdverseEventsTiles = ({ globalFilter }) => {
 
         let maleData = [];
         let femaleData = [];
-        const categories = ['0 - 11 Months', '1 - 5 Yrs', '5 - 9 Yrs', '10 - 14 Yrs'];
+        const categories = ['Under 1', '1 to 4', '5 to 9', '10 to 14'];
         const result = await getAll('care-treatment/getChildrenAdverseEvents', params);
-        console.log(result);
         for (let i = 0; i < categories.length; i++) {
             for (let j = 0; j < result.length; j++) {
                 if(categories[i] == result[j].AgeGroup && (result[j].Gender.toLowerCase() == "female" || result[j].Gender.toLowerCase() == "f" )) {
@@ -75,6 +80,13 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                 }
             }
         }
+        const total_Male = maleData.reduce((a, b) => a + b, 0);
+        const total_female = femaleData.reduce((a, b) => a + b, 0);
+        const total = total_Male + total_female;
+
+        setTotalChildrenAdverseEvents({
+            total: total
+        });
 
         setUnder15AdverseEventsDesegregation({
             chart: {
@@ -139,6 +151,35 @@ const AdverseEventsTiles = ({ globalFilter }) => {
     }, [globalFilter]);
 
     const loadAdults15PlusAdverseEventsDesegregation =  useCallback(async () => {
+        let params = null;
+
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+
+        let maleData = [];
+        let femaleData = [];
+        const categories = ['15 to 19', '20 to 24','25 to 29', '30 to 34', '35 to 39', '40 to 44', '45 to 49', '50 to 54', '55 to 59', '60 to 64', '65+'];
+        const result = await getAll('care-treatment/getAdultsAdverseEvents', params);
+        for (let i = 0; i < categories.length; i++) {
+            for (let j = 0; j < result.length; j++) {
+                if(categories[i] == result[j].AgeGroup && (result[j].Gender.toLowerCase() == "female" || result[j].Gender.toLowerCase() == "f" )) {
+                    femaleData.push(result[j].total);
+                }
+
+                if(categories[i] == result[j].AgeGroup && (result[j].Gender.toLowerCase() == "male" || result[j].Gender.toLowerCase() == "m" )) {
+                    maleData.push(result[j].total);
+                }
+            }
+        }
+        const total_Male = maleData.reduce((a, b) => a + b, 0);
+        const total_female = femaleData.reduce((a, b) => a + b, 0);
+        const total = total_Male + total_female;
+
+        setTotalAdultsAdverseEvents({
+            total: total
+        });
+
         setAdults15PlusAdverseEventsDesegregation({
             chart: {
                 type: 'column'
@@ -147,7 +188,7 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                 text: ''
             },
             xAxis: {
-                categories: ['15 - 24 Yrs', '25 - 34 Yrs', '35 - 44 Yrs', '45 - 54 Yrs', '55 - 64 Yrs', '>=65 Yrs']
+                categories: categories
             },
             yAxis: {
                 min: 0,
@@ -192,11 +233,11 @@ const AdverseEventsTiles = ({ globalFilter }) => {
             series: [{
                 name: 'Male',
                 color: "#1AB394",
-                data: [5, 3, 4, 7, 2, 2]
+                data: maleData
             }, {
                 name: 'Female',
                 color: "#485969",
-                data: [2, 2, 3, 2, 2, 2]
+                data: femaleData
             }]
         });
     }, [globalFilter]);
@@ -340,7 +381,7 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                 <div className="col-6">
                     <Card className="trends-card">
                         <CardHeader className="trends-header">
-                            CHILDREN &#60;15 ON ART AND DEVELOPED ADVERSE EVENTS(N=495)
+                            CHILDREN &#60;15 ON ART AND DEVELOPED ADVERSE EVENTS(N={totalChildrenAdverseEvents.total})
                         </CardHeader>
                         <CardBody className="trends-body">
                             <div className="col-12">
@@ -353,7 +394,7 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                 <div className="col-6">
                     <Card className="trends-card">
                         <CardHeader className="trends-header">
-                            ADULTS 15+ ON ART AND DEVELOPED ADVERSE EVENTS(N=495)
+                            ADULTS 15+ ON ART AND DEVELOPED ADVERSE EVENTS(N={totalAdultsAdverseEvents.total})
                         </CardHeader>
                         <CardBody className="trends-body">
                             <div className="col-12">
