@@ -1,20 +1,81 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import { getAll } from '../../Shared/Api';
 
 const AdverseEventsTiles = ({ globalFilter }) => {
-    const [adults15PlusCurrentOnART, setAdults15PlusCurrentOnART] = useState({});
+    const [adults15PlusCurrentOnART, setAdults15PlusCurrentOnART] = useState({
+        adults15PlusCurrentOnART: ''
+    });
+    const [childrenUnder15CurrentOnART, setChildrenUnder15CurrentOnART] = useState({
+        childrenUnder15CurrentOnART: ''
+    });
     const [under15AdverseEventsDesegregation, setUnder15AdverseEventsDesegregation] = useState({});
     const [adults15PlusAdverseEventsDesegregation, setAdults15PlusAdverseEventsDesegregation] = useState({});
 
+    const loadActiveOnARTAdults = useCallback(async () => {
+        let params = null;
 
-    useEffect(() => {
-        loadUnder15AdverseEventsDesegregation();
-        loadAdults15PlusAdverseEventsDesegregation();
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+
+        let ActiveARTAdults = 0;
+
+        const result = await getAll('care-treatment/activeArtAdults', params);
+        if(result && result.length > 0) {
+            ActiveARTAdults = result[0].ActiveARTAdults;
+        }
+
+        setAdults15PlusCurrentOnART({
+            adults15PlusCurrentOnART: ActiveARTAdults.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        });
+    }, [globalFilter]);
+
+    const loadActiveOnARTChildren = useCallback(async () => {
+        let params = null;
+
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+
+        let ActiveARTChildren = 0;
+
+        const result = await getAll('care-treatment/activeArtChildren', params);
+        if(result && result.length > 0) {
+            ActiveARTChildren = result[0].ActiveARTChildren;
+        }
+
+        setChildrenUnder15CurrentOnART({
+            childrenUnder15CurrentOnART: ActiveARTChildren.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        });
     }, [globalFilter]);
 
     const loadUnder15AdverseEventsDesegregation =  async () => {
+        let params = null;
+
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+
+        let maleData = [];
+        let femaleData = [];
+        const categories = ['0 - 11 Months', '1 - 5 Yrs', '5 - 9 Yrs', '10 - 14 Yrs'];
+        const result = await getAll('care-treatment/getChildrenAdverseEvents', params);
+        console.log(result);
+        for (let i = 0; i < categories.length; i++) {
+            for (let j = 0; j < result.length; j++) {
+                if(categories[i] == result[j].AgeGroup && (result[j].Gender.toLowerCase() == "female" || result[j].Gender.toLowerCase() == "f" )) {
+                    femaleData.push(result[j].total);
+                }
+
+                if(categories[i] == result[j].AgeGroup && (result[j].Gender.toLowerCase() == "male" || result[j].Gender.toLowerCase() == "m" )) {
+                    maleData.push(result[j].total);
+                }
+            }
+        }
+
         setUnder15AdverseEventsDesegregation({
             chart: {
                 type: 'column'
@@ -23,7 +84,7 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                 text: ''
             },
             xAxis: {
-                categories: ['0 - 11 Months', '1 - 5 Yrs', '5 - 9 Yrs', '10 - 14 Yrs']
+                categories: categories
             },
             yAxis: {
                 min: 0,
@@ -68,11 +129,11 @@ const AdverseEventsTiles = ({ globalFilter }) => {
             series: [{
                 name: 'Male',
                 color: "#1AB394",
-                data: [5, 3, 4, 7]
+                data: maleData
             }, {
                 name: 'Female',
                 color: "#485969",
-                data: [2, 2, 3, 2]
+                data: femaleData
             }]
         });
     };
@@ -140,6 +201,13 @@ const AdverseEventsTiles = ({ globalFilter }) => {
         });
     };
 
+    useEffect(() => {
+        loadActiveOnARTAdults();
+        loadActiveOnARTChildren();
+        loadUnder15AdverseEventsDesegregation();
+        loadAdults15PlusAdverseEventsDesegregation();
+    }, [loadActiveOnARTAdults, loadActiveOnARTChildren, loadUnder15AdverseEventsDesegregation, loadAdults15PlusAdverseEventsDesegregation]);
+
     return (
         <span>
             <div className="row">
@@ -157,7 +225,7 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                             }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">730,655</span>
+                                <span className="expected-uploads-text"><strong>{adults15PlusCurrentOnART.adults15PlusCurrentOnART}</strong></span>
                             </div>
                         </CardBody>
                     </Card>
@@ -219,7 +287,9 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                             }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">730,655</span>
+                                <span className="expected-uploads-text">
+                                    <strong>{childrenUnder15CurrentOnART.childrenUnder15CurrentOnART}</strong>
+                                </span>
                             </div>
                         </CardBody>
                     </Card>
