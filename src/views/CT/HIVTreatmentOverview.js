@@ -5,6 +5,7 @@ import CurrentOnART from './CurrentOnART/CurrentOnART';
 import DSD from './DSD/DSD';
 import TreatmentOutcomes from './TreatmentOutcomes/TreatmentOutcomes';
 import VL from './VL/VL';
+import AdverseEvents from './AdverseEvents/AdverseEvents';
 
 const HIVTreatmentOverview = () => {
 
@@ -58,6 +59,9 @@ const HIVTreatmentOverview = () => {
                 </TabPane>
                 <TabPane tabId="txCurr">
                     <CurrentOnART />
+                </TabPane>
+                <TabPane tabId="advEv">
+                    <AdverseEvents />
                 </TabPane>
                 <TabPane tabId="dsd">
                     <DSD />
