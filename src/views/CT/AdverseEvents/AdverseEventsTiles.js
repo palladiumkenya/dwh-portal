@@ -52,7 +52,7 @@ const AdverseEventsTiles = ({ globalFilter }) => {
         });
     }, [globalFilter]);
 
-    const loadUnder15AdverseEventsDesegregation =  async () => {
+    const loadUnder15AdverseEventsDesegregation =  useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -136,9 +136,9 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                 data: femaleData
             }]
         });
-    };
+    }, [globalFilter]);
 
-    const loadAdults15PlusAdverseEventsDesegregation =  async () => {
+    const loadAdults15PlusAdverseEventsDesegregation =  useCallback(async () => {
         setAdults15PlusAdverseEventsDesegregation({
             chart: {
                 type: 'column'
@@ -199,7 +199,7 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                 data: [2, 2, 3, 2, 2, 2]
             }]
         });
-    };
+    }, [globalFilter]);
 
     useEffect(() => {
         loadActiveOnARTAdults();
