@@ -70,23 +70,35 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
              params = { ...globalFilter };
         }
 
-
-        let appointmentCategory = ["< 1 Month", "> 4 Months", "1-2 Months", "3-4 Months"];
-        const seriesData = [];
+        let seriesData = [];
         const result = await getAll('care-treatment/getDsdAppointmentCategorizationByStabilityStatus', params);
-        for (let i = 0; i < appointmentCategory.length; i++) {
-            seriesData.push(
-                {
-                    name: appointmentCategory[i],
-                    data: []
-                }
-            );
-        }
+        seriesData = [
+            {
+                name: "< 1 Month",
+                color: "#1AB394",
+                data: []
+            },
+            {
+                name: "1-2 Months",
+                color: "#485969",
+                data: []
+            },
+            {
+                name: "3-4 Months",
+                color: "#4D8ECC",
+                data: []
+            },
+            {
+                name: "> 4 Months",
+                color: "#FA7072",
+                data: []
+            },
+        ];
 
         for (let j = 0; j < seriesData.length; j++) {
             for (let i = 0; i < result.length; i++) {
                 if (seriesData[j].name === result[i].AppointmentsCategory)
-                    seriesData[j].data.push(result[i].patients);
+                    seriesData[j].data.push(result[i].proportionByStability);
             }
         }
 
@@ -102,6 +114,7 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
             },
             yAxis: {
                 min: 0,
+                max: 150,
                 title: {
                     text: 'PERCENTAGE OF PATIENTS'
                 },
@@ -117,16 +130,15 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
                 }
             },
             legend: {
-                align: 'right',
-                x: -30,
+                layout: 'vertical',
+                align: 'left',
+                x: 120,
                 verticalAlign: 'top',
-                y: 25,
+                y: 7,
                 floating: true,
                 backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || 'white',
-                borderColor: '#CCC',
-                borderWidth: 1,
-                shadow: false
+                    Highcharts.defaultOptions.legend.backgroundColor || // theme
+                    'rgba(255,255,255,0.25)'
             },
             tooltip: {
                 headerFormat: '<b>{point.x}</b><br/>',
