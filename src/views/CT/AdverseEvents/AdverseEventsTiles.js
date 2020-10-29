@@ -72,11 +72,11 @@ const AdverseEventsTiles = ({ globalFilter }) => {
         for (let i = 0; i < categories.length; i++) {
             for (let j = 0; j < result.length; j++) {
                 if(categories[i] == result[j].AgeGroup && (result[j].Gender.toLowerCase() == "female" || result[j].Gender.toLowerCase() == "f" )) {
-                    femaleData.push(result[j].total);
+                    femaleData.push(result[j].adverseEventsByAgeGroup);
                 }
 
                 if(categories[i] == result[j].AgeGroup && (result[j].Gender.toLowerCase() == "male" || result[j].Gender.toLowerCase() == "m" )) {
-                    maleData.push(result[j].total);
+                    maleData.push(result[j].adverseEventsByAgeGroup);
                 }
             }
         }
@@ -96,10 +96,11 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                 text: ''
             },
             xAxis: {
-                categories: categories
+                categories: categories.map(y => y + ' YRS')
             },
             yAxis: {
                 min: 0,
+                max: 150,
                 title: {
                     text: 'PERCENT OF PATIENTS'
                 },
@@ -115,16 +116,15 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                 }
             },
             legend: {
-                align: 'right',
-                x: -30,
+                layout: 'vertical',
+                align: 'left',
+                x: 120,
                 verticalAlign: 'top',
-                y: 25,
+                y: 7,
                 floating: true,
                 backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || 'white',
-                borderColor: '#CCC',
-                borderWidth: 1,
-                shadow: false
+                    Highcharts.defaultOptions.legend.backgroundColor || // theme
+                    'rgba(255,255,255,0.25)'
             },
             tooltip: {
                 headerFormat: '<b>{point.x}</b><br/>',
@@ -164,11 +164,11 @@ const AdverseEventsTiles = ({ globalFilter }) => {
         for (let i = 0; i < categories.length; i++) {
             for (let j = 0; j < result.length; j++) {
                 if(categories[i] == result[j].AgeGroup && (result[j].Gender.toLowerCase() == "female" || result[j].Gender.toLowerCase() == "f" )) {
-                    femaleData.push(result[j].total);
+                    femaleData.push(result[j].adverseEventsByAgeGroup);
                 }
 
                 if(categories[i] == result[j].AgeGroup && (result[j].Gender.toLowerCase() == "male" || result[j].Gender.toLowerCase() == "m" )) {
-                    maleData.push(result[j].total);
+                    maleData.push(result[j].adverseEventsByAgeGroup);
                 }
             }
         }
@@ -188,10 +188,11 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                 text: ''
             },
             xAxis: {
-                categories: categories
+                categories: categories.map(y => y + ' YRS')
             },
             yAxis: {
                 min: 0,
+                max: 150,
                 title: {
                     text: 'PERCENT OF PATIENTS'
                 },
@@ -207,16 +208,15 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                 }
             },
             legend: {
-                align: 'right',
-                x: -30,
+                layout: 'vertical',
+                align: 'left',
+                x: 120,
                 verticalAlign: 'top',
-                y: 25,
+                y: 7,
                 floating: true,
                 backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || 'white',
-                borderColor: '#CCC',
-                borderWidth: 1,
-                shadow: false
+                    Highcharts.defaultOptions.legend.backgroundColor || // theme
+                    'rgba(255,255,255,0.25)'
             },
             tooltip: {
                 headerFormat: '<b>{point.x}</b><br/>',
