@@ -96,7 +96,7 @@ const AdverseEventsSeverity = ({ globalFilter }) => {
                     {
                         name: 'NOT INDICATED',
                         y: notindictatedVal,
-                        color: "#FA7072"
+                        color: "#f28e2b"
                     }]
                 }
             ]
