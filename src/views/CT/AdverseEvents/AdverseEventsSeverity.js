@@ -1,19 +1,56 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
+import { getAll } from '../../Shared/Api';
 
 const AdverseEventsSeverity = ({ globalFilter }) => {
     const [severityGrading, setSeverityGrading] = useState({});
     const [adverseEventsActionsBySeverity, setAdverseEventsActionsBySeverity] = useState({});
 
+    const loadSeverityGrading =  useCallback(async () => {
+        let params = null;
 
-    useEffect(() => {
-        loadSeverityGrading();
-        loadAdverseEventsActionsBySeverity();
-    }, [globalFilter]);
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
 
-    const loadSeverityGrading =  async () => {
+        let mildVal = 0;
+        let moderateVal = 0;
+        let severeVal = 0;
+        let noneVal = 0;
+        let unknownVal = 0;
+        let notindictatedVal = 0;
+
+        const result = await getAll('care-treatment/getAeSeverityGrading', params);
+        const mild = result.filter(obj => obj.Severity == "Mild");
+        const moderate = result.filter(obj => obj.Severity == "Moderate");
+        const severe = result.filter(obj => obj.Severity == "Severe");
+        const none = result.filter(obj => obj.Severity == "None");
+        const unknown = result.filter(obj => obj.Severity == "Unknown");
+
+        if (mild.length > 0) {
+            mildVal = mild[0].total;
+        }
+
+        if (moderate.length > 0) {
+            moderateVal = moderate[0].total;
+        }
+
+        if (severe.length > 0) {
+            severeVal = severe[0].total;
+        }
+
+        if (none.length > 0) {
+            noneVal = none[0].total;
+        }
+
+        if (unknown.length > 0) {
+            unknownVal = unknown[0].total;
+        }
+
+        notindictatedVal = noneVal + unknownVal;
+
         setSeverityGrading({
             chart: {
                 type: 'pie',
@@ -30,41 +67,43 @@ const AdverseEventsSeverity = ({ globalFilter }) => {
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
-                        enabled: false
+                        enabled: true,
+                        format: '<b>{point.name}</b> <br/> {point.percentage:.1f} % <br/> ({point.y})'
                     },
                     showInLegend: true
                 }
             },
             series: [
                 {
-                    name: 'STABILITY STATUS AMONG ACTIVE PATIENTS',
+                    name: 'SEVERITY GRADING OF AEs',
                     colorByPoint: true,
                     data: [
                     {
                         name: 'MILD',
-                        y: 35.62,
+                        y: mildVal,
                         color: "#1AB394"
                     },
                     {
                         name: 'SEVERE',
-                        y: 18.48,
-                        sliced: true,
-                        selected: true,
+                        y: severeVal,
                         color: "#2F4050"
                     },
                     {
                         name: 'MODERATE',
-                        y: 45.90,
-                        sliced: true,
-                        selected: true,
+                        y: moderateVal,
                         color: "#D4FF78"
+                    },
+                    {
+                        name: 'NOT INDICATED',
+                        y: notindictatedVal,
+                        color: "#FA7072"
                     }]
                 }
             ]
         });
-    };
+    }, [globalFilter]);
 
-    const loadAdverseEventsActionsBySeverity = async () => {
+    const loadAdverseEventsActionsBySeverity = useCallback(async () => {
         setAdverseEventsActionsBySeverity({
             chart: {
                 type: 'column'
@@ -137,7 +176,12 @@ const AdverseEventsSeverity = ({ globalFilter }) => {
                 data: [2, 2, 3, 2]
             }]
         });
-    };
+    }, [globalFilter]);
+
+    useEffect(() => {
+        loadSeverityGrading();
+        loadAdverseEventsActionsBySeverity();
+    }, [loadSeverityGrading, loadAdverseEventsActionsBySeverity]);
 
     return (
         <div className="row">
