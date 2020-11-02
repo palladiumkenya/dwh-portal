@@ -73,9 +73,6 @@ const HIVTreatmentOverview = () => {
                 <TabPane tabId="vl">
                     <VL />
                 </TabPane>
-                <TabPane tabId="tbHiv">
-                    <TBHIV />
-                </TabPane>
             </TabContent>
             <p></p>
         </div>
