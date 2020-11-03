@@ -31,7 +31,15 @@ const NewOnArt = () => {
             <CTFilter onFilterChange={updateGlobalFilter} />
             <p></p><NewOnArtTrends globalFilter={globalFilter}/>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><NewOnArtByAgeSex globalFilter={globalFilter}/>
+            <p></p>
+            <div className="row">
+                <div className="col-6">
+                    
+                </div>
+                <div className="col-6">
+                    <NewOnArtByAgeSex globalFilter={globalFilter}/>
+                </div>
+            </div>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
             <p></p><MedianTimeToArtStart/>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
@@ -41,8 +49,8 @@ const NewOnArt = () => {
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
             <p></p><TimeFromDiagnosisToStart globalFilter={globalFilter}/>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><FacilitiesNewOnArtList globalFilter={globalFilter}/>
-            <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
+            {/* <p></p><FacilitiesNewOnArtList globalFilter={globalFilter}/>
+            <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p> */}
         </div>
     );
 
