@@ -103,6 +103,7 @@ const HtsUptakeByPopulationType = ({ globalFilter }) => {
             },
             series: [{
                 colorByPoint: true,
+                name: '',
                 data: [{
                     name: 'General Population',
                     y: genPopVal,

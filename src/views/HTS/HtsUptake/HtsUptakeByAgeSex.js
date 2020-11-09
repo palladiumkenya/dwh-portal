@@ -22,10 +22,10 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
         const result = await getAll('hts/uptakeByAgeSex', params);
         const result_positivity = await getAll('hts/uptakeByAgeSexPositivity', params);
         for(let i = 0; i < result.length; i++) {
-            if(result[i].Gender === 'Male' || result[i].Gender === 'M') {
+            if(result[i].Gender === 'Male' || result[i].Gender === 'MALE' || result[i].Gender === 'M') {
                 tested_male.push(parseInt(result[i].Tested, 10));
                 ageGroups.push(result[i].AgeGroup);
-            } else if (result[i].Gender === 'Female' || result[i].Gender === 'F') {
+            } else if (result[i].Gender === 'Female' || result[i].Gender === 'FEMALE' || result[i].Gender === 'F') {
                 tested_female.push(parseInt(result[i].Tested, 10));
             }
         }
@@ -85,13 +85,9 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
             tooltip: {
                 shared: true
             },
-            plotOptions: {
-                column: {
-                    stacking: 'normal'
-                }
-            },
+            plotOptions: { column: { stacking: 'normal', dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             legend: {
-                layout: 'vertical',
+                layout: 'horizontal',
                 align: 'left',
                 x: 120,
                 verticalAlign: 'top',

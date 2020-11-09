@@ -82,13 +82,13 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
                 labels: {
                     format: '{value}%',
                     style: {
-                        color: Highcharts.getOptions().colors[2]
+                        color: Highcharts.getOptions().colors[0]
                     }
                 },
                 title: {
                     text: 'HIV Positivity',
                     style: {
-                        color: Highcharts.getOptions().colors[2]
+                        color: Highcharts.getOptions().colors[0]
                     }
                 },
                 opposite: true
@@ -98,36 +98,23 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
                 title: {
                     text: 'Number Tested',
                     style: {
-                        color: Highcharts.getOptions().colors[0]
+                        color: Highcharts.getOptions().colors[1]
                     }
                 },
                 labels: {
                     format: '{value} ',
                     style: {
-                        color: Highcharts.getOptions().colors[0]
+                        color: Highcharts.getOptions().colors[1]
                     }
                 }
 
             }],
-            tooltip: {
-                shared: true
-            },
-            plotOptions: {
-                column: {
-                    stacking: 'normal'
-                }
-            },
+            tooltip: { shared: true },
             legend: {
-                layout: 'vertical',
-                align: 'left',
-                x: 80,
-                verticalAlign: 'top',
-                y: 55,
-                floating: true,
-                backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || // theme
-                    'rgba(255,255,255,0.25)'
+                floating: true, layout: 'horizontal', align: 'left', verticalAlign: 'top', y: 0, x: 80,
+                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
+            plotOptions: { column: { stacking: 'normal', dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             series: [
                 {
                     name: 'New',

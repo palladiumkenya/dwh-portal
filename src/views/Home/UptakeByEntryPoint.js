@@ -2,9 +2,9 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import AdultMan from '../../../assets/custom/AdultMan.png';
-import AdultWoman from '../../../assets/custom/AdultWoman.png';
-import { getAll } from '../../Shared/Api';
+import AdultMan from '../../assets/custom/AdultMan.png';
+import AdultWoman from '../../assets/custom/AdultWoman.png';
+import { getAll } from '../Shared/Api';
 
 const UptakeByEntryPoint = ({ globalFilter }) => {
     const [viralLoadCascade, setViralLoadCascade] = useState({});

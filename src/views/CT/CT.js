@@ -6,9 +6,9 @@ import DSD from './DSD/DSD';
 import TreatmentOutcomes from './TreatmentOutcomes/TreatmentOutcomes';
 import VL from './VL/VL';
 import AdverseEvents from './AdverseEvents/AdverseEvents';
-import TBHIV from './TBHIV/TBHIV';
+// import TBHIV from './TBHIV/TBHIV';
 
-const HIVTreatmentOverview = () => {
+const CT = () => {
 
     const [globalFilter, setGlobalFilter] = useState({
         ctTabs: {
@@ -79,4 +79,4 @@ const HIVTreatmentOverview = () => {
     );
 };
 
-export default HIVTreatmentOverview;
+export default CT;

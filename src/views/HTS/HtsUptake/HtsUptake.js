@@ -1,15 +1,15 @@
-import HtsUptakeByAgeSex from './HtsUptake/HtsUptakeByAgeSex';
-import HtsUptakeByCounty from './HtsUptake/HtsUptakeByCounty';
-import HtsUptakeByPartner from './HtsUptake/HtsUptakeByPartner';
-import HtsUptakeByPopulationType from './HtsUptake/HtsUptakeByPopulationType';
-import HtsUptakeFilter from '../Shared/HtsUptakeFilter';
-import HtsUptakeMonthsSinceLastTest from './HtsUptake/HtsUptakeMonthsSinceLastTest';
-import HtsUptakeFooter from './HtsUptake/HtsUptakeFooter';
-import HtsUptakeHeader from './HtsUptake/HtsUptakeHeader';
-import HtsUptakeTBScreeningAndTBOutcome from './HtsUptake/HtsUptakeTBScreeningAndTBOutcome';
-import HtsUptakeTestingStrategy from './HtsUptake/HtsUptakeTestingStrategy';
-import HtsUptakeTypeAndSelfTest from './HtsUptake/HtsUptakeTypeAndSelfTest';
-import NumberTestedAndPositivity from './HtsUptake/NumberTestedPositivity';
+import HtsUptakeByAgeSex from './HtsUptakeByAgeSex';
+import HtsUptakeByCounty from './HtsUptakeByCounty';
+import HtsUptakeByPartner from './HtsUptakeByPartner';
+import HtsUptakeByPopulationType from './HtsUptakeByPopulationType';
+import HtsUptakeFilter from './../../Shared/HtsUptakeFilter';
+import HtsUptakeMonthsSinceLastTest from './HtsUptakeMonthsSinceLastTest';
+import HtsUptakeFooter from './HtsUptakeFooter';
+import HtsUptakeHeader from './HtsUptakeHeader';
+import HtsUptakeTBScreeningAndTBOutcome from './HtsUptakeTBScreeningAndTBOutcome';
+import HtsUptakeTestingStrategy from './HtsUptakeTestingStrategy';
+import HtsUptakeTypeAndSelfTest from './HtsUptakeTypeAndSelfTest';
+import NumberTestedAndPositivity from './NumberTestedPositivity';
 import React, { useState } from 'react';
 
 const HtsUptake = () => {

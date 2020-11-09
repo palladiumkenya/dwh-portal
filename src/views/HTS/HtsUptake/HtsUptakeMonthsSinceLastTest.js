@@ -69,19 +69,11 @@ const HtsUptakeMonthsSinceLastTest = ({ globalFilter }) => {
                 },
                 opposite: true
             }],
-            tooltip: {
-                shared: true
-            },
+            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
+            tooltip: { shared: true },
             legend: {
-                layout: 'vertical',
-                align: 'left',
-                x: 120,
-                verticalAlign: 'top',
-                y: 7,
-                floating: true,
-                backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || // theme
-                    'rgba(255,255,255,0.25)'
+                floating: true, layout: 'horizontal', align: 'left', verticalAlign: 'top', y: 0, x: 80,
+                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [{
                 name: 'Number Tested',
