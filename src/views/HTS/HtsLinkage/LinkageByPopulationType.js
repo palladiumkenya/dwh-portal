@@ -85,7 +85,7 @@ const LinkageByPopulationType = ({ globalFilter }) => {
                 }
             },
             series: [{
-                name:"Linked",
+                name:"Number Linked",
                 colorByPoint: true,
                 data: [
                     { name: 'General Population', y: genPopLinked, color: "#1AB394" },

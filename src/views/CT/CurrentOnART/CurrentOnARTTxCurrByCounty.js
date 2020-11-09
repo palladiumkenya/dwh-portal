@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import DataTable from 'react-data-table-component';
 import { getAll } from '../../Shared/Api';
@@ -6,11 +6,8 @@ import * as _ from 'lodash';
 
 const CurrentOnARTTxCurrByCounty = ({ globalFilter }) => {
     const [txCurrByCountyList, setTxCurrByCountyList] = useState({});
-    useEffect(() => {
-        loadTxCurrByCountyList();
-    }, [globalFilter]);
 
-    const loadTxCurrByCountyList = async () => {
+    const loadTxCurrByCountyList = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -152,7 +149,11 @@ const CurrentOnARTTxCurrByCounty = ({ globalFilter }) => {
             ],
             data: data
         });
-    };
+    }, [globalFilter]);
+
+    useEffect(() => {
+        loadTxCurrByCountyList();
+    }, [loadTxCurrByCountyList]);
 
     return (
         <div className="row">

@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import HtsLinkageHeader from './HtsLinkage/HtsLinkageHeader';
-import HtsUptakeFilter from '../Shared/HtsUptakeFilter';
-import NumberPositiveLinked from './HtsLinkage/NumberPositiveLinked';
-import LinkageByAgeSex from './HtsLinkage/LinkageByAgeSex';
-import LinkageByPopulationType from './HtsLinkage/LinkageByPopulationType';
-import LinkageByPartner from './HtsLinkage/LinkageByPartner';
-import LinkageByCounty from './HtsLinkage/LinkageByCounty';
-import HtsLinkageFooter from './HtsLinkage/HtsLinkageFooter';
+import HtsLinkageHeader from './HtsLinkageHeader';
+import HtsUptakeFilter from '../../Shared/HtsUptakeFilter';
+import NumberPositiveLinked from './NumberPositiveLinked';
+import LinkageByAgeSex from './LinkageByAgeSex';
+import LinkageByPopulationType from './LinkageByPopulationType';
+import LinkageByStrategyEntryPoint from './LinkageByStrategyEntryPoint';
+import LinkageByPartner from './LinkageByPartner';
+import LinkageByCounty from './LinkageByCounty';
+import HtsLinkageFooter from './HtsLinkageFooter';
 
 const HtsLinkage = () => {
     const [globalFilter, setGlobalFilter] = useState({
@@ -32,6 +33,8 @@ const HtsLinkage = () => {
             <LinkageByAgeSex globalFilter={globalFilter} />
             <hr/><HtsLinkageFooter/><hr/><div className="strip"></div><p></p>
             <LinkageByPopulationType globalFilter={globalFilter}/>
+            <hr/><HtsLinkageFooter/><hr/><div className="strip"></div><p></p>
+            <LinkageByStrategyEntryPoint globalFilter={globalFilter}/>
             <hr/><HtsLinkageFooter/><hr/><div className="strip"></div><p></p>
             <LinkageByCounty globalFilter={globalFilter}/>
             <hr/><HtsLinkageFooter/><hr/><div className="strip"></div><p></p>
