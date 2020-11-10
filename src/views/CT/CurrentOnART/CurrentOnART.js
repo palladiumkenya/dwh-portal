@@ -4,6 +4,7 @@ import CTFilter from '../../Shared/CTFilter';
 import TrendsInTxCurr from './TrendsInTxCurr';
 import CurrentOnARTFooter from './CurrentOnARTFooter';
 import CurrentOnARTTxCurrByAgeSex from './CurrentOnARTTxCurrByAgeSex';
+import CurrentOnARTTxCurrBySex from './CurrentOnARTTxCurrBySex';
 import CurrentOnARTTxCurrDistributionByCounty from './CurrentOnARTTxCurrDistributionByCounty';
 import CurrentOnARTTxCurrDistributionByPartner from './CurrentOnARTTxCurrDistributionByPartner';
 import CurrentOnARTTxCurrByCounty from './CurrentOnARTTxCurrByCounty';
@@ -33,8 +34,16 @@ const CurrentOnART = () => {
             <CurrentOnARTFooter />
             <hr />
             <div className="strip">&nbsp;</div>
+            <p></p>
+            <div className="row">
+                <div className="col-6">
+                    <CurrentOnARTTxCurrBySex globalFilter={globalFilter}/>
+                </div>
+                <div className="col-6">
+                    <CurrentOnARTTxCurrByAgeSex globalFilter={globalFilter}/>
+                </div>
+            </div>
             <p>&nbsp;</p>
-            <CurrentOnARTTxCurrByAgeSex globalFilter={globalFilter} />
             <hr />
             <CurrentOnARTFooter />
             <hr />
