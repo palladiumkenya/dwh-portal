@@ -14,8 +14,8 @@ const CT = () => {
         ctTabs: {
             "txNew": "NEWLY STARTED ON ART",
             "txCurr": "CURRENT ON ART",
-            "txOpt": "ART OPTIMIZATION",
-            "tbHiv": "TB/HIV",
+            // "txOpt": "ART OPTIMIZATION",
+            // "tbHiv": "TB/HIV",
             "advEv": "ADVERSE EVENTS",
             "dsd": "DSD",
             "vl": "VL MONITORING",

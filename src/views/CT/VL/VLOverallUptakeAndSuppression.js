@@ -38,23 +38,17 @@ const VLOverallUptakeAndSuppression = ({ globalFilter }) => {
             chart: { type: 'column' },
             title: { useHTML: true, text: '&nbsp;' },
             subtitle: { text: '' },
-            plotOptions: { column: { stacking: 'normal' } },
+            plotOptions: { column: { stacking: 'percent' } },
             xAxis: [{
                 categories: vlCategoryNames,
                 crosshair: true
             }],
             yAxis: [{
                 min: 0,
-                title: { text: 'Number of Patients' },
+                title: { text: 'Percentage of Patients' },
             }],
             tooltip: { shared: true },
-            legend: {
-                floating: true,
-                layout: 'horizontal',
-                align: 'left',
-                verticalAlign: 'top',
-                y: 0,
-                x: 80,
+            legend: { floating: true, layout: 'horizontal', align: 'left', verticalAlign: 'top', y: 0, x: 80,
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
