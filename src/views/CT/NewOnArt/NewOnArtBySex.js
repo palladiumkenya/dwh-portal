@@ -65,7 +65,7 @@ const NewOnArtBySex = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX NEW DISTRIBUTION BY AGE AND SEX
+                        TX NEW DISTRIBUTION BY SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

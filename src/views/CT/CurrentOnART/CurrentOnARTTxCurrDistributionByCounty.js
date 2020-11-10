@@ -27,9 +27,7 @@ const CurrentOnARTTxCurrDistributionByCounty = ({ globalFilter }) => {
             chart: {
                 type: 'column'
             },
-            title: {
-                text: ''
-            },
+            title: { useHTML: true, text: ' &nbsp;', align: 'left' },
             subtitle: {
                 text: ''
             },
@@ -44,7 +42,8 @@ const CurrentOnARTTxCurrDistributionByCounty = ({ globalFilter }) => {
                 }
             },
             legend: {
-                enabled: false,
+                floating: true, layout: 'horizontal', align: 'left', verticalAlign: 'top', y: 0, x: 80,
+                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -54,14 +53,9 @@ const CurrentOnARTTxCurrDistributionByCounty = ({ globalFilter }) => {
                 shared: true,
                 useHTML: true
             },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
+            plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             series: [{
-                name: 'TX CURR DISTRIBUTION: ',
+                name: 'TX CURR DISTRIBUTION',
                 color: "#485969",
                 data: txCurr
             }]
