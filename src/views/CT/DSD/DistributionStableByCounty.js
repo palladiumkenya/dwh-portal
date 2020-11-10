@@ -57,12 +57,7 @@ const DistributionStableByCounty = ({ globalFilter }) => {
                 shared: true,
                 useHTML: true
             },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
+            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             series: [{
                 name: 'Number of Patients',
                 color: "#485969",
