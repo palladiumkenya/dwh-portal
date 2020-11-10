@@ -30,12 +30,14 @@ const MedianTimeToArtStartByCounty = () => {
                     min: 0,
                 }
             ],
+            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
+            tooltip: { shared: true },
             legend: {
-                floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
+                floating: true, layout: 'horizontal', align: 'left', verticalAlign: 'top', y: 0, x: 80,
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'Time (Days)', data: medianTimeToArtStartByCounty, type: 'bar', color: "#485969" },
+                { name: 'Time (Days)', data: medianTimeToArtStartByCounty, type: 'column', color: "#485969" },
             ]
         });
     }, []);
