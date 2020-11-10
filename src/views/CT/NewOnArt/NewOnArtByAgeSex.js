@@ -48,14 +48,7 @@ const NewOnArtByAgeSex = ({ globalFilter }) => {
                     }
                 }
             ],
-            plotOptions: {
-                series: {
-                    stacking: 'normal'
-                },
-                bar: {
-                    pointWidth: 18,
-                }
-            },
+            plotOptions: { series: { stacking: 'normal' }, bar: { pointWidth: 18, } },
             tooltip: {
                 formatter: function () {
                     return '<b>' + this.series.name + ', Age Group ' + this.point.category + '</b><br/>' +
@@ -63,7 +56,7 @@ const NewOnArtByAgeSex = ({ globalFilter }) => {
                 }
             },
             legend: {
-                floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
+                floating: true, layout: 'horizontal', align: 'left', verticalAlign: 'top', y: 0, x: 80,
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [

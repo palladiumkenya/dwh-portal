@@ -4,6 +4,7 @@ import NewOnArtHeader from './NewOnArtHeader';
 import NewOnArtFooter from './NewOnArtFooter';
 import NewOnArtTrends from './NewOnArtTrends';
 import NewOnArtByAgeSex from './NewOnArtByAgeSex';
+import NewOnArtBySex from './NewOnArtBySex';
 import MedianTimeToArtStart from './MedianTimeToArtStart';
 import MedianTimeToArtStartByCounty from './MedianTimeToArtStartByCounty';
 import MedianTimeToArtStartByPartner from './MedianTimeToArtStartByPartner';
@@ -34,7 +35,7 @@ const NewOnArt = () => {
             <p></p>
             <div className="row">
                 <div className="col-6">
-                    
+                    <NewOnArtBySex globalFilter={globalFilter}/>
                 </div>
                 <div className="col-6">
                     <NewOnArtByAgeSex globalFilter={globalFilter}/>
