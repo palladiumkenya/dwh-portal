@@ -4,11 +4,11 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const HtsUptakeTestingStrategy = ({ globalFilter }) => {
-    const [hivTestingType, setHivTestingType] = useState({});
-    const [uptakeByEntryPoint, setUptakeByEntryPoint] = useState({});
+const LinkageByStrategyEntryPoint = ({ globalFilter }) => {
+    const [linkageByStrategy, setLinkageByStrategy] = useState({});
+    const [linkageByEntryPoint, setLinkageByEntryPoint] = useState({});
 
-    const loadHivTestingType = useCallback(async () => {
+    const loadLinkageByStrategy = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
@@ -16,18 +16,18 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
         }
 
         const testStrategies = [];
-        let tested = [];
-        let positivity = [];
+        let positive = [];
+        let linkage = [];
 
-        const result = await getAll('hts/uptakeByTestStrategy', params);
+        const result = await getAll('hts/linkageByStrategy', params);
         for (let i = 0; i < result.length; i++) {
-            testStrategies.push(result[i].TestStrategy);
-            tested.push(parseInt(result[i].Tested, 10));
-            const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
-            positivity.push(val);
+            testStrategies.push(result[i].testStrategy);
+            positive.push(parseInt(result[i].positive, 10));
+            const val = parseFloat(parseFloat(result[i].linkage).toFixed(1));
+            linkage.push(val);
         }
 
-        setHivTestingType({
+        setLinkageByStrategy({
             chart: {
                 zoomType: 'xy'
             },
@@ -53,14 +53,14 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
                     }
                 },
                 title: {
-                    text: 'Number Tested',
+                    text: 'Number Positive',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
                 }
             }, { // Secondary yAxis
                 title: {
-                    text: 'HIV Positivity',
+                    text: 'Linkage',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
@@ -73,25 +73,30 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
                 },
                 opposite: true
             }],
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             tooltip: { shared: true },
             legend: {
-                floating: true, layout: 'horizontal', align: 'left', verticalAlign: 'top', y: 0, x: 80,
+                floating: true,
+                layout: 'horizontal',
+                align: 'left',
+                verticalAlign: 'top',
+                y: 0,
+                x: 80,
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
+            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             series: [{
-                name: 'Number Tested',
+                name: 'Number Positive',
                 type: 'column',
                 color: "#1AB394",
-                data: tested,
+                data: positive,
                 tooltip: {
                     valueSuffix: ' '
                 }
 
             }, {
-                name: 'HIV Positivity',
+                name: 'Linkage',
                 type: 'spline',
-                data: positivity,
+                data: linkage,
                 color: "#E06F07",
                 yAxis: 1,
                 tooltip: {
@@ -101,27 +106,26 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
         });
     }, [globalFilter]);
 
-    const loadUptakeByEntryPoint = useCallback(async () => {
+    const loadLinkageByEntryPoint = useCallback(async () => {
         let params = null;
 
         if (globalFilter) {
             params = { ...globalFilter };
         }
 
-        const testStrategies = [];
-        let tested = [];
-        let positivity = [];
+        const entryPoints = [];
+        let positive = [];
+        let linkage = [];
 
-        const result = await getAll('hts/uptakeByEntryPoint', params);
+        const result = await getAll('hts/linkageByEntryPoint', params);
         for (let i = 0; i < result.length; i++) {
-            testStrategies.push(result[i].EntryPoint);
-            tested.push(parseInt(result[i].Tested, 10));
-            const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
-            positivity.push(val);
+            entryPoints.push(result[i].entryPoint);
+            positive.push(parseInt(result[i].positive, 10));
+            const val = parseFloat(parseFloat(result[i].linkage).toFixed(1));
+            linkage.push(val);
         }
 
-
-        setUptakeByEntryPoint({
+        setLinkageByEntryPoint({
             chart: {
                 zoomType: 'xy'
             },
@@ -133,7 +137,7 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
                 text: ''
             },
             xAxis: [{
-                categories: testStrategies,
+                categories: entryPoints,
                 crosshair: true,
             }],
             yAxis: [{ // Primary yAxis
@@ -144,14 +148,14 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
                     }
                 },
                 title: {
-                    text: 'Number Tested',
+                    text: 'Number Positive',
                     style: {
                         color: Highcharts.getOptions().colors[1]
                     }
                 }
             }, { // Secondary yAxis
                 title: {
-                    text: 'HIV Positivity',
+                    text: 'Linkage',
                     style: {
                         color: Highcharts.getOptions().colors[0]
                     }
@@ -164,25 +168,30 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
                 },
                 opposite: true
             }],
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             tooltip: { shared: true },
             legend: {
-                floating: true, layout: 'horizontal', align: 'left', verticalAlign: 'top', y: 0, x: 80,
+                floating: true,
+                layout: 'horizontal',
+                align: 'left',
+                verticalAlign: 'top',
+                y: 0,
+                x: 80,
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
+            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             series: [{
-                name: 'Number Tested',
+                name: 'Number Positive',
                 type: 'column',
                 color: "#1AB394",
-                data: tested,
+                data: positive,
                 tooltip: {
                     valueSuffix: ' '
                 }
 
             }, {
-                name: 'HIV Positivity',
+                name: 'Linkage',
                 type: 'spline',
-                data: positivity,
+                data: linkage,
                 color: "#E06F07",
                 yAxis: 1,
                 tooltip: {
@@ -193,19 +202,19 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
     }, [globalFilter]);
 
     useEffect(() => {
-        loadHivTestingType();
-        loadUptakeByEntryPoint();
-    }, [loadHivTestingType, loadUptakeByEntryPoint]);
+        loadLinkageByStrategy();
+        loadLinkageByEntryPoint();
+    }, [loadLinkageByStrategy, loadLinkageByEntryPoint]);
 
     return (
         <div className="row">
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        HTS uptake by strategy
+                        LINKAGE BY STRATEGY
                     </CardHeader>
                     <CardBody className="trends-body">
-                        <HighchartsReact highcharts={Highcharts} options={hivTestingType} />
+                        <HighchartsReact highcharts={Highcharts} options={linkageByStrategy} />
                     </CardBody>
                 </Card>
             </div>
@@ -213,10 +222,10 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        Uptake and positivity by entry point
+                        LINKAGE BY ENTRY POINT
                     </CardHeader>
                     <CardBody className="trends-body">
-                        <HighchartsReact highcharts={Highcharts} options={uptakeByEntryPoint} />
+                        <HighchartsReact highcharts={Highcharts} options={linkageByEntryPoint} />
                     </CardBody>
                 </Card>
             </div>
@@ -224,4 +233,4 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
     );
 };
 
-export default HtsUptakeTestingStrategy;
+export default LinkageByStrategyEntryPoint;

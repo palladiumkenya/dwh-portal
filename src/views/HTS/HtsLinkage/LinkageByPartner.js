@@ -46,7 +46,10 @@ const LinkageByPartner = ({ globalFilter }) => {
                 }
             ],
             tooltip: { shared: true },
-            legend:{ enabled:false },
+            legend: {
+                floating: true, layout: 'horizontal', align: 'left', verticalAlign: 'top', y: 0, x: 80,
+                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
+            },
             series: [
                 { name: 'Number Positive', data: positive, type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ' } },
                 { name: 'Linkage', data: linkage, type: 'spline', color: "#E06F07", tooltip: { valueSuffix: '%' }, yAxis: 1 }

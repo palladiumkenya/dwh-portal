@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import DataTable from 'react-data-table-component';
 
 const AdverseEventsTable = ({ globalFilter }) => {
     const [adverseEvents, setAdverseEvents] = useState({});
+    
+    const loadAdverseEvents = useCallback(async () => {
+
+    }, []);
 
     useEffect(() => {
         loadAdverseEvents();
-    }, [globalFilter]);
-
-    const loadAdverseEvents = async () => {
-
-    };
+    }, [loadAdverseEvents]);
 
     return (
         <div className="row">

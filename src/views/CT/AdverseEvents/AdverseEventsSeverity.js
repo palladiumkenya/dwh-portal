@@ -23,11 +23,11 @@ const AdverseEventsSeverity = ({ globalFilter }) => {
         let notindictatedVal = 0;
 
         const result = await getAll('care-treatment/getAeSeverityGrading', params);
-        const mild = result.filter(obj => obj.Severity == "Mild");
-        const moderate = result.filter(obj => obj.Severity == "Moderate");
-        const severe = result.filter(obj => obj.Severity == "Severe");
-        const none = result.filter(obj => obj.Severity == "None");
-        const unknown = result.filter(obj => obj.Severity == "Unknown");
+        const mild = result.filter(obj => obj.Severity === "Mild");
+        const moderate = result.filter(obj => obj.Severity === "Moderate");
+        const severe = result.filter(obj => obj.Severity === "Severe");
+        const none = result.filter(obj => obj.Severity === "None");
+        const unknown = result.filter(obj => obj.Severity === "Unknown");
 
         if (mild.length > 0) {
             mildVal = mild[0].total;
@@ -104,6 +104,12 @@ const AdverseEventsSeverity = ({ globalFilter }) => {
     }, [globalFilter]);
 
     const loadAdverseEventsActionsBySeverity = useCallback(async () => {
+        let params = null;
+
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+
         setAdverseEventsActionsBySeverity({
             chart: {
                 type: 'column'

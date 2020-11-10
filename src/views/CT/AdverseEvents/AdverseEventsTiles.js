@@ -71,11 +71,11 @@ const AdverseEventsTiles = ({ globalFilter }) => {
         const result = await getAll('care-treatment/getChildrenAdverseEvents', params);
         for (let i = 0; i < categories.length; i++) {
             for (let j = 0; j < result.length; j++) {
-                if(categories[i] == result[j].AgeGroup && (result[j].Gender.toLowerCase() == "female" || result[j].Gender.toLowerCase() == "f" )) {
+                if(categories[i] === result[j].AgeGroup && (result[j].Gender.toLowerCase() === "female" || result[j].Gender.toLowerCase() === "f" )) {
                     femaleData.push(result[j].adverseEventsByAgeGroup);
                 }
 
-                if(categories[i] == result[j].AgeGroup && (result[j].Gender.toLowerCase() == "male" || result[j].Gender.toLowerCase() == "m" )) {
+                if(categories[i] === result[j].AgeGroup && (result[j].Gender.toLowerCase() === "male" || result[j].Gender.toLowerCase() === "m" )) {
                     maleData.push(result[j].adverseEventsByAgeGroup);
                 }
             }
@@ -163,11 +163,11 @@ const AdverseEventsTiles = ({ globalFilter }) => {
         const result = await getAll('care-treatment/getAdultsAdverseEvents', params);
         for (let i = 0; i < categories.length; i++) {
             for (let j = 0; j < result.length; j++) {
-                if(categories[i] == result[j].AgeGroup && (result[j].Gender.toLowerCase() == "female" || result[j].Gender.toLowerCase() == "f" )) {
+                if(categories[i] === result[j].AgeGroup && (result[j].Gender.toLowerCase() === "female" || result[j].Gender.toLowerCase() === "f" )) {
                     femaleData.push(result[j].adverseEventsByAgeGroup);
                 }
 
-                if(categories[i] == result[j].AgeGroup && (result[j].Gender.toLowerCase() == "male" || result[j].Gender.toLowerCase() == "m" )) {
+                if(categories[i] === result[j].AgeGroup && (result[j].Gender.toLowerCase() === "male" || result[j].Gender.toLowerCase() === "m" )) {
                     maleData.push(result[j].adverseEventsByAgeGroup);
                 }
             }

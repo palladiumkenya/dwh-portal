@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import CTHomeOverview from './Home/CTHomeOverview';
-import CTFilter from '../Shared/CTFilter';
-import UptakeByEntryPoint from './Home/UptakeByEntryPoint';
-import CTHomeFooter from './Home/CTHomeFooter';
-import CTHomeTXNew from './Home/CTHomeTXNew';
-import CTHomeStabilityStatusAndTrendsInDSD from './Home/CTHomeStabilityStatusAndTrendsInDsd';
-import CTHomeReportingRates from './Home/CTHomeReportingRates';
+import CTHomeOverview from './CTHomeOverview';
+import CTFilter from './../Shared/CTFilter';
+import UptakeByEntryPoint from './UptakeByEntryPoint';
+import CTHomeFooter from './CTHomeFooter';
+import CTHomeTXNew from './CTHomeTXNew';
+import CTHomeStabilityStatusAndTrendsInDSD from './CTHomeStabilityStatusAndTrendsInDsd';
+import CTHomeReportingRates from './CTHomeReportingRates';
 
-const CareTreatment = () => {
+const Home = () => {
     const [globalFilter, setGlobalFilter] = useState({
         county: [],
         subCounty: [],
@@ -23,6 +23,7 @@ const CareTreatment = () => {
 
     return (
         <div className="animated fadeIn">
+            <br></br>
             <div className="strip">&nbsp;</div>
 
             <CTHomeOverview period={globalFilter?.year} />
@@ -77,4 +78,4 @@ const CareTreatment = () => {
     );
 };
 
-export default CareTreatment;
+export default Home;
