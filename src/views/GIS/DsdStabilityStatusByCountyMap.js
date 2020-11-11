@@ -4,7 +4,9 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { getAll } from './../Shared/Api';
 import mapKenyaByCounty from './../Shared/kenyaByCounty.json';
+
 require('highcharts/modules/map')(Highcharts);
+Highcharts.maps["custom/kenya-county"] = mapKenyaByCounty;
 
 const DsdStabilityStatusByCountyMap = ({ globalFilter }) => {
 
@@ -88,6 +90,7 @@ const DsdStabilityStatusByCountyMap = ({ globalFilter }) => {
         }
         
         setDsdStabilityStatusByCountyMap({
+            chart: { map: 'custom/kenya-county' },
             title: { text: '' },
             colorAxis: { min: 0 },
             tooltip: {
@@ -102,7 +105,6 @@ const DsdStabilityStatusByCountyMap = ({ globalFilter }) => {
                 verticalAlign: 'bottom'
             },
             series: [{
-                mapData: mapKenyaByCounty,
                 data: data,
                 joinBy: ['CC_1', 'id'],
                 name: 'Stable Patients',
