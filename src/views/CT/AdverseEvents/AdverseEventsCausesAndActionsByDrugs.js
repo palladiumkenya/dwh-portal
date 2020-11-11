@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
+import { getAll } from '../../Shared/Api';
 
 const AdverseEventsCausesAndActionsByDrugs = ({ globalFilter }) => {
     const [reportedCausesOfAEs, setReportedCausesOfAEs] = useState({});
@@ -13,6 +14,23 @@ const AdverseEventsCausesAndActionsByDrugs = ({ globalFilter }) => {
     }, [globalFilter]);
 
     const loadReportedCausesOfAE = async () => {
+        let params = null;
+
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+
+        const result = await getAll('care-treatment/getReportedCausesOfAes', params);
+        const arvArray = result.filter(obj => obj.AdverseEventCause === 'ARV');
+        const arvAndOthersArray = result.filter(obj => obj.AdverseEventCause === 'ARV + OTHER DRUGS');
+        const non_arvArray = result.filter(obj => obj.AdverseEventCause === 'NON-ARVS');
+        const unspecifiedArray = result.filter(obj => obj.AdverseEventCause === 'UNSPECIFIED');
+
+        const arv = arvArray.length > 0 ? arvArray[0].total : 0;
+        const arvAndOthers = arvAndOthersArray.length > 0 ? arvAndOthersArray[0].total : 0;
+        const non_arv = non_arvArray.length > 0 ? non_arvArray[0].total : 0;
+        const unspecified = unspecifiedArray.length > 0 ? unspecifiedArray[0].total : 0;
+
         setReportedCausesOfAEs({
             chart: {
                 type: 'pie',
@@ -29,7 +47,8 @@ const AdverseEventsCausesAndActionsByDrugs = ({ globalFilter }) => {
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
-                        enabled: false
+                        enabled: true,
+                        format: '<b>{point.name}</b> <br/> {point.percentage:.1f} % <br/> ({point.y})'
                     },
                     showInLegend: true
                 }
@@ -41,28 +60,22 @@ const AdverseEventsCausesAndActionsByDrugs = ({ globalFilter }) => {
                     data: [
                         {
                             name: 'ARV',
-                            y: 45.90,
+                            y: arv,
                             color: "#1AB394"
                         },
                         {
                             name: 'NON-ARVs',
-                            y: 28.30,
-                            sliced: true,
-                            selected: true,
+                            y: non_arv,
                             color: "#2F4050"
                         },
                         {
                             name: 'ARV + OTHER DRUGS',
-                            y: 1.14,
-                            sliced: true,
-                            selected: true,
+                            y: arvAndOthers,
                             color: "#1f77b4"
                         },
                         {
                             name: 'UNSPECIFIED',
-                            y: 15.74,
-                            sliced: true,
-                            selected: true,
+                            y: unspecified,
                             color: "#D4FF78"
                         }]
                 }
