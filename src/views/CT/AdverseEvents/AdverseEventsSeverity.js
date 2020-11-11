@@ -7,6 +7,9 @@ import { getAll } from '../../Shared/Api';
 const AdverseEventsSeverity = ({ globalFilter }) => {
     const [severityGrading, setSeverityGrading] = useState({});
     const [adverseEventsActionsBySeverity, setAdverseEventsActionsBySeverity] = useState({});
+    const [totalAdverseEventsActions, setTotalAdverseEventsActions] = useState({
+        total: ''
+    });
 
     const loadSeverityGrading =  useCallback(async () => {
         let params = null;
@@ -162,6 +165,12 @@ const AdverseEventsSeverity = ({ globalFilter }) => {
         const severe_all_drugs_stopped_total = severe_allDrugsStopped.length > 0 ? severe_allDrugsStopped.map(item => item.total).reduce((m, n) => m + n) : 0;
         const unknown_all_drugs_stopped_total = unknown_allDrugsStopped.length > 0 ? unknown_allDrugsStopped.map(item => item.total).reduce((x, y) => x + y) : 0;
 
+        const n = result.map(item => item.total).reduce((x, y) => x + y);
+
+        setTotalAdverseEventsActions({
+            total: n
+        });
+
         setAdverseEventsActionsBySeverity({
             chart: {
                 type: 'column'
@@ -259,7 +268,7 @@ const AdverseEventsSeverity = ({ globalFilter }) => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ADVERSE EVENTS ACTIONS BY SEVERITY(N=495)
+                        ADVERSE EVENTS ACTIONS BY SEVERITY(N={totalAdverseEventsActions.total})
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
