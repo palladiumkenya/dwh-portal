@@ -38,7 +38,8 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
-                        enabled: false
+                        enabled: true,
+                        format: '<b>{point.name}</b> <br/> {point.percentage:.1f} % <br/> ({point.y})'
                     },
                     showInLegend: true
                 }
