@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import GISHeader from './GISHeader';
 import GISFooter from './GISFooter';
 import DsdStabilityStatusByCountyMap from './DsdStabilityStatusByCountyMap';
+import CountiesMap from './CountiesMap';
 import TxCurrByProvinceMap from './TxCurrByProvinceMap';
 
 const GIS = () => {
@@ -11,10 +12,13 @@ const GIS = () => {
             <GISHeader></GISHeader>
             <p></p>
             <div className="row">
-                <div className="col-6">
+                <div className="col-4">
                     <DsdStabilityStatusByCountyMap/>
                 </div>
-                <div className="col-6">
+                <div className="col-4">
+                    <CountiesMap/>
+                </div>
+                <div className="col-4">
                     <TxCurrByProvinceMap/>
                 </div>
             </div>
