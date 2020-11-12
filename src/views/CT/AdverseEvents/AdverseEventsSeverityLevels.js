@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
+import { getAll } from '../../Shared/Api';
 
 const AdverseEventsSeverityLevels = ({ globalFilter }) => {
     const [severityLevels, setSeverityLevels] = useState({});
@@ -11,6 +12,34 @@ const AdverseEventsSeverityLevels = ({ globalFilter }) => {
     }, [globalFilter]);
 
     const loadSeverityLevels = async () => {
+        let params = null;
+
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+
+        const categories = [];
+        const severe_values = [];
+        const moderate_values = [];
+        const mild_values = [];
+        const result = await getAll('care-treatment/getReportedAesWithSeverityLevels', params);
+        for (let i = 0; i < result.length; i++) {
+            categories.push(result[i].AdverseEvent);
+        }
+
+        for (let i = 0; i < categories.length; i++) {
+            const cat_severe = result.filter(obj => obj.AdverseEvent == categories[i] && obj.Severity == 'Severe');
+            const cat_moderate = result.filter(obj => obj.AdverseEvent == categories[i] && obj.Severity == 'Moderate');
+            const cat_mild = result.filter(obj => obj.AdverseEvent == categories[i] && obj.Severity == 'Mild');
+
+            const x  = cat_severe.length > 0 ? cat_severe.map(item => item.total).reduce((x, y) => x + y) : 0;
+            const y  = cat_moderate.length > 0 ? cat_moderate.map(item => item.total).reduce((x, y) => x + y) : 0;
+            const z  = cat_mild.length > 0 ? cat_mild.map(item => item.total).reduce((x, y) => x + y) : 0;
+
+            severe_values.push(x);
+            moderate_values.push(y);
+            mild_values.push(z);
+        }
         setSeverityLevels({
             chart: {
                 type: 'column'
@@ -19,10 +48,7 @@ const AdverseEventsSeverityLevels = ({ globalFilter }) => {
                 text: ''
             },
             xAxis: {
-                categories: ['SKIN RASH', 'LIPIDODYSTROPHY', 'BURNING AND TINGLING IN LIMBS',
-                    'NAUSEA', 'DIZZINESS', 'FATIGUE', 'HEADACHE', 'ANAEMIA', 'JAUNDICE', 'INSOMNIA',
-                    'ABNORMAL DISCOMFORT', 'GYNAECOMASTIA', 'HYPERGLYCEAMIA', 'LACTIC ACIDOSIS',
-                    'FEVER', 'LIVER FAILURE', 'PANCREATITIS']
+                categories: categories
             },
             yAxis: {
                 min: 0,
@@ -67,15 +93,15 @@ const AdverseEventsSeverityLevels = ({ globalFilter }) => {
             series: [{
                 name: 'SEVERE',
                 color: "#485969",
-                data: [5, 3, 4, 7, 2, 2,2,1, 2, 1, 1, 3]
+                data: severe_values
             }, {
                 name: 'MODERATE',
                 color: "#1AB394",
-                data: [2, 2, 3, 2, 2, 2, 2, 1, 2, 1, 1]
+                data: moderate_values
             }, {
                 name: 'MILD',
                 color: "#1f77b4",
-                data: [2, 2, 3, 2, 2, 2]
+                data: mild_values
             }]
         });
     };
