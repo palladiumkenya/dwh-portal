@@ -84,6 +84,44 @@ const AdverseEventsCausesAndActionsByDrugs = ({ globalFilter }) => {
     };
 
     const loadActionsByDrugs = async () => {
+        let params = null;
+
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+
+        const categories = [];
+        const result = await getAll('care-treatment/getAeActionsByDrugs', params);
+
+        for (let i = 0; i < result.length; i++) {
+            if (!categories.includes(result[i].AdverseEventCause)) {
+                categories.push(result[i].AdverseEventCause);
+            }
+        }
+        const severeVals = [];
+        const moderateVals = [];
+        const mildVals = [];
+        const undocumentedVals = [];
+        for (let i = 0; i < categories.length; i++) {
+            const categoryVals =  result.filter(obj => obj.AdverseEventCause == categories[i]);
+            //Severe
+            const severeVal = categoryVals.filter(x => x.Severity === 'Severe');
+            const sumSevere = severeVal.length > 0 ? severeVal.map(item => item.total).reduce((x, y) => x + y) : 0;
+            severeVals.push(sumSevere);
+            //Moderate
+            const moderateVal = categoryVals.filter(x => x.Severity === 'Moderate');
+            const sumModerate = moderateVal.length > 0 ? moderateVal.map(item => item.total).reduce((x, y) => x + y) : 0;
+            moderateVals.push(sumModerate);
+            //Mild
+            const mildVal = categoryVals.filter(x => x.Severity === 'Mild');
+            const sumMild = mildVal.length > 0 ? mildVal.map(item => item.total).reduce((x, y) => x + y) : 0;
+            mildVals.push(sumMild);
+            //Undocumented
+            const undocumentedVal = categoryVals.filter(x => x.Severity === 'Undocumented');
+            const sumundocumented = undocumentedVal.length > 0 ? undocumentedVal.map(item => item.total).reduce((x, y) => x + y) : 0;
+            undocumentedVals.push(sumundocumented);
+        }
+
         setActionsByDrugs({
             chart: {
                 type: 'column'
@@ -92,8 +130,7 @@ const AdverseEventsCausesAndActionsByDrugs = ({ globalFilter }) => {
                 text: ''
             },
             xAxis: {
-                categories: ['ARV', 'NON-ARV', 'ARV + OTHER DRUGS',
-                    'UNSPECIFIED']
+                categories: categories
             },
             yAxis: {
                 min: 0,
@@ -138,15 +175,19 @@ const AdverseEventsCausesAndActionsByDrugs = ({ globalFilter }) => {
             series: [{
                 name: 'SEVERE',
                 color: "#485969",
-                data: [5, 3, 4, 7]
+                data: severeVals
             }, {
                 name: 'MODERATE',
                 color: "#1AB394",
-                data: [2, 2, 3, 2]
+                data: moderateVals
             }, {
                 name: 'MILD',
                 color: "#1f77b4",
-                data: [2, 2, 3, 2]
+                data: mildVals
+            }, {
+                name: 'UNDOCUMENTED',
+                color: '',
+                data: undocumentedVals
             }]
         });
     };
