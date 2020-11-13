@@ -65,7 +65,7 @@ const ReportingRatesTrends = ({ globalFilter }) => {
             legend: { enabled: false },
             credits: { enabled: true },
             responsive: { rules: [ { condition: { maxWidth: 500, }, chartOptions: { legend: { enabled: false } } } ] },
-            series: [ { data: Object.values(data).slice(-12), color: "#1AB394" } ]
+            series: [ { name: "Overall Reporting Rates", data: Object.values(data).slice(-12), color: "#1AB394" } ]
         });
     }, [globalFilter]);
 
@@ -109,7 +109,7 @@ const ReportingRatesTrends = ({ globalFilter }) => {
             legend: { enabled: false },
             credits: { enabled: true },
             responsive: { rules: [ { condition: { maxWidth: 500, }, chartOptions: { legend: { enabled: false } } } ] },
-            series: [ { data: Object.values(data).slice(numberOfMonths*-1), color: "#2F4050" } ]
+            series: [ { name: "Consistency of Reporting", data: Object.values(data).slice(numberOfMonths*-1), color: "#2F4050" } ]
         });
     }, [globalFilter]);
 
@@ -124,7 +124,7 @@ const ReportingRatesTrends = ({ globalFilter }) => {
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
                         <span className="trends-text">
-                            TRENDS IN REPORTING ({globalFilter.dockets[globalFilter.docket]} - RECENCY)
+                            TRENDS IN OVERALL REPORTING
                         </span>
                     </CardHeader>
                     <CardBody className="trends-body">
@@ -138,7 +138,7 @@ const ReportingRatesTrends = ({ globalFilter }) => {
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
                         <span className="trends-text">
-                            TRENDS IN REPORTING ({globalFilter.dockets[globalFilter.docket]} - CONSISTENCY)
+                            TRENDS IN CONSISTENCY OF REPORTING
                         </span>
                     </CardHeader>
                     <CardBody className="trends-body">

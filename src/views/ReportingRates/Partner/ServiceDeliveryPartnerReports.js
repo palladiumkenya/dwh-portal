@@ -32,12 +32,11 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
             title: { text: '' },
             subtitle: { text: '' },
             xAxis: { categories: partners, title: { text: null } },
-            yAxis: { min: 0, max: 200, title: { text: 'Number of Facilities by Partner', align: 'high' }, labels: { overflow: 'justify' } },
+            yAxis: { min: 0, title: { text: 'Number of Facilities', align: 'high' }, labels: { overflow: 'justify' } },
             tooltip: { valueSuffix: '' },
             plotOptions: { bar: { dataLabels: { enabled: true } } },
-            legend: { layout: 'vertical', align: 'right', verticalAlign: 'top', x: -40, y: 80, floating: true, borderWidth: 1, backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF', shadow: true },
-            credits: { enabled: false },
-            series: [{ data: partners_series, color: "#2F4050;", name: 'Distribution of EMR Sites by Partner' }]
+            legend: { enabled: false },
+            series: [{ data: partners_series, color: "#2F4050;", name: 'Distribution of EMR Sites' }]
         });
     }, [globalFilter]);
 
@@ -50,19 +49,18 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
 
         const result = await getAll('manifests/recencyreportingbypartner/' + params.docket, params);
         const partners = result.map(({ partner  }) => partner);
-        const partners_series = result.map(({ Percentage }) => parseInt(Percentage, 10));
+        const partners_series = result.map(({ Percentage }) => parseInt(Percentage, 10) > 100 ? 100:parseInt(Percentage, 10));
 
         setRecencyOfReportingByPartner({
             chart: { type: 'bar' },
             title: { text: '' },
             subtitle: { text: '' },
             xAxis: { categories: partners, title: { text: null } },
-            yAxis: { min: 0, title: { text: 'Percentage (%) of Uploads by Partner', align: 'high' }, labels: { overflow: 'justify' } },
+            yAxis: { min: 0, max: 100, title: { text: 'Percentage (%) of Overall Reporting Rates', align: 'high' }, labels: { overflow: 'justify' } },
             tooltip: { valueSuffix: '' },
             plotOptions: { bar: { dataLabels: { enabled: true } } },
-            legend: { layout: 'vertical', align: 'right', verticalAlign: 'top', x: -40, y: 80, floating: true, borderWidth: 1, backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF', shadow: true },
-            credits: { enabled: false },
-            series: [{ data: partners_series, color: "#59A14F", name: 'Overall Reporting - Care & Treatment by Partner March 2020' }]
+            legend: { enabled: false },
+            series: [{ data: partners_series, color: "#59A14F", name: 'Overall Reporting Rates' }]
         });
     }, [globalFilter]);
 
@@ -82,12 +80,11 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
             title: { text: '' },
             subtitle: { text: '' },
             xAxis: { categories: partners, title: { text: null } },
-            yAxis: { min: 0, max: 100, title: { text: 'Percentage (%) of Uploaded PKVs by Partner', align: 'high' }, labels: { overflow: 'justify' } },
+            yAxis: { min: 0, max: 100, title: { text: 'Percentage (%) of Consistency of Reporting', align: 'high' }, labels: { overflow: 'justify' } },
             tooltip: { valueSuffix: '' },
             plotOptions: { bar: { dataLabels: { enabled: true } } },
-            legend: { layout: 'vertical', align: 'right', verticalAlign: 'top', x: -40, y: 80, floating: true, borderWidth: 1, backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF', shadow: true },
-            credits: { enabled: false },
-            series: [{ data: partners_series, color: "#F28E2B", name: 'Consistency Of Reporting - ' + params.docket + ' by Partner ' + monthYear }]
+            legend: { enabled: false },
+            series: [{ data: partners_series, color: "#F28E2B", name: 'Consistency of Reporting' }]
         });
     }, [globalFilter, monthYear]);
 
@@ -102,7 +99,7 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
             <div className="col-4">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        Distribution of EMR sites by Partner
+                        Distribution of EMR sites
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -115,7 +112,7 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
             <div className="col-4">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        Recency Of Reporting - { globalFilter.dockets[globalFilter.docket] } by Partner { monthYear }
+                        Overall Reporting Rates
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -128,7 +125,7 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
             <div className="col-4">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        Consistency Of Reporting - { globalFilter.dockets[globalFilter.docket] } by Partner { monthYear }
+                        Consistency of Reporting
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

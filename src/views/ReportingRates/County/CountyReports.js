@@ -33,7 +33,7 @@ const CountyReports = ({ globalFilter }) => {
             title: { text: '' },
             subtitle: { text: '' },
             xAxis: { categories: counties, title: { text: null }, visible: true },
-            yAxis: { min: 0, title: { text: 'Number of Facilities by County', align: 'high' }, labels: { overflow: 'justify' }, visible: true },
+            yAxis: { min: 0, title: { text: 'Number of Facilities', align: 'high' }, labels: { overflow: 'justify' }, visible: true },
             tooltip: { valueSuffix: '' },
             plotOptions: { bar: { dataLabels: { enabled: true } } },
             legend: { enabled: false },
@@ -51,7 +51,7 @@ const CountyReports = ({ globalFilter }) => {
 
         const result = await getAll('manifests/recencyreportingbycounty/' + params.docket, params);
         const counties = result.map(({ county  }) => county);
-        const counties_series = result.map(({ Percentage }) => parseInt(Percentage, 10));
+        const counties_series = result.map(({ Percentage }) => parseInt(Percentage, 10) > 100 ? 100:parseInt(Percentage, 10));
 
         setRecencyOfReportingByCounty({
             chart: { type: 'bar' },

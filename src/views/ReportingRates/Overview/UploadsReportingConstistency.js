@@ -77,11 +77,7 @@ const UploadsReportingConsistency = ({ globalFilter }) => {
                     </CardHeader>
                     <CardBody
                         className="align-items-center d-flex justify-content-center"
-                        style={{
-                            textAlign: 'center',
-                            backgroundColor: '#F6F6F6',
-                            height: '100px'
-                        }}
+                        style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                     >
                         <div className="col-12">
                             <span className="expected-uploads-text">{expected}</span>
@@ -92,7 +88,7 @@ const UploadsReportingConsistency = ({ globalFilter }) => {
             <div className="col-4">
                 <Card className="card-uploads-consistency-rates">
                     <CardHeader className="expected-uploads-header">
-                        RECENCY REPORTING RATES
+                        OVERALL REPORTING RATES
                     </CardHeader>
                     <CardBody
                         className="align-items-center justify-content-center"
@@ -100,12 +96,7 @@ const UploadsReportingConsistency = ({ globalFilter }) => {
                     >
                         <div className="col-12" style={{ textAlign: 'center' }}>
                             <span className="overall-rates-figure">{recencyStats.stats}</span>&nbsp;
-                            <sup className="overall-rates-sup"> {recencyStats.statsPerc ? recencyStats.statsPerc:0}%</sup>
-                        </div>
-                        <div className="col-12" style={{ textAlign: 'center' }}>
-                            <span className="overall-rates-text">
-                                { globalFilter.dockets[globalFilter.docket] } { monthYear }
-                            </span>
+                            <sup className="overall-rates-sup"> {recencyStats.statsPerc ? recencyStats.statsPerc:0}<span className="overall-rates-sup-perc"> %</span></sup>
                         </div>
                     </CardBody>
                 </Card>
@@ -121,12 +112,7 @@ const UploadsReportingConsistency = ({ globalFilter }) => {
                     >
                         <div className="col-12" style={{ textAlign: 'center' }}>
                             <span className="consistency-reporting-figure">{consistnecyStats.stats}</span>
-                            <sup className="consistency-reporting-sup"> { consistnecyStats.statsPerc ? consistnecyStats.statsPerc:0 }%</sup>
-                        </div>
-                        <div className="col-12" style={{ textAlign: 'center' }}>
-                            <span className="consistency-reporting-text">
-                                CONSISTENCY FOR { monthYear.toUpperCase() }
-                            </span>
+                            <sup className="consistency-reporting-sup"> { consistnecyStats.statsPerc ? consistnecyStats.statsPerc:0 }<span className="consistency-reporting-sup-perc"> %</span></sup>
                         </div>
                     </CardBody>
                 </Card>
