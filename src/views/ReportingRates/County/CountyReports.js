@@ -32,14 +32,13 @@ const CountyReports = ({ globalFilter }) => {
             chart: { type: 'bar' },
             title: { text: '' },
             subtitle: { text: '' },
-            xAxis: { categories: counties, title: { text: null }, visible: true, scrollbar: { enabled: true } },
-            yAxis: { min: 0, max: 200, title: { text: 'Number of Facilities by county', align: 'high' }, labels: { overflow: 'justify' }, visible: true },
+            xAxis: { categories: counties, title: { text: null }, visible: true },
+            yAxis: { min: 0, title: { text: 'Number of Facilities by County', align: 'high' }, labels: { overflow: 'justify' }, visible: true },
             tooltip: { valueSuffix: '' },
             plotOptions: { bar: { dataLabels: { enabled: true } } },
-            legend: { layout: 'vertical', align: 'center', verticalAlign: 'top', floating: true, borderWidth: 0, backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF', shadow: true },
-            credits: { enabled: false },
+            legend: { enabled: false },
             responsive: { rules: [ { chartOptions: { legend: { enabled: false } } } ] },
-            series: [{ data: counties_series, color: "#2F4050;", name: 'Distribution of EMR Sites by County' }]
+            series: [{ data: counties_series, color: "#2F4050;", name: 'Distribution of EMR Sites' }]
         });
     }, [globalFilter]);
 
@@ -59,12 +58,11 @@ const CountyReports = ({ globalFilter }) => {
             title: { text: '' },
             subtitle: { text: '' },
             xAxis: { categories: counties, title: { text: null } },
-            yAxis: { min: 0, max: 120, title: { text: 'Percentage (%) consistency of uploads', align: 'high' }, labels: { overflow: 'justify' } },
+            yAxis: { min: 0, max: 100, title: { text: 'Percentage (%) of Overall Reporting Rates', align: 'high' }, labels: { overflow: 'justify' } },
             tooltip: { valueSuffix: '' },
             plotOptions: { bar: { dataLabels: { enabled: true } } },
-            legend: { layout: 'vertical', align: 'center', verticalAlign: 'top', floating: true, borderWidth: 1, backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF', shadow: true },
-            credits: { enabled: false },
-            series: [{ data: counties_series, color: "#59A14F" }]
+            legend: { enabled: false },
+            series: [{ name: "Overall Reporting Rates", data: counties_series, color: "#59A14F", tooltip: { valueSuffix: ' %' } }]
         });
     }, [globalFilter]);
 
@@ -84,12 +82,11 @@ const CountyReports = ({ globalFilter }) => {
             title: { text: '' },
             subtitle: { text: '' },
             xAxis: { categories: counties, title: { text: null } },
-            yAxis: { min: 0, max: 100, title: { text: 'Reporting Rate', align: 'high' }, labels: { overflow: 'justify' } },
+            yAxis: { min: 0, max: 100, title: { text: 'Percentage (%) of Consistency of Reporting', align: 'high' }, labels: { overflow: 'justify' } },
             tooltip: { valueSuffix: '' },
             plotOptions: { bar: { dataLabels: { enabled: true } } },
-            legend: { layout: 'vertical', align: 'center', verticalAlign: 'top', floating: true, borderWidth: 1, backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF', shadow: true },
-            credits: { enabled: false },
-            series: [{ data: counties_series, color: "#F28E2B", name: 'Consistency Of Reporting - ' + params.docket + ' by County' }]
+            legend: { enabled: false },
+            series: [{ data: counties_series, color: "#F28E2B", name: 'Consistency of Reporting', tooltip: { valueSuffix: ' %' } }]
         });
     }, [globalFilter]);
 
@@ -104,7 +101,7 @@ const CountyReports = ({ globalFilter }) => {
             <div className="col-4">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        Distribution of EMR sites by County
+                        Distribution of EMR sites
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -117,7 +114,7 @@ const CountyReports = ({ globalFilter }) => {
             <div className="col-4">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        Recency Of Reporting - { globalFilter.dockets[globalFilter.docket] } by County { monthYear }
+                        Overall Reporting Rates
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -130,7 +127,7 @@ const CountyReports = ({ globalFilter }) => {
             <div className="col-4">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        Consistency Of Reporting - { globalFilter.dockets[globalFilter.docket] } by County { monthYear }
+                        Consistency Of Reporting
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
