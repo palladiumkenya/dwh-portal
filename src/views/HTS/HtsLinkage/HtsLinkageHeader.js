@@ -17,7 +17,7 @@ const HtsPositivityLinkageHeader = ({ period }) => {
                         <div className="row">
                             <div className="col-6">
                                 <div className="reporting-rates-card-title">
-                                    HTS LINKAGE
+                                    HIV TESTING SERVICES LINKAGE
                                 </div>
                             </div>
                             <div className="col-1">

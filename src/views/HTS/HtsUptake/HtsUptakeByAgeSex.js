@@ -54,38 +54,12 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
                 categories: ageGroups,
                 crosshair: true,
             }],
-            yAxis: [{ // Primary yAxis
-                labels: {
-                    format: '{value}',
-                    style: {
-                        color: Highcharts.getOptions().colors[1]
-                    }
-                },
-                title: {
-                    text: 'Number Tested',
-                    style: {
-                        color: Highcharts.getOptions().colors[1]
-                    }
-                }
-            },{ // Secondary yAxis
-                title: {
-                    text: 'HIV Positivity',
-                    style: {
-                        color: Highcharts.getOptions().colors[0]
-                    }
-                },
-                labels: {
-                    format: '{value} %',
-                    style: {
-                        color: Highcharts.getOptions().colors[0]
-                    }
-                },
-                opposite: true
-            }],
-            tooltip: {
-                shared: true
-            },
-            plotOptions: { column: { stacking: 'normal', dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
+            yAxis: [
+                { title: { text: 'Number Tested' } },
+                { title: { text: 'HIV Positivity' }, labels: { format: '{value} %' }, opposite: true }
+            ],
+            tooltip: { shared: true },
+            plotOptions: { column: { stacking: 'normal' } },
             legend: {
                 layout: 'horizontal',
                 align: 'left',
@@ -135,7 +109,7 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        HTS uptake and positivity by age and sex
+                        HIV TESTING SERVICES UPTAKE and positivity by age and sex
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

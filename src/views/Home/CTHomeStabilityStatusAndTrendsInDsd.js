@@ -39,26 +39,18 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
                     cursor: 'pointer',
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.name}</b> <br/> {point.percentage:.1f} % <br/> ({point.y})'
-                    },
-                    showInLegend: true
+                        format: '<b>{point.name}</b> <br/> {point.percentage:.1f} % <br/> ({point.y:,.0f})'
+                    }
                 }
             },
             series: [
                 {
-                    name: 'STABILITY STATUS AMONG ACTIVE PATIENTS',
+                    name: 'Stability Status',
                     colorByPoint: true,
-                    data: [{
-                        name: 'UNSTABLE',
-                        y: unStable,
-                        color: "#1AB394"
-                    }, {
-                        name: 'STABLE',
-                        y: stable,
-                        sliced: true,
-                        selected: true,
-                        color: "#2F4050"
-                    }]
+                    data: [
+                        { name: 'Stable', y: stable, sliced: true, selected: true, color: "#2F4050" },
+                        { name: 'Unstable', y: unStable, color: "#BBE65F" },
+                    ]
                 }
             ]
         });
@@ -111,36 +103,26 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
                 text: ''
             },
             xAxis: {
-                categories: ["STABLE(YES)", "STABLE(NO)"]
+                categories: ["Stable", "Unstable"]
             },
             yAxis: {
                 min: 0,
-                max: 150,
+                max: 100,
                 title: {
-                    text: 'PERCENTAGE OF PATIENTS'
+                    text: 'Percentage of Patients'
                 },
-                stackLabels: {
-                    enabled: true,
-                    style: {
-                        fontWeight: 'bold',
-                        color: ( // theme
-                            Highcharts.defaultOptions.title.style &&
-                            Highcharts.defaultOptions.title.style.color
-                        ) || 'gray'
-                    }
-                }
+                // stackLabels: {
+                //     enabled: true,
+                //     style: {
+                //         fontWeight: 'bold',
+                //         color: ( // theme
+                //             Highcharts.defaultOptions.title.style &&
+                //             Highcharts.defaultOptions.title.style.color
+                //         ) || 'gray'
+                //     }
+                // }
             },
-            legend: {
-                layout: 'vertical',
-                align: 'left',
-                x: 120,
-                verticalAlign: 'top',
-                y: 7,
-                floating: true,
-                backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || // theme
-                    'rgba(255,255,255,0.25)'
-            },
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             tooltip: {
                 headerFormat: '<b>{point.x}</b><br/>',
                 pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
@@ -148,9 +130,9 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
             plotOptions: {
                 column: {
                     stacking: 'normal',
-                    dataLabels: {
-                        enabled: true
-                    }
+                    // dataLabels: {
+                    //     enabled: true
+                    // }
                 }
             },
             series: seriesData

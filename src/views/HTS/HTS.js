@@ -7,8 +7,9 @@ const HTS = () => {
 
     const [tabInfo, setTabInfo] = useState({
         htsTabs: {
-            "uptake": "HTS UPTAKE",
-            "linkage": "HTS LINKAGE",
+            "uptake": "HIV TESTING SERVICES UPTAKE",
+            "linkage": "HIV TESTING SERVICES LINKAGE",
+            "pns": "PARTNER NOTIFICATION SERVICES",
         },
         htsTab: "uptake"
     });

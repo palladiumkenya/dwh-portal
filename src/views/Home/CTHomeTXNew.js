@@ -63,93 +63,20 @@ const CTHomeTXNew = ({ globalFilter }) => {
         }
 
         setTxNew({
-            chart: {
-                zoomType: 'xy'
-            },
-            title: {
-                useHTML: true,
-                text: ' &nbsp;',
-            },
-            subtitle: {
-                text: ''
-            },
-            xAxis: [{
-                categories: months,
-                crosshair: true,
-            }],
-            yAxis: [{ // Primary yAxis
-                labels: {
-                    format: '{value}',
-                    style: {
-                        color: Highcharts.getOptions().colors[1]
-                    }
-                },
-                title: {
-                    text: 'NUMBER OF PATIENTS',
-                    style: {
-                        color: Highcharts.getOptions().colors[1]
-                    }
-                }
-            },{ // Secondary yAxis
-                title: {
-                    text: 'NUMBER STARTED ON ART',
-                    style: {
-                        color: Highcharts.getOptions().colors[0]
-                    }
-                },
-                labels: {
-                    format: '{value}',
-                    style: {
-                        color: Highcharts.getOptions().colors[0]
-                    }
-                },
-                opposite: true
-            }],
-            tooltip: {
-                shared: true
-            },
-            plotOptions: {
-                column: {
-                    stacking: 'normal'
-                }
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'left',
-                x: 120,
-                verticalAlign: 'top',
-                y: 7,
-                floating: true,
-                backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || // theme
-                    'rgba(255,255,255,0.25)'
-            },
-            series: [{
-                name: 'Male',
-                type: 'column',
-                color: "#1AB394",
-                data: male,
-                tooltip: {
-                    valueSuffix: ' '
-                }
-            }, {
-                name: 'Female',
-                type: 'column',
-                color: "#485969",
-                data: female,
-                tooltip: {
-                    valueSuffix: ' '
-                }
-            }, {
-                name: 'Cumulative Tx New',
-                type: 'spline',
-                yAxis: 1,
-                data: cumulative,
-                color: "#E06F07",
-                tooltip: {
-                    valueSuffix: ''
-                }
-            }]
+            title: { text: '', },
+            xAxis: [{ categories: months, crosshair: true, }],
+            yAxis: [
+                { title: { text: 'Number of Patients' } },
+                { title: { text: 'Cummulative New on ART'}, opposite: true }
+            ],
+            tooltip: { shared: true },
+            plotOptions: { column: { stacking: 'normal' } },
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+            series: [
+                { name: 'Male', type: 'column', color: "#1AB394", data: male },
+                { name: 'Female', type: 'column', color: "#485969", data: female },
+                { name: 'Cumulative New on ART', type: 'spline', yAxis: 1, data: cumulative, color: "#E06F07"}
+            ]
         });
     }, [globalFilter]);
 
@@ -162,7 +89,7 @@ const CTHomeTXNew = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX NEW
+                        NEW ON ART
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
