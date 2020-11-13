@@ -103,7 +103,7 @@ const HtsUptakeByPopulationType = ({ globalFilter }) => {
             },
             series: [{
                 colorByPoint: true,
-                name: '',
+                name: 'HIV Testing Services Uptake',
                 data: [{
                     name: 'General Population',
                     y: genPopVal,
@@ -114,10 +114,9 @@ const HtsUptakeByPopulationType = ({ globalFilter }) => {
                     sliced: true,
                     selected: true,
                     color: "#2F4050"
-                }, {
-                    name: 'Missing',
-                    y: missingPopVal
-                }]
+                },
+                    // { name: 'Missing', y: missingPopVal }
+                ]
             }]
         });
     }, [globalFilter]);
@@ -131,7 +130,7 @@ const HtsUptakeByPopulationType = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        HTS uptake and positivity population type
+                        HIV TESTING SERVICES Uptake and positivity population type
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="row">
@@ -144,7 +143,7 @@ const HtsUptakeByPopulationType = ({ globalFilter }) => {
                                     <tr><td>TYPE</td><td>TESTED</td><td>POSITIVE</td><td>%</td></tr>
                                     <tr><td>GENERAL POPULATION</td><td>{htsOverview.genPopTested}</td><td>{htsOverview.genPopPositive}</td><td>{htsOverview.genPopPositivity} % </td></tr>
                                     <tr><td>KEY POPULATION</td><td>{htsOverview.keyPopTested}</td><td>{htsOverview.keyPopPositive}</td><td>{htsOverview.keyPopPositivity} % </td></tr>
-                                    <tr><td>Missing</td><td>{htsOverview.missingPopTested}</td><td>{htsOverview.missingPopPositive}</td><td>{htsOverview.missingPopPositivity} % </td></tr>
+                                    {/* <tr><td>Missing</td><td>{htsOverview.missingPopTested}</td><td>{htsOverview.missingPopPositive}</td><td>{htsOverview.missingPopPositivity} % </td></tr> */}
                                     <tr><td>TOTAL</td><td>{htsOverview.totalTested}</td><td>{htsOverview.totalPositive}</td><td>{htsOverview.totalPercentage} % </td></tr>
                                     </tbody>
                                 </table>

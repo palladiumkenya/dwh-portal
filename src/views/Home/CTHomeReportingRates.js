@@ -1,87 +1,96 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
-import HighchartsReact from 'highcharts-react-official';
-import Highcharts from 'highcharts';
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
+import moment from 'moment';
+import { getAll } from './../Shared/Api';
 
 const CTHomeReportingRates = ({ globalFilter }) => {
-    const [ctReportingRates, setCTReportingRates] = useState({});
+    const [expected, setExpected] = useState(0);
+    const [recency, setRecencyTrend] = useState({
+        chart: { type: "column" },
+        title: { text: "", style: { display: "none" } },
+        xAxis: { categories: [], title: { text: null } },
+        yAxis: { min: 0, title: { text: "", align: "high" }, labels: { overflow: "justify" } },
+        plotOptions: { bar: { dataLabels: { enabled: true } } },
+        legend: { enabled: false },
+        credits: { enabled: true },
+        responsive: { rules: [ { condition: { maxWidth: 500, }, chartOptions: { legend: { enabled: false } } } ] },
+        series: [ { data: [], color: "#1AB394" } ]
+    });
 
-    const loadCTReportingRates = useCallback(async () => {
-        // let params = null;
+    const getPerc = (count, total) => {
+        return parseInt((count / total) * 100);
+    };
 
-        // if (globalFilter) {
-        //     params = { ...globalFilter };
-        // }
+    const loadExpected = useCallback(async () => {
+        let params = null;
 
-        setCTReportingRates({
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: ''
-            },
-            subtitle: {
-                text: ''
-            },
-            xAxis: {
-                categories: [
-                    'Jan',
-                    'Feb',
-                    'Mar',
-                    'Apr',
-                    'May',
-                    'Jun',
-                    'Jul',
-                    'Aug',
-                    'Sep',
-                    'Oct',
-                    'Nov',
-                    'Dec'
-                ],
-                crosshair: true
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'PERCENT'
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
-            series: [{
-                color: "#1AB394",
-                name: '',
-                data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-            }]
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+
+        const data = await getAll('manifests/expected/CT', params);
+        setExpected(data.expected);
+    }, [globalFilter]);
+
+    const loadRecencyTrend = useCallback(async () => {
+        let params = null;
+        
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+
+        delete params.period;
+        const result = await getAll('manifests/recency/trends/CT', params);
+        const months = {};
+        const data = {};
+        const periodDate = moment(globalFilter.period, 'YYYY,M');
+        
+        for (const element of result) {
+            let dataDate = moment(element.year + "-" + element.month, 'YYYY-M');
+            if (dataDate.isAfter(periodDate)) {
+                continue;
+            }
+            let monthYear = dataDate.format('YYYYMM');
+            if (typeof months[monthYear] !== 'undefined') {
+                data[monthYear] = parseInt(data[monthYear]) + parseInt(element.recency);
+            } else {
+                months[monthYear] = dataDate.format('MMM YYYY');
+                data[monthYear] = parseInt(element.recency);
+            }
+        }
+        
+        setRecencyTrend({
+            chart: { type: "column" },
+            title: { text: "", style: { display: "none" } },
+            xAxis: { categories: Object.values(months).slice(-12), title: { text: null } },
+            yAxis: { min: 0, title: { text: "", align: "high" }, labels: { overflow: "justify" } },
+            plotOptions: { bar: { dataLabels: { enabled: true } } },
+            legend: { enabled: false },
+            credits: { enabled: true },
+            responsive: { rules: [ { condition: { maxWidth: 500, }, chartOptions: { legend: { enabled: false } } } ] },
+            series: [ { name: "Reporting Rates", data: Object.values(data).slice(-12), color: "#1AB394" } ]
         });
-    }, []);
+    }, [globalFilter]);
 
     useEffect(() => {
-        loadCTReportingRates();
-    }, [loadCTReportingRates]);
+        loadExpected();
+        loadRecencyTrend();
+    }, [loadExpected, loadRecencyTrend]);
 
     return (
         <div className="row">
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        Reporting rates AND Care & treatment(last 12 months)(N =495)
+                        <span className="trends-text">
+                            REPORTING RATES IN CARE & TREATMENT
+                        </span>
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={ctReportingRates} />
+                            <HighchartsReact highcharts={Highcharts} options={recency} />
                         </div>
                     </CardBody>
                 </Card>

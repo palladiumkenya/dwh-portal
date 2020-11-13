@@ -62,59 +62,19 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
         }
 
         setNumberTestedPositivity({
-            chart: {
-                zoomType: 'xy'
-            },
-            title: {
-                useHTML: true,
-                text: ' &nbsp;',
-                align: 'left'
-            },
-            subtitle: {
-                text: ' ',
-                align: 'left'
-            },
-            xAxis: [{
-                categories: months,
-                crosshair: true,
-            }],
-            yAxis: [{ // Primary yAxis
-                labels: {
-                    format: '{value}%',
-                    style: {
-                        color: Highcharts.getOptions().colors[0]
-                    }
-                },
-                title: {
-                    text: 'HIV Positivity',
-                    style: {
-                        color: Highcharts.getOptions().colors[0]
-                    }
-                },
-                opposite: true
-
-            }, { // Secondary yAxis
-                gridLineWidth: 0,
-                title: {
-                    text: 'Number Tested',
-                    style: {
-                        color: Highcharts.getOptions().colors[1]
-                    }
-                },
-                labels: {
-                    format: '{value} ',
-                    style: {
-                        color: Highcharts.getOptions().colors[1]
-                    }
-                }
-
-            }],
+            title: { useHTML: true, text: ' &nbsp;', align: 'left' },
+            subtitle: { text: ' ', align: 'left' },
+            xAxis: [{ categories: months, crosshair: true }],
+            yAxis: [
+                { title: { text: 'HIV Positivity'}, labels: { format: '{value} %' }, opposite: true },
+                { title: { text: 'Number Tested' } }
+            ],
             tooltip: { shared: true },
             legend: {
                 floating: true, layout: 'horizontal', align: 'left', verticalAlign: 'top', y: 0, x: 80,
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
-            plotOptions: { column: { stacking: 'normal', dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
+            plotOptions: { column: { stacking: 'normal' } },
             series: [
                 {
                     name: 'New',
@@ -194,7 +154,7 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        HTS Uptake and Hiv Positivity by Month
+                        HIV TESTING SERVICES Uptake and Hiv Positivity by Month
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

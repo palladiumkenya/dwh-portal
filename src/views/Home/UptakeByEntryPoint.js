@@ -179,7 +179,7 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
             },
             xAxis: {
                 categories: [
-                    'TX CURR',
+                    'CURRENT ON ART',
                     'ELIGIBLE FOR VL',
                     'HAS VL AT 12 MONTHS',
                     'SUPPRESSED AT 12 MONTHS'
@@ -219,28 +219,28 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
                 name: 'Viral Load Cascade - Active ART Clients',
                 data: [
                     {
-                        name: 'TX CURR',
+                        name: 'CURRENT ON ART',
                         y: TX_CURR,
                         color: "#3475B3",
-                        text: TX_CURR
+                        text: TX_CURR.toLocaleString('en')
                     },
                     {
                         name: 'ELIGIBLE FOR VL',
                         y: Eligible4VL,
                         color: "#F28E2B",
-                        text: Eligible4VL + ' (' + parseFloat(((Eligible4VL/TX_CURR)*100).toString()).toFixed(0) + '%)'
+                        text: Eligible4VL.toLocaleString('en') + ' (' + parseFloat(((Eligible4VL/TX_CURR)*100).toString()).toFixed(0) + '%)'
                     },
                     {
                         name: 'HAS VL AT 12 MONTHS',
                         y: Last12MonthVL,
                         color: "#0D5647",
-                        text: Last12MonthVL + ' (' + parseFloat(((Last12MonthVL/TX_CURR)*100).toString()).toFixed(0) + '%)'
+                        text: Last12MonthVL.toLocaleString('en') + ' (' + parseFloat(((Last12MonthVL/TX_CURR)*100).toString()).toFixed(0) + '%)'
                     },
                     {
                         name: 'SUPPRESSED AT 12 MONTHS',
                         y: Last12MVLSup,
                         color: "#E15759",
-                        text: Last12MVLSup + ' (' + parseFloat(((Last12MVLSup/TX_CURR)*100).toString()).toFixed(0) + '%)'
+                        text: Last12MVLSup.toLocaleString('en') + ' (' + parseFloat(((Last12MVLSup/TX_CURR)*100).toString()).toFixed(0) + '%)'
                     }
                 ]
             }]
