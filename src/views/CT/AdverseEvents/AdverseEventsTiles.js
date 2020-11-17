@@ -261,8 +261,8 @@ const AdverseEventsTiles = ({ globalFilters }) => {
     const loadTotalNoOfAeReportedInAdults = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const result = await getAll('care-treatment/getNoOfReportedAeInAdults', params);
         if (result) {
@@ -270,13 +270,13 @@ const AdverseEventsTiles = ({ globalFilters }) => {
                 total: result.total
             });
         }
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadTotalNoOfAeReportedInChildren = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const result = await getAll('care-treatment/getNoOfReportedAeInChildren', params);
         if (result) {
@@ -284,13 +284,13 @@ const AdverseEventsTiles = ({ globalFilters }) => {
                 total: result.total
             });
         }
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadTotalNoAdultsWithAe = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const result = await getAll('care-treatment/getNumberOfAdultsWithAe', params);
         if (result) {
@@ -298,13 +298,13 @@ const AdverseEventsTiles = ({ globalFilters }) => {
                 total: result.total
             });
         }
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadTotalNoChildrenWithAe = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const result = await getAll('care-treatment/getNumberOfChildrenWithAe', params);
         if (result) {
@@ -312,7 +312,7 @@ const AdverseEventsTiles = ({ globalFilters }) => {
                 total: result.total
             });
         }
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadActiveOnARTAdults();
