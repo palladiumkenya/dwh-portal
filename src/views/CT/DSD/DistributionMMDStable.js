@@ -4,13 +4,13 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const DistributionMMDStable = ({ globalFilter }) => {
+const DistributionMMDStable = ({ globalFilters }) => {
     const [distributionMMDStable, setDistributionMMDStable] = useState({});
 
     const loadDistributionMMDStable = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const categories = [
             "Standard Care",
@@ -49,7 +49,7 @@ const DistributionMMDStable = ({ globalFilter }) => {
                 { name: 'Number of Patients', data: data, type: 'column', color: "#485969" },
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadDistributionMMDStable();

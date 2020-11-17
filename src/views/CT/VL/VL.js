@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import CTFilter from '../../Shared/CTFilter';
+import React, { useCallback } from 'react';
+import VisibilitySensor from 'react-visibility-sensor';
+import UniversalFilter from './../../Shared/UniversalFilter';
 import VLHeader from './VLHeader';
 import VLFooter from './VLFooter';
 import VLOverallUptakeAndSuppression from './VLOverallUptakeAndSuppression';
@@ -22,89 +23,83 @@ import VLSuppressionByYear12Month from './VLSuppressionByYear12Month';
 import VLSuppressionByYear24Month from './VLSuppressionByYear24Month';
 import VLOverallUptakeAndSuppressionByFacility from './VLOverallUptakeAndSuppressionByFacility';
 
-const VL = () => {
-    const [globalFilter, setGlobalFilter] = useState({
-        county: [],
-        subCounty: [],
-        facility: [],
-        partner: [],
-        year:`${new Date().getFullYear()}`,
-        month: ''
-    });
-
-    const updateGlobalFilter = (selection) => {
-        setGlobalFilter(selection);
-    };
-
+const VL = ({globalFilters, onGlobalFiltersChange}) => {
+    const onVisibilityChange = useCallback(async (isVisible) => {
+        if (globalFilters.ctTab === 'vl') {
+            onGlobalFiltersChange({ ...globalFilters, stickyFilter: !isVisible});
+        }
+    }, [globalFilters, onGlobalFiltersChange]);
     return (
         <div className="animated fadeIn">
             <div className="strip"></div>
             <VLHeader></VLHeader>
-            <CTFilter onFilterChange={updateGlobalFilter} />
+            <VisibilitySensor onChange={onVisibilityChange}>
+                <UniversalFilter globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+            </VisibilitySensor>
             <p></p>
             <div className="row">
                 <div className="col-6">
-                    <VLOverallUptakeAndSuppression globalFilter={globalFilter}/>
+                    <VLOverallUptakeAndSuppression globalFilters={globalFilters}/>
                 </div>
                 <div className="col-6">
-                    <MedianTimeTo1stVL globalFilter={globalFilter}/>
+                    <MedianTimeTo1stVL globalFilters={globalFilters}/>
                 </div>
             </div>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><MedianTimeTo1stVLByCounty globalFilter={globalFilter}/>
+            <p></p><MedianTimeTo1stVLByCounty globalFilters={globalFilters}/>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><MedianTimeTo1stVLByPartner globalFilter={globalFilter}/>
+            <p></p><MedianTimeTo1stVLByPartner globalFilters={globalFilters}/>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
             <p></p>
             <div className="row">
                 <div className="col-4">
-                    <VLUptakeBySex globalFilter={globalFilter}/>
+                    <VLUptakeBySex globalFilters={globalFilters}/>
                 </div>
                 <div className="col-8">
-                    <VLUptakeByAge globalFilter={globalFilter}/>
+                    <VLUptakeByAge globalFilters={globalFilters}/>
                 </div>
             </div>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLUptakeByCounty globalFilter={globalFilter}/>
+            <p></p><VLUptakeByCounty globalFilters={globalFilters}/>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLUptakeByPartner globalFilter={globalFilter}/>
+            <p></p><VLUptakeByPartner globalFilters={globalFilters}/>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
             <div className="row">
                 <div className="col-4">
-                    <VLOutcomesOverall globalFilter={globalFilter}/>
+                    <VLOutcomesOverall globalFilters={globalFilters}/>
                 </div>
                 <div className="col-8">
-                    <VLOutcomesBySex globalFilter={globalFilter}/>
+                    <VLOutcomesBySex globalFilters={globalFilters}/>
                 </div>
             </div>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLSuppressionByAge globalFilter={globalFilter}/>
+            <p></p><VLSuppressionByAge globalFilters={globalFilters}/>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
             <div className="row">
                 <div className="col-4">
-                    <VLSuppressionByRegimen globalFilter={globalFilter}/>
+                    <VLSuppressionByRegimen globalFilters={globalFilters}/>
                 </div>
                 <div className="col-8">
-                    <VLSuppressionByYear globalFilter={globalFilter}/>
+                    <VLSuppressionByYear globalFilters={globalFilters}/>
                 </div>
             </div>
             <p></p>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLSuppressionByCounty globalFilter={globalFilter}/>
+            <p></p><VLSuppressionByCounty globalFilters={globalFilters}/>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLSuppressionByPartner globalFilter={globalFilter}/>
+            <p></p><VLSuppressionByPartner globalFilters={globalFilters}/>
             <p></p>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLSuppressionByYear6Month globalFilter={globalFilter}/>
+            <p></p><VLSuppressionByYear6Month globalFilters={globalFilters}/>
             <p></p>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLSuppressionByYear12Month globalFilter={globalFilter}/>
+            <p></p><VLSuppressionByYear12Month globalFilters={globalFilters}/>
             <p></p>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLSuppressionByYear24Month globalFilter={globalFilter}/>
+            <p></p><VLSuppressionByYear24Month globalFilters={globalFilters}/>
             <p></p>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLOverallUptakeAndSuppressionByFacility globalFilter={globalFilter}/>
+            <p></p><VLOverallUptakeAndSuppressionByFacility globalFilters={globalFilters}/>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
         </div>
     );

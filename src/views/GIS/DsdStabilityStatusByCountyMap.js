@@ -8,7 +8,7 @@ import mapKenyaByCounty from './../Shared/kenyaByCounty.json';
 require('highcharts/modules/map')(Highcharts);
 Highcharts.maps["custom/kenya-county"] = mapKenyaByCounty;
 
-const DsdStabilityStatusByCountyMap = ({ globalFilter }) => {
+const DsdStabilityStatusByCountyMap = ({ globalFilters }) => {
 
     const [dsdStabilityStatusByCounty, setDsdStabilityStatusByCountyMap] = useState({});
 

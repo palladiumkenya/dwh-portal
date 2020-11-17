@@ -4,14 +4,14 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const HtsUptakeMonthsSinceLastTest = ({ globalFilter }) => {
+const HtsUptakeMonthsSinceLastTest = ({ globalFilters }) => {
     const [monthsSinceLastTest, setMonthsSinceLastTest] = useState({});
 
     const loadMonthsSinceLastTest = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const result = await getAll('hts/monthsSinceLastTest', params);
@@ -95,7 +95,7 @@ const HtsUptakeMonthsSinceLastTest = ({ globalFilter }) => {
                 }
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadMonthsSinceLastTest();

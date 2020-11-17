@@ -4,18 +4,18 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { getAll } from '../../Shared/Api';
 
-const AdverseEventsSeverityLevels = ({ globalFilter }) => {
+const AdverseEventsSeverityLevels = ({ globalFilters }) => {
     const [severityLevels, setSeverityLevels] = useState({});
 
     useEffect(() => {
         loadSeverityLevels();
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadSeverityLevels = async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const categories = [];

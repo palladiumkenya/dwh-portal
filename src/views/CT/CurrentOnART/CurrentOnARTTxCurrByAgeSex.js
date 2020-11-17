@@ -4,12 +4,12 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
+const CurrentOnARTTxCurrByAgeSex = ({ globalFilters }) => {
     const [txCurrByAgeAndSex, setTxCurrByAgeAndSex] = useState({});
 
     const getYear = () => {
-        if (globalFilter.year) {
-            return globalFilter.year.split(',')[0];
+        if (globalFilters.year) {
+            return globalFilters.year.split(',')[0];
         }
         return 2020;
     };
@@ -17,8 +17,8 @@ const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
     const loadTxCurrByAgeAndSex = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         let ageGroups = [];
@@ -89,7 +89,7 @@ const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
                 { name: 'Male', data: txNewMale, color: "#1AB394", tooltip: { valueSuffix: ' ' } }
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadTxCurrByAgeAndSex();

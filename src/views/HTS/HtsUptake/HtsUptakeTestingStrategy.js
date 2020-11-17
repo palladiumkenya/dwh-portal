@@ -4,15 +4,15 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const HtsUptakeTestingStrategy = ({ globalFilter }) => {
+const HtsUptakeTestingStrategy = ({ globalFilters }) => {
     const [hivTestingType, setHivTestingType] = useState({});
     const [uptakeByEntryPoint, setUptakeByEntryPoint] = useState({});
 
     const loadHivTestingType = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const testStrategies = [];
@@ -99,13 +99,13 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
                 }
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadUptakeByEntryPoint = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const testStrategies = [];
@@ -190,7 +190,7 @@ const HtsUptakeTestingStrategy = ({ globalFilter }) => {
                 }
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadHivTestingType();

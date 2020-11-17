@@ -4,13 +4,13 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const VLUptakeBySex = ({ globalFilter }) => {
+const VLUptakeBySex = ({ globalFilters }) => {
     const [vlUptakeBySex, setVLUptakeBySex] = useState({});
 
     const loadVLUptakeBySex = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const sexCategories = ['Male', 'Female'];
         const result = await getAll('care-treatment/vlUptakeBySex', params);
@@ -18,20 +18,13 @@ const VLUptakeBySex = ({ globalFilter }) => {
         for(let i = 0; i < result.length; i++) {
             if(result[i].gender === 'Male') {
                 data[0] = Number((parseInt(result[i].vlDone)/parseInt(result[i].eligible))*100).toFixed(0);
-                console.log(parseInt(result[i].vlDone)/parseInt(result[i].eligible));
-                console.log('Male Done: ' + result[i].vlDone);
-                console.log('Male Eligible: ' + result[i].eligible);
                 data[0] = parseInt(result[i].vlDone);
             }
             if(result[i].gender === 'Female') {
                 data[1] = Number((parseInt(result[i].vlDone)/parseInt(result[i].eligible))*100).toFixed(0);
-                console.log(parseInt(result[i].vlDone)/parseInt(result[i].eligible));
-                console.log('Female Done: ' + result[i].vlDone);
-                console.log('Female Eligible: ' + result[i].eligible);
                 data[1] = parseInt(result[i].vlDone);
             }
         }
-        console.log(data);
         setVLUptakeBySex({
             chart: { type: 'column' },
             title: { useHTML: true, text: '&nbsp;' },
@@ -53,7 +46,7 @@ const VLUptakeBySex = ({ globalFilter }) => {
                 { name: 'VL Uptake', data: data, type: 'column', color: "#485969" },
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadVLUptakeBySex();

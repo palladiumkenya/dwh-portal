@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { getAll } from '../Shared/Api';
 
-const CTHomeFooter = ({ globalFilter }) => {
+const CTHomeFooter = ({ globalFilters }) => {
     const [viralLoadCascade, setViralLoadCascade] = useState({});
 
     const loadViralLoadCascade = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         let TX_CURR = 0;
@@ -30,7 +30,7 @@ const CTHomeFooter = ({ globalFilter }) => {
             last12MVLSup: Last12MVLSup,
             last12MVLSupPercent: parseFloat(((Last12MVLSup/TX_CURR)*100).toString()).toFixed(0)
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadViralLoadCascade();

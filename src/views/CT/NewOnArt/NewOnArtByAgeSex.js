@@ -4,13 +4,13 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const NewOnArtByAgeSex = ({ globalFilter }) => {
+const NewOnArtByAgeSex = ({ globalFilters }) => {
     const [linkageByAgeSex, setNewOnArtByAgeSex] = useState({});
 
     const loadNewOnArtByAgeSex = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const result = await getAll('care-treatment/txNewByAgeSex', params);
         const ageGroups = ["Under 1", "1 to 4", "5 to 9", "10 to 14", "15 to 19", "20 to 24", "25 to 29", "30 to 34", "35 to 39", "40 to 44", "45 to 49", "50 to 54", "55 to 59", "60 to 64", "65+"];
@@ -64,7 +64,7 @@ const NewOnArtByAgeSex = ({ globalFilter }) => {
                 { name: 'Male', data: txNewMale, color: "#1AB394", tooltip: { valueSuffix: ' ' } }
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadNewOnArtByAgeSex();

@@ -4,13 +4,13 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const TwentyFourMonthRetention = ({ globalFilter }) => {
+const TwentyFourMonthRetention = ({ globalFilters }) => {
     const [twentyFourMonthRetention, setTwentyFourMonthRetention] = useState({});
 
     const loadTwentyFourMonthRetention = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const yearCategories = [];
         const result = await getAll('care-treatment/treatmentOutcomesRetention24m', params);
@@ -44,7 +44,7 @@ const TwentyFourMonthRetention = ({ globalFilter }) => {
                 { name: 'Number of Patients', data: data, type: 'column', color: "#485969" },
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadTwentyFourMonthRetention();

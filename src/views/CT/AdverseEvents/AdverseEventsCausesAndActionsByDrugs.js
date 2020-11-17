@@ -4,20 +4,20 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { getAll } from '../../Shared/Api';
 
-const AdverseEventsCausesAndActionsByDrugs = ({ globalFilter }) => {
+const AdverseEventsCausesAndActionsByDrugs = ({ globalFilters }) => {
     const [reportedCausesOfAEs, setReportedCausesOfAEs] = useState({});
     const [actionsByDrugs, setActionsByDrugs] = useState({});
 
     useEffect(() => {
         loadReportedCausesOfAE();
         loadActionsByDrugs();
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadReportedCausesOfAE = async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const result = await getAll('care-treatment/getReportedCausesOfAes', params);
@@ -86,8 +86,8 @@ const AdverseEventsCausesAndActionsByDrugs = ({ globalFilter }) => {
     const loadActionsByDrugs = async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const categories = [];

@@ -4,13 +4,13 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const VLSuppressionByRegimen = ({ globalFilter }) => {
+const VLSuppressionByRegimen = ({ globalFilters }) => {
     const [vlSuppressionByRegimen, setVLSuppressionByRegimen] = useState({});
 
     const loadVLSuppressionByRegimen = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const suppressionCategories = ['SUPPRESSED', 'LLV', 'HVL'];
         const regimenCategories = ['TLD', 'TLE', 'OTHERS'];
@@ -60,7 +60,7 @@ const VLSuppressionByRegimen = ({ globalFilter }) => {
                 { name: 'HVL', data: data[2], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadVLSuppressionByRegimen();

@@ -4,7 +4,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const AdverseEventsTiles = ({ globalFilter }) => {
+const AdverseEventsTiles = ({ globalFilters }) => {
     const [adults15PlusCurrentOnART, setAdults15PlusCurrentOnART] = useState({
         adults15PlusCurrentOnART: ''
     });
@@ -39,8 +39,8 @@ const AdverseEventsTiles = ({ globalFilter }) => {
     const loadActiveOnARTAdults = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         let ActiveARTAdults = 0;
@@ -53,13 +53,13 @@ const AdverseEventsTiles = ({ globalFilter }) => {
         setAdults15PlusCurrentOnART({
             adults15PlusCurrentOnART: ActiveARTAdults.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadActiveOnARTChildren = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         let ActiveARTChildren = 0;
@@ -72,13 +72,13 @@ const AdverseEventsTiles = ({ globalFilter }) => {
         setChildrenUnder15CurrentOnART({
             childrenUnder15CurrentOnART: ActiveARTChildren.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadUnder15AdverseEventsDesegregation =  useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         let maleData = [];
@@ -164,13 +164,13 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                 data: femaleData
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadAdults15PlusAdverseEventsDesegregation =  useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         let maleData = [];
@@ -256,13 +256,13 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                 data: femaleData
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadTotalNoOfAeReportedInAdults = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const result = await getAll('care-treatment/getNoOfReportedAeInAdults', params);
         if (result) {
@@ -270,13 +270,13 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                 total: result.total
             });
         }
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadTotalNoOfAeReportedInChildren = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const result = await getAll('care-treatment/getNoOfReportedAeInChildren', params);
         if (result) {
@@ -284,13 +284,13 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                 total: result.total
             });
         }
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadTotalNoAdultsWithAe = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const result = await getAll('care-treatment/getNumberOfAdultsWithAe', params);
         if (result) {
@@ -298,13 +298,13 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                 total: result.total
             });
         }
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadTotalNoChildrenWithAe = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const result = await getAll('care-treatment/getNumberOfChildrenWithAe', params);
         if (result) {
@@ -312,7 +312,7 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                 total: result.total
             });
         }
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadActiveOnARTAdults();

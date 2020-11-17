@@ -4,13 +4,13 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const TreatmentOutcomesByCounty = ({ globalFilter }) => {
+const TreatmentOutcomesByCounty = ({ globalFilters }) => {
     const [treatmentOutcomesByCounty, setTreatmentOutcomesByCounty] = useState({});
 
     const loadTreatmentOutcomesByCounty = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped'];
         const countyCategories = [];
@@ -66,7 +66,7 @@ const TreatmentOutcomesByCounty = ({ globalFilter }) => {
                 { name: 'STOPPED', data: data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadTreatmentOutcomesByCounty();

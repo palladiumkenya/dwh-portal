@@ -6,42 +6,21 @@ import DSD from './DSD/DSD';
 import TreatmentOutcomes from './TreatmentOutcomes/TreatmentOutcomes';
 import VL from './VL/VL';
 import AdverseEvents from './AdverseEvents/AdverseEvents';
-// import TBHIV from './TBHIV/TBHIV';
+import TBHIV from './TBHIV/TBHIV';
 
-const CT = () => {
-
-    const [globalFilter, setGlobalFilter] = useState({
-        ctTabs: {
-            "txNew": "NEWLY STARTED ON ART",
-            "txCurr": "CURRENT ON ART",
-            // "txOpt": "ART OPTIMIZATION",
-            // "tbHiv": "TB/HIV",
-            "advEv": "ADVERSE EVENTS",
-            "dsd": "DSD",
-            "vl": "VL MONITORING",
-            "tOut": "TREATMENT OUTCOMES"
-        },
-        ctTab: "txNew",
-        county: '',
-        subCounty: '',
-        facility: '',
-        partner: '',
-        period: `${new Date().getFullYear()},${new Date().getMonth()}`
-    });
+const CT = ({globalFilters, onGlobalFiltersChange}) => {
 
     const changeCtTabTo = (tab) => {
-        let params = { ...globalFilter };
-        params.ctTab = tab;
-        setGlobalFilter(params);
+        onGlobalFiltersChange({ ...globalFilters, ctTab: tab});
     }
 
     const renderTabNavItems = () => {
         return (
-            Object.keys(globalFilter.ctTabs).map((value) => {
+            Object.keys(globalFilters.ctTabs).map((value) => {
                 return (
                     <NavItem key={value}>
-                        <NavLink active={globalFilter.ctTab === value} onClick={() => { changeCtTabTo(value); }} >
-                            {globalFilter.ctTabs[value]}
+                        <NavLink active={globalFilters.ctTab === value} onClick={() => { changeCtTabTo(value); }} >
+                            {globalFilters.ctTabs[value]}
                         </NavLink>
                     </NavItem>
                 );
@@ -54,24 +33,27 @@ const CT = () => {
             <Nav tabs>
                 {renderTabNavItems()}
             </Nav>
-            <TabContent activeTab={globalFilter.ctTab}>
+            <TabContent activeTab={globalFilters.ctTab}>
                 <TabPane tabId="txNew">
-                    <NewOnArt globalFilter={globalFilter}></NewOnArt>
+                    <NewOnArt globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
                 </TabPane>
                 <TabPane tabId="txCurr">
-                    <CurrentOnART />
+                    <CurrentOnART globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+                </TabPane>
+                <TabPane tabId="tbHiv">
+                    <TBHIV globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
                 </TabPane>
                 <TabPane tabId="advEv">
-                    <AdverseEvents />
+                    <AdverseEvents globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
                 </TabPane>
                 <TabPane tabId="dsd">
-                    <DSD />
+                    <DSD globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
                 </TabPane>
                 <TabPane tabId="tOut">
-                    <TreatmentOutcomes />
+                    <TreatmentOutcomes globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
                 </TabPane>
                 <TabPane tabId="vl">
-                    <VL />
+                    <VL globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
                 </TabPane>
             </TabContent>
             <p></p>

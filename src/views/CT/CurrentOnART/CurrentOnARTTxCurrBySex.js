@@ -4,13 +4,13 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const CurrentOnARTTxCurrBySex = ({ globalFilter }) => {
+const CurrentOnARTTxCurrBySex = ({ globalFilters }) => {
     const [currentOnARTTxCurrByAgeSex, setCurrentOnARTTxCurrBySex] = useState({});
 
     const loadCurrentOnARTTxCurrBySex = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const result = await getAll('care-treatment/txCurrBySex', params);
         let txCurrMale = 0;
@@ -60,7 +60,7 @@ const CurrentOnARTTxCurrBySex = ({ globalFilter }) => {
                 ]
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadCurrentOnARTTxCurrBySex();

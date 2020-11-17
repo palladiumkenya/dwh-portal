@@ -4,13 +4,13 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const ThreeMonthRetention = ({ globalFilter }) => {
+const ThreeMonthRetention = ({ globalFilters }) => {
     const [threeMonthRetention, setThreeMonthRetention] = useState({});
 
     const loadThreeMonthRetention = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const yearCategories = [];
         const result = await getAll('care-treatment/treatmentOutcomesRetention3m', params);
@@ -44,7 +44,7 @@ const ThreeMonthRetention = ({ globalFilter }) => {
                 { name: 'Number of Patients', data: data, type: 'column', color: "#485969" },
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadThreeMonthRetention();

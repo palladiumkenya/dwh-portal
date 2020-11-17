@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import DataTable from 'react-data-table-component';
 
-const AdverseEventsTable = ({ globalFilter }) => {
+const AdverseEventsTable = ({ globalFilters }) => {
     const [adverseEvents, setAdverseEvents] = useState({});
     
     const loadAdverseEvents = useCallback(async () => {

@@ -4,15 +4,15 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { getAll } from './../Shared/Api';
 
-const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
+const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilters }) => {
     const [stabilityStatus, setStabilityStatus] = useState({});
     const [trendsInDSD, setTrendsInDSD] = useState({});
 
     const loadStabilityStatus = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         let stable = 0;
         let unStable = 0;
@@ -54,13 +54,13 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
                 }
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadTrendsInDSD = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-             params = { ...globalFilter };
+        if (globalFilters) {
+             params = { ...globalFilters };
         }
 
         let seriesData = [];
@@ -96,48 +96,16 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilter }) => {
         }
 
         setTrendsInDSD({
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: ''
-            },
-            xAxis: {
-                categories: ["Stable", "Unstable"]
-            },
-            yAxis: {
-                min: 0,
-                max: 100,
-                title: {
-                    text: 'Percentage of Patients'
-                },
-                // stackLabels: {
-                //     enabled: true,
-                //     style: {
-                //         fontWeight: 'bold',
-                //         color: ( // theme
-                //             Highcharts.defaultOptions.title.style &&
-                //             Highcharts.defaultOptions.title.style.color
-                //         ) || 'gray'
-                //     }
-                // }
-            },
+            chart: { type: 'column' },
+            title: { text: '' },
+            xAxis: { categories: ["Stable", "Unstable"] },
+            yAxis: { min: 0, max: 100, title: { text: 'Percentage of Patients' } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
-            tooltip: {
-                headerFormat: '<b>{point.x}</b><br/>',
-                pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-            },
-            plotOptions: {
-                column: {
-                    stacking: 'normal',
-                    // dataLabels: {
-                    //     enabled: true
-                    // }
-                }
-            },
+            tooltip: { headerFormat: '<b>{point.x}</b><br/>', pointFormat: '{series.name}: {point.y:.1f}<br/>Total: {point.stackTotal}' },
+            plotOptions: { column: { stacking: 'normal' } },
             series: seriesData
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadStabilityStatus();

@@ -4,14 +4,14 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const HtsUptakeByCounty = ({ globalFilter }) => {
+const HtsUptakeByCounty = ({ globalFilters }) => {
     const [uptakeByCounty, setUptakeByCounty] = useState({});
 
     const loadUptakeByCounty = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const counties = [];
@@ -95,7 +95,7 @@ const HtsUptakeByCounty = ({ globalFilter }) => {
                 }
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadUptakeByCounty();

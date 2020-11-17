@@ -4,13 +4,13 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const LinkageByAgeSex = ({ globalFilter }) => {
+const LinkageByAgeSex = ({ globalFilters }) => {
     const [linkageByAgeSex, setLinkageByAgeSex] = useState({});
 
     const loadLinkageByAgeSex = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const sexCategories = ['MALE', 'FEMALE'];
         const ageCategories = [
@@ -84,7 +84,7 @@ const LinkageByAgeSex = ({ globalFilter }) => {
                 { name: 'Linkage', data: linkage, type: 'spline', color: "#E06F07", tooltip: { valueSuffix: '%' }, yAxis: 1 }
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadLinkageByAgeSex();

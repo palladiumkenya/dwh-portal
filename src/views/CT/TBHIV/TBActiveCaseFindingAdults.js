@@ -4,13 +4,13 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const TBActiveCaseFindingAdults = ({ globalFilter }) => {
+const TBActiveCaseFindingAdults = ({ globalFilters }) => {
     const [tbActiveCaseFindingAdults, setTBActiveCaseFindingAdults] = useState({});
 
     const loadTBActiveCaseFindingAdults = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         let highVl = 0;
         let onArtLessThan12Months = 0;
@@ -48,7 +48,7 @@ const TBActiveCaseFindingAdults = ({ globalFilter }) => {
                 { name: 'Number of Patients', data: data, type: 'bar', color: "#1AB394" },
             ],
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadTBActiveCaseFindingAdults();

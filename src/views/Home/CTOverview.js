@@ -1,13 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardBody, CardHeader } from 'reactstrap';
-import HighchartsReact from 'highcharts-react-official';
-import Highcharts from 'highcharts';
+import { Col, Row } from 'reactstrap';
 import AdultMan from '../../assets/custom/AdultMan.png';
 import AdultWoman from '../../assets/custom/AdultWoman.png';
 import { getAll } from '../Shared/Api';
 
-const UptakeByEntryPoint = ({ globalFilter }) => {
-    const [viralLoadCascade, setViralLoadCascade] = useState({});
+const CTOverview = ({ globalFilters }) => {
     const [ARTClients, setARTClients] = useState({
         activeARTClients: ''
     });
@@ -30,8 +27,8 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
     const loadActiveOnART = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         let ActiveART = 0;
@@ -44,13 +41,13 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
         setARTClients({
             activeARTClients: ActiveART.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadActiveOnARTChildren = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         let ActiveARTChildren = 0;
@@ -63,13 +60,13 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
         setARTClientsChildren({
             ActiveARTChildren: ActiveARTChildren.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadActiveOnARTAdults = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         let ActiveARTAdults = 0;
@@ -82,13 +79,13 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
         setARTClientsAdults({
             ActiveARTAdults: ActiveARTAdults.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadActiveOnARTAdolescents = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         let ActiveARTAdolescents = 0;
@@ -101,13 +98,13 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
         setARTClientsAdolescents({
             ActiveARTAdolescents: ActiveARTAdolescents.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadActiveOnARTByGender = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         let ActiveARTMale = 0;
@@ -148,129 +145,19 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
             ViralSuppressionMale: ViralSuppressionMale,
             ViralSuppressionFemale: ViralSuppressionFemale
         });
-    }, [globalFilter]);
-
-    const loadViralLoadCascade = useCallback(async () => {
-        let params = null;
-
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
-
-        let TX_CURR = 0;
-        let Eligible4VL = 0;
-        let Last12MonthVL = 0;
-        let Last12MVLSup = 0;
-        const result = await getAll('care-treatment/viralLoadCascade', params);
-        TX_CURR = result.TX_CURR;
-        Eligible4VL = result.Eligible4VL;
-        Last12MonthVL = result.Last12MonthVL;
-        Last12MVLSup = result.Last12MVLSup;
-
-        setViralLoadCascade({
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: ''
-            },
-            subtitle: {
-                text: ''
-            },
-            xAxis: {
-                categories: [
-                    'CURRENT ON ART',
-                    'ELIGIBLE FOR VL',
-                    'HAS VL AT 12 MONTHS',
-                    'SUPPRESSED AT 12 MONTHS'
-                ],
-                crosshair: true
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: ''
-                }
-            },
-            legend: {
-                enabled: false,
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0,
-                    dataLabels: {
-                        enabled: true,
-                        formatter: function () {
-                            return '' + this.point.text;
-                        }
-                    }
-                }
-            },
-            series: [{
-                name: 'Viral Load Cascade - Active ART Clients',
-                data: [
-                    {
-                        name: 'CURRENT ON ART',
-                        y: TX_CURR,
-                        color: "#3475B3",
-                        text: TX_CURR.toLocaleString('en')
-                    },
-                    {
-                        name: 'ELIGIBLE FOR VL',
-                        y: Eligible4VL,
-                        color: "#F28E2B",
-                        text: Eligible4VL.toLocaleString('en') + ' (' + parseFloat(((Eligible4VL/TX_CURR)*100).toString()).toFixed(0) + '%)'
-                    },
-                    {
-                        name: 'HAS VL AT 12 MONTHS',
-                        y: Last12MonthVL,
-                        color: "#0D5647",
-                        text: Last12MonthVL.toLocaleString('en') + ' (' + parseFloat(((Last12MonthVL/TX_CURR)*100).toString()).toFixed(0) + '%)'
-                    },
-                    {
-                        name: 'SUPPRESSED AT 12 MONTHS',
-                        y: Last12MVLSup,
-                        color: "#E15759",
-                        text: Last12MVLSup.toLocaleString('en') + ' (' + parseFloat(((Last12MVLSup/TX_CURR)*100).toString()).toFixed(0) + '%)'
-                    }
-                ]
-            }]
-        });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
-        loadViralLoadCascade();
         loadActiveOnART();
         loadActiveOnARTChildren();
         loadActiveOnARTAdults();
         loadActiveOnARTAdolescents();
         loadActiveOnARTByGender();
-    }, [loadViralLoadCascade, loadActiveOnART, loadActiveOnARTChildren, loadActiveOnARTAdults, loadActiveOnARTAdolescents, loadActiveOnARTByGender]);
+    }, [loadActiveOnART, loadActiveOnARTChildren, loadActiveOnARTAdults, loadActiveOnARTAdolescents, loadActiveOnARTByGender]);
 
     return (
-        <div className="row">
-            <div className="col-6">
-                <Card className="trends-card">
-                    <CardHeader className="trends-header">
-                        VIRAL LOAD CASCADE - ACTIVE ART CLIENTS
-                    </CardHeader>
-                    <CardBody className="trends-body">
-                        <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={viralLoadCascade} />
-                        </div>
-                    </CardBody>
-                </Card>
-            </div>
-            <div className="col-6">
+        <Row>
+            <Col lg={12}>
                 <div className="hmis_statistics_separator">&nbsp;</div>
 
                 <div className="row active_art">
@@ -334,9 +221,9 @@ const UptakeByEntryPoint = ({ globalFilter }) => {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </Col>
+        </Row>
     );
 };
 
-export default UptakeByEntryPoint;
+export default CTOverview;

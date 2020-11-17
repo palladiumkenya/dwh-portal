@@ -4,13 +4,13 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const VLSuppressionByAge = ({ globalFilter }) => {
+const VLSuppressionByAge = ({ globalFilters }) => {
     const [vlSuppressionByAge, setVLSuppressionByAge] = useState({});
 
     const loadVLSuppressionByAge = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const suppressionCategories = ['SUPPRESSED', 'LLV', 'HVL'];
         const ageCategories = [
@@ -76,7 +76,7 @@ const VLSuppressionByAge = ({ globalFilter }) => {
                 { name: 'HVL', data: data[2], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadVLSuppressionByAge();

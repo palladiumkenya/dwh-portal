@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useCallback } from 'react';
+import VisibilitySensor from 'react-visibility-sensor';
+import UniversalFilter from '../../Shared/UniversalFilter';
 import HtsLinkageHeader from './HtsLinkageHeader';
-import HtsUptakeFilter from '../../Shared/HtsUptakeFilter';
 import NumberPositiveLinked from './NumberPositiveLinked';
 import LinkageByAgeSex from './LinkageByAgeSex';
 import LinkageByPopulationType from './LinkageByPopulationType';
@@ -9,36 +10,30 @@ import LinkageByPartner from './LinkageByPartner';
 import LinkageByCounty from './LinkageByCounty';
 import HtsLinkageFooter from './HtsLinkageFooter';
 
-const HtsLinkage = () => {
-    const [globalFilter, setGlobalFilter] = useState({
-            county: '',
-            subCounty: '',
-            facility: '',
-            partner: '',
-            year:`${new Date().getFullYear()}`,
-            month: ''
-    });
-
-    const updateGlobalFilter = (selection) => {
-        setGlobalFilter(selection);
-    };
-
+const HtsLinkage = ({globalFilters, onGlobalFiltersChange}) => {
+    const onVisibilityChange = useCallback(async (isVisible) => {
+        if (globalFilters.htsTab === 'linkage') {
+            onGlobalFiltersChange({ ...globalFilters, stickyFilter: !isVisible});
+        }
+    }, [globalFilters, onGlobalFiltersChange]);
     return (
         <div className="animated fadeIn">
             <div className="strip">&nbsp;</div>
             <HtsLinkageHeader/>
-            <HtsUptakeFilter onFilterChange={updateGlobalFilter}>&nbsp;</HtsUptakeFilter>
-            <NumberPositiveLinked globalFilter={globalFilter}>&nbsp;</NumberPositiveLinked>
+            <VisibilitySensor onChange={onVisibilityChange}>
+                <UniversalFilter globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+            </VisibilitySensor>
+            <NumberPositiveLinked globalFilters={globalFilters}>&nbsp;</NumberPositiveLinked>
             <hr/><HtsLinkageFooter/><hr/><div className="strip"></div><p></p>
-            <LinkageByAgeSex globalFilter={globalFilter} />
+            <LinkageByAgeSex globalFilters={globalFilters} />
             <hr/><HtsLinkageFooter/><hr/><div className="strip"></div><p></p>
-            <LinkageByPopulationType globalFilter={globalFilter}/>
+            <LinkageByPopulationType globalFilters={globalFilters}/>
             <hr/><HtsLinkageFooter/><hr/><div className="strip"></div><p></p>
-            <LinkageByStrategyEntryPoint globalFilter={globalFilter}/>
+            <LinkageByStrategyEntryPoint globalFilters={globalFilters}/>
             <hr/><HtsLinkageFooter/><hr/><div className="strip"></div><p></p>
-            <LinkageByCounty globalFilter={globalFilter}/>
+            <LinkageByCounty globalFilters={globalFilters}/>
             <hr/><HtsLinkageFooter/><hr/><div className="strip"></div><p></p>
-            <LinkageByPartner globalFilter={globalFilter}/>
+            <LinkageByPartner globalFilters={globalFilters}/>
             <hr/><HtsLinkageFooter/><hr/><div className="strip"></div><p></p>
         </div>
     );

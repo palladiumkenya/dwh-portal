@@ -4,11 +4,15 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const MedianTimeToArtStart = () => {
+const MedianTimeToArtStart = ({ globalFilters }) => {
     const [medianTimeToArtStart, setMedianTimeToArtStart] = useState({});
 
     const loadMedianTimeToArtStart = useCallback(async () => {
-        const result = await getAll('care-treatment/medianTimeToArtByYear');
+        let params = null;
+        if (globalFilters) {
+            params = { ...globalFilters };
+        }
+        const result = await getAll('care-treatment/medianTimeToArtByYear', params);
 
         let months = [];
         let medianTimeToArtStart = [];
@@ -38,7 +42,7 @@ const MedianTimeToArtStart = () => {
                 { name: 'Time (Days)', data: medianTimeToArtStart, type: 'spline', color: "#E06F07" },
             ]
         });
-    }, []);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadMedianTimeToArtStart();

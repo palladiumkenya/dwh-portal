@@ -4,13 +4,13 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const AppointmentDurationByAge = ({ globalFilter }) => {
+const AppointmentDurationByAge = ({ globalFilters }) => {
     const [appointmentDurationByAge, setAppointmentDurationByAge] = useState({});
 
     const loadAppointmentDurationByAge = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const appointmentCategories = ['< 1 Month', '1-2 Months', '3-4 Months', '> 4 Months'];
         const ageCategories = [
@@ -77,7 +77,7 @@ const AppointmentDurationByAge = ({ globalFilter }) => {
                 { name: '> 4 MONTHS', data: data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadAppointmentDurationByAge();

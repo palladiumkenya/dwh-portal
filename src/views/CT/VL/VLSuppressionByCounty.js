@@ -4,11 +4,15 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const VLSuppressionByCounty = () => {
+const VLSuppressionByCounty = ({ globalFilters }) => {
     const [vlSuppressionByCounty, setVLSuppressionByCounty] = useState({});
 
     const loadVLSuppressionByCounty = useCallback(async () => {
-        const result = await getAll('care-treatment/vlSuppressionByCounty');
+        let params = null;
+        if (globalFilters) {
+            params = { ...globalFilters };
+        }
+        const result = await getAll('care-treatment/vlSuppressionByCounty', params);
 
         let counties = [];
         let vlSuppressionByCounty = [];
@@ -39,7 +43,7 @@ const VLSuppressionByCounty = () => {
                 { name: 'Number of Patients', data: vlSuppressionByCounty, type: 'column', color: "#485969" },
             ]
         });
-    }, []);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadVLSuppressionByCounty();

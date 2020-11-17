@@ -4,11 +4,15 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const VLSuppressionByPartner = () => {
+const VLSuppressionByPartner = ({ globalFilters }) => {
     const [vlSuppressionByPartner, setVLSuppressionByPartner] = useState({});
 
     const loadVLSuppressionByPartner = useCallback(async () => {
-        const result = await getAll('care-treatment/vlSuppressionByPartner');
+        let params = null;
+        if (globalFilters) {
+            params = { ...globalFilters };
+        }
+        const result = await getAll('care-treatment/vlSuppressionByPartner', params);
 
         let partners = [];
         let vlSuppressionByPartner = [];
@@ -39,7 +43,7 @@ const VLSuppressionByPartner = () => {
                 { name: 'Number of Patients', data: vlSuppressionByPartner, type: 'column', color: "#485969" },
             ]
         });
-    }, []);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadVLSuppressionByPartner();

@@ -1,57 +1,52 @@
-import React, { useState } from 'react';
-import AdverseEventsHeader from './AdverseEventsHeader';
-import CTFilter from '../../Shared/CTFilter';
+import React, { useCallback } from 'react';
+import VisibilitySensor from 'react-visibility-sensor';
+import UniversalFilter from './../../Shared/UniversalFilter';
 import AdverseEventsTiles from './AdverseEventsTiles';
+import AdverseEventsHeader from './AdverseEventsHeader';
 import AdverseEventsFooter from './AdverseEventsFooter';
 import AdverseEventsSeverity from './AdverseEventsSeverity';
 import AdverseEventsSeverityLevels from './AdverseEventsSeverityLevels';
 import AdverseEventsCausesAndActionsByDrugs from './AdverseEventsCausesAndActionsByDrugs';
 import AdverseEventsTable from './AdverseEventsTable';
 
-const AdverseEvents = () => {
-    const [globalFilter, setGlobalFilter] = useState({
-        county: [],
-        subCounty: [],
-        facility: [],
-        partner: [],
-        year:`${new Date().getFullYear()}`,
-        month: ''
-    });
-
-    const updateGlobalFilter = (selection) => {
-        setGlobalFilter(selection);
-    };
-
+const AdverseEvents = ({globalFilters, onGlobalFiltersChange}) => {
+    const onVisibilityChange = useCallback(async (isVisible) => {
+        if (globalFilters.ctTab === 'advEv') {
+            onGlobalFiltersChange({ ...globalFilters, stickyFilter: !isVisible});
+        }
+    }, [globalFilters, onGlobalFiltersChange]);
     return (
         <div className="animated fadeIn">
             <div className="strip">&nbsp;</div>
-            <AdverseEventsHeader period={globalFilter?.year} />
-            <CTFilter onFilterChange={updateGlobalFilter} />
-            <AdverseEventsTiles globalFilter={globalFilter} />
+            <AdverseEventsHeader period={globalFilters?.year} />
+            <VisibilitySensor onChange={onVisibilityChange}>
+                <UniversalFilter globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+            </VisibilitySensor>
+            <AdverseEventsTiles globalFilters={globalFilters} />
             <hr />
             <AdverseEventsFooter />
             <hr />
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
-            <AdverseEventsSeverity globalFilter={globalFilter} />
+            <AdverseEventsSeverity globalFilters={globalFilters} />
             <hr />
             <AdverseEventsFooter />
             <hr />
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
-            <AdverseEventsSeverityLevels globalFilter={globalFilter} />
+            <AdverseEventsSeverityLevels globalFilters={globalFilters} />
             <hr />
             <AdverseEventsFooter />
             <hr />
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
-            <AdverseEventsCausesAndActionsByDrugs globalFilter={globalFilter} />
+            <AdverseEventsCausesAndActionsByDrugs globalFilters={globalFilters} />
             <hr />
             <AdverseEventsFooter />
             <hr />
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
-            <AdverseEventsTable globalFilter={globalFilter} />
+            <AdverseEventsTable globalFilters={globalFilters} />
         </div>
     );
 };

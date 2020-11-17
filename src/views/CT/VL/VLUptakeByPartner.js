@@ -4,11 +4,15 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const VLUptakeByPartner = () => {
+const VLUptakeByPartner = ({ globalFilters }) => {
     const [vlUptakeByPartner, setVLUptakeByPartner] = useState({});
 
     const loadVLUptakeByPartner = useCallback(async () => {
-        const result = await getAll('care-treatment/vlUptakeByPartner');
+        let params = null;
+        if (globalFilters) {
+            params = { ...globalFilters };
+        }
+        const result = await getAll('care-treatment/vlUptakeByPartner', params);
 
         let partners = [];
         let vlUptakeByPartner = [];
@@ -39,7 +43,7 @@ const VLUptakeByPartner = () => {
                 { name: 'Number of Patients', data: vlUptakeByPartner, type: 'column', color: "#485969" },
             ]
         });
-    }, []);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadVLUptakeByPartner();

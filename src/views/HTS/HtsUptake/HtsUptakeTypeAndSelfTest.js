@@ -4,15 +4,15 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const HtsUptakeTypeAndSelfTest = ({ globalFilter }) => {
+const HtsUptakeTypeAndSelfTest = ({ globalFilters }) => {
     const [uptakeByType, setUptakeByType] = useState({});
     const [uptakeBySelfTest, setUptakeBySelfTest] = useState({});
 
     const loadUptakeByType = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         let couple = null;
@@ -71,13 +71,13 @@ const HtsUptakeTypeAndSelfTest = ({ globalFilter }) => {
                 }]
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadUptakeBySelfTest = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         let yes = null;
@@ -136,7 +136,7 @@ const HtsUptakeTypeAndSelfTest = ({ globalFilter }) => {
                 }]
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadUptakeByType();

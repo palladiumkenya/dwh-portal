@@ -4,13 +4,13 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const HIVNegativeTB = ({ globalFilter }) => {
+const HIVNegativeTB = ({ globalFilters }) => {
     const [hivNegativeTB, setHIVNegativeTB] = useState({});
 
     const loadHIVNegativeTB = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         let highVl = 0;
         let onArtLessThan12Months = 0;
@@ -48,7 +48,7 @@ const HIVNegativeTB = ({ globalFilter }) => {
                 { name: 'Number of Patients', data: data, type: 'bar', color: "#1AB394" },
             ],
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadHIVNegativeTB();

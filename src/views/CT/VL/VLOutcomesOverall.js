@@ -4,13 +4,13 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const VLOutcomesOverall = ({ globalFilter }) => {
+const VLOutcomesOverall = ({ globalFilters }) => {
     const [vlOutcomesOverall, setVLOutcomesOverall] = useState({});
 
     const loadVLOutcomesOverall = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const vlOutcomesCategories = ['SUPPRESSED', 'HVL', 'LLV'];
         const result = await getAll('care-treatment/vlOutcomesOverall', params);
@@ -47,7 +47,7 @@ const VLOutcomesOverall = ({ globalFilter }) => {
                 ]
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadVLOutcomesOverall();

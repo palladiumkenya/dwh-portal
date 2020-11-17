@@ -8,7 +8,7 @@ import mapKenyaByProvince from '../Shared/kenyaByProvince.json';
 require('highcharts/modules/map')(Highcharts);
 Highcharts.maps["custom/kenya"] = mapKenyaByProvince;
 
-const TxCurrByProvinceMap = ({ globalFilter }) => {
+const TxCurrByProvinceMap = ({ globalFilters }) => {
 
     const [txCurrByProvinceMap, setTxCurrByProvinceMap] = useState({});
 
@@ -99,8 +99,6 @@ const TxCurrByProvinceMap = ({ globalFilter }) => {
                         index = 7;
                     }
                     data[index] = data[index] + parseInt(result[i].txCurr, 10);
-
-                    console.log(mappedCounty + " : " + resultCounty + " : " + mappedCounties[j].provinceCode  + " : " +  parseInt(result[i].txCurr, 10)   + " : " +  data[index]);
                     continue;
                 }
             }

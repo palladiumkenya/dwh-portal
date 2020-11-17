@@ -4,13 +4,13 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const TreatmentOutcomesByAge = ({ globalFilter }) => {
+const TreatmentOutcomesByAge = ({ globalFilters }) => {
     const [treatmentOutcomesByAge, setTreatmentOutcomesByAge] = useState({});
 
     const loadTreatmentOutcomesByAge = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped'];
         const ageCategories = [
@@ -75,7 +75,7 @@ const TreatmentOutcomesByAge = ({ globalFilter }) => {
                 { name: 'STOPPED', data: data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadTreatmentOutcomesByAge();

@@ -4,11 +4,15 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const VLSuppressionByYear6Month = () => {
+const VLSuppressionByYear6Month = ({ globalFilters }) => {
     const [vlSuppressionByYear6Month, setVLSuppressionByYear6Month] = useState({});
 
     const loadVLSuppressionByYear6Month = useCallback(async () => {
-        const result = await getAll('care-treatment/vlSuppressionByYear');
+        let params = null;
+        if (globalFilters) {
+            params = { ...globalFilters };
+        }
+        const result = await getAll('care-treatment/vlSuppressionByYear', params);
 
         let year = [];
         let vlSuppressionByYear6Month = [];
@@ -39,7 +43,7 @@ const VLSuppressionByYear6Month = () => {
                 { name: 'Number of Patients', data: vlSuppressionByYear6Month, type: 'column', color: "#485969" },
             ]
         });
-    }, []);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadVLSuppressionByYear6Month();

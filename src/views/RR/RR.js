@@ -3,7 +3,7 @@ import ReportingRatesOverview from './Overview/ReportingRatesOverview';
 import ReportingRatesByCounty from './County/ReportingRatesByCounty';
 import ReportingRatesByServiceDeliveryPartner from './Partner/ReportingRatesByServiceDeliveryPartner';
 
-const ReportingRates = () => {
+const RR = () => {
 
     return (
         <div className="animated fadeIn">
@@ -23,4 +23,4 @@ const ReportingRates = () => {
 
 };
 
-export default ReportingRates;
+export default RR;

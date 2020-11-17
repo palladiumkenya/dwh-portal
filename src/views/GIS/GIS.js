@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import GISHeader from './GISHeader';
 import GISFooter from './GISFooter';
 import DsdStabilityStatusByCountyMap from './DsdStabilityStatusByCountyMap';

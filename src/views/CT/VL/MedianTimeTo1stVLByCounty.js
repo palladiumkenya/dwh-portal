@@ -4,11 +4,15 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const MedianTimeTo1stVLByCounty = () => {
+const MedianTimeTo1stVLByCounty = ({ globalFilters }) => {
     const [medianTimeTo1stVLByCounty, setMedianTimeTo1stVLByCounty] = useState({});
 
     const loadMedianTimeTo1stVLByCounty = useCallback(async () => {
-        const result = await getAll('care-treatment/vlMedianTimeToFirstVlByCounty');
+        let params = null;
+        if (globalFilters) {
+            params = { ...globalFilters };
+        }
+        const result = await getAll('care-treatment/vlMedianTimeToFirstVlByCounty', params);
 
         let counties = [];
         let medianTimeTo1stVLByCounty = [];
@@ -35,10 +39,10 @@ const MedianTimeTo1stVLByCounty = () => {
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'Time (Days)', data: medianTimeTo1stVLByCounty, type: 'spline', color: "#E06F07" },
+                { name: 'Time (Days)', data: medianTimeTo1stVLByCounty, type: 'bar', color: "#E06F07" },
             ]
         });
-    }, []);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadMedianTimeTo1stVLByCounty();
