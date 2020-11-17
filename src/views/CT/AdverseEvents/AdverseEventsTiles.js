@@ -28,6 +28,14 @@ const AdverseEventsTiles = ({ globalFilter }) => {
         total: ''
     });
 
+    const [totalNumberOfAdultsWithAe, setTotalNumberOfAdultsWithAe] = useState({
+        total: ''
+    });
+
+    const [totalNumberOfChildrenWithAe, setTotalNumberOfChildrenWithAe] = useState({
+        total: ''
+    });
+
     const loadActiveOnARTAdults = useCallback(async () => {
         let params = null;
 
@@ -278,6 +286,34 @@ const AdverseEventsTiles = ({ globalFilter }) => {
         }
     }, [globalFilter]);
 
+    const loadTotalNoAdultsWithAe = useCallback(async () => {
+        let params = null;
+
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+        const result = await getAll('care-treatment/getNumberOfAdultsWithAe', params);
+        if (result) {
+            setTotalNumberOfAdultsWithAe({
+                total: result.total
+            });
+        }
+    }, [globalFilter]);
+
+    const loadTotalNoChildrenWithAe = useCallback(async () => {
+        let params = null;
+
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+        const result = await getAll('care-treatment/getNumberOfChildrenWithAe', params);
+        if (result) {
+            setTotalNumberOfChildrenWithAe({
+                total: result.total
+            });
+        }
+    }, [globalFilter]);
+
     useEffect(() => {
         loadActiveOnARTAdults();
         loadActiveOnARTChildren();
@@ -285,7 +321,9 @@ const AdverseEventsTiles = ({ globalFilter }) => {
         loadAdults15PlusAdverseEventsDesegregation();
         loadTotalNoOfAeReportedInAdults();
         loadTotalNoOfAeReportedInChildren();
-    }, [loadActiveOnARTAdults, loadActiveOnARTChildren, loadUnder15AdverseEventsDesegregation, loadAdults15PlusAdverseEventsDesegregation, loadTotalNoOfAeReportedInAdults, loadTotalNoOfAeReportedInChildren]);
+        loadTotalNoAdultsWithAe();
+        loadTotalNoChildrenWithAe();
+    }, [loadActiveOnARTAdults, loadActiveOnARTChildren, loadUnder15AdverseEventsDesegregation, loadAdults15PlusAdverseEventsDesegregation, loadTotalNoOfAeReportedInAdults, loadTotalNoOfAeReportedInChildren, loadTotalNoAdultsWithAe, loadTotalNoChildrenWithAe]);
 
     return (
         <span>
@@ -324,7 +362,7 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                             }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">3,071</span>
+                                <span className="expected-uploads-text">{totalNumberOfAdultsWithAe.total}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -388,7 +426,7 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                             }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">3,071</span>
+                                <span className="expected-uploads-text">{totalNumberOfChildrenWithAe.total}</span>
                             </div>
                         </CardBody>
                     </Card>
