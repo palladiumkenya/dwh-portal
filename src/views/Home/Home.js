@@ -1,79 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { CardColumns } from 'reactstrap';
 import CTHomeOverview from './CTHomeOverview';
-import CTFilter from './../Shared/CTFilter';
-import UptakeByEntryPoint from './UptakeByEntryPoint';
+import UniversalFilter from '../Shared/UniversalFilter';
 import CTHomeFooter from './CTHomeFooter';
 import CTHomeTXNew from './CTHomeTXNew';
 import CTHomeStabilityStatusAndTrendsInDSD from './CTHomeStabilityStatusAndTrendsInDsd';
-import CTHomeReportingRates from './CTHomeReportingRates';
+import VLCascade from './VLCascade';
+import CTOverview from './CTOverview';
+import VisibilitySensor from 'react-visibility-sensor';
 
-const Home = () => {
-    const [globalFilter, setGlobalFilter] = useState({
-        county: [],
-        subCounty: [],
-        facility: [],
-        partner: [],
-        year:`${new Date().getFullYear()}`,
-        month: ''
-    });
-
-    const updateGlobalFilter = (selection) => {
-        setGlobalFilter(selection);
-    };
+const Home = ({globalFilters, onGlobalFiltersChange}) => {
+    const onVisibilityChange = useCallback(async (isVisible) => {
+        onGlobalFiltersChange({ ...globalFilters, stickyFilter: !isVisible});
+    }, [globalFilters, onGlobalFiltersChange]);
 
     return (
         <div className="animated fadeIn">
             <br></br>
-            <div className="strip">&nbsp;</div>
-
-            <CTHomeOverview period={globalFilter?.year} />
-
-            <CTFilter onFilterChange={updateGlobalFilter} />
-
+            <div className="strip"></div>
+            <CTHomeOverview period={globalFilters?.year} />
+            <VisibilitySensor onChange={onVisibilityChange}>
+                <UniversalFilter globalFilters={globalFilters}  onGlobalFiltersChange={onGlobalFiltersChange}/>
+            </VisibilitySensor>
             <p>
                 <strong>1223</strong> Health Facilities in 44 Countries in Kenya,
                 supported by 44 SDPs have ever uploaded care & treatment data to the warehouse since it’s inception.
                 As at July 2020,<strong>1035</strong> facilities had reported patients current on ART.
             </p>
-
-            <UptakeByEntryPoint globalFilter={globalFilter} />
-
+            <CardColumns className="cols-2">
+                <VLCascade globalFilters={globalFilters} />
+                <CTOverview globalFilters={globalFilters} />
+            </CardColumns>
             <hr />
-
             <CTHomeFooter />
-
+            <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>
+            <CTHomeTXNew globalFilters={globalFilters} />
             <hr />
-
-            <div className="strip">&nbsp;</div>
-
-            <p>&nbsp;</p>
-
-            <CTHomeTXNew globalFilter={globalFilter} />
-
-            <hr />
-
             <CTHomeFooter />
-
+            <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>
+            <CTHomeStabilityStatusAndTrendsInDSD globalFilters={globalFilters} />
             <hr />
-
-            <div className="strip">&nbsp;</div>
-
-            <p>&nbsp;</p>
-
-            <CTHomeStabilityStatusAndTrendsInDSD globalFilter={globalFilter} />
-
-            <hr />
-
             <CTHomeFooter />
-
-            <hr />
-
-            <div className="strip">&nbsp;</div>
-
-            <p>&nbsp;</p>
-
-            <CTHomeReportingRates globalFilter={globalFilter} />
-
+            <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>
         </div>
     );
 };

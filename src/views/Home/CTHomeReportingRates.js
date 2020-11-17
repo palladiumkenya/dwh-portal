@@ -5,7 +5,7 @@ import HighchartsReact from "highcharts-react-official";
 import moment from 'moment';
 import { getAll } from './../Shared/Api';
 
-const CTHomeReportingRates = ({ globalFilter }) => {
+const CTHomeReportingRates = ({ globalFilters }) => {
     const [expected, setExpected] = useState(0);
     const [recency, setRecencyTrend] = useState({
         chart: { type: "column" },
@@ -26,26 +26,26 @@ const CTHomeReportingRates = ({ globalFilter }) => {
     const loadExpected = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const data = await getAll('manifests/expected/CT', params);
         setExpected(data.expected);
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadRecencyTrend = useCallback(async () => {
         let params = null;
         
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         delete params.period;
         const result = await getAll('manifests/recency/trends/CT', params);
         const months = {};
         const data = {};
-        const periodDate = moment(globalFilter.period, 'YYYY,M');
+        const periodDate = moment(globalFilters.period, 'YYYY,M');
         
         for (const element of result) {
             let dataDate = moment(element.year + "-" + element.month, 'YYYY-M');
@@ -72,7 +72,7 @@ const CTHomeReportingRates = ({ globalFilter }) => {
             responsive: { rules: [ { condition: { maxWidth: 500, }, chartOptions: { legend: { enabled: false } } } ] },
             series: [ { name: "Reporting Rates", data: Object.values(data).slice(-12), color: "#1AB394" } ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadExpected();

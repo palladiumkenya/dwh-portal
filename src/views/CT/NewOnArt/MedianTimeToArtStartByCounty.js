@@ -4,11 +4,15 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const MedianTimeToArtStartByCounty = () => {
+const MedianTimeToArtStartByCounty = ({ globalFilters }) => {
     const [medianTimeToArtStartByCounty, setMedianTimeToArtStartByCounty] = useState({});
 
     const loadMedianTimeToArtStartByCounty = useCallback(async () => {
-        const result = await getAll('care-treatment/medianTimeToArtByCounty');
+        let params = null;
+        if (globalFilters) {
+            params = { ...globalFilters };
+        }
+        const result = await getAll('care-treatment/medianTimeToArtByCounty', params);
 
         let counties = [];
         let medianTimeToArtStartByCounty = [];
@@ -40,7 +44,7 @@ const MedianTimeToArtStartByCounty = () => {
                 { name: 'Time (Days)', data: medianTimeToArtStartByCounty, type: 'column', color: "#485969" },
             ]
         });
-    }, []);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadMedianTimeToArtStartByCounty();

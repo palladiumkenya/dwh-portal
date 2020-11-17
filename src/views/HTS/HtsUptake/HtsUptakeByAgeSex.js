@@ -4,14 +4,14 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const HtsUptakeByAgeSex = ({ globalFilter }) => {
+const HtsUptakeByAgeSex = ({ globalFilters }) => {
     const [uptakeByAgeSex, setUptakeByAgeSex] = useState({});
 
     const loadUptakeByAgeSex = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const ageGroups = [];
@@ -98,7 +98,7 @@ const HtsUptakeByAgeSex = ({ globalFilter }) => {
                 }
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadUptakeByAgeSex();

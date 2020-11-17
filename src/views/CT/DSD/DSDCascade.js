@@ -4,13 +4,13 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const DSDCascade = ({ globalFilter }) => {
+const DSDCascade = ({ globalFilters }) => {
     const [dsdCascade, setDSDCascade] = useState({});
 
     const loadDSDCascade = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         let txCurr = 0;
         let stable = 0;
@@ -44,7 +44,7 @@ const DSDCascade = ({ globalFilter }) => {
                 { name: 'Number of Patients', data: data, type: 'column', color: "#485969" },
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadDSDCascade();

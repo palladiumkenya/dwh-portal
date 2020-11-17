@@ -4,14 +4,14 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const HtsUptakeByPartner = ({ globalFilter }) => {
+const HtsUptakeByPartner = ({ globalFilters }) => {
     const [uptakeByPartner, setUptakeByPartner] = useState({});
 
     const loadUptakeByPartner = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const partners = [];
@@ -95,7 +95,7 @@ const HtsUptakeByPartner = ({ globalFilter }) => {
                 }
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadUptakeByPartner();

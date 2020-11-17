@@ -4,7 +4,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const LinkageByPopulationType = ({ globalFilter }) => {
+const LinkageByPopulationType = ({ globalFilters }) => {
     const [linkageByPopulationType, setLinkageByPopulationType] = useState({});
     const [linkage, setLinkage] = useState({
         genPopPositive: '',
@@ -21,8 +21,8 @@ const LinkageByPopulationType = ({ globalFilter }) => {
     const loadLinkageByPopulationType = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const result = await getAll('hts/linkageByPopulationType', params);
@@ -94,7 +94,7 @@ const LinkageByPopulationType = ({ globalFilter }) => {
                 ]
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadLinkageByPopulationType();

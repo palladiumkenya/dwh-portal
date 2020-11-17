@@ -4,13 +4,13 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const IPTUptake = ({ globalFilter }) => {
+const IPTUptake = ({ globalFilters }) => {
     const [iptUptake, setIPTUptake] = useState({});
 
     const loadIPTUptake = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const sexCategories = ['TX CURR', 'NUMBER STARTED ON IPT'];
         const result = await getAll('care-treatment/vlUptakeBySex', params);
@@ -44,7 +44,7 @@ const IPTUptake = ({ globalFilter }) => {
                 { name: 'Number of Patients', data: data, type: 'column', color: "#485969" },
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadIPTUptake();

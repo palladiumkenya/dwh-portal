@@ -4,13 +4,13 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const TBStatTrends = ({ globalFilter }) => {
+const TBStatTrends = ({ globalFilters }) => {
     const [tbStat, setTBStat] = useState({});
 
     const loadTBStat = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const result = await getAll('care-treatment/txNewTrends', params);
         const monthNames = {
@@ -48,7 +48,7 @@ const TBStatTrends = ({ globalFilter }) => {
                 { name: 'Number of Patients', data: txNew, type: 'spline', color: "#E06F07" },
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadTBStat();

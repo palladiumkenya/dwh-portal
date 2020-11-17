@@ -4,14 +4,14 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const NumberTestedAndPositivity = ({ globalFilter }) => {
+const NumberTestedAndPositivity = ({ globalFilters }) => {
     const [numberPositiveLinked, setNumberPositiveLinked] = useState({});
 
     const loadNumberPositiveLinked = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const result = await getAll('hts/linkageNumberPositive', params);
@@ -67,7 +67,7 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
                 { name: 'Linkage', data: linkage, type: 'spline', color: "#E06F07", tooltip: { valueSuffix: '%' }, yAxis: 1 }
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadNumberPositiveLinked();

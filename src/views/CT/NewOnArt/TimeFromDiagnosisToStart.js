@@ -4,13 +4,13 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const TimeFromDiagnosisToStart = ({ globalFilter }) => {
+const TimeFromDiagnosisToStart = ({ globalFilters }) => {
     const [linkageByAgeSex, setTimeFromDiagnosisToStart] = useState({});
 
     const loadTimeFromDiagnosisToStart = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const periodGroups = [];
         let firstPeriod = [];
@@ -81,7 +81,7 @@ const TimeFromDiagnosisToStart = ({ globalFilter }) => {
                 { name: '> 14 Days', data: fourthPeriodPercent, type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' %' } },
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadTimeFromDiagnosisToStart();

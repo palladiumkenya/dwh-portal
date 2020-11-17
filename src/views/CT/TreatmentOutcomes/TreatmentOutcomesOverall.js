@@ -4,13 +4,13 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const TreatmentOutcomesOverall = ({ globalFilter }) => {
+const TreatmentOutcomesOverall = ({ globalFilters }) => {
     const [treatmentOutcomesOverall, setTreatmentOutcomesOverall] = useState({});
 
     const loadTreatmentOutcomesOverall = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped'];
         const result = await getAll('care-treatment/treatmentOutcomesOverall', params);
@@ -48,7 +48,7 @@ const TreatmentOutcomesOverall = ({ globalFilter }) => {
                 ]
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadTreatmentOutcomesOverall();

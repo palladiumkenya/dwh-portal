@@ -4,11 +4,15 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const MedianTimeTo1stVL = () => {
+const MedianTimeTo1stVL = ({ globalFilters }) => {
     const [medianTimeTo1stVL, setMedianTimeTo1stVL] = useState({});
 
     const loadMedianTimeTo1stVL = useCallback(async () => {
-        const result = await getAll('care-treatment/vlMedianTimeToFirstVlByYear');
+        let params = null;
+        if (globalFilters) {
+            params = { ...globalFilters };
+        }
+        const result = await getAll('care-treatment/vlMedianTimeToFirstVlByYear', params);
 
         let months = [];
         let medianTimeTo1stVL = [];
@@ -39,7 +43,7 @@ const MedianTimeTo1stVL = () => {
                 { name: 'Time (Days)', data: medianTimeTo1stVL, type: 'spline', color: "#E06F07" },
             ]
         });
-    }, []);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadMedianTimeTo1stVL();

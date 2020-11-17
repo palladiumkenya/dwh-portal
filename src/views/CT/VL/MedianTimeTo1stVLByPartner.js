@@ -4,11 +4,15 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const MedianTimeTo1stVLByPartner = () => {
+const MedianTimeTo1stVLByPartner = ({ globalFilters }) => {
     const [medianTimeTo1stVLByPartner, setMedianTimeTo1stVLByPartner] = useState({});
 
     const loadMedianTimeTo1stVLByPartner = useCallback(async () => {
-        const result = await getAll('care-treatment/vlMedianTimeToFirstVlByPartner');
+        let params = null;
+        if (globalFilters) {
+            params = { ...globalFilters };
+        }
+        const result = await getAll('care-treatment/vlMedianTimeToFirstVlByPartner', params);
 
         let partners = [];
         let medianTimeTo1stVLByPartner = [];
@@ -35,10 +39,10 @@ const MedianTimeTo1stVLByPartner = () => {
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'Time (Days)', data: medianTimeTo1stVLByPartner, type: 'spline', color: "#E06F07" },
+                { name: 'Time (Days)', data: medianTimeTo1stVLByPartner, type: 'column', color: "#E06F07" },
             ]
         });
-    }, []);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadMedianTimeTo1stVLByPartner();

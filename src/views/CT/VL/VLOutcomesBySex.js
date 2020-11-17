@@ -4,14 +4,14 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const VLOutcomesBySex = ({ globalFilter }) => {
+const VLOutcomesBySex = ({ globalFilters }) => {
     const [vlOutcomesBySexMale, setVLOutcomesBySexMale] = useState({});
     const [vlOutcomesBySexFemale, setVLOutcomesBySexFemale] = useState({});
 
     const loadVLOutcomesBySex = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const vlOutcomesCategories = ['SUPPRESSED', 'HVL', 'LLV'];
         const result = await getAll('care-treatment/vlOutcomesBySex', params);
@@ -77,7 +77,7 @@ const VLOutcomesBySex = ({ globalFilter }) => {
                 ]
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadVLOutcomesBySex();

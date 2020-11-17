@@ -4,14 +4,14 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { getAll } from '../../Shared/Api';
 
-const DistributionStableByCounty = ({ globalFilter }) => {
+const DistributionStableByCounty = ({ globalFilters }) => {
     const [distributionStableByCounty, setDistributionStableByCounty] = useState({});
 
     const loadTxCurrDistributionByCounty = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-             params = { ...globalFilter };
+        if (globalFilters) {
+             params = { ...globalFilters };
         }
 
         const counties = [];
@@ -64,7 +64,7 @@ const DistributionStableByCounty = ({ globalFilter }) => {
                 data: stable
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadTxCurrDistributionByCounty();

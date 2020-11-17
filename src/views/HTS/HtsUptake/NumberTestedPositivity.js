@@ -4,14 +4,14 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const NumberTestedAndPositivity = ({ globalFilter }) => {
+const NumberTestedAndPositivity = ({ globalFilters }) => {
     const [numberTestedPositivity, setNumberTestedPositivity] = useState({});
 
     const loadNumberTestedPositivity = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const result = await getAll('hts/numberTestedAndPositivity', params);
@@ -143,7 +143,7 @@ const NumberTestedAndPositivity = ({ globalFilter }) => {
                 }]
             }
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadNumberTestedPositivity();

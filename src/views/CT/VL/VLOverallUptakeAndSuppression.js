@@ -4,13 +4,13 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const VLOverallUptakeAndSuppression = ({ globalFilter }) => {
+const VLOverallUptakeAndSuppression = ({ globalFilters }) => {
     const [vlOverallUptakeAndSuppression, setVLOverallUptakeAndSuppression] = useState({});
 
     const loadVLOverallUptakeAndSuppression = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const vlCategories = ['txCurr', 'eligible', 'vlDone', 'suppressed'];
         const vlCategoryNames = ['TOTAL TX CURR', 'ELIGIBLE FOR VL (VALID WITHIN 12 MONTHS)', 'VL DONE', 'VIRALLY SUPPRESSED (VS)'];
@@ -56,7 +56,7 @@ const VLOverallUptakeAndSuppression = ({ globalFilter }) => {
                 { name: 'FEMALE', data: data[1], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadVLOverallUptakeAndSuppression();

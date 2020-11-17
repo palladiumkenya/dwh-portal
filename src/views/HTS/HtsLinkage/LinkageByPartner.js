@@ -4,14 +4,14 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const LinkageByPartner = ({ globalFilter }) => {
+const LinkageByPartner = ({ globalFilters }) => {
     const [uptakeByPartner, setLinkageByPartner] = useState({});
 
     const loadLinkageByPartner = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const partners = [];
@@ -55,7 +55,7 @@ const LinkageByPartner = ({ globalFilter }) => {
                 { name: 'Linkage', data: linkage, type: 'spline', color: "#E06F07", tooltip: { valueSuffix: '%' }, yAxis: 1 }
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadLinkageByPartner();

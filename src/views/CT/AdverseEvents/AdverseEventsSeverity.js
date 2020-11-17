@@ -4,7 +4,7 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { getAll } from '../../Shared/Api';
 
-const AdverseEventsSeverity = ({ globalFilter }) => {
+const AdverseEventsSeverity = ({ globalFilters }) => {
     const [severityGrading, setSeverityGrading] = useState({});
     const [adverseEventsActionsBySeverity, setAdverseEventsActionsBySeverity] = useState({});
     const [totalAdverseEventsActions, setTotalAdverseEventsActions] = useState({
@@ -14,8 +14,8 @@ const AdverseEventsSeverity = ({ globalFilter }) => {
     const loadSeverityGrading =  useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         let mildVal = 0;
@@ -104,13 +104,13 @@ const AdverseEventsSeverity = ({ globalFilter }) => {
                 }
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadAdverseEventsActionsBySeverity = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const result = await getAll('care-treatment/getAeActionsBySeverity', params);
@@ -243,7 +243,7 @@ const AdverseEventsSeverity = ({ globalFilter }) => {
                 data: [mild_all_drugs_stopped_total, moderate_all_drugs_stopped_total, severe_all_drugs_stopped_total, unknown_all_drugs_stopped_total]
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadSeverityGrading();

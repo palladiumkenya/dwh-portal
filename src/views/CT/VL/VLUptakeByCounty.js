@@ -4,11 +4,15 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const VLUptakeByCounty = () => {
+const VLUptakeByCounty = ({ globalFilters }) => {
     const [vlUptakeByCounty, setVLUptakeByCounty] = useState({});
 
     const loadVLUptakeByCounty = useCallback(async () => {
-        const result = await getAll('care-treatment/vlUptakeByCounty');
+        let params = null;
+        if (globalFilters) {
+            params = { ...globalFilters };
+        }
+        const result = await getAll('care-treatment/vlUptakeByCounty', params);
 
         let counties = [];
         let vlUptakeByCounty = [];
@@ -39,7 +43,7 @@ const VLUptakeByCounty = () => {
                 { name: 'Number of Patients', data: vlUptakeByCounty, type: 'column', color: "#485969" },
             ]
         });
-    }, []);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadVLUptakeByCounty();

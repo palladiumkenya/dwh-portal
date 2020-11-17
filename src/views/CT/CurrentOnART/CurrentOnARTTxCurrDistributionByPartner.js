@@ -4,14 +4,14 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { getAll } from '../../Shared/Api';
 
-const CurrentOnARTTxCurrDistributionByPartner = ({ globalFilter }) => {
+const CurrentOnARTTxCurrDistributionByPartner = ({ globalFilters }) => {
     const [txCurrDistributionByPartner, setTxCurrDistributionByPartner] = useState({});
 
     const loadTxCurrDistributionByPartner = useCallback(async () => {
          let params = null;
 
-         if (globalFilter) {
-             params = { ...globalFilter };
+         if (globalFilters) {
+             params = { ...globalFilters };
          }
 
         const partners = [];
@@ -60,7 +60,7 @@ const CurrentOnARTTxCurrDistributionByPartner = ({ globalFilter }) => {
                 data: txCurr
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadTxCurrDistributionByPartner();

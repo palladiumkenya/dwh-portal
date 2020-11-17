@@ -4,15 +4,15 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const LinkageByStrategyEntryPoint = ({ globalFilter }) => {
+const LinkageByStrategyEntryPoint = ({ globalFilters }) => {
     const [linkageByStrategy, setLinkageByStrategy] = useState({});
     const [linkageByEntryPoint, setLinkageByEntryPoint] = useState({});
 
     const loadLinkageByStrategy = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const testStrategies = [];
@@ -104,13 +104,13 @@ const LinkageByStrategyEntryPoint = ({ globalFilter }) => {
                 }
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadLinkageByEntryPoint = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const entryPoints = [];
@@ -199,7 +199,7 @@ const LinkageByStrategyEntryPoint = ({ globalFilter }) => {
                 }
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadLinkageByStrategy();

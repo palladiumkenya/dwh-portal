@@ -4,13 +4,13 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const NewOnArtBySex = ({ globalFilter }) => {
+const NewOnArtBySex = ({ globalFilters }) => {
     const [newOnArtBySex, setNewOnArtBySex] = useState({});
 
     const loadNewOnArtBySex = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const result = await getAll('care-treatment/txNewBySex', params);
         let txNewMale = 0;
@@ -54,7 +54,7 @@ const NewOnArtBySex = ({ globalFilter }) => {
                 ]
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadNewOnArtBySex();

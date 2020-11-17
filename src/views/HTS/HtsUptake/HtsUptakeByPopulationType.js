@@ -4,7 +4,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const HtsUptakeByPopulationType = ({ globalFilter }) => {
+const HtsUptakeByPopulationType = ({ globalFilters }) => {
     const [uptakeByPopulationType, setUptakeByPopulationType] = useState({});
     const [htsOverview, setHtsOverview] = useState({
         genPopTested: '',
@@ -24,8 +24,8 @@ const HtsUptakeByPopulationType = ({ globalFilter }) => {
     const loadHtsUptakeByPopulationType = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const result = await getAll('hts/uptakeByPopulationType', params);
@@ -119,7 +119,7 @@ const HtsUptakeByPopulationType = ({ globalFilter }) => {
                 ]
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadHtsUptakeByPopulationType();

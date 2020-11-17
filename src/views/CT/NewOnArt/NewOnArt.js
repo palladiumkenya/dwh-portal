@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import CTFilter from '../../Shared/CTFilter';
+import React, { useCallback } from 'react';
+import VisibilitySensor from 'react-visibility-sensor';
+import UniversalFilter from './../../Shared/UniversalFilter';
 import NewOnArtHeader from './NewOnArtHeader';
 import NewOnArtFooter from './NewOnArtFooter';
 import NewOnArtTrends from './NewOnArtTrends';
@@ -11,46 +12,40 @@ import MedianTimeToArtStartByPartner from './MedianTimeToArtStartByPartner';
 import TimeFromDiagnosisToStart from './TimeFromDiagnosisToStart';
 import FacilitiesNewOnArtList from './FacilitiesNewOnArtList';
 
-const NewOnArt = () => {
-    const [globalFilter, setGlobalFilter] = useState({
-        county: [],
-        subCounty: [],
-        facility: [],
-        partner: [],
-        year:`${new Date().getFullYear()}`,
-        month: ''
-    });
-
-    const updateGlobalFilter = (selection) => {
-        setGlobalFilter(selection);
-    };
-
+const NewOnArt = ({globalFilters, onGlobalFiltersChange}) => {
+    const onVisibilityChange = useCallback(async (isVisible) => {
+        if (globalFilters.ctTab === 'txNew') {
+            onGlobalFiltersChange({ ...globalFilters, stickyFilter: !isVisible});
+        }
+    }, [globalFilters, onGlobalFiltersChange]);
     return (
         <div className="animated fadeIn">
             <div className="strip"></div>
             <NewOnArtHeader></NewOnArtHeader>
-            <CTFilter onFilterChange={updateGlobalFilter} />
-            <p></p><NewOnArtTrends globalFilter={globalFilter}/>
+            <VisibilitySensor onChange={onVisibilityChange}>
+                <UniversalFilter globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+            </VisibilitySensor>
+            <p></p><NewOnArtTrends globalFilters={globalFilters}/>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
             <p></p>
             <div className="row">
                 <div className="col-6">
-                    <NewOnArtBySex globalFilter={globalFilter}/>
+                    <NewOnArtBySex globalFilters={globalFilters}/>
                 </div>
                 <div className="col-6">
-                    <NewOnArtByAgeSex globalFilter={globalFilter}/>
+                    <NewOnArtByAgeSex globalFilters={globalFilters}/>
                 </div>
             </div>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><MedianTimeToArtStart/>
+            <p></p><MedianTimeToArtStart globalFilters={globalFilters}/>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><MedianTimeToArtStartByCounty/>
+            <p></p><MedianTimeToArtStartByCounty globalFilters={globalFilters}/>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><MedianTimeToArtStartByPartner/>
+            <p></p><MedianTimeToArtStartByPartner globalFilters={globalFilters}/>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TimeFromDiagnosisToStart globalFilter={globalFilter}/>
+            <p></p><TimeFromDiagnosisToStart globalFilters={globalFilters}/>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            {/* <p></p><FacilitiesNewOnArtList globalFilter={globalFilter}/>
+            {/* <p></p><FacilitiesNewOnArtList globalFilters={globalFilters}/>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p> */}
         </div>
     );

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import CurrentOnARTHeader from './CurrentOnARTHeader';
-import CTFilter from '../../Shared/CTFilter';
+import React, { useCallback } from 'react';
+import VisibilitySensor from 'react-visibility-sensor';
+import UniversalFilter from './../../Shared/UniversalFilter';
 import TrendsInTxCurr from './TrendsInTxCurr';
+import CurrentOnARTHeader from './CurrentOnARTHeader';
 import CurrentOnARTFooter from './CurrentOnARTFooter';
 import CurrentOnARTTxCurrByAgeSex from './CurrentOnARTTxCurrByAgeSex';
 import CurrentOnARTTxCurrBySex from './CurrentOnARTTxCurrBySex';
@@ -10,26 +11,20 @@ import CurrentOnARTTxCurrDistributionByPartner from './CurrentOnARTTxCurrDistrib
 import CurrentOnARTTxCurrByCounty from './CurrentOnARTTxCurrByCounty';
 import CurrentOnARTTxCurrByPartner from './CurrentOnARTTxCurrByPartner';
 
-const CurrentOnART = () => {
-    const [globalFilter, setGlobalFilter] = useState({
-        county: [],
-        subCounty: [],
-        facility: [],
-        partner: [],
-        year:`${new Date().getFullYear()}`,
-        month: ''
-    });
-
-    const updateGlobalFilter = (selection) => {
-        setGlobalFilter(selection);
-    };
-
+const CurrentOnART = ({globalFilters, onGlobalFiltersChange}) => {
+    const onVisibilityChange = useCallback(async (isVisible) => {
+        if (globalFilters.ctTab === 'txCurr') {
+            onGlobalFiltersChange({ ...globalFilters, stickyFilter: !isVisible});
+        }
+    }, [globalFilters, onGlobalFiltersChange]);
     return (
         <div className="animated fadeIn">
             <div className="strip">&nbsp;</div>
-            <CurrentOnARTHeader period={globalFilter?.year}>&nbsp;</CurrentOnARTHeader>
-            <CTFilter onFilterChange={updateGlobalFilter} />
-            <TrendsInTxCurr globalFilter={globalFilter} />
+            <CurrentOnARTHeader period={globalFilters?.year}>&nbsp;</CurrentOnARTHeader>
+            <VisibilitySensor onChange={onVisibilityChange}>
+                <UniversalFilter globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+            </VisibilitySensor>
+            <TrendsInTxCurr globalFilters={globalFilters} />
             <hr />
             <CurrentOnARTFooter />
             <hr />
@@ -37,10 +32,10 @@ const CurrentOnART = () => {
             <p></p>
             <div className="row">
                 <div className="col-6">
-                    <CurrentOnARTTxCurrBySex globalFilter={globalFilter}/>
+                    <CurrentOnARTTxCurrBySex globalFilters={globalFilters}/>
                 </div>
                 <div className="col-6">
-                    <CurrentOnARTTxCurrByAgeSex globalFilter={globalFilter}/>
+                    <CurrentOnARTTxCurrByAgeSex globalFilters={globalFilters}/>
                 </div>
             </div>
             <p>&nbsp;</p>
@@ -49,25 +44,25 @@ const CurrentOnART = () => {
             <hr />
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
-            <CurrentOnARTTxCurrDistributionByCounty globalFilter={globalFilter} />
+            <CurrentOnARTTxCurrDistributionByCounty globalFilters={globalFilters} />
             <hr />
             <CurrentOnARTFooter />
             <hr />
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
-            <CurrentOnARTTxCurrDistributionByPartner globalFilter={globalFilter} />
+            <CurrentOnARTTxCurrDistributionByPartner globalFilters={globalFilters} />
             <hr />
             <CurrentOnARTFooter />
             <hr />
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
-            <CurrentOnARTTxCurrByCounty globalFilter={globalFilter} />
+            <CurrentOnARTTxCurrByCounty globalFilters={globalFilters} />
             <hr />
             <CurrentOnARTFooter />
             <hr />
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
-            <CurrentOnARTTxCurrByPartner globalFilter={globalFilter} />
+            <CurrentOnARTTxCurrByPartner globalFilters={globalFilters} />
         </div>
     );
 };

@@ -4,13 +4,13 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const NewOnArtTrends = ({ globalFilter }) => {
+const NewOnArtTrends = ({ globalFilters }) => {
     const [newOnArt, setNewOnArt] = useState({});
 
     const loadNewOnArt = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const result = await getAll('care-treatment/txNewTrends', params);
         const monthNames = {
@@ -48,7 +48,7 @@ const NewOnArtTrends = ({ globalFilter }) => {
                 { name: 'Number of Patients', data: txNew, type: 'spline', color: "#E06F07" },
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadNewOnArt();

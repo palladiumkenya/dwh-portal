@@ -4,14 +4,14 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { getAll } from './../Shared/Api';
 
-const CTHomeTXNew = ({ globalFilter }) => {
+const CTHomeTXNew = ({ globalFilters }) => {
     const [txNew, setTxNew] = useState({});
 
     const loadTxNew = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const result = await getAll('care-treatment/txNew', params);
@@ -78,7 +78,7 @@ const CTHomeTXNew = ({ globalFilter }) => {
                 { name: 'Cumulative New on ART', type: 'spline', yAxis: 1, data: cumulative, color: "#E06F07"}
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadTxNew();

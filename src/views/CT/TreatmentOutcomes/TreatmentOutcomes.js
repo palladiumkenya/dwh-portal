@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import CTFilter from '../../Shared/CTFilter';
+import React, { useCallback } from 'react';
+import VisibilitySensor from 'react-visibility-sensor';
+import UniversalFilter from './../../Shared/UniversalFilter';
 import TreatmentOutcomesHeader from './TreatmentOutcomesHeader';
 import TreatmentOutcomesFooter from './TreatmentOutcomesFooter';
 import TreatmentOutcomesOverall from './TreatmentOutcomesOverall';
@@ -13,50 +14,44 @@ import SixMonthRetention from './SixMonthRetention';
 import TwelveMonthRetention from './TwelveMonthRetention';
 import TwentyFourMonthRetention from './TwentyFourMonthRetention';
 
-const TreatmentOutcomes = () => {
-    const [globalFilter, setGlobalFilter] = useState({
-        county: [],
-        subCounty: [],
-        facility: [],
-        partner: [],
-        year:`${new Date().getFullYear()}`,
-        month: ''
-    });
-
-    const updateGlobalFilter = (selection) => {
-        setGlobalFilter(selection);
-    };
-
+const TreatmentOutcomes = ({globalFilters, onGlobalFiltersChange}) => {
+    const onVisibilityChange = useCallback(async (isVisible) => {
+        if (globalFilters.ctTab === 'tOut') {
+            onGlobalFiltersChange({ ...globalFilters, stickyFilter: !isVisible});
+        }
+    }, [globalFilters, onGlobalFiltersChange]);
     return (
         <div className="animated fadeIn">
             <div className="strip"></div>
             <TreatmentOutcomesHeader></TreatmentOutcomesHeader>
-            <CTFilter onFilterChange={updateGlobalFilter} />
+            <VisibilitySensor onChange={onVisibilityChange}>
+                <UniversalFilter globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+            </VisibilitySensor>
             <p></p>
             <div className="row">
                 <div className="col-6">
-                    <TreatmentOutcomesOverall globalFilter={globalFilter}/>
+                    <TreatmentOutcomesOverall globalFilters={globalFilters}/>
                 </div>
                 <div className="col-6">
-                    <TreatmentOutcomesBySex globalFilter={globalFilter}/>
+                    <TreatmentOutcomesBySex globalFilters={globalFilters}/>
                 </div>
             </div>
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TreatmentOutcomesByAge globalFilter={globalFilter}/>
+            <p></p><TreatmentOutcomesByAge globalFilters={globalFilters}/>
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TreatmentOutcomesByYear globalFilter={globalFilter}/>
+            <p></p><TreatmentOutcomesByYear globalFilters={globalFilters}/>
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TreatmentOutcomesByCounty globalFilter={globalFilter}/>
+            <p></p><TreatmentOutcomesByCounty globalFilters={globalFilters}/>
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TreatmentOutcomesByPartner globalFilter={globalFilter}/>
+            <p></p><TreatmentOutcomesByPartner globalFilters={globalFilters}/>
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><ThreeMonthRetention globalFilter={globalFilter}/>
+            <p></p><ThreeMonthRetention globalFilters={globalFilters}/>
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><SixMonthRetention globalFilter={globalFilter}/>
+            <p></p><SixMonthRetention globalFilters={globalFilters}/>
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TwelveMonthRetention globalFilter={globalFilter}/>
+            <p></p><TwelveMonthRetention globalFilters={globalFilters}/>
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TwentyFourMonthRetention globalFilter={globalFilter}/>
+            <p></p><TwentyFourMonthRetention globalFilters={globalFilters}/>
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
         </div>
     );

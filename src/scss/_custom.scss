@@ -224,3 +224,14 @@
 .active_art_gender {
   text-align: justify !important;
 }
+.stickyUniversalFilter {
+  background-color: #ffffff;
+  border-bottom: 1px solid #c8ced3;
+  padding: 1em;
+  padding-top: 5em;
+  position: fixed;
+  z-index: 1000;
+}
+.hiddenUniversalFilter {
+  display: none;
+}

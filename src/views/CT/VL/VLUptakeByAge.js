@@ -4,13 +4,13 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const VLUptakeByAge = ({ globalFilter }) => {
+const VLUptakeByAge = ({ globalFilters }) => {
     const [vlUptakeByAge, setVLUptakeByAge] = useState({});
 
     const loadVLUptakeByAge = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const sexCategories = ['Male', 'Female'];
         const ageCategories = [
@@ -69,7 +69,7 @@ const VLUptakeByAge = ({ globalFilter }) => {
                 { name: 'FEMALE', data: data[1], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadVLUptakeByAge();

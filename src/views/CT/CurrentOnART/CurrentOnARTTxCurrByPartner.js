@@ -4,14 +4,14 @@ import DataTable from 'react-data-table-component';
 import { getAll } from '../../Shared/Api';
 import * as _ from 'lodash';
 
-const CurrentOnARTTxCurrByPartner = ({ globalFilter }) => {
+const CurrentOnARTTxCurrByPartner = ({ globalFilters }) => {
     const [txCurrByPartnerList, setTxCurrByPartnerList] = useState({});
     
     const loadTxCurrByPartnerList = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const txCurrAgeDistributionByPartner = await getAll('care-treatment/getTxCurrAgeGroupDistributionByPartner', params);
@@ -149,7 +149,7 @@ const CurrentOnARTTxCurrByPartner = ({ globalFilter }) => {
             ],
             data: data
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadTxCurrByPartnerList();

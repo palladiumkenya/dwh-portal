@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import CTFilter from '../../Shared/CTFilter';
+import React, { useCallback } from 'react';
+import VisibilitySensor from 'react-visibility-sensor';
+import UniversalFilter from './../../Shared/UniversalFilter';
 import TBHIVHeader from './TBHIVHeader';
 import TBHIVFooter from './TBHIVFooter';
 import TBStatTrends from './TBStatTrends';
@@ -10,53 +11,48 @@ import TBActiveCaseFindingChildren from './TBActiveCaseFindingChildren';
 import HIVNegativeTB from './HIVNegativeTB';
 import HIVTBCoinfected from './HIVTBCoinfected';
 
-const TBHIV = () => {
-    const [globalFilter, setGlobalFilter] = useState({
-        county: [],
-        subCounty: [],
-        facility: [],
-        partner: [],
-        year:`${new Date().getFullYear()}`,
-        month: ''
-    });
-
-    const updateGlobalFilter = (selection) => {
-        setGlobalFilter(selection);
-    };
-
+const TBHIV = ({globalFilters, onGlobalFiltersChange}) => {
+    const onVisibilityChange = useCallback(async (isVisible) => {
+        if (globalFilters.ctTab === 'tbHiv') {
+            onGlobalFiltersChange({ ...globalFilters, stickyFilter: !isVisible});
+        }
+    }, [globalFilters, onGlobalFiltersChange]);
     return (
         <div className="animated fadeIn">
             <div className="strip"></div>
+            <h3 style={{color: '#ff0000', textAlign: 'center', padding: '1em'}}>Please note that the data on this page is dummy data</h3>
             <TBHIVHeader></TBHIVHeader>
-            <CTFilter onFilterChange={updateGlobalFilter} />
-            <p></p><TBStatTrends globalFilter={globalFilter}/>
+            <VisibilitySensor onChange={onVisibilityChange}>
+                <UniversalFilter globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+            </VisibilitySensor>
+            <p></p><TBStatTrends globalFilters={globalFilters}/>
             <hr/><TBHIVFooter/><hr/><div className="strip"></div><p></p>
             <p></p>
             <div className="row">
                 <div className="col-6">
-                    <TBActiveCaseFindingAdults globalFilter={globalFilter}/>
+                    <TBActiveCaseFindingAdults globalFilters={globalFilters}/>
                 </div>
                 <div className="col-6">
-                    <TBActiveCaseFindingChildren globalFilter={globalFilter}/>
+                    <TBActiveCaseFindingChildren globalFilters={globalFilters}/>
                 </div>
             </div>
             <hr/><TBHIVFooter/><hr/><div className="strip"></div><p></p>
             <p></p>
             <div className="row">
                 <div className="col-6">
-                    <HIVNegativeTB globalFilter={globalFilter}/>
+                    <HIVNegativeTB globalFilters={globalFilters}/>
                 </div>
                 <div className="col-6">
-                    <HIVTBCoinfected globalFilter={globalFilter}/>
+                    <HIVTBCoinfected globalFilters={globalFilters}/>
                 </div>
             </div>
             <hr/><TBHIVFooter/><hr/><div className="strip"></div><p></p>
             <div className="row">
                 <div className="col-4">
-                    <IPTUptake globalFilter={globalFilter}/>
+                    <IPTUptake globalFilters={globalFilters}/>
                 </div>
                 <div className="col-8">
-                    <IPTCompletionByAge globalFilter={globalFilter}/>
+                    <IPTCompletionByAge globalFilters={globalFilters}/>
                 </div>
             </div>
             <hr/><TBHIVFooter/><hr/><div className="strip"></div><p></p>

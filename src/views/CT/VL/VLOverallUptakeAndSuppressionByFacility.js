@@ -3,11 +3,15 @@ import { Card, CardHeader, CardBody } from "reactstrap";
 import DataTable from 'react-data-table-component';
 import { getAll } from '../../Shared/Api';
 
-const VLOverallUptakeAndSuppressionByFacility = ({ globalFilter }) => {
+const VLOverallUptakeAndSuppressionByFacility = ({ globalFilters }) => {
     const [vlOverallUptakeAndSuppressionByFacility, setVLOverallUptakeAndSuppressionByFacility] = useState({});
 
     const loadVLOverallUptakeAndSuppressionByFacility = useCallback(async () => {
-        const result = await getAll('care-treatment/vlOverallUptakeAndSuppressionByFacility');
+        let params = null;
+        if (globalFilters) {
+            params = { ...globalFilters };
+        }
+        const result = await getAll('care-treatment/vlOverallUptakeAndSuppressionByFacility', params);
         const data = [];
         for(let i = 0; i < result.length; i++) {
             let d = {
@@ -58,7 +62,7 @@ const VLOverallUptakeAndSuppressionByFacility = ({ globalFilter }) => {
             ],
             data: data
         });
-    }, []);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadVLOverallUptakeAndSuppressionByFacility();

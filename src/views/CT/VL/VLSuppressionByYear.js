@@ -4,13 +4,13 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const VLSuppressionByYear = ({ globalFilter }) => {
+const VLSuppressionByYear = ({ globalFilters }) => {
     const [vlSuppressionByYear, setVLSuppressionByYear] = useState({});
 
     const loadVLSuppressionByYear = useCallback(async () => {
         let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
         const retentionCategories = ['3 MONTHS', '6 MONTHS', '12 MONTHS', '24 MONTHS'];
         const yearCategories = [2011,2012,2013,2014,2015,2016,2017,2018,2019,2020];
@@ -63,7 +63,7 @@ const VLSuppressionByYear = ({ globalFilter }) => {
                 { name: '24 MONTHS', data: data[3], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadVLSuppressionByYear();

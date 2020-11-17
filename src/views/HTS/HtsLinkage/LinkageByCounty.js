@@ -4,14 +4,14 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const LinkageByCounty = ({ globalFilter }) => {
+const LinkageByCounty = ({ globalFilters }) => {
     const [uptakeByCounty, setLinkageByCounty] = useState({});
 
     const loadLinkageByCounty = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const counties = [];
@@ -55,7 +55,7 @@ const LinkageByCounty = ({ globalFilter }) => {
                 { name: 'Linkage', data: linkage, type: 'spline', color: "#E06F07", tooltip: { valueSuffix: '%' }, yAxis: 1 }
             ]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadLinkageByCounty();

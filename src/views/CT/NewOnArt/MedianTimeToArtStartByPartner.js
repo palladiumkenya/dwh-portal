@@ -4,11 +4,15 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 
-const MedianTimeToArtStartByPartner = () => {
+const MedianTimeToArtStartByPartner = ({ globalFilters }) => {
     const [medianTimeToArtStartByPartner, setMedianTimeToArtStartByPartner] = useState({});
 
     const loadMedianTimeToArtStartByPartner = useCallback(async () => {
-        const result = await getAll('care-treatment/medianTimeToArtByPartner');
+        let params = null;
+        if (globalFilters) {
+            params = { ...globalFilters };
+        }
+        const result = await getAll('care-treatment/medianTimeToArtByPartner', params);
 
         let partners = [];
         let medianTimeToArtStartByPartner = [];
@@ -40,7 +44,7 @@ const MedianTimeToArtStartByPartner = () => {
                 { name: 'Time (Days)', data: medianTimeToArtStartByPartner, type: 'column', color: "#485969" },
             ]
         });
-    }, []);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadMedianTimeToArtStartByPartner();

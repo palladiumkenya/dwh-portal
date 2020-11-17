@@ -3,14 +3,14 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 
-const TrendsInTxCurr = ({ globalFilter }) => {
+const TrendsInTxCurr = ({ globalFilters }) => {
     const [trendsInTxCurr, setTrendsInTxCurr] = useState({});
 
     const loadTrendsInTxCurr = useCallback(async () => {
         // let params = null;
 
-        // if (globalFilter) {
-        //     params = { ...globalFilter };
+        // if (globalFilters) {
+        //     params = { ...globalFilters };
         // }
 
         setTrendsInTxCurr({

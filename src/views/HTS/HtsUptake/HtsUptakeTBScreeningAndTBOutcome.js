@@ -4,15 +4,15 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 
-const HtsUptakeTBScreeningAndTBOutcome = ({ globalFilter }) => {
+const HtsUptakeTBScreeningAndTBOutcome = ({ globalFilters }) => {
     const [screenedTB, setScreenedTB] = useState({});
     const [TBScreeningOutcome, setTBScreeningOutcome] = useState({});
 
     const loadScreenedTB = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const result = await getAll('hts/tbScreened', params);
@@ -67,13 +67,13 @@ const HtsUptakeTBScreeningAndTBOutcome = ({ globalFilter }) => {
                 }]
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadTBScreeningOutcome = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const result = await getAll('hts/tbScreeningOutcomes', params);
@@ -156,7 +156,7 @@ const HtsUptakeTBScreeningAndTBOutcome = ({ globalFilter }) => {
                 }
             }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadScreenedTB();
