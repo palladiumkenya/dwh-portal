@@ -165,7 +165,7 @@ const AdverseEventsSeverity = ({ globalFilter }) => {
         const severe_all_drugs_stopped_total = severe_allDrugsStopped.length > 0 ? severe_allDrugsStopped.map(item => item.total).reduce((m, n) => m + n) : 0;
         const unknown_all_drugs_stopped_total = unknown_allDrugsStopped.length > 0 ? unknown_allDrugsStopped.map(item => item.total).reduce((x, y) => x + y) : 0;
 
-        const n = result.map(item => item.total).reduce((x, y) => x + y);
+        const n = result.length > 0 ? result.map(item => item.total).reduce((x, y) => x + y) : 0;
 
         setTotalAdverseEventsActions({
             total: n
