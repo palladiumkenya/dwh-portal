@@ -20,6 +20,14 @@ const AdverseEventsTiles = ({ globalFilter }) => {
         total: ''
     });
 
+    const [totalNoOfAeReportedInAdults, setTotalNoOfAeReportedInAdults] = useState({
+        total: ''
+    });
+
+    const [totalNoOfAeReportedInChildren, setTotalNoOfAeReportedInChildren] = useState({
+        total: ''
+    });
+
     const loadActiveOnARTAdults = useCallback(async () => {
         let params = null;
 
@@ -242,12 +250,42 @@ const AdverseEventsTiles = ({ globalFilter }) => {
         });
     }, [globalFilter]);
 
+    const loadTotalNoOfAeReportedInAdults = useCallback(async () => {
+        let params = null;
+
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+        const result = await getAll('care-treatment/getNoOfReportedAeInAdults', params);
+        if (result) {
+            setTotalNoOfAeReportedInAdults({
+                total: result.total
+            });
+        }
+    }, [globalFilter]);
+
+    const loadTotalNoOfAeReportedInChildren = useCallback(async () => {
+        let params = null;
+
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+        const result = await getAll('care-treatment/getNoOfReportedAeInChildren', params);
+        if (result) {
+            setTotalNoOfAeReportedInChildren({
+                total: result.total
+            });
+        }
+    }, [globalFilter]);
+
     useEffect(() => {
         loadActiveOnARTAdults();
         loadActiveOnARTChildren();
         loadUnder15AdverseEventsDesegregation();
         loadAdults15PlusAdverseEventsDesegregation();
-    }, [loadActiveOnARTAdults, loadActiveOnARTChildren, loadUnder15AdverseEventsDesegregation, loadAdults15PlusAdverseEventsDesegregation]);
+        loadTotalNoOfAeReportedInAdults();
+        loadTotalNoOfAeReportedInChildren();
+    }, [loadActiveOnARTAdults, loadActiveOnARTChildren, loadUnder15AdverseEventsDesegregation, loadAdults15PlusAdverseEventsDesegregation, loadTotalNoOfAeReportedInAdults, loadTotalNoOfAeReportedInChildren]);
 
     return (
         <span>
@@ -306,7 +344,7 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                             }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">5,477</span>
+                                <span className="expected-uploads-text">{totalNoOfAeReportedInAdults.total}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -370,7 +408,7 @@ const AdverseEventsTiles = ({ globalFilter }) => {
                             }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">5,477</span>
+                                <span className="expected-uploads-text">{totalNoOfAeReportedInChildren.total}</span>
                             </div>
                         </CardBody>
                     </Card>
