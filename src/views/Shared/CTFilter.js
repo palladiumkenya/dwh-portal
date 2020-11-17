@@ -82,7 +82,7 @@ const CTFilter = ({ onFilterChange }) => {
 
     const onCountyChange = async (e, {value}) => {
         const selection = {
-            ...activeSelection, county: value
+            ...activeSelection, county: value, subCounty: []
         };
         setActiveSelection(selection);
         onFilterChange(selection);

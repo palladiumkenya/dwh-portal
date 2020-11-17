@@ -20,6 +20,22 @@ const AdverseEventsTiles = ({ globalFilters }) => {
         total: ''
     });
 
+    const [totalNoOfAeReportedInAdults, setTotalNoOfAeReportedInAdults] = useState({
+        total: ''
+    });
+
+    const [totalNoOfAeReportedInChildren, setTotalNoOfAeReportedInChildren] = useState({
+        total: ''
+    });
+
+    const [totalNumberOfAdultsWithAe, setTotalNumberOfAdultsWithAe] = useState({
+        total: ''
+    });
+
+    const [totalNumberOfChildrenWithAe, setTotalNumberOfChildrenWithAe] = useState({
+        total: ''
+    });
+
     const loadActiveOnARTAdults = useCallback(async () => {
         let params = null;
 
@@ -242,12 +258,72 @@ const AdverseEventsTiles = ({ globalFilters }) => {
         });
     }, [globalFilters]);
 
+    const loadTotalNoOfAeReportedInAdults = useCallback(async () => {
+        let params = null;
+
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+        const result = await getAll('care-treatment/getNoOfReportedAeInAdults', params);
+        if (result) {
+            setTotalNoOfAeReportedInAdults({
+                total: result.total
+            });
+        }
+    }, [globalFilter]);
+
+    const loadTotalNoOfAeReportedInChildren = useCallback(async () => {
+        let params = null;
+
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+        const result = await getAll('care-treatment/getNoOfReportedAeInChildren', params);
+        if (result) {
+            setTotalNoOfAeReportedInChildren({
+                total: result.total
+            });
+        }
+    }, [globalFilter]);
+
+    const loadTotalNoAdultsWithAe = useCallback(async () => {
+        let params = null;
+
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+        const result = await getAll('care-treatment/getNumberOfAdultsWithAe', params);
+        if (result) {
+            setTotalNumberOfAdultsWithAe({
+                total: result.total
+            });
+        }
+    }, [globalFilter]);
+
+    const loadTotalNoChildrenWithAe = useCallback(async () => {
+        let params = null;
+
+        if (globalFilter) {
+            params = { ...globalFilter };
+        }
+        const result = await getAll('care-treatment/getNumberOfChildrenWithAe', params);
+        if (result) {
+            setTotalNumberOfChildrenWithAe({
+                total: result.total
+            });
+        }
+    }, [globalFilter]);
+
     useEffect(() => {
         loadActiveOnARTAdults();
         loadActiveOnARTChildren();
         loadUnder15AdverseEventsDesegregation();
         loadAdults15PlusAdverseEventsDesegregation();
-    }, [loadActiveOnARTAdults, loadActiveOnARTChildren, loadUnder15AdverseEventsDesegregation, loadAdults15PlusAdverseEventsDesegregation]);
+        loadTotalNoOfAeReportedInAdults();
+        loadTotalNoOfAeReportedInChildren();
+        loadTotalNoAdultsWithAe();
+        loadTotalNoChildrenWithAe();
+    }, [loadActiveOnARTAdults, loadActiveOnARTChildren, loadUnder15AdverseEventsDesegregation, loadAdults15PlusAdverseEventsDesegregation, loadTotalNoOfAeReportedInAdults, loadTotalNoOfAeReportedInChildren, loadTotalNoAdultsWithAe, loadTotalNoChildrenWithAe]);
 
     return (
         <span>
@@ -286,7 +362,7 @@ const AdverseEventsTiles = ({ globalFilters }) => {
                             }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">3,071</span>
+                                <span className="expected-uploads-text">{totalNumberOfAdultsWithAe.total}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -306,7 +382,7 @@ const AdverseEventsTiles = ({ globalFilters }) => {
                             }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">5,477</span>
+                                <span className="expected-uploads-text">{totalNoOfAeReportedInAdults.total}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -350,7 +426,7 @@ const AdverseEventsTiles = ({ globalFilters }) => {
                             }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">3,071</span>
+                                <span className="expected-uploads-text">{totalNumberOfChildrenWithAe.total}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -370,7 +446,7 @@ const AdverseEventsTiles = ({ globalFilters }) => {
                             }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">5,477</span>
+                                <span className="expected-uploads-text">{totalNoOfAeReportedInChildren.total}</span>
                             </div>
                         </CardBody>
                     </Card>
