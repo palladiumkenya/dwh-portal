@@ -7,7 +7,7 @@ import mapKenyaByCounty from './../Shared/kenyaByCounty.json';
 require('highcharts/modules/map')(Highcharts);
 Highcharts.maps["custom/kenya-county"] = mapKenyaByCounty;
 
-const CountiesMap = ({}) => {
+const CountiesMap = () => {
 
     const [counties, setCountiesMap] = useState({});
 
