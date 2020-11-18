@@ -76,9 +76,9 @@ const UniversalFilter = ({ globalFilters, onGlobalFiltersChange }) => {
         }
         const data = await getAll('common/agencies', params);
         const options = data.map((c) => {
-            return { value: c.agency, display: c.agency };
+            return { value: c.agency, key: c.agency, text: c.agency };
         });
-        const selectionOptions = [{ value: '', display: '(Select Agency)' }].concat(
+        const selectionOptions = [].concat(
             options
         );
         setAgencies(selectionOptions);
