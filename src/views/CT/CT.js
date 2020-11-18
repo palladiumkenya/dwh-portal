@@ -7,6 +7,7 @@ import TreatmentOutcomes from './TreatmentOutcomes/TreatmentOutcomes';
 import VL from './VL/VL';
 import AdverseEvents from './AdverseEvents/AdverseEvents';
 import TBHIV from './TBHIV/TBHIV';
+import ARVOptimization from './ARVOptimization/ARVOptimization';
 
 const CT = ({globalFilters, onGlobalFiltersChange}) => {
 
@@ -54,6 +55,9 @@ const CT = ({globalFilters, onGlobalFiltersChange}) => {
                 </TabPane>
                 <TabPane tabId="vl">
                     <VL globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+                </TabPane>
+                <TabPane tabId="txOpt">
+                    <ARVOptimization/>
                 </TabPane>
             </TabContent>
             <p></p>
