@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardBody } from 'reactstrap';
 
-const ReportingRatesOverviewHeader = ({ period }) => {
+const RROverviewHeader = ({ period }) => {
     const getYear = () => {
         if (period) {
             return period.split(',')[0];
@@ -37,4 +37,4 @@ const ReportingRatesOverviewHeader = ({ period }) => {
 
 };
 
-export default ReportingRatesOverviewHeader;
+export default RROverviewHeader;

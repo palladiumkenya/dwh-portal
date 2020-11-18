@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class ReportingRatesOverviewFooter extends Component {
+class RROverviewFooter extends Component {
 
     render() {
         return (
@@ -27,4 +27,4 @@ class ReportingRatesOverviewFooter extends Component {
     }
 }
 
-export default ReportingRatesOverviewFooter;
+export default RROverviewFooter;

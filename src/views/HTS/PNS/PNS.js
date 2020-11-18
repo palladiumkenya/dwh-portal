@@ -7,7 +7,17 @@ import PNSFooter from './PNSFooter';
 const PNS = ({globalFilters, onGlobalFiltersChange}) => {
     const onVisibilityChange = useCallback(async (isVisible) => {
         if (globalFilters.htsTab === 'pns') {
-            onGlobalFiltersChange({ ...globalFilters, stickyFilter: !isVisible});
+            onGlobalFiltersChange({
+                ...globalFilters,
+                stickyFilter: !isVisible,
+                countyFilterEnabled: true,
+                subCountyFilterEnabled: true,
+                facilityFilterEnabled: true,
+                partnerFilterEnabled: true,
+                agencyFilterEnabled: true,
+                fromDateFilterEnabled: true,
+                toDateFilterEnabled: true,
+            });
         }
     }, [globalFilters, onGlobalFiltersChange]);
     return (

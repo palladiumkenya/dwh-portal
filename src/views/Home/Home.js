@@ -11,7 +11,30 @@ import VisibilitySensor from 'react-visibility-sensor';
 
 const Home = ({globalFilters, onGlobalFiltersChange}) => {
     const onVisibilityChange = useCallback(async (isVisible) => {
-        onGlobalFiltersChange({ ...globalFilters, stickyFilter: !isVisible});
+        onGlobalFiltersChange({
+            ...globalFilters,
+            stickyFilter: !isVisible,
+            countyFilterEnabled: true,
+            subCountyFilterEnabled: true,
+            facilityFilterEnabled: true,
+            partnerFilterEnabled: true,
+            agencyFilterEnabled: false,
+            fromDateFilterEnabled: false,
+            toDateFilterEnabled: false,
+        });
+    }, [globalFilters, onGlobalFiltersChange]);
+    const onVisibilityChangeOnCTHomeTxNew = useCallback(async (isVisible) => {
+        if (isVisible) {
+            onGlobalFiltersChange({
+                ...globalFilters,
+                fromDateFilterEnabled: true,
+            });
+        } else {
+            onGlobalFiltersChange({
+                ...globalFilters,
+                fromDateFilterEnabled: false,
+            });
+        }
     }, [globalFilters, onGlobalFiltersChange]);
 
     return (
@@ -34,7 +57,9 @@ const Home = ({globalFilters, onGlobalFiltersChange}) => {
             <hr />
             <CTHomeFooter />
             <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>
-            <CTHomeTXNew globalFilters={globalFilters} />
+            <VisibilitySensor onChange={onVisibilityChangeOnCTHomeTxNew}>
+                <CTHomeTXNew globalFilters={globalFilters} />
+            </VisibilitySensor>
             <hr />
             <CTHomeFooter />
             <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>

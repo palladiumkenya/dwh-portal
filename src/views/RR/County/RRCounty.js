@@ -1,33 +1,28 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardHeader, CardBody } from "reactstrap";
+import moment from 'moment';
 import Highcharts from "highcharts";
 import Highstock from 'highcharts/highstock';
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
-import moment from 'moment';
 
-const CountyReports = ({ globalFilter }) => {
-    const monthYear = moment(globalFilter.period, 'YYYY,M').format('MMMM YYYY');
-    const [emrDistribution, setEmrDistribution] = useState({
-    });
-
+const RRCounty = ({ globalFilters }) => {
+    const [emrDistribution, setEmrDistribution] = useState({});
     const [recencyOfReportingByCounty, setRecencyOfReportingByCounty] = useState({});
-
     const [consistencyOfReportingByCounty, setConsistencyOfReportingByCounty] = useState({});
 
-    
-
     const loademrDistribution = useCallback(async () => {
-        let params = null;
+        let params = {
+            county: globalFilters.county,
+            subCounty: globalFilters.subCounty,
+            partner: globalFilters.partner,
+            agency: globalFilters.agency,
+            period: globalFilters.year + ',' + (globalFilters.month ? globalFilters.month:moment().startOf('month').subtract(1, 'month').format('M'))
 
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
-
-        const result = await getAll('manifests/emrdistribution/' + params.docket + '?reportingType=county', params);
+        };
+        const result = await getAll('manifests/emrdistribution/' + globalFilters.rrTab + '?reportingType=county', params);
         const counties = result.map(({ county  }) => county);
         const counties_series = result.map(({ facilities_count }) => parseInt(facilities_count, 10));
-
         setEmrDistribution({
             chart: { type: 'bar' },
             title: { text: '' },
@@ -40,19 +35,19 @@ const CountyReports = ({ globalFilter }) => {
             responsive: { rules: [ { chartOptions: { legend: { enabled: false } } } ] },
             series: [{ data: counties_series, color: "#2F4050;", name: 'Distribution of EMR Sites' }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadRecencyOfReportingByCounty = useCallback(async () => {
-        let params = null;
-
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
-
-        const result = await getAll('manifests/recencyreportingbycounty/' + params.docket, params);
+        let params = {
+            county: globalFilters.county,
+            subCounty: globalFilters.subCounty,
+            partner: globalFilters.partner,
+            agency: globalFilters.agency,
+            period: globalFilters.year + ',' + (globalFilters.month ? globalFilters.month:moment().startOf('month').subtract(1, 'month').format('M'))
+        };
+        const result = await getAll('manifests/recencyreportingbycounty/' + globalFilters.rrTab, params);
         const counties = result.map(({ county  }) => county);
         const counties_series = result.map(({ Percentage }) => parseInt(Percentage, 10) > 100 ? 100:parseInt(Percentage, 10));
-
         setRecencyOfReportingByCounty({
             chart: { type: 'bar' },
             title: { text: '' },
@@ -64,19 +59,19 @@ const CountyReports = ({ globalFilter }) => {
             legend: { enabled: false },
             series: [{ name: "Overall Reporting Rates", data: counties_series, color: "#59A14F", tooltip: { valueSuffix: ' %' } }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadConsistencyOfReportingByCounty = useCallback(async () => {
-        let params = null;
-
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
-
-        const result = await getAll('manifests/consistencyreportingbycountypartner/' + params.docket + '?reportingType=county', params);
+        let params = {
+            county: globalFilters.county,
+            subCounty: globalFilters.subCounty,
+            partner: globalFilters.partner,
+            agency: globalFilters.agency,
+            period: globalFilters.year + ',' + (globalFilters.month ? globalFilters.month:moment().startOf('month').subtract(1, 'month').format('M'))
+        };
+        const result = await getAll('manifests/consistencyreportingbycountypartner/' + globalFilters.rrTab + '?reportingType=county', params);
         const counties = Object.keys(result);
         const counties_series = Object.values(result);
-
         setConsistencyOfReportingByCounty({
             chart: { type: 'bar' },
             title: { text: '' },
@@ -88,7 +83,7 @@ const CountyReports = ({ globalFilter }) => {
             legend: { enabled: false },
             series: [{ data: counties_series, color: "#F28E2B", name: 'Consistency of Reporting', tooltip: { valueSuffix: ' %' } }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loademrDistribution();
@@ -110,7 +105,6 @@ const CountyReports = ({ globalFilter }) => {
                     </CardBody>
                 </Card>
             </div>
-
             <div className="col-4">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
@@ -123,7 +117,6 @@ const CountyReports = ({ globalFilter }) => {
                     </CardBody>
                 </Card>
             </div>
-
             <div className="col-4">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
@@ -140,4 +133,4 @@ const CountyReports = ({ globalFilter }) => {
     );
 };
 
-export default CountyReports;
+export default RRCounty;

@@ -13,7 +13,17 @@ import HtsLinkageFooter from './HtsLinkageFooter';
 const HtsLinkage = ({globalFilters, onGlobalFiltersChange}) => {
     const onVisibilityChange = useCallback(async (isVisible) => {
         if (globalFilters.htsTab === 'linkage') {
-            onGlobalFiltersChange({ ...globalFilters, stickyFilter: !isVisible});
+            onGlobalFiltersChange({
+                ...globalFilters,
+                stickyFilter: !isVisible,
+                countyFilterEnabled: true,
+                subCountyFilterEnabled: false,
+                facilityFilterEnabled: true,
+                partnerFilterEnabled: true,
+                agencyFilterEnabled: false,
+                fromDateFilterEnabled: true,
+                toDateFilterEnabled: false,
+            });
         }
     }, [globalFilters, onGlobalFiltersChange]);
     return (
