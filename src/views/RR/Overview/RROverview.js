@@ -3,64 +3,50 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import moment from 'moment';
 import { getAll } from '../../Shared/Api';
 
-const UploadsReportingConsistency = ({ globalFilter }) => {
-    const monthYear = moment(globalFilter.period, 'YYYY,M').format('MMMM YYYY');
+const RROverview = ({ globalFilters }) => {
     const [expected, setExpected] = useState(0);
-    const [consistnecyStats, setConsistnecy] = useState({
-        consistnecy: [],
-        stats: 0,
-        statsPerc: 0
-    });
-    const [recencyStats, setRecency] = useState({
-        recency: [],
-        stats: 0,
-        statsPerc: 0
-    });
-
-    const loadExpected = useCallback(async () => {
-        let params = null;
-
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
-
-        const data = await getAll('manifests/expected/' + params.docket, params);
-        setExpected(data.expected);
-    }, [globalFilter]);
+    const [consistnecyStats, setConsistnecy] = useState({ consistnecy: [], stats: 0, statsPerc: 0 });
+    const [recencyStats, setRecency] = useState({ recency: [], stats: 0, statsPerc: 0 });
 
     const getPerc = (count, total) => {
         return parseInt((count / total) * 100);
     };
 
+    const loadExpected = useCallback(async () => {
+        let params = {
+            county: globalFilters.county,
+            subCounty: globalFilters.subCounty,
+            partner: globalFilters.partner,
+            agency: globalFilters.agency,
+            period: globalFilters.year + ',' + (globalFilters.month ? globalFilters.month:moment().startOf('month').subtract(1, 'month').format('M'))
+        };
+        const data = await getAll('manifests/expected/' + globalFilters.rrTab, params);
+        setExpected(data.expected);
+    }, [globalFilters]);
+
     const loadConsistnecy = useCallback(async () => {
-        let params = null;
-
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
-
-        const data = await getAll('manifests/consistency/' + params.docket, params);
-        setConsistnecy({
-            consistnecy: [],
-            stats: data.consistency,
-            statsPerc: getPerc(data.consistency , expected)
-        });
-    }, [globalFilter, expected]);
+        let params = {
+            county: globalFilters.county,
+            subCounty: globalFilters.subCounty,
+            partner: globalFilters.partner,
+            agency: globalFilters.agency,
+            period: globalFilters.year + ',' + (globalFilters.month ? globalFilters.month:moment().startOf('month').subtract(1, 'month').format('M'))
+        };
+        const data = await getAll('manifests/consistency/' + globalFilters.rrTab, params);
+        setConsistnecy({ consistnecy: [], stats: data.consistency, statsPerc: getPerc(data.consistency , expected) });
+    }, [globalFilters, expected]);
 
     const loadRecency = useCallback(async () => {
-        let params = null;
-
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
-
-        const data = await getAll('manifests/recency/' + params.docket, params);
-        setRecency({
-            recency: [],
-            stats: data.recency,
-            statsPerc: getPerc(data.recency , expected)
-        });
-    }, [globalFilter, expected]);
+        let params = {
+            county: globalFilters.county,
+            subCounty: globalFilters.subCounty,
+            partner: globalFilters.partner,
+            agency: globalFilters.agency,
+            period: globalFilters.year + ',' + (globalFilters.month ? globalFilters.month:moment().startOf('month').subtract(1, 'month').format('M'))
+        };
+        const data = await getAll('manifests/recency/' + globalFilters.rrTab, params);
+        setRecency({ recency: [], stats: data.recency, statsPerc: getPerc(data.recency , expected) });
+    }, [globalFilters, expected]);
 
     useEffect(() => {
         loadExpected();
@@ -121,4 +107,4 @@ const UploadsReportingConsistency = ({ globalFilter }) => {
     );
 };
 
-export default UploadsReportingConsistency;
+export default RROverview;

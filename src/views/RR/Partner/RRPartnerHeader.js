@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardBody } from "reactstrap";
 
-const ServiceDeliveryPartnerHeader = ({ period }) => {
+const RRPartnerHeader = ({ period }) => {
     const getYear = () => {
         if (period) {
             return period.split(',')[0];
@@ -43,4 +43,4 @@ const ServiceDeliveryPartnerHeader = ({ period }) => {
     );
 };
 
-export default ServiceDeliveryPartnerHeader;
+export default RRPartnerHeader;

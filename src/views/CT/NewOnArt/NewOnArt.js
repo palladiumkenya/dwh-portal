@@ -15,7 +15,17 @@ import FacilitiesNewOnArtList from './FacilitiesNewOnArtList';
 const NewOnArt = ({globalFilters, onGlobalFiltersChange}) => {
     const onVisibilityChange = useCallback(async (isVisible) => {
         if (globalFilters.ctTab === 'txNew') {
-            onGlobalFiltersChange({ ...globalFilters, stickyFilter: !isVisible});
+            onGlobalFiltersChange({
+                ...globalFilters,
+                stickyFilter: !isVisible,
+                countyFilterEnabled: true,
+                subCountyFilterEnabled: true,
+                facilityFilterEnabled: true,
+                partnerFilterEnabled: true,
+                agencyFilterEnabled: false,
+                fromDateFilterEnabled: true,
+                toDateFilterEnabled: false,
+            });
         }
     }, [globalFilters, onGlobalFiltersChange]);
     return (

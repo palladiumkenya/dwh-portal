@@ -6,21 +6,19 @@ import { getAll } from './../Shared/Api';
 
 const CTHomeTXNew = ({ globalFilters }) => {
     const [txNew, setTxNew] = useState({});
-
     const loadTxNew = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: globalFilters.county,
+            subCounty: globalFilters.subCounty,
+            partner: globalFilters.partner,
+            agency: globalFilters.agency,
+            year: globalFilters.year
+        };
         const result = await getAll('care-treatment/txNew', params);
-
         const monthNames = {
             1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June",
             7: "July", 8:"August", 9: "September", 10: "October", 11: "November", 12: "December"
         };
-
         const today = new Date();
         const today_lastyear = new Date();
         const lastYear = new Date(today_lastyear.setFullYear(today.getFullYear() - 1));
@@ -28,7 +26,6 @@ const CTHomeTXNew = ({ globalFilters }) => {
         const lastYearMonth = lastYear.getMonth() + 1;
         const fullYear = today.getFullYear();
         const year = params.year;
-
         let months = [];
         let cumulative = [];
         let male = [];
