@@ -1,0 +1,74 @@
+[
+  {
+    "dashboard": "ARV Optimization",
+    "section": "Adult Optimization",
+    "name": "ART Uptake",
+    "site": "NASCOPCOHORT2016",
+    "workbook": "ARVOptimizeA-Regimens",
+    "view": "ARVOptimization_DashboardAdultOptimizationARTUptake",
+    "rank": 1
+  },
+  {
+    "dashboard": "ARV Optimization",
+    "section": "Adult Optimization",
+    "name": "TLD Analysis",
+    "site": "NASCOPCOHORT2016",
+    "workbook": "ARVOptimizeA-Regimens",
+    "view": "ARVOptimization_DashboardAdultOptimizationTLDAnalysis",
+    "rank": 2
+  },
+  {
+    "dashboard": "ARV Optimization",
+    "section": "Adult Optimization",
+    "name": "Adverse Events",
+    "site": "NASCOPCOHORT2016",
+    "workbook": "ARVOptimizeB_Toxicity",
+    "view": "ARVOptimization_DashboardAdultOptimizationAdverseEvents",
+    "rank": 3
+  },
+  {
+    "dashboard": "ARV Optimization",
+    "section": "Adult Optimization",
+    "name": "Started ART",
+    "site": "NASCOPCOHORT2016",
+    "workbook": "ARVOptimizeB_Toxicity",
+    "view": "ARVOptimization_DashboardAdultOptimizationStartedART",
+    "rank": 4
+  },
+  {
+    "dashboard": "ARV Optimization",
+    "section": "Adult Optimization",
+    "name": "Outcomes",
+    "site": "NASCOPCOHORT2016",
+    "workbook": "ARVOptimizeB_Toxicity",
+    "view": "ARVOptimization_DashboardAdultOptimizationOutcomes",
+    "rank": 5
+  },
+  {
+    "dashboard": "ARV Optimization",
+    "section": "CALHIV Optimization",
+    "name": "ART Uptake",
+    "site": "NASCOPCOHORT2016",
+    "workbook": "ARVOptimize-Regimens-RegimensCALHIV",
+    "view": "ARVOptimization_DashboardCALHIVOptimizationARTUptake",
+    "rank": 6
+  },
+  {
+    "dashboard": "ARV Optimization",
+    "section": "CALHIV Optimization",
+    "name": "Adverse Events",
+    "site": "NASCOPCOHORT2016",
+    "workbook": "ARVOptimizeC_Toxicity",
+    "view": "ARVOptimization_DashboardCALHIVOptimizationAdverseEvents",
+    "rank": 7
+  },
+  {
+    "dashboard": "ARV Optimization",
+    "section": "CALHIV Optimization",
+    "name": "Outcomes",
+    "site": "NASCOPCOHORT2016",
+    "workbook": "ARVOptimizeC_Toxicity",
+    "view": "ARVOptimization_DashboardCALHIVOptimizationOutcomes",
+    "rank": 8
+  }
+]
