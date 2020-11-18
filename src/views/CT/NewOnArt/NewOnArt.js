@@ -10,7 +10,6 @@ import MedianTimeToArtStart from './MedianTimeToArtStart';
 import MedianTimeToArtStartByCounty from './MedianTimeToArtStartByCounty';
 import MedianTimeToArtStartByPartner from './MedianTimeToArtStartByPartner';
 import TimeFromDiagnosisToStart from './TimeFromDiagnosisToStart';
-import FacilitiesNewOnArtList from './FacilitiesNewOnArtList';
 
 const NewOnArt = ({globalFilters, onGlobalFiltersChange}) => {
     const onVisibilityChange = useCallback(async (isVisible) => {

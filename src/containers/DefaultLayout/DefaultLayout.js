@@ -1,8 +1,8 @@
 import { AppFooter, AppHeader, AppBreadcrumb2 as AppBreadcrumb } from '@coreui/react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container } from 'reactstrap';
 import { Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
-import React, { Suspense, useCallback, useEffect, useState } from "react";
+import React, { Suspense, useState } from "react";
 import routes from '../../routes';
 import UniversalFilter from '../../views/Shared/UniversalFilter';
 

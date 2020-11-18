@@ -64,7 +64,7 @@ const AdverseEventsTable = ({ globalFilters }) => {
             ],
             data: data
         });
-    }, []);
+    }, [globalFilters]);
 
     useEffect(() => {
         loadAdverseEvents();

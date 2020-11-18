@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import NewOnArt from './NewOnArt/NewOnArt';
 import CurrentOnART from './CurrentOnART/CurrentOnART';

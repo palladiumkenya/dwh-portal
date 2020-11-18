@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
@@ -8,12 +8,7 @@ const AdverseEventsCausesAndActionsByDrugs = ({ globalFilters }) => {
     const [reportedCausesOfAEs, setReportedCausesOfAEs] = useState({});
     const [actionsByDrugs, setActionsByDrugs] = useState({});
 
-    useEffect(() => {
-        loadReportedCausesOfAE();
-        loadActionsByDrugs();
-    }, [globalFilters]);
-
-    const loadReportedCausesOfAE = async () => {
+    const loadReportedCausesOfAE = useCallback(async () => {
         let params = null;
 
         if (globalFilters) {
@@ -81,9 +76,9 @@ const AdverseEventsCausesAndActionsByDrugs = ({ globalFilters }) => {
                 }
             ]
         });
-    };
+    }, [globalFilters]);
 
-    const loadActionsByDrugs = async () => {
+    const loadActionsByDrugs = useCallback(async () => {
         let params = null;
 
         if (globalFilters) {
@@ -103,7 +98,7 @@ const AdverseEventsCausesAndActionsByDrugs = ({ globalFilters }) => {
         const mildVals = [];
         const undocumentedVals = [];
         for (let i = 0; i < categories.length; i++) {
-            const categoryVals =  result.filter(obj => obj.AdverseEventCause == categories[i]);
+            const categoryVals =  result.filter(obj => obj.AdverseEventCause === categories[i]);
             //Severe
             const severeVal = categoryVals.filter(x => x.Severity === 'Severe');
             const sumSevere = severeVal.length > 0 ? severeVal.map(item => item.total).reduce((x, y) => x + y) : 0;
@@ -190,7 +185,12 @@ const AdverseEventsCausesAndActionsByDrugs = ({ globalFilters }) => {
                 data: undocumentedVals
             }]
         });
-    };
+    }, [globalFilters]);
+
+    useEffect(() => {
+        loadReportedCausesOfAE();
+        loadActionsByDrugs();
+    }, [loadReportedCausesOfAE, loadActionsByDrugs]);
 
     return (
         <div className="row">

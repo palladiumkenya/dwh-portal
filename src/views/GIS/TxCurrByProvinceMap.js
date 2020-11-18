@@ -72,12 +72,12 @@ const TxCurrByProvinceMap = ({ globalFilters }) => {
             }
             let resultCounty = result[i].County;
             resultCounty = resultCounty.toLowerCase();
-            resultCounty = resultCounty.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+            resultCounty = resultCounty.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[]\\\/]/gi, '');
             resultCounty = resultCounty.replace(' ', '');
             for (let j = 0; j < mappedCounties.length; j++) {
                 let mappedCounty = mappedCounties[j].county;
                 mappedCounty = mappedCounty.toLowerCase();
-                mappedCounty = mappedCounty.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>\{\}\[\]\\\/]/gi, '');
+                mappedCounty = mappedCounty.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[]\\\/]/gi, '');
                 mappedCounty = mappedCounty.replace(' ', '');
                 if ( mappedCounty === resultCounty) {
                     let index = 8;
