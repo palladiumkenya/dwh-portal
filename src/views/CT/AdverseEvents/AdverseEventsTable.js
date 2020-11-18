@@ -10,8 +10,8 @@ const AdverseEventsTable = ({ globalFilters }) => {
     const loadAdverseEvents = useCallback(async () => {
         let params = null;
 
-        if (globalFilter) {
-            params = { ...globalFilter };
+        if (globalFilters) {
+            params = { ...globalFilters };
         }
 
         const aeDistributionBySeverity = await getAll('care-treatment/getAeTypesBySeverity', params);
