@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
@@ -6,12 +6,7 @@ import { getAll } from '../../Shared/Api';
 
 const AdverseEventsSeverityLevels = ({ globalFilters }) => {
     const [severityLevels, setSeverityLevels] = useState({});
-
-    useEffect(() => {
-        loadSeverityLevels();
-    }, [globalFilters]);
-
-    const loadSeverityLevels = async () => {
+    const loadSeverityLevels = useCallback(async () => {
         let params = null;
 
         if (globalFilters) {
@@ -28,9 +23,9 @@ const AdverseEventsSeverityLevels = ({ globalFilters }) => {
         }
 
         for (let i = 0; i < categories.length; i++) {
-            const cat_severe = result.filter(obj => obj.AdverseEvent == categories[i] && obj.Severity == 'Severe');
-            const cat_moderate = result.filter(obj => obj.AdverseEvent == categories[i] && obj.Severity == 'Moderate');
-            const cat_mild = result.filter(obj => obj.AdverseEvent == categories[i] && obj.Severity == 'Mild');
+            const cat_severe = result.filter(obj => obj.AdverseEvent === categories[i] && obj.Severity === 'Severe');
+            const cat_moderate = result.filter(obj => obj.AdverseEvent === categories[i] && obj.Severity === 'Moderate');
+            const cat_mild = result.filter(obj => obj.AdverseEvent === categories[i] && obj.Severity === 'Mild');
 
             const x  = cat_severe.length > 0 ? cat_severe.map(item => item.total).reduce((x, y) => x + y) : 0;
             const y  = cat_moderate.length > 0 ? cat_moderate.map(item => item.total).reduce((x, y) => x + y) : 0;
@@ -104,7 +99,11 @@ const AdverseEventsSeverityLevels = ({ globalFilters }) => {
                 data: mild_values
             }]
         });
-    };
+    }, [globalFilters]);
+
+    useEffect(() => {
+        loadSeverityLevels();
+    }, [loadSeverityLevels]);
 
     return (
         <div className="row">

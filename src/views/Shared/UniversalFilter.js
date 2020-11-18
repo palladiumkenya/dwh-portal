@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Row, Col, Form } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import { getAll } from './Api';
 import { Dropdown } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
@@ -22,7 +22,7 @@ const UniversalFilter = ({ globalFilters, onGlobalFiltersChange }) => {
             options
         );
         setCounties(selectionOptions);
-    }, [globalFilters]);
+    }, []);
 
     const loadSubCounties = useCallback(async () => {
         let params = null;
