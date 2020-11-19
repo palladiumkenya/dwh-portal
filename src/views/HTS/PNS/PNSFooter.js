@@ -7,7 +7,7 @@ const PNSFooter = () => {
                 <div className="row">
                     <div className="col-6">
                         <span className="reporting-rates-overview-text">
-                            PNS.
+                            Partner Notification Services
                         </span>
                     </div>
                     <div className="col-6">

@@ -116,7 +116,7 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilters }) => {
         <div className="row">
             <div className="col-6">
                 <Card className="trends-card">
-                    <CardHeader className="trends-header">
+                    <CardHeader className="cardTitle">
                         STABILITY STATUS AMONG ACTIVE PATIENTS
                     </CardHeader>
                     <CardBody className="trends-body">
@@ -128,7 +128,7 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilters }) => {
             </div>
             <div className="col-6">
                 <Card className="trends-card">
-                    <CardHeader className="trends-header">
+                    <CardHeader className="cardTitle">
                         APPOINTMENT DURATION BY STABILITY IN ACTIVE PATIENTS
                     </CardHeader>
                     <CardBody className="trends-body">

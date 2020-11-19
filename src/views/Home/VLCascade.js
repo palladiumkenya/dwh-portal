@@ -74,7 +74,7 @@ const VLCascade = ({ globalFilters }) => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle tag="h6">VIRAL LOAD CASCADE - ACTIVE ART CLIENTS</CardTitle>
+                <CardTitle className="cardTitle">VIRAL LOAD CASCADE - ACTIVE ART CLIENTS</CardTitle>
             </CardHeader>
             <CardBody>
                 <HighchartsReact highcharts={Highcharts} options={vlCascade} />
