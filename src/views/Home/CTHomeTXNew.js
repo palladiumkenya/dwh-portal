@@ -85,9 +85,7 @@ const CTHomeTXNew = ({ globalFilters }) => {
         <div className="row">
             <div className="col-12">
                 <Card className="trends-card">
-                    <CardHeader className="trends-header">
-                        NEW ON ART
-                    </CardHeader>
+                    <CardHeader  className="cardTitle">NEW ON ART</CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
                             <HighchartsReact highcharts={Highcharts} options={txNew} />
