@@ -7,13 +7,6 @@ import { getAll } from '../../Shared/Api';
 const CurrentOnARTTxCurrByAgeSex = ({ globalFilters }) => {
     const [txCurrByAgeAndSex, setTxCurrByAgeAndSex] = useState({});
 
-    const getYear = () => {
-        if (globalFilters.year) {
-            return globalFilters.year.split(',')[0];
-        }
-        return 2020;
-    };
-
     const loadTxCurrByAgeAndSex = useCallback(async () => {
         let params = null;
 

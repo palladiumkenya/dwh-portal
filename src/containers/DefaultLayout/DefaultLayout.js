@@ -1,8 +1,8 @@
 import { AppFooter, AppHeader, AppBreadcrumb2 as AppBreadcrumb } from '@coreui/react';
-import { Container, Row, Col } from 'reactstrap';
+import { Container } from 'reactstrap';
 import { Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
-import React, { Suspense, useCallback, useEffect, useState } from "react";
+import React, { Suspense, useState } from "react";
 import routes from '../../routes';
 import UniversalFilter from '../../views/Shared/UniversalFilter';
 
@@ -13,7 +13,12 @@ const loading = () => <div className="animated fadeIn pt-1 text-center">Loading.
 const DefaultLayout = () => {
 
     const [globalFilters, setGlobalFilters] = useState({
-        docket: '',
+        rrTab: 'ct',
+        rrTabs: {
+            "ct": "CARE & TREATMENT",
+            "hts": "HIV TESTING SERVICES",
+            "pkv": "PATIENT KEY VALUES",
+        },
         htsTab: 'uptake',
         htsTabs: {
             "uptake": "HIV TESTING SERVICES UPTAKE",
@@ -35,6 +40,7 @@ const DefaultLayout = () => {
         subCounty: [],
         facility: [],
         partner: [],
+        agency: [],
         fromDate: '',
         toDate: '',
         year: `${new Date().getFullYear()}`,
@@ -44,10 +50,9 @@ const DefaultLayout = () => {
         subCountyFilterEnabled: true,
         facilityFilterEnabled: true,
         partnerFilterEnabled: true,
+        agencyFilterEnabled: false,
         fromDateFilterEnabled: true,
-        toDateFilterEnabled: true,
-        yearFilterEnabled: true,
-        monthFilterEnabled: true,
+        toDateFilterEnabled: false,
     });
 
     const updateGlobalFilters = (selection) => {

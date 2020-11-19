@@ -26,7 +26,17 @@ import VLOverallUptakeAndSuppressionByFacility from './VLOverallUptakeAndSuppres
 const VL = ({globalFilters, onGlobalFiltersChange}) => {
     const onVisibilityChange = useCallback(async (isVisible) => {
         if (globalFilters.ctTab === 'vl') {
-            onGlobalFiltersChange({ ...globalFilters, stickyFilter: !isVisible});
+            onGlobalFiltersChange({
+                ...globalFilters,
+                stickyFilter: !isVisible,
+                countyFilterEnabled: true,
+                subCountyFilterEnabled: true,
+                facilityFilterEnabled: true,
+                partnerFilterEnabled: true,
+                agencyFilterEnabled: false,
+                fromDateFilterEnabled: true,
+                toDateFilterEnabled: false,
+            });
         }
     }, [globalFilters, onGlobalFiltersChange]);
     return (

@@ -15,7 +15,7 @@ function RenderViz(props) {
         }
 
         loadDashboard();
-    }, []);
+    }, [props.vizd]);
     return (
         <div>
             <h3>{props.vizd.name}</h3>

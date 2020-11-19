@@ -1,6 +1,6 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
-class ServiceDeliveryPartnerFooter extends Component {
+class RRCountyFooter extends Component {
 
     render() {
         return (
@@ -8,9 +8,10 @@ class ServiceDeliveryPartnerFooter extends Component {
                 <div className="col-12">
                     <div className="row">
                         <div className="col-6">
-                            <div className="reporting-rates-overview-text">
-                                The Overall reporting rate for March, 2020 is the number of EMR sites that uploaded data in March, 2020
-                            </div>
+                            <span className="reporting-rates-overview-text">
+                                The overall reporting rate for March, 2020 is the number of EMR
+                                sites that uploaded data in March, 2020.
+                            </span>
                         </div>
                         <div className="col-6">
                             <div className="reporting-rates-overview-copyright">
@@ -24,4 +25,4 @@ class ServiceDeliveryPartnerFooter extends Component {
     }
 }
 
-export default ServiceDeliveryPartnerFooter;
+export default RRCountyFooter;

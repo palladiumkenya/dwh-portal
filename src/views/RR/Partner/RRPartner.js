@@ -1,29 +1,25 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardHeader, CardBody } from "reactstrap";
+import moment from 'moment';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
-import moment from 'moment';
 
-const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
-    const monthYear = moment(globalFilter.period, 'YYYY,M').format('MMMM YYYY');
-    const [emrDistributionByPartner, setEmrDistributionByPartner] = useState({
-    });
-
+const RRPartner = ({ globalFilters }) => {
+    const [emrDistributionByPartner, setEmrDistributionByPartner] = useState({});
     const [recencyOfReportingByPartner, setRecencyOfReportingByPartner] = useState({});
-
     const [consistencyOfReportingByPartner, setConsistencyOfReportingByPartner] = useState({});
 
-    
-
     const loademrDistributionByPartner = useCallback(async () => {
-        let params = null;
+        let params = {
+            county: globalFilters.county,
+            subCounty: globalFilters.subCounty,
+            partner: globalFilters.partner,
+            agency: globalFilters.agency,
+            period: globalFilters.year + ',' + (globalFilters.month ? globalFilters.month:moment().startOf('month').subtract(1, 'month').format('M'))
 
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
-
-        const result = await getAll('manifests/emrdistribution/' + params.docket + '?reportingType=partner', params);
+        };
+        const result = await getAll('manifests/emrdistribution/' + globalFilters.rrTab + '?reportingType=partner', params);
         const partners = result.map(({ partner  }) => partner);
         const partners_series = result.map(({ facilities_count }) => parseInt(facilities_count, 10));
 
@@ -38,16 +34,17 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
             legend: { enabled: false },
             series: [{ data: partners_series, color: "#2F4050;", name: 'Distribution of EMR Sites' }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadRecencyOfReportingByPartner = useCallback(async () => {
-        let params = null;
-
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
-
-        const result = await getAll('manifests/recencyreportingbypartner/' + params.docket, params);
+        let params = {
+            county: globalFilters.county,
+            subCounty: globalFilters.subCounty,
+            partner: globalFilters.partner,
+            agency: globalFilters.agency,
+            period: globalFilters.year + ',' + (globalFilters.month ? globalFilters.month:moment().startOf('month').subtract(1, 'month').format('M'))
+        };
+        const result = await getAll('manifests/recencyreportingbypartner/' + globalFilters.rrTab, params);
         const partners = result.map(({ partner  }) => partner);
         const partners_series = result.map(({ Percentage }) => parseInt(Percentage, 10) > 100 ? 100:parseInt(Percentage, 10));
 
@@ -62,16 +59,17 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
             legend: { enabled: false },
             series: [{ data: partners_series, color: "#59A14F", name: 'Overall Reporting Rates' }]
         });
-    }, [globalFilter]);
+    }, [globalFilters]);
 
     const loadConsistencyOfReportingByPartner = useCallback(async () => {
-        let params = null;
-
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
-
-        const result = await getAll('manifests/consistencyreportingbycountypartner/' + params.docket + '?reportingType=partner', params);
+        let params = {
+            county: globalFilters.county,
+            subCounty: globalFilters.subCounty,
+            partner: globalFilters.partner,
+            agency: globalFilters.agency,
+            period: globalFilters.year + ',' + (globalFilters.month ? globalFilters.month:moment().startOf('month').subtract(1, 'month').format('M'))
+        };
+        const result = await getAll('manifests/consistencyreportingbycountypartner/' + globalFilters.rrTab + '?reportingType=partner', params);
         const partners = Object.keys(result);
         const partners_series = Object.values(result);
 
@@ -86,7 +84,7 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
             legend: { enabled: false },
             series: [{ data: partners_series, color: "#F28E2B", name: 'Consistency of Reporting' }]
         });
-    }, [globalFilter, monthYear]);
+    }, [globalFilters]);
 
     useEffect(() => {
         loademrDistributionByPartner();
@@ -138,4 +136,4 @@ const ServiceDeliveryPartnerReports = ({ globalFilter }) => {
     );
 };
 
-export default ServiceDeliveryPartnerReports;
+export default RRPartner;

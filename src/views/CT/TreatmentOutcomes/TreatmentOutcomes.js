@@ -17,7 +17,17 @@ import TwentyFourMonthRetention from './TwentyFourMonthRetention';
 const TreatmentOutcomes = ({globalFilters, onGlobalFiltersChange}) => {
     const onVisibilityChange = useCallback(async (isVisible) => {
         if (globalFilters.ctTab === 'tOut') {
-            onGlobalFiltersChange({ ...globalFilters, stickyFilter: !isVisible});
+            onGlobalFiltersChange({
+                ...globalFilters,
+                stickyFilter: !isVisible,
+                countyFilterEnabled: true,
+                subCountyFilterEnabled: true,
+                facilityFilterEnabled: true,
+                partnerFilterEnabled: true,
+                agencyFilterEnabled: false,
+                fromDateFilterEnabled: true,
+                toDateFilterEnabled: false,
+            });
         }
     }, [globalFilters, onGlobalFiltersChange]);
     return (

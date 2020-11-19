@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardBody } from "reactstrap";
 
-const ReportingRatesByCountyHeader = ({ period }) => {
+const RRCountyHeader = ({ period }) => {
   const getYear = () => {
       if (period) {
           return period.split(',')[0];
@@ -42,4 +42,4 @@ const ReportingRatesByCountyHeader = ({ period }) => {
   );
 };
 
-export default ReportingRatesByCountyHeader;
+export default RRCountyHeader;

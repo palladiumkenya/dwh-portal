@@ -18,7 +18,17 @@ import AppointmentDurationStableByPartner from './AppointmentDurationStableByPar
 const DSD = ({globalFilters, onGlobalFiltersChange}) => {
     const onVisibilityChange = useCallback(async (isVisible) => {
         if (globalFilters.ctTab === 'dsd') {
-            onGlobalFiltersChange({ ...globalFilters, stickyFilter: !isVisible});
+            onGlobalFiltersChange({
+                ...globalFilters,
+                stickyFilter: !isVisible,
+                countyFilterEnabled: true,
+                subCountyFilterEnabled: true,
+                facilityFilterEnabled: true,
+                partnerFilterEnabled: true,
+                agencyFilterEnabled: false,
+                fromDateFilterEnabled: true,
+                toDateFilterEnabled: false,
+            });
         }
     }, [globalFilters, onGlobalFiltersChange]);
     return (
