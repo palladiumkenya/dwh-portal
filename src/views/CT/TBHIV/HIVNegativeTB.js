@@ -59,7 +59,7 @@ const HIVNegativeTB = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        HIV NEGATIVE TB PATIENTS (N = 465)
+                        HIV NEGATIVE TB PATIENTS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

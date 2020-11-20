@@ -457,7 +457,7 @@ const AdverseEventsTiles = ({ globalFilters }) => {
                 <div className="col-6">
                     <Card className="trends-card">
                         <CardHeader className="trends-header">
-                            CHILDREN &#60;15 ON ART AND DEVELOPED ADVERSE EVENTS(N={totalChildrenAdverseEvents.total})
+                            CHILDREN &#60;15 ON ART AND DEVELOPED ADVERSE EVENTS (N={totalChildrenAdverseEvents.total})
                         </CardHeader>
                         <CardBody className="trends-body">
                             <div className="col-12">
@@ -470,7 +470,7 @@ const AdverseEventsTiles = ({ globalFilters }) => {
                 <div className="col-6">
                     <Card className="trends-card">
                         <CardHeader className="trends-header">
-                            ADULTS 15+ ON ART AND DEVELOPED ADVERSE EVENTS(N={totalAdultsAdverseEvents.total})
+                            ADULTS 15+ ON ART AND DEVELOPED ADVERSE EVENTS (N={totalAdultsAdverseEvents.total})
                         </CardHeader>
                         <CardBody className="trends-body">
                             <div className="col-12">
