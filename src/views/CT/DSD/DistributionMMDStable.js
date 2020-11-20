@@ -60,7 +60,7 @@ const DistributionMMDStable = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        DISTRIBUTION OF MMD MODELS AMONG STABLE TX CURR PATIENTS (N =495)
+                        DISTRIBUTION OF MMD MODELS AMONG STABLE TX CURR PATIENTS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

@@ -72,7 +72,7 @@ const AppointmentDurationBySex = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        APPOINTMENT DURATION PRACTICES BY SEX AMONG STABLE PATIENTS (N =495)
+                        APPOINTMENT DURATION PRACTICES BY SEX AMONG STABLE PATIENTS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

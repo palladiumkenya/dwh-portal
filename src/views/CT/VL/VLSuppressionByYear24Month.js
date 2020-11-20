@@ -54,7 +54,7 @@ const VLSuppressionByYear24Month = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        24 MONTH VIRAL SUPPRESSION BY YEAR OF ART START (N =495)
+                        24 MONTH VIRAL SUPPRESSION BY YEAR OF ART START
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

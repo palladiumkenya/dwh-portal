@@ -72,7 +72,7 @@ const TreatmentOutcomesBySex = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ART TREATMENT OUTCOMES BY SEX (N =495)
+                        ART TREATMENT OUTCOMES BY SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

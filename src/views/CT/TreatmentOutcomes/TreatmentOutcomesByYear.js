@@ -73,7 +73,7 @@ const TreatmentOutcomesByYear = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ART TREATMENT OUTCOMES BY YEAR OF ART START (N =495)
+                        ART TREATMENT OUTCOMES BY YEAR OF ART START
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

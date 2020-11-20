@@ -55,7 +55,7 @@ const IPTUptake = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        IPT UPTAKE AMONG TX CURR PATIENTS (N =495)
+                        IPT UPTAKE AMONG TX CURR PATIENTS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
