@@ -1,12 +1,13 @@
 import React, { useCallback } from 'react';
-import { CardColumns, Col, Row } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 import HomeHeader from './HomeHeader';
 import HomeFooter from './HomeFooter';
 import UniversalFilter from '../Shared/UniversalFilter';
-import CTHomeTXNew from './CTHomeTXNew';
-import CTHomeStabilityStatusAndTrendsInDSD from './CTHomeStabilityStatusAndTrendsInDsd';
+import HomeTxNew from './HomeTxNew';
+import HomeStabilityStatusAndTrendsInDSD from './HomeStabilityStatusAndTrendsInDsd';
 import HomeVLCascade from './HomeVLCascade';
 import HomeAgeDistribution from './HomeAgeDistribution';
+import HomeSexDistribution from './HomeSexDistribution';
 import HomeOverview from './HomeOverview';
 import VisibilitySensor from 'react-visibility-sensor';
 import HomeMaps from './HomeMaps';
@@ -59,16 +60,17 @@ const Home = ({globalFilters, onGlobalFiltersChange}) => {
                     <HomeOverview />
                 </Col>
             </Row>
+            <HomeSexDistribution/>
             <hr />
             <HomeFooter />
             <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>
             <VisibilitySensor onChange={onVisibilityChangeOnCTHomeTxNew}>
-                <CTHomeTXNew globalFilters={globalFilters} />
+                <HomeTxNew globalFilters={globalFilters} />
             </VisibilitySensor>
             <hr />
             <HomeFooter />
             <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>
-            <CTHomeStabilityStatusAndTrendsInDSD globalFilters={globalFilters} />
+            <HomeStabilityStatusAndTrendsInDSD globalFilters={globalFilters} />
             <hr />
             <HomeFooter />
             <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>

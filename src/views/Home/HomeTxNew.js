@@ -2,9 +2,9 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import { getAll } from './../Shared/Api';
+import { getAll } from '../Shared/Api';
 
-const CTHomeTXNew = ({ globalFilters }) => {
+const HomeTxNew = ({ globalFilters }) => {
     const [txNew, setTxNew] = useState({});
     const loadTxNew = useCallback(async () => {
         let params = {
@@ -97,4 +97,4 @@ const CTHomeTXNew = ({ globalFilters }) => {
     );
 };
 
-export default CTHomeTXNew;
+export default HomeTxNew;

@@ -3,9 +3,9 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import moment from 'moment';
-import { getAll } from './../Shared/Api';
+import { getAll } from '../Shared/Api';
 
-const CTHomeReportingRates = ({ globalFilters }) => {
+const HomeReportingRates = ({ globalFilters }) => {
     const [expected, setExpected] = useState(0);
     const [recency, setRecencyTrend] = useState({
         chart: { type: "column" },
@@ -99,4 +99,4 @@ const CTHomeReportingRates = ({ globalFilters }) => {
     );
 };
 
-export default CTHomeReportingRates;
+export default HomeReportingRates;
