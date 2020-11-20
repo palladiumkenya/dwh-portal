@@ -161,12 +161,8 @@ const HomeAgeDistribution = ({ globalFilters }) => {
                         <CardBody className="primary-card-body">
                             <CardTitle tag="h5" className="text-left m-2">ADULTS ON ART</CardTitle>
                             <CardSubtitle tag="h6" className="text-left m-2">15+ YEARS</CardSubtitle>
-                            <Row className="justify-content-center">
-                                <Col className="col-7">
-                                    <CardSubtitle tag="h5" className="primary-card-body-subtitle text-right">95%</CardSubtitle>
-                                </Col>
-                            </Row>
-                            <CardText className="primary-card-body-text text-center" style={{ color: '#F28E2B' }}>{ARTClientsAdults.ActiveARTAdults}</CardText>
+                            <CardSubtitle tag="h5" className="primary-card-body-subtitle text-right">95%</CardSubtitle>
+                            <CardText className="primary-card-body-text text-right" style={{ color: '#F28E2B' }}>{ARTClientsAdults.ActiveARTAdults}</CardText>
                         </CardBody>
                     </Card>
                 </Col>
@@ -177,12 +173,8 @@ const HomeAgeDistribution = ({ globalFilters }) => {
                         <CardBody className="primary-card-body">
                             <CardTitle tag="h5" className="text-left m-2">ADOLESCENTS ON ART</CardTitle>
                             <CardSubtitle tag="h6" className="text-left m-2">10-19 YEARS</CardSubtitle>
-                            <Row className="justify-content-center">
-                                <Col className="col-7">
-                                    <CardSubtitle tag="h5" className="primary-card-body-subtitle text-right">95%</CardSubtitle>
-                                </Col>
-                            </Row>
-                            <CardText className="primary-card-body-text text-center" style={{ color: '#F28E2B' }}>{ARTClientsAdolescents.ActiveARTAdolescents}</CardText>
+                            <CardSubtitle tag="h5" className="primary-card-body-subtitle text-right">95%</CardSubtitle>
+                            <CardText className="primary-card-body-text text-right" style={{ color: '#F28E2B' }}>{ARTClientsAdolescents.ActiveARTAdolescents}</CardText>
                         </CardBody>
                     </Card>
                 </Col>
@@ -193,12 +185,8 @@ const HomeAgeDistribution = ({ globalFilters }) => {
                         <CardBody className="primary-card-body">
                             <CardTitle tag="h5" className="text-left m-2">CHILDREN ON ART</CardTitle>
                             <CardSubtitle tag="h6" className="text-left m-2">0-14 YEARS</CardSubtitle>
-                            <Row className="justify-content-center">
-                                <Col className="col-7">
-                                    <CardSubtitle tag="h5" className="primary-card-body-subtitle text-right">95%</CardSubtitle>
-                                </Col>
-                            </Row>
-                            <CardText className="primary-card-body-text text-center" style={{ color: '#F28E2B' }}>{ARTClientsChildren.ActiveARTChildren}</CardText>
+                            <CardSubtitle tag="h5" className="primary-card-body-subtitle text-right">95%</CardSubtitle>
+                            <CardText className="primary-card-body-text text-right" style={{ color: '#F28E2B' }}>{ARTClientsChildren.ActiveARTChildren}</CardText>
                         </CardBody>
                     </Card>
                 </Col>
