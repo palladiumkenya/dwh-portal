@@ -1,13 +1,15 @@
 import React, { useCallback } from 'react';
-import { CardColumns } from 'reactstrap';
-import CTHomeOverview from './CTHomeOverview';
+import { CardColumns, Col, Row } from 'reactstrap';
+import HomeHeader from './HomeHeader';
+import HomeFooter from './HomeFooter';
 import UniversalFilter from '../Shared/UniversalFilter';
-import CTHomeFooter from './CTHomeFooter';
 import CTHomeTXNew from './CTHomeTXNew';
 import CTHomeStabilityStatusAndTrendsInDSD from './CTHomeStabilityStatusAndTrendsInDsd';
-import VLCascade from './VLCascade';
-import CTOverview from './CTOverview';
+import HomeVLCascade from './HomeVLCascade';
+import HomeAgeDistribution from './HomeAgeDistribution';
+import HomeOverview from './HomeOverview';
 import VisibilitySensor from 'react-visibility-sensor';
+import HomeMaps from './HomeMaps';
 
 const Home = ({globalFilters, onGlobalFiltersChange}) => {
     const onVisibilityChange = useCallback(async (isVisible) => {
@@ -41,31 +43,34 @@ const Home = ({globalFilters, onGlobalFiltersChange}) => {
         <div className="animated fadeIn">
             <br></br>
             <div className="strip"></div>
-            <CTHomeOverview period={globalFilters?.year} />
+            <HomeHeader period={globalFilters?.year} />
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter globalFilters={globalFilters}  onGlobalFiltersChange={onGlobalFiltersChange}/>
             </VisibilitySensor>
-            <p>
-                <strong>1223</strong> Health Facilities in 44 Countries in Kenya,
-                supported by 44 SDPs have ever uploaded care & treatment data to the warehouse since it’s inception.
-                As at July 2020,<strong>1035</strong> facilities had reported patients current on ART.
-            </p>
-            <CardColumns className="cols-2">
-                <VLCascade globalFilters={globalFilters} />
-                <CTOverview globalFilters={globalFilters} />
-            </CardColumns>
+            <HomeVLCascade globalFilters={globalFilters} />
+            <Row>
+                <Col xl={2} lg={2} md={2} sm={12} xs={12}>
+                    <HomeAgeDistribution globalFilters={globalFilters} />
+                </Col>
+                <Col xl={8} lg={8} md={8} sm={12} xs={12}>
+                    <HomeMaps globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+                </Col>
+                <Col xl={2} lg={2} md={2} sm={12} xs={12}>
+                    <HomeOverview />
+                </Col>
+            </Row>
             <hr />
-            <CTHomeFooter />
+            <HomeFooter />
             <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>
             <VisibilitySensor onChange={onVisibilityChangeOnCTHomeTxNew}>
                 <CTHomeTXNew globalFilters={globalFilters} />
             </VisibilitySensor>
             <hr />
-            <CTHomeFooter />
+            <HomeFooter />
             <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>
             <CTHomeStabilityStatusAndTrendsInDSD globalFilters={globalFilters} />
             <hr />
-            <CTHomeFooter />
+            <HomeFooter />
             <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>
         </div>
     );
