@@ -54,7 +54,7 @@ const VLSuppressionByPartner = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VL SUPPRESSION AMONG TX CURR PATIENTS BY partner (N =495)
+                        VL SUPPRESSION AMONG TX CURR PATIENTS BY partner
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

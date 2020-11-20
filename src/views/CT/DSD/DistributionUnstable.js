@@ -59,7 +59,7 @@ const DistributionUnstable = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        DISTRIBUTION OF UNSTABLE PATIENTS (N =495)
+                        DISTRIBUTION OF UNSTABLE PATIENTS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

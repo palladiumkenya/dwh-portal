@@ -210,7 +210,7 @@ const AdverseEventsCausesAndActionsByDrugs = ({ globalFilters }) => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ADVERSE EVENTS ACTIONS BY DRUGS(N=495)
+                        ADVERSE EVENTS ACTIONS BY DRUGS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

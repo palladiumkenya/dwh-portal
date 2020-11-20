@@ -87,7 +87,7 @@ const VLSuppressionByAge = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VIRAL SUPPRESSION (less than 400 cpm) AMONG TX CURR PATIENTS BY AGE (N =495)
+                        VIRAL SUPPRESSION (less than 400 cpm) AMONG TX CURR PATIENTS BY AGE
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

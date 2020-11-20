@@ -92,7 +92,7 @@ const TimeFromDiagnosisToStart = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TIME FROM DIAGNOSIS TO ART START AMONG NEWLY DIAGNOSED PATIENTS BY YEAR OF ART (N=495)
+                        TIME FROM DIAGNOSIS TO ART START AMONG NEWLY DIAGNOSED PATIENTS BY YEAR OF ART
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

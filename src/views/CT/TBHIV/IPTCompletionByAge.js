@@ -86,7 +86,7 @@ const IPTCompletionByAge = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        IPT COMPLETION (N = 495)
+                        IPT COMPLETION
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

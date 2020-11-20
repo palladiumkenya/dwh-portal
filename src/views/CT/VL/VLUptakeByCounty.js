@@ -54,7 +54,7 @@ const VLUptakeByCounty = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VL UPTAKE AMONG TX CURR PATIENTS BY COUNTY (N =495)
+                        VL UPTAKE AMONG TX CURR PATIENTS BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
