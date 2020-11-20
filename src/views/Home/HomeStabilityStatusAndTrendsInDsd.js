@@ -2,9 +2,9 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import { getAll } from './../Shared/Api';
+import { getAll } from '../Shared/Api';
 
-const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilters }) => {
+const HomeStabilityStatusAndTrendsInDSD = ({ globalFilters }) => {
     const [stabilityStatus, setStabilityStatus] = useState({});
     const [trendsInDSD, setTrendsInDSD] = useState({});
 
@@ -142,4 +142,4 @@ const CTHomeStabilityStatusAndTrendsInDSD = ({ globalFilters }) => {
     );
 };
 
-export default CTHomeStabilityStatusAndTrendsInDSD;
+export default HomeStabilityStatusAndTrendsInDSD;
