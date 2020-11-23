@@ -25,16 +25,15 @@ const PNS = ({globalFilters, onGlobalFiltersChange}) => {
                 subCountyFilterEnabled: true,
                 facilityFilterEnabled: true,
                 partnerFilterEnabled: true,
-                agencyFilterEnabled: true,
+                agencyFilterEnabled: false,
                 fromDateFilterEnabled: true,
-                toDateFilterEnabled: true,
+                toDateFilterEnabled: false,
             });
         }
     }, [globalFilters, onGlobalFiltersChange]);
     return (
         <div className="animated fadeIn">
             <div className="strip">&nbsp;</div>
-            <h3 style={{color: '#ff0000', textAlign: 'center', padding: '1em'}}>Please note that the data on this page is dummy data</h3>
             <PNSHeader/>
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
