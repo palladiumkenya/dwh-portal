@@ -80,7 +80,7 @@ const VLUptakeByAge = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VL UPTAKE AMONG TX CURR PATIENTS BY AGE (N =495)
+                        VL UPTAKE AMONG TX CURR PATIENTS BY AGE
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

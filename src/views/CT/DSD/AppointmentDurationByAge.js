@@ -88,7 +88,7 @@ const AppointmentDurationByAge = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        APPOINTMENT DURATION PRACTICES BY AGE (N =495)
+                        APPOINTMENT DURATION PRACTICES BY AGE
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

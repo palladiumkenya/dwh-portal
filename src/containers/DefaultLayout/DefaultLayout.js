@@ -13,6 +13,13 @@ const loading = () => <div className="animated fadeIn pt-1 text-center">Loading.
 const DefaultLayout = () => {
 
     const [globalFilters, setGlobalFilters] = useState({
+        homeTab: 'emr',
+        homeTabs: {
+            "emr": "EMR SITES",
+            "txCurr": "CURRENT ON ART",
+            "hasCurrVl": "HAS CURRENT VL",
+            "suppressed": "SUPPRESSED",
+        },
         rrTab: 'ct',
         rrTabs: {
             "ct": "CARE & TREATMENT",

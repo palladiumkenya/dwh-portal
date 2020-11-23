@@ -71,7 +71,7 @@ const VLSuppressionByRegimen = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VL OUTCOMES AMONG TX CURR PATIENTS BY ART REGIMEN/OPTIMIZATION (N =495)
+                        VL OUTCOMES AMONG TX CURR PATIENTS BY ART REGIMEN/OPTIMIZATION
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

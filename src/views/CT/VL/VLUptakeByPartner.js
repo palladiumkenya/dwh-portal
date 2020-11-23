@@ -54,7 +54,7 @@ const VLUptakeByPartner = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VL UPTAKE AMONG TX CURR PATIENTS BY PARTNER (N =495)
+                        VL UPTAKE AMONG TX CURR PATIENTS BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

@@ -268,7 +268,7 @@ const AdverseEventsSeverity = ({ globalFilters }) => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ADVERSE EVENTS ACTIONS BY SEVERITY(N={totalAdverseEventsActions.total})
+                        ADVERSE EVENTS ACTIONS BY SEVERITY (N={totalAdverseEventsActions.total})
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

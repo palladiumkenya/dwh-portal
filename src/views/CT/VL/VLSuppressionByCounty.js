@@ -54,7 +54,7 @@ const VLSuppressionByCounty = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VL SUPPRESSION AMONG TX CURR PATIENTS BY COUNTY (N =495)
+                        VL SUPPRESSION AMONG TX CURR PATIENTS BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

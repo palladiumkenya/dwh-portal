@@ -55,7 +55,7 @@ const SixMonthRetention = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        6 MONTH RETENTION BY YEAR OF ART START (N =495)
+                        6 MONTH RETENTION BY YEAR OF ART START
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
