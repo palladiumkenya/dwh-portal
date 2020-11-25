@@ -1,18 +1,21 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { getAll } from '../Shared/Api';
+import moment from "moment";
 
-const HomeTxNew = ({ globalFilters }) => {
+const HomeTxNew = () => {
+    const filters = useSelector(state => state.filters);
     const [txNew, setTxNew] = useState({});
     const loadTxNew = useCallback(async () => {
         let params = {
-            county: globalFilters.county,
-            subCounty: globalFilters.subCounty,
-            partner: globalFilters.partner,
-            agency: globalFilters.agency,
-            year: globalFilters.year
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: moment(filters.fromDate, "MMM YYYY").format("YYYY")
         };
         const result = await getAll('care-treatment/txNew', params);
         const monthNames = {
@@ -75,7 +78,7 @@ const HomeTxNew = ({ globalFilters }) => {
                 { name: 'Cumulative New on ART', type: 'spline', yAxis: 1, data: cumulative, color: "#E06F07"}
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadTxNew();

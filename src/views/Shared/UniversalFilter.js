@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 import { getAll } from './Api';
 import { Dropdown } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
-import moment from 'moment';
+import * as filterActions from "../../store/actions/filterActions";
 
-const UniversalFilter = ({ globalFilters, onGlobalFiltersChange }) => {
+const UniversalFilter = () => {
+    const ui = useSelector(state => state.ui);
+    const filters = useSelector(state => state.filters);
 
     const [counties, setCounties] = useState([]);
     const [subCounties, setSubCounties] = useState([]);
@@ -25,10 +28,13 @@ const UniversalFilter = ({ globalFilters, onGlobalFiltersChange }) => {
     }, []);
 
     const loadSubCounties = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            // year:  moment(filters.fromDate, 'MMM YYYY').format('YYYY')
+        };
         const data = await getAll('care-treatment/subCounties', params);
         const options = data.map((c) => {
             return { value: c.subcounty, key: c.subcounty, text: c.subcounty };
@@ -37,13 +43,15 @@ const UniversalFilter = ({ globalFilters, onGlobalFiltersChange }) => {
             options
         );
         setSubCounties(selectionOptions);
-    }, [globalFilters]);
+    }, [filters]);
 
     const loadFacilities = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies
+        };
         const data = await getAll('care-treatment/facilities', params);
         const options = data.map((c) => {
             return { value: c.facilityName, key: c.facilityName, text: c.facilityName };
@@ -52,13 +60,15 @@ const UniversalFilter = ({ globalFilters, onGlobalFiltersChange }) => {
             options
         );
         setFacilities(selectionOptions);
-    }, [globalFilters]);
+    }, [filters]);
 
     const loadPartners = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies
+        };
         const data = await getAll('care-treatment/partners', params);
         const options = data.map((c) => {
             return { value: c.partner, key: c.partner, text: c.partner };
@@ -67,13 +77,15 @@ const UniversalFilter = ({ globalFilters, onGlobalFiltersChange }) => {
             options
         );
         setPartners(selectionOptions);
-    }, [globalFilters]);
+    }, [filters]);
 
     const loadAgencies = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies
+        };
         const data = await getAll('common/agencies', params);
         const options = data.map((c) => {
             return { value: c.agency, key: c.agency, text: c.agency };
@@ -82,62 +94,7 @@ const UniversalFilter = ({ globalFilters, onGlobalFiltersChange }) => {
             options
         );
         setAgencies(selectionOptions);
-    }, [globalFilters]);
-
-    const onCountyChange = async (e, {value}) => {
-        onGlobalFiltersChange({
-            ...globalFilters, county: value
-        });
-    };
-
-    const onSubCountyChange = async (e, {value}) => {
-        onGlobalFiltersChange({
-            ...globalFilters, subCounty: value
-        });
-    };
-
-    const onFacilityChange = async (e, {value}) => {
-        onGlobalFiltersChange({
-            ...globalFilters, facility: value
-        });
-    };
-
-    const onPartnerChange = async (e, {value}) => {
-        onGlobalFiltersChange({
-            ...globalFilters, partner: value
-        });
-    };
-
-    const onAgencyChange = async (e, {value}) => {
-        onGlobalFiltersChange({
-            ...globalFilters, agency: value
-        });
-    };
-
-    const onFromDateChange = async (e, {value}) => {
-        let filters = { ...globalFilters };
-        if (value) {
-            let fromDate = moment(value, 'MMM YYYY');
-            filters.fromDate = value;
-            filters.year = fromDate.format('YYYY');
-            filters.month = fromDate.format('MM');
-        } else {
-            filters.fromDate = '';
-            filters.year = moment().format('YYYY');
-            filters.month = moment().format('M');
-        }
-        onGlobalFiltersChange(filters);
-    };
-
-    const onToDateChange = async (e, {value}) => {
-        let filters = { ...globalFilters };
-        if (value) {
-            filters.toDate = value;
-        } else {
-            filters.toDate = '';
-        }
-        onGlobalFiltersChange(filters);
-    }
+    }, [filters]);
 
     useEffect(() => {
         loadCounties();
@@ -150,72 +107,134 @@ const UniversalFilter = ({ globalFilters, onGlobalFiltersChange }) => {
     return (
         <Row>
             {
-                globalFilters.countyFilterEnabled ?
+                ui.countyFilterEnabled ?
                 <Col>
                     <div className="form-group">
                         <label htmlFor="county">County</label>
-                        <Dropdown id="county"  name="county" placeholder="Select County" fluid multiple selection options={counties} value={globalFilters.county} onChange={onCountyChange} />
+                        <Dropdown
+                            id="county"
+                            name="county"
+                            placeholder="Select County"
+                            fluid
+                            multiple
+                            selection
+                            options={counties}
+                            value={filters.counties}
+                            onChange={() => {
+                                filterActions.filterByCounty(filters.counties);
+                            }}
+                        />
                     </div>
                 </Col> : null
             }
             {
-                globalFilters.subCountyFilterEnabled ?
+                ui.subCountyFilterEnabled ?
                 <Col>
                     <div className="form-group">
                         <label htmlFor="county">Sub-County</label>
-                        <Dropdown id="subCounty" name="subCounty" placeholder="Select Sub-County" fluid multiple selection options={subCounties} value={globalFilters.subCounty} onChange={onSubCountyChange} />
+                        <Dropdown
+                            id="subCounty"
+                            name="subCounty"
+                            placeholder="Select Sub-County"
+                            fluid
+                            multiple
+                            selection
+                            options={subCounties}
+                            value={filters.subCounties}
+                            onChange={() => {
+                                filterActions.filterBySubCounty(filters.subCounties);
+                            }}
+                        />
                     </div>
                 </Col> : null
             }
             {
-                globalFilters.facilityFilterEnabled ?
+                ui.facilityFilterEnabled ?
                 <Col>
                     <div className="form-group">
                         <label htmlFor="county">Facility</label>
-                        <Dropdown id="facility" name="facility" placeholder="Select Facility" fluid multiple selection options={facilities} value={globalFilters.facility} onChange={onFacilityChange} />
+                        <Dropdown
+                            id="facility"
+                            name="facility"
+                            placeholder="Select Facility"
+                            fluid
+                            multiple
+                            selection
+                            options={facilities}
+                            value={filters.facilities}
+                            onChange={() => {
+                                filterActions.filterByFacility(filters.facilities);
+                            }}
+                        />
                     </div>
                 </Col> : null
             }
             {
-                globalFilters.partnerFilterEnabled ?
+                ui.partnerFilterEnabled ?
                 <Col>
                     <div className="form-group">
                         <label htmlFor="partner">Partner</label>
-                        <Dropdown id="partner" name="partner" placeholder="Select Partner" fluid multiple selection options={partners} value={globalFilters.partner} onChange={onPartnerChange} />
+                        <Dropdown
+                            id="partner"
+                            name="partner"
+                            placeholder="Select Partner"
+                            fluid
+                            multiple
+                            selection
+                            options={partners}
+                            value={filters.partners}
+                            onChange={() => {
+                                filterActions.filterByPartner(filters.partners);
+                            }}
+                        />
                     </div>
                 </Col> : null
             }
             {
-                globalFilters.agencyFilterEnabled ?
+                ui.agencyFilterEnabled ?
                 <Col>
                     <div className="form-group">
                         <label htmlFor="agency">Agency</label>
-                        <Dropdown id="agency" name="agency" placeholder="Select Agency" fluid multiple selection options={agencies} value={globalFilters.agency} onChange={onAgencyChange} />
+                        <Dropdown
+                            id="agency"
+                            name="agency"
+                            placeholder="Select Agency"
+                            fluid
+                            multiple
+                            selection
+                            options={agencies}
+                            value={filters.agencies}
+                            onChange={() => {
+                                filterActions.filterByAgency(filters.agencies);
+                            }}
+                        />
                     </div>
                 </Col> : null
             }
             {
-                globalFilters.fromDateFilterEnabled ?
+                ui.fromDateFilterEnabled ?
                 <Col>
                     <div className="form-group">
-                        <label htmlFor="fromDate">{globalFilters.toDateFilterEnabled ? 'From':'Period'}</label>
+                        <label htmlFor="fromDate">{ui.toDateFilterEnabled ? 'From':'Period'}</label>
                         <DateInput
                             name="fromDate"
                             dateFormat="MMM YYYY"
                             closable={true}
                             clearable={true}
                             // maxDate={moment()}
-                            placeholder={globalFilters.toDateFilterEnabled ? 'From':'Period'}
+                            placeholder={ui.toDateFilterEnabled ? 'From':'Period'}
                             fluid
-                            value={globalFilters.fromDate}
+                            value={filters.fromDate}
                             iconPosition="left"
-                            onChange={onFromDateChange}
+                            onChange={() => {
+                                filterActions.filterByFromDate(filters.fromDate);
+                            }}
                         />
                     </div>
                 </Col> : null
             }
             {
-                globalFilters.toDateFilterEnabled ?
+                ui.toDateFilterEnabled ?
                 <Col>
                     <div className="form-group">
                         <label htmlFor="toDate">To</label>
@@ -224,13 +243,15 @@ const UniversalFilter = ({ globalFilters, onGlobalFiltersChange }) => {
                             dateFormat="MMM YYYY"
                             closable={true}
                             clearable={true}
-                            // minDate={globalFilters.fromDate}
+                            // minDate={filters.fromDate}
                             // maxDate={moment()}
                             placeholder="To"
                             fluid
-                            value={globalFilters.toDate}
+                            value={filters.toDate}
                             iconPosition="left"
-                            onChange={onToDateChange}
+                            onChange={() => {
+                                filterActions.filterByToDate(filters.toDate);
+                            }}
                         />
                     </div>
                 </Col> : null

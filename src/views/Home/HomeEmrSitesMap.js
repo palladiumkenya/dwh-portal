@@ -8,9 +8,7 @@ require('highcharts/modules/map')(Highcharts);
 Highcharts.maps["custom/kenyaByCounty"] = mapKenyaByCounty;
 
 const HomeEmrSitesMap = () => {
-
     const [counties, setHomeEmrSitesMap] = useState({});
-
     const loadCounties = useCallback(async () => {
         setHomeEmrSitesMap({
             chart: { map: 'custom/kenyaByCounty' },
