@@ -40,6 +40,9 @@ class DefaultHeader extends Component {
                     <NavItem className="px-3">
                         <NavLink to="/resources" className="nav-link">Resources</NavLink>
                     </NavItem>
+                    <NavItem className="px-3">
+                        <a href="https://data.kenyahmis.org:9090/" className="nav-link">Adhoc</a>
+                    </NavItem>
                 </Nav>
                 <Nav className="ml-auto" navbar>
                 </Nav>
