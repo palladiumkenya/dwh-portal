@@ -1,5 +1,4 @@
 import * as actionTypes from "../actions/types";
-import moment from "moment";
 
 const initialState = {
     counties: [],
@@ -8,11 +7,11 @@ const initialState = {
     partners: [],
     agencies: [],
     projects: [],
-    fromDate: moment().subtract(12, "month").format("MMM YYYY"),
-    toDate: moment().format("MMM YYYY"),
+    fromDate: '',
+    toDate: '',
 };
 
-export default function(state = initialState, action) {
+export default (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FILTER_BY_COUNTY:
             return {
@@ -43,6 +42,16 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 projects: action.payload.projects
+            }
+        case actionTypes.FILTER_BY_FROM_DATE:
+            return {
+                ...state,
+                fromDate: action.payload.fromDate
+            }
+        case actionTypes.FILTER_BY_TO_DATE:
+            return {
+                ...state,
+                toDate: action.payload.toDate
             }
         default:
             return state

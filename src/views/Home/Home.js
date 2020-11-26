@@ -1,7 +1,8 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Col, Row } from 'reactstrap';
-import HomeHeader from './HomeHeader';
-import HomeFooter from './HomeFooter';
+import SectionHeader from './../Shared/SectionHeader';
+import SectionFooter from './../Shared/SectionFooter';
 import UniversalFilter from '../Shared/UniversalFilter';
 import HomeTxNew from './HomeTxNew';
 import HomeVLCascade from './HomeVLCascade';
@@ -10,31 +11,23 @@ import HomeSexDistribution from './HomeSexDistribution';
 import VisibilitySensor from 'react-visibility-sensor';
 import HomeOverview from './HomeOverview';
 import HomeMaps from './HomeMaps';
-import * as uiActions from "../../store/actions/uiActions";
+import { ui } from "../../actions";
 
 const Home = () => {
+    const branding = { title: "HOME", description: "HMIS STATISTICS", overview: "HMIS Statistics" };
+    const dispatch = useDispatch();
+
     const onVisibilityChange = (isVisible) => {
         if (isVisible) {
-            uiActions.disableStickyFilter();
+            dispatch(ui.disableStickyFilter());
         } else {
-            uiActions.enableStickyFilter();
+            dispatch(ui.enableStickyFilter());
         }
     };
-    const onVisibilityChangeOnCTHomeTxNew = (isVisible) => {
-        if (isVisible) {
-            uiActions.enableFromDateFilter();
-            uiActions.disableToDateFilter();
-        } else {
-            uiActions.disableFromDateFilter();
-            uiActions.enableToDateFilter();
-        }
-    };
-
+    
     return (
         <div className="animated fadeIn">
-            <br></br>
-            <div className="strip"></div>
-            <HomeHeader/>
+            <SectionHeader title={branding.title} description={branding.description}/>
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
@@ -51,15 +44,9 @@ const Home = () => {
                 </Col>
             </Row>
             <HomeSexDistribution/>
-            <hr />
-            <HomeFooter />
-            <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>
-            <VisibilitySensor onChange={onVisibilityChangeOnCTHomeTxNew}>
-                <HomeTxNew/>
-            </VisibilitySensor>
-            <hr />
-            <HomeFooter />
-            <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>
+            <SectionFooter overview={branding.overview}/>
+            <HomeTxNew/>
+            <SectionFooter overview={branding.overview}/>
         </div>
     );
 };

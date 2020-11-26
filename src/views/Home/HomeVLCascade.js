@@ -18,6 +18,7 @@ const HomeVLCascade = () => {
         suppressedText: '',
         suppressedPercent: ''
     });
+    
     const loadHomeVLCascade = useCallback(async () => {
         let params = {
             county: filters.counties,

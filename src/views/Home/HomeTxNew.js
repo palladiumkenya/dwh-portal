@@ -9,13 +9,14 @@ import moment from "moment";
 const HomeTxNew = () => {
     const filters = useSelector(state => state.filters);
     const [txNew, setTxNew] = useState({});
+
     const loadTxNew = useCallback(async () => {
         let params = {
             county: filters.counties,
             subCounty: filters.subCounties,
             partner: filters.partners,
             agency: filters.agencies,
-            year: moment(filters.fromDate, "MMM YYYY").format("YYYY")
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY")
         };
         const result = await getAll('care-treatment/txNew', params);
         const monthNames = {
@@ -33,7 +34,6 @@ const HomeTxNew = () => {
         let cumulative = [];
         let male = [];
         let female = [];
-
         for(let i = 0; i < result.length; i++) {
             const result_month = result[i].month;
             const result_year = result[i].year.toString();
@@ -49,7 +49,6 @@ const HomeTxNew = () => {
                 female.push(parseInt(result[i].tx_new, 10));
             }
         }
-
         for(let i = 0; i < male.length; i++) {
             let month_value = 0;
             month_value = male[i] + female[i];
@@ -61,7 +60,6 @@ const HomeTxNew = () => {
                 cumulative.push(month_value);
             }
         }
-
         setTxNew({
             title: { text: '', },
             xAxis: [{ categories: months, crosshair: true, }],

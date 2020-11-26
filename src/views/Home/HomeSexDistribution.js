@@ -13,6 +13,7 @@ const HomeSexDistribution = () => {
         ViralSuppressionMale: 0,
         ViralSuppressionFemale: 0
     });
+    
     const loadActiveOnARTByGender = useCallback(async () => {
         let params = {
             county: filters.counties,

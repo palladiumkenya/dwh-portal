@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 import { getAll } from './Api';
 import { Dropdown } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
-import * as filterActions from "../../store/actions/filterActions";
+import * as actions from "../../actions/filterActions";
 
 const UniversalFilter = () => {
-    const ui = useSelector(state => state.ui);
+    const dispatch = useDispatch();
     const filters = useSelector(state => state.filters);
-
+    const ui = useSelector(state => state.ui);
     const [counties, setCounties] = useState([]);
     const [subCounties, setSubCounties] = useState([]);
     const [facilities, setFacilities] = useState([]);
@@ -32,8 +32,7 @@ const UniversalFilter = () => {
             county: filters.counties,
             subCounty: filters.subCounties,
             partner: filters.partners,
-            agency: filters.agencies,
-            // year:  moment(filters.fromDate, 'MMM YYYY').format('YYYY')
+            agency: filters.agencies
         };
         const data = await getAll('care-treatment/subCounties', params);
         const options = data.map((c) => {
@@ -120,8 +119,8 @@ const UniversalFilter = () => {
                             selection
                             options={counties}
                             value={filters.counties}
-                            onChange={() => {
-                                filterActions.filterByCounty(filters.counties);
+                            onChange={(e, data) => {
+                                dispatch(actions.filterByCounty(data.value));
                             }}
                         />
                     </div>
@@ -141,8 +140,8 @@ const UniversalFilter = () => {
                             selection
                             options={subCounties}
                             value={filters.subCounties}
-                            onChange={() => {
-                                filterActions.filterBySubCounty(filters.subCounties);
+                            onChange={(e, data) => {
+                                dispatch(actions.filterBySubCounty(data.value));
                             }}
                         />
                     </div>
@@ -162,8 +161,8 @@ const UniversalFilter = () => {
                             selection
                             options={facilities}
                             value={filters.facilities}
-                            onChange={() => {
-                                filterActions.filterByFacility(filters.facilities);
+                            onChange={(e, data) => {
+                                dispatch(actions.filterByFacility(data.value));
                             }}
                         />
                     </div>
@@ -183,8 +182,8 @@ const UniversalFilter = () => {
                             selection
                             options={partners}
                             value={filters.partners}
-                            onChange={() => {
-                                filterActions.filterByPartner(filters.partners);
+                            onChange={(e, data) => {
+                                dispatch(actions.filterByPartner(data.value));
                             }}
                         />
                     </div>
@@ -204,8 +203,8 @@ const UniversalFilter = () => {
                             selection
                             options={agencies}
                             value={filters.agencies}
-                            onChange={() => {
-                                filterActions.filterByAgency(filters.agencies);
+                            onChange={(e, data) => {
+                                dispatch(actions.filterByAgency(data.value));
                             }}
                         />
                     </div>
@@ -226,8 +225,8 @@ const UniversalFilter = () => {
                             fluid
                             value={filters.fromDate}
                             iconPosition="left"
-                            onChange={() => {
-                                filterActions.filterByFromDate(filters.fromDate);
+                            onChange={(e, data) => {
+                                dispatch(actions.filterByFromDate(data.value));
                             }}
                         />
                     </div>
@@ -249,8 +248,8 @@ const UniversalFilter = () => {
                             fluid
                             value={filters.toDate}
                             iconPosition="left"
-                            onChange={() => {
-                                filterActions.filterByToDate(filters.toDate);
+                            onChange={(e, data) => {
+                                dispatch(actions.filterByToDate(data.value));
                             }}
                         />
                     </div>
