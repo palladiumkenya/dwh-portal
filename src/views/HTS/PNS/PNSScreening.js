@@ -6,38 +6,66 @@ import { getAll } from '../../Shared/Api';
 
 const PNSScreening = ({ globalFilters }) => {
     const [pnsScreening, setPNSScreening] = useState({});
+    const [pnsSexualContactsCascade, setPNSSexualContactsCascade] = useState({
+        elicited: 0,
+        tested: 0,
+        positive: 0,
+        linked: 0,
+        knownPositive: 0
+    });
+    const [pnsChildrenCascade, setPNSChildrenCascade] = useState({
+        elicited: 0,
+        tested: 0,
+        positive: 0,
+        linked: 0,
+        knownPositive: 0
+    });
+    const loadPNSSexualContactsCascade = useCallback(async () => {
+        let params = {
+            county: globalFilters.county,
+            subCounty: globalFilters.subCounty,
+            partner: globalFilters.partner,
+            agency: globalFilters.agency,
+            year: globalFilters.year,
+            month: globalFilters.month
+        };
+        const data = await getAll('hts/pnsSexualContactsCascade', params);
+        setPNSSexualContactsCascade({
+            elicited: data.elicited ? data.elicited:0,
+            tested: data.tested ? data.tested:0,
+            positive: data.positive ? data.positive:0,
+            linked: data.linked ? data.linked:0,
+            knownPositive: data.knownPositive ? data.knownPositive:0
+        });
+    }, [globalFilters]);
+    const loadPNSChildrenCascade = useCallback(async () => {
+        let params = {
+            county: globalFilters.county,
+            subCounty: globalFilters.subCounty,
+            partner: globalFilters.partner,
+            agency: globalFilters.agency,
+            year: globalFilters.year,
+            month: globalFilters.month
+        };
+        const data = await getAll('hts/pnsChildrenCascade', params);
+        setPNSChildrenCascade({
+            elicited: data.elicited ? data.elicited:0,
+            tested: data.tested ? data.tested:0,
+            positive: data.positive ? data.positive:0,
+            linked: data.linked ? data.linked:0,
+            knownPositive: data.knownPositive ? data.knownPositive:0
+        });
+    }, [globalFilters]);
 
     const loadPNSScreening = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-        const vlCategories = ['txCurr', 'eligible', 'vlDone'];
-        const vlCategoryNames = ['Index', 'Contact Elicited', 'Known positive'];
-        const sexCategories = ['Female','Male'];
-        const result = await getAll('care-treatment/vlOverallUptakeAndSuppression', params);
+        const categories = ['Index', 'Contact Elicited', 'Known positive'];
         let data = [];
-        // seed all values sp that missing values default to 0
-        for(let i = 0; i < sexCategories.length; i++) {
-            data[i] = [];
-            for(let j = 0; j < vlCategories.length; j++) {
-                data[i][j] = 0;
-            }
-        }
-        for(let i = 0; i < result.length; i++) {
-            let sexIndex = sexCategories.indexOf(result[i].gender);
-            if(sexIndex === -1 ) { // unsupported
-                continue;
-            }
-            data[sexIndex][0] = data[sexIndex][0] + parseInt(result[i].txCurr);
-            data[sexIndex][1] = data[sexIndex][1] + parseInt(result[i].eligible);
-            data[sexIndex][2] = data[sexIndex][2] + parseInt(result[i].vlDone);
-
-            data[1][0] = 0;
-        }
+        data[0] = [Number(pnsSexualContactsCascade.positive), Number(pnsSexualContactsCascade.elicited), Number(pnsSexualContactsCascade.knownPositive)];
+        data[1] = [Number(pnsChildrenCascade.positive), Number(pnsChildrenCascade.elicited), Number(pnsChildrenCascade.knownPositive)];
+        console.log(data)
         setPNSScreening({
             title: { text: '' },
-            xAxis: [{ categories: vlCategoryNames, crosshair: true }],
+            xAxis: [{ categories: categories, crosshair: true }],
             yAxis: [{ title: { text: '' } }],
             tooltip: { shared: true },
             plotOptions: { column: { stacking: 'normal', dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
@@ -47,11 +75,13 @@ const PNSScreening = ({ globalFilters }) => {
                 { name: 'Adult', data: data[0], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilters]);
+    }, [pnsSexualContactsCascade, pnsChildrenCascade]);
 
     useEffect(() => {
+        loadPNSSexualContactsCascade();
+        loadPNSChildrenCascade();
         loadPNSScreening();
-    }, [loadPNSScreening]);
+    }, [loadPNSSexualContactsCascade, loadPNSChildrenCascade, loadPNSScreening]);
 
     return (
         <div className="row">

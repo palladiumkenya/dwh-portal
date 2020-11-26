@@ -1,25 +1,63 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
-import moment from 'moment';
 import { getAll } from '../../Shared/Api';
 
 const PNSOverview = ({ globalFilters }) => {
-    const [expected, setExpected] = useState(0);
-    const loadExpected = useCallback(async () => {
+    const [pnsSexualContactsCascade, setPNSSexualContactsCascade] = useState({
+        elicited: 0,
+        tested: 0,
+        positive: 0,
+        linked: 0,
+        knownPositive: 0
+    });
+    const [pnsChildrenCascade, setPNSChildrenCascade] = useState({
+        elicited: 0,
+        tested: 0,
+        positive: 0,
+        linked: 0,
+        knownPositive: 0
+    });
+    const loadPNSSexualContactsCascade = useCallback(async () => {
         let params = {
             county: globalFilters.county,
             subCounty: globalFilters.subCounty,
             partner: globalFilters.partner,
             agency: globalFilters.agency,
-            period: globalFilters.year + ',' + (globalFilters.month ? globalFilters.month:moment().startOf('month').subtract(1, 'month').format('M'))
+            year: globalFilters.year,
+            month: globalFilters.month
         };
-        const data = await getAll('manifests/expected/' + globalFilters.rrTab, params);
-        setExpected(data.expected);
+        const data = await getAll('hts/pnsSexualContactsCascade', params);
+        setPNSSexualContactsCascade({
+            elicited: data.elicited ? data.elicited:0,
+            tested: data.tested ? data.tested:0,
+            positive: data.positive ? data.positive:0,
+            linked: data.linked ? data.linked:0,
+            knownPositive: data.knownPositive ? data.knownPositive:0
+        });
+    }, [globalFilters]);
+    const loadPNSChildrenCascade = useCallback(async () => {
+        let params = {
+            county: globalFilters.county,
+            subCounty: globalFilters.subCounty,
+            partner: globalFilters.partner,
+            agency: globalFilters.agency,
+            year: globalFilters.year,
+            month: globalFilters.month
+        };
+        const data = await getAll('hts/pnsChildrenCascade', params);
+        setPNSChildrenCascade({
+            elicited: data.elicited ? data.elicited:0,
+            tested: data.tested ? data.tested:0,
+            positive: data.positive ? data.positive:0,
+            linked: data.linked ? data.linked:0,
+            knownPositive: data.knownPositive ? data.knownPositive:0
+        });
     }, [globalFilters]);
 
     useEffect(() => {
-        loadExpected();
-    }, [loadExpected]);
+        loadPNSSexualContactsCascade();
+        loadPNSChildrenCascade();
+    }, [loadPNSSexualContactsCascade, loadPNSChildrenCascade]);
 
     return (
         <div>
@@ -34,7 +72,7 @@ const PNSOverview = ({ globalFilters }) => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{expected*600}</span>
+                                <span className="expected-uploads-text">{pnsSexualContactsCascade.elicited + pnsChildrenCascade.elicited}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -49,7 +87,7 @@ const PNSOverview = ({ globalFilters }) => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{expected*700}</span>
+                                <span className="expected-uploads-text">{pnsSexualContactsCascade.elicited}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -57,14 +95,14 @@ const PNSOverview = ({ globalFilters }) => {
                 <div className="col-4">
                     <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
-                            TOTAL CHILDREN LINE ELICITED
+                            TOTAL CHILDREN ELICITED
                         </CardHeader>
                         <CardBody
                             className="align-items-center d-flex justify-content-center"
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{expected*620}</span>
+                                <span className="expected-uploads-text">{pnsChildrenCascade.elicited}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -81,7 +119,13 @@ const PNSOverview = ({ globalFilters }) => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">53%</span>
+                                <span className="expected-uploads-text">
+                                    {
+                                        pnsSexualContactsCascade.elicited > 0 ?
+                                        ((pnsSexualContactsCascade.tested/pnsSexualContactsCascade.elicited)*100).toFixed(0) :
+                                        0
+                                    }
+                                %</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -96,7 +140,13 @@ const PNSOverview = ({ globalFilters }) => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">28%</span>
+                                <span className="expected-uploads-text">
+                                    {
+                                        pnsSexualContactsCascade.tested > 0 ?
+                                        ((pnsSexualContactsCascade.positive/pnsSexualContactsCascade.tested)*100).toFixed(0) :
+                                        0
+                                    }
+                                %</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -104,14 +154,20 @@ const PNSOverview = ({ globalFilters }) => {
                 <div className="col-4">
                     <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
-                            SEXUAL CONTACTS LINKD
+                            SEXUAL CONTACTS LINKED
                         </CardHeader>
                         <CardBody
                             className="align-items-center d-flex justify-content-center"
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">96%</span>
+                                <span className="expected-uploads-text">
+                                    {
+                                        pnsSexualContactsCascade.positive > 0 ?
+                                        ((pnsSexualContactsCascade.linked/pnsSexualContactsCascade.positive)*100).toFixed(0) :
+                                        0
+                                    }
+                                %</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -128,7 +184,13 @@ const PNSOverview = ({ globalFilters }) => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">67%</span>
+                                <span className="expected-uploads-text">
+                                    {
+                                        pnsChildrenCascade.elicited > 0 ?
+                                        ((pnsChildrenCascade.tested/pnsChildrenCascade.elicited)*100).toFixed(0) :
+                                        0
+                                    }
+                                %</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -143,7 +205,13 @@ const PNSOverview = ({ globalFilters }) => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">5%</span>
+                                <span className="expected-uploads-text">
+                                    {
+                                        pnsChildrenCascade.tested > 0 ?
+                                        ((pnsChildrenCascade.positive/pnsChildrenCascade.tested)*100).toFixed(0) :
+                                        0
+                                    }
+                                %</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -158,7 +226,13 @@ const PNSOverview = ({ globalFilters }) => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">98%</span>
+                                <span className="expected-uploads-text">
+                                    {
+                                        pnsChildrenCascade.positive > 0 ?
+                                        ((pnsChildrenCascade.linked/pnsChildrenCascade.positive)*100).toFixed(0) :
+                                        0
+                                    }
+                                %</span>
                             </div>
                         </CardBody>
                     </Card>
