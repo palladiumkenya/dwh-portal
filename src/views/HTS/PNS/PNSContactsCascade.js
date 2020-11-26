@@ -17,15 +17,31 @@ const PNSContactsCascade = ({ globalFilters }) => {
             'Sexual Contacts Positive',
             'Sexual Contacts Linked',
         ];
-        const result = await getAll('care-treatment/viralLoadCascade', { ...globalFilters });
+        let params = {
+            county: globalFilters.county,
+            subCounty: globalFilters.subCounty,
+            partner: globalFilters.partner,
+            agency: globalFilters.agency,
+            year: globalFilters.year,
+            month: globalFilters.month
+        };
+        const result1 = await getAll('hts/pnsSexualContactsCascade', params);
+        let pnsSexualContactsCascade = {
+            elicited: result1.elicited ? result1.elicited:0,
+            tested: result1.tested ? result1.tested:0,
+            positive: result1.positive ? result1.positive:0,
+            linked: result1.linked ? result1.linked:0,
+            knownPositive: result1.knownPositive ? result1.knownPositive:0
+        };
+        const result2 = await getAll('hts/pnsIndex', params);
         let data = [
-            result.TX_CURR ? result.TX_CURR/1000 : 0,
-            result.Eligible4VL ? result.Eligible4VL/1000 : 0,
-            result.Last12MonthVL ? result.Last12MonthVL/1000 : 0,
-            result.Last12MVLSup ? result.Last12MVLSup/1000 : 0,
-            result.Eligible4VL ? result.Eligible4VL/1500 : 0,
-            result.Last12MonthVL ? result.Last12MonthVL/1500 : 0,
-            result.Last12MVLSup ? result.Last12MVLSup/1500 : 0,
+            result2.indexClients ? result2.indexClients : 0,
+            pnsSexualContactsCascade.elicited ? pnsSexualContactsCascade.elicited : 0,
+            pnsSexualContactsCascade.knownPositive ? pnsSexualContactsCascade.knownPositive : 0,
+            pnsSexualContactsCascade.elicited ? pnsSexualContactsCascade.elicited : 0,
+            pnsSexualContactsCascade.tested ? pnsSexualContactsCascade.tested : 0,
+            pnsSexualContactsCascade.positive ? pnsSexualContactsCascade.positive : 0,
+            pnsSexualContactsCascade.linked ? pnsSexualContactsCascade.linked : 0,
         ].map(x => Number(parseFloat(x).toFixed(0)));
 
         setPNSContactsCascade({

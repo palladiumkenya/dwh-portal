@@ -13,23 +13,30 @@ const PNSDistributionElicitedAgeSex = ({ globalFilters }) => {
             params = { ...globalFilters };
         }
         const result = await getAll('hts/pnsSexualContactsByAgeSex', params);
-        const ageGroups = ["Under 1", "1-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34", "35-39", "40-44", "45-49", "50-54", "55-59", "60-64", "65+"];
-        const ageGroupsMale = ageGroups;
-        const ageGroupsFemale = ageGroups;
-        let stableMale = [];
-        let stableFemale = [];
-
+        const sexGroups = ['M', 'F'];
+        const ageGroups = [];
+        let data = [];
         for(let i = 0; i < result.length; i++) {
-            if (result[i].gender === 'M') {
-                let index = ageGroupsMale.indexOf(result[i].ageGroup);
-                stableMale.splice(index, 0, parseInt(result[i].stable) * -1);
-            }
-            if (result[i].gender === 'F') {
-                let index = ageGroupsFemale.indexOf(result[i].ageGroup);
-                stableFemale.splice(index, 0, parseInt(result[i].stable));
+            if(ageGroups.indexOf(result[i].age) === -1){
+                ageGroups.push(result[i].age);
             }
         }
-
+        // seed all values so that missing values default to 0
+        for(let i = 0; i < sexGroups.length; i++) {
+            data[i] = [];
+            for(let j = 0; j < ageGroups.length; j++) {
+                data[i][j] = 0;
+            }
+        }
+        for(let i = 0; i < result.length; i++) {
+            let sexIndex = sexGroups.indexOf(result[i].gender);
+            let ageIndex = ageGroups.indexOf(result[i].age);
+            if(sexIndex === -1 || ageIndex === -1 ) { // unsupported
+                continue;
+            }
+            data[sexIndex][ageIndex] = data[sexIndex][ageIndex] + parseInt(result[i].elicited);
+        }
+        data[0] = data[0].map(value => value * -1);
         setPNSDistributionElicitedAgeSex({
             chart: { type: 'bar' },
             title: { text: '' },
@@ -39,31 +46,20 @@ const PNSDistributionElicitedAgeSex = ({ globalFilters }) => {
             ],
             yAxis: [
                 {
-                    title: { text: 'Number Stable', style: { color: Highcharts.getOptions().colors[1] } },
+                    title: { text: 'Number Elicited', style: { color: Highcharts.getOptions().colors[1] } },
                     labels: { formatter: function () { return Math.abs(this.value); } }
                 }
             ],
-            plotOptions: {
-                series: {
-                    stacking: 'normal'
-                },
-                bar: {
-                    pointWidth: 18,
+            plotOptions: { series: { stacking: 'normal' }, bar: { pointWidth: 18 } },
+            tooltip: { formatter: function () {
+                    return '<b>Number Elicited:</b><br/>' + this.series.name + ', ' + this.point.category +
+                        ': ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
                 }
             },
-            tooltip: {
-                formatter: function () {
-                    return '<b>' + this.series.name + ', Age Group ' + this.point.category + '</b><br/>' +
-                        'Number Stable: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
-                }
-            },
-            legend: {
-                floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
-                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
-            },
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Female', data: stableFemale, color: "#485969", tooltip: { valueSuffix: ' ' } },
-                { name: 'Male', data: stableMale, color: "#1AB394", tooltip: { valueSuffix: ' ' } }
+                { name: 'Female', data: data[1], color: "#485969", tooltip: { valueSuffix: ' ' } },
+                { name: 'Male', data: data[0], color: "#1AB394", tooltip: { valueSuffix: ' ' } }
             ]
         });
     }, [globalFilters]);
