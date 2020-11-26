@@ -14,12 +14,27 @@ const PNSChildrenFamilyTestingCascade = ({ globalFilters }) => {
             'Positive',
             'Linked',
         ];
-        const result = await getAll('care-treatment/viralLoadCascade', { ...globalFilters });
+        let params = {
+            county: globalFilters.county,
+            subCounty: globalFilters.subCounty,
+            partner: globalFilters.partner,
+            agency: globalFilters.agency,
+            year: globalFilters.year,
+            month: globalFilters.month
+        };
+        const result = await getAll('hts/pnsChildrenCascade', params);
+        let pnsChildrenCascade = {
+            elicited: result.elicited ? result.elicited:0,
+            tested: result.tested ? result.tested:0,
+            positive: result.positive ? result.positive:0,
+            linked: result.linked ? result.linked:0,
+            knownPositive: result.knownPositive ? result.knownPositive:0
+        };
         let data = [
-            result.TX_CURR ? result.TX_CURR/10000 : 0,
-            result.Eligible4VL ? result.Eligible4VL/10000 : 0,
-            result.Last12MonthVL ? result.Last12MonthVL/10000 : 0,
-            result.Last12MVLSup ? result.Last12MVLSup/10000 : 0,
+            pnsChildrenCascade.elicited ? pnsChildrenCascade.elicited : 0,
+            pnsChildrenCascade.tested ? pnsChildrenCascade.tested : 0,
+            pnsChildrenCascade.positive ? pnsChildrenCascade.positive : 0,
+            pnsChildrenCascade.linked ? pnsChildrenCascade.linked : 0,
         ].map(x => Number(parseFloat(x).toFixed(0)));
 
         setPNSChildrenFamilyTestingCascade({
