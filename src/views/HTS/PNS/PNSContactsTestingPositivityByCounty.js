@@ -7,19 +7,28 @@ import { getAll } from '../../Shared/Api';
 const PNSContactsTestingPositivityByCounty = ({ globalFilters }) => {
     const [pnsContactsTestingPositivityByCounty, setPNSContactsTestingPositivityByCounty] = useState({});
     const loadPNSContactsTestingPositivityByCounty = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: globalFilters.county,
+            subCounty: globalFilters.subCounty,
+            partner: globalFilters.partner,
+            agency: globalFilters.agency,
+            year: globalFilters.year,
+            month: globalFilters.month
+        };
         const counties = [];
         let tested = [];
         let positivity = [];
-        const result = await getAll('hts/uptakeByCounty', params);
+        const result = await getAll('hts/pnsSexualContactsByCounty', params);
         for(let i = 0; i < result.length; i++) {
-            counties.push(result[i].County);
-            tested.push(parseInt(result[i].Tested, 10));
-            const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
-            positivity.push(val);
+            let testedR = parseInt(result[i].tested, 10);
+            let positiveR = parseInt(result[i].positive, 10);
+            let pos = 0;
+            if (testedR > 0) {
+                pos = ((positiveR/testedR)*100).toFixed(1);
+            }
+            counties.push(result[i].county);
+            tested.push(testedR);
+            positivity.push(Number(pos));
         }
         setPNSContactsTestingPositivityByCounty({
             title: { text: '' },
