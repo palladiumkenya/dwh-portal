@@ -12,19 +12,19 @@ const PNSDistributionElicitedAgeSex = ({ globalFilters }) => {
         if (globalFilters) {
             params = { ...globalFilters };
         }
-        const result = await getAll('care-treatment/dsdStabilityStatusByAgeSex', params);
-        const ageGroups = ["Under 1", "1 to 4", "5 to 9", "10 to 14", "15 to 19", "20 to 24", "25 to 29", "30 to 34", "35 to 39", "40 to 44", "45 to 49", "50 to 54", "55 to 59", "60 to 64", "65+"];
+        const result = await getAll('hts/pnsSexualContactsByAgeSex', params);
+        const ageGroups = ["Under 1", "1-4", "5-9", "10-14", "15-19", "20-24", "25-29", "30-34", "35-39", "40-44", "45-49", "50-54", "55-59", "60-64", "65+"];
         const ageGroupsMale = ageGroups;
         const ageGroupsFemale = ageGroups;
         let stableMale = [];
         let stableFemale = [];
 
         for(let i = 0; i < result.length; i++) {
-            if (result[i].gender === 'Male') {
+            if (result[i].gender === 'M') {
                 let index = ageGroupsMale.indexOf(result[i].ageGroup);
                 stableMale.splice(index, 0, parseInt(result[i].stable) * -1);
             }
-            if (result[i].gender === 'Female') {
+            if (result[i].gender === 'F') {
                 let index = ageGroupsFemale.indexOf(result[i].ageGroup);
                 stableFemale.splice(index, 0, parseInt(result[i].stable));
             }
@@ -32,8 +32,7 @@ const PNSDistributionElicitedAgeSex = ({ globalFilters }) => {
 
         setPNSDistributionElicitedAgeSex({
             chart: { type: 'bar' },
-            title: { useHTML: true, text: ' &nbsp;', align: 'left' },
-            subtitle: { text: ' ', align: 'left' },
+            title: { text: '' },
             xAxis: [
                 { categories: ageGroups, title: { text: '' }, reversed: false },
                 { categories: ageGroups, title: { text: '' }, linkedTo: 0, reversed: false, opposite: true }
@@ -41,11 +40,7 @@ const PNSDistributionElicitedAgeSex = ({ globalFilters }) => {
             yAxis: [
                 {
                     title: { text: 'Number Stable', style: { color: Highcharts.getOptions().colors[1] } },
-                    labels: {
-                        formatter: function () {
-                            return Math.abs(this.value);
-                        }
-                    }
+                    labels: { formatter: function () { return Math.abs(this.value); } }
                 }
             ],
             plotOptions: {

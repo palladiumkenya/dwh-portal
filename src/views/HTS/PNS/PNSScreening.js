@@ -60,8 +60,8 @@ const PNSScreening = ({ globalFilters }) => {
     const loadPNSScreening = useCallback(async () => {
         const categories = ['Index', 'Contact Elicited', 'Known positive'];
         let data = [];
-        data[0] = [Number(pnsSexualContactsCascade.elicited), Number(pnsSexualContactsCascade.elicited), Number(pnsSexualContactsCascade.knownPositive)];
-        data[1] = [0, Number(pnsChildrenCascade.elicited), Number(pnsChildrenCascade.knownPositive)];
+        data[0] = [Number(pnsSexualContactsCascade.positive), Number(pnsSexualContactsCascade.elicited), Number(pnsSexualContactsCascade.knownPositive)];
+        data[1] = [Number(pnsChildrenCascade.positive), Number(pnsChildrenCascade.elicited), Number(pnsChildrenCascade.knownPositive)];
         console.log(data)
         setPNSScreening({
             title: { text: '' },
