@@ -1,28 +1,30 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import moment from 'moment';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { getAll } from '../../Shared/Api';
+import { getAll } from '../Shared/Api';
 
-const RRPartner = ({ globalFilters }) => {
+const RRPartner = () => {
+    const filters = useSelector(state => state.filters);
+    const rrTab = useSelector(state => state.ui.rrTab);
     const [emrDistributionByPartner, setEmrDistributionByPartner] = useState({});
     const [recencyOfReportingByPartner, setRecencyOfReportingByPartner] = useState({});
     const [consistencyOfReportingByPartner, setConsistencyOfReportingByPartner] = useState({});
 
     const loademrDistributionByPartner = useCallback(async () => {
         let params = {
-            county: globalFilters.county,
-            subCounty: globalFilters.subCounty,
-            partner: globalFilters.partner,
-            agency: globalFilters.agency,
-            period: globalFilters.year + ',' + (globalFilters.month ? globalFilters.month:moment().startOf('month').subtract(1, 'month').format('M'))
-
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
         };
-        const result = await getAll('manifests/emrdistribution/' + globalFilters.rrTab + '?reportingType=partner', params);
+        params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
+        const result = await getAll('manifests/emrdistribution/' + rrTab + '?reportingType=partner', params);
         const partners = result.map(({ partner  }) => partner);
         const partners_series = result.map(({ facilities_count }) => parseInt(facilities_count, 10));
-
         setEmrDistributionByPartner({
             chart: { type: 'bar' },
             title: { text: '' },
@@ -34,20 +36,20 @@ const RRPartner = ({ globalFilters }) => {
             legend: { enabled: false },
             series: [{ data: partners_series, color: "#2F4050;", name: 'Distribution of EMR Sites' }]
         });
-    }, [globalFilters]);
+    }, [filters, rrTab]);
 
     const loadRecencyOfReportingByPartner = useCallback(async () => {
         let params = {
-            county: globalFilters.county,
-            subCounty: globalFilters.subCounty,
-            partner: globalFilters.partner,
-            agency: globalFilters.agency,
-            period: globalFilters.year + ',' + (globalFilters.month ? globalFilters.month:moment().startOf('month').subtract(1, 'month').format('M'))
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
         };
-        const result = await getAll('manifests/recencyreportingbypartner/' + globalFilters.rrTab, params);
+        params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
+        const result = await getAll('manifests/recencyreportingbypartner/' + rrTab, params);
         const partners = result.map(({ partner  }) => partner);
         const partners_series = result.map(({ Percentage }) => parseInt(Percentage, 10) > 100 ? 100:parseInt(Percentage, 10));
-
         setRecencyOfReportingByPartner({
             chart: { type: 'bar' },
             title: { text: '' },
@@ -59,20 +61,20 @@ const RRPartner = ({ globalFilters }) => {
             legend: { enabled: false },
             series: [{ data: partners_series, color: "#59A14F", name: 'Overall Reporting Rates' }]
         });
-    }, [globalFilters]);
+    }, [filters, rrTab]);
 
     const loadConsistencyOfReportingByPartner = useCallback(async () => {
         let params = {
-            county: globalFilters.county,
-            subCounty: globalFilters.subCounty,
-            partner: globalFilters.partner,
-            agency: globalFilters.agency,
-            period: globalFilters.year + ',' + (globalFilters.month ? globalFilters.month:moment().startOf('month').subtract(1, 'month').format('M'))
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
         };
-        const result = await getAll('manifests/consistencyreportingbycountypartner/' + globalFilters.rrTab + '?reportingType=partner', params);
+        params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
+        const result = await getAll('manifests/consistencyreportingbycountypartner/' + rrTab + '?reportingType=partner', params);
         const partners = Object.keys(result);
         const partners_series = Object.values(result);
-
         setConsistencyOfReportingByPartner({
             chart: { type: 'bar' },
             title: { text: '' },
@@ -84,7 +86,7 @@ const RRPartner = ({ globalFilters }) => {
             legend: { enabled: false },
             series: [{ data: partners_series, color: "#F28E2B", name: 'Consistency of Reporting' }]
         });
-    }, [globalFilters]);
+    }, [filters, rrTab]);
 
     useEffect(() => {
         loademrDistributionByPartner();

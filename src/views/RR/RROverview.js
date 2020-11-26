@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import moment from 'moment';
-import { getAll } from '../../Shared/Api';
+import { getAll } from '../Shared/Api';
 
-const RROverview = ({ globalFilters }) => {
+const RROverview = () => {
+    const filters = useSelector(state => state.filters);
+    const rrTab = useSelector(state => state.ui.rrTab);
     const [expected, setExpected] = useState(0);
-    const [consistnecyStats, setConsistnecy] = useState({ consistnecy: [], stats: 0, statsPerc: 0 });
+    const [consistencyStats, setConsistnecy] = useState({ consistency: [], stats: 0, statsPerc: 0 });
     const [recencyStats, setRecency] = useState({ recency: [], stats: 0, statsPerc: 0 });
 
     const getPerc = (count, total) => {
@@ -14,39 +17,42 @@ const RROverview = ({ globalFilters }) => {
 
     const loadExpected = useCallback(async () => {
         let params = {
-            county: globalFilters.county,
-            subCounty: globalFilters.subCounty,
-            partner: globalFilters.partner,
-            agency: globalFilters.agency,
-            period: globalFilters.year + ',' + (globalFilters.month ? globalFilters.month:moment().startOf('month').subtract(1, 'month').format('M'))
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
         };
-        const data = await getAll('manifests/expected/' + globalFilters.rrTab, params);
+        params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
+        const data = await getAll('manifests/expected/' + rrTab, params);
         setExpected(data.expected);
-    }, [globalFilters]);
+    }, [filters, rrTab]);
 
     const loadConsistnecy = useCallback(async () => {
         let params = {
-            county: globalFilters.county,
-            subCounty: globalFilters.subCounty,
-            partner: globalFilters.partner,
-            agency: globalFilters.agency,
-            period: globalFilters.year + ',' + (globalFilters.month ? globalFilters.month:moment().startOf('month').subtract(1, 'month').format('M'))
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
         };
-        const data = await getAll('manifests/consistency/' + globalFilters.rrTab, params);
-        setConsistnecy({ consistnecy: [], stats: data.consistency, statsPerc: getPerc(data.consistency , expected) });
-    }, [globalFilters, expected]);
+        params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
+        const data = await getAll('manifests/consistency/' + rrTab, params);
+        setConsistnecy({ consistency: [], stats: data.consistency, statsPerc: getPerc(data.consistency , expected) });
+    }, [filters, rrTab, expected]);
 
     const loadRecency = useCallback(async () => {
         let params = {
-            county: globalFilters.county,
-            subCounty: globalFilters.subCounty,
-            partner: globalFilters.partner,
-            agency: globalFilters.agency,
-            period: globalFilters.year + ',' + (globalFilters.month ? globalFilters.month:moment().startOf('month').subtract(1, 'month').format('M'))
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
         };
-        const data = await getAll('manifests/recency/' + globalFilters.rrTab, params);
+        params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
+        const data = await getAll('manifests/recency/' + rrTab, params);
         setRecency({ recency: [], stats: data.recency, statsPerc: getPerc(data.recency , expected) });
-    }, [globalFilters, expected]);
+    }, [filters, rrTab, expected]);
 
     useEffect(() => {
         loadExpected();
@@ -97,8 +103,8 @@ const RROverview = ({ globalFilters }) => {
                         style={{ backgroundColor: '#F6F6F6', height: '100px' }}
                     >
                         <div className="col-12" style={{ textAlign: 'center' }}>
-                            <span className="consistency-reporting-figure">{consistnecyStats.stats}</span>
-                            <sup className="consistency-reporting-sup"> { consistnecyStats.statsPerc ? consistnecyStats.statsPerc:0 }<span className="consistency-reporting-sup-perc"> %</span></sup>
+                            <span className="consistency-reporting-figure">{consistencyStats.stats}</span>
+                            <sup className="consistency-reporting-sup"> { consistencyStats.statsPerc ? consistencyStats.statsPerc:0 }<span className="consistency-reporting-sup-perc"> %</span></sup>
                         </div>
                     </CardBody>
                 </Card>

@@ -6,7 +6,7 @@ import { changeHomeTab } from "../../actions/uiActions";
 import { HOME_TABS } from "../../constants";
 
 const HomeMaps = () => {
-    const ui = useSelector(state => state.ui);
+    const homeTab = useSelector(state => state.ui.homeTab);
     const dispatch = useDispatch();
 
     const renderTabNavItems = () => {
@@ -14,7 +14,7 @@ const HomeMaps = () => {
             Object.keys(HOME_TABS).map((value) => {
                 return (
                     <NavItem key={value}>
-                        <NavLink active={ui.homeTab === value} onClick={() => { dispatch(changeHomeTab(value)); }} >
+                        <NavLink active={homeTab === value} onClick={() => { dispatch(changeHomeTab(value)); }} >
                             {HOME_TABS[value]}
                         </NavLink>
                     </NavItem>
@@ -28,7 +28,7 @@ const HomeMaps = () => {
             <Nav tabs>
                 {renderTabNavItems()}
             </Nav>
-            <TabContent activeTab={ui.homeTab}>
+            <TabContent activeTab={homeTab}>
                 <TabPane tabId="emr">
                     <HomeEmrSitesMap/>
                 </TabPane>

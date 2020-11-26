@@ -49,3 +49,13 @@ export const disableToDateFilter = () => ({
     type: actionTypes.DISABLE_TO_DATE_FILTER,
     payload: {}
 });
+
+export const enableAgencyFilter = () => ({
+    type: actionTypes.ENABLE_AGENCY_FILTER,
+    payload: {}
+});
+
+export const disableAgencyFilter = () => ({
+    type: actionTypes.DISABLE_AGENCY_FILTER,
+    payload: {}
+});

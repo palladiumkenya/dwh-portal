@@ -11,7 +11,7 @@ import HomeSexDistribution from './HomeSexDistribution';
 import VisibilitySensor from 'react-visibility-sensor';
 import HomeOverview from './HomeOverview';
 import HomeMaps from './HomeMaps';
-import { ui } from "../../actions";
+import { enableStickyFilter, disableStickyFilter } from "../../actions/uiActions";
 
 const Home = () => {
     const branding = { title: "HOME", description: "HMIS STATISTICS", overview: "HMIS Statistics" };
@@ -19,9 +19,9 @@ const Home = () => {
 
     const onVisibilityChange = (isVisible) => {
         if (isVisible) {
-            dispatch(ui.disableStickyFilter());
+            dispatch(disableStickyFilter());
         } else {
-            dispatch(ui.enableStickyFilter());
+            dispatch(enableStickyFilter());
         }
     };
     
