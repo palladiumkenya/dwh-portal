@@ -6,38 +6,39 @@ import { getAll } from '../../Shared/Api';
 
 const PNSScreening = ({ globalFilters }) => {
     const [pnsScreening, setPNSScreening] = useState({});
-
     const loadPNSScreening = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-        const vlCategories = ['txCurr', 'eligible', 'vlDone'];
-        const vlCategoryNames = ['Index', 'Contact Elicited', 'Known positive'];
-        const sexCategories = ['Female','Male'];
-        const result = await getAll('care-treatment/vlOverallUptakeAndSuppression', params);
+        let params = {
+            county: globalFilters.county,
+            subCounty: globalFilters.subCounty,
+            partner: globalFilters.partner,
+            agency: globalFilters.agency,
+            year: globalFilters.year,
+            month: globalFilters.month
+        };
+        const data1 = await getAll('hts/pnsSexualContactsCascade', params);
+        let pnsSexualContactsCascade = {
+            elicited: data1.elicited ? data1.elicited:0,
+            tested: data1.tested ? data1.tested:0,
+            positive: data1.positive ? data1.positive:0,
+            linked: data1.linked ? data1.linked:0,
+            knownPositive: data1.knownPositive ? data1.knownPositive:0
+        };
+        const data2 = await getAll('hts/pnsChildrenCascade', params);
+        let pnsChildrenCascade = {
+            elicited: data2.elicited ? data2.elicited:0,
+            tested: data2.tested ? data2.tested:0,
+            positive: data2.positive ? data2.positive:0,
+            linked: data2.linked ? data2.linked:0,
+            knownPositive: data2.knownPositive ? data2.knownPositive:0
+        };
+        const data3 = await getAll('hts/pnsIndex', params);
+        const categories = ['Index', 'Contacts Elicited', 'Known positive'];
         let data = [];
-        // seed all values sp that missing values default to 0
-        for(let i = 0; i < sexCategories.length; i++) {
-            data[i] = [];
-            for(let j = 0; j < vlCategories.length; j++) {
-                data[i][j] = 0;
-            }
-        }
-        for(let i = 0; i < result.length; i++) {
-            let sexIndex = sexCategories.indexOf(result[i].gender);
-            if(sexIndex === -1 ) { // unsupported
-                continue;
-            }
-            data[sexIndex][0] = data[sexIndex][0] + parseInt(result[i].txCurr);
-            data[sexIndex][1] = data[sexIndex][1] + parseInt(result[i].eligible);
-            data[sexIndex][2] = data[sexIndex][2] + parseInt(result[i].vlDone);
-
-            data[1][0] = 0;
-        }
+        data[0] = [Number(data3.indexClients), Number(pnsSexualContactsCascade.elicited), Number(pnsSexualContactsCascade.knownPositive)];
+        data[1] = [0, Number(pnsChildrenCascade.elicited), Number(pnsChildrenCascade.knownPositive)];
         setPNSScreening({
             title: { text: '' },
-            xAxis: [{ categories: vlCategoryNames, crosshair: true }],
+            xAxis: [{ categories: categories, crosshair: true }],
             yAxis: [{ title: { text: '' } }],
             tooltip: { shared: true },
             plotOptions: { column: { stacking: 'normal', dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
