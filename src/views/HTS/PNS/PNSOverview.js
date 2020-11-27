@@ -24,8 +24,10 @@ const PNSOverview = () => {
         let params = {
             county: filters.counties,
             subCounty: filters.subCounties,
+            facility: filters.facilities,
             partner: filters.partners,
             agency: filters.agencies,
+            project: filters.projects,
             year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY")
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
@@ -42,8 +44,10 @@ const PNSOverview = () => {
         let params = {
             county: filters.counties,
             subCounty: filters.subCounties,
+            facility: filters.facilities,
             partner: filters.partners,
             agency: filters.agencies,
+            project: filters.projects,
             year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY")
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';

@@ -19,8 +19,10 @@ const RROverview = () => {
         let params = {
             county: filters.counties,
             subCounty: filters.subCounties,
+            facility: filters.facilities,
             partner: filters.partners,
             agency: filters.agencies,
+            project: filters.projects,
             fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
         };
         params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
@@ -32,8 +34,10 @@ const RROverview = () => {
         let params = {
             county: filters.counties,
             subCounty: filters.subCounties,
+            facility: filters.facilities,
             partner: filters.partners,
             agency: filters.agencies,
+            project: filters.projects,
             fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
         };
         params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
@@ -45,8 +49,10 @@ const RROverview = () => {
         let params = {
             county: filters.counties,
             subCounty: filters.subCounties,
+            facility: filters.facilities,
             partner: filters.partners,
             agency: filters.agencies,
+            project: filters.projects,
             fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
         };
         params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');

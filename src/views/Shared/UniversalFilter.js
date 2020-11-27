@@ -61,8 +61,10 @@ const UniversalFilter = () => {
         let params = {
             county: filters.counties,
             subCounty: filters.subCounties,
+            facility: filters.facilities,
             partner: filters.partners,
-            agency: filters.agencies
+            agency: filters.agencies,
+            project: filters.projects,
         };
         const data = await getAll(endpoint + '/subCounties', params);
         const options = data.map((c) => {
@@ -78,8 +80,10 @@ const UniversalFilter = () => {
         let params = {
             county: filters.counties,
             subCounty: filters.subCounties,
+            facility: filters.facilities,
             partner: filters.partners,
-            agency: filters.agencies
+            agency: filters.agencies,
+            project: filters.projects,
         };
         const data = await getAll(endpoint + '/facilities', params);
         const options = data.map((c) => {
@@ -95,8 +99,10 @@ const UniversalFilter = () => {
         let params = {
             county: filters.counties,
             subCounty: filters.subCounties,
+            facility: filters.facilities,
             partner: filters.partners,
-            agency: filters.agencies
+            agency: filters.agencies,
+            project: filters.projects,
         };
         const data = await getAll(endpoint + '/partners', params);;
         const options = data.map((c) => {
@@ -112,8 +118,10 @@ const UniversalFilter = () => {
         let params = {
             county: filters.counties,
             subCounty: filters.subCounties,
+            facility: filters.facilities,
             partner: filters.partners,
-            agency: filters.agencies
+            agency: filters.agencies,
+            project: filters.projects,
         };
         const data = await getAll(endpoint + '/agencies', params);
         const options = data.map((c) => {

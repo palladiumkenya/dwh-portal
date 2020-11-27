@@ -64,3 +64,13 @@ export const disableAgencyFilter = () => ({
     type: actionTypes.DISABLE_AGENCY_FILTER,
     payload: {}
 });
+
+export const enableFacilityFilter = () => ({
+    type: actionTypes.ENABLE_FACILITY_FILTER,
+    payload: {}
+});
+
+export const disableFacilityFilter = () => ({
+    type: actionTypes.DISABLE_FACILITY_FILTER,
+    payload: {}
+});
