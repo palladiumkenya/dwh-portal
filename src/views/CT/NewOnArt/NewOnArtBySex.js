@@ -72,7 +72,7 @@ const NewOnArtBySex = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX NEW DISTRIBUTION BY SEX
+                        NEW ON ART DISTRIBUTION BY SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

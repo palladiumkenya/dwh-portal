@@ -60,7 +60,7 @@ const CurrentOnARTTxCurrDistributionByPartner = () => {
             },
             plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             series: [{
-                name: 'TX CURR DISTRIBUTION',
+                name: 'CURRENT ON ART DISTRIBUTION',
                 color: "#485969",
                 data: txCurr
             }]
@@ -76,7 +76,7 @@ const CurrentOnARTTxCurrDistributionByPartner = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX CURR DISTRIBUTION BY PARTNER
+                        CURRENT ON ART DISTRIBUTION BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={txCurrDistributionByPartner} />

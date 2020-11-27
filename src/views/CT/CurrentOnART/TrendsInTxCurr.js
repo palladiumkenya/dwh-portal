@@ -73,7 +73,7 @@ const TrendsInTxCurr = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TRENDS IN TX CURR
+                        TRENDS IN CURRENT ON ART
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

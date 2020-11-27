@@ -78,7 +78,7 @@ const CurrentOnARTTxCurrBySex = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX CURR BY SEX
+                        CURRENT ON ART BY SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

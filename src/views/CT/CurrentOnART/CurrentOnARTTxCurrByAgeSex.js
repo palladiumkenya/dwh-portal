@@ -63,7 +63,7 @@ const CurrentOnARTTxCurrByAgeSex = () => {
                 {
                     min: -(max),
                     max: (max),
-                    title: { text: 'TX CURR', style: { color: Highcharts.getOptions().colors[1] } },
+                    title: { text: 'CURRENT ON ART', style: { color: Highcharts.getOptions().colors[1] } },
                     labels: {
                         formatter: function () {
                             return Math.abs(this.value);
@@ -75,7 +75,7 @@ const CurrentOnARTTxCurrByAgeSex = () => {
             tooltip: {
                 formatter: function () {
                     return '<b>' + this.series.name + ', Age Group ' + this.point.category + '</b><br/>' +
-                        'TX CURR: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
+                        'CURRENT ON ART: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
                 }
             },
             legend: {
@@ -98,7 +98,7 @@ const CurrentOnARTTxCurrByAgeSex = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX CURR BY AGE AND SEX
+                        CURRENT ON ART BY AGE AND SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

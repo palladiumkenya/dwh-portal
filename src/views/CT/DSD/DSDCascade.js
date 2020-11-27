@@ -28,7 +28,7 @@ const DSDCascade = () => {
             stable = result.stable;
             mmd = result.mmd;
         }
-        const categories = ["TX CURR", "STABLE", "TOTAL ON MMD"];
+        const categories = ["CURRENT ON ART", "STABLE", "TOTAL ON MMD"];
         const data = [txCurr, stable, mmd];
         setDSDCascade({
             chart: { zoomType: 'xy' },

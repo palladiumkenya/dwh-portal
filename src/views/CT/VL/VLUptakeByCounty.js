@@ -61,7 +61,7 @@ const VLUptakeByCounty = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VL UPTAKE AMONG TX CURR PATIENTS BY COUNTY
+                        VL UPTAKE AMONG CURRENT ON ART PATIENTS BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

@@ -32,7 +32,7 @@ const TBActiveCaseFindingAdults = () => {
             poorAdherence = result.poorAdherence;
             bmiLessThan18 = result.bmiLessThan18;
         }
-        const categories = ["TX CURR", "SCREENED FOR TB", "PRESUMPTIVE TB", "CONFIRMED TB", "STARTED TB RX"];
+        const categories = ["CURRENT ON ART", "SCREENED FOR TB", "PRESUMPTIVE TB", "CONFIRMED TB", "STARTED TB RX"];
         const data = [highVl, onArtLessThan12Months, ageLessThan20Years, poorAdherence, bmiLessThan18];
         setTBActiveCaseFindingAdults({
             chart: { zoomType: 'xy' },

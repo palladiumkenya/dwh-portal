@@ -60,7 +60,7 @@ const VLOverallUptakeAndSuppressionByFacility = () => {
                 { name: 'Partner', selector: 'partner', sortable: true},
                 { name: 'County', selector: 'county', sortable: true},
                 { name: 'Sub County', selector: 'subCounty', sortable: true},
-                { name: 'TX CURR', selector: 'txCurr', sortable: true, right: true},
+                { name: 'CURRENT ON ART', selector: 'txCurr', sortable: true, right: true},
                 { name: 'VL IN LAST 12 MONTHS', selector: 'eligible', sortable: true, right: true},
                 { name: 'FREQUENCY', selector: 'vlDone', sortable: true, right: true},
                 // { name: 'Uptake (%)', selector: 'uptake', sortable: true, right: true },

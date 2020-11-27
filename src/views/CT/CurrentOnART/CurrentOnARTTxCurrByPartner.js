@@ -165,7 +165,7 @@ const CurrentOnARTTxCurrByPartner = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX CURR BY PARTNER
+                        CURRENT ON ART BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
