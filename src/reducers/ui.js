@@ -1,6 +1,7 @@
 import * as actions from "../actions/types";
 
 const initialState = {
+    currentPage: "",
     stickyFilter: false,
     homeTab: "emr",
     rrTab: "ct",
@@ -18,6 +19,8 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case actions.CHANGE_CURRENT_PAGE:
+            return { ...state, currentPage: action.payload.page }
         case actions.ENABLE_STICKY_FILTER:
             return { ...state, stickyFilter: true }
         case actions.DISABLE_STICKY_FILTER:

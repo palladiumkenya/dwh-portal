@@ -5,19 +5,49 @@ import { getAll } from './Api';
 import { Dropdown } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
 import * as actions from "../../actions/filterActions";
+import { PAGES } from "../../constants";
 
 const UniversalFilter = () => {
     const dispatch = useDispatch();
     const filters = useSelector(state => state.filters);
     const ui = useSelector(state => state.ui);
+    const [endpoint, setEndpoint] = useState('common');
     const [counties, setCounties] = useState([]);
     const [subCounties, setSubCounties] = useState([]);
     const [facilities, setFacilities] = useState([]);
     const [partners, setPartners] = useState([]);
     const [agencies, setAgencies] = useState([]);
 
+    const loadEndpoint = useCallback(async () => {
+        let endpoint = '';
+        switch(ui.currentPage) {
+            case PAGES.home:
+                endpoint = 'care-treatment';
+                break;
+            case PAGES.rr:
+                endpoint = 'common';
+                break;
+            case PAGES.hts:
+                endpoint = 'hts';
+                break;
+            case PAGES.ct:
+                endpoint = 'care-treatment';
+                break;
+            default:
+                endpoint = 'common';
+        }
+        setEndpoint(endpoint);
+    }, [ui]);
+
     const loadCounties = useCallback(async () => {
-        const data = await getAll('care-treatment/counties');
+        // let params = {
+        //     county: filters.counties,
+        //     subCounty: filters.subCounties,
+        //     partner: filters.partners,
+        //     agency: filters.agencies
+        // };
+        let params = {};
+        const data = await getAll(endpoint + '/counties', params);
         const options = data.map((c) => {
             return { value: c.county, key: c.county, text: c.county };
         });
@@ -25,7 +55,7 @@ const UniversalFilter = () => {
             options
         );
         setCounties(selectionOptions);
-    }, []);
+    }, [endpoint]);
 
     const loadSubCounties = useCallback(async () => {
         let params = {
@@ -34,15 +64,15 @@ const UniversalFilter = () => {
             partner: filters.partners,
             agency: filters.agencies
         };
-        const data = await getAll('care-treatment/subCounties', params);
+        const data = await getAll(endpoint + '/subCounties', params);
         const options = data.map((c) => {
-            return { value: c.subcounty, key: c.subcounty, text: c.subcounty };
+            return { value: c.subCounty, key: c.subCounty, text: c.subCounty };
         });
         const selectionOptions = [].concat(
             options
         );
         setSubCounties(selectionOptions);
-    }, [filters]);
+    }, [filters, endpoint]);
 
     const loadFacilities = useCallback(async () => {
         let params = {
@@ -51,15 +81,15 @@ const UniversalFilter = () => {
             partner: filters.partners,
             agency: filters.agencies
         };
-        const data = await getAll('care-treatment/facilities', params);
+        const data = await getAll(endpoint + '/facilities', params);
         const options = data.map((c) => {
-            return { value: c.facilityName, key: c.facilityName, text: c.facilityName };
+            return { value: c.facility, key: c.facility, text: c.facility };
         });
         const selectionOptions = [].concat(
             options
         );
         setFacilities(selectionOptions);
-    }, [filters]);
+    }, [filters, endpoint]);
 
     const loadPartners = useCallback(async () => {
         let params = {
@@ -68,7 +98,7 @@ const UniversalFilter = () => {
             partner: filters.partners,
             agency: filters.agencies
         };
-        const data = await getAll('care-treatment/partners', params);
+        const data = await getAll(endpoint + '/partners', params);;
         const options = data.map((c) => {
             return { value: c.partner, key: c.partner, text: c.partner };
         });
@@ -76,7 +106,7 @@ const UniversalFilter = () => {
             options
         );
         setPartners(selectionOptions);
-    }, [filters]);
+    }, [filters, endpoint]);
 
     const loadAgencies = useCallback(async () => {
         let params = {
@@ -85,7 +115,7 @@ const UniversalFilter = () => {
             partner: filters.partners,
             agency: filters.agencies
         };
-        const data = await getAll('common/agencies', params);
+        const data = await getAll(endpoint + '/agencies', params);
         const options = data.map((c) => {
             return { value: c.agency, key: c.agency, text: c.agency };
         });
@@ -93,15 +123,16 @@ const UniversalFilter = () => {
             options
         );
         setAgencies(selectionOptions);
-    }, [filters]);
+    }, [filters, endpoint]);
 
     useEffect(() => {
+        loadEndpoint();
         loadCounties();
         loadSubCounties();
         loadFacilities();
         loadPartners();
         loadAgencies();
-    }, [loadCounties, loadSubCounties, loadFacilities, loadPartners, loadAgencies]);
+    }, [loadEndpoint, loadCounties, loadSubCounties, loadFacilities, loadPartners, loadAgencies]);
 
     return (
         <Row>

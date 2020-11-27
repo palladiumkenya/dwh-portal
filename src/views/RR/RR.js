@@ -9,8 +9,8 @@ import RROverview from './RROverview';
 import RROverviewTrends from './RROverviewTrends';
 import RRCounty from './RRCounty';
 import RRPartner from './RRPartner';
-import { enableStickyFilter, disableStickyFilter, changeRRTab } from "../../actions/uiActions";
-import { RR_TABS } from "../../constants";
+import { enableStickyFilter, disableStickyFilter, changeRRTab, changeCurrentPage, enableAgencyFilter, disableAgencyFilter } from "../../actions/uiActions";
+import { RR_TABS, PAGES } from "../../constants";
 
 const RR = () => {
     const dispatch = useDispatch();
@@ -39,11 +39,12 @@ const RR = () => {
     };
 
     useEffect(() => {
-        console.log('On mount');
+        dispatch(changeCurrentPage(PAGES.rr));
+        dispatch(enableAgencyFilter());
         return () => {
-            console.log('On dismount');
+            dispatch(disableAgencyFilter());
         }
-    }, []);
+    }, [dispatch]);
 
     return (
         <div>

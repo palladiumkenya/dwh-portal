@@ -1,5 +1,10 @@
 import * as actionTypes from './types';
 
+export const changeCurrentPage = page => ({
+    type: actionTypes.CHANGE_CURRENT_PAGE,
+    payload: { page }
+});
+
 export const enableStickyFilter = () => ({
     type: actionTypes.ENABLE_STICKY_FILTER,
     payload: {}

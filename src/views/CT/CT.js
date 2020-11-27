@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import NewOnArt from './NewOnArt/NewOnArt';
@@ -9,8 +9,8 @@ import VL from './VL/VL';
 import AdverseEvents from './AdverseEvents/AdverseEvents';
 import TBHIV from './TBHIV/TBHIV';
 import ARVOptimization from './ARVOptimization/ARVOptimization';
-import { changeCtTab } from "../../actions/uiActions";
-import { CT_TABS } from "../../constants";
+import { changeCtTab, changeCurrentPage } from "../../actions/uiActions";
+import { CT_TABS, PAGES } from "../../constants";
 
 const CT = () => {
     const dispatch = useDispatch();
@@ -29,6 +29,10 @@ const CT = () => {
             })
         );
     };
+
+    useEffect(() => {
+        dispatch(changeCurrentPage(PAGES.ct));
+    }, [dispatch]);
 
     return (
         <div>

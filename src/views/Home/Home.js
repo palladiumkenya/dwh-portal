@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Col, Row } from 'reactstrap';
 import SectionHeader from './../Shared/SectionHeader';
@@ -11,7 +11,8 @@ import HomeSexDistribution from './HomeSexDistribution';
 import VisibilitySensor from 'react-visibility-sensor';
 import HomeOverview from './HomeOverview';
 import HomeMaps from './HomeMaps';
-import { enableStickyFilter, disableStickyFilter } from "../../actions/uiActions";
+import { enableStickyFilter, disableStickyFilter, changeCurrentPage } from "../../actions/uiActions";
+import { PAGES } from './../../constants';
 
 const Home = () => {
     const branding = { title: "HOME", description: "HMIS STATISTICS", overview: "HMIS Statistics" };
@@ -24,6 +25,10 @@ const Home = () => {
             dispatch(enableStickyFilter());
         }
     };
+
+    useEffect(() => {
+        dispatch(changeCurrentPage(PAGES.home));
+    }, [dispatch]);
     
     return (
         <div className="animated fadeIn">
