@@ -1,12 +1,24 @@
-import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import React from 'react';
+import { Route, Redirect  } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { signinRedirect } from '../services/UserService';
 
 function ProtectedRoute({ children, component: Component, ...rest }) {
     const user = useSelector(state => state.auth.user)
-    return user
-        ? (<Route {...rest} component={Component} />)
-        : (<Redirect to={'/login'} />)
+    if (user) {
+        return (<Route {...rest} component={Component} />);
+    } else {
+        return (
+            <div>
+                Redirecting....
+                {
+                    setTimeout(() => {
+                        signinRedirect();
+                    }, 2000)
+                }
+            </div>
+        );
+    }
 }
 
 export default ProtectedRoute;
