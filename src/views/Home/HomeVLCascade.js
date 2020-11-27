@@ -23,8 +23,10 @@ const HomeVLCascade = () => {
         let params = {
             county: filters.counties,
             subCounty: filters.subCounties,
+            facility: filters.facilities,
             partner: filters.partners,
-            agency: filters.agencies
+            agency: filters.agencies,
+            project: filters.projects,
         };
         const result = await getAll('care-treatment/viralLoadCascade', params);
         let data = [

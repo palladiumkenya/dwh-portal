@@ -9,7 +9,7 @@ import RROverview from './RROverview';
 import RROverviewTrends from './RROverviewTrends';
 import RRCounty from './RRCounty';
 import RRPartner from './RRPartner';
-import { enableStickyFilter, disableStickyFilter, changeRRTab, changeCurrentPage, enableAgencyFilter, disableAgencyFilter } from "../../actions/uiActions";
+import { enableStickyFilter, disableStickyFilter, changeRRTab, changeCurrentPage, enableFacilityFilter, disableFacilityFilter, enableAgencyFilter, disableAgencyFilter } from "../../actions/uiActions";
 import { RR_TABS, PAGES } from "../../constants";
 
 const RR = () => {
@@ -40,8 +40,10 @@ const RR = () => {
 
     useEffect(() => {
         dispatch(changeCurrentPage(PAGES.rr));
+        dispatch(disableFacilityFilter());
         dispatch(enableAgencyFilter());
         return () => {
+            dispatch(enableFacilityFilter());
             dispatch(disableAgencyFilter());
         }
     }, [dispatch]);

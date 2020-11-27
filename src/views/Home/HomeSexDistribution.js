@@ -18,8 +18,10 @@ const HomeSexDistribution = () => {
         let params = {
             county: filters.counties,
             subCounty: filters.subCounties,
+            facility: filters.facilities,
             partner: filters.partners,
             agency: filters.agencies,
+            project: filters.projects,
         };
         let ActiveARTMale = 0;
         let ActiveARTFemale = 0;

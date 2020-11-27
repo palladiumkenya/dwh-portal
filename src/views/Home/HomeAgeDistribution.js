@@ -13,8 +13,10 @@ const HomeAgeDistribution = () => {
         let params = {
             county: filters.counties,
             subCounty: filters.subCounties,
+            facility: filters.facilities,
             partner: filters.partners,
-            agency: filters.agencies
+            agency: filters.agencies,
+            project: filters.projects,
         };
         let ActiveARTChildren = 0;
         const result = await getAll('care-treatment/activeArtChildren', params);
@@ -30,8 +32,10 @@ const HomeAgeDistribution = () => {
         let params = {
             county: filters.counties,
             subCounty: filters.subCounties,
+            facility: filters.facilities,
             partner: filters.partners,
-            agency: filters.agencies
+            agency: filters.agencies,
+            project: filters.projects,
         };
         let ActiveARTAdults = 0;
         const result = await getAll('care-treatment/activeArtAdults', params);
@@ -47,8 +51,10 @@ const HomeAgeDistribution = () => {
         let params = {
             county: filters.counties,
             subCounty: filters.subCounties,
+            facility: filters.facilities,
             partner: filters.partners,
-            agency: filters.agencies
+            agency: filters.agencies,
+            project: filters.projects,
         };
         let ActiveARTAdolescents = 0;
         const result = await getAll('care-treatment/activeArtAdolescents', params);
