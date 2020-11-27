@@ -1,10 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const AdverseEventsTiles = ({ globalFilters }) => {
+const AdverseEventsTiles = () => {
+    const filters = useSelector(state => state.filters);
     const [adults15PlusCurrentOnART, setAdults15PlusCurrentOnART] = useState({
         adults15PlusCurrentOnART: ''
     });
@@ -37,12 +40,14 @@ const AdverseEventsTiles = ({ globalFilters }) => {
     });
 
     const loadActiveOnARTAdults = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         let ActiveARTAdults = 0;
 
         const result = await getAll('care-treatment/activeArtAdults', params);
@@ -53,15 +58,17 @@ const AdverseEventsTiles = ({ globalFilters }) => {
         setAdults15PlusCurrentOnART({
             adults15PlusCurrentOnART: ActiveARTAdults.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     const loadActiveOnARTChildren = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         let ActiveARTChildren = 0;
 
         const result = await getAll('care-treatment/activeArtChildren', params);
@@ -72,15 +79,17 @@ const AdverseEventsTiles = ({ globalFilters }) => {
         setChildrenUnder15CurrentOnART({
             childrenUnder15CurrentOnART: ActiveARTChildren.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     const loadUnder15AdverseEventsDesegregation =  useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         let maleData = [];
         let femaleData = [];
         const categories = ['Under 1', '1 to 4', '5 to 9', '10 to 14'];
@@ -164,15 +173,17 @@ const AdverseEventsTiles = ({ globalFilters }) => {
                 data: femaleData
             }]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     const loadAdults15PlusAdverseEventsDesegregation =  useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         let maleData = [];
         let femaleData = [];
         const categories = ['15 to 19', '20 to 24','25 to 29', '30 to 34', '35 to 39', '40 to 44', '45 to 49', '50 to 54', '55 to 59', '60 to 64', '65+'];
@@ -256,13 +267,13 @@ const AdverseEventsTiles = ({ globalFilters }) => {
                 data: femaleData
             }]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     const loadTotalNoOfAeReportedInAdults = useCallback(async () => {
         let params = null;
 
-        if (globalFilters) {
-            params = { ...globalFilters };
+        if (filters) {
+            params = { ...filters };
         }
         const result = await getAll('care-treatment/getNoOfReportedAeInAdults', params);
         if (result) {
@@ -270,13 +281,13 @@ const AdverseEventsTiles = ({ globalFilters }) => {
                 total: result.total
             });
         }
-    }, [globalFilters]);
+    }, [filters]);
 
     const loadTotalNoOfAeReportedInChildren = useCallback(async () => {
         let params = null;
 
-        if (globalFilters) {
-            params = { ...globalFilters };
+        if (filters) {
+            params = { ...filters };
         }
         const result = await getAll('care-treatment/getNoOfReportedAeInChildren', params);
         if (result) {
@@ -284,13 +295,13 @@ const AdverseEventsTiles = ({ globalFilters }) => {
                 total: result.total
             });
         }
-    }, [globalFilters]);
+    }, [filters]);
 
     const loadTotalNoAdultsWithAe = useCallback(async () => {
         let params = null;
 
-        if (globalFilters) {
-            params = { ...globalFilters };
+        if (filters) {
+            params = { ...filters };
         }
         const result = await getAll('care-treatment/getNumberOfAdultsWithAe', params);
         if (result) {
@@ -298,13 +309,13 @@ const AdverseEventsTiles = ({ globalFilters }) => {
                 total: result.total
             });
         }
-    }, [globalFilters]);
+    }, [filters]);
 
     const loadTotalNoChildrenWithAe = useCallback(async () => {
         let params = null;
 
-        if (globalFilters) {
-            params = { ...globalFilters };
+        if (filters) {
+            params = { ...filters };
         }
         const result = await getAll('care-treatment/getNumberOfChildrenWithAe', params);
         if (result) {
@@ -312,7 +323,7 @@ const AdverseEventsTiles = ({ globalFilters }) => {
                 total: result.total
             });
         }
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadActiveOnARTAdults();

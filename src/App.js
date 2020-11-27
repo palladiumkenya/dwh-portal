@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { HashRouter, Route, Switch } from "react-router-dom";
 import Highcharts from "highcharts";
 import HighchartsExporting from 'highcharts/modules/exporting';
@@ -15,19 +15,17 @@ if (typeof Highcharts === 'object') {
     Highcharts.setOptions({ lang: { thousandsSep: ',', decimalPoint: '.', numericSymbols: null }})
 }
 
-class App extends Component{
-    render() {
-        return (
-            <HashRouter>
-                <React.Suspense fallback={loading()}>
-                    <Switch>
-                        <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
-                        <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>} />
-                    </Switch>
-                </React.Suspense>
-            </HashRouter>
-        );
-    }
+const App = () => {
+    return (
+        <HashRouter>
+            <React.Suspense fallback={loading()}>
+                <Switch>
+                    <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
+                    <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>} />
+                </Switch>
+            </React.Suspense>
+        </HashRouter>
+    );
 }
 
 export default App;

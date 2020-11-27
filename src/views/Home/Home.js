@@ -1,79 +1,52 @@
-import React, { useCallback } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Col, Row } from 'reactstrap';
-import HomeHeader from './HomeHeader';
-import HomeFooter from './HomeFooter';
+import SectionHeader from './../Shared/SectionHeader';
+import SectionFooter from './../Shared/SectionFooter';
 import UniversalFilter from '../Shared/UniversalFilter';
 import HomeTxNew from './HomeTxNew';
-import HomeStabilityStatusAndTrendsInDSD from './HomeStabilityStatusAndTrendsInDsd';
 import HomeVLCascade from './HomeVLCascade';
 import HomeAgeDistribution from './HomeAgeDistribution';
 import HomeSexDistribution from './HomeSexDistribution';
-import HomeOverview from './HomeOverview';
 import VisibilitySensor from 'react-visibility-sensor';
+import HomeOverview from './HomeOverview';
 import HomeMaps from './HomeMaps';
+import { enableStickyFilter, disableStickyFilter } from "../../actions/uiActions";
 
-const Home = ({globalFilters, onGlobalFiltersChange}) => {
-    const onVisibilityChange = useCallback(async (isVisible) => {
-        onGlobalFiltersChange({
-            ...globalFilters,
-            stickyFilter: !isVisible,
-            countyFilterEnabled: true,
-            subCountyFilterEnabled: true,
-            facilityFilterEnabled: true,
-            partnerFilterEnabled: true,
-            agencyFilterEnabled: false,
-            fromDateFilterEnabled: false,
-            toDateFilterEnabled: false,
-        });
-    }, [globalFilters, onGlobalFiltersChange]);
-    const onVisibilityChangeOnCTHomeTxNew = useCallback(async (isVisible) => {
+const Home = () => {
+    const branding = { title: "HOME", description: "HMIS STATISTICS", overview: "HMIS Statistics" };
+    const dispatch = useDispatch();
+
+    const onVisibilityChange = (isVisible) => {
         if (isVisible) {
-            onGlobalFiltersChange({
-                ...globalFilters,
-                fromDateFilterEnabled: true,
-            });
+            dispatch(disableStickyFilter());
         } else {
-            onGlobalFiltersChange({
-                ...globalFilters,
-                fromDateFilterEnabled: false,
-            });
+            dispatch(enableStickyFilter());
         }
-    }, [globalFilters, onGlobalFiltersChange]);
-
+    };
+    
     return (
         <div className="animated fadeIn">
-            <br></br>
-            <div className="strip"></div>
-            <HomeHeader period={globalFilters?.year} />
+            <SectionHeader title={branding.title} description={branding.description}/>
             <VisibilitySensor onChange={onVisibilityChange}>
-                <UniversalFilter globalFilters={globalFilters}  onGlobalFiltersChange={onGlobalFiltersChange}/>
+                <UniversalFilter/>
             </VisibilitySensor>
-            <HomeVLCascade globalFilters={globalFilters} />
+            <HomeVLCascade/>
             <Row>
                 <Col xl={2} lg={2} md={2} sm={12} xs={12}>
-                    <HomeAgeDistribution globalFilters={globalFilters} />
+                    <HomeAgeDistribution/>
                 </Col>
                 <Col xl={8} lg={8} md={8} sm={12} xs={12}>
-                    <HomeMaps globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+                    <HomeMaps/>
                 </Col>
                 <Col xl={2} lg={2} md={2} sm={12} xs={12}>
                     <HomeOverview />
                 </Col>
             </Row>
             <HomeSexDistribution/>
-            <hr />
-            <HomeFooter />
-            <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>
-            <VisibilitySensor onChange={onVisibilityChangeOnCTHomeTxNew}>
-                <HomeTxNew globalFilters={globalFilters} />
-            </VisibilitySensor>
-            <hr />
-            <HomeFooter />
-            <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>
-            <HomeStabilityStatusAndTrendsInDSD globalFilters={globalFilters} />
-            <hr />
-            <HomeFooter />
-            <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>
+            <SectionFooter overview={branding.overview}/>
+            <HomeTxNew/>
+            <SectionFooter overview={branding.overview}/>
         </div>
     );
 };

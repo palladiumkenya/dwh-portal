@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from './../../Shared/UniversalFilter';
 import TBHIVHeader from './TBHIVHeader';
@@ -10,59 +11,56 @@ import TBActiveCaseFindingAdults from './TBActiveCaseFindingAdults';
 import TBActiveCaseFindingChildren from './TBActiveCaseFindingChildren';
 import HIVNegativeTB from './HIVNegativeTB';
 import HIVTBCoinfected from './HIVTBCoinfected';
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
 
-const TBHIV = ({globalFilters, onGlobalFiltersChange}) => {
-    const onVisibilityChange = useCallback(async (isVisible) => {
-        if (globalFilters.ctTab === 'tbHiv') {
-            onGlobalFiltersChange({
-                ...globalFilters,
-                stickyFilter: !isVisible,
-                countyFilterEnabled: true,
-                subCountyFilterEnabled: true,
-                facilityFilterEnabled: true,
-                partnerFilterEnabled: true,
-                agencyFilterEnabled: false,
-                fromDateFilterEnabled: true,
-                toDateFilterEnabled: false,
-            });
+const TBHIV = () => {
+    const filters = useSelector(state => state.filters);
+    const dispatch = useDispatch();
+    const onVisibilityChange = (isVisible) => {
+        if (filters.ctTab === 'tbHiv') {
+            if (isVisible) {
+                dispatch(disableStickyFilter());
+            } else {
+                dispatch(enableStickyFilter());
+            }
         }
-    }, [globalFilters, onGlobalFiltersChange]);
+    };
     return (
         <div className="animated fadeIn">
             <div className="strip"></div>
             <h3 style={{color: '#ff0000', textAlign: 'center', padding: '1em'}}>Please note that the data on this page is dummy data</h3>
             <TBHIVHeader></TBHIVHeader>
             <VisibilitySensor onChange={onVisibilityChange}>
-                <UniversalFilter globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+                <UniversalFilter/>
             </VisibilitySensor>
-            <p></p><TBStatTrends globalFilters={globalFilters}/>
+            <p></p><TBStatTrends />
             <hr/><TBHIVFooter/><hr/><div className="strip"></div><p></p>
             <p></p>
             <div className="row">
                 <div className="col-6">
-                    <TBActiveCaseFindingAdults globalFilters={globalFilters}/>
+                    <TBActiveCaseFindingAdults />
                 </div>
                 <div className="col-6">
-                    <TBActiveCaseFindingChildren globalFilters={globalFilters}/>
+                    <TBActiveCaseFindingChildren />
                 </div>
             </div>
             <hr/><TBHIVFooter/><hr/><div className="strip"></div><p></p>
             <p></p>
             <div className="row">
                 <div className="col-6">
-                    <HIVNegativeTB globalFilters={globalFilters}/>
+                    <HIVNegativeTB />
                 </div>
                 <div className="col-6">
-                    <HIVTBCoinfected globalFilters={globalFilters}/>
+                    <HIVTBCoinfected />
                 </div>
             </div>
             <hr/><TBHIVFooter/><hr/><div className="strip"></div><p></p>
             <div className="row">
                 <div className="col-4">
-                    <IPTUptake globalFilters={globalFilters}/>
+                    <IPTUptake />
                 </div>
                 <div className="col-8">
-                    <IPTCompletionByAge globalFilters={globalFilters}/>
+                    <IPTCompletionByAge />
                 </div>
             </div>
             <hr/><TBHIVFooter/><hr/><div className="strip"></div><p></p>

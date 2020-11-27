@@ -1,17 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const TBActiveCaseFindingChildren = ({ globalFilters }) => {
+const TBActiveCaseFindingChildren = () => {
+    const filters = useSelector(state => state.filters);
     const [tbActiveCaseFindingChildren, setTBActiveCaseFindingChildren] = useState({});
 
     const loadTBActiveCaseFindingChildren = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         let highVl = 0;
         let onArtLessThan12Months = 0;
         let ageLessThan20Years = 0;
@@ -48,7 +55,7 @@ const TBActiveCaseFindingChildren = ({ globalFilters }) => {
                 { name: 'Number of Patients', data: data, type: 'bar', color: "#1AB394" },
             ],
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadTBActiveCaseFindingChildren();
