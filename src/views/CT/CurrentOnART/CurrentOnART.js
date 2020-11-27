@@ -15,9 +15,10 @@ import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActi
 
 const CurrentOnART = () => {
     const filters = useSelector(state => state.filters);
+    const ctTab = useSelector(state => state.ui.ctTab);
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
-        if (filters.ctTab === 'txCurr') {
+        if (ctTab === 'txCurr') {
             if (isVisible) {
                 dispatch(disableStickyFilter());
             } else {

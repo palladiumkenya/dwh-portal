@@ -26,10 +26,10 @@ import VLOverallUptakeAndSuppressionByFacility from './VLOverallUptakeAndSuppres
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
 
 const VL = () => {
-    const filters = useSelector(state => state.filters);
+    const ctTab = useSelector(state => state.ui.ctTab);
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
-        if (filters.ctTab === 'vl') {
+        if (ctTab === 'vl') {
             if (isVisible) {
                 dispatch(disableStickyFilter());
             } else {
