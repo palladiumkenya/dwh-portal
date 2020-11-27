@@ -4,7 +4,7 @@ let config = {};
 
 if(process.env.NODE_ENV.trim() === 'production') {
     config = {
-        authority: "https://localhost:5001",
+        authority: "https://auth.kenyahmis.org/dwhidentity",
         client_id: "dwh.spa",
         redirect_uri: "http://localhost:3000/signin-oidc",
         response_type: "id_token token",
