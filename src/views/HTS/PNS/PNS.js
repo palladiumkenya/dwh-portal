@@ -1,8 +1,10 @@
-import React, { useCallback } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { CardColumns } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from '../../Shared/UniversalFilter';
-import PNSHeader from './PNSHeader';
+import SectionHeader from '../../Shared/SectionHeader';
+import SectionFooter from '../../Shared/SectionFooter';
 import PNSOverview from './PNSOverview';
 import PNSScreening from './PNSScreening';
 import PNSDistributionElicitedAgeSex from './PNSDistributionElicitedAgeSex';
@@ -13,52 +15,53 @@ import PNSChildrenFamilyTestingPositivityTrends from './PNSChildrenFamilyTesting
 import PNSPositivityTrends from './PNSPositivityTrends';
 import PNSContactsTestingPositivityByCounty from './PNSContactsTestingPositivityByCounty';
 import PNSContactsTestingPositivityByPartner from './PNSContactsTestingPositivityByPartner';
-import PNSFooter from './PNSFooter';
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
 
-const PNS = ({globalFilters, onGlobalFiltersChange}) => {
-    const onVisibilityChange = useCallback(async (isVisible) => {
-        if (globalFilters.htsTab === 'pns') {
-            onGlobalFiltersChange({
-                ...globalFilters,
-                stickyFilter: !isVisible,
-                countyFilterEnabled: true,
-                subCountyFilterEnabled: true,
-                facilityFilterEnabled: true,
-                partnerFilterEnabled: true,
-                agencyFilterEnabled: false,
-                fromDateFilterEnabled: true,
-                toDateFilterEnabled: false,
-            });
+const PNS = () => {
+    const dispatch = useDispatch();
+    const htsTab = useSelector(state => state.ui.htsTab);
+    const branding = {
+        title: "PARTNER NOTIFICATION SERVICES",
+        description: "OVERVIEW",
+        overview: "HTS Uptake is defined as the rate at which individuals take up HIV Tests."
+    };
+    const onVisibilityChange = (isVisible) => {
+        if (htsTab === 'pns') {
+            if (isVisible) {
+                dispatch(disableStickyFilter());
+            } else {
+                dispatch(enableStickyFilter());
+            }
         }
-    }, [globalFilters, onGlobalFiltersChange]);
+    };
+    
     return (
         <div className="animated fadeIn">
-            <div className="strip">&nbsp;</div>
-            <PNSHeader/>
+            <SectionHeader title={branding.title} description={branding.description}/>
             <VisibilitySensor onChange={onVisibilityChange}>
-                <UniversalFilter globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+                <UniversalFilter/>
             </VisibilitySensor>
-            <PNSOverview globalFilters={globalFilters} />
+            <PNSOverview/>
             <CardColumns className="cols-2">
-                <PNSScreening globalFilters={globalFilters} />
-                <PNSDistributionElicitedAgeSex globalFilters={globalFilters} />
+                <PNSScreening/>
+                <PNSDistributionElicitedAgeSex/>
             </CardColumns>
-            <hr/><PNSFooter/><hr/><div className="strip"></div><p></p>
+            <SectionFooter overview={branding.overview}/>
             <CardColumns className="cols-2">
-                <PNSContactsCascade globalFilters={globalFilters} />
-                <PNSChildrenFamilyTestingCascade globalFilters={globalFilters} />
+                <PNSContactsCascade/>
+                <PNSChildrenFamilyTestingCascade/>
             </CardColumns>
-            <hr/><PNSFooter/><hr/><div className="strip"></div><p></p>
-            <PNSContactsTestingPositivityTrends globalFilters={globalFilters} />
-            <hr/><PNSFooter/><hr/><div className="strip"></div><p></p>
-            <PNSChildrenFamilyTestingPositivityTrends globalFilters={globalFilters} />
-            <hr/><PNSFooter/><hr/><div className="strip"></div><p></p>
-            <PNSPositivityTrends globalFilters={globalFilters} />
-            <hr/><PNSFooter/><hr/><div className="strip"></div><p></p>
-            <PNSContactsTestingPositivityByCounty globalFilters={globalFilters} />
-            <hr/><PNSFooter/><hr/><div className="strip"></div><p></p>
-            <PNSContactsTestingPositivityByPartner globalFilters={globalFilters} />
-            <hr/><PNSFooter/><hr/><div className="strip"></div><p></p>
+            <SectionFooter overview={branding.overview}/>
+            <PNSContactsTestingPositivityTrends/>
+            <SectionFooter overview={branding.overview}/>
+            <PNSChildrenFamilyTestingPositivityTrends/>
+            <SectionFooter overview={branding.overview}/>
+            <PNSPositivityTrends/>
+            <SectionFooter overview={branding.overview}/>
+            <PNSContactsTestingPositivityByCounty/>
+            <SectionFooter overview={branding.overview}/>
+            <PNSContactsTestingPositivityByPartner/>
+            <SectionFooter overview={branding.overview}/>
         </div>
     );
 };

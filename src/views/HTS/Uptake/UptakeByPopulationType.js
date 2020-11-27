@@ -1,10 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const HtsUptakeByPopulationType = ({ globalFilters }) => {
+const UptakeByPopulationType = () => {
+    const filters = useSelector(state => state.filters);
     const [uptakeByPopulationType, setUptakeByPopulationType] = useState({});
     const [htsOverview, setHtsOverview] = useState({
         genPopTested: '',
@@ -21,13 +24,15 @@ const HtsUptakeByPopulationType = ({ globalFilters }) => {
         missingPopPositivity: ''
     });
 
-    const loadHtsUptakeByPopulationType = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+    const loadUptakeByPopulationType = useCallback(async () => {
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY")
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('hts/uptakeByPopulationType', params);
         let genPopVal = null;
         let keyPopVal = null;
@@ -38,7 +43,6 @@ const HtsUptakeByPopulationType = ({ globalFilters }) => {
         let genPopPositivity = null;
         let keyPopPositivity = null;
         let missingPopPositivity = null;
-
         for(let i = 0; i < result.length; i++) {
             if(result[i].PopulationType === 'Key Population') {
                 keyPopVal = parseInt(result[i].Tested, 10);
@@ -57,7 +61,6 @@ const HtsUptakeByPopulationType = ({ globalFilters }) => {
                 missingPopPositivity = val;
             }
         }
-
         setHtsOverview({
             genPopTested: genPopVal,
             keyPopTested: keyPopVal,
@@ -72,65 +75,34 @@ const HtsUptakeByPopulationType = ({ globalFilters }) => {
             totalPositive: genPopPositive + keyPopPositive + missingPopPositive,
             totalPercentage: parseFloat(parseFloat(((genPopPositivity + keyPopPositivity + missingPopPositivity)/2)).toFixed(1))
         });
-
         setUptakeByPopulationType({
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                type: 'pie'
-            },
-            title: {
-                text: ''
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            accessibility: {
-                point: {
-                    valueSuffix: '%'
+            title: { text: '' },
+            plotOptions: { pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b> <br/> {point.percentage:.1f} % <br/> ({point.y:,.0f})'
                 }
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                    }
-                }
-            },
-            series: [{
-                colorByPoint: true,
-                name: 'HIV Testing Services Uptake',
-                data: [{
-                    name: 'General Population',
-                    y: genPopVal,
-                    color: "#1AB394"
-                }, {
-                    name: 'Key Population',
-                    y: keyPopVal,
-                    sliced: true,
-                    selected: true,
-                    color: "#2F4050"
-                },
-                    // { name: 'Missing', y: missingPopVal }
-                ]
-            }]
+            }},
+            series: [{ type: 'pie', colorByPoint: true, name: 'HIV Testing Services Uptake', data: [
+                { name: 'General Population', y: genPopVal, color: "#1AB394" },
+                { name: 'Key Population',  y: keyPopVal, color: "#2F4050", sliced: true, selected: true },
+                // { name: 'Missing', y: missingPopVal, color: "#E06F07" }
+            ]}]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
-        loadHtsUptakeByPopulationType();
-    }, [loadHtsUptakeByPopulationType]);
+        loadUptakeByPopulationType();
+    }, [loadUptakeByPopulationType]);
 
     return (
         <div className="row">
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        HIV TESTING SERVICES Uptake and positivity population type
+                        HIV TESTING SERVICES UPTAKE AND POSITIVITY POPULATION TYPE
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="row">
@@ -140,11 +112,11 @@ const HtsUptakeByPopulationType = ({ globalFilters }) => {
                             <div className="col-6" style={{backgroundColor: '#ffffff', padding: '3em' }}>
                                 <table className="table table-bordered">
                                     <tbody>
-                                    <tr><td>TYPE</td><td>TESTED</td><td>POSITIVE</td><td>%</td></tr>
-                                    <tr><td>GENERAL POPULATION</td><td>{htsOverview.genPopTested}</td><td>{htsOverview.genPopPositive}</td><td>{htsOverview.genPopPositivity} % </td></tr>
-                                    <tr><td>KEY POPULATION</td><td>{htsOverview.keyPopTested}</td><td>{htsOverview.keyPopPositive}</td><td>{htsOverview.keyPopPositivity} % </td></tr>
-                                    {/* <tr><td>Missing</td><td>{htsOverview.missingPopTested}</td><td>{htsOverview.missingPopPositive}</td><td>{htsOverview.missingPopPositivity} % </td></tr> */}
-                                    <tr><td>TOTAL</td><td>{htsOverview.totalTested}</td><td>{htsOverview.totalPositive}</td><td>{htsOverview.totalPercentage} % </td></tr>
+                                    <tr><th>Type</th><th>Tested</th><th>Positive</th><th>%</th></tr>
+                                    <tr><td>General Population</td><td align="right">{htsOverview.genPopTested}</td><td align="right">{htsOverview.genPopPositive}</td><td align="right">{htsOverview.genPopPositivity} % </td></tr>
+                                    <tr><td>Key Population</td><td align="right">{htsOverview.keyPopTested}</td><td align="right">{htsOverview.keyPopPositive}</td><td align="right">{htsOverview.keyPopPositivity} % </td></tr>
+                                    {/* <tr><td>Missing</td><td align="right">{htsOverview.missingPopTested}</td><td align="right">{htsOverview.missingPopPositive}</td><td align="right">{htsOverview.missingPopPositivity} % </td></tr> */}
+                                    <tr><td>Total</td><td align="right">{htsOverview.totalTested}</td><td align="right">{htsOverview.totalPositive}</td><td align="right">{htsOverview.totalPercentage} % </td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -156,4 +128,4 @@ const HtsUptakeByPopulationType = ({ globalFilters }) => {
     );
 };
 
-export default HtsUptakeByPopulationType;
+export default UptakeByPopulationType;

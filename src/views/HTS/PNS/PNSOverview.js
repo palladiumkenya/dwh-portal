@@ -1,8 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const PNSOverview = ({ globalFilters }) => {
+const PNSOverview = () => {
+    const filters = useSelector(state => state.filters);
     const [pnsSexualContactsCascade, setPNSSexualContactsCascade] = useState({
         elicited: 0,
         tested: 0,
@@ -19,13 +22,13 @@ const PNSOverview = ({ globalFilters }) => {
     });
     const loadPNSSexualContactsCascade = useCallback(async () => {
         let params = {
-            county: globalFilters.county,
-            subCounty: globalFilters.subCounty,
-            partner: globalFilters.partner,
-            agency: globalFilters.agency,
-            year: globalFilters.year,
-            month: globalFilters.month
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY")
         };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const data = await getAll('hts/pnsSexualContactsCascade', params);
         setPNSSexualContactsCascade({
             elicited: data.elicited ? data.elicited:0,
@@ -34,16 +37,16 @@ const PNSOverview = ({ globalFilters }) => {
             linked: data.linked ? data.linked:0,
             knownPositive: data.knownPositive ? data.knownPositive:0
         });
-    }, [globalFilters]);
+    }, [filters]);
     const loadPNSChildrenCascade = useCallback(async () => {
         let params = {
-            county: globalFilters.county,
-            subCounty: globalFilters.subCounty,
-            partner: globalFilters.partner,
-            agency: globalFilters.agency,
-            year: globalFilters.year,
-            month: globalFilters.month
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY")
         };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const data = await getAll('hts/pnsChildrenCascade', params);
         setPNSChildrenCascade({
             elicited: data.elicited ? data.elicited:0,
@@ -52,7 +55,7 @@ const PNSOverview = ({ globalFilters }) => {
             linked: data.linked ? data.linked:0,
             knownPositive: data.knownPositive ? data.knownPositive:0
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadPNSSexualContactsCascade();

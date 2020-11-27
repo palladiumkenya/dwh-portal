@@ -1,61 +1,49 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const LinkageByPartner = ({ globalFilters }) => {
+const LinkageByPartner = () => {
+    const filters = useSelector(state => state.filters);
     const [uptakeByPartner, setLinkageByPartner] = useState({});
 
     const loadLinkageByPartner = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY")
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const partners = [];
         let positive = [];
         let linkage = [];
-
         const result = await getAll('hts/linkageByPartner', params);
         for(let i = 0; i < result.length; i++) {
             partners.push(result[i].Partner);
             positive.push(parseInt(result[i].positive, 10));
             linkage.push(Number(parseFloat(result[i].linkage).toFixed(1)));
         }
-
         setLinkageByPartner({
-            chart: { zoomType: 'xy' },
-            title: { useHTML: true, text: ' &nbsp;', align: 'left' },
-            subtitle: { text: ' ', align: 'left' },
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
+            title: { text: '', },
             xAxis: [{ categories: partners, crosshair: true, title: { text: 'Partners' } }],
             yAxis: [
-                {
-                    title: { text: 'Number Positive', style: { color: Highcharts.getOptions().colors[1] } },
-                    labels: { format: '{value}', style: { color: Highcharts.getOptions().colors[1] } },
-                    min: 0,
-                },
-                {
-                    title: { text: 'Linkage (%)', style: { color: Highcharts.getOptions().colors[0] } },
-                    labels: { format: '{value} %', style: { color: Highcharts.getOptions().colors[0] } },
-                    min: 0,
-                    max: 100,
-                    opposite: true
-                }
+                { title: { text: 'Number Positive' } },
+                { title: { text: 'Linkage (%)' }, opposite: true, labels: { format: '{value} %' } },
             ],
             tooltip: { shared: true },
-            legend: {
-                floating: true, layout: 'horizontal', align: 'left', verticalAlign: 'top', y: 0, x: 80,
-                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
-            },
+            plotOptions: { column: { dataLabels: { enabled: true } } },
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Number Positive', data: positive, type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ' } },
-                { name: 'Linkage', data: linkage, type: 'spline', color: "#E06F07", tooltip: { valueSuffix: '%' }, yAxis: 1 }
+                { name: 'Number Positive', type: 'column', data: positive, yAxis: 0, color: "#1AB394" },
+                { name: 'Linkage', type: 'spline', data: linkage, yAxis: 1, color: "#E06F07", tooltip: { valueSuffix: '%' } }
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadLinkageByPartner();

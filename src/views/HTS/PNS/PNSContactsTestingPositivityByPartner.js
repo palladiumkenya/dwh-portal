@@ -1,20 +1,23 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const PNSContactsTestingPositivityByPartner = ({ globalFilters }) => {
+const PNSContactsTestingPositivityByPartner = () => {
+    const filters = useSelector(state => state.filters);
     const [pnsContactsTestingPositivityByPartner, setPNSContactsTestingPositivityByPartner] = useState({});
     const loadPNSContactsTestingPositivityByPartner = useCallback(async () => {
         let params = {
-            county: globalFilters.county,
-            subCounty: globalFilters.subCounty,
-            partner: globalFilters.partner,
-            agency: globalFilters.agency,
-            year: globalFilters.year,
-            month: globalFilters.month
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY")
         };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const partners = [];
         let tested = [];
         let positivity = [];
@@ -44,7 +47,7 @@ const PNSContactsTestingPositivityByPartner = ({ globalFilters }) => {
                 { name: 'Positivity Percentage', type: 'spline', data: positivity, yAxis: 1, color: "#E06F07", tooltip: { valueSuffix: ' %' }, dashStyle: 'Dash' }
             ],
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadPNSContactsTestingPositivityByPartner();

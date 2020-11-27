@@ -1,24 +1,28 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const HtsUptakeByAgeSex = ({ globalFilters }) => {
+const UptakeByAgeSex = () => {
+    const filters = useSelector(state => state.filters);
     const [uptakeByAgeSex, setUptakeByAgeSex] = useState({});
 
     const loadUptakeByAgeSex = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY")
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const ageGroups = [];
         let tested_male = [];
         let tested_female = [];
         let positivity = [];
-
         const result = await getAll('hts/uptakeByAgeSex', params);
         const result_positivity = await getAll('hts/uptakeByAgeSexPositivity', params);
         for(let i = 0; i < result.length; i++) {
@@ -29,7 +33,6 @@ const HtsUptakeByAgeSex = ({ globalFilters }) => {
                 tested_female.push(parseInt(result[i].Tested, 10));
             }
         }
-
         for(let i = 0; i < ageGroups.length; i++) {
             for(let j = 0; j < result_positivity.length; j++) {
                 if(ageGroups[i] === result_positivity[j].AgeGroup) {
@@ -38,67 +41,23 @@ const HtsUptakeByAgeSex = ({ globalFilters }) => {
                 }
             }
         }
-
         setUptakeByAgeSex({
-            chart: {
-                zoomType: 'xy'
-            },
-            title: {
-                useHTML: true,
-                text: ' &nbsp;',
-            },
-            subtitle: {
-                text: ''
-            },
-            xAxis: [{
-                categories: ageGroups,
-                crosshair: true,
-            }],
+            title: { text: '', },
+            xAxis: [{ categories: ageGroups, title: { text: 'Age Groups' }, crosshair: true }],
             yAxis: [
                 { title: { text: 'Number Tested' } },
-                { title: { text: 'HIV Positivity' }, labels: { format: '{value} %' }, opposite: true }
+                { title: { text: 'HIV Positivity'}, opposite: true, labels: { format: '{value} %' } },
             ],
             tooltip: { shared: true },
             plotOptions: { column: { stacking: 'normal' } },
-            legend: {
-                layout: 'horizontal',
-                align: 'left',
-                x: 120,
-                verticalAlign: 'top',
-                y: 7,
-                floating: true,
-                backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || // theme
-                    'rgba(255,255,255,0.25)'
-            },
-            series: [{
-                name: 'Male',
-                type: 'column',
-                color: "#1AB394",
-                data: tested_male,
-                tooltip: {
-                    valueSuffix: ' '
-                }
-            }, {
-                name: 'Female',
-                type: 'column',
-                color: "#485969",
-                data: tested_female,
-                tooltip: {
-                    valueSuffix: ' '
-                }
-            }, {
-                name: 'HIV Positivity',
-                type: 'spline',
-                yAxis: 1,
-                data: positivity,
-                color: "#E06F07",
-                tooltip: {
-                    valueSuffix: '%'
-                }
-            }]
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+            series: [
+                { name: 'Male', type: 'column', data: tested_male, yAxis: 0, color: "#1AB394" },
+                { name: 'Female', type: 'column', data: tested_female, yAxis: 0, color: "#485969" },
+                { name: 'HIV Positivity', type: 'spline', data: positivity, yAxis: 1, color: "#E06F07", tooltip: { valueSuffix: ' %' } }
+            ],
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadUptakeByAgeSex();
@@ -109,7 +68,7 @@ const HtsUptakeByAgeSex = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        HIV TESTING SERVICES UPTAKE and positivity by age and sex
+                        HIV TESTING SERVICES UPTAKE AND POSITIVITY BY AGE AND SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -122,4 +81,4 @@ const HtsUptakeByAgeSex = ({ globalFilters }) => {
     );
 };
 
-export default HtsUptakeByAgeSex;
+export default UptakeByAgeSex;

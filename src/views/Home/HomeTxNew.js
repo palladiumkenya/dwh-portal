@@ -62,7 +62,7 @@ const HomeTxNew = () => {
         }
         setTxNew({
             title: { text: '', },
-            xAxis: [{ categories: months, crosshair: true, }],
+            xAxis: [{ categories: months, crosshair: true }],
             yAxis: [
                 { title: { text: 'Number of Patients' } },
                 { title: { text: 'Cummulative New on ART'}, opposite: true }
