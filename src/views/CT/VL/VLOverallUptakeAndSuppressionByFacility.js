@@ -1,16 +1,23 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import DataTable from 'react-data-table-component';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const VLOverallUptakeAndSuppressionByFacility = ({ globalFilters }) => {
+const VLOverallUptakeAndSuppressionByFacility = () => {
+    const filters = useSelector(state => state.filters);
     const [vlOverallUptakeAndSuppressionByFacility, setVLOverallUptakeAndSuppressionByFacility] = useState({});
 
     const loadVLOverallUptakeAndSuppressionByFacility = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('care-treatment/vlOverallUptakeAndSuppressionByFacility', params);
         const data = [];
         for(let i = 0; i < result.length; i++) {
@@ -62,7 +69,7 @@ const VLOverallUptakeAndSuppressionByFacility = ({ globalFilters }) => {
             ],
             data: data
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadVLOverallUptakeAndSuppressionByFacility();

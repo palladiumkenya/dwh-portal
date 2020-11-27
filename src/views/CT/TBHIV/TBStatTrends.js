@@ -1,17 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const TBStatTrends = ({ globalFilters }) => {
+const TBStatTrends = () => {
+    const filters = useSelector(state => state.filters);
     const [tbStat, setTBStat] = useState({});
 
     const loadTBStat = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('care-treatment/txNewTrends', params);
         const monthNames = {
             1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June",
@@ -48,7 +55,7 @@ const TBStatTrends = ({ globalFilters }) => {
                 { name: 'Number of Patients', data: txNew, type: 'spline', color: "#E06F07" },
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadTBStat();

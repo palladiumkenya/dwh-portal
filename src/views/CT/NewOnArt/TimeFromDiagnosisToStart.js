@@ -1,17 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const TimeFromDiagnosisToStart = ({ globalFilters }) => {
+const TimeFromDiagnosisToStart = () => {
+    const filters = useSelector(state => state.filters);
     const [linkageByAgeSex, setTimeFromDiagnosisToStart] = useState({});
 
     const loadTimeFromDiagnosisToStart = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const periodGroups = [];
         let firstPeriod = [];
         let firstPeriodPercent = [];
@@ -81,7 +88,7 @@ const TimeFromDiagnosisToStart = ({ globalFilters }) => {
                 { name: '> 14 Days', data: fourthPeriodPercent, type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' %' } },
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadTimeFromDiagnosisToStart();

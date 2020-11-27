@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from './../../Shared/UniversalFilter';
 import AdverseEventsTiles from './AdverseEventsTiles';
@@ -8,55 +9,52 @@ import AdverseEventsSeverity from './AdverseEventsSeverity';
 import AdverseEventsSeverityLevels from './AdverseEventsSeverityLevels';
 import AdverseEventsCausesAndActionsByDrugs from './AdverseEventsCausesAndActionsByDrugs';
 import AdverseEventsTable from './AdverseEventsTable';
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
 
-const AdverseEvents = ({globalFilters, onGlobalFiltersChange}) => {
-    const onVisibilityChange = useCallback(async (isVisible) => {
-        if (globalFilters.ctTab === 'advEv') {
-            onGlobalFiltersChange({
-                ...globalFilters,
-                stickyFilter: !isVisible,
-                countyFilterEnabled: true,
-                subCountyFilterEnabled: true,
-                facilityFilterEnabled: true,
-                partnerFilterEnabled: true,
-                agencyFilterEnabled: false,
-                fromDateFilterEnabled: true,
-                toDateFilterEnabled: false,
-            });
+const AdverseEvents = () => {
+    const filters = useSelector(state => state.filters);
+    const dispatch = useDispatch();
+    const onVisibilityChange = (isVisible) => {
+        if (filters.ctTab === 'advEv') {
+            if (isVisible) {
+                dispatch(disableStickyFilter());
+            } else {
+                dispatch(enableStickyFilter());
+            }
         }
-    }, [globalFilters, onGlobalFiltersChange]);
+    };
     return (
         <div className="animated fadeIn">
             <div className="strip">&nbsp;</div>
-            <AdverseEventsHeader period={globalFilters?.year} />
+            <AdverseEventsHeader period={filters?.year} />
             <VisibilitySensor onChange={onVisibilityChange}>
-                <UniversalFilter globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+                <UniversalFilter/>
             </VisibilitySensor>
-            <AdverseEventsTiles globalFilters={globalFilters} />
+            <AdverseEventsTiles />
             <hr />
             <AdverseEventsFooter />
             <hr />
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
-            <AdverseEventsSeverity globalFilters={globalFilters} />
+            <AdverseEventsSeverity />
             <hr />
             <AdverseEventsFooter />
             <hr />
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
-            <AdverseEventsSeverityLevels globalFilters={globalFilters} />
+            <AdverseEventsSeverityLevels />
             <hr />
             <AdverseEventsFooter />
             <hr />
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
-            <AdverseEventsCausesAndActionsByDrugs globalFilters={globalFilters} />
+            <AdverseEventsCausesAndActionsByDrugs />
             <hr />
             <AdverseEventsFooter />
             <hr />
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
-            <AdverseEventsTable globalFilters={globalFilters} />
+            <AdverseEventsTable />
         </div>
     );
 };

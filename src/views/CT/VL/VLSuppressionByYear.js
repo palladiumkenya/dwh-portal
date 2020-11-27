@@ -1,17 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const VLSuppressionByYear = ({ globalFilters }) => {
+const VLSuppressionByYear = () => {
+    const filters = useSelector(state => state.filters);
     const [vlSuppressionByYear, setVLSuppressionByYear] = useState({});
 
     const loadVLSuppressionByYear = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const retentionCategories = ['3 MONTHS', '6 MONTHS', '12 MONTHS', '24 MONTHS'];
         const yearCategories = [2011,2012,2013,2014,2015,2016,2017,2018,2019,2020];
         const result = await getAll('care-treatment/vlSuppressionByYear', params);
@@ -63,7 +70,7 @@ const VLSuppressionByYear = ({ globalFilters }) => {
                 { name: '24 MONTHS', data: data[3], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadVLSuppressionByYear();

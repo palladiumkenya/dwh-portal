@@ -1,7 +1,8 @@
-import React, { useCallback } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from './../../Shared/UniversalFilter';
-import TrendsInTxCurr from './TrendsInTxCurr';
+// import TrendsInTxCurr from './TrendsInTxCurr';
 import CurrentOnARTHeader from './CurrentOnARTHeader';
 import CurrentOnARTFooter from './CurrentOnARTFooter';
 import CurrentOnARTTxCurrByAgeSex from './CurrentOnARTTxCurrByAgeSex';
@@ -10,31 +11,28 @@ import CurrentOnARTTxCurrDistributionByCounty from './CurrentOnARTTxCurrDistribu
 import CurrentOnARTTxCurrDistributionByPartner from './CurrentOnARTTxCurrDistributionByPartner';
 import CurrentOnARTTxCurrByCounty from './CurrentOnARTTxCurrByCounty';
 import CurrentOnARTTxCurrByPartner from './CurrentOnARTTxCurrByPartner';
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
 
-const CurrentOnART = ({globalFilters, onGlobalFiltersChange}) => {
-    const onVisibilityChange = useCallback(async (isVisible) => {
-        if (globalFilters.ctTab === 'txCurr') {
-            onGlobalFiltersChange({
-                ...globalFilters,
-                stickyFilter: !isVisible,
-                countyFilterEnabled: true,
-                subCountyFilterEnabled: true,
-                facilityFilterEnabled: true,
-                partnerFilterEnabled: true,
-                agencyFilterEnabled: false,
-                fromDateFilterEnabled: true,
-                toDateFilterEnabled: false,
-            });
+const CurrentOnART = () => {
+    const filters = useSelector(state => state.filters);
+    const dispatch = useDispatch();
+    const onVisibilityChange = (isVisible) => {
+        if (filters.ctTab === 'txCurr') {
+            if (isVisible) {
+                dispatch(disableStickyFilter());
+            } else {
+                dispatch(enableStickyFilter());
+            }
         }
-    }, [globalFilters, onGlobalFiltersChange]);
+    };
     return (
         <div className="animated fadeIn">
             <div className="strip">&nbsp;</div>
-            <CurrentOnARTHeader period={globalFilters?.year}>&nbsp;</CurrentOnARTHeader>
+            <CurrentOnARTHeader period={filters?.year}>&nbsp;</CurrentOnARTHeader>
             <VisibilitySensor onChange={onVisibilityChange}>
-                <UniversalFilter globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+                <UniversalFilter/>
             </VisibilitySensor>
-            <TrendsInTxCurr globalFilters={globalFilters} />
+            {/* <TrendsInTxCurr /> */}
             <hr />
             <CurrentOnARTFooter />
             <hr />
@@ -42,10 +40,10 @@ const CurrentOnART = ({globalFilters, onGlobalFiltersChange}) => {
             <p></p>
             <div className="row">
                 <div className="col-6">
-                    <CurrentOnARTTxCurrBySex globalFilters={globalFilters}/>
+                    <CurrentOnARTTxCurrBySex />
                 </div>
                 <div className="col-6">
-                    <CurrentOnARTTxCurrByAgeSex globalFilters={globalFilters}/>
+                    <CurrentOnARTTxCurrByAgeSex />
                 </div>
             </div>
             <p>&nbsp;</p>
@@ -54,25 +52,25 @@ const CurrentOnART = ({globalFilters, onGlobalFiltersChange}) => {
             <hr />
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
-            <CurrentOnARTTxCurrDistributionByCounty globalFilters={globalFilters} />
+            <CurrentOnARTTxCurrDistributionByCounty />
             <hr />
             <CurrentOnARTFooter />
             <hr />
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
-            <CurrentOnARTTxCurrDistributionByPartner globalFilters={globalFilters} />
+            <CurrentOnARTTxCurrDistributionByPartner />
             <hr />
             <CurrentOnARTFooter />
             <hr />
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
-            <CurrentOnARTTxCurrByCounty globalFilters={globalFilters} />
+            <CurrentOnARTTxCurrByCounty />
             <hr />
             <CurrentOnARTFooter />
             <hr />
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
-            <CurrentOnARTTxCurrByPartner globalFilters={globalFilters} />
+            <CurrentOnARTTxCurrByPartner />
         </div>
     );
 };

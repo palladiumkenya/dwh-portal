@@ -1,17 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const CurrentOnARTTxCurrBySex = ({ globalFilters }) => {
+const CurrentOnARTTxCurrBySex = () => {
+    const filters = useSelector(state => state.filters);
     const [currentOnARTTxCurrByAgeSex, setCurrentOnARTTxCurrBySex] = useState({});
 
     const loadCurrentOnARTTxCurrBySex = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('care-treatment/txCurrBySex', params);
         let txCurrMale = 0;
         let txCurrFemale = 0;
@@ -60,7 +67,7 @@ const CurrentOnARTTxCurrBySex = ({ globalFilters }) => {
                 ]
             }]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadCurrentOnARTTxCurrBySex();

@@ -1,19 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import DataTable from 'react-data-table-component';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 import * as _ from 'lodash';
 
-const CurrentOnARTTxCurrByCounty = ({ globalFilters }) => {
+const CurrentOnARTTxCurrByCounty = () => {
+    const filters = useSelector(state => state.filters);
     const [txCurrByCountyList, setTxCurrByCountyList] = useState({});
 
     const loadTxCurrByCountyList = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const txCurrAgeDistributionByCounty = await getAll('care-treatment/getTxCurrAgeGroupDistributionByCounty', params);
         const data = [];
 
@@ -149,7 +154,7 @@ const CurrentOnARTTxCurrByCounty = ({ globalFilters }) => {
             ],
             data: data
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadTxCurrByCountyList();

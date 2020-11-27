@@ -1,17 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const VLOutcomesOverall = ({ globalFilters }) => {
+const VLOutcomesOverall = () => {
+    const filters = useSelector(state => state.filters);
     const [vlOutcomesOverall, setVLOutcomesOverall] = useState({});
 
     const loadVLOutcomesOverall = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const vlOutcomesCategories = ['SUPPRESSED', 'HVL', 'LLV'];
         const result = await getAll('care-treatment/vlOutcomesOverall', params);
         let data = [0, 0, 0];
@@ -47,7 +54,7 @@ const VLOutcomesOverall = ({ globalFilters }) => {
                 ]
             }]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadVLOutcomesOverall();

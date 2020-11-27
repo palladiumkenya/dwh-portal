@@ -1,17 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const VLUptakeBySex = ({ globalFilters }) => {
+const VLUptakeBySex = () => {
+    const filters = useSelector(state => state.filters);
     const [vlUptakeBySex, setVLUptakeBySex] = useState({});
 
     const loadVLUptakeBySex = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const sexCategories = ['Male', 'Female'];
         const result = await getAll('care-treatment/vlUptakeBySex', params);
         let data = [];
@@ -46,7 +53,7 @@ const VLUptakeBySex = ({ globalFilters }) => {
                 { name: 'VL Uptake', data: data, type: 'column', color: "#485969" },
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadVLUptakeBySex();

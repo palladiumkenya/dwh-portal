@@ -1,19 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const CurrentOnARTTxCurrDistributionByCounty = ({ globalFilters }) => {
+const CurrentOnARTTxCurrDistributionByCounty = () => {
+    const filters = useSelector(state => state.filters);
     const [txCurrDistributionByCounty, setTxCurrDistributionByCounty] = useState({});
 
     const loadTxCurrDistributionByCounty = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-             params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const counties = [];
         const txCurr = [];
 
@@ -60,7 +65,7 @@ const CurrentOnARTTxCurrDistributionByCounty = ({ globalFilters }) => {
                 data: txCurr
             }]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadTxCurrDistributionByCounty();
