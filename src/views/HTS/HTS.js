@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import Uptake from './Uptake/Uptake';
 import Linkage from './Linkage/Linkage';
 import PNS from './PNS/PNS';
-import { HTS_TABS } from "../../constants";
-import { changeHtsTab } from "../../actions/uiActions";
+import { HTS_TABS, PAGES } from "../../constants";
+import { changeHtsTab, changeCurrentPage } from "../../actions/uiActions";
 
 const HTS = () => {
     const dispatch = useDispatch();
@@ -24,6 +24,10 @@ const HTS = () => {
             })
         );
     };
+
+    useEffect(() => {
+        dispatch(changeCurrentPage(PAGES.hts));
+    }, [dispatch]);
 
     return (
         <div>

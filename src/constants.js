@@ -4,16 +4,19 @@ export const HOME_TABS = {
     hasCurrVl: "HAS CURRENT VL",
     suppressed: "SUPPRESSED",
 }
+
 export const RR_TABS = {
     ct: "CARE & TREATMENT",
     hts: "HIV TESTING SERVICES",
     pkv: "PATIENT KEY VALUES",
 }
+
 export const HTS_TABS = {
     uptake: "HIV TESTING SERVICES UPTAKE",
     linkage: "HIV TESTING SERVICES LINKAGE",
     pns: "PARTNER NOTIFICATION SERVICES",
 }
+
 export const CT_TABS = {
     txNew: "NEWLY STARTED ON ART",
     txCurr: "CURRENT ON ART",
@@ -24,3 +27,10 @@ export const CT_TABS = {
     vl: "VL MONITORING",
     tOut: "TREATMENT OUTCOMES"
 }
+
+export const PAGES = {
+    home: "HOME",
+    rr: "REPORTING_RATES",
+    hts: "HIV_TESTING_SERVICES",
+    ct: "CARE_AND_TREATMENT"
+};
