@@ -82,7 +82,7 @@ const NewOnArtByAgeSex = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX NEW DISTRIBUTION BY AGE AND SEX
+                        NEW ON ART DISTRIBUTION BY AGE AND SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

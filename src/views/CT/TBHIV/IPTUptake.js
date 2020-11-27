@@ -19,7 +19,7 @@ const IPTUptake = () => {
             year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const sexCategories = ['TX CURR', 'NUMBER STARTED ON IPT'];
+        const sexCategories = ['CURRENT ON ART', 'NUMBER STARTED ON IPT'];
         const result = await getAll('care-treatment/vlUptakeBySex', params);
         let data = [];
         for(let i = 0; i < result.length; i++) {
@@ -62,7 +62,7 @@ const IPTUptake = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        IPT UPTAKE AMONG TX CURR PATIENTS
+                        IPT UPTAKE AMONG CURRENT ON ART PATIENTS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

@@ -171,7 +171,7 @@ const TxCurrByProvinceMap = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX CURR BY PROVINCE
+                        CURRENT ON ART BY PROVINCE
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={txCurrByProvinceMap} constructorType={'mapChart'}/>

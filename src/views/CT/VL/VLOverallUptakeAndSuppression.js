@@ -20,7 +20,7 @@ const VLOverallUptakeAndSuppression = () => {
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const vlCategories = ['txCurr', 'eligible', 'vlDone', 'suppressed'];
-        const vlCategoryNames = ['TOTAL TX CURR', 'ELIGIBLE FOR VL (VALID WITHIN 12 MONTHS)', 'VL DONE', 'VIRALLY SUPPRESSED (VS)'];
+        const vlCategoryNames = ['TOTAL CURRENT ON ART', 'ELIGIBLE FOR VL (VALID WITHIN 12 MONTHS)', 'VL DONE', 'VIRALLY SUPPRESSED (VS)'];
         const sexCategories = ['Male', 'Female'];
         const result = await getAll('care-treatment/vlOverallUptakeAndSuppression', params);
         let data = [];
@@ -74,7 +74,7 @@ const VLOverallUptakeAndSuppression = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        OVERALL VL UPTAKE AND SUPPRESSION AMONG TX CURR PATIENTS
+                        OVERALL VL UPTAKE AND SUPPRESSION AMONG CURRENT ON ART PATIENTS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

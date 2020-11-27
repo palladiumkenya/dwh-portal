@@ -78,7 +78,7 @@ const VLSuppressionByRegimen = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VL OUTCOMES AMONG TX CURR PATIENTS BY ART REGIMEN/OPTIMIZATION
+                        VL OUTCOMES AMONG CURRENT ON ART PATIENTS BY ART REGIMEN/OPTIMIZATION
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

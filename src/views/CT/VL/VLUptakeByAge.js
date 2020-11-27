@@ -87,7 +87,7 @@ const VLUptakeByAge = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VL UPTAKE AMONG TX CURR PATIENTS BY AGE
+                        VL UPTAKE AMONG CURRENT ON ART PATIENTS BY AGE
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

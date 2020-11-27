@@ -165,7 +165,7 @@ const CurrentOnARTTxCurrByCounty = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX CURR BY COUNTY
+                        CURRENT ON ART BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
