@@ -1,17 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const PNSDistributionElicitedAgeSex = ({ globalFilters }) => {
+const PNSDistributionElicitedAgeSex = () => {
+    const filters = useSelector(state => state.filters);
     const [pnsDistributionElicitedAgeSex, setPNSDistributionElicitedAgeSex] = useState({});
 
     const loadPNSDistributionElicitedAgeSex = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY")
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('hts/pnsSexualContactsByAgeSex', params);
         const sexGroups = ['M', 'F'];
         const ageGroups = [];
@@ -62,7 +69,7 @@ const PNSDistributionElicitedAgeSex = ({ globalFilters }) => {
                 { name: 'Male', data: data[0], color: "#1AB394", tooltip: { valueSuffix: ' ' } }
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadPNSDistributionElicitedAgeSex();

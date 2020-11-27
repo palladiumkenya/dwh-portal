@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardText, CardTitle, CardSubtitle, Row, Col } from 'reactstrap';
 import { getAll } from '../Shared/Api';
 
-const HomeVLCascade = ({ globalFilters }) => {
+const HomeVLCascade = () => {
+    const filters = useSelector(state => state.filters);
     const [vlCascade, setHomeVLCascade] = useState({
         currentOnArt: 0,
         currentOnArtText: '',
@@ -18,7 +20,13 @@ const HomeVLCascade = ({ globalFilters }) => {
     });
     
     const loadHomeVLCascade = useCallback(async () => {
-        const result = await getAll('care-treatment/viralLoadCascade', { ...globalFilters });
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies
+        };
+        const result = await getAll('care-treatment/viralLoadCascade', params);
         let data = [
             result.TX_CURR ? result.TX_CURR : 0,
             result.Eligible4VL ? result.Eligible4VL : 0,
@@ -38,7 +46,7 @@ const HomeVLCascade = ({ globalFilters }) => {
             suppressedText: data[3].toLocaleString('en'),
             suppressedPercent: parseFloat(((data[3]/data[0])*100).toString()).toFixed(0) + '%'
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadHomeVLCascade();

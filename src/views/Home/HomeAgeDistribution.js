@@ -1,74 +1,64 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 import { getAll } from '../Shared/Api';
 
-const HomeAgeDistribution = ({ globalFilters }) => {
-    const [ARTClientsChildren, setARTClientsChildren] = useState({
-        ActiveARTChildren: ''
-    });
-    const [ARTClientsAdults, setARTClientsAdults] = useState({
-        ActiveARTAdults: ''
-    });
-    const [ARTClientsAdolescents, setARTClientsAdolescents] = useState({
-        ActiveARTAdolescents: ''
-    });
+const HomeAgeDistribution = () => {
+    const filters = useSelector(state => state.filters);
+    const [ARTClientsChildren, setARTClientsChildren] = useState({ ActiveARTChildren: '' });
+    const [ARTClientsAdults, setARTClientsAdults] = useState({ ActiveARTAdults: '' });
+    const [ARTClientsAdolescents, setARTClientsAdolescents] = useState({ ActiveARTAdolescents: '' });
 
     const loadActiveOnARTChildren = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies
+        };
         let ActiveARTChildren = 0;
-
         const result = await getAll('care-treatment/activeArtChildren', params);
         if(result && result.length > 0) {
             ActiveARTChildren = result[0].ActiveARTChildren;
         }
-
         setARTClientsChildren({
             ActiveARTChildren: ActiveARTChildren.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     const loadActiveOnARTAdults = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies
+        };
         let ActiveARTAdults = 0;
-
         const result = await getAll('care-treatment/activeArtAdults', params);
         if(result && result.length > 0) {
             ActiveARTAdults = result[0].ActiveARTAdults;
         }
-
         setARTClientsAdults({
             ActiveARTAdults: ActiveARTAdults.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     const loadActiveOnARTAdolescents = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies
+        };
         let ActiveARTAdolescents = 0;
-
         const result = await getAll('care-treatment/activeArtAdolescents', params);
         if(result && result.length > 0) {
             ActiveARTAdolescents = result[0].ActiveARTAdolescents;
         }
-
         setARTClientsAdolescents({
             ActiveARTAdolescents: ActiveARTAdolescents.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadActiveOnARTChildren();
@@ -77,7 +67,7 @@ const HomeAgeDistribution = ({ globalFilters }) => {
     }, [loadActiveOnARTChildren, loadActiveOnARTAdults, loadActiveOnARTAdolescents]);
 
     return (
-        <div>
+        <>
             <Row>
                 <Col>
                     <Card className="primary-card">
@@ -114,7 +104,7 @@ const HomeAgeDistribution = ({ globalFilters }) => {
                     </Card>
                 </Col>
             </Row>
-        </div>
+        </>
     );
 };
 

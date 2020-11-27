@@ -1,17 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const AppointmentDurationStableByPartner = ({ globalFilters }) => {
+const AppointmentDurationStableByPartner = () => {
+    const filters = useSelector(state => state.filters);
     const [appointmentDurationStableByPartner, setAppointmentDurationStableByPartner] = useState({});
 
     const loadAppointmentDurationStableByPartner = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const appointmentCategories = ['< 1 Month', '1-2 Months', '3-4 Months', '> 4 Months'];
         const partnerCategories = [];
         const result = await getAll('care-treatment/dsdAppointmentDurationByPartner', params);
@@ -66,7 +73,7 @@ const AppointmentDurationStableByPartner = ({ globalFilters }) => {
                 { name: '> 4 MONTHS', data: data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadAppointmentDurationStableByPartner();

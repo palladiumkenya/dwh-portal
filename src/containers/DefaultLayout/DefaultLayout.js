@@ -2,80 +2,26 @@ import { AppFooter, AppHeader, AppBreadcrumb2 as AppBreadcrumb } from '@coreui/r
 import { Container } from 'reactstrap';
 import { Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
-import React, { Suspense, useState } from "react";
+import React, { Suspense } from "react";
 import routes from '../../routes';
 import UniversalFilter from '../../views/Shared/UniversalFilter';
+import { useSelector } from 'react-redux';
 
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 const loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>;
 
 const DefaultLayout = () => {
-
-    const [globalFilters, setGlobalFilters] = useState({
-        homeTab: 'emr',
-        homeTabs: {
-            "emr": "EMR SITES",
-            "txCurr": "CURRENT ON ART",
-            "hasCurrVl": "HAS CURRENT VL",
-            "suppressed": "SUPPRESSED",
-        },
-        rrTab: 'ct',
-        rrTabs: {
-            "ct": "CARE & TREATMENT",
-            "hts": "HIV TESTING SERVICES",
-            "pkv": "PATIENT KEY VALUES",
-        },
-        htsTab: 'uptake',
-        htsTabs: {
-            "uptake": "HIV TESTING SERVICES UPTAKE",
-            "linkage": "HIV TESTING SERVICES LINKAGE",
-            "pns": "PARTNER NOTIFICATION SERVICES",
-        },
-        ctTab: 'txNew',
-        ctTabs: {
-            "txNew": "NEWLY STARTED ON ART",
-            "txCurr": "CURRENT ON ART",
-            "txOpt": "ART OPTIMIZATION",
-            "tbHiv": "TB/HIV",
-            "advEv": "ADVERSE EVENTS",
-            "dsd": "DSD",
-            "vl": "VL MONITORING",
-            "tOut": "TREATMENT OUTCOMES"
-        },
-        county: [],
-        subCounty: [],
-        facility: [],
-        partner: [],
-        agency: [],
-        fromDate: '',
-        toDate: '',
-        year: `${new Date().getFullYear()}`,
-        month: '',
-        stickyFilter: false,
-        countyFilterEnabled: true,
-        subCountyFilterEnabled: true,
-        facilityFilterEnabled: true,
-        partnerFilterEnabled: true,
-        agencyFilterEnabled: false,
-        fromDateFilterEnabled: true,
-        toDateFilterEnabled: false,
-    });
-
-    const updateGlobalFilters = (selection) => {
-        setGlobalFilters(selection);
-    };
-
+    const ui = useSelector(state => state.ui)
     return (
-
         <div className="app">
             <AppHeader fixed>
                 <Suspense fallback={loading()}>
                     <DefaultHeader />
                 </Suspense>
             </AppHeader>
-            <Container fluid className={globalFilters && globalFilters.stickyFilter === true ? 'stickyUniversalFilter':'hiddenUniversalFilter'}>
-                <UniversalFilter globalFilters={globalFilters} onGlobalFiltersChange={updateGlobalFilters} />
+            <Container fluid className={ui.stickyFilter === true ? 'stickyUniversalFilter':'hiddenUniversalFilter'}>
+                <UniversalFilter />
             </Container>
             <div className="app-body">
                 <main className={"main"}>
@@ -91,7 +37,7 @@ const DefaultLayout = () => {
                                             exact={route.exact}
                                             name={route.name}
                                             render={props => (
-                                                <route.component {...props} globalFilters={globalFilters} onGlobalFiltersChange={updateGlobalFilters}/>
+                                                <route.component {...props}/>
                                             )} />
                                     ) : (null);
                                 })}

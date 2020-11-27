@@ -1,21 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const PNSPositivityTrends = ({ globalFilters }) => {
+const PNSPositivityTrends = () => {
+    const filters = useSelector(state => state.filters);
     const [pnsPositivityTrends, setPNSPositivityTrends] = useState({});
 
     const loadPNSPositivityTrends = useCallback(async () => {
         let params = {
-            county: globalFilters.county,
-            subCounty: globalFilters.subCounty,
-            partner: globalFilters.partner,
-            agency: globalFilters.agency,
-            year: globalFilters.year,
-            month: globalFilters.month
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY")
         };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('hts/pnsSexualContactsByYear', params);
         const result2 = await getAll('hts/pnsChildrenByYear', params);
         const monthNames = {
@@ -66,7 +69,7 @@ const PNSPositivityTrends = ({ globalFilters }) => {
                 { name: 'Positivity Percentage', type: 'spline', data: positivity, yAxis: 1, color: "#E06F07", dataLabels: { enabled: true, format: '{y} %' }, tooltip: { valueSuffix: ' %' }, dashStyle: 'Dash' }
             ],
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadPNSPositivityTrends();

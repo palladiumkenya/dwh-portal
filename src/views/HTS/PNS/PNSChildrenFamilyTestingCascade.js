@@ -1,10 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader, CardTitle } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const PNSChildrenFamilyTestingCascade = ({ globalFilters }) => {
+const PNSChildrenFamilyTestingCascade = () => {
+    const filters = useSelector(state => state.filters);
     const [pnsChildrenFamilyTestingCascade, setPNSChildrenFamilyTestingCascade] = useState({});
     
     const loadPNSChildrenFamilyTestingCascade = useCallback(async () => {
@@ -15,13 +18,13 @@ const PNSChildrenFamilyTestingCascade = ({ globalFilters }) => {
             'Linked',
         ];
         let params = {
-            county: globalFilters.county,
-            subCounty: globalFilters.subCounty,
-            partner: globalFilters.partner,
-            agency: globalFilters.agency,
-            year: globalFilters.year,
-            month: globalFilters.month
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY")
         };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('hts/pnsChildrenCascade', params);
         let pnsChildrenCascade = {
             elicited: result.elicited ? result.elicited:0,
@@ -36,12 +39,11 @@ const PNSChildrenFamilyTestingCascade = ({ globalFilters }) => {
             pnsChildrenCascade.positive ? pnsChildrenCascade.positive : 0,
             pnsChildrenCascade.linked ? pnsChildrenCascade.linked : 0,
         ].map(x => Number(parseFloat(x).toFixed(0)));
-
         setPNSChildrenFamilyTestingCascade({
             title: { text: '' },
             xAxis: { categories: categories, crosshair: true },
-            yAxis: { title: { text: '' }, min: 0},
-            legend: { enabled: false, },
+            yAxis: { title: { text: '' } },
+            legend: { enabled: false },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                 pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
@@ -53,14 +55,14 @@ const PNSChildrenFamilyTestingCascade = ({ globalFilters }) => {
             plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () {
                 return '' + this.point.text;
             }}}},
-            series: [{ name: 'Family Testing of children Cascade', color: "#1AB394", type: 'column', data: [
+            series: [{ name: 'Family Testing of Children Cascade', color: "#1AB394", type: 'column', data: [
                 { name: categories[0], y: data[0], text: data[0].toLocaleString('en') },
                 { name: categories[1], y: data[1], text: data[1].toLocaleString('en') + ' (' + parseFloat(((data[1]/data[0])*100).toString()).toFixed(0) + '%)' },
                 { name: categories[2], y: data[2], text: data[2].toLocaleString('en') + ' (' + parseFloat(((data[1]/data[0])*100).toString()).toFixed(0) + '%)' },
                 { name: categories[3], y: data[3], text: data[3].toLocaleString('en') + ' (' + parseFloat(((data[2]/data[0])*100).toString()).toFixed(0) + '%)' },
             ]}]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadPNSChildrenFamilyTestingCascade();

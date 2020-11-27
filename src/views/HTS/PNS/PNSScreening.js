@@ -1,20 +1,23 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const PNSScreening = ({ globalFilters }) => {
+const PNSScreening = () => {
+    const filters = useSelector(state => state.filters);
     const [pnsScreening, setPNSScreening] = useState({});
     const loadPNSScreening = useCallback(async () => {
         let params = {
-            county: globalFilters.county,
-            subCounty: globalFilters.subCounty,
-            partner: globalFilters.partner,
-            agency: globalFilters.agency,
-            year: globalFilters.year,
-            month: globalFilters.month
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY")
         };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const data1 = await getAll('hts/pnsSexualContactsCascade', params);
         let pnsSexualContactsCascade = {
             elicited: data1.elicited ? data1.elicited:0,
@@ -41,14 +44,14 @@ const PNSScreening = ({ globalFilters }) => {
             xAxis: [{ categories: categories, crosshair: true }],
             yAxis: [{ title: { text: '' } }],
             tooltip: { shared: true },
-            plotOptions: { column: { stacking: 'normal', dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
+            plotOptions: { column: { stacking: 'normal', dataLabels: { enabled: true } } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'Children', data: data[1], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
                 { name: 'Adult', data: data[0], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadPNSScreening();

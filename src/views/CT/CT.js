@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import NewOnArt from './NewOnArt/NewOnArt';
 import CurrentOnART from './CurrentOnART/CurrentOnART';
@@ -8,20 +9,20 @@ import VL from './VL/VL';
 import AdverseEvents from './AdverseEvents/AdverseEvents';
 import TBHIV from './TBHIV/TBHIV';
 import ARVOptimization from './ARVOptimization/ARVOptimization';
+import { changeCtTab } from "../../actions/uiActions";
+import { CT_TABS } from "../../constants";
 
-const CT = ({globalFilters, onGlobalFiltersChange}) => {
-
-    const changeCtTabTo = (tab) => {
-        onGlobalFiltersChange({ ...globalFilters, ctTab: tab});
-    }
+const CT = () => {
+    const dispatch = useDispatch();
+    const ctTab = useSelector(state => state.ui.ctTab);
 
     const renderTabNavItems = () => {
         return (
-            Object.keys(globalFilters.ctTabs).map((value) => {
+            Object.keys(CT_TABS).map((value) => {
                 return (
                     <NavItem key={value}>
-                        <NavLink active={globalFilters.ctTab === value} onClick={() => { changeCtTabTo(value); }} >
-                            {globalFilters.ctTabs[value]}
+                        <NavLink active={ctTab === value} onClick={() => { dispatch(changeCtTab(value)); }} >
+                            {CT_TABS[value]}
                         </NavLink>
                     </NavItem>
                 );
@@ -34,27 +35,27 @@ const CT = ({globalFilters, onGlobalFiltersChange}) => {
             <Nav tabs>
                 {renderTabNavItems()}
             </Nav>
-            <TabContent activeTab={globalFilters.ctTab}>
+            <TabContent activeTab={ctTab}>
                 <TabPane tabId="txNew">
-                    <NewOnArt globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+                    <NewOnArt/>
                 </TabPane>
                 <TabPane tabId="txCurr">
-                    <CurrentOnART globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+                    <CurrentOnART/>
                 </TabPane>
                 <TabPane tabId="tbHiv">
-                    <TBHIV globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+                    <TBHIV/>
                 </TabPane>
                 <TabPane tabId="advEv">
-                    <AdverseEvents globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+                    <AdverseEvents/>
                 </TabPane>
                 <TabPane tabId="dsd">
-                    <DSD globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+                    <DSD/>
                 </TabPane>
                 <TabPane tabId="tOut">
-                    <TreatmentOutcomes globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+                    <TreatmentOutcomes/>
                 </TabPane>
                 <TabPane tabId="vl">
-                    <VL globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+                    <VL/>
                 </TabPane>
                 <TabPane tabId="txOpt">
                     <ARVOptimization/>

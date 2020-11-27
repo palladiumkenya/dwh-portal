@@ -1,10 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader, CardTitle } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const PNSContactsCascade = ({ globalFilters }) => {
+const PNSContactsCascade = () => {
+    const filters = useSelector(state => state.filters);
     const [pnsContactsCascade, setPNSContactsCascade] = useState({});
     
     const loadPNSContactsCascade = useCallback(async () => {
@@ -18,13 +21,13 @@ const PNSContactsCascade = ({ globalFilters }) => {
             'Sexual Contacts Linked',
         ];
         let params = {
-            county: globalFilters.county,
-            subCounty: globalFilters.subCounty,
-            partner: globalFilters.partner,
-            agency: globalFilters.agency,
-            year: globalFilters.year,
-            month: globalFilters.month
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY")
         };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result1 = await getAll('hts/pnsSexualContactsCascade', params);
         let pnsSexualContactsCascade = {
             elicited: result1.elicited ? result1.elicited:0,
@@ -43,11 +46,10 @@ const PNSContactsCascade = ({ globalFilters }) => {
             pnsSexualContactsCascade.positive ? pnsSexualContactsCascade.positive : 0,
             pnsSexualContactsCascade.linked ? pnsSexualContactsCascade.linked : 0,
         ].map(x => Number(parseFloat(x).toFixed(0)));
-
         setPNSContactsCascade({
             title: { text: '' },
             xAxis: { categories: categories, crosshair: true },
-            yAxis: { title: { text: '' }, min: 0},
+            yAxis: { title: { text: '' } },
             legend: { enabled: false, },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -70,7 +72,7 @@ const PNSContactsCascade = ({ globalFilters }) => {
                 { name: categories[6], y: data[6], text: data[6].toLocaleString('en') + ' (' + parseFloat(((data[5]/data[0])*100).toString()).toFixed(0) + '%)' },
             ]}]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadPNSContactsCascade();
