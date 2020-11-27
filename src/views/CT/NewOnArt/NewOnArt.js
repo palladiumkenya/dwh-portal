@@ -14,10 +14,10 @@ import TimeFromDiagnosisToStart from './TimeFromDiagnosisToStart';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
 
 const NewOnArt = () => {
-    const filters = useSelector(state => state.filters);
+    const ctTab = useSelector(state => state.ui.ctTab);
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
-        if (filters.ctTab === 'txNew') {
+        if (ctTab === 'txNew') {
             if (isVisible) {
                 dispatch(disableStickyFilter());
             } else {

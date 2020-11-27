@@ -18,10 +18,10 @@ import AppointmentDurationStableByPartner from './AppointmentDurationStableByPar
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
 
 const DSD = () => {
-    const filters = useSelector(state => state.filters);
+    const ctTab = useSelector(state => state.ui.ctTab);
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
-        if (filters.ctTab === 'dsd') {
+        if (ctTab === 'dsd') {
             if (isVisible) {
                 dispatch(disableStickyFilter());
             } else {

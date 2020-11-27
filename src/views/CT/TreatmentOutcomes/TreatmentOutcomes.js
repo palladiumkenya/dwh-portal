@@ -17,10 +17,10 @@ import TwentyFourMonthRetention from './TwentyFourMonthRetention';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
 
 const TreatmentOutcomes = () => {
-    const filters = useSelector(state => state.filters);
+    const ctTab = useSelector(state => state.ui.ctTab);
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
-        if (filters.ctTab === 'tOut') {
+        if (ctTab === 'tOut') {
             if (isVisible) {
                 dispatch(disableStickyFilter());
             } else {

@@ -13,9 +13,10 @@ import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActi
 
 const AdverseEvents = () => {
     const filters = useSelector(state => state.filters);
+    const ctTab = useSelector(state => state.ui.ctTab);
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
-        if (filters.ctTab === 'advEv') {
+        if (ctTab === 'advEv') {
             if (isVisible) {
                 dispatch(disableStickyFilter());
             } else {
