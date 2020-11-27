@@ -1,25 +1,34 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const VLUptakeBySex = ({ globalFilter }) => {
+const VLUptakeBySex = () => {
+    const filters = useSelector(state => state.filters);
     const [vlUptakeBySex, setVLUptakeBySex] = useState({});
 
     const loadVLUptakeBySex = useCallback(async () => {
-        let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const sexCategories = ['Male', 'Female'];
         const result = await getAll('care-treatment/vlUptakeBySex', params);
         let data = [];
         for(let i = 0; i < result.length; i++) {
             if(result[i].gender === 'Male') {
+                data[0] = Number((parseInt(result[i].vlDone)/parseInt(result[i].eligible))*100).toFixed(0);
                 data[0] = parseInt(result[i].vlDone);
             }
             if(result[i].gender === 'Female') {
+                data[1] = Number((parseInt(result[i].vlDone)/parseInt(result[i].eligible))*100).toFixed(0);
                 data[1] = parseInt(result[i].vlDone);
             }
         }
@@ -33,7 +42,7 @@ const VLUptakeBySex = ({ globalFilter }) => {
             }],
             yAxis: [{
                 min: 0,
-                title: { text: 'Number of Patients' },
+                title: { text: 'VL Uptake' },
             }],
             tooltip: { shared: true },
             legend: {
@@ -41,10 +50,10 @@ const VLUptakeBySex = ({ globalFilter }) => {
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'Number of Patients', data: data, type: 'column', color: "#485969" },
+                { name: 'VL Uptake', data: data, type: 'column', color: "#485969" },
             ]
         });
-    }, [globalFilter]);
+    }, [filters]);
 
     useEffect(() => {
         loadVLUptakeBySex();
@@ -55,7 +64,7 @@ const VLUptakeBySex = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VL UPTAKE AMONG TX CURR PATIENTS BY SEX
+                        VL UPTAKE AMONG CURRENT ON ART PATIENTS BY SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

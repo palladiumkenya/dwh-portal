@@ -1,17 +1,19 @@
-import CareTreatment from './views/CT/CareTreatment';
-import HIVTreatmentOverview from "./views/CT/HIVTreatmentOverview";
+import Home from './views/Home/Home';
+import RR from './views/RR/RR';
+import HTS from './views/HTS/HTS';
+import CT from "./views/CT/CT";
+import GIS from "./views/GIS/GIS";
 import HRH from "./views/HRH/HRH";
-import HtsLinkage from './views/HTS/HtsLinkage';
-import HtsUptake from './views/HTS/HtsUptake';
-import ReportingRates from './views/ReportingRates/ReportingRates';
+import Resources from './views/Resources/Resources';
 
 const routes = [
-  { path: "/", exact: true, name: "Home", component: CareTreatment },
-  { path: "/hiv-treatment", exact: true, name: "HIV Treatment", component: HIVTreatmentOverview, },
-  { path: "/hrh", exact: true, name: "HRH", component: HRH, },
-  { path: "/hts/hts-linkage", exact: true, name: 'HTS Linkage', component: HtsLinkage },
-  { path: "/hts/hts-uptake", exact: true, name: 'HTS Uptake', component: HtsUptake },
-  { path: "/reporting-rates", exact: true, name: "Reporting Rates", component: ReportingRates, },
+  { path: "/", exact: true, name: "Home", component: Home },
+  { path: "/reporting-rates", exact: true, name: "Reporting Rates", component: RR },
+  { path: "/hiv-testing", exact: true, name: 'HIV Testing & Prevention', component: HTS },
+  { path: "/hiv-treatment", exact: true, name: "HIV Treatment", component: CT },
+  { path: "/gis", exact: true, name: "GIS", component: GIS },
+  { path: "/hrh", exact: true, name: "HRH", component: HRH },
+  { path: "/resources", exact: true, name: "Resources", component: Resources }
 ];
 
 export default routes;

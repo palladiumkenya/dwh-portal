@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import DataTable from 'react-data-table-component';
 
-const FacilitiesNewOnArtList = ({ globalFilter }) => {
+const FacilitiesNewOnArtList = () => {
+    const filters = useSelector(state => state.filters);
     const [facilitiesNewOnArt, setFacilitiesNewOnArt] = useState({});
 
     const loadFacilitiesNewOnArt = useCallback(async () => {

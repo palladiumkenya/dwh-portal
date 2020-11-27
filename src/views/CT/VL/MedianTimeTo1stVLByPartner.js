@@ -1,14 +1,25 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
 const MedianTimeTo1stVLByPartner = () => {
+    const filters = useSelector(state => state.filters);
     const [medianTimeTo1stVLByPartner, setMedianTimeTo1stVLByPartner] = useState({});
 
     const loadMedianTimeTo1stVLByPartner = useCallback(async () => {
-        const result = await getAll('care-treatment/vlMedianTimeToFirstVlByPartner');
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
+        const result = await getAll('care-treatment/vlMedianTimeToFirstVlByPartner', params);
 
         let partners = [];
         let medianTimeTo1stVLByPartner = [];
@@ -35,10 +46,10 @@ const MedianTimeTo1stVLByPartner = () => {
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'Time (Days)', data: medianTimeTo1stVLByPartner, type: 'spline', color: "#E06F07" },
+                { name: 'Time (Days)', data: medianTimeTo1stVLByPartner, type: 'column', color: "#E06F07" },
             ]
         });
-    }, []);
+    }, [filters]);
 
     useEffect(() => {
         loadMedianTimeTo1stVLByPartner();

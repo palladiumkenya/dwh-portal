@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import CTFilter from '../../Shared/CTFilter';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import VisibilitySensor from 'react-visibility-sensor';
+import UniversalFilter from './../../Shared/UniversalFilter';
 import DSDHeader from './DSDHeader';
 import DSDFooter from './DSDFooter';
 import DSDCascade from './DSDCascade';
@@ -13,63 +15,64 @@ import AppointmentDurationBySex from './AppointmentDurationBySex';
 import AppointmentDurationByAge from './AppointmentDurationByAge';
 import AppointmentDurationStableByCounty from './AppointmentDurationStableByCounty';
 import AppointmentDurationStableByPartner from './AppointmentDurationStableByPartner';
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
 
 const DSD = () => {
-    const [globalFilter, setGlobalFilter] = useState({
-        county: [],
-        subCounty: [],
-        facility: [],
-        partner: [],
-        year:`${new Date().getFullYear()}`,
-        month: ''
-    });
-
-    const updateGlobalFilter = (selection) => {
-        setGlobalFilter(selection);
+    const ctTab = useSelector(state => state.ui.ctTab);
+    const dispatch = useDispatch();
+    const onVisibilityChange = (isVisible) => {
+        if (ctTab === 'dsd') {
+            if (isVisible) {
+                dispatch(disableStickyFilter());
+            } else {
+                dispatch(enableStickyFilter());
+            }
+        }
     };
-
     return (
         <div className="animated fadeIn">
             <div className="strip"></div>
             <DSDHeader></DSDHeader>
-            <CTFilter onFilterChange={updateGlobalFilter} />
+            <VisibilitySensor onChange={onVisibilityChange}>
+                <UniversalFilter/>
+            </VisibilitySensor>
             <p></p>
             <div className="row">
                 <div className="col-6">
-                    <DSDCascade globalFilter={globalFilter}/>
+                    <DSDCascade />
                 </div>
                 <div className="col-6">
-                    <DistributionUnstable globalFilter={globalFilter}/>
+                    <DistributionUnstable />
                 </div>
             </div>
             <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
             <p></p>
             <div className="row">
                 <div className="col-6">
-                    <DistributionMMDStable globalFilter={globalFilter}/>
+                    <DistributionMMDStable />
                 </div>
                 <div className="col-6">
-                    <DistributionStableAgeSex globalFilter={globalFilter}/>
+                    <DistributionStableAgeSex />
                 </div>
             </div>
-            <p></p><DistributionStableByCounty globalFilter={globalFilter}/>
+            <p></p><DistributionStableByCounty />
             <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><DistributionStableByPartner globalFilter={globalFilter}/>
+            <p></p><DistributionStableByPartner />
             <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
             <p></p>
             <div className="row">
                 <div className="col-6">
-                    <AppointmentDurationByStability globalFilter={globalFilter}/>
+                    <AppointmentDurationByStability />
                 </div>
                 <div className="col-6">
-                    <AppointmentDurationBySex globalFilter={globalFilter}/>
+                    <AppointmentDurationBySex />
                 </div>
             </div>
-            <p></p><AppointmentDurationByAge globalFilter={globalFilter}/>
+            <p></p><AppointmentDurationByAge />
             <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><AppointmentDurationStableByCounty globalFilter={globalFilter}/>
+            <p></p><AppointmentDurationStableByCounty />
             <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><AppointmentDurationStableByPartner globalFilter={globalFilter}/>
+            <p></p><AppointmentDurationStableByPartner />
             <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
             
         </div>

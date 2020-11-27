@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import DataTable from 'react-data-table-component';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 import * as _ from 'lodash';
 
-const CurrentOnARTTxCurrByPartner = ({ globalFilter }) => {
+const CurrentOnARTTxCurrByPartner = () => {
+    const filters = useSelector(state => state.filters);
     const [txCurrByPartnerList, setTxCurrByPartnerList] = useState({});
-    useEffect(() => {
-        loadTxCurrByPartnerList();
-    }, [globalFilter]);
-
-    const loadTxCurrByPartnerList = async () => {
-        let params = null;
-
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
-
+    
+    const loadTxCurrByPartnerList = useCallback(async () => {
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const txCurrAgeDistributionByPartner = await getAll('care-treatment/getTxCurrAgeGroupDistributionByPartner', params);
         const data = [];
 
@@ -152,14 +154,18 @@ const CurrentOnARTTxCurrByPartner = ({ globalFilter }) => {
             ],
             data: data
         });
-    };
+    }, [filters]);
+
+    useEffect(() => {
+        loadTxCurrByPartnerList();
+    }, [loadTxCurrByPartnerList]);
 
     return (
         <div className="row">
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX CURR BY PARTNER
+                        CURRENT ON ART BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

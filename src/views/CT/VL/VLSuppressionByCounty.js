@@ -1,14 +1,25 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
 const VLSuppressionByCounty = () => {
+    const filters = useSelector(state => state.filters);
     const [vlSuppressionByCounty, setVLSuppressionByCounty] = useState({});
 
     const loadVLSuppressionByCounty = useCallback(async () => {
-        const result = await getAll('care-treatment/vlSuppressionByCounty');
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
+        const result = await getAll('care-treatment/vlSuppressionByCounty', params);
 
         let counties = [];
         let vlSuppressionByCounty = [];
@@ -30,6 +41,7 @@ const VLSuppressionByCounty = () => {
                     min: 0,
                 }
             ],
+            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             legend: {
                 floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
@@ -38,7 +50,7 @@ const VLSuppressionByCounty = () => {
                 { name: 'Number of Patients', data: vlSuppressionByCounty, type: 'column', color: "#485969" },
             ]
         });
-    }, []);
+    }, [filters]);
 
     useEffect(() => {
         loadVLSuppressionByCounty();
@@ -49,7 +61,7 @@ const VLSuppressionByCounty = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VL SUPPRESSION AMONG TX CURR PATIENTS BY COUNTY (N =495)
+                        VL SUPPRESSION AMONG CURRENT ON ART PATIENTS BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

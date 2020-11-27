@@ -1,17 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const VLUptakeByAge = ({ globalFilter }) => {
+const VLUptakeByAge = () => {
+    const filters = useSelector(state => state.filters);
     const [vlUptakeByAge, setVLUptakeByAge] = useState({});
 
     const loadVLUptakeByAge = useCallback(async () => {
-        let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const sexCategories = ['Male', 'Female'];
         const ageCategories = [
             'Under 1',
@@ -51,23 +58,17 @@ const VLUptakeByAge = ({ globalFilter }) => {
             chart: { type: 'column' },
             title: { useHTML: true, text: '&nbsp;' },
             subtitle: { text: '' },
-            plotOptions: { column: { stacking: 'normal' } },
+            plotOptions: { column: { stacking: 'percent' } },
             xAxis: [{
                 categories: ageCategories,
                 crosshair: true
             }],
             yAxis: [{
                 min: 0,
-                title: { text: 'Number of Patients' },
+                title: { text: 'Percentage of Patients' },
             }],
             tooltip: { shared: true },
-            legend: {
-                floating: true,
-                layout: 'horizontal',
-                align: 'left',
-                verticalAlign: 'top',
-                y: 0,
-                x: 80,
+            legend: { floating: true, layout: 'horizontal', align: 'left', verticalAlign: 'top', y: 0, x: 80,
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
@@ -75,7 +76,7 @@ const VLUptakeByAge = ({ globalFilter }) => {
                 { name: 'FEMALE', data: data[1], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilter]);
+    }, [filters]);
 
     useEffect(() => {
         loadVLUptakeByAge();
@@ -86,7 +87,7 @@ const VLUptakeByAge = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VL UPTAKE AMONG TX CURR PATIENTS BY AGE (N =495)
+                        VL UPTAKE AMONG CURRENT ON ART PATIENTS BY AGE
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

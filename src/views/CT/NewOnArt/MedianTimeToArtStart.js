@@ -1,14 +1,25 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
 const MedianTimeToArtStart = () => {
+    const filters = useSelector(state => state.filters);
     const [medianTimeToArtStart, setMedianTimeToArtStart] = useState({});
 
     const loadMedianTimeToArtStart = useCallback(async () => {
-        const result = await getAll('care-treatment/medianTimeToArtByYear');
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
+        const result = await getAll('care-treatment/medianTimeToArtByYear', params);
 
         let months = [];
         let medianTimeToArtStart = [];
@@ -38,7 +49,7 @@ const MedianTimeToArtStart = () => {
                 { name: 'Time (Days)', data: medianTimeToArtStart, type: 'spline', color: "#E06F07" },
             ]
         });
-    }, []);
+    }, [filters]);
 
     useEffect(() => {
         loadMedianTimeToArtStart();

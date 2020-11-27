@@ -1,17 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const NewOnArtTrends = ({ globalFilter }) => {
+const NewOnArtTrends = () => {
+    const filters = useSelector(state => state.filters);
     const [newOnArt, setNewOnArt] = useState({});
 
     const loadNewOnArt = useCallback(async () => {
-        let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('care-treatment/txNewTrends', params);
         const monthNames = {
             1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June",
@@ -48,7 +55,7 @@ const NewOnArtTrends = ({ globalFilter }) => {
                 { name: 'Number of Patients', data: txNew, type: 'spline', color: "#E06F07" },
             ]
         });
-    }, [globalFilter]);
+    }, [filters]);
 
     useEffect(() => {
         loadNewOnArt();
@@ -59,7 +66,7 @@ const NewOnArtTrends = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TRENDS IN TX NEW - NUMBER STARTED ART BY MONTH
+                        TRENDS IN NEW ON ART - NUMBER STARTED ART BY MONTH
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

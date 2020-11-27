@@ -1,17 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const AppointmentDurationByStability = ({ globalFilter }) => {
+const AppointmentDurationByStability = () => {
+    const filters = useSelector(state => state.filters);
     const [appointmentDurationByStability, setAppointmentDurationByStability] = useState({});
 
     const loadAppointmentDurationByStability = useCallback(async () => {
-        let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const appointmentCategories = ['< 1 Month', '1-2 Months', '3-4 Months', '> 4 Months'];
         const stabilityCategories = ['Stable', 'Unstable'];
         const result = await getAll('care-treatment/getDsdAppointmentCategorizationByStabilityStatus', params);
@@ -61,7 +68,7 @@ const AppointmentDurationByStability = ({ globalFilter }) => {
                 { name: '> 4 MONTHS', data: data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilter]);
+    }, [filters]);
 
     useEffect(() => {
         loadAppointmentDurationByStability();
@@ -72,7 +79,7 @@ const AppointmentDurationByStability = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        APPOINTMENT DURATION PRACTICES BY STABILITY STATUS (N =495)
+                        APPOINTMENT DURATION PRACTICES BY STABILITY STATUS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

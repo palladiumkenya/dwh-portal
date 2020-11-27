@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import CTFilter from '../../Shared/CTFilter';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import VisibilitySensor from 'react-visibility-sensor';
+import UniversalFilter from './../../Shared/UniversalFilter';
 import VLHeader from './VLHeader';
 import VLFooter from './VLFooter';
 import VLOverallUptakeAndSuppression from './VLOverallUptakeAndSuppression';
@@ -21,90 +23,91 @@ import VLSuppressionByYear6Month from './VLSuppressionByYear6Month';
 import VLSuppressionByYear12Month from './VLSuppressionByYear12Month';
 import VLSuppressionByYear24Month from './VLSuppressionByYear24Month';
 import VLOverallUptakeAndSuppressionByFacility from './VLOverallUptakeAndSuppressionByFacility';
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
 
 const VL = () => {
-    const [globalFilter, setGlobalFilter] = useState({
-        county: [],
-        subCounty: [],
-        facility: [],
-        partner: [],
-        year:`${new Date().getFullYear()}`,
-        month: ''
-    });
-
-    const updateGlobalFilter = (selection) => {
-        setGlobalFilter(selection);
+    const ctTab = useSelector(state => state.ui.ctTab);
+    const dispatch = useDispatch();
+    const onVisibilityChange = (isVisible) => {
+        if (ctTab === 'vl') {
+            if (isVisible) {
+                dispatch(disableStickyFilter());
+            } else {
+                dispatch(enableStickyFilter());
+            }
+        }
     };
-
     return (
         <div className="animated fadeIn">
             <div className="strip"></div>
             <VLHeader></VLHeader>
-            <CTFilter onFilterChange={updateGlobalFilter} />
+            <VisibilitySensor onChange={onVisibilityChange}>
+                <UniversalFilter/>
+            </VisibilitySensor>
             <p></p>
             <div className="row">
                 <div className="col-6">
-                    <VLOverallUptakeAndSuppression globalFilter={globalFilter}/>
+                    <VLOverallUptakeAndSuppression />
                 </div>
                 <div className="col-6">
-                    <MedianTimeTo1stVL globalFilter={globalFilter}/>
+                    <MedianTimeTo1stVL />
                 </div>
             </div>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><MedianTimeTo1stVLByCounty globalFilter={globalFilter}/>
+            <p></p><MedianTimeTo1stVLByCounty />
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><MedianTimeTo1stVLByPartner globalFilter={globalFilter}/>
+            <p></p><MedianTimeTo1stVLByPartner />
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
             <p></p>
             <div className="row">
                 <div className="col-4">
-                    <VLUptakeBySex globalFilter={globalFilter}/>
+                    <VLUptakeBySex />
                 </div>
                 <div className="col-8">
-                    <VLUptakeByAge globalFilter={globalFilter}/>
+                    <VLUptakeByAge />
                 </div>
             </div>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLUptakeByCounty globalFilter={globalFilter}/>
+            <p></p><VLUptakeByCounty />
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLUptakeByPartner globalFilter={globalFilter}/>
+            <p></p><VLUptakeByPartner />
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
             <div className="row">
                 <div className="col-4">
-                    <VLOutcomesOverall globalFilter={globalFilter}/>
+                    <VLOutcomesOverall />
                 </div>
                 <div className="col-8">
-                    <VLOutcomesBySex globalFilter={globalFilter}/>
+                    <VLOutcomesBySex />
                 </div>
             </div>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLSuppressionByAge globalFilter={globalFilter}/>
+            <p></p><VLSuppressionByAge />
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
             <div className="row">
                 <div className="col-4">
-                    <VLSuppressionByRegimen globalFilter={globalFilter}/>
+                    <VLSuppressionByRegimen />
                 </div>
                 <div className="col-8">
-                    <VLSuppressionByYear globalFilter={globalFilter}/>
+                    <VLSuppressionByYear />
                 </div>
             </div>
             <p></p>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLSuppressionByCounty globalFilter={globalFilter}/>
+            <p></p><VLSuppressionByCounty />
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLSuppressionByPartner globalFilter={globalFilter}/>
+            <p></p><VLSuppressionByPartner />
             <p></p>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLSuppressionByYear6Month globalFilter={globalFilter}/>
+            <p></p><VLSuppressionByYear6Month />
             <p></p>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLSuppressionByYear12Month globalFilter={globalFilter}/>
+            <p></p><VLSuppressionByYear12Month />
             <p></p>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLSuppressionByYear24Month globalFilter={globalFilter}/>
+            <p></p><VLSuppressionByYear24Month />
             <p></p>
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLOverallUptakeAndSuppressionByFacility globalFilter={globalFilter}/>
+            <p></p><VLOverallUptakeAndSuppressionByFacility />
             <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
         </div>
     );

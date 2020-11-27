@@ -1,30 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
+const CurrentOnARTTxCurrByAgeSex = () => {
+    const filters = useSelector(state => state.filters);
     const [txCurrByAgeAndSex, setTxCurrByAgeAndSex] = useState({});
 
-    const getYear = () => {
-        if (globalFilter.year) {
-            return globalFilter.year.split(',')[0];
-        }
-        return 2020;
-    };
-
-    useEffect(() => {
-        loadTxCurrByAgeAndSex();
-    }, [globalFilter]);
-
-    const loadTxCurrByAgeAndSex = async () => {
-        let params = null;
-
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
-
+    const loadTxCurrByAgeAndSex = useCallback(async () => {
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         let ageGroups = [];
         let txNewMale = [];
         let txNewFemale = [];
@@ -69,7 +63,7 @@ const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
                 {
                     min: -(max),
                     max: (max),
-                    title: { text: 'TX CURR', style: { color: Highcharts.getOptions().colors[1] } },
+                    title: { text: 'CURRENT ON ART', style: { color: Highcharts.getOptions().colors[1] } },
                     labels: {
                         formatter: function () {
                             return Math.abs(this.value);
@@ -77,19 +71,15 @@ const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
                     },
                 }
             ],
-            plotOptions: {
-                series: {
-                    stacking: 'normal'
-                }
-            },
+            plotOptions: { series: { stacking: 'normal' }, bar: { pointWidth: 22, } },
             tooltip: {
                 formatter: function () {
                     return '<b>' + this.series.name + ', Age Group ' + this.point.category + '</b><br/>' +
-                        'TX CURR: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
+                        'CURRENT ON ART: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
                 }
             },
             legend: {
-                floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
+                floating: true, layout: 'horizontal', align: 'left', verticalAlign: 'top', y: 0, x: 80,
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
@@ -97,14 +87,18 @@ const CurrentOnARTTxCurrByAgeSex = ({ globalFilter }) => {
                 { name: 'Male', data: txNewMale, color: "#1AB394", tooltip: { valueSuffix: ' ' } }
             ]
         });
-    };
+    }, [filters]);
+
+    useEffect(() => {
+        loadTxCurrByAgeAndSex();
+    }, [loadTxCurrByAgeAndSex]);
 
     return (
         <div className="row">
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX CURR BY AGE AND SEX - {getYear()}
+                        CURRENT ON ART BY AGE AND SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

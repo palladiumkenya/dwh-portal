@@ -1,17 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const AppointmentDurationStableByPartner = ({ globalFilter }) => {
+const AppointmentDurationStableByPartner = () => {
+    const filters = useSelector(state => state.filters);
     const [appointmentDurationStableByPartner, setAppointmentDurationStableByPartner] = useState({});
 
     const loadAppointmentDurationStableByPartner = useCallback(async () => {
-        let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const appointmentCategories = ['< 1 Month', '1-2 Months', '3-4 Months', '> 4 Months'];
         const partnerCategories = [];
         const result = await getAll('care-treatment/dsdAppointmentDurationByPartner', params);
@@ -66,7 +73,7 @@ const AppointmentDurationStableByPartner = ({ globalFilter }) => {
                 { name: '> 4 MONTHS', data: data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilter]);
+    }, [filters]);
 
     useEffect(() => {
         loadAppointmentDurationStableByPartner();
@@ -77,7 +84,7 @@ const AppointmentDurationStableByPartner = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        APPOINTMENT DURATION IN ACTIVE STABLE PATIENTS BY PARTNER (N =495)
+                        APPOINTMENT DURATION IN ACTIVE STABLE PATIENTS BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

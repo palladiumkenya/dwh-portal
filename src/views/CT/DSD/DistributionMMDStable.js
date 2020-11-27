@@ -1,17 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const DistributionMMDStable = ({ globalFilter }) => {
+const DistributionMMDStable = () => {
+    const filters = useSelector(state => state.filters);
     const [distributionMMDStable, setDistributionMMDStable] = useState({});
 
     const loadDistributionMMDStable = useCallback(async () => {
-        let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const categories = [
             "Standard Care",
             "Fast Track",
@@ -40,15 +47,16 @@ const DistributionMMDStable = ({ globalFilter }) => {
                     min: 0,
                 }
             ],
+            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             legend: {
                 floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'Number of Patients', data: data, type: 'bar', color: "#485969" },
+                { name: 'Number of Patients', data: data, type: 'column', color: "#485969" },
             ]
         });
-    }, [globalFilter]);
+    }, [filters]);
 
     useEffect(() => {
         loadDistributionMMDStable();
@@ -59,7 +67,7 @@ const DistributionMMDStable = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        DISTRIBUTION OF MMD MODELS AMONG STABLE TX CURR PATIENTS (N =495)
+                        DISTRIBUTION OF MMD MODELS AMONG STABLE CURRENT ON ART PATIENTS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

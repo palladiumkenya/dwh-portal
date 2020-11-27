@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import CTFilter from '../../Shared/CTFilter';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import VisibilitySensor from 'react-visibility-sensor';
+import UniversalFilter from './../../Shared/UniversalFilter';
 import TreatmentOutcomesHeader from './TreatmentOutcomesHeader';
 import TreatmentOutcomesFooter from './TreatmentOutcomesFooter';
 import TreatmentOutcomesOverall from './TreatmentOutcomesOverall';
@@ -12,51 +14,52 @@ import ThreeMonthRetention from './ThreeMonthRetention';
 import SixMonthRetention from './SixMonthRetention';
 import TwelveMonthRetention from './TwelveMonthRetention';
 import TwentyFourMonthRetention from './TwentyFourMonthRetention';
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
 
 const TreatmentOutcomes = () => {
-    const [globalFilter, setGlobalFilter] = useState({
-        county: [],
-        subCounty: [],
-        facility: [],
-        partner: [],
-        year:`${new Date().getFullYear()}`,
-        month: ''
-    });
-
-    const updateGlobalFilter = (selection) => {
-        setGlobalFilter(selection);
+    const ctTab = useSelector(state => state.ui.ctTab);
+    const dispatch = useDispatch();
+    const onVisibilityChange = (isVisible) => {
+        if (ctTab === 'tOut') {
+            if (isVisible) {
+                dispatch(disableStickyFilter());
+            } else {
+                dispatch(enableStickyFilter());
+            }
+        }
     };
-
     return (
         <div className="animated fadeIn">
             <div className="strip"></div>
             <TreatmentOutcomesHeader></TreatmentOutcomesHeader>
-            <CTFilter onFilterChange={updateGlobalFilter} />
+            <VisibilitySensor onChange={onVisibilityChange}>
+                <UniversalFilter/>
+            </VisibilitySensor>
             <p></p>
             <div className="row">
                 <div className="col-6">
-                    <TreatmentOutcomesOverall globalFilter={globalFilter}/>
+                    <TreatmentOutcomesOverall />
                 </div>
                 <div className="col-6">
-                    <TreatmentOutcomesBySex globalFilter={globalFilter}/>
+                    <TreatmentOutcomesBySex />
                 </div>
             </div>
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TreatmentOutcomesByAge globalFilter={globalFilter}/>
+            <p></p><TreatmentOutcomesByAge />
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TreatmentOutcomesByYear globalFilter={globalFilter}/>
+            <p></p><TreatmentOutcomesByYear />
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TreatmentOutcomesByCounty globalFilter={globalFilter}/>
+            <p></p><TreatmentOutcomesByCounty />
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TreatmentOutcomesByPartner globalFilter={globalFilter}/>
+            <p></p><TreatmentOutcomesByPartner />
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><ThreeMonthRetention globalFilter={globalFilter}/>
+            <p></p><ThreeMonthRetention />
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><SixMonthRetention globalFilter={globalFilter}/>
+            <p></p><SixMonthRetention />
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TwelveMonthRetention globalFilter={globalFilter}/>
+            <p></p><TwelveMonthRetention />
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TwentyFourMonthRetention globalFilter={globalFilter}/>
+            <p></p><TwentyFourMonthRetention />
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
         </div>
     );

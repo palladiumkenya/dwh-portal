@@ -1,19 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const VLOverallUptakeAndSuppression = ({ globalFilter }) => {
+const VLOverallUptakeAndSuppression = () => {
+    const filters = useSelector(state => state.filters);
     const [vlOverallUptakeAndSuppression, setVLOverallUptakeAndSuppression] = useState({});
 
     const loadVLOverallUptakeAndSuppression = useCallback(async () => {
-        let params = null;
-        if (globalFilter) {
-            params = { ...globalFilter };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const vlCategories = ['txCurr', 'eligible', 'vlDone', 'suppressed'];
-        const vlCategoryNames = ['TOTAL TX CURR', 'ELIGIBLE FOR VL (VALID WITHIN 12 MONTHS)', 'VL DONE', 'VIRALLY SUPPRESSED (VS)'];
+        const vlCategoryNames = ['TOTAL CURRENT ON ART', 'ELIGIBLE FOR VL (VALID WITHIN 12 MONTHS)', 'VL DONE', 'VIRALLY SUPPRESSED (VS)'];
         const sexCategories = ['Male', 'Female'];
         const result = await getAll('care-treatment/vlOverallUptakeAndSuppression', params);
         let data = [];
@@ -38,23 +45,17 @@ const VLOverallUptakeAndSuppression = ({ globalFilter }) => {
             chart: { type: 'column' },
             title: { useHTML: true, text: '&nbsp;' },
             subtitle: { text: '' },
-            plotOptions: { column: { stacking: 'normal' } },
+            plotOptions: { column: { stacking: 'percent' } },
             xAxis: [{
                 categories: vlCategoryNames,
                 crosshair: true
             }],
             yAxis: [{
                 min: 0,
-                title: { text: 'Number of Patients' },
+                title: { text: 'Percentage of Patients' },
             }],
             tooltip: { shared: true },
-            legend: {
-                floating: true,
-                layout: 'horizontal',
-                align: 'left',
-                verticalAlign: 'top',
-                y: 0,
-                x: 80,
+            legend: { floating: true, layout: 'horizontal', align: 'left', verticalAlign: 'top', y: 0, x: 80,
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
@@ -62,7 +63,7 @@ const VLOverallUptakeAndSuppression = ({ globalFilter }) => {
                 { name: 'FEMALE', data: data[1], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilter]);
+    }, [filters]);
 
     useEffect(() => {
         loadVLOverallUptakeAndSuppression();
@@ -73,7 +74,7 @@ const VLOverallUptakeAndSuppression = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        OVERALL VL UPTAKE AND SUPPRESSION AMONG TX CURR PATIENTS
+                        OVERALL VL UPTAKE AND SUPPRESSION AMONG CURRENT ON ART PATIENTS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

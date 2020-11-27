@@ -1,19 +1,24 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const DistributionStableByCounty = ({ globalFilter }) => {
+const DistributionStableByCounty = () => {
+    const filters = useSelector(state => state.filters);
     const [distributionStableByCounty, setDistributionStableByCounty] = useState({});
 
     const loadTxCurrDistributionByCounty = useCallback(async () => {
-        let params = null;
-
-        if (globalFilter) {
-             params = { ...globalFilter };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const counties = [];
         const stable = [];
 
@@ -57,19 +62,14 @@ const DistributionStableByCounty = ({ globalFilter }) => {
                 shared: true,
                 useHTML: true
             },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
+            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             series: [{
                 name: 'Number of Patients',
                 color: "#485969",
                 data: stable
             }]
         });
-    }, [globalFilter]);
+    }, [filters]);
 
     useEffect(() => {
         loadTxCurrDistributionByCounty();
@@ -80,7 +80,7 @@ const DistributionStableByCounty = ({ globalFilter }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        DISTRIBUTION OF STABLE PATIENTS BY COUNTY (N =495)
+                        DISTRIBUTION OF STABLE PATIENTS BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={distributionStableByCounty} />

@@ -1,14 +1,25 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
 const MedianTimeToArtStartByPartner = () => {
+    const filters = useSelector(state => state.filters);
     const [medianTimeToArtStartByPartner, setMedianTimeToArtStartByPartner] = useState({});
 
     const loadMedianTimeToArtStartByPartner = useCallback(async () => {
-        const result = await getAll('care-treatment/medianTimeToArtByPartner');
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            partner: filters.partners,
+            agency: filters.agencies,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
+        const result = await getAll('care-treatment/medianTimeToArtByPartner', params);
 
         let partners = [];
         let medianTimeToArtStartByPartner = [];
@@ -30,15 +41,17 @@ const MedianTimeToArtStartByPartner = () => {
                     min: 0,
                 }
             ],
+            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
+            tooltip: { shared: true },
             legend: {
-                floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
+                floating: true, layout: 'horizontal', align: 'left', verticalAlign: 'top', y: 0, x: 80,
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'Time (Days)', data: medianTimeToArtStartByPartner, type: 'bar', color: "#485969" },
+                { name: 'Time (Days)', data: medianTimeToArtStartByPartner, type: 'column', color: "#485969" },
             ]
         });
-    }, []);
+    }, [filters]);
 
     useEffect(() => {
         loadMedianTimeToArtStartByPartner();
