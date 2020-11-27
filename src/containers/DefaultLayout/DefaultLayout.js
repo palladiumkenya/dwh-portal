@@ -6,6 +6,7 @@ import React, { Suspense } from "react";
 import routes from '../../routes';
 import UniversalFilter from '../../views/Shared/UniversalFilter';
 import { useSelector } from 'react-redux';
+import PrivateRoute from '../../utils/protectedRoute';
 
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
@@ -31,6 +32,14 @@ const DefaultLayout = () => {
                             <Switch>
                                 {routes.map((route, idx) => {
                                     return route.component ? (
+                                        route.private ? <PrivateRoute
+                                                key={idx}
+                                                path={route.path}
+                                                exact={route.exact}
+                                                name={route.name}
+                                                render={props => (
+                                                    <route.component {...props}/>
+                                                )} /> :
                                         <Route
                                             key={idx}
                                             path={route.path}
