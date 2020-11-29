@@ -61,7 +61,7 @@ const LinkageNumberPositive = () => {
             series: [
                 { name: 'New', type: 'column', data: positive[0], color: "#1AB394" },
                 { name: 'Retest', type: 'column', data: positive[1], color: "#485969" },
-                { name: 'Linkage', type: 'spline', data: linkage, yAxis: 1, color: "#E06F07", tooltip: { valueSuffix: '%' } }
+                { name: 'Linkage', type: 'spline', data: linkage, yAxis: 1, color: "#E06F07", dashStyle: 'ShortDot', tooltip: { valueSuffix: '%' } }
             ]
         });
     }, [filters]);

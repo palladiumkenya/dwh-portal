@@ -73,9 +73,9 @@ const LinkageByAgeSex = () => {
             plotOptions: { column: { stacking: 'normal' } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Male', type: 'column', data: positive[0], yAxis: 0, color: "#1AB394" },
-                { name: 'Female', type: 'column', data: positive[1], yAxis: 0, color: "#485969" },
-                { name: 'Linkage', type: 'spline', data: linkage, yAxis: 1, color: "#E06F07", tooltip: { valueSuffix: ' %' } }
+                { name: 'Male', type: 'column', data: positive[0], yAxis: 0, color: "#14084D" },
+                { name: 'Female', type: 'column', data: positive[1], yAxis: 0, color: "#EA4C8B" },
+                { name: 'Linkage', type: 'spline', data: linkage, yAxis: 1, color: "#E06F07", dashStyle: 'ShortDot', tooltip: { valueSuffix: ' %' } }
             ],
         });
     }, [filters]);

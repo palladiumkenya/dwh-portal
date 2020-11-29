@@ -44,7 +44,7 @@ const LinkageByStrategyEntryPoint = () => {
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'Number Positive', type: 'column', data: positive, yAxis: 0, color: "#1AB394" },
-                { name: 'Linkage', type: 'spline', data: linkage, yAxis: 1, color: "#E06F07", tooltip: { valueSuffix: '%' } }
+                { name: 'Linkage', type: 'spline', data: linkage, yAxis: 1, color: "#E06F07", dashStyle: 'ShortDot', tooltip: { valueSuffix: '%' } }
             ]
         });
     }, [filters]);
@@ -82,7 +82,7 @@ const LinkageByStrategyEntryPoint = () => {
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'Number Positive', type: 'column', data: positive, yAxis: 0, color: "#1AB394" },
-                { name: 'Linkage', type: 'spline', data: linkage, yAxis: 1, color: "#E06F07", tooltip: { valueSuffix: '%' } }
+                { name: 'Linkage', type: 'spline', data: linkage, yAxis: 1, color: "#E06F07", dashStyle: 'ShortDot', tooltip: { valueSuffix: '%' } }
             ]
         });
     }, [filters]);

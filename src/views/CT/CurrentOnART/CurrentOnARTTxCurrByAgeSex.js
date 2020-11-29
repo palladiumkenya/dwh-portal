@@ -85,8 +85,8 @@ const CurrentOnARTTxCurrByAgeSex = () => {
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'Female', data: txNewFemale, color: "#485969", tooltip: { valueSuffix: ' ' } },
-                { name: 'Male', data: txNewMale, color: "#1AB394", tooltip: { valueSuffix: ' ' } }
+                { name: 'Female', data: txNewFemale, color: "#EA4C8B", tooltip: { valueSuffix: ' ' } },
+                { name: 'Male', data: txNewMale, color: "#14084D", tooltip: { valueSuffix: ' ' } }
             ]
         });
     }, [filters]);

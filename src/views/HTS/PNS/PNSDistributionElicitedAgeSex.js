@@ -50,14 +50,10 @@ const PNSDistributionElicitedAgeSex = () => {
             chart: { type: 'bar' },
             title: { text: '' },
             xAxis: [
-                { categories: ageGroups, title: { text: '' }, reversed: false },
-                { categories: ageGroups, title: { text: '' }, linkedTo: 0, reversed: false, opposite: true }
+                { categories: ageGroups, title: { text: 'Age Groups' } }
             ],
             yAxis: [
-                {
-                    title: { text: 'Number Elicited', style: { color: Highcharts.getOptions().colors[1] } },
-                    labels: { formatter: function () { return Math.abs(this.value); } }
-                }
+                { title: { text: 'Number Elicited' }, labels: { formatter: function () { return Math.abs(this.value); } } }
             ],
             plotOptions: { series: { stacking: 'normal' }, bar: { pointWidth: 18 } },
             tooltip: { formatter: function () {
@@ -67,8 +63,8 @@ const PNSDistributionElicitedAgeSex = () => {
             },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Female', data: data[1], color: "#485969", tooltip: { valueSuffix: ' ' } },
-                { name: 'Male', data: data[0], color: "#1AB394", tooltip: { valueSuffix: ' ' } }
+                { name: 'Female', data: data[1], color: "#EA4C8B", tooltip: { valueSuffix: ' ' } },
+                { name: 'Male', data: data[0], color: "#14084D", tooltip: { valueSuffix: ' ' } }
             ]
         });
     }, [filters]);

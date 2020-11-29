@@ -64,7 +64,7 @@ const PNSChildrenFamilyTestingPositivityTrends = () => {
             series: [
                 { name: 'Number Tested', type: 'column', data: tested, yAxis: 0, color: "#485969",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
                 { name: 'Number Linked ', type: 'column', data: linked, yAxis: 0, color: "#1AB394",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
-                { name: 'Positivity Percentage', type: 'spline', data: positivity, yAxis: 1, color: "#E06F07", dataLabels: { enabled: true, format: '{y} %' }, tooltip: { valueSuffix: ' %' }, dashStyle: 'Dash' }
+                { name: 'Positivity Percentage', type: 'spline', data: positivity, yAxis: 1, color: "#E06F07", dashStyle: 'ShortDot', dataLabels: { enabled: true, format: '{y} %' }, tooltip: { valueSuffix: ' %' } }
             ],
         });
     }, [filters]);

@@ -23,6 +23,7 @@ const PNSPositivityTrends = () => {
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('hts/pnsSexualContactsByYear', params);
         const result2 = await getAll('hts/pnsChildrenByYear', params);
+        const result3 = await getAll('hts/linkageNumberPositive', params);
         const monthNames = {
             1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June",
             7: "July", 8:"August", 9: "September", 10: "October", 11: "November", 12: "December"
@@ -44,15 +45,14 @@ const PNSPositivityTrends = () => {
             if((year.toString() === fullYear.toString()) && (result_month <= lastYearMonth && result_year.toString() === lastFullYear.toString())) {
                 continue;
             }
-            let testedR = parseInt(result[i].tested, 10) + parseInt(result2[i] ? result2[i].tested:0, 10);
             let positiveR = parseInt(result[i].positive, 10) + parseInt(result2[i] ? result2[i].positive:0, 10);
-            let linkedR = parseInt(result[i].linked, 10) + parseInt(result2[i] ? result2[i].linked:0, 10);
-            tested.push(testedR);
+            let positiveRT = parseInt(result3[i].positive, 10);
+            tested.push(positiveRT);
             months.push(monthNames[result[i].month] + ' ' + result_year.toString());
-            linked.push(linkedR);
+            linked.push(positiveR);
             let val = 0;
-            if (testedR > 0) {
-                val = ((positiveR/testedR)*100).toFixed(1);
+            if (positiveRT > 0) {
+                val = ((positiveR/positiveRT)*100).toFixed(1);
             }
             positivity.push(Number(val));
         }
@@ -61,14 +61,14 @@ const PNSPositivityTrends = () => {
             xAxis: [{ categories: months, title: { text: 'Months' }, crosshair: true }],
             yAxis: [
                 { title: { text: 'No of Positive' } },
-                { title: { text: 'Positivity Percentage'}, opposite: true },
+                { title: { text: 'Positivity Percentage'}, opposite: true},
             ],
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Number Tested', type: 'column', data: tested, yAxis: 0, color: "#485969",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
-                { name: 'Number Linked ', type: 'column', data: linked, yAxis: 0, color: "#1AB394",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
-                { name: 'Positivity Percentage', type: 'spline', data: positivity, yAxis: 1, color: "#E06F07", dataLabels: { enabled: true, format: '{y} %' }, tooltip: { valueSuffix: ' %' }, dashStyle: 'Dash' }
+                { name: 'Total Positive', type: 'column', data: tested, yAxis: 0, color: "#485969",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
+                { name: 'PNS Positive ', type: 'column', data: linked, yAxis: 0, color: "#1AB394",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
+                { name: 'Percentage', type: 'spline', data: positivity, yAxis: 1, color: "#E06F07", dataLabels: { enabled: true, format: '{y} %' }, tooltip: { valueSuffix: ' %' }, dashStyle: 'ShortDot' }
             ],
         });
     }, [filters]);

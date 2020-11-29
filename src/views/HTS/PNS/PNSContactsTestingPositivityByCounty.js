@@ -39,14 +39,14 @@ const PNSContactsTestingPositivityByCounty = () => {
             title: { text: '' },
             xAxis: [{ categories: counties, title: { text: 'Counties' }, crosshair: true }],
             yAxis: [
-                { title: { text: 'No of Sexual Contacts Tested' } },
+                { title: { text: 'Number of Sexual Contacts Tested' } },
                 { title: { text: 'Positivity (%)'}, opposite: true },
             ],
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'Total Tested', type: 'column', data: tested, yAxis: 0, color: "#485969",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
-                { name: 'Positivity Percentage', type: 'spline', data: positivity, yAxis: 1, color: "#E06F07", tooltip: { valueSuffix: ' %' }, dashStyle: 'Dash' }
+                { name: 'Positivity Percentage', type: 'spline', data: positivity, yAxis: 1, color: "#E06F07", dashStyle: 'ShortDot', tooltip: { valueSuffix: ' %' } }
             ],
         });
     }, [filters]);

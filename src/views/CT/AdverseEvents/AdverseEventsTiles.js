@@ -171,11 +171,11 @@ const AdverseEventsTiles = () => {
             },
             series: [{
                 name: 'Male',
-                color: "#1AB394",
+                color: "#14084D",
                 data: maleData
             }, {
                 name: 'Female',
-                color: "#485969",
+                color: "#EA4C8B",
                 data: femaleData
             }]
         });
@@ -267,11 +267,11 @@ const AdverseEventsTiles = () => {
             },
             series: [{
                 name: 'Male',
-                color: "#1AB394",
+                color: "#14084D",
                 data: maleData
             }, {
                 name: 'Female',
-                color: "#485969",
+                color: "#EA4C8B",
                 data: femaleData
             }]
         });

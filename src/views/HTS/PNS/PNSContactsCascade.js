@@ -43,7 +43,7 @@ const PNSContactsCascade = () => {
             result2.indexClients ? result2.indexClients : 0,
             pnsSexualContactsCascade.elicited ? pnsSexualContactsCascade.elicited : 0,
             pnsSexualContactsCascade.knownPositive ? pnsSexualContactsCascade.knownPositive : 0,
-            pnsSexualContactsCascade.elicited ? pnsSexualContactsCascade.elicited : 0,
+            (parseInt(pnsSexualContactsCascade.elicited, 10) - parseInt(pnsSexualContactsCascade.knownPositive, 10)) > 0 ? (parseInt(pnsSexualContactsCascade.elicited, 10) - parseInt(pnsSexualContactsCascade.knownPositive, 10)) : 0,
             pnsSexualContactsCascade.tested ? pnsSexualContactsCascade.tested : 0,
             pnsSexualContactsCascade.positive ? pnsSexualContactsCascade.positive : 0,
             pnsSexualContactsCascade.linked ? pnsSexualContactsCascade.linked : 0,

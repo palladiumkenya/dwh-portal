@@ -58,8 +58,8 @@ const NewOnArtBySex = () => {
                 name:"New on ART",
                 colorByPoint: true,
                 data: [
-                    { name: 'Female', y: txNewFemale, color: "#2F4050" },
-                    { name: 'Male', y: txNewMale, sliced: true, selected: true, color: "#1AB394" },
+                    { name: 'Female', y: txNewFemale, color: "#EA4C8B" },
+                    { name: 'Male', y: txNewMale, sliced: true, selected: true, color: "#14084D" },
                 ]
             }]
         });
