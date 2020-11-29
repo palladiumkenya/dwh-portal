@@ -73,9 +73,9 @@ const HomeTxNew = () => {
             plotOptions: { column: { stacking: 'normal' } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Male', type: 'column', color: "#1AB394", data: male },
-                { name: 'Female', type: 'column', color: "#485969", data: female },
-                { name: 'Cumulative New on ART', type: 'spline', yAxis: 1, data: cumulative, color: "#E06F07"}
+                { name: 'Male', type: 'column', color: "#14084D", data: male },
+                { name: 'Female', type: 'column', color: "#EA4C8B", data: female },
+                { name: 'Cumulative New on ART', type: 'spline', yAxis: 1, data: cumulative, color: "#E06F07", dashStyle: 'ShortDot'}
             ]
         });
     }, [filters]);

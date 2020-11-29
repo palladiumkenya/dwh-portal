@@ -76,8 +76,8 @@ const DistributionStableAgeSex = () => {
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'Female', data: stableFemale, color: "#485969", tooltip: { valueSuffix: ' ' } },
-                { name: 'Male', data: stableMale, color: "#1AB394", tooltip: { valueSuffix: ' ' } }
+                { name: 'Female', data: stableFemale, color: "#EA4C8B", tooltip: { valueSuffix: ' ' } },
+                { name: 'Male', data: stableMale, color: "#14084D", tooltip: { valueSuffix: ' ' } }
             ]
         });
     }, [filters]);

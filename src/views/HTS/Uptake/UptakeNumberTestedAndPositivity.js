@@ -73,7 +73,7 @@ const UptakeNumberTestedAndPositivity = () => {
             series: [
                 { name: 'New', type: 'column', data: tested_new, yAxis: 0, color: "#1AB394" },
                 { name: 'Retest', type: 'column', data: tested_retest, yAxis: 0, color: "#485969" },
-                { name: 'HIV Positivity', type: 'spline', data: positivity, yAxis: 1, color: "#E06F07", tooltip: { valueSuffix: ' %' } }
+                { name: 'HIV Positivity', type: 'spline', data: positivity, yAxis: 1, color: "#E06F07", dashStyle: 'ShortDot', tooltip: { valueSuffix: ' %' } }
             ],
         });
     }, [filters]);

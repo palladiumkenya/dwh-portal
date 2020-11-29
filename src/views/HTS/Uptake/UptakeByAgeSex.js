@@ -54,9 +54,9 @@ const UptakeByAgeSex = () => {
             plotOptions: { column: { stacking: 'normal' } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Male', type: 'column', data: tested_male, yAxis: 0, color: "#1AB394" },
-                { name: 'Female', type: 'column', data: tested_female, yAxis: 0, color: "#485969" },
-                { name: 'HIV Positivity', type: 'spline', data: positivity, yAxis: 1, color: "#E06F07", tooltip: { valueSuffix: ' %' } }
+                { name: 'Male', type: 'column', data: tested_male, yAxis: 0, color: "#14084D" },
+                { name: 'Female', type: 'column', data: tested_female, yAxis: 0, color: "#EA4C8B" },
+                { name: 'HIV Positivity', type: 'spline', data: positivity, yAxis: 1, color: "#E06F07", dashStyle: 'ShortDot', tooltip: { valueSuffix: ' %' } }
             ],
         });
     }, [filters]);

@@ -43,7 +43,7 @@ const UptakeByPartner = () => {
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'Number Tested', type: 'column', data: tested, yAxis: 0, color: "#1AB394" },
-                { name: 'HIV Positivity', type: 'spline', data: positivity, yAxis: 1, color: "#E06F07", tooltip: { valueSuffix: ' %' } }
+                { name: 'HIV Positivity', type: 'spline', data: positivity, yAxis: 1, color: "#E06F07", dashStyle: 'ShortDot', tooltip: { valueSuffix: ' %' } }
             ],
         });
     }, [filters]);
