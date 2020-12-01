@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import NewOnArt from './NewOnArt/NewOnArt';
@@ -15,13 +15,13 @@ import { CT_TABS, PAGES } from "../../constants";
 const CT = () => {
     const dispatch = useDispatch();
     const ctTab = useSelector(state => state.ui.ctTab);
-
+    const [currentTab, setCurrentTab] = useState();
     const renderTabNavItems = () => {
         return (
             Object.keys(CT_TABS).map((value) => {
                 return (
                     <NavItem key={value}>
-                        <NavLink active={ctTab === value} onClick={() => { dispatch(changeCtTab(value)); }} >
+                        <NavLink active={ctTab === value} onClick={() => { dispatch(changeCtTab(value)); setCurrentTab(value);}} >
                             {CT_TABS[value]}
                         </NavLink>
                     </NavItem>
@@ -62,7 +62,7 @@ const CT = () => {
                     <VL/>
                 </TabPane>
                 <TabPane tabId="txOpt">
-                    <ARVOptimization/>
+                    {currentTab==="txOpt" && <ARVOptimization/>}
                 </TabPane>
             </TabContent>
             <p></p>

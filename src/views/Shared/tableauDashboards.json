@@ -70,13 +70,5 @@
     "workbook": "ARVOptimizeC_Toxicity",
     "view": "ARVOptimization_DashboardCALHIVOptimizationOutcomes",
     "rank": 8
-  },
-  { "dashboard": "ARV Optimization_Dashboard", "section": "Adult Optimization", "name": "ART Uptake ", "site": "NASCOPCOHORT2016", "workbook": "ARVOptimizeA-Regimens", "view": "ARVOptimization_DashboardAdultOptimizationARTUptake", "rank": 68 },
-  { "dashboard": "ARV Optimization_Dashboard", "section": "Adult Optimization", "name": "TLD Analysis", "site": "NASCOPCOHORT2016", "workbook": "ARVOptimizeA-Regimens", "view": "ARVOptimization_DashboardAdultOptimizationTLDAnalysis", "rank": 69 },
-  { "dashboard": "ARV Optimization_Dashboard", "section": "Adult Optimization", "name": "Adverse Events", "site": "NASCOPCOHORT2016", "workbook": "ARVOptimizeB_Toxicity", "view": "ARVOptimization_DashboardAdultOptimizationAdverseEvents", "rank": 70 },
-  { "dashboard": "ARV Optimization_Dashboard", "section": "Adult Optimization", "name": "Started ART", "site": "NASCOPCOHORT2016", "workbook": "ARVOptimizeB_Toxicity", "view": "ARVOptimization_DashboardAdultOptimizationStartedART", "rank": 71 },
-  { "dashboard": "ARV Optimization_Dashboard", "section": "Adult Optimization", "name": "Outcomes", "site": "NASCOPCOHORT2016", "workbook": "ARVOptimizeB_Toxicity", "view": "ARVOptimization_DashboardAdultOptimizationOutcomes", "rank": 72 },
-  { "dashboard": "ARV Optimization_Dashboard", "section": "CALHIV Optimization", "name": "ART Uptake", "site": "NASCOPCOHORT2016", "workbook": "ARVOptimize-Regimens-RegimensCALHIV", "view": "ARVOptimization_DashboardCALHIVOptimizationARTUptake", "rank": 73 },
-  { "dashboard": "ARV Optimization_Dashboard", "section": "CALHIV Optimization", "name": "Adverse Events", "site": "NASCOPCOHORT2016", "workbook": "ARVOptimizeC_Toxicity", "view": "ARVOptimization_DashboardCALHIVOptimizationAdverseEvents", "rank": 74 },
-  { "dashboard": "ARV Optimization_Dashboard", "section": "CALHIV Optimization", "name": "Outcomes", "site": "NASCOPCOHORT2016", "workbook": "ARVOptimizeC_Toxicity", "view": "ARVOptimization_DashboardCALHIVOptimizationOutcomes", "rank": 75 }
+  }
 ]
