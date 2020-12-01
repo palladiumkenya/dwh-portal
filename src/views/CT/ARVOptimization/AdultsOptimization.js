@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import vizdata from '../../Shared/tableauDashboards.json';
+import vizzData from '../../Shared/tableauDashboards.json';
 import RenderViz from '../../Shared/RenderViz';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 
 function AdultsOptimization() {
     const [views, setViews] = useState([]);
     useEffect(() => {
-        setViews(vizdata);
+        setViews(vizzData);
     }, []);
 
     return (
@@ -18,11 +18,13 @@ function AdultsOptimization() {
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            {views.filter(x => x.section === 'Adult Optimization').map((v, index) => (
-                                <div key={index}>
-                                    <RenderViz vizd={v}/>
-                                </div>
-                            ))}
+                            {views.length > 0 &&
+                            views.filter(x => x.section === 'Adult Optimization')
+                                .map((view, index) => (
+                                    <div key={index}>
+                                        <RenderViz vizzView={view}/>
+                                    </div>
+                                ))}
                         </div>
                     </CardBody>
                 </Card>
