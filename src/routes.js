@@ -13,7 +13,7 @@ const routes = [
   { path: "/hiv-treatment", exact: true, name: "HIV Treatment", component: CT, private: false },
   { path: "/gis", exact: true, name: "GIS", component: GIS, private: false },
   { path: "/hrh", exact: true, name: "HRH", component: HRH, private: false },
-  { path: "/resources", exact: true, name: "Resources", component: Resources, private: true }
+  { path: "/resources", exact: true, name: "Resources", component: Resources, private: false },
 ];
 
 export default routes;
