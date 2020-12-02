@@ -57,7 +57,8 @@ const UptakeMonthsSinceLastTest = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        HIV TESTING SERVICES UPTAKE AND POSITIVITY BY DURATION SINCE LAST HIV TEST
+                    MONTHS SINCE LAST TEST
+
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={monthsSinceLastTest} />

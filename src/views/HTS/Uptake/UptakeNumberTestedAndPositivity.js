@@ -87,7 +87,7 @@ const UptakeNumberTestedAndPositivity = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        HIV TESTING SERVICES Uptake and Hiv Positivity by Month
+                        Uptake by Month
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
