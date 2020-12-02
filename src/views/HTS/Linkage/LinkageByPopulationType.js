@@ -29,7 +29,7 @@ const LinkageByPopulationType = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY")
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):""
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('hts/linkageByPopulationType', params);
@@ -69,18 +69,20 @@ const LinkageByPopulationType = () => {
             missingPopLinkage: missingPopLinkage,
         });
         setLinkageByPopulationType({
-            title: { text: '' },
-            plotOptions: { pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b> <br/> {point.percentage:.1f} % <br/> ({point.y:,.0f})'
-                }
+            title: { text: '', },
+            xAxis: [{ categories: ['Key Population', 'General Population'], crosshair: true }],
+            yAxis: [
+                { title: { text: 'Percentage Linkage' }, labels: { format: '{value} %' } },
+            ],
+            tooltip: { formatter: function () {
+                return this.point.category + ': <b>' +
+                    Highcharts.numberFormat(Math.abs(this.point.absoluteY), 0) + '</b>';
             }},
-            series: [{ type: 'pie', colorByPoint: true, name: 'HIV Testing Services Linkage', data: [
-                { name: 'General Population', y: genPopLinked, color: "#1AB394" },
-                { name: 'Key Population',  y: keyPopLinked, color: "#2F4050", sliced: true, selected: true },
+            plotOptions: { column: { dataLabels: { enabled: true, format: '<b>{point.y:,.0f} %</b>' } } },
+            legend: { enabled: false },
+            series: [{ name: 'Percentage Linkage', type: 'column', tooltip: { valueSuffix: ' %' } , data: [
+                { name: 'Key Population',  y: Number(((keyPopLinked/(genPopLinked + keyPopLinked + missingPopLinked))*100).toFixed(0)), absoluteY:keyPopLinked, color: "#2F4050"},
+                { name: 'General Population', y: Number(((genPopLinked/(genPopLinked + keyPopLinked + missingPopLinked))*100).toFixed(0)), absoluteY:genPopLinked, color: "#1AB394" },
                 // { name: 'Missing', y: missingPopLinked, color: "#E06F07" }
             ]}]
         });
