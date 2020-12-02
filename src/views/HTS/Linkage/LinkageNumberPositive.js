@@ -75,7 +75,7 @@ const LinkageNumberPositive = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        NUMBER OF POSITIVE PATIENTS WHO ARE LINKED
+                    Linkage by month
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

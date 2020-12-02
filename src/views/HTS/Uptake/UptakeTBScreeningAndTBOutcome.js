@@ -104,7 +104,7 @@ const UptakeTBScreeningAndTBOutcome = () => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        HIV POSITIVITY BY TB SCREENING OUTCOMES
+                    Positivity by TB screening outcome
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={TBScreeningOutcome} />

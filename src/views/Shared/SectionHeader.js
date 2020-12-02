@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody } from 'reactstrap';
+import { Card, CardBody, Row, Col } from 'reactstrap';
 
 const SectionHeader = ({ title, description}) => {
     return (
@@ -8,25 +8,21 @@ const SectionHeader = ({ title, description}) => {
             <div className="strip"></div>
             <Card className="pageHeading_reporting">
                 <CardBody>
-                    <div className="row">
-                        <div className="col-5">
-                            <div className="row">
-                                <div className="col-6">
-                                    <div className="reporting-rates-card-title">
-                                        {title}
-                                    </div>
-                                </div>
-                                <div className="col-1">
-                                    <div className="reporting-rates-card-separator"></div>
-                                </div>
-                                <div className="col-5">
-                                    <div className="reporting-rates-card-overview">
-                                        {description}
-                                    </div>
-                                </div>
+                    <Row>
+                        <Col xl={3} lg={3} md={4} sm={6} xs={12}>
+                            <div className="reporting-rates-card-title">
+                                {title}
                             </div>
-                        </div>
-                    </div>
+                        </Col>
+                        <Col xl={1} lg={1} md={1} sm={1} className="d-none d-sm-block">
+                            <div className="reporting-rates-card-separator"></div>
+                        </Col>
+                        <Col xl={8} lg={8} md={7} sm={5} className="d-none d-sm-block">
+                            <div className="reporting-rates-card-overview">
+                                {description}
+                            </div>
+                        </Col>
+                    </Row>
                 </CardBody>
             </Card>
         </>

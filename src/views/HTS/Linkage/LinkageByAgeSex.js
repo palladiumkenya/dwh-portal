@@ -89,7 +89,7 @@ const LinkageByAgeSex = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        LINKAGE BY AGE AND SEX
+                    Linkage BY AGE group AND SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

@@ -15,7 +15,7 @@ function RenderViz(props) {
             }
         };
 
-        const result = axios.get('https://auth.kenyahmis.org/tikiti/api/ticket')
+        axios.get('https://auth.kenyahmis.org/tikiti/api/ticket')
             .then(resp => {
                 const url = `https://data.kenyahmis.org/trusted/${resp.data}/t/${props.vizzView.site}/views/${props.vizzView.workbook}/${props.vizzView.view}`;
                 new tableau.Viz(ref.current, url, options);

@@ -38,13 +38,13 @@ const Home = () => {
             </VisibilitySensor>
             <HomeVLCascade/>
             <Row>
-                <Col xl={2} lg={2} md={2} sm={12} xs={12}>
+                <Col xl={3} lg={3} md={12} sm={12} xs={12}>
                     <HomeAgeDistribution/>
                 </Col>
-                <Col xl={8} lg={8} md={8} sm={12} xs={12}>
+                <Col xl={6} lg={6} md={12} sm={12} xs={12}>
                     <HomeMaps/>
                 </Col>
-                <Col xl={2} lg={2} md={2} sm={12} xs={12}>
+                <Col xl={3} lg={3} md={12} sm={12} xs={12}>
                     <HomeOverview />
                 </Col>
             </Row>

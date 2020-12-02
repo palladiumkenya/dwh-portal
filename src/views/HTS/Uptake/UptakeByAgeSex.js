@@ -70,7 +70,7 @@ const UptakeByAgeSex = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        HIV TESTING SERVICES UPTAKE AND POSITIVITY BY AGE AND SEX
+                        UPTAKE BY AGE GROUP AND SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

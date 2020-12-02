@@ -4,6 +4,7 @@ import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from '../../Shared/UniversalFilter';
 import SectionHeader from '../../Shared/SectionHeader';
 import SectionFooter from '../../Shared/SectionFooter';
+import UptakeOverview from './UptakeOverview';
 import UptakeByAgeSex from './UptakeByAgeSex';
 import UptakeByCounty from './UptakeByCounty';
 import UptakeByPartner from './UptakeByPartner';
@@ -20,7 +21,7 @@ const Uptake = () => {
     const branding = {
         title: "HIV TESTING SERVICES UPTAKE",
         description: "OVERVIEW",
-        overview: "HTS Uptake is defined as the rate at which individuals take up HIV Tests."
+        overview: "HTS Uptake"
     };
     const htsTab = useSelector(state => state.ui.htsTab);
     const onVisibilityChange = (isVisible) => {
@@ -38,6 +39,7 @@ const Uptake = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
+            <UptakeOverview/>
             <UptakeNumberTestedAndPositivity/>
             <SectionFooter overview={branding.overview}/>
             <UptakeByAgeSex/>
