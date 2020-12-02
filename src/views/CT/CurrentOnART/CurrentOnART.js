@@ -12,6 +12,7 @@ import CurrentOnARTTxCurrDistributionByPartner from './CurrentOnARTTxCurrDistrib
 import CurrentOnARTTxCurrByCounty from './CurrentOnARTTxCurrByCounty';
 import CurrentOnARTTxCurrByPartner from './CurrentOnARTTxCurrByPartner';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
+import CurrentOnARTTiles from './CurrentOnARTTiles';
 
 const CurrentOnART = () => {
     const filters = useSelector(state => state.filters);
@@ -39,6 +40,7 @@ const CurrentOnART = () => {
             <hr />
             <div className="strip">&nbsp;</div>
             <p></p>
+            <CurrentOnARTTiles />
             <div className="row">
                 <div className="col-6">
                     <CurrentOnARTTxCurrBySex />
