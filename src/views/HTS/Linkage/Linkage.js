@@ -4,6 +4,7 @@ import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from '../../Shared/UniversalFilter';
 import SectionHeader from '../../Shared/SectionHeader';
 import SectionFooter from '../../Shared/SectionFooter';
+import LinkageOverview from './LinkageOverview';
 import LinkageNumberPositive from './LinkageNumberPositive';
 import LinkageByAgeSex from './LinkageByAgeSex';
 import LinkageByPopulationType from './LinkageByPopulationType';
@@ -17,7 +18,7 @@ const Linkage = () => {
     const branding = {
         title: "HIV TESTING SERVICES LINKAGE",
         description: "OVERVIEW",
-        overview: "HTS Uptake is defined as the rate at which individuals take up HIV Tests."
+        overview: "HTS Linkage"
     };
     const htsTab = useSelector(state => state.ui.htsTab);
 
@@ -37,6 +38,7 @@ const Linkage = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
+            <LinkageOverview/>
             <LinkageNumberPositive/>
             <SectionFooter overview={branding.overview}/>
             <LinkageByAgeSex />
