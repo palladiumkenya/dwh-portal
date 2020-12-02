@@ -32,7 +32,7 @@ const UptakeByPopulationType = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY")
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):""
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('hts/uptakeByPopulationType', params);
@@ -78,18 +78,20 @@ const UptakeByPopulationType = () => {
             totalPercentage: parseFloat(parseFloat(((genPopPositivity + keyPopPositivity + missingPopPositivity)/2)).toFixed(1))
         });
         setUptakeByPopulationType({
-            title: { text: '' },
-            plotOptions: { pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b> <br/> {point.percentage:.1f} % <br/> ({point.y:,.0f})'
-                }
+            title: { text: '', },
+            xAxis: [{ categories: ['Key Population', 'General Population'], crosshair: true }],
+            yAxis: [
+                { title: { text: 'Percentage Uptake' }, labels: { format: '{value} %' } },
+            ],
+            tooltip: { formatter: function () {
+                return this.point.category + ': <b>' +
+                    Highcharts.numberFormat(Math.abs(this.point.absoluteY), 0) + '</b>';
             }},
-            series: [{ type: 'pie', colorByPoint: true, name: 'HIV Testing Services Uptake', data: [
-                { name: 'General Population', y: genPopVal, color: "#1AB394" },
-                { name: 'Key Population',  y: keyPopVal, color: "#2F4050", sliced: true, selected: true },
+            plotOptions: { column: { dataLabels: { enabled: true, format: '<b>{point.y:,.0f} %</b>' } } },
+            legend: { enabled: false },
+            series: [{ name: 'Percentage Uptake', type: 'column', tooltip: { valueSuffix: ' %' } , data: [
+                { name: 'Key Population',  y: Number(((keyPopVal/(genPopVal + keyPopVal + missingPopVal))*100).toFixed(0)), absoluteY:keyPopVal, color: "#2F4050"},
+                { name: 'General Population', y: Number(((genPopVal/(genPopVal + keyPopVal + missingPopVal))*100).toFixed(0)), absoluteY:genPopVal, color: "#1AB394" },
                 // { name: 'Missing', y: missingPopVal, color: "#E06F07" }
             ]}]
         });
