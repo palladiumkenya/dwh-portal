@@ -20,6 +20,28 @@ const PNSOverview = () => {
         linked: 0,
         knownPositive: 0
     });
+    const [vlCascade, setHomeVLCascade] = useState({
+        currentOnArt: 0,
+        currentOnArtText: ''
+    });
+    const loadHomeVLCascade = useCallback(async () => {
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+        };
+        const result = await getAll('care-treatment/viralLoadCascade', params);
+        let data = [
+            result.TX_CURR ? result.TX_CURR : 0,
+        ];
+        setHomeVLCascade({
+            currentOnArt: data[0],
+            currentOnArtText: data[0].toLocaleString('en')
+        });
+    }, [filters]);
     const loadPNSSexualContactsCascade = useCallback(async () => {
         let params = {
             county: filters.counties,
@@ -62,9 +84,10 @@ const PNSOverview = () => {
     }, [filters]);
 
     useEffect(() => {
+        loadHomeVLCascade();
         loadPNSSexualContactsCascade();
         loadPNSChildrenCascade();
-    }, [loadPNSSexualContactsCascade, loadPNSChildrenCascade]);
+    }, [loadHomeVLCascade, loadPNSSexualContactsCascade, loadPNSChildrenCascade]);
 
     return (
         <div>
@@ -79,7 +102,7 @@ const PNSOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{pnsSexualContactsCascade.elicited + pnsChildrenCascade.elicited}</span>
+                                <span className="expected-uploads-text">{vlCascade.currentOnArt}</span>
                             </div>
                         </CardBody>
                     </Card>

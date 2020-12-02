@@ -23,7 +23,7 @@ const PNS = () => {
     const branding = {
         title: "PARTNER NOTIFICATION SERVICES",
         description: "OVERVIEW",
-        overview: "HTS Uptake is defined as the rate at which individuals take up HIV Tests."
+        overview: "PNS"
     };
     const onVisibilityChange = (isVisible) => {
         if (htsTab === 'pns') {
