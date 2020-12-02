@@ -16,7 +16,13 @@ const CurrentOnARTTiles = () => {
         hasCurrentVlPercent: '',
         suppressed: 0,
         suppressedText: '',
-        suppressedPercent: ''
+        suppressedPercent: '',
+        highViremia: 0,
+        highViremiaText: '',
+        highViremiaPercent: '',
+        lowViremia: 0,
+        lowViremiaText: '',
+        lowViremiaPercent: '',
     });
 
     const loadHomeVLCascade = useCallback(async () => {

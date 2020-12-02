@@ -12,6 +12,7 @@ import MedianTimeToArtStartByCounty from './MedianTimeToArtStartByCounty';
 import MedianTimeToArtStartByPartner from './MedianTimeToArtStartByPartner';
 import TimeFromDiagnosisToStart from './TimeFromDiagnosisToStart';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
+import NewOnARTTiles from './NewOnARTTiles';
 
 const NewOnArt = () => {
     const ctTab = useSelector(state => state.ui.ctTab);
@@ -32,8 +33,15 @@ const NewOnArt = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <p></p><NewOnArtTrends />
-            <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
+            <p></p>
+            <NewOnARTTiles />
+            <p></p>
+            <NewOnArtTrends />
+            <hr/>
+            <NewOnArtFooter/>
+            <hr/>
+            <div className="strip"></div>
+            <p></p>
             <p></p>
             <div className="row">
                 <div className="col-6">
