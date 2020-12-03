@@ -24,7 +24,7 @@ const VLOverallUptakeAndSuppression = () => {
         const vlCategories = ['txCurr', 'eligible', 'vlDone', 'suppressed'];
         const vlCategoryNames = ['TOTAL CURRENT ON ART', 'ELIGIBLE FOR VL (VALID WITHIN 12 MONTHS)', 'VL DONE', 'VIRALLY SUPPRESSED (VS)'];
         const sexCategories = ['Male', 'Female'];
-        const result = await getAll('care-treatment/vlOverallUptakeAndSuppression', params);
+        const result = await getAll('care-treatment/vlOverallUptakeAndSuppressionBySex', params);
         let data = [];
         // seed all values sp that missing values default to 0
         for(let i = 0; i < sexCategories.length; i++) {
@@ -44,25 +44,17 @@ const VLOverallUptakeAndSuppression = () => {
             data[sexIndex][3] = data[sexIndex][3] + parseInt(result[i].suppressed);
         }
         setVLOverallUptakeAndSuppression({
-            chart: { type: 'column' },
-            title: { useHTML: true, text: '&nbsp;' },
-            subtitle: { text: '' },
-            plotOptions: { column: { stacking: 'percent' } },
-            xAxis: [{
-                categories: vlCategoryNames,
-                crosshair: true
-            }],
-            yAxis: [{
-                min: 0,
-                title: { text: 'Percentage of Patients' },
-            }],
+            title: { text: '' },
+            xAxis: [{ categories: vlCategoryNames, crosshair: true }],
+            yAxis: [
+                { title: { text: 'Number of Patients' } }
+            ],
             tooltip: { shared: true },
-            legend: { floating: true, layout: 'horizontal', align: 'left', verticalAlign: 'top', y: 0, x: 80,
-                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
-            },
+            plotOptions: { column: { stacking: 'normal', dataLabels: { enabled: true } } },
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'MALE', data: data[0], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'FEMALE', data: data[1], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'MALE', data: data[0], type: 'column', color: "#14084D", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'FEMALE', data: data[1], type: 'column', color: "#EA4C8B", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [filters]);

@@ -26,33 +26,29 @@ const VLUptakeBySex = () => {
         let data = [];
         for(let i = 0; i < result.length; i++) {
             if(result[i].gender === 'Male') {
-                data[0] = Number((parseInt(result[i].vlDone)/parseInt(result[i].eligible))*100).toFixed(0);
-                data[0] = parseInt(result[i].vlDone);
+                data[0] = {
+                    y: Number(((parseInt(result[i].vlDone)/parseInt(result[i].txCurr))*100).toFixed(1)),
+                    absoluteY: result[i].vlDone.toLocaleString('en'),
+                    color: "#14084D"
+                };
             }
             if(result[i].gender === 'Female') {
-                data[1] = Number((parseInt(result[i].vlDone)/parseInt(result[i].eligible))*100).toFixed(0);
-                data[1] = parseInt(result[i].vlDone);
+                data[1] = {
+                    y: Number(((parseInt(result[i].vlDone)/parseInt(result[i].txCurr))*100).toFixed(1)),
+                    absoluteY: result[i].vlDone.toLocaleString('en'),
+                    color: "#EA4C8B",
+                };
             }
         }
         setVLUptakeBySex({
-            chart: { type: 'column' },
-            title: { useHTML: true, text: '&nbsp;' },
-            subtitle: { text: '' },
-            xAxis: [{
-                categories: sexCategories,
-                crosshair: true
-            }],
-            yAxis: [{
-                min: 0,
-                title: { text: 'VL Uptake' },
-            }],
-            tooltip: { shared: true },
-            legend: {
-                floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
-                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
-            },
+            title: { text: '' },
+            xAxis: [{ categories: sexCategories, crosshair: true }],
+            yAxis: [
+                { title: { text: 'Percentage of Patients' }, labels: { format: '{value} %' }}
+            ],
+            legend: { enabled: false },
             series: [
-                { name: 'VL Uptake', data: data, type: 'column', color: "#485969" },
+                { name: 'VL Uptake', data: data, type: 'column', tooltip: { valueSuffix: ' % ({point.absoluteY})' } },
             ]
         });
     }, [filters]);

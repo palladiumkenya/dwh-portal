@@ -32,23 +32,15 @@ const MedianTimeTo1stVLByCounty = () => {
         }
 
         setMedianTimeTo1stVLByCounty({
-            chart: { zoomType: 'xy' },
-            title: { useHTML: true, text: ' &nbsp;', align: 'left' },
-            subtitle: { text: ' ', align: 'left' },
+            title: { text: '' },
             xAxis: [{ categories: counties, crosshair: true, title: { text: 'County' } }],
             yAxis: [
-                {
-                    title: { text: 'Time (Days)', style: { color: Highcharts.getOptions().colors[1] } },
-                    labels: { format: '{value}', style: { color: Highcharts.getOptions().colors[1] } },
-                    min: 0,
-                }
+                { title: { text: 'Time (Days)' } },
             ],
-            legend: {
-                floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
-                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
-            },
+            tooltip: { shared: true },
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Time (Days)', data: medianTimeTo1stVLByCounty, type: 'bar', color: "#E06F07" },
+                { name: 'Time (Days)', data: medianTimeTo1stVLByCounty, type: 'spline', color: "#E06F07" },
             ]
         });
     }, [filters]);

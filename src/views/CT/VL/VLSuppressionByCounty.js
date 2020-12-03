@@ -32,22 +32,13 @@ const VLSuppressionByCounty = () => {
         }
 
         setVLSuppressionByCounty({
-            chart: { zoomType: 'xy' },
-            title: { useHTML: true, text: ' &nbsp;', align: 'left' },
-            subtitle: { text: ' ', align: 'left' },
+            title: { text: '' },
             xAxis: [{ categories: counties, crosshair: true, title: { text: 'County' } }],
             yAxis: [
-                {
-                    title: { text: 'Number of Patients', style: { color: Highcharts.getOptions().colors[1] } },
-                    labels: { format: '{value}', style: { color: Highcharts.getOptions().colors[1] } },
-                    min: 0,
-                }
+                { title: { text: 'Number of Patients' } },
             ],
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
-            legend: {
-                floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
-                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
-            },
+            plotOptions: { column: { dataLabels: { enabled: true } } },
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'Number of Patients', data: vlSuppressionByCounty, type: 'column', color: "#485969" },
             ]
