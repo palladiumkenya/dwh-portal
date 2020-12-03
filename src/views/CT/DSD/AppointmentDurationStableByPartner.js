@@ -18,7 +18,7 @@ const AppointmentDurationStableByPartner = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const appointmentCategories = ['< 1 Month', '1-2 Months', '3-4 Months', '> 4 Months'];
