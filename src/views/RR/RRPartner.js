@@ -28,15 +28,12 @@ const RRPartner = () => {
         const partners = result.map(({ partner  }) => partner);
         const partners_series = result.map(({ facilities_count }) => parseInt(facilities_count, 10));
         setEmrDistributionByPartner({
-            chart: { type: 'bar' },
+            chart: { type: 'bar', height: '120%', spacingLeft:0, spacingRight:0, spacingBottom:0 },
             title: { text: '' },
-            subtitle: { text: '' },
-            xAxis: { categories: partners, title: { text: null } },
-            yAxis: { min: 0, title: { text: 'Number of Facilities', align: 'high' }, labels: { overflow: 'justify' } },
-            tooltip: { valueSuffix: '' },
-            plotOptions: { bar: { dataLabels: { enabled: true } } },
+            xAxis: { categories: partners, title: { text: '' }, labels: { style: { fontSize: '10px' } } },
+            yAxis: { title: { text: 'Number of Facilities' }},
             legend: { enabled: false },
-            series: [{ data: partners_series, color: "#2F4050;", name: 'Distribution of EMR Sites' }]
+            series: [{ name: "Distribution of EMR Sites", data: partners_series, color: "#2F4050" }]
         });
     }, [filters, rrTab]);
 
@@ -54,16 +51,14 @@ const RRPartner = () => {
         const result = await getAll('manifests/recencyreportingbypartner/' + rrTab, params);
         const partners = result.map(({ partner  }) => partner);
         const partners_series = result.map(({ Percentage }) => parseInt(Percentage, 10) > 100 ? 100:parseInt(Percentage, 10));
+        const data = partners_series.map(d => ({ y: d, color: d >= 70 ? '#59A14F': (d >= 30 && d <70) ? '#F28E2B' : '#E15759' }));
         setRecencyOfReportingByPartner({
-            chart: { type: 'bar' },
+            chart: { type: 'bar', height: '120%', spacingLeft:0, spacingRight:0, spacingBottom:0 },
             title: { text: '' },
-            subtitle: { text: '' },
-            xAxis: { categories: partners, title: { text: null } },
-            yAxis: { min: 0, max: 100, title: { text: 'Percentage (%) of Overall Reporting Rates', align: 'high' }, labels: { overflow: 'justify' } },
-            tooltip: { valueSuffix: '' },
-            plotOptions: { bar: { dataLabels: { enabled: true } } },
+            xAxis: { categories: partners, title: { text: '' }, labels: { style: { fontSize: '10px' } } },
+            yAxis: { min: 0, max: 100, title: { text: 'Percentage (%) Reporting Rate' }},
             legend: { enabled: false },
-            series: [{ data: partners_series, color: "#59A14F", name: 'Overall Reporting Rates' }]
+            series: [{ name: "Overall Reporting Rates", data: data, color: "#59A14F", tooltip: { valueSuffix: ' %' } }]
         });
     }, [filters, rrTab]);
 
@@ -81,16 +76,14 @@ const RRPartner = () => {
         const result = await getAll('manifests/consistencyreportingbycountypartner/' + rrTab + '?reportingType=partner', params);
         const partners = Object.keys(result);
         const partners_series = Object.values(result);
+        const data = partners_series.map(d => ({ y: d, color: d >= 70 ? '#59A14F': (d >= 30 && d <70) ? '#F28E2B' : '#E15759' }));
         setConsistencyOfReportingByPartner({
-            chart: { type: 'bar' },
+            chart: { type: 'bar', height: '120%', spacingLeft:0, spacingRight:0, spacingBottom:0 },
             title: { text: '' },
-            subtitle: { text: '' },
-            xAxis: { categories: partners, title: { text: null } },
-            yAxis: { min: 0, max: 100, title: { text: 'Percentage (%) of Consistency of Reporting', align: 'high' }, labels: { overflow: 'justify' } },
-            tooltip: { valueSuffix: '' },
-            plotOptions: { bar: { dataLabels: { enabled: true } } },
+            xAxis: { categories: partners, title: { text: '' }, labels: { style: { fontSize: '10px' } } },
+            yAxis: { min: 0, max: 100, title: { text: 'Percentage (%) Reporting Rate' }},
             legend: { enabled: false },
-            series: [{ data: partners_series, color: "#F28E2B", name: 'Consistency of Reporting' }]
+            series: [{ name: 'Consistency of Reporting', data: data, tooltip: { valueSuffix: ' %' } }]
         });
     }, [filters, rrTab]);
 

@@ -29,16 +29,12 @@ const RRCounty = () => {
         const counties = result.map(({ county  }) => county);
         const counties_series = result.map(({ facilities_count }) => parseInt(facilities_count, 10));
         setEmrDistribution({
-            chart: { type: 'bar' },
+            chart: { type: 'bar', height: '120%', spacingLeft:0, spacingRight:0, spacingBottom:0 },
             title: { text: '' },
-            subtitle: { text: '' },
-            xAxis: { categories: counties, title: { text: null }, visible: true },
-            yAxis: { min: 0, title: { text: 'Number of Facilities', align: 'high' }, labels: { overflow: 'justify' }, visible: true },
-            tooltip: { valueSuffix: '' },
-            plotOptions: { bar: { dataLabels: { enabled: true } } },
+            xAxis: { categories: counties, title: { text: '' }, labels: { style: { fontSize: '10px' } } },
+            yAxis: { title: { text: 'Number of Facilities' }},
             legend: { enabled: false },
-            responsive: { rules: [ { chartOptions: { legend: { enabled: false } } } ] },
-            series: [{ data: counties_series, color: "#2F4050;", name: 'Distribution of EMR Sites' }]
+            series: [{ name: "Distribution of EMR Sites", data: counties_series, color: "#2F4050" }]
         });
     }, [filters, rrTab]);
 
@@ -56,16 +52,14 @@ const RRCounty = () => {
         const result = await getAll('manifests/recencyreportingbycounty/' + rrTab, params);
         const counties = result.map(({ county  }) => county);
         const counties_series = result.map(({ Percentage }) => parseInt(Percentage, 10) > 100 ? 100:parseInt(Percentage, 10));
+        const data = counties_series.map(d => ({ y: d, color: d >= 70 ? '#59A14F': (d >= 30 && d <70) ? '#F28E2B' : '#E15759' }));
         setRecencyOfReportingByCounty({
-            chart: { type: 'bar' },
+            chart: { type: 'bar', height: '120%', spacingLeft:0, spacingRight:0, spacingBottom:0 },
             title: { text: '' },
-            subtitle: { text: '' },
-            xAxis: { categories: counties, title: { text: null } },
-            yAxis: { min: 0, max: 100, title: { text: 'Percentage (%) of Overall Reporting Rates', align: 'high' }, labels: { overflow: 'justify' } },
-            tooltip: { valueSuffix: '' },
-            plotOptions: { bar: { dataLabels: { enabled: true } } },
+            xAxis: { categories: counties, title: { text: '' }, labels: { style: { fontSize: '10px' } } },
+            yAxis: { min: 0, max: 100, title: { text: 'Percentage (%) Reporting Rate' }},
             legend: { enabled: false },
-            series: [{ name: "Overall Reporting Rates", data: counties_series, color: "#59A14F", tooltip: { valueSuffix: ' %' } }]
+            series: [{ name: "Overall Reporting Rates", data: data, color: "#59A14F", tooltip: { valueSuffix: ' %' } }]
         });
     }, [filters, rrTab]);
 
@@ -83,16 +77,14 @@ const RRCounty = () => {
         const result = await getAll('manifests/consistencyreportingbycountypartner/' + rrTab + '?reportingType=county', params);
         const counties = Object.keys(result);
         const counties_series = Object.values(result);
+        const data = counties_series.map(d => ({ y: d, color: d >= 70 ? '#59A14F': (d >= 30 && d <70) ? '#F28E2B' : '#E15759' }));
         setConsistencyOfReportingByCounty({
-            chart: { type: 'bar' },
+            chart: { type: 'bar', height: '120%', spacingLeft:0, spacingRight:0, spacingBottom:0 },
             title: { text: '' },
-            subtitle: { text: '' },
-            xAxis: { categories: counties, title: { text: null } },
-            yAxis: { min: 0, max: 100, title: { text: 'Percentage (%) of Consistency of Reporting', align: 'high' }, labels: { overflow: 'justify' } },
-            tooltip: { valueSuffix: '' },
-            plotOptions: { bar: { dataLabels: { enabled: true } } },
+            xAxis: { categories: counties, title: { text: '' }, labels: { style: { fontSize: '10px' } } },
+            yAxis: { min: 0, max: 100, title: { text: 'Percentage (%) Reporting Rate' }},
             legend: { enabled: false },
-            series: [{ data: counties_series, color: "#F28E2B", name: 'Consistency of Reporting', tooltip: { valueSuffix: ' %' } }]
+            series: [{ name: 'Consistency of Reporting', data: data, tooltip: { valueSuffix: ' %' } }]
         });
     }, [filters, rrTab]);
 
