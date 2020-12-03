@@ -13,7 +13,7 @@ import HomeSexDistribution from './HomeSexDistribution';
 import VisibilitySensor from 'react-visibility-sensor';
 import HomeOverview from './HomeOverview';
 import HomeMaps from './HomeMaps';
-import { enableStickyFilter, disableStickyFilter, changeCurrentPage } from "../../actions/uiActions";
+import { enableStickyFilter, disableStickyFilter, changeCurrentPage, enableFromDateFilter, disableFromDateFilter } from "../../actions/uiActions";
 import { PAGES } from './../../constants';
 
 const Home = () => {
@@ -30,6 +30,10 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(changeCurrentPage(PAGES.home));
+        dispatch(disableFromDateFilter());
+        return () => {
+            dispatch(enableFromDateFilter());
+        }
     }, [dispatch]);
     
     return (
