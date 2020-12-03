@@ -4,6 +4,7 @@ import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from './../../Shared/UniversalFilter';
 import DSDHeader from './DSDHeader';
 import DSDFooter from './DSDFooter';
+import DSDOverview from './DSDOverview';
 import DSDCascade from './DSDCascade';
 import DistributionUnstable from './DistributionUnstable';
 import DistributionMMDStable from './DistributionMMDStable';
@@ -36,6 +37,12 @@ const DSD = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
+            <p></p>
+            <div className="row">
+                <div className="col-12">
+                    <DSDOverview />
+                </div>
+            </div>
             <p></p>
             <div className="row">
                 <div className="col-6">
