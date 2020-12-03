@@ -32,22 +32,13 @@ const MedianTimeTo1stVL = () => {
         }
 
         setMedianTimeTo1stVL({
-            chart: { zoomType: 'xy' },
-            title: { useHTML: true, text: ' &nbsp;', align: 'left' },
-            subtitle: { text: ' ', align: 'left' },
+            title: { text: '' },
             xAxis: [{ categories: months, crosshair: true, title: { text: 'Year of Start' } }],
             yAxis: [
-                {
-                    title: { text: 'Time (Days)', style: { color: Highcharts.getOptions().colors[1] } },
-                    labels: { format: '{value}', style: { color: Highcharts.getOptions().colors[1] } },
-                    min: 0,
-                }
+                { title: { text: 'Time (Days)' } },
             ],
             // plotOptions: { spline: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
-            legend: {
-                floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
-                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
-            },
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'Time (Days)', data: medianTimeTo1stVL, type: 'spline', color: "#E06F07" },
             ]

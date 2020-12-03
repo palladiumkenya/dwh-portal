@@ -4,6 +4,7 @@ import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from './../../Shared/UniversalFilter';
 import VLHeader from './VLHeader';
 import VLFooter from './VLFooter';
+import VLOverview from './VLOverview';
 import VLOverallUptakeAndSuppression from './VLOverallUptakeAndSuppression';
 import MedianTimeTo1stVL from './MedianTimeTo1stVL';
 import MedianTimeTo1stVLByCounty from './MedianTimeTo1stVLByCounty';
@@ -44,6 +45,12 @@ const VL = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
+            <p></p>
+            <div className="row">
+                <div className="col-12">
+                    <VLOverview />
+                </div>
+            </div>
             <p></p>
             <div className="row">
                 <div className="col-6">
