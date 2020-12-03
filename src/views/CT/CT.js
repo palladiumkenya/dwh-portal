@@ -9,7 +9,7 @@ import VL from './VL/VL';
 import AdverseEvents from './AdverseEvents/AdverseEvents';
 import TBHIV from './TBHIV/TBHIV';
 import ARVOptimization from './ARVOptimization/ARVOptimization';
-import { changeCtTab, changeCurrentPage } from "../../actions/uiActions";
+import { changeCtTab, changeCurrentPage, enableFromDateFilter, disableFromDateFilter } from "../../actions/uiActions";
 import { CT_TABS, PAGES } from "../../constants";
 
 const CT = () => {
@@ -21,7 +21,15 @@ const CT = () => {
             Object.keys(CT_TABS).map((value) => {
                 return (
                     <NavItem key={value}>
-                        <NavLink active={ctTab === value} onClick={() => { dispatch(changeCtTab(value)); setCurrentTab(value);}} >
+                        <NavLink active={ctTab === value} onClick={() => {
+                                dispatch(changeCtTab(value));
+                                setCurrentTab(value);
+                                if (value == 'txNew') {
+                                    dispatch(enableFromDateFilter());
+                                } else {
+                                    dispatch(disableFromDateFilter());
+                                }
+                            }} >
                             {CT_TABS[value]}
                         </NavLink>
                     </NavItem>
@@ -32,6 +40,12 @@ const CT = () => {
 
     useEffect(() => {
         dispatch(changeCurrentPage(PAGES.ct));
+        if (ctTab !== 'txNew') {
+            dispatch(disableFromDateFilter());
+        }
+        return () => {
+            // dispatch(enableFromDateFilter());
+        }
     }, [dispatch]);
 
     return (
