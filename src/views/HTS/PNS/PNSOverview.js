@@ -102,7 +102,7 @@ const PNSOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{vlCascade.currentOnArt.toLocaleString('en')}</span>
+                                <span className="expected-uploads-text">{vlCascade.currentOnArt ? vlCascade.currentOnArt.toLocaleString('en'):''}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -117,7 +117,7 @@ const PNSOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{pnsSexualContactsCascade.elicited.toLocaleString('en')}</span>
+                                <span className="expected-uploads-text">{pnsSexualContactsCascade.elicited ? pnsSexualContactsCascade.elicited.toLocaleString('en'):''}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -132,7 +132,7 @@ const PNSOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{pnsChildrenCascade.elicited.toLocaleString('en')}</span>
+                                <span className="expected-uploads-text">{pnsChildrenCascade.elicited ? pnsChildrenCascade.elicited.toLocaleString('en'):''}</span>
                             </div>
                         </CardBody>
                     </Card>

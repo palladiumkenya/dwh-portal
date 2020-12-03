@@ -89,7 +89,7 @@ const LinkageOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{linkageOverview.totalPositive.toLocaleString('en')}</span>
+                                <span className="expected-uploads-text">{linkageOverview.totalPositive ? linkageOverview.totalPositive.toLocaleString('en'):''}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -104,7 +104,7 @@ const LinkageOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{linkageOverview.malePositive.toLocaleString('en')}</span>
+                                <span className="expected-uploads-text">{linkageOverview.malePositive ? linkageOverview.malePositive.toLocaleString('en'):''}</span>
                                 <sup className="overall-rates-sup"> {linkageOverview.malePositivePercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
@@ -120,7 +120,7 @@ const LinkageOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{linkageOverview.femalePositive}</span>
+                                <span className="expected-uploads-text">{linkageOverview.femalePositive ? linkageOverview.femalePositive.toLocaleString('en'):''}</span>
                                 <sup className="overall-rates-sup"> {linkageOverview.femalePositivePercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
@@ -138,7 +138,7 @@ const LinkageOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{linkageOverview.totalLinked.toLocaleString('en')}</span>
+                                <span className="expected-uploads-text">{linkageOverview.totalLinked ? linkageOverview.totalLinked.toLocaleString('en'):''}</span>
                                 <sup className="overall-rates-sup"> {linkageOverview.totalLinkedPercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
@@ -154,7 +154,7 @@ const LinkageOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{linkageOverview.maleLinked.toLocaleString('en')}</span>
+                                <span className="expected-uploads-text">{linkageOverview.maleLinked ? linkageOverview.maleLinked.toLocaleString('en'):''}</span>
                                 <sup className="overall-rates-sup"> {linkageOverview.maleLinkedPercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
@@ -170,7 +170,7 @@ const LinkageOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12" style={{ textAlign: 'center' }}>
-                                <span className="overall-rates-figure">{linkageOverview.femaleLinked.toLocaleString('en')}</span>
+                                <span className="overall-rates-figure">{linkageOverview.femaleLinked ? linkageOverview.femaleLinked.toLocaleString('en'):''}</span>
                                 <sup className="overall-rates-sup"> {linkageOverview.femaleLinkedPercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
