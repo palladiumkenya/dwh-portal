@@ -6,7 +6,7 @@ import moment from "moment";
 
 const TreatmentOutcomesOverview = () => {
     const filters = useSelector(state => state.filters);
-    const [dsdStabilityStatus, setDsdStabilityStatus] = useState({
+    const [treatmentOutcomes, setTreatmentOutcomes] = useState({
         active: 0,
         dead: 0,
         deadPercent: 0,
@@ -24,7 +24,7 @@ const TreatmentOutcomesOverview = () => {
         totalStartedOnARTText: '',
     });
 
-    const loadDsdStabilityStatus = useCallback(async () => {
+    const loadTreatmentOutcomes = useCallback(async () => {
         let params = {
             county: filters.counties,
             subCounty: filters.subCounties,
@@ -70,7 +70,7 @@ const TreatmentOutcomesOverview = () => {
            data.netPercent = ((data.net/data.active)*100).toFixed(1);
            data.toPercent = ((data.to/data.active)*100).toFixed(1);
         }
-        setDsdStabilityStatus(data);
+        setTreatmentOutcomes(data);
     }, [filters]);
 
     const loadNewlyStartedARTTiles = useCallback(async () => {
@@ -91,9 +91,9 @@ const TreatmentOutcomesOverview = () => {
     }, [filters]);
 
     useEffect(() => {
-        loadDsdStabilityStatus();
+        loadTreatmentOutcomes();
         loadNewlyStartedARTTiles();
-    }, [loadDsdStabilityStatus, loadNewlyStartedARTTiles]);
+    }, [loadTreatmentOutcomes, loadNewlyStartedARTTiles]);
 
     return (
         <div className="row">
@@ -124,8 +124,8 @@ const TreatmentOutcomesOverview = () => {
                                 style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                             >
                                 <div className="col-12">
-                                    <span className="expected-uploads-text">{dsdStabilityStatus.to ? dsdStabilityStatus.to.toLocaleString('en'):'0'}</span>
-                                    <sup className="overall-rates-sup"> {dsdStabilityStatus.toPercent ? dsdStabilityStatus.toPercent:'0'}<span className="overall-rates-sup-perc"> %</span></sup>
+                                    <span className="expected-uploads-text">{treatmentOutcomes.to ? treatmentOutcomes.to.toLocaleString('en'):'0'}</span>
+                                    <sup className="overall-rates-sup"> {treatmentOutcomes.toPercent ? treatmentOutcomes.toPercent:'0'}<span className="overall-rates-sup-perc"> %</span></sup>
                                 </div>
                             </CardBody>
                         </Card>
@@ -140,8 +140,8 @@ const TreatmentOutcomesOverview = () => {
                                 style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                             >
                                 <div className="col-12">
-                                    <span className="expected-uploads-text">{dsdStabilityStatus.stopped ? dsdStabilityStatus.stopped.toLocaleString('en'):'0'}</span>
-                                    <sup className="overall-rates-sup"> {dsdStabilityStatus.stoppedPercent ? dsdStabilityStatus.stoppedPercent:'0'}<span className="overall-rates-sup-perc"> %</span></sup>
+                                    <span className="expected-uploads-text">{treatmentOutcomes.stopped ? treatmentOutcomes.stopped.toLocaleString('en'):'0'}</span>
+                                    <sup className="overall-rates-sup"> {treatmentOutcomes.stoppedPercent ? treatmentOutcomes.stoppedPercent:'0'}<span className="overall-rates-sup-perc"> %</span></sup>
                                 </div>
                             </CardBody>
                         </Card>
@@ -156,8 +156,8 @@ const TreatmentOutcomesOverview = () => {
                                 style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                             >
                                 <div className="col-12">
-                                    <span className="expected-uploads-text">{dsdStabilityStatus.net ? dsdStabilityStatus.net.toLocaleString('en'):'0'}</span>
-                                    {/* <sup className="overall-rates-sup"> {dsdStabilityStatus.netPercent ? dsdStabilityStatus.netPercent:'0'}<span className="overall-rates-sup-perc"> %</span></sup> */}
+                                    <span className="expected-uploads-text">{treatmentOutcomes.net ? treatmentOutcomes.net.toLocaleString('en'):'0'}</span>
+                                    {/* <sup className="overall-rates-sup"> {treatmentOutcomes.netPercent ? treatmentOutcomes.netPercent:'0'}<span className="overall-rates-sup-perc"> %</span></sup> */}
                                 </div>
                             </CardBody>
                         </Card>
@@ -174,8 +174,8 @@ const TreatmentOutcomesOverview = () => {
                                 style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                             >
                                 <div className="col-12">
-                                    <span className="expected-uploads-text">{dsdStabilityStatus.active ? dsdStabilityStatus.active.toLocaleString('en'):'0'}</span>
-                                    <sup className="overall-rates-sup"> {dsdStabilityStatus.activePercent ? dsdStabilityStatus.activePercent:'0'}<span className="overall-rates-sup-perc"> %</span></sup>
+                                    <span className="expected-uploads-text">{treatmentOutcomes.active ? treatmentOutcomes.active.toLocaleString('en'):'0'}</span>
+                                    {/* <sup className="overall-rates-sup"> {treatmentOutcomes.activePercent ? treatmentOutcomes.activePercent:'0'}<span className="overall-rates-sup-perc"> %</span></sup> */}
                                 </div>
                             </CardBody>
                         </Card>
@@ -190,8 +190,8 @@ const TreatmentOutcomesOverview = () => {
                                 style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                             >
                                 <div className="col-12">
-                                    <span className="expected-uploads-text">{dsdStabilityStatus.ltfu ? dsdStabilityStatus.ltfu.toLocaleString('en'):'0'}</span>
-                                    <sup className="overall-rates-sup"> {dsdStabilityStatus.ltfuPercent ? dsdStabilityStatus.ltfuPercent:'0'}<span className="overall-rates-sup-perc"> %</span></sup>
+                                    <span className="expected-uploads-text">{treatmentOutcomes.ltfu ? treatmentOutcomes.ltfu.toLocaleString('en'):'0'}</span>
+                                    <sup className="overall-rates-sup"> {treatmentOutcomes.ltfuPercent ? treatmentOutcomes.ltfuPercent:'0'}<span className="overall-rates-sup-perc"> %</span></sup>
                                 </div>
                             </CardBody>
                         </Card>
@@ -206,8 +206,8 @@ const TreatmentOutcomesOverview = () => {
                                 style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                             >
                                 <div className="col-12" style={{ textAlign: 'center' }}>
-                                    <span className="overall-rates-figure">{dsdStabilityStatus.dead ? dsdStabilityStatus.dead.toLocaleString('en'):'0'}</span>
-                                    <sup className="overall-rates-sup"> {dsdStabilityStatus.deadPercent}<span className="overall-rates-sup-perc"> %</span></sup>
+                                    <span className="overall-rates-figure">{treatmentOutcomes.dead ? treatmentOutcomes.dead.toLocaleString('en'):'0'}</span>
+                                    <sup className="overall-rates-sup"> {treatmentOutcomes.deadPercent}<span className="overall-rates-sup-perc"> %</span></sup>
                                 </div>
                             </CardBody>
                         </Card>
