@@ -89,7 +89,7 @@ const LinkageOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{linkageOverview.totalPositive}</span>
+                                <span className="expected-uploads-text">{linkageOverview.totalPositive.toLocaleString('en')}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -104,7 +104,7 @@ const LinkageOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{linkageOverview.malePositive}</span>
+                                <span className="expected-uploads-text">{linkageOverview.malePositive.toLocaleString('en')}</span>
                                 <sup className="overall-rates-sup"> {linkageOverview.malePositivePercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
@@ -138,7 +138,7 @@ const LinkageOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{linkageOverview.totalLinked}</span>
+                                <span className="expected-uploads-text">{linkageOverview.totalLinked.toLocaleString('en')}</span>
                                 <sup className="overall-rates-sup"> {linkageOverview.totalLinkedPercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
@@ -154,7 +154,7 @@ const LinkageOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{linkageOverview.maleLinked}</span>
+                                <span className="expected-uploads-text">{linkageOverview.maleLinked.toLocaleString('en')}</span>
                                 <sup className="overall-rates-sup"> {linkageOverview.maleLinkedPercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
@@ -170,7 +170,7 @@ const LinkageOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12" style={{ textAlign: 'center' }}>
-                                <span className="overall-rates-figure">{linkageOverview.femaleLinked}</span>
+                                <span className="overall-rates-figure">{linkageOverview.femaleLinked.toLocaleString('en')}</span>
                                 <sup className="overall-rates-sup"> {linkageOverview.femaleLinkedPercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
