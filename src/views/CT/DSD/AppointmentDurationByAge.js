@@ -21,7 +21,7 @@ const AppointmentDurationByAge = () => {
             year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const appointmentCategories = ['< 1 Month', '1-2 Months', '3-4 Months', '> 4 Months'];
+        const appointmentCategories = ['<3 Months', '> 3 Months'];
         const ageCategories = [
             'Under 1',
             '1 to 4',
@@ -57,33 +57,15 @@ const AppointmentDurationByAge = () => {
             data[appointmentIndex][ageIndex] = data[appointmentIndex][ageIndex] + parseInt(result[i].patients);
         }
         setAppointmentDurationByAge({
-            chart: { type: 'column' },
-            title: { useHTML: true, text: '&nbsp;' },
-            subtitle: { text: '' },
-            plotOptions: { column: { stacking: 'percent' } },
-            xAxis: [{
-                categories: ageCategories,
-                crosshair: true
-            }],
-            yAxis: [{
-                min: 0,
-                title: { text: 'Percentage of Patients' },
-            }],
+            title: { text: '' },
+            xAxis: [{ categories: ageCategories, crosshair: true }],
+            yAxis: [{ title: { text: 'Percentage of Patients' }}],
             tooltip: { shared: true },
-            legend: {
-                floating: true,
-                layout: 'horizontal',
-                align: 'left',
-                verticalAlign: 'top',
-                y: 0,
-                x: 80,
-                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
-            },
+            plotOptions: { column: { stacking: 'percent' } },
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: '< 1 MONTH', data: data[0], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '1-2 MONTHS', data: data[1], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '3-4 MONTHS', data: data[2], type: 'column', color: "#60A6E5", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '> 4 MONTHS', data: data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: '> 3 MONTHS', data: data[1], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: '< 3 MONTHS', data: data[0], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [filters]);
@@ -97,7 +79,7 @@ const AppointmentDurationByAge = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        APPOINTMENT DURATION PRACTICES BY AGE
+                        APPOINTMENT DURATION PRACTICES BY AGE GROUP
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
