@@ -9,8 +9,24 @@ import { getAll } from '../Shared/Api';
 const RROverviewTrends = () => {
     const filters = useSelector(state => state.filters);
     const rrTab = useSelector(state => state.ui.rrTab);
+    const [expected, setExpected] = useState(0);
     const [overallReportingTrend, setOverallReportingTrend] = useState({});
     const [consistency, setConsistencyTrend] = useState({});
+
+    const loadExpected = useCallback(async () => {
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
+        };
+        params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
+        const data = await getAll('manifests/expected/' + rrTab, params);
+        setExpected(data.expected);
+    }, [filters, rrTab]);
 
     const loadOverallReportingTrend = useCallback(async () => {
         let params = {
@@ -40,18 +56,18 @@ const RROverviewTrends = () => {
                 data[monthYear] = parseInt(element.recency);
             }
         }
+        const categories = Object.values(months).slice(-12);
+        const dataRecent = Object.values(data).slice(-12);
+        const dataProcessed = dataRecent.map(d => Number(((d/expected) * 100).toFixed(0)));
         setOverallReportingTrend({
-            chart: { type: "column" },
-            title: { text: "", style: { display: "none" } },
-            xAxis: { categories: Object.values(months).slice(-12), title: { text: null } },
-            yAxis: { min: 0, title: { text: "", align: "high" }, labels: { overflow: "justify" } },
-            plotOptions: { bar: { dataLabels: { enabled: true } } },
+            title: { text: '', },
+            xAxis: [{ categories: categories, crosshair: true }],
+            yAxis: [{ title: { text: 'Percentage' }, labels: { format: '{value}' } }],
+            plotOptions: { column: { dataLabels: { enabled: true, format: '<b>{point.y} %</b>' } } },
             legend: { enabled: false },
-            credits: { enabled: true },
-            responsive: { rules: [ { condition: { maxWidth: 500, }, chartOptions: { legend: { enabled: false } } } ] },
-            series: [ { name: "Overall Reporting Rates", data: Object.values(data).slice(-12), color: "#1AB394" } ]
+            series: [ { name: "Overall Reporting Rates", type: "column", data: dataProcessed, color: "#1AB394", tooltip: { valueSuffix: ' %' } } ]
         });
-    }, [filters, rrTab]);
+    }, [filters, rrTab, expected]);
 
     const loadConsistencyTrend = useCallback(async () => {
         const numberOfMonths = 12;
@@ -84,23 +100,24 @@ const RROverviewTrends = () => {
                 data[monthYear] = parseInt(element.consistency);
             }
         }
+        const categories = Object.values(months).slice(-12);
+        const dataRecent = Object.values(data).slice(-12);
+        const dataProcessed = dataRecent.map(d => Number(((d/expected) * 100).toFixed(0)));
         setConsistencyTrend({
-            chart: { type: "column" },
-            title: { text: "", style: { display: "none" } },
-            xAxis: { categories: Object.values(months).slice(numberOfMonths*-1), title: { text: null } },
-            yAxis: { min: 0, title: { text: "", align: "high" }, labels: { overflow: "justify" } },
-            plotOptions: { bar: { dataLabels: { enabled: true } } },
+            title: { text: '', },
+            xAxis: [{ categories: categories, crosshair: true }],
+            yAxis: [{ title: { text: 'Percentage' }}],
+            plotOptions: { column: { dataLabels: { enabled: true, format: '<b>{point.y} %</b>' }}},
             legend: { enabled: false },
-            credits: { enabled: true },
-            responsive: { rules: [ { condition: { maxWidth: 500, }, chartOptions: { legend: { enabled: false } } } ] },
-            series: [ { name: "Consistency of Reporting", data: Object.values(data).slice(numberOfMonths*-1), color: "#2F4050" } ]
+            series: [ { name: "Consistency of Reporting", type: "column", data: dataProcessed, color: "#2F4050", tooltip: { valueSuffix: ' %' }}]
         });
-    }, [filters, rrTab]);
+    }, [filters, rrTab, expected]);
 
     useEffect(() => {
+        loadExpected();
         loadOverallReportingTrend();
         loadConsistencyTrend();
-    }, [loadOverallReportingTrend, loadConsistencyTrend]);
+    }, [loadExpected, loadOverallReportingTrend, loadConsistencyTrend]);
 
     return (
         <div className="row">

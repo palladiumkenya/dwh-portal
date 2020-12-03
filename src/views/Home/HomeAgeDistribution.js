@@ -24,7 +24,7 @@ const HomeAgeDistribution = () => {
             ActiveARTChildren = result[0].ActiveARTChildren;
         }
         setARTClientsChildren({
-            ActiveARTChildren: ActiveARTChildren.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            ActiveARTChildren: ActiveARTChildren ? ActiveARTChildren.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","):0
         });
     }, [filters]);
 
@@ -62,7 +62,7 @@ const HomeAgeDistribution = () => {
             ActiveARTAdolescents = result[0].ActiveARTAdolescents;
         }
         setARTClientsAdolescents({
-            ActiveARTAdolescents: ActiveARTAdolescents.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            ActiveARTAdolescents: ActiveARTAdolescents ? ActiveARTAdolescents.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","):0
         });
     }, [filters]);
 

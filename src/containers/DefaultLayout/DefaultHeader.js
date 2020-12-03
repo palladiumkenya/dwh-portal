@@ -20,9 +20,6 @@ const DefaultHeader = () => {
                 <NavItem className="px-3">
                     <NavLink to="/reporting-rates" className="nav-link" >Reporting Rates</NavLink>
                 </NavItem>
-                <NavItem className="px-3">
-                    <NavLink to="/reporting-rates-n" className="nav-link" >Reporting Rates N</NavLink>
-                </NavItem>
                 {/* <NavItem className="px-3">
                     <NavLink to="/hrh" className="nav-link">HRH</NavLink>
                 </NavItem> */}
