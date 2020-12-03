@@ -56,7 +56,7 @@ const VLOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{vlOverview.txCurr}</span>
+                                <span className="expected-uploads-text">{vlOverview.txCurr.toLocaleString('en')}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -71,7 +71,7 @@ const VLOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{vlOverview.vlDone}</span>
+                                <span className="expected-uploads-text">{vlOverview.vlDone.toLocaleString('en')}</span>
                                 <sup className="overall-rates-sup"> {vlOverview.vlDonePercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
@@ -87,7 +87,7 @@ const VLOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{vlOverview.suppressed}</span>
+                                <span className="expected-uploads-text">{vlOverview.suppressed.toLocaleString('en')}</span>
                                 <sup className="overall-rates-sup"> {vlOverview.suppressedPercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>

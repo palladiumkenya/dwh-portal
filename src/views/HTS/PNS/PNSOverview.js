@@ -102,7 +102,7 @@ const PNSOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{vlCascade.currentOnArt}</span>
+                                <span className="expected-uploads-text">{vlCascade.currentOnArt.toLocaleString('en')}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -117,7 +117,7 @@ const PNSOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{pnsSexualContactsCascade.elicited}</span>
+                                <span className="expected-uploads-text">{pnsSexualContactsCascade.elicited.toLocaleString('en')}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -132,7 +132,7 @@ const PNSOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{pnsChildrenCascade.elicited}</span>
+                                <span className="expected-uploads-text">{pnsChildrenCascade.elicited.toLocaleString('en')}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -152,7 +152,7 @@ const PNSOverview = () => {
                                 <span className="expected-uploads-text">
                                     {
                                         pnsSexualContactsCascade.elicited > 0 ?
-                                        ((pnsSexualContactsCascade.tested/pnsSexualContactsCascade.elicited)*100).toFixed(0) :
+                                        ((pnsSexualContactsCascade.tested/pnsSexualContactsCascade.elicited)*100).toFixed(0).toLocaleString('en') :
                                         0
                                     }
                                 %</span>
@@ -173,7 +173,7 @@ const PNSOverview = () => {
                                 <span className="expected-uploads-text">
                                     {
                                         pnsSexualContactsCascade.tested > 0 ?
-                                        ((pnsSexualContactsCascade.positive/pnsSexualContactsCascade.tested)*100).toFixed(0) :
+                                        ((pnsSexualContactsCascade.positive/pnsSexualContactsCascade.tested)*100).toFixed(0).toLocaleString('en') :
                                         0
                                     }
                                 %</span>
@@ -194,7 +194,7 @@ const PNSOverview = () => {
                                 <span className="expected-uploads-text">
                                     {
                                         pnsSexualContactsCascade.positive > 0 ?
-                                        ((pnsSexualContactsCascade.linked/pnsSexualContactsCascade.positive)*100).toFixed(0) :
+                                        ((pnsSexualContactsCascade.linked/pnsSexualContactsCascade.positive)*100).toFixed(0).toLocaleString('en') :
                                         0
                                     }
                                 %</span>
@@ -217,7 +217,7 @@ const PNSOverview = () => {
                                 <span className="expected-uploads-text">
                                     {
                                         pnsChildrenCascade.elicited > 0 ?
-                                        ((pnsChildrenCascade.tested/pnsChildrenCascade.elicited)*100).toFixed(0) :
+                                        ((pnsChildrenCascade.tested/pnsChildrenCascade.elicited)*100).toFixed(0).toLocaleString('en') :
                                         0
                                     }
                                 %</span>
@@ -238,7 +238,7 @@ const PNSOverview = () => {
                                 <span className="expected-uploads-text">
                                     {
                                         pnsChildrenCascade.tested > 0 ?
-                                        ((pnsChildrenCascade.positive/pnsChildrenCascade.tested)*100).toFixed(0) :
+                                        ((pnsChildrenCascade.positive/pnsChildrenCascade.tested)*100).toFixed(0).toLocaleString('en') :
                                         0
                                     }
                                 %</span>
@@ -259,7 +259,7 @@ const PNSOverview = () => {
                                 <span className="expected-uploads-text">
                                     {
                                         pnsChildrenCascade.positive > 0 ?
-                                        ((pnsChildrenCascade.linked/pnsChildrenCascade.positive)*100).toFixed(0) :
+                                        ((pnsChildrenCascade.linked/pnsChildrenCascade.positive)*100).toFixed(0).toLocaleString('en') :
                                         0
                                     }
                                 %</span>
