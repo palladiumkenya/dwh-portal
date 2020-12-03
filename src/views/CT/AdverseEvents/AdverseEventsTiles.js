@@ -81,7 +81,7 @@ const AdverseEventsTiles = () => {
         }
 
         setChildrenUnder15CurrentOnART({
-            childrenUnder15CurrentOnART: ActiveARTChildren.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            childrenUnder15CurrentOnART: ActiveARTChildren ? ActiveARTChildren.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","):0
         });
     }, [filters]);
 
