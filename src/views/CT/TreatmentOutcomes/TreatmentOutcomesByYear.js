@@ -18,7 +18,7 @@ const TreatmentOutcomesByYear = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped'];

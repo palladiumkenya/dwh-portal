@@ -5,6 +5,8 @@ import SectionHeader from './../Shared/SectionHeader';
 import SectionFooter from './../Shared/SectionFooter';
 import UniversalFilter from '../Shared/UniversalFilter';
 import HomeTxNew from './HomeTxNew';
+import HomeOverallMmdUptake from './HomeOverallMmdUptake';
+import HomeMmdUptakeBySex from './HomeMmdUptakeBySex';
 import HomeVLCascade from './HomeVLCascade';
 import HomeAgeDistribution from './HomeAgeDistribution';
 import HomeSexDistribution from './HomeSexDistribution';
@@ -51,6 +53,15 @@ const Home = () => {
             <HomeSexDistribution/>
             <SectionFooter overview={branding.overview}/>
             <HomeTxNew/>
+            <SectionFooter overview={branding.overview}/>
+            <Row>
+                <Col sm={6}>
+                    <HomeOverallMmdUptake/>
+                </Col>
+                <Col sm={6}>
+                    <HomeMmdUptakeBySex/>
+                </Col>
+            </Row>
             <SectionFooter overview={branding.overview}/>
         </div>
     );

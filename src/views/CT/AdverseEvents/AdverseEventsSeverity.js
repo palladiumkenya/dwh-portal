@@ -22,7 +22,7 @@ const AdverseEventsSeverity = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         let mildVal = 0;
@@ -121,7 +121,7 @@ const AdverseEventsSeverity = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('care-treatment/getAeActionsBySeverity', params);
