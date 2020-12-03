@@ -91,7 +91,7 @@ const DistributionStableAgeSex = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        DISTRIBUTION OF STABLE PATIENTS BY AGE AND SEX
+                        DISTRIBUTION OF STABLE PATIENTS BY AGE GROUP AND SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
