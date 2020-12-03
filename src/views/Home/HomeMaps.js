@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import HomeEmrSitesMap from './HomeEmrSitesMap';
+import HomeCurrentOnArtByCountyMap from './HomeCurrentOnArtByCountyMap';
 import { changeHomeTab } from "../../actions/uiActions";
 import { HOME_TABS } from "../../constants";
 
@@ -33,7 +34,7 @@ const HomeMaps = () => {
                     <HomeEmrSitesMap/>
                 </TabPane>
                 <TabPane tabId="txCurr">
-                    
+                    <HomeCurrentOnArtByCountyMap/>
                 </TabPane>
                 <TabPane tabId="hasCurrVl">
                     
