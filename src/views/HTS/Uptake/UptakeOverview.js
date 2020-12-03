@@ -89,7 +89,7 @@ const UptakeOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{uptakeOverview.totalTested.toLocaleString('en')}</span>
+                                <span className="expected-uploads-text">{uptakeOverview.totalTested ? uptakeOverview.totalTested.toLocaleString('en'):''}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -104,7 +104,7 @@ const UptakeOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{uptakeOverview.maleTested.toLocaleString('en')}</span>
+                                <span className="expected-uploads-text">{uptakeOverview.maleTested ? uptakeOverview.maleTested.toLocaleString('en'):''}</span>
                                 <sup className="overall-rates-sup"> {uptakeOverview.maleTestedPercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
@@ -120,7 +120,7 @@ const UptakeOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{uptakeOverview.femaleTested.toLocaleString('en')}</span>
+                                <span className="expected-uploads-text">{uptakeOverview.femaleTested ? uptakeOverview.femaleTested.toLocaleString('en'):''}</span>
                                 <sup className="overall-rates-sup"> {uptakeOverview.femaleTestedPercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
@@ -138,7 +138,7 @@ const UptakeOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{uptakeOverview.totalPositive.toLocaleString('en')}</span>
+                                <span className="expected-uploads-text">{uptakeOverview.totalPositive ? uptakeOverview.totalPositive.toLocaleString('en'):''}</span>
                                 <sup className="overall-rates-sup"> {uptakeOverview.totalPositivePercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
@@ -154,7 +154,7 @@ const UptakeOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{uptakeOverview.malePositive.toLocaleString('en')}</span>
+                                <span className="expected-uploads-text">{uptakeOverview.malePositive ? uptakeOverview.malePositive.toLocaleString('en'):''}</span>
                                 <sup className="overall-rates-sup"> {uptakeOverview.malePositivePercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
@@ -170,7 +170,7 @@ const UptakeOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12" style={{ textAlign: 'center' }}>
-                                <span className="overall-rates-figure">{uptakeOverview.femalePositive.toLocaleString('en')}</span>
+                                <span className="overall-rates-figure">{uptakeOverview.femalePositive ? uptakeOverview.femalePositive.toLocaleString('en'):''}</span>
                                 <sup className="overall-rates-sup"> {uptakeOverview.femalePositivePercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
