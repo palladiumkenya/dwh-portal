@@ -48,8 +48,8 @@ const HomeCurrentOnArtByCountyMap = () => {
             ]},
             tooltip: {
                 formatter: function () {
-                    return this.category + ' ' + this.series.name + '<br>' +
-                    this.point.properties.NAME_1 + ': ' + '<b>' + this.point.value + '</b>';
+                    return this.series.name + '<br>' +
+                    this.point.properties.NAME_1 + ': <b>' + this.point.value + '</b>';
                 }
             },
             legend: { title: { text: 'KEY: CURRENT ON ART' }, layout: 'vertical', align: 'right', verticalAlign: 'bottom', valueDecimals: 0, backgroundColor: 'white', floating: true, },

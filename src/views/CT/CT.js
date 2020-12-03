@@ -24,7 +24,7 @@ const CT = () => {
                         <NavLink active={ctTab === value} onClick={() => {
                                 dispatch(changeCtTab(value));
                                 setCurrentTab(value);
-                                if (value == 'txNew') {
+                                if (value === 'txNew') {
                                     dispatch(enableFromDateFilter());
                                 } else {
                                     dispatch(disableFromDateFilter());
@@ -46,7 +46,7 @@ const CT = () => {
         return () => {
             // dispatch(enableFromDateFilter());
         }
-    }, [dispatch]);
+    }, [dispatch, ctTab]);
 
     return (
         <div>
