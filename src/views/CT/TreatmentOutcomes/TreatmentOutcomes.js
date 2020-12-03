@@ -4,6 +4,7 @@ import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from './../../Shared/UniversalFilter';
 import TreatmentOutcomesHeader from './TreatmentOutcomesHeader';
 import TreatmentOutcomesFooter from './TreatmentOutcomesFooter';
+import TreatmentOutcomesOverview from './TreatmentOutcomesOverview';
 import TreatmentOutcomesOverall from './TreatmentOutcomesOverall';
 import TreatmentOutcomesBySex from './TreatmentOutcomesBySex';
 import TreatmentOutcomesByAge from './TreatmentOutcomesByAge';
@@ -37,11 +38,17 @@ const TreatmentOutcomes = () => {
             </VisibilitySensor>
             <p></p>
             <div className="row">
-                <div className="col-6">
-                    <TreatmentOutcomesOverall />
+                <div className="col-12">
+                    <TreatmentOutcomesOverview />
                 </div>
+            </div>
+            <p></p>
+            <div className="row">
                 <div className="col-6">
                     <TreatmentOutcomesBySex />
+                </div>
+                <div className="col-6">
+                    <TreatmentOutcomesOverall />
                 </div>
             </div>
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
