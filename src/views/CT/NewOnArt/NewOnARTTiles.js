@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import React, { useCallback, useEffect, useState } from 'react';
 import { getAll } from '../../Shared/Api';
 import { Card, CardBody, CardSubtitle, CardText, CardTitle, Col, Row } from 'reactstrap';
+import moment from 'moment';
 
 const NewOnARTTiles = () => {
     const filters = useSelector(state => state.filters);
@@ -24,6 +25,10 @@ const NewOnARTTiles = () => {
         childrenStartedOnART: 0,
         childrenStartedOnARTText: '',
         childrenStartedOnARTPercent: '',
+
+        adultsStartedOnART: 0,
+        adultsStartedOnARTText: '',
+        adultsStartedOnARTPercent: '',
     });
 
     const loadNewlyStartedARTTiles = useCallback(async () => {
@@ -34,14 +39,17 @@ const NewOnARTTiles = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
         };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('care-treatment/getNewlyStartedDesegregated', params);
         let data = [
             result.TotalStartedOnART ? result.TotalStartedOnART : 0,
             result.MalesStartedOnART ? result.MalesStartedOnART : 0,
             result.FemalesStartedOnART ? result.FemalesStartedOnART : 0,
             result.AdolescentsStartedOnART ? result.AdolescentsStartedOnART : 0,
-            result.ChildrenStartedOnART ? result.ChildrenStartedOnART : 0
+            result.ChildrenStartedOnART ? result.ChildrenStartedOnART : 0,
+            result.AdultsStartedOnART ? result.AdultsStartedOnART : 0,
         ];
         setNewlyStartedOnARTTiles({
             totalStartedOnART: data[0],
@@ -57,7 +65,10 @@ const NewOnARTTiles = () => {
             adolescentsStartedOnARTPercent: parseFloat(((data[3]/data[0])*100).toString()).toFixed(0) + '%',
             childrenStartedOnART: data[4],
             childrenStartedOnARTText: data[4].toLocaleString('en'),
-            childrenStartedOnARTPercent: parseFloat(((data[4]/data[0])*100).toString()).toFixed(0) + '%'
+            childrenStartedOnARTPercent: parseFloat(((data[4]/data[0])*100).toString()).toFixed(0) + '%',
+            adultsStartedOnART: data[5],
+            adultsStartedOnARTText: data[5].toLocaleString('en'),
+            adultsStartedOnARTPercent: parseFloat(((data[5]/data[0])*100).toString()).toFixed(0) + '%'
         });
     }, [filters]);
 
@@ -70,17 +81,37 @@ const NewOnARTTiles = () => {
         <React.Fragment>
             <Row>
                 <Col>
-                    <Card className="primary-card" style={{ height: '95%' }}>
-                        <CardBody className="primary-card-body">
-                            <CardTitle tag="h5" className="text-center m-2">TOTAL STARTED ON ART</CardTitle>
-                            <Row className="justify-content-center">
-                                <Col className="col-7">
-                                    <CardTitle tag="h5" className="primary-card-body-subtitle text-right" style={{ color: '#FFFFFF' }}>100%</CardTitle>
-                                </Col>
-                            </Row>
-                            <CardText className="primary-card-body-text text-center">{newlyStartedOnARTTiles.totalStartedOnARTText}</CardText>
-                        </CardBody>
-                    </Card>
+                    <Row>
+                        <Col>
+                            <Card className="primary-card" style={{ height: '90%' }}>
+                                <CardBody className="primary-card-body">
+                                    <CardTitle tag="h5" className="text-center m-2">TOTAL STARTED ON ART</CardTitle>
+                                    <Row className="justify-content-center">
+                                        <Col className="col-7">
+                                            <CardTitle tag="h5" className="primary-card-body-subtitle text-right" style={{ color: '#FFFFFF' }}>100%</CardTitle>
+                                        </Col>
+                                    </Row>
+                                    <CardText className="primary-card-body-text text-center">{newlyStartedOnARTTiles.totalStartedOnARTText}</CardText>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col>
+                            <Card className="primary-card" style={{ height: '90%' }}>
+                                <CardBody className="primary-card-body">
+                                    <CardTitle tag="h5" className="text-center m-2">ADULTS STARTED ON ART(15+ YRS)</CardTitle>
+                                    <Row className="justify-content-center">
+                                        <Col className="col-7">
+                                            <CardTitle tag="h5" className="primary-card-body-subtitle text-right">{newlyStartedOnARTTiles.adultsStartedOnARTPercent}</CardTitle>
+                                        </Col>
+                                    </Row>
+                                    <CardText className="primary-card-body-text text-center">{newlyStartedOnARTTiles.adultsStartedOnARTText}</CardText>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
                 </Col>
                 <Col>
                     <Row>
@@ -102,13 +133,13 @@ const NewOnARTTiles = () => {
                         <Col>
                             <Card className="primary-card" style={{ height: '90%' }}>
                                 <CardBody className="primary-card-body">
-                                    <CardTitle tag="h5" className="text-center m-2">ADOLESCENTS STARTED ON ART</CardTitle>
+                                    <CardTitle tag="h5" className="text-center m-2">CHILDREN STARTED ON ART(&lt;14 YRS)</CardTitle>
                                     <Row className="justify-content-center">
                                         <Col className="col-7">
-                                            <CardSubtitle tag="h5" className="primary-card-body-subtitle text-right">{newlyStartedOnARTTiles.adolescentsStartedOnARTPercent}</CardSubtitle>
+                                            <CardSubtitle tag="h5" className="primary-card-body-subtitle text-right">{newlyStartedOnARTTiles.childrenStartedOnARTPercent}</CardSubtitle>
                                         </Col>
                                     </Row>
-                                    <CardText className="primary-card-body-text text-center">{newlyStartedOnARTTiles.adolescentsStartedOnARTText}</CardText>
+                                    <CardText className="primary-card-body-text text-center">{newlyStartedOnARTTiles.childrenStartedOnARTText}</CardText>
                                 </CardBody>
                             </Card>
                         </Col>
@@ -134,13 +165,13 @@ const NewOnARTTiles = () => {
                         <Col>
                             <Card className="primary-card" style={{ height: '90%' }}>
                                 <CardBody className="primary-card-body">
-                                    <CardTitle tag="h5" className="text-center m-2">CHILDREN STARTED ON ART</CardTitle>
+                                    <CardTitle tag="h5" className="text-center m-2">ADOLESCENTS STARTED ON ART(10 - 19 YRS)</CardTitle>
                                     <Row className="justify-content-center">
                                         <Col className="col-7">
-                                            <CardSubtitle tag="h5" className="primary-card-body-subtitle text-right">{newlyStartedOnARTTiles.childrenStartedOnARTPercent}</CardSubtitle>
+                                            <CardSubtitle tag="h5" className="primary-card-body-subtitle text-right">{newlyStartedOnARTTiles.adolescentsStartedOnARTPercent}</CardSubtitle>
                                         </Col>
                                     </Row>
-                                    <CardText className="primary-card-body-text text-center">{newlyStartedOnARTTiles.childrenStartedOnARTText}</CardText>
+                                    <CardText className="primary-card-body-text text-center">{newlyStartedOnARTTiles.adolescentsStartedOnARTText}</CardText>
                                 </CardBody>
                             </Card>
                         </Col>

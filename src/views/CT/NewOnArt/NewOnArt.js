@@ -44,10 +44,10 @@ const NewOnArt = () => {
             <p></p>
             <p></p>
             <div className="row">
-                <div className="col-6">
+                {/*<div className="col-6">
                     <NewOnArtBySex />
-                </div>
-                <div className="col-6">
+                </div>*/}
+                <div className="col-12">
                     <NewOnArtByAgeSex />
                 </div>
             </div>
