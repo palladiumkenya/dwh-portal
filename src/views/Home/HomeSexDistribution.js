@@ -76,8 +76,8 @@ const HomeSexDistribution = () => {
                                     <CardTitle tag="h4" className="text-center mt-0 mb-2">Active on ART</CardTitle>
                                 </Col>
                                 <Col md={3}>
-                                    <CardSubtitle tag="h5" className="primary-card-body-subtitle text-right">{ARTClientsByGender.ViralSuppressionMale}%</CardSubtitle>
-                                    <CardTitle tag="h5" className="text-right m-2">Of the males with a viral load are virally suppressed.</CardTitle>
+                                    <CardSubtitle tag="h5" className="primary-card-body-subtitle text-right bigger-subtitle">{ARTClientsByGender.ViralSuppressionMale}%</CardSubtitle>
+                                    <CardTitle tag="h5" className="text-right m-2">viral suppression among males</CardTitle>
                                 </Col>
                             </Row>
                         </CardBody>
@@ -95,8 +95,8 @@ const HomeSexDistribution = () => {
                                     <CardTitle tag="h4" className="text-center mt-0 mb-2">Active on ART</CardTitle>
                                 </Col>
                                 <Col md={3}>
-                                    <CardSubtitle tag="h5" className="primary-card-body-subtitle text-right">{ARTClientsByGender.ViralSuppressionFemale}%</CardSubtitle>
-                                    <CardTitle tag="h5" className="text-right m-2">Of the females with a viral load are virally suppressed.</CardTitle>
+                                    <CardSubtitle tag="h5" className="primary-card-body-subtitle text-right bigger-subtitle">{ARTClientsByGender.ViralSuppressionFemale}%</CardSubtitle>
+                                    <CardTitle tag="h5" className="text-right m-2">viral suppression among females</CardTitle>
                                 </Col>
                             </Row>
                         </CardBody>
