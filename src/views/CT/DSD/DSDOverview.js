@@ -96,7 +96,7 @@ const DSDOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{dsdStabilityStatus.txCurr.toLocaleString('en')}</span>
+                                <span className="expected-uploads-text">{dsdStabilityStatus.txCurr ? dsdStabilityStatus.txCurr.toLocaleString('en'):''}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -111,7 +111,7 @@ const DSDOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{dsdStabilityStatus.mmd.toLocaleString('en')}</span>
+                                <span className="expected-uploads-text">{dsdStabilityStatus.mmd ? dsdStabilityStatus.mmd.toLocaleString('en'):''}</span>
                                 <sup className="overall-rates-sup"> {dsdStabilityStatus.mmdPercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
@@ -127,7 +127,7 @@ const DSDOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{dsdStabilityStatus.stable.toLocaleString('en')}</span>
+                                <span className="expected-uploads-text">{dsdStabilityStatus.stable ? dsdStabilityStatus.stable.toLocaleString('en'):''}</span>
                                 <sup className="overall-rates-sup"> {dsdStabilityStatus.stablePercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
@@ -145,7 +145,7 @@ const DSDOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{dsdUnstable.onArtLessThan12Months.toLocaleString('en')}</span>
+                                <span className="expected-uploads-text">{dsdUnstable.onArtLessThan12Months ? dsdUnstable.onArtLessThan12Months.toLocaleString('en'):''}</span>
                                 {/* <sup className="overall-rates-sup"> {dsdUnstable.onArtLessThan12MonthsPercent}<span className="overall-rates-sup-perc"> %</span></sup> */}
                             </div>
                         </CardBody>
@@ -161,7 +161,7 @@ const DSDOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{dsdUnstable.highVl.toLocaleString('en')}</span>
+                                <span className="expected-uploads-text">{dsdUnstable.highVl ? dsdUnstable.highVl.toLocaleString('en'):''}</span>
                                 <sup className="overall-rates-sup"> {dsdUnstable.highVlPercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
@@ -177,7 +177,7 @@ const DSDOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12" style={{ textAlign: 'center' }}>
-                                <span className="overall-rates-figure">{dsdUnstable.poorAdherence.toLocaleString('en')}</span>
+                                <span className="overall-rates-figure">{dsdUnstable.poorAdherence ? dsdUnstable.poorAdherence.toLocaleString('en'):''}</span>
                                 <sup className="overall-rates-sup"> {dsdUnstable.poorAdherencePercent}<span className="overall-rates-sup-perc"> %</span></sup>
                             </div>
                         </CardBody>
