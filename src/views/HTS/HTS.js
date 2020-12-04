@@ -5,7 +5,7 @@ import Uptake from './Uptake/Uptake';
 import Linkage from './Linkage/Linkage';
 import PNS from './PNS/PNS';
 import { HTS_TABS, PAGES } from "../../constants";
-import { changeHtsTab, changeCurrentPage } from "../../actions/uiActions";
+import { changeHtsTab, changeCurrentPage, enableFromDateFilter, disableFromDateFilter } from "../../actions/uiActions";
 
 const HTS = () => {
     const dispatch = useDispatch();
@@ -27,6 +27,10 @@ const HTS = () => {
 
     useEffect(() => {
         dispatch(changeCurrentPage(PAGES.hts));
+        dispatch(enableFromDateFilter());
+        return () => {
+            dispatch(disableFromDateFilter());
+        }
     }, [dispatch]);
 
     return (
