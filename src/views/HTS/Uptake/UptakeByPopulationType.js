@@ -50,12 +50,12 @@ const UptakeByPopulationType = () => {
                 keyPopVal = parseInt(result[i].Tested, 10);
                 keyPopPositive = parseInt(result[i].positive, 10);
                 const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
-                genPopPositivity = val;
+                keyPopPositivity = val;
             } else if(result[i].PopulationType === 'General Population') {
                 genPopVal = parseInt(result[i].Tested, 10);
                 genPopPositive = parseInt(result[i].positive, 10);
                 const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
-                keyPopPositivity = val;
+                genPopPositivity = val;
             } else if(result[i].PopulationType === null) {
                 missingPopVal = parseInt(result[i].Tested, 10);
                 missingPopPositive = parseInt(result[i].positive, 10);
