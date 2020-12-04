@@ -361,7 +361,7 @@ const AdverseEventsTiles = () => {
                             }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text"><strong>{adults15PlusCurrentOnART.adults15PlusCurrentOnART}</strong></span>
+                                <span className="expected-uploads-text">{adults15PlusCurrentOnART.adults15PlusCurrentOnART}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -424,7 +424,7 @@ const AdverseEventsTiles = () => {
                         >
                             <div className="col-12">
                                 <span className="expected-uploads-text">
-                                    <strong>{childrenUnder15CurrentOnART.childrenUnder15CurrentOnART}</strong>
+                                    {childrenUnder15CurrentOnART.childrenUnder15CurrentOnART}
                                 </span>
                             </div>
                         </CardBody>

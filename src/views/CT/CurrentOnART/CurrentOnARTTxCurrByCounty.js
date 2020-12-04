@@ -171,7 +171,7 @@ const CurrentOnARTTxCurrByCounty = () => {
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <DataTable columns={txCurrByCountyList.columns} data={txCurrByCountyList.data}/>
+                            <DataTable columns={txCurrByCountyList.columns} data={txCurrByCountyList.data} pagination="true" defaultSortField="county" responsive="true"/>
                         </div>
                     </CardBody>
                 </Card>
