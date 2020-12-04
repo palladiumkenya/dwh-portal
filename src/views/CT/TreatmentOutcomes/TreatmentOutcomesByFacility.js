@@ -31,13 +31,13 @@ const TreatmentOutcomesByFacility = () => {
                     partner: result[i].partner,
                 };
             }
-            if (result[i].artOutcome == "Active") {
+            if (result[i].artOutcome === "Active") {
                 outcomes[result[i].facility].active = parseInt(result[i].totalOutcomes, 10);
-            } else if (result[i].artOutcome == "Dead") {
+            } else if (result[i].artOutcome === "Dead") {
                 outcomes[result[i].facility].dead = parseInt(result[i].totalOutcomes, 10);
-            } else if (result[i].artOutcome == "LTFU") {
+            } else if (result[i].artOutcome === "LTFU") {
                 outcomes[result[i].facility].ltfu = parseInt(result[i].totalOutcomes, 10);
-            } else if (result[i].artOutcome == "Stopped") {
+            } else if (result[i].artOutcome === "Stopped") {
                 outcomes[result[i].facility].stopped = parseInt(result[i].totalOutcomes, 10);
             }
         }
