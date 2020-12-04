@@ -15,6 +15,7 @@ import ThreeMonthRetention from './ThreeMonthRetention';
 import SixMonthRetention from './SixMonthRetention';
 import TwelveMonthRetention from './TwelveMonthRetention';
 import TwentyFourMonthRetention from './TwentyFourMonthRetention';
+import TreatmentOutcomesByFacility from './TreatmentOutcomesByFacility';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
 
 const TreatmentOutcomes = () => {
@@ -68,6 +69,8 @@ const TreatmentOutcomes = () => {
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
             <p></p><TwentyFourMonthRetention />
             <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
+            <p></p><TreatmentOutcomesByFacility />
+            <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p><p></p>
         </div>
     );
 

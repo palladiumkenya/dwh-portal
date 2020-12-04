@@ -89,7 +89,7 @@ const VLOverallUptakeAndSuppressionByFacility = () => {
                             <DataTable
                                 columns={vlOverallUptakeAndSuppressionByFacility.columns}
                                 data={vlOverallUptakeAndSuppressionByFacility.data}
-                                pagination="true"
+                                pagination="true" defaultSortField="facility" responsive="true"
                             />
                         </div>
                     </CardBody>
