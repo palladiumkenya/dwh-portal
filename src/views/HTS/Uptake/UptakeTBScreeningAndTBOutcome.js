@@ -41,7 +41,7 @@ const UptakeTBScreeningAndTBOutcome = () => {
             }},
             series: [{ type: 'pie', colorByPoint: true, name: 'Screening for TB', data: [
                 { name: 'Not Screened For TB', y: NotScreenedTB, color: "#1AB394", sliced: true, selected: true },
-                { name: 'Individual',  y: ScreenedTB, color: "#2F4050" },
+                { name: 'Screened For TB',  y: ScreenedTB, color: "#2F4050" },
             ]}]
         });
     }, [filters]);
