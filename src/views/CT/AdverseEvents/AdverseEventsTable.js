@@ -86,7 +86,7 @@ const AdverseEventsTable = () => {
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <DataTable columns={adverseEvents.columns} data={adverseEvents.data}/>
+                            <DataTable columns={adverseEvents.columns} data={adverseEvents.data} pagination="true" defaultSortField="aeName" responsive="true"/>
                         </div>
                     </CardBody>
                 </Card>
