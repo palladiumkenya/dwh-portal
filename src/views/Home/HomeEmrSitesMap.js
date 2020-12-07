@@ -25,11 +25,11 @@ const HomeEmrSitesMap = () => {
             let lat = parseFloat(result[k].latitude);
             let lon = parseFloat(result[k].longitude);
             if (Number.isFinite(lat) && lat < 5 && lat > -5 && Number.isFinite(lon) && lon > 34 && lon < 41) {
-                emrSites[index].push({name: result[k].facility, lat: lat, lon: lon });
+                emrSites[index].push({ name: result[k].facility, lat: lat, lon: lon });
             }
         }
         data.push({
-            mapData: Highcharts.maps['custom/ke-all'],
+            mapData: Highcharts.maps['custom/ke-province'],
             name: 'Basemap',
             borderColor: '#A0A0A0',
             nullColor: 'rgba(200, 200, 200, 0.3)',
@@ -39,22 +39,13 @@ const HomeEmrSitesMap = () => {
             data.push({
                 name: emrNames[j] === null ? 'Unknown' : emrNames[j],
                 type: 'mappoint',
-                data: emrSites[j]
+                data: emrSites[j],
+                dataLabels: { enabled: false },
             });
         }
         setHomeEmrSitesMap({
-            chart: { map: 'custom/ke-all' },
             title: { text: '' },
-            // tooltip: {
-            //     formatter: function () {
-            //         return this.series.name + '<br>' +
-            //         this.point.properties.NAME_1 + ': <b>' + this.point.z.toLocaleString('en') + '</b>';
-            //     }
-            // },
-            tooltip: {
-                headerFormat: '',
-                pointFormat: '<b>{point.name}</b><br>Lat: {point.lat}, Lon: {point.lon}'
-            },
+            tooltip: { pointFormat: '<b>{point.name}</b>' },
             legend: { title: { text: 'KEY: EMR SITES' }, layout: 'vertical', align: 'right', verticalAlign: 'bottom' },
             series: data
         });
