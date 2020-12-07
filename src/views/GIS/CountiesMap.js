@@ -1,11 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
+import Highcharts from '../../utils/highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import Highcharts from 'highcharts';
-import mapKenyaByCounty from './../Shared/kenyaByCounty.json';
-
-require('highcharts/modules/map')(Highcharts);
-Highcharts.maps["custom/kenya-county"] = mapKenyaByCounty;
 
 const CountiesMap = () => {
 
@@ -13,7 +9,7 @@ const CountiesMap = () => {
 
     const loadCounties = useCallback(async () => {
         setCountiesMap({
-            chart: { map: 'custom/kenya-county' },
+            chart: { map: 'custom/ke-county' },
             title: { text: '' },
             legend: { enabled: false },
             series: [{
