@@ -3,7 +3,7 @@ import * as actions from "../actions/types";
 const initialState = {
     currentPage: "",
     stickyFilter: false,
-    homeTab: "txCurr",
+    homeTab: "emr",
     rrTab: "ct",
     htsTab: "uptake",
     ctTab: "txNew",

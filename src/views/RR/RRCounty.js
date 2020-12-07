@@ -52,11 +52,11 @@ const RRCounty = () => {
         const result = await getAll('manifests/recencyreportingbycounty/' + rrTab, params);
         const counties = result.map(({ county  }) => county);
         const counties_series = result.map(({ Percentage }) => parseInt(Percentage, 10) > 100 ? 100:parseInt(Percentage, 10));
-        const data = counties_series.map(d => ({ y: d, color: d >= 70 ? '#59A14F': (d >= 30 && d <70) ? '#F28E2B' : '#E15759' }));
+        const data = counties_series.map(d => ({ y: d, color: d >= 90 ? '#59A14F': (d >= 30 && d <90) ? '#F28E2B' : '#E15759' }));
         setRecencyOfReportingByCounty({
             chart: { type: 'bar', height: '120%', spacingLeft:0, spacingRight:0, spacingBottom:0 },
             title: { text: '' },
-            xAxis: { categories: counties, title: { text: '' }, labels: { style: { fontSize: '10px' } } },
+            xAxis: { categories: counties, title: { text: '' }, labels: { style: { fontSize: '8px' } } },
             yAxis: { min: 0, max: 100, title: { text: 'Percentage (%) Reporting Rate' }},
             legend: { enabled: false },
             series: [{ name: "Overall Reporting Rates", data: data, color: "#59A14F", tooltip: { valueSuffix: ' %' } }]
@@ -77,11 +77,11 @@ const RRCounty = () => {
         const result = await getAll('manifests/consistencyreportingbycountypartner/' + rrTab + '?reportingType=county', params);
         const counties = Object.keys(result);
         const counties_series = Object.values(result);
-        const data = counties_series.map(d => ({ y: d, color: d >= 70 ? '#59A14F': (d >= 30 && d <70) ? '#F28E2B' : '#E15759' }));
+        const data = counties_series.map(d => ({ y: d, color: d >= 90 ? '#59A14F': (d >= 30 && d <90) ? '#F28E2B' : '#E15759' }));
         setConsistencyOfReportingByCounty({
             chart: { type: 'bar', height: '120%', spacingLeft:0, spacingRight:0, spacingBottom:0 },
             title: { text: '' },
-            xAxis: { categories: counties, title: { text: '' }, labels: { style: { fontSize: '10px' } } },
+            xAxis: { categories: counties, title: { text: '' }, labels: { style: { fontSize: '8px' } } },
             yAxis: { min: 0, max: 100, title: { text: 'Percentage (%) Reporting Rate' }},
             legend: { enabled: false },
             series: [{ name: 'Consistency of Reporting', data: data, tooltip: { valueSuffix: ' %' } }]
