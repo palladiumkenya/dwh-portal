@@ -1,12 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import Highcharts from '../../utils/highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import Highcharts from 'highcharts';
 import { getAll } from '../Shared/Api';
 import countyMapping from '../Shared/countyMapping.json';
-import mapKenyaByCounty from '../Shared/kenyaByCounty.json';
-
-require('highcharts/modules/map')(Highcharts);
-Highcharts.maps["custom/kenya-county"] = mapKenyaByCounty;
 
 const HomeCurrentOnArtByCountyMap = () => {
     const [currentOnArtByCounty, setHomeCurrentOnArtByCountyMap] = useState({});
@@ -36,7 +32,7 @@ const HomeCurrentOnArtByCountyMap = () => {
         }
         
         setHomeCurrentOnArtByCountyMap({
-            chart: { map: 'custom/kenya-county' },
+            chart: { map: 'custom/ke-county' },
             title: { text: '' },
             colors: ['#F5542D', '#F17B25', '#F7DB00', '#8CC63F', '#009245'],
             colorAxis: { dataClassColor: 'category', dataClasses: [

@@ -1,14 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
+import Highcharts from '../../utils/highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import Highcharts from 'highcharts';
 import { getAll } from '../Shared/Api';
-import mapKenyaByProvince from '../Shared/kenyaByProvince.json';
 
-require('highcharts/modules/map')(Highcharts);
-Highcharts.maps["custom/kenya"] = mapKenyaByProvince;
-
-const TxCurrByProvinceMap = ({ globalFilters }) => {
+const TxCurrByProvinceMap = () => {
 
     const [txCurrByProvinceMap, setTxCurrByProvinceMap] = useState({});
 
@@ -139,7 +135,7 @@ const TxCurrByProvinceMap = ({ globalFilters }) => {
         ];
         
         setTxCurrByProvinceMap({
-            chart: { borderWidth: 1, map: 'custom/kenya' },
+            chart: { borderWidth: 1, map: 'custom/ke-province' },
             title: { text: ' ' },
             subtitle: { text: ' ' },
             legend: { enabled: false },
