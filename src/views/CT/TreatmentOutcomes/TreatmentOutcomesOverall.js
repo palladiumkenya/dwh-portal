@@ -21,7 +21,7 @@ const TreatmentOutcomesOverall = () => {
             year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped'];
+        const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped', 'TransferOut'];
         const result = await getAll('care-treatment/treatmentOutcomesOverall', params);
         let data = [0, 0, 0, 0];
         for(let i = 0; i < result.length; i++) {
@@ -54,6 +54,7 @@ const TreatmentOutcomesOverall = () => {
                     { name: 'DEAD', y: data[1], color: "#60A6E5" },
                     { name: 'LTFU', y: data[2], color: "#1AB394" },
                     { name: 'STOPPED', y: data[3], color: "#BBE65F" },
+                    // { name: 'TRANSFER OUT', y: data[3], color: "#BBE65F" },
                 ]
             }]
         });
