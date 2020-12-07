@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import vizdata from '../../Shared/tableauDashboards.json';
+import vizzData from '../../Shared/tableauDashboards.json';
 import RenderViz from '../../Shared/RenderViz';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 
 function CALHIVOptimization() {
     const [views, setViews] = useState([]);
     useEffect(() => {
-        setViews(vizdata);
+        setViews(vizzData);
     }, []);
 
     return (
@@ -21,7 +21,7 @@ function CALHIVOptimization() {
                         <div className="col-12">
                             {views.filter(x => x.section === 'CALHIV Optimization').map((v, index) => (
                                 <div key={index}>
-                                    <RenderViz vizd={v}/>
+                                    <RenderViz vizzView={v}/>
                                 </div>
                             ))}
                         </div>

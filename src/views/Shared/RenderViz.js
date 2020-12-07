@@ -1,24 +1,37 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as axios from 'axios';
 
-const { tableau } = window;
+const { tableau} = window;
 
 function RenderViz(props) {
     const ref = useRef(null);
-    useEffect(() => {
-        async function loadDashboard() {
-            const result = await axios(
-                'https://auth.kenyahmis.org/tikiti/api/ticket'
-            );
-            const url = `https://data.kenyahmis.org/trusted/${result.data}/t/${props.vizd.site}/views/${props.vizd.workbook}/${props.vizd.view}`;
-            new tableau.Viz(ref.current, url);
-        }
+    const [vizzStatus, setVizzStatus] = useState(" loading...");
 
+    const loadDashboard = () => {
+        const options = {
+            onFirstInteractive: function() {
+                console.log(`loaded ${props.vizzView.name}`)
+                setVizzStatus("")
+            }
+        };
+
+        axios.get('https://auth.kenyahmis.org/tikiti/api/ticket')
+            .then(resp => {
+                const url = `https://data.kenyahmis.org/trusted/${resp.data}/t/${props.vizzView.site}/views/${props.vizzView.workbook}/${props.vizzView.view}`;
+                new tableau.Viz(ref.current, url, options);
+            }).catch(err => {
+                console.error(err);
+            });
+
+    }
+
+    useEffect(() => {
         loadDashboard();
-    }, [props.vizd]);
+    }, []);
+
     return (
         <div>
-            <h3>{props.vizd.name}</h3>
+            <h4>{props.vizzView.name} <span className="smallfont">{vizzStatus}</span></h4>
             <div ref={ref}></div>
         </div>
     );

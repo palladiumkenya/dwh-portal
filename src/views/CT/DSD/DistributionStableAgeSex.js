@@ -1,17 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const DistributionStableAgeSex = ({ globalFilters }) => {
+const DistributionStableAgeSex = () => {
+    const filters = useSelector(state => state.filters);
     const [distributionStableAgeSex, setDistributionStableAgeSex] = useState({});
 
     const loadDistributionStableAgeSex = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('care-treatment/dsdStabilityStatusByAgeSex', params);
         const ageGroups = ["Under 1", "1 to 4", "5 to 9", "10 to 14", "15 to 19", "20 to 24", "25 to 29", "30 to 34", "35 to 39", "40 to 44", "45 to 49", "50 to 54", "55 to 59", "60 to 64", "65+"];
         const ageGroupsMale = ageGroups;
@@ -67,11 +76,11 @@ const DistributionStableAgeSex = ({ globalFilters }) => {
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'Female', data: stableFemale, color: "#485969", tooltip: { valueSuffix: ' ' } },
-                { name: 'Male', data: stableMale, color: "#1AB394", tooltip: { valueSuffix: ' ' } }
+                { name: 'Female', data: stableFemale, color: "#EA4C8B", tooltip: { valueSuffix: ' ' } },
+                { name: 'Male', data: stableMale, color: "#14084D", tooltip: { valueSuffix: ' ' } }
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadDistributionStableAgeSex();
@@ -82,7 +91,7 @@ const DistributionStableAgeSex = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        DISTRIBUTION OF STABLE PATIENTS BY AGE AND SEX
+                        DISTRIBUTION OF STABLE PATIENTS BY AGE GROUP AND SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

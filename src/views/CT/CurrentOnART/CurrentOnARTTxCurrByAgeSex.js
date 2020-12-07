@@ -1,19 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const CurrentOnARTTxCurrByAgeSex = ({ globalFilters }) => {
+const CurrentOnARTTxCurrByAgeSex = () => {
+    const filters = useSelector(state => state.filters);
     const [txCurrByAgeAndSex, setTxCurrByAgeAndSex] = useState({});
 
     const loadTxCurrByAgeAndSex = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         let ageGroups = [];
         let txNewMale = [];
         let txNewFemale = [];
@@ -58,7 +65,7 @@ const CurrentOnARTTxCurrByAgeSex = ({ globalFilters }) => {
                 {
                     min: -(max),
                     max: (max),
-                    title: { text: 'TX CURR', style: { color: Highcharts.getOptions().colors[1] } },
+                    title: { text: 'CURRENT ON ART', style: { color: Highcharts.getOptions().colors[1] } },
                     labels: {
                         formatter: function () {
                             return Math.abs(this.value);
@@ -70,7 +77,7 @@ const CurrentOnARTTxCurrByAgeSex = ({ globalFilters }) => {
             tooltip: {
                 formatter: function () {
                     return '<b>' + this.series.name + ', Age Group ' + this.point.category + '</b><br/>' +
-                        'TX CURR: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
+                        'CURRENT ON ART: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
                 }
             },
             legend: {
@@ -78,11 +85,11 @@ const CurrentOnARTTxCurrByAgeSex = ({ globalFilters }) => {
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'Female', data: txNewFemale, color: "#485969", tooltip: { valueSuffix: ' ' } },
-                { name: 'Male', data: txNewMale, color: "#1AB394", tooltip: { valueSuffix: ' ' } }
+                { name: 'Female', data: txNewFemale, color: "#EA4C8B", tooltip: { valueSuffix: ' ' } },
+                { name: 'Male', data: txNewMale, color: "#14084D", tooltip: { valueSuffix: ' ' } }
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadTxCurrByAgeAndSex();
@@ -93,7 +100,7 @@ const CurrentOnARTTxCurrByAgeSex = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX CURR BY AGE AND SEX
+                        CURRENT ON ART BY AGE GROUP AND SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

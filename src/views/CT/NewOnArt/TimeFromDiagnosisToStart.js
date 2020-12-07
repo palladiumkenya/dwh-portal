@@ -1,17 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const TimeFromDiagnosisToStart = ({ globalFilters }) => {
+const TimeFromDiagnosisToStart = () => {
+    const filters = useSelector(state => state.filters);
     const [linkageByAgeSex, setTimeFromDiagnosisToStart] = useState({});
 
     const loadTimeFromDiagnosisToStart = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const periodGroups = [];
         let firstPeriod = [];
         let firstPeriodPercent = [];
@@ -81,7 +90,7 @@ const TimeFromDiagnosisToStart = ({ globalFilters }) => {
                 { name: '> 14 Days', data: fourthPeriodPercent, type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' %' } },
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadTimeFromDiagnosisToStart();
@@ -92,7 +101,7 @@ const TimeFromDiagnosisToStart = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TIME FROM DIAGNOSIS TO ART START AMONG NEWLY DIAGNOSED PATIENTS BY YEAR OF ART (N=495)
+                        TIME FROM DIAGNOSIS TO ART START AMONG NEWLY DIAGNOSED PATIENTS BY YEAR OF ART
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

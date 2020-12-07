@@ -1,72 +1,72 @@
-import React, { useCallback } from 'react';
-import { CardColumns } from 'reactstrap';
-import CTHomeOverview from './CTHomeOverview';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Col, Row } from 'reactstrap';
+import SectionHeader from './../Shared/SectionHeader';
+import SectionFooter from './../Shared/SectionFooter';
 import UniversalFilter from '../Shared/UniversalFilter';
-import CTHomeFooter from './CTHomeFooter';
-import CTHomeTXNew from './CTHomeTXNew';
-import CTHomeStabilityStatusAndTrendsInDSD from './CTHomeStabilityStatusAndTrendsInDsd';
-import VLCascade from './VLCascade';
-import CTOverview from './CTOverview';
+import HomeTxNew from './HomeTxNew';
+import HomeOverallMmdUptake from './HomeOverallMmdUptake';
+import HomeMmdUptakeBySex from './HomeMmdUptakeBySex';
+import HomeVLCascade from './HomeVLCascade';
+import HomeAgeDistribution from './HomeAgeDistribution';
+import HomeSexDistribution from './HomeSexDistribution';
 import VisibilitySensor from 'react-visibility-sensor';
+import HomeOverview from './HomeOverview';
+import HomeMaps from './HomeMaps';
+import { enableStickyFilter, disableStickyFilter, changeCurrentPage, enableFromDateFilter, disableFromDateFilter } from "../../actions/uiActions";
+import { PAGES } from './../../constants';
 
-const Home = ({globalFilters, onGlobalFiltersChange}) => {
-    const onVisibilityChange = useCallback(async (isVisible) => {
-        onGlobalFiltersChange({
-            ...globalFilters,
-            stickyFilter: !isVisible,
-            countyFilterEnabled: true,
-            subCountyFilterEnabled: true,
-            facilityFilterEnabled: true,
-            partnerFilterEnabled: true,
-            agencyFilterEnabled: false,
-            fromDateFilterEnabled: false,
-            toDateFilterEnabled: false,
-        });
-    }, [globalFilters, onGlobalFiltersChange]);
-    const onVisibilityChangeOnCTHomeTxNew = useCallback(async (isVisible) => {
+const Home = () => {
+    const branding = { title: "HOME", description: "HMIS STATISTICS", overview: "HMIS Statistics" };
+    const dispatch = useDispatch();
+
+    const onVisibilityChange = (isVisible) => {
         if (isVisible) {
-            onGlobalFiltersChange({
-                ...globalFilters,
-                fromDateFilterEnabled: true,
-            });
+            dispatch(disableStickyFilter());
         } else {
-            onGlobalFiltersChange({
-                ...globalFilters,
-                fromDateFilterEnabled: false,
-            });
+            dispatch(enableStickyFilter());
         }
-    }, [globalFilters, onGlobalFiltersChange]);
+    };
 
+    useEffect(() => {
+        dispatch(changeCurrentPage(PAGES.home));
+        dispatch(disableFromDateFilter());
+        return () => {
+            dispatch(enableFromDateFilter());
+        }
+    }, [dispatch]);
+    
     return (
         <div className="animated fadeIn">
-            <br></br>
-            <div className="strip"></div>
-            <CTHomeOverview period={globalFilters?.year} />
+            <SectionHeader title={branding.title} description={branding.description}/>
             <VisibilitySensor onChange={onVisibilityChange}>
-                <UniversalFilter globalFilters={globalFilters}  onGlobalFiltersChange={onGlobalFiltersChange}/>
+                <UniversalFilter/>
             </VisibilitySensor>
-            <p>
-                <strong>1223</strong> Health Facilities in 44 Countries in Kenya,
-                supported by 44 SDPs have ever uploaded care & treatment data to the warehouse since it’s inception.
-                As at July 2020,<strong>1035</strong> facilities had reported patients current on ART.
-            </p>
-            <CardColumns className="cols-2">
-                <VLCascade globalFilters={globalFilters} />
-                <CTOverview globalFilters={globalFilters} />
-            </CardColumns>
-            <hr />
-            <CTHomeFooter />
-            <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>
-            <VisibilitySensor onChange={onVisibilityChangeOnCTHomeTxNew}>
-                <CTHomeTXNew globalFilters={globalFilters} />
-            </VisibilitySensor>
-            <hr />
-            <CTHomeFooter />
-            <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>
-            <CTHomeStabilityStatusAndTrendsInDSD globalFilters={globalFilters} />
-            <hr />
-            <CTHomeFooter />
-            <hr /><div className="strip">&nbsp;</div><p>&nbsp;</p>
+            <HomeVLCascade/>
+            <Row>
+                <Col xl={3} lg={3} md={12} sm={12} xs={12}>
+                    <HomeAgeDistribution/>
+                </Col>
+                <Col xl={6} lg={6} md={12} sm={12} xs={12}>
+                    <HomeMaps/>
+                </Col>
+                <Col xl={3} lg={3} md={12} sm={12} xs={12}>
+                    <HomeOverview />
+                </Col>
+            </Row>
+            <HomeSexDistribution/>
+            <SectionFooter overview={branding.overview}/>
+            <HomeTxNew/>
+            <SectionFooter overview={branding.overview}/>
+            <Row>
+                <Col sm={6}>
+                    <HomeOverallMmdUptake/>
+                </Col>
+                <Col sm={6}>
+                    <HomeMmdUptakeBySex/>
+                </Col>
+            </Row>
+            <SectionFooter overview={branding.overview}/>
         </div>
     );
 };

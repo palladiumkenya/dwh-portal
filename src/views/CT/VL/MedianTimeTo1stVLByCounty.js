@@ -1,17 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const MedianTimeTo1stVLByCounty = ({ globalFilters }) => {
+const MedianTimeTo1stVLByCounty = () => {
+    const filters = useSelector(state => state.filters);
     const [medianTimeTo1stVLByCounty, setMedianTimeTo1stVLByCounty] = useState({});
 
     const loadMedianTimeTo1stVLByCounty = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('care-treatment/vlMedianTimeToFirstVlByCounty', params);
 
         let counties = [];
@@ -23,26 +32,18 @@ const MedianTimeTo1stVLByCounty = ({ globalFilters }) => {
         }
 
         setMedianTimeTo1stVLByCounty({
-            chart: { zoomType: 'xy' },
-            title: { useHTML: true, text: ' &nbsp;', align: 'left' },
-            subtitle: { text: ' ', align: 'left' },
+            title: { text: '' },
             xAxis: [{ categories: counties, crosshair: true, title: { text: 'County' } }],
             yAxis: [
-                {
-                    title: { text: 'Time (Days)', style: { color: Highcharts.getOptions().colors[1] } },
-                    labels: { format: '{value}', style: { color: Highcharts.getOptions().colors[1] } },
-                    min: 0,
-                }
+                { title: { text: 'Time (Days)' } },
             ],
-            legend: {
-                floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
-                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
-            },
+            tooltip: { shared: true },
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Time (Days)', data: medianTimeTo1stVLByCounty, type: 'bar', color: "#E06F07" },
+                { name: 'Time (Days)', data: medianTimeTo1stVLByCounty, type: 'spline', color: "#E06F07" },
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadMedianTimeTo1stVLByCounty();

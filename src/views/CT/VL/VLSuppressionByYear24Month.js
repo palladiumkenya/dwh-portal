@@ -1,17 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const VLSuppressionByYear24Month = ({ globalFilters }) => {
+const VLSuppressionByYear24Month = () => {
+    const filters = useSelector(state => state.filters);
     const [vlSuppressionByYear24Month, setVLSuppressionByYear24Month] = useState({});
 
     const loadVLSuppressionByYear24Month = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('care-treatment/vlSuppressionByYear', params);
 
         let year = [];
@@ -43,7 +52,7 @@ const VLSuppressionByYear24Month = ({ globalFilters }) => {
                 { name: 'Number of Patients', data: vlSuppressionByYear24Month, type: 'column', color: "#485969" },
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadVLSuppressionByYear24Month();
@@ -54,7 +63,7 @@ const VLSuppressionByYear24Month = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        24 MONTH VIRAL SUPPRESSION BY YEAR OF ART START (N =495)
+                        24 MONTH VIRAL SUPPRESSION BY YEAR OF ART START
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

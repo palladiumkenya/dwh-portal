@@ -1,50 +1,59 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const DSDCascade = ({ globalFilters }) => {
+const DSDCascade = () => {
+    const filters = useSelector(state => state.filters);
     const [dsdCascade, setDSDCascade] = useState({});
 
     const loadDSDCascade = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         let txCurr = 0;
-        let stable = 0;
+        // let stable = 0;
         let mmd = 0;
         const result = await getAll('care-treatment/dsdCascade', params);
         if(result) {
             txCurr = result.txCurr;
-            stable = result.stable;
+            // stable = result.stable;
             mmd = result.mmd;
         }
-        const categories = ["TX CURR", "STABLE", "TOTAL ON MMD"];
-        const data = [txCurr, stable, mmd];
+        const categories = [
+            "CURRENT ON ART",
+            // "STABLE",
+            "TOTAL ON MMD"
+        ];
+        const data = [
+            txCurr,
+            // stable,
+            mmd
+        ];
         setDSDCascade({
-            chart: { zoomType: 'xy' },
-            title: { useHTML: true, text: ' &nbsp;', align: 'left' },
-            subtitle: { text: ' ', align: 'left' },
+            title: { text: '' },
             xAxis: [{ categories: categories, crosshair: true }],
             yAxis: [
-                {
-                    title: { text: 'Number of Patients', style: { color: Highcharts.getOptions().colors[1] } },
-                    labels: { format: '{value}', style: { color: Highcharts.getOptions().colors[1] } },
-                    min: 0,
-                }
+                { title: { text: 'Number of Patients' }}
             ],
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
-            legend: {
-                floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
-                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
-            },
-            series: [
-                { name: 'Number of Patients', data: data, type: 'column', color: "#485969" },
-            ]
+            legend: { enabled: false },
+            plotOptions: { column: { dataLabels: { enabled: true, format: '{point.y:,.0f}{point.text}' } } },
+            series: [{ name: 'DSD Cascade', type: 'column', color: "#485969", tooltip: { valueSuffix: '{point.text}' }, data: [
+                { name: categories[0], y: data[0] },
+                { name: categories[1], y: data[1], text: ' (' + parseFloat(((data[1]/data[0])*100).toString()).toFixed(0) + '%)' },
+            ]}]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadDSDCascade();

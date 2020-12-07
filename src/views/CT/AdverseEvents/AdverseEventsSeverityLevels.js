@@ -1,18 +1,25 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const AdverseEventsSeverityLevels = ({ globalFilters }) => {
+const AdverseEventsSeverityLevels = () => {
+    const filters = useSelector(state => state.filters);
     const [severityLevels, setSeverityLevels] = useState({});
     const loadSeverityLevels = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const categories = [];
         const severe_values = [];
         const moderate_values = [];
@@ -99,7 +106,7 @@ const AdverseEventsSeverityLevels = ({ globalFilters }) => {
                 data: mild_values
             }]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadSeverityLevels();

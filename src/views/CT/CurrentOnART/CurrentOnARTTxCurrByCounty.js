@@ -1,19 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import DataTable from 'react-data-table-component';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 import * as _ from 'lodash';
 
-const CurrentOnARTTxCurrByCounty = ({ globalFilters }) => {
+const CurrentOnARTTxCurrByCounty = () => {
+    const filters = useSelector(state => state.filters);
     const [txCurrByCountyList, setTxCurrByCountyList] = useState({});
 
     const loadTxCurrByCountyList = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const txCurrAgeDistributionByCounty = await getAll('care-treatment/getTxCurrAgeGroupDistributionByCounty', params);
         const data = [];
 
@@ -149,7 +156,7 @@ const CurrentOnARTTxCurrByCounty = ({ globalFilters }) => {
             ],
             data: data
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadTxCurrByCountyList();
@@ -160,11 +167,11 @@ const CurrentOnARTTxCurrByCounty = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX CURR BY COUNTY
+                        CURRENT ON ART BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <DataTable columns={txCurrByCountyList.columns} data={txCurrByCountyList.data}/>
+                            <DataTable columns={txCurrByCountyList.columns} data={txCurrByCountyList.data} pagination="true" defaultSortField="county" responsive="true"/>
                         </div>
                     </CardBody>
                 </Card>

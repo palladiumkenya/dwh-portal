@@ -1,8 +1,10 @@
-import React, { useCallback } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from './../../Shared/UniversalFilter';
 import DSDHeader from './DSDHeader';
 import DSDFooter from './DSDFooter';
+import DSDOverview from './DSDOverview';
 import DSDCascade from './DSDCascade';
 import DistributionUnstable from './DistributionUnstable';
 import DistributionMMDStable from './DistributionMMDStable';
@@ -14,67 +16,70 @@ import AppointmentDurationBySex from './AppointmentDurationBySex';
 import AppointmentDurationByAge from './AppointmentDurationByAge';
 import AppointmentDurationStableByCounty from './AppointmentDurationStableByCounty';
 import AppointmentDurationStableByPartner from './AppointmentDurationStableByPartner';
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
 
-const DSD = ({globalFilters, onGlobalFiltersChange}) => {
-    const onVisibilityChange = useCallback(async (isVisible) => {
-        if (globalFilters.ctTab === 'dsd') {
-            onGlobalFiltersChange({
-                ...globalFilters,
-                stickyFilter: !isVisible,
-                countyFilterEnabled: true,
-                subCountyFilterEnabled: true,
-                facilityFilterEnabled: true,
-                partnerFilterEnabled: true,
-                agencyFilterEnabled: false,
-                fromDateFilterEnabled: true,
-                toDateFilterEnabled: false,
-            });
+const DSD = () => {
+    const ctTab = useSelector(state => state.ui.ctTab);
+    const dispatch = useDispatch();
+    const onVisibilityChange = (isVisible) => {
+        if (ctTab === 'dsd') {
+            if (isVisible) {
+                dispatch(disableStickyFilter());
+            } else {
+                dispatch(enableStickyFilter());
+            }
         }
-    }, [globalFilters, onGlobalFiltersChange]);
+    };
     return (
         <div className="animated fadeIn">
             <div className="strip"></div>
             <DSDHeader></DSDHeader>
             <VisibilitySensor onChange={onVisibilityChange}>
-                <UniversalFilter globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+                <UniversalFilter/>
             </VisibilitySensor>
             <p></p>
             <div className="row">
+                <div className="col-12">
+                    <DSDOverview />
+                </div>
+            </div>
+            <p></p>
+            <div className="row">
                 <div className="col-6">
-                    <DSDCascade globalFilters={globalFilters}/>
+                    <DSDCascade />
                 </div>
                 <div className="col-6">
-                    <DistributionUnstable globalFilters={globalFilters}/>
+                    <DistributionUnstable />
                 </div>
             </div>
             <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
             <p></p>
             <div className="row">
                 <div className="col-6">
-                    <DistributionMMDStable globalFilters={globalFilters}/>
+                    <DistributionMMDStable />
                 </div>
                 <div className="col-6">
-                    <DistributionStableAgeSex globalFilters={globalFilters}/>
+                    <DistributionStableAgeSex />
                 </div>
             </div>
-            <p></p><DistributionStableByCounty globalFilters={globalFilters}/>
+            <p></p><DistributionStableByCounty />
             <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><DistributionStableByPartner globalFilters={globalFilters}/>
+            <p></p><DistributionStableByPartner />
             <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
             <p></p>
             <div className="row">
                 <div className="col-6">
-                    <AppointmentDurationByStability globalFilters={globalFilters}/>
+                    <AppointmentDurationByStability />
                 </div>
                 <div className="col-6">
-                    <AppointmentDurationBySex globalFilters={globalFilters}/>
+                    <AppointmentDurationBySex />
                 </div>
             </div>
-            <p></p><AppointmentDurationByAge globalFilters={globalFilters}/>
+            <p></p><AppointmentDurationByAge />
             <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><AppointmentDurationStableByCounty globalFilters={globalFilters}/>
+            <p></p><AppointmentDurationStableByCounty />
             <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><AppointmentDurationStableByPartner globalFilters={globalFilters}/>
+            <p></p><AppointmentDurationStableByPartner />
             <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
             
         </div>

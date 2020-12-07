@@ -1,16 +1,25 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import DataTable from 'react-data-table-component';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const VLOverallUptakeAndSuppressionByFacility = ({ globalFilters }) => {
+const VLOverallUptakeAndSuppressionByFacility = () => {
+    const filters = useSelector(state => state.filters);
     const [vlOverallUptakeAndSuppressionByFacility, setVLOverallUptakeAndSuppressionByFacility] = useState({});
 
     const loadVLOverallUptakeAndSuppressionByFacility = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('care-treatment/vlOverallUptakeAndSuppressionByFacility', params);
         const data = [];
         for(let i = 0; i < result.length; i++) {
@@ -53,7 +62,7 @@ const VLOverallUptakeAndSuppressionByFacility = ({ globalFilters }) => {
                 { name: 'Partner', selector: 'partner', sortable: true},
                 { name: 'County', selector: 'county', sortable: true},
                 { name: 'Sub County', selector: 'subCounty', sortable: true},
-                { name: 'TX CURR', selector: 'txCurr', sortable: true, right: true},
+                { name: 'CURRENT ON ART', selector: 'txCurr', sortable: true, right: true},
                 { name: 'VL IN LAST 12 MONTHS', selector: 'eligible', sortable: true, right: true},
                 { name: 'FREQUENCY', selector: 'vlDone', sortable: true, right: true},
                 // { name: 'Uptake (%)', selector: 'uptake', sortable: true, right: true },
@@ -62,7 +71,7 @@ const VLOverallUptakeAndSuppressionByFacility = ({ globalFilters }) => {
             ],
             data: data
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadVLOverallUptakeAndSuppressionByFacility();
@@ -80,7 +89,7 @@ const VLOverallUptakeAndSuppressionByFacility = ({ globalFilters }) => {
                             <DataTable
                                 columns={vlOverallUptakeAndSuppressionByFacility.columns}
                                 data={vlOverallUptakeAndSuppressionByFacility.data}
-                                pagination="true"
+                                pagination="true" defaultSortField="facility" responsive="true"
                             />
                         </div>
                     </CardBody>

@@ -1,17 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const VLSuppressionByRegimen = ({ globalFilters }) => {
+const VLSuppressionByRegimen = () => {
+    const filters = useSelector(state => state.filters);
     const [vlSuppressionByRegimen, setVLSuppressionByRegimen] = useState({});
 
     const loadVLSuppressionByRegimen = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const suppressionCategories = ['SUPPRESSED', 'LLV', 'HVL'];
         const regimenCategories = ['TLD', 'TLE', 'OTHERS'];
         const result = await getAll('care-treatment/vlSuppressionByRegimen', params);
@@ -60,7 +69,7 @@ const VLSuppressionByRegimen = ({ globalFilters }) => {
                 { name: 'HVL', data: data[2], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadVLSuppressionByRegimen();
@@ -71,7 +80,7 @@ const VLSuppressionByRegimen = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VL OUTCOMES AMONG TX CURR PATIENTS BY ART REGIMEN/OPTIMIZATION (N =495)
+                        VL OUTCOMES AMONG CURRENT ON ART PATIENTS BY ART REGIMEN/OPTIMIZATION
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

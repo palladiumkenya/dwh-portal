@@ -1,19 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const DistributionStableByPartner = ({ globalFilters }) => {
+const DistributionStableByPartner = () => {
+    const filters = useSelector(state => state.filters);
     const [distributionStableByPartner, setDistributionStableByPartner] = useState({});
 
     const loadTxCurrDistributionByPartner = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-             params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const partners = [];
         const stable = [];
 
@@ -64,7 +71,7 @@ const DistributionStableByPartner = ({ globalFilters }) => {
                 data: stable
             }]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadTxCurrDistributionByPartner();
@@ -75,7 +82,7 @@ const DistributionStableByPartner = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        DISTRIBUTION OF STABLE PATIENTS BY PARTNER (N =495)
+                        DISTRIBUTION OF STABLE PATIENTS BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={distributionStableByPartner} />

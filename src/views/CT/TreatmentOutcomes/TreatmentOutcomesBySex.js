@@ -1,17 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const TreatmentOutcomesBySex = ({ globalFilters }) => {
+const TreatmentOutcomesBySex = () => {
+    const filters = useSelector(state => state.filters);
     const [treatmentOutcomesBySex, setTreatmentOutcomesBySex] = useState({});
 
     const loadTreatmentOutcomesBySex = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped'];
         const sexCategories = ['Male', 'Female'];
         const result = await getAll('care-treatment/treatmentOutcomesBySex', params);
@@ -61,7 +70,7 @@ const TreatmentOutcomesBySex = ({ globalFilters }) => {
                 { name: 'STOPPED', data: data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadTreatmentOutcomesBySex();
@@ -72,7 +81,7 @@ const TreatmentOutcomesBySex = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ART TREATMENT OUTCOMES BY SEX (N =495)
+                        ART TREATMENT OUTCOMES BY SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

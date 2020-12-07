@@ -1,19 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import DataTable from 'react-data-table-component';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 import * as _ from 'lodash';
 
-const AdverseEventsTable = ({ globalFilters }) => {
+const AdverseEventsTable = () => {
+    const filters = useSelector(state => state.filters);
     const [adverseEvents, setAdverseEvents] = useState({});
 
     const loadAdverseEvents = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const aeDistributionBySeverity = await getAll('care-treatment/getAeTypesBySeverity', params);
         const data = [];
 
@@ -64,7 +71,7 @@ const AdverseEventsTable = ({ globalFilters }) => {
             ],
             data: data
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadAdverseEvents();
@@ -79,7 +86,7 @@ const AdverseEventsTable = ({ globalFilters }) => {
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <DataTable columns={adverseEvents.columns} data={adverseEvents.data}/>
+                            <DataTable columns={adverseEvents.columns} data={adverseEvents.data} pagination="true" defaultSortField="aeName" responsive="true"/>
                         </div>
                     </CardBody>
                 </Card>

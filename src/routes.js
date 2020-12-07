@@ -7,13 +7,13 @@ import HRH from "./views/HRH/HRH";
 import Resources from './views/Resources/Resources';
 
 const routes = [
-  { path: "/", exact: true, name: "Home", component: Home },
-  { path: "/reporting-rates", exact: true, name: "Reporting Rates", component: RR },
-  { path: "/hiv-testing", exact: true, name: 'HIV Testing & Prevention', component: HTS },
-  { path: "/hiv-treatment", exact: true, name: "HIV Treatment", component: CT },
-  { path: "/gis", exact: true, name: "GIS", component: GIS },
-  { path: "/hrh", exact: true, name: "HRH", component: HRH },
-  { path: "/resources", exact: true, name: "Resources", component: Resources }
+  { path: "/", exact: true, name: "Home", component: Home, private: false },
+  { path: "/reporting-rates", exact: true, name: "Reporting Rates", component: RR, private: false },
+  { path: "/hiv-testing", exact: true, name: 'HIV Testing & Prevention', component: HTS, private: false },
+  { path: "/hiv-treatment", exact: true, name: "HIV Treatment", component: CT, private: false },
+  { path: "/gis", exact: true, name: "GIS", component: GIS, private: false },
+  { path: "/hrh", exact: true, name: "HRH", component: HRH, private: false },
+  { path: "/resources", exact: true, name: "Resources", component: Resources, private: false },
 ];
 
 export default routes;

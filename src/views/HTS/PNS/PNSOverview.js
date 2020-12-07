@@ -1,25 +1,93 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
-import moment from 'moment';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const PNSOverview = ({ globalFilters }) => {
-    const [expected, setExpected] = useState(0);
-    const loadExpected = useCallback(async () => {
+const PNSOverview = () => {
+    const filters = useSelector(state => state.filters);
+    const [pnsSexualContactsCascade, setPNSSexualContactsCascade] = useState({
+        elicited: 0,
+        tested: 0,
+        positive: 0,
+        linked: 0,
+        knownPositive: 0
+    });
+    const [pnsChildrenCascade, setPNSChildrenCascade] = useState({
+        elicited: 0,
+        tested: 0,
+        positive: 0,
+        linked: 0,
+        knownPositive: 0
+    });
+    const [vlCascade, setHomeVLCascade] = useState({
+        currentOnArt: 0,
+        currentOnArtText: ''
+    });
+    const loadHomeVLCascade = useCallback(async () => {
         let params = {
-            county: globalFilters.county,
-            subCounty: globalFilters.subCounty,
-            partner: globalFilters.partner,
-            agency: globalFilters.agency,
-            period: globalFilters.year + ',' + (globalFilters.month ? globalFilters.month:moment().startOf('month').subtract(1, 'month').format('M'))
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
         };
-        const data = await getAll('manifests/expected/' + globalFilters.rrTab, params);
-        setExpected(data.expected);
-    }, [globalFilters]);
+        const result = await getAll('care-treatment/viralLoadCascade', params);
+        let data = [
+            result.TX_CURR ? result.TX_CURR : 0,
+        ];
+        setHomeVLCascade({
+            currentOnArt: data[0],
+            currentOnArtText: data[0].toLocaleString('en')
+        });
+    }, [filters]);
+    const loadPNSSexualContactsCascade = useCallback(async () => {
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):""
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
+        const data = await getAll('hts/pnsSexualContactsCascade', params);
+        setPNSSexualContactsCascade({
+            elicited: data.elicited ? data.elicited:0,
+            tested: data.tested ? data.tested:0,
+            positive: data.positive ? data.positive:0,
+            linked: data.linked ? data.linked:0,
+            knownPositive: data.knownPositive ? data.knownPositive:0
+        });
+    }, [filters]);
+    const loadPNSChildrenCascade = useCallback(async () => {
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):""
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
+        const data = await getAll('hts/pnsChildrenCascade', params);
+        setPNSChildrenCascade({
+            elicited: data.elicited ? data.elicited:0,
+            tested: data.tested ? data.tested:0,
+            positive: data.positive ? data.positive:0,
+            linked: data.linked ? data.linked:0,
+            knownPositive: data.knownPositive ? data.knownPositive:0
+        });
+    }, [filters]);
 
     useEffect(() => {
-        loadExpected();
-    }, [loadExpected]);
+        loadHomeVLCascade();
+        loadPNSSexualContactsCascade();
+        loadPNSChildrenCascade();
+    }, [loadHomeVLCascade, loadPNSSexualContactsCascade, loadPNSChildrenCascade]);
 
     return (
         <div>
@@ -34,7 +102,7 @@ const PNSOverview = ({ globalFilters }) => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{expected*600}</span>
+                                <span className="expected-uploads-text">{vlCascade.currentOnArt ? vlCascade.currentOnArt.toLocaleString('en'):''}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -49,7 +117,7 @@ const PNSOverview = ({ globalFilters }) => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{expected*700}</span>
+                                <span className="expected-uploads-text">{pnsSexualContactsCascade.elicited ? pnsSexualContactsCascade.elicited.toLocaleString('en'):''}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -57,14 +125,14 @@ const PNSOverview = ({ globalFilters }) => {
                 <div className="col-4">
                     <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
-                            TOTAL CHILDREN LINE ELICITED
+                            TOTAL CHILDREN ELICITED
                         </CardHeader>
                         <CardBody
                             className="align-items-center d-flex justify-content-center"
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{expected*620}</span>
+                                <span className="expected-uploads-text">{pnsChildrenCascade.elicited ? pnsChildrenCascade.elicited.toLocaleString('en'):''}</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -81,7 +149,13 @@ const PNSOverview = ({ globalFilters }) => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">53%</span>
+                                <span className="expected-uploads-text">
+                                    {
+                                        pnsSexualContactsCascade.elicited > 0 ?
+                                        ((pnsSexualContactsCascade.tested/pnsSexualContactsCascade.elicited)*100).toFixed(0).toLocaleString('en') :
+                                        0
+                                    }
+                                %</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -96,7 +170,13 @@ const PNSOverview = ({ globalFilters }) => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">28%</span>
+                                <span className="expected-uploads-text">
+                                    {
+                                        pnsSexualContactsCascade.tested > 0 ?
+                                        ((pnsSexualContactsCascade.positive/pnsSexualContactsCascade.tested)*100).toFixed(0).toLocaleString('en') :
+                                        0
+                                    }
+                                %</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -104,14 +184,20 @@ const PNSOverview = ({ globalFilters }) => {
                 <div className="col-4">
                     <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
-                            SEXUAL CONTACTS LINKD
+                            SEXUAL CONTACTS LINKED
                         </CardHeader>
                         <CardBody
                             className="align-items-center d-flex justify-content-center"
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">96%</span>
+                                <span className="expected-uploads-text">
+                                    {
+                                        pnsSexualContactsCascade.positive > 0 ?
+                                        ((pnsSexualContactsCascade.linked/pnsSexualContactsCascade.positive)*100).toFixed(0).toLocaleString('en') :
+                                        0
+                                    }
+                                %</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -128,7 +214,13 @@ const PNSOverview = ({ globalFilters }) => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">67%</span>
+                                <span className="expected-uploads-text">
+                                    {
+                                        pnsChildrenCascade.elicited > 0 ?
+                                        ((pnsChildrenCascade.tested/pnsChildrenCascade.elicited)*100).toFixed(0).toLocaleString('en') :
+                                        0
+                                    }
+                                %</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -143,7 +235,13 @@ const PNSOverview = ({ globalFilters }) => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">5%</span>
+                                <span className="expected-uploads-text">
+                                    {
+                                        pnsChildrenCascade.tested > 0 ?
+                                        ((pnsChildrenCascade.positive/pnsChildrenCascade.tested)*100).toFixed(0).toLocaleString('en') :
+                                        0
+                                    }
+                                %</span>
                             </div>
                         </CardBody>
                     </Card>
@@ -158,7 +256,13 @@ const PNSOverview = ({ globalFilters }) => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">98%</span>
+                                <span className="expected-uploads-text">
+                                    {
+                                        pnsChildrenCascade.positive > 0 ?
+                                        ((pnsChildrenCascade.linked/pnsChildrenCascade.positive)*100).toFixed(0).toLocaleString('en') :
+                                        0
+                                    }
+                                %</span>
                             </div>
                         </CardBody>
                     </Card>

@@ -1,18 +1,27 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const IPTUptake = ({ globalFilters }) => {
+const IPTUptake = () => {
+    const filters = useSelector(state => state.filters);
     const [iptUptake, setIPTUptake] = useState({});
 
     const loadIPTUptake = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-        const sexCategories = ['TX CURR', 'NUMBER STARTED ON IPT'];
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
+        const sexCategories = ['CURRENT ON ART', 'NUMBER STARTED ON IPT'];
         const result = await getAll('care-treatment/vlUptakeBySex', params);
         let data = [];
         for(let i = 0; i < result.length; i++) {
@@ -44,7 +53,7 @@ const IPTUptake = ({ globalFilters }) => {
                 { name: 'Number of Patients', data: data, type: 'column', color: "#485969" },
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadIPTUptake();
@@ -55,7 +64,7 @@ const IPTUptake = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        IPT UPTAKE AMONG TX CURR PATIENTS (N =495)
+                        IPT UPTAKE AMONG CURRENT ON ART PATIENTS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

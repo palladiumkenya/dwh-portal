@@ -1,17 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const TreatmentOutcomesByAge = ({ globalFilters }) => {
+const TreatmentOutcomesByAge = () => {
+    const filters = useSelector(state => state.filters);
     const [treatmentOutcomesByAge, setTreatmentOutcomesByAge] = useState({});
 
     const loadTreatmentOutcomesByAge = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped'];
         const ageCategories = [
             '<1',
@@ -75,7 +84,7 @@ const TreatmentOutcomesByAge = ({ globalFilters }) => {
                 { name: 'STOPPED', data: data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadTreatmentOutcomesByAge();
@@ -86,7 +95,7 @@ const TreatmentOutcomesByAge = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ART TREATMENT OUTCOMES BY AGE (N =495)
+                        ART TREATMENT OUTCOMES BY AGE GROUP
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

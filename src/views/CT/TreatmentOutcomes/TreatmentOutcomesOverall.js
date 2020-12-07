@@ -1,17 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const TreatmentOutcomesOverall = ({ globalFilters }) => {
+const TreatmentOutcomesOverall = () => {
+    const filters = useSelector(state => state.filters);
     const [treatmentOutcomesOverall, setTreatmentOutcomesOverall] = useState({});
 
     const loadTreatmentOutcomesOverall = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped'];
         const result = await getAll('care-treatment/treatmentOutcomesOverall', params);
         let data = [0, 0, 0, 0];
@@ -48,7 +57,7 @@ const TreatmentOutcomesOverall = ({ globalFilters }) => {
                 ]
             }]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadTreatmentOutcomesOverall();
@@ -59,7 +68,7 @@ const TreatmentOutcomesOverall = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        OVERALL ART TREATMENT OUTCOMES (N = 485)
+                        OVERALL ART TREATMENT OUTCOMES
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

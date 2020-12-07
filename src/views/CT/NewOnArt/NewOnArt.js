@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from './../../Shared/UniversalFilter';
 import NewOnArtHeader from './NewOnArtHeader';
@@ -10,51 +11,56 @@ import MedianTimeToArtStart from './MedianTimeToArtStart';
 import MedianTimeToArtStartByCounty from './MedianTimeToArtStartByCounty';
 import MedianTimeToArtStartByPartner from './MedianTimeToArtStartByPartner';
 import TimeFromDiagnosisToStart from './TimeFromDiagnosisToStart';
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
+import NewOnARTTiles from './NewOnARTTiles';
 
-const NewOnArt = ({globalFilters, onGlobalFiltersChange}) => {
-    const onVisibilityChange = useCallback(async (isVisible) => {
-        if (globalFilters.ctTab === 'txNew') {
-            onGlobalFiltersChange({
-                ...globalFilters,
-                stickyFilter: !isVisible,
-                countyFilterEnabled: true,
-                subCountyFilterEnabled: true,
-                facilityFilterEnabled: true,
-                partnerFilterEnabled: true,
-                agencyFilterEnabled: false,
-                fromDateFilterEnabled: true,
-                toDateFilterEnabled: false,
-            });
+const NewOnArt = () => {
+    const ctTab = useSelector(state => state.ui.ctTab);
+    const dispatch = useDispatch();
+    const onVisibilityChange = (isVisible) => {
+        if (ctTab === 'txNew') {
+            if (isVisible) {
+                dispatch(disableStickyFilter());
+            } else {
+                dispatch(enableStickyFilter());
+            }
         }
-    }, [globalFilters, onGlobalFiltersChange]);
+    };
     return (
         <div className="animated fadeIn">
             <div className="strip"></div>
             <NewOnArtHeader></NewOnArtHeader>
             <VisibilitySensor onChange={onVisibilityChange}>
-                <UniversalFilter globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+                <UniversalFilter/>
             </VisibilitySensor>
-            <p></p><NewOnArtTrends globalFilters={globalFilters}/>
-            <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
+            <p></p>
+            <NewOnARTTiles />
+            <p></p>
+            <NewOnArtTrends />
+            <hr/>
+            <NewOnArtFooter/>
+            <hr/>
+            <div className="strip"></div>
+            <p></p>
             <p></p>
             <div className="row">
-                <div className="col-6">
-                    <NewOnArtBySex globalFilters={globalFilters}/>
-                </div>
-                <div className="col-6">
-                    <NewOnArtByAgeSex globalFilters={globalFilters}/>
+                {/*<div className="col-6">
+                    <NewOnArtBySex />
+                </div>*/}
+                <div className="col-12">
+                    <NewOnArtByAgeSex />
                 </div>
             </div>
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><MedianTimeToArtStart globalFilters={globalFilters}/>
+            <p></p><MedianTimeToArtStart />
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><MedianTimeToArtStartByCounty globalFilters={globalFilters}/>
+            <p></p><MedianTimeToArtStartByCounty />
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><MedianTimeToArtStartByPartner globalFilters={globalFilters}/>
+            <p></p><MedianTimeToArtStartByPartner />
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TimeFromDiagnosisToStart globalFilters={globalFilters}/>
+            <p></p><TimeFromDiagnosisToStart />
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            {/* <p></p><FacilitiesNewOnArtList globalFilters={globalFilters}/>
+            {/* <p></p><FacilitiesNewOnArtList />
             <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p> */}
         </div>
     );

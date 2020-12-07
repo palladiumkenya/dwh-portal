@@ -27,8 +27,8 @@
   font-size: 16px;
   text-align: center;
   text-transform: uppercase;
-
   color: #000000;
+  margin-top: 5px;
 }
 
 .reporting-rates-card-separator {
@@ -45,8 +45,8 @@
   font-weight: normal;
   font-size: 20px;
   text-align: right;
-
   color: #000000;
+  margin-top: 5px;
 }
 
 .reporting-rates-card-overview {
@@ -239,4 +239,25 @@
   text-align: center;
   font-weight: bold;
   font-size: 1em;
+}
+
+.primary-card {
+  background: #FFFFFF;
+  border: 0.5px solid #D1D8DC;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.primary-card-body-text {
+  font-size: 3.8em;
+  color: #000000;
+}
+
+.primary-card-body-subtitle {
+  font-size: 1.4em;
+  color: #00AD30;
+}
+
+.bigger-subtitle {
+  font-size: 2.4em;
 }

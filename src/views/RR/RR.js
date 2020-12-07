@@ -1,44 +1,36 @@
-import React, { useCallback } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from '../Shared/UniversalFilter';
-import RROverviewHeader from './Overview/RROverviewHeader';
-import RROverview from './Overview/RROverview';
-import RROverviewTrends from './Overview/RROverviewTrends';
-import RROverviewFooter from './Overview/RROverviewFooter';
-import RRCountyHeader from './County/RRCountyHeader';
-import RRCounty from './County/RRCounty';
-import RRCountyFooter from './County/RRCountyFooter';
-import RRPartnerHeader from './Partner/RRPartnerHeader';
-import RRPartner from './Partner/RRPartner';
-import RRPartnerFooter from './Partner/RRPartnerFooter';
+import SectionHeader from './../Shared/SectionHeader';
+import SectionFooter from './../Shared/SectionFooter';
+import RROverview from './RROverview';
+import RROverviewTrends from './RROverviewTrends';
+import RRCounty from './RRCounty';
+import RRPartner from './RRPartner';
+import { enableStickyFilter, disableStickyFilter, changeRRTab, changeCurrentPage, enableFacilityFilter, disableFacilityFilter, enableAgencyFilter, disableAgencyFilter, enableFromDateFilter, disableFromDateFilter } from "../../actions/uiActions";
+import { RR_TABS, PAGES } from "../../constants";
 
-const RR = ({globalFilters, onGlobalFiltersChange}) => {
-    const onVisibilityChange = useCallback(async (isVisible) => {
-        onGlobalFiltersChange({
-            ...globalFilters,
-            stickyFilter: !isVisible,
-            countyFilterEnabled: true,
-            subCountyFilterEnabled: false,
-            facilityFilterEnabled: false,
-            partnerFilterEnabled: true,
-            agencyFilterEnabled: true,
-            fromDateFilterEnabled: true,
-            toDateFilterEnabled: false,
-        });
-    }, [globalFilters, onGlobalFiltersChange]);
+const RR = () => {
+    const dispatch = useDispatch();
+    const rrTab = useSelector(state => state.ui.rrTab);
 
-    const changeRRTabTo = (tab) => {
-        onGlobalFiltersChange({ ...globalFilters, rrTab: tab});
-    }
+    const onVisibilityChange = (isVisible) => {
+        if (isVisible) {
+            dispatch(disableStickyFilter());
+        } else {
+            dispatch(enableStickyFilter());
+        }
+    };
 
     const renderTabNavItems = () => {
         return (
-            Object.keys(globalFilters.rrTabs).map((value) => {
+            Object.keys(RR_TABS).map((value) => {
                 return (
                     <NavItem key={value}>
-                        <NavLink active={globalFilters.rrTab === value} onClick={() => { changeRRTabTo(value); }} >
-                            {globalFilters.rrTabs[value]}
+                        <NavLink active={rrTab === value} onClick={() => { dispatch(changeRRTab(value)); }} >
+                            {RR_TABS[value]}
                         </NavLink>
                     </NavItem>
                 );
@@ -46,26 +38,46 @@ const RR = ({globalFilters, onGlobalFiltersChange}) => {
         );
     };
 
+    useEffect(() => {
+        dispatch(changeCurrentPage(PAGES.rr));
+        dispatch(disableFacilityFilter());
+        dispatch(enableAgencyFilter());
+        dispatch(enableFromDateFilter());
+        return () => {
+            dispatch(enableFacilityFilter());
+            dispatch(disableAgencyFilter());
+            dispatch(disableFromDateFilter());
+        }
+    }, [dispatch]);
+
     return (
         <div>
             <Nav tabs>
                 {renderTabNavItems()}
             </Nav>
-            <TabContent activeTab={globalFilters.rrTab}>
-                <TabPane tabId={globalFilters.rrTab}>
-                    <RROverviewHeader period={globalFilters?.year} />
+            <TabContent activeTab={rrTab}>
+                <TabPane tabId={rrTab}>
+                    <SectionHeader title="REPORTING RATES" description="OVERVIEW"/>
                     <VisibilitySensor onChange={onVisibilityChange}>
-                        <UniversalFilter globalFilters={globalFilters} onGlobalFiltersChange={onGlobalFiltersChange}/>
+                        <UniversalFilter/>
                     </VisibilitySensor>
-                    <RROverview globalFilters={globalFilters} />
-                    <RROverviewTrends globalFilters={globalFilters} />
-                    <RROverviewFooter/>
-                    <RRCountyHeader period={globalFilters?.year} />
-                    <RRCounty globalFilters={globalFilters} />
-                    <RRCountyFooter/>
-                    <RRPartnerHeader period={globalFilters?.year} />
-                    <RRPartner globalFilters={globalFilters} />
-                    <RRPartnerFooter/>
+                    <RROverview/>
+                    <RROverviewTrends/>
+                    <SectionFooter overview="The Overall reporting rates refers to the proportion of EMR
+                        sites that submitted the most recent i.e. The Jan 2020 Overall
+                        reporting rates in the number of EMR sites that uploaded data to
+                        the NDW in Jan 2020 and so forth."
+                    />
+                    <SectionHeader title="REPORTING RATES" description="BY COUNTY"/>
+                    <RRCounty/>
+                    <SectionFooter overview="The overall reporting rate for March, 2020 is the
+                        number of EMR sites that uploaded data in March, 2020"
+                    />
+                    <SectionHeader title="REPORTING RATES" description="BY PARTNER"/>
+                    <RRPartner/>
+                    <SectionFooter overview="The overall reporting rate for March, 2020 is the
+                        number of EMR sites that uploaded data in March, 2020"
+                    />
                 </TabPane>
             </TabContent>
             <p></p><p></p>

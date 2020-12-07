@@ -1,19 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const CurrentOnARTTxCurrDistributionByCounty = ({ globalFilters }) => {
+const CurrentOnARTTxCurrDistributionByCounty = () => {
+    const filters = useSelector(state => state.filters);
     const [txCurrDistributionByCounty, setTxCurrDistributionByCounty] = useState({});
 
     const loadTxCurrDistributionByCounty = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-             params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const counties = [];
         const txCurr = [];
 
@@ -55,12 +62,12 @@ const CurrentOnARTTxCurrDistributionByCounty = ({ globalFilters }) => {
             },
             plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             series: [{
-                name: 'TX CURR DISTRIBUTION',
+                name: 'CURRENT ON ART DISTRIBUTION',
                 color: "#485969",
                 data: txCurr
             }]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadTxCurrDistributionByCounty();
@@ -71,7 +78,7 @@ const CurrentOnARTTxCurrDistributionByCounty = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX CURR DISTRIBUTION BY COUNTY
+                        CURRENT ON ART DISTRIBUTION BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={txCurrDistributionByCounty} />

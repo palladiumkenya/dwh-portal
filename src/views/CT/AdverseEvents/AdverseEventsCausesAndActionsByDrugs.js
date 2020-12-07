@@ -1,20 +1,27 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const AdverseEventsCausesAndActionsByDrugs = ({ globalFilters }) => {
+const AdverseEventsCausesAndActionsByDrugs = () => {
+    const filters = useSelector(state => state.filters);
     const [reportedCausesOfAEs, setReportedCausesOfAEs] = useState({});
     const [actionsByDrugs, setActionsByDrugs] = useState({});
 
     const loadReportedCausesOfAE = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('care-treatment/getReportedCausesOfAes', params);
         const arvArray = result.filter(obj => obj.AdverseEventCause === 'ARV');
         const arvAndOthersArray = result.filter(obj => obj.AdverseEventCause === 'ARV + OTHER DRUGS');
@@ -76,15 +83,19 @@ const AdverseEventsCausesAndActionsByDrugs = ({ globalFilters }) => {
                 }
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     const loadActionsByDrugs = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const categories = [];
         const result = await getAll('care-treatment/getAeActionsByDrugs', params);
 
@@ -185,7 +196,7 @@ const AdverseEventsCausesAndActionsByDrugs = ({ globalFilters }) => {
                 data: undocumentedVals
             }]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadReportedCausesOfAE();
@@ -210,7 +221,7 @@ const AdverseEventsCausesAndActionsByDrugs = ({ globalFilters }) => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ADVERSE EVENTS ACTIONS BY DRUGS(N=495)
+                        ADVERSE EVENTS ACTIONS BY DRUGS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

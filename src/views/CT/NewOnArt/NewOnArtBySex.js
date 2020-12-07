@@ -1,17 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const NewOnArtBySex = ({ globalFilters }) => {
+const NewOnArtBySex = () => {
+    const filters = useSelector(state => state.filters);
     const [newOnArtBySex, setNewOnArtBySex] = useState({});
 
     const loadNewOnArtBySex = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('care-treatment/txNewBySex', params);
         let txNewMale = 0;
         let txNewFemale = 0;
@@ -49,12 +58,12 @@ const NewOnArtBySex = ({ globalFilters }) => {
                 name:"New on ART",
                 colorByPoint: true,
                 data: [
-                    { name: 'Female', y: txNewFemale, color: "#2F4050" },
-                    { name: 'Male', y: txNewMale, sliced: true, selected: true, color: "#1AB394" },
+                    { name: 'Female', y: txNewFemale, color: "#EA4C8B" },
+                    { name: 'Male', y: txNewMale, sliced: true, selected: true, color: "#14084D" },
                 ]
             }]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadNewOnArtBySex();
@@ -65,7 +74,7 @@ const NewOnArtBySex = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX NEW DISTRIBUTION BY SEX
+                        NEW ON ART DISTRIBUTION BY SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

@@ -1,19 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import DataTable from 'react-data-table-component';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 import * as _ from 'lodash';
 
-const CurrentOnARTTxCurrByPartner = ({ globalFilters }) => {
+const CurrentOnARTTxCurrByPartner = () => {
+    const filters = useSelector(state => state.filters);
     const [txCurrByPartnerList, setTxCurrByPartnerList] = useState({});
     
     const loadTxCurrByPartnerList = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const txCurrAgeDistributionByPartner = await getAll('care-treatment/getTxCurrAgeGroupDistributionByPartner', params);
         const data = [];
 
@@ -149,7 +156,7 @@ const CurrentOnARTTxCurrByPartner = ({ globalFilters }) => {
             ],
             data: data
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadTxCurrByPartnerList();
@@ -160,11 +167,11 @@ const CurrentOnARTTxCurrByPartner = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TX CURR BY PARTNER
+                        CURRENT ON ART BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <DataTable columns={txCurrByPartnerList.columns} data={txCurrByPartnerList.data}/>
+                            <DataTable columns={txCurrByPartnerList.columns} data={txCurrByPartnerList.data} pagination="true" defaultSortField="partner" responsive="true"/>
                         </div>
                     </CardBody>
                 </Card>

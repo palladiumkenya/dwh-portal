@@ -1,17 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const VLSuppressionByAge = ({ globalFilters }) => {
+const VLSuppressionByAge = () => {
+    const filters = useSelector(state => state.filters);
     const [vlSuppressionByAge, setVLSuppressionByAge] = useState({});
 
     const loadVLSuppressionByAge = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const suppressionCategories = ['SUPPRESSED', 'LLV', 'HVL'];
         const ageCategories = [
             'Under 1',
@@ -76,7 +85,7 @@ const VLSuppressionByAge = ({ globalFilters }) => {
                 { name: 'HVL', data: data[2], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadVLSuppressionByAge();
@@ -87,7 +96,7 @@ const VLSuppressionByAge = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VIRAL SUPPRESSION (less than 400 cpm) AMONG TX CURR PATIENTS BY AGE (N =495)
+                        VIRAL SUPPRESSION (less than 400 cpm) AMONG CURRENT ON ART PATIENTS BY AGE GROUP
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

@@ -1,10 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader, CardTitle } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const PNSContactsCascade = ({ globalFilters }) => {
+const PNSContactsCascade = () => {
+    const filters = useSelector(state => state.filters);
     const [pnsContactsCascade, setPNSContactsCascade] = useState({});
     
     const loadPNSContactsCascade = useCallback(async () => {
@@ -17,21 +20,38 @@ const PNSContactsCascade = ({ globalFilters }) => {
             'Sexual Contacts Positive',
             'Sexual Contacts Linked',
         ];
-        const result = await getAll('care-treatment/viralLoadCascade', { ...globalFilters });
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):""
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
+        const result1 = await getAll('hts/pnsSexualContactsCascade', params);
+        let pnsSexualContactsCascade = {
+            elicited: result1.elicited ? result1.elicited:0,
+            tested: result1.tested ? result1.tested:0,
+            positive: result1.positive ? result1.positive:0,
+            linked: result1.linked ? result1.linked:0,
+            knownPositive: result1.knownPositive ? result1.knownPositive:0
+        };
+        const result2 = await getAll('hts/pnsIndex', params);
         let data = [
-            result.TX_CURR ? result.TX_CURR/1000 : 0,
-            result.Eligible4VL ? result.Eligible4VL/1000 : 0,
-            result.Last12MonthVL ? result.Last12MonthVL/1000 : 0,
-            result.Last12MVLSup ? result.Last12MVLSup/1000 : 0,
-            result.Eligible4VL ? result.Eligible4VL/1500 : 0,
-            result.Last12MonthVL ? result.Last12MonthVL/1500 : 0,
-            result.Last12MVLSup ? result.Last12MVLSup/1500 : 0,
+            result2.indexClients ? result2.indexClients : 0,
+            pnsSexualContactsCascade.elicited ? pnsSexualContactsCascade.elicited : 0,
+            pnsSexualContactsCascade.knownPositive ? pnsSexualContactsCascade.knownPositive : 0,
+            (parseInt(pnsSexualContactsCascade.elicited, 10) - parseInt(pnsSexualContactsCascade.knownPositive, 10)) > 0 ? (parseInt(pnsSexualContactsCascade.elicited, 10) - parseInt(pnsSexualContactsCascade.knownPositive, 10)) : 0,
+            pnsSexualContactsCascade.tested ? pnsSexualContactsCascade.tested : 0,
+            pnsSexualContactsCascade.positive ? pnsSexualContactsCascade.positive : 0,
+            pnsSexualContactsCascade.linked ? pnsSexualContactsCascade.linked : 0,
         ].map(x => Number(parseFloat(x).toFixed(0)));
-
         setPNSContactsCascade({
             title: { text: '' },
             xAxis: { categories: categories, crosshair: true },
-            yAxis: { title: { text: '' }, min: 0},
+            yAxis: { title: { text: '' } },
             legend: { enabled: false, },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -54,7 +74,7 @@ const PNSContactsCascade = ({ globalFilters }) => {
                 { name: categories[6], y: data[6], text: data[6].toLocaleString('en') + ' (' + parseFloat(((data[5]/data[0])*100).toString()).toFixed(0) + '%)' },
             ]}]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadPNSContactsCascade();

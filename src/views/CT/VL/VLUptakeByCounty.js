@@ -1,17 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const VLUptakeByCounty = ({ globalFilters }) => {
+const VLUptakeByCounty = () => {
+    const filters = useSelector(state => state.filters);
     const [vlUptakeByCounty, setVLUptakeByCounty] = useState({});
 
     const loadVLUptakeByCounty = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('care-treatment/vlUptakeByCounty', params);
 
         let counties = [];
@@ -43,7 +52,7 @@ const VLUptakeByCounty = ({ globalFilters }) => {
                 { name: 'Number of Patients', data: vlUptakeByCounty, type: 'column', color: "#485969" },
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadVLUptakeByCounty();
@@ -54,7 +63,7 @@ const VLUptakeByCounty = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VL UPTAKE AMONG TX CURR PATIENTS BY COUNTY (N =495)
+                        VL UPTAKE AMONG CURRENT ON ART PATIENTS BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

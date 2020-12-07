@@ -1,10 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const AdverseEventsSeverity = ({ globalFilters }) => {
+const AdverseEventsSeverity = () => {
+    const filters = useSelector(state => state.filters);
     const [severityGrading, setSeverityGrading] = useState({});
     const [adverseEventsActionsBySeverity, setAdverseEventsActionsBySeverity] = useState({});
     const [totalAdverseEventsActions, setTotalAdverseEventsActions] = useState({
@@ -12,12 +15,16 @@ const AdverseEventsSeverity = ({ globalFilters }) => {
     });
 
     const loadSeverityGrading =  useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         let mildVal = 0;
         let moderateVal = 0;
         let severeVal = 0;
@@ -104,15 +111,19 @@ const AdverseEventsSeverity = ({ globalFilters }) => {
                 }
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     const loadAdverseEventsActionsBySeverity = useCallback(async () => {
-        let params = null;
-
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
-
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('care-treatment/getAeActionsBySeverity', params);
 
         const undocumented = result.filter(obj => obj.AdverseEventActionTaken === 'Undocumented');
@@ -243,7 +254,7 @@ const AdverseEventsSeverity = ({ globalFilters }) => {
                 data: [mild_all_drugs_stopped_total, moderate_all_drugs_stopped_total, severe_all_drugs_stopped_total, unknown_all_drugs_stopped_total]
             }]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadSeverityGrading();
@@ -268,7 +279,7 @@ const AdverseEventsSeverity = ({ globalFilters }) => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ADVERSE EVENTS ACTIONS BY SEVERITY(N={totalAdverseEventsActions.total})
+                        ADVERSE EVENTS ACTIONS BY SEVERITY (N={totalAdverseEventsActions.total})
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

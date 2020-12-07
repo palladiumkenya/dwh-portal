@@ -1,17 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const VLSuppressionByPartner = ({ globalFilters }) => {
+const VLSuppressionByPartner = () => {
+    const filters = useSelector(state => state.filters);
     const [vlSuppressionByPartner, setVLSuppressionByPartner] = useState({});
 
     const loadVLSuppressionByPartner = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('care-treatment/vlSuppressionByPartner', params);
 
         let partners = [];
@@ -23,27 +32,18 @@ const VLSuppressionByPartner = ({ globalFilters }) => {
         }
 
         setVLSuppressionByPartner({
-            chart: { zoomType: 'xy' },
-            title: { useHTML: true, text: ' &nbsp;', align: 'left' },
-            subtitle: { text: ' ', align: 'left' },
+            title: { text: '' },
             xAxis: [{ categories: partners, crosshair: true, title: { text: 'Service Delivery Partner' } }],
             yAxis: [
-                {
-                    title: { text: 'Number of Patients', style: { color: Highcharts.getOptions().colors[1] } },
-                    labels: { format: '{value}', style: { color: Highcharts.getOptions().colors[1] } },
-                    min: 0,
-                }
+                { title: { text: 'Number of Patients' } },
             ],
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
-            legend: {
-                floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
-                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
-            },
+            plotOptions: { column: { dataLabels: { enabled: true } } },
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'Number of Patients', data: vlSuppressionByPartner, type: 'column', color: "#485969" },
             ]
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadVLSuppressionByPartner();
@@ -54,7 +54,7 @@ const VLSuppressionByPartner = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VL SUPPRESSION AMONG TX CURR PATIENTS BY partner (N =495)
+                        VL SUPPRESSION AMONG CURRENT ON ART PATIENTS BY partner
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

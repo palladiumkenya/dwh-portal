@@ -1,17 +1,26 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from "reactstrap";
+import { useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
+import moment from "moment";
 
-const HIVNegativeTB = ({ globalFilters }) => {
+const HIVNegativeTB = () => {
+    const filters = useSelector(state => state.filters);
     const [hivNegativeTB, setHIVNegativeTB] = useState({});
 
     const loadHIVNegativeTB = useCallback(async () => {
-        let params = null;
-        if (globalFilters) {
-            params = { ...globalFilters };
-        }
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
+        };
+        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         let highVl = 0;
         let onArtLessThan12Months = 0;
         let ageLessThan20Years = 0;
@@ -48,7 +57,7 @@ const HIVNegativeTB = ({ globalFilters }) => {
                 { name: 'Number of Patients', data: data, type: 'bar', color: "#1AB394" },
             ],
         });
-    }, [globalFilters]);
+    }, [filters]);
 
     useEffect(() => {
         loadHIVNegativeTB();
@@ -59,7 +68,7 @@ const HIVNegativeTB = ({ globalFilters }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        HIV NEGATIVE TB PATIENTS (N = 465)
+                        HIV NEGATIVE TB PATIENTS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
