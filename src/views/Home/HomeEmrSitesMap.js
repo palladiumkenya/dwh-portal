@@ -2,32 +2,55 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Row, Col } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import mapKenyaByCounty from './../Shared/kenyaByCounty.json';
+import { getAll } from '../Shared/Api';
+import mapKenyaByCounty from '../Shared/kenyaByCounty.json';
 
 require('highcharts/modules/map')(Highcharts);
-Highcharts.maps["custom/kenyaByCounty"] = mapKenyaByCounty;
+Highcharts.maps["custom/kenya-county"] = mapKenyaByCounty;
 
 const HomeEmrSitesMap = () => {
     const [counties, setHomeEmrSitesMap] = useState({});
-    
+
     const loadCounties = useCallback(async () => {
+        const result = await getAll('care-treatment/sites', []);
+        const data = [];
+        const emrNames = [];
+        let emrSites = [];
+        for(let i = 0; i < result.length; i++) {
+            if(emrNames.indexOf(result[i].emr) === -1){
+                emrNames.push(result[i].emr);
+            }
+        }
+        for(let j = 0; j < emrNames.length; j++) {
+            emrSites[j] = [];
+        }
+        for (let k = 0; k < result.length; k++) {
+            let index = emrNames.indexOf(result[k].emr);
+            emrSites[index].push({
+                name: result[k].facility,
+                lat: result[k].latitude,
+                lon: result[k].longitude,
+            });
+        }
+        data.push({ name: 'Countries', color: '#E0E0E0', enableMouseTracking: false, showInLegend: false });
+        for(let j = 0; j < emrNames.length; j++) {
+            data.push({
+                name: emrNames[j] == null ? 'Unknown' : emrNames[j],
+                type: 'mappoint',
+                data: emrSites[j]
+            });
+        }
         setHomeEmrSitesMap({
-            chart: { map: 'custom/kenyaByCounty' },
+            chart: { map: 'custom/kenya-county' },
             title: { text: '' },
-            series: [
-                { name: 'AOMRS' },
-                { name: 'Ecare' },
-                { name: 'IQCare' },
-                { name: 'KenyaEMR' },
-                // { name: 'KenyaEMR', showInLegend: true, enableMouseTracking: true, type: 'mappoint', color: Highcharts.getOptions().colors[1], data: [
-                //     { name: 'GGG', lat: -1.3031934, lon: 36.5672003, dataLabels: {
-                //         align: 'left',
-                //         x: 5,
-                //         verticalAlign: 'middle'
-                //     } }
-                // ]},
-                { name: 'OpenMRS' }
-            ]
+            tooltip: {
+                formatter: function () {
+                    return this.series.name + '<br>' +
+                    this.point.properties.NAME_1 + ': <b>' + this.point.z.toLocaleString('en') + '</b>';
+                }
+            },
+            legend: { title: { text: 'KEY: EMR SITES' }, layout: 'vertical', align: 'right', verticalAlign: 'bottom' },
+            series: data
         });
     }, []);
 

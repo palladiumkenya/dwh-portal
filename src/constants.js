@@ -1,8 +1,8 @@
 export const HOME_TABS = {
-    // emr: "EMR SITES",
+    emr: "EMR SITES",
     txCurr: "CURRENT ON ART",
-    // hasCurrVl: "HAS CURRENT VL",
-    // suppressed: "SUPPRESSED",
+    hasCurrVl: "HAS CURRENT VL",
+    suppressed: "SUPPRESSED",
 }
 
 export const RR_TABS = {

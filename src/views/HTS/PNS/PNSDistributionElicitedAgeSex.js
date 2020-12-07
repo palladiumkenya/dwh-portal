@@ -58,7 +58,7 @@ const PNSDistributionElicitedAgeSex = () => {
             plotOptions: { series: { stacking: 'normal' }, bar: { pointWidth: 18 } },
             tooltip: { formatter: function () {
                     return '<b>Number Elicited:</b><br/>' + this.series.name + ', ' + this.point.category +
-                        ': ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
+                        ': ' + Highcharts.numberFormat(Math.abs(this.point.y), 0);
                 }
             },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
