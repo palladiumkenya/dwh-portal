@@ -11,10 +11,10 @@ const TreatmentOutcomesOverview = () => {
         dead: 0,
         ltfu: 0,
         stopped: 0,
-        net: 0,
         to: 0,
     });
     const [treatmentOutcomesPercent, setTreatmentOutcomesPercent] = useState({
+        net: 0,
         deadPercent: 0,
         ltfuPercent: 0,
         stoppedPercent: 0,
@@ -43,7 +43,6 @@ const TreatmentOutcomesOverview = () => {
             dead: 0,
             ltfu: 0,
             stopped: 0,
-            net: 0,
             to: 0,
         }
         for(let i = 0; i < result.length; i++) {
@@ -58,6 +57,9 @@ const TreatmentOutcomesOverview = () => {
             }
             if(result[i].artOutcome === 'Stopped') {
                 data.stopped = data.stopped + parseInt(result[i].totalOutcomes)
+            }
+            if(result[i].artOutcome === 'TransferOut') {
+                data.to = data.to + parseInt(result[i].totalOutcomes)
             }
         }
         setTreatmentOutcomes(data);
@@ -82,6 +84,7 @@ const TreatmentOutcomesOverview = () => {
 
     const loadTreatmentOutcomesPercent = useCallback(async () => {
         let data = {
+            net: 0,
             deadPercent: 0,
             ltfuPercent: 0,
             stoppedPercent: 0,
@@ -89,14 +92,15 @@ const TreatmentOutcomesOverview = () => {
             toPercent: 0,
         }
         if (newlyStartedOnARTTiles.totalStartedOnART > 0) {
+            data.net = newlyStartedOnARTTiles.totalStartedOnART - treatmentOutcomes.to - treatmentOutcomes.stopped;
             data.deadPercent = ((treatmentOutcomes.dead/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
             data.ltfuPercent = ((treatmentOutcomes.ltfu/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
             data.stoppedPercent = ((treatmentOutcomes.stopped/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
-            data.netPercent = ((treatmentOutcomes.net/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
+            data.netPercent = ((data.net/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
             data.toPercent = ((treatmentOutcomes.to/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
         }
         setTreatmentOutcomesPercent(data);
-    }, [treatmentOutcomes, newlyStartedOnARTTiles]);  
+    }, [treatmentOutcomes, newlyStartedOnARTTiles.totalStartedOnART]);  
 
     useEffect(() => {
         loadTreatmentOutcomes();
@@ -165,8 +169,8 @@ const TreatmentOutcomesOverview = () => {
                                 style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                             >
                                 <div className="col-12">
-                                    <span className="expected-uploads-text">{treatmentOutcomes.net ? treatmentOutcomes.net.toLocaleString('en'):'0'}</span>
-                                    <sup className="overall-rates-sup"> {treatmentOutcomesPercent.netPercent ? treatmentOutcomesPercent.netPercent:'0'}<span className="overall-rates-sup-perc"> %</span></sup>
+                                    <span className="expected-uploads-text">{treatmentOutcomesPercent.net > 0 ? (treatmentOutcomesPercent.net).toLocaleString('en'):'0'}</span>
+                                    {/* <sup className="overall-rates-sup"> {treatmentOutcomesPercent.netPercent ? treatmentOutcomesPercent.netPercent:'0'}<span className="overall-rates-sup-perc"> %</span></sup> */}
                                 </div>
                             </CardBody>
                         </Card>

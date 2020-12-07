@@ -21,7 +21,7 @@ const TreatmentOutcomesByYear = () => {
             year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped'];
+        const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped', 'TransferOut'];
         const yearCategories = [2011,2012,2013,2014,2015,2016,2017,2018,2019,2020];
         const result = await getAll('care-treatment/treatmentOutcomesByYear', params);
         let data = [];
@@ -69,6 +69,7 @@ const TreatmentOutcomesByYear = () => {
                 { name: 'DEAD', data: data[1], type: 'column', color: "#60A6E5", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
                 { name: 'LTFU', data: data[2], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
                 { name: 'STOPPED', data: data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                // { name: 'TRANSFER OUT', data: data[4], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [filters]);
