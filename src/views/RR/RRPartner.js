@@ -29,6 +29,9 @@ const RRPartner = () => {
         const consistencyResultPartners = Object.keys(consistencyResult);
         const consistencyResultData = Object.values(consistencyResult);
         let consistencyResultSeries = [];
+        for (let i = 0; i < partners.length; i++) {
+            consistencyResultSeries[i] = 0;
+        }
         for(let i = 0; i < consistencyResultPartners.length; i++) {
             let resultPartner = consistencyResultPartners[i];
             resultPartner = resultPartner.toLowerCase();
@@ -39,8 +42,8 @@ const RRPartner = () => {
                 mappedPartner = mappedPartner.toLowerCase();
                 mappedPartner = mappedPartner.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[]\\\/]/gi, '');
                 mappedPartner = mappedPartner.replace(' ', '');
-                if (mappedPartner === resultPartner) {
-                    consistencyResultSeries.splice(j, 0, consistencyResultData[i]);
+                if (mappedPartner === resultPartner && emrResultSeries[j] > 0) {
+                    consistencyResultSeries[j] = parseInt((consistencyResultData[i]/emrResultSeries[j]) * 100);
                     continue;
                 }
             }

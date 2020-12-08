@@ -58,7 +58,7 @@ const RROverviewTrends = () => {
         }
         const categories = Object.values(months).slice(-12);
         const dataRecent = Object.values(data).slice(-12);
-        const dataProcessed = dataRecent.map(d => Number(((d/expected) * 100).toFixed(0)));
+        const dataProcessed = dataRecent.map(d => parseInt((d/expected) * 100));
         setOverallReportingTrend({
             title: { text: '', },
             xAxis: [{ categories: categories, crosshair: true }],
@@ -102,7 +102,7 @@ const RROverviewTrends = () => {
         }
         const categories = Object.values(months).slice(-12);
         const dataRecent = Object.values(data).slice(-12);
-        const dataProcessed = dataRecent.map(d => Number(((d/expected) * 100).toFixed(0)));
+        const dataProcessed = dataRecent.map(d => parseInt((d/expected) * 100));
         setConsistencyTrend({
             title: { text: '', },
             xAxis: [{ categories: categories, crosshair: true }],
