@@ -54,7 +54,7 @@ const CurrentOnARTTiles = () => {
             hasCurrentVlPercent: parseFloat(((data[2]/data[0])*100).toString()).toFixed(0) + '%',
             suppressed: data[3],
             suppressedText: data[3].toLocaleString('en'),
-            suppressedPercent: parseFloat(((data[3]/data[0])*100).toString()).toFixed(0) + '%',
+            suppressedPercent: parseFloat(((data[3]/data[2])*100).toString()).toFixed(0) + '%',
             highViremia: data[4],
             highViremiaText: data[4].toLocaleString('en'),
             highViremiaPercent: parseFloat(((data[4]/data[0])*100).toString()).toFixed(0) + '%',
