@@ -29,6 +29,9 @@ const RRCounty = () => {
         const consistencyResultCounties = Object.keys(consistencyResult);
         const consistencyResultData = Object.values(consistencyResult);
         let consistencyResultSeries = [];
+        for (let i = 0; i < counties.length; i++) {
+            consistencyResultSeries[i] = 0;
+        }
         for(let i = 0; i < consistencyResultCounties.length; i++) {
             let resultCounty = consistencyResultCounties[i];
             resultCounty = resultCounty.toLowerCase();
@@ -39,8 +42,8 @@ const RRCounty = () => {
                 mappedCounty = mappedCounty.toLowerCase();
                 mappedCounty = mappedCounty.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[]\\\/]/gi, '');
                 mappedCounty = mappedCounty.replace(' ', '');
-                if (mappedCounty === resultCounty) {
-                    consistencyResultSeries.splice(j, 0, consistencyResultData[i]);
+                if (mappedCounty === resultCounty && emrResultSeries[j] > 0) {
+                    consistencyResultSeries[j] = parseInt((consistencyResultData[i]/emrResultSeries[j]) * 100);
                     continue;
                 }
             }
