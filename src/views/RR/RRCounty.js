@@ -1,20 +1,16 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { Card, CardHeader, CardBody } from "reactstrap";
 import moment from 'moment';
 import Highcharts from "highcharts";
-import Highstock from 'highcharts/highstock';
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../Shared/Api';
 
 const RRCounty = () => {
     const filters = useSelector(state => state.filters);
     const rrTab = useSelector(state => state.ui.rrTab);
-    const [emrDistribution, setEmrDistribution] = useState({});
-    const [recencyOfReportingByCounty, setRecencyOfReportingByCounty] = useState({});
-    const [consistencyOfReportingByCounty, setConsistencyOfReportingByCounty] = useState({});
+    const [reportingByCounty, setReportingByCounty] = useState({});
 
-    const loademrDistribution = useCallback(async () => {
+    const loadReportingByCounty = useCallback(async () => {
         let params = {
             county: filters.counties,
             subCounty: filters.subCounties,
@@ -25,114 +21,53 @@ const RRCounty = () => {
             fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
         };
         params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
-        const result = await getAll('manifests/emrdistribution/' + rrTab + '?reportingType=county', params);
-        const counties = result.map(({ county  }) => county);
-        const counties_series = result.map(({ facilities_count }) => parseInt(facilities_count, 10));
-        setEmrDistribution({
-            chart: { type: 'bar', height: '120%', spacingLeft:0, spacingRight:0, spacingBottom:0 },
+        const overallReportingRateResult = await getAll('manifests/recencyreportingbycounty/' + rrTab, params);
+        const consistencyResult = await getAll('manifests/consistencyreportingbycountypartner/' + rrTab + '?reportingType=county', params);
+        const counties = overallReportingRateResult.map(({ county  }) => county);
+        const emrResultSeries = overallReportingRateResult.map(({ expected }) => parseInt(expected, 10));
+        const overallReportingRateResultSeries = overallReportingRateResult.map(({ Percentage }) => parseInt(Percentage, 10) > 100 ? 100:parseInt(Percentage, 10));
+        const consistencyResultCounties = Object.keys(consistencyResult);
+        const consistencyResultData = Object.values(consistencyResult);
+        let consistencyResultSeries = [];
+        for(let i = 0; i < consistencyResultCounties.length; i++) {
+            let resultCounty = consistencyResultCounties[i];
+            resultCounty = resultCounty.toLowerCase();
+            resultCounty = resultCounty.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[]\\\/]/gi, '');
+            resultCounty = resultCounty.replace(' ', '');
+            for (let j = 0; j < counties.length; j++) {
+                let mappedCounty = counties[j];
+                mappedCounty = mappedCounty.toLowerCase();
+                mappedCounty = mappedCounty.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[]\\\/]/gi, '');
+                mappedCounty = mappedCounty.replace(' ', '');
+                if (mappedCounty === resultCounty) {
+                    consistencyResultSeries.splice(j, 0, consistencyResultData[i]);
+                    continue;
+                }
+            }
+        }
+        setReportingByCounty({
             title: { text: '' },
-            xAxis: { categories: counties, title: { text: '' }, labels: { style: { fontSize: '10px' } } },
-            yAxis: { title: { text: 'Number of Facilities' }},
-            legend: { enabled: false },
-            series: [{ name: "Distribution of EMR Sites", data: counties_series, color: "#2F4050" }]
-        });
-    }, [filters, rrTab]);
-
-    const loadRecencyOfReportingByCounty = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-            fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
-        };
-        params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
-        const result = await getAll('manifests/recencyreportingbycounty/' + rrTab, params);
-        const counties = result.map(({ county  }) => county);
-        const counties_series = result.map(({ Percentage }) => parseInt(Percentage, 10) > 100 ? 100:parseInt(Percentage, 10));
-        const data = counties_series.map(d => ({ y: d, color: d >= 90 ? '#59A14F': (d >= 30 && d <90) ? '#F28E2B' : '#E15759' }));
-        setRecencyOfReportingByCounty({
-            chart: { type: 'bar', height: '120%', spacingLeft:0, spacingRight:0, spacingBottom:0 },
-            title: { text: '' },
-            xAxis: { categories: counties, title: { text: '' }, labels: { style: { fontSize: '8px' } } },
-            yAxis: { min: 0, max: 100, title: { text: 'Percentage (%) Reporting Rate' }},
-            legend: { enabled: false },
-            series: [{ name: "Overall Reporting Rates", data: data, color: "#59A14F", tooltip: { valueSuffix: ' %' } }]
-        });
-    }, [filters, rrTab]);
-
-    const loadConsistencyOfReportingByCounty = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-            fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
-        };
-        params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
-        const result = await getAll('manifests/consistencyreportingbycountypartner/' + rrTab + '?reportingType=county', params);
-        const counties = Object.keys(result);
-        const counties_series = Object.values(result);
-        const data = counties_series.map(d => ({ y: d, color: d >= 90 ? '#59A14F': (d >= 30 && d <90) ? '#F28E2B' : '#E15759' }));
-        setConsistencyOfReportingByCounty({
-            chart: { type: 'bar', height: '120%', spacingLeft:0, spacingRight:0, spacingBottom:0 },
-            title: { text: '' },
-            xAxis: { categories: counties, title: { text: '' }, labels: { style: { fontSize: '8px' } } },
-            yAxis: { min: 0, max: 100, title: { text: 'Percentage (%) Reporting Rate' }},
-            legend: { enabled: false },
-            series: [{ name: 'Consistency of Reporting', data: data, tooltip: { valueSuffix: ' %' } }]
+            xAxis: [{ categories: counties, title: { text: 'Counties' } }],
+            yAxis: [
+                { title: { text: 'Number of EMR Sites' } },
+                { title: { text: 'Percentage (%) Reporting Rate'}, opposite: true },
+            ],
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+            tooltip: { shared: true },
+            series: [
+                { name: 'Distribution of EMR Sites', type: 'column', data: emrResultSeries, color: "#2F4050" },
+                { name: 'Overall Reporting Rate', type: 'spline', data: overallReportingRateResultSeries, yAxis: 1, color: "#E06F07", dataLabels: { enabled: false, format: '{y} %' }, tooltip: { valueSuffix: ' %' }, dashStyle: 'ShortDot' },
+                { name: 'Consistency of Reporting', type: 'spline', data: consistencyResultSeries, yAxis: 1, color: "#59A14F", dataLabels: { enabled: false, format: '{y} %' }, tooltip: { valueSuffix: ' %' }, dashStyle: 'ShortDot' }
+            ]
         });
     }, [filters, rrTab]);
 
     useEffect(() => {
-        loademrDistribution();
-        loadRecencyOfReportingByCounty();
-        loadConsistencyOfReportingByCounty();
-    }, [loademrDistribution, loadRecencyOfReportingByCounty, loadConsistencyOfReportingByCounty]);
+        loadReportingByCounty();
+    }, [loadReportingByCounty]);
 
     return (
-        <div className="row">
-            <div className="col-4">
-                <Card className="trends-card">
-                    <CardHeader className="trends-header">
-                        Distribution of EMR sites
-                    </CardHeader>
-                    <CardBody className="trends-body">
-                        <div className="col-12">
-                            <HighchartsReact highcharts={Highstock} options={emrDistribution} />
-                        </div>
-                    </CardBody>
-                </Card>
-            </div>
-            <div className="col-4">
-                <Card className="trends-card">
-                    <CardHeader className="trends-header">
-                        Overall Reporting Rates
-                    </CardHeader>
-                    <CardBody className="trends-body">
-                        <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={recencyOfReportingByCounty} />
-                        </div>
-                    </CardBody>
-                </Card>
-            </div>
-            <div className="col-4">
-                <Card className="trends-card">
-                    <CardHeader className="trends-header">
-                        Consistency Of Reporting
-                    </CardHeader>
-                    <CardBody className="trends-body">
-                        <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={consistencyOfReportingByCounty} />
-                        </div>
-                    </CardBody>
-                </Card>
-            </div>
-        </div>
+        <HighchartsReact highcharts={Highcharts} options={reportingByCounty} />
     );
 };
 
