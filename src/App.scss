@@ -5,3 +5,11 @@
 @import './scss/style.scss';
 
 @import '~semantic-ui-css/semantic.min.css';
+
+.modal {
+  height: auto;
+  top: auto;
+  left: auto;
+  bottom: auto;
+  right: auto;
+}

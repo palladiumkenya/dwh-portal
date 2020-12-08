@@ -1,11 +1,14 @@
 import axios from 'axios';
 import moment from 'moment'
 let url = null;
+let url_identity = null;
 
 if(process.env.NODE_ENV.trim() === 'production') {
     url = 'https://data.kenyahmis.org:8082/api/';
+    url_identity = 'https://auth.kenyahmis.org/DwhIdentity/api/';
 } else {
     url = 'http://localhost:7000/api/';
+    url_identity = 'https://localhost:5006/api/';
 }
 
 export const getAll = async (endpoint, params) => {
@@ -22,6 +25,49 @@ export const getAll = async (endpoint, params) => {
     }
     return [];
 };
+
+export const getIdentityAll = async (endpoint, params) => {
+    let request = axios.get(`${url_identity}${endpoint}`);
+    if (params) {
+        request = axios.get(`${url_identity}${endpoint}`,{ params: params });
+    }
+    try {
+        const response = await request;
+        const result = response.data;
+        return result;
+    } catch (e) {
+        console.error(e);
+    }
+    return [];
+}
+
+export const createUpdateOrganizations = async (endpoint, id, name, code) => {
+    let req = axios.post(`${url_identity}${endpoint}`, {
+        id: id,
+        Name: name,
+        Code: code
+    });
+
+    try {
+        const response = await req;
+        const result = response.data;
+        return result;
+    } catch (e) {
+        console.error(e);
+    }
+}
+
+export const deleteOrganizations = async (endpoint, id) => {
+    let request = axios.delete(`${url_identity}${endpoint}/${id}`);
+    try {
+        const response = await request;
+        const result = response.data;
+        return result;
+    } catch (e) {
+        console.error(e);
+    }
+    return [];
+}
 
 export const getYearMonths = (minYear) => {
     const yearMonths = [];
