@@ -44,16 +44,19 @@ const RRPartner = () => {
                 mappedPartner = mappedPartner.replace(' ', '');
                 if (mappedPartner === resultPartner && emrResultSeries[j] > 0) {
                     consistencyResultSeries[j] = parseInt((consistencyResultData[i]/emrResultSeries[j]) * 100);
+                    if (consistencyResultSeries[j] > 100) {
+                        consistencyResultSeries[j] = 100;
+                    }
                     continue;
                 }
             }
         }
         setReportingByPartner({
             title: { text: '' },
-            xAxis: [{ categories: partners, title: { text: 'Partners' } }],
+            xAxis: [{ categories: partners, title: { text: 'Partners' }, crosshair: true }],
             yAxis: [
                 { title: { text: 'Number of EMR Sites' } },
-                { title: { text: 'Percentage (%) Reporting Rate'}, opposite: true },
+                { title: { text: 'Percentage (%) Reporting Rate'}, opposite: true, min: 0, max: 100 },
             ],
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             tooltip: { shared: true },

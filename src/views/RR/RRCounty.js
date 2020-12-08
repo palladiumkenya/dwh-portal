@@ -44,16 +44,19 @@ const RRCounty = () => {
                 mappedCounty = mappedCounty.replace(' ', '');
                 if (mappedCounty === resultCounty && emrResultSeries[j] > 0) {
                     consistencyResultSeries[j] = parseInt((consistencyResultData[i]/emrResultSeries[j]) * 100);
+                    if (consistencyResultSeries[j] > 100) {
+                        consistencyResultSeries[j] = 100;
+                    }
                     continue;
                 }
             }
         }
         setReportingByCounty({
             title: { text: '' },
-            xAxis: [{ categories: counties, title: { text: 'Counties' } }],
+            xAxis: [{ categories: counties, title: { text: 'Counties' }, crosshair: true }],
             yAxis: [
                 { title: { text: 'Number of EMR Sites' } },
-                { title: { text: 'Percentage (%) Reporting Rate'}, opposite: true },
+                { title: { text: 'Percentage (%) Reporting Rate'}, opposite: true, min: 0, max: 100 },
             ],
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             tooltip: { shared: true },
