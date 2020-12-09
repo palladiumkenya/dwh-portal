@@ -6,11 +6,11 @@ import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../../Shared/Api';
 import moment from "moment";
 
-const PNSDistributionElicitedAgeSex = () => {
+const PNSDistributionPositiveAgeSex = () => {
     const filters = useSelector(state => state.filters);
-    const [pnsDistributionElicitedAgeSex, setPNSDistributionElicitedAgeSex] = useState({});
+    const [pnsDistributionPositiveAgeSex, setPNSDistributionPositiveAgeSex] = useState({});
 
-    const loadPNSDistributionElicitedAgeSex = useCallback(async () => {
+    const loadPNSDistributionPositiveAgeSex = useCallback(async () => {
         let params = {
             county: filters.counties,
             subCounty: filters.subCounties,
@@ -43,21 +43,21 @@ const PNSDistributionElicitedAgeSex = () => {
             if(sexIndex === -1 || ageIndex === -1 ) { // unsupported
                 continue;
             }
-            data[sexIndex][ageIndex] = data[sexIndex][ageIndex] + parseInt(result[i].elicited);
+            data[sexIndex][ageIndex] = data[sexIndex][ageIndex] + parseInt(result[i].positive);
         }
         data[0] = data[0].map(value => value * -1);
-        setPNSDistributionElicitedAgeSex({
+        setPNSDistributionPositiveAgeSex({
             chart: { type: 'bar' },
             title: { text: '' },
             xAxis: [
                 { categories: ageGroups, title: { text: 'Age Groups' } }
             ],
             yAxis: [
-                { title: { text: 'Number Elicited' }, labels: { formatter: function () { return Math.abs(this.value); } } }
+                { title: { text: 'Number Positive' }, labels: { formatter: function () { return Math.abs(this.value); } } }
             ],
             plotOptions: { series: { stacking: 'normal' }, bar: { pointWidth: 18 } },
             tooltip: { formatter: function () {
-                    return '<b>Number Elicited:</b><br/>' + this.series.name + ', ' + this.point.category +
+                    return '<b>Number Positive:</b><br/>' + this.series.name + ', ' + this.point.category +
                         ': ' + Highcharts.numberFormat(Math.abs(this.point.y), 0);
                 }
             },
@@ -70,19 +70,19 @@ const PNSDistributionElicitedAgeSex = () => {
     }, [filters]);
 
     useEffect(() => {
-        loadPNSDistributionElicitedAgeSex();
-    }, [loadPNSDistributionElicitedAgeSex]);
+        loadPNSDistributionPositiveAgeSex();
+    }, [loadPNSDistributionPositiveAgeSex]);
 
     return (
         <Card className="trends-card">
-            <CardHeader className="cardTitle">CHARACTERISTICS OF ELICITED SEXUAL CONTACTS</CardHeader>
+            <CardHeader className="cardTitle">CHARACTERISTICS OF SEXUAL CONTACTS WHO TESTED POSITIVE</CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
-                    <HighchartsReact highcharts={Highcharts} options={pnsDistributionElicitedAgeSex} />
+                    <HighchartsReact highcharts={Highcharts} options={pnsDistributionPositiveAgeSex} />
                 </div>
             </CardBody>
         </Card>
     );
 };
 
-export default PNSDistributionElicitedAgeSex;
+export default PNSDistributionPositiveAgeSex;
