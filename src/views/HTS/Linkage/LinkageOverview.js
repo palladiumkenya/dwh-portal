@@ -47,11 +47,11 @@ const LinkageOverview = () => {
         for(let i = 0; i < result.length; i++) {
             data.totalPositive = data.totalPositive + parseInt(result[i].positive);
             data.totalLinked = data.totalLinked + parseInt(result[i].linked);
-            if (result[i].gender === "M") {
+            if (result[i].gender.toLowerCase() === "m" || result[i].gender.toLowerCase() === "male") {
                 data.malePositive = data.malePositive + parseInt(result[i].positive);
                 data.maleLinked = data.maleLinked + parseFloat(result[i].linked);
             }
-            if (result[i].gender === "F") {
+            if (result[i].gender.toLowerCase() === "f"  || result[i].gender.toLowerCase() === "female") {
                 data.femalePositive = data.femalePositive + parseInt(result[i].positive);
                 data.femaleLinked = data.femaleLinked + parseFloat(result[i].linked);
             }

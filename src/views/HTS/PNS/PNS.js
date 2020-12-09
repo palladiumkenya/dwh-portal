@@ -1,14 +1,16 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CardColumns } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from '../../Shared/UniversalFilter';
 import SectionHeader from '../../Shared/SectionHeader';
 import SectionFooter from '../../Shared/SectionFooter';
-import PNSOverview from './PNSOverview';
-import PNSScreening from './PNSScreening';
+import PNSContactsTestingOverview from './PNSContactsTestingOverview';
 import PNSDistributionElicitedAgeSex from './PNSDistributionElicitedAgeSex';
+import PNSDistributionPositiveAgeSex from './PNSDistributionPositiveAgeSex';
+import PNSContactsHivStatus from './PNSContactsHivStatus';
 import PNSContactsCascade from './PNSContactsCascade';
+import PNSFamilyTestingOverview from './PNSFamilyTestingOverview';
 import PNSChildrenFamilyTestingCascade from './PNSChildrenFamilyTestingCascade';
 import PNSContactsTestingPositivityTrends from './PNSContactsTestingPositivityTrends';
 import PNSChildrenFamilyTestingPositivityTrends from './PNSChildrenFamilyTestingPositivityTrends';
@@ -37,30 +39,41 @@ const PNS = () => {
     
     return (
         <div className="animated fadeIn">
-            <SectionHeader title={branding.title} description={branding.description}/>
+            <SectionHeader title={branding.title} description="SEXUAL CONTACT TESTING"/>
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <PNSOverview/>
-            <CardColumns className="cols-2">
-                <PNSScreening/>
-                <PNSDistributionElicitedAgeSex/>
-            </CardColumns>
-            <SectionFooter overview={branding.overview}/>
-            <CardColumns className="cols-2">
-                <PNSContactsCascade/>
-                <PNSChildrenFamilyTestingCascade/>
-            </CardColumns>
+            <PNSContactsTestingOverview/>
+            <Row>
+                <Col>
+                    <PNSContactsCascade/>
+                </Col>
+                <Col>
+                    <PNSDistributionElicitedAgeSex/>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <PNSContactsHivStatus/>
+                </Col>
+                <Col>
+                    <PNSDistributionPositiveAgeSex/>
+                </Col>
+            </Row>
             <SectionFooter overview={branding.overview}/>
             <PNSContactsTestingPositivityTrends/>
-            <SectionFooter overview={branding.overview}/>
-            <PNSChildrenFamilyTestingPositivityTrends/>
             <SectionFooter overview={branding.overview}/>
             <PNSPositivityTrends/>
             <SectionFooter overview={branding.overview}/>
             <PNSContactsTestingPositivityByCounty/>
             <SectionFooter overview={branding.overview}/>
             <PNSContactsTestingPositivityByPartner/>
+            <SectionFooter overview={branding.overview}/>
+            <SectionHeader title={branding.title} description="FAMILY TESTING"/>
+            <PNSFamilyTestingOverview/>
+            <PNSChildrenFamilyTestingCascade/>
+            <SectionFooter overview={branding.overview}/>
+            <PNSChildrenFamilyTestingPositivityTrends/>
             <SectionFooter overview={branding.overview}/>
         </div>
     );

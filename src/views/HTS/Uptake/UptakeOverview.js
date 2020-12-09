@@ -47,11 +47,11 @@ const UptakeOverview = () => {
         for(let i = 0; i < result.length; i++) {
             data.totalTested = data.totalTested + parseInt(result[i].tested);
             data.totalPositive = data.totalPositive + parseInt(result[i].positive);
-            if (result[i].gender === "M") {
+            if (result[i].gender.toLowerCase() === "m" || result[i].gender.toLowerCase() === "male") {
                 data.maleTested = data.maleTested + parseInt(result[i].tested);
                 data.malePositive = data.malePositive + parseFloat(result[i].positive);
             }
-            if (result[i].gender === "F") {
+            if (result[i].gender.toLowerCase() === "f" || result[i].gender.toLowerCase() === "female") {
                 data.femaleTested = data.femaleTested + parseInt(result[i].tested);
                 data.femalePositive = data.femalePositive + parseFloat(result[i].positive);
             }
