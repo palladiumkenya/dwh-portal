@@ -97,7 +97,7 @@ const UptakeTestingStrategy = () => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        UPTAKE BY STRATEGY
+                        HTS UPTAKE BY STRATEGY
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={hivTestingType} />
@@ -108,7 +108,7 @@ const UptakeTestingStrategy = () => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                       UPTAKE BY ENTRY POINT
+                       HTS UPTAKE BY ENTRY POINT
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={uptakeByEntryPoint} />

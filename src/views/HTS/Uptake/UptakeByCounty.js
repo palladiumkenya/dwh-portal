@@ -57,7 +57,7 @@ const UptakeByCounty = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        UPTAKE BY COUNTY
+                        HTS UPTAKE BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={uptakeByCounty} />

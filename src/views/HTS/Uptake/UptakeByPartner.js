@@ -57,7 +57,7 @@ const UptakeByPartner = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        UPTAKE BY PARTNER
+                        HTS UPTAKE BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={uptakeByPartner} />
