@@ -57,7 +57,7 @@ const AdverseEventsCausesAndActionsByDrugs = () => {
             },
             series: [
                 {
-                    name: 'STABILITY STATUS AMONG ACTIVE PATIENTS',
+                    name: 'REPORTED CAUSES OF AES',
                     colorByPoint: true,
                     data: [
                         {
