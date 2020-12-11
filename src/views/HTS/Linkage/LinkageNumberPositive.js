@@ -32,7 +32,7 @@ const LinkageNumberPositive = () => {
         let linked = [];
         let linkage = [];
         for(let i = 0; i < result.length; i++) {
-            if(result[i].TestedBefore === 'New') { 
+            if(result[i].TestedBefore === 'New') {
                 months.push(monthNames[result[i].month] + ' ' + result[i].year.toString());
                 positive[0].push(parseInt(result[i].positive, 10));
             } else {
@@ -75,7 +75,7 @@ const LinkageNumberPositive = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                    Linkage by month
+                    HTS Linkage by month
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
