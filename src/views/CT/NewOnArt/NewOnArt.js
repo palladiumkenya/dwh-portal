@@ -6,7 +6,6 @@ import NewOnArtHeader from './NewOnArtHeader';
 import NewOnArtFooter from './NewOnArtFooter';
 import NewOnArtTrends from './NewOnArtTrends';
 import NewOnArtByAgeSex from './NewOnArtByAgeSex';
-import NewOnArtBySex from './NewOnArtBySex';
 import MedianTimeToArtStart from './MedianTimeToArtStart';
 import MedianTimeToArtStartByCounty from './MedianTimeToArtStartByCounty';
 import MedianTimeToArtStartByPartner from './MedianTimeToArtStartByPartner';
@@ -44,9 +43,6 @@ const NewOnArt = () => {
             <p></p>
             <p></p>
             <div className="row">
-                {/*<div className="col-6">
-                    <NewOnArtBySex />
-                </div>*/}
                 <div className="col-12">
                     <NewOnArtByAgeSex />
                 </div>
