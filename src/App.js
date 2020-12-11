@@ -3,11 +3,12 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Highcharts from "highcharts";
 import HighchartsExporting from 'highcharts/modules/exporting';
 import HighchartsExportData from 'highcharts/modules/export-data';
+import { PersistGate } from 'redux-persist/integration/react';
 import './App.scss';
 import { Provider } from 'react-redux';
 import AuthProvider from './utils/authProvider';
 import userManager, { loadUserFromStorage } from './services/UserService';
-import store from './store';
+import  { store, persistor } from './store';
 import SignoutOidc from './views/Pages/Login/signout-oidc';
 import SigninOidc from './views/Pages/Login/signin-oidc';
 
@@ -29,18 +30,20 @@ const App = () => {
 
     return (
         <Provider store={store}>
-            <AuthProvider userManager={userManager} store={store}>
-                <Router>
-                    <React.Suspense fallback={loading()}>
-                        <Switch>
-                            <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
-                            <Route path="/signout-oidc" component={SignoutOidc} />
-                            <Route path="/signin-oidc" component={SigninOidc} />
-                            <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>} />
-                        </Switch>
-                    </React.Suspense>
-                </Router>
-            </AuthProvider>
+            <PersistGate loading={loading()} persistor={persistor}>
+                <AuthProvider userManager={userManager} store={store}>
+                    <Router>
+                        <React.Suspense fallback={loading()}>
+                            <Switch>
+                                <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
+                                <Route path="/signout-oidc" component={SignoutOidc} />
+                                <Route path="/signin-oidc" component={SigninOidc} />
+                                <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>} />
+                            </Switch>
+                        </React.Suspense>
+                    </Router>
+                </AuthProvider>
+            </PersistGate>
         </Provider>
     );
 }
