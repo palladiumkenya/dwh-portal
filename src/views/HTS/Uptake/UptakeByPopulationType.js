@@ -106,7 +106,7 @@ const UptakeByPopulationType = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        UPTAKE BY POPULATION TYPE
+                        HTS UPTAKE BY POPULATION TYPE
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="row">
