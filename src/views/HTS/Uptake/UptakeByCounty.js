@@ -26,7 +26,7 @@ const UptakeByCounty = () => {
         let positivity = [];
         const result = await getAll('hts/uptakeByCounty', params);
         for(let i = 0; i < result.length; i++) {
-            counties.push(result[i].County);
+            counties.push(result[i].County.capitalize());
             tested.push(parseInt(result[i].Tested, 10));
             const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
             positivity.push(val);
@@ -47,6 +47,10 @@ const UptakeByCounty = () => {
             ],
         });
     }, [filters]);
+
+    String.prototype.capitalize = function() {
+        return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase()
+    }
 
     useEffect(() => {
         loadUptakeByCounty();
