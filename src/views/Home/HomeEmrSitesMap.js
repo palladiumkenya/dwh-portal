@@ -8,7 +8,7 @@ const HomeEmrSitesMap = () => {
     const [counties, setHomeEmrSitesMap] = useState({});
 
     const loadCounties = useCallback(async () => {
-        const result = await getAll('care-treatment/sites', []);
+        const result = await getAll('care-treatment/siteGps', []);
         const data = [];
         const emrNames = [];
         let emrSites = [];
