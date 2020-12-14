@@ -5,7 +5,7 @@ import HomeEmrSitesMap from './HomeEmrSitesMap';
 import HomeCurrentOnArtByCountyMap from './HomeCurrentOnArtByCountyMap';
 import HomeHasCurrentVlByCountyMap from './HomeHasCurrentVlByCountyMap';
 import HomeSuppressionByCountyMap from './HomeSuppressionByCountyMap';
-import { changeHomeTab } from "../../actions/uiActions";
+import { changeHomeTab } from "../../actions/shared/uiActions";
 import { HOME_TABS } from "../../constants";
 
 const HomeMaps = () => {

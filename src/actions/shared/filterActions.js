@@ -1,4 +1,4 @@
-import * as actionTypes from './types';
+import * as actionTypes from '../types';
 
 export const filterByCounty = counties => ({
     type: actionTypes.FILTER_BY_COUNTY,

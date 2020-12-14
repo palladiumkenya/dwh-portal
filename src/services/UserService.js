@@ -1,5 +1,5 @@
 import { UserManager } from 'oidc-client';
-import { storeUser, storeUserError } from '../actions/AuthActions';
+import { storeUser, storeUserError } from '../actions/shared/AuthActions';
 let config = {};
 
 if(process.env.NODE_ENV.trim() === 'production') {
