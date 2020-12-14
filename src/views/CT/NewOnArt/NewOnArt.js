@@ -10,7 +10,7 @@ import MedianTimeToArtStart from './MedianTimeToArtStart';
 import MedianTimeToArtStartByCounty from './MedianTimeToArtStartByCounty';
 import MedianTimeToArtStartByPartner from './MedianTimeToArtStartByPartner';
 import TimeFromDiagnosisToStart from './TimeFromDiagnosisToStart';
-import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/shared/uiActions";
 import NewOnARTTiles from './NewOnARTTiles';
 
 const NewOnArt = () => {

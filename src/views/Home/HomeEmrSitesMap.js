@@ -3,31 +3,31 @@ import { Row, Col } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Highcharts from '../../utils/highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { loadSites } from '../../actions/siteActions'
+import { loadGpsSites } from '../../actions/home/gpsSitesActions';
 
 const HomeEmrSitesMap = () => {
     const [emrSitesMap, setHomeEmrSitesMap] = useState({});
-    const sites = useSelector(state => state.sites.list);
+    const gpsSites = useSelector(state => state.gpsSites.list);
     const dispatch = useDispatch();
 
     const loadEmrSitesMaps = useCallback(async () => {
         const data = [];
         const emrNames = [];
         let emrSites = [];
-        for(let i = 0; i < sites.length; i++) {
-            if (emrNames.indexOf(sites[i].emr) === -1) {
-                emrNames.push(sites[i].emr);
+        for(let i = 0; i < gpsSites.length; i++) {
+            if (emrNames.indexOf(gpsSites[i].emr) === -1) {
+                emrNames.push(gpsSites[i].emr);
             }
         }
         for(let j = 0; j < emrNames.length; j++) {
             emrSites[j] = [];
         }
-        for (let k = 0; k < sites.length; k++) {
-            let index = emrNames.indexOf(sites[k].emr);
-            let lat = parseFloat(sites[k].latitude);
-            let lon = parseFloat(sites[k].longitude);
+        for (let k = 0; k < gpsSites.length; k++) {
+            let index = emrNames.indexOf(gpsSites[k].emr);
+            let lat = parseFloat(gpsSites[k].latitude);
+            let lon = parseFloat(gpsSites[k].longitude);
             if (Number.isFinite(lat) && lat < 5 && lat > -5 && Number.isFinite(lon) && lon > 34 && lon < 41) {
-                emrSites[index].push({ name: sites[k].facility, lat: lat, lon: lon });
+                emrSites[index].push({ name: gpsSites[k].facility, lat: lat, lon: lon });
             }
         }
         data.push({
@@ -51,10 +51,10 @@ const HomeEmrSitesMap = () => {
             legend: { title: { text: 'KEY: EMR SITES' }, layout: 'vertical', align: 'right', verticalAlign: 'bottom' },
             series: data
         });
-    }, [sites]);
+    }, [gpsSites]);
 
     useEffect(() => {
-        dispatch(loadSites());
+        dispatch(loadGpsSites());
         loadEmrSitesMaps();
     }, [dispatch, loadEmrSitesMaps]);
 

@@ -9,7 +9,7 @@ import AdverseEventsSeverity from './AdverseEventsSeverity';
 import AdverseEventsSeverityLevels from './AdverseEventsSeverityLevels';
 import AdverseEventsCausesAndActionsByDrugs from './AdverseEventsCausesAndActionsByDrugs';
 import AdverseEventsTable from './AdverseEventsTable';
-import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/shared/uiActions";
 
 const AdverseEvents = () => {
     const filters = useSelector(state => state.filters);

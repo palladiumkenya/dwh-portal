@@ -34,3 +34,10 @@ export const PAGES = {
     hts: "HIV_TESTING_SERVICES",
     ct: "CARE_AND_TREATMENT"
 };
+
+export const CACHING = {
+    // in minutes
+    SHORT: 10,
+    MID: 60,
+    LONG: 360
+}
