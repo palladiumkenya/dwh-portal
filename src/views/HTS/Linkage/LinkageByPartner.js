@@ -56,7 +56,7 @@ const LinkageByPartner = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        LINKAGE BY PARTNER
+                        HTS LINKAGE BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={uptakeByPartner} />
