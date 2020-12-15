@@ -286,7 +286,7 @@ const AdverseEventsTiles = () => {
         const result = await getAll('care-treatment/getNoOfReportedAeInAdults', params);
         if (result) {
             setTotalNoOfAeReportedInAdults({
-                total: result.total
+                total: result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             });
         }
     }, [filters]);
@@ -300,7 +300,7 @@ const AdverseEventsTiles = () => {
         const result = await getAll('care-treatment/getNoOfReportedAeInChildren', params);
         if (result) {
             setTotalNoOfAeReportedInChildren({
-                total: result.total
+                total: result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             });
         }
     }, [filters]);
@@ -314,7 +314,7 @@ const AdverseEventsTiles = () => {
         const result = await getAll('care-treatment/getNumberOfAdultsWithAe', params);
         if (result) {
             setTotalNumberOfAdultsWithAe({
-                total: result.total
+                total: result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             });
         }
     }, [filters]);
@@ -328,7 +328,7 @@ const AdverseEventsTiles = () => {
         const result = await getAll('care-treatment/getNumberOfChildrenWithAe', params);
         if (result) {
             setTotalNumberOfChildrenWithAe({
-                total: result.total
+                total: result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             });
         }
     }, [filters]);
