@@ -69,7 +69,7 @@ const DistributionMMDStable = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        DISTRIBUTION OF MMD MODELS AMONG STABLE CURRENT ON ART PATIENTS
+                        DISTRIBUTION OF MMD MODELS AMONG PATIENTS CURRENTLY ON ART
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
