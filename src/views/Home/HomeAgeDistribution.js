@@ -43,7 +43,7 @@ const HomeAgeDistribution = () => {
             ActiveARTAdults = result[0].ActiveARTAdults;
         }
         setARTClientsAdults({
-            ActiveARTAdults: ActiveARTAdults.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            ActiveARTAdults: ActiveARTAdults ? ActiveARTAdults.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0
         });
     }, [filters]);
 
