@@ -97,7 +97,7 @@ const UptakeTypeAndSelfTest = () => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                    Couples receiving HTS
+                        HTS uptake among couples
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={uptakeByType} />
@@ -107,7 +107,7 @@ const UptakeTypeAndSelfTest = () => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                    History of HIV self test
+                        History of HIV self test
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={uptakeBySelfTest} />
