@@ -103,11 +103,11 @@ const AdverseEventsTiles = () => {
         for (let i = 0; i < categories.length; i++) {
             for (let j = 0; j < result.length; j++) {
                 if(categories[i] === result[j].AgeGroup && (result[j].Gender.toLowerCase() === "female" || result[j].Gender.toLowerCase() === "f" )) {
-                    femaleData.push(result[j].adverseEventsByAgeGroup);
+                    femaleData.push(result[j].total);
                 }
 
                 if(categories[i] === result[j].AgeGroup && (result[j].Gender.toLowerCase() === "male" || result[j].Gender.toLowerCase() === "m" )) {
-                    maleData.push(result[j].adverseEventsByAgeGroup);
+                    maleData.push(result[j].total);
                 }
             }
         }
@@ -131,9 +131,8 @@ const AdverseEventsTiles = () => {
             },
             yAxis: {
                 min: 0,
-                max: 150,
                 title: {
-                    text: 'PERCENT OF PATIENTS'
+                    text: 'Number of Patients'
                 },
                 stackLabels: {
                     enabled: true,
@@ -199,11 +198,11 @@ const AdverseEventsTiles = () => {
         for (let i = 0; i < categories.length; i++) {
             for (let j = 0; j < result.length; j++) {
                 if(categories[i] === result[j].AgeGroup && (result[j].Gender.toLowerCase() === "female" || result[j].Gender.toLowerCase() === "f" )) {
-                    femaleData.push(result[j].adverseEventsByAgeGroup);
+                    femaleData.push(result[j].total);
                 }
 
                 if(categories[i] === result[j].AgeGroup && (result[j].Gender.toLowerCase() === "male" || result[j].Gender.toLowerCase() === "m" )) {
-                    maleData.push(result[j].adverseEventsByAgeGroup);
+                    maleData.push(result[j].total);
                 }
             }
         }
@@ -227,9 +226,8 @@ const AdverseEventsTiles = () => {
             },
             yAxis: {
                 min: 0,
-                max: 150,
                 title: {
-                    text: 'PERCENT OF PATIENTS'
+                    text: 'Number of Patients'
                 },
                 stackLabels: {
                     enabled: true,
@@ -300,7 +298,7 @@ const AdverseEventsTiles = () => {
         const result = await getAll('care-treatment/getNoOfReportedAeInChildren', params);
         if (result) {
             setTotalNoOfAeReportedInChildren({
-                total: result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                total: result.total ? result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : result.total
             });
         }
     }, [filters]);
@@ -476,7 +474,7 @@ const AdverseEventsTiles = () => {
                 <div className="col-6">
                     <Card className="trends-card">
                         <CardHeader className="trends-header">
-                            CHILDREN &#60;15 ON ART AND DEVELOPED ADVERSE EVENTS (N={totalChildrenAdverseEvents.total})
+                            CHILDREN &#60;15 ON ART AND DEVELOPED ADVERSE EVENTS
                         </CardHeader>
                         <CardBody className="trends-body">
                             <div className="col-12">
