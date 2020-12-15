@@ -13,7 +13,7 @@ import HomeSexDistribution from './HomeSexDistribution';
 import VisibilitySensor from 'react-visibility-sensor';
 import HomeOverview from './HomeOverview';
 import HomeMaps from './HomeMaps';
-import { enableStickyFilter, disableStickyFilter, changeCurrentPage, enableFromDateFilter, disableFromDateFilter } from "../../actions/uiActions";
+import { enableStickyFilter, disableStickyFilter, changeCurrentPage, enableFromDateFilter, disableFromDateFilter } from "../../actions/shared/uiActions";
 import { PAGES } from './../../constants';
 
 const Home = () => {

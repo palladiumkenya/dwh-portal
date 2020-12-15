@@ -97,7 +97,7 @@ const LinkageByPopulationType = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        LINKAGE BY POPULATION TYPE
+                        HTS LINKAGE BY POPULATION TYPE
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="row">

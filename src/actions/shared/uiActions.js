@@ -1,4 +1,4 @@
-import * as actionTypes from './types';
+import * as actionTypes from '../types';
 
 export const changeCurrentPage = page => ({
     type: actionTypes.CHANGE_CURRENT_PAGE,

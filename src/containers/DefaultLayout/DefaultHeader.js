@@ -4,7 +4,7 @@ import { Nav, NavItem } from 'reactstrap';
 import { AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from '../../assets/img/brand/dwh2.png';
 import sygnet from '../../assets/img/brand/ic_launcher.png';
-import { Badge, UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import { UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
 
 const DefaultHeader = () => {
     return (

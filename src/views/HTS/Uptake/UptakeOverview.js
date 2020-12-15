@@ -82,7 +82,7 @@ const UptakeOverview = () => {
                 <div className="col-4">
                     <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
-                            TOTAL TESTED
+                            TOTAL PATIENTS TESTED
                         </CardHeader>
                         <CardBody
                             className="align-items-center d-flex justify-content-center"

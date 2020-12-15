@@ -61,7 +61,7 @@ const CurrentOnARTTxCurrBySex = () => {
                 }
             },
             series: [{
-                name:"New on ART",
+                name:"Current on ART",
                 colorByPoint: true,
                 data: [
                     { name: 'Female', y: txCurrFemale, color: "#EA4C8B" },

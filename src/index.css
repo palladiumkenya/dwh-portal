@@ -17,3 +17,7 @@ span.smallfont {
     font-weight: lighter;
     font-style: italic;
 }
+
+.DwhCapitalize {
+    text-transform: capitalize;
+}

@@ -62,7 +62,7 @@ const HomeMmdUptakeBySex = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        MMD UPTAKE BY SEX
+                        Overall MMD Uptake among patients currently on ART by sex
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
