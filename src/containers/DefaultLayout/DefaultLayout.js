@@ -5,19 +5,20 @@ import * as router from 'react-router-dom';
 import React, { Suspense } from "react";
 import routes from '../../routes';
 import UniversalFilter from '../../views/Shared/UniversalFilter';
+import Loading from '../../views/Shared/Loading';
 import { useSelector } from 'react-redux';
 import PrivateRoute from '../../utils/protectedRoute';
 
 const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
-const loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>;
 
 const DefaultLayout = () => {
-    const ui = useSelector(state => state.ui)
+    const ui = useSelector(state => state.ui);
+
     return (
         <div className="app">
             <AppHeader fixed>
-                <Suspense fallback={loading()}>
+                <Suspense fallback={<Loading/>}>
                     <DefaultHeader />
                 </Suspense>
             </AppHeader>
@@ -28,7 +29,7 @@ const DefaultLayout = () => {
                 <main className={"main"}>
                     <AppBreadcrumb appRoutes={routes} router={router} />
                     <Container fluid>
-                        <Suspense fallback={loading()}>
+                        <Suspense fallback={<Loading/>}>
                             <Switch>
                                 {routes.map((route, idx) => {
                                     return route.component ? (
@@ -56,7 +57,7 @@ const DefaultLayout = () => {
                 </main>
             </div>
             <AppFooter>
-                <Suspense fallback={loading()}>
+                <Suspense fallback={<Loading/>}>
                     <DefaultFooter />
                 </Suspense>
             </AppFooter>

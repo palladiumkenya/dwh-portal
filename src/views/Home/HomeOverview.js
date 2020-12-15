@@ -1,63 +1,13 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import { Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
-import { getAll } from '../Shared/Api';
-import moment from 'moment';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 const HomeOverview = () => {
-    const filters = useSelector(state => state.filters);
-    const [counties, setCounties] = useState(0);
-    const [facilities, setFacilities] = useState(0);
-    const [partners, setPartners] = useState(0);
-
-    const [selectedCounty, setSelectedCounty] = useState('');
-
-    const loadCounties = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-        };
-
-        const counties = filters.counties.length > 0 ? filters.counties.toString() : '';
-        setSelectedCounty(counties);
-        //<strong>{counties}</strong> counties
-
-        const data = await getAll('care-treatment/counties', params);
-        setCounties(data.length);
-    }, [filters]);
-
-    const loadFacilities = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-        };
-
-        const data = await getAll('care-treatment/facilities', params);
-        setFacilities(data.length);
-    }, [filters]);
-
-    const loadPartners = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-        };
-
-        const data = await getAll('care-treatment/partners', params);
-        setPartners(data.length);
-    }, [filters]);
-
-    useEffect(() => {
-        loadCounties();
-        loadFacilities();
-        loadPartners()
-    }, [loadCounties, loadFacilities, loadPartners]);
-
+    const counties = useSelector(state => state.ctSites.counties);
+    const facilities = useSelector(state => state.ctSites.facilities);
+    const partners = useSelector(state => state.ctSites.partners);
+    
     return (
         <Row>
             <Col>
@@ -65,10 +15,10 @@ const HomeOverview = () => {
                     <CardBody className="primary-card-body">
                         <CardTitle tag="h4" className="pb-2">WELCOME</CardTitle>
                         <CardText className="mb-5">
-                            <strong>{facilities}</strong> Health Facilities in <strong>{counties}</strong> counties in Kenya,
-                            supported by <strong>{partners}</strong> SDPs have ever uploaded care & treatment data to the
+                            <strong>{facilities.length}</strong> Health Facilities in <strong>{counties.length}</strong> counties in Kenya,
+                            supported by <strong>{partners.length}</strong> SDPs have ever uploaded care & treatment data to the
                             warehouse since it’s inception. As at {moment().format('MMM YYYY')},
-                            <strong> {facilities}</strong> facilities had reported patients current on ART
+                            <strong> {facilities.length}</strong> facilities had reported patients current on ART
                         </CardText>
                         <CardTitle tag="h4" className="pb-2">THEME OF THE MONTH</CardTitle>
                         <CardSubtitle tag="h5" className="pb-2">Differenciated Service Delivery</CardSubtitle>

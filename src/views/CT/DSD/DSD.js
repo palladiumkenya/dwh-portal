@@ -16,7 +16,7 @@ import AppointmentDurationBySex from './AppointmentDurationBySex';
 import AppointmentDurationByAge from './AppointmentDurationByAge';
 import AppointmentDurationStableByCounty from './AppointmentDurationStableByCounty';
 import AppointmentDurationStableByPartner from './AppointmentDurationStableByPartner';
-import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/shared/uiActions";
 
 const DSD = () => {
     const ctTab = useSelector(state => state.ui.ctTab);
