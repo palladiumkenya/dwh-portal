@@ -89,7 +89,7 @@ const DSDOverview = () => {
                 <div className="col-4">
                     <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
-                            TOTAL ACTIVE PATIENTS
+                            CURRENT ON ART
                         </CardHeader>
                         <CardBody
                             className="align-items-center d-flex justify-content-center"

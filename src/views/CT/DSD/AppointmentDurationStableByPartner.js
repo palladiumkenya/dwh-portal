@@ -68,7 +68,7 @@ const AppointmentDurationStableByPartner = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        MMD UPTAKE IN ACTIVE STABLE PATIENTS BY PARTNER
+                        MMD UPTAKE IN PATIENTS CURRENTLY ON ART BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
