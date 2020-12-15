@@ -2,7 +2,7 @@ export const HOME_TABS = {
     emr: "EMR SITES",
     txCurr: "CURRENT ON ART",
     hasCurrVl: "HAS CURRENT VL",
-    suppressed: "SUPPRESSED",
+    suppressed: "SUPPRESSION LEVEL",
 }
 
 export const RR_TABS = {
@@ -22,7 +22,7 @@ export const CT_TABS = {
     txCurr: "CURRENT ON ART",
     txOpt: "ART OPTIMIZATION",
     // tbHiv: "TB/HIV",
-    advEv: "ADVERSE EVENTS",
+    advEv: "ADVERSE EVENTS - AE",
     dsd: "DSD",
     vl: "VL MONITORING",
     tOut: "TREATMENT OUTCOMES"

@@ -2,26 +2,55 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'reactstrap';
 import { getAll } from '../Shared/Api';
 import moment from 'moment';
+import { useSelector } from 'react-redux';
 
 const HomeOverview = () => {
+    const filters = useSelector(state => state.filters);
     const [counties, setCounties] = useState(0);
     const [facilities, setFacilities] = useState(0);
     const [partners, setPartners] = useState(0);
 
+    const [selectedCounty, setSelectedCounty] = useState('');
+
     const loadCounties = useCallback(async () => {
-        const data = await getAll('care-treatment/counties', []);
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+        };
+
+        const counties = filters.counties.length > 0 ? filters.counties.toString() : '';
+        setSelectedCounty(counties);
+        //<strong>{counties}</strong> counties
+
+        const data = await getAll('care-treatment/counties', params);
         setCounties(data.length);
-    }, []);
+    }, [filters]);
 
     const loadFacilities = useCallback(async () => {
-        const data = await getAll('care-treatment/facilities', []);
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+        };
+
+        const data = await getAll('care-treatment/facilities', params);
         setFacilities(data.length);
-    }, []);
+    }, [filters]);
 
     const loadPartners = useCallback(async () => {
-        const data = await getAll('care-treatment/partners', []);
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+        };
+
+        const data = await getAll('care-treatment/partners', params);
         setPartners(data.length);
-    }, []);
+    }, [filters]);
 
     useEffect(() => {
         loadCounties();

@@ -350,7 +350,7 @@ const AdverseEventsTiles = () => {
                 <div className="col-4">
                     <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
-                            ADULTS 15+ CURRENT ON ART
+                            ADULTS 15+ CURRENTLY ON ART
                         </CardHeader>
                         <CardBody
                             className="align-items-center d-flex justify-content-center"
@@ -412,7 +412,7 @@ const AdverseEventsTiles = () => {
                 <div className="col-4">
                     <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
-                            CHILDREN CURRENT ON ART
+                            CHILDREN CURRENTLY ON ART
                         </CardHeader>
                         <CardBody
                             className="align-items-center d-flex justify-content-center"
