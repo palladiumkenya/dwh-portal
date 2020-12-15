@@ -300,7 +300,7 @@ const AdverseEventsTiles = () => {
         const result = await getAll('care-treatment/getNoOfReportedAeInChildren', params);
         if (result) {
             setTotalNoOfAeReportedInChildren({
-                total: result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                total: result.total ? result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : result.total
             });
         }
     }, [filters]);
@@ -476,7 +476,7 @@ const AdverseEventsTiles = () => {
                 <div className="col-6">
                     <Card className="trends-card">
                         <CardHeader className="trends-header">
-                            CHILDREN &#60;15 ON ART AND DEVELOPED ADVERSE EVENTS (N={totalChildrenAdverseEvents.total})
+                            CHILDREN &#60;15 ON ART AND DEVELOPED ADVERSE EVENTS
                         </CardHeader>
                         <CardBody className="trends-body">
                             <div className="col-12">
