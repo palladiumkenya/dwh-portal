@@ -68,7 +68,7 @@ const AppointmentDurationStableByCounty = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        APPOINTMENT DURATION IN ACTIVE STABLE PATIENTS BY COUNTY
+                        MMD UPTAKE IN ACTIVE STABLE PATIENTS BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

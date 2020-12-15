@@ -79,7 +79,7 @@ const AppointmentDurationByAge = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        APPOINTMENT DURATION PRACTICES BY AGE GROUP
+                        MMD UPTAKE PRACTICES BY AGE GROUP
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

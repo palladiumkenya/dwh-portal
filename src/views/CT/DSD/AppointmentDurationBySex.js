@@ -63,7 +63,7 @@ const AppointmentDurationBySex = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        APPOINTMENT DURATION PRACTICES BY SEX AMONG STABLE PATIENTS
+                        MMD UPTAKE BY SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
