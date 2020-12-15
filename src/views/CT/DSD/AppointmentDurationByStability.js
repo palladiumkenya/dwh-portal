@@ -48,8 +48,8 @@ const AppointmentDurationByStability = () => {
             plotOptions: { column: { stacking: 'percent' } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: '> 3 MONTHS', data: data[1], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '< 3 MONTHS', data: data[0], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'NON MMD', data: data[1], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'MMD', data: data[0], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [filters]);
@@ -63,7 +63,7 @@ const AppointmentDurationByStability = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        APPOINTMENT DURATION PRACTICES BY STABILITY STATUS
+                        MMD UPTAKE BY STABILITY STATUS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

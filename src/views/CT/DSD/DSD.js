@@ -49,22 +49,9 @@ const DSD = () => {
                     <DSDCascade />
                 </div>
                 <div className="col-6">
-                    <DistributionUnstable />
-                </div>
-            </div>
-            <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
-            <p></p>
-            <div className="row">
-                <div className="col-6">
                     <DistributionMMDStable />
                 </div>
-                <div className="col-6">
-                    <DistributionStableAgeSex />
-                </div>
             </div>
-            <p></p><DistributionStableByCounty />
-            <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><DistributionStableByPartner />
             <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
             <p></p>
             <div className="row">
@@ -75,13 +62,27 @@ const DSD = () => {
                     <AppointmentDurationBySex />
                 </div>
             </div>
+            <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
             <p></p><AppointmentDurationByAge />
             <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
             <p></p><AppointmentDurationStableByCounty />
             <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
             <p></p><AppointmentDurationStableByPartner />
             <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
-            
+            <p></p>
+            <div className="row">
+                <div className="col-6">
+                    <DistributionStableAgeSex />
+                </div>
+                <div className="col-6">
+                    <DistributionUnstable />
+                </div>
+            </div>
+            <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
+            <p></p><DistributionStableByCounty />
+            <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
+            <p></p><DistributionStableByPartner />
+            <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
         </div>
     );
 
