@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
-import { getAll } from '../../Shared/Api';
+import { capitalize, getAll } from '../../Shared/Api';
 import moment from "moment";
 
 const AppointmentDurationStableByCounty = () => {
@@ -47,14 +47,14 @@ const AppointmentDurationStableByCounty = () => {
         }
         setAppointmentDurationStableByCounty({
             title: { text: '' },
-            xAxis: [{ categories: countyCategories, crosshair: true }],
+            xAxis: [{ categories: countyCategories.map(c => capitalize(c)), crosshair: true }],
             yAxis: [{ title: { text: 'Percentage of Patients' }}],
             tooltip: { shared: true },
             plotOptions: { column: { stacking: 'percent' } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: '> 3 MONTHS', data: data[1], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '< 3 MONTHS', data: data[0], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'NON MMD', data: data[1], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'MMD', data: data[0], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [filters]);
