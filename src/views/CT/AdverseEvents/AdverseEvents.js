@@ -50,12 +50,12 @@ const AdverseEvents = () => {
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
             <AdverseEventsCausesAndActionsByDrugs />
-            <hr />
+            {/**<hr />
             <AdverseEventsFooter />
             <hr />
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
-            <AdverseEventsTable />
+            <AdverseEventsTable />*/}
         </div>
     );
 };
