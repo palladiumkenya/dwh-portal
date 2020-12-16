@@ -6,7 +6,7 @@ import { CACHING } from '../../constants';
 export const loadHtsSites = () => async (dispatch, getState) => {
     const lastFetch = getState().htsSites.lastFetch;
     const diffInMinutes = moment().diff(moment(lastFetch), 'minutes');
-    if (diffInMinutes < CACHING.MID) return;
+    if (diffInMinutes < CACHING.LONG) return;
     await dispatch(fetchHtsSites());
 };
 
