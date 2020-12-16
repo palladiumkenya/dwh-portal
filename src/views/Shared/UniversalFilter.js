@@ -15,10 +15,10 @@ const UniversalFilter = () => {
     const rrSites = useSelector(state => state.rrSites);
     const htsSites = useSelector(state => state.htsSites);
     const ctSites = useSelector(state => state.ctSites);
-    
+
     const filters = useSelector(state => state.filters);
     const ui = useSelector(state => state.ui);
-    
+
     const [counties, setCounties] = useState([]);
     const [subCounties, setSubCounties] = useState([]);
     const [facilities, setFacilities] = useState([]);
@@ -31,13 +31,13 @@ const UniversalFilter = () => {
     const rrPartners = useSelector(rrSelectors.getPartners);
     const rrAgencies = useSelector(rrSelectors.getAgencies);
     const rrProjects = useSelector(rrSelectors.getProjects);
-    
+
     const htsSubCounties = useSelector(htsSelectors.getSubCounties);
     const htsFacilities = useSelector(htsSelectors.getFacilities);
     const htsPartners = useSelector(htsSelectors.getPartners);
     const htsAgencies = useSelector(htsSelectors.getAgencies);
     const htsProjects = useSelector(htsSelectors.getProjects);
-    
+
     const ctSubCounties = useSelector(ctSelectors.getSubCounties);
     const ctFacilities = useSelector(ctSelectors.getFacilities);
     const ctPartners = useSelector(ctSelectors.getPartners);
@@ -102,7 +102,7 @@ const UniversalFilter = () => {
         htsPartners,
         htsAgencies,
         htsProjects,
-        
+
         ctSites.counties,
         ctSubCounties,
         ctFacilities,
@@ -129,6 +129,7 @@ const UniversalFilter = () => {
                             fluid
                             multiple
                             selection
+                            search
                             options={counties}
                             value={filters.counties}
                             onChange={(e, data) => {
@@ -150,6 +151,7 @@ const UniversalFilter = () => {
                             fluid
                             multiple
                             selection
+                            search
                             options={subCounties}
                             value={filters.subCounties}
                             onChange={(e, data) => {
@@ -171,6 +173,7 @@ const UniversalFilter = () => {
                             fluid
                             multiple
                             selection
+                            search
                             options={facilities}
                             value={filters.facilities}
                             onChange={(e, data) => {
@@ -192,6 +195,7 @@ const UniversalFilter = () => {
                             fluid
                             multiple
                             selection
+                            search
                             options={partners}
                             value={filters.partners}
                             onChange={(e, data) => {
@@ -213,6 +217,7 @@ const UniversalFilter = () => {
                             fluid
                             multiple
                             selection
+                            search
                             options={agencies}
                             value={filters.agencies}
                             onChange={(e, data) => {
@@ -234,6 +239,7 @@ const UniversalFilter = () => {
                             fluid
                             multiple
                             selection
+                            search
                             options={projects}
                             value={filters.projects}
                             onChange={(e, data) => {
