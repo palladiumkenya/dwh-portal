@@ -9,7 +9,8 @@ import VL from './VL/VL';
 import AdverseEvents from './AdverseEvents/AdverseEvents';
 import TBHIV from './TBHIV/TBHIV';
 import ARVOptimization from './ARVOptimization/ARVOptimization';
-import { changeCtTab, changeCurrentPage, enableFromDateFilter, disableFromDateFilter } from "../../actions/shared/uiActions";
+import ArtOptimization from './ArtOptimization/ArtOptimization';
+import { changeCtTab, changeCurrentPage, enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/uiActions";
 import { CT_TABS, PAGES } from "../../constants";
 
 const CT = () => {
@@ -77,6 +78,9 @@ const CT = () => {
                 </TabPane>
                 <TabPane tabId="txOpt">
                     {currentTab==="txOpt" && <ARVOptimization/>}
+                </TabPane>
+                <TabPane tabId="txOptNew">
+                    <ArtOptimization/>
                 </TabPane>
             </TabContent>
             <p></p>
