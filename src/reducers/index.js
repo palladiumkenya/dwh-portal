@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-import authReducer from './shared/authReducer';
-import ui from "./shared/ui";
-import filters from "./shared/filters";
-import rrSites from "./shared/rrSites";
-import htsSites from "./shared/htsSites";
-import ctSites from "./shared/ctSites";
-import gpsSites from "./home/gpsSites";
+import authReducer from './Shared/authReducer';
+import ui from "./Shared/ui";
+import filters from "./Shared/filters";
+import rrSites from "./Shared/rrSites";
+import htsSites from "./Shared/htsSites";
+import ctSites from "./Shared/ctSites";
+import gpsSites from "./Home/gpsSites";
 
 export default combineReducers({
     auth: authReducer,

@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col } from 'reactstrap';
 import { Dropdown } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
-import * as actions from "../../actions/shared/filterActions";
-import * as rrSelectors from '../../selectors/rrSitesSelector';
-import * as htsSelectors from '../../selectors/htsSitesSelector';
-import * as ctSelectors from '../../selectors/ctSitesSelector';
+import * as actions from "../../actions/Shared/filterActions";
+import * as rrSelectors from '../../selectors/Shared/rrSitesSelector';
+import * as htsSelectors from '../../selectors/Shared/htsSitesSelector';
+import * as ctSelectors from '../../selectors/Shared/ctSitesSelector';
 import { PAGES } from "../../constants";
 
 const UniversalFilter = () => {

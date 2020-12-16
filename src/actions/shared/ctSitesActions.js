@@ -6,7 +6,7 @@ import { CACHING } from '../../constants';
 export const loadCtSites = () => async (dispatch, getState) => {
     const lastFetch = getState().ctSites.lastFetch;
     const diffInMinutes = moment().diff(moment(lastFetch), 'minutes');
-    if (diffInMinutes < CACHING.MID) return;
+    if (diffInMinutes < CACHING.LONG) return;
     await dispatch(fetchCtSites());
 };
 

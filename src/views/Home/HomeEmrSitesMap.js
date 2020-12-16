@@ -3,7 +3,7 @@ import { Row, Col } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Highcharts from '../../utils/highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { loadGpsSites } from '../../actions/home/gpsSitesActions';
+import { loadGpsSites } from '../../actions/Home/gpsSitesActions';
 
 const HomeEmrSitesMap = () => {
     const [emrSitesMap, setHomeEmrSitesMap] = useState({});

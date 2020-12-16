@@ -11,7 +11,7 @@ import CurrentOnARTTxCurrDistributionByCounty from './CurrentOnARTTxCurrDistribu
 import CurrentOnARTTxCurrDistributionByPartner from './CurrentOnARTTxCurrDistributionByPartner';
 import CurrentOnARTTxCurrByCounty from './CurrentOnARTTxCurrByCounty';
 import CurrentOnARTTxCurrByPartner from './CurrentOnARTTxCurrByPartner';
-import { enableStickyFilter, disableStickyFilter } from "../../../actions/shared/uiActions";
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 import CurrentOnARTTiles from './CurrentOnARTTiles';
 
 const CurrentOnART = () => {
