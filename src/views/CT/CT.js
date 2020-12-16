@@ -9,7 +9,7 @@ import VL from './VL/VL';
 import AdverseEvents from './AdverseEvents/AdverseEvents';
 import TBHIV from './TBHIV/TBHIV';
 import ARVOptimization from './ARVOptimization/ARVOptimization';
-import { changeCtTab, changeCurrentPage, enableFromDateFilter, disableFromDateFilter } from "../../actions/shared/uiActions";
+import { changeCtTab, changeCurrentPage, enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/uiActions";
 import { CT_TABS, PAGES } from "../../constants";
 
 const CT = () => {
