@@ -17,7 +17,7 @@ import PNSChildrenFamilyTestingPositivityTrends from './PNSChildrenFamilyTesting
 import PNSPositivityTrends from './PNSPositivityTrends';
 import PNSContactsTestingPositivityByCounty from './PNSContactsTestingPositivityByCounty';
 import PNSContactsTestingPositivityByPartner from './PNSContactsTestingPositivityByPartner';
-import { enableStickyFilter, disableStickyFilter } from "../../../actions/shared/uiActions";
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const PNS = () => {
     const dispatch = useDispatch();
