@@ -83,7 +83,7 @@ const CT = () => {
                     <ArtOptimization/>
                 </TabPane>
             </TabContent>
-            <p></p>
+            <p></p><p></p>
         </div>
     );
 };
