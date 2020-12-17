@@ -1,17 +1,9 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Row, Col, Card, CardBody, CardHeader } from 'reactstrap';
 import * as artOptimizationOverviewSelectors from '../../../selectors/CT/ArtOptimization/artOptimizationOverview';
-import { loadArtOptimizationOverview } from '../../../actions/CT/ArtOptimization/artOptimizationActions';
 
-const ArtOptimizationOverview = () => {
-    const dispatch = useDispatch();
-    const counties = useSelector(state => state.filters.counties);
-    const subCounties = useSelector(state => state.filters.subCounties);
-    const facilities = useSelector(state => state.filters.facilities);
-    const partners = useSelector(state => state.filters.partners);
-    const agencies = useSelector(state => state.filters.agencies);
-    const projects = useSelector(state => state.filters.projects);
+const AdultArtOptimizationOverview = () => {
     const adults = useSelector(artOptimizationOverviewSelectors.getAdults);
     const adultsOnFirstLine = useSelector(artOptimizationOverviewSelectors.getAdultsOnFirstLine);
     const adultsOnFirstLinePercent = adults ? ((adultsOnFirstLine/adults)*100).toFixed(1) : 0;
@@ -23,10 +15,6 @@ const ArtOptimizationOverview = () => {
     const adultsOnTldPercent = adults ? ((adultsOnTld/adults)*100).toFixed(1) : 0;
     const adultsOnNvp = useSelector(artOptimizationOverviewSelectors.getAdultsOnNvp);
     const adultsOnNvpPercent = adults ? ((adultsOnNvp/adults)*100).toFixed(1) : 0;
-
-    useEffect(() => {
-        dispatch(loadArtOptimizationOverview(counties, subCounties, facilities, partners, agencies, projects));
-    }, [dispatch, counties, subCounties, facilities, partners, agencies, projects]);
 
     return (
         <>
@@ -118,4 +106,4 @@ const ArtOptimizationOverview = () => {
     );
 };
 
-export default ArtOptimizationOverview;
+export default AdultArtOptimizationOverview;
