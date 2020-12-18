@@ -25,7 +25,7 @@ const AdultDistributionRegimenLines = () => {
                         enabled: true,
                         format: '<b>{point.name}</b> <br/> {point.percentage:.1f} % <br/> ({point.y:,.0f})'
                     },
-                    innerSize: '70%',
+                    innerSize: '75%',
                 }
             },
             series: [{
