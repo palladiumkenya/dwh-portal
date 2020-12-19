@@ -10,13 +10,11 @@ export default function AuthProvider({ userManager: manager, store, children }) 
         userManager.current = manager
 
         const onUserLoaded = (user) => {
-            console.log(`user loaded: ${user}`)
             store.dispatch(storeUser(user))
         }
 
         const onUserUnloaded = () => {
             setAuthHeader(null)
-            console.log(`user unloaded`)
         }
 
         const onAccessTokenExpiring = () => {
