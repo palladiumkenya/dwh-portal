@@ -7,6 +7,7 @@ import htsSites from "./Shared/htsSites";
 import ctSites from "./Shared/ctSites";
 import gpsSites from "./Home/gpsSites";
 import artOptimizationOverview from "./CT/ArtOptimization/artOptimizationOverview";
+import artOptimizationCurrentByRegimen from "./CT/ArtOptimization/artOptimizationCurrentByRegimen";
 
 export default combineReducers({
     auth: authReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
     ctSites,
     gpsSites,
     artOptimizationOverview,
+    artOptimizationCurrentByRegimen,
 });

@@ -38,7 +38,7 @@ const HomeOverallMmdUptake = () => {
                         enabled: true,
                         format: '<b>{point.name}</b>: {point.percentage:.0f} %'
                     },
-                    innerSize: '70%',
+                    innerSize: '75%',
                 }
             },
             series: [{

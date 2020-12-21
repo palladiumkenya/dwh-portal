@@ -21,7 +21,6 @@ export const CT_TABS = {
     txNew: "NEWLY STARTED ON ART",
     txCurr: "CURRENT ON ART",
     txOpt: "ART OPTIMIZATION",
-    txOptNew: "ART OPTIMIZATION NEW",
     // tbHiv: "TB/HIV",
     advEv: "ADVERSE EVENTS - AE",
     dsd: "DSD",
