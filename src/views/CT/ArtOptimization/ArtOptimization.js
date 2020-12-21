@@ -25,6 +25,9 @@ import ChildDistributionRegimens from './ChildDistributionRegimens';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 import { loadArtOptimizationOverview } from '../../../actions/CT/ArtOptimization/artOptimizationOverviewActions';
 import { loadArtOptimizationCurrentByRegimen } from '../../../actions/CT/ArtOptimization/artOptimizationCurrentByRegimenActions';
+import { loadArtOptimizationCurrentByAgeSex } from '../../../actions/CT/ArtOptimization/artOptimizationCurrentByAgeSexActions';
+import { loadArtOptimizationCurrentByCounty } from '../../../actions/CT/ArtOptimization/artOptimizationCurrentByCountyActions';
+import { loadArtOptimizationCurrentByPartner } from '../../../actions/CT/ArtOptimization/artOptimizationCurrentByPartnerActions';
 
 const ArtOptimization = () => {
     const dispatch = useDispatch();
@@ -51,6 +54,9 @@ const ArtOptimization = () => {
     useEffect(() => {
         dispatch(loadArtOptimizationOverview(counties, subCounties, facilities, partners, agencies, projects));
         dispatch(loadArtOptimizationCurrentByRegimen(counties, subCounties, facilities, partners, agencies, projects));
+        dispatch(loadArtOptimizationCurrentByAgeSex(counties, subCounties, facilities, partners, agencies, projects));
+        dispatch(loadArtOptimizationCurrentByCounty(counties, subCounties, facilities, partners, agencies, projects));
+        dispatch(loadArtOptimizationCurrentByPartner(counties, subCounties, facilities, partners, agencies, projects));
     }, [dispatch, counties, subCounties, facilities, partners, agencies, projects]);
 
     return (

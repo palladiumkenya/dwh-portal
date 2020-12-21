@@ -240,6 +240,54 @@ export const getAdultsOnTld = createSelector(
     }
 );
 
+export const getMales = createSelector(
+    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
+    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
+        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+        const list = filtered ? listFiltered : listUnfiltered;
+        return _.chain(list)
+            .filter(list => list.gender === "Male")
+            .sumBy("txCurr")
+            .value();
+    }
+);
+
+export const getFemales = createSelector(
+    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
+    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
+        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+        const list = filtered ? listFiltered : listUnfiltered;
+        return _.chain(list)
+            .filter(list => list.gender === "Female")
+            .sumBy("txCurr")
+            .value();
+    }
+);
+
+export const getMalesOnTld = createSelector(
+    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
+    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
+        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+        const list = filtered ? listFiltered : listUnfiltered;
+        return _.chain(list)
+            .filter(list => list.gender === "Male" && list.currentRegimen === "TLD")
+            .sumBy("txCurr")
+            .value();
+    }
+);
+
+export const getFemalesOnTld = createSelector(
+    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
+    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
+        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+        const list = filtered ? listFiltered : listUnfiltered;
+        return _.chain(list)
+            .filter(list => list.gender === "Female" && list.currentRegimen === "TLD")
+            .sumBy("txCurr")
+            .value();
+    }
+);
+
 export const getAdultsOnNonTld = createSelector(
     [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
     (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {

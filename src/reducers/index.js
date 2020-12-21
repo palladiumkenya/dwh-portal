@@ -8,6 +8,12 @@ import ctSites from "./Shared/ctSites";
 import gpsSites from "./Home/gpsSites";
 import artOptimizationOverview from "./CT/ArtOptimization/artOptimizationOverview";
 import artOptimizationCurrentByRegimen from "./CT/ArtOptimization/artOptimizationCurrentByRegimen";
+import artOptimizationCurrentByAgeSex from "./CT/ArtOptimization/artOptimizationCurrentByAgeSex";
+import artOptimizationCurrentByCounty from "./CT/ArtOptimization/artOptimizationCurrentByCounty";
+import artOptimizationCurrentByPartner from "./CT/ArtOptimization/artOptimizationCurrentByPartner";
+import artOptimizationNewByYear from "./CT/ArtOptimization/artOptimizationNewByYear";
+import artOptimizationNewByCounty from "./CT/ArtOptimization/artOptimizationNewByCounty";
+import artOptimizationNewByPartner from "./CT/ArtOptimization/artOptimizationNewByPartner";
 
 export default combineReducers({
     auth: authReducer,
@@ -19,4 +25,10 @@ export default combineReducers({
     gpsSites,
     artOptimizationOverview,
     artOptimizationCurrentByRegimen,
+    artOptimizationCurrentByAgeSex,
+    artOptimizationCurrentByCounty,
+    artOptimizationCurrentByPartner,
+    artOptimizationNewByCounty,
+    artOptimizationNewByPartner,
+    artOptimizationNewByYear,
 });

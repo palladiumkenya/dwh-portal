@@ -15,10 +15,9 @@ const AdverseEventsTiles = () => {
         childrenUnder15CurrentOnART: ''
     });
     const [under15AdverseEventsDesegregation, setUnder15AdverseEventsDesegregation] = useState({});
-    const [totalChildrenAdverseEvents, setTotalChildrenAdverseEvents] = useState({
-        total: ''
-    });
-    console.log(totalChildrenAdverseEvents);
+    // const [totalChildrenAdverseEvents, setTotalChildrenAdverseEvents] = useState({
+    //     total: ''
+    // });
     const [adults15PlusAdverseEventsDesegregation, setAdults15PlusAdverseEventsDesegregation] = useState({});
     const [totalAdultsAdverseEvents, setTotalAdultsAdverseEvents] = useState({
         total: ''
@@ -112,13 +111,13 @@ const AdverseEventsTiles = () => {
                 }
             }
         }
-        const total_Male = maleData.reduce((a, b) => a + b, 0);
-        const total_female = femaleData.reduce((a, b) => a + b, 0);
-        const total = total_Male + total_female;
+        // const total_Male = maleData.reduce((a, b) => a + b, 0);
+        // const total_female = femaleData.reduce((a, b) => a + b, 0);
+        // const total = total_Male + total_female;
 
-        setTotalChildrenAdverseEvents({
-            total: total
-        });
+        // setTotalChildrenAdverseEvents({
+        //     total: total
+        // });
 
         setUnder15AdverseEventsDesegregation({
             chart: {
