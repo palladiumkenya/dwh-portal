@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import { useSelector } from 'react-redux';
 import { getIdentityAll } from '../Shared/Api';
@@ -9,18 +9,18 @@ const Profile = () => {
 
     const user = useSelector(state => state.auth.user)
 
-    const getUser = async () => {
+    const getUser = useCallback(async () => {
         const response = await getIdentityAll('User/' + user.profile.sub);
         setUserDetails(response);
         if (response) {
             const userOrganizationResponse = await getIdentityAll('Organizations/' + response.organizationId);
             setUserOrganization(userOrganizationResponse);
         }
-    }
+    }, [user.profile.sub]);
 
     useEffect(() => {
         getUser();
-    }, []);
+    }, [getUser]);
 
     const Titles = {
         0: 'Mr',

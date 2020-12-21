@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import moment from 'moment';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { getAll } from '../Shared/Api';
+import { capitalize, getAll } from '../Shared/Api';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 const _ = require("lodash");
 
@@ -22,10 +22,6 @@ const RRCounty = () => {
         tab = "PKV";
     }
 
-    String.prototype.capitalize = function() {
-        return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase()
-    }
-
     const loadReportingByCounty = useCallback(async () => {
         let params = {
             county: filters.counties,
@@ -42,7 +38,7 @@ const RRCounty = () => {
 
         /* Overall reporting */
         const overAllReportingData = _.orderBy(overallReportingRateResult, [function(resultItem) { return parseInt(resultItem.Percentage, 10); }], ['desc']);
-        const overAllReportingCounties = overAllReportingData.map(({ county  }) => county.capitalize());
+        const overAllReportingCounties = overAllReportingData.map(({ county  }) => capitalize(county));
         let overAllReportingSeriesData = overAllReportingData.map(({ Percentage }) => parseInt(Percentage, 10) > 100 ? 100 : parseInt(Percentage, 10));
         overAllReportingSeriesData = overAllReportingSeriesData.map(function(r) {
             if (r <= 50) {
@@ -54,11 +50,16 @@ const RRCounty = () => {
                 return { y: r, color: '#E06F07' }
             } else if (r >= 90) {
                 return { y: r, color: '#59A14F' }
+            } else {
+                return {
+                    y: r,
+                    color: 'red'
+                }
             }
         });
 
         /* Consistency of reporting */
-        const consistency_counties = Object.keys(consistencyResult).map(r => r.capitalize());
+        const consistency_counties = Object.keys(consistencyResult).map(r => capitalize(r));
         const consistency_values = Object.values(consistencyResult).map(function(r) {
             if (r <= 50) {
                 return {
@@ -69,6 +70,11 @@ const RRCounty = () => {
                 return { y: r, color: '#E06F07' }
             } else if (r >= 90) {
                 return { y: r > 100 ? 100 : r, color: '#59A14F' }
+            } else {
+                return {
+                    y: r,
+                    color: 'red'
+                }
             }
         });
 

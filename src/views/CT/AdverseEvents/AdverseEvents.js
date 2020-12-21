@@ -8,7 +8,7 @@ import AdverseEventsFooter from './AdverseEventsFooter';
 import AdverseEventsSeverity from './AdverseEventsSeverity';
 import AdverseEventsSeverityLevels from './AdverseEventsSeverityLevels';
 import AdverseEventsCausesAndActionsByDrugs from './AdverseEventsCausesAndActionsByDrugs';
-import AdverseEventsTable from './AdverseEventsTable';
+// import AdverseEventsTable from './AdverseEventsTable';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const AdverseEvents = () => {

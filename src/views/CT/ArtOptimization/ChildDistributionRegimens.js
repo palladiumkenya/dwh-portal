@@ -54,7 +54,7 @@ const ChildDistributionRegimens = () => {
             });
         }
         setChildDistributionRegimens(data);
-    }, []);
+    }, [children, childrenOnFirstLine, childrenOnSecondLine, childrenOnThirdLine, childrenOnUndocumentedLine]);
 
     useEffect(() => {
         loadChildrenByRegimenNames();
