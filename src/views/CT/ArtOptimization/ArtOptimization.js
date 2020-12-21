@@ -28,6 +28,8 @@ import { loadArtOptimizationCurrentByRegimen } from '../../../actions/CT/ArtOpti
 import { loadArtOptimizationCurrentByAgeSex } from '../../../actions/CT/ArtOptimization/artOptimizationCurrentByAgeSexActions';
 import { loadArtOptimizationCurrentByCounty } from '../../../actions/CT/ArtOptimization/artOptimizationCurrentByCountyActions';
 import { loadArtOptimizationCurrentByPartner } from '../../../actions/CT/ArtOptimization/artOptimizationCurrentByPartnerActions';
+import { loadArtOptimizationNewByCounty } from '../../../actions/CT/ArtOptimization/artOptimizationNewByCountyActions';
+import { loadArtOptimizationNewByPartner } from '../../../actions/CT/ArtOptimization/artOptimizationNewByPartnerActions';
 
 const ArtOptimization = () => {
     const dispatch = useDispatch();
@@ -57,6 +59,8 @@ const ArtOptimization = () => {
         dispatch(loadArtOptimizationCurrentByAgeSex(counties, subCounties, facilities, partners, agencies, projects));
         dispatch(loadArtOptimizationCurrentByCounty(counties, subCounties, facilities, partners, agencies, projects));
         dispatch(loadArtOptimizationCurrentByPartner(counties, subCounties, facilities, partners, agencies, projects));
+        dispatch(loadArtOptimizationNewByCounty(counties, subCounties, facilities, partners, agencies, projects));
+        dispatch(loadArtOptimizationNewByPartner(counties, subCounties, facilities, partners, agencies, projects));
     }, [dispatch, counties, subCounties, facilities, partners, agencies, projects]);
 
     return (

@@ -30,7 +30,7 @@ export const loadArtOptimizationNewByCounty = (counties = [], subCounties = [], 
 export const fetchArtOptimizationNewByCounty = (counties = [], subCounties = [], facilities = [], partners = [], agencies = [], projects = [], years = []) => async dispatch => {
     const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length || years.length) ? true : false;
     dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_NEW_BY_COUNTY_REQUEST, payload: { filtered, counties, subCounties, facilities, partners, agencies, projects, years }});
-    const params = { county: counties, subCounty: subCounties, facility: facilities, partner: partners, agency: agencies, project: projects, year: years };
+    const params = { county: counties, subCounty: subCounties, facility: facilities, partner: partners, agency: agencies, project: projects, year: [2020] };
     const response = await getAll('care-treatment/getArtOptimizationNewByCounty', params);
     if (response.length) {
         dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_NEW_BY_COUNTY_FETCH, payload: { filtered, list: response }});
