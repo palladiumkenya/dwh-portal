@@ -30,6 +30,7 @@ import { loadArtOptimizationCurrentByCounty } from '../../../actions/CT/ArtOptim
 import { loadArtOptimizationCurrentByPartner } from '../../../actions/CT/ArtOptimization/artOptimizationCurrentByPartnerActions';
 import { loadArtOptimizationNewByCounty } from '../../../actions/CT/ArtOptimization/artOptimizationNewByCountyActions';
 import { loadArtOptimizationNewByPartner } from '../../../actions/CT/ArtOptimization/artOptimizationNewByPartnerActions';
+import { loadArtOptimizationNewByYear } from '../../../actions/CT/ArtOptimization/artOptimizationNewByYearActions';
 
 const ArtOptimization = () => {
     const dispatch = useDispatch();
@@ -61,6 +62,7 @@ const ArtOptimization = () => {
         dispatch(loadArtOptimizationCurrentByPartner(counties, subCounties, facilities, partners, agencies, projects));
         dispatch(loadArtOptimizationNewByCounty(counties, subCounties, facilities, partners, agencies, projects));
         dispatch(loadArtOptimizationNewByPartner(counties, subCounties, facilities, partners, agencies, projects));
+        dispatch(loadArtOptimizationNewByYear(counties, subCounties, facilities, partners, agencies, projects));
     }, [dispatch, counties, subCounties, facilities, partners, agencies, projects]);
 
     return (
