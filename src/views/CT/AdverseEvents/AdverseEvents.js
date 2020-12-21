@@ -8,8 +8,8 @@ import AdverseEventsFooter from './AdverseEventsFooter';
 import AdverseEventsSeverity from './AdverseEventsSeverity';
 import AdverseEventsSeverityLevels from './AdverseEventsSeverityLevels';
 import AdverseEventsCausesAndActionsByDrugs from './AdverseEventsCausesAndActionsByDrugs';
-import AdverseEventsTable from './AdverseEventsTable';
-import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
+// import AdverseEventsTable from './AdverseEventsTable';
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const AdverseEvents = () => {
     const filters = useSelector(state => state.filters);
@@ -50,12 +50,12 @@ const AdverseEvents = () => {
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
             <AdverseEventsCausesAndActionsByDrugs />
-            <hr />
+            {/**<hr />
             <AdverseEventsFooter />
             <hr />
             <div className="strip">&nbsp;</div>
             <p>&nbsp;</p>
-            <AdverseEventsTable />
+            <AdverseEventsTable />*/}
         </div>
     );
 };

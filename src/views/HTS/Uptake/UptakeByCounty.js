@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { getAll } from '../../Shared/Api';
+import { capitalize, getAll } from '../../Shared/Api';
 import moment from "moment";
 
 const UptakeByCounty = () => {
@@ -18,7 +18,7 @@ const UptakeByCounty = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):""
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"): moment().format("YYYY")
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const counties = [];
@@ -26,7 +26,7 @@ const UptakeByCounty = () => {
         let positivity = [];
         const result = await getAll('hts/uptakeByCounty', params);
         for(let i = 0; i < result.length; i++) {
-            counties.push(result[i].County);
+            counties.push(capitalize(result[i].County));
             tested.push(parseInt(result[i].Tested, 10));
             const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
             positivity.push(val);
@@ -57,7 +57,7 @@ const UptakeByCounty = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        UPTAKE BY COUNTY
+                        HTS UPTAKE BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={uptakeByCounty} />

@@ -24,7 +24,7 @@ import VLSuppressionByYear6Month from './VLSuppressionByYear6Month';
 import VLSuppressionByYear12Month from './VLSuppressionByYear12Month';
 import VLSuppressionByYear24Month from './VLSuppressionByYear24Month';
 import VLOverallUptakeAndSuppressionByFacility from './VLOverallUptakeAndSuppressionByFacility';
-import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const VL = () => {
     const ctTab = useSelector(state => state.ui.ctTab);

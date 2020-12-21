@@ -32,7 +32,7 @@ const UptakeByPopulationType = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):""
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"): moment().format("YYYY")
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('hts/uptakeByPopulationType', params);
@@ -106,7 +106,7 @@ const UptakeByPopulationType = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        UPTAKE BY POPULATION TYPE
+                        HTS UPTAKE BY POPULATION TYPE
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="row">

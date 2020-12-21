@@ -16,7 +16,7 @@ import SixMonthRetention from './SixMonthRetention';
 import TwelveMonthRetention from './TwelveMonthRetention';
 import TwentyFourMonthRetention from './TwentyFourMonthRetention';
 import TreatmentOutcomesByFacility from './TreatmentOutcomesByFacility';
-import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const TreatmentOutcomes = () => {
     const ctTab = useSelector(state => state.ui.ctTab);

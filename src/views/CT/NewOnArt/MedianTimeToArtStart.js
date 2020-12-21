@@ -35,7 +35,7 @@ const MedianTimeToArtStart = () => {
             chart: { zoomType: 'xy' },
             title: { useHTML: true, text: ' &nbsp;', align: 'left' },
             subtitle: { text: ' ', align: 'left' },
-            xAxis: [{ categories: months, crosshair: true, title: { text: 'Year of Start' } }],
+            xAxis: [{ categories: months, crosshair: true, title: { text: 'Year of ART Start' } }],
             yAxis: [
                 {
                     title: { text: 'Time (Days)', style: { color: Highcharts.getOptions().colors[1] } },

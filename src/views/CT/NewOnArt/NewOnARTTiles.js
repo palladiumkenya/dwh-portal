@@ -85,7 +85,7 @@ const NewOnARTTiles = () => {
                         <Col>
                             <Card className="primary-card" style={{ height: '90%' }}>
                                 <CardBody className="primary-card-body">
-                                    <CardTitle tag="h5" className="text-center m-2">TOTAL STARTED ON ART</CardTitle>
+                                    <CardTitle tag="h5" className="text-center m-2">Total newly started on ART</CardTitle>
                                     <Row className="justify-content-center">
                                         <Col className="col-7">
                                             <CardTitle tag="h5" className="primary-card-body-subtitle text-right" style={{ color: '#FFFFFF' }}>100%</CardTitle>

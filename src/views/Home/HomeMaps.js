@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import HomeEmrSitesMap from './HomeEmrSitesMap';
 import HomeCurrentOnArtByCountyMap from './HomeCurrentOnArtByCountyMap';
-import { changeHomeTab } from "../../actions/uiActions";
+import HomeHasCurrentVlByCountyMap from './HomeHasCurrentVlByCountyMap';
+import HomeSuppressionByCountyMap from './HomeSuppressionByCountyMap';
+import { changeHomeTab } from "../../actions/Shared/uiActions";
 import { HOME_TABS } from "../../constants";
 
 const HomeMaps = () => {
@@ -37,10 +39,10 @@ const HomeMaps = () => {
                     <HomeCurrentOnArtByCountyMap/>
                 </TabPane>
                 <TabPane tabId="hasCurrVl">
-                    
+                    <HomeHasCurrentVlByCountyMap/>
                 </TabPane>
                 <TabPane tabId="suppressed">
-                    
+                    <HomeSuppressionByCountyMap/>
                 </TabPane>
             </TabContent>
             <p></p><p></p>

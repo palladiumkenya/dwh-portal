@@ -62,7 +62,7 @@ const CurrentOnARTTxCurrDistributionByCounty = () => {
             },
             plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             series: [{
-                name: 'CURRENT ON ART DISTRIBUTION',
+                name: 'Number currently on ART',
                 color: "#485969",
                 data: txCurr
             }]
@@ -78,7 +78,7 @@ const CurrentOnARTTxCurrDistributionByCounty = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        CURRENT ON ART DISTRIBUTION BY COUNTY
+                        Distribution of Patients currently on ART by County
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={txCurrDistributionByCounty} />

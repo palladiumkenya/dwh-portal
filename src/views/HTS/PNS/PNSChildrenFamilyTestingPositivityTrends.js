@@ -54,7 +54,7 @@ const PNSChildrenFamilyTestingPositivityTrends = () => {
         }
         setPNSChildrenFamilyTestingPositivityTrends({
             title: { text: '' },
-            xAxis: [{ categories: months, title: { text: 'Months' }, crosshair: true }],
+            xAxis: [{ categories: months.slice(-12), title: { text: 'Months' }, crosshair: true }],
             yAxis: [
                 { title: { text: 'No of Children Tested' } },
                 { title: { text: 'Positivity (%)'}, opposite: true },
@@ -62,9 +62,9 @@ const PNSChildrenFamilyTestingPositivityTrends = () => {
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Number Tested', type: 'column', data: tested, yAxis: 0, color: "#485969",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
-                { name: 'Number Linked ', type: 'column', data: linked, yAxis: 0, color: "#1AB394",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
-                { name: 'Positivity Percentage', type: 'spline', data: positivity, yAxis: 1, color: "#E06F07", dashStyle: 'ShortDot', dataLabels: { enabled: true, format: '{y} %' }, tooltip: { valueSuffix: ' %' } }
+                { name: 'Number Tested', type: 'column', data: tested.slice(-12), yAxis: 0, color: "#485969",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
+                { name: 'Number Linked ', type: 'column', data: linked.slice(-12), yAxis: 0, color: "#1AB394",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
+                { name: 'Positivity Percentage', type: 'spline', data: positivity.slice(-12), yAxis: 1, color: "#E06F07", dashStyle: 'ShortDot', dataLabels: { enabled: true, format: '{y} %' }, tooltip: { valueSuffix: ' %' } }
             ],
         });
     }, [filters]);

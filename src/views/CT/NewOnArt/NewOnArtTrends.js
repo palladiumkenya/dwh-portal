@@ -68,7 +68,7 @@ const NewOnArtTrends = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TRENDS IN NEW ON ART - NUMBER STARTED ART BY MONTH
+                        TRENDS OF NEWLY STARTED PATIENTS ON ART
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

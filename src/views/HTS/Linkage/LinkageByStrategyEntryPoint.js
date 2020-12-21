@@ -97,7 +97,7 @@ const LinkageByStrategyEntryPoint = () => {
             <div className="col-6">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        LINKAGE BY STRATEGY
+                        HTS LINKAGE BY STRATEGY
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={linkageByStrategy} />

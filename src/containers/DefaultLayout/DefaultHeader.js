@@ -1,11 +1,26 @@
 import React from "react";
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { Nav, NavItem } from 'reactstrap';
 import { AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from '../../assets/img/brand/dwh2.png';
 import sygnet from '../../assets/img/brand/ic_launcher.png';
+import { UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import avatar from '../../assets/img/avatars/avatar.png';
+import { useSelector } from 'react-redux';
+import { signinRedirect, signoutRedirect } from '../../services/UserService';
 
 const DefaultHeader = () => {
+    const user = useSelector(state => state.auth.user)
+    const loginAction = user ? "Logout" : "Login";
+
+    const login = async () => {
+        if (user) {
+            await signoutRedirect();
+        } else {
+            await signinRedirect();
+        }
+    };
+
     return (
         <>
             <AppSidebarToggler className="d-lg-none" display="md" mobile />
@@ -35,8 +50,29 @@ const DefaultHeader = () => {
                 <NavItem className="px-3">
                     <a href="https://data.kenyahmis.org:9090/" className="nav-link">Adhoc</a>
                 </NavItem>
+                <UncontrolledDropdown nav inNavbar>
+                    <DropdownToggle nav caret>Administration</DropdownToggle>
+                    <DropdownMenu right>
+                        <DropdownItem><Link to="/administration/organizations" className="nav-link">Organizations</Link></DropdownItem>
+                        <DropdownItem> <a href="https://auth.kenyahmis.org/DwhIdentity/Users" className="nav-link">Users</a></DropdownItem>
+                    </DropdownMenu>
+                </UncontrolledDropdown>
             </Nav>
             <Nav className="ml-auto" navbar>
+                <UncontrolledDropdown nav direction="down">
+                    <DropdownToggle nav>
+                        { user ? user.profile.FullName : '' }
+                        <img src={avatar} className="img-avatar" alt={ user ? user.profile.email : '' } />
+                    </DropdownToggle>
+                    <DropdownMenu right>
+                        <DropdownItem header tag="div" className="text-center"><strong>Settings</strong></DropdownItem>
+                        {
+                            user ? <DropdownItem tag={Link} to={"/users/profile"}> <i className="fa fa-user"/> Profile </DropdownItem> : ''
+                        }
+                        <DropdownItem divider />
+                        <DropdownItem onClick={() => login()}><i className="fa fa-lock"></i> {loginAction}</DropdownItem>
+                    </DropdownMenu>
+                </UncontrolledDropdown>
             </Nav>
         </>
     );

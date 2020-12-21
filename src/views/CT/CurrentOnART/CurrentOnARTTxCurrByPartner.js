@@ -171,7 +171,7 @@ const CurrentOnARTTxCurrByPartner = () => {
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <DataTable columns={txCurrByPartnerList.columns} data={txCurrByPartnerList.data} pagination="true" defaultSortField="partner" responsive="true"/>
+                            <DataTable columns={txCurrByPartnerList.columns} data={txCurrByPartnerList.data} pagination={true} defaultSortField="partner" responsive={true}/>
                         </div>
                     </CardBody>
                 </Card>

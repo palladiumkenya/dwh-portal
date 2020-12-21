@@ -11,7 +11,7 @@ import TBActiveCaseFindingAdults from './TBActiveCaseFindingAdults';
 import TBActiveCaseFindingChildren from './TBActiveCaseFindingChildren';
 import HIVNegativeTB from './HIVNegativeTB';
 import HIVTBCoinfected from './HIVTBCoinfected';
-import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const TBHIV = () => {
     const ctTab = useSelector(state => state.ui.ctTab);

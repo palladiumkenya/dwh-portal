@@ -39,6 +39,8 @@ const TreatmentOutcomesByFacility = () => {
                 outcomes[result[i].facility].ltfu = parseInt(result[i].totalOutcomes, 10);
             } else if (result[i].artOutcome === "Stopped") {
                 outcomes[result[i].facility].stopped = parseInt(result[i].totalOutcomes, 10);
+            } else if (result[i].artOutcome === "TransferOut") {
+                outcomes[result[i].facility].to = parseInt(result[i].totalOutcomes, 10);
             }
         }
         const data = Object.values(outcomes);
@@ -52,6 +54,7 @@ const TreatmentOutcomesByFacility = () => {
                 { name: 'Dead', selector: 'dead', sortable: true, right: true},
                 { name: 'LTFU', selector: 'ltfu', sortable: true, right: true},
                 { name: 'Stopped', selector: 'stopped', sortable: true, right: true },
+                // { name: 'Transfer Out', selector: 'to', sortable: true, right: true },
             ],
             data: data
         });
@@ -73,7 +76,7 @@ const TreatmentOutcomesByFacility = () => {
                             <DataTable
                                 columns={treatmentOutcomesByFacility.columns}
                                 data={treatmentOutcomesByFacility.data}
-                                pagination="true" defaultSortField="facility" responsive="true"
+                                pagination={true} defaultSortField="facility" responsive={true}
                             />
                         </div>
                     </CardBody>

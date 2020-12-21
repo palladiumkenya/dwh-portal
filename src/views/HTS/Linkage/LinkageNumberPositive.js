@@ -18,7 +18,7 @@ const LinkageNumberPositive = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):""
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") :  new Date().getFullYear()
         };
         // params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('hts/linkageNumberPositiveByType', params);
@@ -31,23 +31,55 @@ const LinkageNumberPositive = () => {
         let positive = [[], []];
         let linked = [];
         let linkage = [];
+
+        const year = params.year;
+        const today = new Date();
+        const today_lastyear = new Date();
+        const lastYear = new Date(today_lastyear.setFullYear(today.getFullYear() - 1));
+        const lastFullYear = lastYear.getFullYear();
+        const lastYearMonth = lastYear.getMonth() + 1;
+        const fullYear = today.getFullYear();
+
         for(let i = 0; i < result.length; i++) {
-            if(result[i].TestedBefore === 'New') { 
-                months.push(monthNames[result[i].month] + ' ' + result[i].year.toString());
-                positive[0].push(parseInt(result[i].positive, 10));
-            } else {
-                positive[1].push(parseInt(result[i].positive, 10));
+            const result_month = result[i].month;
+            const result_year = result[i].year.toString();
+            if((year.toString() === fullYear.toString()) && (result_month <= lastYearMonth && result_year.toString() === lastFullYear.toString())) {
+                continue;
+            }
+
+            const monthYearFilterNew = result.filter(y => y.month === result[i].month && y.year.toString() === result_year && result[i].TestedBefore === 'New');
+            const monthYearFilterRetest = result.filter(y => y.month === result[i].month && y.year.toString() === result_year && result[i].TestedBefore === 'Retest');
+            if (monthYearFilterNew.length > 1) {
+                if (!months.includes(monthNames[result[i].month] + ' ' + result_year.toString())) {
+                    months.push(monthNames[result[i].month] + ' ' + result_year.toString());
+                }
+                positive[0].push(parseInt(monthYearFilterNew[0].positive, 10));
+                positive[1].push(parseInt(monthYearFilterNew[1].positive, 10));
+            } else if (monthYearFilterNew.length === 0 && monthYearFilterRetest.length === 1) {
+                if (!months.includes(monthNames[result[i].month] + ' ' + result_year.toString())) {
+                    months.push(monthNames[result[i].month] + ' ' + result_year.toString());
+                    positive[0].push(0);
+                    positive[1].push(parseInt(monthYearFilterRetest[0].positive, 10));
+                }
+            } else if (monthYearFilterNew.length === 1 && monthYearFilterRetest.length === 0) {
+                if (!months.includes(monthNames[result[i].month] + ' ' + result_year.toString())) {
+                    months.push(monthNames[result[i].month] + ' ' + result_year.toString());
+                    positive[0].push(parseInt(monthYearFilterNew[0].positive, 10));
+                    positive[1].push(0);
+                }
             }
         }
         for(let i = 0; i < result2.length; i++) {
+            const result_month = result2[i].month;
+            const result_year = result2[i].year.toString();
+            if ((year.toString() === fullYear.toString()) && (result_month <= lastYearMonth && result_year.toString() === lastFullYear.toString())) {
+                continue;
+            }
+
             linked.push(parseInt(result2[i].linked, 10));
             linkage.push(Number(parseFloat(result2[i].linkage).toFixed(1)));
         }
-        months = months.slice(Math.max(months.length - 12, 0));
-        positive[0] = positive[0].slice(Math.max(positive[0].length - 12, 0));
-        positive[1] = positive[1].slice(Math.max(positive[1].length - 12, 0));
-        linked = linked.slice(Math.max(linked.length - 12, 0));
-        linkage = linkage.slice(Math.max(linkage.length - 12, 0));
+
         setNumberPositiveLinked({
             title: { text: '', },
             xAxis: [{ categories: months, title: { text: 'Months' }, crosshair: true }],
@@ -75,7 +107,7 @@ const LinkageNumberPositive = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                    Linkage by month
+                    HTS Linkage by month
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

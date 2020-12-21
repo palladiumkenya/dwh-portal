@@ -18,7 +18,7 @@ const HomeVLCascade = () => {
         suppressedText: '',
         suppressedPercent: ''
     });
-    
+
     const loadHomeVLCascade = useCallback(async () => {
         let params = {
             county: filters.counties,
@@ -46,7 +46,7 @@ const HomeVLCascade = () => {
             hasCurrentVlPercent: parseFloat(((data[2]/data[0])*100).toString()).toFixed(0) + '%',
             suppressed: data[3],
             suppressedText: data[3].toLocaleString('en'),
-            suppressedPercent: parseFloat(((data[3]/data[0])*100).toString()).toFixed(0) + '%'
+            suppressedPercent: parseFloat(((data[3]/data[2])*100).toString()).toFixed(0) + '%'
         });
     }, [filters]);
 

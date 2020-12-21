@@ -27,7 +27,7 @@ const UptakeOverview = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : ''
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : moment().format("YYYY")
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('hts/uptakeBySex', params);
@@ -47,11 +47,11 @@ const UptakeOverview = () => {
         for(let i = 0; i < result.length; i++) {
             data.totalTested = data.totalTested + parseInt(result[i].tested);
             data.totalPositive = data.totalPositive + parseInt(result[i].positive);
-            if (result[i].gender === "M") {
+            if (result[i].gender.toLowerCase() === "m" || result[i].gender.toLowerCase() === "male") {
                 data.maleTested = data.maleTested + parseInt(result[i].tested);
                 data.malePositive = data.malePositive + parseFloat(result[i].positive);
             }
-            if (result[i].gender === "F") {
+            if (result[i].gender.toLowerCase() === "f" || result[i].gender.toLowerCase() === "female") {
                 data.femaleTested = data.femaleTested + parseInt(result[i].tested);
                 data.femalePositive = data.femalePositive + parseFloat(result[i].positive);
             }
@@ -82,7 +82,7 @@ const UptakeOverview = () => {
                 <div className="col-4">
                     <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
-                            TOTAL TESTED
+                            TOTAL PATIENTS TESTED
                         </CardHeader>
                         <CardBody
                             className="align-items-center d-flex justify-content-center"

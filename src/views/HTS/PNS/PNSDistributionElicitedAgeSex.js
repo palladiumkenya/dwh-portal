@@ -58,7 +58,7 @@ const PNSDistributionElicitedAgeSex = () => {
             plotOptions: { series: { stacking: 'normal' }, bar: { pointWidth: 18 } },
             tooltip: { formatter: function () {
                     return '<b>Number Elicited:</b><br/>' + this.series.name + ', ' + this.point.category +
-                        ': ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
+                        ': ' + Highcharts.numberFormat(Math.abs(this.point.y), 0);
                 }
             },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
@@ -75,7 +75,7 @@ const PNSDistributionElicitedAgeSex = () => {
 
     return (
         <Card className="trends-card">
-            <CardHeader className="cardTitle">DISTRIBUTION OF SEXUAL PARTNERS ELICITED</CardHeader>
+            <CardHeader className="cardTitle">CHARACTERISTICS OF ELICITED SEXUAL CONTACTS</CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
                     <HighchartsReact highcharts={Highcharts} options={pnsDistributionElicitedAgeSex} />

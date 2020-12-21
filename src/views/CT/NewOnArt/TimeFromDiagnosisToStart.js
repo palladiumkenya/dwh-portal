@@ -87,7 +87,7 @@ const TimeFromDiagnosisToStart = () => {
                 { name: 'Same Day', data: firstPeriodPercent, type: 'column', color: "#485969", tooltip: { valueSuffix: ' %' } },
                 { name: '1-7 Days', data: secondPeriodPercent, type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' %' } },
                 { name: '8-14 Days', data: thirdPeriodPercent, type: 'column', color: "#60A6E5", tooltip: { valueSuffix: ' %' } },
-                { name: '> 14 Days', data: fourthPeriodPercent, type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' %' } },
+                { name: '> 14 Days', data: fourthPeriodPercent, type: 'column', color: "#E15759", tooltip: { valueSuffix: ' %' } },
             ]
         });
     }, [filters]);

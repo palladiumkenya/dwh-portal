@@ -1,12 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
+import Highcharts from '../../utils/highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import Highcharts from 'highcharts';
 import { getAll } from './../Shared/Api';
-import mapKenyaByCounty from './../Shared/kenyaByCounty.json';
-
-require('highcharts/modules/map')(Highcharts);
-Highcharts.maps["custom/kenya-county"] = mapKenyaByCounty;
 
 const DsdStabilityStatusByCountyMap = ({ globalFilters }) => {
 
@@ -90,7 +86,7 @@ const DsdStabilityStatusByCountyMap = ({ globalFilters }) => {
         }
         
         setDsdStabilityStatusByCountyMap({
-            chart: { map: 'custom/kenya-county' },
+            chart: { map: 'custom/ke-county' },
             title: { text: '' },
             colorAxis: { min: 0 },
             tooltip: {

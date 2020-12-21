@@ -14,7 +14,7 @@ import UptakeTBScreeningAndTBOutcome from './UptakeTBScreeningAndTBOutcome';
 import UptakeTestingStrategy from './UptakeTestingStrategy';
 import UptakeTypeAndSelfTest from './UptakeTypeAndSelfTest';
 import UptakeNumberTestedAndPositivity from './UptakeNumberTestedAndPositivity';
-import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const Uptake = () => {
     const dispatch = useDispatch();
