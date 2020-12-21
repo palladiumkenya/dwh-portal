@@ -28,10 +28,10 @@ export const loadArtOptimizationOverview = (counties = [], subCounties = [], fac
 
 export const fetchArtOptimizationOverview = (counties = [], subCounties = [], facilities = [], partners = [], agencies = [], projects = []) => async dispatch => {
     const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
-    dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_REQUEST, payload: { filtered, counties, subCounties, facilities, partners, agencies, projects }});
+    dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_OVERVIEW_REQUEST, payload: { filtered, counties, subCounties, facilities, partners, agencies, projects }});
     const params = { county: counties, subCounty: subCounties, facility: facilities, partner: partners, agency: agencies, project: projects };
     const response = await getAll('care-treatment/getArtOptimizationOverview', params);
     if (response.length) {
-        dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_FETCH, payload: { filtered, list: response }});
+        dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_OVERVIEW_FETCH, payload: { filtered, list: response }});
     }
 };

@@ -18,7 +18,7 @@ const initialState = {
 export default (state = initialState, action) => {
     let newState = { ...state };
     switch (action.type) {
-        case actionTypes.CT_ART_OPTIMIZATION_OVERVIEW_REQUEST:
+        case actionTypes.CT_ART_OPTIMIZATION_CURRENT_BY_REGIMEN_REQUEST:
             newState.counties = action.payload.counties;
             newState.subCounties = action.payload.subCounties;
             newState.facilities = action.payload.facilities;
@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
                 newState.loadingUnfiltered = true;
             }
             return newState;
-        case actionTypes.CT_ART_OPTIMIZATION_OVERVIEW_FETCH:
+        case actionTypes.CT_ART_OPTIMIZATION_CURRENT_BY_REGIMEN_FETCH:
             if (action.payload.filtered === true) {
                 newState.loadingFiltered = false;
                 newState.lastFetchFiltered = Date.now();
@@ -42,7 +42,7 @@ export default (state = initialState, action) => {
                 newState.listUnfiltered = action.payload.list;
             }
             return newState;
-        case actionTypes.CT_ART_OPTIMIZATION_OVERVIEW_REQUEST_FAILED:
+        case actionTypes.CT_ART_OPTIMIZATION_CURRENT_BY_REGIMEN_REQUEST_FAILED:
             if (action.payload.filtered === true) {
                 newState.loadingFiltered = false;
             } else {
