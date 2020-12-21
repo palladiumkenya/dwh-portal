@@ -45,16 +45,16 @@ const DefaultHeader = () => {
                     <NavLink to="/hiv-treatment" className="nav-link">HIV Treatment</NavLink>
                 </NavItem>
                 <NavItem className="px-3">
-                    <NavLink to="/resources" className="nav-link">Resources</NavLink>
+                    <a href="https://kenyahmis.org/resources/" className="nav-link">Resources</a>
                 </NavItem>
                 <NavItem className="px-3">
-                    <a href="https://data.kenyahmis.org:9090/" className="nav-link">Adhoc</a>
+                    <a href="https://dwh.nascop.org:7010/" className="nav-link">Adhoc</a>
                 </NavItem>
                 <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>Administration</DropdownToggle>
                     <DropdownMenu right>
                         <DropdownItem><Link to="/administration/organizations" className="nav-link">Organizations</Link></DropdownItem>
-                        <DropdownItem> <a href="https://auth.kenyahmis.org/DwhIdentity/Users" className="nav-link">Users</a></DropdownItem>
+                        <DropdownItem> <a href="https://auth.kenyahmis.org/nascop/Users" className="nav-link">Users</a></DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>
             </Nav>
