@@ -18,6 +18,7 @@ const AdverseEventsTiles = () => {
     const [totalChildrenAdverseEvents, setTotalChildrenAdverseEvents] = useState({
         total: ''
     });
+    console.log(totalChildrenAdverseEvents);
     const [adults15PlusAdverseEventsDesegregation, setAdults15PlusAdverseEventsDesegregation] = useState({});
     const [totalAdultsAdverseEvents, setTotalAdultsAdverseEvents] = useState({
         total: ''
@@ -284,7 +285,7 @@ const AdverseEventsTiles = () => {
         const result = await getAll('care-treatment/getNoOfReportedAeInAdults', params);
         if (result) {
             setTotalNoOfAeReportedInAdults({
-                total: result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                total: result.total ? result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","): 0
             });
         }
     }, [filters]);
@@ -298,7 +299,7 @@ const AdverseEventsTiles = () => {
         const result = await getAll('care-treatment/getNoOfReportedAeInChildren', params);
         if (result) {
             setTotalNoOfAeReportedInChildren({
-                total: result.total ? result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : result.total
+                total: result.total ? result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0
             });
         }
     }, [filters]);
@@ -312,7 +313,7 @@ const AdverseEventsTiles = () => {
         const result = await getAll('care-treatment/getNumberOfAdultsWithAe', params);
         if (result) {
             setTotalNumberOfAdultsWithAe({
-                total: result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                total: result.total ? result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0
             });
         }
     }, [filters]);
@@ -326,7 +327,7 @@ const AdverseEventsTiles = () => {
         const result = await getAll('care-treatment/getNumberOfChildrenWithAe', params);
         if (result) {
             setTotalNumberOfChildrenWithAe({
-                total: result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                total: result.total ? result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0
             });
         }
     }, [filters]);

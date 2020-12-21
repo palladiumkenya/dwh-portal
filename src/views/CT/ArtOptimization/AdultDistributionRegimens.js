@@ -54,7 +54,7 @@ const AdultDistributionRegimens = () => {
             });
         }
         setAdultDistributionRegimens(data);
-    }, []);
+    }, [adults, adultsOnFirstLine, adultsOnSecondLine, adultsOnThirdLine, adultsOnUndocumentedLine]);
 
     useEffect(() => {
         loadAdultsByRegimenNames();
