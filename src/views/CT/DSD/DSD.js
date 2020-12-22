@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Col, Row } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from './../../Shared/UniversalFilter';
-import DSDHeader from './DSDHeader';
-import DSDFooter from './DSDFooter';
+import SectionHeader from '../../Shared/SectionHeader';
+import SectionFooter from '../../Shared/SectionFooter';
 import DSDOverview from './DSDOverview';
 import DSDCascade from './DSDCascade';
 import DistributionUnstable from './DistributionUnstable';
@@ -19,6 +20,7 @@ import AppointmentDurationStableByPartner from './AppointmentDurationStableByPar
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const DSD = () => {
+    const branding = { title: "DIFFERENTIATED SERVICE DELIVERY", description: "OVERVIEW", overview: "Differenciated Service Delivery" };
     const ctTab = useSelector(state => state.ui.ctTab);
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
@@ -32,57 +34,48 @@ const DSD = () => {
     };
     return (
         <div className="animated fadeIn">
-            <div className="strip"></div>
-            <DSDHeader></DSDHeader>
+            <SectionHeader title={branding.title}/>
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <p></p>
-            <div className="row">
-                <div className="col-12">
-                    <DSDOverview />
-                </div>
-            </div>
-            <p></p>
-            <div className="row">
-                <div className="col-6">
+            <DSDOverview />
+            <Row>
+                <Col>
                     <DSDCascade />
-                </div>
-                <div className="col-6">
+                </Col>
+                <Col>
                     <DistributionMMDStable />
-                </div>
-            </div>
-            <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
-            <p></p>
-            <div className="row">
-                <div className="col-6">
+                </Col>
+            </Row>
+            <SectionFooter overview={branding.overview}/>
+            <Row>
+                <Col>
                     <AppointmentDurationByStability />
-                </div>
-                <div className="col-6">
+                </Col>
+                <Col>
                     <AppointmentDurationBySex />
-                </div>
-            </div>
-            <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><AppointmentDurationByAge />
-            <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><AppointmentDurationStableByCounty />
-            <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><AppointmentDurationStableByPartner />
-            <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
-            <p></p>
-            <div className="row">
-                <div className="col-6">
+                </Col>
+            </Row>
+            <SectionFooter overview={branding.overview}/>
+            <AppointmentDurationByAge />
+            <SectionFooter overview={branding.overview}/>
+            <AppointmentDurationStableByCounty />
+            <SectionFooter overview={branding.overview}/>
+            <AppointmentDurationStableByPartner />
+            <SectionFooter overview={branding.overview}/>
+            <Row>
+                <Col>
                     <DistributionStableAgeSex />
-                </div>
-                <div className="col-6">
+                </Col>
+                <Col>
                     <DistributionUnstable />
-                </div>
-            </div>
-            <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><DistributionStableByCounty />
-            <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><DistributionStableByPartner />
-            <hr/><DSDFooter/><hr/><div className="strip"></div><p></p>
+                </Col>
+            </Row>
+            <SectionFooter overview={branding.overview}/>
+            <DistributionStableByCounty />
+            <SectionFooter overview={branding.overview}/>
+            <DistributionStableByPartner />
+            <SectionFooter overview={branding.overview}/>
         </div>
     );
 

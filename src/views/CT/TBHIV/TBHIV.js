@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Col, Row } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from './../../Shared/UniversalFilter';
-import TBHIVHeader from './TBHIVHeader';
-import TBHIVFooter from './TBHIVFooter';
+import SectionHeader from '../../Shared/SectionHeader';
+import SectionFooter from '../../Shared/SectionFooter';
 import TBStatTrends from './TBStatTrends';
 import IPTCompletionByAge from './IPTCompletionByAge';
 import IPTUptake from './IPTUptake';
@@ -14,6 +15,7 @@ import HIVTBCoinfected from './HIVTBCoinfected';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const TBHIV = () => {
+    const branding = { title: "TB/HIV - UPTAKE AND OUTCOMES", description: "OVERVIEW", overview: "TB/HIV - Uptake and Outcomes" };
     const ctTab = useSelector(state => state.ui.ctTab);
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
@@ -27,43 +29,40 @@ const TBHIV = () => {
     };
     return (
         <div className="animated fadeIn">
-            <div className="strip"></div>
             <h3 style={{color: '#ff0000', textAlign: 'center', padding: '1em'}}>Please note that the data on this page is dummy data</h3>
-            <TBHIVHeader></TBHIVHeader>
+            <SectionHeader title={branding.title}/>
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <p></p><TBStatTrends />
-            <hr/><TBHIVFooter/><hr/><div className="strip"></div><p></p>
-            <p></p>
-            <div className="row">
-                <div className="col-6">
+            <TBStatTrends />
+            <SectionFooter overview={branding.overview}/>
+            <Row>
+                <Col>
                     <TBActiveCaseFindingAdults />
-                </div>
-                <div className="col-6">
+                </Col>
+                <Col>
                     <TBActiveCaseFindingChildren />
-                </div>
-            </div>
-            <hr/><TBHIVFooter/><hr/><div className="strip"></div><p></p>
-            <p></p>
-            <div className="row">
-                <div className="col-6">
+                </Col>
+            </Row>
+            <SectionFooter overview={branding.overview}/>
+            <Row>
+                <Col>
                     <HIVNegativeTB />
-                </div>
-                <div className="col-6">
+                </Col>
+                <Col>
                     <HIVTBCoinfected />
-                </div>
-            </div>
-            <hr/><TBHIVFooter/><hr/><div className="strip"></div><p></p>
-            <div className="row">
-                <div className="col-4">
+                </Col>
+            </Row>
+            <SectionFooter overview={branding.overview}/>
+            <Row>
+                <Col sm={4}>
                     <IPTUptake />
-                </div>
-                <div className="col-8">
+                </Col>
+                <Col sm={8}>
                     <IPTCompletionByAge />
-                </div>
-            </div>
-            <hr/><TBHIVFooter/><hr/><div className="strip"></div><p></p>
+                </Col>
+            </Row>
+            <SectionFooter overview={branding.overview}/>
         </div>
     );
 

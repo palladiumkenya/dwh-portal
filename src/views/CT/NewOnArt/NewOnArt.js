@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from './../../Shared/UniversalFilter';
-import NewOnArtHeader from './NewOnArtHeader';
-import NewOnArtFooter from './NewOnArtFooter';
+import SectionHeader from '../../Shared/SectionHeader';
+import SectionFooter from '../../Shared/SectionFooter';
 import NewOnArtTrends from './NewOnArtTrends';
 import NewOnArtByAgeSex from './NewOnArtByAgeSex';
 import MedianTimeToArtStart from './MedianTimeToArtStart';
@@ -14,6 +14,7 @@ import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared
 import NewOnARTTiles from './NewOnARTTiles';
 
 const NewOnArt = () => {
+    const branding = { title: "NEWLY STARTED ON ART", description: "OVERVIEW", overview: "Newly Started on ART Information" };
     const ctTab = useSelector(state => state.ui.ctTab);
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
@@ -27,8 +28,7 @@ const NewOnArt = () => {
     };
     return (
         <div className="animated fadeIn">
-            <div className="strip"></div>
-            <NewOnArtHeader></NewOnArtHeader>
+            <SectionHeader title={branding.title}/>
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
@@ -36,28 +36,19 @@ const NewOnArt = () => {
             <NewOnARTTiles />
             <p></p>
             <NewOnArtTrends />
-            <hr/>
-            <NewOnArtFooter/>
-            <hr/>
-            <div className="strip"></div>
-            <p></p>
-            <p></p>
-            <div className="row">
-                <div className="col-12">
-                    <NewOnArtByAgeSex />
-                </div>
-            </div>
-            <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><MedianTimeToArtStart />
-            <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><MedianTimeToArtStartByCounty />
-            <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><MedianTimeToArtStartByPartner />
-            <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TimeFromDiagnosisToStart />
-            <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p>
-            {/* <p></p><FacilitiesNewOnArtList />
-            <hr/><NewOnArtFooter/><hr/><div className="strip"></div><p></p> */}
+            <SectionFooter overview={branding.overview}/>
+            <NewOnArtByAgeSex />
+            <SectionFooter overview={branding.overview}/>
+            <MedianTimeToArtStart />
+            <SectionFooter overview={branding.overview}/>
+            <MedianTimeToArtStartByCounty />
+            <SectionFooter overview={branding.overview}/>
+            <MedianTimeToArtStartByPartner />
+            <SectionFooter overview={branding.overview}/>
+            <TimeFromDiagnosisToStart />
+            <SectionFooter overview={branding.overview}/>
+            {/* <FacilitiesNewOnArtList />
+            <SectionFooter overview={branding.overview}/> */}
         </div>
     );
 
