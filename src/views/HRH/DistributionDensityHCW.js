@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardHeader, CardBody } from 'reactstrap';
+import { Card, CardBody } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../Shared/HRHApi';

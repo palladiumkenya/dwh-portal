@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Col, Row } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from './../../Shared/UniversalFilter';
-import TreatmentOutcomesHeader from './TreatmentOutcomesHeader';
-import TreatmentOutcomesFooter from './TreatmentOutcomesFooter';
+import SectionHeader from '../../Shared/SectionHeader';
+import SectionFooter from '../../Shared/SectionFooter';
 import TreatmentOutcomesOverview from './TreatmentOutcomesOverview';
 import TreatmentOutcomesOverall from './TreatmentOutcomesOverall';
 import TreatmentOutcomesBySex from './TreatmentOutcomesBySex';
@@ -19,6 +20,7 @@ import TreatmentOutcomesByFacility from './TreatmentOutcomesByFacility';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const TreatmentOutcomes = () => {
+    const branding = { title: "TREATMENT OUTCOMES", description: "OVERVIEW", overview: "Treatment Outcomes" };
     const ctTab = useSelector(state => state.ui.ctTab);
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
@@ -32,45 +34,38 @@ const TreatmentOutcomes = () => {
     };
     return (
         <div className="animated fadeIn">
-            <div className="strip"></div>
-            <TreatmentOutcomesHeader></TreatmentOutcomesHeader>
+            <SectionHeader title={branding.title}/>
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <p></p>
-            <div className="row">
-                <div className="col-12">
-                    <TreatmentOutcomesOverview />
-                </div>
-            </div>
-            <p></p>
-            <div className="row">
-                <div className="col-6">
+            <TreatmentOutcomesOverview />
+            <Row>
+                <Col>
                     <TreatmentOutcomesBySex />
-                </div>
-                <div className="col-6">
+                </Col>
+                <Col>
                     <TreatmentOutcomesOverall />
-                </div>
-            </div>
-            <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TreatmentOutcomesByAge />
-            <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TreatmentOutcomesByYear />
-            <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TreatmentOutcomesByCounty />
-            <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TreatmentOutcomesByPartner />
-            <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><ThreeMonthRetention />
-            <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><SixMonthRetention />
-            <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TwelveMonthRetention />
-            <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TwentyFourMonthRetention />
-            <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><TreatmentOutcomesByFacility />
-            <hr/><TreatmentOutcomesFooter/><hr/><div className="strip"></div><p></p><p></p>
+                </Col>
+            </Row>
+            <SectionFooter overview={branding.overview}/>
+            <TreatmentOutcomesByAge />
+            <SectionFooter overview={branding.overview}/>
+            <TreatmentOutcomesByYear />
+            <SectionFooter overview={branding.overview}/>
+            <TreatmentOutcomesByCounty />
+            <SectionFooter overview={branding.overview}/>
+            <TreatmentOutcomesByPartner />
+            <SectionFooter overview={branding.overview}/>
+            <ThreeMonthRetention />
+            <SectionFooter overview={branding.overview}/>
+            <SixMonthRetention />
+            <SectionFooter overview={branding.overview}/>
+            <TwelveMonthRetention />
+            <SectionFooter overview={branding.overview}/>
+            <TwentyFourMonthRetention />
+            <SectionFooter overview={branding.overview}/>
+            <TreatmentOutcomesByFacility />
+            <SectionFooter overview={branding.overview}/>
         </div>
     );
 
