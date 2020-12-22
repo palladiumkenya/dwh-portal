@@ -9,7 +9,7 @@ import RROverview from './RROverview';
 import RROverviewTrends from './RROverviewTrends';
 import RRCounty from './RRCounty';
 import RRPartner from './RRPartner';
-import { enableStickyFilter, disableStickyFilter, changeRRTab, changeCurrentPage, enableFacilityFilter, disableFacilityFilter, enableAgencyFilter, disableAgencyFilter, enableFromDateFilter, disableFromDateFilter } from "../../actions/shared/uiActions";
+import { enableStickyFilter, disableStickyFilter, changeRRTab, changeCurrentPage, enableFacilityFilter, disableFacilityFilter, enableAgencyFilter, disableAgencyFilter, enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/uiActions";
 import { RR_TABS, PAGES } from "../../constants";
 
 const RR = () => {
@@ -68,12 +68,12 @@ const RR = () => {
                         reporting rates in the number of EMR sites that uploaded data to
                         the NDW in Jan 2020 and so forth."
                     />
-                    <SectionHeader title="REPORTING RATES" description="BY COUNTY"/>
+                    {/*<SectionHeader title="REPORTING RATES" description="BY COUNTY"/>*/}
                     <RRCounty/>
                     <SectionFooter overview="The overall reporting rate for March, 2020 is the
                         number of EMR sites that uploaded data in March, 2020"
                     />
-                    <SectionHeader title="REPORTING RATES" description="BY PARTNER"/>
+                    {/*<SectionHeader title="REPORTING RATES" description="BY PARTNER"/>*/}
                     <RRPartner/>
                     <SectionFooter overview="The overall reporting rate for March, 2020 is the
                         number of EMR sites that uploaded data in March, 2020"

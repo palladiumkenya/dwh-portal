@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { getAll } from '../../Shared/Api';
+import { capitalize, getAll } from '../../Shared/Api';
 import moment from "moment";
 
 const UptakeByPartner = () => {
@@ -18,7 +18,7 @@ const UptakeByPartner = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):""
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"): moment().format("YYYY")
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const partners = [];
@@ -26,7 +26,7 @@ const UptakeByPartner = () => {
         let positivity = [];
         const result = await getAll('hts/uptakeByPartner', params);
         for(let i = 0; i < result.length; i++) {
-            partners.push(result[i].Partner.capitalize());
+            partners.push(capitalize(result[i].Partner));
             tested.push(parseInt(result[i].Tested, 10));
             const val = parseFloat(parseFloat(result[i].positivity).toFixed(1));
             positivity.push(val);
@@ -47,10 +47,6 @@ const UptakeByPartner = () => {
             ],
         });
     }, [filters]);
-
-    String.prototype.capitalize = function() {
-        return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase()
-    }
 
     useEffect(() => {
         loadUptakeByPartner();

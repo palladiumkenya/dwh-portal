@@ -11,9 +11,9 @@ import  { store } from './store';
 import SignoutOidc from './views/Pages/Login/signout-oidc';
 import SigninOidc from './views/Pages/Login/signin-oidc';
 import Loading from './views/Shared/Loading';
-import { loadRrSites } from './actions/shared/rrSitesActions';
-import { loadHtsSites } from './actions/shared/htsSitesActions';
-import { loadCtSites } from './actions/shared/ctSitesActions';
+import { loadRrSites } from './actions/Shared/rrSitesActions';
+import { loadHtsSites } from './actions/Shared/htsSitesActions';
+import { loadCtSites } from './actions/Shared/ctSitesActions';
 
 const DefaultLayout = React.lazy(() => import('./containers/DefaultLayout'));
 const Login = React.lazy(() => import('./views/Pages/Login'));

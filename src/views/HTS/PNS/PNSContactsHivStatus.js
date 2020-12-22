@@ -21,13 +21,16 @@ const PNSContactsHivStatus = () => {
             year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):""
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const result = await getAll('hts/pnsSexualContactsCascade', params);
+        const result = await getAll('hts/pnsKnowledgeHivStatusCascade', params);
         let pnsSexualContactsCascade = {
             elicited: result.elicited ? parseInt(result.elicited):0,
             tested: result.tested ? parseInt(result.tested):0,
             positive: result.positive ? parseInt(result.positive):0,
             linked: result.linked ? parseInt(result.linked):0,
-            knownPositive: result.knownPositive ? parseInt(result.knownPositive):0
+            knownPositive: result.knownPositive ? parseInt(result.knownPositive):0,
+            newNegatives: result.newNegatives ? parseInt(result.newNegatives):0,
+            newPositives: result.newPositives ? parseInt(result.newPositives):0,
+            unknownStatus: result.unknownStatus ? parseInt(result.unknownStatus):0
         };
         setPNSContactsHivStatus({
             title: { text: '' },
@@ -36,9 +39,9 @@ const PNSContactsHivStatus = () => {
             plotOptions: { column: { stacking: 'normal' } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Unknown HIV status', type: 'column', data: [0], color: "#EF0909" },
-                { name: 'New Negatives', type: 'column', data: [0], color: "#59A14F" },
-                { name: 'New Positives', type: 'column', data: [pnsSexualContactsCascade.positive], color: "#F1450E" },
+                { name: 'Unknown HIV status', type: 'column', data: [pnsSexualContactsCascade.unknownStatus], color: "#EF0909" },
+                { name: 'New Negatives', type: 'column', data: [pnsSexualContactsCascade.newNegatives], color: "#59A14F" },
+                { name: 'New Positives', type: 'column', data: [pnsSexualContactsCascade.newPositives], color: "#F1450E" },
                 { name: 'Known Positives', type: 'column', data: [pnsSexualContactsCascade.knownPositive], color: "#1184F0" },
             ]
         });

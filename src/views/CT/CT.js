@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import NewOnArt from './NewOnArt/NewOnArt';
@@ -8,14 +8,13 @@ import TreatmentOutcomes from './TreatmentOutcomes/TreatmentOutcomes';
 import VL from './VL/VL';
 import AdverseEvents from './AdverseEvents/AdverseEvents';
 import TBHIV from './TBHIV/TBHIV';
-import ARVOptimization from './ARVOptimization/ARVOptimization';
-import { changeCtTab, changeCurrentPage, enableFromDateFilter, disableFromDateFilter } from "../../actions/shared/uiActions";
+import ArtOptimization from './ArtOptimization/ArtOptimization';
+import { changeCtTab, changeCurrentPage, enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/uiActions";
 import { CT_TABS, PAGES } from "../../constants";
 
 const CT = () => {
     const dispatch = useDispatch();
     const ctTab = useSelector(state => state.ui.ctTab);
-    const [currentTab, setCurrentTab] = useState();
     const renderTabNavItems = () => {
         return (
             Object.keys(CT_TABS).map((value) => {
@@ -23,7 +22,6 @@ const CT = () => {
                     <NavItem key={value}>
                         <NavLink active={ctTab === value} onClick={() => {
                                 dispatch(changeCtTab(value));
-                                setCurrentTab(value);
                                 if (value === 'txNew') {
                                     dispatch(enableFromDateFilter());
                                 } else {
@@ -63,23 +61,23 @@ const CT = () => {
                 <TabPane tabId="tbHiv">
                     <TBHIV/>
                 </TabPane>
+                <TabPane tabId="txOpt">
+                    <ArtOptimization/>
+                </TabPane>
                 <TabPane tabId="advEv">
                     <AdverseEvents/>
                 </TabPane>
                 <TabPane tabId="dsd">
                     <DSD/>
                 </TabPane>
-                <TabPane tabId="tOut">
-                    <TreatmentOutcomes/>
-                </TabPane>
                 <TabPane tabId="vl">
                     <VL/>
                 </TabPane>
-                <TabPane tabId="txOpt">
-                    {currentTab==="txOpt" && <ARVOptimization/>}
+                <TabPane tabId="tOut">
+                    <TreatmentOutcomes/>
                 </TabPane>
             </TabContent>
-            <p></p>
+            <p></p><p></p>
         </div>
     );
 };

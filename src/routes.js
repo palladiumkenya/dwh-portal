@@ -6,6 +6,7 @@ import GIS from "./views/GIS/GIS";
 import HRH from "./views/HRH/HRH";
 import Resources from './views/Resources/Resources';
 import Organizations from './views/Administration/Organizations/Organizations';
+import Profile from './views/Users/Profile';
 
 const routes = [
   { path: "/", exact: true, name: "Home", component: Home, private: false },
@@ -16,6 +17,7 @@ const routes = [
   { path: "/hrh", exact: true, name: "HRH", component: HRH, private: false },
   { path: "/resources", exact: true, name: "Resources", component: Resources, private: false },
   { path: '/administration/organizations', exact: true, name: "Organizations", component: Organizations, private: true },
+  { path: '/users/profile', exact: true, name: "Profile", component: Profile, private: true }
 ];
 
 export default routes;

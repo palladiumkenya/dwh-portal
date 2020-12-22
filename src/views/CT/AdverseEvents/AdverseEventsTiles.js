@@ -15,9 +15,9 @@ const AdverseEventsTiles = () => {
         childrenUnder15CurrentOnART: ''
     });
     const [under15AdverseEventsDesegregation, setUnder15AdverseEventsDesegregation] = useState({});
-    const [totalChildrenAdverseEvents, setTotalChildrenAdverseEvents] = useState({
-        total: ''
-    });
+    // const [totalChildrenAdverseEvents, setTotalChildrenAdverseEvents] = useState({
+    //     total: ''
+    // });
     const [adults15PlusAdverseEventsDesegregation, setAdults15PlusAdverseEventsDesegregation] = useState({});
     const [totalAdultsAdverseEvents, setTotalAdultsAdverseEvents] = useState({
         total: ''
@@ -111,13 +111,13 @@ const AdverseEventsTiles = () => {
                 }
             }
         }
-        const total_Male = maleData.reduce((a, b) => a + b, 0);
-        const total_female = femaleData.reduce((a, b) => a + b, 0);
-        const total = total_Male + total_female;
+        // const total_Male = maleData.reduce((a, b) => a + b, 0);
+        // const total_female = femaleData.reduce((a, b) => a + b, 0);
+        // const total = total_Male + total_female;
 
-        setTotalChildrenAdverseEvents({
-            total: total
-        });
+        // setTotalChildrenAdverseEvents({
+        //     total: total
+        // });
 
         setUnder15AdverseEventsDesegregation({
             chart: {
@@ -284,7 +284,7 @@ const AdverseEventsTiles = () => {
         const result = await getAll('care-treatment/getNoOfReportedAeInAdults', params);
         if (result) {
             setTotalNoOfAeReportedInAdults({
-                total: result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                total: result.total ? result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","): 0
             });
         }
     }, [filters]);
@@ -298,7 +298,7 @@ const AdverseEventsTiles = () => {
         const result = await getAll('care-treatment/getNoOfReportedAeInChildren', params);
         if (result) {
             setTotalNoOfAeReportedInChildren({
-                total: result.total ? result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : result.total
+                total: result.total ? result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0
             });
         }
     }, [filters]);
@@ -312,7 +312,7 @@ const AdverseEventsTiles = () => {
         const result = await getAll('care-treatment/getNumberOfAdultsWithAe', params);
         if (result) {
             setTotalNumberOfAdultsWithAe({
-                total: result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                total: result.total ? result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0
             });
         }
     }, [filters]);
@@ -326,7 +326,7 @@ const AdverseEventsTiles = () => {
         const result = await getAll('care-treatment/getNumberOfChildrenWithAe', params);
         if (result) {
             setTotalNumberOfChildrenWithAe({
-                total: result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                total: result.total ? result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0
             });
         }
     }, [filters]);

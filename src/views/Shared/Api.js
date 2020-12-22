@@ -106,3 +106,9 @@ export const getMonths = () => {
         7: "July", 8:"August", 9: "September", 10: "October", 11: "November", 12: "December"
     };
 };
+
+export const capitalize = toCapitalize => {
+    return toCapitalize ?
+        toCapitalize.charAt(0).toUpperCase() + toCapitalize.slice(1).toLowerCase() :
+        toCapitalize;
+}
