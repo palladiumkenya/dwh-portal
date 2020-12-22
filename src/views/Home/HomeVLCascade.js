@@ -43,7 +43,7 @@ const HomeVLCascade = () => {
             eligibleForVlPercent: parseFloat(((data[1]/data[0])*100).toString()).toFixed(0) + '%',
             hasCurrentVl: data[2],
             hasCurrentVlText: data[2].toLocaleString('en'),
-            hasCurrentVlPercent: parseFloat(((data[2]/data[0])*100).toString()).toFixed(0) + '%',
+            hasCurrentVlPercent: parseFloat(((data[2]/data[1])*100).toString()).toFixed(0) + '%',
             suppressed: data[3],
             suppressedText: data[3].toLocaleString('en'),
             suppressedPercent: parseFloat(((data[3]/data[2])*100).toString()).toFixed(0) + '%'

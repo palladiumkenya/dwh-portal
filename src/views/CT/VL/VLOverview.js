@@ -8,6 +8,8 @@ const VLOverview = () => {
     const filters = useSelector(state => state.filters);
     const [vlOverview, setVlOverview] = useState({
         txCurr: 0,
+        eligible: 0,
+        eligiblePercent: 0,
         vlDone: 0,
         vlDonePercent: 0,
         suppressed: 0,
@@ -27,14 +29,17 @@ const VLOverview = () => {
         const result = await getAll('care-treatment/vlOverallUptakeAndSuppression', params);
         let data = {
             txCurr: parseInt(result.txCurr) ? parseInt(result.txCurr) : 0,
+            eligible: parseInt(result.eligible) ? parseInt(result.eligible) : 0,
+            eligiblePercent: 0,
             vlDone: parseInt(result.vlDone) ? parseInt(result.vlDone) : 0,
             vlDonePercent: 0,
             suppressed: parseInt(result.suppressed) ? parseInt(result.suppressed) : 0,
             suppressedPercent: 0
         }
         if (data.txCurr > 0) {
-           data.vlDonePercent = ((data.vlDone/data.txCurr)*100).toFixed(1);
-           data.suppressedPercent = ((data.suppressed/data.txCurr)*100).toFixed(1);
+           data.eligiblePercent = ((data.eligible/data.txCurr)*100).toFixed(1);
+           data.vlDonePercent = ((data.vlDone/data.eligible)*100).toFixed(1);
+           data.suppressedPercent = ((data.suppressed/data.vlDone)*100).toFixed(1);
         }
         setVlOverview(data);
     }, [filters]);
