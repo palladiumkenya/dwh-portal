@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Col, Row } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from './../../Shared/UniversalFilter';
-import VLHeader from './VLHeader';
-import VLFooter from './VLFooter';
+import SectionHeader from '../../Shared/SectionHeader';
+import SectionFooter from '../../Shared/SectionFooter';
 import VLOverview from './VLOverview';
 import VLOverallUptakeAndSuppression from './VLOverallUptakeAndSuppression';
 import MedianTimeTo1stVL from './MedianTimeTo1stVL';
@@ -27,6 +28,7 @@ import VLOverallUptakeAndSuppressionByFacility from './VLOverallUptakeAndSuppres
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const VL = () => {
+    const branding = { title: "VIRAL LOAD MONITORING", description: "OVERVIEW", overview: "Viral Load Monitoring" };
     const ctTab = useSelector(state => state.ui.ctTab);
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
@@ -40,82 +42,69 @@ const VL = () => {
     };
     return (
         <div className="animated fadeIn">
-            <div className="strip"></div>
-            <VLHeader></VLHeader>
+            <SectionHeader title={branding.title}/>
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <p></p>
-            <div className="row">
-                <div className="col-12">
-                    <VLOverview />
-                </div>
-            </div>
-            <p></p>
-            <div className="row">
-                <div className="col-6">
+            <VLOverview />
+            <Row>
+                <Col>
                     <VLOverallUptakeAndSuppression />
-                </div>
-                <div className="col-6">
+                </Col>
+                <Col>
                     <MedianTimeTo1stVL />
-                </div>
-            </div>
-            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><MedianTimeTo1stVLByCounty />
-            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><MedianTimeTo1stVLByPartner />
-            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p>
-            <div className="row">
-                <div className="col-4">
+                </Col>
+            </Row>
+            <SectionFooter overview={branding.overview}/>
+            <MedianTimeTo1stVLByCounty />
+            <SectionFooter overview={branding.overview}/>
+            <MedianTimeTo1stVLByPartner />
+            <SectionFooter overview={branding.overview}/>
+            <Row>
+                <Col sm={4}>
                     <VLUptakeBySex />
-                </div>
-                <div className="col-8">
+                </Col>
+                <Col sm={8}>
                     <VLUptakeByAge />
-                </div>
-            </div>
-            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLUptakeByCounty />
-            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLUptakeByPartner />
-            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <div className="row">
-                <div className="col-4">
+                </Col>
+            </Row>
+            <SectionFooter overview={branding.overview}/>
+            <VLUptakeByCounty />
+            <SectionFooter overview={branding.overview}/>
+            <VLUptakeByPartner />
+            <SectionFooter overview={branding.overview}/>
+            <Row>
+                <Col sm={4}>
                     <VLOutcomesOverall />
-                </div>
-                <div className="col-8">
+                </Col>
+                <Col sm={8}>
                     <VLOutcomesBySex />
-                </div>
-            </div>
-            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLSuppressionByAge />
-            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <div className="row">
-                <div className="col-4">
+                </Col>
+            </Row>
+            <SectionFooter overview={branding.overview}/>
+            <VLSuppressionByAge />
+            <SectionFooter overview={branding.overview}/>
+            <Row>
+                <Col sm={4}>
                     <VLSuppressionByRegimen />
-                </div>
-                <div className="col-8">
+                </Col>
+                <Col sm={8}>
                     <VLSuppressionByYear />
-                </div>
-            </div>
-            <p></p>
-            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLSuppressionByCounty />
-            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLSuppressionByPartner />
-            <p></p>
-            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLSuppressionByYear6Month />
-            <p></p>
-            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLSuppressionByYear12Month />
-            <p></p>
-            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLSuppressionByYear24Month />
-            <p></p>
-            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
-            <p></p><VLOverallUptakeAndSuppressionByFacility />
-            <hr/><VLFooter/><hr/><div className="strip"></div><p></p>
+                </Col>
+            </Row>
+            <SectionFooter overview={branding.overview}/>
+            <VLSuppressionByCounty />
+            <SectionFooter overview={branding.overview}/>
+            <VLSuppressionByPartner />
+            <SectionFooter overview={branding.overview}/>
+            <VLSuppressionByYear6Month />
+            <SectionFooter overview={branding.overview}/>
+            <VLSuppressionByYear12Month />
+            <SectionFooter overview={branding.overview}/>
+            <VLSuppressionByYear24Month />
+            <SectionFooter overview={branding.overview}/>
+            <VLOverallUptakeAndSuppressionByFacility />
+            <SectionFooter overview={branding.overview}/>
         </div>
     );
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Col, Row } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from './../../Shared/UniversalFilter';
+import SectionHeader from '../../Shared/SectionHeader';
+import SectionFooter from '../../Shared/SectionFooter';
 // import TrendsInTxCurr from './TrendsInTxCurr';
-import CurrentOnARTHeader from './CurrentOnARTHeader';
-import CurrentOnARTFooter from './CurrentOnARTFooter';
 import CurrentOnARTTxCurrByAgeSex from './CurrentOnARTTxCurrByAgeSex';
 import CurrentOnARTTxCurrBySex from './CurrentOnARTTxCurrBySex';
 import CurrentOnARTTxCurrDistributionByCounty from './CurrentOnARTTxCurrDistributionByCounty';
@@ -15,7 +16,7 @@ import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared
 import CurrentOnARTTiles from './CurrentOnARTTiles';
 
 const CurrentOnART = () => {
-    const filters = useSelector(state => state.filters);
+    const branding = { title: "CURRENT ON ART", description: "OVERVIEW", overview: "Current on ART" };
     const ctTab = useSelector(state => state.ui.ctTab);
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
@@ -29,51 +30,30 @@ const CurrentOnART = () => {
     };
     return (
         <div className="animated fadeIn">
-            <div className="strip">&nbsp;</div>
-            <CurrentOnARTHeader period={filters?.year}>&nbsp;</CurrentOnARTHeader>
+            <SectionHeader title={branding.title}/>
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            {/* <TrendsInTxCurr /> */}
-            <hr />
-            <CurrentOnARTFooter />
-            <hr />
-            <div className="strip">&nbsp;</div>
-            <p></p>
             <CurrentOnARTTiles />
-            <div className="row">
-                <div className="col-6">
+            {/* <TrendsInTxCurr />
+            <SectionFooter overview={branding.overview}/> */}
+            <Row>
+                <Col>
                     <CurrentOnARTTxCurrBySex />
-                </div>
-                <div className="col-6">
+                </Col>
+                <Col>
                     <CurrentOnARTTxCurrByAgeSex />
-                </div>
-            </div>
-            <p>&nbsp;</p>
-            <hr />
-            <CurrentOnARTFooter />
-            <hr />
-            <div className="strip">&nbsp;</div>
-            <p>&nbsp;</p>
+                </Col>
+            </Row>
+            <SectionFooter overview={branding.overview}/>
             <CurrentOnARTTxCurrDistributionByCounty />
-            <hr />
-            <CurrentOnARTFooter />
-            <hr />
-            <div className="strip">&nbsp;</div>
-            <p>&nbsp;</p>
+            <SectionFooter overview={branding.overview}/>
             <CurrentOnARTTxCurrDistributionByPartner />
-            <hr />
-            <CurrentOnARTFooter />
-            <hr />
-            <div className="strip">&nbsp;</div>
-            <p>&nbsp;</p>
+            <SectionFooter overview={branding.overview}/>
             <CurrentOnARTTxCurrByCounty />
-            <hr />
-            <CurrentOnARTFooter />
-            <hr />
-            <div className="strip">&nbsp;</div>
-            <p>&nbsp;</p>
+            <SectionFooter overview={branding.overview}/>
             <CurrentOnARTTxCurrByPartner />
+            <SectionFooter overview={branding.overview}/>
         </div>
     );
 };
