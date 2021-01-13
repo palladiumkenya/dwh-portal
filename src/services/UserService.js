@@ -45,8 +45,8 @@ export function signinRedirectCallback() {
 
 export async function signoutRedirect() {
     let user = await userManager.getUser();
-    userManager.clearStaleState();
-    userManager.removeUser();
+    await userManager.clearStaleState();
+    await userManager.removeUser();
     return userManager.signoutRedirect({ 'id_token_hint': user.id_token });
 }
 
