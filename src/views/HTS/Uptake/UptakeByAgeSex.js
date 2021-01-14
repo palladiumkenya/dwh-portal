@@ -18,7 +18,7 @@ const UptakeByAgeSex = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):""
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"): moment().format("YYYY")
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const ageGroups = [];
@@ -70,7 +70,7 @@ const UptakeByAgeSex = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        UPTAKE BY AGE GROUP AND SEX
+                        HTS UPTAKE BY AGE GROUP AND SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

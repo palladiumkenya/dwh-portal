@@ -11,7 +11,7 @@ import LinkageByPopulationType from './LinkageByPopulationType';
 import LinkageByStrategyEntryPoint from './LinkageByStrategyEntryPoint';
 import LinkageByPartner from './LinkageByPartner';
 import LinkageByCounty from './LinkageByCounty';
-import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const Linkage = () => {
     const dispatch = useDispatch();

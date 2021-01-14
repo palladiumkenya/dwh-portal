@@ -38,7 +38,7 @@ const HomeOverallMmdUptake = () => {
                         enabled: true,
                         format: '<b>{point.name}</b>: {point.percentage:.0f} %'
                     },
-                    innerSize: '70%',
+                    innerSize: '75%',
                 }
             },
             series: [{
@@ -61,7 +61,7 @@ const HomeOverallMmdUptake = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        OVERALL MMD UPTAKE
+                        Overall MMD Uptake among patients currently on ART
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

@@ -2,7 +2,7 @@ export const HOME_TABS = {
     emr: "EMR SITES",
     txCurr: "CURRENT ON ART",
     hasCurrVl: "HAS CURRENT VL",
-    suppressed: "SUPPRESSED",
+    suppressed: "SUPPRESSION LEVEL",
 }
 
 export const RR_TABS = {
@@ -22,15 +22,23 @@ export const CT_TABS = {
     txCurr: "CURRENT ON ART",
     txOpt: "ART OPTIMIZATION",
     // tbHiv: "TB/HIV",
-    advEv: "ADVERSE EVENTS",
+    advEv: "ADVERSE EVENTS - AE",
     dsd: "DSD",
     vl: "VL MONITORING",
-    tOut: "TREATMENT OUTCOMES"
+    tOut: "TREATMENT OUTCOMES",
 }
 
 export const PAGES = {
     home: "HOME",
     rr: "REPORTING_RATES",
     hts: "HIV_TESTING_SERVICES",
-    ct: "CARE_AND_TREATMENT"
+    ct: "CARE_AND_TREATMENT",
 };
+
+export const CACHING = {
+    // in minutes
+    SHORT: 10,
+    MID: 60,
+    LONG: 1440, // 1 day
+    EXTRA_LONG: 4320, // 3 days
+}

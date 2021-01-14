@@ -47,7 +47,7 @@ const Organizations = () => {
             return ;
 
         const id = editedId ? editedId : '00000000-0000-0000-0000-000000000000';
-        const response = await createUpdateOrganizations('Organizations', id, name, code);
+        await createUpdateOrganizations('Organizations', id, name, code);
         setOpen(false);
         window.location.reload();
     }

@@ -195,7 +195,7 @@ const AdverseEventsSeverity = () => {
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'PERCENT OF PATIENTS'
+                    text: 'Number of Patients'
                 },
                 stackLabels: {
                     enabled: true,

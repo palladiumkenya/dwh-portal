@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import { getAll } from '../../Shared/Api';
+import { capitalize, getAll } from '../../Shared/Api';
 import moment from "moment";
 
 const DistributionStableByPartner = () => {
@@ -41,7 +41,7 @@ const DistributionStableByPartner = () => {
                 text: ''
             },
             xAxis: {
-                categories: partners,
+                categories: partners.map(p => capitalize(p)),
                 crosshair: true,
                 title: {
                     text: 'Service Delivery Partner'

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import { getAll } from '../../Shared/Api';
+import { capitalize, getAll } from '../../Shared/Api';
 import moment from "moment";
 
 const DistributionStableByCounty = () => {
@@ -41,7 +41,7 @@ const DistributionStableByCounty = () => {
                 text: ''
             },
             xAxis: {
-                categories: counties,
+                categories: counties.map(c => capitalize(c)),
                 crosshair: true,
                 title: {
                     text: 'County'

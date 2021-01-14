@@ -15,9 +15,9 @@ const AdverseEventsTiles = () => {
         childrenUnder15CurrentOnART: ''
     });
     const [under15AdverseEventsDesegregation, setUnder15AdverseEventsDesegregation] = useState({});
-    const [totalChildrenAdverseEvents, setTotalChildrenAdverseEvents] = useState({
-        total: ''
-    });
+    // const [totalChildrenAdverseEvents, setTotalChildrenAdverseEvents] = useState({
+    //     total: ''
+    // });
     const [adults15PlusAdverseEventsDesegregation, setAdults15PlusAdverseEventsDesegregation] = useState({});
     const [totalAdultsAdverseEvents, setTotalAdultsAdverseEvents] = useState({
         total: ''
@@ -103,21 +103,21 @@ const AdverseEventsTiles = () => {
         for (let i = 0; i < categories.length; i++) {
             for (let j = 0; j < result.length; j++) {
                 if(categories[i] === result[j].AgeGroup && (result[j].Gender.toLowerCase() === "female" || result[j].Gender.toLowerCase() === "f" )) {
-                    femaleData.push(result[j].adverseEventsByAgeGroup);
+                    femaleData.push(result[j].total);
                 }
 
                 if(categories[i] === result[j].AgeGroup && (result[j].Gender.toLowerCase() === "male" || result[j].Gender.toLowerCase() === "m" )) {
-                    maleData.push(result[j].adverseEventsByAgeGroup);
+                    maleData.push(result[j].total);
                 }
             }
         }
-        const total_Male = maleData.reduce((a, b) => a + b, 0);
-        const total_female = femaleData.reduce((a, b) => a + b, 0);
-        const total = total_Male + total_female;
+        // const total_Male = maleData.reduce((a, b) => a + b, 0);
+        // const total_female = femaleData.reduce((a, b) => a + b, 0);
+        // const total = total_Male + total_female;
 
-        setTotalChildrenAdverseEvents({
-            total: total
-        });
+        // setTotalChildrenAdverseEvents({
+        //     total: total
+        // });
 
         setUnder15AdverseEventsDesegregation({
             chart: {
@@ -131,9 +131,8 @@ const AdverseEventsTiles = () => {
             },
             yAxis: {
                 min: 0,
-                max: 150,
                 title: {
-                    text: 'PERCENT OF PATIENTS'
+                    text: 'Number of Patients'
                 },
                 stackLabels: {
                     enabled: true,
@@ -199,11 +198,11 @@ const AdverseEventsTiles = () => {
         for (let i = 0; i < categories.length; i++) {
             for (let j = 0; j < result.length; j++) {
                 if(categories[i] === result[j].AgeGroup && (result[j].Gender.toLowerCase() === "female" || result[j].Gender.toLowerCase() === "f" )) {
-                    femaleData.push(result[j].adverseEventsByAgeGroup);
+                    femaleData.push(result[j].total);
                 }
 
                 if(categories[i] === result[j].AgeGroup && (result[j].Gender.toLowerCase() === "male" || result[j].Gender.toLowerCase() === "m" )) {
-                    maleData.push(result[j].adverseEventsByAgeGroup);
+                    maleData.push(result[j].total);
                 }
             }
         }
@@ -227,9 +226,8 @@ const AdverseEventsTiles = () => {
             },
             yAxis: {
                 min: 0,
-                max: 150,
                 title: {
-                    text: 'PERCENT OF PATIENTS'
+                    text: 'Number of Patients'
                 },
                 stackLabels: {
                     enabled: true,
@@ -286,7 +284,7 @@ const AdverseEventsTiles = () => {
         const result = await getAll('care-treatment/getNoOfReportedAeInAdults', params);
         if (result) {
             setTotalNoOfAeReportedInAdults({
-                total: result.total
+                total: result.total ? result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","): 0
             });
         }
     }, [filters]);
@@ -300,7 +298,7 @@ const AdverseEventsTiles = () => {
         const result = await getAll('care-treatment/getNoOfReportedAeInChildren', params);
         if (result) {
             setTotalNoOfAeReportedInChildren({
-                total: result.total
+                total: result.total ? result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0
             });
         }
     }, [filters]);
@@ -314,7 +312,7 @@ const AdverseEventsTiles = () => {
         const result = await getAll('care-treatment/getNumberOfAdultsWithAe', params);
         if (result) {
             setTotalNumberOfAdultsWithAe({
-                total: result.total
+                total: result.total ? result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0
             });
         }
     }, [filters]);
@@ -328,7 +326,7 @@ const AdverseEventsTiles = () => {
         const result = await getAll('care-treatment/getNumberOfChildrenWithAe', params);
         if (result) {
             setTotalNumberOfChildrenWithAe({
-                total: result.total
+                total: result.total ? result.total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : 0
             });
         }
     }, [filters]);
@@ -350,7 +348,7 @@ const AdverseEventsTiles = () => {
                 <div className="col-4">
                     <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
-                            ADULTS 15+ CURRENT ON ART
+                            ADULTS 15+ CURRENTLY ON ART
                         </CardHeader>
                         <CardBody
                             className="align-items-center d-flex justify-content-center"
@@ -412,7 +410,7 @@ const AdverseEventsTiles = () => {
                 <div className="col-4">
                     <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
-                            CHILDREN CURRENT ON ART
+                            CHILDREN CURRENTLY ON ART
                         </CardHeader>
                         <CardBody
                             className="align-items-center d-flex justify-content-center"
@@ -476,7 +474,7 @@ const AdverseEventsTiles = () => {
                 <div className="col-6">
                     <Card className="trends-card">
                         <CardHeader className="trends-header">
-                            CHILDREN &#60;15 ON ART AND DEVELOPED ADVERSE EVENTS (N={totalChildrenAdverseEvents.total})
+                            CHILDREN &#60;15 ON ART AND DEVELOPED ADVERSE EVENTS
                         </CardHeader>
                         <CardBody className="trends-body">
                             <div className="col-12">

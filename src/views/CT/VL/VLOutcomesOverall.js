@@ -43,7 +43,7 @@ const VLOutcomesOverall = () => {
                         enabled: true,
                         format: '<b>{point.name}</b>: {point.percentage:.1f} %'
                     },
-                    innerSize: '70%',
+                    innerSize: '75%',
                 }
             },
             series: [{

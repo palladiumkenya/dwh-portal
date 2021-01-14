@@ -1,5 +1,5 @@
 import { UserManager } from 'oidc-client';
-import { storeUser, storeUserError } from '../actions/AuthActions';
+import { storeUser, storeUserError } from '../actions/Shared/AuthActions';
 let config = {};
 
 if(process.env.NODE_ENV.trim() === 'production') {
@@ -45,8 +45,8 @@ export function signinRedirectCallback() {
 
 export async function signoutRedirect() {
     let user = await userManager.getUser();
-    userManager.clearStaleState();
-    userManager.removeUser();
+    await userManager.clearStaleState();
+    await userManager.removeUser();
     return userManager.signoutRedirect({ 'id_token_hint': user.id_token });
 }
 

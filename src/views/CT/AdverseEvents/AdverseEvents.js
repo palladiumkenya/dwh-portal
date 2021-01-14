@@ -3,16 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from './../../Shared/UniversalFilter';
 import AdverseEventsTiles from './AdverseEventsTiles';
-import AdverseEventsHeader from './AdverseEventsHeader';
-import AdverseEventsFooter from './AdverseEventsFooter';
+import SectionHeader from '../../Shared/SectionHeader';
+import SectionFooter from '../../Shared/SectionFooter';
 import AdverseEventsSeverity from './AdverseEventsSeverity';
 import AdverseEventsSeverityLevels from './AdverseEventsSeverityLevels';
 import AdverseEventsCausesAndActionsByDrugs from './AdverseEventsCausesAndActionsByDrugs';
-import AdverseEventsTable from './AdverseEventsTable';
-import { enableStickyFilter, disableStickyFilter } from "../../../actions/uiActions";
+// import AdverseEventsTable from './AdverseEventsTable';
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const AdverseEvents = () => {
-    const filters = useSelector(state => state.filters);
+    const branding = { title: "ADVERSE EVENTS", description: "OVERVIEW", overview: "Adverse Events" };
     const ctTab = useSelector(state => state.ui.ctTab);
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
@@ -26,36 +26,19 @@ const AdverseEvents = () => {
     };
     return (
         <div className="animated fadeIn">
-            <div className="strip">&nbsp;</div>
-            <AdverseEventsHeader period={filters?.year} />
+            <SectionHeader title={branding.title}/>
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
             <AdverseEventsTiles />
-            <hr />
-            <AdverseEventsFooter />
-            <hr />
-            <div className="strip">&nbsp;</div>
-            <p>&nbsp;</p>
+            <SectionFooter overview={branding.overview}/>
             <AdverseEventsSeverity />
-            <hr />
-            <AdverseEventsFooter />
-            <hr />
-            <div className="strip">&nbsp;</div>
-            <p>&nbsp;</p>
+            <SectionFooter overview={branding.overview}/>
             <AdverseEventsSeverityLevels />
-            <hr />
-            <AdverseEventsFooter />
-            <hr />
-            <div className="strip">&nbsp;</div>
-            <p>&nbsp;</p>
+            <SectionFooter overview={branding.overview}/>
             <AdverseEventsCausesAndActionsByDrugs />
-            <hr />
-            <AdverseEventsFooter />
-            <hr />
-            <div className="strip">&nbsp;</div>
-            <p>&nbsp;</p>
-            <AdverseEventsTable />
+            <SectionFooter overview={branding.overview}/>
+            {/* <AdverseEventsTable /> */}
         </div>
     );
 };

@@ -27,7 +27,7 @@ const UptakeOverview = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : ''
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : moment().format("YYYY")
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('hts/uptakeBySex', params);

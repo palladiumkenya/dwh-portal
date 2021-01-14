@@ -21,7 +21,7 @@ const LinkageByAgeSex = () => {
             year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):""
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const sexCategories = ['M', 'F'];
+        const sexCategories = ['M', 'F', 'MALE', 'FEMALE'];
         const ageCategories = [
             'Under 5',
             '5 to 9',
@@ -51,10 +51,16 @@ const LinkageByAgeSex = () => {
             }
         }
         for(let i = 0; i < result.length; i++) {
-            let sexIndex = sexCategories.indexOf(result[i].Gender);
+            let sexIndex = sexCategories.indexOf(result[i].Gender.toUpperCase());
             let ageIndex = ageCategories.indexOf(result[i].AgeGroup);
             if(sexIndex === -1 || ageIndex === -1) { // unsupported
                 continue;
+            }
+            if(sexIndex === 2) {
+                sexIndex = 0;
+            }
+            if(sexIndex === 3) {
+                sexIndex = 1;
             }
             positive[sexIndex][ageIndex] = positive[sexIndex][ageIndex] + parseInt(result[i].positive);
             linked[sexIndex][ageIndex] = linked[sexIndex][ageIndex] + parseInt(result[i].linked);
@@ -89,7 +95,7 @@ const LinkageByAgeSex = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                    Linkage BY AGE group AND SEX
+                    HTS Linkage BY AGE group AND SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

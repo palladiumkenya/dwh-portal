@@ -1,146 +1,119 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col } from 'reactstrap';
-import { getAll } from './Api';
 import { Dropdown } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
-import * as actions from "../../actions/filterActions";
+import * as actions from "../../actions/Shared/filterActions";
+import * as rrSelectors from '../../selectors/Shared/rrSitesSelector';
+import * as htsSelectors from '../../selectors/Shared/htsSitesSelector';
+import * as ctSelectors from '../../selectors/Shared/ctSitesSelector';
 import { PAGES } from "../../constants";
 
 const UniversalFilter = () => {
     const dispatch = useDispatch();
+
+    const rrSites = useSelector(state => state.rrSites);
+    const htsSites = useSelector(state => state.htsSites);
+    const ctSites = useSelector(state => state.ctSites);
+
     const filters = useSelector(state => state.filters);
     const ui = useSelector(state => state.ui);
-    const [endpoint, setEndpoint] = useState('common');
+
     const [counties, setCounties] = useState([]);
     const [subCounties, setSubCounties] = useState([]);
     const [facilities, setFacilities] = useState([]);
     const [partners, setPartners] = useState([]);
     const [agencies, setAgencies] = useState([]);
+    const [projects, setProjects] = useState([]);
 
-    const loadEndpoint = useCallback(async () => {
-        let endpoint = '';
+    const rrSubCounties = useSelector(rrSelectors.getSubCounties);
+    const rrFacilities = useSelector(rrSelectors.getFacilities);
+    const rrPartners = useSelector(rrSelectors.getPartners);
+    const rrAgencies = useSelector(rrSelectors.getAgencies);
+    const rrProjects = useSelector(rrSelectors.getProjects);
+
+    const htsSubCounties = useSelector(htsSelectors.getSubCounties);
+    const htsFacilities = useSelector(htsSelectors.getFacilities);
+    const htsPartners = useSelector(htsSelectors.getPartners);
+    const htsAgencies = useSelector(htsSelectors.getAgencies);
+    const htsProjects = useSelector(htsSelectors.getProjects);
+
+    const ctSubCounties = useSelector(ctSelectors.getSubCounties);
+    const ctFacilities = useSelector(ctSelectors.getFacilities);
+    const ctPartners = useSelector(ctSelectors.getPartners);
+    const ctAgencies = useSelector(ctSelectors.getAgencies);
+    const ctProjects = useSelector(ctSelectors.getProjects);
+
+    const loadSites = useCallback(async () => {
         switch(ui.currentPage) {
             case PAGES.home:
-                endpoint = 'care-treatment';
+                setCounties(ctSites.counties.map(c => ({ value: c, key: c, text: c })));
+                setSubCounties(ctSubCounties.map(s => ({ value: s, key: s, text: s })));
+                setFacilities(ctFacilities.map(f => ({ value: f, key: f, text: f })));
+                setPartners(ctPartners.map(p => ({ value: p, key: p, text: p })));
+                setAgencies(ctAgencies.map(a => ({ value: a, key: a, text: a })));
+                setProjects(ctProjects.map(p => ({ value: p, key: p, text: p })));
                 break;
             case PAGES.rr:
-                endpoint = 'common';
+                setCounties(rrSites.counties.map(c => ({ value: c, key: c, text: c })));
+                setSubCounties(rrSubCounties.map(s => ({ value: s, key: s, text: s })));
+                setFacilities(rrFacilities.map(f => ({ value: f, key: f, text: f })));
+                setPartners(rrPartners.map(p => ({ value: p, key: p, text: p })));
+                setAgencies(rrAgencies.map(a => ({ value: a, key: a, text: a })));
+                setProjects(rrProjects.map(p => ({ value: p, key: p, text: p })));
                 break;
             case PAGES.hts:
-                endpoint = 'hts';
+                setCounties(htsSites.counties.map(c => ({ value: c, key: c, text: c })));
+                setSubCounties(htsSubCounties.map(s => ({ value: s, key: s, text: s })));
+                setFacilities(htsFacilities.map(f => ({ value: f, key: f, text: f })));
+                setPartners(htsPartners.map(p => ({ value: p, key: p, text: p })));
+                setAgencies(htsAgencies.map(a => ({ value: a, key: a, text: a })));
+                setProjects(htsProjects.map(p => ({ value: p, key: p, text: p })));
                 break;
             case PAGES.ct:
-                endpoint = 'care-treatment';
+                setCounties(ctSites.counties.map(c => ({ value: c, key: c, text: c })));
+                setSubCounties(ctSubCounties.map(s => ({ value: s, key: s, text: s })));
+                setFacilities(ctFacilities.map(s => ({ value: s, key: s, text: s })));
+                setPartners(ctPartners.map(p => ({ value: p, key: p, text: p })));
+                setAgencies(ctAgencies.map(a => ({ value: a, key: a, text: a })));
+                setProjects(ctProjects.map(p => ({ value: p, key: p, text: p })));
                 break;
             default:
-                endpoint = 'common';
+                setCounties(rrSites.counties.map(c => ({ value: c, key: c, text: c })));
+                setSubCounties(rrSubCounties.map(s => ({ value: s, key: s, text: s })));
+                setFacilities(rrFacilities.map(f => ({ value: f, key: f, text: f })));
+                setPartners(rrPartners.map(p => ({ value: p, key: p, text: p })));
+                setAgencies(rrAgencies.map(a => ({ value: a, key: a, text: a })));
+                setProjects(rrProjects.map(p => ({ value: p, key: p, text: p })));
         }
-        setEndpoint(endpoint);
-    }, [ui]);
+    }, [
+        ui,
 
-    const loadCounties = useCallback(async () => {
-        // let params = {
-        //     county: filters.counties,
-        //     subCounty: filters.subCounties,
-        //     partner: filters.partners,
-        //     agency: filters.agencies
-        // };
-        let params = {};
-        const data = await getAll(endpoint + '/counties', params);
-        const options = data.map((c) => {
-            return { value: c.county, key: c.county, text: c.county };
-        });
-        const selectionOptions = [].concat(
-            options
-        );
-        setCounties(selectionOptions);
-    }, [endpoint]);
+        rrSites.counties,
+        rrSubCounties,
+        rrFacilities,
+        rrPartners,
+        rrAgencies,
+        rrProjects,
 
-    const loadSubCounties = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-        };
-        const data = await getAll(endpoint + '/subCounties', params);
-        const options = data.map((c) => {
-            return { value: c.subCounty, key: c.subCounty, text: c.subCounty };
-        });
-        const selectionOptions = [].concat(
-            options
-        );
-        setSubCounties(selectionOptions);
-    }, [filters, endpoint]);
+        htsSites.counties,
+        htsSubCounties,
+        htsFacilities,
+        htsPartners,
+        htsAgencies,
+        htsProjects,
 
-    const loadFacilities = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-        };
-        const data = await getAll(endpoint + '/facilities', params);
-        const options = data.map((c) => {
-            return { value: c.facility, key: c.facility, text: c.facility };
-        });
-        const selectionOptions = [].concat(
-            options
-        );
-        setFacilities(selectionOptions);
-    }, [filters, endpoint]);
-
-    const loadPartners = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-        };
-        const data = await getAll(endpoint + '/partners', params);;
-        const options = data.map((c) => {
-            return { value: c.partner, key: c.partner, text: c.partner };
-        });
-        const selectionOptions = [].concat(
-            options
-        );
-        setPartners(selectionOptions);
-    }, [filters, endpoint]);
-
-    const loadAgencies = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-        };
-        const data = await getAll(endpoint + '/agencies', params);
-        const options = data.map((c) => {
-            return { value: c.agency, key: c.agency, text: c.agency };
-        });
-        const selectionOptions = [].concat(
-            options
-        );
-        setAgencies(selectionOptions);
-    }, [filters, endpoint]);
+        ctSites.counties,
+        ctSubCounties,
+        ctFacilities,
+        ctPartners,
+        ctAgencies,
+        ctProjects,
+    ]);
 
     useEffect(() => {
-        loadEndpoint();
-        loadCounties();
-        loadSubCounties();
-        loadFacilities();
-        loadPartners();
-        loadAgencies();
-    }, [loadEndpoint, loadCounties, loadSubCounties, loadFacilities, loadPartners, loadAgencies]);
+        loadSites();
+    }, [loadSites]);
 
     return (
         <Row>
@@ -156,6 +129,7 @@ const UniversalFilter = () => {
                             fluid
                             multiple
                             selection
+                            search
                             options={counties}
                             value={filters.counties}
                             onChange={(e, data) => {
@@ -177,6 +151,7 @@ const UniversalFilter = () => {
                             fluid
                             multiple
                             selection
+                            search
                             options={subCounties}
                             value={filters.subCounties}
                             onChange={(e, data) => {
@@ -198,6 +173,7 @@ const UniversalFilter = () => {
                             fluid
                             multiple
                             selection
+                            search
                             options={facilities}
                             value={filters.facilities}
                             onChange={(e, data) => {
@@ -219,6 +195,7 @@ const UniversalFilter = () => {
                             fluid
                             multiple
                             selection
+                            search
                             options={partners}
                             value={filters.partners}
                             onChange={(e, data) => {
@@ -240,10 +217,33 @@ const UniversalFilter = () => {
                             fluid
                             multiple
                             selection
+                            search
                             options={agencies}
                             value={filters.agencies}
                             onChange={(e, data) => {
                                 dispatch(actions.filterByAgency(data.value));
+                            }}
+                        />
+                    </div>
+                </Col> : null
+            }
+            {
+                ui.projectFilterEnabled ?
+                <Col>
+                    <div className="form-group">
+                        <label htmlFor="project">Project</label>
+                        <Dropdown
+                            id="project"
+                            name="project"
+                            placeholder="Select Project"
+                            fluid
+                            multiple
+                            selection
+                            search
+                            options={projects}
+                            value={filters.projects}
+                            onChange={(e, data) => {
+                                dispatch(actions.filterByProject(data.value));
                             }}
                         />
                     </div>

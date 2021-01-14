@@ -57,7 +57,7 @@ const AdverseEventsCausesAndActionsByDrugs = () => {
             },
             series: [
                 {
-                    name: 'STABILITY STATUS AMONG ACTIVE PATIENTS',
+                    name: 'Number of Patients',
                     colorByPoint: true,
                     data: [
                         {
@@ -76,7 +76,7 @@ const AdverseEventsCausesAndActionsByDrugs = () => {
                             color: "#1f77b4"
                         },
                         {
-                            name: 'UNSPECIFIED',
+                            name: 'UNSPECIFIED CATEGORY',
                             y: unspecified,
                             color: "#D4FF78"
                         }]

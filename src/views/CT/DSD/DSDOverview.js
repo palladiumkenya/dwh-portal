@@ -62,7 +62,7 @@ const DSDOverview = () => {
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('care-treatment/dsdUnstable', params);
         let data = {
-            txCurr: parseInt(result.txCurr) ? parseInt(result.txCurr) : 0,
+            txCurr: parseInt(dsdStabilityStatus.txCurr) ? parseInt(dsdStabilityStatus.txCurr) : 0,
             onArtLessThan12Months: parseInt(result.onArtLessThan12Months) ? parseInt(result.onArtLessThan12Months) : 0,
             onArtLessThan12MonthsPercent: 0,
             highVl: parseInt(result.highVl) ? parseInt(result.highVl) : 0,
@@ -76,7 +76,7 @@ const DSDOverview = () => {
            data.poorAdherencePercent = ((data.poorAdherence/data.txCurr)*100).toFixed(1);
         }
         setDsdUnstable(data);
-    }, [filters]);
+    }, [filters, dsdStabilityStatus.txCurr]);
 
     useEffect(() => {
         loadDsdStabilityStatus();
@@ -89,7 +89,7 @@ const DSDOverview = () => {
                 <div className="col-4">
                     <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
-                            TOTAL ACTIVE PATIENTS
+                            CURRENT ON ART
                         </CardHeader>
                         <CardBody
                             className="align-items-center d-flex justify-content-center"

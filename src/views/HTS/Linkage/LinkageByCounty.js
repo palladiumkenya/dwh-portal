@@ -56,7 +56,7 @@ const LinkageByCounty = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        LINKAGE BY COUNTY
+                        HTS LINKAGE BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={uptakeByCounty} />
