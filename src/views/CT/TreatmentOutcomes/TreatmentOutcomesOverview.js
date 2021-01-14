@@ -63,6 +63,30 @@ const TreatmentOutcomesOverview = () => {
             }
         }
         setTreatmentOutcomes(data);
+
+        const response = await getAll('care-treatment/getNewlyStartedDesegregated', params);
+        let newlyStartedOnARTTiles = {
+            totalStartedOnART: response.TotalStartedOnART ? response.TotalStartedOnART : 0,
+            totalStartedOnARTText: response.TotalStartedOnART ? response.TotalStartedOnART.toLocaleString('en') : 0
+        };
+        let final = {
+            net: 0,
+            deadPercent: 0,
+            ltfuPercent: 0,
+            stoppedPercent: 0,
+            netPercent: 0,
+            toPercent: 0,
+        }
+        if (newlyStartedOnARTTiles.totalStartedOnART > 0) {
+            final.net = newlyStartedOnARTTiles.totalStartedOnART - data.to - data.stopped;
+            final.deadPercent = ((data.dead/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
+            final.ltfuPercent = ((data.ltfu/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
+            final.stoppedPercent = ((data.stopped/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
+            final.netPercent = ((final.net/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
+            final.toPercent = ((data.to/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
+        }
+        setTreatmentOutcomesPercent(final);
+
     }, [filters]);
 
     const loadNewlyStartedARTTiles = useCallback(async () => {
@@ -82,31 +106,10 @@ const TreatmentOutcomesOverview = () => {
         });
     }, [filters]);
 
-    const loadTreatmentOutcomesPercent = useCallback(async () => {
-        let data = {
-            net: 0,
-            deadPercent: 0,
-            ltfuPercent: 0,
-            stoppedPercent: 0,
-            netPercent: 0,
-            toPercent: 0,
-        }
-        if (newlyStartedOnARTTiles.totalStartedOnART > 0) {
-            data.net = newlyStartedOnARTTiles.totalStartedOnART - treatmentOutcomes.to - treatmentOutcomes.stopped;
-            data.deadPercent = ((treatmentOutcomes.dead/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
-            data.ltfuPercent = ((treatmentOutcomes.ltfu/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
-            data.stoppedPercent = ((treatmentOutcomes.stopped/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
-            data.netPercent = ((data.net/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
-            data.toPercent = ((treatmentOutcomes.to/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
-        }
-        setTreatmentOutcomesPercent(data);
-    }, [treatmentOutcomes, newlyStartedOnARTTiles.totalStartedOnART]);  
-
     useEffect(() => {
         loadTreatmentOutcomes();
         loadNewlyStartedARTTiles();
-        loadTreatmentOutcomesPercent();
-    }, [loadTreatmentOutcomes, loadNewlyStartedARTTiles, loadTreatmentOutcomesPercent]);
+    }, [loadTreatmentOutcomes, loadNewlyStartedARTTiles]);
 
     return (
         <div className="row">
