@@ -34,8 +34,8 @@ const App = () => {
                     <React.Suspense fallback={loading()}>
                         <Switch>
                             <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
-                            <Route path="/signout-oidc" component={SignoutOidc} />
-                            <Route path="/signin-oidc" component={SigninOidc} />
+                            <Route path="/#id_token" component={SignoutOidc} />
+                            <Route path="/#/signin-oidc" component={SigninOidc} />
                             <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>} />
                         </Switch>
                     </React.Suspense>
