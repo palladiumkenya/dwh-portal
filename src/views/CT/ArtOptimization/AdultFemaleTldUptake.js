@@ -13,12 +13,18 @@ const AdultFemaleTldUptake = () => {
     const loadAdultFemaleTldUptake = useCallback(async () => {
         setAdultFemaleTldUptake({
             title: { text: '' },
-            xAxis: { categories: ['FEMALES CURRENT ON ART', 'FEMALES ON TLD'], title: { text: '' }, crosshair: true },
+            xAxis: { categories: ['FEMALES CURRENT ON ART', 'FEMALES ON TLD'], title: { text: '' }, crosshair: true, labels: { rotation: 270 } },
             yAxis: { title: { text: 'NUMBER OF PATIENTS' }},
             tooltip: { shared: true },
             legend: { enabled: false },
+            plotOptions: { column: { dataLabels: { enabled: true, formatter: function () {
+                return '' + this.point.text;
+            }}}},
             series: [
-                { name: 'FEMALE TLD UPTAKE', type: 'column', data: [females, femalesOnTld], color: "#EA4C8B" },
+                { name: 'FEMALE TLD UPTAKE', type: 'column', data: [
+                    { y: females, text: females.toLocaleString('en') },
+                    { y: femalesOnTld, text: femalesOnTld.toLocaleString('en') + ' (' + parseFloat(((femalesOnTld/females)*100).toString()).toFixed(0) + '%)' },
+                ], color: "#EA4C8B" },
             ],
         });
     }, [females, femalesOnTld]);

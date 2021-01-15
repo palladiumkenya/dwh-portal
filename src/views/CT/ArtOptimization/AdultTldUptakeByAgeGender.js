@@ -14,7 +14,9 @@ const AdultTldUptakeByAgeGender = () => {
     const adultsCurrentByAgeSexTotal = useSelector(selectors.getAdultsCurrentByAgeSexTotal);
 
     const loadAdultTldUptakeByAgeGender = useCallback(async () => {
-        let ageGroups = _.uniq(['Under 1', '1 to 4', '5 to 9'].concat(ageGroupsOriginal));
+        let ageGroups = _.remove(_.uniq(['Under 1', '1 to 4', '5 to 9'].concat(ageGroupsOriginal)), function(element) {
+            return element !== 'Under 1' && element !== '1 to 4' && element !== '5 to 9';
+        });
         let data = [];
         for(let i = 0; i < sexGroups.length; i++) {
             data[i] = [];

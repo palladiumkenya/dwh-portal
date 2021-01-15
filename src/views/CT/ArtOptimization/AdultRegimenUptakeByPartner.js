@@ -48,7 +48,14 @@ const AdultRegimenUptakeByPartner = () => {
             xAxis: { categories: partners.map(a => a.toUpperCase()), title: { text: 'PARTNER' }, crosshair: true },
             yAxis: { title: { text: 'PERCENT OF PATIENTS' }},
             tooltip: { shared: true },
-            plotOptions: { column: { stacking: 'percent' } },
+            plotOptions: {
+                column: {
+                    stacking: 'percent',
+                    tooltip: {
+                        valueSuffix: ' ({point.percentage:.0f}%)'
+                    },
+                }
+            },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: series,
         });
