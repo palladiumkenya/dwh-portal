@@ -6,7 +6,7 @@ if(process.env.NODE_ENV.trim() === 'production') {
     config = {
         authority: "https://auth.kenyahmis.org/dwhidentity",
         client_id: "dwh.spa",
-        redirect_uri: "https://data.kenyahmis.org:9000/signin-oidc",
+        redirect_uri: "https://data.kenyahmis.org:9000/#/signin-oidc#",
         response_type: "id_token token",
         scope: "openid profile apiApp",
         post_logout_redirect_uri: "https://data.kenyahmis.org:9000",
