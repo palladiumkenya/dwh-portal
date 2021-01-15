@@ -40,7 +40,9 @@ const RROverview = () => {
             project: filters.projects,
             fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
         };
-        params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
+        params.period = filters.fromDate ?
+            moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M') :
+            moment().startOf('month').subtract(2, 'month').format('YYYY,M');
         const data = await getAll('manifests/consistency/' + rrTab, params);
         setConsistnecy({ consistency: [], stats: data.consistency, statsPerc: getPerc(data.consistency , expected) });
     }, [filters, rrTab, expected]);
@@ -55,7 +57,9 @@ const RROverview = () => {
             project: filters.projects,
             fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
         };
-        params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
+        params.period = filters.fromDate ?
+            moment(params.fromDate, "MMM YYYY").startOf('month').subtract(0, 'month').format('YYYY,M') :
+            moment().startOf('month').subtract(1, 'month').format('YYYY,M');
         const data = await getAll('manifests/recency/' + rrTab, params);
         setRecency({ recency: [], stats: data.recency, statsPerc: getPerc(data.recency , expected) });
     }, [filters, rrTab, expected]);
