@@ -6,7 +6,7 @@ if(process.env.NODE_ENV.trim() === 'production') {
     config = {
         authority: "https://auth.kenyahmis.org/dwhidentity",
         client_id: "dwh.spa",
-        redirect_uri: "https://data.kenyahmis.org:9000/signin-oidc",
+        redirect_uri: "https://data.kenyahmis.org:9000/#/signin-oidc#",
         response_type: "id_token token",
         scope: "openid profile apiApp",
         post_logout_redirect_uri: "https://data.kenyahmis.org:9000",
@@ -15,10 +15,11 @@ if(process.env.NODE_ENV.trim() === 'production') {
     config = {
         authority: "https://localhost:5006",
         client_id: "dwh.spa",
-        redirect_uri: "http://localhost:3000/signin-oidc",
+        redirect_uri: "http://localhost:3000/#/signin-oidc#",
         response_type: "id_token token",
         scope: "openid profile apiApp",
         post_logout_redirect_uri: "http://localhost:3000",
+        filterProtocolClaims: true,
     }
 }
 
@@ -40,7 +41,27 @@ export function signinRedirect() {
 }
 
 export function signinRedirectCallback() {
-    return userManager.signinRedirectCallback();
+    if (window.location.hash) {
+        try {
+            return userManager.signinRedirectCallback();
+        }
+        catch (e) {
+            console.log(e);
+        }
+    } else {
+        return userManager.signinRedirectCallback();
+    }
+}
+
+function getHashParameters(hash) {
+    return hash
+        .substr(1)
+        .split('&')
+        .reduce(function(result, item) {
+            var parts = item.split('=');
+            result[parts[0]] = parts[1];
+            return result;
+        }, {});
 }
 
 export async function signoutRedirect() {
