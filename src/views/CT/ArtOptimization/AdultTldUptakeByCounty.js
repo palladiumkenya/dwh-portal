@@ -32,7 +32,14 @@ const AdultTldUptakeByCounty = () => {
             xAxis: { categories: counties.map(a => a.toUpperCase()), title: { text: 'COUNTY' }, crosshair: true },
             yAxis: { title: { text: 'PERCENT OF PATIENTS' }},
             tooltip: { shared: true },
-            plotOptions: { column: { stacking: 'percent' } },
+            plotOptions: {
+                column: {
+                    stacking: 'percent',
+                    tooltip: {
+                        valueSuffix: ' ({point.percentage:.0f}%)'
+                    },
+                }
+            },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'MALE', type: 'column', data: data[1], color: "#14084D" },
