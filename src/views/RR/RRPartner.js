@@ -86,7 +86,7 @@ const RRPartner = () => {
             xAxis: [{ categories: partners, title: { text: 'Partners' }, crosshair: true }],
             yAxis: [
                 { title: { text: 'Number of EMR Sites' } },
-                { title: { text: 'Percentage (%) Reporting Rate'}, opposite: true, min: 0, max: 100 },
+                // { title: { text: 'Percentage (%) Reporting Rate'}, opposite: true, min: 0, max: 100 },
             ],
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80, enabled: false },
             tooltip: { shared: true },
