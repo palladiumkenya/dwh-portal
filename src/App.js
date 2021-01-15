@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Highcharts from "highcharts";
 import HighchartsExporting from 'highcharts/modules/exporting';
@@ -37,7 +37,7 @@ const App = () => {
 
     return (
         <AuthProvider userManager={userManager} store={store}>
-            <Router>
+            <HashRouter>
                 <React.Suspense fallback={<Loading/>}>
                     <Switch>
                         <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
@@ -46,7 +46,7 @@ const App = () => {
                         <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>} />
                     </Switch>
                 </React.Suspense>
-            </Router>
+            </HashRouter>
         </AuthProvider>
     );
 }
