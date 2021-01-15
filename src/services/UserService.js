@@ -9,7 +9,7 @@ if(process.env.NODE_ENV.trim() === 'production') {
         redirect_uri: "https://data.kenyahmis.org:9000/#/signin-oidc#",
         response_type: "id_token token",
         scope: "openid profile apiApp",
-        post_logout_redirect_uri: "https://dwh.nascop.org",
+        post_logout_redirect_uri: "https://data.kenyahmis.org:9000",
     }
 } else {
     config = {
