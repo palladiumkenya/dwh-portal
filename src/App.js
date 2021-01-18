@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { HashRouter, Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Highcharts from "highcharts";
 import HighchartsExporting from 'highcharts/modules/exporting';
