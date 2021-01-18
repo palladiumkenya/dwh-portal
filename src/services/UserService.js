@@ -53,17 +53,6 @@ export function signinRedirectCallback() {
     }
 }
 
-function getHashParameters(hash) {
-    return hash
-        .substr(1)
-        .split('&')
-        .reduce(function(result, item) {
-            var parts = item.split('=');
-            result[parts[0]] = parts[1];
-            return result;
-        }, {});
-}
-
 export async function signoutRedirect() {
     let user = await userManager.getUser();
     await userManager.clearStaleState();
