@@ -13,7 +13,7 @@ const HomeSexDistribution = () => {
         ViralSuppressionMale: 0,
         ViralSuppressionFemale: 0
     });
-    
+
     const loadActiveOnARTByGender = useCallback(async () => {
         let params = {
             county: filters.counties,
@@ -41,12 +41,12 @@ const HomeSexDistribution = () => {
             if(viralLoadSuppression[i].Gender.toString().toLowerCase() === 'f' || viralLoadSuppression[i].Gender.toString().toLowerCase() === 'female') {
                 const Suppressed = viralLoadSuppression[i].Suppressed;
                 const Last12MonthVL = viralLoadSuppression[i].Last12MonthVL;
-                ViralSuppressionFemale = parseFloat(((Suppressed / Last12MonthVL) * 100).toString()).toFixed(0);
+                ViralSuppressionFemale = typeof Suppressed !== 'undefined' && typeof Last12MonthVL !== 'undefined' ? parseFloat(((Suppressed / Last12MonthVL) * 100).toString()).toFixed(0) : 0;
             }
             if(viralLoadSuppression[i].Gender.toString().toLowerCase() === 'm' || viralLoadSuppression[i].Gender.toString().toLowerCase() === 'male') {
                 const Suppressed = viralLoadSuppression[i].Suppressed;
                 const Last12MonthVL = viralLoadSuppression[i].Last12MonthVL;
-                ViralSuppressionMale = parseFloat(((Suppressed / Last12MonthVL) * 100).toString()).toFixed(0);
+                ViralSuppressionMale = typeof Suppressed !== 'undefined' && typeof Last12MonthVL !== 'undefined' ? parseFloat(((Suppressed / Last12MonthVL) * 100).toString()).toFixed(0) : 0;
             }
         }
         setARTClientsByGender({
