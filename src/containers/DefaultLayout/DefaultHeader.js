@@ -30,48 +30,41 @@ const DefaultHeader = () => {
             />
             <Nav className="d-md-down-none" navbar>
                 <NavItem className="px-3">
-                    <NavLink to="/" className="nav-link active"><strong>Home</strong></NavLink>
+                    <NavLink to="/" className="nav-link" >Home</NavLink>
                 </NavItem>
                 <NavItem className="px-3">
-                    <NavLink to="/reporting-rates" className="nav-link active">
-                        <strong>Reporting Rates</strong>
-                    </NavLink>
+                    <NavLink to="/reporting-rates" className="nav-link" >Reporting Rates</NavLink>
                 </NavItem>
                 {/* <NavItem className="px-3">
                     <NavLink to="/hrh" className="nav-link">HRH</NavLink>
                 </NavItem> */}
                 <NavItem className="px-3">
-                    <NavLink to="/hiv-testing" className="nav-link active">
-                        <strong>HIV Testing & Prevention</strong>
-                    </NavLink>
+                    <NavLink to="/hiv-testing" className="nav-link">HIV Testing & Prevention</NavLink>
                 </NavItem>
                 <NavItem className="px-3">
-                    <NavLink to="/hiv-treatment" className="nav-link active">
-                        <strong>HIV Treatment</strong>
-                    </NavLink>
+                    <NavLink to="/hiv-treatment" className="nav-link">HIV Treatment</NavLink>
                 </NavItem>
+
                 <NavItem className="px-3">
-                    <NavLink to="/resources" className="nav-link active">
-                        <strong>Resources</strong>
-                    </NavLink>
+                    <a href="https://kenyahmis.org/resources/" className="nav-link">Resources</a>
                 </NavItem>
-                <NavItem className="px-3">
-                    <a href="https://data.kenyahmis.org:9090/" className="nav-link active">
-                        <strong>Adhoc</strong>
-                    </a>
-                </NavItem>
-                <UncontrolledDropdown nav inNavbar active>
-                    <DropdownToggle nav caret><strong>Administration</strong></DropdownToggle>
+
+                {
+                    user ? <Adhoc /> : null
+                }
+
+                <UncontrolledDropdown nav inNavbar>
+                    <DropdownToggle nav caret>Administration</DropdownToggle>
                     <DropdownMenu right>
-                        <DropdownItem><Link to="/administration/organizations" className="nav-link"><strong>Organizations</strong></Link></DropdownItem>
-                        <DropdownItem> <a href="https://auth.kenyahmis.org/DwhIdentity/Users" className="nav-link"><strong>Users</strong></a></DropdownItem>
+                        <DropdownItem><Link to="/administration/organizations" className="nav-link">Organizations</Link></DropdownItem>
+                        <DropdownItem> <a href="https://auth.kenyahmis.org/nascop/Users" className="nav-link">Users</a></DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>
             </Nav>
             <Nav className="ml-auto" navbar>
                 <UncontrolledDropdown nav direction="down">
                     <DropdownToggle nav>
-                        <strong> { user ? user.profile.FullName : '' } </strong>
+                        { user ? user.profile.FullName : '' }
                         <img src={avatar} className="img-avatar" alt={ user ? user.profile.email : '' } />
                     </DropdownToggle>
                     <DropdownMenu right>
@@ -87,5 +80,13 @@ const DefaultHeader = () => {
         </>
     );
 }
+
+const Adhoc = () => {
+    return (
+        <NavItem className="px-3">
+            <a href="https://dwh.nascop.org:7010/" className="nav-link">Adhoc</a>
+        </NavItem>
+    );
+};
 
 export default DefaultHeader;
