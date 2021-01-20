@@ -44,12 +44,15 @@ const DefaultHeader = () => {
                 <NavItem className="px-3">
                     <NavLink to="/hiv-treatment" className="nav-link">HIV Treatment</NavLink>
                 </NavItem>
+
                 <NavItem className="px-3">
                     <a href="https://kenyahmis.org/resources/" className="nav-link">Resources</a>
                 </NavItem>
-                <NavItem className="px-3">
-                    <a href="https://dwh.nascop.org:7010/" className="nav-link">Adhoc</a>
-                </NavItem>
+
+                {
+                    user ? <Adhoc /> : null
+                }
+
                 <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>Administration</DropdownToggle>
                     <DropdownMenu right>
@@ -77,5 +80,13 @@ const DefaultHeader = () => {
         </>
     );
 }
+
+const Adhoc = () => {
+    return (
+        <NavItem className="px-3">
+            <a href="https://dwh.nascop.org:7010/" className="nav-link">Adhoc</a>
+        </NavItem>
+    );
+};
 
 export default DefaultHeader;
