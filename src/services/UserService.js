@@ -9,7 +9,7 @@ if(process.env.NODE_ENV.trim() === 'production') {
         redirect_uri: "https://dwh.nascop.org/#/signin-oidc#",
         response_type: "id_token token",
         scope: "openid profile apiApp",
-        post_logout_redirect_uri: "https://dwh.nascop.org",
+        post_logout_redirect_uri: "https://data.kenyahmis.org:9000",
     }
 } else {
     config = {
@@ -19,6 +19,7 @@ if(process.env.NODE_ENV.trim() === 'production') {
         response_type: "id_token token",
         scope: "openid profile apiApp",
         post_logout_redirect_uri: "http://localhost:3000",
+        filterProtocolClaims: true,
     }
 }
 
@@ -40,7 +41,16 @@ export function signinRedirect() {
 }
 
 export function signinRedirectCallback() {
-    return userManager.signinRedirectCallback();
+    if (window.location.hash) {
+        try {
+            return userManager.signinRedirectCallback();
+        }
+        catch (e) {
+            console.log(e);
+        }
+    } else {
+        return userManager.signinRedirectCallback();
+    }
 }
 
 export async function signoutRedirect() {
