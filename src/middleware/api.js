@@ -16,7 +16,7 @@ const api = ({ dispatch }) => (next) => async (action) => {
 
     try {
         const response = await axios.request({
-            baseURL: process.env.NODE_ENV.trim() === 'production' ? 'https://data.kenyahmis.org:8082/api/' : 'http://localhost:7000/api/',
+            baseURL: process.env.NODE_ENV.trim() === 'production' ? 'api/' : 'http://localhost:7000/api/',
             url,
             method,
             data,

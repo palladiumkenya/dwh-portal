@@ -12,7 +12,11 @@ const RROverview = () => {
     const [recencyStats, setRecency] = useState({ recency: [], stats: 0, statsPerc: 0 });
 
     const getPerc = (count, total) => {
-        return parseInt((count / total) * 100);
+        if (count && total) {
+            return Math.round((count / total) * 100);
+        } else {
+            return 0;
+        }
     };
 
     const loadExpected = useCallback(async () => {

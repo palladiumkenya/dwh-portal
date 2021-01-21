@@ -30,38 +30,48 @@ const DefaultHeader = () => {
             />
             <Nav className="d-md-down-none" navbar>
                 <NavItem className="px-3">
-                    <NavLink to="/" className="nav-link" >Home</NavLink>
+                    <NavLink to="/" className="nav-link active"><strong>Home</strong></NavLink>
                 </NavItem>
                 <NavItem className="px-3">
-                    <NavLink to="/reporting-rates" className="nav-link" >Reporting Rates</NavLink>
+                    <NavLink to="/reporting-rates" className="nav-link active">
+                        <strong>Reporting Rates</strong>
+                    </NavLink>
                 </NavItem>
                 {/* <NavItem className="px-3">
                     <NavLink to="/hrh" className="nav-link">HRH</NavLink>
                 </NavItem> */}
                 <NavItem className="px-3">
-                    <NavLink to="/hiv-testing" className="nav-link">HIV Testing & Prevention</NavLink>
+                    <NavLink to="/hiv-testing" className="nav-link active">
+                        <strong>HIV Testing & Prevention</strong>
+                    </NavLink>
                 </NavItem>
                 <NavItem className="px-3">
-                    <NavLink to="/hiv-treatment" className="nav-link">HIV Treatment</NavLink>
+                    <NavLink to="/hiv-treatment" className="nav-link active">
+                        <strong>HIV Treatment</strong>
+                    </NavLink>
                 </NavItem>
                 <NavItem className="px-3">
-                    <NavLink to="/resources" className="nav-link">Resources</NavLink>
+                    <NavLink to="/resources" className="nav-link active">
+                        <strong>Resources</strong>
+                    </NavLink>
                 </NavItem>
                 <NavItem className="px-3">
-                    <a href="https://data.kenyahmis.org:9090/" className="nav-link">Adhoc</a>
+                    <a href="https://data.kenyahmis.org:9090/" className="nav-link active">
+                        <strong>Adhoc</strong>
+                    </a>
                 </NavItem>
-                <UncontrolledDropdown nav inNavbar>
-                    <DropdownToggle nav caret>Administration</DropdownToggle>
+                <UncontrolledDropdown nav inNavbar active>
+                    <DropdownToggle nav caret><strong>Administration</strong></DropdownToggle>
                     <DropdownMenu right>
-                        <DropdownItem><Link to="/administration/organizations" className="nav-link">Organizations</Link></DropdownItem>
-                        <DropdownItem> <a href="https://auth.kenyahmis.org/DwhIdentity/Users" className="nav-link">Users</a></DropdownItem>
+                        <DropdownItem><Link to="/administration/organizations" className="nav-link"><strong>Organizations</strong></Link></DropdownItem>
+                        <DropdownItem> <a href="https://auth.kenyahmis.org/DwhIdentity/Users" className="nav-link"><strong>Users</strong></a></DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>
             </Nav>
             <Nav className="ml-auto" navbar>
                 <UncontrolledDropdown nav direction="down">
                     <DropdownToggle nav>
-                        { user ? user.profile.FullName : '' }
+                        <strong> { user ? user.profile.FullName : '' } </strong>
                         <img src={avatar} className="img-avatar" alt={ user ? user.profile.email : '' } />
                     </DropdownToggle>
                     <DropdownMenu right>
