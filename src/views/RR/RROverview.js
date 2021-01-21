@@ -29,7 +29,9 @@ const RROverview = () => {
             project: filters.projects,
             fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
         };
-        params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
+        params.period = filters.fromDate ?
+            moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M') :
+            moment().startOf('month').subtract(2, 'month').format('YYYY,M');
         const data = await getAll('manifests/expected/' + rrTab, params);
         setExpected(data.expected);
     }, [filters, rrTab]);
