@@ -33,9 +33,15 @@ const RRPartner = () => {
             project: filters.projects,
             fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
         };
-        params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
+        params.period = filters.fromDate ?
+            moment(params.fromDate, "MMM YYYY").startOf('month').subtract(0, 'month').format('YYYY,M') :
+            moment().startOf('month').subtract(1, 'month').format('YYYY,M');
         const overallReportingRateResult = await getAll('manifests/recencyreportingbypartner/' + rrTab, params);
+        params.period = filters.fromDate ?
+            moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M') :
+            moment().startOf('month').subtract(2, 'month').format('YYYY,M');
         const consistencyResult = await getAll('manifests/consistencyreportingbycountypartner/' + rrTab + '?reportingType=partner', params);
+        const rrData = await getAll('manifests/expected/' + rrTab, params);
         const partners = overallReportingRateResult.map(({ partner  }) => partner);
         const emrResultSeries = overallReportingRateResult.map(({ expected }) => parseInt(expected, 10));
 
@@ -63,19 +69,21 @@ const RRPartner = () => {
 
         /* Consistency of reporting */
         const consistency_partners = Object.keys(consistencyResult).map(r => capitalize(r));
+        const expected = rrData.expected;
         const consistency_values = Object.values(consistencyResult).map(function(r) {
-            if (r <= 50) {
+            const cos = parseInt((r/expected)*100);
+            if (cos <= 50) {
                 return {
-                    y: r,
+                    y: cos,
                     color: 'red'
                 }
-            } else if (r >= 51 && r <= 89) {
-                return { y: r, color: '#E06F07' }
-            } else if (r >= 90) {
-                return { y: r > 100 ? 100 : r, color: '#59A14F' }
+            } else if (cos >= 51 && cos <= 89) {
+                return { y: cos, color: '#E06F07' }
+            } else if (cos >= 90) {
+                return { y: cos > 100 ? 100 : cos, color: '#59A14F' }
             } else {
                 return {
-                    y: r,
+                    y: cos,
                     color: 'red'
                 }
             }
@@ -104,7 +112,7 @@ const RRPartner = () => {
             xAxis: { categories: overAllReportingPartners, title: { text: null } },
             yAxis: { min: 0, max: 120, title: { text: 'Percentage (%) of Overall Reporting Rates', align: 'high' }, labels: { overflow: 'justify' } },
             tooltip: { valueSuffix: '' },
-            plotOptions: { bar: { dataLabels: { enabled: true } } },
+            plotOptions: { bar: { dataLabels: { enabled: true, format: '{y} %' } } },
             legend: { enabled: false },
             series: [{ data: overAllReportingSeriesData, color: "#59A14F", name: 'Overall Reporting Rates' }]
         });
@@ -116,7 +124,7 @@ const RRPartner = () => {
             xAxis: { categories: consistency_partners, title: { text: null } },
             yAxis: { min: 0, max: 120, title: { text: 'Percentage (%) of Consistency of Reporting', align: 'high' }, labels: { overflow: 'justify' } },
             tooltip: { valueSuffix: '' },
-            plotOptions: { bar: { dataLabels: { enabled: true } } },
+            plotOptions: { bar: { dataLabels: { enabled: true, format: '{y} %' } } },
             legend: { enabled: false },
             series: [{ data: consistency_values, name: 'Consistency of Reporting' }]
         });
