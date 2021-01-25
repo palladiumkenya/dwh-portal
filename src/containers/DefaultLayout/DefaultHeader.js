@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Nav, NavItem } from 'reactstrap';
 import { AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
@@ -8,18 +8,50 @@ import { UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle } from
 import avatar from '../../assets/img/avatars/avatar.png';
 import { useSelector } from 'react-redux';
 import { signinRedirect, signoutRedirect } from '../../services/UserService';
+import { getAll, getUserById } from '../../views/Shared/Api';
 
 const DefaultHeader = () => {
     const user = useSelector(state => state.auth.user)
     const loginAction = user ? "Logout" : "Login";
+    const [userType, setUserType] = useState({
+
+    });
+
+    const loadUserType = useCallback(async () => {
+        const userType = await getUserType();
+        setUserType({
+            userType: userType
+        });
+    }, []);
 
     const login = async () => {
-        if (user) {
+        const res = await getUserType();
+        console.log(res);
+        if (user && !user.expired) {
             await signoutRedirect();
         } else {
             await signinRedirect();
         }
     };
+
+    const getUserType = async () => {
+        let userType = 0;
+        if (user) {
+            const result = await getUserById('User/' + user.profile.sub, user.access_token);
+            return result.userType;
+        }
+        return userType;
+    }
+
+    const getAdministrationTab = async () => {
+        return <Administration />
+        const res = await getUserType();
+        return  res === 1 ? <Administration /> : null;
+    }
+
+    useEffect(() => {
+        loadUserType()
+    }, [loadUserType]);
 
     return (
         <>
@@ -28,9 +60,9 @@ const DefaultHeader = () => {
                 full={{ src: logo, width: "auto", height: 50, alt: 'DWH Logo' }}
                 minimized={{ src: sygnet, alt: 'DWH Logo' }}
             />
-            <Nav className="d-md-down-none" navbar active>
+            <Nav className="d-md-down-none navbar">
                 <NavItem className="px-3">
-                    <NavLink to="/" className="nav-link">
+                    <NavLink to="/" className="nav-link active">
                         <strong>Home</strong>
                     </NavLink>
                 </NavItem>
@@ -63,15 +95,12 @@ const DefaultHeader = () => {
                     user ? <Adhoc /> : null
                 }
 
-                <UncontrolledDropdown nav inNavbar active>
-                    <DropdownToggle nav caret><strong>Administration</strong></DropdownToggle>
-                    <DropdownMenu right>
-                        <DropdownItem><Link to="/administration/organizations" className="nav-link">Organizations</Link></DropdownItem>
-                        <DropdownItem> <a href="https://auth.kenyahmis.org/nascop/Users" className="nav-link">Users</a></DropdownItem>
-                    </DropdownMenu>
-                </UncontrolledDropdown>
+                {
+                    userType.userType === 1 ? <Administration /> : null
+                }
+
             </Nav>
-            <Nav className="ml-auto" navbar active>
+            <Nav className="ml-auto">
                 <UncontrolledDropdown nav direction="down">
                     <DropdownToggle nav>
                         <strong>{ user ? user.profile.FullName : '' }</strong>
@@ -94,9 +123,21 @@ const DefaultHeader = () => {
 const Adhoc = () => {
     return (
         <NavItem className="px-3">
-            <a href="https://dwh.nascop.org:7010/" className="nav-link">Adhoc</a>
+            <a href="https://dwh.nascop.org:7010/" className="nav-link active"><strong>Adhoc</strong></a>
         </NavItem>
     );
 };
+
+const Administration = () => {
+    return (
+        <UncontrolledDropdown nav inNavbar>
+            <DropdownToggle nav caret><strong>Administration</strong></DropdownToggle>
+            <DropdownMenu right>
+                <DropdownItem><Link to="/administration/organizations" className="nav-link">Organizations</Link></DropdownItem>
+                <DropdownItem><a href="https://auth.kenyahmis.org/nascop/Users" className="nav-link">Users</a></DropdownItem>
+            </DropdownMenu>
+        </UncontrolledDropdown>
+    );
+}
 
 export default DefaultHeader;

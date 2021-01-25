@@ -48,8 +48,6 @@ const HomeVLCascade = () => {
             suppressedText: data[3].toLocaleString('en'),
             suppressedPercent: typeof data[3] !== 'undefined' && typeof data[2] !== 'undefined' && data[3] !== 0 && data[2] !== 0 ? parseFloat(((data[3]/data[2])*100).toString()).toFixed(0) + '%' : 0 + '%'
         });
-
-        console.log(data[1]);
     }, [filters]);
 
     useEffect(() => {
