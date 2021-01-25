@@ -69,6 +69,23 @@ export const deleteOrganizations = async (endpoint, id) => {
     return [];
 }
 
+export const getUserById = async (endpoint, token) => {
+    try {
+        let request = axios.get(`${url_identity}${endpoint}`, { headers: { 'Authorization': 'Bearer ' + token } });
+        try {
+            const response = await request;
+            const result = response.data;
+            return result;
+        } catch (e) {
+            console.error(e);
+        }
+        return [];
+    } catch (e) {
+        console.error(e);
+    }
+    return [];
+}
+
 export const getYearMonths = (minYear) => {
     const yearMonths = [];
     const startDate = moment([minYear]);
