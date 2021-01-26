@@ -21,7 +21,7 @@ const AppointmentDurationStableByPartner = () => {
             year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const appointmentCategories = ['<3 Months', '> 3 Months'];
+        const appointmentCategories = ['<3 Months', '>3 Months'];
         const partnerCategories = [];
         const result = await getAll('care-treatment/dsdAppointmentDurationByPartner', params);
         let data = [];

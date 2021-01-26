@@ -21,7 +21,7 @@ const AppointmentDurationStableByCounty = () => {
             year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const appointmentCategories = ['<3 Months', '> 3 Months'];
+        const appointmentCategories = ['<3 Months', '>3 Months'];
         const countyCategories = [];
         const result = await getAll('care-treatment/dsdAppointmentDurationByCounty', params);
         let data = [];
