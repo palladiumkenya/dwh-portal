@@ -50,7 +50,7 @@ const PNSFamilyTestingOverview = () => {
                         style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                     >
                         <div className="col-12">
-                            <span className="expected-uploads-text">{pnsChildrenCascade.elicited ? pnsChildrenCascade.elicited.toLocaleString('en'):''}</span>
+                            <span className="expected-uploads-text">{ pnsChildrenCascade.elicited ? Number(pnsChildrenCascade.elicited).toLocaleString('en') : '' }</span>
                         </div>
                     </CardBody>
                 </Card>

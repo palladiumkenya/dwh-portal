@@ -24,5 +24,5 @@ yarn-debug.log*
 yarn-error.log*
 /.vs/dwh-portal/v16/
 /.vs/VSWorkspaceState.json
-/build.zip
 /.vs/slnx.sqlite
+/build.rar

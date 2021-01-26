@@ -40,13 +40,13 @@ const HomeVLCascade = () => {
             currentOnArtText: data[0].toLocaleString('en'),
             eligibleForVl: data[1],
             eligibleForVlText: data[1].toLocaleString('en'),
-            eligibleForVlPercent: typeof data[1] !== 'undefined' && typeof data[0] !== 'undefined' ? parseFloat(((data[1]/data[0])*100).toString()).toFixed(0) + '%' : 0 + '%',
+            eligibleForVlPercent: typeof data[1] !== 'undefined' && typeof data[0] !== 'undefined' && data[1] !== 0 && data[0] !== 0 ? parseFloat(((data[1]/data[0])*100).toString()).toFixed(0) + '%' : 0 + '%',
             hasCurrentVl: data[2],
             hasCurrentVlText: data[2].toLocaleString('en'),
-            hasCurrentVlPercent: typeof data[2] !== 'undefined' && typeof data[1] !== 'undefined' ? parseFloat(((data[2]/data[1])*100).toString()).toFixed(0) + '%' : 0 + '%',
+            hasCurrentVlPercent: typeof data[2] !== 'undefined' && typeof data[1] !== 'undefined' && data[2] !== 0 && data[1] !== 0 ? parseFloat(((data[2]/data[1])*100).toString()).toFixed(0) + '%' : 0 + '%',
             suppressed: data[3],
             suppressedText: data[3].toLocaleString('en'),
-            suppressedPercent: typeof data[3] !== 'undefined' && typeof data[2] !== 'undefined' ? parseFloat(((data[3]/data[2])*100).toString()).toFixed(0) + '%' : 0 + '%'
+            suppressedPercent: typeof data[3] !== 'undefined' && typeof data[2] !== 'undefined' && data[3] !== 0 && data[2] !== 0 ? parseFloat(((data[3]/data[2])*100).toString()).toFixed(0) + '%' : 0 + '%'
         });
     }, [filters]);
 
