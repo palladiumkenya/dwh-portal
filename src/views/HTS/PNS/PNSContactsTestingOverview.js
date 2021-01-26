@@ -83,7 +83,7 @@ const PNSContactsTestingOverview = () => {
                         style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                     >
                         <div className="col-12">
-                            <span className="expected-uploads-text">{pnsSexualContactsCascade.elicited ? pnsSexualContactsCascade.elicited.toLocaleString('en') : '0'}</span>
+                            <span className="expected-uploads-text">{ pnsSexualContactsCascade.elicited ? Number(pnsSexualContactsCascade.elicited).toLocaleString('en') : '0' }</span>
                         </div>
                     </CardBody>
                 </Card>

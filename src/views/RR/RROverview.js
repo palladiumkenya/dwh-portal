@@ -7,13 +7,14 @@ import { getAll } from '../Shared/Api';
 const RROverview = () => {
     const filters = useSelector(state => state.filters);
     const rrTab = useSelector(state => state.ui.rrTab);
-    const [expected, setExpected] = useState(0);
-    const [consistencyStats, setConsistnecy] = useState({ consistency: [], stats: 0, statsPerc: 0 });
-    const [recencyStats, setRecency] = useState({ recency: [], stats: 0, statsPerc: 0 });
+    const [expected, setExpected] = useState('0');
+    const [consistencyStats, setConsistnecy] = useState({ consistency: [], stats: '0', statsPerc: 0 });
+    const [recencyStats, setRecency] = useState({ recency: [], stats: '0', statsPerc: 0 });
 
     const getPerc = (count, total) => {
-        if (count && total) {
-            return Math.round((count / total) * 100);
+        const numTotal = parseInt(total.replace(",",""), 10);
+        if (count && total && numTotal > 0) {
+            return Math.round((count / numTotal) * 100);
         } else {
             return 0;
         }
@@ -33,7 +34,7 @@ const RROverview = () => {
             moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M') :
             moment().startOf('month').subtract(2, 'month').format('YYYY,M');
         const data = await getAll('manifests/expected/' + rrTab, params);
-        setExpected(data.expected);
+        setExpected(data.expected.toLocaleString('en'));
     }, [filters, rrTab]);
 
     const loadConsistnecy = useCallback(async () => {
@@ -50,7 +51,7 @@ const RROverview = () => {
             moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M') :
             moment().startOf('month').subtract(2, 'month').format('YYYY,M');
         const data = await getAll('manifests/consistency/' + rrTab, params);
-        setConsistnecy({ consistency: [], stats: data.consistency, statsPerc: getPerc(data.consistency , expected) });
+        setConsistnecy({ consistency: [], stats: data.consistency.toLocaleString('en'), statsPerc: getPerc(data.consistency , expected) });
     }, [filters, rrTab, expected]);
 
     const loadRecency = useCallback(async () => {
@@ -67,7 +68,7 @@ const RROverview = () => {
             moment(params.fromDate, "MMM YYYY").startOf('month').subtract(0, 'month').format('YYYY,M') :
             moment().startOf('month').subtract(1, 'month').format('YYYY,M');
         const data = await getAll('manifests/recency/' + rrTab, params);
-        setRecency({ recency: [], stats: data.recency, statsPerc: getPerc(data.recency , expected) });
+        setRecency({ recency: [], stats: data.recency.toLocaleString('en'), statsPerc: getPerc(data.recency , expected) });
     }, [filters, rrTab, expected]);
 
     useEffect(() => {

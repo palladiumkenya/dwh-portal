@@ -21,3 +21,7 @@ span.smallfont {
 .DwhCapitalize {
     text-transform: capitalize;
 }
+
+.app-header .nav-item .nav-link {
+    color: black!important;
+}
