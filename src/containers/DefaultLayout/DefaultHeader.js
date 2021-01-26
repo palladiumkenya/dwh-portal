@@ -86,9 +86,9 @@ const DefaultHeader = () => {
                 </NavItem>
 
                 <NavItem className="px-3">
-                    <NavLink to="/resources" className="nav-link active">
+                    <a href="https://kenyahmis.org/resources/" className="nav-link active" target="_blank" rel="noopener noreferrer">
                         <strong>Resources</strong>
-                    </NavLink>
+                    </a>
                 </NavItem>
 
                 {
