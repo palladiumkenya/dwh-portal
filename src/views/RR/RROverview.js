@@ -12,8 +12,9 @@ const RROverview = () => {
     const [recencyStats, setRecency] = useState({ recency: [], stats: '0', statsPerc: 0 });
 
     const getPerc = (count, total) => {
-        if (count && total && total > 0) {
-            return Math.round((count / total) * 100);
+        const numTotal = parseInt(total.replace(",",""), 10);
+        if (count && total && numTotal > 0) {
+            return Math.round((count / numTotal) * 100);
         } else {
             return 0;
         }
