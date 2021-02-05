@@ -31,7 +31,5 @@ export const fetchMedianTimeToArtStartByCounty = () => async (dispatch, getState
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
     const response = await getAll('care-treatment/medianTimeToArtByCounty', params);
-    if (response.length) {
-        dispatch({ type: actionTypes.CT_MEDIAN_TIME_TO_ART_START_BY_COUNTY_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
-    }
+    dispatch({ type: actionTypes.CT_MEDIAN_TIME_TO_ART_START_BY_COUNTY_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };

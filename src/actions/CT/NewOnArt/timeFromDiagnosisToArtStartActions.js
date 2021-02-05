@@ -31,7 +31,5 @@ export const fetchTimeFromDiagnosisToArtStart = () => async (dispatch, getState)
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
     const response = await getAll('care-treatment/timeToArt', params);
-    if (response.length) {
-        dispatch({ type: actionTypes.CT_TIME_FROM_DIAGNOSIS_TO_ART_START_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
-    }
+    dispatch({ type: actionTypes.CT_TIME_FROM_DIAGNOSIS_TO_ART_START_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };

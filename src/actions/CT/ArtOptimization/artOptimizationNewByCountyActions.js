@@ -30,7 +30,5 @@ export const fetchArtOptimizationNewByCounty = () => async (dispatch, getState) 
         year: [2020, 2021]
     };
     const response = await getAll('care-treatment/getArtOptimizationNewByCounty', params);
-    if (response.length) {
-        dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_NEW_BY_COUNTY_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
-    }
+    dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_NEW_BY_COUNTY_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };

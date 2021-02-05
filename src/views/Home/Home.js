@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Col, Row } from 'reactstrap';
 import SectionHeader from './../Shared/SectionHeader';
 import SectionFooter from './../Shared/SectionFooter';
@@ -14,10 +14,19 @@ import VisibilitySensor from 'react-visibility-sensor';
 import HomeOverview from './HomeOverview';
 import HomeMaps from './HomeMaps';
 import { enableStickyFilter, disableStickyFilter, changeCurrentPage, enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/uiActions";
+import { loadCurrentOnArtOverview } from '../../actions/CT/CurrentOnArt/currentOnArtOverviewActions';
+import { loadCurrentOnArtByAgeSex } from '../../actions/CT/CurrentOnArt/currentOnArtByAgeSexActions';
 import { PAGES } from './../../constants';
 
 const Home = () => {
     const branding = { title: "HOME", description: "HMIS STATISTICS", overview: "HMIS Statistics" };
+    const page = useSelector(state => state.ui.currentPage);
+    const counties = useSelector(state => state.filters.counties);
+    const subCounties = useSelector(state => state.filters.subCounties);
+    const facilities = useSelector(state => state.filters.facilities);
+    const partners = useSelector(state => state.filters.partners);
+    const agencies = useSelector(state => state.filters.agencies);
+    const projects = useSelector(state => state.filters.projects);
     const dispatch = useDispatch();
 
     const onVisibilityChange = (isVisible) => {
@@ -35,6 +44,20 @@ const Home = () => {
             dispatch(enableFromDateFilter());
         }
     }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(loadCurrentOnArtOverview());
+        dispatch(loadCurrentOnArtByAgeSex());
+    }, [
+        dispatch,
+        counties,
+        subCounties,
+        facilities,
+        partners,
+        agencies,
+        projects,
+        page
+    ]);
     
     return (
         <div className="animated fadeIn">

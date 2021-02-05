@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import NewOnArt from './NewOnArt/NewOnArt';
-import CurrentOnART from './CurrentOnART/CurrentOnART';
+import CurrentOnArt from './CurrentOnArt1/CurrentOnArt';
 import DSD from './DSD/DSD';
 import TreatmentOutcomes from './TreatmentOutcomes/TreatmentOutcomes';
 import VL from './VL/VL';
@@ -56,7 +56,7 @@ const CT = () => {
                     <NewOnArt/>
                 </TabPane>
                 <TabPane tabId="txCurr">
-                    <CurrentOnART/>
+                    <CurrentOnArt/>
                 </TabPane>
                 <TabPane tabId="tbHiv">
                     <TBHIV/>

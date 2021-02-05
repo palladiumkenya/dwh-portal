@@ -29,7 +29,5 @@ export const fetchArtOptimizationOverview = () => async (dispatch, getState) => 
         project: getState().filters.projects
     };
     const response = await getAll('care-treatment/getArtOptimizationOverview', params);
-    if (response.length) {
-        dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_OVERVIEW_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
-    }
+    dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_OVERVIEW_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };

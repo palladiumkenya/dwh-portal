@@ -29,7 +29,5 @@ export const fetchArtOptimizationCurrentByCounty = () => async (dispatch, getSta
         project: getState().filters.projects
     };
     const response = await getAll('care-treatment/getArtOptimizationCurrentByCounty', params);
-    if (response.length) {
-        dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_CURRENT_BY_COUNTY_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
-    }
+    dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_CURRENT_BY_COUNTY_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };

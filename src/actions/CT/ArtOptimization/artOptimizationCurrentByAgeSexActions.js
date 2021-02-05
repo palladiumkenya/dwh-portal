@@ -29,7 +29,5 @@ export const fetchArtOptimizationCurrentByAgeSex = () => async (dispatch, getSta
         project: getState().filters.projects
     };
     const response = await getAll('care-treatment/getArtOptimizationCurrentByAgeSex', params);
-    if (response.length) {
-        dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_CURRENT_BY_AGE_SEX_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
-    }
+    dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_CURRENT_BY_AGE_SEX_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };

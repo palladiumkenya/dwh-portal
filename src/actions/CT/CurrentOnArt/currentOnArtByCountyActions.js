@@ -3,23 +3,23 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING } from '../../../constants';
 
-export const loadMedianTimeToArtStartByYear = () => async (dispatch, getState) => {
+export const loadCurrentOnArtByCounty = () => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
-        moment(getState().medianTimeToArtStartByYear.lastFetch),
+        moment(getState().currentOnArtByCounty.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'txNew') {
+    if (getState().ui.ctTab !== 'txCurr') {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
         return;
     } else {
-        await dispatch(fetchMedianTimeToArtStartByYear());
+        await dispatch(fetchCurrentOnArtByCounty());
     }
 };
 
-export const fetchMedianTimeToArtStartByYear = () => async (dispatch, getState) => {
-    dispatch({ type: actionTypes.CT_MEDIAN_TIME_TO_ART_START_BY_YEAR_REQUEST });
+export const fetchCurrentOnArtByCounty = () => async (dispatch, getState) => {
+    dispatch({ type: actionTypes.CT_CURRENT_ON_ART_BY_COUNTY_REQUEST });
     const params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,
@@ -30,6 +30,6 @@ export const fetchMedianTimeToArtStartByYear = () => async (dispatch, getState) 
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
-    const response = await getAll('care-treatment/medianTimeToArtByYear', params);
-    dispatch({ type: actionTypes.CT_MEDIAN_TIME_TO_ART_START_BY_YEAR_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
+    const response = await getAll('care-treatment/txCurrDistributionByCounty', params);
+    dispatch({ type: actionTypes.CT_CURRENT_ON_ART_BY_COUNTY_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };

@@ -17,6 +17,13 @@ import medianTimeToArtStartByCounty from "./CT/NewOnArt/medianTimeToArtStartByCo
 import medianTimeToArtStartByPartner from "./CT/NewOnArt/medianTimeToArtStartByPartner";
 import timeFromDiagnosisToArtStart from "./CT/NewOnArt/timeFromDiagnosisToArtStart";
 
+import currentOnArtOverview from "./CT/CurrentOnArt/currentOnArtOverview";
+import currentOnArtByAgeSex from "./CT/CurrentOnArt/currentOnArtByAgeSex";
+import currentOnArtByCounty from "./CT/CurrentOnArt/currentOnArtByCounty";
+import currentOnArtByPartner from "./CT/CurrentOnArt/currentOnArtByPartner";
+import currentOnArtDistributionByCounty from "./CT/CurrentOnArt/currentOnArtDistributionByCounty";
+import currentOnArtDistributionByPartner from "./CT/CurrentOnArt/currentOnArtDistributionByPartner";
+
 import artOptimizationOverview from "./CT/ArtOptimization/artOptimizationOverview";
 import artOptimizationCurrentByRegimen from "./CT/ArtOptimization/artOptimizationCurrentByRegimen";
 import artOptimizationCurrentByAgeSex from "./CT/ArtOptimization/artOptimizationCurrentByAgeSex";
@@ -44,6 +51,13 @@ export default combineReducers({
     medianTimeToArtStartByCounty,
     medianTimeToArtStartByPartner,
     timeFromDiagnosisToArtStart,
+
+    currentOnArtOverview,
+    currentOnArtByAgeSex,
+    currentOnArtByCounty,
+    currentOnArtByPartner,
+    currentOnArtDistributionByCounty,
+    currentOnArtDistributionByPartner,
 
     artOptimizationOverview,
     artOptimizationCurrentByRegimen,

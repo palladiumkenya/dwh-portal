@@ -31,7 +31,5 @@ export const fetchMedianTimeToArtStartByPartner = () => async (dispatch, getStat
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
     const response = await getAll('care-treatment/medianTimeToArtByPartner', params);
-    if (response.length) {
-        dispatch({ type: actionTypes.CT_MEDIAN_TIME_TO_ART_START_BY_PARTNER_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
-    }
+    dispatch({ type: actionTypes.CT_MEDIAN_TIME_TO_ART_START_BY_PARTNER_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };

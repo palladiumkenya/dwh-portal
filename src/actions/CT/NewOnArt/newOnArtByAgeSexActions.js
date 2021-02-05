@@ -31,7 +31,5 @@ export const fetchNewOnArtByAgeSex = () => async (dispatch, getState) => {
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
     const response = await getAll('care-treatment/txNewByAgeSex', params);
-    if (response.length) {
-        dispatch({ type: actionTypes.CT_NEW_ON_ART_BY_AGE_SEX_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
-    }
+    dispatch({ type: actionTypes.CT_NEW_ON_ART_BY_AGE_SEX_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };

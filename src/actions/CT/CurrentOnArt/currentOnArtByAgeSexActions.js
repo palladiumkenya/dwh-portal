@@ -1,25 +1,25 @@
 import moment from 'moment';
 import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
-import { CACHING } from '../../../constants';
+import { CACHING, PAGES } from '../../../constants';
 
-export const loadMedianTimeToArtStartByYear = () => async (dispatch, getState) => {
+export const loadCurrentOnArtByAgeSex = () => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
-        moment(getState().medianTimeToArtStartByYear.lastFetch),
+        moment(getState().currentOnArtByAgeSex.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'txNew') {
+    if (getState().ui.ctTab !== 'txCurr' && getState().ui.currentPage !== PAGES.home) {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
         return;
     } else {
-        await dispatch(fetchMedianTimeToArtStartByYear());
+        await dispatch(fetchCurrentOnArtByAgeSex());
     }
 };
 
-export const fetchMedianTimeToArtStartByYear = () => async (dispatch, getState) => {
-    dispatch({ type: actionTypes.CT_MEDIAN_TIME_TO_ART_START_BY_YEAR_REQUEST });
+export const fetchCurrentOnArtByAgeSex = () => async (dispatch, getState) => {
+    dispatch({ type: actionTypes.CT_CURRENT_ON_ART_BY_AGE_SEX_REQUEST });
     const params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,
@@ -30,6 +30,6 @@ export const fetchMedianTimeToArtStartByYear = () => async (dispatch, getState) 
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
-    const response = await getAll('care-treatment/medianTimeToArtByYear', params);
-    dispatch({ type: actionTypes.CT_MEDIAN_TIME_TO_ART_START_BY_YEAR_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
+    const response = await getAll('care-treatment/txCurrByAgeAndSex', params);
+    dispatch({ type: actionTypes.CT_CURRENT_ON_ART_BY_AGE_SEX_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };
