@@ -6,40 +6,36 @@ import HighchartsReact from 'highcharts-react-official';
 import * as newOnArtByAgeSexSelectors from '../../../selectors/CT/NewOnArt/newOnArtByAgeSex';
 
 const NewOnArtByAgeSex = () => {
-    const [linkageByAgeSex, setNewOnArtByAgeSex] = useState({});
-    const ageGroups = useSelector(newOnArtByAgeSexSelectors.getAgeGroups);
-    const newOnArtMale = useSelector(newOnArtByAgeSexSelectors.getNewOnArtMale);
-    const newOnArtFemale = useSelector(newOnArtByAgeSexSelectors.getNewOnArtFemale);
+    const [newOnArtByAgeSexChart, setNewOnArtByAgeSexChart] = useState({});
+    const newOnArtByAgeSexData = useSelector(newOnArtByAgeSexSelectors.getNewOnArtByAgeSex);
 
-    const loadNewOnArtByAgeSex = useCallback(async () => {
-        setNewOnArtByAgeSex({
+    const loadNewOnArtByAgeSexChart = useCallback(async () => {
+        setNewOnArtByAgeSexChart({
             chart: { type: 'bar' },
             title: { text: '' },
             xAxis: [
-                { categories: ageGroups, title: { text: '' } },
-                { categories: ageGroups, title: { text: '' }, linkedTo: 0, opposite: true }
+                { categories: newOnArtByAgeSexData.ageGroups, title: { text: '' }, reversed: false },
+                { categories: newOnArtByAgeSexData.ageGroups, title: { text: '' }, reversed: false, linkedTo: 0, opposite: true }
             ],
-            yAxis: [
-                { title: { text: 'Number Positive' }, labels: { formatter: function () {
-                    return Math.abs(this.value);
-                }}}
-            ],
+            yAxis: [{ min: -(newOnArtByAgeSexData.max), max: newOnArtByAgeSexData.max, title: { text: 'Number Positive' }, labels: { formatter: function () {
+                return Math.abs(this.value);
+            }}}],
             plotOptions: { series: { stacking: 'normal' }, bar: { pointWidth: 18, } },
             tooltip: { formatter: function () {
                 return '<b>' + this.series.name + ', Age Group ' + this.point.category + '</b><br/>' +
-                        'Number Positive: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
+                    'Number Positive: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
             }},
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Female', data: newOnArtFemale, color: "#EA4C8B" },
-                { name: 'Male', data: newOnArtMale, color: "#14084D" }
+                { name: 'Female', data: newOnArtByAgeSexData.newOnArtFemale, color: "#EA4C8B" },
+                { name: 'Male', data: newOnArtByAgeSexData.newOnArtMale, color: "#14084D" }
             ]
         });
-    }, [ageGroups, newOnArtMale, newOnArtFemale]);
+    }, [newOnArtByAgeSexData]);
 
     useEffect(() => {
-        loadNewOnArtByAgeSex();
-    }, [loadNewOnArtByAgeSex]);
+        loadNewOnArtByAgeSexChart();
+    }, [loadNewOnArtByAgeSexChart]);
 
     return (
         <div className="row">
@@ -50,7 +46,7 @@ const NewOnArtByAgeSex = () => {
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={linkageByAgeSex} />
+                            <HighchartsReact highcharts={Highcharts} options={newOnArtByAgeSexChart} />
                         </div>
                     </CardBody>
                 </Card>
