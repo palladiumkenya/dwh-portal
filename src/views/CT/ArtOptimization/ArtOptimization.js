@@ -43,6 +43,8 @@ const ArtOptimization = () => {
     const partners = useSelector(state => state.filters.partners);
     const agencies = useSelector(state => state.filters.agencies);
     const projects = useSelector(state => state.filters.projects);
+    const fromDate = useSelector(state => state.filters.fromDate);
+    const toDate = useSelector(state => state.filters.toDate);
 
     const onVisibilityChange = (isVisible) => {
         if (ctTab === 'txOpt') {
@@ -55,15 +57,26 @@ const ArtOptimization = () => {
     };
 
     useEffect(() => {
-        dispatch(loadArtOptimizationOverview(counties, subCounties, facilities, partners, agencies, projects));
-        dispatch(loadArtOptimizationCurrentByRegimen(counties, subCounties, facilities, partners, agencies, projects));
-        dispatch(loadArtOptimizationCurrentByAgeSex(counties, subCounties, facilities, partners, agencies, projects));
-        dispatch(loadArtOptimizationCurrentByCounty(counties, subCounties, facilities, partners, agencies, projects));
-        dispatch(loadArtOptimizationCurrentByPartner(counties, subCounties, facilities, partners, agencies, projects));
-        dispatch(loadArtOptimizationNewByCounty(counties, subCounties, facilities, partners, agencies, projects));
-        dispatch(loadArtOptimizationNewByPartner(counties, subCounties, facilities, partners, agencies, projects));
-        dispatch(loadArtOptimizationNewByYear(counties, subCounties, facilities, partners, agencies, projects));
-    }, [dispatch, counties, subCounties, facilities, partners, agencies, projects]);
+        dispatch(loadArtOptimizationOverview());
+        dispatch(loadArtOptimizationCurrentByRegimen());
+        dispatch(loadArtOptimizationCurrentByAgeSex());
+        dispatch(loadArtOptimizationCurrentByCounty());
+        dispatch(loadArtOptimizationCurrentByPartner());
+        dispatch(loadArtOptimizationNewByCounty());
+        dispatch(loadArtOptimizationNewByPartner());
+        dispatch(loadArtOptimizationNewByYear());
+    }, [
+        dispatch,
+        counties,
+        subCounties,
+        facilities,
+        partners,
+        agencies,
+        projects,
+        fromDate,
+        toDate,
+        ctTab
+    ]);
 
     return (
         <div className="animated fadeIn">

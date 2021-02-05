@@ -1,53 +1,29 @@
 import * as actionTypes from "../../../actions/types";
 
 const initialState = {
-    lastFetchUnfiltered: null,
-    lastFetchFiltered: null,
-    loadingUnfiltered: false,
-    loadingFiltered: false,
+    lastFetch: null,
+    loading: false,
     listUnfiltered: [],
     listFiltered: [],
-    counties: [],
-    subCounties: [],
-    facilities: [],
-    partners: [],
-    agencies: [],
-    projects: [],
 };
 
 export default (state = initialState, action) => {
     let newState = { ...state };
     switch (action.type) {
         case actionTypes.CT_ART_OPTIMIZATION_CURRENT_BY_AGE_SEX_REQUEST:
-            newState.counties = action.payload.counties;
-            newState.subCounties = action.payload.subCounties;
-            newState.facilities = action.payload.facilities;
-            newState.partners = action.payload.partners;
-            newState.agencies = action.payload.agencies;
-            newState.projects = action.payload.projects;
-            if (action.payload.filtered === true) {
-                newState.loadingFiltered = true;
-            } else {
-                newState.loadingUnfiltered = true;
-            }
+            newState.loading = true;
             return newState;
         case actionTypes.CT_ART_OPTIMIZATION_CURRENT_BY_AGE_SEX_FETCH:
             if (action.payload.filtered === true) {
-                newState.loadingFiltered = false;
-                newState.lastFetchFiltered = Date.now();
                 newState.listFiltered = action.payload.list;
             } else {
-                newState.loadingUnfiltered = false;
-                newState.lastFetchUnfiltered = Date.now();
                 newState.listUnfiltered = action.payload.list;
+                newState.lastFetch = Date.now();
             }
+            newState.loading = false;
             return newState;
         case actionTypes.CT_ART_OPTIMIZATION_CURRENT_BY_AGE_SEX_REQUEST_FAILED:
-            if (action.payload.filtered === true) {
-                newState.loadingFiltered = false;
-            } else {
-                newState.loadingUnfiltered = false;
-            }
+            newState.loading = false;
             return newState;
         default:
             return state
