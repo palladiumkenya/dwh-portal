@@ -3,65 +3,27 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { getAll } from '../../Shared/Api';
-import moment from "moment";
+import * as newOnArtTrendsSelectors from '../../../selectors/CT/NewOnArt/newOnArtTrends';
 
 const NewOnArtTrends = () => {
-    const filters = useSelector(state => state.filters);
-    const [newOnArt, setNewOnArt] = useState({});
-
-    const loadNewOnArt = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
-        };
-        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const result = await getAll('care-treatment/txNewTrends', params);
-        const monthNames = {
-            1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June",
-            7: "July", 8:"August", 9: "September", 10: "October", 11: "November", 12: "December"
-        };
-        let months = [];
-        let txNew = [];
-
-        for(let i = 0; i < result.length; i++) {
-            months.push(monthNames[result[i].month] + ' ' + result[i].year.toString());
-            txNew.push(parseInt(result[i].txNew, 10));
-        }
-
-        months = months.slice(Math.max(months.length - 12, 0));
-        txNew = txNew.slice(Math.max(txNew.length - 12, 0));
-
-        setNewOnArt({
-            chart: { zoomType: 'xy' },
-            title: { useHTML: true, text: ' &nbsp;', align: 'left' },
-            subtitle: { text: ' ', align: 'left' },
-            xAxis: [{ categories: months, crosshair: true, title: { text: 'Months' } }],
-            yAxis: [
-                {
-                    title: { text: 'Number of Patients', style: { color: Highcharts.getOptions().colors[1] } },
-                    labels: { format: '{value}', style: { color: Highcharts.getOptions().colors[1] } },
-                    min: 0,
-                }
-            ],
-            legend: {
-                floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
-                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
-            },
+    const [newOnArtTrendsChart, setNewOnArtTrendsChart] = useState({});
+    const newOnArtTrendsData = useSelector(newOnArtTrendsSelectors.getNewOnArtTrends);
+    
+    const loadNewOnArtTrendsChart = useCallback(async () => {
+        setNewOnArtTrendsChart({
+            title: { text: '' },
+            xAxis: [{ categories: newOnArtTrendsData.months, title: { text: 'Months' }, crosshair: true }],
+            yAxis: [{ title: { text: 'Number of Patients'}}],
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Number of Patients', data: txNew, type: 'spline', color: "#E06F07" },
+                { name: 'Number of Patients', data: newOnArtTrendsData.txNew, type: 'spline', color: "#E06F07" },
             ]
         });
-    }, [filters]);
+    }, [newOnArtTrendsData]);
 
     useEffect(() => {
-        loadNewOnArt();
-    }, [loadNewOnArt]);
+        loadNewOnArtTrendsChart();
+    }, [loadNewOnArtTrendsChart]);
 
     return (
         <div className="row">
@@ -72,7 +34,7 @@ const NewOnArtTrends = () => {
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={newOnArt} />
+                            <HighchartsReact highcharts={Highcharts} options={newOnArtTrendsChart} />
                         </div>
                     </CardBody>
                 </Card>
