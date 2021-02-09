@@ -3,57 +3,24 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { getAll } from '../../Shared/Api';
-import moment from "moment";
+import * as threeMonthRetentionSelectors from '../../../selectors/CT/TreatmentOutcomes/threeMonthRetention';
 
 const ThreeMonthRetention = () => {
-    const filters = useSelector(state => state.filters);
     const [threeMonthRetention, setThreeMonthRetention] = useState({});
+    const threeMonthRetentionData = useSelector(threeMonthRetentionSelectors.getThreeMonthRetention);
 
     const loadThreeMonthRetention = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
-        };
-        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const yearCategories = [];
-        const result = await getAll('care-treatment/treatmentOutcomesRetention3m', params);
-        let data = [];
-        for(let i = 0; i < result.length; i++) {
-            yearCategories[i] = result[i].year;
-            data[i] = parseInt(result[i].retention);
-        }
         setThreeMonthRetention({
-            chart: { zoomType: 'xy' },
-            title: { useHTML: true, text: ' &nbsp;', align: 'left' },
-            subtitle: { text: ' ', align: 'left' },
-            xAxis: [{
-                categories: yearCategories,
-                crosshair: true,
-                title: { text: 'Year of start from 2011' }
-            }],
-            yAxis: [
-                {
-                    title: { text: 'Number of Patients', style: { color: Highcharts.getOptions().colors[1] } },
-                    labels: { format: '{value}', style: { color: Highcharts.getOptions().colors[1] } },
-                    min: 0,
-                }
-            ],
+            title: { text: '' },
+            xAxis: [{ categories: threeMonthRetentionData.yearCategories, title: { text: 'Year of start from 2011' }, crosshair: true }],
+            yAxis: [{ title: { text: 'Number of Patients' }}],
             plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
-            legend: {
-                floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
-                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
-            },
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Number of Patients', data: data, type: 'column', color: "#485969" },
+                { name: 'Number of Patients', data: threeMonthRetentionData.data, type: 'column', color: "#485969" },
             ]
         });
-    }, [filters]);
+    }, [threeMonthRetentionData]);
 
     useEffect(() => {
         loadThreeMonthRetention();
