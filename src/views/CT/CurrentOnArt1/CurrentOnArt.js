@@ -2,18 +2,17 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Row } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
-import UniversalFilter from './../../Shared/UniversalFilter';
+import UniversalFilter from '../../Shared/UniversalFilter';
 import SectionHeader from '../../Shared/SectionHeader';
 import SectionFooter from '../../Shared/SectionFooter';
-// import TrendsInTxCurr from './TrendsInTxCurr';
-import CurrentOnARTTxCurrByAgeSex from './CurrentOnARTTxCurrByAgeSex';
-import CurrentOnARTTxCurrBySex from './CurrentOnARTTxCurrBySex';
-import CurrentOnARTTxCurrDistributionByCounty from './CurrentOnARTTxCurrDistributionByCounty';
-import CurrentOnARTTxCurrDistributionByPartner from './CurrentOnARTTxCurrDistributionByPartner';
-import CurrentOnARTTxCurrByCounty from './CurrentOnARTTxCurrByCounty';
-import CurrentOnARTTxCurrByPartner from './CurrentOnARTTxCurrByPartner';
+import CurrentOnArtOverview from './CurrentOnArtOverview';
+import CurrentOnArtByAgeSex from './CurrentOnArtByAgeSex';
+import CurrentOnArtBySex from './CurrentOnArtBySex';
+import CurrentOnArtDistributionByCounty from './CurrentOnArtDistributionByCounty';
+import CurrentOnArtDistributionByPartner from './CurrentOnArtDistributionByPartner';
+import CurrentOnArtByCounty from './CurrentOnArtByCounty';
+import CurrentOnArtByPartner from './CurrentOnArtByPartner';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
-import CurrentOnARTTiles from './CurrentOnARTTiles';
 
 const CurrentOnART = () => {
     const branding = { title: "CURRENT ON ART", description: "OVERVIEW", overview: "Current on ART" };
@@ -34,25 +33,23 @@ const CurrentOnART = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <CurrentOnARTTiles />
-            {/* <TrendsInTxCurr />
-            <SectionFooter overview={branding.overview}/> */}
+            <CurrentOnArtOverview />
             <Row>
                 <Col>
-                    <CurrentOnARTTxCurrBySex />
+                    <CurrentOnArtBySex />
                 </Col>
                 <Col>
-                    <CurrentOnARTTxCurrByAgeSex />
+                    <CurrentOnArtByAgeSex />
                 </Col>
             </Row>
             <SectionFooter overview={branding.overview}/>
-            <CurrentOnARTTxCurrDistributionByCounty />
+            <CurrentOnArtByCounty />
             <SectionFooter overview={branding.overview}/>
-            <CurrentOnARTTxCurrDistributionByPartner />
+            <CurrentOnArtByPartner />
             <SectionFooter overview={branding.overview}/>
-            <CurrentOnARTTxCurrByCounty />
+            <CurrentOnArtDistributionByCounty />
             <SectionFooter overview={branding.overview}/>
-            <CurrentOnARTTxCurrByPartner />
+            <CurrentOnArtDistributionByPartner />
             <SectionFooter overview={branding.overview}/>
         </div>
     );
