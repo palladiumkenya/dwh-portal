@@ -36,6 +36,17 @@ import { loadArtOptimizationNewByCounty } from '../../actions/CT/ArtOptimization
 import { loadArtOptimizationNewByPartner } from '../../actions/CT/ArtOptimization/artOptimizationNewByPartnerActions';
 import { loadArtOptimizationNewByYear } from '../../actions/CT/ArtOptimization/artOptimizationNewByYearActions';
 
+import { loadDsdStabilityStatusByAgeSex } from '../../actions/CT/Dsd/dsdStabilityStatusByAgeSexActions';
+import { loadDsdStabilityStatusByCounty } from '../../actions/CT/Dsd/dsdStabilityStatusByCountyActions';
+import { loadDsdStabilityStatusByPartner } from '../../actions/CT/Dsd/dsdStabilityStatusByPartnerActions';
+import { loadDsdUnstable } from '../../actions/CT/Dsd/dsdUnstableActions';
+import { loadDsdStableMmdModels } from '../../actions/CT/Dsd/dsdStableMmdModelsActions';
+import { loadDsdAppointmentDurationByStabilityStatus } from '../../actions/CT/Dsd/dsdAppointmentDurationByStabilityStatusActions';
+import { loadDsdAppointmentDurationBySex } from '../../actions/CT/Dsd/dsdAppointmentDurationBySexActions';
+import { loadDsdAppointmentDurationByAge } from '../../actions/CT/Dsd/dsdAppointmentDurationByAgeActions';
+import { loadDsdAppointmentDurationByCounty } from '../../actions/CT/Dsd/dsdAppointmentDurationByCountyActions';
+import { loadDsdAppointmentDurationByPartner } from '../../actions/CT/Dsd/dsdAppointmentDurationByPartnerActions';
+
 import { loadTreatmentOutcomesBySex } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesBySexActions';
 import { loadTreatmentOutcomesByAge } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByAgeActions';
 import { loadTreatmentOutcomesByYear } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByYearActions';
@@ -77,7 +88,6 @@ const CT = () => {
 
     useEffect(() => {
         dispatch(changeCurrentPage(PAGES.ct));
-        dispatch(disableFromDateFilter());
     }, [dispatch]);
 
     useEffect(() => {
@@ -90,7 +100,6 @@ const CT = () => {
                 dispatch(loadMedianTimeToArtStartByCounty());
                 dispatch(loadMedianTimeToArtStartByPartner());
                 dispatch(loadTimeFromDiagnosisToArtStart());
-                dispatch(enableFromDateFilter());
                 break;
             case 'txCurr':
                 dispatch(loadCurrentOnArtOverview());
@@ -99,7 +108,6 @@ const CT = () => {
                 dispatch(loadCurrentOnArtByPartner());
                 dispatch(loadCurrentOnArtDistributionByCounty());
                 dispatch(loadCurrentOnArtDistributionByPartner());
-                dispatch(disableFromDateFilter());
                 break;
             case 'txOpt':
                 dispatch(loadArtOptimizationOverview());
@@ -110,7 +118,19 @@ const CT = () => {
                 dispatch(loadArtOptimizationNewByCounty());
                 dispatch(loadArtOptimizationNewByPartner());
                 dispatch(loadArtOptimizationNewByYear());
-                dispatch(disableFromDateFilter());
+                break;
+            case 'dsd':
+                dispatch(loadCurrentOnArtOverview());
+                dispatch(loadDsdStabilityStatusByAgeSex());
+                dispatch(loadDsdStabilityStatusByCounty());
+                dispatch(loadDsdStabilityStatusByPartner());
+                dispatch(loadDsdUnstable());
+                dispatch(loadDsdStableMmdModels());
+                dispatch(loadDsdAppointmentDurationByStabilityStatus());
+                dispatch(loadDsdAppointmentDurationBySex());
+                dispatch(loadDsdAppointmentDurationByAge());
+                dispatch(loadDsdAppointmentDurationByCounty());
+                dispatch(loadDsdAppointmentDurationByPartner());
                 break;
             case 'tOut':
                 dispatch(loadNewOnArtOverview());
@@ -125,6 +145,11 @@ const CT = () => {
                 break;
             default:
                 break;
+        }
+        if (ctTab === 'txNew') {
+            dispatch(enableFromDateFilter());
+        } else {
+            dispatch(disableFromDateFilter());
         }
     }, [
         dispatch,

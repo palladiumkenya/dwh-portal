@@ -3,49 +3,21 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { getAll } from '../../Shared/Api';
-import moment from "moment";
+import * as currentOnArtOverviewSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
+import * as dsdStabilityStatusByAgeSexSelectors from '../../../selectors/CT/Dsd/dsdStabilityStatusByAgeSex';
 
 const DSDCascade = () => {
-    const filters = useSelector(state => state.filters);
     const [dsdCascade, setDSDCascade] = useState({});
+    const currentOnArt = useSelector(currentOnArtOverviewSelectors.getCurrentOnArt);
+    const mmd = useSelector(dsdStabilityStatusByAgeSexSelectors.getMmd);
 
     const loadDSDCascade = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
-        };
-        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        let txCurr = 0;
-        // let stable = 0;
-        let mmd = 0;
-        const result = await getAll('care-treatment/dsdCascade', params);
-        if(result) {
-            txCurr = result.txCurr;
-            // stable = result.stable;
-            mmd = result.mmd;
-        }
-        const categories = [
-            "CURRENT ON ART",
-            // "STABLE",
-            "TOTAL ON MMD"
-        ];
-        const data = [
-            txCurr,
-            // stable,
-            mmd
-        ];
+        const categories = ["CURRENT ON ART", "TOTAL ON MMD"];
+        const data = [currentOnArt, mmd];
         setDSDCascade({
             title: { text: '' },
             xAxis: [{ categories: categories, crosshair: true }],
-            yAxis: [
-                { title: { text: 'Number of Patients' }}
-            ],
+            yAxis: [{ title: { text: 'Number of Patients' }}],
             legend: { enabled: false },
             plotOptions: { column: { dataLabels: { enabled: true, format: '{point.y:,.0f}{point.text}' } } },
             series: [{ name: 'DSD Cascade', type: 'column', color: "#485969", tooltip: { valueSuffix: '{point.text}' }, data: [
@@ -53,7 +25,7 @@ const DSDCascade = () => {
                 { name: categories[1], y: data[1], text: ' (' + parseFloat(((data[1]/data[0])*100).toString()).toFixed(0) + '%)' },
             ]}]
         });
-    }, [filters]);
+    }, [currentOnArt, mmd]);
 
     useEffect(() => {
         loadDSDCascade();

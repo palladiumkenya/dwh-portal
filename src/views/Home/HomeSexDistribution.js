@@ -4,12 +4,13 @@ import { Row, Col, Card, CardBody, CardTitle, CardSubtitle, CardText } from 'rea
 import { getAll } from '../Shared/Api';
 import AdultMan from '../../assets/custom/AdultMan.png';
 import AdultWoman from '../../assets/custom/AdultWoman.png';
+import * as currentOnArtByAgeSexSelectors from '../../selectors/CT/CurrentOnArt/currentOnArtByAgeSex';
+import { formatNumber, roundNumber } from '../../utils/utils';
 
 const HomeSexDistribution = () => {
     const filters = useSelector(state => state.filters);
+    const currentOnArtBySex = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtBySex);
     const [ARTClientsByGender, setARTClientsByGender] = useState({
-        ActiveARTFemale: '',
-        ActiveARTMale: '',
         ViralSuppressionMale: 0,
         ViralSuppressionFemale: 0
     });
@@ -23,35 +24,22 @@ const HomeSexDistribution = () => {
             agency: filters.agencies,
             project: filters.projects,
         };
-        let ActiveARTMale = 0;
-        let ActiveARTFemale = 0;
         let ViralSuppressionMale = 0
         let ViralSuppressionFemale = 0
-        const result = await getAll('care-treatment/activeArtByGender', params);
         const viralLoadSuppression = await getAll('care-treatment/viralLoadSuppressionPercentageByGender', params);
-        for (let i = 0; i < result.length; i++) {
-            if(result[i].Gender.toString().toLowerCase() === 'f' || result[i].Gender.toString().toLowerCase() === 'female') {
-                ActiveARTFemale = result[i].ActiveART;
-            }
-            if(result[i].Gender.toString().toLowerCase() === 'm' || result[i].Gender.toString().toLowerCase() === 'male') {
-                ActiveARTMale = result[i].ActiveART;
-            }
-        }
         for (let i = 0; i < viralLoadSuppression.length; i++) {
             if(viralLoadSuppression[i].Gender.toString().toLowerCase() === 'f' || viralLoadSuppression[i].Gender.toString().toLowerCase() === 'female') {
                 const Suppressed = viralLoadSuppression[i].Suppressed;
                 const Last12MonthVL = viralLoadSuppression[i].Last12MonthVL;
-                ViralSuppressionFemale = typeof Suppressed !== 'undefined' && typeof Last12MonthVL !== 'undefined' ? parseFloat(((Suppressed / Last12MonthVL) * 100).toString()).toFixed(0) : 0;
+                ViralSuppressionFemale = typeof Suppressed !== 'undefined' && typeof Last12MonthVL !== 'undefined' ? roundNumber((Suppressed / Last12MonthVL) * 100) : 0;
             }
             if(viralLoadSuppression[i].Gender.toString().toLowerCase() === 'm' || viralLoadSuppression[i].Gender.toString().toLowerCase() === 'male') {
                 const Suppressed = viralLoadSuppression[i].Suppressed;
                 const Last12MonthVL = viralLoadSuppression[i].Last12MonthVL;
-                ViralSuppressionMale = typeof Suppressed !== 'undefined' && typeof Last12MonthVL !== 'undefined' ? parseFloat(((Suppressed / Last12MonthVL) * 100).toString()).toFixed(0) : 0;
+                ViralSuppressionMale = typeof Suppressed !== 'undefined' && typeof Last12MonthVL !== 'undefined' ? roundNumber((Suppressed / Last12MonthVL) * 100) : 0;
             }
         }
         setARTClientsByGender({
-            ActiveARTMale: ActiveARTMale.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
-            ActiveARTFemale: ActiveARTFemale.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","),
             ViralSuppressionMale: ViralSuppressionMale,
             ViralSuppressionFemale: ViralSuppressionFemale
         });
@@ -72,7 +60,7 @@ const HomeSexDistribution = () => {
                                     <img src={AdultMan} className="mt-2" width={"auto"} height={"100"}  alt={"Adult Man"} />
                                 </Col>
                                 <Col md={6}>
-                                    <CardText className="primary-card-body-text text-center mb-2">{ARTClientsByGender.ActiveARTMale}</CardText>
+                                    <CardText className="primary-card-body-text text-center mb-2">{formatNumber(currentOnArtBySex.currentOnArtMale)}</CardText>
                                     <CardTitle tag="h4" className="text-center mt-0 mb-2">Active on ART</CardTitle>
                                 </Col>
                                 <Col md={3}>
@@ -91,7 +79,7 @@ const HomeSexDistribution = () => {
                                     <img src={AdultWoman} className="mt-2" width={"auto"} height={"100"} alt={"Adult Woman"} />
                                 </Col>
                                 <Col md={6}>
-                                    <CardText className="primary-card-body-text text-center mb-2">{ARTClientsByGender.ActiveARTFemale}</CardText>
+                                    <CardText className="primary-card-body-text text-center mb-2">{formatNumber(currentOnArtBySex.currentOnArtFemale)}</CardText>
                                     <CardTitle tag="h4" className="text-center mt-0 mb-2">Active on ART</CardTitle>
                                 </Col>
                                 <Col md={3}>

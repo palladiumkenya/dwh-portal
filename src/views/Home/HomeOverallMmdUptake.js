@@ -3,29 +3,14 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { getAll } from '../Shared/Api';
-import moment from "moment";
+import * as dsdStabilityStatusByAgeSexSelectors from '../../selectors/CT/Dsd/dsdStabilityStatusByAgeSex';
 
 const HomeOverallMmdUptake = () => {
-    const filters = useSelector(state => state.filters);
     const [overallMmdUptake, setHomeOverallMmdUptake] = useState({});
+    const mmd = useSelector(dsdStabilityStatusByAgeSexSelectors.getMmd);
+    const nonMmd = useSelector(dsdStabilityStatusByAgeSexSelectors.getNonMmd);
 
     const loadHomeOverallMmdUptake = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
-        };
-        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const result = await getAll('care-treatment/dsdMmdUptakeOverall', params);
-        let data = [
-            result.mmd ? result.mmd: 0,
-            result.nonMmd ? result.nonMmd: 0
-        ];
         setHomeOverallMmdUptake({
             chart: { type: 'pie' },
             title: { text: '' },
@@ -45,12 +30,12 @@ const HomeOverallMmdUptake = () => {
                 name:"OVERALL MMD UPTAKE",
                 colorByPoint: true,
                 data: [
-                    { name: 'NON MMD', y: data[1], color: "#485969" },
-                    { name: 'MMD', y: data[0], color: "#1AB394" },
+                    { name: 'NON MMD', y: nonMmd, color: "#485969" },
+                    { name: 'MMD', y: mmd, color: "#1AB394" },
                 ]
             }]
         });
-    }, [filters]);
+    }, [mmd, nonMmd]);
 
     useEffect(() => {
         loadHomeOverallMmdUptake();
