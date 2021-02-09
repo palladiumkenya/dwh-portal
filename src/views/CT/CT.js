@@ -7,7 +7,7 @@ import DSD from './DSD/DSD';
 import TreatmentOutcomes from './TreatmentOutcomes/TreatmentOutcomes';
 import VL from './VL/VL';
 import AdverseEvents from './AdverseEvents/AdverseEvents';
-import TBHIV from './TBHIV/TBHIV';
+// import TBHIV from './TBHIV/TBHIV';
 import ArtOptimization from './ArtOptimization/ArtOptimization';
 import { changeCtTab, changeCurrentPage } from "../../actions/Shared/uiActions";
 import { enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
@@ -176,9 +176,9 @@ const CT = () => {
                 <TabPane tabId="txCurr">
                     <CurrentOnArt/>
                 </TabPane>
-                <TabPane tabId="tbHiv">
+                {/* <TabPane tabId="tbHiv">
                     <TBHIV/>
-                </TabPane>
+                </TabPane> */}
                 <TabPane tabId="txOpt">
                     <ArtOptimization/>
                 </TabPane>
