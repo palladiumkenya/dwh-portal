@@ -1,25 +1,25 @@
 import moment from 'moment';
 import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
-import { CACHING } from '../../../constants';
+import { CACHING, PAGES } from '../../../constants';
 
-export const loadCurrentOnArtByCounty = () => async (dispatch, getState) => {
+export const loadDsdStableMmdModels = () => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
-        moment(getState().currentOnArtByCounty.lastFetch),
+        moment(getState().dsdStableMmdModels.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'txCurr') {
+    if (getState().ui.ctTab !== 'dsd' && getState().ui.currentPage !== PAGES.home) {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
         return;
     } else {
-        await dispatch(fetchCurrentOnArtByCounty());
+        await dispatch(fetchDsdStableMmdModels());
     }
 };
 
-export const fetchCurrentOnArtByCounty = () => async (dispatch, getState) => {
-    dispatch({ type: actionTypes.CT_CURRENT_ON_ART_BY_COUNTY_REQUEST });
+export const fetchDsdStableMmdModels = () => async (dispatch, getState) => {
+    dispatch({ type: actionTypes.CT_DSD_STABLE_MMD_MODELS_REQUEST });
     const params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,
@@ -30,6 +30,6 @@ export const fetchCurrentOnArtByCounty = () => async (dispatch, getState) => {
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
-    const response = await getAll('care-treatment/txCurrDistributionByCounty', params);
-    dispatch({ type: actionTypes.CT_CURRENT_ON_ART_BY_COUNTY_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
+    const response = await getAll('care-treatment/dsdMmdStable', params);
+    dispatch({ type: actionTypes.CT_DSD_STABLE_MMD_MODELS_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };

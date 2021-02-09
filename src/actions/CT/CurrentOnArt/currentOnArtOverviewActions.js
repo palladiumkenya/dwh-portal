@@ -8,7 +8,11 @@ export const loadCurrentOnArtOverview = () => async (dispatch, getState) => {
         moment(getState().currentOnArtOverview.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'txCurr' && getState().ui.currentPage !== PAGES.home) {
+    if (
+        getState().ui.ctTab !== 'txCurr' &&
+        getState().ui.ctTab !== 'dsd' &&
+        getState().ui.currentPage !== PAGES.home
+    ) {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
@@ -27,7 +31,7 @@ export const fetchCurrentOnArtOverview = () => async (dispatch, getState) => {
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
         project: getState().filters.projects,
-        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY"):moment().format("YYYY"),
+        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
     const response = await getAll('care-treatment/viralLoadCascade', params);

@@ -3,26 +3,26 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING } from '../../../constants';
 
-export const loadCurrentOnArtByCounty = () => async (dispatch, getState) => {
+export const loadDsdAppointmentDurationByPartner = () => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
-        moment(getState().currentOnArtByCounty.lastFetch),
+        moment(getState().dsdAppointmentDurationByPartner.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'txCurr') {
+    if (getState().ui.ctTab !== 'dsd') {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
         return;
     } else {
-        await dispatch(fetchCurrentOnArtByCounty());
+        await dispatch(fetchDsdAppointmentDurationByPartner());
     }
 };
 
-export const fetchCurrentOnArtByCounty = () => async (dispatch, getState) => {
-    dispatch({ type: actionTypes.CT_CURRENT_ON_ART_BY_COUNTY_REQUEST });
+export const fetchDsdAppointmentDurationByPartner = () => async (dispatch, getState) => {
+    dispatch({ type: actionTypes.CT_DSD_APPOINTMENT_DURATION_BY_PARTNER_REQUEST });
     const params = {
         county: getState().filters.counties,
-        subCounty: getState().filters.subCounties,
+        subPartner: getState().filters.subCounties,
         facility: getState().filters.facilities,
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
@@ -30,6 +30,6 @@ export const fetchCurrentOnArtByCounty = () => async (dispatch, getState) => {
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
-    const response = await getAll('care-treatment/txCurrDistributionByCounty', params);
-    dispatch({ type: actionTypes.CT_CURRENT_ON_ART_BY_COUNTY_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
+    const response = await getAll('care-treatment/dsdAppointmentDurationByPartner', params);
+    dispatch({ type: actionTypes.CT_DSD_APPOINTMENT_DURATION_BY_PARTNER_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };

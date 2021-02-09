@@ -3,59 +3,18 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import { capitalize, getAll } from '../../Shared/Api';
-import moment from "moment";
+import * as dsdStabilityStatusByCountySelectors from '../../../selectors/CT/Dsd/dsdStabilityStatusByCounty';
 
 const DistributionStableByCounty = () => {
-    const filters = useSelector(state => state.filters);
     const [distributionStableByCounty, setDistributionStableByCounty] = useState({});
+    const stabilityStatusByCounty = useSelector(dsdStabilityStatusByCountySelectors.getStabilityStatusByCounty);
 
     const loadTxCurrDistributionByCounty = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
-        };
-        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const counties = [];
-        const stable = [];
-
-        const result = await getAll('care-treatment/dsdStabilityStatusByCounty', params);
-        for(let i = 0; i < result.length; i++) {
-            counties.push(result[i].county);
-            stable.push(result[i].stable);
-        }
-
         setDistributionStableByCounty({
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: ''
-            },
-            subtitle: {
-                text: ''
-            },
-            xAxis: {
-                categories: counties.map(c => capitalize(c)),
-                crosshair: true,
-                title: {
-                    text: 'County'
-                }
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Number of Patients'
-                }
-            },
-            legend: {
-                enabled: false,
-            },
+            title: { text: ''},
+            xAxis: [{ categories: stabilityStatusByCounty.counties, title: { text: 'County' }, crosshair: true }],
+            yAxis: { title: { text: 'Number of Patients' }},
+            legend: { enabled: false },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                 pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
@@ -65,13 +24,11 @@ const DistributionStableByCounty = () => {
                 useHTML: true
             },
             plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
-            series: [{
-                name: 'Number of Patients',
-                color: "#485969",
-                data: stable
-            }]
+            series: [
+                { data: stabilityStatusByCounty.stability, name: 'Number of Patients', type: 'column', color: "#485969" }
+            ]
         });
-    }, [filters]);
+    }, [stabilityStatusByCounty]);
 
     useEffect(() => {
         loadTxCurrDistributionByCounty();

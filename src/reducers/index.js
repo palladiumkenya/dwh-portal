@@ -33,6 +33,17 @@ import artOptimizationNewByYear from "./CT/ArtOptimization/artOptimizationNewByY
 import artOptimizationNewByCounty from "./CT/ArtOptimization/artOptimizationNewByCounty";
 import artOptimizationNewByPartner from "./CT/ArtOptimization/artOptimizationNewByPartner";
 
+import dsdStabilityStatusByAgeSex from "./CT/Dsd/dsdStabilityStatusByAgeSex";
+import dsdStabilityStatusByCounty from "./CT/Dsd/dsdStabilityStatusByCounty";
+import dsdStabilityStatusByPartner from "./CT/Dsd/dsdStabilityStatusByPartner";
+import dsdUnstable from "./CT/Dsd/dsdUnstable";
+import dsdStableMmdModels from "./CT/Dsd/dsdStableMmdModels";
+import dsdAppointmentDurationBySex from "./CT/Dsd/dsdAppointmentDurationBySex";
+import dsdAppointmentDurationByAge from "./CT/Dsd/dsdAppointmentDurationByAge";
+import dsdAppointmentDurationByStabilityStatus from "./CT/Dsd/dsdAppointmentDurationByStabilityStatus";
+import dsdAppointmentDurationByCounty from "./CT/Dsd/dsdAppointmentDurationByCounty";
+import dsdAppointmentDurationByPartner from "./CT/Dsd/dsdAppointmentDurationByPartner";
+
 import treatmentOutcomesBySex from "./CT/TreatmentOutcomes/treatmentOutcomesBySex";
 import treatmentOutcomesByAge from "./CT/TreatmentOutcomes/treatmentOutcomesByAge";
 import treatmentOutcomesByYear from "./CT/TreatmentOutcomes/treatmentOutcomesByYear";
@@ -76,6 +87,17 @@ export default combineReducers({
     artOptimizationNewByCounty,
     artOptimizationNewByPartner,
     artOptimizationNewByYear,
+
+    dsdStabilityStatusByAgeSex,
+    dsdStabilityStatusByCounty,
+    dsdStabilityStatusByPartner,
+    dsdUnstable,
+    dsdStableMmdModels,
+    dsdAppointmentDurationBySex,
+    dsdAppointmentDurationByAge,
+    dsdAppointmentDurationByStabilityStatus,
+    dsdAppointmentDurationByCounty,
+    dsdAppointmentDurationByPartner,
 
     treatmentOutcomesBySex,
     treatmentOutcomesByAge,

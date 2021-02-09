@@ -1,190 +1,74 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
-import { getAll } from '../../Shared/Api';
-import moment from "moment";
+import { Row, Col } from 'reactstrap';
+import * as currentOnArtOverviewSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
+import * as dsdStabilityStatusByAgeSexSelectors from '../../../selectors/CT/Dsd/dsdStabilityStatusByAgeSex';
+import * as dsdUnstableSelectors from '../../../selectors/CT/Dsd/dsdUnstable';
+import { formatNumber, roundNumber } from '../../../utils/utils';
+import DataCard from '../../Shared/DataCard';
 
 const DSDOverview = () => {
-    const filters = useSelector(state => state.filters);
-    const [dsdStabilityStatus, setDsdStabilityStatus] = useState({
-        txCurr: 0,
-        mmd: 0,
-        mmdPercent: 0,
-        stable: 0,
-        stablePercent: 0
-    });
-    const [dsdUnstable, setDsdUnstable] = useState({
-        txCurr: 0,
-        onArtLessThan12Months: 0,
-        onArtLessThan12MonthsPercent: 0,
-        highVl: 0,
-        highVlPercent: 0,
-        poorAdherence: 0,
-        poorAdherencePercent: 0
-    });
-
-    const loadDsdStabilityStatus = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : ''
-        };
-        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const result = await getAll('care-treatment/dsdStabilityStatus', params);
-        let data = {
-            txCurr: parseInt(result.txCurr) ? parseInt(result.txCurr) : 0,
-            mmd: parseInt(result.mmd) ? parseInt(result.mmd) : 0,
-            mmdPercent: 0,
-            stable: parseInt(result.stable) ? parseInt(result.stable) : 0,
-            stablePercent: 0
-        }
-        if (data.txCurr > 0) {
-           data.mmdPercent = ((data.mmd/data.txCurr)*100).toFixed(1);
-           data.stablePercent = ((data.stable/data.txCurr)*100).toFixed(1);
-        }
-        setDsdStabilityStatus(data);
-    }, [filters]);
-
-    const loadDsdUnstable = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : ''
-        };
-        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const result = await getAll('care-treatment/dsdUnstable', params);
-        let data = {
-            txCurr: parseInt(dsdStabilityStatus.txCurr) ? parseInt(dsdStabilityStatus.txCurr) : 0,
-            onArtLessThan12Months: parseInt(result.onArtLessThan12Months) ? parseInt(result.onArtLessThan12Months) : 0,
-            onArtLessThan12MonthsPercent: 0,
-            highVl: parseInt(result.highVl) ? parseInt(result.highVl) : 0,
-            highVlPercent: 0,
-            poorAdherence: parseInt(result.poorAdherence) ? parseInt(result.poorAdherence) : 0,
-            poorAdherencePercent: 0
-        }
-        if (data.txCurr > 0) {
-           data.onArtLessThan12MonthsPercent = ((data.onArtLessThan12Months/data.txCurr)*100).toFixed(1);
-           data.highVlPercent = ((data.highVl/data.txCurr)*100).toFixed(1);
-           data.poorAdherencePercent = ((data.poorAdherence/data.txCurr)*100).toFixed(1);
-        }
-        setDsdUnstable(data);
-    }, [filters, dsdStabilityStatus.txCurr]);
-
-    useEffect(() => {
-        loadDsdStabilityStatus();
-        loadDsdUnstable();
-    }, [loadDsdStabilityStatus, loadDsdUnstable]);
+    const currentOnArt = useSelector(currentOnArtOverviewSelectors.getCurrentOnArt);
+    const mmd = useSelector(dsdStabilityStatusByAgeSexSelectors.getMmd);
+    const mmdPercent = currentOnArt ? ((mmd/currentOnArt)*100) : 0;
+    const stable = useSelector(dsdStabilityStatusByAgeSexSelectors.getStable);
+    const stablePercent = currentOnArt ? ((stable/currentOnArt)*100) : 0;
+    const onArtLessThan12Months = useSelector(dsdUnstableSelectors.getOnArtLessThan12Months);
+    const onArtLessThan12MonthsPercent = currentOnArt ? ((onArtLessThan12Months/currentOnArt)*100) : 0;
+    const highVl = useSelector(dsdUnstableSelectors.getHighVl);
+    const highVlPercent = currentOnArt ? ((highVl/currentOnArt)*100) : 0;
+    const poorAdherence = useSelector(dsdUnstableSelectors.getPoorAdherence);
+    const poorAdherencePercent = currentOnArt ? ((poorAdherence/currentOnArt)*100) : 0;
 
     return (
-        <div>
-            <div className="row">
-                <div className="col-4">
-                    <Card className="card-uploads-consistency-rates">
-                        <CardHeader className="expected-uploads-header">
-                            CURRENT ON ART
-                        </CardHeader>
-                        <CardBody
-                            className="align-items-center d-flex justify-content-center"
-                            style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
-                        >
-                            <div className="col-12">
-                                <span className="expected-uploads-text">{dsdStabilityStatus.txCurr ? dsdStabilityStatus.txCurr.toLocaleString('en'):''}</span>
-                            </div>
-                        </CardBody>
-                    </Card>
-                </div>
-                <div className="col-4">
-                    <Card className="card-uploads-consistency-rates">
-                        <CardHeader className="expected-uploads-header">
-                            PATIENTS ON MMD
-                        </CardHeader>
-                        <CardBody
-                            className="align-items-center d-flex justify-content-center"
-                            style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
-                        >
-                            <div className="col-12">
-                                <span className="expected-uploads-text">{dsdStabilityStatus.mmd ? dsdStabilityStatus.mmd.toLocaleString('en'):''}</span>
-                                <sup className="overall-rates-sup"> {dsdStabilityStatus.mmdPercent}<span className="overall-rates-sup-perc"> %</span></sup>
-                            </div>
-                        </CardBody>
-                    </Card>
-                </div>
-                <div className="col-4">
-                    <Card className="card-uploads-consistency-rates">
-                        <CardHeader className="expected-uploads-header">
-                            STABLE PATIENTS
-                        </CardHeader>
-                        <CardBody
-                            className="align-items-center d-flex justify-content-center"
-                            style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
-                        >
-                            <div className="col-12">
-                                <span className="expected-uploads-text">{dsdStabilityStatus.stable ? dsdStabilityStatus.stable.toLocaleString('en'):''}</span>
-                                <sup className="overall-rates-sup"> {dsdStabilityStatus.stablePercent}<span className="overall-rates-sup-perc"> %</span></sup>
-                            </div>
-                        </CardBody>
-                    </Card>
-                </div>
-            </div>
-            <div className="row">
-                <div className="col-4">
-                    <Card className="card-uploads-consistency-rates">
-                        <CardHeader className="expected-uploads-header">
-                            PATIENTS ON ART &lt;1 YEAR
-                        </CardHeader>
-                        <CardBody
-                            className="align-items-center d-flex justify-content-center"
-                            style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
-                        >
-                            <div className="col-12">
-                                <span className="expected-uploads-text">{dsdUnstable.onArtLessThan12Months ? dsdUnstable.onArtLessThan12Months.toLocaleString('en'):''}</span>
-                                {/* <sup className="overall-rates-sup"> {dsdUnstable.onArtLessThan12MonthsPercent}<span className="overall-rates-sup-perc"> %</span></sup> */}
-                            </div>
-                        </CardBody>
-                    </Card>
-                </div>
-                <div className="col-4">
-                    <Card className="card-uploads-consistency-rates">
-                        <CardHeader className="expected-uploads-header">
-                            PATIENTS WITH HVL
-                        </CardHeader>
-                        <CardBody
-                            className="align-items-center d-flex justify-content-center"
-                            style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
-                        >
-                            <div className="col-12">
-                                <span className="expected-uploads-text">{dsdUnstable.highVl ? dsdUnstable.highVl.toLocaleString('en'):''}</span>
-                                <sup className="overall-rates-sup"> {dsdUnstable.highVlPercent}<span className="overall-rates-sup-perc"> %</span></sup>
-                            </div>
-                        </CardBody>
-                    </Card>
-                </div>
-                <div className="col-4">
-                    <Card className="card-uploads-consistency-rates">
-                        <CardHeader className="expected-uploads-header">
-                            PATIENTS WITH POOR ADHERANCE
-                        </CardHeader>
-                        <CardBody
-                            className="align-items-center d-flex justify-content-center"
-                            style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
-                        >
-                            <div className="col-12" style={{ textAlign: 'center' }}>
-                                <span className="overall-rates-figure">{dsdUnstable.poorAdherence ? dsdUnstable.poorAdherence.toLocaleString('en'):''}</span>
-                                <sup className="overall-rates-sup"> {dsdUnstable.poorAdherencePercent}<span className="overall-rates-sup-perc"> %</span></sup>
-                            </div>
-                        </CardBody>
-                    </Card>
-                </div>
-            </div>
-        </div>
+        <>
+            <Row>
+                <Col>
+                    <DataCard
+                        title="CURRENT ON ART"
+                        subtitle={null}
+                        data={formatNumber(currentOnArt)}
+                    />
+                </Col>
+                <Col>
+                    <DataCard
+                        title="PATIENTS ON MMD"
+                        subtitle={roundNumber(mmdPercent) + "%"}
+                        data={formatNumber(mmd)}
+                    />
+                </Col>
+                <Col>
+                    <DataCard
+                        title="STABLE PATIENTS"
+                        subtitle={roundNumber(stablePercent) + "%"}
+                        data={formatNumber(stable)}
+                    />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <DataCard
+                        title="PATIENTS ON ART &lt;1 YEAR"
+                        subtitle={roundNumber(onArtLessThan12MonthsPercent) + "%"}
+                        data={formatNumber(onArtLessThan12Months)}
+                    />
+                </Col>
+                <Col>
+                    <DataCard
+                        title="PATIENTS WITH HVL"
+                        subtitle={roundNumber(highVlPercent) + "%"}
+                        data={formatNumber(highVl)}
+                    />
+                </Col>
+                <Col>
+                    <DataCard
+                        title="PATIENTS WITH POOR ADHERANCE"
+                        subtitle={roundNumber(poorAdherencePercent) + "%"}
+                        data={formatNumber(poorAdherence)}
+                    />
+                </Col>
+            </Row>
+        </>
     );
 };
 
