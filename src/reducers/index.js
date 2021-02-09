@@ -33,6 +33,15 @@ import artOptimizationNewByYear from "./CT/ArtOptimization/artOptimizationNewByY
 import artOptimizationNewByCounty from "./CT/ArtOptimization/artOptimizationNewByCounty";
 import artOptimizationNewByPartner from "./CT/ArtOptimization/artOptimizationNewByPartner";
 
+import treatmentOutcomesBySex from "./CT/TreatmentOutcomes/treatmentOutcomesBySex";
+import treatmentOutcomesByAge from "./CT/TreatmentOutcomes/treatmentOutcomesByAge";
+import treatmentOutcomesByYear from "./CT/TreatmentOutcomes/treatmentOutcomesByYear";
+import treatmentOutcomesByFacility from "./CT/TreatmentOutcomes/treatmentOutcomesByFacility";
+import threeMonthRetention from "./CT/TreatmentOutcomes/threeMonthRetention";
+import sixMonthRetention from "./CT/TreatmentOutcomes/sixMonthRetention";
+import twelveMonthRetention from "./CT/TreatmentOutcomes/twelveMonthRetention";
+import twentyFourMonthRetention from "./CT/TreatmentOutcomes/twentyFourMonthRetention";
+
 export default combineReducers({
     auth: authReducer,
 
@@ -67,4 +76,13 @@ export default combineReducers({
     artOptimizationNewByCounty,
     artOptimizationNewByPartner,
     artOptimizationNewByYear,
+
+    treatmentOutcomesBySex,
+    treatmentOutcomesByAge,
+    treatmentOutcomesByYear,
+    treatmentOutcomesByFacility,
+    threeMonthRetention,
+    sixMonthRetention,
+    twelveMonthRetention,
+    twentyFourMonthRetention,
 });

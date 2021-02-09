@@ -1,236 +1,92 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
-import { getAll } from '../../Shared/Api';
-import moment from "moment";
+import { Row, Col, Card, CardBody, CardTitle, CardText } from 'reactstrap';
+import * as newOnArtOverviewSelectors from '../../../selectors/CT/NewOnArt/newOnArtOverview';
+import * as treatmentOutcomesBySexSelectors from '../../../selectors/CT/TreatmentOutcomes/treatmentOutcomesBySex';
+import { formatNumber, roundNumber } from '../../../utils/utils';
+import DataCard from '../../Shared/DataCard';
 
 const TreatmentOutcomesOverview = () => {
-    const filters = useSelector(state => state.filters);
-    const [treatmentOutcomes, setTreatmentOutcomes] = useState({
-        active: 0,
-        dead: 0,
-        ltfu: 0,
-        stopped: 0,
-        to: 0,
-    });
-    const [treatmentOutcomesPercent, setTreatmentOutcomesPercent] = useState({
-        net: 0,
-        deadPercent: 0,
-        ltfuPercent: 0,
-        stoppedPercent: 0,
-        netPercent: 0,
-        toPercent: 0,
-    });
-    const [newlyStartedOnARTTiles, setNewlyStartedOnARTTiles] = useState({
-        totalStartedOnART: 0,
-        totalStartedOnARTText: '',
-    });
-
-    const loadTreatmentOutcomes = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : ''
-        };
-        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const result = await getAll('care-treatment/treatmentOutcomesOverall', params);
-        let data = {
-            active: 0,
-            dead: 0,
-            ltfu: 0,
-            stopped: 0,
-            to: 0,
-        }
-        for(let i = 0; i < result.length; i++) {
-            if(result[i].artOutcome === 'Active') {
-                data.active = data.active + parseInt(result[i].totalOutcomes)
-            }
-            if(result[i].artOutcome === 'Dead') {
-                data.dead = data.dead + parseInt(result[i].totalOutcomes)
-            }
-            if(result[i].artOutcome === 'LTFU') {
-                data.ltfu = data.ltfu + parseInt(result[i].totalOutcomes)
-            }
-            if(result[i].artOutcome === 'Stopped') {
-                data.stopped = data.stopped + parseInt(result[i].totalOutcomes)
-            }
-            if(result[i].artOutcome === 'TransferOut') {
-                data.to = data.to + parseInt(result[i].totalOutcomes)
-            }
-        }
-        setTreatmentOutcomes(data);
-
-        const response = await getAll('care-treatment/getNewlyStartedDesegregated', params);
-        let newlyStartedOnARTTiles = {
-            totalStartedOnART: response.TotalStartedOnART ? response.TotalStartedOnART : 0,
-            totalStartedOnARTText: response.TotalStartedOnART ? response.TotalStartedOnART.toLocaleString('en') : 0
-        };
-        let final = {
-            net: 0,
-            deadPercent: 0,
-            ltfuPercent: 0,
-            stoppedPercent: 0,
-            netPercent: 0,
-            toPercent: 0,
-        }
-        if (newlyStartedOnARTTiles.totalStartedOnART > 0) {
-            final.net = newlyStartedOnARTTiles.totalStartedOnART - data.to - data.stopped;
-            final.deadPercent = ((data.dead/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
-            final.ltfuPercent = ((data.ltfu/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
-            final.stoppedPercent = ((data.stopped/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
-            final.netPercent = ((final.net/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
-            final.toPercent = ((data.to/newlyStartedOnARTTiles.totalStartedOnART)*100).toFixed(1);
-        }
-        setTreatmentOutcomesPercent(final);
-
-    }, [filters]);
-
-    const loadNewlyStartedARTTiles = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-        };
-        const result = await getAll('care-treatment/getNewlyStartedDesegregated', params);
-        let data = [ result.TotalStartedOnART ? result.TotalStartedOnART : 0 ];
-        setNewlyStartedOnARTTiles({
-            totalStartedOnART: data[0],
-            totalStartedOnARTText: data[0].toLocaleString('en')
-        });
-    }, [filters]);
-
-    useEffect(() => {
-        loadTreatmentOutcomes();
-        loadNewlyStartedARTTiles();
-    }, [loadTreatmentOutcomes, loadNewlyStartedARTTiles]);
+    const startedOnArt = useSelector(newOnArtOverviewSelectors.getNewOnArt);
+    const active = useSelector(treatmentOutcomesBySexSelectors.getActive);
+    const dead = useSelector(treatmentOutcomesBySexSelectors.getDead);
+    const ltfu = useSelector(treatmentOutcomesBySexSelectors.getLtfu);
+    const stopped = useSelector(treatmentOutcomesBySexSelectors.getStopped);
+    const transferOut = useSelector(treatmentOutcomesBySexSelectors.getTransferOut);
+    const netCohort = startedOnArt > 0 ? (startedOnArt - transferOut - stopped) : 0;
+    const deadPercent = startedOnArt > 0 ? ((dead/startedOnArt)*100) : 0;
+    const ltfuPercent = startedOnArt > 0 ? ((ltfu/startedOnArt)*100) : 0;
+    const stoppedPercent = startedOnArt > 0 ? ((stopped/startedOnArt)*100) : 0;
+    const transferOutPercent = startedOnArt > 0 ? ((transferOut/startedOnArt)*100) : 0;
 
     return (
-        <div className="row">
-            <div className="col-3">
-                <Card className="card-uploads-consistency-rates">
-                    <CardHeader className="expected-uploads-header">
-                        STARTED ART
-                    </CardHeader>
-                    <CardBody
-                        className="align-items-center d-flex justify-content-center"
-                        style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '265px' }}
-                    >
-                        <div className="col-12">
-                            <span className="expected-uploads-text">{newlyStartedOnARTTiles.totalStartedOnARTText}</span>
-                        </div>
+        <Row>
+            <Col xs={12} sm={12} md={12} lg={3}>
+                <Card className="primary-card" style={{height:"95%"}}>
+                    <CardBody className="primary-card-body" style={{display:"flex", alignItems: "center", justifyContent: "center"}}>
+                        <Row style={{display:"block"}}>
+                            <Col>
+                                <CardTitle tag="h5" className="text-center m-2">STARTED ART</CardTitle>
+                                <Row className="justify-content-center">
+                                    <Col className="col-7">
+                                        <CardTitle tag="h5" className="primary-card-body-subtitle text-right" style={{ color: '#FFFFFF' }}>100%</CardTitle>
+                                    </Col>
+                                </Row>
+                                <CardText className="primary-card-body-text text-center">{formatNumber(startedOnArt)}</CardText>
+                            </Col>
+                        </Row>
                     </CardBody>
                 </Card>
-            </div>
-            <div className="col-9">
-                <div className="row">
-                    <div className="col-4">
-                        <Card className="card-uploads-consistency-rates">
-                            <CardHeader className="expected-uploads-header">
-                                TRANSFERRED OUT
-                            </CardHeader>
-                            <CardBody
-                                className="align-items-center d-flex justify-content-center"
-                                style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
-                            >
-                                <div className="col-12">
-                                    <span className="expected-uploads-text">{treatmentOutcomes.to ? treatmentOutcomes.to.toLocaleString('en'):'0'}</span>
-                                    <sup className="overall-rates-sup"> {treatmentOutcomesPercent.toPercent ? treatmentOutcomesPercent.toPercent:'0'}<span className="overall-rates-sup-perc"> %</span></sup>
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </div>
-                    <div className="col-4">
-                        <Card className="card-uploads-consistency-rates">
-                            <CardHeader className="expected-uploads-header">
-                                STOPPED ART
-                            </CardHeader>
-                            <CardBody
-                                className="align-items-center d-flex justify-content-center"
-                                style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
-                            >
-                                <div className="col-12">
-                                    <span className="expected-uploads-text">{treatmentOutcomes.stopped ? treatmentOutcomes.stopped.toLocaleString('en'):'0'}</span>
-                                    <sup className="overall-rates-sup"> {treatmentOutcomesPercent.stoppedPercent ? treatmentOutcomesPercent.stoppedPercent:'0'}<span className="overall-rates-sup-perc"> %</span></sup>
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </div>
-                    <div className="col-4">
-                        <Card className="card-uploads-consistency-rates">
-                            <CardHeader className="expected-uploads-header">
-                                NET COHORT
-                            </CardHeader>
-                            <CardBody
-                                className="align-items-center d-flex justify-content-center"
-                                style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
-                            >
-                                <div className="col-12">
-                                    <span className="expected-uploads-text">{treatmentOutcomesPercent.net > 0 ? (treatmentOutcomesPercent.net).toLocaleString('en'):'0'}</span>
-                                    {/* <sup className="overall-rates-sup"> {treatmentOutcomesPercent.netPercent ? treatmentOutcomesPercent.netPercent:'0'}<span className="overall-rates-sup-perc"> %</span></sup> */}
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-4">
-                        <Card className="card-uploads-consistency-rates">
-                            <CardHeader className="expected-uploads-header">
-                                ACTIVE ON ART
-                            </CardHeader>
-                            <CardBody
-                                className="align-items-center d-flex justify-content-center"
-                                style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
-                            >
-                                <div className="col-12">
-                                    <span className="expected-uploads-text">{treatmentOutcomes.active ? treatmentOutcomes.active.toLocaleString('en'):'0'}</span>
-                                    {/* <sup className="overall-rates-sup"> {treatmentOutcomesPercent.activePercent ? treatmentOutcomesPercent.activePercent:'0'}<span className="overall-rates-sup-perc"> %</span></sup> */}
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </div>
-                    <div className="col-4">
-                        <Card className="card-uploads-consistency-rates">
-                            <CardHeader className="expected-uploads-header">
-                                LOST TO FOLLOWUP
-                            </CardHeader>
-                            <CardBody
-                                className="align-items-center d-flex justify-content-center"
-                                style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
-                            >
-                                <div className="col-12">
-                                    <span className="expected-uploads-text">{treatmentOutcomes.ltfu ? treatmentOutcomes.ltfu.toLocaleString('en'):'0'}</span>
-                                    <sup className="overall-rates-sup"> {treatmentOutcomesPercent.ltfuPercent ? treatmentOutcomesPercent.ltfuPercent:'0'}<span className="overall-rates-sup-perc"> %</span></sup>
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </div>
-                    <div className="col-4">
-                        <Card className="card-uploads-consistency-rates">
-                            <CardHeader className="expected-uploads-header">
-                                DEAD
-                            </CardHeader>
-                            <CardBody
-                                className="align-items-center d-flex justify-content-center"
-                                style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
-                            >
-                                <div className="col-12" style={{ textAlign: 'center' }}>
-                                    <span className="overall-rates-figure">{treatmentOutcomes.dead ? treatmentOutcomes.dead.toLocaleString('en'):'0'}</span>
-                                    <sup className="overall-rates-sup"> {treatmentOutcomesPercent.deadPercent}<span className="overall-rates-sup-perc"> %</span></sup>
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </div>
-                </div>
-            </div>
-        </div>
+            </Col>
+            <Col xs={12} sm={12} md={12} lg={9}>
+                <Row>
+                    <Col>
+                        <DataCard
+                            title="TRANSFERRED OUT"
+                            subtitle={roundNumber(transferOutPercent) + "%"}
+                            data={formatNumber(transferOut)}
+                        />
+                    </Col>
+                    <Col>
+                        <DataCard
+                            title="STOPPED ART"
+                            subtitle={roundNumber(stoppedPercent) + "%"}
+                            data={formatNumber(stopped)}
+                        />
+                    </Col>
+                    <Col>
+                        <DataCard
+                            title="NET COHORT"
+                            subtitle={null}
+                            data={formatNumber(netCohort)}
+                        />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <DataCard
+                            title="ACTIVE ON ART"
+                            subtitle={null}
+                            data={formatNumber(active)}
+                        />
+                    </Col>
+                    <Col>
+                        <DataCard
+                            title="LOST TO FOLLOWUP"
+                            subtitle={roundNumber(ltfuPercent) + "%"}
+                            data={formatNumber(ltfu)}
+                        />
+                    </Col>
+                    <Col>
+                        <DataCard
+                            title="DEAD"
+                            subtitle={roundNumber(deadPercent) + "%"}
+                            data={formatNumber(dead)}
+                        />
+                    </Col>
+                </Row>
+            </Col>
+        </Row>
     );
 };
 

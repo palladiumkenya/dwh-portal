@@ -36,6 +36,15 @@ import { loadArtOptimizationNewByCounty } from '../../actions/CT/ArtOptimization
 import { loadArtOptimizationNewByPartner } from '../../actions/CT/ArtOptimization/artOptimizationNewByPartnerActions';
 import { loadArtOptimizationNewByYear } from '../../actions/CT/ArtOptimization/artOptimizationNewByYearActions';
 
+import { loadTreatmentOutcomesBySex } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesBySexActions';
+import { loadTreatmentOutcomesByAge } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByAgeActions';
+import { loadTreatmentOutcomesByYear } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByYearActions';
+import { loadTreatmentOutcomesByFacility } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByFacilityActions';
+import { loadThreeMonthRetention } from '../../actions/CT/TreatmentOutcomes/threeMonthRetentionActions';
+import { loadSixMonthRetention } from '../../actions/CT/TreatmentOutcomes/sixMonthRetentionActions';
+import { loadTwelveMonthRetention } from '../../actions/CT/TreatmentOutcomes/twelveMonthRetentionActions';
+import { loadTwentyFourMonthRetention } from '../../actions/CT/TreatmentOutcomes/twentyFourMonthRetentionActions';
+
 import { CT_TABS, PAGES } from "../../constants";
 
 const CT = () => {
@@ -102,6 +111,17 @@ const CT = () => {
                 dispatch(loadArtOptimizationNewByPartner());
                 dispatch(loadArtOptimizationNewByYear());
                 dispatch(disableFromDateFilter());
+                break;
+            case 'tOut':
+                dispatch(loadNewOnArtOverview());
+                dispatch(loadTreatmentOutcomesBySex());
+                dispatch(loadTreatmentOutcomesByAge());
+                dispatch(loadTreatmentOutcomesByYear());
+                dispatch(loadTreatmentOutcomesByFacility());
+                dispatch(loadThreeMonthRetention());
+                dispatch(loadSixMonthRetention());
+                dispatch(loadTwelveMonthRetention());
+                dispatch(loadTwentyFourMonthRetention());
                 break;
             default:
                 break;
