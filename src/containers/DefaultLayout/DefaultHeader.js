@@ -8,7 +8,7 @@ import { UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle } from
 import avatar from '../../assets/img/avatars/avatar.png';
 import { useSelector } from 'react-redux';
 import { signinRedirect, signoutRedirect } from '../../services/UserService';
-import { getAll, getUserById } from '../../views/Shared/Api';
+import { getUserById } from '../../views/Shared/Api';
 
 const DefaultHeader = () => {
     const user = useSelector(state => state.auth.user)

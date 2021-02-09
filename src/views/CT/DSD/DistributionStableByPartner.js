@@ -3,59 +3,18 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import { capitalize, getAll } from '../../Shared/Api';
-import moment from "moment";
+import * as dsdStabilityStatusByPartnerSelectors from '../../../selectors/CT/Dsd/dsdStabilityStatusByPartner';
 
 const DistributionStableByPartner = () => {
-    const filters = useSelector(state => state.filters);
     const [distributionStableByPartner, setDistributionStableByPartner] = useState({});
+    const stabilityStatusByPartner = useSelector(dsdStabilityStatusByPartnerSelectors.getStabilityStatusByPartner);
 
     const loadTxCurrDistributionByPartner = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
-        };
-        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const partners = [];
-        const stable = [];
-
-        const result = await getAll('care-treatment/dsdStabilityStatusByPartner', params);
-        for(let i = 0; i < result.length; i++) {
-            partners.push(result[i].partner);
-            stable.push(result[i].stable);
-        }
-
         setDistributionStableByPartner({
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: ''
-            },
-            subtitle: {
-                text: ''
-            },
-            xAxis: {
-                categories: partners.map(p => capitalize(p)),
-                crosshair: true,
-                title: {
-                    text: 'Service Delivery Partner'
-                }
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Number of Patients'
-                }
-            },
-            legend: {
-                enabled: false,
-            },
+            title: { text: ''},
+            xAxis: [{ categories: stabilityStatusByPartner.partners, title: { text: 'Partner' }, crosshair: true }],
+            yAxis: { title: { text: 'Number of Patients' }},
+            legend: { enabled: false },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                 pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
@@ -65,13 +24,11 @@ const DistributionStableByPartner = () => {
                 useHTML: true
             },
             plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
-            series: [{
-                name: 'Number of Patients',
-                color: "#485969",
-                data: stable
-            }]
+            series: [
+                { data: stabilityStatusByPartner.stability, name: 'Number of Patients', type: 'column', color: "#485969" }
+            ]
         });
-    }, [filters]);
+    }, [stabilityStatusByPartner]);
 
     useEffect(() => {
         loadTxCurrDistributionByPartner();

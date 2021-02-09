@@ -5,7 +5,8 @@ import Uptake from './Uptake/Uptake';
 import Linkage from './Linkage/Linkage';
 import PNS from './PNS/PNS';
 import { HTS_TABS, PAGES } from "../../constants";
-import { changeHtsTab, changeCurrentPage, enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/uiActions";
+import { changeHtsTab, changeCurrentPage } from "../../actions/Shared/uiActions";
+import { enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
 
 const HTS = () => {
     const dispatch = useDispatch();

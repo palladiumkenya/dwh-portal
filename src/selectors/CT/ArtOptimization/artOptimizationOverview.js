@@ -3,18 +3,11 @@ import { createSelector } from 'reselect';
 
 const listUnfiltered = state => state.artOptimizationOverview.listUnfiltered;
 const listFiltered = state => state.artOptimizationOverview.listFiltered;
-
-const counties = state => state.filters.counties;
-const subCounties = state => state.filters.subCounties;
-const facilities = state => state.filters.facilities;
-const partners = state => state.filters.partners;
-const agencies = state => state.filters.agencies;
-const projects = state => state.filters.projects;
+const filtered = state => state.filters.filtered;
 
 export const getAdults = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Adult")
@@ -24,9 +17,8 @@ export const getAdults = createSelector(
 );
 
 export const getAdultsOnFirstLine = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Adult" && list.regimenLine === "First Regimen Line")
@@ -36,9 +28,8 @@ export const getAdultsOnFirstLine = createSelector(
 );
 
 export const getAdultsOnSecondLine = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Adult" && list.regimenLine === "Second Regimen Line")
@@ -48,9 +39,8 @@ export const getAdultsOnSecondLine = createSelector(
 );
 
 export const getAdultsOnThirdLine = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Adult" && list.regimenLine === "Third Regimen Line")
@@ -60,9 +50,8 @@ export const getAdultsOnThirdLine = createSelector(
 );
 
 export const getAdultsOnUndocumentedLine = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Adult" && list.regimenLine === "Undocumented Regimen Line")
@@ -73,9 +62,8 @@ export const getAdultsOnUndocumentedLine = createSelector(
 
 
 export const getChildren = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Child")
@@ -85,9 +73,8 @@ export const getChildren = createSelector(
 );
 
 export const getChildrenOnFirstLine = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Child" && list.regimenLine === "First Regimen Line")
@@ -97,9 +84,8 @@ export const getChildrenOnFirstLine = createSelector(
 );
 
 export const getChildrenOnSecondLine = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Child" && list.regimenLine === "Second Regimen Line")
@@ -109,9 +95,8 @@ export const getChildrenOnSecondLine = createSelector(
 );
 
 export const getChildrenOnThirdLine = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Child" && list.regimenLine === "Third Regimen Line")
@@ -121,9 +106,8 @@ export const getChildrenOnThirdLine = createSelector(
 );
 
 export const getChildrenOnUndocumentedLine = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Child" && list.regimenLine === "Undocumented Regimen Line")
@@ -133,9 +117,8 @@ export const getChildrenOnUndocumentedLine = createSelector(
 );
 
 export const getMaleAdultsOnFirstLine = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Adult" && list.gender === "Male" && list.regimenLine === "First Regimen Line")
@@ -145,9 +128,8 @@ export const getMaleAdultsOnFirstLine = createSelector(
 );
 
 export const getMaleAdultsOnSecondLine = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Adult" && list.gender === "Male" && list.regimenLine === "Second Regimen Line")
@@ -157,9 +139,8 @@ export const getMaleAdultsOnSecondLine = createSelector(
 );
 
 export const getMaleAdultsOnThirdLine = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Adult" && list.gender === "Male" && list.regimenLine === "Third Regimen Line")
@@ -169,9 +150,8 @@ export const getMaleAdultsOnThirdLine = createSelector(
 );
 
 export const getMaleAdultsOnUndocumentedLine = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Adult" && list.gender === "Male" && list.regimenLine === "Undocumented Regimen Line")
@@ -181,9 +161,8 @@ export const getMaleAdultsOnUndocumentedLine = createSelector(
 );
 
 export const getFemaleAdultsOnFirstLine = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Adult" && list.gender === "Female" && list.regimenLine === "First Regimen Line")
@@ -193,9 +172,8 @@ export const getFemaleAdultsOnFirstLine = createSelector(
 );
 
 export const getFemaleAdultsOnSecondLine = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Adult" && list.gender === "Female" && list.regimenLine === "Second Regimen Line")
@@ -205,9 +183,8 @@ export const getFemaleAdultsOnSecondLine = createSelector(
 );
 
 export const getFemaleAdultsOnThirdLine = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Adult" && list.gender === "Female" && list.regimenLine === "Third Regimen Line")
@@ -217,9 +194,8 @@ export const getFemaleAdultsOnThirdLine = createSelector(
 );
 
 export const getFemaleAdultsOnUndocumentedLine = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Adult" && list.gender === "Female" && list.regimenLine === "Undocumented Regimen Line")
@@ -229,9 +205,8 @@ export const getFemaleAdultsOnUndocumentedLine = createSelector(
 );
 
 export const getAdultsOnTld = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Adult" && list.currentRegimen === "TLD")
@@ -241,9 +216,8 @@ export const getAdultsOnTld = createSelector(
 );
 
 export const getMales = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.gender === "Male")
@@ -253,9 +227,8 @@ export const getMales = createSelector(
 );
 
 export const getFemales = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.gender === "Female")
@@ -265,9 +238,8 @@ export const getFemales = createSelector(
 );
 
 export const getMalesOnTld = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.gender === "Male" && list.currentRegimen === "TLD")
@@ -277,9 +249,8 @@ export const getMalesOnTld = createSelector(
 );
 
 export const getFemalesOnTld = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.gender === "Female" && list.currentRegimen === "TLD")
@@ -289,9 +260,8 @@ export const getFemalesOnTld = createSelector(
 );
 
 export const getAdultsOnNonTld = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Adult" && list.currentRegimen !== "TLD")
@@ -301,9 +271,8 @@ export const getAdultsOnNonTld = createSelector(
 );
 
 export const getAdultsOnNvp = createSelector(
-    [listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects],
-    (listUnfiltered, listFiltered, counties, subCounties, facilities, partners, agencies, projects) => {
-        const filtered = (counties.length || subCounties.length || facilities.length || partners.length || agencies.length || projects.length) ? true : false;
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
             .filter(list => list.ageGroup === "Adult" && list.currentRegimen === "NVP")

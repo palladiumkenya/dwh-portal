@@ -118,7 +118,7 @@ const UniversalFilter = () => {
     return (
         <Row>
             {
-                ui.countyFilterEnabled ?
+                filters.countyFilterEnabled ?
                 <Col>
                     <div className="form-group">
                         <label htmlFor="county">County</label>
@@ -140,7 +140,7 @@ const UniversalFilter = () => {
                 </Col> : null
             }
             {
-                ui.subCountyFilterEnabled ?
+                filters.subCountyFilterEnabled ?
                 <Col>
                     <div className="form-group">
                         <label htmlFor="county">Sub-County</label>
@@ -162,7 +162,7 @@ const UniversalFilter = () => {
                 </Col> : null
             }
             {
-                ui.facilityFilterEnabled ?
+                filters.facilityFilterEnabled ?
                 <Col>
                     <div className="form-group">
                         <label htmlFor="county">Facility</label>
@@ -184,7 +184,7 @@ const UniversalFilter = () => {
                 </Col> : null
             }
             {
-                ui.partnerFilterEnabled ?
+                filters.partnerFilterEnabled ?
                 <Col>
                     <div className="form-group">
                         <label htmlFor="partner">Partner</label>
@@ -206,7 +206,7 @@ const UniversalFilter = () => {
                 </Col> : null
             }
             {
-                ui.agencyFilterEnabled ?
+                filters.agencyFilterEnabled ?
                 <Col>
                     <div className="form-group">
                         <label htmlFor="agency">Agency</label>
@@ -228,7 +228,7 @@ const UniversalFilter = () => {
                 </Col> : null
             }
             {
-                ui.projectFilterEnabled ?
+                filters.projectFilterEnabled ?
                 <Col>
                     <div className="form-group">
                         <label htmlFor="project">Project</label>
@@ -250,17 +250,17 @@ const UniversalFilter = () => {
                 </Col> : null
             }
             {
-                ui.fromDateFilterEnabled ?
+                filters.fromDateFilterEnabled ?
                 <Col>
                     <div className="form-group">
-                        <label htmlFor="fromDate">{ui.toDateFilterEnabled ? 'From':'Period'}</label>
+                        <label htmlFor="fromDate">{filters.toDateFilterEnabled ? 'From':'Period'}</label>
                         <DateInput
                             name="fromDate"
                             dateFormat="MMM YYYY"
                             closable={true}
                             clearable={true}
                             // maxDate={moment()}
-                            placeholder={ui.toDateFilterEnabled ? 'From':'Period'}
+                            placeholder={filters.toDateFilterEnabled ? 'From':'Period'}
                             fluid
                             value={filters.fromDate}
                             iconPosition="left"
@@ -272,7 +272,7 @@ const UniversalFilter = () => {
                 </Col> : null
             }
             {
-                ui.toDateFilterEnabled ?
+                filters.toDateFilterEnabled ?
                 <Col>
                     <div className="form-group">
                         <label htmlFor="toDate">To</label>

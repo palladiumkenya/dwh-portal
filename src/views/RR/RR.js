@@ -9,7 +9,8 @@ import RROverview from './RROverview';
 import RROverviewTrends from './RROverviewTrends';
 import RRCounty from './RRCounty';
 import RRPartner from './RRPartner';
-import { enableStickyFilter, disableStickyFilter, changeRRTab, changeCurrentPage, enableFacilityFilter, disableFacilityFilter, enableAgencyFilter, disableAgencyFilter, enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/uiActions";
+import { enableStickyFilter, disableStickyFilter, changeRRTab, changeCurrentPage } from "../../actions/Shared/uiActions";
+import { enableFacilityFilter, disableFacilityFilter, enableAgencyFilter, disableAgencyFilter, enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
 import { RR_TABS, PAGES } from "../../constants";
 
 const RR = () => {

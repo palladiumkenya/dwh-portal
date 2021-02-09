@@ -3,46 +3,31 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { getAll } from '../Shared/Api';
-import moment from "moment";
+import * as currentOnArtByAgeSexSelectors from '../../selectors/CT/CurrentOnArt/currentOnArtByAgeSex';
+import * as dsdStabilityStatusByAgeSexSelectors from '../../selectors/CT/Dsd/dsdStabilityStatusByAgeSex';
+import { formatNumber, roundNumber } from '../../utils/utils';
 
 const HomeMmdUptakeBySex = () => {
-    const filters = useSelector(state => state.filters);
     const [mmdUptakeBySex, setHomeMmdUptakeBySex] = useState({});
+    const currentOnArtBySex = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtBySex);
+    const mmdBySex = useSelector(dsdStabilityStatusByAgeSexSelectors.getMmdBySex);
 
     const loadHomeMmdUptakeBySex = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"): '',
-        };
-        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const sexCategories = ['Male', 'Female'];
-        const result = await getAll('care-treatment/dsdMmdUptakeOverallBySex', params);
-        let data = [];
-        for(let i = 0; i < result.length; i++) {
-            if(result[i].gender === 'Male') {
-                data[0] = {
-                    y: Number(((parseInt(result[i].mmd)/parseInt(result[i].txCurr))*100).toFixed(1)),
-                    absoluteY: result[i].mmd.toLocaleString('en'),
-                    color: "#14084D"
-                };
+        let data = [
+            {
+                y: Number(roundNumber((mmdBySex[0]/currentOnArtBySex.currentOnArtMale)*100)),
+                absoluteY: formatNumber(mmdBySex[0]),
+                color: "#14084D"
+            },
+            {
+                y: Number(roundNumber((mmdBySex[1]/currentOnArtBySex.currentOnArtFemale)*100)),
+                absoluteY: formatNumber(mmdBySex[1]),
+                color: "#EA4C8B",
             }
-            if(result[i].gender === 'Female') {
-                data[1] = {
-                    y: Number(((parseInt(result[i].mmd)/parseInt(result[i].txCurr))*100).toFixed(1)),
-                    absoluteY: result[i].mmd.toLocaleString('en'),
-                    color: "#EA4C8B",
-                };
-            }
-        }
+        ];
         setHomeMmdUptakeBySex({
             title: { text: '' },
-            xAxis: [{ categories: sexCategories, crosshair: true }],
+            xAxis: [{ categories: ['Male', 'Female'], crosshair: true }],
             yAxis: [
                 { title: { text: 'Percentage of Patients' }, labels: { format: '{value} %' }}
             ],
@@ -51,7 +36,7 @@ const HomeMmdUptakeBySex = () => {
                 { name: 'MMD Uptake', data: data, type: 'column', tooltip: { valueSuffix: ' % ({point.absoluteY})' } },
             ]
         });
-    }, [filters]);
+    }, [currentOnArtBySex, mmdBySex]);
 
     useEffect(() => {
         loadHomeMmdUptakeBySex();

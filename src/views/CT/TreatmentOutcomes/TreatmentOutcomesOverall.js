@@ -3,38 +3,20 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { getAll } from '../../Shared/Api';
-import moment from "moment";
+import * as treatmentOutcomesBySexSelectors from '../../../selectors/CT/TreatmentOutcomes/treatmentOutcomesBySex';
 
 const TreatmentOutcomesOverall = () => {
-    const filters = useSelector(state => state.filters);
     const [treatmentOutcomesOverall, setTreatmentOutcomesOverall] = useState({});
+    const active = useSelector(treatmentOutcomesBySexSelectors.getActive);
+    const dead = useSelector(treatmentOutcomesBySexSelectors.getDead);
+    const ltfu = useSelector(treatmentOutcomesBySexSelectors.getLtfu);
+    const stopped = useSelector(treatmentOutcomesBySexSelectors.getStopped);
+    const transferOut = useSelector(treatmentOutcomesBySexSelectors.getTransferOut);
 
     const loadTreatmentOutcomesOverall = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
-        };
-        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped', 'TransferOut'];
-        const result = await getAll('care-treatment/treatmentOutcomesOverall', params);
-        let data = [0, 0, 0, 0];
-        for(let i = 0; i < result.length; i++) {
-            for(let j = 0; j < treatmentOutcomesCategories.length; j++) {
-                if (result[i].artOutcome === treatmentOutcomesCategories[j]) {
-                    data[j] = data[j] + parseInt(result[i].totalOutcomes);
-                }
-            }
-        }
         setTreatmentOutcomesOverall({
             chart: { type: 'pie' },
             title: { text: '' },
-            subtitle: { text: '' },
             plotOptions: {
                 pie: {
                     allowPointSelect: true,
@@ -50,15 +32,15 @@ const TreatmentOutcomesOverall = () => {
                 name:"Overall Treatment Outcomes",
                 colorByPoint: true,
                 data: [
-                    { name: 'ACTIVE', y: data[0], color: "#485969" },
-                    { name: 'DEAD', y: data[1], color: "#60A6E5" },
-                    { name: 'LTFU', y: data[2], color: "#1AB394" },
-                    { name: 'STOPPED', y: data[3], color: "#BBE65F" },
-                    // { name: 'TRANSFER OUT', y: data[3], color: "#BBE65F" },
+                    { name: 'ACTIVE', y: active, color: "#485969" },
+                    { name: 'DEAD', y: dead, color: "#60A6E5" },
+                    { name: 'LTFU', y: ltfu, color: "#1AB394" },
+                    { name: 'STOPPED', y: stopped, color: "#BBE65F" },
+                    { name: 'TRANSFER OUT', y: transferOut, color: "#F28E2B" },
                 ]
             }]
         });
-    }, [filters]);
+    }, [active, dead, ltfu, stopped, transferOut]);
 
     useEffect(() => {
         loadTreatmentOutcomesOverall();
