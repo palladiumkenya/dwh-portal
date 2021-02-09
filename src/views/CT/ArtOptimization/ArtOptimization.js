@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane, Col, Row } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
@@ -23,28 +23,12 @@ import ChildArtOptimizationOverview from './ChildArtOptimizationOverview';
 import ChildDistributionRegimenLines from './ChildDistributionRegimenLines';
 import ChildDistributionRegimens from './ChildDistributionRegimens';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
-import { loadArtOptimizationOverview } from '../../../actions/CT/ArtOptimization/artOptimizationOverviewActions';
-import { loadArtOptimizationCurrentByRegimen } from '../../../actions/CT/ArtOptimization/artOptimizationCurrentByRegimenActions';
-import { loadArtOptimizationCurrentByAgeSex } from '../../../actions/CT/ArtOptimization/artOptimizationCurrentByAgeSexActions';
-import { loadArtOptimizationCurrentByCounty } from '../../../actions/CT/ArtOptimization/artOptimizationCurrentByCountyActions';
-import { loadArtOptimizationCurrentByPartner } from '../../../actions/CT/ArtOptimization/artOptimizationCurrentByPartnerActions';
-import { loadArtOptimizationNewByCounty } from '../../../actions/CT/ArtOptimization/artOptimizationNewByCountyActions';
-import { loadArtOptimizationNewByPartner } from '../../../actions/CT/ArtOptimization/artOptimizationNewByPartnerActions';
-import { loadArtOptimizationNewByYear } from '../../../actions/CT/ArtOptimization/artOptimizationNewByYearActions';
 
 const ArtOptimization = () => {
     const dispatch = useDispatch();
     const branding = { title: "ART OPTIMIZATION", description: "OVERVIEW", overview: "ART Optimization" };
     const [activeTab, setActiveTab] = useState('adults');
     const ctTab = useSelector(state => state.ui.ctTab);
-    const counties = useSelector(state => state.filters.counties);
-    const subCounties = useSelector(state => state.filters.subCounties);
-    const facilities = useSelector(state => state.filters.facilities);
-    const partners = useSelector(state => state.filters.partners);
-    const agencies = useSelector(state => state.filters.agencies);
-    const projects = useSelector(state => state.filters.projects);
-    const fromDate = useSelector(state => state.filters.fromDate);
-    const toDate = useSelector(state => state.filters.toDate);
 
     const onVisibilityChange = (isVisible) => {
         if (ctTab === 'txOpt') {
@@ -55,28 +39,6 @@ const ArtOptimization = () => {
             }
         }
     };
-
-    useEffect(() => {
-        dispatch(loadArtOptimizationOverview());
-        dispatch(loadArtOptimizationCurrentByRegimen());
-        dispatch(loadArtOptimizationCurrentByAgeSex());
-        dispatch(loadArtOptimizationCurrentByCounty());
-        dispatch(loadArtOptimizationCurrentByPartner());
-        dispatch(loadArtOptimizationNewByCounty());
-        dispatch(loadArtOptimizationNewByPartner());
-        dispatch(loadArtOptimizationNewByYear());
-    }, [
-        dispatch,
-        counties,
-        subCounties,
-        facilities,
-        partners,
-        agencies,
-        projects,
-        fromDate,
-        toDate,
-        ctTab
-    ]);
 
     return (
         <div className="animated fadeIn">

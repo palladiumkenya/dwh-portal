@@ -9,12 +9,47 @@ import VL from './VL/VL';
 import AdverseEvents from './AdverseEvents/AdverseEvents';
 import TBHIV from './TBHIV/TBHIV';
 import ArtOptimization from './ArtOptimization/ArtOptimization';
-import { changeCtTab, changeCurrentPage, enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/uiActions";
+import { changeCtTab, changeCurrentPage } from "../../actions/Shared/uiActions";
+import { enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
+
+import { loadNewOnArtOverview } from '../../actions/CT/NewOnArt/newOnArtOverviewActions';
+import { loadNewOnArtTrends } from '../../actions/CT/NewOnArt/newOnArtTrendsActions';
+import { loadNewOnArtByAgeSex } from '../../actions/CT/NewOnArt/newOnArtByAgeSexActions';
+import { loadMedianTimeToArtStartByYear } from '../../actions/CT/NewOnArt/medianTimeToArtStartByYearActions';
+import { loadMedianTimeToArtStartByCounty } from '../../actions/CT/NewOnArt/medianTimeToArtStartByCountyActions';
+import { loadMedianTimeToArtStartByPartner } from '../../actions/CT/NewOnArt/medianTimeToArtStartByPartnerActions';
+import { loadTimeFromDiagnosisToArtStart } from '../../actions/CT/NewOnArt/timeFromDiagnosisToArtStartActions';
+
+import { loadCurrentOnArtOverview } from '../../actions/CT/CurrentOnArt/currentOnArtOverviewActions';
+import { loadCurrentOnArtByAgeSex } from '../../actions/CT/CurrentOnArt/currentOnArtByAgeSexActions';
+import { loadCurrentOnArtByCounty } from '../../actions/CT/CurrentOnArt/currentOnArtByCountyActions';
+import { loadCurrentOnArtByPartner } from '../../actions/CT/CurrentOnArt/currentOnArtByPartnerActions';
+import { loadCurrentOnArtDistributionByCounty } from '../../actions/CT/CurrentOnArt/currentOnArtDistributionByCountyActions';
+import { loadCurrentOnArtDistributionByPartner } from '../../actions/CT/CurrentOnArt/currentOnArtDistributionByPartnerActions';
+
+import { loadArtOptimizationOverview } from '../../actions/CT/ArtOptimization/artOptimizationOverviewActions';
+import { loadArtOptimizationCurrentByRegimen } from '../../actions/CT/ArtOptimization/artOptimizationCurrentByRegimenActions';
+import { loadArtOptimizationCurrentByAgeSex } from '../../actions/CT/ArtOptimization/artOptimizationCurrentByAgeSexActions';
+import { loadArtOptimizationCurrentByCounty } from '../../actions/CT/ArtOptimization/artOptimizationCurrentByCountyActions';
+import { loadArtOptimizationCurrentByPartner } from '../../actions/CT/ArtOptimization/artOptimizationCurrentByPartnerActions';
+import { loadArtOptimizationNewByCounty } from '../../actions/CT/ArtOptimization/artOptimizationNewByCountyActions';
+import { loadArtOptimizationNewByPartner } from '../../actions/CT/ArtOptimization/artOptimizationNewByPartnerActions';
+import { loadArtOptimizationNewByYear } from '../../actions/CT/ArtOptimization/artOptimizationNewByYearActions';
+
 import { CT_TABS, PAGES } from "../../constants";
 
 const CT = () => {
     const dispatch = useDispatch();
     const ctTab = useSelector(state => state.ui.ctTab);
+    const counties = useSelector(state => state.filters.counties);
+    const subCounties = useSelector(state => state.filters.subCounties);
+    const facilities = useSelector(state => state.filters.facilities);
+    const partners = useSelector(state => state.filters.partners);
+    const agencies = useSelector(state => state.filters.agencies);
+    const projects = useSelector(state => state.filters.projects);
+    const fromDate = useSelector(state => state.filters.fromDate);
+    const toDate = useSelector(state => state.filters.toDate);
+    
     const renderTabNavItems = () => {
         return (
             Object.keys(CT_TABS).map((value) => {
@@ -22,11 +57,6 @@ const CT = () => {
                     <NavItem key={value}>
                         <NavLink active={ctTab === value} onClick={() => {
                                 dispatch(changeCtTab(value));
-                                if (value === 'txNew') {
-                                    dispatch(enableFromDateFilter());
-                                } else {
-                                    dispatch(disableFromDateFilter());
-                                }
                             }} >
                             {CT_TABS[value]}
                         </NavLink>
@@ -38,13 +68,56 @@ const CT = () => {
 
     useEffect(() => {
         dispatch(changeCurrentPage(PAGES.ct));
-        if (ctTab !== 'txNew') {
-            dispatch(disableFromDateFilter());
+        dispatch(disableFromDateFilter());
+    }, [dispatch]);
+
+    useEffect(() => {
+        switch (ctTab) {
+            case 'txNew':
+                dispatch(loadNewOnArtOverview());
+                dispatch(loadNewOnArtTrends());
+                dispatch(loadNewOnArtByAgeSex());
+                dispatch(loadMedianTimeToArtStartByYear());
+                dispatch(loadMedianTimeToArtStartByCounty());
+                dispatch(loadMedianTimeToArtStartByPartner());
+                dispatch(loadTimeFromDiagnosisToArtStart());
+                dispatch(enableFromDateFilter());
+                break;
+            case 'txCurr':
+                dispatch(loadCurrentOnArtOverview());
+                dispatch(loadCurrentOnArtByAgeSex());
+                dispatch(loadCurrentOnArtByCounty());
+                dispatch(loadCurrentOnArtByPartner());
+                dispatch(loadCurrentOnArtDistributionByCounty());
+                dispatch(loadCurrentOnArtDistributionByPartner());
+                dispatch(disableFromDateFilter());
+                break;
+            case 'txOpt':
+                dispatch(loadArtOptimizationOverview());
+                dispatch(loadArtOptimizationCurrentByRegimen());
+                dispatch(loadArtOptimizationCurrentByAgeSex());
+                dispatch(loadArtOptimizationCurrentByCounty());
+                dispatch(loadArtOptimizationCurrentByPartner());
+                dispatch(loadArtOptimizationNewByCounty());
+                dispatch(loadArtOptimizationNewByPartner());
+                dispatch(loadArtOptimizationNewByYear());
+                dispatch(disableFromDateFilter());
+                break;
+            default:
+                break;
         }
-        return () => {
-            // dispatch(enableFromDateFilter());
-        }
-    }, [dispatch, ctTab]);
+    }, [
+        dispatch,
+        counties,
+        subCounties,
+        facilities,
+        partners,
+        agencies,
+        projects,
+        fromDate,
+        toDate,
+        ctTab
+    ]);
 
     return (
         <div>

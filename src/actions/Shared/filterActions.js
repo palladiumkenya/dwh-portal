@@ -39,3 +39,35 @@ export const filterByToDate = toDate => ({
     type: actionTypes.FILTER_BY_TO_DATE,
     payload: { toDate }
 });
+
+export const enableFromDateFilter = () => ({
+    type: actionTypes.ENABLE_FROM_DATE_FILTER
+});
+
+export const disableFromDateFilter = () => ({
+    type: actionTypes.DISABLE_FROM_DATE_FILTER
+});
+
+export const enableToDateFilter = () => ({
+    type: actionTypes.ENABLE_TO_DATE_FILTER
+});
+
+export const disableToDateFilter = () => ({
+    type: actionTypes.DISABLE_TO_DATE_FILTER
+});
+
+export const enableAgencyFilter = () => ({
+    type: actionTypes.ENABLE_AGENCY_FILTER
+});
+
+export const disableAgencyFilter = () => ({
+    type: actionTypes.DISABLE_AGENCY_FILTER
+});
+
+export const enableFacilityFilter = () => ({
+    type: actionTypes.ENABLE_FACILITY_FILTER
+});
+
+export const disableFacilityFilter = () => ({
+    type: actionTypes.DISABLE_FACILITY_FILTER
+});
