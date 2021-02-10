@@ -9,7 +9,7 @@ const AdultTldUptakeByCounty = () => {
     const [adultRegimenUptakeByCounty, setAdultTldUptakeByCounty] = useState({});
     const sexGroups = useSelector(selectors.getSexGroups);
     const counties = useSelector(selectors.getCounties);
-    const adultsCurrentByCounty = useSelector(selectors.getAdultsCurrentByCounty);
+    const adultsCurrentByCounty = useSelector(selectors.getCurrentByCounty);
 
     const loadAdultTldUptakeByCounty = useCallback(async () => {
         let data = [];

@@ -5,11 +5,11 @@ const listUnfiltered = state => state.artOptimizationCurrentByCounty.listUnfilte
 const listFiltered = state => state.artOptimizationCurrentByCounty.listFiltered;
 const filtered = state => state.filters.filtered;
 
-export const getAdultsCurrentByCounty = createSelector(
+export const getCurrentByCounty = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        return list.filter(list => list.ageGroup === "Adult");
+        return list;
     }
 );
 

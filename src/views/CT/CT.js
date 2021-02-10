@@ -110,6 +110,7 @@ const CT = () => {
                 dispatch(loadCurrentOnArtDistributionByPartner());
                 break;
             case 'txOpt':
+                dispatch(loadCurrentOnArtByAgeSex());
                 dispatch(loadArtOptimizationOverview());
                 dispatch(loadArtOptimizationCurrentByRegimen());
                 dispatch(loadArtOptimizationCurrentByAgeSex());
