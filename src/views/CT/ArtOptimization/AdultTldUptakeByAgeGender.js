@@ -53,8 +53,16 @@ const AdultTldUptakeByAgeGender = () => {
         for(let i = 0; i < sexGroups.length; i++) {
             const sum = _.sum(data[i]);
             const sumCurrent = _.sum(dataCurrent[i]);
-            data[i] = data[i].map((d, x) => Number(((d/dataCurrent[i][x])*100).toFixed(0)));
-            data[i].push(Number(((sum/sumCurrent)*100).toFixed(0)));
+            data[i] = data[i].map((d, x) => {
+                return {
+                    y: Number(((d/dataCurrent[i][x])*100).toFixed(0)),
+                    absoluteY: d.toLocaleString('en'),
+                };
+            });
+            data[i].push({
+                y: Number(((sum/sumCurrent)*100).toFixed(0)),
+                absoluteY: sum.toLocaleString('en'),
+            });
         }
         ageGroups.push('TOTAL');
         setAdultTldUptakeByAgeGender({
@@ -64,8 +72,8 @@ const AdultTldUptakeByAgeGender = () => {
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'MALE', type: 'column', data: data[1], color: "#14084D", tooltip: { valueSuffix: ' %' } },
-                { name: 'FEMALE ', type: 'column', data: data[0], color: "#EA4C8B", tooltip: { valueSuffix: ' %' } },
+                { name: 'MALE', type: 'column', data: data[1], color: "#14084D", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
+                { name: 'FEMALE ', type: 'column', data: data[0], color: "#EA4C8B", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
             ],
         });
     }, [ageGroupsOriginal, sexGroups, adultsCurrentByAgeSex, currentOnArtByAgeSexData]);

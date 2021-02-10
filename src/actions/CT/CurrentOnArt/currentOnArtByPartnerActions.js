@@ -8,7 +8,7 @@ export const loadCurrentOnArtByPartner = () => async (dispatch, getState) => {
         moment(getState().currentOnArtByPartner.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'txCurr') {
+    if (getState().ui.ctTab !== 'txCurr' && getState().ui.ctTab !== 'txOpt') {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {

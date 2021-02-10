@@ -12,7 +12,10 @@ export const getCurrentOnArtByCounty = createSelector(
         const currentOnArt = [];
         
         for(let i = 0; i < list.length; i++) {
-            counties.push(list[i].County);
+            if (!list[i].County) {
+                continue;
+            }
+            counties.push(list[i].County.toUpperCase());
             currentOnArt.push(list[i].txCurr);
         }
 
