@@ -8,7 +8,11 @@ export const loadCurrentOnArtByAgeSex = () => async (dispatch, getState) => {
         moment(getState().currentOnArtByAgeSex.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'txCurr' && getState().ui.currentPage !== PAGES.home) {
+    if (
+        getState().ui.ctTab !== 'txCurr' &&
+        getState().ui.ctTab !== 'txOpt' &&
+        getState().ui.currentPage !== PAGES.home
+    ) {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
