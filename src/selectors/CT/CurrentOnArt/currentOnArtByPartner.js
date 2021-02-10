@@ -12,7 +12,10 @@ export const getCurrentOnArtByPartner = createSelector(
         const currentOnArt = [];
         
         for(let i = 0; i < list.length; i++) {
-            partners.push(list[i].CTPartner);
+            if (!list[i].CTPartner) {
+                continue;
+            }
+            partners.push(list[i].CTPartner.toUpperCase());
             currentOnArt.push(list[i].txCurr);
         }
 
