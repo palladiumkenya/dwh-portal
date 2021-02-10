@@ -28,28 +28,20 @@ const VLUptakeByPartner = () => {
 
         for(let i = 0; i < result.length; i++) {
             partners.push(result[i].partner);
-            vlUptakeByPartner.push(parseInt(result[i].vlDone, 10));
+            vlUptakeByPartner.push({
+                y: Number(((parseInt(result[i].vlDone)/parseInt(result[i].txCurr))*100).toFixed(0)),
+                absoluteY: result[i].vlDone.toLocaleString('en'),
+            });
         }
 
         setVLUptakeByPartner({
-            chart: { zoomType: 'xy' },
-            title: { useHTML: true, text: ' &nbsp;', align: 'left' },
-            subtitle: { text: ' ', align: 'left' },
-            xAxis: [{ categories: partners, crosshair: true, title: { text: 'Service Delivery Partner' } }],
-            yAxis: [
-                {
-                    title: { text: 'Number of Patients', style: { color: Highcharts.getOptions().colors[1] } },
-                    labels: { format: '{value}', style: { color: Highcharts.getOptions().colors[1] } },
-                    min: 0,
-                }
-            ],
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
-            legend: {
-                floating: true, layout: 'vertical', align: 'left', verticalAlign: 'top', y: 0, x: 80,
-                backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
-            },
+            title: { text: '' },
+            xAxis: [{ categories: partners, title: { text: 'Service Delivery Partner' }, crosshair: true }],
+            yAxis: [{ title: { text: 'Percentage of Patients' }, labels: { format: '{value} %' }}],
+            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none', format: '{y} %' } } },
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Number of Patients', data: vlUptakeByPartner, type: 'column', color: "#485969" },
+                { name: 'Percentage of Patients', data: vlUptakeByPartner, type: 'column', color: "#485969", tooltip: { valueSuffix: ' % ({point.absoluteY})'} },
             ]
         });
     }, [filters]);
