@@ -4,19 +4,23 @@ import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import * as selectors from '../../../selectors/CT/ArtOptimization/artOptimizationCurrentByPartner';
+import * as currentOnArtByPartnerSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtByPartner';
 
 const AdultTldUptakeByPartner = () => {
     const [adultRegimenUptakeByPartner, setAdultTldUptakeByPartner] = useState({});
     const sexGroups = useSelector(selectors.getSexGroups);
     const partners = useSelector(selectors.getPartners);
-    const adultsCurrentByPartner = useSelector(selectors.getCurrentByPartner);
+    const adultsCurrentByPartner = useSelector(selectors.getCurrentTldByPartner);
+    const currentOnArtByPartnerData = useSelector(currentOnArtByPartnerSelectors.getCurrentOnArtByPartner);
 
     const loadAdultTldUptakeByPartner = useCallback(async () => {
         let data = [];
+        let dataCurrent = [];
         for(let i = 0; i < sexGroups.length; i++) {
             data[i] = [];
             for(let j = 0; j < partners.length; j++) {
                 data[i][j] = 0;
+                dataCurrent[j] = 0;
             }
         }
         for(let i = 0; i < adultsCurrentByPartner.length; i++) {
@@ -27,26 +31,35 @@ const AdultTldUptakeByPartner = () => {
             }
             data[sexGroupsIndex][partnersIndex] = data[sexGroupsIndex][partnersIndex] + parseInt(adultsCurrentByPartner[i].txCurr);
         }
+        for(let i = 0; i < currentOnArtByPartnerData.currentOnArt.length; i++) {
+            let partnerIndex = partners.indexOf(currentOnArtByPartnerData.partners[i]);
+            if(partnerIndex === -1) {
+                continue;
+            }
+            dataCurrent[partnerIndex] = dataCurrent[partnerIndex] + parseInt(currentOnArtByPartnerData.currentOnArt[i]);
+        }
+        let final = [];
+        if (data[0]) {
+            final = data[0].map((d, x) => {
+                let total = (d + data[1][x]);
+                let percentage = Number(((total/dataCurrent[x])*100).toFixed(0));
+                return {
+                    y: percentage,
+                    absoluteY: total.toLocaleString('en'),
+                };
+            });
+        }
         setAdultTldUptakeByPartner({
             title: { text: '' },
             xAxis: { categories: partners.map(a => a.toUpperCase()), title: { text: 'PARTNER' }, crosshair: true },
             yAxis: { title: { text: 'PERCENT OF PATIENTS' }},
             tooltip: { shared: true },
-            plotOptions: {
-                column: {
-                    stacking: 'percent',
-                    tooltip: {
-                        valueSuffix: ' ({point.percentage:.0f}%)'
-                    },
-                }
-            },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'MALE', type: 'column', data: data[1], color: "#14084D" },
-                { name: 'FEMALE ', type: 'column', data: data[0], color: "#EA4C8B" },
+                { name: 'TLD UPTAKE', type: 'column', data: final, color: "#485969", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
             ],
         });
-    }, [partners, sexGroups, adultsCurrentByPartner]);
+    }, [partners, sexGroups, adultsCurrentByPartner, currentOnArtByPartnerData]);
 
     useEffect(() => {
         loadAdultTldUptakeByPartner();

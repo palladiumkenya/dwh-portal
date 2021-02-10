@@ -13,11 +13,19 @@ export const getCurrentByPartner = createSelector(
     }
 );
 
+export const getCurrentTldByPartner = createSelector(
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        return _.chain(list).filter(l => l.regimen === 'TLD').value();
+    }
+);
+
 export const getPartners = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        return _.chain(list).filter(l => l.partner).map(l => l.partner).uniq().sort().value();
+        return _.chain(list).filter(l => l.partner).map(l => l.partner.toUpperCase()).uniq().sort().value();
     }
 );
 
