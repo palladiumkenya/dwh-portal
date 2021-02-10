@@ -64,3 +64,11 @@ export const getCurrentOnArtBySex = createSelector(
         return { currentOnArtFemale, currentOnArtMale }
     }
 );
+
+export const getCurrentOnArtByAgeSexList = createSelector(
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        return list;
+    }
+);

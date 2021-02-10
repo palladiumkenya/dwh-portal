@@ -5,23 +5,27 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import _ from 'lodash';
 import * as selectors from '../../../selectors/CT/ArtOptimization/artOptimizationCurrentByAgeSex';
+import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtByAgeSex';
 
 const AdultTldUptakeByAgeGender = () => {
     const [adultTldUptakeByAgeGender, setAdultTldUptakeByAgeGender] = useState({});
     const sexGroups = useSelector(selectors.getSexGroups);
     const ageGroupsOriginal = useSelector(selectors.getAgeGroups);
-    const adultsCurrentByAgeSex = useSelector(selectors.getAdultsCurrentByAgeSex);
-    const adultsCurrentByAgeSexTotal = useSelector(selectors.getAdultsCurrentByAgeSexTotal);
+    const adultsCurrentByAgeSex = useSelector(selectors.getCurrentTldByAgeSex);
+    const currentOnArtByAgeSexData = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtByAgeSexList);
 
     const loadAdultTldUptakeByAgeGender = useCallback(async () => {
         let ageGroups = _.remove(_.uniq(['Under 1', '1 to 4', '5 to 9'].concat(ageGroupsOriginal)), function(element) {
             return element !== 'Under 1' && element !== '1 to 4' && element !== '5 to 9';
         });
         let data = [];
+        let dataCurrent = [];
         for(let i = 0; i < sexGroups.length; i++) {
             data[i] = [];
+            dataCurrent[i] = [];
             for(let j = 0; j < ageGroups.length; j++) {
                 data[i][j] = 0;
+                dataCurrent[i][j] = 0;
             }
         }
         for(let i = 0; i < adultsCurrentByAgeSex.length; i++) {
@@ -32,10 +36,25 @@ const AdultTldUptakeByAgeGender = () => {
             }
             data[sexGroupsIndex][ageGroupsIndex] = data[sexGroupsIndex][ageGroupsIndex] + parseInt(adultsCurrentByAgeSex[i].txCurr);
         }
+
+        for(let i = 0; i < currentOnArtByAgeSexData.length; i++) {
+            if (!currentOnArtByAgeSexData[i].ageGroup) {
+                continue;
+            }
+            let sexGroupsIndex = sexGroups.indexOf(currentOnArtByAgeSexData[i].Gender);
+            let ageGroupsIndex = ageGroups.indexOf(currentOnArtByAgeSexData[i].ageGroup.replace(/-/g, " to "));
+            
+            if(sexGroupsIndex === -1 || ageGroupsIndex === -1) {
+                continue;
+            }
+            dataCurrent[sexGroupsIndex][ageGroupsIndex] = dataCurrent[sexGroupsIndex][ageGroupsIndex] + parseInt(currentOnArtByAgeSexData[i].txCurr);
+        }
+
         for(let i = 0; i < sexGroups.length; i++) {
             const sum = _.sum(data[i]);
-            data[i] = data[i].map(d => Number(((d/sum)*100).toFixed(2)));
-            data[i].push(Number(((sum/adultsCurrentByAgeSexTotal)*100).toFixed(2)));
+            const sumCurrent = _.sum(dataCurrent[i]);
+            data[i] = data[i].map((d, x) => Number(((d/dataCurrent[i][x])*100).toFixed(0)));
+            data[i].push(Number(((sum/sumCurrent)*100).toFixed(0)));
         }
         ageGroups.push('TOTAL');
         setAdultTldUptakeByAgeGender({
@@ -49,7 +68,7 @@ const AdultTldUptakeByAgeGender = () => {
                 { name: 'FEMALE ', type: 'column', data: data[0], color: "#EA4C8B", tooltip: { valueSuffix: ' %' } },
             ],
         });
-    }, [ageGroupsOriginal, sexGroups, adultsCurrentByAgeSex, adultsCurrentByAgeSexTotal]);
+    }, [ageGroupsOriginal, sexGroups, adultsCurrentByAgeSex, currentOnArtByAgeSexData]);
 
     useEffect(() => {
         loadAdultTldUptakeByAgeGender();
