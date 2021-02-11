@@ -38,9 +38,11 @@ const AdverseEventsSeverityLevels = () => {
             const y  = cat_moderate.length > 0 ? cat_moderate.map(item => item.total).reduce((x, y) => x + y) : 0;
             const z  = cat_mild.length > 0 ? cat_mild.map(item => item.total).reduce((x, y) => x + y) : 0;
 
-            severe_values.push(x);
-            moderate_values.push(y);
-            mild_values.push(z);
+            if (x > 0 || y > 0 || z > 0) {
+                severe_values.push(x);
+                moderate_values.push(y);
+                mild_values.push(z);
+            }
         }
         setSeverityLevels({
             chart: {
