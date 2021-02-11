@@ -8,7 +8,7 @@ export const loadNewOnArtTrends = () => async (dispatch, getState) => {
         moment(getState().newOnArtTrends.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'txNew') {
+    if (getState().ui.ctTab !== 'txNew' && getState().ui.ctTab !== 'tOut') {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
