@@ -11,6 +11,7 @@ export const loadCurrentOnArtOverview = () => async (dispatch, getState) => {
     if (
         getState().ui.ctTab !== 'txCurr' &&
         getState().ui.ctTab !== 'dsd' &&
+        getState().ui.ctTab !== 'vl' &&
         getState().ui.currentPage !== PAGES.home
     ) {
         return;
