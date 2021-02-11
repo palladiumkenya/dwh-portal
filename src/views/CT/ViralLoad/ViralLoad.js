@@ -2,14 +2,14 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Row } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
-import UniversalFilter from './../../Shared/UniversalFilter';
+import UniversalFilter from '../../Shared/UniversalFilter';
 import SectionHeader from '../../Shared/SectionHeader';
 import SectionFooter from '../../Shared/SectionFooter';
-import VLOverview from './VLOverview';
+import ViralLoadOverview from './ViralLoadOverview';
 import VLOverallUptakeAndSuppression from './VLOverallUptakeAndSuppression';
-import MedianTimeTo1stVL from './MedianTimeTo1stVL';
-import MedianTimeTo1stVLByCounty from './MedianTimeTo1stVLByCounty';
-import MedianTimeTo1stVLByPartner from './MedianTimeTo1stVLByPartner';
+import MedianTimeTo1stVlByYear from './MedianTimeTo1stVlByYear';
+import MedianTimeTo1stVlByCounty from './MedianTimeTo1stVlByCounty';
+import MedianTimeTo1stVlByPartner from './MedianTimeTo1stVlByPartner';
 import VLUptakeBySex from './VLUptakeBySex';
 import VLUptakeByAge from './VLUptakeByAge';
 import VLUptakeByCounty from './VLUptakeByCounty';
@@ -27,7 +27,7 @@ import VLSuppressionByYear24Month from './VLSuppressionByYear24Month';
 import VLOverallUptakeAndSuppressionByFacility from './VLOverallUptakeAndSuppressionByFacility';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
-const VL = () => {
+const ViralLoad = () => {
     const branding = { title: "VIRAL LOAD MONITORING", description: "OVERVIEW", overview: "Viral Load Monitoring" };
     const ctTab = useSelector(state => state.ui.ctTab);
     const dispatch = useDispatch();
@@ -46,19 +46,19 @@ const VL = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <VLOverview />
+            <ViralLoadOverview />
             <Row>
                 <Col>
                     <VLOverallUptakeAndSuppression />
                 </Col>
                 <Col>
-                    <MedianTimeTo1stVL />
+                    <MedianTimeTo1stVlByYear />
                 </Col>
             </Row>
             <SectionFooter overview={branding.overview}/>
-            <MedianTimeTo1stVLByCounty />
+            <MedianTimeTo1stVlByCounty />
             <SectionFooter overview={branding.overview}/>
-            <MedianTimeTo1stVLByPartner />
+            <MedianTimeTo1stVlByPartner />
             <SectionFooter overview={branding.overview}/>
             <Row>
                 <Col sm={4}>
@@ -110,4 +110,4 @@ const VL = () => {
 
 };
 
-export default VL;
+export default ViralLoad;
