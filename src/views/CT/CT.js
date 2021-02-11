@@ -137,6 +137,7 @@ const CT = () => {
                 break;
             case 'tOut':
                 dispatch(loadNewOnArtOverview());
+                dispatch(loadNewOnArtTrends());
                 dispatch(loadTreatmentOutcomesBySex());
                 dispatch(loadTreatmentOutcomesByAge());
                 dispatch(loadTreatmentOutcomesByYear());
