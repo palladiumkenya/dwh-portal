@@ -44,6 +44,10 @@ import dsdAppointmentDurationByStabilityStatus from "./CT/Dsd/dsdAppointmentDura
 import dsdAppointmentDurationByCounty from "./CT/Dsd/dsdAppointmentDurationByCounty";
 import dsdAppointmentDurationByPartner from "./CT/Dsd/dsdAppointmentDurationByPartner";
 
+import viralLoadUptakeBySex from "./CT/ViralLoad/viralLoadUptakeBySex";
+import viralLoadUptakeByAge from "./CT/ViralLoad/viralLoadUptakeByAge";
+import viralLoadUptakeByCounty from "./CT/ViralLoad/viralLoadUptakeByCounty";
+import viralLoadUptakeByPartner from "./CT/ViralLoad/viralLoadUptakeByPartner";
 import viralLoadOverallUptakeSuppressionBySex from "./CT/ViralLoad/viralLoadOverallUptakeSuppressionBySex";
 import medianTimeTo1stVlByYear from "./CT/ViralLoad/medianTimeTo1stVlByYear";
 import medianTimeTo1stVlByCounty from "./CT/ViralLoad/medianTimeTo1stVlByCounty";
@@ -105,6 +109,10 @@ export default combineReducers({
     dsdAppointmentDurationByCounty,
     dsdAppointmentDurationByPartner,
 
+    viralLoadUptakeBySex,
+    viralLoadUptakeByAge,
+    viralLoadUptakeByCounty,
+    viralLoadUptakeByPartner,
     viralLoadOverallUptakeSuppressionBySex,
     medianTimeTo1stVlByYear,
     medianTimeTo1stVlByCounty,

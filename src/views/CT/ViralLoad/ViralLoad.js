@@ -10,10 +10,10 @@ import ViralLoadOverallUptakeAndSuppressionBySex from './ViralLoadOverallUptakeA
 import MedianTimeTo1stVlByYear from './MedianTimeTo1stVlByYear';
 import MedianTimeTo1stVlByCounty from './MedianTimeTo1stVlByCounty';
 import MedianTimeTo1stVlByPartner from './MedianTimeTo1stVlByPartner';
-import VLUptakeBySex from './VLUptakeBySex';
-import VLUptakeByAge from './VLUptakeByAge';
-import VLUptakeByCounty from './VLUptakeByCounty';
-import VLUptakeByPartner from './VLUptakeByPartner';
+import ViralLoadUptakeBySex from './ViralLoadUptakeBySex';
+import ViralLoadUptakeByAge from './ViralLoadUptakeByAge';
+import ViralLoadUptakeByCounty from './ViralLoadUptakeByCounty';
+import ViralLoadUptakeByPartner from './ViralLoadUptakeByPartner';
 import VLOutcomesOverall from './VLOutcomesOverall';
 import VLOutcomesBySex from './VLOutcomesBySex';
 import VLSuppressionByAge from './VLSuppressionByAge';
@@ -62,16 +62,16 @@ const ViralLoad = () => {
             <SectionFooter overview={branding.overview}/>
             <Row>
                 <Col sm={4}>
-                    <VLUptakeBySex />
+                    <ViralLoadUptakeBySex />
                 </Col>
                 <Col sm={8}>
-                    <VLUptakeByAge />
+                    <ViralLoadUptakeByAge />
                 </Col>
             </Row>
             <SectionFooter overview={branding.overview}/>
-            <VLUptakeByCounty />
+            <ViralLoadUptakeByCounty />
             <SectionFooter overview={branding.overview}/>
-            <VLUptakeByPartner />
+            <ViralLoadUptakeByPartner />
             <SectionFooter overview={branding.overview}/>
             <Row>
                 <Col sm={4}>
