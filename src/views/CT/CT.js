@@ -5,7 +5,7 @@ import NewOnArt from './NewOnArt/NewOnArt';
 import CurrentOnArt from './CurrentOnArt/CurrentOnArt';
 import DSD from './DSD/DSD';
 import TreatmentOutcomes from './TreatmentOutcomes/TreatmentOutcomes';
-import VL from './VL/VL';
+import ViralLoad from './ViralLoad/ViralLoad';
 import AdverseEvents from './AdverseEvents/AdverseEvents';
 // import TBHIV from './TBHIV/TBHIV';
 import ArtOptimization from './ArtOptimization/ArtOptimization';
@@ -46,6 +46,16 @@ import { loadDsdAppointmentDurationBySex } from '../../actions/CT/Dsd/dsdAppoint
 import { loadDsdAppointmentDurationByAge } from '../../actions/CT/Dsd/dsdAppointmentDurationByAgeActions';
 import { loadDsdAppointmentDurationByCounty } from '../../actions/CT/Dsd/dsdAppointmentDurationByCountyActions';
 import { loadDsdAppointmentDurationByPartner } from '../../actions/CT/Dsd/dsdAppointmentDurationByPartnerActions';
+
+import { loadViralLoadUptakeBySex } from '../../actions/CT/ViralLoad/viralLoadUptakeBySexActions';
+import { loadViralLoadUptakeByAge } from '../../actions/CT/ViralLoad/viralLoadUptakeByAgeActions';
+import { loadViralLoadUptakeByCounty } from '../../actions/CT/ViralLoad/viralLoadUptakeByCountyActions';
+import { loadViralLoadUptakeByPartner } from '../../actions/CT/ViralLoad/viralLoadUptakeByPartnerActions';
+import { loadViralLoadOverallUptakeSuppressionBySex } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeSuppressionBySexActions';
+import { loadMedianTimeTo1stVlByYear } from '../../actions/CT/ViralLoad/medianTimeTo1stVlByYearActions';
+import { loadMedianTimeTo1stVlByCounty } from '../../actions/CT/ViralLoad/medianTimeTo1stVlByCountyActions';
+import { loadMedianTimeTo1stVlByPartner } from '../../actions/CT/ViralLoad/medianTimeTo1stVlByPartnerActions';
+import { loadViralLoadOverallUptakeSuppressionByFacility } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeSuppressionByFacilityActions';
 
 import { loadTreatmentOutcomesBySex } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesBySexActions';
 import { loadTreatmentOutcomesByAge } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByAgeActions';
@@ -135,6 +145,18 @@ const CT = () => {
                 dispatch(loadDsdAppointmentDurationByCounty());
                 dispatch(loadDsdAppointmentDurationByPartner());
                 break;
+            case 'vl':
+                dispatch(loadCurrentOnArtOverview());
+                dispatch(loadViralLoadUptakeBySex());
+                dispatch(loadViralLoadUptakeByAge());
+                dispatch(loadViralLoadUptakeByCounty());
+                dispatch(loadViralLoadUptakeByPartner());
+                dispatch(loadViralLoadOverallUptakeSuppressionBySex());
+                dispatch(loadMedianTimeTo1stVlByYear());
+                dispatch(loadMedianTimeTo1stVlByCounty());
+                dispatch(loadMedianTimeTo1stVlByPartner());
+                dispatch(loadViralLoadOverallUptakeSuppressionByFacility());
+                break;
             case 'tOut':
                 dispatch(loadNewOnArtOverview());
                 dispatch(loadNewOnArtTrends());
@@ -193,7 +215,7 @@ const CT = () => {
                     <DSD/>
                 </TabPane>
                 <TabPane tabId="vl">
-                    <VL/>
+                    <ViralLoad/>
                 </TabPane>
                 <TabPane tabId="tOut">
                     <TreatmentOutcomes/>

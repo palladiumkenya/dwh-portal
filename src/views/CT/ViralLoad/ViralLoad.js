@@ -2,18 +2,18 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Row } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
-import UniversalFilter from './../../Shared/UniversalFilter';
+import UniversalFilter from '../../Shared/UniversalFilter';
 import SectionHeader from '../../Shared/SectionHeader';
 import SectionFooter from '../../Shared/SectionFooter';
-import VLOverview from './VLOverview';
-import VLOverallUptakeAndSuppression from './VLOverallUptakeAndSuppression';
-import MedianTimeTo1stVL from './MedianTimeTo1stVL';
-import MedianTimeTo1stVLByCounty from './MedianTimeTo1stVLByCounty';
-import MedianTimeTo1stVLByPartner from './MedianTimeTo1stVLByPartner';
-import VLUptakeBySex from './VLUptakeBySex';
-import VLUptakeByAge from './VLUptakeByAge';
-import VLUptakeByCounty from './VLUptakeByCounty';
-import VLUptakeByPartner from './VLUptakeByPartner';
+import ViralLoadOverview from './ViralLoadOverview';
+import ViralLoadOverallUptakeAndSuppressionBySex from './ViralLoadOverallUptakeAndSuppressionBySex';
+import MedianTimeTo1stVlByYear from './MedianTimeTo1stVlByYear';
+import MedianTimeTo1stVlByCounty from './MedianTimeTo1stVlByCounty';
+import MedianTimeTo1stVlByPartner from './MedianTimeTo1stVlByPartner';
+import ViralLoadUptakeBySex from './ViralLoadUptakeBySex';
+import ViralLoadUptakeByAge from './ViralLoadUptakeByAge';
+import ViralLoadUptakeByCounty from './ViralLoadUptakeByCounty';
+import ViralLoadUptakeByPartner from './ViralLoadUptakeByPartner';
 import VLOutcomesOverall from './VLOutcomesOverall';
 import VLOutcomesBySex from './VLOutcomesBySex';
 import VLSuppressionByAge from './VLSuppressionByAge';
@@ -24,10 +24,10 @@ import VLSuppressionByPartner from './VLSuppressionByPartner';
 import VLSuppressionByYear6Month from './VLSuppressionByYear6Month';
 import VLSuppressionByYear12Month from './VLSuppressionByYear12Month';
 import VLSuppressionByYear24Month from './VLSuppressionByYear24Month';
-import VLOverallUptakeAndSuppressionByFacility from './VLOverallUptakeAndSuppressionByFacility';
+import ViralLoadOverallUptakeAndSuppressionByFacility from './ViralLoadOverallUptakeAndSuppressionByFacility';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
-const VL = () => {
+const ViralLoad = () => {
     const branding = { title: "VIRAL LOAD MONITORING", description: "OVERVIEW", overview: "Viral Load Monitoring" };
     const ctTab = useSelector(state => state.ui.ctTab);
     const dispatch = useDispatch();
@@ -46,32 +46,32 @@ const VL = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <VLOverview />
+            <ViralLoadOverview />
             <Row>
                 <Col>
-                    <VLOverallUptakeAndSuppression />
+                    <ViralLoadOverallUptakeAndSuppressionBySex />
                 </Col>
                 <Col>
-                    <MedianTimeTo1stVL />
+                    <MedianTimeTo1stVlByYear />
                 </Col>
             </Row>
             <SectionFooter overview={branding.overview}/>
-            <MedianTimeTo1stVLByCounty />
+            <MedianTimeTo1stVlByCounty />
             <SectionFooter overview={branding.overview}/>
-            <MedianTimeTo1stVLByPartner />
+            <MedianTimeTo1stVlByPartner />
             <SectionFooter overview={branding.overview}/>
             <Row>
                 <Col sm={4}>
-                    <VLUptakeBySex />
+                    <ViralLoadUptakeBySex />
                 </Col>
                 <Col sm={8}>
-                    <VLUptakeByAge />
+                    <ViralLoadUptakeByAge />
                 </Col>
             </Row>
             <SectionFooter overview={branding.overview}/>
-            <VLUptakeByCounty />
+            <ViralLoadUptakeByCounty />
             <SectionFooter overview={branding.overview}/>
-            <VLUptakeByPartner />
+            <ViralLoadUptakeByPartner />
             <SectionFooter overview={branding.overview}/>
             <Row>
                 <Col sm={4}>
@@ -103,11 +103,11 @@ const VL = () => {
             <SectionFooter overview={branding.overview}/>
             <VLSuppressionByYear24Month />
             <SectionFooter overview={branding.overview}/>
-            <VLOverallUptakeAndSuppressionByFacility />
+            <ViralLoadOverallUptakeAndSuppressionByFacility />
             <SectionFooter overview={branding.overview}/>
         </div>
     );
 
 };
 
-export default VL;
+export default ViralLoad;
