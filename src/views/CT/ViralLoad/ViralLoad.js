@@ -6,7 +6,7 @@ import UniversalFilter from '../../Shared/UniversalFilter';
 import SectionHeader from '../../Shared/SectionHeader';
 import SectionFooter from '../../Shared/SectionFooter';
 import ViralLoadOverview from './ViralLoadOverview';
-import VLOverallUptakeAndSuppression from './VLOverallUptakeAndSuppression';
+import ViralLoadOverallUptakeAndSuppressionBySex from './ViralLoadOverallUptakeAndSuppressionBySex';
 import MedianTimeTo1stVlByYear from './MedianTimeTo1stVlByYear';
 import MedianTimeTo1stVlByCounty from './MedianTimeTo1stVlByCounty';
 import MedianTimeTo1stVlByPartner from './MedianTimeTo1stVlByPartner';
@@ -24,7 +24,7 @@ import VLSuppressionByPartner from './VLSuppressionByPartner';
 import VLSuppressionByYear6Month from './VLSuppressionByYear6Month';
 import VLSuppressionByYear12Month from './VLSuppressionByYear12Month';
 import VLSuppressionByYear24Month from './VLSuppressionByYear24Month';
-import VLOverallUptakeAndSuppressionByFacility from './VLOverallUptakeAndSuppressionByFacility';
+import ViralLoadOverallUptakeAndSuppressionByFacility from './ViralLoadOverallUptakeAndSuppressionByFacility';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const ViralLoad = () => {
@@ -49,7 +49,7 @@ const ViralLoad = () => {
             <ViralLoadOverview />
             <Row>
                 <Col>
-                    <VLOverallUptakeAndSuppression />
+                    <ViralLoadOverallUptakeAndSuppressionBySex />
                 </Col>
                 <Col>
                     <MedianTimeTo1stVlByYear />
@@ -103,7 +103,7 @@ const ViralLoad = () => {
             <SectionFooter overview={branding.overview}/>
             <VLSuppressionByYear24Month />
             <SectionFooter overview={branding.overview}/>
-            <VLOverallUptakeAndSuppressionByFacility />
+            <ViralLoadOverallUptakeAndSuppressionByFacility />
             <SectionFooter overview={branding.overview}/>
         </div>
     );
