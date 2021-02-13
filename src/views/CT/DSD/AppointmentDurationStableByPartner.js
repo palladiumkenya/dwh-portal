@@ -3,26 +3,27 @@ import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
-import * as dsdAppointmentDurationByPartnerSelectors from '../../../selectors/CT/Dsd/dsdAppointmentDurationByPartner';
+import * as dsdStabilityStatusByPartnerSelectors from '../../../selectors/CT/Dsd/dsdStabilityStatusByPartner';
 
 const AppointmentDurationStableByPartner = () => {
     const [appointmentDurationStableByPartner, setAppointmentDurationStableByPartner] = useState({});
-    const appointmentDurationByPartnerData = useSelector(dsdAppointmentDurationByPartnerSelectors.getAppointmentDurationByPartner);
+    const stabilityStatusByPartnerMmd = useSelector(dsdStabilityStatusByPartnerSelectors.getStabilityStatusByPartnerMmd);
+    const stabilityStatusByPartnerNonMmd = useSelector(dsdStabilityStatusByPartnerSelectors.getStabilityStatusByPartnerNonMmd);
 
     const loadAppointmentDurationStableByPartner = useCallback(async () => {
         setAppointmentDurationStableByPartner({
             title: { text: '' },
-            xAxis: [{ categories: appointmentDurationByPartnerData.partnerCategories, crosshair: true }],
+            xAxis: [{ categories: stabilityStatusByPartnerNonMmd.partners, crosshair: true }],
             yAxis: [{ title: { text: 'Percentage of Patients' }}],
             tooltip: { shared: true },
             plotOptions: { column: { stacking: 'percent' } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'NON MMD', data: appointmentDurationByPartnerData.data[1], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'MMD', data: appointmentDurationByPartnerData.data[0], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'NON MMD', data: stabilityStatusByPartnerNonMmd.nonMmd, type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'MMD', data: stabilityStatusByPartnerMmd.mmd, type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [appointmentDurationByPartnerData]);
+    }, [stabilityStatusByPartnerMmd, stabilityStatusByPartnerNonMmd]);
 
     useEffect(() => {
         loadAppointmentDurationStableByPartner();
