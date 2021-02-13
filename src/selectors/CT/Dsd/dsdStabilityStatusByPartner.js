@@ -20,3 +20,37 @@ export const getStabilityStatusByPartner = createSelector(
         return { partners, stability };
     }
 );
+
+export const getStabilityStatusByPartnerMmd = createSelector(
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        const partners = [];
+        const mmd = [];
+        for(let i = 0; i < list.length; i++) {
+            if (!list[i].partner) {
+                continue;
+            }
+            partners.push(list[i].partner.toUpperCase());
+            mmd.push(list[i].mmd);
+        }
+        return { partners, mmd };
+    }
+);
+
+export const getStabilityStatusByPartnerNonMmd = createSelector(
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        const partners = [];
+        const nonMmd = [];
+        for(let i = 0; i < list.length; i++) {
+            if (!list[i].partner) {
+                continue;
+            }
+            partners.push(list[i].partner.toUpperCase());
+            nonMmd.push(list[i].nonMmd);
+        }
+        return { partners, nonMmd };
+    }
+);
