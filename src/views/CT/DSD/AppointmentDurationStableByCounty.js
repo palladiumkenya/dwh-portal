@@ -3,26 +3,27 @@ import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
-import * as dsdAppointmentDurationByCountySelectors from '../../../selectors/CT/Dsd/dsdAppointmentDurationByCounty';
+import * as dsdStabilityStatusByCountySelectors from '../../../selectors/CT/Dsd/dsdStabilityStatusByCounty';
 
 const AppointmentDurationStableByCounty = () => {
     const [appointmentDurationStableByCounty, setAppointmentDurationStableByCounty] = useState({});
-    const appointmentDurationByCountyData = useSelector(dsdAppointmentDurationByCountySelectors.getAppointmentDurationByCounty);
+    const stabilityStatusByCountyMmd = useSelector(dsdStabilityStatusByCountySelectors.getStabilityStatusByCountyMmd);
+    const stabilityStatusByCountyNonMmd = useSelector(dsdStabilityStatusByCountySelectors.getStabilityStatusByCountyNonMmd);
 
     const loadAppointmentDurationStableByCounty = useCallback(async () => {
         setAppointmentDurationStableByCounty({
             title: { text: '' },
-            xAxis: [{ categories: appointmentDurationByCountyData.countyCategories, crosshair: true }],
+            xAxis: [{ categories: stabilityStatusByCountyMmd.counties, crosshair: true }],
             yAxis: [{ title: { text: 'Percentage of Patients' }}],
             tooltip: { shared: true },
             plotOptions: { column: { stacking: 'percent' } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'NON MMD', data: appointmentDurationByCountyData.data[1], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'MMD', data: appointmentDurationByCountyData.data[0], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'NON MMD', data: stabilityStatusByCountyNonMmd.nonMmd, type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'MMD', data: stabilityStatusByCountyMmd.mmd, type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [appointmentDurationByCountyData]);
+    }, [stabilityStatusByCountyMmd, stabilityStatusByCountyNonMmd]);
 
     useEffect(() => {
         loadAppointmentDurationStableByCounty();
