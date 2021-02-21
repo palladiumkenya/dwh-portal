@@ -19,7 +19,7 @@ import VLOutcomesBySex from './VLOutcomesBySex';
 import VLSuppressionByAge from './VLSuppressionByAge';
 import VLSuppressionByRegimen from './VLSuppressionByRegimen';
 import VLSuppressionByYear from './VLSuppressionByYear';
-import VLSuppressionByCounty from './VLSuppressionByCounty';
+import ViralLoadSuppressionByCounty from './ViralLoadSuppressionByCounty';
 import VLSuppressionByPartner from './VLSuppressionByPartner';
 import VLSuppressionByYear6Month from './VLSuppressionByYear6Month';
 import VLSuppressionByYear12Month from './VLSuppressionByYear12Month';
@@ -93,7 +93,7 @@ const ViralLoad = () => {
                 </Col>
             </Row>
             <SectionFooter overview={branding.overview}/>
-            <VLSuppressionByCounty />
+            <ViralLoadSuppressionByCounty />
             <SectionFooter overview={branding.overview}/>
             <VLSuppressionByPartner />
             <SectionFooter overview={branding.overview}/>
