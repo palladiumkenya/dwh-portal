@@ -14,16 +14,16 @@ import ViralLoadUptakeBySex from './ViralLoadUptakeBySex';
 import ViralLoadUptakeByAge from './ViralLoadUptakeByAge';
 import ViralLoadUptakeByCounty from './ViralLoadUptakeByCounty';
 import ViralLoadUptakeByPartner from './ViralLoadUptakeByPartner';
-import VLOutcomesOverall from './VLOutcomesOverall';
-import VLOutcomesBySex from './VLOutcomesBySex';
-import VLSuppressionByAge from './VLSuppressionByAge';
-import VLSuppressionByRegimen from './VLSuppressionByRegimen';
-import VLSuppressionByYear from './VLSuppressionByYear';
+import ViralLoadOutcomesOverall from './ViralLoadOutcomesOverall';
+import ViralLoadOutcomesBySex from './ViralLoadOutcomesBySex';
+import ViralLoadSuppressionByAge from './ViralLoadSuppressionByAge';
+import ViralLoadSuppressionByRegimen from './ViralLoadSuppressionByRegimen';
+import ViralLoadSuppressionByYear from './ViralLoadSuppressionByYear';
 import ViralLoadSuppressionByCounty from './ViralLoadSuppressionByCounty';
-import VLSuppressionByPartner from './VLSuppressionByPartner';
-import VLSuppressionByYear6Month from './VLSuppressionByYear6Month';
-import VLSuppressionByYear12Month from './VLSuppressionByYear12Month';
-import VLSuppressionByYear24Month from './VLSuppressionByYear24Month';
+import ViralLoadSuppressionByPartner from './ViralLoadSuppressionByPartner';
+import ViralLoadSuppressionByYear6Month from './ViralLoadSuppressionByYear6Month';
+import ViralLoadSuppressionByYear12Month from './ViralLoadSuppressionByYear12Month';
+import ViralLoadSuppressionByYear24Month from './ViralLoadSuppressionByYear24Month';
 import ViralLoadOverallUptakeAndSuppressionByFacility from './ViralLoadOverallUptakeAndSuppressionByFacility';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
@@ -75,33 +75,33 @@ const ViralLoad = () => {
             <SectionFooter overview={branding.overview}/>
             <Row>
                 <Col sm={4}>
-                    <VLOutcomesOverall />
+                    <ViralLoadOutcomesOverall />
                 </Col>
                 <Col sm={8}>
-                    <VLOutcomesBySex />
+                    <ViralLoadOutcomesBySex />
                 </Col>
             </Row>
             <SectionFooter overview={branding.overview}/>
-            <VLSuppressionByAge />
+            <ViralLoadSuppressionByAge />
             <SectionFooter overview={branding.overview}/>
             <Row>
                 <Col sm={4}>
-                    <VLSuppressionByRegimen />
+                    <ViralLoadSuppressionByRegimen />
                 </Col>
                 <Col sm={8}>
-                    <VLSuppressionByYear />
+                    <ViralLoadSuppressionByYear />
                 </Col>
             </Row>
             <SectionFooter overview={branding.overview}/>
             <ViralLoadSuppressionByCounty />
             <SectionFooter overview={branding.overview}/>
-            <VLSuppressionByPartner />
+            <ViralLoadSuppressionByPartner />
             <SectionFooter overview={branding.overview}/>
-            <VLSuppressionByYear6Month />
+            <ViralLoadSuppressionByYear6Month />
             <SectionFooter overview={branding.overview}/>
-            <VLSuppressionByYear12Month />
+            <ViralLoadSuppressionByYear12Month />
             <SectionFooter overview={branding.overview}/>
-            <VLSuppressionByYear24Month />
+            <ViralLoadSuppressionByYear24Month />
             <SectionFooter overview={branding.overview}/>
             <ViralLoadOverallUptakeAndSuppressionByFacility />
             <SectionFooter overview={branding.overview}/>

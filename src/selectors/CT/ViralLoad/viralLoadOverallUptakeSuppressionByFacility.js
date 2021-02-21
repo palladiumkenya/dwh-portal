@@ -78,3 +78,26 @@ export const getViralLoadOverallUptakeSuppressionByCounty = createSelector(
         return { counties, data };
     }
 );
+
+export const getViralLoadOverallUptakeSuppressionByPartner = createSelector(
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        const partners = _.chain(list).filter(l => l.partner).map(l => l.partner.toUpperCase()).uniq().value();
+        const data = [];
+        for(let i = 0; i < partners.length; i++) {
+            data[i] = 0;
+        }
+        for(let i = 0; i < list.length; i++) {
+            if (!list[i].partner) {
+                continue;
+            }
+            let index = partners.indexOf(list[i].partner.toUpperCase());
+            if (index === -1) {
+                continue;
+            }
+            data[index] = data[index] + parseInt(list[i].suppressed, 10);
+        }
+        return { partners, data };
+    }
+);

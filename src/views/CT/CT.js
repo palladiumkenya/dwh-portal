@@ -47,14 +47,22 @@ import { loadDsdAppointmentDurationByAge } from '../../actions/CT/Dsd/dsdAppoint
 import { loadDsdAppointmentDurationByCounty } from '../../actions/CT/Dsd/dsdAppointmentDurationByCountyActions';
 import { loadDsdAppointmentDurationByPartner } from '../../actions/CT/Dsd/dsdAppointmentDurationByPartnerActions';
 
-import { loadViralLoadUptakeBySex } from '../../actions/CT/ViralLoad/viralLoadUptakeBySexActions';
-import { loadViralLoadUptakeByAge } from '../../actions/CT/ViralLoad/viralLoadUptakeByAgeActions';
-import { loadViralLoadUptakeByCounty } from '../../actions/CT/ViralLoad/viralLoadUptakeByCountyActions';
-import { loadViralLoadUptakeByPartner } from '../../actions/CT/ViralLoad/viralLoadUptakeByPartnerActions';
 import { loadViralLoadOverallUptakeSuppressionBySex } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeSuppressionBySexActions';
 import { loadMedianTimeTo1stVlByYear } from '../../actions/CT/ViralLoad/medianTimeTo1stVlByYearActions';
 import { loadMedianTimeTo1stVlByCounty } from '../../actions/CT/ViralLoad/medianTimeTo1stVlByCountyActions';
 import { loadMedianTimeTo1stVlByPartner } from '../../actions/CT/ViralLoad/medianTimeTo1stVlByPartnerActions';
+
+import { loadViralLoadUptakeBySex } from '../../actions/CT/ViralLoad/viralLoadUptakeBySexActions';
+import { loadViralLoadUptakeByAge } from '../../actions/CT/ViralLoad/viralLoadUptakeByAgeActions';
+import { loadViralLoadUptakeByCounty } from '../../actions/CT/ViralLoad/viralLoadUptakeByCountyActions';
+import { loadViralLoadUptakeByPartner } from '../../actions/CT/ViralLoad/viralLoadUptakeByPartnerActions';
+
+import { loadViralLoadOutcomesBySex } from '../../actions/CT/ViralLoad/viralLoadOutcomesBySexActions';
+
+import { loadViralLoadSuppressionByAge } from '../../actions/CT/ViralLoad/viralLoadSuppressionByAgeActions';
+import { loadViralLoadSuppressionByYear } from '../../actions/CT/ViralLoad/viralLoadSuppressionByYearActions';
+import { loadViralLoadSuppressionByRegimen } from '../../actions/CT/ViralLoad/viralLoadSuppressionByRegimenActions';
+
 import { loadViralLoadOverallUptakeSuppressionByFacility } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeSuppressionByFacilityActions';
 
 import { loadTreatmentOutcomesBySex } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesBySexActions';
@@ -147,14 +155,21 @@ const CT = () => {
                 break;
             case 'vl':
                 dispatch(loadCurrentOnArtOverview());
-                dispatch(loadViralLoadUptakeBySex());
-                dispatch(loadViralLoadUptakeByAge());
-                dispatch(loadViralLoadUptakeByCounty());
-                dispatch(loadViralLoadUptakeByPartner());
                 dispatch(loadViralLoadOverallUptakeSuppressionBySex());
                 dispatch(loadMedianTimeTo1stVlByYear());
                 dispatch(loadMedianTimeTo1stVlByCounty());
                 dispatch(loadMedianTimeTo1stVlByPartner());
+                dispatch(loadViralLoadUptakeBySex());
+                dispatch(loadViralLoadUptakeByAge());
+                dispatch(loadViralLoadUptakeByCounty());
+                dispatch(loadViralLoadUptakeByPartner());
+                
+                dispatch(loadViralLoadOutcomesBySex());
+
+                dispatch(loadViralLoadSuppressionByAge());
+                dispatch(loadViralLoadSuppressionByYear());
+                dispatch(loadViralLoadSuppressionByRegimen());
+                
                 dispatch(loadViralLoadOverallUptakeSuppressionByFacility());
                 break;
             case 'tOut':
