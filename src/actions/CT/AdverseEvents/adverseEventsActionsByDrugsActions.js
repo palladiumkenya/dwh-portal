@@ -1,30 +1,25 @@
 import moment from 'moment';
 import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
-import { CACHING, PAGES } from '../../../constants';
+import { CACHING } from '../../../constants';
 
-export const loadCurrentOnArtByAgeSex = () => async (dispatch, getState) => {
+export const loadAdverseEventsActionsByDrugs = () => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
-        moment(getState().currentOnArtByAgeSex.lastFetch),
+        moment(getState().adverseEventsActionsByDrugs.lastFetch),
         'minutes'
     );
-    if (
-        getState().ui.ctTab !== 'txCurr' &&
-        getState().ui.ctTab !== 'txOpt' &&
-        getState().ui.ctTab !== 'advEv' &&
-        getState().ui.currentPage !== PAGES.home
-    ) {
+    if (getState().ui.ctTab !== 'advEv') {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
         return;
     } else {
-        await dispatch(fetchCurrentOnArtByAgeSex());
+        await dispatch(fetchAdverseEventsActionsByDrugs());
     }
 };
 
-export const fetchCurrentOnArtByAgeSex = () => async (dispatch, getState) => {
-    dispatch({ type: actionTypes.CT_CURRENT_ON_ART_BY_AGE_SEX_REQUEST });
+export const fetchAdverseEventsActionsByDrugs = () => async (dispatch, getState) => {
+    dispatch({ type: actionTypes.CT_ADVERSE_EVENTS_ACTIONS_BY_DRUGS_REQUEST });
     const params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,
@@ -35,6 +30,6 @@ export const fetchCurrentOnArtByAgeSex = () => async (dispatch, getState) => {
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
-    const response = await getAll('care-treatment/txCurrByAgeAndSex', params);
-    dispatch({ type: actionTypes.CT_CURRENT_ON_ART_BY_AGE_SEX_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
+    const response = await getAll('care-treatment/getAeActionsByDrugs', params);
+    dispatch({ type: actionTypes.CT_ADVERSE_EVENTS_ACTIONS_BY_DRUGS_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };

@@ -42,7 +42,7 @@ export const getCurrentOnArtByAgeSex = createSelector(
         let max = _.max([_.max(currentOnArtMale), _.max(currentOnArtFemale)]);
         currentOnArtMale = currentOnArtMale.map(x => x * -1);
 
-        return { ageGroups, max, currentOnArtFemale, currentOnArtMale }
+        return { ageGroups, max, currentOnArtFemale, currentOnArtMale };
     }
 );
 
@@ -61,7 +61,7 @@ export const getCurrentOnArtBySex = createSelector(
             }
         }
 
-        return { currentOnArtFemale, currentOnArtMale }
+        return { currentOnArtFemale, currentOnArtMale };
     }
 );
 
@@ -70,5 +70,143 @@ export const getCurrentOnArtByAgeSexList = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return list;
+    }
+);
+
+export const getCurrentOnArtAdults = createSelector(
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        let ageGroups = [
+            // "< 1",
+            // "1-4",
+            // "5-9",
+            // "10-14",
+            "15-19",
+            "20-24",
+            "25-29",
+            "30-34",
+            "35-39",
+            "40-44",
+            "45-49",
+            "50-54",
+            "55-59",
+            "60-64",
+            "65+"
+        ];
+        let currentOnArtMale = 0;
+        let currentOnArtFemale = 0;
+        
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
+                let index = ageGroups.indexOf(list[i].ageGroup);
+                if(index === -1) {
+                    continue;
+                }
+                currentOnArtMale = currentOnArtMale + parseInt(list[i].txCurr, 10);
+            } else if (list[i].Gender.toLowerCase() === "F".toLowerCase() || list[i].Gender.toLowerCase() === "Female".toLowerCase()) {
+                let index = ageGroups.indexOf(list[i].ageGroup);
+                if(index === -1) {
+                    continue;
+                }
+                currentOnArtFemale = currentOnArtFemale + parseInt(list[i].txCurr, 10);
+            }
+        }
+
+        let currentOnArt = currentOnArtFemale + currentOnArtMale;
+
+        return { ageGroups, currentOnArt, currentOnArtFemale, currentOnArtMale };
+    }
+);
+
+export const getCurrentOnArtAdolescents = createSelector(
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        let ageGroups = [
+            // "< 1",
+            // "1-4",
+            // "5-9",
+            "10-14",
+            "15-19",
+            // "20-24",
+            // "25-29",
+            // "30-34",
+            // "35-39",
+            // "40-44",
+            // "45-49",
+            // "50-54",
+            // "55-59",
+            // "60-64",
+            // "65+"
+        ];
+        let currentOnArtMale = 0;
+        let currentOnArtFemale = 0;
+        
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
+                let index = ageGroups.indexOf(list[i].ageGroup);
+                if(index === -1) {
+                    continue;
+                }
+                currentOnArtMale = currentOnArtMale + parseInt(list[i].txCurr, 10);
+            } else if (list[i].Gender.toLowerCase() === "F".toLowerCase() || list[i].Gender.toLowerCase() === "Female".toLowerCase()) {
+                let index = ageGroups.indexOf(list[i].ageGroup);
+                if(index === -1) {
+                    continue;
+                }
+                currentOnArtFemale = currentOnArtFemale + parseInt(list[i].txCurr, 10);
+            }
+        }
+
+        let currentOnArt = currentOnArtFemale + currentOnArtMale;
+        
+        return { ageGroups, currentOnArt, currentOnArtFemale, currentOnArtMale };
+    }
+);
+
+export const getCurrentOnArtChildren = createSelector(
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        let ageGroups = [
+            "< 1",
+            "1-4",
+            "5-9",
+            "10-14",
+            // "15-19",
+            // "20-24",
+            // "25-29",
+            // "30-34",
+            // "35-39",
+            // "40-44",
+            // "45-49",
+            // "50-54",
+            // "55-59",
+            // "60-64",
+            // "65+"
+        ];
+        let currentOnArtMale = 0;
+        let currentOnArtFemale = 0;
+        
+        for (let i = 0; i < list.length; i++) {
+            if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
+                let index = ageGroups.indexOf(list[i].ageGroup);
+                if(index === -1) {
+                    continue;
+                }
+                currentOnArtMale = currentOnArtMale + parseInt(list[i].txCurr, 10);
+            } else if (list[i].Gender.toLowerCase() === "F".toLowerCase() || list[i].Gender.toLowerCase() === "Female".toLowerCase()) {
+                let index = ageGroups.indexOf(list[i].ageGroup);
+                if(index === -1) {
+                    continue;
+                }
+                currentOnArtFemale = currentOnArtFemale + parseInt(list[i].txCurr, 10);
+            }
+        }
+
+        let currentOnArt = currentOnArtFemale + currentOnArtMale;
+        
+        return { ageGroups, currentOnArt, currentOnArtFemale, currentOnArtMale };
     }
 );
