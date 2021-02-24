@@ -8,7 +8,6 @@ import * as viralLoadUptakeBySexSelectors from '../../../selectors/CT/ViralLoad/
 const ViralLoadUptakeBySex = () => {
     const [viralLoadUptakeBySex, setViralLoadUptakeBySex] = useState({});
     const viralLoadUptakeBySexData = useSelector(viralLoadUptakeBySexSelectors.getViralLoadUptakeBySex);
-    console.log(viralLoadUptakeBySexData.data);
 
     const loadViralLoadUptakeBySex = useCallback(async () => {
         setViralLoadUptakeBySex({

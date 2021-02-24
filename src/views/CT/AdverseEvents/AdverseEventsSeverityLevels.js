@@ -3,112 +3,27 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import { getAll } from '../../Shared/Api';
-import moment from "moment";
+import * as adverseEventsReportedWithSeverityLevelsSelectors from '../../../selectors/CT/AdverseEvents/adverseEventsReportedWithSeverityLevels';
 
 const AdverseEventsSeverityLevels = () => {
-    const filters = useSelector(state => state.filters);
     const [severityLevels, setSeverityLevels] = useState({});
-    const loadSeverityLevels = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
-        };
-        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const categories = [];
-        const severe_values = [];
-        const moderate_values = [];
-        const mild_values = [];
-        const result = await getAll('care-treatment/getReportedAesWithSeverityLevels', params);
-        for (let i = 0; i < result.length; i++) {
-            categories.push(result[i].AdverseEvent);
-        }
+    const adverseEventsReportedWithSeverityLevels = useSelector(adverseEventsReportedWithSeverityLevelsSelectors.getAdverseEventsReportedWithSeverityLevels);
 
-        for (let i = 0; i < categories.length; i++) {
-            const cat_severe = result.filter(obj => obj.AdverseEvent === categories[i] && obj.Severity === 'Severe');
-            const cat_moderate = result.filter(obj => obj.AdverseEvent === categories[i] && obj.Severity === 'Moderate');
-            const cat_mild = result.filter(obj => obj.AdverseEvent === categories[i] && obj.Severity === 'Mild');
-
-            const x  = cat_severe.length > 0 ? cat_severe.map(item => item.total).reduce((x, y) => x + y) : 0;
-            const y  = cat_moderate.length > 0 ? cat_moderate.map(item => item.total).reduce((x, y) => x + y) : 0;
-            const z  = cat_mild.length > 0 ? cat_mild.map(item => item.total).reduce((x, y) => x + y) : 0;
-
-            if (x > 0 || y > 0 || z > 0) {
-                severe_values.push(x);
-                moderate_values.push(y);
-                mild_values.push(z);
-            }
-        }
+    const loadSeverityLevels = useCallback(async () => {        
         setSeverityLevels({
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: ''
-            },
-            xAxis: {
-                categories: categories
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Number of Patients'
-                },
-                stackLabels: {
-                    enabled: true,
-                    style: {
-                        fontWeight: 'bold',
-                        color: ( // theme
-                            Highcharts.defaultOptions.title.style &&
-                            Highcharts.defaultOptions.title.style.color
-                        ) || 'gray'
-                    }
-                }
-            },
-            legend: {
-                align: 'right',
-                x: -30,
-                verticalAlign: 'top',
-                y: 25,
-                floating: true,
-                backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || 'white',
-                borderColor: '#CCC',
-                borderWidth: 1,
-                shadow: false
-            },
-            tooltip: {
-                headerFormat: '<b>{point.x}</b><br/>',
-                pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
-            },
-            plotOptions: {
-                column: {
-                    stacking: 'normal',
-                    dataLabels: {
-                        enabled: true
-                    }
-                }
-            },
-            series: [{
-                name: 'SEVERE',
-                color: "#485969",
-                data: severe_values
-            }, {
-                name: 'MODERATE',
-                color: "#1AB394",
-                data: moderate_values
-            }, {
-                name: 'MILD',
-                color: "#1f77b4",
-                data: mild_values
-            }]
+            title: { text: '' },
+            xAxis: [{ categories: adverseEventsReportedWithSeverityLevels.categories }],
+            yAxis: [{ title: { text: 'Number of Patients' }, stackLabels: { enabled: true, style: { fontWeight: 'bold', color: "#808080" }}}],
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+            tooltip: { headerFormat: '<b>{point.x}</b><br/>', pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}' },
+            plotOptions: { column: { stacking: 'normal', dataLabels: { enabled: true }}},
+            series: [
+                { data: adverseEventsReportedWithSeverityLevels.severe_values, name: 'SEVERE', type: 'column', color: "#485969" },
+                { data: adverseEventsReportedWithSeverityLevels.moderate_values, name: 'MODERATE', type: 'column', color: "#1AB394" },
+                { data: adverseEventsReportedWithSeverityLevels.mild_values, name: 'MILD', type: 'column', color: "#1f77b4" },
+            ]
         });
-    }, [filters]);
+    }, [adverseEventsReportedWithSeverityLevels]);
 
     useEffect(() => {
         loadSeverityLevels();

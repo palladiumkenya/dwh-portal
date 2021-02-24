@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
-const listUnfiltered = state => state.medianTimeTo1stVlByCounty.listUnfiltered;
-const listFiltered = state => state.medianTimeTo1stVlByCounty.listFiltered;
+const listUnfiltered = state => state.medianTimeTo1stVlByPartner.listUnfiltered;
+const listFiltered = state => state.medianTimeTo1stVlByPartner.listFiltered;
 const filtered = state => state.filters.filtered;
 
 export const getMedianTimeTo1stVlByPartner = createSelector(

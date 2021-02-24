@@ -1,14 +1,18 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Col, Row } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from './../../Shared/UniversalFilter';
-import AdverseEventsTiles from './AdverseEventsTiles';
 import SectionHeader from '../../Shared/SectionHeader';
 import SectionFooter from '../../Shared/SectionFooter';
-import AdverseEventsSeverity from './AdverseEventsSeverity';
+import AdverseEventsOverview from './AdverseEventsOverview';
+import AdverseEventsClientsByAgeSexAdults from './AdverseEventsClientsByAgeSexAdults';
+import AdverseEventsClientsByAgeSexChildren from './AdverseEventsClientsByAgeSexChildren';
+import AdverseEventsSeverityGrading from './AdverseEventsSeverityGrading';
+import AdverseEventsSeverityActions from './AdverseEventsSeverityActions';
 import AdverseEventsSeverityLevels from './AdverseEventsSeverityLevels';
-import AdverseEventsCausesAndActionsByDrugs from './AdverseEventsCausesAndActionsByDrugs';
-// import AdverseEventsTable from './AdverseEventsTable';
+import AdverseEventsCauses from './AdverseEventsCauses';
+import AdverseEventsActionsByDrugs from './AdverseEventsActionsByDrugs';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const AdverseEvents = () => {
@@ -30,15 +34,24 @@ const AdverseEvents = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <AdverseEventsTiles />
+            <AdverseEventsOverview/>
+            <Row>
+                <Col><AdverseEventsClientsByAgeSexChildren/></Col>
+                <Col><AdverseEventsClientsByAgeSexAdults/></Col>
+            </Row>
             <SectionFooter overview={branding.overview}/>
-            <AdverseEventsSeverity />
+            <Row>
+                <Col><AdverseEventsSeverityGrading/></Col>
+                <Col><AdverseEventsSeverityActions/></Col>
+            </Row>
             <SectionFooter overview={branding.overview}/>
             <AdverseEventsSeverityLevels />
             <SectionFooter overview={branding.overview}/>
-            <AdverseEventsCausesAndActionsByDrugs />
+            <Row>
+                <Col><AdverseEventsCauses/></Col>
+                <Col><AdverseEventsActionsByDrugs/></Col>
+            </Row>
             <SectionFooter overview={branding.overview}/>
-            {/* <AdverseEventsTable /> */}
         </div>
     );
 };
