@@ -18,9 +18,9 @@ const ViralLoadSuppressionByAge = () => {
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'VS', data: viralLoadSuppressionByAgeData.data[0], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'LLV', data: viralLoadSuppressionByAgeData.data[1], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'HVL', data: viralLoadSuppressionByAgeData.data[2], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'HVL', data: viralLoadSuppressionByAgeData.data[2], type: 'column', color: "#E15759", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'LLV', data: viralLoadSuppressionByAgeData.data[1], type: 'column', color: "#F28E2B", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'VS', data: viralLoadSuppressionByAgeData.data[0], type: 'column', color: "#3475B3", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [viralLoadSuppressionByAgeData]);
