@@ -8,11 +8,12 @@ import * as viralLoadUptakeByCountySelectors from '../../../selectors/CT/ViralLo
 const ViralLoadUptakeByCounty = () => {
     const [viralLoadUptakeByCounty, setViralLoadUptakeByCounty] = useState({});
     const viralLoadUptakeByCountyData = useSelector(viralLoadUptakeByCountySelectors.getViralLoadUptakeByCounty);
+    const counties = viralLoadUptakeByCountyData.data.map(function(d) { return d['c']; });
 
     const loadViralLoadUptakeByCounty = useCallback(async () => {
         setViralLoadUptakeByCounty({
             title: { text: '' },
-            xAxis: [{ categories: viralLoadUptakeByCountyData.counties, title: { text: 'County' }, crosshair: true }],
+            xAxis: [{ categories: counties, title: { text: 'County' }, crosshair: true }],
             yAxis: [{ title: { text: 'Percentage of Patients' }, labels: { format: '{value} %' }}],
             plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none', format: '{y} %' } } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },

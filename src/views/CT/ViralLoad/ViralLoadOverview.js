@@ -7,13 +7,40 @@ import DataCard from '../../Shared/DataCard';
 
 const ViralLoadOverview = () => {
     const currentOnArt = useSelector(currentOnArtOverviewSelectors.getCurrentOnArt);
+    const eligibleForVl = useSelector(currentOnArtOverviewSelectors.getEligibleForVl);
+    const eligibleForVlPercent = currentOnArt ? ((eligibleForVl/currentOnArt)*100) : 0;
     const hasCurrentVl = useSelector(currentOnArtOverviewSelectors.getHasCurrentVl);
-    const hasCurrentVlPercent = currentOnArt ? ((hasCurrentVl/currentOnArt)*100) : 0;
-    const virallySuppressed = useSelector(currentOnArtOverviewSelectors.getVirallySuppressed);
-    const virallySuppressedPercent = currentOnArt ? ((virallySuppressed/currentOnArt)*100) : 0;
+    const hasCurrentVlPercent = currentOnArt ? ((hasCurrentVl/eligibleForVl)*100) : 0;
+    /*const virallySuppressed = useSelector(currentOnArtOverviewSelectors.getVirallySuppressed);
+    const virallySuppressedPercent = currentOnArt ? ((virallySuppressed/hasCurrentVl)*100) : 0;*/
+
 
     return (
-        <Row>
+        <span>
+            <Row>
+                <Col>
+                    <DataCard
+                        title="CURRENTLY ON ART"
+                        subtitle={null}
+                        data={formatNumber(currentOnArt)}
+                    />
+                </Col>
+                <Col>
+                    <DataCard
+                        title="ELIGIBLE FOR VIRAL LOAD"
+                        subtitle={roundNumber(eligibleForVlPercent) + "%"}
+                        data={formatNumber(eligibleForVl)}
+                    />
+                </Col>
+                <Col>
+                    <DataCard
+                        title="VALID VIRAL LOAD"
+                        subtitle={roundNumber(hasCurrentVlPercent) + "%"}
+                        data={formatNumber(hasCurrentVl)}
+                    />
+                </Col>
+            </Row>
+            {/*<Row>
             <Col>
                 <DataCard
                     title="PATIENTS CURRENT ON TREATMENT"
@@ -23,7 +50,7 @@ const ViralLoadOverview = () => {
             </Col>
             <Col>
                 <DataCard
-                    title="PATIENTS WITH CURRENT VL"
+                    title="PATIENTS WITH VALID VL"
                     subtitle={roundNumber(hasCurrentVlPercent) + "%"}
                     data={formatNumber(hasCurrentVl)}
                 />
@@ -35,7 +62,8 @@ const ViralLoadOverview = () => {
                     data={formatNumber(virallySuppressed)}
                 />
             </Col>
-        </Row>
+        </Row>*/}
+        </span>
     );
 };
 

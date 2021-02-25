@@ -12,7 +12,7 @@ const CurrentOnArtOverview = () => {
     const hasCurrentVl = useSelector(currentOnArtOverviewSelectors.getHasCurrentVl);
     const hasCurrentVlPercent = currentOnArt ? ((hasCurrentVl/currentOnArt)*100) : 0;
     const virallySuppressed = useSelector(currentOnArtOverviewSelectors.getVirallySuppressed);
-    const virallySuppressedPercent = currentOnArt ? ((virallySuppressed/currentOnArt)*100) : 0;
+    const virallySuppressedPercent = currentOnArt ? ((virallySuppressed/hasCurrentVl)*100) : 0;
     const lowLevelViremia = useSelector(currentOnArtOverviewSelectors.getLowLevelViremia);
     const lowLevelViremiaPercent = currentOnArt ? ((lowLevelViremia/currentOnArt)*100) : 0;
     const highViralLoad = useSelector(currentOnArtOverviewSelectors.getHighViralLoad);
@@ -20,7 +20,7 @@ const CurrentOnArtOverview = () => {
 
     return (
         <>
-            <Row>
+            {/*<Row>
                 <Col>
                     <DataCard
                         title="CURRENTLY ON ART"
@@ -42,7 +42,7 @@ const CurrentOnArtOverview = () => {
                         data={formatNumber(hasCurrentVl)}
                     />
                 </Col>
-            </Row>
+            </Row>*/}
             <Row>
                 <Col>
                     <DataCard
