@@ -3,40 +3,15 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { getAll } from '../../Shared/Api';
-import moment from "moment";
+import * as viralLoadOutcomesBySexSelectors from '../../../selectors/CT/ViralLoad/viralLoadOutcomesBySex';
 
-const VLOutcomesBySex = () => {
-    const filters = useSelector(state => state.filters);
-    const [vlOutcomesBySexMale, setVLOutcomesBySexMale] = useState({});
-    const [vlOutcomesBySexFemale, setVLOutcomesBySexFemale] = useState({});
+const ViralLoadOutcomesBySex = () => {
+    const [viralloadOutcomesBySexMale, setViralLoadOutcomesBySexMale] = useState({});
+    const [viralloadOutcomesBySexFemale, setViralLoadOutcomesBySexFemale] = useState({});
+    const viralLoadOutcomesBySexData = useSelector(viralLoadOutcomesBySexSelectors.getViralLoadOutcomesBySex);
 
-    const loadVLOutcomesBySex = useCallback(async () => {
-        let params = {
-            county: filters.counties,
-            subCounty: filters.subCounties,
-            facility: filters.facilities,
-            partner: filters.partners,
-            agency: filters.agencies,
-            project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):'',
-        };
-        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const vlOutcomesCategories = ['SUPPRESSED', 'HVL', 'LLV'];
-        const result = await getAll('care-treatment/vlOutcomesBySex', params);
-        let dataMale = [0, 0, 0];
-        let dataFemale = [0, 0, 0];
-        for(let i = 0; i < result.length; i++) {
-            for(let j = 0; j < vlOutcomesCategories.length; j++) {
-                if (result[i].outcome === vlOutcomesCategories[j] && result[i].gender === "Male") {
-                    dataMale[j] = dataMale[j] + parseInt(result[i].count);
-                }
-                if (result[i].outcome === vlOutcomesCategories[j] && result[i].gender === "Female") {
-                    dataFemale[j] = dataFemale[j] + parseInt(result[i].count);
-                }
-            }
-        }
-        setVLOutcomesBySexMale({
+    const loadViralLoadOutcomesBySex = useCallback(async () => {
+        setViralLoadOutcomesBySexMale({
             chart: { type: 'pie' },
             title: { text: 'MALE', align: 'center', verticalAlign: 'middle'},
             subtitle: { text: '' },
@@ -55,13 +30,13 @@ const VLOutcomesBySex = () => {
                 name:"VL Outcomes (Male)",
                 colorByPoint: true,
                 data: [
-                    { name: 'SUPPRESSED', y: dataMale[0], color: "#485969" },
-                    { name: 'HVL', y: dataMale[1], color: "#1AB394" },
-                    { name: 'LLV', y: dataMale[2], color: "#BBE65F" },
+                    { name: 'SUPPRESSED', y: viralLoadOutcomesBySexData.data[0][0], color: "#485969" },
+                    { name: 'HVL', y: viralLoadOutcomesBySexData.data[0][2], color: "#1AB394" },
+                    { name: 'LLV', y: viralLoadOutcomesBySexData.data[0][1], color: "#BBE65F" },
                 ]
             }]
         });
-        setVLOutcomesBySexFemale({
+        setViralLoadOutcomesBySexFemale({
             chart: { type: 'pie' },
             title: { text: 'FEMALE', align: 'center', verticalAlign: 'middle'},
             subtitle: { text: '' },
@@ -80,17 +55,17 @@ const VLOutcomesBySex = () => {
                 name:"VL Outcomes (Female)",
                 colorByPoint: true,
                 data: [
-                    { name: 'SUPPRESSED', y: dataFemale[0], color: "#485969" },
-                    { name: 'HVL', y: dataFemale[1], color: "#1AB394" },
-                    { name: 'LLV', y: dataFemale[2], color: "#BBE65F" },
+                    { name: 'SUPPRESSED', y: viralLoadOutcomesBySexData.data[1][0], color: "#485969" },
+                    { name: 'HVL', y: viralLoadOutcomesBySexData.data[1][2], color: "#1AB394" },
+                    { name: 'LLV', y: viralLoadOutcomesBySexData.data[1][1], color: "#BBE65F" },
                 ]
             }]
         });
-    }, [filters]);
+    }, [viralLoadOutcomesBySexData]);
 
     useEffect(() => {
-        loadVLOutcomesBySex();
-    }, [loadVLOutcomesBySex]);
+        loadViralLoadOutcomesBySex();
+    }, [loadViralLoadOutcomesBySex]);
 
     return (
         <div className="row">
@@ -103,10 +78,10 @@ const VLOutcomesBySex = () => {
                         <div className="col-12">
                             <div className="row">
                                 <div className="col-6">
-                                    <HighchartsReact highcharts={Highcharts} options={vlOutcomesBySexMale} />
+                                    <HighchartsReact highcharts={Highcharts} options={viralloadOutcomesBySexMale} />
                                 </div>
                                 <div className="col-6">
-                                    <HighchartsReact highcharts={Highcharts} options={vlOutcomesBySexFemale} />
+                                    <HighchartsReact highcharts={Highcharts} options={viralloadOutcomesBySexFemale} />
                                 </div>
                             </div>
                         </div>
@@ -117,4 +92,4 @@ const VLOutcomesBySex = () => {
     );
 };
 
-export default VLOutcomesBySex;
+export default ViralLoadOutcomesBySex;

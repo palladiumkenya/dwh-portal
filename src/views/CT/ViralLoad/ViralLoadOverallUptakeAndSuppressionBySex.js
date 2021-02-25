@@ -10,18 +10,79 @@ const ViralLoadOverallUptakeAndSuppressionBySex = () => {
     const viralLoadOverallUptakeSuppressionBySexData = useSelector(viralLoadOverallUptakeSuppressionBySexSelectors.getViralLoadOverallUptakeSuppressionBySex);
 
     const loadViralLoadOverallUptakeAndSuppressionBySex = useCallback(async () => {
+        let viralLoadCascade = [];
+        viralLoadCascade = viralLoadOverallUptakeSuppressionBySexData.data[0].map(function (num, idx) {
+            return num + viralLoadOverallUptakeSuppressionBySexData.data[1][idx];
+        });
         setViralLoadOverallUptakeAndSuppressionBySex({
+            chart: {
+                type: 'column'
+            },
             title: { text: '' },
             xAxis: [{ categories: viralLoadOverallUptakeSuppressionBySexData.vlCategoryNames, crosshair: true }],
             yAxis: [
                 { title: { text: 'Number of Patients' } }
             ],
-            tooltip: { shared: true },
-            plotOptions: { column: { stacking: 'normal', dataLabels: { enabled: true } } },
-            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+            tooltip: {
+                formatter: function() {
+                    let currentPoint = this,
+                        currentSeries = currentPoint.series,
+                        chart = currentSeries.chart,
+                        cText = '';
+
+                    chart.series.forEach(function(series) {
+                        series.points.forEach(function(point) {
+                            if (currentSeries.userOptions.name === series.userOptions.name && currentPoint.key === point.category) {
+                                cText = point.cText;
+                            }
+                        })
+                    });
+
+                    return cText;
+                }
+            },
+            plotOptions: { column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return '' + this.point.text;
+                        }
+                    }
+                }},
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80, enabled: false },
             series: [
-                { name: 'MALE', data: viralLoadOverallUptakeSuppressionBySexData.data[0], type: 'column', color: "#14084D", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'FEMALE', data: viralLoadOverallUptakeSuppressionBySexData.data[1], type: 'column', color: "#EA4C8B", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                {
+                    name: 'VIRAL LOAD CASCADE',
+                    data: [
+                        {
+                            name: viralLoadOverallUptakeSuppressionBySexData.vlCategoryNames[0],
+                            y: viralLoadCascade[0],
+                            color: "#485969",
+                            text: viralLoadCascade[0].toLocaleString('en'),
+                            cText: 'Male: ' + viralLoadOverallUptakeSuppressionBySexData.data[0][0] + ' <br /> Female: ' + viralLoadOverallUptakeSuppressionBySexData.data[1][0]
+                        },
+                        {
+                            name: viralLoadOverallUptakeSuppressionBySexData.vlCategoryNames[1],
+                            y: viralLoadCascade[1], color: "#485969",
+                            text: viralLoadCascade[1].toLocaleString('en') + ' (' + parseFloat(((viralLoadCascade[1]/viralLoadCascade[0])*100).toString()).toFixed(0) + '%)',
+                            cText: 'Male: ' + viralLoadOverallUptakeSuppressionBySexData.data[0][1] + ' <br /> Female: ' + viralLoadOverallUptakeSuppressionBySexData.data[1][1]
+                        },
+                        {
+                            name: viralLoadOverallUptakeSuppressionBySexData.vlCategoryNames[2],
+                            y: viralLoadCascade[2], color: "#485969",
+                            text: viralLoadCascade[2].toLocaleString('en') + ' (' + parseFloat(((viralLoadCascade[2]/viralLoadCascade[1])*100).toString()).toFixed(0) + '%)',
+                            cText: 'Male: ' + viralLoadOverallUptakeSuppressionBySexData.data[0][2] + ' <br /> Female: ' + viralLoadOverallUptakeSuppressionBySexData.data[1][2]
+                        },
+                        {
+                            name: viralLoadOverallUptakeSuppressionBySexData.vlCategoryNames[3],
+                            y: viralLoadCascade[3], color: "#485969",
+                            text: viralLoadCascade[3].toLocaleString('en') + ' (' + parseFloat(((viralLoadCascade[3]/viralLoadCascade[2])*100).toString()).toFixed(0) + '%)',
+                            cText: 'Male: ' + viralLoadOverallUptakeSuppressionBySexData.data[0][3] + ' <br /> Female: ' + viralLoadOverallUptakeSuppressionBySexData.data[1][3]
+                        }
+                    ]
+                },
             ]
         });
     }, [viralLoadOverallUptakeSuppressionBySexData]);

@@ -33,7 +33,6 @@ const CurrentOnART = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <CurrentOnArtOverview />
             <Row>
                 <Col>
                     <CurrentOnArtBySex />

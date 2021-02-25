@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { createSelector } from 'reselect';
 
 const listUnfiltered = state => state.viralLoadOverallUptakeSuppressionByFacility.listUnfiltered;
@@ -55,5 +56,48 @@ export const getViralLoadOverallUptakeSuppressionByFacility = createSelector(
             { name: 'PERCENTAGE (%)', selector: 'suppression', sortable: true, right: true },
         ];
         return { columns, data };
+    }
+);
+
+export const getViralLoadOverallUptakeSuppressionByCounty = createSelector(
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        const counties = _.chain(list).map(l => l.county.toUpperCase()).uniq().value();
+        const data = [];
+        for(let i = 0; i < counties.length; i++) {
+            data[i] = 0;
+        }
+        for(let i = 0; i < list.length; i++) {
+            let index = counties.indexOf(list[i].county.toUpperCase());
+            if (index === -1) {
+                continue;
+            }
+            data[index] = data[index] + parseInt(list[i].suppressed, 10);
+        }
+        return { counties, data };
+    }
+);
+
+export const getViralLoadOverallUptakeSuppressionByPartner = createSelector(
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        const partners = _.chain(list).filter(l => l.partner).map(l => l.partner.toUpperCase()).uniq().value();
+        const data = [];
+        for(let i = 0; i < partners.length; i++) {
+            data[i] = 0;
+        }
+        for(let i = 0; i < list.length; i++) {
+            if (!list[i].partner) {
+                continue;
+            }
+            let index = partners.indexOf(list[i].partner.toUpperCase());
+            if (index === -1) {
+                continue;
+            }
+            data[index] = data[index] + parseInt(list[i].suppressed, 10);
+        }
+        return { partners, data };
     }
 );

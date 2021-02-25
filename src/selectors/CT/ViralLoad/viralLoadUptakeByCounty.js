@@ -14,10 +14,15 @@ export const getViralLoadUptakeByCounty = createSelector(
         for(let i = 0; i < list.length; i++) {
             counties.push(list[i].county);
             data.push({
+                c: list[i].county,
                 y: Number(((parseInt(list[i].vlDone)/parseInt(list[i].txCurr))*100).toFixed(0)),
                 absoluteY: list[i].vlDone.toLocaleString('en'),
             });
         }
+
+        data.sort(function(a, b) {
+            return b.y - a.y;
+        });
         return { counties, data };
     }
 );
