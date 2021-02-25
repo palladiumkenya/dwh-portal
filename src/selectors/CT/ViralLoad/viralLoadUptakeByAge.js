@@ -94,7 +94,9 @@ export const getViralLoadUptakeByAge = createSelector(
                         gender: sexCategory,
                         ageGroup: key,
                         groupPercentage: parseInt(roundNumber(groupValidVLPercentage)),
-                        percentage: parseInt(roundNumber(validVLPercentage))
+                        percentage: parseInt(roundNumber(validVLPercentage)),
+                        vlDone: totalVlDone,
+                        eligible: totalEligible
                     }
                 );
             }
