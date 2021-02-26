@@ -18,6 +18,7 @@ import AppointmentDurationByAge from './AppointmentDurationByAge';
 import AppointmentDurationStableByCounty from './AppointmentDurationStableByCounty';
 import AppointmentDurationStableByPartner from './AppointmentDurationStableByPartner';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
+import DSDIndicatorDefinition from './DSDIndicatorDefinition';
 
 const DSD = () => {
     const branding = { title: "DIFFERENTIATED SERVICE DELIVERY", description: "OVERVIEW", overview: "Differenciated Service Delivery" };
@@ -39,6 +40,8 @@ const DSD = () => {
                 <UniversalFilter/>
             </VisibilitySensor>
             <DSDOverview />
+            <SectionFooter overview={branding.overview}/>
+            <DSDIndicatorDefinition />
             <Row>
                 <Col>
                     <DSDCascade />
@@ -48,11 +51,11 @@ const DSD = () => {
                 </Col>
             </Row>
             <SectionFooter overview={branding.overview}/>
-            <Row>
-                <Col>
+            <Row className={"col-12"}>
+                <Col className={"col-6"}>
                     <AppointmentDurationByStability />
                 </Col>
-                <Col>
+                <Col className={"col-6"}>
                     <AppointmentDurationBySex />
                 </Col>
             </Row>
