@@ -8,7 +8,7 @@ export const getAppointmentDurationByStabilityStatus = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        const appointmentCategories = ['<3 Months', '>3 Months'];
+        const appointmentCategories = ['<3 Months', '<3-5 Months', '>6+ Months'];
         const stabilityCategories = ['Stable', 'Unstable'];
         let data = [];
         for(let i = 0; i < appointmentCategories.length; i++) {
