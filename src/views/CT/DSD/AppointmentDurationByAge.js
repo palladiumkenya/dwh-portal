@@ -9,17 +9,18 @@ const AppointmentDurationByAge = () => {
     const [appointmentDurationByAge, setAppointmentDurationByAge] = useState({});
     const appointmentDurationByAgeData = useSelector(dsdAppointmentDurationByAgeSelectors.getAppointmentDurationByAge);
 
+
     const loadAppointmentDurationByAge = useCallback(async () => {
         setAppointmentDurationByAge({
             title: { text: '' },
-            xAxis: [{ categories: appointmentDurationByAgeData.ageCategories, crosshair: true }],
+            xAxis: [{ categories: appointmentDurationByAgeData.ObjectArr, crosshair: true }],
             yAxis: [{ title: { text: 'Percentage of Patients' }}],
             tooltip: { shared: true },
             plotOptions: { column: { stacking: 'percent' } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'MMD', data: appointmentDurationByAgeData.data[1], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'NON MMD', data: appointmentDurationByAgeData.data[0], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'MMD', data: appointmentDurationByAgeData.groupedVals[0], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'NON MMD', data: appointmentDurationByAgeData.groupedVals[1],type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [appointmentDurationByAgeData]);
@@ -33,7 +34,7 @@ const AppointmentDurationByAge = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        MMD UPTAKE PRACTICES BY AGE GROUP
+                        MMD UPTAKE BY AGE GROUP
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

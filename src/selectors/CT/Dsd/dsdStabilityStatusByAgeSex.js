@@ -88,21 +88,54 @@ export const getStabilityStatusByAgeSex = createSelector(
         ];
         let stableMale = [];
         let stableFemale = [];
-        
-        for(let i = 0; i < list.length; i++) {
+
+        for (let j = 0; j < ageGroups.length; j++) {
+            const femaleValues = list.filter(obj => (obj.gender === "Female" || obj.gender === "F") && (obj.ageGroup === ageGroups[j]));
+            const maleValues = list.filter(obj => (obj.gender === "Male" || obj.gender === "M") && (obj.ageGroup === ageGroups[j]));
+            let total = 0;
+            let femaleValue = 0;
+            let maleValue = 0;
+            if (femaleValues.length > 0) {
+                total = total + femaleValues[0].patients;
+                femaleValue = femaleValues[0].patients;
+            }
+            if (maleValues.length > 0) {
+                total = total + maleValues[0].patients;
+                maleValue = maleValues[0].patients;
+            }
+            const malePercent = total > 0 ? ((maleValue / total)*100) : 0;
+            const femalePercent = total > 0 ? ((femaleValue / total)*100) : 0;
+            stableMale.push(Math.round(malePercent));
+            stableFemale.push(-Math.round(femalePercent));
+        }
+        /*for (let i = 0; i < list.length; i++) {
+            const femaleValues = list.filter(obj => obj.gender === "Female" || obj.gender === "F");
+            const maleValues = list.filter(obj => obj.gender === "Male" || obj.gender === "M");
+            let index = ageGroups.indexOf(list[i].ageGroup);
+            console.log(index);
+            //femaleValues.filter(obj => obj.ageGroup);
+            //maleValues.filter(obj => obj.ageGroup);
+            for (let j = 0; j < ageGroups.length; i++) {
+                const ageFemaleGroupVal = femaleValues.filter(obj => obj.ageGroup === ageGroups[j]);
+                const ageMaleGroupVal = maleValues.filter(obj => obj.ageGroup === ageGroups[j]);
+                console.log(ageFemaleGroupVal);
+                console.log(ageMaleGroupVal);
+            }
+        }*/
+        /*for(let i = 0; i < list.length; i++) {
             if (list[i].gender.toLowerCase() === "M".toLowerCase() || list[i].gender.toLowerCase() === "Male".toLowerCase()) {
                 let index = ageGroups.indexOf(list[i].ageGroup);
-                stableMale.splice(index, 0, parseInt(list[i].stable));
+                stableMale.splice(index, 0, parseInt(list[i].patients));
             }
             else if (list[i].gender.toLowerCase() === "F".toLowerCase() || list[i].gender.toLowerCase() === "Female".toLowerCase()) {
                 let index = ageGroups.indexOf(list[i].ageGroup);
-                stableFemale.splice(index, 0, parseInt(list[i].stable));
+                stableFemale.splice(index, 0, parseInt(list[i].patients));
             }
-        }
+        }*/
 
-        let max = _.max([_.max(stableMale), _.max(stableFemale)]);
-        stableMale = stableMale.map(x => x * -1);
+        /*let max = _.max([_.max(stableMale), _.max(stableFemale)]);
+        stableMale = stableMale.map(x => x * -1);*/
 
-        return { max, ageGroups, stableMale, stableFemale };
+        return { ageGroups, stableMale, stableFemale };
     }
 );

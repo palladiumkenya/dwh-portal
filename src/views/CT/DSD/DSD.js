@@ -42,11 +42,11 @@ const DSD = () => {
             <DSDOverview />
             <SectionFooter overview={branding.overview}/>
             <DSDIndicatorDefinition />
-            <Row>
-                <Col>
+            <Row className={"col-12"}>
+                <Col className={"col-6"}>
                     <DSDCascade />
                 </Col>
-                <Col>
+                <Col className={"col-6"}>
                     <DistributionMMDStable />
                 </Col>
             </Row>

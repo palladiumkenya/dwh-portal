@@ -17,13 +17,13 @@ const DistributionStableAgeSex = () => {
                 { categories: stabilityStatusByAgeSex.ageGroups, title: { text: '' }, reversed: false },
                 { categories: stabilityStatusByAgeSex.ageGroups, title: { text: '' }, linkedTo: 0, reversed: false, opposite: true }
             ],
-            yAxis: [{ min: -(stabilityStatusByAgeSex.max), max: stabilityStatusByAgeSex.max, title: { text: 'Number Stable' }, labels: { formatter: function () {
+            yAxis: [{ min: -(100), max: 100, title: { text: 'Percent Stable' }, labels: { formatter: function () {
                 return Math.abs(this.value);
             }}}],
             plotOptions: { series: { stacking: 'normal' }, bar: { pointWidth: 18 }},
             tooltip: { formatter: function () {
                 return '<b>' + this.series.name + ', Age Group ' + this.point.category + '</b><br/>' +
-                    'Number Stable: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
+                    'Percent Stable: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
                 }
             },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
