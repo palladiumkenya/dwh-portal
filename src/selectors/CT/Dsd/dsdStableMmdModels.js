@@ -13,17 +13,21 @@ export const getStableMmdModels = createSelector(
             "Fast Track",
             "Community ART Distribution HCW Led",
             "Community ART Distribution peer led",
-            "Facility ART distribution Group"
+            "Facility ART distribution Group",
+            "Not Documented"
         ];
-        let data = [0, 0, 0, 0, 0];
+        let data = [0, 0, 0, 0, 0, 0];
+        let txCurr = 0;
         for(let i = 0; i < list.length; i++) {
+            txCurr = txCurr + parseInt(list[i].TXCurr, 10);
             for(let j = 0; j < models.length; j++) {
                 if (list[i].differentiatedCare === models[j]) {
+                    data[j] = data[j] + parseInt(list[i].mmdModels);
+                } else if (list[i].differentiatedCare === null) {
                     data[j] = data[j] + parseInt(list[i].mmdModels);
                 }
             }
         }
-
-        return { models, data };
+        return { models, data, txCurr };
     }
 );

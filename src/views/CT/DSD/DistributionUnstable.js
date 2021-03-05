@@ -15,15 +15,42 @@ const DistributionUnstable = () => {
 
     const loadDistributionUnstable = useCallback(async () => {
         const categories = ["HIGH VL", "ART<12 MONTHS", "AGE <20 YEARS", "POOR ADHERANCE", "BMI <18.5"];
-        const data = [highVl, onArtLessThan12Months, ageLessThan20Years, poorAdherence, bmiLessThan18];
+        const total = highVl + onArtLessThan12Months + ageLessThan20Years + poorAdherence + bmiLessThan18;
+        const data = [Math.round((highVl/total)*100), Math.round((onArtLessThan12Months/total)*100), Math.round((ageLessThan20Years/total)*100), Math.round((poorAdherence/total)*100), Math.round((bmiLessThan18/total)*100)];
         setDistributionUnstable({
             title: { text: '' },
             xAxis: [{ categories: categories, crosshair: true }],
-            yAxis: [{ title: { text: 'Number of Patients'}}],
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
+            yAxis: [{ title: { text: 'PERCENT OF PATIENTS'}, max: 100 }],
+            plotOptions: { column: { dataLabels: { enabled: true, format: '{point.y:,.0f}%{point.text}' } } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Number of Patients', data: data, type: 'column', color: "#1AB394" },
+                { name: 'PERCENT OF PATIENTS', data: [
+                        {
+                            name: categories[0],
+                            y: data[0],
+                            text: ' (' + highVl + ')'
+                        },
+                        {
+                            name: categories[1],
+                            y: data[1],
+                            text: ' (' + onArtLessThan12Months + ')'
+                        },
+                        {
+                            name: categories[2],
+                            y: data[2],
+                            text: ' (' + ageLessThan20Years + ')'
+                        },
+                        {
+                            name: categories[3],
+                            y: data[3],
+                            text: ' (' + poorAdherence + ')'
+                        },
+                        {
+                            name: categories[4],
+                            y: data[4],
+                            text: ' (' + bmiLessThan18 + ')'
+                        }
+                    ], type: 'column', color: "#1AB394" },
             ]
         });
     }, [highVl, onArtLessThan12Months, ageLessThan20Years, poorAdherence, bmiLessThan18]);

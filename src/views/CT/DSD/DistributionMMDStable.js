@@ -9,15 +9,60 @@ const DistributionMMDStable = () => {
     const [distributionMMDStable, setDistributionMMDStable] = useState({});
     const stableMmdModels = useSelector(dsdStableMmdModelsSelectors.getStableMmdModels);
 
+
     const loadDistributionMMDStable = useCallback(async () => {
         setDistributionMMDStable({
             title: { text: '' },
             xAxis: [{ categories: stableMmdModels.models, crosshair: true }],
-            yAxis: [{ title: { text: 'Number of Patients' }}],
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
+            yAxis: [
+                {
+                    min: 0,
+                    max: 100,
+                    title: {
+                        text: 'PERCENT OF PATIENTS'
+                    }
+                }
+            ],
+            plotOptions: { column: { dataLabels: { enabled: true, format: '{point.y:,.0f}%{point.text}' } } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Number of Patients', data: stableMmdModels.data, type: 'column', color: "#485969" },
+                {
+                    name: 'Number of Patients',
+                    data: [
+                        {
+                            name: stableMmdModels.models[0],
+                            y: parseInt((Math.round((stableMmdModels.data[0]/stableMmdModels.txCurr)*100)).toString(), 10),
+                            text: ' (' + stableMmdModels.data[0] + ')'
+                        },
+                        {
+                            name: stableMmdModels.models[1],
+                            y: parseInt((Math.round((stableMmdModels.data[1]/stableMmdModels.txCurr)*100)).toString(), 10),
+                            text: ' (' + stableMmdModels.data[1] + ')'
+                        },
+                        {
+                            name: stableMmdModels.models[2],
+                            y: parseInt((Math.round((stableMmdModels.data[2]/stableMmdModels.txCurr)*100)).toString(), 10),
+                            text: ' (' + stableMmdModels.data[2] + ')'
+                        },
+                        {
+                            name: stableMmdModels.models[3],
+                            y: parseInt((Math.round((stableMmdModels.data[3]/stableMmdModels.txCurr)*100)).toString(), 10),
+                            text: ' (' + stableMmdModels.data[3] + ')'
+                        },
+                        {
+                            name: stableMmdModels.models[4],
+                            y: parseInt((Math.round((stableMmdModels.data[4]/stableMmdModels.txCurr)*100)).toString(), 10),
+                            text: ' (' + stableMmdModels.data[4] + ')'
+                        },
+                        {
+                            name: stableMmdModels.models[5],
+                            y: parseInt((Math.round((stableMmdModels.data[5]/stableMmdModels.txCurr)*100)).toString(), 10),
+                            text: ' (' + stableMmdModels.data[5] + ')'
+                        }
+                    ],
+                    type: 'column',
+                    color: "#485969"
+                },
             ]
         });
     }, [stableMmdModels]);

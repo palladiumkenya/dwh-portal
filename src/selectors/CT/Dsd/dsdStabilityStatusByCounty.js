@@ -4,10 +4,13 @@ const listUnfiltered = state => state.dsdStabilityStatusByCounty.listUnfiltered;
 const listFiltered = state => state.dsdStabilityStatusByCounty.listFiltered;
 const filtered = state => state.filters.filtered;
 
+const listUnfilteredStability = state => state.dsdAppointmentDurationByCounty.listUnfiltered;
+const listFilteredStability = state => state.dsdAppointmentDurationByCounty.listFiltered;
+
 export const getStabilityStatusByCounty = createSelector(
-    [listUnfiltered, listFiltered, filtered],
-    (listUnfiltered, listFiltered, filtered) => {
-        const list = filtered ? listFiltered : listUnfiltered;
+    [listUnfilteredStability, listFilteredStability, filtered],
+    (listUnfilteredStability, listFilteredStability, filtered) => {
+        const list = filtered ? listFilteredStability : listUnfilteredStability;
         const counties = [];
         const stability = [];
         for(let i = 0; i < list.length; i++) {
@@ -15,7 +18,10 @@ export const getStabilityStatusByCounty = createSelector(
                 continue;
             }
             counties.push(list[i].county.toUpperCase());
-            stability.push(list[i].stable);
+            stability.push({
+                y: Math.round(list[i].percentStable*100),
+                text: list[i].patients
+            });
         }
         return { counties, stability };
     }
