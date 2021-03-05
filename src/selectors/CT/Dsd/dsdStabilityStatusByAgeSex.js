@@ -1,8 +1,17 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
+import dsdUptakeOverall from '../../../reducers/CT/Dsd/dsdUptakeOverall';
+import dsdStableOverall from '../../../reducers/CT/Dsd/dsdStableOverall';
 
 const listUnfiltered = state => state.dsdStabilityStatusByAgeSex.listUnfiltered;
 const listFiltered = state => state.dsdStabilityStatusByAgeSex.listFiltered;
+
+const listUnfilteredMMD = state => state.dsdUptakeOverall.listUnfiltered;
+const listFilteredMMD = state => state.dsdUptakeOverall.listFiltered;
+
+const listUnfilteredStable = state => state.dsdStableOverall.listUnfiltered;
+const listFilteredStable = state => state.dsdStableOverall.listFiltered;
+
 const filtered = state => state.filters.filtered;
 
 export const getCurrentOnArt = createSelector(
@@ -14,18 +23,18 @@ export const getCurrentOnArt = createSelector(
 );
 
 export const getMmd = createSelector(
-    [listUnfiltered, listFiltered, filtered],
-    (listUnfiltered, listFiltered, filtered) => {
-        const list = filtered ? listFiltered : listUnfiltered;
-        return _.chain(list).sumBy("mmd").value();
+    [listUnfilteredMMD, listFilteredMMD, filtered],
+    (listUnfilteredMMD, listFilteredMMD, filtered) => {
+        const list = filtered ? listFilteredMMD : listUnfilteredMMD;
+        return list.mmd;
     }
 );
 
 export const getNonMmd = createSelector(
-    [listUnfiltered, listFiltered, filtered],
-    (listUnfiltered, listFiltered, filtered) => {
-        const list = filtered ? listFiltered : listUnfiltered;
-        return _.chain(list).sumBy("nonMmd").value();
+    [listUnfilteredMMD, listFilteredMMD, filtered],
+    (listUnfilteredMMD, listFilteredMMD, filtered) => {
+        const list = filtered ? listFilteredMMD : listUnfilteredMMD;
+        return list.nonMmd;
     }
 );
 
@@ -50,10 +59,10 @@ export const getNonMmdBySex = createSelector(
 );
 
 export const getStable = createSelector(
-    [listUnfiltered, listFiltered, filtered],
-    (listUnfiltered, listFiltered, filtered) => {
-        const list = filtered ? listFiltered : listUnfiltered;
-        return _.chain(list).sumBy("stable").value();
+    [listUnfilteredStable, listFilteredStable, filtered],
+    (listUnfilteredStable, listFilteredStable, filtered) => {
+        const list = filtered ? listFilteredStable : listUnfilteredStable;
+        return list.Stable;
     }
 );
 
@@ -108,33 +117,6 @@ export const getStabilityStatusByAgeSex = createSelector(
             stableMale.push(Math.round(malePercent));
             stableFemale.push(-Math.round(femalePercent));
         }
-        /*for (let i = 0; i < list.length; i++) {
-            const femaleValues = list.filter(obj => obj.gender === "Female" || obj.gender === "F");
-            const maleValues = list.filter(obj => obj.gender === "Male" || obj.gender === "M");
-            let index = ageGroups.indexOf(list[i].ageGroup);
-            console.log(index);
-            //femaleValues.filter(obj => obj.ageGroup);
-            //maleValues.filter(obj => obj.ageGroup);
-            for (let j = 0; j < ageGroups.length; i++) {
-                const ageFemaleGroupVal = femaleValues.filter(obj => obj.ageGroup === ageGroups[j]);
-                const ageMaleGroupVal = maleValues.filter(obj => obj.ageGroup === ageGroups[j]);
-                console.log(ageFemaleGroupVal);
-                console.log(ageMaleGroupVal);
-            }
-        }*/
-        /*for(let i = 0; i < list.length; i++) {
-            if (list[i].gender.toLowerCase() === "M".toLowerCase() || list[i].gender.toLowerCase() === "Male".toLowerCase()) {
-                let index = ageGroups.indexOf(list[i].ageGroup);
-                stableMale.splice(index, 0, parseInt(list[i].patients));
-            }
-            else if (list[i].gender.toLowerCase() === "F".toLowerCase() || list[i].gender.toLowerCase() === "Female".toLowerCase()) {
-                let index = ageGroups.indexOf(list[i].ageGroup);
-                stableFemale.splice(index, 0, parseInt(list[i].patients));
-            }
-        }*/
-
-        /*let max = _.max([_.max(stableMale), _.max(stableFemale)]);
-        stableMale = stableMale.map(x => x * -1);*/
 
         return { ageGroups, stableMale, stableFemale };
     }
