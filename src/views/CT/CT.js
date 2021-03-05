@@ -52,6 +52,8 @@ import { loadDsdAppointmentDurationBySex } from '../../actions/CT/Dsd/dsdAppoint
 import { loadDsdAppointmentDurationByAge } from '../../actions/CT/Dsd/dsdAppointmentDurationByAgeActions';
 import { loadDsdAppointmentDurationByCounty } from '../../actions/CT/Dsd/dsdAppointmentDurationByCountyActions';
 import { loadDsdAppointmentDurationByPartner } from '../../actions/CT/Dsd/dsdAppointmentDurationByPartnerActions';
+import { loadDsdUptakeOverall } from '../../actions/CT/Dsd/dsdUptakeOverallActions';
+import { loadDsdStableOverall } from '../../actions/CT/Dsd/dsdStableOverallActions';
 
 import { loadViralLoadOverallUptakeSuppressionBySex } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeSuppressionBySexActions';
 import { loadMedianTimeTo1stVlByYear } from '../../actions/CT/ViralLoad/medianTimeTo1stVlByYearActions';
@@ -89,7 +91,7 @@ const CT = () => {
     const projects = useSelector(state => state.filters.projects);
     const fromDate = useSelector(state => state.filters.fromDate);
     const toDate = useSelector(state => state.filters.toDate);
-    
+
     const renderTabNavItems = () => {
         return (
             Object.keys(CT_TABS).map((value) => {
@@ -163,6 +165,8 @@ const CT = () => {
                 dispatch(loadDsdAppointmentDurationByAge());
                 dispatch(loadDsdAppointmentDurationByCounty());
                 dispatch(loadDsdAppointmentDurationByPartner());
+                dispatch(loadDsdUptakeOverall());
+                dispatch(loadDsdStableOverall());
                 break;
             case 'vl':
                 dispatch(loadCurrentOnArtOverview());
@@ -174,13 +178,13 @@ const CT = () => {
                 dispatch(loadViralLoadUptakeByAge());
                 dispatch(loadViralLoadUptakeByCounty());
                 dispatch(loadViralLoadUptakeByPartner());
-                
+
                 dispatch(loadViralLoadOutcomesBySex());
 
                 dispatch(loadViralLoadSuppressionByAge());
                 dispatch(loadViralLoadSuppressionByYear());
                 dispatch(loadViralLoadSuppressionByRegimen());
-                
+
                 dispatch(loadViralLoadOverallUptakeSuppressionByFacility());
                 break;
             case 'tOut':

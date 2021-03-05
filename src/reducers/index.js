@@ -50,6 +50,8 @@ import dsdAppointmentDurationByAge from "./CT/Dsd/dsdAppointmentDurationByAge";
 import dsdAppointmentDurationByStabilityStatus from "./CT/Dsd/dsdAppointmentDurationByStabilityStatus";
 import dsdAppointmentDurationByCounty from "./CT/Dsd/dsdAppointmentDurationByCounty";
 import dsdAppointmentDurationByPartner from "./CT/Dsd/dsdAppointmentDurationByPartner";
+import dsdUptakeOverall from './CT/Dsd/dsdUptakeOverall';
+import dsdStableOverall from './CT/Dsd/dsdStableOverall';
 
 import viralLoadOverallUptakeSuppressionBySex from "./CT/ViralLoad/viralLoadOverallUptakeSuppressionBySex";
 import medianTimeTo1stVlByYear from "./CT/ViralLoad/medianTimeTo1stVlByYear";
@@ -84,7 +86,7 @@ export default combineReducers({
     ctSites,
 
     gpsSites,
-    
+
     newOnArtOverview,
     newOnArtTrends,
     newOnArtByAgeSex,
@@ -126,6 +128,8 @@ export default combineReducers({
     dsdAppointmentDurationByStabilityStatus,
     dsdAppointmentDurationByCounty,
     dsdAppointmentDurationByPartner,
+    dsdUptakeOverall,
+    dsdStableOverall,
 
     viralLoadOverallUptakeSuppressionBySex,
     medianTimeTo1stVlByYear,
