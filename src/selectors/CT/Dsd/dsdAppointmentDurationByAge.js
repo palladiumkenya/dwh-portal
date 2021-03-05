@@ -46,13 +46,17 @@ export const getAppointmentDurationByAge = createSelector(
             if (arr[key].length > 1) {
                 arr[key].forEach(z => {
                     const catValues = list.filter(obj => obj.AgeGroup.trim() === z.trim());
-                    totalMMD = totalMMD + catValues[0].MMD;
-                    totalNonMMD = totalNonMMD + catValues[0].NonMMD;
+                    if (catValues.length > 0) {
+                        totalMMD = totalMMD + catValues[0].MMD;
+                        totalNonMMD = totalNonMMD + catValues[0].NonMMD;
+                    }
                 });
             } else {
                 const catValues = list.filter(obj => obj.AgeGroup.trim() === arr[key][0]);
-                totalMMD = totalMMD + catValues[0].MMD;
-                totalNonMMD = totalNonMMD + catValues[0].NonMMD;
+                if (catValues.length > 0) {
+                    totalMMD = totalMMD + catValues[0].MMD;
+                    totalNonMMD = totalNonMMD + catValues[0].NonMMD;
+                }
             }
             MMDarr.push(totalMMD);
             NonMMDarr.push(totalNonMMD);
