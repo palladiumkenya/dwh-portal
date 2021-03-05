@@ -13,7 +13,7 @@ const DistributionStableByPartner = () => {
         setDistributionStableByPartner({
             title: { text: ''},
             xAxis: [{ categories: stabilityStatusByPartner.partners, title: { text: 'Partner' }, crosshair: true }],
-            yAxis: { title: { text: 'Number of Patients' }},
+            yAxis: { title: { text: 'PERCENT OF PATIENTS' }},
             legend: { enabled: false },
             tooltip: { formatter: function () {
                     return '<b>TXCurr: ' + this.point.text + '</b>';
@@ -21,7 +21,7 @@ const DistributionStableByPartner = () => {
             },
             plotOptions: { column: { dataLabels: { enabled: true, format: '{point.y:,.0f}%' } } },
             series: [
-                { data: stabilityStatusByPartner.stability, name: 'Number of Patients', type: 'column', color: "#485969" }
+                { data: stabilityStatusByPartner.stability, name: 'PERCENT OF PATIENTS', type: 'column', color: "#485969" }
             ]
         });
     }, [stabilityStatusByPartner]);
