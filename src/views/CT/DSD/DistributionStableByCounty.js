@@ -17,7 +17,7 @@ const DistributionStableByCounty = () => {
             legend: { enabled: false },
             plotOptions: { column: { dataLabels: { enabled: true, format: '{point.y:,.0f}%' } } },
             tooltip: { formatter: function () {
-                    return '<b>TXCurr: ' + this.point.text + '</b>';
+                    return this.point.text;
                 }
             },
             series: [

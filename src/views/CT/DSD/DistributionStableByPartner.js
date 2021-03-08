@@ -16,7 +16,7 @@ const DistributionStableByPartner = () => {
             yAxis: { title: { text: 'PERCENT OF PATIENTS' }},
             legend: { enabled: false },
             tooltip: { formatter: function () {
-                    return '<b>TXCurr: ' + this.point.text + '</b>';
+                    return this.point.text;
                 }
             },
             plotOptions: { column: { dataLabels: { enabled: true, format: '{point.y:,.0f}%' } } },

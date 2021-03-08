@@ -4,6 +4,7 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import * as dsdUnstableSelectors from '../../../selectors/CT/Dsd/dsdUnstable';
+import { formatNumber } from '../../../utils/utils';
 
 const DistributionUnstable = () => {
     const [distributionUnstable, setDistributionUnstable] = useState({});
@@ -28,27 +29,27 @@ const DistributionUnstable = () => {
                         {
                             name: categories[0],
                             y: data[0],
-                            text: ' (' + highVl + ')'
+                            text: ' (' + formatNumber(highVl) + ')'
                         },
                         {
                             name: categories[1],
                             y: data[1],
-                            text: ' (' + onArtLessThan12Months + ')'
+                            text: ' (' + formatNumber(onArtLessThan12Months) + ')'
                         },
                         {
                             name: categories[2],
                             y: data[2],
-                            text: ' (' + ageLessThan20Years + ')'
+                            text: ' (' + formatNumber(ageLessThan20Years) + ')'
                         },
                         {
                             name: categories[3],
                             y: data[3],
-                            text: ' (' + poorAdherence + ')'
+                            text: ' (' + formatNumber(poorAdherence) + ')'
                         },
                         {
                             name: categories[4],
                             y: data[4],
-                            text: ' (' + bmiLessThan18 + ')'
+                            text: ' (' + formatNumber(bmiLessThan18) + ')'
                         }
                     ], type: 'column', color: "#1AB394" },
             ]

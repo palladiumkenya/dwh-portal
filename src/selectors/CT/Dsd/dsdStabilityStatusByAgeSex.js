@@ -114,8 +114,18 @@ export const getStabilityStatusByAgeSex = createSelector(
             }
             const malePercent = total > 0 ? ((maleValue / total)*100) : 0;
             const femalePercent = total > 0 ? ((femaleValue / total)*100) : 0;
-            stableMale.push(Math.round(malePercent));
-            stableFemale.push(-Math.round(femalePercent));
+            stableMale.push(
+                {
+                    y: Math.round(malePercent),
+                    text: maleValue
+                }
+            );
+            stableFemale.push(
+                {
+                    y: -Math.round(femalePercent),
+                    text: femaleValue
+                }
+            );
         }
 
         return { ageGroups, stableMale, stableFemale };
