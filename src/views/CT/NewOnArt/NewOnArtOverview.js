@@ -23,7 +23,7 @@ const NewOnArtOverview = () => {
             <Row>
                 <Col>
                     <DataCard
-                        title="TOTAL NEWLY STARTED ON ART"
+                        title="NEWLY STARTED ON ART"
                         subtitle={null}
                         data={formatNumber(newOnArt)}
                     />

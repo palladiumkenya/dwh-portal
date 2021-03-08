@@ -13,7 +13,7 @@ const TimeFromDiagnosisToArtStart = () => {
         setTimeFromDiagnosisToArtStartChart({
             title: { text: '' },
             plotOptions: { column: { stacking: 'normal' } },
-            xAxis: [{ categories: timeFromDiagnosisToArtStartData.periodGroups, title: { text: 'Year of Art Start' }, crosshair: true }],
+            xAxis: [{ categories: timeFromDiagnosisToArtStartData.periodGroups, title: { text: 'Year of ART Start' }, crosshair: true }],
             yAxis: [{ title: { text: 'Percentage of Patients'} , min: 0, max: 100 }],
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },

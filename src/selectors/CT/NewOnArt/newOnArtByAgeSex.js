@@ -46,3 +46,23 @@ export const getNewOnArtByAgeSex = createSelector(
         return { max, ageGroups, newOnArtMale, newOnArtFemale };
     }
 );
+
+export const getNewOnArtBySex = createSelector(
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        let newOnArtMale = 0;
+        let newOnArtFemale = 0;
+        
+        for(let i = 0; i < list.length; i++) {
+            if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
+                newOnArtMale = newOnArtMale + parseInt(list[i].txNew);
+            }
+            else if (list[i].Gender.toLowerCase() === "F".toLowerCase() || list[i].Gender.toLowerCase() === "Female".toLowerCase()) {
+                newOnArtFemale = newOnArtFemale + parseInt(list[i].txNew);
+            }
+        }
+
+        return { newOnArtMale, newOnArtFemale };
+    }
+);

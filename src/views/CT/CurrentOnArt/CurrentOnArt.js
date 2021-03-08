@@ -5,7 +5,6 @@ import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from '../../Shared/UniversalFilter';
 import SectionHeader from '../../Shared/SectionHeader';
 import SectionFooter from '../../Shared/SectionFooter';
-import CurrentOnArtOverview from './CurrentOnArtOverview';
 import CurrentOnArtByAgeSex from './CurrentOnArtByAgeSex';
 import CurrentOnArtBySex from './CurrentOnArtBySex';
 import CurrentOnArtDistributionByCounty from './CurrentOnArtDistributionByCounty';
