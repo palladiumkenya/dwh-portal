@@ -20,7 +20,7 @@ export const getStabilityStatusByPartner = createSelector(
             partners.push(list[i].partner.toUpperCase());
             stability.push({
                 y: Math.round(list[i].percentStable*100),
-                text: list[i].patients
+                text: '<b>Stable Patients: ' + list[i].stablePatients + ' </b><br/> <b>Txcurr:' + list[i].patients + '</b>'
             });
         }
         return { partners, stability };

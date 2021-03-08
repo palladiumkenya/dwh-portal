@@ -23,7 +23,8 @@ const DistributionStableAgeSex = () => {
             plotOptions: { series: { stacking: 'normal' }, bar: { pointWidth: 18 }},
             tooltip: { formatter: function () {
                 return '<b>' + this.series.name + ', Age Group ' + this.point.category + '</b><br/>' +
-                    'Percent Stable: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
+                    'Percent Stable: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1) +
+                    '% (' + this.point.text + ')';
                 }
             },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
