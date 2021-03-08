@@ -70,7 +70,6 @@ const ViralLoad = () => {
             <TabContent activeTab={activeTab}>
                 <TabPane tabId="uptake">
                     <SectionHeader title={branding.title + " UPTAKE"}/>
-                    <SectionFooter overview={branding.overview}/>
                     <Card>
                         <CardHeader>Indicator Definition</CardHeader>
                         <CardBody>
@@ -114,7 +113,6 @@ const ViralLoad = () => {
                 </TabPane>
                 <TabPane tabId="outcomes">
                     <SectionHeader title={branding.title + " OUTCOMES"}/>
-                    <SectionFooter overview={branding.overview}/>
                     <Card>
                         <CardHeader>Indicator Definition</CardHeader>
                         <CardBody>

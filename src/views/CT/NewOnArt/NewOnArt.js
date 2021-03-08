@@ -1,12 +1,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from './../../Shared/UniversalFilter';
 import SectionHeader from '../../Shared/SectionHeader';
 import SectionFooter from '../../Shared/SectionFooter';
 import NewOnArtOverview from './NewOnArtOverview';
-import NewOnArtTrends from './NewOnArtTrends';
+import NewOnArtBySex from './NewOnArtBySex';
 import NewOnArtByAgeSex from './NewOnArtByAgeSex';
+import NewOnArtTrends from './NewOnArtTrends';
 import MedianTimeToArtStartByYear from './MedianTimeToArtStartByYear';
 import MedianTimeToArtStartByCounty from './MedianTimeToArtStartByCounty';
 import MedianTimeToArtStartByPartner from './MedianTimeToArtStartByPartner';
@@ -33,10 +35,27 @@ const NewOnArt = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor><p></p>
+            <Card>
+                <CardHeader>Indicator Definition</CardHeader>
+                <CardBody>
+                    <ul>
+                        <li>
+                            Newly started on ART => Number of patients who were started on ART within the previous month
+                        </li>
+                    </ul>
+                </CardBody>
+            </Card>
             <NewOnArtOverview /><p></p>
-            <NewOnArtTrends />
+            <Row>
+                <Col>
+                    <NewOnArtBySex />
+                </Col>
+                <Col>
+                    <NewOnArtByAgeSex />
+                </Col>
+            </Row>
             <SectionFooter overview={branding.overview}/>
-            <NewOnArtByAgeSex />
+            <NewOnArtTrends />
             <SectionFooter overview={branding.overview}/>
             <MedianTimeToArtStartByYear />
             <SectionFooter overview={branding.overview}/>
