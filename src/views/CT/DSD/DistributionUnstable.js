@@ -22,7 +22,10 @@ const DistributionUnstable = () => {
             title: { text: '' },
             xAxis: [{ categories: categories, crosshair: true }],
             yAxis: [{ title: { text: 'PERCENT OF PATIENTS'}, max: 100 }],
-            plotOptions: { column: { dataLabels: { enabled: true, format: '{point.y:,.0f}%{point.text}' } } },
+            plotOptions: { column: { dataLabels: { enabled: true, format: '{point.y:,.0f}%' } } },
+            tooltip: { formatter: function () {
+                    return '<b>' + this.point.name + '</b>: ' + this.point.text;
+                } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'PERCENT OF PATIENTS', data: [
