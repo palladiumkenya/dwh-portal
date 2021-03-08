@@ -12,10 +12,10 @@ const DSDIndicatorDefinition = () => {
                     <CardBody className={"indicator_definition_body"}>
                         <ul>
                             <li>
-                                MMD => Duration between clinic visit date and the next appointment of 90 or more days
+                                In computing the patients current on ART, those with a visit date but do not have a next appointment date have 30 days added to their visit date to impute the expected appointment date. This could affect the computed proportion on MMD.
                             </li>
                             <li>
-                                STABLE => Patients on ART for &#8805;12 months, no active OIs, good adherence, undetectable VL, non-pregnant/not breastfeeding, MBI &#8805;18.5, age &#8805;20 years and no HCW concerns.
+                                Stable patients is based on documented stability status on the EMR
                             </li>
                         </ul>
                     </CardBody>
