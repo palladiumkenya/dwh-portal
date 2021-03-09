@@ -9,7 +9,10 @@ import ctSites from "./Shared/ctSites";
 
 import gpsSites from "./Home/gpsSites";
 
+import linkagePositiveTrends from "./HTS/Linkage/linkagePositiveTrends";
+
 import currentNewOnArtOverview from "./CT/NewOnArt/currentNewOnArtOverview";
+
 import newOnArtOverview from "./CT/NewOnArt/newOnArtOverview";
 import newOnArtTrends from "./CT/NewOnArt/newOnArtTrends";
 import newOnArtByAgeSex from "./CT/NewOnArt/newOnArtByAgeSex";
@@ -87,6 +90,8 @@ export default combineReducers({
     ctSites,
 
     gpsSites,
+
+    linkagePositiveTrends,
 
     currentNewOnArtOverview,
     

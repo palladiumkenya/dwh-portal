@@ -13,6 +13,7 @@ import MedianTimeToArtStartByYear from './MedianTimeToArtStartByYear';
 import MedianTimeToArtStartByCounty from './MedianTimeToArtStartByCounty';
 import MedianTimeToArtStartByPartner from './MedianTimeToArtStartByPartner';
 import TimeFromDiagnosisToArtStart from './TimeFromDiagnosisToArtStart';
+import NewOnArtHtsPositive from './NewOnArtHtsPositive';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const NewOnArt = () => {
@@ -64,6 +65,8 @@ const NewOnArt = () => {
             <MedianTimeToArtStartByPartner />
             <SectionFooter overview={branding.overview}/>
             <TimeFromDiagnosisToArtStart />
+            <SectionFooter overview={branding.overview}/>
+            <NewOnArtHtsPositive />
             <SectionFooter overview={branding.overview}/>
         </div>
     );

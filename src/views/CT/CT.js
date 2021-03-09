@@ -11,6 +11,8 @@ import ArtOptimization from './ArtOptimization/ArtOptimization';
 import { changeCtTab, changeCurrentPage } from "../../actions/Shared/uiActions";
 import { enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
 
+import { loadLinkagePositiveTrends } from '../../actions/HTS/Linkage/linkagePositiveTrendsActions';
+
 import { loadCurrentNewOnArtOverview } from '../../actions/CT/NewOnArt/currentNewOnArtOverviewActions';
 
 import { loadNewOnArtOverview } from '../../actions/CT/NewOnArt/newOnArtOverviewActions';
@@ -117,6 +119,8 @@ const CT = () => {
     useEffect(() => {
         switch (ctTab) {
             case 'txNew':
+                dispatch(loadLinkagePositiveTrends());
+
                 dispatch(loadCurrentNewOnArtOverview());
                 
                 dispatch(loadNewOnArtOverview());
