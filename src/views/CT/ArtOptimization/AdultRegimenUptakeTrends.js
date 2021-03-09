@@ -33,11 +33,11 @@ const AdultRegimenUptakeTrends = () => {
         for(let i = 0; i < regimens.length; i++) {
             let color = '#55FFFF';
             if (regimens[i] === 'TLD') {
-                color = '#55FFFF';
+                color = '#2D73F5';
             } else if (regimens[i] === 'TLE') {
-                color = '#1F77B4';
+                color = '#1AB394';
             } else {
-                color = '#F28E2B';
+                color = '#142459';
             }
             series.push({
                 name: regimens[i], type: 'column', data: data[i], color: color
