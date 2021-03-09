@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
+import dsdMmdUptakeOverallBySex from '../../../reducers/CT/Dsd/dsdMmdUptakeOverallBySex';
 
 const listUnfiltered = state => state.dsdStabilityStatusByAgeSex.listUnfiltered;
 const listFiltered = state => state.dsdStabilityStatusByAgeSex.listFiltered;
@@ -12,6 +13,9 @@ const listFilteredStable = state => state.dsdStableOverall.listFiltered;
 
 const listUnfilteredTXCurr = state => state.currentOnArtByAgeSex.listUnfiltered;
 const listFilteredTXCurr = state => state.currentOnArtByAgeSex.listFiltered;
+
+const listUnfilteredOverAllMMD = state => state.dsdMmdUptakeOverallBySex.listUnfiltered;
+const listFilteredOverAllMMD = state => state.dsdMmdUptakeOverallBySex.listFiltered;
 
 const filtered = state => state.filters.filtered;
 
@@ -40,9 +44,10 @@ export const getNonMmd = createSelector(
 );
 
 export const getMmdBySex = createSelector(
-    [listUnfiltered, listFiltered, filtered],
-    (listUnfiltered, listFiltered, filtered) => {
-        const list = filtered ? listFiltered : listUnfiltered;
+    [listUnfilteredOverAllMMD, listFilteredOverAllMMD, filtered],
+    (listUnfilteredOverAllMMD, listFilteredOverAllMMD, filtered) => {
+        const list = filtered ? listFilteredOverAllMMD : listUnfilteredOverAllMMD;
+
         const male = _.chain(list).filter(list => list.gender === "Male").sumBy("mmd").value();
         const female = _.chain(list).filter(list => list.gender === "Female").sumBy("mmd").value();
         return [male, female];
