@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import currentOnArtByPartner from '../../../reducers/CT/CurrentOnArt/currentOnArtByPartner';
 
 const listUnfiltered = state => state.dsdStabilityStatusByPartner.listUnfiltered;
 const listFiltered = state => state.dsdStabilityStatusByPartner.listFiltered;
@@ -25,7 +24,7 @@ export const getStabilityStatusByPartner = createSelector(
                 continue;
             }
             partners.push(list[i].partner.toUpperCase());
-            const selectedPartner = listCurrentOnART.filter(obj => obj.CTPartner === list[i].partner.toUpperCase());
+            const selectedPartner = listCurrentOnART.filter(obj => obj.CTPartner ? obj.CTPartner.toUpperCase() === list[i].partner.toUpperCase() : null);
 
             if (selectedPartner.length > 0) {
                 stability.push({

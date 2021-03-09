@@ -24,7 +24,7 @@ export const getStabilityStatusByCounty = createSelector(
                 continue;
             }
             counties.push(list[i].county.toUpperCase());
-            const selectedCounty = listCurrentOnART.filter(obj => obj.County === list[i].county.toUpperCase());
+            const selectedCounty = listCurrentOnART.filter(obj => obj.County ? obj.County.toUpperCase() === list[i].county.toUpperCase() : null);
 
             if (selectedCounty.length > 0) {
                 stability.push({
