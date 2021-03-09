@@ -5,12 +5,18 @@ const listFiltered = state => state.dsdStabilityStatusByPartner.listFiltered;
 
 const ListUnfilteredStability = state => state.dsdAppointmentDurationByPartner.listUnfiltered;
 const listFilteredStability = state => state.dsdAppointmentDurationByPartner.listFiltered;
+
+const ListUnfilteredCurrentOnART = state => state.currentOnArtByPartner.listUnfiltered;
+const listFilteredCurrentOnART  = state => state.currentOnArtByPartner.listFiltered;
+
 const filtered = state => state.filters.filtered;
 
 export const getStabilityStatusByPartner = createSelector(
-    [ListUnfilteredStability, listFilteredStability, filtered],
-    (ListUnfilteredStability, listFilteredStability, filtered) => {
+    [ListUnfilteredStability, ListUnfilteredCurrentOnART, listFilteredStability, listFilteredCurrentOnART, filtered],
+    (ListUnfilteredStability, ListUnfilteredCurrentOnART, listFilteredStability, listFilteredCurrentOnART, filtered) => {
         const list = filtered ? listFilteredStability : ListUnfilteredStability;
+        const listCurrentOnART = filtered ? listFilteredCurrentOnART : ListUnfilteredCurrentOnART;
+
         const partners = [];
         const stability = [];
         for(let i = 0; i < list.length; i++) {
@@ -18,11 +24,26 @@ export const getStabilityStatusByPartner = createSelector(
                 continue;
             }
             partners.push(list[i].partner.toUpperCase());
-            stability.push({
-                y: Math.round(list[i].percentStable*100),
-                text: '<b>Stable Patients: ' + list[i].stablePatients + ' </b><br/> <b>Txcurr:' + list[i].patients + '</b>'
-            });
+            const selectedPartner = listCurrentOnART.filter(obj => obj.CTPartner ? obj.CTPartner.toUpperCase() === list[i].partner.toUpperCase() : null);
+
+            if (selectedPartner.length > 0) {
+                stability.push({
+                    name: list[i].partner.toUpperCase(),
+                    y: Math.round(((list[i].stablePatients/selectedPartner[0].txCurr)*100)) > 100 ? 100 : Math.round(((list[i].stablePatients/selectedPartner[0].txCurr)*100)),
+                    text: '<b>Stable Patients: ' + list[i].stablePatients + ' </b><br/> <b>Txcurr:' + selectedPartner[0].txCurr + '</b>'
+                });
+            } else {
+                stability.push({
+                    name: list[i].partner.toUpperCase(),
+                    y: 0,
+                    text: '<b>Stable Patients: ' + list[i].stablePatients + ' </b><br/> <b>Txcurr: </b>'
+                });
+            }
         }
+
+        stability.sort(function(a, b) {
+            return b.y - a.y;
+        });
         return { partners, stability };
     }
 );

@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import currentOnArtByCounty from '../../../reducers/CT/CurrentOnArt/currentOnArtByCounty';
 
 const listUnfiltered = state => state.dsdStabilityStatusByCounty.listUnfiltered;
 const listFiltered = state => state.dsdStabilityStatusByCounty.listFiltered;
@@ -7,10 +8,15 @@ const filtered = state => state.filters.filtered;
 const listUnfilteredStability = state => state.dsdAppointmentDurationByCounty.listUnfiltered;
 const listFilteredStability = state => state.dsdAppointmentDurationByCounty.listFiltered;
 
+const listUnfilteredCurrentOnART = state => state.currentOnArtByCounty.listUnfiltered;
+const listFilteredCurrentOnART = state => state.currentOnArtByCounty.listFiltered;
+
 export const getStabilityStatusByCounty = createSelector(
-    [listUnfilteredStability, listFilteredStability, filtered],
-    (listUnfilteredStability, listFilteredStability, filtered) => {
+    [listUnfilteredStability, listUnfilteredCurrentOnART, listFilteredStability, listFilteredCurrentOnART, filtered],
+    (listUnfilteredStability, listUnfilteredCurrentOnART, listFilteredStability, listFilteredCurrentOnART, filtered) => {
         const list = filtered ? listFilteredStability : listUnfilteredStability;
+        const listCurrentOnART = filtered ? listFilteredCurrentOnART : listUnfilteredCurrentOnART;
+
         const counties = [];
         const stability = [];
         for(let i = 0; i < list.length; i++) {
@@ -18,11 +24,26 @@ export const getStabilityStatusByCounty = createSelector(
                 continue;
             }
             counties.push(list[i].county.toUpperCase());
-            stability.push({
-                y: Math.round(list[i].percentStable*100),
-                text:  '<b>Stable Patients: ' + list[i].stablePatients + ' </b><br/> <b>Txcurr:' + list[i].patients + '</b>'
-            });
+            const selectedCounty = listCurrentOnART.filter(obj => obj.County ? obj.County.toUpperCase() === list[i].county.toUpperCase() : null);
+
+            if (selectedCounty.length > 0) {
+                stability.push({
+                    name: list[i].county.toUpperCase(),
+                    y: Math.round(((list[i].stablePatients/selectedCounty[0].txCurr)*100)) > 100 ? 100 : Math.round(((list[i].stablePatients/selectedCounty[0].txCurr)*100)),
+                    text:  '<b>Stable Patients: ' + list[i].stablePatients + ' </b><br/> <b>Txcurr:' + selectedCounty[0].txCurr + '</b>'
+                });
+            } else {
+                stability.push({
+                    name: list[i].county.toUpperCase(),
+                    y: 0,
+                    text:  '<b>Stable Patients: ' + list[i].stablePatients + ' </b><br/> <b>Txcurr: </b>'
+                });
+            }
         }
+
+        stability.sort(function(a, b) {
+            return b.y - a.y;
+        });
         return { counties, stability };
     }
 );

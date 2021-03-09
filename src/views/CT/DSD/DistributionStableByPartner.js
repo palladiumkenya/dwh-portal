@@ -12,7 +12,7 @@ const DistributionStableByPartner = () => {
     const loadTxCurrDistributionByPartner = useCallback(async () => {
         setDistributionStableByPartner({
             title: { text: ''},
-            xAxis: [{ categories: stabilityStatusByPartner.partners, title: { text: 'Partner' }, crosshair: true }],
+            xAxis: [{ categories: stabilityStatusByPartner.stability.map(a => a.name), title: { text: 'Partner' }, crosshair: true }],
             yAxis: { title: { text: 'PERCENT OF PATIENTS' }},
             legend: { enabled: false },
             tooltip: { formatter: function () {
