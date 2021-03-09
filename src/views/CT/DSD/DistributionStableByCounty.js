@@ -12,7 +12,7 @@ const DistributionStableByCounty = () => {
     const loadTxCurrDistributionByCounty = useCallback(async () => {
         setDistributionStableByCounty({
             title: { text: ''},
-            xAxis: [{ categories: stabilityStatusByCounty.counties, title: { text: 'County' }, crosshair: true }],
+            xAxis: [{ categories: stabilityStatusByCounty.stability.map(a => a.name), title: { text: 'County' }, crosshair: true }],
             yAxis: { title: { text: 'PERCENT OF PATIENTS' }},
             legend: { enabled: false },
             plotOptions: { column: { dataLabels: { enabled: true, format: '{point.y:,.0f}%' } } },
