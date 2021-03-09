@@ -58,6 +58,7 @@ import { loadDsdAppointmentDurationByCounty } from '../../actions/CT/Dsd/dsdAppo
 import { loadDsdAppointmentDurationByPartner } from '../../actions/CT/Dsd/dsdAppointmentDurationByPartnerActions';
 import { loadDsdUptakeOverall } from '../../actions/CT/Dsd/dsdUptakeOverallActions';
 import { loadDsdStableOverall } from '../../actions/CT/Dsd/dsdStableOverallActions';
+import { loadDsdUptakeOverallBySex } from '../../actions/CT/Dsd/dsdMmdUptakeOverallBySexActions';
 
 import { loadViralLoadOverallUptakeSuppressionBySex } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeSuppressionBySexActions';
 import { loadMedianTimeTo1stVlByYear } from '../../actions/CT/ViralLoad/medianTimeTo1stVlByYearActions';
@@ -122,7 +123,7 @@ const CT = () => {
                 dispatch(loadLinkagePositiveTrends());
 
                 dispatch(loadCurrentNewOnArtOverview());
-                
+
                 dispatch(loadNewOnArtOverview());
                 dispatch(loadNewOnArtTrends());
                 dispatch(loadNewOnArtByAgeSex());
@@ -175,6 +176,7 @@ const CT = () => {
                 dispatch(loadDsdAppointmentDurationByPartner());
                 dispatch(loadDsdUptakeOverall());
                 dispatch(loadDsdStableOverall());
+                dispatch(loadDsdUptakeOverallBySex());
                 break;
             case 'vl':
                 dispatch(loadCurrentOnArtOverview());

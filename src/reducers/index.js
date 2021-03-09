@@ -79,6 +79,7 @@ import threeMonthRetention from "./CT/TreatmentOutcomes/threeMonthRetention";
 import sixMonthRetention from "./CT/TreatmentOutcomes/sixMonthRetention";
 import twelveMonthRetention from "./CT/TreatmentOutcomes/twelveMonthRetention";
 import twentyFourMonthRetention from "./CT/TreatmentOutcomes/twentyFourMonthRetention";
+import dsdMmdUptakeOverallBySex from './CT/Dsd/dsdMmdUptakeOverallBySex';
 
 export default combineReducers({
     auth: authReducer,
@@ -94,7 +95,7 @@ export default combineReducers({
     linkagePositiveTrends,
 
     currentNewOnArtOverview,
-    
+
     newOnArtOverview,
     newOnArtTrends,
     newOnArtByAgeSex,
@@ -138,6 +139,7 @@ export default combineReducers({
     dsdAppointmentDurationByPartner,
     dsdUptakeOverall,
     dsdStableOverall,
+    dsdMmdUptakeOverallBySex,
 
     viralLoadOverallUptakeSuppressionBySex,
     medianTimeTo1stVlByYear,

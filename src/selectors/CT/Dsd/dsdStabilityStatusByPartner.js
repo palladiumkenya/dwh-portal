@@ -18,7 +18,6 @@ export const getStabilityStatusByPartner = createSelector(
         const list = filtered ? listFilteredStability : ListUnfilteredStability;
         const listCurrentOnART = filtered ? listFilteredCurrentOnART : ListUnfilteredCurrentOnART;
 
-        console.log(listCurrentOnART);
         const partners = [];
         const stability = [];
         for(let i = 0; i < list.length; i++) {
