@@ -14,7 +14,7 @@ const DistributionMMDStable = () => {
     const loadDistributionMMDStable = useCallback(async () => {
         setDistributionMMDStable({
             title: { text: '' },
-            xAxis: [{ categories: stableMmdModels.models, crosshair: true }],
+            xAxis: [{ categories: stableMmdModels.data.map(a => a.name), crosshair: true }],
             yAxis: [
                 {
                     min: 0,
@@ -32,38 +32,7 @@ const DistributionMMDStable = () => {
             series: [
                 {
                     name: 'PERCENT OF PATIENTS',
-                    data: [
-                        {
-                            name: stableMmdModels.models[0],
-                            y: parseInt((Math.round((stableMmdModels.data[0]/stableMmdModels.txCurr)*100)).toString(), 10),
-                            text: ' (' + formatNumber(stableMmdModels.data[0]) + ')',
-                        },
-                        {
-                            name: stableMmdModels.models[1],
-                            y: parseInt((Math.round((stableMmdModels.data[1]/stableMmdModels.txCurr)*100)).toString(), 10),
-                            text: ' (' + formatNumber(stableMmdModels.data[1]) + ')'
-                        },
-                        {
-                            name: stableMmdModels.models[2],
-                            y: parseInt((Math.round((stableMmdModels.data[2]/stableMmdModels.txCurr)*100)).toString(), 10),
-                            text: ' (' + formatNumber(stableMmdModels.data[2]) + ')'
-                        },
-                        {
-                            name: stableMmdModels.models[3],
-                            y: parseInt((Math.round((stableMmdModels.data[3]/stableMmdModels.txCurr)*100)).toString(), 10),
-                            text: ' (' + formatNumber(stableMmdModels.data[3]) + ')'
-                        },
-                        {
-                            name: stableMmdModels.models[4],
-                            y: parseInt((Math.round((stableMmdModels.data[4]/stableMmdModels.txCurr)*100)).toString(), 10),
-                            text: ' (' + formatNumber(stableMmdModels.data[4]) + ')'
-                        },
-                        {
-                            name: stableMmdModels.models[5],
-                            y: parseInt((Math.round((stableMmdModels.data[5]/stableMmdModels.txCurr)*100)).toString(), 10),
-                            text: ' (' + formatNumber(stableMmdModels.data[5]) + ')'
-                        }
-                    ],
+                    data: stableMmdModels.data,
                     type: 'column',
                     color: "#485969"
                 },

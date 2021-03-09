@@ -17,10 +17,34 @@ const DistributionUnstable = () => {
     const loadDistributionUnstable = useCallback(async () => {
         const categories = ["HIGH VL", "ART<12 MONTHS", "AGE <20 YEARS", "POOR ADHERANCE", "BMI <18.5"];
         const total = highVl + onArtLessThan12Months + ageLessThan20Years + poorAdherence + bmiLessThan18;
-        const data = [Math.round((highVl/total)*100), Math.round((onArtLessThan12Months/total)*100), Math.round((ageLessThan20Years/total)*100), Math.round((poorAdherence/total)*100), Math.round((bmiLessThan18/total)*100)];
+        const data = [
+            {
+                y: Math.round((highVl/total)*100),
+                name: "HIGH VL"
+            },
+            {
+                y: Math.round((onArtLessThan12Months/total)*100),
+                name: "ART<12 MONTHS"
+            },
+            {
+                y: Math.round((ageLessThan20Years/total)*100),
+                name: "AGE <20 YEARS"
+            },
+            {
+                y: Math.round((poorAdherence/total)*100),
+                name: "POOR ADHERANCE"
+            },
+            {
+                y: Math.round((bmiLessThan18/total)*100),
+                name: "BMI <18.5"
+            }
+        ];
+        data.sort(function(a, b) {
+            return b.y - a.y;
+        });
         setDistributionUnstable({
             title: { text: '' },
-            xAxis: [{ categories: categories, crosshair: true }],
+            xAxis: [{ categories: data.map(a => a.name), crosshair: true }],
             yAxis: [{ title: { text: 'PERCENT OF PATIENTS'}, max: 100 }],
             plotOptions: { column: { dataLabels: { enabled: true, format: '{point.y:,.0f}%' } } },
             tooltip: { formatter: function () {
@@ -31,30 +55,30 @@ const DistributionUnstable = () => {
                 { name: 'PERCENT OF PATIENTS', data: [
                         {
                             name: categories[0],
-                            y: data[0],
+                            y: data[0].y,
                             text: ' (' + formatNumber(highVl) + ')'
                         },
                         {
                             name: categories[1],
-                            y: data[1],
+                            y: data[1].y,
                             text: ' (' + formatNumber(onArtLessThan12Months) + ')'
                         },
                         {
                             name: categories[2],
-                            y: data[2],
+                            y: data[2].y,
                             text: ' (' + formatNumber(ageLessThan20Years) + ')'
                         },
                         {
                             name: categories[3],
-                            y: data[3],
+                            y: data[3].y,
                             text: ' (' + formatNumber(poorAdherence) + ')'
                         },
                         {
                             name: categories[4],
-                            y: data[4],
+                            y: data[4].y,
                             text: ' (' + formatNumber(bmiLessThan18) + ')'
                         }
-                    ], type: 'column', color: "#1AB394" },
+                    ], type: 'column', color: "#485969" },
             ]
         });
     }, [highVl, onArtLessThan12Months, ageLessThan20Years, poorAdherence, bmiLessThan18]);
