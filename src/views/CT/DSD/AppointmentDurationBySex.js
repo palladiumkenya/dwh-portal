@@ -19,8 +19,8 @@ const AppointmentDurationBySex = () => {
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: '<3 MONTHS', data: appointmentDurationBySexData.data[0], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '3-5 MONTHS', data: appointmentDurationBySexData.data[1], type: 'column', color: "#3281CC", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '6+ MONTHS', data: appointmentDurationBySexData.data[2], type: 'column', color: "#2F4050", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: '3-5 MONTHS', data: appointmentDurationBySexData.data[1], type: 'column', color: "#2F4050", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: '6+ MONTHS', data: appointmentDurationBySexData.data[2], type: 'column', color: "#3281CC", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [appointmentDurationBySexData]);

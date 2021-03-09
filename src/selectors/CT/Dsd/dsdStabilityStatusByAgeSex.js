@@ -1,7 +1,5 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
-import dsdUptakeOverall from '../../../reducers/CT/Dsd/dsdUptakeOverall';
-import dsdStableOverall from '../../../reducers/CT/Dsd/dsdStableOverall';
 
 const listUnfiltered = state => state.dsdStabilityStatusByAgeSex.listUnfiltered;
 const listFiltered = state => state.dsdStabilityStatusByAgeSex.listFiltered;
@@ -11,6 +9,9 @@ const listFilteredMMD = state => state.dsdUptakeOverall.listFiltered;
 
 const listUnfilteredStable = state => state.dsdStableOverall.listUnfiltered;
 const listFilteredStable = state => state.dsdStableOverall.listFiltered;
+
+const listUnfilteredTXCurr = state => state.currentOnArtByAgeSex.listUnfiltered;
+const listFilteredTXCurr = state => state.currentOnArtByAgeSex.listFiltered;
 
 const filtered = state => state.filters.filtered;
 
@@ -75,9 +76,28 @@ export const getUnstable = createSelector(
 );
 
 export const getStabilityStatusByAgeSex = createSelector(
-    [listUnfiltered, listFiltered, filtered],
-    (listUnfiltered, listFiltered, filtered) => {
+    [listUnfiltered, listUnfilteredTXCurr, listFilteredTXCurr, listFiltered, filtered],
+    (listUnfiltered, listUnfilteredTXCurr, listFilteredTXCurr, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
+        const listTXCurr = filtered ? listFilteredTXCurr : listUnfilteredTXCurr;
+
+        const ageArr = [
+            { "Under 1": "<1" },
+            { "1 to 4": "1-4" },
+            { "5 to 9": "5-9" },
+            { "10 to 14" : "10-14" },
+            { "15 to 19" : "15-19" },
+            { "20 to 24" : "20-24" },
+            { "25 to 29" : "25-29" },
+            { "30 to 34" : "30-34" },
+            { "35 to 39" : "35-39" },
+            { "40 to 44" : "40-44" },
+            { "45 to 49" : "45-49" },
+            { "50 to 54" : "50-54" },
+            { "55 to 59" : "55-59" },
+            { "60 to 64" : "60-64" },
+            {  "65+": "65+" }
+        ];
         const ageGroups = [
             "Under 1",
             "1 to 4",
@@ -99,21 +119,43 @@ export const getStabilityStatusByAgeSex = createSelector(
         let stableFemale = [];
 
         for (let j = 0; j < ageGroups.length; j++) {
+            let altAgeGroup = null;
+            const aggArrFind = ageArr.find(obj => {
+                return Object.keys(obj)[0] === ageGroups[j];
+            });
+
+            if (aggArrFind) {
+                altAgeGroup = Object.values(aggArrFind)[0];
+            }
+
+
             const femaleValues = list.filter(obj => (obj.gender === "Female" || obj.gender === "F") && (obj.ageGroup === ageGroups[j]));
             const maleValues = list.filter(obj => (obj.gender === "Male" || obj.gender === "M") && (obj.ageGroup === ageGroups[j]));
-            let total = 0;
+
+            const ageGroupFemaleVals =  listTXCurr.filter(obj => (obj.Gender === "Female" || obj.Gender === "F") && (obj.ageGroup === altAgeGroup));
+            const ageGroupMaleVals = listTXCurr.filter(obj => (obj.Gender === "Male" || obj.Gender === "M") && (obj.ageGroup === altAgeGroup));
+
+            let totalFemale = 0;
             let femaleValue = 0;
+            let totalMale = 0;
             let maleValue = 0;
             if (femaleValues.length > 0) {
-                total = total + femaleValues[0].patients;
                 femaleValue = femaleValues[0].patients;
             }
             if (maleValues.length > 0) {
-                total = total + maleValues[0].patients;
                 maleValue = maleValues[0].patients;
             }
-            const malePercent = total > 0 ? ((maleValue / total)*100) : 0;
-            const femalePercent = total > 0 ? ((femaleValue / total)*100) : 0;
+
+            if (ageGroupFemaleVals.length > 0) {
+                totalFemale = totalFemale + ageGroupFemaleVals[0].txCurr;
+            }
+
+            if (ageGroupMaleVals.length > 0) {
+                totalMale = totalMale + ageGroupMaleVals[0].txCurr;
+            }
+
+            const malePercent = totalMale > 0 ? ((maleValue / totalMale)*100) : 0;
+            const femalePercent = totalFemale > 0 ? ((femaleValue / totalFemale)*100) : 0;
             stableMale.push(
                 {
                     y: Math.round(malePercent),
@@ -122,7 +164,7 @@ export const getStabilityStatusByAgeSex = createSelector(
             );
             stableFemale.push(
                 {
-                    y: -Math.round(femalePercent),
+                    y: Math.round(femalePercent),
                     text: femaleValue
                 }
             );
