@@ -16,7 +16,6 @@ import ThreeMonthRetention from './ThreeMonthRetention';
 import SixMonthRetention from './SixMonthRetention';
 import TwelveMonthRetention from './TwelveMonthRetention';
 import TwentyFourMonthRetention from './TwentyFourMonthRetention';
-import TreatmentOutcomesByFacility from './TreatmentOutcomesByFacility';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const TreatmentOutcomes = () => {
@@ -63,8 +62,6 @@ const TreatmentOutcomes = () => {
             <TwelveMonthRetention />
             <SectionFooter overview={branding.overview}/>
             <TwentyFourMonthRetention />
-            <SectionFooter overview={branding.overview}/>
-            <TreatmentOutcomesByFacility />
             <SectionFooter overview={branding.overview}/>
         </div>
     );
