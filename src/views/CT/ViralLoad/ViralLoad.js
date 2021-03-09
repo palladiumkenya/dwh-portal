@@ -38,7 +38,7 @@ import ViralLoadSuppressionByYear24Month from './ViralLoadSuppressionByYear24Mon
 import ViralLoadOverallUptakeAndSuppressionByFacility from './ViralLoadOverallUptakeAndSuppressionByFacility';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 import classnames from 'classnames';
-import CurrentOnArtOverview from '../CurrentOnArt/CurrentOnArtOverview';
+import ViralLoadOutcomesOverview from './ViralLoadOutcomesOverview';
 
 const ViralLoad = () => {
     const branding = { title: "VIRAL LOAD", description: "OVERVIEW", overview: "Viral Load Monitoring" };
@@ -129,7 +129,7 @@ const ViralLoad = () => {
                             </ul>
                         </CardBody>
                     </Card>
-                    <CurrentOnArtOverview />
+                    <ViralLoadOutcomesOverview />
                     <Row>
                         <Col sm={4}>
                             <ViralLoadOutcomesOverall />

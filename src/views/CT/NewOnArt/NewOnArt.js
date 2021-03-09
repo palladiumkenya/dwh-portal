@@ -40,7 +40,7 @@ const NewOnArt = () => {
                 <CardBody>
                     <ul>
                         <li>
-                            Newly started on ART => Number of patients who were started on ART within the previous month
+                            Newly started on ART =&gt; Number of patients who were started on ART within the previous month
                         </li>
                     </ul>
                 </CardBody>

@@ -11,6 +11,8 @@ import ArtOptimization from './ArtOptimization/ArtOptimization';
 import { changeCtTab, changeCurrentPage } from "../../actions/Shared/uiActions";
 import { enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
 
+import { loadCurrentNewOnArtOverview } from '../../actions/CT/NewOnArt/currentNewOnArtOverviewActions';
+
 import { loadNewOnArtOverview } from '../../actions/CT/NewOnArt/newOnArtOverviewActions';
 import { loadNewOnArtTrends } from '../../actions/CT/NewOnArt/newOnArtTrendsActions';
 import { loadNewOnArtByAgeSex } from '../../actions/CT/NewOnArt/newOnArtByAgeSexActions';
@@ -115,6 +117,8 @@ const CT = () => {
     useEffect(() => {
         switch (ctTab) {
             case 'txNew':
+                dispatch(loadCurrentNewOnArtOverview());
+                
                 dispatch(loadNewOnArtOverview());
                 dispatch(loadNewOnArtTrends());
                 dispatch(loadNewOnArtByAgeSex());

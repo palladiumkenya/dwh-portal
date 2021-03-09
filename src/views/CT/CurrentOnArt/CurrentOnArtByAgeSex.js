@@ -42,7 +42,7 @@ const CurrentOnArtByAgeSex = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        CURRENT ON ART BY AGE GROUP AND SEX
+                        CURRENT ON ART BY AGE GROUP AND SEX*
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -50,6 +50,9 @@ const CurrentOnArtByAgeSex = () => {
                         </div>
                     </CardBody>
                 </Card>
+            </div>
+            <div className="col-12">
+                *This indicator is computed and displayed for the last completed month.
             </div>
         </div>
     );
