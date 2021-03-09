@@ -37,12 +37,15 @@ const CurrentOnArtByPartner = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        Distribution of Patients currently on ART by Partner
+                        Distribution of Patients currently on ART by Partner*
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={currentOnArtByPartnerChart} />
                     </CardBody>
                 </Card>
+            </div>
+            <div className="col-12">
+                *This indicator is computed and displayed for the last completed month.
             </div>
         </div>
     );

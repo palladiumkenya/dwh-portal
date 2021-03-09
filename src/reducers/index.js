@@ -9,6 +9,7 @@ import ctSites from "./Shared/ctSites";
 
 import gpsSites from "./Home/gpsSites";
 
+import currentNewOnArtOverview from "./CT/NewOnArt/currentNewOnArtOverview";
 import newOnArtOverview from "./CT/NewOnArt/newOnArtOverview";
 import newOnArtTrends from "./CT/NewOnArt/newOnArtTrends";
 import newOnArtByAgeSex from "./CT/NewOnArt/newOnArtByAgeSex";
@@ -87,6 +88,8 @@ export default combineReducers({
 
     gpsSites,
 
+    currentNewOnArtOverview,
+    
     newOnArtOverview,
     newOnArtTrends,
     newOnArtByAgeSex,
