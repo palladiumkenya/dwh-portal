@@ -17,7 +17,8 @@ import { enableStickyFilter, disableStickyFilter, changeCurrentPage } from "../.
 import { enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
 import { loadCurrentOnArtOverview } from '../../actions/CT/CurrentOnArt/currentOnArtOverviewActions';
 import { loadCurrentOnArtByAgeSex } from '../../actions/CT/CurrentOnArt/currentOnArtByAgeSexActions';
-import { loadDsdStabilityStatusByAgeSex } from '../../actions/CT/Dsd/dsdStabilityStatusByAgeSexActions';
+import { loadDsdUptakeOverall } from '../../actions/CT/Dsd/dsdUptakeOverallActions';
+import { loadDsdUptakeOverallBySex } from '../../actions/CT/Dsd/dsdMmdUptakeOverallBySexActions';
 import { PAGES } from './../../constants';
 
 const Home = () => {
@@ -50,7 +51,8 @@ const Home = () => {
     useEffect(() => {
         dispatch(loadCurrentOnArtOverview());
         dispatch(loadCurrentOnArtByAgeSex());
-        dispatch(loadDsdStabilityStatusByAgeSex());
+        dispatch(loadDsdUptakeOverall());
+        dispatch(loadDsdUptakeOverallBySex());
     }, [
         dispatch,
         counties,

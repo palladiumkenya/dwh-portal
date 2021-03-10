@@ -1,14 +1,14 @@
 import moment from 'moment';
-import { CACHING } from '../../../constants';
+import { CACHING, PAGES } from '../../../constants';
 import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 
 export const loadDsdUptakeOverall = () => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
-        moment(getState().dsdUnstable.lastFetch),
+        moment(getState().dsdUptakeOverall.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'dsd') {
+    if (getState().ui.ctTab !== 'dsd' && getState().ui.currentPage !== PAGES.home) {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
