@@ -37,17 +37,17 @@ const HomeSuppressionByCountyMap = () => {
             colors: ['#F5542D', '#F7DB00', '#8CC63F', '#009245'],
             colorAxis: { dataClassColor: 'category', dataClasses: [
                 { to: 50 },
-                { from: 50, to: 60 },
-                { from: 60, to: 70 },
-                { from: 70 }
+                { from: 50, to: 70 },
+                { from: 70, to: 90 },
+                { from: 90 }
             ]},
             tooltip: {
                 formatter: function () {
                     return this.series.name + '<br>' +
-                    this.point.properties.NAME_1 + ': <b>' + this.point.value + '</b>';
+                    this.point.properties.NAME_1 + ': <b>' + this.point.value + ' %</b>';
                 }
             },
-            legend: { title: { text: 'KEY: SUPPRESSION' }, layout: 'vertical', align: 'right', verticalAlign: 'bottom', valueDecimals: 0, backgroundColor: 'white', floating: true, },
+            legend: { title: { text: 'KEY: VIRAL SUPPRESSION' }, layout: 'vertical', align: 'right', verticalAlign: 'bottom', valueDecimals: 0, backgroundColor: 'white', floating: true, labelFormat: "{name} %" },
             series: [
                 { name: 'Suppression', data: data, joinBy: ['CC_1', 'id'], states: { hover: { color: '#000000' } } }
             ]

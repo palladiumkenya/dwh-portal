@@ -40,11 +40,11 @@ const HomeHasCurrentVlByCountyMap = () => {
                     this.point.properties.NAME_1 + ': <b>' + this.point.z.toLocaleString('en') + '</b>';
                 }
             },
-            legend: { title: { text: 'KEY: HAS CURRENT VL' }, layout: 'vertical', align: 'right', verticalAlign: 'bottom', valueDecimals: 0, backgroundColor: 'white', floating: true, },
+            legend: { title: { text: 'KEY: VALID VIRAL LOAD' }, layout: 'vertical', align: 'right', verticalAlign: 'bottom', valueDecimals: 0, backgroundColor: 'white', floating: true, },
             series: [
                 { name: 'Countries', color: '#E0E0E0', enableMouseTracking: false, showInLegend: false },
                 {
-                    name: 'Has Current VL',
+                    name: 'Valid Viral Load',
                     type: 'mapbubble',
                     joinBy: ['CC_1', 'id'],
                     data: data,
