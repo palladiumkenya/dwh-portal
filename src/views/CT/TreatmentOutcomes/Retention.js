@@ -95,7 +95,7 @@ const Retention = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        RETENTION BY YEAR OF ART START
+                        RETENTION BY YEAR OF ART START*
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -103,6 +103,9 @@ const Retention = () => {
                         </div>
                     </CardBody>
                 </Card>
+            </div>
+            <div className="col-12">
+                *This indicator is computed and displayed for the last completed month.
             </div>
         </div>
     );
