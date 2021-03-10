@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { createSelector } from 'reselect';
 
 const listUnfiltered = state => state.treatmentOutcomesByFacility.listUnfiltered;
@@ -51,17 +52,20 @@ export const getTreatmentOutcomesByCounty = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped', 'TransferOut'];
-        const countyCategories = [];
+        const countyCategories = _.chain(list)
+            .filter(l => l.county && l.artOutcome === 'Active')
+            .map(l => ({ ...l, county: l.county.toUpperCase() }))
+            .groupBy('county')
+            .map((objs, key) => ({
+                'county': key,
+                'active': _.sumBy(objs, 'totalOutcomes')
+            }))
+            .orderBy('active', 'desc')
+            .map(l => l.county)
+            .uniq()
+            .value();
         let data = [];
-        for(let i = 0; i < list.length; i++) {
-            if(!list[i].county) {
-                continue;
-            }
-            if(countyCategories.indexOf(list[i].county.toUpperCase()) === -1){
-                countyCategories.push(list[i].county.toUpperCase());
-            }
-        }
-        countyCategories.sort();
+
         for(let i = 0; i < treatmentOutcomesCategories.length; i++) {
             data[i] = [];
             for(let j = 0; j < countyCategories.length; j++) {
@@ -88,17 +92,19 @@ export const getTreatmentOutcomesByPartner = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped', 'TransferOut'];
-        const partnerCategories = [];
+        const partnerCategories = _.chain(list)
+            .filter(l => l.partner && l.artOutcome === 'Active')
+            .map(l => ({ ...l, partner: l.partner.toUpperCase() }))
+            .groupBy('partner')
+            .map((objs, key) => ({
+                'partner': key,
+                'active': _.sumBy(objs, 'totalOutcomes')
+            }))
+            .orderBy('active', 'desc')
+            .map(l => l.partner)
+            .uniq()
+            .value();
         let data = [];
-        for(let i = 0; i < list.length; i++) {
-            if(!list[i].partner) {
-                continue;
-            }
-            if(partnerCategories.indexOf(list[i].partner.toUpperCase()) === -1){
-                partnerCategories.push(list[i].partner.toUpperCase());
-            }
-        }
-        partnerCategories.sort();
         for(let i = 0; i < treatmentOutcomesCategories.length; i++) {
             data[i] = [];
             for(let j = 0; j < partnerCategories.length; j++) {
