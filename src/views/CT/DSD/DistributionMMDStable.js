@@ -4,7 +4,6 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import * as dsdStableMmdModelsSelectors from '../../../selectors/CT/Dsd/dsdStableMmdModels';
-import { formatNumber } from '../../../utils/utils';
 
 const DistributionMMDStable = () => {
     const [distributionMMDStable, setDistributionMMDStable] = useState({});
