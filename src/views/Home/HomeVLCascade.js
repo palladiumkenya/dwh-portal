@@ -4,9 +4,11 @@ import { Row, Col } from 'reactstrap';
 import * as currentOnArtOverviewSelectors from '../../selectors/CT/CurrentOnArt/currentOnArtOverview';
 import { formatNumber, roundNumber } from '../../utils/utils';
 import DataCard from '../Shared/DataCard';
+import moment from 'moment';
 
 const HomeVLCascade = () => {
     const currentOnArt = useSelector(currentOnArtOverviewSelectors.getCurrentOnArt);
+    const currentOnArtText = "CURRENT ON ART as at " + moment().startOf('month').subtract(1, 'month').format('MMM YYYY');
     const eligibleForVl = useSelector(currentOnArtOverviewSelectors.getEligibleForVl);
     const eligibleForVlPercent = currentOnArt ? ((eligibleForVl/currentOnArt)*100) : 0;
     const hasCurrentVl = useSelector(currentOnArtOverviewSelectors.getHasCurrentVl);
@@ -18,7 +20,7 @@ const HomeVLCascade = () => {
         <Row>
             <Col>
                 <DataCard
-                    title="CURRENT ON ART"
+                    title={currentOnArtText}
                     subtitle={null}
                     data={formatNumber(currentOnArt)}
                 />
