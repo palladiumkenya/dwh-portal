@@ -42,6 +42,29 @@ export const getTreatmentOutcomesByAge = createSelector(
             }
             data[treatmentOutcomesIndex][ageIndex] = data[treatmentOutcomesIndex][ageIndex] + parseInt(list[i].totalOutcomes);
         }
+        // combine and cleanup
+        for(let i = 0; i < data.length; i++) {
+            data[i][1] = data[i][1] + data[i][0];
+            data[i][7] = data[i][7] + data[i][6];
+            data[i][9] = data[i][9] + data[i][8];
+            data[i][11] = data[i][11] + data[i][10];
+            data[i][13] = data[i][13] + data[i][12];
+            data[i].splice(0, 1);
+            data[i].splice(6-1, 1);
+            data[i].splice(8-2, 1);
+            data[i].splice(10-3, 1);
+            data[i].splice(12-4, 1);
+        }
+        ageCategories[1] = '<5';
+        ageCategories[7] = '25-34';
+        ageCategories[9] = '35-44';
+        ageCategories[11] = '45-54';
+        ageCategories[13] = '55-64';
+        ageCategories.splice(0, 1);
+        ageCategories.splice(6-1, 1);
+        ageCategories.splice(8-2, 1);
+        ageCategories.splice(10-3, 1);
+        ageCategories.splice(12-4, 1);
         return { ageCategories, data };
     }
 );
