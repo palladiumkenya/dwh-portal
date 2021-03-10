@@ -15,48 +15,49 @@ const AdultTldUptakeByPartner = () => {
 
     const loadAdultTldUptakeByPartner = useCallback(async () => {
         let data = [];
-        let dataCurrent = [];
-        for(let i = 0; i < sexGroups.length; i++) {
-            data[i] = [];
-            for(let j = 0; j < partners.length; j++) {
-                data[i][j] = 0;
-                dataCurrent[j] = 0;
-            }
-        }
         for(let i = 0; i < adultsCurrentByPartner.length; i++) {
-            let sexGroupsIndex = sexGroups.indexOf(adultsCurrentByPartner[i].gender);
-            let partnersIndex = partners.indexOf(adultsCurrentByPartner[i].partner);
-            if(sexGroupsIndex === -1 || partnersIndex === -1) {
-                continue;
+            data.push(
+                {
+                    Male: adultsCurrentByPartner[i].gender === "Male" ? adultsCurrentByPartner[i].txCurr : 0,
+                    Female: adultsCurrentByPartner[i].gender === "Female" ? adultsCurrentByPartner[i].txCurr : 0,
+                    partner: adultsCurrentByPartner[i].partner ? adultsCurrentByPartner[i].partner.toUpperCase() : null
+                }
+            );
+        }
+        const valChartData = [];
+        partners.map(partner => {
+            const partnerData = data.filter(x => x.partner === partner);
+            let totalPartnerTld = 0;
+            if (partnerData.length > 0) {
+                for (const partnerDatum of partnerData) {
+                    totalPartnerTld = totalPartnerTld + partnerDatum.Female + partnerDatum.Male;
+                }
+
+                const partnerIndex = currentOnArtByPartnerData.partners.indexOf(partner);
+                const partnerTxcurr = parseInt(currentOnArtByPartnerData.currentOnArt[partnerIndex]);
+                let percentage = totalPartnerTld === 0 || partnerTxcurr === 0 ? 0 : Number(((totalPartnerTld/partnerTxcurr)*100).toFixed(0));
+                valChartData.push(
+                    {
+                        y: percentage > 100 ? 100: percentage,
+                        absoluteY: totalPartnerTld.toLocaleString('en'),
+                        partner: partner
+                    }
+                );
             }
-            data[sexGroupsIndex][partnersIndex] = data[sexGroupsIndex][partnersIndex] + parseInt(adultsCurrentByPartner[i].txCurr);
-        }
-        for(let i = 0; i < currentOnArtByPartnerData.currentOnArt.length; i++) {
-            let partnerIndex = partners.indexOf(currentOnArtByPartnerData.partners[i]);
-            if(partnerIndex === -1) {
-                continue;
-            }
-            dataCurrent[partnerIndex] = dataCurrent[partnerIndex] + parseInt(currentOnArtByPartnerData.currentOnArt[i]);
-        }
-        let final = [];
-        if (data[0]) {
-            final = data[0].map((d, x) => {
-                let total = (d + data[1][x]);
-                let percentage = Number(((total/dataCurrent[x])*100).toFixed(0));
-                return {
-                    y: percentage,
-                    absoluteY: total.toLocaleString('en'),
-                };
-            });
-        }
+        });
+
+        valChartData.sort(function(a, b){
+            return b.y - a.y;
+        });
+
         setAdultTldUptakeByPartner({
             title: { text: '' },
-            xAxis: { categories: partners.map(a => a.toUpperCase()), title: { text: 'PARTNER' }, crosshair: true },
+            xAxis: { categories: valChartData.map(a => a.partner.toUpperCase()), title: { text: 'PARTNER' }, crosshair: true },
             yAxis: { title: { text: 'PERCENT OF PATIENTS' }},
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'TLD UPTAKE', type: 'column', data: final, color: "#485969", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
+                { name: 'TLD UPTAKE', type: 'column', data: valChartData, color: "#485969", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
             ],
         });
     }, [partners, sexGroups, adultsCurrentByPartner, currentOnArtByPartnerData]);
