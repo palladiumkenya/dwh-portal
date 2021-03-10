@@ -21,7 +21,7 @@ const ViralLoadUptakeByCounty = () => {
                 { name: 'Percentage of Patients', data: viralLoadUptakeByCountyData.data, type: 'column', color: "#485969", tooltip: { valueSuffix: ' % ({point.absoluteY})'} },
             ]
         });
-    }, [viralLoadUptakeByCountyData]);
+    }, [viralLoadUptakeByCountyData, counties]);
 
     useEffect(() => {
         loadViralLoadUptakeByCounty();

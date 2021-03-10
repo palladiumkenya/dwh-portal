@@ -21,7 +21,7 @@ const ViralLoadUptakeByPartner = () => {
                 { name: 'Percentage of Patients', data: viralLoadUptakeByPartnerData.data, type: 'column', color: "#485969", tooltip: { valueSuffix: ' % ({point.absoluteY})'} },
             ]
         });
-    }, [viralLoadUptakeByPartnerData]);
+    }, [viralLoadUptakeByPartnerData, partners]);
 
     useEffect(() => {
         loadViralLoadUptakeByPartner();
