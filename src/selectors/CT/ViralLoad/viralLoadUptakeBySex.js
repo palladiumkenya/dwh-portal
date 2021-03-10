@@ -15,7 +15,8 @@ export const getViralLoadUptakeBySex = createSelector(
                 data[0] = {
                     y: Number(((parseInt(list[i].vlDone)/parseInt(list[i].txCurr))*100).toFixed(1)),
                     absoluteY: list[i].vlDone.toLocaleString('en'),
-                    color: "#14084D"
+                    color: "#14084D",
+                    text: Number(((parseInt(list[i].vlDone)/parseInt(list[i].txCurr))*100).toFixed(1)) + '%',
                 };
             }
             if(list[i].gender === 'Female') {
@@ -23,6 +24,7 @@ export const getViralLoadUptakeBySex = createSelector(
                     y: Number(((parseInt(list[i].vlDone)/parseInt(list[i].txCurr))*100).toFixed(1)),
                     absoluteY: list[i].vlDone.toLocaleString('en'),
                     color: "#EA4C8B",
+                    text: Number(((parseInt(list[i].vlDone)/parseInt(list[i].txCurr))*100).toFixed(1)) + '%',
                 };
             }
         }

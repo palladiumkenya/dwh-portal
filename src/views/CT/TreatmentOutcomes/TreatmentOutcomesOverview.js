@@ -26,7 +26,7 @@ const TreatmentOutcomesOverview = () => {
                     <CardBody className="primary-card-body" style={{display:"flex", alignItems: "center", justifyContent: "center"}}>
                         <Row style={{display:"block"}}>
                             <Col>
-                                <CardTitle tag="h5" className="text-center m-2">STARTED ART</CardTitle>
+                                <CardTitle tag="h5" className="text-center m-2">EVER STARTED ART</CardTitle>
                                 <Row className="justify-content-center">
                                     <Col className="col-7">
                                         <CardTitle tag="h5" className="primary-card-body-subtitle text-right" style={{ color: '#FFFFFF' }}>100%</CardTitle>
@@ -65,14 +65,14 @@ const TreatmentOutcomesOverview = () => {
                 <Row>
                     <Col>
                         <DataCard
-                            title="ACTIVE ON ART"
+                            title="CURRENT ON ART"
                             subtitle={null}
                             data={formatNumber(active)}
                         />
                     </Col>
                     <Col>
                         <DataCard
-                            title="LOST TO FOLLOWUP"
+                            title="LOST TO FOLLOW UP"
                             subtitle={roundNumber(ltfuPercent) + "%"}
                             data={formatNumber(ltfu)}
                         />

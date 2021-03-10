@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { formatNumber } from '../../../utils/utils';
 
 const listUnfiltered = state => state.dsdStableMmdModels.listUnfiltered;
 const listFiltered = state => state.dsdStableMmdModels.listFiltered;
@@ -13,17 +14,38 @@ export const getStableMmdModels = createSelector(
             "Fast Track",
             "Community ART Distribution HCW Led",
             "Community ART Distribution peer led",
-            "Facility ART distribution Group"
+            "Facility ART distribution Group",
+            "Not Documented"
         ];
-        let data = [0, 0, 0, 0, 0];
+        let data = [];
+        let txCurr = 0;
+        list.map(obj => {
+            txCurr = txCurr + parseInt(obj.TXCurr, 10);
+        });
         for(let i = 0; i < list.length; i++) {
             for(let j = 0; j < models.length; j++) {
                 if (list[i].differentiatedCare === models[j]) {
-                    data[j] = data[j] + parseInt(list[i].mmdModels);
+                    data.push(
+                        {
+                            name: models[j],
+                            y: parseInt((Math.round((parseInt(list[i].mmdModels)/txCurr)*100)).toString(), 10),
+                            text: ' (' + formatNumber(list[i].mmdModels) + ')',
+                        }
+                    );
+                } else if (list[i].differentiatedCare === null && models[j] === "Not Documented") {
+                    data.push(
+                        {
+                            name: "Not Documented",
+                            y: parseInt((Math.round((parseInt(list[i].mmdModels)/txCurr)*100)).toString(), 10),
+                            text: ' (' + formatNumber(list[i].mmdModels) + ')',
+                        }
+                    );
                 }
             }
         }
-
-        return { models, data };
+        data.sort(function(a, b) {
+            return b.y - a.y;
+        });
+        return { models, data, txCurr };
     }
 );

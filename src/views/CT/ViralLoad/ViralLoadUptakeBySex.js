@@ -8,11 +8,11 @@ import * as viralLoadUptakeBySexSelectors from '../../../selectors/CT/ViralLoad/
 const ViralLoadUptakeBySex = () => {
     const [viralLoadUptakeBySex, setViralLoadUptakeBySex] = useState({});
     const viralLoadUptakeBySexData = useSelector(viralLoadUptakeBySexSelectors.getViralLoadUptakeBySex);
-    console.log(viralLoadUptakeBySexData.data);
 
     const loadViralLoadUptakeBySex = useCallback(async () => {
         setViralLoadUptakeBySex({
             title: { text: '' },
+            plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.text; } } }},
             xAxis: [{ categories: viralLoadUptakeBySexData.sexCategories, crosshair: true }],
             yAxis: [
                 { title: { text: 'Percentage of Patients' }, labels: { format: '{value} %' }}

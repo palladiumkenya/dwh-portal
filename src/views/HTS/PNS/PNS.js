@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col } from 'reactstrap';
+import { Row, Col, Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
+import classnames from 'classnames';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from '../../Shared/UniversalFilter';
 import SectionHeader from '../../Shared/SectionHeader';
@@ -22,6 +23,7 @@ import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared
 const PNS = () => {
     const dispatch = useDispatch();
     const htsTab = useSelector(state => state.ui.htsTab);
+    const [activeTab, setActiveTab] = useState('contacts');
     const branding = {
         title: "PARTNER NOTIFICATION SERVICES",
         description: "OVERVIEW",
@@ -39,42 +41,56 @@ const PNS = () => {
     
     return (
         <div className="animated fadeIn">
-            <SectionHeader title={branding.title} description="SEXUAL CONTACT TESTING"/>
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <PNSContactsTestingOverview/>
-            <Row>
-                <Col>
-                    <PNSContactsCascade/>
-                </Col>
-                <Col>
-                    <PNSDistributionElicitedAgeSex/>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <PNSContactsHivStatus/>
-                </Col>
-                <Col>
-                    <PNSDistributionPositiveAgeSex/>
-                </Col>
-            </Row>
-            <SectionFooter overview={branding.overview}/>
-            <PNSContactsTestingPositivityTrends/>
-            <SectionFooter overview={branding.overview}/>
-            <PNSPositivityTrends/>
-            <SectionFooter overview={branding.overview}/>
-            <PNSContactsTestingPositivityByCounty/>
-            <SectionFooter overview={branding.overview}/>
-            <PNSContactsTestingPositivityByPartner/>
-            <SectionFooter overview={branding.overview}/>
-            <SectionHeader title={branding.title} description="FAMILY TESTING"/>
-            <PNSFamilyTestingOverview/>
-            <PNSChildrenFamilyTestingCascade/>
-            <SectionFooter overview={branding.overview}/>
-            <PNSChildrenFamilyTestingPositivityTrends/>
-            <SectionFooter overview={branding.overview}/>
+            <Nav tabs>
+                <NavItem>
+                    <NavLink className={classnames({ active: activeTab === 'contacts' })} onClick={() => { setActiveTab('contacts') }}>SEXUAL CONTACT TESTING</NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink className={classnames({ active: activeTab === 'family' })} onClick={() => { setActiveTab('family') }}>FAMILY TESTING</NavLink>
+                </NavItem>
+            </Nav>
+            <TabContent activeTab={activeTab}>
+                <TabPane tabId="contacts">
+                    <SectionHeader title={branding.title} description="SEXUAL CONTACT TESTING"/>
+                    <PNSContactsTestingOverview/>
+                    <Row>
+                        <Col>
+                            <PNSContactsCascade/>
+                        </Col>
+                        <Col>
+                            <PNSDistributionElicitedAgeSex/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            <PNSContactsHivStatus/>
+                        </Col>
+                        <Col>
+                            <PNSDistributionPositiveAgeSex/>
+                        </Col>
+                    </Row>
+                    <SectionFooter overview={branding.overview}/>
+                    <PNSContactsTestingPositivityTrends/>
+                    <SectionFooter overview={branding.overview}/>
+                    <PNSPositivityTrends/>
+                    <SectionFooter overview={branding.overview}/>
+                    <PNSContactsTestingPositivityByCounty/>
+                    <SectionFooter overview={branding.overview}/>
+                    <PNSContactsTestingPositivityByPartner/>
+                    <SectionFooter overview={branding.overview}/>
+                </TabPane>
+                <TabPane tabId="family">
+                    <SectionHeader title={branding.title} description="FAMILY TESTING"/>
+                    <PNSFamilyTestingOverview/>
+                    <PNSChildrenFamilyTestingCascade/>
+                    <SectionFooter overview={branding.overview}/>
+                    <PNSChildrenFamilyTestingPositivityTrends/>
+                    <SectionFooter overview={branding.overview}/>
+                </TabPane>
+            </TabContent>
         </div>
     );
 };

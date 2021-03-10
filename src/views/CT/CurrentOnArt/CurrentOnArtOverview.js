@@ -2,21 +2,22 @@ import { useSelector } from 'react-redux';
 import React from 'react';
 import { Col, Row } from 'reactstrap';
 import * as currentOnArtOverviewSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
+import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtByAgeSex';
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import DataCard from '../../Shared/DataCard';
 
 const CurrentOnArtOverview = () => {
     const currentOnArt = useSelector(currentOnArtOverviewSelectors.getCurrentOnArt);
-    const eligibleForVl = useSelector(currentOnArtOverviewSelectors.getEligibleForVl);
-    const eligibleForVlPercent = currentOnArt ? ((eligibleForVl/currentOnArt)*100) : 0;
-    const hasCurrentVl = useSelector(currentOnArtOverviewSelectors.getHasCurrentVl);
-    const hasCurrentVlPercent = currentOnArt ? ((hasCurrentVl/currentOnArt)*100) : 0;
-    const virallySuppressed = useSelector(currentOnArtOverviewSelectors.getVirallySuppressed);
-    const virallySuppressedPercent = currentOnArt ? ((virallySuppressed/currentOnArt)*100) : 0;
-    const lowLevelViremia = useSelector(currentOnArtOverviewSelectors.getLowLevelViremia);
-    const lowLevelViremiaPercent = currentOnArt ? ((lowLevelViremia/currentOnArt)*100) : 0;
-    const highViralLoad = useSelector(currentOnArtOverviewSelectors.getHighViralLoad);
-    const highViralLoadPercent = currentOnArt ? ((highViralLoad/currentOnArt)*100) : 0;
+    const currentOnArtMale = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtBySex).currentOnArtMale;
+    const currentOnArtMalePercent = currentOnArt ? ((currentOnArtMale/currentOnArt)*100) : 0;
+    const currentOnArtFemale = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtBySex).currentOnArtFemale;
+    const currentOnArtFemalePercent = currentOnArt ? ((currentOnArtFemale/currentOnArt)*100) : 0;
+    const currentOnArtAdults = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtAdults).currentOnArt;
+    const currentOnArtAdultsPercent = currentOnArt ? ((currentOnArtAdults/currentOnArt)*100) : 0;
+    const currentOnArtAdolescents = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtAdolescents).currentOnArt;
+    const currentOnArtAdolescentsPercent = currentOnArt ? ((currentOnArtAdolescents/currentOnArt)*100) : 0;
+    const currentOnArtChildren = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtChildren).currentOnArt;
+    const currentOnArtChildrenPercent = currentOnArt ? ((currentOnArtChildren/currentOnArt)*100) : 0;
 
     return (
         <>
@@ -30,39 +31,39 @@ const CurrentOnArtOverview = () => {
                 </Col>
                 <Col>
                     <DataCard
-                        title="ELIGIBLE FOR VL"
-                        subtitle={roundNumber(eligibleForVlPercent) + "%"}
-                        data={formatNumber(eligibleForVl)}
+                        title="MALES CURRENT ON ART"
+                        subtitle={roundNumber(currentOnArtMalePercent) + "%"}
+                        data={formatNumber(currentOnArtMale)}
                     />
                 </Col>
                 <Col>
                     <DataCard
-                        title="HAS CURRENT VIRAL LOAD"
-                        subtitle={roundNumber(hasCurrentVlPercent) + "%"}
-                        data={formatNumber(hasCurrentVl)}
+                        title="FEMALES CURRENT ON ART"
+                        subtitle={roundNumber(currentOnArtFemalePercent) + "%"}
+                        data={formatNumber(currentOnArtFemale)}
                     />
                 </Col>
             </Row>
             <Row>
                 <Col>
                     <DataCard
-                        title="VIRALLY SUPPRESSED"
-                        subtitle={roundNumber(virallySuppressedPercent) + "%"}
-                        data={formatNumber(virallySuppressed)}
+                        title="ADULTS CURRENT ON ART(15+ YRS)"
+                        subtitle={roundNumber(currentOnArtAdultsPercent) + "%"}
+                        data={formatNumber(currentOnArtAdults)}
                     />
                 </Col>
                 <Col>
                     <DataCard
-                        title="LOW LEVEL VIREMIA"
-                        subtitle={roundNumber(lowLevelViremiaPercent) + "%"}
-                        data={formatNumber(lowLevelViremia)}
+                        title="CHILDREN CURRENT ON ART(<14 YRS)"
+                        subtitle={roundNumber(currentOnArtChildrenPercent) + "%"}
+                        data={formatNumber(currentOnArtChildren)}
                     />
                 </Col>
                 <Col>
                     <DataCard
-                        title="HIGH VIRAL LOAD"
-                        subtitle={roundNumber(highViralLoadPercent) + "%"}
-                        data={formatNumber(highViralLoad)}
+                        title="ADOLESCENTS CURRENT ON ART(10 - 19 YRS)"
+                        subtitle={roundNumber(currentOnArtAdolescentsPercent) + "%"}
+                        data={formatNumber(currentOnArtAdolescents)}
                     />
                 </Col>
             </Row>

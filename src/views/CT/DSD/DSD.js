@@ -18,6 +18,7 @@ import AppointmentDurationByAge from './AppointmentDurationByAge';
 import AppointmentDurationStableByCounty from './AppointmentDurationStableByCounty';
 import AppointmentDurationStableByPartner from './AppointmentDurationStableByPartner';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
+import DSDIndicatorDefinition from './DSDIndicatorDefinition';
 
 const DSD = () => {
     const branding = { title: "DIFFERENTIATED SERVICE DELIVERY", description: "OVERVIEW", overview: "Differenciated Service Delivery" };
@@ -39,25 +40,25 @@ const DSD = () => {
                 <UniversalFilter/>
             </VisibilitySensor>
             <DSDOverview />
-            <Row>
-                <Col>
+            <SectionFooter overview={branding.overview}/>
+            <DSDIndicatorDefinition />
+            <Row className={"col-12"}>
+                <Col className={"col-6"}>
                     <DSDCascade />
                 </Col>
-                <Col>
+                <Col className={"col-6"}>
                     <DistributionMMDStable />
                 </Col>
             </Row>
             <SectionFooter overview={branding.overview}/>
-            <Row>
-                <Col>
+            <Row className={"col-12"}>
+                <Col className={"col-6"}>
                     <AppointmentDurationByStability />
                 </Col>
-                <Col>
+                <Col className={"col-6"}>
                     <AppointmentDurationBySex />
                 </Col>
             </Row>
-            <SectionFooter overview={branding.overview}/>
-            <AppointmentDurationByAge />
             <SectionFooter overview={branding.overview}/>
             <AppointmentDurationStableByCounty />
             <SectionFooter overview={branding.overview}/>
@@ -71,6 +72,8 @@ const DSD = () => {
                     <DistributionUnstable />
                 </Col>
             </Row>
+            <SectionFooter overview={branding.overview}/>
+            <AppointmentDurationByAge />
             <SectionFooter overview={branding.overview}/>
             <DistributionStableByCounty />
             <SectionFooter overview={branding.overview}/>

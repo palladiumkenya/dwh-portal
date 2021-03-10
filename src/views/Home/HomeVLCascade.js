@@ -10,9 +10,9 @@ const HomeVLCascade = () => {
     const eligibleForVl = useSelector(currentOnArtOverviewSelectors.getEligibleForVl);
     const eligibleForVlPercent = currentOnArt ? ((eligibleForVl/currentOnArt)*100) : 0;
     const hasCurrentVl = useSelector(currentOnArtOverviewSelectors.getHasCurrentVl);
-    const hasCurrentVlPercent = currentOnArt ? ((hasCurrentVl/currentOnArt)*100) : 0;
+    const hasCurrentVlPercent = currentOnArt ? ((hasCurrentVl/eligibleForVl)*100) : 0;
     const virallySuppressed = useSelector(currentOnArtOverviewSelectors.getVirallySuppressed);
-    const virallySuppressedPercent = currentOnArt ? ((virallySuppressed/currentOnArt)*100) : 0;
+    const virallySuppressedPercent = currentOnArt ? ((virallySuppressed/hasCurrentVl)*100) : 0;
 
     return (
         <Row>
@@ -32,14 +32,14 @@ const HomeVLCascade = () => {
             </Col>
             <Col>
                 <DataCard
-                    title="HAS CURRENT VIRAL LOAD"
+                    title="VALID VIRAL LOAD"
                     subtitle={roundNumber(hasCurrentVlPercent) + "%"}
                     data={formatNumber(hasCurrentVl)}
                 />
             </Col>
             <Col>
                 <DataCard
-                    title="SUPPRESSED"
+                    title="VIRALLY SUPPRESSED"
                     subtitle={roundNumber(virallySuppressedPercent) + "%"}
                     data={formatNumber(virallySuppressed)}
                 />

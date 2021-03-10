@@ -24,7 +24,7 @@ const CurrentOnArtDistributionByPartner = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        CURRENT ON ART BY PARTNER
+                        CURRENT ON ART BY PARTNER*
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -32,6 +32,9 @@ const CurrentOnArtDistributionByPartner = () => {
                         </div>
                     </CardBody>
                 </Card>
+            </div>
+            <div className="col-12">
+                *This indicator is computed and displayed for the last completed month.
             </div>
         </div>
     );

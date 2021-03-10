@@ -15,48 +15,49 @@ const AdultTldUptakeByCounty = () => {
 
     const loadAdultTldUptakeByCounty = useCallback(async () => {
         let data = [];
-        let dataCurrent = [];
-        for(let i = 0; i < sexGroups.length; i++) {
-            data[i] = [];
-            for(let j = 0; j < counties.length; j++) {
-                data[i][j] = 0;
-                dataCurrent[j] = 0;
-            }
-        }
         for(let i = 0; i < adultsCurrentByCounty.length; i++) {
-            let sexGroupsIndex = sexGroups.indexOf(adultsCurrentByCounty[i].gender);
-            let countiesIndex = counties.indexOf(adultsCurrentByCounty[i].county);
-            if(sexGroupsIndex === -1 || countiesIndex === -1) {
-                continue;
+            data.push(
+                {
+                    Male: adultsCurrentByCounty[i].gender === "Male" ? adultsCurrentByCounty[i].txCurr : 0,
+                    Female: adultsCurrentByCounty[i].gender === "Female" ? adultsCurrentByCounty[i].txCurr : 0,
+                    County: adultsCurrentByCounty[i].county
+                }
+            );
+        }
+        const valChartData = [];
+        counties.map(county => {
+            const countyData = data.filter(x => x.County === county);
+            let totalCountyTld = 0;
+            if (countyData.length > 0) {
+                for (const countyDatum of countyData) {
+                    totalCountyTld = totalCountyTld + countyDatum.Female + countyDatum.Male;
+                }
+
+                const countyIndex = currentOnArtByCountyData.counties.indexOf(county);
+                const countyTxcurr = parseInt(currentOnArtByCountyData.currentOnArt[countyIndex]);
+                let percentage = totalCountyTld === 0 || countyTxcurr === 0 ? 0 : Number(((totalCountyTld/countyTxcurr)*100).toFixed(0));
+                valChartData.push(
+                    {
+                        y: percentage > 100 ? 100: percentage,
+                        absoluteY: totalCountyTld.toLocaleString('en'),
+                        county: county
+                    }
+                );
             }
-            data[sexGroupsIndex][countiesIndex] = data[sexGroupsIndex][countiesIndex] + parseInt(adultsCurrentByCounty[i].txCurr);
-        }
-        for(let i = 0; i < currentOnArtByCountyData.currentOnArt.length; i++) {
-            let countyIndex = counties.indexOf(currentOnArtByCountyData.counties[i]);
-            if(countyIndex === -1) {
-                continue;
-            }
-            dataCurrent[countyIndex] = dataCurrent[countyIndex] + parseInt(currentOnArtByCountyData.currentOnArt[i]);
-        }
-        let final = [];
-        if (data[0]) {
-            final = data[0].map((d, x) => {
-                let total = (d + data[1][x]);
-                let percentage = Number(((total/dataCurrent[x])*100).toFixed(0));
-                return {
-                    y: percentage > 100 ? 100: percentage,
-                    absoluteY: total.toLocaleString('en'),
-                };
-            });
-        }
+        });
+
+        valChartData.sort(function(a, b){
+            return b.y - a.y;
+        });
+
         setAdultTldUptakeByCounty({
             title: { text: '' },
-            xAxis: { categories: counties.map(a => a.toUpperCase()), title: { text: 'COUNTY' }, crosshair: true },
+            xAxis: { categories: valChartData.map(a => a.county.toUpperCase()), title: { text: 'COUNTY' }, crosshair: true },
             yAxis: { title: { text: 'PERCENT OF PATIENTS' }},
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'TLD UPTAKE', type: 'column', data: final, color: "#485969", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
+                { name: 'TLD UPTAKE', type: 'column', data: valChartData, color: "#485969", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
             ],
         });
     }, [counties, sexGroups, adultsCurrentByCounty, currentOnArtByCountyData]);

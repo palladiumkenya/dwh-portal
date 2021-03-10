@@ -1,21 +1,21 @@
 import { useSelector } from 'react-redux';
 import React from 'react';
 import { Col, Row } from 'reactstrap';
-import * as newOnArtOverviewSelectors from '../../../selectors/CT/NewOnArt/newOnArtOverview';
+import * as currentNewOnArtOverviewSelectors from '../../../selectors/CT/NewOnArt/currentNewOnArtOverview';
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import DataCard from '../../Shared/DataCard';
 
 const NewOnArtOverview = () => {
-    const newOnArt = useSelector(newOnArtOverviewSelectors.getNewOnArt);
-    const newOnArtMale = useSelector(newOnArtOverviewSelectors.getNewOnArtMale);
+    const newOnArt = useSelector(currentNewOnArtOverviewSelectors.getNewOnArt);
+    const newOnArtMale = useSelector(currentNewOnArtOverviewSelectors.getNewOnArtMale);
     const newOnArtMalePercent = newOnArt ? ((newOnArtMale/newOnArt)*100) : 0;
-    const newOnArtFemale = useSelector(newOnArtOverviewSelectors.getNewOnArtFemale);
+    const newOnArtFemale = useSelector(currentNewOnArtOverviewSelectors.getNewOnArtFemale);
     const newOnArtFemalePercent = newOnArt ? ((newOnArtFemale/newOnArt)*100) : 0;
-    const newOnArtAdults = useSelector(newOnArtOverviewSelectors.getNewOnArtAdults);
+    const newOnArtAdults = useSelector(currentNewOnArtOverviewSelectors.getNewOnArtAdults);
     const newOnArtAdultsPercent = newOnArt ? ((newOnArtAdults/newOnArt)*100) : 0;
-    const newOnArtAdolescents = useSelector(newOnArtOverviewSelectors.getNewOnArtAdolescents);
+    const newOnArtAdolescents = useSelector(currentNewOnArtOverviewSelectors.getNewOnArtAdolescents);
     const newOnArtAdolescentsPercent = newOnArt ? ((newOnArtAdolescents/newOnArt)*100) : 0;
-    const newOnArtChildren = useSelector(newOnArtOverviewSelectors.getNewOnArtChildren);
+    const newOnArtChildren = useSelector(currentNewOnArtOverviewSelectors.getNewOnArtChildren);
     const newOnArtChildrenPercent = newOnArt ? ((newOnArtChildren/newOnArt)*100) : 0;
 
     return (
@@ -23,7 +23,7 @@ const NewOnArtOverview = () => {
             <Row>
                 <Col>
                     <DataCard
-                        title="TOTAL NEWLY STARTED ON ART"
+                        title="NEWLY STARTED ON ART"
                         subtitle={null}
                         data={formatNumber(newOnArt)}
                     />

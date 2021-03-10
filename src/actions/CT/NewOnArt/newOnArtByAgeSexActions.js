@@ -20,6 +20,7 @@ export const loadNewOnArtByAgeSex = () => async (dispatch, getState) => {
 
 export const fetchNewOnArtByAgeSex = () => async (dispatch, getState) => {
     dispatch({ type: actionTypes.CT_NEW_ON_ART_BY_AGE_SEX_REQUEST });
+    const previousMonth = moment().startOf('month').subtract(1, 'month');
     const params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,
@@ -27,8 +28,8 @@ export const fetchNewOnArtByAgeSex = () => async (dispatch, getState) => {
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
         project: getState().filters.projects,
-        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
-        month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
+        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : previousMonth.format("YYYY"),
+        month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : previousMonth.format("MM"),
     };
     const response = await getAll('care-treatment/txNewByAgeSex', params);
     dispatch({ type: actionTypes.CT_NEW_ON_ART_BY_AGE_SEX_FETCH, payload: { filtered: getState().filters.filtered, list: response }});

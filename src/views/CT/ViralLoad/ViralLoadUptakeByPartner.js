@@ -8,11 +8,12 @@ import * as viralLoadUptakeByPartnerSelectors from '../../../selectors/CT/ViralL
 const ViralLoadUptakeByPartner = () => {
     const [viralLoadUptakeByPartner, setViralLoadUptakeByPartner] = useState({});
     const viralLoadUptakeByPartnerData = useSelector(viralLoadUptakeByPartnerSelectors.getViralLoadUptakeByPartner);
+    const partners = viralLoadUptakeByPartnerData.data.map(function(d) { return d['p']; });
 
     const loadViralLoadUptakeByPartner = useCallback(async () => {
         setViralLoadUptakeByPartner({
             title: { text: '' },
-            xAxis: [{ categories: viralLoadUptakeByPartnerData.partners, title: { text: 'Service Delivery Partner' }, crosshair: true }],
+            xAxis: [{ categories: partners, title: { text: 'Service Delivery Partner' }, crosshair: true }],
             yAxis: [{ title: { text: 'Percentage of Patients' }, labels: { format: '{value} %' }}],
             plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none', format: '{y} %' } } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },

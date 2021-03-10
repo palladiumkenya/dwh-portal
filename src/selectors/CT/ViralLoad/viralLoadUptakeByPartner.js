@@ -14,10 +14,14 @@ export const getViralLoadUptakeByPartner = createSelector(
         for(let i = 0; i < list.length; i++) {
             partners.push(list[i].partner);
             data.push({
+                p: list[i].partner,
                 y: Number(((parseInt(list[i].vlDone)/parseInt(list[i].txCurr))*100).toFixed(0)),
                 absoluteY: list[i].vlDone.toLocaleString('en'),
             });
         }
+        data.sort(function(a, b) {
+            return b.y - a.y;
+        });
         return { partners, data };
     }
 );

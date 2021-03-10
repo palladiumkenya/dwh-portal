@@ -8,7 +8,6 @@ export const getAppointmentDurationByAge = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        const appointmentCategories = ['<3 Months', '>3 Months'];
         const ageCategories = [
             'Under 1',
             '1 to 4',
@@ -26,21 +25,44 @@ export const getAppointmentDurationByAge = createSelector(
             '60 to 64',
             '65+'
         ];
-        let data = [];
-        for(let i = 0; i < appointmentCategories.length; i++) {
-            data[i] = [];
-            for(let j = 0; j < ageCategories.length; j++) {
-                data[i][j] = 0;
+        const arr =
+            {
+                '<15 YRS': ['Under 1', '1 to 4', '5 to 9', '10 to 14'],
+                '15-19 YRS': ['15 to 19'],
+                '20-24 YRS': ['20 to 24'],
+                '25-34 YRS': ['25 to 29', '30 to 34'],
+                '35-44 YRS': ['35 to 39', '40 to 44'],
+                '45-54 YRS': ['45 to 49', '50 to 54'],
+                '55-64 YRS': ['55 to 59', '60 to 64'],
+                '65+ YRS': ['65+']
+            };
+        const MMDarr = [];
+        const NonMMDarr = [];
+        const groupedVals = [];
+
+        Object.keys(arr).forEach(key => {
+            let totalMMD = 0;
+            let totalNonMMD = 0;
+            if (arr[key].length > 1) {
+                arr[key].forEach(z => {
+                    const catValues = list.filter(obj => obj.AgeGroup.trim() === z.trim());
+                    if (catValues.length > 0) {
+                        totalMMD = totalMMD + catValues[0].MMD;
+                        totalNonMMD = totalNonMMD + catValues[0].NonMMD;
+                    }
+                });
+            } else {
+                const catValues = list.filter(obj => obj.AgeGroup.trim() === arr[key][0]);
+                if (catValues.length > 0) {
+                    totalMMD = totalMMD + catValues[0].MMD;
+                    totalNonMMD = totalNonMMD + catValues[0].NonMMD;
+                }
             }
-        }
-        for(let i = 0; i < list.length; i++) {
-            let appointmentIndex = appointmentCategories.indexOf(list[i].AppointmentsCategory);
-            let ageIndex = ageCategories.indexOf(list[i].AgeGroup);
-            if(appointmentIndex === -1 || ageIndex === -1 ) {
-                continue;
-            }
-            data[appointmentIndex][ageIndex] = data[appointmentIndex][ageIndex] + parseInt(list[i].patients);
-        }
-        return { appointmentCategories, ageCategories, data };
+            MMDarr.push(totalMMD);
+            NonMMDarr.push(totalNonMMD);
+        });
+        const ObjectArr = Object.keys(arr);
+        groupedVals.push(MMDarr, NonMMDarr);
+        return { ageCategories, groupedVals, ObjectArr };
     }
 );

@@ -1,6 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Col, Row } from 'reactstrap';
+import {
+    Card,
+    CardBody,
+    CardHeader,
+    Col,
+    Nav,
+    NavItem,
+    NavLink,
+    Row,
+    TabContent,
+    TabPane
+} from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from '../../Shared/UniversalFilter';
 import SectionHeader from '../../Shared/SectionHeader';
@@ -14,21 +25,24 @@ import ViralLoadUptakeBySex from './ViralLoadUptakeBySex';
 import ViralLoadUptakeByAge from './ViralLoadUptakeByAge';
 import ViralLoadUptakeByCounty from './ViralLoadUptakeByCounty';
 import ViralLoadUptakeByPartner from './ViralLoadUptakeByPartner';
-import VLOutcomesOverall from './VLOutcomesOverall';
-import VLOutcomesBySex from './VLOutcomesBySex';
-import VLSuppressionByAge from './VLSuppressionByAge';
-import VLSuppressionByRegimen from './VLSuppressionByRegimen';
-import VLSuppressionByYear from './VLSuppressionByYear';
-import VLSuppressionByCounty from './VLSuppressionByCounty';
-import VLSuppressionByPartner from './VLSuppressionByPartner';
-import VLSuppressionByYear6Month from './VLSuppressionByYear6Month';
-import VLSuppressionByYear12Month from './VLSuppressionByYear12Month';
-import VLSuppressionByYear24Month from './VLSuppressionByYear24Month';
+import ViralLoadOutcomesOverall from './ViralLoadOutcomesOverall';
+import ViralLoadOutcomesBySex from './ViralLoadOutcomesBySex';
+import ViralLoadSuppressionByAge from './ViralLoadSuppressionByAge';
+import ViralLoadSuppressionByRegimen from './ViralLoadSuppressionByRegimen';
+import ViralLoadSuppressionByYear from './ViralLoadSuppressionByYear';
+import ViralLoadSuppressionByCounty from './ViralLoadSuppressionByCounty';
+import ViralLoadSuppressionByPartner from './ViralLoadSuppressionByPartner';
+import ViralLoadSuppressionByYear6Month from './ViralLoadSuppressionByYear6Month';
+import ViralLoadSuppressionByYear12Month from './ViralLoadSuppressionByYear12Month';
+import ViralLoadSuppressionByYear24Month from './ViralLoadSuppressionByYear24Month';
 import ViralLoadOverallUptakeAndSuppressionByFacility from './ViralLoadOverallUptakeAndSuppressionByFacility';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
+import classnames from 'classnames';
+import ViralLoadOutcomesOverview from './ViralLoadOutcomesOverview';
 
 const ViralLoad = () => {
-    const branding = { title: "VIRAL LOAD MONITORING", description: "OVERVIEW", overview: "Viral Load Monitoring" };
+    const branding = { title: "VIRAL LOAD", description: "OVERVIEW", overview: "Viral Load Monitoring" };
+    const [activeTab, setActiveTab] = useState('uptake');
     const ctTab = useSelector(state => state.ui.ctTab);
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
@@ -42,69 +56,114 @@ const ViralLoad = () => {
     };
     return (
         <div className="animated fadeIn">
-            <SectionHeader title={branding.title}/>
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <ViralLoadOverview />
-            <Row>
-                <Col>
-                    <ViralLoadOverallUptakeAndSuppressionBySex />
-                </Col>
-                <Col>
-                    <MedianTimeTo1stVlByYear />
-                </Col>
-            </Row>
-            <SectionFooter overview={branding.overview}/>
-            <MedianTimeTo1stVlByCounty />
-            <SectionFooter overview={branding.overview}/>
-            <MedianTimeTo1stVlByPartner />
-            <SectionFooter overview={branding.overview}/>
-            <Row>
-                <Col sm={4}>
-                    <ViralLoadUptakeBySex />
-                </Col>
-                <Col sm={8}>
-                    <ViralLoadUptakeByAge />
-                </Col>
-            </Row>
-            <SectionFooter overview={branding.overview}/>
-            <ViralLoadUptakeByCounty />
-            <SectionFooter overview={branding.overview}/>
-            <ViralLoadUptakeByPartner />
-            <SectionFooter overview={branding.overview}/>
-            <Row>
-                <Col sm={4}>
-                    <VLOutcomesOverall />
-                </Col>
-                <Col sm={8}>
-                    <VLOutcomesBySex />
-                </Col>
-            </Row>
-            <SectionFooter overview={branding.overview}/>
-            <VLSuppressionByAge />
-            <SectionFooter overview={branding.overview}/>
-            <Row>
-                <Col sm={4}>
-                    <VLSuppressionByRegimen />
-                </Col>
-                <Col sm={8}>
-                    <VLSuppressionByYear />
-                </Col>
-            </Row>
-            <SectionFooter overview={branding.overview}/>
-            <VLSuppressionByCounty />
-            <SectionFooter overview={branding.overview}/>
-            <VLSuppressionByPartner />
-            <SectionFooter overview={branding.overview}/>
-            <VLSuppressionByYear6Month />
-            <SectionFooter overview={branding.overview}/>
-            <VLSuppressionByYear12Month />
-            <SectionFooter overview={branding.overview}/>
-            <VLSuppressionByYear24Month />
-            <SectionFooter overview={branding.overview}/>
-            <ViralLoadOverallUptakeAndSuppressionByFacility />
-            <SectionFooter overview={branding.overview}/>
+            <Nav tabs>
+                <NavItem>
+                    <NavLink className={classnames({ active: activeTab === 'uptake' })} onClick={() => { setActiveTab('uptake') }}>VIRAL LOAD UPTAKE</NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink className={classnames({ active: activeTab === 'outcomes' })} onClick={() => { setActiveTab('outcomes') }}>VIRAL LOAD OUTCOMES</NavLink>
+                </NavItem>
+            </Nav>
+            <TabContent activeTab={activeTab}>
+                <TabPane tabId="uptake">
+                    <SectionHeader title={branding.title + " UPTAKE"}/>
+                    <Card>
+                        <CardHeader>Indicator Definition</CardHeader>
+                        <CardBody>
+                            <ul>
+                                <li>
+                                    Eligible for Viral Load => Patients who are current on treatment for more than 6 months
+                                </li>
+                                <li>
+                                    Valid Viral Load => Patients who are current on treatment for more than 6 months and have a viral load result whose sample was taken within the last 14 months of the latest visit.
+                                </li>
+                            </ul>
+                        </CardBody>
+                    </Card>
+                    <ViralLoadOverview />
+                    <Row>
+                        <Col>
+                            <ViralLoadOverallUptakeAndSuppressionBySex />
+                        </Col>
+                        <Col>
+                            <MedianTimeTo1stVlByYear />
+                        </Col>
+                    </Row>
+                    <SectionFooter overview={branding.overview}/>
+                    <MedianTimeTo1stVlByCounty />
+                    <SectionFooter overview={branding.overview}/>
+                    <MedianTimeTo1stVlByPartner />
+                    <SectionFooter overview={branding.overview}/>
+                    <Row>
+                        <Col sm={4}>
+                            <ViralLoadUptakeBySex />
+                        </Col>
+                        <Col sm={8}>
+                            <ViralLoadUptakeByAge />
+                        </Col>
+                    </Row>
+                    <SectionFooter overview={branding.overview}/>
+                    <ViralLoadUptakeByCounty />
+                    <SectionFooter overview={branding.overview}/>
+                    <ViralLoadUptakeByPartner />
+                    <SectionFooter overview={branding.overview}/>
+                </TabPane>
+                <TabPane tabId="outcomes">
+                    <SectionHeader title={branding.title + " OUTCOMES"}/>
+                    <Card>
+                        <CardHeader>Indicator Definition</CardHeader>
+                        <CardBody>
+                            <ul>
+                                <li>
+                                    Virally suppressed => Patients who are current on treatment with valid viral load results of &#60;400 copies/ml
+                                </li>
+                                <li>
+                                    Low Level Viremia => Patients who are current on treatment with valid viral load results of 400 – 999 copies/ml
+                                </li>
+                                <li>
+                                    High Viral Load => Patients who are current on treatment with valid viral load results of ≥1,000 copies/ml
+                                </li>
+                            </ul>
+                        </CardBody>
+                    </Card>
+                    <ViralLoadOutcomesOverview />
+                    <Row>
+                        <Col sm={4}>
+                            <ViralLoadOutcomesOverall />
+                        </Col>
+                        <Col sm={8}>
+                            <ViralLoadOutcomesBySex />
+                        </Col>
+                    </Row>
+                    <SectionFooter overview={branding.overview}/>
+                    <ViralLoadSuppressionByAge />
+                    <SectionFooter overview={branding.overview}/>
+                    <Row>
+                        <Col sm={4}>
+                            <ViralLoadSuppressionByRegimen />
+                        </Col>
+                        <Col sm={8}>
+                            <ViralLoadSuppressionByYear />
+                        </Col>
+                    </Row>
+                    <SectionFooter overview={branding.overview}/>
+                    <ViralLoadSuppressionByCounty />
+                    <SectionFooter overview={branding.overview}/>
+                    <ViralLoadSuppressionByPartner />
+                    <SectionFooter overview={branding.overview}/>
+                    <ViralLoadSuppressionByYear6Month />
+                    <SectionFooter overview={branding.overview}/>
+                    <ViralLoadSuppressionByYear12Month />
+                    <SectionFooter overview={branding.overview}/>
+                    <ViralLoadSuppressionByYear24Month />
+                    <SectionFooter overview={branding.overview}/>
+                    <ViralLoadOverallUptakeAndSuppressionByFacility />
+                    <SectionFooter overview={branding.overview}/>
+                </TabPane>
+            </TabContent>
         </div>
     );
 

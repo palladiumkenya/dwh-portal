@@ -9,6 +9,10 @@ import ctSites from "./Shared/ctSites";
 
 import gpsSites from "./Home/gpsSites";
 
+import linkagePositiveTrends from "./HTS/Linkage/linkagePositiveTrends";
+
+import currentNewOnArtOverview from "./CT/NewOnArt/currentNewOnArtOverview";
+
 import newOnArtOverview from "./CT/NewOnArt/newOnArtOverview";
 import newOnArtTrends from "./CT/NewOnArt/newOnArtTrends";
 import newOnArtByAgeSex from "./CT/NewOnArt/newOnArtByAgeSex";
@@ -33,6 +37,13 @@ import artOptimizationNewByYear from "./CT/ArtOptimization/artOptimizationNewByY
 import artOptimizationNewByCounty from "./CT/ArtOptimization/artOptimizationNewByCounty";
 import artOptimizationNewByPartner from "./CT/ArtOptimization/artOptimizationNewByPartner";
 
+import adverseEventsByAgeSex from "./CT/AdverseEvents/adverseEventsByAgeSex";
+import adverseEventsClientsByAgeSex from "./CT/AdverseEvents/adverseEventsClientsByAgeSex";
+import adverseEventsSeverityGrading from "./CT/AdverseEvents/adverseEventsSeverityGrading";
+import adverseEventsSeverityActions from "./CT/AdverseEvents/adverseEventsSeverityActions";
+import adverseEventsReportedWithSeverityLevels from "./CT/AdverseEvents/adverseEventsReportedWithSeverityLevels";
+import adverseEventsActionsByDrugs from "./CT/AdverseEvents/adverseEventsActionsByDrugs";
+
 import dsdStabilityStatusByAgeSex from "./CT/Dsd/dsdStabilityStatusByAgeSex";
 import dsdStabilityStatusByCounty from "./CT/Dsd/dsdStabilityStatusByCounty";
 import dsdStabilityStatusByPartner from "./CT/Dsd/dsdStabilityStatusByPartner";
@@ -43,15 +54,21 @@ import dsdAppointmentDurationByAge from "./CT/Dsd/dsdAppointmentDurationByAge";
 import dsdAppointmentDurationByStabilityStatus from "./CT/Dsd/dsdAppointmentDurationByStabilityStatus";
 import dsdAppointmentDurationByCounty from "./CT/Dsd/dsdAppointmentDurationByCounty";
 import dsdAppointmentDurationByPartner from "./CT/Dsd/dsdAppointmentDurationByPartner";
+import dsdUptakeOverall from './CT/Dsd/dsdUptakeOverall';
+import dsdStableOverall from './CT/Dsd/dsdStableOverall';
 
-import viralLoadUptakeBySex from "./CT/ViralLoad/viralLoadUptakeBySex";
-import viralLoadUptakeByAge from "./CT/ViralLoad/viralLoadUptakeByAge";
-import viralLoadUptakeByCounty from "./CT/ViralLoad/viralLoadUptakeByCounty";
-import viralLoadUptakeByPartner from "./CT/ViralLoad/viralLoadUptakeByPartner";
 import viralLoadOverallUptakeSuppressionBySex from "./CT/ViralLoad/viralLoadOverallUptakeSuppressionBySex";
 import medianTimeTo1stVlByYear from "./CT/ViralLoad/medianTimeTo1stVlByYear";
 import medianTimeTo1stVlByCounty from "./CT/ViralLoad/medianTimeTo1stVlByCounty";
 import medianTimeTo1stVlByPartner from "./CT/ViralLoad/medianTimeTo1stVlByPartner";
+import viralLoadUptakeBySex from "./CT/ViralLoad/viralLoadUptakeBySex";
+import viralLoadUptakeByAge from "./CT/ViralLoad/viralLoadUptakeByAge";
+import viralLoadUptakeByCounty from "./CT/ViralLoad/viralLoadUptakeByCounty";
+import viralLoadUptakeByPartner from "./CT/ViralLoad/viralLoadUptakeByPartner";
+import viralLoadOutcomesBySex from "./CT/ViralLoad/viralLoadOutcomesBySex";
+import viralLoadSuppressionByAge from "./CT/ViralLoad/viralLoadSuppressionByAge";
+import viralLoadSuppressionByYear from "./CT/ViralLoad/viralLoadSuppressionByYear";
+import viralLoadSuppressionByRegimen from "./CT/ViralLoad/viralLoadSuppressionByRegimen";
 import viralLoadOverallUptakeSuppressionByFacility from "./CT/ViralLoad/viralLoadOverallUptakeSuppressionByFacility";
 
 import treatmentOutcomesBySex from "./CT/TreatmentOutcomes/treatmentOutcomesBySex";
@@ -62,6 +79,7 @@ import threeMonthRetention from "./CT/TreatmentOutcomes/threeMonthRetention";
 import sixMonthRetention from "./CT/TreatmentOutcomes/sixMonthRetention";
 import twelveMonthRetention from "./CT/TreatmentOutcomes/twelveMonthRetention";
 import twentyFourMonthRetention from "./CT/TreatmentOutcomes/twentyFourMonthRetention";
+import dsdMmdUptakeOverallBySex from './CT/Dsd/dsdMmdUptakeOverallBySex';
 
 export default combineReducers({
     auth: authReducer,
@@ -73,7 +91,11 @@ export default combineReducers({
     ctSites,
 
     gpsSites,
-    
+
+    linkagePositiveTrends,
+
+    currentNewOnArtOverview,
+
     newOnArtOverview,
     newOnArtTrends,
     newOnArtByAgeSex,
@@ -98,6 +120,13 @@ export default combineReducers({
     artOptimizationNewByPartner,
     artOptimizationNewByYear,
 
+    adverseEventsByAgeSex,
+    adverseEventsClientsByAgeSex,
+    adverseEventsSeverityGrading,
+    adverseEventsSeverityActions,
+    adverseEventsReportedWithSeverityLevels,
+    adverseEventsActionsByDrugs,
+
     dsdStabilityStatusByAgeSex,
     dsdStabilityStatusByCounty,
     dsdStabilityStatusByPartner,
@@ -108,15 +137,22 @@ export default combineReducers({
     dsdAppointmentDurationByStabilityStatus,
     dsdAppointmentDurationByCounty,
     dsdAppointmentDurationByPartner,
+    dsdUptakeOverall,
+    dsdStableOverall,
+    dsdMmdUptakeOverallBySex,
 
-    viralLoadUptakeBySex,
-    viralLoadUptakeByAge,
-    viralLoadUptakeByCounty,
-    viralLoadUptakeByPartner,
     viralLoadOverallUptakeSuppressionBySex,
     medianTimeTo1stVlByYear,
     medianTimeTo1stVlByCounty,
     medianTimeTo1stVlByPartner,
+    viralLoadUptakeBySex,
+    viralLoadUptakeByAge,
+    viralLoadUptakeByCounty,
+    viralLoadUptakeByPartner,
+    viralLoadOutcomesBySex,
+    viralLoadSuppressionByAge,
+    viralLoadSuppressionByYear,
+    viralLoadSuppressionByRegimen,
     viralLoadOverallUptakeSuppressionByFacility,
 
     treatmentOutcomesBySex,

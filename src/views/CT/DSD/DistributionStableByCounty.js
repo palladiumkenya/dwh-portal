@@ -12,18 +12,14 @@ const DistributionStableByCounty = () => {
     const loadTxCurrDistributionByCounty = useCallback(async () => {
         setDistributionStableByCounty({
             title: { text: ''},
-            xAxis: [{ categories: stabilityStatusByCounty.counties, title: { text: 'County' }, crosshair: true }],
-            yAxis: { title: { text: 'Number of Patients' }},
+            xAxis: [{ categories: stabilityStatusByCounty.stability.map(a => a.name), title: { text: 'County' }, crosshair: true }],
+            yAxis: { title: { text: 'PERCENT OF PATIENTS' }},
             legend: { enabled: false },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
+            plotOptions: { column: { dataLabels: { enabled: true, format: '{point.y:,.0f}%' } } },
+            tooltip: { formatter: function () {
+                    return this.point.text;
+                }
             },
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             series: [
                 { data: stabilityStatusByCounty.stability, name: 'Number of Patients', type: 'column', color: "#485969" }
             ]

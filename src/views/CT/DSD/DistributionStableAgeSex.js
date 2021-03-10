@@ -11,26 +11,43 @@ const DistributionStableAgeSex = () => {
 
     const loadDistributionStableAgeSex = useCallback(async () => {
         setDistributionStableAgeSex({
-            chart: { type: 'bar' },
-            title: { text: '' },
-            xAxis: [
-                { categories: stabilityStatusByAgeSex.ageGroups, title: { text: '' }, reversed: false },
-                { categories: stabilityStatusByAgeSex.ageGroups, title: { text: '' }, linkedTo: 0, reversed: false, opposite: true }
-            ],
-            yAxis: [{ min: -(stabilityStatusByAgeSex.max), max: stabilityStatusByAgeSex.max, title: { text: 'Number Stable' }, labels: { formatter: function () {
-                return Math.abs(this.value);
-            }}}],
-            plotOptions: { series: { stacking: 'normal' }, bar: { pointWidth: 18 }},
-            tooltip: { formatter: function () {
-                return '<b>' + this.series.name + ', Age Group ' + this.point.category + '</b><br/>' +
-                    'Number Stable: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: ''
+            },
+            xAxis: {
+                categories: stabilityStatusByAgeSex.ageGroups,
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                max: 100,
+                title: {
+                    text: 'PERCENT OF PATIENTS'
                 }
             },
-            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
-            series: [
-                { name: 'Female', data: stabilityStatusByAgeSex.stableFemale, color: "#EA4C8B" },
-                { name: 'Male', data: stabilityStatusByAgeSex.stableMale, color: "#14084D" }
-            ]
+            tooltip: {
+                shared: true,
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'MALE',
+                data: stabilityStatusByAgeSex.stableMale,
+                color: "#14084D",
+                tooltip: { valueSuffix: '{point.percentage:.0f}%' + '({point.text})' }
+            }, {
+                name: 'FEMALE',
+                data: stabilityStatusByAgeSex.stableFemale,
+                color: "#EA4C8B",
+                tooltip: { valueSuffix: '{point.percentage:.0f}%' + '({point.text})' }
+            }]
         });
     }, [stabilityStatusByAgeSex]);
 

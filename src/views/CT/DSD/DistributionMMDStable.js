@@ -4,20 +4,38 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import * as dsdStableMmdModelsSelectors from '../../../selectors/CT/Dsd/dsdStableMmdModels';
+import { formatNumber } from '../../../utils/utils';
 
 const DistributionMMDStable = () => {
     const [distributionMMDStable, setDistributionMMDStable] = useState({});
     const stableMmdModels = useSelector(dsdStableMmdModelsSelectors.getStableMmdModels);
 
+
     const loadDistributionMMDStable = useCallback(async () => {
         setDistributionMMDStable({
             title: { text: '' },
-            xAxis: [{ categories: stableMmdModels.models, crosshair: true }],
-            yAxis: [{ title: { text: 'Number of Patients' }}],
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
+            xAxis: [{ categories: stableMmdModels.data.map(a => a.name), crosshair: true }],
+            yAxis: [
+                {
+                    min: 0,
+                    max: 100,
+                    title: {
+                        text: 'PERCENT OF PATIENTS'
+                    }
+                }
+            ],
+            plotOptions: { column: { dataLabels: { enabled: true, format: '{point.y:,.0f}%' } } },
+            tooltip: { formatter: function () {
+                    return '<b>' + this.point.name + '</b>: ' + this.point.text;
+                } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Number of Patients', data: stableMmdModels.data, type: 'column', color: "#485969" },
+                {
+                    name: 'PERCENT OF PATIENTS',
+                    data: stableMmdModels.data,
+                    type: 'column',
+                    color: "#485969"
+                },
             ]
         });
     }, [stableMmdModels]);

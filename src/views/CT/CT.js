@@ -7,10 +7,13 @@ import DSD from './DSD/DSD';
 import TreatmentOutcomes from './TreatmentOutcomes/TreatmentOutcomes';
 import ViralLoad from './ViralLoad/ViralLoad';
 import AdverseEvents from './AdverseEvents/AdverseEvents';
-// import TBHIV from './TBHIV/TBHIV';
 import ArtOptimization from './ArtOptimization/ArtOptimization';
 import { changeCtTab, changeCurrentPage } from "../../actions/Shared/uiActions";
 import { enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
+
+import { loadLinkagePositiveTrends } from '../../actions/HTS/Linkage/linkagePositiveTrendsActions';
+
+import { loadCurrentNewOnArtOverview } from '../../actions/CT/NewOnArt/currentNewOnArtOverviewActions';
 
 import { loadNewOnArtOverview } from '../../actions/CT/NewOnArt/newOnArtOverviewActions';
 import { loadNewOnArtTrends } from '../../actions/CT/NewOnArt/newOnArtTrendsActions';
@@ -36,6 +39,13 @@ import { loadArtOptimizationNewByCounty } from '../../actions/CT/ArtOptimization
 import { loadArtOptimizationNewByPartner } from '../../actions/CT/ArtOptimization/artOptimizationNewByPartnerActions';
 import { loadArtOptimizationNewByYear } from '../../actions/CT/ArtOptimization/artOptimizationNewByYearActions';
 
+import { loadAdverseEventsByAgeSex } from '../../actions/CT/AdverseEvents/adverseEventsByAgeSexActions';
+import { loadAdverseEventsClientsByAgeSex } from '../../actions/CT/AdverseEvents/adverseEventsClientsByAgeSexActions';
+import { loadAdverseEventsSeverityGrading } from '../../actions/CT/AdverseEvents/adverseEventsSeverityGradingActions';
+import { loadAdverseEventsSeverityActions } from '../../actions/CT/AdverseEvents/adverseEventsSeverityActionsActions';
+import { loadAdverseEventsReportedWithSeverityLevels } from '../../actions/CT/AdverseEvents/adverseEventsReportedWithSeverityLevelsActions';
+import { loadAdverseEventsActionsByDrugs }  from '../../actions/CT/AdverseEvents/adverseEventsActionsByDrugsActions';
+
 import { loadDsdStabilityStatusByAgeSex } from '../../actions/CT/Dsd/dsdStabilityStatusByAgeSexActions';
 import { loadDsdStabilityStatusByCounty } from '../../actions/CT/Dsd/dsdStabilityStatusByCountyActions';
 import { loadDsdStabilityStatusByPartner } from '../../actions/CT/Dsd/dsdStabilityStatusByPartnerActions';
@@ -46,15 +56,22 @@ import { loadDsdAppointmentDurationBySex } from '../../actions/CT/Dsd/dsdAppoint
 import { loadDsdAppointmentDurationByAge } from '../../actions/CT/Dsd/dsdAppointmentDurationByAgeActions';
 import { loadDsdAppointmentDurationByCounty } from '../../actions/CT/Dsd/dsdAppointmentDurationByCountyActions';
 import { loadDsdAppointmentDurationByPartner } from '../../actions/CT/Dsd/dsdAppointmentDurationByPartnerActions';
+import { loadDsdUptakeOverall } from '../../actions/CT/Dsd/dsdUptakeOverallActions';
+import { loadDsdStableOverall } from '../../actions/CT/Dsd/dsdStableOverallActions';
+import { loadDsdUptakeOverallBySex } from '../../actions/CT/Dsd/dsdMmdUptakeOverallBySexActions';
 
-import { loadViralLoadUptakeBySex } from '../../actions/CT/ViralLoad/viralLoadUptakeBySexActions';
-import { loadViralLoadUptakeByAge } from '../../actions/CT/ViralLoad/viralLoadUptakeByAgeActions';
-import { loadViralLoadUptakeByCounty } from '../../actions/CT/ViralLoad/viralLoadUptakeByCountyActions';
-import { loadViralLoadUptakeByPartner } from '../../actions/CT/ViralLoad/viralLoadUptakeByPartnerActions';
 import { loadViralLoadOverallUptakeSuppressionBySex } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeSuppressionBySexActions';
 import { loadMedianTimeTo1stVlByYear } from '../../actions/CT/ViralLoad/medianTimeTo1stVlByYearActions';
 import { loadMedianTimeTo1stVlByCounty } from '../../actions/CT/ViralLoad/medianTimeTo1stVlByCountyActions';
 import { loadMedianTimeTo1stVlByPartner } from '../../actions/CT/ViralLoad/medianTimeTo1stVlByPartnerActions';
+import { loadViralLoadUptakeBySex } from '../../actions/CT/ViralLoad/viralLoadUptakeBySexActions';
+import { loadViralLoadUptakeByAge } from '../../actions/CT/ViralLoad/viralLoadUptakeByAgeActions';
+import { loadViralLoadUptakeByCounty } from '../../actions/CT/ViralLoad/viralLoadUptakeByCountyActions';
+import { loadViralLoadUptakeByPartner } from '../../actions/CT/ViralLoad/viralLoadUptakeByPartnerActions';
+import { loadViralLoadOutcomesBySex } from '../../actions/CT/ViralLoad/viralLoadOutcomesBySexActions';
+import { loadViralLoadSuppressionByAge } from '../../actions/CT/ViralLoad/viralLoadSuppressionByAgeActions';
+import { loadViralLoadSuppressionByYear } from '../../actions/CT/ViralLoad/viralLoadSuppressionByYearActions';
+import { loadViralLoadSuppressionByRegimen } from '../../actions/CT/ViralLoad/viralLoadSuppressionByRegimenActions';
 import { loadViralLoadOverallUptakeSuppressionByFacility } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeSuppressionByFacilityActions';
 
 import { loadTreatmentOutcomesBySex } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesBySexActions';
@@ -79,7 +96,7 @@ const CT = () => {
     const projects = useSelector(state => state.filters.projects);
     const fromDate = useSelector(state => state.filters.fromDate);
     const toDate = useSelector(state => state.filters.toDate);
-    
+
     const renderTabNavItems = () => {
         return (
             Object.keys(CT_TABS).map((value) => {
@@ -103,6 +120,10 @@ const CT = () => {
     useEffect(() => {
         switch (ctTab) {
             case 'txNew':
+                dispatch(loadLinkagePositiveTrends());
+
+                dispatch(loadCurrentNewOnArtOverview());
+
                 dispatch(loadNewOnArtOverview());
                 dispatch(loadNewOnArtTrends());
                 dispatch(loadNewOnArtByAgeSex());
@@ -132,6 +153,15 @@ const CT = () => {
                 dispatch(loadArtOptimizationNewByPartner());
                 dispatch(loadArtOptimizationNewByYear());
                 break;
+            case 'advEv':
+                dispatch(loadCurrentOnArtByAgeSex());
+                dispatch(loadAdverseEventsByAgeSex());
+                dispatch(loadAdverseEventsClientsByAgeSex());
+                dispatch(loadAdverseEventsSeverityGrading());
+                dispatch(loadAdverseEventsSeverityActions());
+                dispatch(loadAdverseEventsReportedWithSeverityLevels());
+                dispatch(loadAdverseEventsActionsByDrugs());
+                break;
             case 'dsd':
                 dispatch(loadCurrentOnArtOverview());
                 dispatch(loadDsdStabilityStatusByAgeSex());
@@ -144,17 +174,27 @@ const CT = () => {
                 dispatch(loadDsdAppointmentDurationByAge());
                 dispatch(loadDsdAppointmentDurationByCounty());
                 dispatch(loadDsdAppointmentDurationByPartner());
+                dispatch(loadDsdUptakeOverall());
+                dispatch(loadDsdStableOverall());
+                dispatch(loadDsdUptakeOverallBySex());
                 break;
             case 'vl':
                 dispatch(loadCurrentOnArtOverview());
-                dispatch(loadViralLoadUptakeBySex());
-                dispatch(loadViralLoadUptakeByAge());
-                dispatch(loadViralLoadUptakeByCounty());
-                dispatch(loadViralLoadUptakeByPartner());
                 dispatch(loadViralLoadOverallUptakeSuppressionBySex());
                 dispatch(loadMedianTimeTo1stVlByYear());
                 dispatch(loadMedianTimeTo1stVlByCounty());
                 dispatch(loadMedianTimeTo1stVlByPartner());
+                dispatch(loadViralLoadUptakeBySex());
+                dispatch(loadViralLoadUptakeByAge());
+                dispatch(loadViralLoadUptakeByCounty());
+                dispatch(loadViralLoadUptakeByPartner());
+
+                dispatch(loadViralLoadOutcomesBySex());
+
+                dispatch(loadViralLoadSuppressionByAge());
+                dispatch(loadViralLoadSuppressionByYear());
+                dispatch(loadViralLoadSuppressionByRegimen());
+
                 dispatch(loadViralLoadOverallUptakeSuppressionByFacility());
                 break;
             case 'tOut':
@@ -202,9 +242,6 @@ const CT = () => {
                 <TabPane tabId="txCurr">
                     <CurrentOnArt/>
                 </TabPane>
-                {/* <TabPane tabId="tbHiv">
-                    <TBHIV/>
-                </TabPane> */}
                 <TabPane tabId="txOpt">
                     <ArtOptimization/>
                 </TabPane>
