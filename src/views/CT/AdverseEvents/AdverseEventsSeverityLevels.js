@@ -14,13 +14,13 @@ const AdverseEventsSeverityLevels = () => {
             title: { text: '' },
             xAxis: [{ categories: adverseEventsReportedWithSeverityLevels.categories }],
             yAxis: [{ title: { text: 'Number of Patients' }, stackLabels: { enabled: true, style: { fontWeight: 'bold', color: "#808080" }}}],
-            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+            legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             tooltip: { headerFormat: '<b>{point.x}</b><br/>', pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}' },
             plotOptions: { column: { stacking: 'normal', dataLabels: { enabled: true }}},
             series: [
-                { data: adverseEventsReportedWithSeverityLevels.severe_values, name: 'SEVERE', type: 'column', color: "#485969" },
-                { data: adverseEventsReportedWithSeverityLevels.moderate_values, name: 'MODERATE', type: 'column', color: "#1AB394" },
-                { data: adverseEventsReportedWithSeverityLevels.mild_values, name: 'MILD', type: 'column', color: "#1f77b4" },
+                { data: adverseEventsReportedWithSeverityLevels.severe_values, name: 'SEVERE', type: 'column', color: "#E15759" },
+                { data: adverseEventsReportedWithSeverityLevels.moderate_values, name: 'MODERATE', type: 'column', color: "#F7ED00" },
+                { data: adverseEventsReportedWithSeverityLevels.mild_values, name: 'MILD', type: 'column', color: "#1AB394" },
             ]
         });
     }, [adverseEventsReportedWithSeverityLevels]);

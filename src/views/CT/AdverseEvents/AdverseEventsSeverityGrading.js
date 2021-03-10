@@ -43,19 +43,19 @@ const AdverseEventsSeverityGrading = () => {
                         color: "#1AB394"
                     },
                     {
-                        name: 'SEVERE',
-                        y: adverseEventsSeverityGrading.severeVal,
-                        color: "#2F4050"
-                    },
-                    {
                         name: 'MODERATE',
                         y: adverseEventsSeverityGrading.moderateVal,
-                        color: "#D4FF78"
+                        color: "#F7ED00"
+                    },
+                    {
+                        name: 'SEVERE',
+                        y: adverseEventsSeverityGrading.severeVal,
+                        color: "#E15759"
                     },
                     {
                         name: 'NOT INDICATED',
                         y: adverseEventsSeverityGrading.notindictatedVal,
-                        color: "#f28e2b"
+                        color: "#2F4050"
                     }]
                 }
             ]
@@ -68,7 +68,7 @@ const AdverseEventsSeverityGrading = () => {
 
     return (
         <Card className="trends-card">
-            <CardHeader className="trends-header">
+            <CardHeader className="trends-header" style={{textTransform: 'none'}}>
                 SEVERITY GRADING OF AEs
             </CardHeader>
             <CardBody className="trends-body">

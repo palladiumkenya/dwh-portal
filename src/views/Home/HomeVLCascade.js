@@ -18,7 +18,7 @@ const HomeVLCascade = () => {
         <Row>
             <Col>
                 <DataCard
-                    title="CURRENTLY ON ART"
+                    title="CURRENT ON ART"
                     subtitle={null}
                     data={formatNumber(currentOnArt)}
                 />

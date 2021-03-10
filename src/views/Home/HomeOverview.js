@@ -20,12 +20,12 @@ const HomeOverview = () => {
                             warehouse since it’s inception. As at {moment().format('MMM YYYY')},
                             <strong> {facilities.length}</strong> facilities had reported patients current on ART
                         </CardText>
-                        <CardTitle tag="h4" className="pb-2">THEME OF THE MONTH</CardTitle>
-                        <CardSubtitle tag="h5" className="pb-2">Differenciated Service Delivery</CardSubtitle>
+                        <CardTitle tag="h4" className="pb-2">KEY HIGHLIGHTS</CardTitle>
                         <CardText className="mb-5">
-                            We will embark on taking you through the various milestones achieved within the
-                            Differerenciated Service Delivery program including MMD Uptake of Active Patients,
-                            Trends and various categories
+                            <ol>
+                                <li>Trends in identification of new positives cumulatively and by month. The highlight also shows male and female identification trends by month.</li>
+                                <li>Overall MMD uptake based on last month's patients current on ART. The highlight also shows MMD uptake among males and females.</li>
+                            </ol>
                         </CardText>
                         <CardTitle tag="h4" className="pb-2">EMR SITES IN KENYA</CardTitle>
                         <CardSubtitle tag="h5" className="pb-2">Kenya EMR</CardSubtitle>

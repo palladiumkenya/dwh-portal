@@ -13,15 +13,15 @@ const AdverseEventsActionsByDrugs = () => {
         setActionsByDrugs({
             title: { text: '' },
             xAxis: [{ categories: adverseEventsActionsByDrugs.categories }],
-            yAxis: [{ title: { text: 'PERCENT OF PATIENTS' }, stackLabels: { enabled: true, style: { fontWeight: 'bold', color: "#808080" }}}],
-            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+            yAxis: [{ title: { text: 'Number of Patients' }, stackLabels: { enabled: true, style: { fontWeight: 'bold', color: "#808080" }}}],
+            legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             tooltip: { headerFormat: '<b>{point.x}</b><br/>', pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}' },
             plotOptions: { column: { stacking: 'normal', dataLabels: { enabled: true }}},
             series: [
-                { data: adverseEventsActionsByDrugs.severeVals, name: 'SEVERE', type: 'column', color: "#485969" },
-                { data: adverseEventsActionsByDrugs.moderateVals, name: 'MODERATE', type: 'column', color: "#1AB394" },
-                { data: adverseEventsActionsByDrugs.mildVals, name: 'MILD', type: 'column', color: "#1f77b4" },
-                { data: adverseEventsActionsByDrugs.undocumentedVals, name: 'UNDOCUMENTED', type: 'column', color: '' }
+                { data: adverseEventsActionsByDrugs.undocumentedVals, name: 'UNDOCUMENTED', type: 'column', color: '#2F4050' },
+                { data: adverseEventsActionsByDrugs.severeVals, name: 'SEVERE', type: 'column', color: "#E15759" },
+                { data: adverseEventsActionsByDrugs.moderateVals, name: 'MODERATE', type: 'column', color: "#F7ED00" },
+                { data: adverseEventsActionsByDrugs.mildVals, name: 'MILD', type: 'column', color: "#1AB394" },
             ]
         });
     }, [adverseEventsActionsByDrugs]);

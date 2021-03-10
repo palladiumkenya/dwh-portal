@@ -34,7 +34,7 @@ const TreatmentOutcomesByCounty = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ART TREATMENT OUTCOMES BY COUNTY
+                        ART TREATMENT OUTCOMES BY COUNTY*
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -42,6 +42,9 @@ const TreatmentOutcomesByCounty = () => {
                         </div>
                     </CardBody>
                 </Card>
+            </div>
+            <div className="col-12">
+                *This indicator is computed and displayed for the last completed month.
             </div>
         </div>
     );

@@ -61,7 +61,7 @@ const HomeSexDistribution = () => {
                                 </Col>
                                 <Col md={6}>
                                     <CardText className="primary-card-body-text text-center mb-2">{formatNumber(currentOnArtBySex.currentOnArtMale)}</CardText>
-                                    <CardTitle tag="h4" className="text-center mt-0 mb-2">Active on ART</CardTitle>
+                                    <CardTitle tag="h4" className="text-center mt-0 mb-2">Current on ART</CardTitle>
                                 </Col>
                                 <Col md={3}>
                                     <CardSubtitle tag="h5" className="primary-card-body-subtitle text-right bigger-subtitle">{ARTClientsByGender.ViralSuppressionMale}%</CardSubtitle>
@@ -80,7 +80,7 @@ const HomeSexDistribution = () => {
                                 </Col>
                                 <Col md={6}>
                                     <CardText className="primary-card-body-text text-center mb-2">{formatNumber(currentOnArtBySex.currentOnArtFemale)}</CardText>
-                                    <CardTitle tag="h4" className="text-center mt-0 mb-2">Active on ART</CardTitle>
+                                    <CardTitle tag="h4" className="text-center mt-0 mb-2">Current on ART</CardTitle>
                                 </Col>
                                 <Col md={3}>
                                     <CardSubtitle tag="h5" className="primary-card-body-subtitle text-right bigger-subtitle">{ARTClientsByGender.ViralSuppressionFemale}%</CardSubtitle>
