@@ -160,8 +160,8 @@ const ViralLoad = () => {
                     <SectionFooter overview={branding.overview}/>
                     <ViralLoadSuppressionByYear24Month />
                     <SectionFooter overview={branding.overview}/>
-                    <ViralLoadOverallUptakeAndSuppressionByFacility />
-                    <SectionFooter overview={branding.overview}/>
+                    {/*<ViralLoadOverallUptakeAndSuppressionByFacility />
+                    <SectionFooter overview={branding.overview}/>*/}
                 </TabPane>
             </TabContent>
         </div>
