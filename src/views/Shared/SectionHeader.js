@@ -10,7 +10,7 @@ const SectionHeader = ({ title, description}) => {
                 <CardBody>
                     <Row>
                         <Col xl={3} lg={3} md={4} sm={6} xs={12}>
-                            <div className="reporting-rates-card-title">
+                            <div className="reporting-rates-card-title" style={{textTransform: 'none'}}>
                                 {title}
                             </div>
                         </Col>
