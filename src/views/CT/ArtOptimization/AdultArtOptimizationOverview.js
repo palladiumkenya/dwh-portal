@@ -13,6 +13,10 @@ const AdultArtOptimizationOverview = () => {
     const adultsOnSecondLinePercent = adults ? (adultsOnSecondLine/adults)*100 : 0;
     const adultsOnThirdLine = useSelector(artOptimizationOverviewSelectors.getAdultsOnThirdLine);
     const adultsOnThirdLinePercent = adults ? (adultsOnThirdLine/adults)*100 : 0;
+
+    const adultsOnUndocumented = useSelector(artOptimizationOverviewSelectors.getAdultsOnUndocumentedLine);
+    const adultsOnUndocumentedPercent = adults ? (adultsOnUndocumented/adults)*100 : 0;
+
     const adultsOnTld = useSelector(artOptimizationOverviewSelectors.getAdultsOnTld);
     const adultsOnTldPercent = adults ? (adultsOnTld/adults)*100 : 0;
     const adultsOnNvp = useSelector(artOptimizationOverviewSelectors.getAdultsOnNvp);
@@ -44,6 +48,13 @@ const AdultArtOptimizationOverview = () => {
                 </Col>
             </Row>
             <Row>
+                <Col>
+                    <DataCard
+                        title={"ADULTS ON UNDOCUMENTED LINE"}
+                        subtitle={roundNumber(adultsOnUndocumentedPercent) + "%"}
+                        data={formatNumber(adultsOnUndocumented)}
+                        />
+                </Col>
                 <Col>
                     <DataCard
                         title="ADULTS ON TLD"

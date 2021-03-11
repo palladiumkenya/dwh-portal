@@ -14,30 +14,50 @@ const ChildArtOptimizationOverview = () => {
     const childrenOnThirdLine = useSelector(artOptimizationOverviewSelectors.getChildrenOnThirdLine);
     const childrenOnThirdLinePercent = children ? (childrenOnThirdLine/children)*100 : 0;
 
+    const childrenOnUndocumentedLine = useSelector(artOptimizationOverviewSelectors.getChildrenOnUndocumentedLine);
+    const childrenOnUndocumentedLinePercent = children ? (childrenOnUndocumentedLine/children)*100 : 0;
+
     return (
-        <Row>
-            <Col>
-                <DataCard
-                    title="CALHIV ON FIRST LINE"
-                    subtitle={roundNumber(childrenOnFirstLinePercent) + "%"}
-                    data={formatNumber(childrenOnFirstLine)}
-                />
-            </Col>
-            <Col>
-                <DataCard
-                    title="CALHIV ON SECOND LINE"
-                    subtitle={roundNumber(childrenOnSecondLinePercent) + "%"}
-                    data={formatNumber(childrenOnSecondLine)}
-                />
-            </Col>
-            <Col>
-                <DataCard
-                    title="CALHIV ON THIRD LINE"
-                    subtitle={roundNumber(childrenOnThirdLinePercent) + "%"}
-                    data={formatNumber(childrenOnThirdLine)}
-                />
-            </Col>
-        </Row>
+        <span>
+            <Row>
+                <Col>
+                    <DataCard
+                        title="CALHIV ON FIRST LINE"
+                        subtitle={roundNumber(childrenOnFirstLinePercent) + "%"}
+                        data={formatNumber(childrenOnFirstLine)}
+                    />
+                </Col>
+                <Col>
+                    <DataCard
+                        title="CALHIV ON SECOND LINE"
+                        subtitle={roundNumber(childrenOnSecondLinePercent) + "%"}
+                        data={formatNumber(childrenOnSecondLine)}
+                    />
+                </Col>
+                <Col>
+                    <DataCard
+                        title="CALHIV ON THIRD LINE"
+                        subtitle={roundNumber(childrenOnThirdLinePercent) + "%"}
+                        data={formatNumber(childrenOnThirdLine)}
+                    />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <DataCard
+                        title="CALHIV ON UNDOCUMENTED LINE"
+                        subtitle={roundNumber(childrenOnUndocumentedLinePercent) + "%"}
+                        data={formatNumber(childrenOnUndocumentedLine)}
+                    />
+                </Col>
+                <Col>
+                    &nbsp;
+                </Col>
+                <Col>
+                    &nbsp;
+                </Col>
+            </Row>
+        </span>
     );
 };
 
