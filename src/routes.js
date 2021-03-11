@@ -1,12 +1,14 @@
-import Home from './views/Home/Home';
-import RR from './views/RR/RR';
-import HTS from './views/HTS/HTS';
-import CT from "./views/CT/CT";
-import GIS from "./views/GIS/GIS";
-import HRH from "./views/HRH/HRH";
-import Resources from './views/Resources/Resources';
-import Organizations from './views/Administration/Organizations/Organizations';
-import Profile from './views/Users/Profile';
+import React from 'react';
+
+const Home = React.lazy(() => import('./views/Home/Home'));
+const RR = React.lazy(() => import('./views/RR/RR'));
+const HTS = React.lazy(() => import('./views/HTS/HTS'));
+const CT = React.lazy(() => import("./views/CT/CT"));
+const GIS = React.lazy(() => import("./views/GIS/GIS"));
+const HRH = React.lazy(() => import("./views/HRH/HRH"));
+const Resources = React.lazy(() => import('./views/Resources/Resources'));
+const Organizations = React.lazy(() => import('./views/Administration/Organizations/Organizations'));
+const Profile = React.lazy(() => import('./views/Users/Profile'));
 
 const routes = [
   { path: "/", exact: true, name: "Home", component: Home, private: false },
