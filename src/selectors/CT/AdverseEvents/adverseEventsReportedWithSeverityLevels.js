@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { createSelector } from 'reselect';
 
 const listUnfiltered = state => state.adverseEventsReportedWithSeverityLevels.listUnfiltered;
@@ -9,13 +10,19 @@ export const getAdverseEventsReportedWithSeverityLevels = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         const severityCategories = ['Mild', 'Moderate', 'Severe', 'Unknown'];
-        const categories = [];
+        const categories = _.chain(list)
+            .filter(l => l.AdverseEvent)
+            .map(l => ({ ...l, AdverseEvent: l.AdverseEvent.toUpperCase() }))
+            .groupBy('AdverseEvent')
+            .map((objs, key) => ({
+                'adverseEvent': key,
+                'total': _.sumBy(objs, 'total')
+            }))
+            .orderBy('total', 'desc')
+            .map(l => l.adverseEvent)
+            .uniq()
+            .value();
         let data = [];
-        for (let i = 0; i < list.length; i++) {
-            if (list[i].AdverseEvent && categories.indexOf(list[i].AdverseEvent.toUpperCase()) === -1) {
-                categories.push(list[i].AdverseEvent.toUpperCase());
-            }
-        }
         for(let i = 0; i < severityCategories.length; i++) {
             data[i] = [];
             for(let j = 0; j < categories.length; j++) {
@@ -23,7 +30,6 @@ export const getAdverseEventsReportedWithSeverityLevels = createSelector(
             }
         }
         for(let i = 0; i < list.length; i++) {
-            console.log(list[i]);
             let severityIndex = severityCategories.indexOf(list[i].Severity);
             let categoryIndex = categories.indexOf(list[i].AdverseEvent.toUpperCase());
             if(severityIndex === -1 || categoryIndex === -1 ) {
