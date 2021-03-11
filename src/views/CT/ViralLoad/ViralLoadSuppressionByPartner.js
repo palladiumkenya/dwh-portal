@@ -13,13 +13,11 @@ const ViralLoadSuppressionByPartner = () => {
         setViralLoadSuppressionByPartner({
             title: { text: '' },
             xAxis: [{ categories: viralLoadOverallUptakeSuppressionByPartnerData.partners, crosshair: true, title: { text: 'Service Delivery Partner' } }],
-            yAxis: [
-                { title: { text: 'Number of Patients' } },
-            ],
-            plotOptions: { column: { dataLabels: { enabled: true } } },
+            yAxis: [{ title: { text: 'Percentage of Patients' }, labels: { format: '{value} %' }}],
+            plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.text; } } }},
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Number of Patients', data: viralLoadOverallUptakeSuppressionByPartnerData.data, type: 'column', color: "#485969" },
+                { name: 'Percentage of Patients', data: viralLoadOverallUptakeSuppressionByPartnerData.data, type: 'column', color: "#485969", tooltip: { valueSuffix: ' % ({point.absoluteY})' }},
             ]
         });
     }, [viralLoadOverallUptakeSuppressionByPartnerData]);
