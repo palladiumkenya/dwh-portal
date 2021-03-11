@@ -1,8 +1,9 @@
 import React from 'react';
+import { Spinner } from 'reactstrap';
 
 const Loading = () => {
     return (
-        <div className="animated fadeIn pt-1 text-center">Loading...</div>
+        <Spinner color="danger" />
     );
 };
 
