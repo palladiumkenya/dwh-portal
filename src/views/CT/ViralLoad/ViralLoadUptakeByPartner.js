@@ -15,7 +15,7 @@ const ViralLoadUptakeByPartner = () => {
             title: { text: '' },
             xAxis: [{ categories: partners, title: { text: 'Service Delivery Partner' }, crosshair: true }],
             yAxis: [{ title: { text: 'Percentage of Patients' }, labels: { format: '{value} %' }}],
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none', format: '{y} %' } } },
+            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none', format: '{y}%' } } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'Percentage of Patients', data: viralLoadUptakeByPartnerData.data, type: 'column', color: "#485969", tooltip: { valueSuffix: ' % ({point.absoluteY})'} },
