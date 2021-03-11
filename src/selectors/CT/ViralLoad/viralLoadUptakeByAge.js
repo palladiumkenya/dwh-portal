@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect';
 import { roundNumber } from '../../../utils/utils';
-import parse from 'proj4/lib/parseCode';
 
 const listUnfiltered = state => state.viralLoadUptakeByAge.listUnfiltered;
 const listFiltered = state => state.viralLoadUptakeByAge.listFiltered;

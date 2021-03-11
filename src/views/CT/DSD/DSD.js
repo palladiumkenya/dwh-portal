@@ -40,8 +40,8 @@ const DSD = () => {
                 <UniversalFilter/>
             </VisibilitySensor>
             <DSDOverview />
-            <SectionFooter overview={branding.overview}/>
             <DSDIndicatorDefinition />
+            <SectionFooter overview={branding.overview}/>
             <Row className={"col-12"}>
                 <Col className={"col-6"}>
                     <DSDCascade />

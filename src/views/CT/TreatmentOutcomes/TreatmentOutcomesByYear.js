@@ -16,13 +16,11 @@ const TreatmentOutcomesByYear = () => {
             xAxis: [{ categories: treatmentOutcomesByYearData.yearCategories, title: { text: 'Year of start from 2011' }, crosshair: true}],
             yAxis: [{ title: { text: 'Percentage of Patients' }}],
             tooltip: { shared: true },
-            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+            legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'ACTIVE', data: treatmentOutcomesByYearData.data[0], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'DEAD', data: treatmentOutcomesByYearData.data[1], type: 'column', color: "#60A6E5", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'LTFU', data: treatmentOutcomesByYearData.data[2], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'STOPPED', data: treatmentOutcomesByYearData.data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'TRANSFER OUT', data: treatmentOutcomesByYearData.data[4], type: 'column', color: "#F28E2B", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'DEAD', data: treatmentOutcomesByYearData.data[1], type: 'column', color: "#E15759", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'LTFU', data: treatmentOutcomesByYearData.data[2], type: 'column', color: "#F28E2B", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'ACTIVE', data: treatmentOutcomesByYearData.data[0], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [treatmentOutcomesByYearData]);
@@ -36,7 +34,7 @@ const TreatmentOutcomesByYear = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ART TREATMENT OUTCOMES BY YEAR OF ART START
+                        ART TREATMENT OUTCOMES BY YEAR OF ART START*
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -44,6 +42,9 @@ const TreatmentOutcomesByYear = () => {
                         </div>
                     </CardBody>
                 </Card>
+            </div>
+            <div className="col-12">
+                *This indicator is computed and displayed for the last completed month.
             </div>
         </div>
     );

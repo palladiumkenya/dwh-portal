@@ -16,13 +16,11 @@ const TreatmentOutcomesByPartner = () => {
             xAxis: [{ categories: treatmentOutcomesByPartnerData.partnerCategories, crosshair: true }],
             yAxis: [{ title: { text: 'Percentage of Patients' }}],
             tooltip: { shared: true },
-            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+            legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'ACTIVE', data: treatmentOutcomesByPartnerData.data[0], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'DEAD', data: treatmentOutcomesByPartnerData.data[1], type: 'column', color: "#60A6E5", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'LTFU', data: treatmentOutcomesByPartnerData.data[2], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'STOPPED', data: treatmentOutcomesByPartnerData.data[3], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'TRANSFER OUT', data: treatmentOutcomesByPartnerData.data[4], type: 'column', color: "#F28E2B", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'DEAD', data: treatmentOutcomesByPartnerData.data[1], type: 'column', color: "#E15759", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'LTFU', data: treatmentOutcomesByPartnerData.data[2], type: 'column', color: "#F28E2B", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'ACTIVE', data: treatmentOutcomesByPartnerData.data[0], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [treatmentOutcomesByPartnerData]);
@@ -36,7 +34,7 @@ const TreatmentOutcomesByPartner = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ART TREATMENT OUTCOMES BY PARTNER
+                        ART TREATMENT OUTCOMES BY PARTNER*
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -44,6 +42,9 @@ const TreatmentOutcomesByPartner = () => {
                         </div>
                     </CardBody>
                 </Card>
+            </div>
+            <div className="col-12">
+                *This indicator is computed and displayed for the last completed month.
             </div>
         </div>
     );
