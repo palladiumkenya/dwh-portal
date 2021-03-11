@@ -38,6 +38,10 @@ export const getAdverseEventsReportedWithSeverityLevels = createSelector(
             data[severityIndex][categoryIndex] = data[severityIndex][categoryIndex] + parseInt(list[i].total);
         }
 
-        return { categories, severityCategories, data };
+        return {
+            categories: categories.map(c => c == 'OTHER ADRS' ? 'OTHER AEs': c),
+            severityCategories,
+            data
+        };
     }
 );
