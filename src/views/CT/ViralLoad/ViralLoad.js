@@ -35,7 +35,6 @@ import ViralLoadSuppressionByPartner from './ViralLoadSuppressionByPartner';
 import ViralLoadSuppressionByYear6Month from './ViralLoadSuppressionByYear6Month';
 import ViralLoadSuppressionByYear12Month from './ViralLoadSuppressionByYear12Month';
 import ViralLoadSuppressionByYear24Month from './ViralLoadSuppressionByYear24Month';
-import ViralLoadOverallUptakeAndSuppressionByFacility from './ViralLoadOverallUptakeAndSuppressionByFacility';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 import classnames from 'classnames';
 import ViralLoadOutcomesOverview from './ViralLoadOutcomesOverview';
@@ -160,8 +159,6 @@ const ViralLoad = () => {
                     <SectionFooter overview={branding.overview}/>
                     <ViralLoadSuppressionByYear24Month />
                     <SectionFooter overview={branding.overview}/>
-                    {/*<ViralLoadOverallUptakeAndSuppressionByFacility />
-                    <SectionFooter overview={branding.overview}/>*/}
                 </TabPane>
             </TabContent>
         </div>
