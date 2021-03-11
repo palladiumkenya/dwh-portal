@@ -21,12 +21,10 @@ const HomeOverview = () => {
                             <strong> {facilities.length}</strong> facilities had reported patients current on ART
                         </CardText>
                         <CardTitle tag="h4" className="pb-2">KEY HIGHLIGHTS</CardTitle>
-                        <CardText className="mb-5">
-                            <ol>
-                                <li>Trends in identification of new positives cumulatively and by month. The highlight also shows male and female identification trends by month.</li>
-                                <li>Overall MMD uptake based on last month's patients current on ART. The highlight also shows MMD uptake among males and females.</li>
-                            </ol>
-                        </CardText>
+                        <ol>
+                            <li>Trends in identification of new positives cumulatively and by month. The highlight also shows male and female identification trends by month.</li>
+                            <li>Overall MMD uptake based on last month's patients current on ART. The highlight also shows MMD uptake among males and females.</li>
+                        </ol>
                         <CardTitle tag="h4" className="pb-2">EMR SITES IN KENYA</CardTitle>
                         <CardSubtitle tag="h5" className="pb-2">Kenya EMR</CardSubtitle>
                         <CardText className="mb-5">
