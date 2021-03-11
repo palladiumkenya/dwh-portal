@@ -53,7 +53,7 @@ const AdverseEventsSeverityGrading = () => {
                         color: "#E15759"
                     },
                     {
-                        name: 'NOT INDICATED',
+                        name: 'UNDOCUMENTED',
                         y: adverseEventsSeverityGrading.notindictatedVal,
                         color: "#2F4050"
                     }]
