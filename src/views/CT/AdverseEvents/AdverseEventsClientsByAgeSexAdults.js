@@ -12,16 +12,17 @@ const AdverseEventsClientsByAgeSexAdults = () => {
     const loadAdults15PlusAdverseEventsDesegregation =  useCallback(async () => {
         setAdults15PlusAdverseEventsDesegregation({
             title: { text: '' },
-            xAxis: [{ categories: adverseEventsClientsAdults.ageGroups.map(y => y + ' YRS')}],
+            xAxis: [{ categories: adverseEventsClientsAdults.ageGroups.map(y => y + ' YRS'), crosshair: true }],
             yAxis: [
                 { title: { text: 'Number of Patients' }, stackLabels: { enabled: true, style: { fontWeight: 'bold', color: "#808080" }}}
             ],
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             tooltip: {
+                shared: true,
                 headerFormat: '<b>{point.x}</b><br/>',
                 pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
             },
-            plotOptions: { column: { stacking: 'normal', dataLabels: { enabled: true }}},
+            plotOptions: { column: { stacking: 'normal'}},
             series: [
                 { data: adverseEventsClientsAdults.adverseEventsMale, name: 'Male', type: 'column', color: "#14084D" },
                 { data: adverseEventsClientsAdults.adverseEventsFemale, name: 'Female', type: 'column', color: "#EA4C8B" },

@@ -33,7 +33,6 @@ const AdverseEvents = () => {
     };
     return (
         <div className="animated fadeIn">
-            <SectionHeader title={branding.title}/>
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
