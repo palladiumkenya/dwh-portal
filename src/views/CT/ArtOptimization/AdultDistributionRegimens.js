@@ -26,7 +26,8 @@ const AdultDistributionRegimens = () => {
                 regimenLine: 'FIRST LINE',
                 regimen: adultsOnFirstLine[i].lastRegimen,
                 activeOnArt: adultsOnFirstLine[i].txCurr,
-                percentageOnArt: ((adultsOnFirstLine[i].txCurr/adults)*100).toFixed(2) + " %"
+                percentageOnArt: ((adultsOnFirstLine[i].txCurr/adults)*100).toFixed(2) + " %",
+                percentNumber: ((adultsOnFirstLine[i].txCurr/adults)*100).toFixed(2)
             });
         }
         for(let i = 0; i < adultsOnSecondLine.length; i++) {
@@ -34,7 +35,8 @@ const AdultDistributionRegimens = () => {
                 regimenLine: 'SECOND LINE',
                 regimen: adultsOnSecondLine[i].lastRegimen,
                 activeOnArt: adultsOnSecondLine[i].txCurr,
-                percentageOnArt: ((adultsOnSecondLine[i].txCurr/adults)*100).toFixed(2) + " %"
+                percentageOnArt: ((adultsOnSecondLine[i].txCurr/adults)*100).toFixed(2) + " %",
+                percentNumber: ((adultsOnSecondLine[i].txCurr/adults)*100).toFixed(2)
             });
         }
         for(let i = 0; i < adultsOnThirdLine.length; i++) {
@@ -42,7 +44,8 @@ const AdultDistributionRegimens = () => {
                 regimenLine: 'THIRD LINE',
                 regimen: adultsOnThirdLine[i].lastRegimen,
                 activeOnArt: adultsOnThirdLine[i].txCurr,
-                percentageOnArt: ((adultsOnThirdLine[i].txCurr/adults)*100).toFixed(2) + " %"
+                percentageOnArt: ((adultsOnThirdLine[i].txCurr/adults)*100).toFixed(2) + " %",
+                percentNumber: ((adultsOnThirdLine[i].txCurr/adults)*100).toFixed(2)
             });
         }
         for(let i = 0; i < adultsOnUndocumentedLine.length; i++) {
@@ -50,9 +53,13 @@ const AdultDistributionRegimens = () => {
                 regimenLine: 'UNDOCUMENTED REG LINE',
                 regimen: adultsOnUndocumentedLine[i].lastRegimen,
                 activeOnArt: adultsOnUndocumentedLine[i].txCurr,
-                percentageOnArt: ((adultsOnUndocumentedLine[i].txCurr/adults)*100).toFixed(2) + " %"
+                percentageOnArt: ((adultsOnUndocumentedLine[i].txCurr/adults)*100).toFixed(2) + " %",
+                percentNumber: ((adultsOnUndocumentedLine[i].txCurr/adults)*100).toFixed(2)
             });
         }
+        data.data.sort(function(a, b) {
+            return b.percentNumber - a.percentNumber;
+        });
         setAdultDistributionRegimens(data);
     }, [adults, adultsOnFirstLine, adultsOnSecondLine, adultsOnThirdLine, adultsOnUndocumentedLine]);
 
