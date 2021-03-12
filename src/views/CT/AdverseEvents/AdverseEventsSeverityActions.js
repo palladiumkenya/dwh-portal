@@ -12,11 +12,11 @@ const AdverseEventsSeverityActions = () => {
     const loadAdverseEventsActionsBySeverity = useCallback(async () => {
         setAdverseEventsActionsBySeverity({
             title: { text: '' },
-            xAxis: [{ categories: ['MILD', 'MODERATE', 'SEVERE', 'UNKNOWN']}],
+            xAxis: [{ categories: ['MILD', 'MODERATE', 'SEVERE', 'UNKNOWN'], crosshair: true}],
             yAxis: [{ title: { text: 'Number of Patients' }, stackLabels: { enabled: true, style: { fontWeight: 'bold', color: "#808080" }}}],
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
-            tooltip: { headerFormat: '<b>{point.x}</b><br/>', pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}' },
-            plotOptions: { column: { stacking: 'normal', dataLabels: { enabled: true }}},
+            tooltip: { shared: true, headerFormat: '<b>{point.x}</b><br/>', pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}' },
+            plotOptions: { column: { stacking: 'normal'}},
             series: [{
                 data: [
                     adverseEventsSeverityActions.mild_undocumented_total,

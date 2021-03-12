@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import currentOnArtByCounty from '../../../reducers/CT/CurrentOnArt/currentOnArtByCounty';
 
 const listUnfiltered = state => state.dsdStabilityStatusByCounty.listUnfiltered;
 const listFiltered = state => state.dsdStabilityStatusByCounty.listFiltered;

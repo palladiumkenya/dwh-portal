@@ -11,59 +11,31 @@ const ViralLoadOverview = () => {
     const eligibleForVlPercent = currentOnArt ? ((eligibleForVl/currentOnArt)*100) : 0;
     const hasCurrentVl = useSelector(currentOnArtOverviewSelectors.getHasCurrentVl);
     const hasCurrentVlPercent = currentOnArt ? ((hasCurrentVl/eligibleForVl)*100) : 0;
-    /*const virallySuppressed = useSelector(currentOnArtOverviewSelectors.getVirallySuppressed);
-    const virallySuppressedPercent = currentOnArt ? ((virallySuppressed/hasCurrentVl)*100) : 0;*/
-
 
     return (
-        <span>
-            <Row>
-                <Col>
-                    <DataCard
-                        title="CURRENTLY ON ART"
-                        subtitle={null}
-                        data={formatNumber(currentOnArt)}
-                    />
-                </Col>
-                <Col>
-                    <DataCard
-                        title="ELIGIBLE FOR VIRAL LOAD"
-                        subtitle={roundNumber(eligibleForVlPercent) + "%"}
-                        data={formatNumber(eligibleForVl)}
-                    />
-                </Col>
-                <Col>
-                    <DataCard
-                        title="VALID VIRAL LOAD"
-                        subtitle={roundNumber(hasCurrentVlPercent) + "%"}
-                        data={formatNumber(hasCurrentVl)}
-                    />
-                </Col>
-            </Row>
-            {/*<Row>
+        <Row>
             <Col>
                 <DataCard
-                    title="PATIENTS CURRENT ON TREATMENT"
+                    title="CURRENTLY ON ART"
                     subtitle={null}
                     data={formatNumber(currentOnArt)}
                 />
             </Col>
             <Col>
                 <DataCard
-                    title="PATIENTS WITH VALID VL"
-                    subtitle={roundNumber(hasCurrentVlPercent) + "%"}
-                    data={formatNumber(hasCurrentVl)}
+                    title="ELIGIBLE FOR VIRAL LOAD"
+                    subtitle={roundNumber(eligibleForVlPercent) + "%"}
+                    data={formatNumber(eligibleForVl)}
                 />
             </Col>
             <Col>
                 <DataCard
-                    title="VIRAL SUPPRESSION"
-                    subtitle={roundNumber(virallySuppressedPercent) + "%"}
-                    data={formatNumber(virallySuppressed)}
+                    title="VALID VIRAL LOAD"
+                    subtitle={roundNumber(hasCurrentVlPercent) + "%"}
+                    data={formatNumber(hasCurrentVl)}
                 />
             </Col>
-        </Row>*/}
-        </span>
+        </Row>
     );
 };
 

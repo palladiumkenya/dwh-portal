@@ -63,19 +63,25 @@ export const getViralLoadOverallUptakeSuppressionByCounty = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        const counties = _.chain(list).map(l => l.county.toUpperCase()).uniq().value();
-        const data = [];
-        for(let i = 0; i < counties.length; i++) {
-            data[i] = 0;
-        }
-        for(let i = 0; i < list.length; i++) {
-            let index = counties.indexOf(list[i].county.toUpperCase());
-            if (index === -1) {
-                continue;
-            }
-            data[index] = data[index] + parseInt(list[i].suppressed, 10);
-        }
-        return { counties, data };
+        const data = _.chain(list)
+            .filter(l => l.county)
+            .map(l => ({ ...l, county: l.county.toUpperCase() }))
+            .groupBy('county')
+            .map((objs, key) => ({
+                'county': key,
+                'suppressed': _.sumBy(objs, 'suppressed') > 0 ? _.sumBy(objs, 'suppressed') : 0,
+                'suppression': _.sumBy(objs, 'vlDone') > 0 ? Number(((_.sumBy(objs, 'suppressed')/_.sumBy(objs, 'vlDone'))*100).toFixed(0)) :0
+            }))
+            .orderBy(['suppression', 'county'], ['desc', 'asc'])
+            .value();
+        return {
+            counties: data.map(l => l.county),
+            data: data.map(l => ({
+                y: l.suppression,
+                absoluteY: l.suppressed.toLocaleString('en'),
+                text: l.suppression + '%',
+            }))
+        };
     }
 );
 
@@ -83,21 +89,24 @@ export const getViralLoadOverallUptakeSuppressionByPartner = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        const partners = _.chain(list).filter(l => l.partner).map(l => l.partner.toUpperCase()).uniq().value();
-        const data = [];
-        for(let i = 0; i < partners.length; i++) {
-            data[i] = 0;
-        }
-        for(let i = 0; i < list.length; i++) {
-            if (!list[i].partner) {
-                continue;
-            }
-            let index = partners.indexOf(list[i].partner.toUpperCase());
-            if (index === -1) {
-                continue;
-            }
-            data[index] = data[index] + parseInt(list[i].suppressed, 10);
-        }
-        return { partners, data };
+        const data = _.chain(list)
+            .filter(l => l.partner)
+            .map(l => ({ ...l, partner: l.partner.toUpperCase() }))
+            .groupBy('partner')
+            .map((objs, key) => ({
+                'partner': key,
+                'suppressed': _.sumBy(objs, 'suppressed') > 0 ? _.sumBy(objs, 'suppressed') : 0,
+                'suppression': _.sumBy(objs, 'vlDone') > 0 ? Number(((_.sumBy(objs, 'suppressed')/_.sumBy(objs, 'vlDone'))*100).toFixed(0)) :0
+            }))
+            .orderBy(['suppression', 'partner'], ['desc', 'asc'])
+            .value();
+        return {
+            partners: data.map(l => l.partner),
+            data: data.map(l => ({
+                y: l.suppression,
+                absoluteY: l.suppressed.toLocaleString('en'),
+                text: l.suppression + '%',
+            }))
+        };
     }
 );

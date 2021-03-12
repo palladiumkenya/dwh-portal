@@ -35,7 +35,8 @@ const NewOnArt = () => {
             <SectionHeader title={branding.title}/>
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
-            </VisibilitySensor><p></p>
+            </VisibilitySensor>
+            <NewOnArtOverview />
             <Card>
                 <CardHeader>Indicator Definition</CardHeader>
                 <CardBody>
@@ -46,7 +47,6 @@ const NewOnArt = () => {
                     </ul>
                 </CardBody>
             </Card>
-            <NewOnArtOverview /><p></p>
             <Row>
                 <Col>
                     <NewOnArtBySex />

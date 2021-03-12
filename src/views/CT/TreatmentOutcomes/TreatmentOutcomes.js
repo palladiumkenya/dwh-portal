@@ -34,6 +34,7 @@ const TreatmentOutcomes = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
+            <TreatmentOutcomesOverview />
             <Card>
                 <CardHeader>Indicator Definition</CardHeader>
                 <CardBody>
@@ -50,7 +51,6 @@ const TreatmentOutcomes = () => {
                     </ul>
                 </CardBody>
             </Card>
-            <TreatmentOutcomesOverview />
             <Row>
                 <Col>
                     <TreatmentOutcomesBySex />

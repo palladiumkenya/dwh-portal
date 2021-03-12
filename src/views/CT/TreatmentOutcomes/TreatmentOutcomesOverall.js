@@ -47,7 +47,7 @@ const TreatmentOutcomesOverall = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        OVERALL ART TREATMENT OUTCOMES
+                        OVERALL ART TREATMENT OUTCOMES*
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -55,6 +55,9 @@ const TreatmentOutcomesOverall = () => {
                         </div>
                     </CardBody>
                 </Card>
+            </div>
+            <div className="col-12">
+                *This indicator is computed and displayed for the last completed month.
             </div>
         </div>
     );

@@ -43,19 +43,19 @@ const AdverseEventsCauses = () => {
                             color: "#1AB394"
                         },
                         {
-                            name: 'NON-ARVs',
-                            y: adverseEventsCauses.non_arv,
-                            color: "#2F4050"
-                        },
-                        {
                             name: 'ARV + OTHER DRUGS',
                             y: adverseEventsCauses.arvAndOthers,
-                            color: "#1f77b4"
+                            color: "#F7ED00"
+                        },
+                        {
+                            name: 'NON-ARVs',
+                            y: adverseEventsCauses.non_arv,
+                            color: "#E15759"
                         },
                         {
                             name: 'UNSPECIFIED CATEGORY',
                             y: adverseEventsCauses.unspecified,
-                            color: "#D4FF78"
+                            color: "#2F4050"
                         }]
                 }
             ]
@@ -68,7 +68,7 @@ const AdverseEventsCauses = () => {
 
     return (
         <Card className="trends-card">
-            <CardHeader className="trends-header">
+            <CardHeader className="trends-header" style={{textTransform: 'none'}}>
                 REPORTED CAUSES OF AEs
             </CardHeader>
             <CardBody className="trends-body">
