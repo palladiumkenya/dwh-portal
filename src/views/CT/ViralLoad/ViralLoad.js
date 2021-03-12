@@ -69,20 +69,16 @@ const ViralLoad = () => {
             <TabContent activeTab={activeTab}>
                 <TabPane tabId="uptake">
                     <SectionHeader title={branding.title + " UPTAKE"}/>
+                    <ViralLoadOverview />
                     <Card>
                         <CardHeader>Indicator Definition</CardHeader>
                         <CardBody>
                             <ul>
-                                <li>
-                                    Eligible for Viral Load => Patients who are current on treatment for more than 6 months
-                                </li>
-                                <li>
-                                    Valid Viral Load => Patients who are current on treatment for more than 6 months and have a viral load result whose sample was taken within the last 14 months of the latest visit.
-                                </li>
+                                <li>Eligible for Viral Load =&gt; Patients who are current on treatment for more than 6 months</li>
+                                <li>Valid Viral Load =&gt; Patients who are current on treatment for more than 6 months and have a viral load result whose sample was taken within the last 14 months of the latest visit.</li>
                             </ul>
                         </CardBody>
                     </Card>
-                    <ViralLoadOverview />
                     <Row>
                         <Col>
                             <ViralLoadOverallUptakeAndSuppressionBySex />
@@ -112,23 +108,17 @@ const ViralLoad = () => {
                 </TabPane>
                 <TabPane tabId="outcomes">
                     <SectionHeader title={branding.title + " OUTCOMES"}/>
+                    <ViralLoadOutcomesOverview />
                     <Card>
                         <CardHeader>Indicator Definition</CardHeader>
                         <CardBody>
                             <ul>
-                                <li>
-                                    Virally suppressed => Patients who are current on treatment with valid viral load results of &#60;400 copies/ml
-                                </li>
-                                <li>
-                                    Low Level Viremia => Patients who are current on treatment with valid viral load results of 400 – 999 copies/ml
-                                </li>
-                                <li>
-                                    High Viral Load => Patients who are current on treatment with valid viral load results of ≥1,000 copies/ml
-                                </li>
+                                <li>Virally suppressed =&gt; Patients who are current on treatment with valid viral load results of &#60;400 copies/ml</li>
+                                <li>Low Level Viremia =&gt; Patients who are current on treatment with valid viral load results of 400 – 999 copies/ml</li>
+                                <li>High Viral Load =&gt; Patients who are current on treatment with valid viral load results of ≥1,000 copies/ml</li>
                             </ul>
                         </CardBody>
                     </Card>
-                    <ViralLoadOutcomesOverview />
                     <Row>
                         <Col sm={4}>
                             <ViralLoadOutcomesOverall />

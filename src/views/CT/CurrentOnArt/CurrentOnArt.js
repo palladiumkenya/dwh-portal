@@ -31,13 +31,12 @@ const CurrentOnART = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
+            <CurrentOnArtOverview />
             <Card>
                 <CardHeader>Indicator Definition</CardHeader>
                 <CardBody>
                     <ul>
-                        <li>
-                            Current on ART =&gt; Number of adults and children currently receiving ART including those who have missed their appointment and 30 days have not passed since the last missed appointment.
-                        </li>
+                        <li>Current on ART =&gt; Number of adults and children currently receiving ART including those who have missed their appointment and 30 days have not passed since the last missed appointment.</li>
                         <em>Indicator notes:</em>
                         <li>This indicator is computed and displayed for the last completed month.</li>
                         <li>Patients who have a visit date but do not have a next appointment date have 30 days added to their visit date to impute the expected appointment date.</li>
@@ -45,7 +44,6 @@ const CurrentOnART = () => {
                     </ul>
                 </CardBody>
             </Card>
-            <CurrentOnArtOverview /><p></p>
             <Row>
                 <Col>
                     <CurrentOnArtBySex />
