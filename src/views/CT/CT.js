@@ -73,6 +73,8 @@ import { loadViralLoadSuppressionByAge } from '../../actions/CT/ViralLoad/viralL
 import { loadViralLoadSuppressionByYear } from '../../actions/CT/ViralLoad/viralLoadSuppressionByYearActions';
 import { loadViralLoadSuppressionByRegimen } from '../../actions/CT/ViralLoad/viralLoadSuppressionByRegimenActions';
 import { loadViralLoadOverallUptakeSuppressionByFacility } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeSuppressionByFacilityActions';
+import { loadViralLoadSuppressionByYearAndSuppressionCategory } from '../../actions/CT/ViralLoad/viralLoadSuppressionByYearAndSuppressionCategoryActions';
+
 
 import { loadTreatmentOutcomesBySex } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesBySexActions';
 import { loadTreatmentOutcomesByAge } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByAgeActions';
@@ -84,7 +86,6 @@ import { loadTwelveMonthRetention } from '../../actions/CT/TreatmentOutcomes/twe
 import { loadTwentyFourMonthRetention } from '../../actions/CT/TreatmentOutcomes/twentyFourMonthRetentionActions';
 
 import { CT_TABS, PAGES } from "../../constants";
-
 const CT = () => {
     const dispatch = useDispatch();
     const ctTab = useSelector(state => state.ui.ctTab);
@@ -194,7 +195,7 @@ const CT = () => {
                 dispatch(loadViralLoadSuppressionByAge());
                 dispatch(loadViralLoadSuppressionByYear());
                 dispatch(loadViralLoadSuppressionByRegimen());
-
+                // dispatch(loadViralLoadSuppressionByYearAndSuppressionCategory());
                 dispatch(loadViralLoadOverallUptakeSuppressionByFacility());
                 break;
             case 'tOut':

@@ -70,6 +70,8 @@ import viralLoadSuppressionByAge from "./CT/ViralLoad/viralLoadSuppressionByAge"
 import viralLoadSuppressionByYear from "./CT/ViralLoad/viralLoadSuppressionByYear";
 import viralLoadSuppressionByRegimen from "./CT/ViralLoad/viralLoadSuppressionByRegimen";
 import viralLoadOverallUptakeSuppressionByFacility from "./CT/ViralLoad/viralLoadOverallUptakeSuppressionByFacility";
+import viralLoadSuppressionByYearAndSuppressionCategory
+    from './CT/ViralLoad/viralLoadSuppressionByYearAndSuppressionCategory';
 
 import treatmentOutcomesBySex from "./CT/TreatmentOutcomes/treatmentOutcomesBySex";
 import treatmentOutcomesByAge from "./CT/TreatmentOutcomes/treatmentOutcomesByAge";
@@ -80,6 +82,7 @@ import sixMonthRetention from "./CT/TreatmentOutcomes/sixMonthRetention";
 import twelveMonthRetention from "./CT/TreatmentOutcomes/twelveMonthRetention";
 import twentyFourMonthRetention from "./CT/TreatmentOutcomes/twentyFourMonthRetention";
 import dsdMmdUptakeOverallBySex from './CT/Dsd/dsdMmdUptakeOverallBySex';
+
 
 export default combineReducers({
     auth: authReducer,
@@ -154,6 +157,7 @@ export default combineReducers({
     viralLoadSuppressionByYear,
     viralLoadSuppressionByRegimen,
     viralLoadOverallUptakeSuppressionByFacility,
+    viralLoadSuppressionByYearAndSuppressionCategory,
 
     treatmentOutcomesBySex,
     treatmentOutcomesByAge,
