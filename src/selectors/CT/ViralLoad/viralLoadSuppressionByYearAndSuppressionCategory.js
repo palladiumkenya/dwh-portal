@@ -8,11 +8,21 @@ export const getViralLoadSuppressionByYearAndSuppressionCategory = createSelecto
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        console.log(list);
-        const retentionCategories = ['LLV', 'SUPPRESSED', 'HVL'];
+        const retentionCategories = ['HVL', 'LLV', 'SUPPRESSED'];
         const yearCategories = [2011,2012,2013,2014,2015,2016,2017,2018,2019,2020, 2021];
         let data = [];
-
+        for (const retentionCategory of retentionCategories) {
+                const categoryData = [];
+                for (let i = 0; i < yearCategories.length; i++) {
+                        const filteredValues = list.filter(obj => obj.last12MVLResult === retentionCategory && obj.year === yearCategories[i]);
+                        if (filteredValues.length > 0) {
+                                categoryData.push(filteredValues[0].totalSuppressed);
+                        } else {
+                                categoryData.push(0);
+                        }
+                }
+                data.push(categoryData);
+        }
         return { yearCategories, retentionCategories, data };
     }
 );

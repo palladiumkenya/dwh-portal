@@ -195,7 +195,7 @@ const CT = () => {
                 dispatch(loadViralLoadSuppressionByAge());
                 dispatch(loadViralLoadSuppressionByYear());
                 dispatch(loadViralLoadSuppressionByRegimen());
-                // dispatch(loadViralLoadSuppressionByYearAndSuppressionCategory());
+                dispatch(loadViralLoadSuppressionByYearAndSuppressionCategory());
                 dispatch(loadViralLoadOverallUptakeSuppressionByFacility());
                 break;
             case 'tOut':
