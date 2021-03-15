@@ -36,6 +36,14 @@ export const getPoorAdherence = createSelector(
     }
 );
 
+export const getPregnantAndBreastFeeding = createSelector(
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        return list.latestPregnancy ? list.latestPregnancy : 0;
+    }
+);
+
 export const getHighVl = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
