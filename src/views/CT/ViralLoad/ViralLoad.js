@@ -1,45 +1,34 @@
-import React, { useState } from 'react';
+import { Col, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 import { useDispatch, useSelector } from 'react-redux';
-import {
-    Card,
-    CardBody,
-    CardHeader,
-    Col,
-    Nav,
-    NavItem,
-    NavLink,
-    Row,
-    TabContent,
-    TabPane
-} from 'reactstrap';
-import VisibilitySensor from 'react-visibility-sensor';
-import UniversalFilter from '../../Shared/UniversalFilter';
-import SectionHeader from '../../Shared/SectionHeader';
-import SectionFooter from '../../Shared/SectionFooter';
-import ViralLoadOverview from './ViralLoadOverview';
-import ViralLoadOverallUptakeAndSuppressionBySex from './ViralLoadOverallUptakeAndSuppressionBySex';
-import MedianTimeTo1stVlByYear from './MedianTimeTo1stVlByYear';
+import classnames from 'classnames';
 import MedianTimeTo1stVlByCounty from './MedianTimeTo1stVlByCounty';
 import MedianTimeTo1stVlByPartner from './MedianTimeTo1stVlByPartner';
-import ViralLoadUptakeBySex from './ViralLoadUptakeBySex';
+import MedianTimeTo1stVlByYear from './MedianTimeTo1stVlByYear';
+import React, { useState } from 'react';
+import SectionFooter from '../../Shared/SectionFooter';
+import SectionHeader from '../../Shared/SectionHeader';
+import UniversalFilter from '../../Shared/UniversalFilter';
+import ViralLoadOutcomesBySex from './ViralLoadOutcomesBySex';
+import ViralLoadOutcomesIndicatorDefinition from './ViralLoadOutcomesIndicatorDefinition';
+import ViralLoadOutcomesOverall from './ViralLoadOutcomesOverall';
+import ViralLoadOutcomesOverview from './ViralLoadOutcomesOverview';
+import ViralLoadOverallUptakeAndSuppressionBySex from './ViralLoadOverallUptakeAndSuppressionBySex';
+import ViralLoadOverview from './ViralLoadOverview';
+import ViralLoadSuppressionByAge from './ViralLoadSuppressionByAge';
+import ViralLoadSuppressionByCounty from './ViralLoadSuppressionByCounty';
+import ViralLoadSuppressionByPartner from './ViralLoadSuppressionByPartner';
+import ViralLoadSuppressionByRegimen from './ViralLoadSuppressionByRegimen';
+import ViralLoadSuppressionByYear from './ViralLoadSuppressionByYear';
+import ViralLoadSuppressionByYear12Month from './ViralLoadSuppressionByYear12Month';
+import ViralLoadSuppressionByYear24Month from './ViralLoadSuppressionByYear24Month';
+import ViralLoadSuppressionByYear6Month from './ViralLoadSuppressionByYear6Month';
 import ViralLoadUptakeByAge from './ViralLoadUptakeByAge';
 import ViralLoadUptakeByCounty from './ViralLoadUptakeByCounty';
 import ViralLoadUptakeByPartner from './ViralLoadUptakeByPartner';
-import ViralLoadOutcomesOverall from './ViralLoadOutcomesOverall';
-import ViralLoadOutcomesBySex from './ViralLoadOutcomesBySex';
-import ViralLoadSuppressionByAge from './ViralLoadSuppressionByAge';
-import ViralLoadSuppressionByRegimen from './ViralLoadSuppressionByRegimen';
-import ViralLoadSuppressionByYear from './ViralLoadSuppressionByYear';
-import ViralLoadSuppressionByCounty from './ViralLoadSuppressionByCounty';
-import ViralLoadSuppressionByPartner from './ViralLoadSuppressionByPartner';
-import ViralLoadSuppressionByYear6Month from './ViralLoadSuppressionByYear6Month';
-import ViralLoadSuppressionByYear12Month from './ViralLoadSuppressionByYear12Month';
-import ViralLoadSuppressionByYear24Month from './ViralLoadSuppressionByYear24Month';
-import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
-import classnames from 'classnames';
-import ViralLoadOutcomesOverview from './ViralLoadOutcomesOverview';
-import ViralLoadOutcomesIndicatorDefinition from './ViralLoadOutcomesIndicatorDefinition';
+import ViralLoadUptakeBySex from './ViralLoadUptakeBySex';
 import ViralLoadUptakeIndicatorDefinition from './ViralLoadUptakeIndicatorDefinition';
+import VisibilitySensor from 'react-visibility-sensor';
 
 const ViralLoad = () => {
     const branding = { title: "VIRAL LOAD", description: "OVERVIEW", overview: "Viral Load Monitoring" };
