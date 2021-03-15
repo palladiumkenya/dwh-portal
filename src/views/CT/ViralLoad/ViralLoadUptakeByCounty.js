@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
@@ -6,27 +6,18 @@ import HighchartsReact from "highcharts-react-official";
 import * as viralLoadUptakeByCountySelectors from '../../../selectors/CT/ViralLoad/viralLoadUptakeByCounty';
 
 const ViralLoadUptakeByCounty = () => {
-    const [viralLoadUptakeByCounty, setViralLoadUptakeByCounty] = useState({});
     const viralLoadUptakeByCountyData = useSelector(viralLoadUptakeByCountySelectors.getViralLoadUptakeByCounty);
     const counties = viralLoadUptakeByCountyData.data.map(function(d) { return d['c']; });
-
-    const loadViralLoadUptakeByCounty = useCallback(async () => {
-        setViralLoadUptakeByCounty({
-            title: { text: '' },
-            xAxis: [{ categories: counties, title: { text: 'County' }, crosshair: true }],
-            yAxis: [{ title: { text: 'Percentage of Patients' }, labels: { format: '{value} %' }}],
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none', format: '{y}%' } } },
-            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
-            series: [
-                { name: 'Percentage of Patients', data: viralLoadUptakeByCountyData.data, type: 'column', color: "#485969", tooltip: { valueSuffix: ' % ({point.absoluteY})'} },
-            ]
-        });
-    }, [viralLoadUptakeByCountyData]);
-
-    useEffect(() => {
-        loadViralLoadUptakeByCounty();
-    }, [loadViralLoadUptakeByCounty]);
-
+    const viralLoadUptakeByCounty = {
+        title: { text: '' },
+        xAxis: [{ categories: counties, title: { text: 'County' }, crosshair: true }],
+        yAxis: [{ title: { text: 'Percentage of Patients' }, labels: { format: '{value} %' }}],
+        plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none', format: '{y}%' } } },
+        legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+        series: [
+            { name: 'Percentage of Patients', data: viralLoadUptakeByCountyData.data, type: 'column', color: "#485969", tooltip: { valueSuffix: ' % ({point.absoluteY})'} },
+        ]
+    };
     return (
         <div className="row">
             <div className="col-12">

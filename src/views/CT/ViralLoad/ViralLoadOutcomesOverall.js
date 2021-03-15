@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
@@ -6,41 +6,32 @@ import HighchartsReact from "highcharts-react-official";
 import * as viralLoadOutcomesBySexSelectors from '../../../selectors/CT/ViralLoad/viralLoadOutcomesBySex';
 
 const ViralLoadOutcomesOverall = () => {
-    const [viralLoadOutcomesOverall, setViralLoadOutcomesOverall] = useState({});
     const viralLoadOutcomesOverallData = useSelector(viralLoadOutcomesBySexSelectors.getViralLoadOutcomesOverall);
-
-    const loadViralLoadOutcomesOverall = useCallback(async () => {
-        setViralLoadOutcomesOverall({
-            chart: { type: 'pie' },
-            title: { text: 'OVERALL', align: 'center', verticalAlign: 'middle'},
-            subtitle: { text: '' },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                    },
-                    innerSize: '75%',
-                }
-            },
-            series: [{
-                name:"Overall VL Outcomes",
-                colorByPoint: true,
-                data: [
-                    { name: 'SUPPRESSED', y: viralLoadOutcomesOverallData.data[0], color: "#485969" },
-                    { name: 'HVL', y: viralLoadOutcomesOverallData.data[2], color: "#1AB394" },
-                    { name: 'LLV', y: viralLoadOutcomesOverallData.data[1], color: "#BBE65F" },
-                ]
-            }]
-        });
-    }, [viralLoadOutcomesOverallData]);
-
-    useEffect(() => {
-        loadViralLoadOutcomesOverall();
-    }, [loadViralLoadOutcomesOverall]);
-
+    const viralLoadOutcomesOverall = {
+        chart: { type: 'pie' },
+        title: { text: 'OVERALL', align: 'center', verticalAlign: 'middle'},
+        subtitle: { text: '' },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                },
+                innerSize: '75%',
+            }
+        },
+        series: [{
+            name:"Overall VL Outcomes",
+            colorByPoint: true,
+            data: [
+                { name: 'SUPPRESSED', y: viralLoadOutcomesOverallData.data[0], color: "#485969" },
+                { name: 'HVL', y: viralLoadOutcomesOverallData.data[2], color: "#1AB394" },
+                { name: 'LLV', y: viralLoadOutcomesOverallData.data[1], color: "#BBE65F" },
+            ]
+        }]
+    };
     return (
         <div className="row">
             <div className="col-12">

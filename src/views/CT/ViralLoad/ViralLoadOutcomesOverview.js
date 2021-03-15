@@ -14,7 +14,6 @@ const ViralLoadOutcomesOverview = () => {
     const lowLevelViremiaPercent = currentOnArt ? ((lowLevelViremia/currentOnArt)*100) : 0;
     const highViralLoad = useSelector(currentOnArtOverviewSelectors.getHighViralLoad);
     const highViralLoadPercent = currentOnArt ? ((highViralLoad/currentOnArt)*100) : 0;
-
     return (
         <Row>
             <Col>

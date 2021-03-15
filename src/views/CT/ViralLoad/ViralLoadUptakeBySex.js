@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
@@ -6,28 +6,19 @@ import HighchartsReact from "highcharts-react-official";
 import * as viralLoadUptakeBySexSelectors from '../../../selectors/CT/ViralLoad/viralLoadUptakeBySex';
 
 const ViralLoadUptakeBySex = () => {
-    const [viralLoadUptakeBySex, setViralLoadUptakeBySex] = useState({});
     const viralLoadUptakeBySexData = useSelector(viralLoadUptakeBySexSelectors.getViralLoadUptakeBySex);
-
-    const loadViralLoadUptakeBySex = useCallback(async () => {
-        setViralLoadUptakeBySex({
-            title: { text: '' },
-            plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.text; } } }},
-            xAxis: [{ categories: viralLoadUptakeBySexData.sexCategories, crosshair: true }],
-            yAxis: [
-                { title: { text: 'Percentage of Patients' }, labels: { format: '{value} %' }}
-            ],
-            legend: { enabled: false },
-            series: [
-                { name: 'VL Uptake', data: viralLoadUptakeBySexData.data, type: 'column', tooltip: { valueSuffix: ' % ({point.absoluteY})' } },
-            ]
-        });
-    }, [viralLoadUptakeBySexData]);
-
-    useEffect(() => {
-        loadViralLoadUptakeBySex();
-    }, [loadViralLoadUptakeBySex]);
-
+    const viralLoadUptakeBySex = {
+        title: { text: '' },
+        plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.text; } } }},
+        xAxis: [{ categories: viralLoadUptakeBySexData.sexCategories, crosshair: true }],
+        yAxis: [
+            { title: { text: 'Percentage of Patients' }, labels: { format: '{value} %' }}
+        ],
+        legend: { enabled: false },
+        series: [
+            { name: 'VL Uptake', data: viralLoadUptakeBySexData.data, type: 'column', tooltip: { valueSuffix: ' % ({point.absoluteY})' } },
+        ]
+    };
     return (
         <div className="row">
             <div className="col-12">

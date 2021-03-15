@@ -11,7 +11,6 @@ const ViralLoadOverview = () => {
     const eligibleForVlPercent = currentOnArt ? ((eligibleForVl/currentOnArt)*100) : 0;
     const hasCurrentVl = useSelector(currentOnArtOverviewSelectors.getHasCurrentVl);
     const hasCurrentVlPercent = currentOnArt ? ((hasCurrentVl/eligibleForVl)*100) : 0;
-
     return (
         <Row>
             <Col>

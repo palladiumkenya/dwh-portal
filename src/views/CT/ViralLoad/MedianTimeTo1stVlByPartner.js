@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
@@ -6,26 +6,17 @@ import HighchartsReact from "highcharts-react-official";
 import * as medianTimeTo1stVlByPartnerSelectors from '../../../selectors/CT/ViralLoad/medianTimeTo1stVlByPartner';
 
 const MedianTimeTo1stVlByPartner = () => {
-    const [medianTimeTo1stVlByPartner, setMedianTimeTo1stVlByPartner] = useState({});
     const medianTimeTo1stVlByPartnerData = useSelector(medianTimeTo1stVlByPartnerSelectors.getMedianTimeTo1stVlByPartner);
-
-    const loadMedianTimeTo1stVlByPartner = useCallback(async () => {
-        setMedianTimeTo1stVlByPartner({
-            title: { text: '' },
-            xAxis: [{ categories: medianTimeTo1stVlByPartnerData.partners, crosshair: true, title: { text: 'Partner' } }],
-            yAxis: [{ title: { text: 'Time (Days)' }}],
-            tooltip: { shared: true },
-            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
-            series: [
-                { name: 'Time (Days)', data: medianTimeTo1stVlByPartnerData.times, type: 'spline', color: "#E06F07" },
-            ]
-        });
-    }, [medianTimeTo1stVlByPartnerData]);
-
-    useEffect(() => {
-        loadMedianTimeTo1stVlByPartner();
-    }, [loadMedianTimeTo1stVlByPartner]);
-
+    const medianTimeTo1stVlByPartner = {
+        title: { text: '' },
+        xAxis: [{ categories: medianTimeTo1stVlByPartnerData.partners, crosshair: true, title: { text: 'Partner' } }],
+        yAxis: [{ title: { text: 'Time (Days)' }}],
+        tooltip: { shared: true },
+        legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+        series: [
+            { name: 'Time (Days)', data: medianTimeTo1stVlByPartnerData.times, type: 'spline', color: "#E06F07" },
+        ]
+    };
     return (
         <div className="row">
             <div className="col-12">
