@@ -43,6 +43,7 @@ import adverseEventsSeverityGrading from "./CT/AdverseEvents/adverseEventsSeveri
 import adverseEventsSeverityActions from "./CT/AdverseEvents/adverseEventsSeverityActions";
 import adverseEventsReportedWithSeverityLevels from "./CT/AdverseEvents/adverseEventsReportedWithSeverityLevels";
 import adverseEventsActionsByDrugs from "./CT/AdverseEvents/adverseEventsActionsByDrugs";
+import adverseEventsActionsByDrugsNew from "./CT/AdverseEvents/adverseEventsActionsByDrugsNew";
 
 import dsdStabilityStatusByAgeSex from "./CT/Dsd/dsdStabilityStatusByAgeSex";
 import dsdStabilityStatusByCounty from "./CT/Dsd/dsdStabilityStatusByCounty";
@@ -130,6 +131,7 @@ export default combineReducers({
     adverseEventsSeverityActions,
     adverseEventsReportedWithSeverityLevels,
     adverseEventsActionsByDrugs,
+    adverseEventsActionsByDrugsNew,
 
     dsdStabilityStatusByAgeSex,
     dsdStabilityStatusByCounty,

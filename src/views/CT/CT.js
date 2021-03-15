@@ -45,6 +45,7 @@ import { loadAdverseEventsSeverityGrading } from '../../actions/CT/AdverseEvents
 import { loadAdverseEventsSeverityActions } from '../../actions/CT/AdverseEvents/adverseEventsSeverityActionsActions';
 import { loadAdverseEventsReportedWithSeverityLevels } from '../../actions/CT/AdverseEvents/adverseEventsReportedWithSeverityLevelsActions';
 import { loadAdverseEventsActionsByDrugs }  from '../../actions/CT/AdverseEvents/adverseEventsActionsByDrugsActions';
+import { loadAdverseEventsActionsByDrugsNew }  from '../../actions/CT/AdverseEvents/adverseEventsActionsByDrugsNewActions';
 
 import { loadDsdStabilityStatusByAgeSex } from '../../actions/CT/Dsd/dsdStabilityStatusByAgeSexActions';
 import { loadDsdStabilityStatusByCounty } from '../../actions/CT/Dsd/dsdStabilityStatusByCountyActions';
@@ -162,6 +163,7 @@ const CT = () => {
                 dispatch(loadAdverseEventsSeverityActions());
                 dispatch(loadAdverseEventsReportedWithSeverityLevels());
                 dispatch(loadAdverseEventsActionsByDrugs());
+                dispatch(loadAdverseEventsActionsByDrugsNew());
                 break;
             case 'dsd':
                 dispatch(loadCurrentOnArtOverview());
