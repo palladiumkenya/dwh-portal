@@ -75,8 +75,8 @@ import { loadViralLoadSuppressionByRegimen } from '../../actions/CT/ViralLoad/vi
 import { loadViralLoadOverallUptakeSuppressionByFacility } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeSuppressionByFacilityActions';
 import { loadViralLoadSuppressionByYearAndSuppressionCategory } from '../../actions/CT/ViralLoad/viralLoadSuppressionByYearAndSuppressionCategoryActions';
 
-
 import { loadTreatmentOutcomesBySex } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesBySexActions';
+import { loadTreatmentOutcomesByPopulationType } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByPopulationTypeActions';
 import { loadTreatmentOutcomesByAge } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByAgeActions';
 import { loadTreatmentOutcomesByYear } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByYearActions';
 import { loadTreatmentOutcomesByFacility } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByFacilityActions';
@@ -202,6 +202,7 @@ const CT = () => {
                 dispatch(loadNewOnArtOverview());
                 dispatch(loadNewOnArtTrends());
                 dispatch(loadTreatmentOutcomesBySex());
+                dispatch(loadTreatmentOutcomesByPopulationType());
                 dispatch(loadTreatmentOutcomesByAge());
                 dispatch(loadTreatmentOutcomesByYear());
                 dispatch(loadTreatmentOutcomesByFacility());
