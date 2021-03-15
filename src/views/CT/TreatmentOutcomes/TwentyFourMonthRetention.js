@@ -53,7 +53,7 @@ const TwentyFourMonthRetention = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        24 MONTH RETENTION BY YEAR OF ART START
+                        24 MONTH RETENTION BY YEAR OF ART START*
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -61,6 +61,9 @@ const TwentyFourMonthRetention = () => {
                         </div>
                     </CardBody>
                 </Card>
+            </div>
+            <div className="col-12">
+                *This indicator is computed and displayed for the last completed month.
             </div>
         </div>
     );
