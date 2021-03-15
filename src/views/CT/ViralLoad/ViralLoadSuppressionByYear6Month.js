@@ -13,7 +13,7 @@ const ViralLoadSuppressionByYear6Month = () => {
         setViralLoadSuppressionByYear6Month({
             title: { text: '' },
             xAxis: [{ categories: viralLoadSuppressionByYearData.yearCategories, crosshair: true, title: { text: 'Year of Start' } }],
-            yAxis: [{ title: { text: 'Number of Patients' }}],
+            yAxis: [{ title: { text: 'Number of Patients' }, labels: { format: '{value} %' }}],
             plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
