@@ -3,26 +3,27 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import * as adverseEventsActionsByDrugsSelectors from '../../../selectors/CT/AdverseEvents/adverseEventsActionsByDrugs';
+import * as adverseEventsActionsByDrugsNewSelectors from '../../../selectors/CT/AdverseEvents/adverseEventsActionsByDrugsNew';
 
 const AdverseEventsActionsByDrugs = () => {
     const [actionsByDrugs, setActionsByDrugs] = useState({});
-    const adverseEventsActionsByDrugs = useSelector(adverseEventsActionsByDrugsSelectors.getAdverseEventsActionsByDrugs);
+    const adverseEventsActionsByDrugs = useSelector(adverseEventsActionsByDrugsNewSelectors.getAdverseEventsActionsByDrugsNew);
 
     const loadActionsByDrugs = useCallback(async () => {
+        const series = [];
+        for(let i = 0; i < adverseEventsActionsByDrugs.actions.length; i++) {
+            series.push(
+                { data: adverseEventsActionsByDrugs.data[i], name: adverseEventsActionsByDrugs.actions[i], type: 'column'}
+            );
+        }
         setActionsByDrugs({
             title: { text: '' },
-            xAxis: [{ categories: adverseEventsActionsByDrugs.categories, crosshair: true }],
+            xAxis: [{ categories: adverseEventsActionsByDrugs.drugs, crosshair: true }],
             yAxis: [{ title: { text: 'Number of Patients' }, stackLabels: { enabled: true, style: { fontWeight: 'bold', color: "#808080" }}}],
             legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             tooltip: { shared: true, headerFormat: '<b>{point.x}</b><br/>', pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}' },
             plotOptions: { column: { stacking: 'normal'}},
-            series: [
-                { data: adverseEventsActionsByDrugs.undocumentedVals, name: 'UNDOCUMENTED', type: 'column', color: '#2F4050' },
-                { data: adverseEventsActionsByDrugs.severeVals, name: 'SEVERE', type: 'column', color: "#E15759" },
-                { data: adverseEventsActionsByDrugs.moderateVals, name: 'MODERATE', type: 'column', color: "#F7ED00" },
-                { data: adverseEventsActionsByDrugs.mildVals, name: 'MILD', type: 'column', color: "#1AB394" },
-            ]
+            series: series
         });
     }, [adverseEventsActionsByDrugs]);
 

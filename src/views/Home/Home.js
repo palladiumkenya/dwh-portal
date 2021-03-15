@@ -95,9 +95,6 @@ const Home = () => {
                 </Col>
             </Row>
             <SectionFooter overview={branding.overview}/>
-            <Row>
-                <Col><b>*Current on ART indicator is computed and displayed for the last completed month.</b><p></p><p></p></Col>
-            </Row>
         </div>
     );
 };

@@ -43,6 +43,7 @@ import adverseEventsSeverityGrading from "./CT/AdverseEvents/adverseEventsSeveri
 import adverseEventsSeverityActions from "./CT/AdverseEvents/adverseEventsSeverityActions";
 import adverseEventsReportedWithSeverityLevels from "./CT/AdverseEvents/adverseEventsReportedWithSeverityLevels";
 import adverseEventsActionsByDrugs from "./CT/AdverseEvents/adverseEventsActionsByDrugs";
+import adverseEventsActionsByDrugsNew from "./CT/AdverseEvents/adverseEventsActionsByDrugsNew";
 
 import dsdStabilityStatusByAgeSex from "./CT/Dsd/dsdStabilityStatusByAgeSex";
 import dsdStabilityStatusByCounty from "./CT/Dsd/dsdStabilityStatusByCounty";
@@ -74,6 +75,7 @@ import viralLoadSuppressionByYearAndSuppressionCategory
     from './CT/ViralLoad/viralLoadSuppressionByYearAndSuppressionCategory';
 
 import treatmentOutcomesBySex from "./CT/TreatmentOutcomes/treatmentOutcomesBySex";
+import treatmentOutcomesByPopulationType from "./CT/TreatmentOutcomes/treatmentOutcomesByPopulationType";
 import treatmentOutcomesByAge from "./CT/TreatmentOutcomes/treatmentOutcomesByAge";
 import treatmentOutcomesByYear from "./CT/TreatmentOutcomes/treatmentOutcomesByYear";
 import treatmentOutcomesByFacility from "./CT/TreatmentOutcomes/treatmentOutcomesByFacility";
@@ -129,6 +131,7 @@ export default combineReducers({
     adverseEventsSeverityActions,
     adverseEventsReportedWithSeverityLevels,
     adverseEventsActionsByDrugs,
+    adverseEventsActionsByDrugsNew,
 
     dsdStabilityStatusByAgeSex,
     dsdStabilityStatusByCounty,
@@ -160,6 +163,7 @@ export default combineReducers({
     viralLoadSuppressionByYearAndSuppressionCategory,
 
     treatmentOutcomesBySex,
+    treatmentOutcomesByPopulationType,
     treatmentOutcomesByAge,
     treatmentOutcomesByYear,
     treatmentOutcomesByFacility,

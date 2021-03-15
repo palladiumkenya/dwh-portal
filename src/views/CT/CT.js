@@ -45,6 +45,7 @@ import { loadAdverseEventsSeverityGrading } from '../../actions/CT/AdverseEvents
 import { loadAdverseEventsSeverityActions } from '../../actions/CT/AdverseEvents/adverseEventsSeverityActionsActions';
 import { loadAdverseEventsReportedWithSeverityLevels } from '../../actions/CT/AdverseEvents/adverseEventsReportedWithSeverityLevelsActions';
 import { loadAdverseEventsActionsByDrugs }  from '../../actions/CT/AdverseEvents/adverseEventsActionsByDrugsActions';
+import { loadAdverseEventsActionsByDrugsNew }  from '../../actions/CT/AdverseEvents/adverseEventsActionsByDrugsNewActions';
 
 import { loadDsdStabilityStatusByAgeSex } from '../../actions/CT/Dsd/dsdStabilityStatusByAgeSexActions';
 import { loadDsdStabilityStatusByCounty } from '../../actions/CT/Dsd/dsdStabilityStatusByCountyActions';
@@ -75,8 +76,8 @@ import { loadViralLoadSuppressionByRegimen } from '../../actions/CT/ViralLoad/vi
 import { loadViralLoadOverallUptakeSuppressionByFacility } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeSuppressionByFacilityActions';
 import { loadViralLoadSuppressionByYearAndSuppressionCategory } from '../../actions/CT/ViralLoad/viralLoadSuppressionByYearAndSuppressionCategoryActions';
 
-
 import { loadTreatmentOutcomesBySex } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesBySexActions';
+import { loadTreatmentOutcomesByPopulationType } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByPopulationTypeActions';
 import { loadTreatmentOutcomesByAge } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByAgeActions';
 import { loadTreatmentOutcomesByYear } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByYearActions';
 import { loadTreatmentOutcomesByFacility } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByFacilityActions';
@@ -162,6 +163,7 @@ const CT = () => {
                 dispatch(loadAdverseEventsSeverityActions());
                 dispatch(loadAdverseEventsReportedWithSeverityLevels());
                 dispatch(loadAdverseEventsActionsByDrugs());
+                dispatch(loadAdverseEventsActionsByDrugsNew());
                 break;
             case 'dsd':
                 dispatch(loadCurrentOnArtOverview());
@@ -202,6 +204,7 @@ const CT = () => {
                 dispatch(loadNewOnArtOverview());
                 dispatch(loadNewOnArtTrends());
                 dispatch(loadTreatmentOutcomesBySex());
+                dispatch(loadTreatmentOutcomesByPopulationType());
                 dispatch(loadTreatmentOutcomesByAge());
                 dispatch(loadTreatmentOutcomesByYear());
                 dispatch(loadTreatmentOutcomesByFacility());
