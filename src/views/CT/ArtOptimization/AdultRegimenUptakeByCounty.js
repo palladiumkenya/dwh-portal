@@ -12,40 +12,73 @@ const AdultRegimenUptakeByCounty = () => {
     const counties = useSelector(selectors.getCounties);
     const newByCounty = useSelector(selectors.getNewByCounty);
 
+    function mapOrder (array, order, key) {
+        array.sort( function (a, b) {
+            let A = a[key], B = b[key];
+
+            if (order.indexOf(A) > order.indexOf(B)) {
+                return 1;
+            } else {
+                return -1;
+            }
+
+        });
+        return array;
+    }
+
     const loadAdultRegimenUptakeByCounty = useCallback(async () => {
         let data = [];
-        let regimens = _.uniq(['TLD', 'TLE'].concat(regimensOriginal));
-        for(let i = 0; i < regimens.length; i++) {
-            data[i] = [];
-            for(let j = 0; j < counties.length; j++) {
-                data[i][j] = 0;
+        let regimens = _.uniq(['Other Regimen', 'TLE', 'TLD'].concat(regimensOriginal));
+        for (const county of counties) {
+            let totalCounty = 0;
+            const filteredValuesCounty = newByCounty.filter(obj => obj.county === county);
+            filteredValuesCounty.map(obj => totalCounty = totalCounty + obj.txCurr);
+            for (const regimen of regimens) {
+                let total = 0;
+                const filteredValues = newByCounty.filter(obj => obj.startRegimen === regimen && obj.county === county);
+                filteredValues.map(obj => total = total + obj.txCurr);
+
+                data.push(
+                    {
+                        regimen: regimen,
+                        county: county,
+                        y: total,
+                        perc: total > 0 && totalCounty > 0 ? ((total/totalCounty)*100) : 0
+                    }
+                );
             }
         }
-        for(let i = 0; i < newByCounty.length; i++) {
-            let regimensIndex = regimens.indexOf(newByCounty[i].startRegimen);
-            let countiesIndex = counties.indexOf(newByCounty[i].county);
-            if(regimensIndex === -1 || countiesIndex === -1) {
-                continue;
-            }
-            data[regimensIndex][countiesIndex] = data[regimensIndex][countiesIndex] + parseInt(newByCounty[i].txCurr);
-        }
+        const tle = data.filter(obj => obj.regimen === "TLE");
+        const tld = data.filter(obj => obj.regimen === "TLD");
+        const otherRegimen = data.filter(obj => obj.regimen === "Other Regimen");
+        tld.sort(function(a, b) {
+            return b.perc - a.perc;
+        });
+        const orderedCounties = tld.map(item => item.county);
+        const orderedTle = mapOrder(tle, orderedCounties, 'county');
+        const orderedOther = mapOrder(otherRegimen, orderedCounties, 'county');
+
         const series = [];
         for(let i = 0; i < regimens.length; i++) {
             let color = '#55FFFF';
+            let chartData = [];
             if (regimens[i] === 'TLD') {
                 color = '#2D73F5';
+                chartData = tld;
             } else if (regimens[i] === 'TLE') {
                 color = '#1AB394';
+                chartData = orderedTle;
             } else {
                 color = '#142459';
+                chartData = orderedOther;
             }
             series.push({
-                name: regimens[i], type: 'column', data: data[i], color: color
+                name: regimens[i], type: 'column', data: chartData, color: color
             });
         }
         setAdultRegimenUptakeByCounty({
             title: { text: '' },
-            xAxis: { categories: counties.map(a => a.toUpperCase()), title: { text: 'COUNTY' }, crosshair: true },
+            xAxis: { categories: orderedCounties, title: { text: 'COUNTY' }, crosshair: true },
             yAxis: { title: { text: 'PERCENT OF PATIENTS' }},
             tooltip: { shared: true },
             plotOptions: {
