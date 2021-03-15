@@ -39,9 +39,9 @@ const DSD = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <DSDOverview />
             <DSDIndicatorDefinition />
             <SectionFooter overview={branding.overview}/>
+            <DSDOverview />
             <Row className={"col-12"}>
                 <Col className={"col-6"}>
                     <DSDCascade />

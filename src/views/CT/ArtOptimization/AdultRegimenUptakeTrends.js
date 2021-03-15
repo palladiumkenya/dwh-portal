@@ -14,7 +14,7 @@ const AdultRegimenUptakeTrends = () => {
 
     const loadAdultRegimenUptakeTrends = useCallback(async () => {
         let data = [];
-        let regimens = _.uniq(['TLD', 'TLE'].concat(regimensOriginal));
+        let regimens = _.uniq(['Other Regimen', 'TLE', 'TLD'].concat(regimensOriginal));
         for(let i = 0; i < regimens.length; i++) {
             data[i] = [];
             for(let j = 0; j < monthYear.length; j++) {

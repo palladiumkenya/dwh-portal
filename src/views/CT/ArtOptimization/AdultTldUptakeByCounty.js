@@ -40,7 +40,8 @@ const AdultTldUptakeByCounty = () => {
                     {
                         y: percentage > 100 ? 100: percentage,
                         absoluteY: totalCountyTld.toLocaleString('en'),
-                        county: county
+                        county: county,
+                        text: (percentage > 100 ? 100: percentage) + '%',
                     }
                 );
             }
@@ -56,6 +57,7 @@ const AdultTldUptakeByCounty = () => {
             yAxis: { title: { text: 'PERCENT OF PATIENTS' }},
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+            plotOptions: { column: { dataLabels: { enabled: true, formatter: function () { return '' + this.point.text; } } }},
             series: [
                 { name: 'TLD UPTAKE', type: 'column', data: valChartData, color: "#485969", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
             ],
