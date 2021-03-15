@@ -83,11 +83,16 @@ const DistributionUnstable = () => {
                             name: categories[4],
                             y: data[4].y,
                             text: ' (' + formatNumber(bmiLessThan18) + ')'
+                        },
+                        {
+                            name: categories[5],
+                            y: data[5].y,
+                            text: ' (' + formatNumber(pregnantAndBreastFeeding) + ')'
                         }
                     ], type: 'column', color: "#485969" },
             ]
         });
-    }, [highVl, onArtLessThan12Months, ageLessThan20Years, poorAdherence, bmiLessThan18]);
+    }, [highVl, onArtLessThan12Months, ageLessThan20Years, poorAdherence, bmiLessThan18, pregnantAndBreastFeeding]);
 
     useEffect(() => {
         loadDistributionUnstable();
