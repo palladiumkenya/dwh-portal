@@ -10,11 +10,13 @@ export const getMedianTimeTo1stVlByYear = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         let years = [];
         let times = [];
+        console.log(list);
+
 
         for(let i = 0; i < list.length; i++) {
             if (list[i].year >= 2011) {
                 years.push(list[i].year);
-                times.push(parseInt(list[i].time, 10));
+                times.push(parseInt(list[i].medianTime, 10));
             }
         }
 
