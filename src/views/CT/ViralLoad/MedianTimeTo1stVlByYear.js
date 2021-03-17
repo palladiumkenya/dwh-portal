@@ -14,12 +14,12 @@ const MedianTimeTo1stVlByYear = () => {
             title: { text: '' },
             xAxis: [{ categories: medianTimeTo1stVlByYearData.years, crosshair: true, title: { text: 'Year of Start' } }],
             yAxis: [
-                { title: { text: 'Time (Days)' } },
+                { title: { text: 'Time (Months)' } },
             ],
             // plotOptions: { spline: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Time (Days)', data: medianTimeTo1stVlByYearData.times, type: 'spline', color: "#E06F07" },
+                { name: 'Time (Months)', data: medianTimeTo1stVlByYearData.times, type: 'spline', color: "#E06F07" },
             ]
         });
     }, [medianTimeTo1stVlByYearData]);

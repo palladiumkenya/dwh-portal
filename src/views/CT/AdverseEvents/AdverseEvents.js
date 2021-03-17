@@ -16,6 +16,15 @@ import AdverseEventsSeverityLevels from './AdverseEventsSeverityLevels';
 import AdverseEventsCauses from './AdverseEventsCauses';
 import AdverseEventsActionsByDrugs from './AdverseEventsActionsByDrugs';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
+import AdverseEventsProportionOfPlHivByTypeOfSuspectedCausativeDrugs
+    from './AdverseEventsProportionOfPlHivByTypeOfSuspectedCausativeDrugs';
+import AdverseEventsProportionOfPlHivWithAeRegimenChanged from './AdverseEventsProportionOfPlHivWithAeRegimenChanged';
+import AdverseEventsProportionOfPlHivWithAeRelatedToArtOrSuspectedArt
+    from './AdverseEventsProportionOfPlHivWithAeRelatedToArtOrSuspectedArt';
+import AdverseEventsProportionOfPlHivWithAeRegimenStopped from './AdverseEventsProportionOfPlHivWithAeRegimenStopped';
+import AdverseEventsProportionOfPlHivWithAeRegimenNotAltered
+    from './AdverseEventsProportionOfPlHivWithAeRegimenNotAltered';
+import AdverseEventsProportionOfPlHivOnArtWithAe from './AdverseEventsProportionOfPlHivOnArtWithAe';
 
 const AdverseEvents = () => {
     const branding = { title: "ADVERSE EVENTS (AEs)", description: "OVERVIEW", overview: "Adverse Events (AEs)" };
@@ -61,6 +70,18 @@ const AdverseEvents = () => {
                         <Col><AdverseEventsCauses/></Col>
                         <Col><AdverseEventsActionsByDrugs/></Col>
                     </Row>
+                    <SectionFooter overview={branding.overview}/>
+                    <AdverseEventsProportionOfPlHivByTypeOfSuspectedCausativeDrugs />
+                    <SectionFooter overview={branding.overview}/>
+                    <AdverseEventsProportionOfPlHivWithAeRelatedToArtOrSuspectedArt />
+                    <SectionFooter overview={branding.overview}/>
+                    <AdverseEventsProportionOfPlHivWithAeRegimenChanged />
+                    <SectionFooter overview={branding.overview}/>
+                    <AdverseEventsProportionOfPlHivWithAeRegimenStopped />
+                    <SectionFooter overview={branding.overview}/>
+                    <AdverseEventsProportionOfPlHivWithAeRegimenNotAltered />
+                    <SectionFooter overview={branding.overview}/>
+                    <AdverseEventsProportionOfPlHivOnArtWithAe />
                     <SectionFooter overview={branding.overview}/>
                 </TabPane>
                 <TabPane tabId="children">

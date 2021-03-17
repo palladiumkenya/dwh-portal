@@ -44,6 +44,8 @@ import adverseEventsSeverityActions from "./CT/AdverseEvents/adverseEventsSeveri
 import adverseEventsReportedWithSeverityLevels from "./CT/AdverseEvents/adverseEventsReportedWithSeverityLevels";
 import adverseEventsActionsByDrugs from "./CT/AdverseEvents/adverseEventsActionsByDrugs";
 import adverseEventsActionsByDrugsNew from "./CT/AdverseEvents/adverseEventsActionsByDrugsNew";
+import adverseEventsProportionOfPlHivWithAeByCausativeDrugs
+    from './CT/AdverseEvents/adverseEventsProportionOfPlHivWithAeByCausativeDrugs';
 
 import dsdStabilityStatusByAgeSex from "./CT/Dsd/dsdStabilityStatusByAgeSex";
 import dsdStabilityStatusByCounty from "./CT/Dsd/dsdStabilityStatusByCounty";
@@ -84,6 +86,9 @@ import sixMonthRetention from "./CT/TreatmentOutcomes/sixMonthRetention";
 import twelveMonthRetention from "./CT/TreatmentOutcomes/twelveMonthRetention";
 import twentyFourMonthRetention from "./CT/TreatmentOutcomes/twentyFourMonthRetention";
 import dsdMmdUptakeOverallBySex from './CT/Dsd/dsdMmdUptakeOverallBySex';
+import adverseEventsProportionOfPlHivAeRelatedToArtDrugs
+    from './CT/AdverseEvents/adverseEventsProportionOfPlHivAeRelatedToArtDrugs';
+
 
 
 export default combineReducers({
@@ -132,6 +137,8 @@ export default combineReducers({
     adverseEventsReportedWithSeverityLevels,
     adverseEventsActionsByDrugs,
     adverseEventsActionsByDrugsNew,
+    adverseEventsProportionOfPlHivWithAeByCausativeDrugs,
+    adverseEventsProportionOfPlHivAeRelatedToArtDrugs,
 
     dsdStabilityStatusByAgeSex,
     dsdStabilityStatusByCounty,

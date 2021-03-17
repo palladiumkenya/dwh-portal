@@ -46,6 +46,8 @@ import { loadAdverseEventsSeverityActions } from '../../actions/CT/AdverseEvents
 import { loadAdverseEventsReportedWithSeverityLevels } from '../../actions/CT/AdverseEvents/adverseEventsReportedWithSeverityLevelsActions';
 import { loadAdverseEventsActionsByDrugs }  from '../../actions/CT/AdverseEvents/adverseEventsActionsByDrugsActions';
 import { loadAdverseEventsActionsByDrugsNew }  from '../../actions/CT/AdverseEvents/adverseEventsActionsByDrugsNewActions';
+import { loadAdverseEventsProportionOfPlHivWithAeByCausativeDrugs } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPlHivWithAeByCausativeDrugsActions';
+import { loadAdverseEventsProportionOfPlHivAeRelatedToArt } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPlHivAeRelatedToArtActions';
 
 import { loadDsdStabilityStatusByAgeSex } from '../../actions/CT/Dsd/dsdStabilityStatusByAgeSexActions';
 import { loadDsdStabilityStatusByCounty } from '../../actions/CT/Dsd/dsdStabilityStatusByCountyActions';
@@ -87,6 +89,8 @@ import { loadTwelveMonthRetention } from '../../actions/CT/TreatmentOutcomes/twe
 import { loadTwentyFourMonthRetention } from '../../actions/CT/TreatmentOutcomes/twentyFourMonthRetentionActions';
 
 import { CT_TABS, PAGES } from "../../constants";
+
+
 const CT = () => {
     const dispatch = useDispatch();
     const ctTab = useSelector(state => state.ui.ctTab);
@@ -164,6 +168,8 @@ const CT = () => {
                 dispatch(loadAdverseEventsReportedWithSeverityLevels());
                 dispatch(loadAdverseEventsActionsByDrugs());
                 dispatch(loadAdverseEventsActionsByDrugsNew());
+                dispatch(loadAdverseEventsProportionOfPlHivWithAeByCausativeDrugs());
+                dispatch(loadAdverseEventsProportionOfPlHivAeRelatedToArt());
                 break;
             case 'dsd':
                 dispatch(loadCurrentOnArtOverview());
