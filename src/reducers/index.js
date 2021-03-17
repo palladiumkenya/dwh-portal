@@ -88,6 +88,12 @@ import twentyFourMonthRetention from "./CT/TreatmentOutcomes/twentyFourMonthRete
 import dsdMmdUptakeOverallBySex from './CT/Dsd/dsdMmdUptakeOverallBySex';
 import adverseEventsProportionOfPlHivAeRelatedToArtDrugs
     from './CT/AdverseEvents/adverseEventsProportionOfPlHivAeRelatedToArtDrugs';
+import adverseEventsProportionOfPLHIVWithAeRegimenChanged
+    from './CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenChanged';
+import adverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered
+    from './CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered';
+import adverseEventsProportionOfPLHIVWithAeRegimenWasStopped
+    from './CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasStopped';
 
 
 
@@ -139,6 +145,9 @@ export default combineReducers({
     adverseEventsActionsByDrugsNew,
     adverseEventsProportionOfPlHivWithAeByCausativeDrugs,
     adverseEventsProportionOfPlHivAeRelatedToArtDrugs,
+    adverseEventsProportionOfPLHIVWithAeRegimenChanged,
+    adverseEventsProportionOfPLHIVWithAeRegimenWasStopped,
+    adverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered,
 
     dsdStabilityStatusByAgeSex,
     dsdStabilityStatusByCounty,
