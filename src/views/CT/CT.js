@@ -48,6 +48,7 @@ import { loadAdverseEventsActionsByDrugs }  from '../../actions/CT/AdverseEvents
 import { loadAdverseEventsActionsByDrugsNew }  from '../../actions/CT/AdverseEvents/adverseEventsActionsByDrugsNewActions';
 import { loadAdverseEventsProportionOfPlHivWithAeByCausativeDrugs } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPlHivWithAeByCausativeDrugsActions';
 import { loadAdverseEventsProportionOfPlHivAeRelatedToArt } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPlHivAeRelatedToArtActions';
+import { loadAdverseEventsProportionOfPLHIVWithAeRegimenChanged } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenChangedActions';
 
 import { loadDsdStabilityStatusByAgeSex } from '../../actions/CT/Dsd/dsdStabilityStatusByAgeSexActions';
 import { loadDsdStabilityStatusByCounty } from '../../actions/CT/Dsd/dsdStabilityStatusByCountyActions';
@@ -89,6 +90,8 @@ import { loadTwelveMonthRetention } from '../../actions/CT/TreatmentOutcomes/twe
 import { loadTwentyFourMonthRetention } from '../../actions/CT/TreatmentOutcomes/twentyFourMonthRetentionActions';
 
 import { CT_TABS, PAGES } from "../../constants";
+import { loadAdverseEventsProportionOfPLHIVWithAeRegimenWasStopped } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasStoppedActions';
+import { loadAdverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasNotAlteredActions';
 
 
 const CT = () => {
@@ -170,6 +173,9 @@ const CT = () => {
                 dispatch(loadAdverseEventsActionsByDrugsNew());
                 dispatch(loadAdverseEventsProportionOfPlHivWithAeByCausativeDrugs());
                 dispatch(loadAdverseEventsProportionOfPlHivAeRelatedToArt());
+                dispatch(loadAdverseEventsProportionOfPLHIVWithAeRegimenChanged());
+                dispatch(loadAdverseEventsProportionOfPLHIVWithAeRegimenWasStopped());
+                dispatch(loadAdverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered());
                 break;
             case 'dsd':
                 dispatch(loadCurrentOnArtOverview());

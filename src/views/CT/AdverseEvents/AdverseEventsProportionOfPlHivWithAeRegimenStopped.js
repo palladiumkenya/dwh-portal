@@ -2,9 +2,16 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import * as adverseEventsClientsByAgeSexSelectors
+    from '../../../selectors/CT/AdverseEvents/adverseEventsClientsByAgeSex';
+import * as adverseEventsProportionOfPLHIVWithAeRegimenWasStopped
+    from '../../../selectors/CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasStopped';
 
 const AdverseEventsProportionOfPlHivWithAeRegimenStopped = () => {
     const [proportionOfPlHivWithAeRegimenStopped, setProportionOfPlHivWithAeRegimenStopped] = useState({});
+    const adverseEventsClientsAdults = useSelector(adverseEventsClientsByAgeSexSelectors.getAdverseEventsClientsAdults);
+    const proportionOfPLHIVWithAeRegimenWasStopped = useSelector(adverseEventsProportionOfPLHIVWithAeRegimenWasStopped.getAdverseEventsProportionOfPLHIVWithAeRegimenWasStopped);
 
     const loadProportionOfPlHivWithAeRegimenStopped = useCallback(async () => {
         setProportionOfPlHivWithAeRegimenStopped({
@@ -15,42 +22,17 @@ const AdverseEventsProportionOfPlHivWithAeRegimenStopped = () => {
                 text: ''
             },
             xAxis: {
-                categories: [
-                    'Jan',
-                    'Feb',
-                    'Mar',
-                    'Apr',
-                    'May',
-                    'Jun',
-                    'Jul',
-                    'Aug',
-                    'Sep',
-                    'Oct',
-                    'Nov',
-                    'Dec'
-                ],
+                categories: ['NUMBER WITH ADVERSE EVENTS(AEs)', 'NUMBER STOPPED'],
                 crosshair: true
             },
             yAxis: {
-                min: 0,
+                type: 'logarithmic',
+                minorTickInterval: 0.1,
                 title: {
                     text: 'NUMBER OF PATIENTS WITH AEs'
                 }
             },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
+            plotOptions: { column: { dataLabels: { enabled: true, formatter: function () { return '' + this.point.y; } } }},
             legend: {
                 enabled: false
             },
@@ -58,18 +40,18 @@ const AdverseEventsProportionOfPlHivWithAeRegimenStopped = () => {
                 data: [
                     {
                         name: 'Number with adverse events (AEs)',
-                        y: 50,
+                        y: adverseEventsClientsAdults.adverseEvents,
                         color: '#28B294'
                     },
                     {
                         name: 'Number Stopped',
-                        y: 40,
+                        y: proportionOfPLHIVWithAeRegimenWasStopped,
                         color: '#14084D'
                     }
                 ]
             }]
         });
-    }, []);
+    }, [adverseEventsClientsAdults, proportionOfPLHIVWithAeRegimenWasStopped]);
 
     useEffect(() => {
         loadProportionOfPlHivWithAeRegimenStopped();
