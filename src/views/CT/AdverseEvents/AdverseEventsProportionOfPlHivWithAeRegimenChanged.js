@@ -27,6 +27,7 @@ const AdverseEventsProportionOfPlHivWithAeRegimenChanged = () => {
             },
             yAxis: {
                 type: 'logarithmic',
+                minorTickInterval: 0.1,
                 title: {
                     text: 'NUMBER OF PATIENTS WITH AEs'
                 },
