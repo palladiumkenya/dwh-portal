@@ -5,6 +5,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 import moment from "moment";
+import { formatNumber } from '../../../utils/utils';
 
 const UptakeByPopulationType = () => {
     const filters = useSelector(state => state.filters);
@@ -80,20 +81,18 @@ const UptakeByPopulationType = () => {
         setUptakeByPopulationType({
             title: { text: '', },
             xAxis: [{ categories: ['Key Population', 'General Population'], crosshair: true }],
-            yAxis: [
-                { title: { text: 'Percentage Uptake' }, labels: { format: '{value} %' } },
-            ],
-            tooltip: { formatter: function () {
-                return this.point.category + ': <b>' +
-                    Highcharts.numberFormat(Math.abs(this.point.absoluteY), 0) + '</b>';
-            }},
-            plotOptions: { column: { dataLabels: { enabled: true, format: '<b>{point.y:,.0f} %</b>' } } },
+            yAxis: [{ title: { text: 'Percentage Uptake' }, labels: { format: '{value} %' } }],
+            plotOptions: { column: { dataLabels: { enabled: true, format: '<b>{point.y} %</b>' } } },
             legend: { enabled: false },
-            series: [{ name: 'Percentage Uptake', type: 'column', tooltip: { valueSuffix: ' %' } , data: [
-                { name: 'Key Population',  y: Number(((keyPopVal/(genPopVal + keyPopVal + missingPopVal))*100).toFixed(0)), absoluteY:keyPopVal, color: "#2F4050"},
-                { name: 'General Population', y: Number(((genPopVal/(genPopVal + keyPopVal + missingPopVal))*100).toFixed(0)), absoluteY:genPopVal, color: "#1AB394" },
-                // { name: 'Missing', y: missingPopVal, color: "#E06F07" }
-            ]}]
+            series: [
+                {
+                    name: 'Percentage Uptake', type: 'column', tooltip: { valueSuffix: ' % ({point.absoluteY})' } , data: [
+                        { name: 'Key Population',  y: keyPopPositivity, absoluteY: formatNumber(keyPopVal), color: "#2F4050" },
+                        { name: 'General Population', y: genPopPositivity, absoluteY: formatNumber(genPopVal), color: "#1AB394" },
+                        // { name: 'Missing', y: missingPopPositivity, absoluteY: formatNumber(missingPopVal), color: "#E06F07" },
+                    ]
+                }
+            ]
         });
     }, [filters]);
 
@@ -117,10 +116,10 @@ const UptakeByPopulationType = () => {
                                 <table className="table table-bordered">
                                     <tbody>
                                     <tr><th>Type</th><th>Tested</th><th>Positive</th><th>%</th></tr>
-                                    <tr><td>General Population</td><td align="right">{htsOverview.genPopTested}</td><td align="right">{htsOverview.genPopPositive}</td><td align="right">{htsOverview.genPopPositivity} % </td></tr>
-                                    <tr><td>Key Population</td><td align="right">{htsOverview.keyPopTested}</td><td align="right">{htsOverview.keyPopPositive}</td><td align="right">{htsOverview.keyPopPositivity} % </td></tr>
-                                    {/* <tr><td>Missing</td><td align="right">{htsOverview.missingPopTested}</td><td align="right">{htsOverview.missingPopPositive}</td><td align="right">{htsOverview.missingPopPositivity} % </td></tr> */}
-                                    <tr><td>Total</td><td align="right">{htsOverview.totalTested}</td><td align="right">{htsOverview.totalPositive}</td><td align="right">{htsOverview.totalPercentage} % </td></tr>
+                                    <tr><td>General Population</td><td align="right">{formatNumber(htsOverview.genPopTested)}</td><td align="right">{formatNumber(htsOverview.genPopPositive)}</td><td align="right">{formatNumber(htsOverview.genPopPositivity)} % </td></tr>
+                                    <tr><td>Key Population</td><td align="right">{formatNumber(htsOverview.keyPopTested)}</td><td align="right">{formatNumber(htsOverview.keyPopPositive)}</td><td align="right">{formatNumber(htsOverview.keyPopPositivity)} % </td></tr>
+                                    {/* <tr><td>Missing</td><td align="right">{formatNumber(htsOverview.missingPopTested)}</td><td align="right">{formatNumber(htsOverview.missingPopPositive)}</td><td align="right">{formatNumber(htsOverview.missingPopPositivity)} % </td></tr> */}
+                                    <tr><td>Total</td><td align="right">{formatNumber(htsOverview.totalTested)}</td><td align="right">{formatNumber(htsOverview.totalPositive)}</td><td align="right">{formatNumber(htsOverview.totalPercentage)} % </td></tr>
                                     </tbody>
                                 </table>
                             </div>

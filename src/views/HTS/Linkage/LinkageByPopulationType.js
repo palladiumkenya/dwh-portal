@@ -5,6 +5,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from "highcharts-react-official";
 import { getAll } from '../../Shared/Api';
 import moment from "moment";
+import { formatNumber } from '../../../utils/utils';
 
 const LinkageByPopulationType = () => {
     const filters = useSelector(state => state.filters);
@@ -71,20 +72,18 @@ const LinkageByPopulationType = () => {
         setLinkageByPopulationType({
             title: { text: '', },
             xAxis: [{ categories: ['Key Population', 'General Population'], crosshair: true }],
-            yAxis: [
-                { title: { text: 'Percentage Linkage' }, labels: { format: '{value} %' } },
-            ],
-            tooltip: { formatter: function () {
-                return this.point.category + ': <b>' +
-                    Highcharts.numberFormat(Math.abs(this.point.absoluteY), 0) + '</b>';
-            }},
-            plotOptions: { column: { dataLabels: { enabled: true, format: '<b>{point.y:,.0f} %</b>' } } },
+            yAxis: [{ title: { text: 'Percentage Linkage' }, labels: { format: '{value} %' } }],
+            plotOptions: { column: { dataLabels: { enabled: true, format: '<b>{point.y} %</b>' } } },
             legend: { enabled: false },
-            series: [{ name: 'Percentage Linkage', type: 'column', tooltip: { valueSuffix: ' %' } , data: [
-                { name: 'Key Population',  y: Number(((keyPopLinked/(genPopLinked + keyPopLinked + missingPopLinked))*100).toFixed(0)), absoluteY:keyPopLinked, color: "#2F4050"},
-                { name: 'General Population', y: Number(((genPopLinked/(genPopLinked + keyPopLinked + missingPopLinked))*100).toFixed(0)), absoluteY:genPopLinked, color: "#1AB394" },
-                // { name: 'Missing', y: missingPopLinked, color: "#E06F07" }
-            ]}]
+            series: [
+                {
+                    name: 'Percentage Linkage', type: 'column', tooltip: { valueSuffix: ' % ({point.absoluteY})' } , data: [
+                        { name: 'Key Population',  y: keyPopLinkage, absoluteY: formatNumber(keyPopLinked), color: "#2F4050"},
+                        { name: 'General Population', y: genPopLinkage, absoluteY: formatNumber(genPopLinked), color: "#1AB394" },
+                        // { name: 'Missing', y: missingPopLinkage, absoluteY: formatNumber(missingPopLinked), color: "#E06F07" }
+                    ]
+                }
+            ]
         });
     }, [filters]);
 
@@ -108,10 +107,10 @@ const LinkageByPopulationType = () => {
                                 <table className="table table-bordered">
                                     <tbody>
                                         <tr><th>Type</th><th>Positive</th><th>Linked</th><th>%</th></tr>
-                                        <tr><td>General Population</td><td align="right">{linkage.genPopPositive}</td><td align="right">{linkage.genPopLinked}</td><td align="right">{parseFloat(linkage.genPopLinkage).toFixed(1)} % </td></tr>
-                                        <tr><td>Key Population</td><td align="right">{linkage.keyPopPositive}</td><td align="right">{linkage.keyPopLinked}</td><td align="right">{parseFloat(linkage.keyPopLinkage).toFixed(1)} % </td></tr>
-                                        {/* <tr><td>Missing</td><td align="right">{linkage.missingPopPositive}</td><td align="right">{linkage.missingPopLinked}</td><td align="right">{parseFloat(linkage.missingPopLinkage).toFixed(1)} % </td></tr> */}
-                                        <tr><td>Total</td><td align="right">{linkage.genPopPositive + linkage.keyPopPositive}</td><td align="right">{linkage.genPopLinked + linkage.keyPopLinked}</td><td align="right">{((linkage.genPopLinkage + linkage.keyPopLinkage)/2).toFixed(1)} % </td></tr>
+                                        <tr><td>General Population</td><td align="right">{formatNumber(linkage.genPopPositive)}</td><td align="right">{formatNumber(linkage.genPopLinked)}</td><td align="right">{formatNumber(parseFloat(linkage.genPopLinkage).toFixed(1))} % </td></tr>
+                                        <tr><td>Key Population</td><td align="right">{formatNumber(linkage.keyPopPositive)}</td><td align="right">{formatNumber(linkage.keyPopLinked)}</td><td align="right">{formatNumber(parseFloat(linkage.keyPopLinkage).toFixed(1))} % </td></tr>
+                                        {/* <tr><td>Missing</td><td align="right">{formatNumber(linkage.missingPopPositive)}</td><td align="right">{formatNumber(linkage.missingPopLinked)}</td><td align="right">{formatNumber(parseFloat(linkage.missingPopLinkage).toFixed(1))} % </td></tr> */}
+                                        <tr><td>Total</td><td align="right">{formatNumber(linkage.genPopPositive + linkage.keyPopPositive)}</td><td align="right">{formatNumber(linkage.genPopLinked + linkage.keyPopLinked)}</td><td align="right">{formatNumber(((linkage.genPopLinkage + linkage.keyPopLinkage)/2).toFixed(1))} % </td></tr>
                                     </tbody>
                                 </table>
                             </div>
