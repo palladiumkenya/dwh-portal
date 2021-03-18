@@ -75,11 +75,17 @@ const AdverseEvents = () => {
                     <SectionFooter overview={branding.overview}/>
                     <AdverseEventsProportionOfPlHivWithAeRelatedToArtOrSuspectedArt />
                     <SectionFooter overview={branding.overview}/>
-                    <AdverseEventsProportionOfPlHivWithAeRegimenChanged />
-                    <SectionFooter overview={branding.overview}/>
-                    <AdverseEventsProportionOfPlHivWithAeRegimenStopped />
-                    <SectionFooter overview={branding.overview}/>
-                    <AdverseEventsProportionOfPlHivWithAeRegimenNotAltered />
+                    <Row className={"col-12"}>
+                        <Col className={"col-4"}>
+                            <AdverseEventsProportionOfPlHivWithAeRegimenChanged />
+                        </Col>
+                        <Col className={"col-4"}>
+                            <AdverseEventsProportionOfPlHivWithAeRegimenStopped />
+                        </Col>
+                        <Col className={"col-4"}>
+                            <AdverseEventsProportionOfPlHivWithAeRegimenNotAltered />
+                        </Col>
+                    </Row>
                     <SectionFooter overview={branding.overview}/>
                     <AdverseEventsProportionOfPlHivOnArtWithAe />
                     <SectionFooter overview={branding.overview}/>
