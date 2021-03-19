@@ -94,6 +94,9 @@ import adverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered
     from './CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered';
 import adverseEventsProportionOfPLHIVWithAeRegimenWasStopped
     from './CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasStopped';
+import viralLoad6MonthSuppressionByYearOfArtStart from './CT/ViralLoad/viralLoad6MonthSuppressionByYearOfArtStart';
+import viralLoad12MonthSuppressionByYearOfArtStart from './CT/ViralLoad/viralLoad12MonthSuppressionByYearOfArtStart';
+import viralLoad24MonthSuppressionByYearOfArtStart from './CT/ViralLoad/viralLoad24MonthSuppressionByYearOfArtStart';
 
 
 
@@ -177,6 +180,9 @@ export default combineReducers({
     viralLoadSuppressionByRegimen,
     viralLoadOverallUptakeSuppressionByFacility,
     viralLoadSuppressionByYearAndSuppressionCategory,
+    viralLoad6MonthSuppressionByYearOfArtStart,
+    viralLoad12MonthSuppressionByYearOfArtStart,
+    viralLoad24MonthSuppressionByYearOfArtStart,
 
     treatmentOutcomesBySex,
     treatmentOutcomesByPopulationType,
