@@ -19,13 +19,6 @@ const AdverseEventsSeverityActions = () => {
             plotOptions: { column: { stacking: 'normal'}},
             series: [{
                 data: [
-                    adverseEventsSeverityActions.mild_undocumented_total,
-                    adverseEventsSeverityActions.moderate_undocumented_total,
-                    adverseEventsSeverityActions.severe_undocumented_total,
-                    adverseEventsSeverityActions.unknown_undocumented_total
-                ], name: 'Undocumented', type: 'column', color: "#1AB394",
-            }, {
-                data: [
                     adverseEventsSeverityActions.mild_medicineNotChanged_total,
                     adverseEventsSeverityActions.moderate_medicineNotChanged_total,
                     adverseEventsSeverityActions.severe_medicineNotChanged_total,
@@ -52,6 +45,13 @@ const AdverseEventsSeverityActions = () => {
                     adverseEventsSeverityActions.severe_all_drugs_stopped_total,
                     adverseEventsSeverityActions.unknown_all_drugs_stopped_total
                 ], name: 'All drugs stopped', type: 'column', color: "#f28e2b",
+            }, {
+                data: [
+                    adverseEventsSeverityActions.mild_undocumented_total,
+                    adverseEventsSeverityActions.moderate_undocumented_total,
+                    adverseEventsSeverityActions.severe_undocumented_total,
+                    adverseEventsSeverityActions.unknown_undocumented_total
+                ], name: 'Undocumented', type: 'column', color: "#1AB394",
             }]
         });
     }, [adverseEventsSeverityActions]);

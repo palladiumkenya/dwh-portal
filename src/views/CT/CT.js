@@ -92,6 +92,9 @@ import { loadTwentyFourMonthRetention } from '../../actions/CT/TreatmentOutcomes
 import { CT_TABS, PAGES } from "../../constants";
 import { loadAdverseEventsProportionOfPLHIVWithAeRegimenWasStopped } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasStoppedActions';
 import { loadAdverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasNotAlteredActions';
+import { load6MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLoad/viralLoad6MonthSuppressionByYearOfArtStartActions';
+import { load12MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLoad/viralLoad12MonthSuppressionByYearOfArtStartActions';
+import { load24MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLoad/viralLoad24MonthSuppressionByYearOfArtStartActions';
 
 
 const CT = () => {
@@ -209,8 +212,11 @@ const CT = () => {
                 dispatch(loadViralLoadSuppressionByAge());
                 dispatch(loadViralLoadSuppressionByYear());
                 dispatch(loadViralLoadSuppressionByRegimen());
-                dispatch(loadViralLoadSuppressionByYearAndSuppressionCategory());
+                // dispatch(loadViralLoadSuppressionByYearAndSuppressionCategory());
                 dispatch(loadViralLoadOverallUptakeSuppressionByFacility());
+                dispatch(load6MonthSuppressionByYearOfArtStart());
+                dispatch(load12MonthSuppressionByYearOfArtStart());
+                dispatch(load24MonthSuppressionByYearOfArtStart());
                 break;
             case 'tOut':
                 dispatch(loadNewOnArtOverview());
