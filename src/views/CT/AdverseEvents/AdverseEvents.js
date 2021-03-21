@@ -87,8 +87,8 @@ const AdverseEvents = () => {
                         </Col>
                     </Row>
                     <SectionFooter overview={branding.overview}/>
-                    <AdverseEventsProportionOfPlHivOnArtWithAe />
-                    <SectionFooter overview={branding.overview}/>
+                    {/*<AdverseEventsProportionOfPlHivOnArtWithAe />
+                    <SectionFooter overview={branding.overview}/>*/}
                 </TabPane>
                 <TabPane tabId="children">
                     <SectionHeader title={branding.title + " - CHILDREN"}/>
