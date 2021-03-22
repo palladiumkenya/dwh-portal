@@ -212,7 +212,7 @@ const CT = () => {
                 dispatch(loadViralLoadSuppressionByAge());
                 dispatch(loadViralLoadSuppressionByYear());
                 dispatch(loadViralLoadSuppressionByRegimen());
-                // dispatch(loadViralLoadSuppressionByYearAndSuppressionCategory());
+                dispatch(loadViralLoadSuppressionByYearAndSuppressionCategory());
                 dispatch(loadViralLoadOverallUptakeSuppressionByFacility());
                 dispatch(load6MonthSuppressionByYearOfArtStart());
                 dispatch(load12MonthSuppressionByYearOfArtStart());
