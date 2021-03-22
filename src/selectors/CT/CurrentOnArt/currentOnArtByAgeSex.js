@@ -28,7 +28,7 @@ export const getCurrentOnArtByAgeSex = createSelector(
         ];
         let currentOnArtMale = [];
         let currentOnArtFemale = [];
-        
+
         for (let i = 0; i < list.length; i++) {
             if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
                 let index = ageGroups.indexOf(list[i].ageGroup);
@@ -52,7 +52,7 @@ export const getCurrentOnArtBySex = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         let currentOnArtMale = 0;
         let currentOnArtFemale = 0;
-        
+
         for (let i = 0; i < list.length; i++) {
             if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
                 currentOnArtMale = currentOnArtMale + parseInt(list[i].txCurr);
@@ -96,7 +96,7 @@ export const getCurrentOnArtAdults = createSelector(
         ];
         let currentOnArtMale = 0;
         let currentOnArtFemale = 0;
-        
+
         for (let i = 0; i < list.length; i++) {
             if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
                 let index = ageGroups.indexOf(list[i].ageGroup);
@@ -142,7 +142,7 @@ export const getCurrentOnArtAdolescents = createSelector(
         ];
         let currentOnArtMale = 0;
         let currentOnArtFemale = 0;
-        
+
         for (let i = 0; i < list.length; i++) {
             if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
                 let index = ageGroups.indexOf(list[i].ageGroup);
@@ -160,7 +160,7 @@ export const getCurrentOnArtAdolescents = createSelector(
         }
 
         let currentOnArt = currentOnArtFemale + currentOnArtMale;
-        
+
         return { ageGroups, currentOnArt, currentOnArtFemale, currentOnArtMale };
     }
 );
@@ -170,7 +170,7 @@ export const getCurrentOnArtChildren = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         let ageGroups = [
-            "< 1",
+            "<1",
             "1-4",
             "5-9",
             "10-14",
@@ -188,7 +188,7 @@ export const getCurrentOnArtChildren = createSelector(
         ];
         let currentOnArtMale = 0;
         let currentOnArtFemale = 0;
-        
+
         for (let i = 0; i < list.length; i++) {
             if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
                 let index = ageGroups.indexOf(list[i].ageGroup);
@@ -206,7 +206,7 @@ export const getCurrentOnArtChildren = createSelector(
         }
 
         let currentOnArt = currentOnArtFemale + currentOnArtMale;
-        
+
         return { ageGroups, currentOnArt, currentOnArtFemale, currentOnArtMale };
     }
 );
