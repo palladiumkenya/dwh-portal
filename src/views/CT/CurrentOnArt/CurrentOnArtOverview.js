@@ -54,7 +54,7 @@ const CurrentOnArtOverview = () => {
                 </Col>
                 <Col>
                     <DataCard
-                        title="CHILDREN CURRENT ON ART(<14 YRS)"
+                        title="CHILDREN CURRENT ON ART(<15 YRS)"
                         subtitle={roundNumber(currentOnArtChildrenPercent) + "%"}
                         data={formatNumber(currentOnArtChildren)}
                     />

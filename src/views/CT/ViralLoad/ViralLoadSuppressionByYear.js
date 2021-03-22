@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import * as viralLoadSuppressionByYearSelectors from '../../../selectors/CT/ViralLoad/viralLoadSuppressionByYear';
+import * as viralLoadSuppressionByYearSelectors from '../../../selectors/CT/ViralLoad/viralLoadSuppressionByYearAndSuppressionCategory';
 
 const ViralLoadSuppressionByYear = () => {
     const [viralLoadSuppressionByYear, setViralLoadSuppressionByYear] = useState({});
-    const viralLoadSuppressionByYearData = useSelector(viralLoadSuppressionByYearSelectors.getViralLoadSuppressionByYear);
+    const viralLoadSuppressionByYearData = useSelector(viralLoadSuppressionByYearSelectors.getViralLoadSuppressionByYearAndSuppressionCategory);
 
     const loadViralLoadSuppressionByYear = useCallback(async () => {
         setViralLoadSuppressionByYear({
@@ -18,10 +18,9 @@ const ViralLoadSuppressionByYear = () => {
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: '3 MONTHS', data: viralLoadSuppressionByYearData.data[0], type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '6 MONTHS', data: viralLoadSuppressionByYearData.data[1], type: 'column', color: "#BBE65F", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '12 MONTHS', data: viralLoadSuppressionByYearData.data[2], type: 'column', color: "#60A6E5", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '24 MONTHS', data: viralLoadSuppressionByYearData.data[3], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'HVL', data: viralLoadSuppressionByYearData.data[0], type: 'column',color: "#E15759", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'LLV', data: viralLoadSuppressionByYearData.data[1], type: 'column', color: "#F28E2B", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'VS', data: viralLoadSuppressionByYearData.data[2], type: 'column', color: "#3475B3", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [viralLoadSuppressionByYearData]);

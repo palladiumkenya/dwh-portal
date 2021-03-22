@@ -6,13 +6,16 @@ import UniversalFilter from './../../Shared/UniversalFilter';
 import SectionHeader from '../../Shared/SectionHeader';
 import SectionFooter from '../../Shared/SectionFooter';
 import TreatmentOutcomesOverview from './TreatmentOutcomesOverview';
-import TreatmentOutcomesOverall from './TreatmentOutcomesOverall';
+import TreatmentOutcomesByPopulationType from './TreatmentOutcomesByPopulationType';
 import TreatmentOutcomesBySex from './TreatmentOutcomesBySex';
 import TreatmentOutcomesByAge from './TreatmentOutcomesByAge';
 import TreatmentOutcomesByYear from './TreatmentOutcomesByYear';
 import TreatmentOutcomesByCounty from './TreatmentOutcomesByCounty';
-import TreatmentOutcomesByPartner from './TreatmentOutcomesByPartner';
-import Retention from './Retention';
+import TreatmentOutcomesByPartner from './TreatmentOutcomesByPartner'
+import ThreeMonthRetention from './ThreeMonthRetention';
+import SixMonthRetention from './SixMonthRetention';
+import TwelveMonthRetention from './TwelveMonthRetention';
+import TwentyFourMonthRetention from './TwentyFourMonthRetention';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const TreatmentOutcomes = () => {
@@ -56,7 +59,7 @@ const TreatmentOutcomes = () => {
                     <TreatmentOutcomesBySex />
                 </Col>
                 <Col>
-                    <TreatmentOutcomesOverall />
+                    <TreatmentOutcomesByPopulationType />
                 </Col>
             </Row>
             <SectionFooter overview={branding.overview}/>
@@ -68,7 +71,13 @@ const TreatmentOutcomes = () => {
             <SectionFooter overview={branding.overview}/>
             <TreatmentOutcomesByPartner />
             <SectionFooter overview={branding.overview}/>
-            <Retention />
+            <ThreeMonthRetention />
+            <SectionFooter overview={branding.overview}/>
+            <SixMonthRetention />
+            <SectionFooter overview={branding.overview}/>
+            <TwelveMonthRetention />
+            <SectionFooter overview={branding.overview}/>
+            <TwentyFourMonthRetention />
             <SectionFooter overview={branding.overview}/>
         </div>
     );

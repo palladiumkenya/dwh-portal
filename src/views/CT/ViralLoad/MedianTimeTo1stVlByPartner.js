@@ -13,11 +13,11 @@ const MedianTimeTo1stVlByPartner = () => {
         setMedianTimeTo1stVlByPartner({
             title: { text: '' },
             xAxis: [{ categories: medianTimeTo1stVlByPartnerData.partners, crosshair: true, title: { text: 'Partner' } }],
-            yAxis: [{ title: { text: 'Time (Days)' }}],
+            yAxis: [{ title: { text: 'Time (Months)' }}],
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Time (Days)', data: medianTimeTo1stVlByPartnerData.times, type: 'spline', color: "#E06F07" },
+                { name: 'Time (Months)', data: medianTimeTo1stVlByPartnerData.times, type: 'spline', color: "#E06F07" },
             ]
         });
     }, [medianTimeTo1stVlByPartnerData]);

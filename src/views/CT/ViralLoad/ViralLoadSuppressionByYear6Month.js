@@ -3,21 +3,23 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import * as viralLoadSuppressionByYearSelectors from '../../../selectors/CT/ViralLoad/viralLoadSuppressionByYear';
+import _ from 'lodash';
+import * as viralLoad6MonthSuppressionByYearOfArtStart
+    from '../../../selectors/CT/ViralLoad/viralLoad6MonthSuppressionByYearOfArtStart';
 
 const ViralLoadSuppressionByYear6Month = () => {
     const [viralLoadSuppressionByYear6Month, setViralLoadSuppressionByYear6Month] = useState({});
-    const viralLoadSuppressionByYearData = useSelector(viralLoadSuppressionByYearSelectors.getViralLoadSuppressionByYear);
+    const viralLoadSuppressionByYearData = useSelector(viralLoad6MonthSuppressionByYearOfArtStart.getViralLoad6MonthSuppressionByYearOfArtStart);
 
     const loadViralLoadSuppressionByYear6Month = useCallback(async () => {
         setViralLoadSuppressionByYear6Month({
             title: { text: '' },
-            xAxis: [{ categories: viralLoadSuppressionByYearData.yearCategories, crosshair: true, title: { text: 'Year of Start' } }],
-            yAxis: [{ title: { text: 'Number of Patients' }}],
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
+            xAxis: [{ categories: viralLoadSuppressionByYearData.data.map(obj => obj.year), crosshair: true, title: { text: 'Year of Start' } }],
+            yAxis: [{ title: { text: 'Percentage of Patients' }, labels: { format: '{value} %' }}],
+            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none', format: '{y}%' } } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Number of Patients', data: viralLoadSuppressionByYearData.data[1], type: 'column', color: "#485969" },
+                { name: 'Percentage of Patients', data: viralLoadSuppressionByYearData.data, type: 'column', color: "#485969", tooltip: { valueSuffix: ' % ({point.text})'} },
             ]
         });
     }, [viralLoadSuppressionByYearData]);

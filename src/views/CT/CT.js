@@ -45,6 +45,10 @@ import { loadAdverseEventsSeverityGrading } from '../../actions/CT/AdverseEvents
 import { loadAdverseEventsSeverityActions } from '../../actions/CT/AdverseEvents/adverseEventsSeverityActionsActions';
 import { loadAdverseEventsReportedWithSeverityLevels } from '../../actions/CT/AdverseEvents/adverseEventsReportedWithSeverityLevelsActions';
 import { loadAdverseEventsActionsByDrugs }  from '../../actions/CT/AdverseEvents/adverseEventsActionsByDrugsActions';
+import { loadAdverseEventsActionsByDrugsNew }  from '../../actions/CT/AdverseEvents/adverseEventsActionsByDrugsNewActions';
+import { loadAdverseEventsProportionOfPlHivWithAeByCausativeDrugs } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPlHivWithAeByCausativeDrugsActions';
+import { loadAdverseEventsProportionOfPlHivAeRelatedToArt } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPlHivAeRelatedToArtActions';
+import { loadAdverseEventsProportionOfPLHIVWithAeRegimenChanged } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenChangedActions';
 
 import { loadDsdStabilityStatusByAgeSex } from '../../actions/CT/Dsd/dsdStabilityStatusByAgeSexActions';
 import { loadDsdStabilityStatusByCounty } from '../../actions/CT/Dsd/dsdStabilityStatusByCountyActions';
@@ -73,8 +77,10 @@ import { loadViralLoadSuppressionByAge } from '../../actions/CT/ViralLoad/viralL
 import { loadViralLoadSuppressionByYear } from '../../actions/CT/ViralLoad/viralLoadSuppressionByYearActions';
 import { loadViralLoadSuppressionByRegimen } from '../../actions/CT/ViralLoad/viralLoadSuppressionByRegimenActions';
 import { loadViralLoadOverallUptakeSuppressionByFacility } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeSuppressionByFacilityActions';
+import { loadViralLoadSuppressionByYearAndSuppressionCategory } from '../../actions/CT/ViralLoad/viralLoadSuppressionByYearAndSuppressionCategoryActions';
 
 import { loadTreatmentOutcomesBySex } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesBySexActions';
+import { loadTreatmentOutcomesByPopulationType } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByPopulationTypeActions';
 import { loadTreatmentOutcomesByAge } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByAgeActions';
 import { loadTreatmentOutcomesByYear } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByYearActions';
 import { loadTreatmentOutcomesByFacility } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByFacilityActions';
@@ -84,6 +90,12 @@ import { loadTwelveMonthRetention } from '../../actions/CT/TreatmentOutcomes/twe
 import { loadTwentyFourMonthRetention } from '../../actions/CT/TreatmentOutcomes/twentyFourMonthRetentionActions';
 
 import { CT_TABS, PAGES } from "../../constants";
+import { loadAdverseEventsProportionOfPLHIVWithAeRegimenWasStopped } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasStoppedActions';
+import { loadAdverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasNotAlteredActions';
+import { load6MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLoad/viralLoad6MonthSuppressionByYearOfArtStartActions';
+import { load12MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLoad/viralLoad12MonthSuppressionByYearOfArtStartActions';
+import { load24MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLoad/viralLoad24MonthSuppressionByYearOfArtStartActions';
+
 
 const CT = () => {
     const dispatch = useDispatch();
@@ -161,6 +173,12 @@ const CT = () => {
                 dispatch(loadAdverseEventsSeverityActions());
                 dispatch(loadAdverseEventsReportedWithSeverityLevels());
                 dispatch(loadAdverseEventsActionsByDrugs());
+                dispatch(loadAdverseEventsActionsByDrugsNew());
+                dispatch(loadAdverseEventsProportionOfPlHivWithAeByCausativeDrugs());
+                dispatch(loadAdverseEventsProportionOfPlHivAeRelatedToArt());
+                dispatch(loadAdverseEventsProportionOfPLHIVWithAeRegimenChanged());
+                dispatch(loadAdverseEventsProportionOfPLHIVWithAeRegimenWasStopped());
+                dispatch(loadAdverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered());
                 break;
             case 'dsd':
                 dispatch(loadCurrentOnArtOverview());
@@ -194,13 +212,17 @@ const CT = () => {
                 dispatch(loadViralLoadSuppressionByAge());
                 dispatch(loadViralLoadSuppressionByYear());
                 dispatch(loadViralLoadSuppressionByRegimen());
-
+                // dispatch(loadViralLoadSuppressionByYearAndSuppressionCategory());
                 dispatch(loadViralLoadOverallUptakeSuppressionByFacility());
+                dispatch(load6MonthSuppressionByYearOfArtStart());
+                dispatch(load12MonthSuppressionByYearOfArtStart());
+                dispatch(load24MonthSuppressionByYearOfArtStart());
                 break;
             case 'tOut':
                 dispatch(loadNewOnArtOverview());
                 dispatch(loadNewOnArtTrends());
                 dispatch(loadTreatmentOutcomesBySex());
+                dispatch(loadTreatmentOutcomesByPopulationType());
                 dispatch(loadTreatmentOutcomesByAge());
                 dispatch(loadTreatmentOutcomesByYear());
                 dispatch(loadTreatmentOutcomesByFacility());

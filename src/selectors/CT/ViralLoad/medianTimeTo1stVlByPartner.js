@@ -12,8 +12,8 @@ export const getMedianTimeTo1stVlByPartner = createSelector(
         let times = [];
 
         for(let i = 0; i < list.length; i++) {
-            partners.push(list[i].partner);
-            times.push(parseInt(list[i].time, 10));
+            partners.push(list[i].Partner);
+            times.push(parseInt(list[i].medianTime, 10));
         }
 
         return { partners, times };

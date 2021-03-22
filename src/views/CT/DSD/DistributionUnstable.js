@@ -13,10 +13,12 @@ const DistributionUnstable = () => {
     const onArtLessThan12Months = useSelector(dsdUnstableSelectors.getOnArtLessThan12Months);
     const highVl = useSelector(dsdUnstableSelectors.getHighVl);
     const poorAdherence = useSelector(dsdUnstableSelectors.getPoorAdherence);
+    const pregnantAndBreastFeeding = useSelector(dsdUnstableSelectors.getPregnantAndBreastFeeding);
+
 
     const loadDistributionUnstable = useCallback(async () => {
-        const categories = ["HIGH VL", "ART<12 MONTHS", "AGE <20 YEARS", "POOR ADHERANCE", "BMI <18.5"];
-        const total = highVl + onArtLessThan12Months + ageLessThan20Years + poorAdherence + bmiLessThan18;
+        const categories = ["HIGH VL", "ART<12 MONTHS", "AGE <20 YEARS", "POOR ADHERANCE", "BMI <18.5", "PREGNANT & BREAST FEEDING"];
+        const total = highVl + onArtLessThan12Months + ageLessThan20Years + poorAdherence + bmiLessThan18 + pregnantAndBreastFeeding;
         const data = [
             {
                 y: Math.round((highVl/total)*100),
@@ -37,6 +39,10 @@ const DistributionUnstable = () => {
             {
                 y: Math.round((bmiLessThan18/total)*100),
                 name: "BMI <18.5"
+            },
+            {
+                y: Math.round((pregnantAndBreastFeeding/total)*100),
+                name: "PREGNANT & BREAST FEEDING"
             }
         ];
         data.sort(function(a, b) {
@@ -77,11 +83,16 @@ const DistributionUnstable = () => {
                             name: categories[4],
                             y: data[4].y,
                             text: ' (' + formatNumber(bmiLessThan18) + ')'
+                        },
+                        {
+                            name: categories[5],
+                            y: data[5].y,
+                            text: ' (' + formatNumber(pregnantAndBreastFeeding) + ')'
                         }
                     ], type: 'column', color: "#485969" },
             ]
         });
-    }, [highVl, onArtLessThan12Months, ageLessThan20Years, poorAdherence, bmiLessThan18]);
+    }, [highVl, onArtLessThan12Months, ageLessThan20Years, poorAdherence, bmiLessThan18, pregnantAndBreastFeeding]);
 
     useEffect(() => {
         loadDistributionUnstable();

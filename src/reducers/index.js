@@ -43,6 +43,9 @@ import adverseEventsSeverityGrading from "./CT/AdverseEvents/adverseEventsSeveri
 import adverseEventsSeverityActions from "./CT/AdverseEvents/adverseEventsSeverityActions";
 import adverseEventsReportedWithSeverityLevels from "./CT/AdverseEvents/adverseEventsReportedWithSeverityLevels";
 import adverseEventsActionsByDrugs from "./CT/AdverseEvents/adverseEventsActionsByDrugs";
+import adverseEventsActionsByDrugsNew from "./CT/AdverseEvents/adverseEventsActionsByDrugsNew";
+import adverseEventsProportionOfPlHivWithAeByCausativeDrugs
+    from './CT/AdverseEvents/adverseEventsProportionOfPlHivWithAeByCausativeDrugs';
 
 import dsdStabilityStatusByAgeSex from "./CT/Dsd/dsdStabilityStatusByAgeSex";
 import dsdStabilityStatusByCounty from "./CT/Dsd/dsdStabilityStatusByCounty";
@@ -70,8 +73,11 @@ import viralLoadSuppressionByAge from "./CT/ViralLoad/viralLoadSuppressionByAge"
 import viralLoadSuppressionByYear from "./CT/ViralLoad/viralLoadSuppressionByYear";
 import viralLoadSuppressionByRegimen from "./CT/ViralLoad/viralLoadSuppressionByRegimen";
 import viralLoadOverallUptakeSuppressionByFacility from "./CT/ViralLoad/viralLoadOverallUptakeSuppressionByFacility";
+import viralLoadSuppressionByYearAndSuppressionCategory
+    from './CT/ViralLoad/viralLoadSuppressionByYearAndSuppressionCategory';
 
 import treatmentOutcomesBySex from "./CT/TreatmentOutcomes/treatmentOutcomesBySex";
+import treatmentOutcomesByPopulationType from "./CT/TreatmentOutcomes/treatmentOutcomesByPopulationType";
 import treatmentOutcomesByAge from "./CT/TreatmentOutcomes/treatmentOutcomesByAge";
 import treatmentOutcomesByYear from "./CT/TreatmentOutcomes/treatmentOutcomesByYear";
 import treatmentOutcomesByFacility from "./CT/TreatmentOutcomes/treatmentOutcomesByFacility";
@@ -80,6 +86,19 @@ import sixMonthRetention from "./CT/TreatmentOutcomes/sixMonthRetention";
 import twelveMonthRetention from "./CT/TreatmentOutcomes/twelveMonthRetention";
 import twentyFourMonthRetention from "./CT/TreatmentOutcomes/twentyFourMonthRetention";
 import dsdMmdUptakeOverallBySex from './CT/Dsd/dsdMmdUptakeOverallBySex';
+import adverseEventsProportionOfPlHivAeRelatedToArtDrugs
+    from './CT/AdverseEvents/adverseEventsProportionOfPlHivAeRelatedToArtDrugs';
+import adverseEventsProportionOfPLHIVWithAeRegimenChanged
+    from './CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenChanged';
+import adverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered
+    from './CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered';
+import adverseEventsProportionOfPLHIVWithAeRegimenWasStopped
+    from './CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasStopped';
+import viralLoad6MonthSuppressionByYearOfArtStart from './CT/ViralLoad/viralLoad6MonthSuppressionByYearOfArtStart';
+import viralLoad12MonthSuppressionByYearOfArtStart from './CT/ViralLoad/viralLoad12MonthSuppressionByYearOfArtStart';
+import viralLoad24MonthSuppressionByYearOfArtStart from './CT/ViralLoad/viralLoad24MonthSuppressionByYearOfArtStart';
+
+
 
 export default combineReducers({
     auth: authReducer,
@@ -126,6 +145,12 @@ export default combineReducers({
     adverseEventsSeverityActions,
     adverseEventsReportedWithSeverityLevels,
     adverseEventsActionsByDrugs,
+    adverseEventsActionsByDrugsNew,
+    adverseEventsProportionOfPlHivWithAeByCausativeDrugs,
+    adverseEventsProportionOfPlHivAeRelatedToArtDrugs,
+    adverseEventsProportionOfPLHIVWithAeRegimenChanged,
+    adverseEventsProportionOfPLHIVWithAeRegimenWasStopped,
+    adverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered,
 
     dsdStabilityStatusByAgeSex,
     dsdStabilityStatusByCounty,
@@ -154,8 +179,13 @@ export default combineReducers({
     viralLoadSuppressionByYear,
     viralLoadSuppressionByRegimen,
     viralLoadOverallUptakeSuppressionByFacility,
+    viralLoadSuppressionByYearAndSuppressionCategory,
+    viralLoad6MonthSuppressionByYearOfArtStart,
+    viralLoad12MonthSuppressionByYearOfArtStart,
+    viralLoad24MonthSuppressionByYearOfArtStart,
 
     treatmentOutcomesBySex,
+    treatmentOutcomesByPopulationType,
     treatmentOutcomesByAge,
     treatmentOutcomesByYear,
     treatmentOutcomesByFacility,

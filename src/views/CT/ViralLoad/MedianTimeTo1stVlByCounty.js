@@ -13,11 +13,11 @@ const MedianTimeTo1stVlByCounty = () => {
         setMedianTimeTo1stVlByCounty({
             title: { text: '' },
             xAxis: [{ categories: medianTimeTo1stVlByCountyData.counties, crosshair: true, title: { text: 'County' } }],
-            yAxis: [{ title: { text: 'Time (Days)' }}],
+            yAxis: [{ title: { text: 'Time (Months)' }}],
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Time (Days)', data: medianTimeTo1stVlByCountyData.times, type: 'spline', color: "#E06F07" },
+                { name: 'Time (Months)', data: medianTimeTo1stVlByCountyData.times, type: 'spline', color: "#E06F07" },
             ]
         });
     }, [medianTimeTo1stVlByCountyData]);
