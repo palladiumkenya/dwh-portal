@@ -30,7 +30,7 @@ const HomeAgeDistribution = () => {
                             <CardTitle tag="h5" className="text-left m-2">CHILDREN ON ART</CardTitle>
                             <CardSubtitle tag="h6" className="text-left m-2">0-14 YEARS</CardSubtitle>
                             {/* <CardSubtitle tag="h5" className="primary-card-body-subtitle text-right">95%</CardSubtitle> */}
-                            <CardText className="primary-card-body-text text-right" style={{ color: '#F28E2B' }}>{formatNumber(currentOnArtAdolescents.currentOnArt)}</CardText>
+                            <CardText className="primary-card-body-text text-right" style={{ color: '#F28E2B' }}>{formatNumber(currentOnArtChildren.currentOnArt)}</CardText>
                         </CardBody>
                     </Card>
                 </Col>
@@ -42,7 +42,7 @@ const HomeAgeDistribution = () => {
                             <CardTitle tag="h5" className="text-left m-2">ADOLESCENTS ON ART</CardTitle>
                             <CardSubtitle tag="h6" className="text-left m-2">10-19 YEARS</CardSubtitle>
                             {/* <CardSubtitle tag="h5" className="primary-card-body-subtitle text-right">95%</CardSubtitle> */}
-                            <CardText className="primary-card-body-text text-right" style={{ color: '#F28E2B' }}>{formatNumber(currentOnArtChildren.currentOnArt)}</CardText>
+                            <CardText className="primary-card-body-text text-right" style={{ color: '#F28E2B' }}>{formatNumber(currentOnArtAdolescents.currentOnArt)}</CardText>
                         </CardBody>
                     </Card>
                 </Col>
