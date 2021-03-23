@@ -34,7 +34,7 @@ const ViralLoadSuppressionByYear = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VIRAL SUPPRESSION BY YEAR OF ART START
+                        Levels of Viral suppression by year of ART
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
