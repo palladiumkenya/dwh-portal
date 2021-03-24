@@ -60,6 +60,16 @@ const NewOnArt = () => {
             <SectionFooter overview={branding.overview}/>
             <MedianTimeToArtStartByYear />
             <SectionFooter overview={branding.overview}/>
+            <Card>
+                <CardHeader>Indicator Definition</CardHeader>
+                <CardBody>
+                    <ul>
+                        <li>
+                            MEDIAN TIME TO ART START BY COUNTY / PARTNER =&gt; This indicator is computed and displayed for those who started ART in the last 12 months.
+                        </li>
+                    </ul>
+                </CardBody>
+            </Card>
             <MedianTimeToArtStartByCounty />
             <SectionFooter overview={branding.overview}/>
             <MedianTimeToArtStartByPartner />

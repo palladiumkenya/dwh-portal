@@ -13,7 +13,7 @@ export const getMedianTimeToArtStartByCounty = createSelector(
 
         for(let i = 0; i < list.length; i++) {
             counties.push(list[i].county);
-            times.push(parseInt(list[i].time, 10));
+            times.push(parseInt(list[i].medianTime, 10));
         }
 
         return { counties, times };
