@@ -12,13 +12,15 @@ const ViralLoadSuppressionByRegimen = () => {
     const loadViralLoadSuppressionByRegimen = useCallback(async () => {
         setViralLoadSuppressionByRegimen({
             title: { text: '' },
+            plotOptions: { column: { stacking: 'percent' } },
             xAxis: [{ categories: viralLoadSuppressionByRegimenData.regimenCategories, crosshair: true }],
-            yAxis: [{ title: { text: 'Percent of Patients' }, labels: { format: '{value} %' }}],
+            yAxis: [{ title: { text: 'Percentage of Patients' }}],
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
-            plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.text; } } }},
             series: [
-                { name: 'Viral Load Suppression', data: viralLoadSuppressionByRegimenData.data, type: 'column', color: "#485969", tooltip: { valueSuffix: ' % ({point.absoluteY})' }}
+                { name: 'HVL', data: viralLoadSuppressionByRegimenData.data[1], type: 'column',color: "#E15759", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'LLV', data: viralLoadSuppressionByRegimenData.data[2], type: 'column', color: "#F28E2B", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'VS', data: viralLoadSuppressionByRegimenData.data[0], type: 'column', color: "#3475B3", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [viralLoadSuppressionByRegimenData]);

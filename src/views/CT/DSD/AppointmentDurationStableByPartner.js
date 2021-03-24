@@ -17,7 +17,7 @@ const AppointmentDurationStableByPartner = () => {
             yAxis: [{ title: { text: 'Percentage of Patients' }}],
             tooltip: { shared: true },
             plotOptions: { column: { stacking: 'percent' } },
-            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80, reversed: true },
             series: [
                 { name: 'NON MMD', data: stabilityStatusByPartnerNonMmd.nonMmd, type: 'column', color: "#485969", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
                 { name: 'MMD', data: stabilityStatusByPartnerMmd.mmd, type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
