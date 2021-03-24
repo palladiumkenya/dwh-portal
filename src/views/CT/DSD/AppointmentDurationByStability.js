@@ -16,11 +16,11 @@ const AppointmentDurationByStability = () => {
             yAxis: [{ title: { text: 'Percentage of Patients' }}],
             tooltip: { shared: true },
             plotOptions: { column: { stacking: 'percent' } },
-            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80, reversed: true },
             series: [
-                { name: '<3 MONTHS', data: appointmentDurationByStabilityStatus.data[0], type: 'column', color: "#2F4050", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: '3-5 MONTHS', data: appointmentDurationByStabilityStatus.data[1], type: 'column', color: "#3281CC", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
                 { name: '6+ MONTHS', data: appointmentDurationByStabilityStatus.data[2], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: '3-5 MONTHS', data: appointmentDurationByStabilityStatus.data[1], type: 'column', color: "#3281CC", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: '<3 MONTHS', data: appointmentDurationByStabilityStatus.data[0], type: 'column', color: "#2F4050", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [appointmentDurationByStabilityStatus]);

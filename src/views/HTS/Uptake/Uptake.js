@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from '../../Shared/UniversalFilter';
 import SectionHeader from '../../Shared/SectionHeader';
@@ -40,6 +41,15 @@ const Uptake = () => {
                 <UniversalFilter/>
             </VisibilitySensor>
             <UptakeOverview/>
+            <Card>
+                <CardHeader>Indicator Definition</CardHeader>
+                <CardBody>
+                    <ul>
+                        <li>HIV Testing Services (HTS) Uptake =&gt; Number of unique individuals who are tested for HIV within a reporting period. This is based on the documented final result in eHTS.</li>
+                        <li>Positivity =&gt; Number of unique individuals whose HIV test results are positive divided by the number of unique individuals tested for HIV.</li>
+                    </ul>
+                </CardBody>
+            </Card>
             <UptakeNumberTestedAndPositivity/>
             <SectionFooter overview={branding.overview}/>
             <UptakeByAgeSex/>

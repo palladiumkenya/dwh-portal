@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from '../../Shared/UniversalFilter';
 import SectionHeader from '../../Shared/SectionHeader';
@@ -39,6 +40,14 @@ const Linkage = () => {
                 <UniversalFilter/>
             </VisibilitySensor>
             <LinkageOverview/>
+            <Card>
+                <CardHeader>Indicator Definition</CardHeader>
+                <CardBody>
+                    <ul>
+                        <li>HIV Testing Services (HTS) Linkage =&gt; Proportion of HIV positive individuals who are linked to care and treatment services within a reporting period. This is based on a documented CCC number in the linkage form.</li>
+                    </ul>
+                </CardBody>
+            </Card>
             <LinkageNumberPositive/>
             <SectionFooter overview={branding.overview}/>
             <LinkageByAgeSex />
