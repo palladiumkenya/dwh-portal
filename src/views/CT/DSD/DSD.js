@@ -64,6 +64,8 @@ const DSD = () => {
             <SectionFooter overview={branding.overview}/>
             <AppointmentDurationStableByPartner />
             <SectionFooter overview={branding.overview}/>
+            <AppointmentDurationByAge />
+            <SectionFooter overview={branding.overview}/>
             <Row>
                 <Col>
                     <DistributionStableAgeSex />
@@ -72,8 +74,6 @@ const DSD = () => {
                     <DistributionUnstable />
                 </Col>
             </Row>
-            <SectionFooter overview={branding.overview}/>
-            <AppointmentDurationByAge />
             <SectionFooter overview={branding.overview}/>
             <DistributionStableByCounty />
             <SectionFooter overview={branding.overview}/>
