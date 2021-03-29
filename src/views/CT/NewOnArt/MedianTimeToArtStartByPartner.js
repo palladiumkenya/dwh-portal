@@ -13,12 +13,12 @@ const MedianTimeToArtStartByPartner = () => {
         setMedianTimeToArtStartByPartnerChart({
             title: { text: '' },
             xAxis: [{ categories: medianTimeToArtStartByPartnerData.partners, title: { text: 'Partners' }, crosshair: true }],
-            yAxis: [{ title: { text: 'Time (Days)' }}],
+            yAxis: [{ title: { text: 'Time (Months)' }}],
             plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Time (Days)', data: medianTimeToArtStartByPartnerData.times, type: 'column', color: "#485969" },
+                { name: 'Time (Months)', data: medianTimeToArtStartByPartnerData.times, type: 'column', color: "#485969" },
             ]
         });
     }, [medianTimeToArtStartByPartnerData]);

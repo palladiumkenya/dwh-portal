@@ -12,8 +12,8 @@ export const getMedianTimeToArtStartByYear = createSelector(
         let times = [];
 
         for(let i = 0; i < list.length; i++) {
-            years.push(list[i].year);
-            times.push(parseInt(list[i].time, 10));
+            years.push(list[i].StartYr);
+            times.push(parseInt(list[i].medianTime, 10));
         }
 
         return { years, times };

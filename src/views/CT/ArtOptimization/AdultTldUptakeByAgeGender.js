@@ -15,8 +15,8 @@ const AdultTldUptakeByAgeGender = () => {
     const currentOnArtByAgeSexData = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtByAgeSexList);
 
     const loadAdultTldUptakeByAgeGender = useCallback(async () => {
-        let ageGroups = _.remove(_.uniq(['Under 1', '1 to 4', '5 to 9'].concat(ageGroupsOriginal)), function(element) {
-            return element !== 'Under 1' && element !== '1 to 4' && element !== '5 to 9';
+        let ageGroups = _.remove(_.uniq(['Under 1', '1 to 4', '5 to 9', '10 to 14'].concat(ageGroupsOriginal)), function(element) {
+            return element !== 'Under 1' && element !== '1 to 4' && element !== '5 to 9' && element !== '10 to 14';
         });
         let data = [];
         let dataCurrent = [];
@@ -43,7 +43,7 @@ const AdultTldUptakeByAgeGender = () => {
             }
             let sexGroupsIndex = sexGroups.indexOf(currentOnArtByAgeSexData[i].Gender);
             let ageGroupsIndex = ageGroups.indexOf(currentOnArtByAgeSexData[i].ageGroup.replace(/-/g, " to "));
-            
+
             if(sexGroupsIndex === -1 || ageGroupsIndex === -1) {
                 continue;
             }
