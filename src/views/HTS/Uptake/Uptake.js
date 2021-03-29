@@ -15,6 +15,7 @@ import UptakeTestingStrategy from './UptakeTestingStrategy';
 import UptakeTypeAndSelfTest from './UptakeTypeAndSelfTest';
 import UptakeNumberTestedAndPositivity from './UptakeNumberTestedAndPositivity';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
+import HtsUptakeIndicatorDefinition from './HtsUptakeIndicatorDefinition';
 
 const Uptake = () => {
     const dispatch = useDispatch();
@@ -39,6 +40,7 @@ const Uptake = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
+            <HtsUptakeIndicatorDefinition />
             <UptakeOverview/>
             <UptakeNumberTestedAndPositivity/>
             <SectionFooter overview={branding.overview}/>
