@@ -40,7 +40,7 @@ const RRCounty = () => {
             moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M') :
             moment().startOf('month').subtract(2, 'month').format('YYYY,M');
         const consistencyResult = await getAll('manifests/consistencyreportingbycountypartner/' + rrTab + '?reportingType=county', params);
-        const rrData = await getAll('manifests/expected/' + rrTab, params);
+        const rrData = await getAll('manifests/expectedPartnerCounty/' + rrTab + '?reportingType=county', params);
 
         /* Overall reporting */
         const overAllReportingData = _.orderBy(overallReportingRateResult, [function(resultItem) { return parseInt(resultItem.Percentage, 10); }], ['desc']);
@@ -65,26 +65,37 @@ const RRCounty = () => {
         });
 
         /* Consistency of reporting */
-        const consistency_counties = Object.keys(consistencyResult).map(r => capitalize(r));
-        const expected = rrData.expected;
-        const consistency_values = Object.values(consistencyResult).map(function(r) {
-            const cos = parseInt((r/expected)*100);
-            if (cos <= 50) {
-                return {
-                    y: cos,
-                    color: 'red'
-                }
-            } else if (cos >= 51 && cos <= 89) {
-                return { y: cos, color: '#E06F07' }
-            } else if (cos >= 90) {
-                return { y: cos > 100 ? 100 : cos, color: '#59A14F' }
-            } else {
-                return {
-                    y: cos,
-                    color: 'red'
-                }
+        const consistency_values = [];
+        let expected = 0;
+        for (const [key, value] of Object.entries(consistencyResult)) {
+            const expectedCounty =  rrData.filter(obj => obj.county === key);
+            if (expectedCounty.length > 0) {
+                expected = expectedCounty[0].totalexpected;
             }
+
+            const cos = expected === 0 ? 0 : parseInt(((value/expected)*100).toString());
+            if (cos <= 50) {
+                consistency_values.push({
+                    county: key,
+                    y: cos,
+                    color: 'red'
+                });
+            } else if (cos >= 51 && cos <= 89) {
+                consistency_values.push({ county: key, y: cos, color: '#E06F07' });
+            } else if (cos >= 90) {
+                consistency_values.push({ county: key, y: cos > 100 ? 100 : cos, color: '#59A14F' });
+            } else {
+                consistency_values.push({
+                    county: key,
+                    y: cos,
+                    color: 'red'
+                });
+            }
+        }
+        consistency_values.sort(function(a, b) {
+            return b.y - a.y;
         });
+        const consistency_counties = consistency_values.map(obj => capitalize(obj.county));
 
         const counties = overallReportingRateResult.map(({ county  }) => county);
         const emrResultSeries = overallReportingRateResult.map(({ expected }) => parseInt(expected, 10));
