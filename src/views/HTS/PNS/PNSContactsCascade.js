@@ -66,12 +66,12 @@ const PNSContactsCascade = () => {
             }}}},
             series: [{ name: 'PNS Cascade of Sexual Contacts', color: "#485969", type: 'column', data: [
                 { name: categories[0], y: data[0], text: data[0].toLocaleString('en') },
-                { name: categories[1], y: data[1], text: data[1].toLocaleString('en') },
-                { name: categories[2], y: data[2], text: data[2].toLocaleString('en') + ' (' + parseFloat(((data[1]/data[0])*100).toString()).toFixed(0) + '%)' },
-                { name: categories[3], y: data[3], text: data[3].toLocaleString('en') + ' (' + parseFloat(((data[2]/data[0])*100).toString()).toFixed(0) + '%)' },
-                { name: categories[4], y: data[4], text: data[4].toLocaleString('en') + ' (' + parseFloat(((data[3]/data[0])*100).toString()).toFixed(0) + '%)' },
-                { name: categories[5], y: data[5], text: data[5].toLocaleString('en') + ' (' + parseFloat(((data[4]/data[0])*100).toString()).toFixed(0) + '%)' },
-                { name: categories[6], y: data[6], text: data[6].toLocaleString('en') + ' (' + parseFloat(((data[5]/data[0])*100).toString()).toFixed(0) + '%)' },
+                { name: categories[1], y: data[1], text: data[1].toLocaleString('en') + ' (' + parseFloat(((data[1]/data[0])*100).toString()).toFixed(0) + '%)'  },
+                { name: categories[2], y: data[2], text: data[2].toLocaleString('en') + ' (' + parseFloat(((data[2]/data[0])*100).toString()).toFixed(0) + '%)' },
+                { name: categories[3], y: data[3], text: data[3].toLocaleString('en') + ' (' + parseFloat(((data[3]/data[0])*100).toString()).toFixed(0) + '%)' },
+                { name: categories[4], y: data[4], text: data[4].toLocaleString('en') + ' (' + parseFloat(((data[4]/data[0])*100).toString()).toFixed(0) + '%)' },
+                { name: categories[5], y: data[5], text: data[5].toLocaleString('en') + ' (' + parseFloat(((data[5]/data[0])*100).toString()).toFixed(0) + '%)' },
+                { name: categories[6], y: data[6], text: data[6].toLocaleString('en') + ' (' + parseFloat(((data[6]/data[0])*100).toString()).toFixed(0) + '%)' },
             ]}]
         });
     }, [filters]);
