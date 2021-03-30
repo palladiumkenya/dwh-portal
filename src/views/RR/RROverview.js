@@ -51,7 +51,7 @@ const RROverview = () => {
             moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M') :
             moment().startOf('month').subtract(2, 'month').format('YYYY,M');
         const data = await getAll('manifests/consistency/' + rrTab, params);
-        setConsistnecy({ consistency: [], stats: data.consistency.toLocaleString('en'), statsPerc: getPerc(data.consistency , expected) });
+        setConsistnecy({ consistency: [], stats: data.consistency ? data.consistency.toLocaleString('en') : [], statsPerc: getPerc(data.consistency , expected) });
     }, [filters, rrTab, expected]);
 
     const loadRecency = useCallback(async () => {
@@ -68,7 +68,7 @@ const RROverview = () => {
             moment(params.fromDate, "MMM YYYY").startOf('month').subtract(0, 'month').format('YYYY,M') :
             moment().startOf('month').subtract(1, 'month').format('YYYY,M');
         const data = await getAll('manifests/recency/' + rrTab, params);
-        setRecency({ recency: [], stats: data.recency.toLocaleString('en'), statsPerc: getPerc(data.recency , expected) });
+        setRecency({ recency: [], stats: data.recency ? data.recency.toLocaleString('en') : [], statsPerc: getPerc(data.recency , expected) });
     }, [filters, rrTab, expected]);
 
     useEffect(() => {
