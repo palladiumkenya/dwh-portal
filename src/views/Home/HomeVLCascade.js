@@ -14,7 +14,9 @@ const HomeVLCascade = () => {
     const hasCurrentVl = useSelector(currentOnArtOverviewSelectors.getHasCurrentVl);
     const hasCurrentVlPercent = currentOnArt ? ((hasCurrentVl/eligibleForVl)*100) : 0;
     const virallySuppressed = useSelector(currentOnArtOverviewSelectors.getVirallySuppressed);
-    const virallySuppressedPercent = currentOnArt ? ((virallySuppressed/hasCurrentVl)*100) : 0;
+    const lowLevelViremia = useSelector(currentOnArtOverviewSelectors.getLowLevelViremia);
+    const suppressed = virallySuppressed + lowLevelViremia;
+    const suppressedPercent = currentOnArt ? ((suppressed/hasCurrentVl)*100) : 0;
 
     return (
         <Row>
@@ -42,8 +44,8 @@ const HomeVLCascade = () => {
             <Col>
                 <DataCard
                     title="VIRALLY SUPPRESSED"
-                    subtitle={roundNumber(virallySuppressedPercent) + "%"}
-                    data={formatNumber(virallySuppressed)}
+                    subtitle={roundNumber(suppressedPercent) + "%"}
+                    data={formatNumber(suppressed)}
                 />
             </Col>
         </Row>
