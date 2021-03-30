@@ -13,12 +13,12 @@ const MedianTimeToArtStartByCounty = () => {
         setMedianTimeToArtStartByCountyChart({
             title: { text: '' },
             xAxis: [{ categories: medianTimeToArtStartByCountyData.counties, title: { text: 'Counties' }, crosshair: true }],
-            yAxis: [{ title: { text: 'Time (Months)' }}],
+            yAxis: [{ title: { text: 'Time (Days)' }}],
             plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Time (Months)', data: medianTimeToArtStartByCountyData.times, type: 'column', color: "#485969" },
+                { name: 'Time (Days)', data: medianTimeToArtStartByCountyData.times, type: 'column', color: "#485969" },
             ]
         });
     }, [medianTimeToArtStartByCountyData]);
