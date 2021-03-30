@@ -13,7 +13,7 @@ export const getMedianTimeToArtStartByPartner = createSelector(
 
         for(let i = 0; i < list.length; i++) {
             partners.push(list[i].partner);
-            times.push(parseInt(list[i].time, 10));
+            times.push(parseInt(list[i].medianTime, 10));
         }
 
         return { partners, times };
