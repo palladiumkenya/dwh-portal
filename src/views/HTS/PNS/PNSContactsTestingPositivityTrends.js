@@ -36,7 +36,7 @@ const PNSContactsTestingPositivityTrends = () => {
         let months = [];
         let positivity = [];
         let tested = [];
-        let linked = [];
+        let positive = [];
         for(let i = 0; i < result.length; i++) {
             const result_month = result[i].month;
             const result_year = result[i].year.toString();
@@ -45,7 +45,7 @@ const PNSContactsTestingPositivityTrends = () => {
             }
             tested.push(parseInt(result[i].tested, 10));
             months.push(monthNames[result[i].month] + ' ' + result_year.toString());
-            linked.push(parseInt(result[i].linked, 10));
+            positive.push(parseInt(result[i].positive, 10));
             let val = 0;
             if (parseInt(result[i].tested, 10) > 0) {
                 val = ((parseFloat(result[i].positive)/parseFloat(result[i].tested))*100).toFixed(1);
@@ -63,7 +63,7 @@ const PNSContactsTestingPositivityTrends = () => {
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'Sexual Contacts Tested', type: 'column', data: tested.slice(-12), yAxis: 0, color: "#485969",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
-                { name: 'Sexual Contacts Linked ', type: 'column', data: linked.slice(-12), yAxis: 0, color: "#1AB394",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
+                { name: 'Sexual Contacts Positive ', type: 'column', data: positive.slice(-12), yAxis: 0, color: "#1AB394",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
                 { name: 'Positivity Percentage', type: 'spline', data: positivity.slice(-12), yAxis: 1, color: "#E06F07", dataLabels: { enabled: true, format: '{y} %' }, tooltip: { valueSuffix: ' %' }, dashStyle: 'ShortDot' }
             ],
         });
