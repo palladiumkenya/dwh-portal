@@ -60,8 +60,8 @@ const PNSChildrenFamilyTestingCascade = () => {
             series: [{ name: 'Family Testing of Children Cascade', color: "#1AB394", type: 'column', data: [
                 { name: categories[0], y: data[0], text: data[0].toLocaleString('en') },
                 { name: categories[1], y: data[1], text: data[1].toLocaleString('en') + ' (' + parseFloat(((data[1]/data[0])*100).toString()).toFixed(0) + '%)' },
-                { name: categories[2], y: data[2], text: data[2].toLocaleString('en') + ' (' + parseFloat(((data[1]/data[0])*100).toString()).toFixed(0) + '%)' },
-                { name: categories[3], y: data[3], text: data[3].toLocaleString('en') + ' (' + parseFloat(((data[2]/data[0])*100).toString()).toFixed(0) + '%)' },
+                { name: categories[2], y: data[2], text: data[2].toLocaleString('en') + ' (' + parseFloat(((data[2]/data[0])*100).toString()).toFixed(0) + '%)' },
+                { name: categories[3], y: data[3], text: data[3].toLocaleString('en') + ' (' + parseFloat(((data[3]/data[0])*100).toString()).toFixed(0) + '%)' },
             ]}]
         });
     }, [filters]);
