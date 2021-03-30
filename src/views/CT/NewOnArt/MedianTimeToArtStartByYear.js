@@ -13,10 +13,10 @@ const MedianTimeToArtStartByYear = () => {
         setMedianTimeToArtStartByYearChart({
             title: { text: '' },
             xAxis: [{ categories: medianTimeToArtStartByYearData.years, title: { text: 'Year of ART Start' }, crosshair: true }],
-            yAxis: [{ title: { text: 'Time (Months)' }}],
+            yAxis: [{ title: { text: 'Time (Days)' }}],
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Time (Months)', data: medianTimeToArtStartByYearData.times, type: 'spline', color: "#E06F07" },
+                { name: 'Time (Days)', data: medianTimeToArtStartByYearData.times, type: 'spline', color: "#E06F07" },
             ]
         });
     }, [medianTimeToArtStartByYearData]);
