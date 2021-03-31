@@ -13,7 +13,7 @@ const RROverview = () => {
 
     const getPerc = (count, total) => {
         const numTotal = parseInt(total.replace(",",""), 10);
-        if (count && total && numTotal > 0) {
+        if (count && total && numTotal > 0 && (numTotal >= count)) {
             return Math.round((count / numTotal) * 100);
         } else {
             return 0;
