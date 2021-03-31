@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import moment from 'moment';
 
 const listUnfiltered = state => state.newOnArtTrends.listUnfiltered;
 const listFiltered = state => state.newOnArtTrends.listFiltered;
@@ -19,25 +20,27 @@ export const getNewOnArtHtsPositive = createSelector(
         let txNew = [];
         let positives = [];
 
-        for(let i = 0; i < list.length; i++) {
-            months.push(monthNames[list[i].month] + ' ' + list[i].year.toString());
-            txNew.push(parseInt(list[i].txNew, 10));
-            positives.push(0);
-        }
-
-        for(let i = 0; i < listPositiveTrends.length; i++) {
-            let month = monthNames[listPositiveTrends[i].month] + ' ' + listPositiveTrends[i].year.toString();
-            let monthIndex = months.indexOf(month);
-            if(monthIndex === -1 ) {
-                continue;
+        const today = new Date();
+        let previousYearDate = moment(today).subtract(1, 'years').toDate();
+        previousYearDate = moment(previousYearDate).add(1, 'month').toDate();
+        while (previousYearDate <= today) {
+            months.push(monthNames[previousYearDate.getMonth() + 1] + ' ' + previousYearDate.getFullYear());
+            const filteredMonthYear = list.filter(obj => obj.month === (previousYearDate.getMonth() + 1) && obj.year === previousYearDate.getFullYear());
+            if (filteredMonthYear.length > 0) {
+                let totalTxNew = 0;
+                for (const filteredMonthYearElement of filteredMonthYear) {
+                    totalTxNew = totalTxNew + filteredMonthYearElement.txNew;
+                }
+                txNew.push(parseInt(totalTxNew.toString(), 10));
             }
-            positives[monthIndex] = positives[monthIndex] + parseInt(listPositiveTrends[i].positive);
+
+            const filteredPositives = listPositiveTrends.filter(obj => obj.month === (previousYearDate.getMonth() + 1) && obj.year === previousYearDate.getFullYear());
+            for (const filteredPositive of filteredPositives) {
+                positives.push(parseInt(filteredPositive.positive.toString(), 10));
+            }
+            previousYearDate = moment(previousYearDate).add(1, 'month').toDate();
         }
 
-        months = months.slice(Math.max(months.length - 12, 0));
-        txNew = txNew.slice(Math.max(txNew.length - 12, 0));
-        positives = positives.slice(Math.max(positives.length - 12, 0));
-        
         return { months, txNew, positives };
     }
 );
