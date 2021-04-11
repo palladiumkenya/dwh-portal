@@ -12,6 +12,7 @@ import RRPartner from './RRPartner';
 import { enableStickyFilter, disableStickyFilter, changeRRTab, changeCurrentPage } from "../../actions/Shared/uiActions";
 import { enableFacilityFilter, disableFacilityFilter, enableAgencyFilter, disableAgencyFilter, enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
 import { RR_TABS, PAGES } from "../../constants";
+import RRIndicatorDefinition from './RRIndicatorDefinition';
 
 const RR = () => {
     const dispatch = useDispatch();
@@ -62,6 +63,7 @@ const RR = () => {
                     <VisibilitySensor onChange={onVisibilityChange}>
                         <UniversalFilter/>
                     </VisibilitySensor>
+                    <RRIndicatorDefinition />
                     <RROverview/>
                     <RROverviewTrends/>
                     <SectionFooter overview="The Overall reporting rates refers to the proportion of EMR

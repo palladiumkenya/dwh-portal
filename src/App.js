@@ -14,6 +14,7 @@ import Loading from './views/Shared/Loading';
 import { loadRrSites } from './actions/Shared/rrSitesActions';
 import { loadHtsSites } from './actions/Shared/htsSitesActions';
 import { loadCtSites } from './actions/Shared/ctSitesActions';
+import { useHistory } from 'react-router-dom';
 
 const DefaultLayout = React.lazy(() => import('./containers/DefaultLayout'));
 const Login = React.lazy(() => import('./views/Pages/Login'));
@@ -26,6 +27,7 @@ if (typeof Highcharts === 'object') {
 
 const App = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
         // fetch current user from cookies
@@ -37,7 +39,7 @@ const App = () => {
 
     return (
         <AuthProvider userManager={userManager} store={store}>
-            <HashRouter>
+            <HashRouter history={history}>
                 <React.Suspense fallback={<Loading/>}>
                     <Switch>
                         <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
