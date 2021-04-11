@@ -6,7 +6,6 @@ ReactGA.initialize(GA_TRACKING_ID);
 
 export default (WrappedComponent, options = {}) => {
     const trackPage = page => {
-        console.log(page);
         ReactGA.set({
             page,
             ...options
