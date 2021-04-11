@@ -43,4 +43,4 @@ export const CACHING = {
     EXTRA_LONG: 4320, // 3 days
 };
 
-export const GA_TRACKING_ID = 'UA-137589703-1';
+export const GA_TRACKING_ID = 'UA-137589703-2';
