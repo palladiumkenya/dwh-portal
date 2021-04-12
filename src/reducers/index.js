@@ -36,6 +36,10 @@ import artOptimizationCurrentByPartner from "./CT/ArtOptimization/artOptimizatio
 import artOptimizationNewByYear from "./CT/ArtOptimization/artOptimizationNewByYear";
 import artOptimizationNewByCounty from "./CT/ArtOptimization/artOptimizationNewByCounty";
 import artOptimizationNewByPartner from "./CT/ArtOptimization/artOptimizationNewByPartner";
+import artOptimizationRegimenDistributionByWeightBands
+    from './CT/ArtOptimization/artOptimizationRegimenDistributionByWeightBands';
+import artOptimizationRegimenDistributionByAgeBands
+    from './CT/ArtOptimization/artOptimizationRegimenDistributionByAgeBands';
 
 import adverseEventsByAgeSex from "./CT/AdverseEvents/adverseEventsByAgeSex";
 import adverseEventsClientsByAgeSex from "./CT/AdverseEvents/adverseEventsClientsByAgeSex";
@@ -99,7 +103,6 @@ import viralLoad12MonthSuppressionByYearOfArtStart from './CT/ViralLoad/viralLoa
 import viralLoad24MonthSuppressionByYearOfArtStart from './CT/ViralLoad/viralLoad24MonthSuppressionByYearOfArtStart';
 
 
-
 export default combineReducers({
     auth: authReducer,
 
@@ -138,6 +141,8 @@ export default combineReducers({
     artOptimizationNewByCounty,
     artOptimizationNewByPartner,
     artOptimizationNewByYear,
+    artOptimizationRegimenDistributionByWeightBands,
+    artOptimizationRegimenDistributionByAgeBands,
 
     adverseEventsByAgeSex,
     adverseEventsClientsByAgeSex,
