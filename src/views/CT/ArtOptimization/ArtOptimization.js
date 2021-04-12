@@ -23,6 +23,8 @@ import ChildArtOptimizationOverview from './ChildArtOptimizationOverview';
 import ChildDistributionRegimenLines from './ChildDistributionRegimenLines';
 import ChildDistributionRegimens from './ChildDistributionRegimens';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
+import RegimenDistributionByWeightBands from './RegimenDistributionByWeightBands';
+import RegimenDistributionByAgeBands from './RegimenDistributionByAgeBands';
 
 const ArtOptimization = () => {
     const dispatch = useDispatch();
@@ -89,6 +91,10 @@ const ArtOptimization = () => {
                         <Col><ChildDistributionRegimenLines/></Col>
                         <Col><ChildDistributionRegimens/></Col>
                     </Row>
+                    <SectionFooter overview={branding.overview}/>
+                    <RegimenDistributionByWeightBands />
+                    <SectionFooter overview={branding.overview}/>
+                    <RegimenDistributionByAgeBands />
                     <SectionFooter overview={branding.overview}/>
                 </TabPane>
             </TabContent>
