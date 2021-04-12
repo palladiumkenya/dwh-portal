@@ -41,4 +41,8 @@ export const CACHING = {
     MID: 60,
     LONG: 1440, // 1 day
     EXTRA_LONG: 4320, // 3 days
-}
+};
+
+export const GA_TRACKING_ID = 'UA-137589703-1';
+
+export const HRH_API_URL = 'https://hrh.datacompanion.org';
