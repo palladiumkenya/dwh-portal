@@ -8,7 +8,9 @@ import DistributionDensityNCK from './DistributionDensityNCK';
 import DistributionDensityMPDB from './DistributionDensityMPDB';
 import DistributionDensityCOC from './DistributionDensityCOC';
 import DistributionHTSCI from './DistributionHTSCI';
-import { loadPractitionersCountByCountyQualification } from '../../actions/HRH/Practitioners/practitionersCountByCountyQualification';
+import { loadPractitionersCountByCountyQualification } from '../../actions/HRH/practitionersCountByCountyQualification';
+import { loadPopulationByCounty } from '../../actions/HRH/populationByCounty';
+import { loadUptakeByCounty } from '../../actions/HTS/Uptake/uptakeByCounty';
 
 const HRH = () => {
     const branding = { title: "HRH", description: "OVERVIEW", overview: "HRH" };
@@ -16,6 +18,8 @@ const HRH = () => {
 
     useEffect(() => {
         dispatch(loadPractitionersCountByCountyQualification());
+        dispatch(loadPopulationByCounty());
+        dispatch(loadUptakeByCounty());
     }, [dispatch]);
     
     return (

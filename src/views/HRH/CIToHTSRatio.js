@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { getHtsProvidersByCounty } from '../../selectors/HRH/Practitioners/practitionersCountByCountyQualification';
+import { getHtsProvidersByCounty } from '../../selectors/HRH/practitionersCountByCountyQualification';
 
 const DistributionHTSCI = () => {
     const htsProvidersByCounty = useSelector(getHtsProvidersByCounty);
@@ -15,7 +15,7 @@ const DistributionHTSCI = () => {
         tooltip: { shared: true },
         legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80, floating: true, borderWidth: 1 },
         series: [
-            { name: 'CI to HTS Providers Ratio', type: 'spline', data: htsProvidersByCounty.count, color: "#E06F07" }
+            { name: 'CI to HTS Providers Ratio', type: 'spline', data: htsProvidersByCounty.caseToCountRatio, color: "#E06F07" }
         ]
     };
     return (

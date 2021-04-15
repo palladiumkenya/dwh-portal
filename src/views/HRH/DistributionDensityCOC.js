@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { getClinicalOfficersByCounty } from '../../selectors/HRH/Practitioners/practitionersCountByCountyQualification';
+import { getClinicalOfficersByCounty } from '../../selectors/HRH/practitionersCountByCountyQualification';
 
 const DistributionDensityCOC = () => {
     const clinicalOfficersByCounty = useSelector(getClinicalOfficersByCounty);
@@ -19,7 +19,7 @@ const DistributionDensityCOC = () => {
         legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80, floating: true, borderWidth: 1 },
         series: [
             { name: 'Density', type: 'column', yAxis: 1, data: clinicalOfficersByCounty.count, color: "#485969" },
-            { name: 'Ratio to 10,000 pop', type: 'spline', data: [], color: "#E06F07" },
+            { name: 'Ratio to 10,000 pop', type: 'spline', data: clinicalOfficersByCounty.population, color: "#E06F07" },
         ]
     };
     return (
