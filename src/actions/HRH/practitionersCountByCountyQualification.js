@@ -1,7 +1,7 @@
 import axios from 'axios';
 import moment from 'moment';
-import * as actionTypes from '../../types';
-import { CACHING, HRH_API_URL } from '../../../constants';
+import * as actionTypes from '../types';
+import { CACHING, HRH_API_URL } from '../../constants';
 
 export const loadPractitionersCountByCountyQualification = () => async (dispatch, getState) => {
     const lastFetch = getState().practitionersCountByCountyQualification.lastFetch;

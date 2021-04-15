@@ -102,7 +102,11 @@ import viralLoad6MonthSuppressionByYearOfArtStart from './CT/ViralLoad/viralLoad
 import viralLoad12MonthSuppressionByYearOfArtStart from './CT/ViralLoad/viralLoad12MonthSuppressionByYearOfArtStart';
 import viralLoad24MonthSuppressionByYearOfArtStart from './CT/ViralLoad/viralLoad24MonthSuppressionByYearOfArtStart';
 
-import practitionersCountByCountyQualification from './HRH/Practitioners/practitionersCountByCountyQualification';
+import practitionersCountByCountyQualification from './HRH/practitionersCountByCountyQualification';
+import populationByCounty from './HRH/populationByCounty';
+
+import uptakeBySex from './HTS/Uptake/uptakeBySex';
+import uptakeByCounty from './HTS/Uptake/uptakeByCounty';
 
 export default combineReducers({
     auth: authReducer,
@@ -201,4 +205,8 @@ export default combineReducers({
     twentyFourMonthRetention,
 
     practitionersCountByCountyQualification,
+    populationByCounty,
+
+    uptakeBySex,
+    uptakeByCounty,
 });
