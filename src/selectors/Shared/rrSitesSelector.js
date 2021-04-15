@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { createSelector } from 'reselect';
 
 const list = state => state.rrSites.list;
-// const counties = state => state.rrSites.counties;
+const counties = state => state.rrSites.counties;
 const subCounties = state => state.rrSites.subCounties;
 const facilities = state => state.rrSites.facilities;
 const partners = state => state.rrSites.partners;
@@ -12,17 +12,42 @@ const projects = state => state.rrSites.projects;
 const filteredCounties = state => state.filters.counties;
 const filteredSubCounties = state => state.filters.subCounties;
 // const filteredFacilities = state => state.filters.facilities;
-// const filteredPartners = state => state.filters.partners;
+const filteredPartners = state => state.filters.partners;
 // const filteredAgencies = state => state.filters.agencies;
 // const filteredProjects = state => state.filters.projects;
 
+export const getCounties = createSelector(
+    [list, counties, filteredPartners],
+    (list, counties, filteredPartners) => {
+        return filteredPartners.length === 0 ?
+            counties :
+            _.chain(list)
+            .filter(list => filteredPartners.includes(list.partner))
+            .map(l => l.county ? l.county.toUpperCase(): 'No County')
+            .uniq()
+            .sort()
+            .value();
+    }
+);
+
 export const getSubCounties = createSelector(
-    [list, subCounties, filteredCounties],
-    (list, subCounties, filteredCounties) => {
-        return filteredCounties.length === 0 ?
+    [list, subCounties, filteredCounties, filteredPartners],
+    (list, subCounties, filteredCounties, filteredPartners) => {
+        return filteredCounties.length === 0 && filteredPartners.length === 0 ?
             subCounties :
             _.chain(list)
-            .filter(list => filteredCounties.includes(list.county.toUpperCase()) )
+            .filter(list => {
+                let val = false;
+                if (filteredCounties.length > 0 && filteredPartners.length > 0) {
+                    val = filteredCounties.includes(list.county.toUpperCase()) &&
+                        filteredPartners.includes(list.partner);
+                } else if (filteredCounties.length > 0) {
+                    val = filteredCounties.includes(list.county.toUpperCase());
+                } else if (filteredPartners.length > 0) {
+                    val = filteredPartners.includes(list.partner);
+                }
+                return val;
+            })
             .map(l => l.subCounty ? l.subCounty.toUpperCase(): 'No Sub County')
             .uniq()
             .sort()
@@ -31,20 +56,32 @@ export const getSubCounties = createSelector(
 );
 
 export const getFacilities = createSelector(
-    [list, facilities, filteredCounties, filteredSubCounties],
-    (list, facilities, filteredCounties, filteredSubCounties) => {
-        return filteredCounties.length === 0 && filteredSubCounties.length === 0 ?
+    [list, facilities, filteredCounties, filteredSubCounties, filteredPartners],
+    (list, facilities, filteredCounties, filteredSubCounties, filteredPartners) => {
+        return filteredCounties.length === 0 && filteredSubCounties.length === 0 && filteredPartners.length === 0 ?
             facilities :
             _.chain(list)
             .filter(list => {
                 let val = false;
-                if (filteredCounties.length > 0 && filteredSubCounties.length > 0) {
+                if (filteredCounties.length > 0 && filteredSubCounties.length > 0 && filteredPartners.length > 0) {
+                    val = filteredCounties.includes(list.county.toUpperCase()) &&
+                        filteredSubCounties.includes(list.subCounty.toUpperCase()) &&
+                        filteredPartners.includes(list.partner);
+                } else if (filteredCounties.length > 0 && filteredSubCounties.length) {
                     val = filteredCounties.includes(list.county.toUpperCase()) &&
                         filteredSubCounties.includes(list.subCounty.toUpperCase());
+                } else if (filteredCounties.length > 0 && filteredPartners.length > 0) {
+                    val = filteredCounties.includes(list.county.toUpperCase()) &&
+                        filteredPartners.includes(list.partner);
+                } else if (filteredSubCounties.length > 0 && filteredPartners.length > 0) {
+                    val = filteredSubCounties.includes(list.subCounty.toUpperCase()) &&
+                        filteredPartners.includes(list.partner);
                 } else if (filteredCounties.length > 0) {
                     val = filteredCounties.includes(list.county.toUpperCase());
                 } else if (filteredSubCounties.length > 0) {
                     val = filteredSubCounties.includes(list.subCounty.toUpperCase());
+                } else if (filteredPartners.length > 0) {
+                    val = filteredPartners.includes(list.partner);
                 }
                 return val;
             })
