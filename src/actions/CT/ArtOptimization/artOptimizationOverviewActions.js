@@ -26,7 +26,9 @@ export const fetchArtOptimizationOverview = () => async (dispatch, getState) => 
         facility: getState().filters.facilities,
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
-        project: getState().filters.projects
+        project: getState().filters.projects,
+        gender: getState().filters.genders,
+        datimAgeGroup: getState().filters.datimAgeGroups,
     };
     const response = await getAll('care-treatment/getArtOptimizationOverview', params);
     dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_OVERVIEW_FETCH, payload: { filtered: getState().filters.filtered, list: response }});

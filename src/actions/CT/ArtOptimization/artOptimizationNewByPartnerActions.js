@@ -27,6 +27,8 @@ export const fetchArtOptimizationNewByPartner = () => async (dispatch, getState)
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
         project: getState().filters.projects,
+        gender: getState().filters.genders,
+        datimAgeGroup: getState().filters.datimAgeGroups,
         year: [2020, 2021]
     };
     const response = await getAll('care-treatment/getArtOptimizationNewByPartner', params);
