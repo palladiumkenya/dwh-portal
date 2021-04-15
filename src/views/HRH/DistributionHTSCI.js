@@ -3,14 +3,21 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import { getHtsProvidersByCounty } from '../../selectors/HRH/Practitioners/practitionersCountByCountyQualification';
+import { getHtsProvidersByCounty } from '../../selectors/HRH/practitionersCountByCountyQualification';
 
 const DistributionHTSCI = () => {
     const htsProvidersByCounty = useSelector(getHtsProvidersByCounty);
+    const data = [];
+    for(let i = 0; i < htsProvidersByCounty.count.length; i++) {
+        data.push([
+            htsProvidersByCounty.cases[i],
+            htsProvidersByCounty.count[i],
+        ])
+    }
     const distributionOfHTSProvidersAndCaseidentification = {
-        title: { text: 'Distribution of HTS providers and case identification, 2019' },
+        title: { text: 'Distribution of HTS providers and case identification' },
         subtitle: { text: 'Source: NASCOP HRIS' },
-        xAxis: { title: { text: 'No of HTS providers' }, startOnTick: true, endOnTick: true, showLastLabel: true },
+        xAxis: { title: { text: 'No of HTS providers' }, startOnTick: true, endOnTick: true, showLastLabel: true, min:0 },
         yAxis: { title: { text: 'No of cases identified' }},
         legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80, floating: true, borderWidth: 1 },
         plotOptions: {
@@ -21,7 +28,7 @@ const DistributionHTSCI = () => {
             }
         },
         series: [
-            { name: 'Cases & HTS Providers Distribution', color: 'rgba(223, 83, 83, .5)', data: [[],htsProvidersByCounty], type: 'scatter' }
+            { name: 'Cases & HTS Providers Distribution', color: 'rgba(223, 83, 83, .5)', data: data, type: 'scatter' }
         ]
     };
     return (
