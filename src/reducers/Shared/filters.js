@@ -8,8 +8,6 @@ const initialState = {
     partners: [],
     agencies: [],
     projects: [],
-    genders: [],
-    datimAgeGroups: [],
     fromDate: '',
     toDate: '',
     countyFilterEnabled: true,
@@ -20,8 +18,6 @@ const initialState = {
     projectFilterEnabled: false,
     fromDateFilterEnabled: false,
     toDateFilterEnabled: false,
-    genderFilterEnabled: false,
-    datimAgeGroupFilterEnabled: false,
 };
 
 export default (state = initialState, action) => {
@@ -29,7 +25,7 @@ export default (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.FILTER_BY_COUNTY:
             filtered = action.payload.counties.length > 0 || state.subCounties.length > 0 || state.facilities.length > 0 ||
-                state.partners.length > 0 || state.agencies.length > 0 || state.projects.length > 0 || state.genders.length > 0 || state.datimAgeGroups.length > 0 ||
+                state.partners.length > 0 || state.agencies.length > 0 || state.projects.length > 0 ||
                 state.fromDate !== '' ||  state.toDate !== '' || false;
             return {
                 ...state,
@@ -38,7 +34,7 @@ export default (state = initialState, action) => {
             }
         case actionTypes.FILTER_BY_SUB_COUNTY:
             filtered = state.counties.length > 0 || action.payload.subCounties.length > 0 || state.facilities.length > 0 ||
-                state.partners.length > 0 || state.agencies.length > 0 || state.projects.length > 0 || state.genders.length > 0 || state.datimAgeGroups.length > 0 ||
+                state.partners.length > 0 || state.agencies.length > 0 || state.projects.length > 0 ||
                 state.fromDate !== '' || state.toDate !== '' || false;
             return {
                 ...state,
@@ -47,7 +43,7 @@ export default (state = initialState, action) => {
             }
         case actionTypes.FILTER_BY_FACILITY:
             filtered = state.counties.length > 0 || state.subCounties.length > 0 || action.payload.facilities.length > 0 ||
-                state.partners.length > 0 || state.agencies.length > 0 || state.projects.length > 0 || state.genders.length > 0 || state.datimAgeGroups.length > 0 ||
+                state.partners.length > 0 || state.agencies.length > 0 || state.projects.length > 0 ||
                 state.fromDate !== '' || state.toDate !== '' || false;
             return {
                 ...state,
@@ -56,7 +52,7 @@ export default (state = initialState, action) => {
             }
         case actionTypes.FILTER_BY_PARTNER:
             filtered = state.counties.length > 0 || state.subCounties.length > 0 || state.facilities.length > 0 ||
-                action.payload.partners.length > 0 || state.agencies.length > 0 || state.projects.length > 0 || state.genders.length > 0 || state.datimAgeGroups.length > 0 ||
+                action.payload.partners.length > 0 || state.agencies.length > 0 || state.projects.length > 0 ||
                 state.fromDate !== '' || state.toDate !== '' || false;
             return {
                 ...state,
@@ -65,7 +61,7 @@ export default (state = initialState, action) => {
             }
         case actionTypes.FILTER_BY_AGENCY:
             filtered = state.counties.length > 0 || state.subCounties.length > 0 || state.facilities.length > 0 ||
-                state.partners.length > 0 || action.payload.agencies.length > 0 || state.projects.length > 0 || state.genders.length > 0 || state.datimAgeGroups.length > 0 ||
+                state.partners.length > 0 || action.payload.agencies.length > 0 || state.projects.length > 0 ||
                 state.fromDate !== '' || state.toDate !== '' || false;
             return {
                 ...state,
@@ -74,7 +70,7 @@ export default (state = initialState, action) => {
             }
         case actionTypes.FILTER_BY_PROJECT:
             filtered = state.counties.length > 0 || state.subCounties.length > 0 || state.facilities.length > 0 ||
-                state.partners.length > 0 || state.agencies.length > 0 || action.payload.projects.length > 0 || state.genders.length > 0 || state.datimAgeGroups.length > 0 ||
+                state.partners.length > 0 || state.agencies.length > 0 || action.payload.projects.length > 0 ||
                 state.fromDate !== '' || state.toDate !== '' || false;
             return {
                 ...state,
@@ -83,7 +79,7 @@ export default (state = initialState, action) => {
             }
         case actionTypes.FILTER_BY_FROM_DATE:
             filtered = state.counties.length > 0 || state.subCounties.length > 0 || state.facilities.length > 0 ||
-                state.partners.length > 0 || state.agencies.length > 0 || state.projects.length > 0 || state.genders.length > 0 || state.datimAgeGroups.length > 0 ||
+                state.partners.length > 0 || state.agencies.length > 0 || state.projects.length > 0 ||
                 action.payload.fromDate !== '' || state.toDate !== '' || false;
             return {
                 ...state,
@@ -92,30 +88,12 @@ export default (state = initialState, action) => {
             }
         case actionTypes.FILTER_BY_TO_DATE:
             filtered = state.counties.length > 0 || state.subCounties.length > 0 || state.facilities.length > 0 ||
-                state.partners.length > 0 || state.agencies.length > 0 || state.projects.length > 0 || state.genders.length > 0 || state.datimAgeGroups.length > 0 ||
+                state.partners.length > 0 || state.agencies.length > 0 || state.projects.length > 0 ||
                 state.fromDate !== '' || action.payload.toDate !== '' || false;
             return {
                 ...state,
                 filtered,
                 toDate: action.payload.toDate
-            }
-        case actionTypes.FILTER_BY_GENDER:
-            filtered = state.counties.length > 0 || state.subCounties.length > 0 || state.facilities.length > 0 ||
-                state.partners.length > 0 || state.agencies.length > 0 || state.projects.length > 0  || action.payload.genders.length > 0 || state.datimAgeGroups.length > 0 ||
-                state.fromDate !== '' || state.toDate !== '' || false;
-            return {
-                ...state,
-                filtered,
-                genders: action.payload.genders
-            }
-        case actionTypes.FILTER_BY_DATIM_AGE_GROUP:
-            filtered = state.counties.length > 0 || state.subCounties.length > 0 || state.facilities.length > 0 ||
-                state.partners.length > 0 || state.agencies.length > 0 || state.projects.length > 0  || state.genders.length > 0 || action.payload.datimAgeGroups.length > 0 ||
-                state.fromDate !== '' || state.toDate !== '' || false;
-            return {
-                ...state,
-                filtered,
-                datimAgeGroups: action.payload.datimAgeGroups
             }
         case actionTypes.ENABLE_COUNTY_FILTER:
             return {
@@ -204,28 +182,6 @@ export default (state = initialState, action) => {
                 ...state,
                 toDateFilterEnabled: false,
                 toDate: '',
-            }
-        case actionTypes.ENABLE_GENDER_FILTER:
-            return {
-                ...state,
-                genderFilterEnabled: true
-            }
-        case actionTypes.DISABLE_GENDER_FILTER:
-            return {
-                ...state,
-                genderFilterEnabled: false,
-                genders: []
-            }
-        case actionTypes.ENABLE_DATIM_AGE_GROUP_FILTER:
-            return {
-                ...state,
-                datimAgeGroupFilterEnabled: true
-            }
-        case actionTypes.DISABLE_DATIM_AGE_GROUP_FILTER:
-            return {
-                ...state,
-                datimAgeGroupFilterEnabled: false,
-                datimAgeGroups: []
             }
         default:
             return state

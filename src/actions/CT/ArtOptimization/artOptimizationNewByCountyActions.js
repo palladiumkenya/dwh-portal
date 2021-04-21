@@ -27,9 +27,7 @@ export const fetchArtOptimizationNewByCounty = () => async (dispatch, getState) 
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
         project: getState().filters.projects,
-        gender: getState().filters.genders,
-        datimAgeGroup: getState().filters.datimAgeGroups,
-        year: [2020, 2021],
+        year: [2020, 2021]
     };
     const response = await getAll('care-treatment/getArtOptimizationNewByCounty', params);
     dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_NEW_BY_COUNTY_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
