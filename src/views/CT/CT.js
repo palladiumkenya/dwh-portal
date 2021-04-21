@@ -9,7 +9,7 @@ import ViralLoad from './ViralLoad/ViralLoad';
 import AdverseEvents from './AdverseEvents/AdverseEvents';
 import ArtOptimization from './ArtOptimization/ArtOptimization';
 import { changeCtTab, changeCurrentPage } from "../../actions/Shared/uiActions";
-import { enableFromDateFilter, disableFromDateFilter, enableGenderFilter, disableGenderFilter, enableDatimAgeGroupFilter, disableDatimAgeGroupFilter } from "../../actions/Shared/filterActions";
+import { enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
 
 import { loadLinkagePositiveTrends } from '../../actions/HTS/Linkage/linkagePositiveTrendsActions';
 
@@ -242,13 +242,6 @@ const CT = () => {
             dispatch(enableFromDateFilter());
         } else {
             dispatch(disableFromDateFilter());
-        }
-        if (ctTab === 'txOpt') {
-            dispatch(enableGenderFilter());
-            dispatch(enableDatimAgeGroupFilter());
-        } else {
-            dispatch(disableGenderFilter());
-            dispatch(disableDatimAgeGroupFilter());
         }
     }, [
         dispatch,

@@ -21,8 +21,7 @@ const UniversalFilter = () => {
     const [partners, setPartners] = useState([]);
     const [agencies, setAgencies] = useState([]);
     const [projects, setProjects] = useState([]);
-    const [genders, setGenders] = useState([]);
-    const [datimAgeGroups, setDatimAgeGroups] = useState([]);
+
     const rrCounties = useSelector(rrSelectors.getCounties);
     const rrSubCounties = useSelector(rrSelectors.getSubCounties);
     const rrFacilities = useSelector(rrSelectors.getFacilities);
@@ -86,24 +85,6 @@ const UniversalFilter = () => {
                 setAgencies(rrAgencies.map(a => ({ value: a, key: a, text: a })));
                 setProjects(rrProjects.map(p => ({ value: p, key: p, text: p })));
         }
-        setGenders(['Male', 'Female'].map(c => ({ value: c, key: c, text: c })));
-        setDatimAgeGroups([
-            'Under 1',
-            '1 to 4',
-            '5 to 9',
-            '10 to 14',
-            '15 to 19',
-            '20 to 24',
-            '25 to 29',
-            '30 to 34',
-            '35 to 39',
-            '40 to 44',
-            '45 to 49',
-            '50 to 54',
-            '55 to 59',
-            '60 to 64',
-            '65+'
-        ].map(c => ({ value: c, key: c, text: c })));
     }, [
         ui,
 
@@ -307,50 +288,6 @@ const UniversalFilter = () => {
                             iconPosition="left"
                             onChange={(e, data) => {
                                 dispatch(actions.filterByToDate(data.value));
-                            }}
-                        />
-                    </div>
-                </Col> : null
-            }
-            {
-                filters.genderFilterEnabled ?
-                <Col>
-                    <div className="form-group">
-                        <label htmlFor="gender">Gender</label>
-                        <Dropdown
-                            id="gender"
-                            name="gender"
-                            placeholder="Select Gender"
-                            fluid
-                            multiple
-                            selection
-                            search
-                            options={genders}
-                            value={filters.genders}
-                            onChange={(e, data) => {
-                                dispatch(actions.filterByGender(data.value));
-                            }}
-                        />
-                    </div>
-                </Col> : null
-            }
-            {
-                filters.datimAgeGroupFilterEnabled ?
-                <Col>
-                    <div className="form-group">
-                        <label htmlFor="datimAgeGroup">Age Group</label>
-                        <Dropdown
-                            id="datimAgeGroup"
-                            name="datimAgeGroup"
-                            placeholder="Select Age Group"
-                            fluid
-                            multiple
-                            selection
-                            search
-                            options={datimAgeGroups}
-                            value={filters.datimAgeGroups}
-                            onChange={(e, data) => {
-                                dispatch(actions.filterByDatimAgeGroup(data.value));
                             }}
                         />
                     </div>
