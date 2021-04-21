@@ -40,6 +40,16 @@ export const filterByToDate = toDate => ({
     payload: { toDate }
 });
 
+export const filterByGender = genders => ({
+    type: actionTypes.FILTER_BY_GENDER,
+    payload: { genders }
+});
+
+export const filterByDatimAgeGroup = datimAgeGroups => ({
+    type: actionTypes.FILTER_BY_DATIM_AGE_GROUP,
+    payload: { datimAgeGroups }
+});
+
 export const enableFromDateFilter = () => ({
     type: actionTypes.ENABLE_FROM_DATE_FILTER
 });
@@ -70,4 +80,20 @@ export const enableFacilityFilter = () => ({
 
 export const disableFacilityFilter = () => ({
     type: actionTypes.DISABLE_FACILITY_FILTER
+});
+
+export const enableGenderFilter = () => ({
+    type: actionTypes.ENABLE_GENDER_FILTER
+});
+
+export const disableGenderFilter = () => ({
+    type: actionTypes.DISABLE_GENDER_FILTER
+});
+
+export const enableDatimAgeGroupFilter = () => ({
+    type: actionTypes.ENABLE_DATIM_AGE_GROUP_FILTER
+});
+
+export const disableDatimAgeGroupFilter = () => ({
+    type: actionTypes.DISABLE_DATIM_AGE_GROUP_FILTER
 });
