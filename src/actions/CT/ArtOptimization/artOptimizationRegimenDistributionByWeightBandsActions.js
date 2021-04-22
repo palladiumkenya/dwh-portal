@@ -29,6 +29,8 @@ export const fetchRegimenDistributionByWeightBands = () => async (dispatch, getS
         project: getState().filters.projects,
         gender: getState().filters.genders,
         datimAgeGroup: getState().filters.datimAgeGroups,
+        latestPregnancy: getState().filters.latestPregnancies,
+        populationType: getState().filters.populationTypes,
     };
     const response = await getAll('care-treatment/getRegimenDistributionByWeightBands', params);
     dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_REGIMEN_DISTRIBUTION_BY_WEIGHT_BANDS_FETCH, payload: { filtered: getState().filters.filtered, list: response }});

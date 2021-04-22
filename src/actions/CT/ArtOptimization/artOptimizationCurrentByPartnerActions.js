@@ -29,6 +29,8 @@ export const fetchArtOptimizationCurrentByPartner = () => async (dispatch, getSt
         project: getState().filters.projects,
         gender: getState().filters.genders,
         datimAgeGroup: getState().filters.datimAgeGroups,
+        latestPregnancy: getState().filters.latestPregnancies,
+        populationType: getState().filters.populationTypes,
     };
     const response = await getAll('care-treatment/getArtOptimizationCurrentByPartner', params);
     dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_CURRENT_BY_PARTNER_FETCH, payload: { filtered: getState().filters.filtered, list: response }});

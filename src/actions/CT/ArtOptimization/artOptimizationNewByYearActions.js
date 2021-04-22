@@ -29,6 +29,8 @@ export const fetchArtOptimizationNewByYear = () => async (dispatch, getState) =>
         project: getState().filters.projects,
         gender: getState().filters.genders,
         datimAgeGroup: getState().filters.datimAgeGroups,
+        latestPregnancy: getState().filters.latestPregnancies,
+        populationType: getState().filters.populationTypes,
         year: [2020, 2021]
     };
     const response = await getAll('care-treatment/getArtOptimizationNewByYear', params);

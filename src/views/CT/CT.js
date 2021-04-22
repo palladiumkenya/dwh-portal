@@ -9,7 +9,18 @@ import ViralLoad from './ViralLoad/ViralLoad';
 import AdverseEvents from './AdverseEvents/AdverseEvents';
 import ArtOptimization from './ArtOptimization/ArtOptimization';
 import { changeCtTab, changeCurrentPage } from "../../actions/Shared/uiActions";
-import { enableFromDateFilter, disableFromDateFilter, enableGenderFilter, disableGenderFilter, enableDatimAgeGroupFilter, disableDatimAgeGroupFilter } from "../../actions/Shared/filterActions";
+import {
+    enableFromDateFilter,
+    disableFromDateFilter,
+    enableGenderFilter,
+    disableGenderFilter,
+    enableDatimAgeGroupFilter,
+    disableDatimAgeGroupFilter,
+    enableLatestPregnancyFilter,
+    disableLatestPregnancyFilter,
+    enablePopulationTypeFilter,
+    disablePopulationTypeFilter
+} from "../../actions/Shared/filterActions";
 
 import { loadLinkagePositiveTrends } from '../../actions/HTS/Linkage/linkagePositiveTrendsActions';
 
@@ -246,9 +257,13 @@ const CT = () => {
         if (ctTab === 'txOpt') {
             dispatch(enableGenderFilter());
             dispatch(enableDatimAgeGroupFilter());
+            dispatch(enableLatestPregnancyFilter());
+            dispatch(enablePopulationTypeFilter());
         } else {
             dispatch(disableGenderFilter());
             dispatch(disableDatimAgeGroupFilter());
+            dispatch(disableLatestPregnancyFilter());
+            dispatch(disablePopulationTypeFilter());
         }
     }, [
         dispatch,

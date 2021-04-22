@@ -23,6 +23,8 @@ const UniversalFilter = () => {
     const [projects, setProjects] = useState([]);
     const [genders, setGenders] = useState([]);
     const [datimAgeGroups, setDatimAgeGroups] = useState([]);
+    const [populationTypes, setPopulationTypes] = useState([]);
+    const [latestPregnancies, setLatestPregnancies] = useState([]);
     const rrCounties = useSelector(rrSelectors.getCounties);
     const rrSubCounties = useSelector(rrSelectors.getSubCounties);
     const rrFacilities = useSelector(rrSelectors.getFacilities);
@@ -103,6 +105,21 @@ const UniversalFilter = () => {
             '55 to 59',
             '60 to 64',
             '65+'
+        ].map(c => ({ value: c, key: c, text: c })));
+        setPopulationTypes([
+            ' FSW',
+            ' General Population',
+            ' MSM',
+            ' PWID',
+            'General Population',
+            'Key population',
+        ].map(c => ({ value: c, key: c, text: c })));
+        setLatestPregnancies([
+            'LIVE BIRTH',
+            'No',
+            'RECENTLY MISCARRIAGED',
+            'UNKNOWN',
+            'YES',
         ].map(c => ({ value: c, key: c, text: c })));
     }, [
         ui,
@@ -351,6 +368,50 @@ const UniversalFilter = () => {
                             value={filters.datimAgeGroups}
                             onChange={(e, data) => {
                                 dispatch(actions.filterByDatimAgeGroup(data.value));
+                            }}
+                        />
+                    </div>
+                </Col> : null
+            }
+            {
+                filters.latestPregnancyFilterEnabled ?
+                <Col>
+                    <div className="form-group">
+                        <label htmlFor="latestPregnancy">Pregnancy</label>
+                        <Dropdown
+                            id="latestPregnancy"
+                            name="latestPregnancy"
+                            placeholder="Select Pregnancy"
+                            fluid
+                            multiple
+                            selection
+                            search
+                            options={latestPregnancies}
+                            value={filters.latestPregnancies}
+                            onChange={(e, data) => {
+                                dispatch(actions.filterByLatestPregnancy(data.value));
+                            }}
+                        />
+                    </div>
+                </Col> : null
+            }
+            {
+                filters.populationTypeFilterEnabled ?
+                <Col>
+                    <div className="form-group">
+                        <label htmlFor="populationType">Population Type</label>
+                        <Dropdown
+                            id="populationType"
+                            name="populationType"
+                            placeholder="Select Pregnancy"
+                            fluid
+                            multiple
+                            selection
+                            search
+                            options={populationTypes}
+                            value={filters.populationTypes}
+                            onChange={(e, data) => {
+                                dispatch(actions.filterByPopulationType(data.value));
                             }}
                         />
                     </div>
