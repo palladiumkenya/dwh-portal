@@ -5,9 +5,10 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import * as adverseEventsSeverityActionsSelectors from '../../../selectors/CT/AdverseEvents/adverseEventsSeverityActions';
 
-const AdverseEventsSeverityActions = () => {
+const AdverseEventsSeverityActions = ({ tab }) => {
     const [adverseEventsActionsBySeverity, setAdverseEventsActionsBySeverity] = useState({});
-    const adverseEventsSeverityActions = useSelector(adverseEventsSeverityActionsSelectors.getAdverseEventsSeverityActions);
+    const methodCalled = tab === 'adult' ? adverseEventsSeverityActionsSelectors.getAdverseEventsSeverityActions : adverseEventsSeverityActionsSelectors.getAdverseEventsSeverityCalHIVActions;
+    const adverseEventsSeverityActions = useSelector(methodCalled);
 
     const loadAdverseEventsActionsBySeverity = useCallback(async () => {
         setAdverseEventsActionsBySeverity({
