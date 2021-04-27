@@ -60,8 +60,8 @@ const AdverseEvents = () => {
                     <AdverseEventsClientsByAgeSexAdults/>
                     <SectionFooter overview={branding.overview}/>
                     <Row>
-                        <Col><AdverseEventsSeverityGrading/></Col>
-                        <Col><AdverseEventsSeverityActions/></Col>
+                        <Col><AdverseEventsSeverityGrading tab={'adult'} /></Col>
+                        <Col><AdverseEventsSeverityActions tab={'adult'} /></Col>
                     </Row>
                     <SectionFooter overview={branding.overview}/>
                     <AdverseEventsSeverityLevels />
@@ -94,6 +94,15 @@ const AdverseEvents = () => {
                     <SectionHeader title={branding.title + " - CHILDREN"}/>
                     <AdverseEventsOverviewChildren/>
                     <AdverseEventsClientsByAgeSexChildren/>
+                    <SectionFooter overview={branding.overview}/>
+                    <Row>
+                        <Col className={'col-6'}>
+                            <AdverseEventsSeverityGrading tab={'calhiv'} />
+                        </Col>
+                        <Col className={'col-6'}>
+                            <AdverseEventsSeverityActions tab={'calhiv'} />
+                        </Col>
+                    </Row>
                     <SectionFooter overview={branding.overview}/>
                 </TabPane>
             </TabContent>
