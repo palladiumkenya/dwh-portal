@@ -64,7 +64,7 @@ const AdverseEvents = () => {
                         <Col><AdverseEventsSeverityActions tab={'adult'} /></Col>
                     </Row>
                     <SectionFooter overview={branding.overview}/>
-                    <AdverseEventsSeverityLevels />
+                    <AdverseEventsSeverityLevels tab={'adult'} />
                     <SectionFooter overview={branding.overview}/>
                     <Row>
                         <Col><AdverseEventsCauses/></Col>
@@ -104,6 +104,7 @@ const AdverseEvents = () => {
                         </Col>
                     </Row>
                     <SectionFooter overview={branding.overview}/>
+                    <AdverseEventsSeverityLevels tab={'calhiv'} />
                 </TabPane>
             </TabContent>
         </div>

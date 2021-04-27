@@ -5,11 +5,13 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import * as adverseEventsReportedWithSeverityLevelsSelectors from '../../../selectors/CT/AdverseEvents/adverseEventsReportedWithSeverityLevels';
 
-const AdverseEventsSeverityLevels = () => {
+const AdverseEventsSeverityLevels = ({ tab }) => {
     const [severityLevels, setSeverityLevels] = useState({});
-    const adverseEventsReportedWithSeverityLevels = useSelector(adverseEventsReportedWithSeverityLevelsSelectors.getAdverseEventsReportedWithSeverityLevels);
+    const methodCalled = tab === 'adult' ? adverseEventsReportedWithSeverityLevelsSelectors.getAdverseEventsReportedWithSeverityLevels
+        : adverseEventsReportedWithSeverityLevelsSelectors.getAdverseEventsReportedWithSeverityLevelsCalHIV;
+    const adverseEventsReportedWithSeverityLevels = useSelector(methodCalled);
 
-    const loadSeverityLevels = useCallback(async () => {        
+    const loadSeverityLevels = useCallback(async () => {
         setSeverityLevels({
             title: { text: '' },
             xAxis: [{ categories: adverseEventsReportedWithSeverityLevels.categories, crosshair: true }],
