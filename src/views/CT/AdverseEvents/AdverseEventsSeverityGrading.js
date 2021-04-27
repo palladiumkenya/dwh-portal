@@ -5,9 +5,10 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import * as adverseEventsSeverityGradingSelectors from '../../../selectors/CT/AdverseEvents/adverseEventsSeverityGrading';
 
-const AdverseEventsSeverityGrading = () => {
+const AdverseEventsSeverityGrading = ({ tab }) => {
     const [severityGrading, setSeverityGrading] = useState({});
-    const adverseEventsSeverityGrading = useSelector(adverseEventsSeverityGradingSelectors.getAdverseEventsSeverityGrading);
+    const methodSelected = tab === 'adult' ? adverseEventsSeverityGradingSelectors.getAdverseEventsSeverityGrading : adverseEventsSeverityGradingSelectors.getAdverseEventsSeverityGradingCalHIV;
+    const adverseEventsSeverityGrading = useSelector(methodSelected);
 
     const loadSeverityGrading =  useCallback(async () => {
         setSeverityGrading({
