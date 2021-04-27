@@ -8,7 +8,7 @@ import * as adverseEventsProportionOfPLHIVWithAeByTypeOfSuspectedCausativeDrugs
 import * as adverseEventsClientsByAgeSexSelectors
     from '../../../selectors/CT/AdverseEvents/adverseEventsClientsByAgeSex';
 
-const AdverseEventsProportionOfPlHivByTypeOfSuspectedCausativeDrugs = () => {
+const AdverseEventsProportionOfPlHivByTypeOfSuspectedCausativeDrugs = ({ tab }) => {
     const [proportionOfPlHivByTypeOfSuspectedCausativeDrugs, setProportionOfPlHivByTypeOfSuspectedCausativeDrugs] = useState({});
     const adverseEventsProportionOfPLHIVByCausativeDrugs = useSelector(adverseEventsProportionOfPLHIVWithAeByTypeOfSuspectedCausativeDrugs.getProportionOfPLHIVWithAeByTypeOfSuspectedCausativeDrugs);
     const adverseEventsClientsAdults = useSelector(adverseEventsClientsByAgeSexSelectors.getAdverseEventsClientsAdults);
