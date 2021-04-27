@@ -3,7 +3,9 @@ export function roundNumber(number, decimalPlaces = 0) {
 }
 
 export function formatNumber(number) {
-    if (typeof number === 'undefined') {
+    if (!number) {
+        return 0;
+    } else if (typeof number === 'undefined') {
         return 0;
     }
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
