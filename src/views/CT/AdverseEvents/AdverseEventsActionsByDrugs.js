@@ -5,9 +5,11 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import * as adverseEventsActionsByDrugsNewSelectors from '../../../selectors/CT/AdverseEvents/adverseEventsActionsByDrugsNew';
 
-const AdverseEventsActionsByDrugs = () => {
+const AdverseEventsActionsByDrugs = ({ tab }) => {
     const [actionsByDrugs, setActionsByDrugs] = useState({});
-    const adverseEventsActionsByDrugs = useSelector(adverseEventsActionsByDrugsNewSelectors.getAdverseEventsActionsByDrugsNew);
+    const methodCalled = tab === 'adult' ? adverseEventsActionsByDrugsNewSelectors.getAdverseEventsActionsByDrugsNew
+        : adverseEventsActionsByDrugsNewSelectors.getAdverseEventsActionsByDrugsNewCalHIV;
+    const adverseEventsActionsByDrugs = useSelector(methodCalled);
 
     const loadActionsByDrugs = useCallback(async () => {
         const series = [];
