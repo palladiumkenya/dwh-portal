@@ -6,14 +6,11 @@ const HtsUptakeIndicatorDefinition = () => {
         <div className={"row"}>
             <div className="col-12">
                 <Card>
-                    <CardHeader className={"indicator_definition_header"}>
-                        Indicator Definitions
-                    </CardHeader>
-                    <CardBody className={"indicator_definition_body"}>
+                    <CardHeader>Indicator Definition</CardHeader>
+                    <CardBody>
                         <ul>
-                            <li>
-                                HIV testing services (HTS) uptake (HIV Testing) = Number of unique individuals who are tested for HIV within a reporting period. This is based on the documented final result in eHTS.
-                            </li>
+                            <li>HIV Testing Services (HTS) Uptake =&gt; Number of unique individuals who are tested for HIV within a reporting period. This is based on the documented final result in eHTS.</li>
+                            <li>Positivity =&gt; Number of unique individuals whose HIV test results are positive divided by the number of unique individuals tested for HIV.</li>
                         </ul>
                     </CardBody>
                 </Card>

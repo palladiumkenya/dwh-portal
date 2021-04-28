@@ -38,6 +38,8 @@ import { loadArtOptimizationCurrentByPartner } from '../../actions/CT/ArtOptimiz
 import { loadArtOptimizationNewByCounty } from '../../actions/CT/ArtOptimization/artOptimizationNewByCountyActions';
 import { loadArtOptimizationNewByPartner } from '../../actions/CT/ArtOptimization/artOptimizationNewByPartnerActions';
 import { loadArtOptimizationNewByYear } from '../../actions/CT/ArtOptimization/artOptimizationNewByYearActions';
+import { loadRegimenDistributionByWeightBands } from '../../actions/CT/ArtOptimization/artOptimizationRegimenDistributionByWeightBandsActions';
+import { loadRegimenDistributionByAgeBands } from '../../actions/CT/ArtOptimization/artOptimizationRegimenDistributionByAgeBandsActions';
 
 import { loadAdverseEventsByAgeSex } from '../../actions/CT/AdverseEvents/adverseEventsByAgeSexActions';
 import { loadAdverseEventsClientsByAgeSex } from '../../actions/CT/AdverseEvents/adverseEventsClientsByAgeSexActions';
@@ -164,6 +166,8 @@ const CT = () => {
                 dispatch(loadArtOptimizationNewByCounty());
                 dispatch(loadArtOptimizationNewByPartner());
                 dispatch(loadArtOptimizationNewByYear());
+                dispatch(loadRegimenDistributionByWeightBands());
+                dispatch(loadRegimenDistributionByAgeBands());
                 break;
             case 'advEv':
                 dispatch(loadCurrentOnArtByAgeSex());

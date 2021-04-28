@@ -82,7 +82,7 @@ const Home = () => {
                     <HomeOverview />
                 </Col>
             </Row>
-            <HomeSexDistribution/>
+            {/*<HomeSexDistribution/>
             <SectionFooter overview={branding.overview}/>
             <HomeTxNew/>
             <SectionFooter overview={branding.overview}/>
@@ -93,7 +93,7 @@ const Home = () => {
                 <Col sm={6}>
                     <HomeMmdUptakeBySex/>
                 </Col>
-            </Row>
+            </Row>*/}
             <SectionFooter overview={branding.overview}/>
         </div>
     );

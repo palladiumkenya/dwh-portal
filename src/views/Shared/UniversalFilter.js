@@ -12,10 +12,6 @@ import { PAGES } from "../../constants";
 const UniversalFilter = () => {
     const dispatch = useDispatch();
 
-    const rrSites = useSelector(state => state.rrSites);
-    const htsSites = useSelector(state => state.htsSites);
-    const ctSites = useSelector(state => state.ctSites);
-
     const filters = useSelector(state => state.filters);
     const ui = useSelector(state => state.ui);
 
@@ -26,18 +22,21 @@ const UniversalFilter = () => {
     const [agencies, setAgencies] = useState([]);
     const [projects, setProjects] = useState([]);
 
+    const rrCounties = useSelector(rrSelectors.getCounties);
     const rrSubCounties = useSelector(rrSelectors.getSubCounties);
     const rrFacilities = useSelector(rrSelectors.getFacilities);
     const rrPartners = useSelector(rrSelectors.getPartners);
     const rrAgencies = useSelector(rrSelectors.getAgencies);
     const rrProjects = useSelector(rrSelectors.getProjects);
 
+    const htsCounties = useSelector(htsSelectors.getCounties);
     const htsSubCounties = useSelector(htsSelectors.getSubCounties);
     const htsFacilities = useSelector(htsSelectors.getFacilities);
     const htsPartners = useSelector(htsSelectors.getPartners);
     const htsAgencies = useSelector(htsSelectors.getAgencies);
     const htsProjects = useSelector(htsSelectors.getProjects);
 
+    const ctCounties = useSelector(ctSelectors.getCounties);
     const ctSubCounties = useSelector(ctSelectors.getSubCounties);
     const ctFacilities = useSelector(ctSelectors.getFacilities);
     const ctPartners = useSelector(ctSelectors.getPartners);
@@ -47,7 +46,7 @@ const UniversalFilter = () => {
     const loadSites = useCallback(async () => {
         switch(ui.currentPage) {
             case PAGES.home:
-                setCounties(ctSites.counties.map(c => ({ value: c, key: c, text: c })));
+                setCounties(ctCounties.map(c => ({ value: c, key: c, text: c })));
                 setSubCounties(ctSubCounties.map(s => ({ value: s, key: s, text: s })));
                 setFacilities(ctFacilities.map(f => ({ value: f, key: f, text: f })));
                 setPartners(ctPartners.map(p => ({ value: p, key: p, text: p })));
@@ -55,7 +54,7 @@ const UniversalFilter = () => {
                 setProjects(ctProjects.map(p => ({ value: p, key: p, text: p })));
                 break;
             case PAGES.rr:
-                setCounties(rrSites.counties.map(c => ({ value: c, key: c, text: c })));
+                setCounties(rrCounties.map(c => ({ value: c, key: c, text: c })));
                 setSubCounties(rrSubCounties.map(s => ({ value: s, key: s, text: s })));
                 setFacilities(rrFacilities.map(f => ({ value: f, key: f, text: f })));
                 setPartners(rrPartners.map(p => ({ value: p, key: p, text: p })));
@@ -63,7 +62,7 @@ const UniversalFilter = () => {
                 setProjects(rrProjects.map(p => ({ value: p, key: p, text: p })));
                 break;
             case PAGES.hts:
-                setCounties(htsSites.counties.map(c => ({ value: c, key: c, text: c })));
+                setCounties(htsCounties.map(c => ({ value: c, key: c, text: c })));
                 setSubCounties(htsSubCounties.map(s => ({ value: s, key: s, text: s })));
                 setFacilities(htsFacilities.map(f => ({ value: f, key: f, text: f })));
                 setPartners(htsPartners.map(p => ({ value: p, key: p, text: p })));
@@ -71,7 +70,7 @@ const UniversalFilter = () => {
                 setProjects(htsProjects.map(p => ({ value: p, key: p, text: p })));
                 break;
             case PAGES.ct:
-                setCounties(ctSites.counties.map(c => ({ value: c, key: c, text: c })));
+                setCounties(ctCounties.map(c => ({ value: c, key: c, text: c })));
                 setSubCounties(ctSubCounties.map(s => ({ value: s, key: s, text: s })));
                 setFacilities(ctFacilities.map(s => ({ value: s, key: s, text: s })));
                 setPartners(ctPartners.map(p => ({ value: p, key: p, text: p })));
@@ -79,7 +78,7 @@ const UniversalFilter = () => {
                 setProjects(ctProjects.map(p => ({ value: p, key: p, text: p })));
                 break;
             default:
-                setCounties(rrSites.counties.map(c => ({ value: c, key: c, text: c })));
+                setCounties(rrCounties.map(c => ({ value: c, key: c, text: c })));
                 setSubCounties(rrSubCounties.map(s => ({ value: s, key: s, text: s })));
                 setFacilities(rrFacilities.map(f => ({ value: f, key: f, text: f })));
                 setPartners(rrPartners.map(p => ({ value: p, key: p, text: p })));
@@ -89,21 +88,21 @@ const UniversalFilter = () => {
     }, [
         ui,
 
-        rrSites.counties,
+        rrCounties,
         rrSubCounties,
         rrFacilities,
         rrPartners,
         rrAgencies,
         rrProjects,
 
-        htsSites.counties,
+        htsCounties,
         htsSubCounties,
         htsFacilities,
         htsPartners,
         htsAgencies,
         htsProjects,
 
-        ctSites.counties,
+        ctCounties,
         ctSubCounties,
         ctFacilities,
         ctPartners,

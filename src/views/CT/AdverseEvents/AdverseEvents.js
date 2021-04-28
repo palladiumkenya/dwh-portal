@@ -60,20 +60,24 @@ const AdverseEvents = () => {
                     <AdverseEventsClientsByAgeSexAdults/>
                     <SectionFooter overview={branding.overview}/>
                     <Row>
-                        <Col><AdverseEventsSeverityGrading/></Col>
-                        <Col><AdverseEventsSeverityActions/></Col>
+                        <Col><AdverseEventsSeverityGrading tab={'adult'} /></Col>
+                        <Col><AdverseEventsSeverityActions tab={'adult'} /></Col>
                     </Row>
                     <SectionFooter overview={branding.overview}/>
-                    <AdverseEventsSeverityLevels />
+                    <AdverseEventsSeverityLevels tab={'adult'} />
                     <SectionFooter overview={branding.overview}/>
                     <Row>
-                        <Col><AdverseEventsCauses/></Col>
-                        <Col><AdverseEventsActionsByDrugs/></Col>
+                        <Col>
+                            <AdverseEventsCauses tab={'adult'} />
+                        </Col>
+                        <Col>
+                            <AdverseEventsActionsByDrugs tab={'adult'} />
+                        </Col>
                     </Row>
                     <SectionFooter overview={branding.overview}/>
-                    <AdverseEventsProportionOfPlHivByTypeOfSuspectedCausativeDrugs />
+                    <AdverseEventsProportionOfPlHivByTypeOfSuspectedCausativeDrugs tab={'adult'} />
                     <SectionFooter overview={branding.overview}/>
-                    <AdverseEventsProportionOfPlHivWithAeRelatedToArtOrSuspectedArt />
+                    <AdverseEventsProportionOfPlHivWithAeRelatedToArtOrSuspectedArt tab={'adult'} />
                     <SectionFooter overview={branding.overview}/>
                     <Row className={"col-12"}>
                         <Col className={"col-4"}>
@@ -94,6 +98,26 @@ const AdverseEvents = () => {
                     <SectionHeader title={branding.title + " - CHILDREN"}/>
                     <AdverseEventsOverviewChildren/>
                     <AdverseEventsClientsByAgeSexChildren/>
+                    <SectionFooter overview={branding.overview}/>
+                    <Row>
+                        <Col className={'col-6'}>
+                            <AdverseEventsSeverityGrading tab={'calhiv'} />
+                        </Col>
+                        <Col className={'col-6'}>
+                            <AdverseEventsSeverityActions tab={'calhiv'} />
+                        </Col>
+                    </Row>
+                    <SectionFooter overview={branding.overview}/>
+                    <AdverseEventsSeverityLevels tab={'calhiv'} />
+                    <SectionFooter overview={branding.overview}/>
+                    <Row>
+                        <Col className={'col-6'}>
+                            <AdverseEventsCauses tab={'calhiv'} />
+                        </Col>
+                        <Col className={'col-6'}>
+                            <AdverseEventsActionsByDrugs tab={'calhiv'} />
+                        </Col>
+                    </Row>
                     <SectionFooter overview={branding.overview}/>
                 </TabPane>
             </TabContent>

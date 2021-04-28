@@ -33,6 +33,7 @@ export const PAGES = {
     rr: "REPORTING_RATES",
     hts: "HIV_TESTING_SERVICES",
     ct: "CARE_AND_TREATMENT",
+    hrh: "HRH"
 };
 
 export const CACHING = {
@@ -44,3 +45,6 @@ export const CACHING = {
 };
 
 export const GA_TRACKING_ID = 'UA-137589703-2';
+
+export const DWH_API_URL = 'https://data.kenyahmis.org:8082';
+export const HRH_API_URL = 'https://hrh.datacompanion.org';

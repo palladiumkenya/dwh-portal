@@ -4,10 +4,13 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import * as adverseEventsActionsByDrugsSelectors from '../../../selectors/CT/AdverseEvents/adverseEventsActionsByDrugs';
+import * as adverseEventsReportedWithSeverityLevelsSelectors
+    from '../../../selectors/CT/AdverseEvents/adverseEventsReportedWithSeverityLevels';
 
-const AdverseEventsCauses = () => {
+const AdverseEventsCauses = ({ tab }) => {
     const [reportedCausesOfAEs, setReportedCausesOfAEs] = useState({});
-    const adverseEventsCauses = useSelector(adverseEventsActionsByDrugsSelectors.getAdverseEventsCauses);
+    const methodCalled = tab === 'adult' ? adverseEventsActionsByDrugsSelectors.getAdverseEventsCauses : adverseEventsActionsByDrugsSelectors.getAdverseEventsCausesCalHIV;
+    const adverseEventsCauses = useSelector(methodCalled);
 
     const loadReportedCausesOfAE = useCallback(async () => {
         setReportedCausesOfAEs({

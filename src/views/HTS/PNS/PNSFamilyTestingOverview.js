@@ -21,9 +21,9 @@ const PNSFamilyTestingOverview = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):""
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : moment().startOf('month').subtract(1, 'month').format("YYYY"),
+            month: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : moment().startOf('month').subtract(1, 'month').format("MM")
         };
-        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const data = await getAll('hts/pnsChildrenCascade', params);
         setPNSChildrenCascade({
             elicited: data.elicited ? data.elicited:0,
