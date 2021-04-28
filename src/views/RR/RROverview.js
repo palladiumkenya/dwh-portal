@@ -15,11 +15,13 @@ const RROverview = () => {
 
     const overallReportingRatesByFacilityReportedFiltered = useSelector(state => state.overallReportingRatesByFacilityReported.listFiltered);
     const overallReportingRatesByFacilityReportedUnFiltered = useSelector(state => state.overallReportingRatesByFacilityReported.listUnfiltered);
-    const overallReportingRatesByFacilityReported = filters.filtered ? overallReportingRatesByFacilityReportedFiltered[rrTab] : overallReportingRatesByFacilityReportedUnFiltered[rrTab];
+    const overallReportingRatesByFacilityReportedList = filters.filtered ? overallReportingRatesByFacilityReportedFiltered[rrTab] : overallReportingRatesByFacilityReportedUnFiltered[rrTab];
+    const overallReportingRatesByFacilityReported = overallReportingRatesByFacilityReportedList.length ? overallReportingRatesByFacilityReportedList : [];
     const overallReportingRatesByFacilityReportedLoading = useSelector(state => state.overallReportingRatesByFacilityReported.loading)[rrTab];
     const overallReportingRatesByFacilityNotReportedFiltered = useSelector(state => state.overallReportingRatesByFacilityNotReported.listFiltered);
     const overallReportingRatesByFacilityNotReportedUnFiltered = useSelector(state => state.overallReportingRatesByFacilityNotReported.listUnfiltered);
-    const overallReportingRatesByFacilityNotReported = filters.filtered ? overallReportingRatesByFacilityNotReportedFiltered[rrTab] : overallReportingRatesByFacilityNotReportedUnFiltered[rrTab];
+    const overallReportingRatesByFacilityNotReportedList = filters.filtered ? overallReportingRatesByFacilityNotReportedFiltered[rrTab] : overallReportingRatesByFacilityNotReportedUnFiltered[rrTab];
+    const overallReportingRatesByFacilityNotReported = overallReportingRatesByFacilityNotReportedList.length ? overallReportingRatesByFacilityNotReportedList : [];
     const overallReportingRatesByFacilityNotReportedLoading = useSelector(state => state.overallReportingRatesByFacilityNotReported.loading)[rrTab];
 
     const getPerc = (count, total) => {
