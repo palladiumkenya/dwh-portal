@@ -3,18 +3,20 @@ import moment from 'moment';
 import * as actionTypes from '../types';
 import { CACHING, DWH_API_URL, PAGES } from '../../constants';
 
-export const loadOverallReportingRatesByFacility = () => async (dispatch, getState) => {
+export const loadOverallReportingRatesByFacilityReported = () => async (dispatch, getState) => {
     const docket = getState().ui.rrTab;
-    const lastFetch = getState().overallReportingRatesByFacility.lastFetch[docket];
+    const lastFetch = getState().overallReportingRatesByFacilityReported.lastFetch[docket];
     const diffInMinutes = moment().diff(moment(lastFetch), 'minutes');
+    console.log('loadOverallReportingRatesByFacilityReported');
     if (getState().ui.currentPage !== PAGES.rr) return;
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) return;
-    await dispatch(fetchOverallReportingRatesByFacility());
+    await dispatch(fetchOverallReportingRatesByFacilityReported());
 };
 
-export const fetchOverallReportingRatesByFacility = () => async (dispatch, getState) => {
+export const fetchOverallReportingRatesByFacilityReported = () => async (dispatch, getState) => {
+    console.log('fetchOverallReportingRatesByFacilityReported');
     const docket = getState().ui.rrTab;
-    dispatch({ type: actionTypes.RR_OVERALL_REPORTING_RATES_BY_FACILITY_REQUEST, payload: { docket: docket }});
+    dispatch({ type: actionTypes.RR_OVERALL_REPORTING_RATES_BY_FACILITY_REPORTED_REQUEST, payload: { docket: docket }});
     const params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,
@@ -24,12 +26,12 @@ export const fetchOverallReportingRatesByFacility = () => async (dispatch, getSt
         project: getState().filters.projects,
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
-        reportingType: '0',
+        reportingType: '1',
     };
     try {
         const response = await axios.get(`${DWH_API_URL}/api/manifests/overallReportingByFacility/${docket}`, { params: params });
-        dispatch({ type: actionTypes.RR_OVERALL_REPORTING_RATES_BY_FACILITY_FETCH, payload: { filtered: getState().filters.filtered, docket: docket, list: response.data }});
+        dispatch({ type: actionTypes.RR_OVERALL_REPORTING_RATES_BY_FACILITY_REPORTED_FETCH, payload: { filtered: getState().filters.filtered, docket: docket, list: response.data }});
     } catch (e) {
-        dispatch({ type: actionTypes.RR_OVERALL_REPORTING_RATES_BY_FACILITY_REQUEST_FAILED, payload: { docket: docket }});
+        dispatch({ type: actionTypes.RR_OVERALL_REPORTING_RATES_BY_FACILITY_REPORTED_REQUEST_FAILED, payload: { docket: docket }});
     }
 };

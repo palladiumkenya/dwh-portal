@@ -4,8 +4,7 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import moment from 'moment';
 import { getAll } from '../Shared/Api';
 import CsvDownloader from 'react-csv-downloader';
-
-import { getOverallReportingRatesByFacility } from '../../selectors/RR/overallReportingRatesByFacility';
+import { Spinner } from 'reactstrap';
 
 const RROverview = () => {
     const filters = useSelector(state => state.filters);
@@ -13,7 +12,15 @@ const RROverview = () => {
     const [expected, setExpected] = useState('0');
     const [consistencyStats, setConsistnecy] = useState({ consistency: [], stats: '0', statsPerc: 0 });
     const [recencyStats, setRecency] = useState({ recency: [], stats: '0', statsPerc: 0 });
-    const overallReportingRatesByFacility = useSelector(getOverallReportingRatesByFacility);
+
+    const overallReportingRatesByFacilityReportedFiltered = useSelector(state => state.overallReportingRatesByFacilityReported.listFiltered);
+    const overallReportingRatesByFacilityReportedUnFiltered = useSelector(state => state.overallReportingRatesByFacilityReported.listUnfiltered);
+    const overallReportingRatesByFacilityReported = filters.filtered ? overallReportingRatesByFacilityReportedFiltered[rrTab] : overallReportingRatesByFacilityReportedUnFiltered[rrTab];
+    const overallReportingRatesByFacilityReportedLoading = useSelector(state => state.overallReportingRatesByFacilityReported.loading)[rrTab];
+    const overallReportingRatesByFacilityNotReportedFiltered = useSelector(state => state.overallReportingRatesByFacilityNotReported.listFiltered);
+    const overallReportingRatesByFacilityNotReportedUnFiltered = useSelector(state => state.overallReportingRatesByFacilityNotReported.listUnfiltered);
+    const overallReportingRatesByFacilityNotReported = filters.filtered ? overallReportingRatesByFacilityNotReportedFiltered[rrTab] : overallReportingRatesByFacilityNotReportedUnFiltered[rrTab];
+    const overallReportingRatesByFacilityNotReportedLoading = useSelector(state => state.overallReportingRatesByFacilityNotReported.loading)[rrTab];
 
     const getPerc = (count, total) => {
         const numTotal = parseInt(total.replace(",",""), 10);
@@ -134,13 +141,45 @@ const RROverview = () => {
             </div>
             <div className="row">
                 <div className="col-4">
-                    <CsvDownloader
-                        filename="ndwh_reporting_rates"
-                        separator=","
-                        datas={overallReportingRatesByFacility}
-                    >
-                        <button className="btn btn-primary">Facilities not reported</button>
-                    </CsvDownloader>
+                    {
+                        overallReportingRatesByFacilityNotReportedLoading === true ?
+                        <Spinner/> :
+                        <CsvDownloader
+                            filename="ndwh_reporting_rates_not_reported"
+                            separator=","
+                            datas={overallReportingRatesByFacilityNotReported.map(l => ({
+                                mfl: l.facilityId,
+                                name: l.FacilityName,
+                                county: l.county,
+                                sub_county: l.subcounty,
+                                agency: l.agency,
+                                partner: l.partner,
+                            }))}
+                            text="Download facilities not reported"
+                            className="btn btn-danger"
+                        />
+                    }
+                </div>
+                <div className="col-4">
+                    {
+                        overallReportingRatesByFacilityReportedLoading === true ?
+                        <Spinner/> :
+                        <CsvDownloader
+                            filename="ndwh_reporting_rates_reported"
+                            separator=","
+                            datas={overallReportingRatesByFacilityReported.map(l => ({
+                                mfl: l.facilityId,
+                                name: l.FacilityName,
+                                county: l.county,
+                                sub_county: l.subcounty,
+                                agency: l.agency,
+                                partner: l.partner,
+                                upload_date: l.uploaddate ? l.uploaddate.substring(0,10) : '',
+                            }))}
+                            text="Download facilities reported"
+                            className="btn btn-success"
+                        />
+                    }
                 </div>
             </div>
             <br></br>
