@@ -24,6 +24,7 @@ export const fetchOverallReportingRatesByFacility = () => async (dispatch, getSt
         project: getState().filters.projects,
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
+        reportingType: '0',
     };
     try {
         const response = await axios.get(`${DWH_API_URL}/api/manifests/overallReportingByFacility/${docket}`, { params: params });

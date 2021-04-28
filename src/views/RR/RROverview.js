@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import moment from 'moment';
 import { getAll } from '../Shared/Api';
+import CsvDownloader from 'react-csv-downloader';
 
 import { getOverallReportingRatesByFacility } from '../../selectors/RR/overallReportingRatesByFacility';
 
@@ -131,11 +132,18 @@ const RROverview = () => {
                     </Card>
                 </div>
             </div>
-            {/* <div className="row">
+            <div className="row">
                 <div className="col-4">
-
+                    <CsvDownloader
+                        filename="ndwh_reporting_rates"
+                        separator=","
+                        datas={overallReportingRatesByFacility}
+                    >
+                        <button className="btn btn-primary">Facilities not reported</button>
+                    </CsvDownloader>
                 </div>
-            </div> */}
+            </div>
+            <br></br>
         </>
 
     );
