@@ -7,14 +7,12 @@ export const loadOverallReportingRatesByFacilityNotReported = () => async (dispa
     const docket = getState().ui.rrTab;
     const lastFetch = getState().overallReportingRatesByFacilityNotReported.lastFetch[docket];
     const diffInMinutes = moment().diff(moment(lastFetch), 'minutes');
-    console.log('loadOverallReportingRatesByFacilityNotReported');
     if (getState().ui.currentPage !== PAGES.rr) return;
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) return;
     await dispatch(fetchOverallReportingRatesByFacilityNotReported());
 };
 
 export const fetchOverallReportingRatesByFacilityNotReported = () => async (dispatch, getState) => {
-    console.log('fetchOverallReportingRatesByFacilityNotReported');
     const docket = getState().ui.rrTab;
     dispatch({ type: actionTypes.RR_OVERALL_REPORTING_RATES_BY_FACILITY_NOT_REPORTED_REQUEST, payload: { docket: docket }});
     const params = {
@@ -28,6 +26,7 @@ export const fetchOverallReportingRatesByFacilityNotReported = () => async (disp
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
         reportingType: '0',
     };
+    params.period = getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").startOf('month').subtract(0, 'month').format('YYYY,M') : '';
     try {
         const response = await axios.get(`${DWH_API_URL}/api/manifests/overallReportingByFacility/${docket}`, { params: params });
         dispatch({ type: actionTypes.RR_OVERALL_REPORTING_RATES_BY_FACILITY_NOT_REPORTED_FETCH, payload: { filtered: getState().filters.filtered, docket: docket, list: response.data }});

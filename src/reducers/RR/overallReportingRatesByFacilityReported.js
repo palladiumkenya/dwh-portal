@@ -38,7 +38,6 @@ export default (state = initialState, action) => {
             }
             newState.loading[action.payload.docket] = false;
             newState.lastFetch[action.payload.docket] = Date.now();
-            console.log('RR_OVERALL_REPORTING_RATES_BY_FACILITY_REPORTED_FETCH');
             return newState;
         case actionTypes.RR_OVERALL_REPORTING_RATES_BY_FACILITY_REPORTED_REQUEST_FAILED:
             newState.loading[action.payload.docket] = false;
