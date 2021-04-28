@@ -108,6 +108,8 @@ import populationByCounty from './HRH/populationByCounty';
 import uptakeBySex from './HTS/Uptake/uptakeBySex';
 import uptakeByCounty from './HTS/Uptake/uptakeByCounty';
 
+import overallReportingRatesByFacility from './RR/overallReportingRatesByFacility';
+
 export default combineReducers({
     auth: authReducer,
 
@@ -209,4 +211,6 @@ export default combineReducers({
 
     uptakeBySex,
     uptakeByCounty,
+
+    overallReportingRatesByFacility,
 });

@@ -11,12 +11,21 @@ import RRCounty from './RRCounty';
 import RRPartner from './RRPartner';
 import { enableStickyFilter, disableStickyFilter, changeRRTab, changeCurrentPage } from "../../actions/Shared/uiActions";
 import { enableFacilityFilter, disableFacilityFilter, enableAgencyFilter, disableAgencyFilter, enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
+import { loadOverallReportingRatesByFacility } from "../../actions/RR/overallReportingRatesByFacility";
 import { RR_TABS, PAGES } from "../../constants";
 import RRIndicatorDefinition from './RRIndicatorDefinition';
 
 const RR = () => {
     const dispatch = useDispatch();
     const rrTab = useSelector(state => state.ui.rrTab);
+    const counties = useSelector(state => state.filters.counties);
+    const subCounties = useSelector(state => state.filters.subCounties);
+    const facilities = useSelector(state => state.filters.facilities);
+    const partners = useSelector(state => state.filters.partners);
+    const agencies = useSelector(state => state.filters.agencies);
+    const projects = useSelector(state => state.filters.projects);
+    const fromDate = useSelector(state => state.filters.fromDate);
+    const toDate = useSelector(state => state.filters.toDate);
 
     const onVisibilityChange = (isVisible) => {
         if (isVisible) {
@@ -51,6 +60,21 @@ const RR = () => {
             dispatch(disableFromDateFilter());
         }
     }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(loadOverallReportingRatesByFacility());
+    }, [
+        dispatch,
+        counties,
+        subCounties,
+        facilities,
+        partners,
+        agencies,
+        projects,
+        fromDate,
+        toDate,
+        rrTab
+    ]);
 
     return (
         <div>
