@@ -11,8 +11,6 @@ export const getOverallReportingRatesByFacilityNotReported = createSelector(
     [listUnfiltered, listFiltered, filtered, docket],
     (listUnfiltered, listFiltered, filtered, docket) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        console.log('getOverallReportingRatesByFacilityNotReported');
-        console.log(list[docket]);
         return list[docket];
     }
 );

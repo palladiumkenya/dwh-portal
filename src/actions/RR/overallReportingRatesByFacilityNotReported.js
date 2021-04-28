@@ -7,14 +7,12 @@ export const loadOverallReportingRatesByFacilityNotReported = () => async (dispa
     const docket = getState().ui.rrTab;
     const lastFetch = getState().overallReportingRatesByFacilityNotReported.lastFetch[docket];
     const diffInMinutes = moment().diff(moment(lastFetch), 'minutes');
-    console.log('loadOverallReportingRatesByFacilityNotReported');
     if (getState().ui.currentPage !== PAGES.rr) return;
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) return;
     await dispatch(fetchOverallReportingRatesByFacilityNotReported());
 };
 
 export const fetchOverallReportingRatesByFacilityNotReported = () => async (dispatch, getState) => {
-    console.log('fetchOverallReportingRatesByFacilityNotReported');
     const docket = getState().ui.rrTab;
     dispatch({ type: actionTypes.RR_OVERALL_REPORTING_RATES_BY_FACILITY_NOT_REPORTED_REQUEST, payload: { docket: docket }});
     const params = {

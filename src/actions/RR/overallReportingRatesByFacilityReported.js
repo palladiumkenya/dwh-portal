@@ -7,14 +7,12 @@ export const loadOverallReportingRatesByFacilityReported = () => async (dispatch
     const docket = getState().ui.rrTab;
     const lastFetch = getState().overallReportingRatesByFacilityReported.lastFetch[docket];
     const diffInMinutes = moment().diff(moment(lastFetch), 'minutes');
-    console.log('loadOverallReportingRatesByFacilityReported');
     if (getState().ui.currentPage !== PAGES.rr) return;
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) return;
     await dispatch(fetchOverallReportingRatesByFacilityReported());
 };
 
 export const fetchOverallReportingRatesByFacilityReported = () => async (dispatch, getState) => {
-    console.log('fetchOverallReportingRatesByFacilityReported');
     const docket = getState().ui.rrTab;
     dispatch({ type: actionTypes.RR_OVERALL_REPORTING_RATES_BY_FACILITY_REPORTED_REQUEST, payload: { docket: docket }});
     const params = {
