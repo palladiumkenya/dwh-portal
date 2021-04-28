@@ -154,6 +154,7 @@ const RROverview = () => {
                                 sub_county: l.subcounty,
                                 agency: l.agency,
                                 partner: l.partner,
+                                reporting_date: filters.fromDate ? filters.fromDate : moment().startOf('month').subtract(1, 'month').format("MMM YYYY"),
                             }))}
                             text="Download facilities not reported"
                             className="btn btn-danger"
