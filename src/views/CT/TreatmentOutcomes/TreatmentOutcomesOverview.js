@@ -25,7 +25,7 @@ const TreatmentOutcomesOverview = () => {
             <Row>
                 <Col>
                     <DataCard
-                        title="EVER STARTED ART"
+                        title="STARTED ART"
                         subtitle={null}
                         data={formatNumber(startedOnArt)}
                     />
