@@ -13,6 +13,7 @@ import { enableStickyFilter, disableStickyFilter, changeRRTab, changeCurrentPage
 import { enableFacilityFilter, disableFacilityFilter, enableAgencyFilter, disableAgencyFilter, enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
 import { loadOverallReportingRatesByFacilityReported } from "../../actions/RR/overallReportingRatesByFacilityReported";
 import { loadOverallReportingRatesByFacilityNotReported } from "../../actions/RR/overallReportingRatesByFacilityNotReported";
+import { loadConsistencyByFacilityNotReported } from "../../actions/RR/consistencyByFacilityNotReported";
 import { RR_TABS, PAGES } from "../../constants";
 import RRIndicatorDefinition from './RRIndicatorDefinition';
 
@@ -65,6 +66,7 @@ const RR = () => {
     useEffect(() => {
         dispatch(loadOverallReportingRatesByFacilityReported());
         dispatch(loadOverallReportingRatesByFacilityNotReported());
+        dispatch(loadConsistencyByFacilityNotReported());
     }, [
         dispatch,
         counties,

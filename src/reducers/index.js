@@ -111,6 +111,8 @@ import uptakeByCounty from './HTS/Uptake/uptakeByCounty';
 import overallReportingRatesByFacilityReported from './RR/overallReportingRatesByFacilityReported';
 import overallReportingRatesByFacilityNotReported from './RR/overallReportingRatesByFacilityNotReported';
 
+import consistencyByFacilityNotReported from './RR/consistencyByFacilityNotReported';
+
 export default combineReducers({
     auth: authReducer,
 
@@ -215,4 +217,6 @@ export default combineReducers({
 
     overallReportingRatesByFacilityReported,
     overallReportingRatesByFacilityNotReported,
+
+    consistencyByFacilityNotReported,
 });
