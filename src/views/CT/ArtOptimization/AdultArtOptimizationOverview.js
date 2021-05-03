@@ -64,7 +64,7 @@ const AdultArtOptimizationOverview = () => {
                 </Col>
                 <Col>
                     <DataCard
-                        title="ADULTS ON NVP"
+                        title="ADULTS ON NVP-BASED REGIMEN"
                         subtitle={roundNumber(adultsOnNvpPercent) + "%"}
                         data={formatNumber(adultsOnNvp)}
                     />
