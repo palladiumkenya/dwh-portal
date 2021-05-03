@@ -18,11 +18,18 @@ const RROverview = () => {
     const overallReportingRatesByFacilityReportedList = filters.filtered ? overallReportingRatesByFacilityReportedFiltered[rrTab] : overallReportingRatesByFacilityReportedUnFiltered[rrTab];
     const overallReportingRatesByFacilityReported = overallReportingRatesByFacilityReportedList.length ? overallReportingRatesByFacilityReportedList : [];
     const overallReportingRatesByFacilityReportedLoading = useSelector(state => state.overallReportingRatesByFacilityReported.loading)[rrTab];
+
     const overallReportingRatesByFacilityNotReportedFiltered = useSelector(state => state.overallReportingRatesByFacilityNotReported.listFiltered);
     const overallReportingRatesByFacilityNotReportedUnFiltered = useSelector(state => state.overallReportingRatesByFacilityNotReported.listUnfiltered);
     const overallReportingRatesByFacilityNotReportedList = filters.filtered ? overallReportingRatesByFacilityNotReportedFiltered[rrTab] : overallReportingRatesByFacilityNotReportedUnFiltered[rrTab];
     const overallReportingRatesByFacilityNotReported = overallReportingRatesByFacilityNotReportedList.length ? overallReportingRatesByFacilityNotReportedList : [];
     const overallReportingRatesByFacilityNotReportedLoading = useSelector(state => state.overallReportingRatesByFacilityNotReported.loading)[rrTab];
+
+    const consistencyByFacilityNotReportedFiltered = useSelector(state => state.consistencyByFacilityNotReported.listFiltered);
+    const consistencyByFacilityNotReportedUnFiltered = useSelector(state => state.consistencyByFacilityNotReported.listUnfiltered);
+    const consistencyByFacilityNotReportedList = filters.filtered ? consistencyByFacilityNotReportedFiltered[rrTab] : consistencyByFacilityNotReportedUnFiltered[rrTab];
+    const consistencyByFacilityNotReported = consistencyByFacilityNotReportedList.length ? consistencyByFacilityNotReportedList : [];
+    const consistencyByFacilityNotReportedLoading = useSelector(state => state.consistencyByFacilityNotReported.loading)[rrTab];
 
     const getPerc = (count, total) => {
         const numTotal = parseInt(total.replace(",",""), 10);
@@ -158,7 +165,7 @@ const RROverview = () => {
                                 partner: l.partner,
                                 reporting_date: filters.fromDate ? filters.fromDate : moment().startOf('month').subtract(1, 'month').format("MMM YYYY"),
                             }))}
-                            text="Download facilities not reported"
+                            text="Download facilities not reporting"
                             className="btn btn-danger"
                         />
                     }
@@ -179,8 +186,30 @@ const RROverview = () => {
                                 partner: l.partner,
                                 upload_date: l.uploaddate ? l.uploaddate.substring(0,10) : '',
                             }))}
-                            text="Download facilities reported"
+                            text="Download facilities reporting"
                             className="btn btn-success"
+                        />
+                    }
+                </div>
+                <div className="col-4">
+                    {
+                        consistencyByFacilityNotReportedLoading === true ?
+                        <Spinner/> :
+                        <CsvDownloader
+                            filename="ndwh_reporting_rates_not_consistent"
+                            separator=","
+                            datas={consistencyByFacilityNotReported.map(l => ({
+                                mfl: l.MFLCode,
+                                name: l.FacilityName,
+                                county: l.County,
+                                sub_county: l.Subcounty,
+                                agency: l.Agency,
+                                partner: l.Partner,
+                                reporting_date: filters.fromDate ? filters.fromDate : moment().startOf('month').subtract(1, 'month').format("MMM YYYY"),
+                                number_of_uploads: l.NumberOfUploads
+                            }))}
+                            text="Download facilities not consistent"
+                            className="btn btn-warning"
                         />
                     }
                 </div>
