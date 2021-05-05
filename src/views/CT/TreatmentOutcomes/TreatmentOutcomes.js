@@ -1,22 +1,26 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import VisibilitySensor from 'react-visibility-sensor';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
-import VisibilitySensor from 'react-visibility-sensor';
-import UniversalFilter from './../../Shared/UniversalFilter';
-import SectionHeader from '../../Shared/SectionHeader';
-import SectionFooter from '../../Shared/SectionFooter';
-import TreatmentOutcomesOverview from './TreatmentOutcomesOverview';
-import TreatmentOutcomesByPopulationType from './TreatmentOutcomesByPopulationType';
-import TreatmentOutcomesBySex from './TreatmentOutcomesBySex';
-import TreatmentOutcomesByAge from './TreatmentOutcomesByAge';
-import TreatmentOutcomesByYear from './TreatmentOutcomesByYear';
-import TreatmentOutcomesByCounty from './TreatmentOutcomesByCounty';
-import TreatmentOutcomesByPartner from './TreatmentOutcomesByPartner'
-import ThreeMonthRetention from './ThreeMonthRetention';
-import SixMonthRetention from './SixMonthRetention';
-import TwelveMonthRetention from './TwelveMonthRetention';
-import TwentyFourMonthRetention from './TwentyFourMonthRetention';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
+import { LOADING_DELAY } from "../../../constants";
+import Loading from './../../Shared/Loading';
+import SectionFooter from '../../Shared/SectionFooter';
+import SectionHeader from '../../Shared/SectionHeader';
+import UniversalFilter from './../../Shared/UniversalFilter';
+
+const SixMonthRetention = Loadable({ loader: () => import('./SixMonthRetention'), loading: Loading, delay: LOADING_DELAY });
+const ThreeMonthRetention = Loadable({ loader: () => import('./ThreeMonthRetention'), loading: Loading, delay: LOADING_DELAY });
+const TreatmentOutcomesByAge = Loadable({ loader: () => import('./TreatmentOutcomesByAge'), loading: Loading, delay: LOADING_DELAY });
+const TreatmentOutcomesByCounty = Loadable({ loader: () => import('./TreatmentOutcomesByCounty'), loading: Loading, delay: LOADING_DELAY });
+const TreatmentOutcomesByPartner = Loadable({ loader: () => import('./TreatmentOutcomesByPartner'), loading: Loading, delay: LOADING_DELAY });
+const TreatmentOutcomesByPopulationType = Loadable({ loader: () => import('./TreatmentOutcomesByPopulationType'), loading: Loading, delay: LOADING_DELAY });
+const TreatmentOutcomesBySex = Loadable({ loader: () => import('./TreatmentOutcomesBySex'), loading: Loading, delay: LOADING_DELAY });
+const TreatmentOutcomesByYear = Loadable({ loader: () => import('./TreatmentOutcomesByYear'), loading: Loading, delay: LOADING_DELAY });
+const TreatmentOutcomesOverview = Loadable({ loader: () => import('./TreatmentOutcomesOverview'), loading: Loading, delay: LOADING_DELAY });
+const TwelveMonthRetention = Loadable({ loader: () => import('./TwelveMonthRetention'), loading: Loading, delay: LOADING_DELAY });
+const TwentyFourMonthRetention = Loadable({ loader: () => import('./TwentyFourMonthRetention'), loading: Loading, delay: LOADING_DELAY });
 
 const TreatmentOutcomes = () => {
     const branding = { title: "TREATMENT OUTCOMES", description: "OVERVIEW", overview: "Treatment Outcomes" };

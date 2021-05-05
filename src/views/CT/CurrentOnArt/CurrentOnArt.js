@@ -1,16 +1,20 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import VisibilitySensor from 'react-visibility-sensor';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
-import VisibilitySensor from 'react-visibility-sensor';
-import UniversalFilter from '../../Shared/UniversalFilter';
-import SectionHeader from '../../Shared/SectionHeader';
-import SectionFooter from '../../Shared/SectionFooter';
-import CurrentOnArtOverview from './CurrentOnArtOverview';
-import CurrentOnArtByAgeSex from './CurrentOnArtByAgeSex';
-import CurrentOnArtBySex from './CurrentOnArtBySex';
-import CurrentOnArtByCounty from './CurrentOnArtByCounty';
-import CurrentOnArtByPartner from './CurrentOnArtByPartner';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
+import { LOADING_DELAY } from "../../../constants";
+import Loading from './../../Shared/Loading';
+import SectionFooter from './../../Shared/SectionFooter';
+import SectionHeader from './../../Shared/SectionHeader';
+import UniversalFilter from './../../Shared/UniversalFilter';
+
+const CurrentOnArtByAgeSex  = Loadable({ loader: () => import('./CurrentOnArtByAgeSex'), loading: Loading, delay: LOADING_DELAY });
+const CurrentOnArtByCounty  = Loadable({ loader: () => import('./CurrentOnArtByCounty'), loading: Loading, delay: LOADING_DELAY });
+const CurrentOnArtByPartner  = Loadable({ loader: () => import('./CurrentOnArtByPartner'), loading: Loading, delay: LOADING_DELAY });
+const CurrentOnArtBySex  = Loadable({ loader: () => import('./CurrentOnArtBySex'), loading: Loading, delay: LOADING_DELAY });
+const CurrentOnArtOverview  = Loadable({ loader: () => import('./CurrentOnArtOverview'), loading: Loading, delay: LOADING_DELAY });
 
 const CurrentOnART = () => {
     const branding = { title: "CURRENT ON ART", description: "OVERVIEW", overview: "Current on ART" };
