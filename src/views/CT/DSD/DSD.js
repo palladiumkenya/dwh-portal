@@ -1,24 +1,28 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import VisibilitySensor from 'react-visibility-sensor';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Row } from 'reactstrap';
-import VisibilitySensor from 'react-visibility-sensor';
-import UniversalFilter from './../../Shared/UniversalFilter';
-import SectionHeader from '../../Shared/SectionHeader';
-import SectionFooter from '../../Shared/SectionFooter';
-import DSDOverview from './DSDOverview';
-import DSDCascade from './DSDCascade';
-import DistributionUnstable from './DistributionUnstable';
-import DistributionMMDStable from './DistributionMMDStable';
-import DistributionStableAgeSex from './DistributionStableAgeSex';
-import DistributionStableByCounty from './DistributionStableByCounty';
-import DistributionStableByPartner from './DistributionStableByPartner';
-import AppointmentDurationByStability from './AppointmentDurationByStability';
-import AppointmentDurationBySex from './AppointmentDurationBySex';
-import AppointmentDurationByAge from './AppointmentDurationByAge';
-import AppointmentDurationStableByCounty from './AppointmentDurationStableByCounty';
-import AppointmentDurationStableByPartner from './AppointmentDurationStableByPartner';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
-import DSDIndicatorDefinition from './DSDIndicatorDefinition';
+import { LOADING_DELAY } from "../../../constants";
+import Loading from './../../Shared/Loading';
+import SectionFooter from '../../Shared/SectionFooter';
+import SectionHeader from '../../Shared/SectionHeader';
+import UniversalFilter from './../../Shared/UniversalFilter';
+
+const AppointmentDurationByAge  = Loadable({ loader: () => import('./AppointmentDurationByAge'), loading: Loading, delay: LOADING_DELAY });
+const AppointmentDurationBySex  = Loadable({ loader: () => import('./AppointmentDurationBySex'), loading: Loading, delay: LOADING_DELAY });
+const AppointmentDurationByStability  = Loadable({ loader: () => import('./AppointmentDurationByStability'), loading: Loading, delay: LOADING_DELAY });
+const AppointmentDurationStableByCounty  = Loadable({ loader: () => import('./AppointmentDurationStableByCounty'), loading: Loading, delay: LOADING_DELAY });
+const AppointmentDurationStableByPartner  = Loadable({ loader: () => import('./AppointmentDurationStableByPartner'), loading: Loading, delay: LOADING_DELAY });
+const DistributionMMDStable  = Loadable({ loader: () => import('./DistributionMMDStable'), loading: Loading, delay: LOADING_DELAY });
+const DistributionStableAgeSex  = Loadable({ loader: () => import('./DistributionStableAgeSex'), loading: Loading, delay: LOADING_DELAY });
+const DistributionStableByCounty  = Loadable({ loader: () => import('./DistributionStableByCounty'), loading: Loading, delay: LOADING_DELAY });
+const DistributionStableByPartner  = Loadable({ loader: () => import('./DistributionStableByPartner'), loading: Loading, delay: LOADING_DELAY });
+const DistributionUnstable  = Loadable({ loader: () => import('./DistributionUnstable'), loading: Loading, delay: LOADING_DELAY });
+const DSDCascade  = Loadable({ loader: () => import('./DSDCascade'), loading: Loading, delay: LOADING_DELAY });
+const DSDIndicatorDefinition  = Loadable({ loader: () => import('./DSDIndicatorDefinition'), loading: Loading, delay: LOADING_DELAY });
+const DSDOverview  = Loadable({ loader: () => import('./DSDOverview'), loading: Loading, delay: LOADING_DELAY });
 
 const DSD = () => {
     const branding = { title: "DIFFERENTIATED SERVICE DELIVERY", description: "OVERVIEW", overview: "Differenciated Service Delivery" };

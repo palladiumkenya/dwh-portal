@@ -1,14 +1,20 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
-import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import { Card, CardBody, CardHeader } from 'reactstrap';
+import { formatNumber } from './../../../utils/utils';
+import { useSelector } from 'react-redux';
+
 import * as adverseEventsSeverityGradingSelectors from '../../../selectors/CT/AdverseEvents/adverseEventsSeverityGrading';
 
 const AdverseEventsSeverityGrading = ({ tab }) => {
     const [severityGrading, setSeverityGrading] = useState({});
     const methodSelected = tab === 'adult' ? adverseEventsSeverityGradingSelectors.getAdverseEventsSeverityGrading : adverseEventsSeverityGradingSelectors.getAdverseEventsSeverityGradingCalHIV;
     const adverseEventsSeverityGrading = useSelector(methodSelected);
+    const n = parseInt(adverseEventsSeverityGrading.mildVal) +
+        parseInt(adverseEventsSeverityGrading.moderateVal) +
+        parseInt(adverseEventsSeverityGrading.severeVal) +
+        parseInt(adverseEventsSeverityGrading.notindictatedVal);
 
     const loadSeverityGrading =  useCallback(async () => {
         setSeverityGrading({
@@ -70,7 +76,7 @@ const AdverseEventsSeverityGrading = ({ tab }) => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                SEVERITY GRADING OF AEs
+                SEVERITY GRADING OF REPORTED CASES OF AEs (N={n ? formatNumber(n): 0})
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">

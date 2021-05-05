@@ -1,13 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
-import NewOnArt from './NewOnArt/NewOnArt';
-import CurrentOnArt from './CurrentOnArt/CurrentOnArt';
-import DSD from './DSD/DSD';
-import TreatmentOutcomes from './TreatmentOutcomes/TreatmentOutcomes';
-import ViralLoad from './ViralLoad/ViralLoad';
-import AdverseEvents from './AdverseEvents/AdverseEvents';
-import ArtOptimization from './ArtOptimization/ArtOptimization';
+import Loadable from 'react-loadable';
+
 import { changeCtTab, changeCurrentPage } from "../../actions/Shared/uiActions";
 import { enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
 
@@ -91,13 +86,23 @@ import { loadSixMonthRetention } from '../../actions/CT/TreatmentOutcomes/sixMon
 import { loadTwelveMonthRetention } from '../../actions/CT/TreatmentOutcomes/twelveMonthRetentionActions';
 import { loadTwentyFourMonthRetention } from '../../actions/CT/TreatmentOutcomes/twentyFourMonthRetentionActions';
 
-import { CT_TABS, PAGES } from "../../constants";
 import { loadAdverseEventsProportionOfPLHIVWithAeRegimenWasStopped } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasStoppedActions';
 import { loadAdverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasNotAlteredActions';
 import { load6MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLoad/viralLoad6MonthSuppressionByYearOfArtStartActions';
 import { load12MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLoad/viralLoad12MonthSuppressionByYearOfArtStartActions';
 import { load24MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLoad/viralLoad24MonthSuppressionByYearOfArtStartActions';
 
+import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
+
+import Loading from './../Shared/Loading';
+
+const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
+const CurrentOnArt = Loadable({ loader: () => import('./CurrentOnArt/CurrentOnArt'), loading: Loading, delay: LOADING_DELAY });
+const DSD = Loadable({ loader: () => import('./DSD/DSD'), loading: Loading, delay: LOADING_DELAY });
+const TreatmentOutcomes = Loadable({ loader: () => import('./TreatmentOutcomes/TreatmentOutcomes'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoad = Loadable({ loader: () => import('./ViralLoad/ViralLoad'), loading: Loading, delay: LOADING_DELAY });
+const AdverseEvents = Loadable({ loader: () => import('./AdverseEvents/AdverseEvents'), loading: Loading, delay: LOADING_DELAY });
+const ArtOptimization = Loadable({ loader: () => import('./ArtOptimization/ArtOptimization'), loading: Loading, delay: LOADING_DELAY });
 
 const CT = () => {
     const dispatch = useDispatch();
@@ -263,25 +268,25 @@ const CT = () => {
             </Nav>
             <TabContent activeTab={ctTab}>
                 <TabPane tabId="txNew">
-                    <NewOnArt/>
+                    { ctTab === 'txNew' ? <NewOnArt/>: null }
                 </TabPane>
                 <TabPane tabId="txCurr">
-                    <CurrentOnArt/>
+                    { ctTab === 'txCurr' ? <CurrentOnArt/>: null }
                 </TabPane>
                 <TabPane tabId="txOpt">
-                    <ArtOptimization/>
+                    { ctTab === 'txOpt' ? <ArtOptimization/>: null }
                 </TabPane>
                 <TabPane tabId="advEv">
-                    <AdverseEvents/>
+                    { ctTab === 'advEv' ? <AdverseEvents/>: null }
                 </TabPane>
                 <TabPane tabId="dsd">
-                    <DSD/>
+                    { ctTab === 'dsd' ? <DSD/>: null }
                 </TabPane>
                 <TabPane tabId="vl">
-                    <ViralLoad/>
+                    { ctTab === 'vl' ? <ViralLoad/>: null }
                 </TabPane>
                 <TabPane tabId="tOut">
-                    <TreatmentOutcomes/>
+                    { ctTab === 'tOut' ? <TreatmentOutcomes/>: null }
                 </TabPane>
             </TabContent>
             <p></p><p></p>

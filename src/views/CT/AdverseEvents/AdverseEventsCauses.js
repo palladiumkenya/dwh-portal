@@ -1,16 +1,19 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
-import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import { Card, CardBody, CardHeader } from 'reactstrap';
+import { formatNumber } from './../../../utils/utils';
+import { useSelector } from 'react-redux';
 import * as adverseEventsActionsByDrugsSelectors from '../../../selectors/CT/AdverseEvents/adverseEventsActionsByDrugs';
-import * as adverseEventsReportedWithSeverityLevelsSelectors
-    from '../../../selectors/CT/AdverseEvents/adverseEventsReportedWithSeverityLevels';
 
 const AdverseEventsCauses = ({ tab }) => {
     const [reportedCausesOfAEs, setReportedCausesOfAEs] = useState({});
     const methodCalled = tab === 'adult' ? adverseEventsActionsByDrugsSelectors.getAdverseEventsCauses : adverseEventsActionsByDrugsSelectors.getAdverseEventsCausesCalHIV;
     const adverseEventsCauses = useSelector(methodCalled);
+    const n = parseInt(adverseEventsCauses.arv) +
+        parseInt(adverseEventsCauses.arvAndOthers) +
+        parseInt(adverseEventsCauses.non_arv) +
+        parseInt(adverseEventsCauses.unspecified);
 
     const loadReportedCausesOfAE = useCallback(async () => {
         setReportedCausesOfAEs({
@@ -72,7 +75,7 @@ const AdverseEventsCauses = ({ tab }) => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                REPORTED CAUSES OF AEs
+                REPORTED CAUSES OF AEs (N={n ? formatNumber(n): 0})
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">

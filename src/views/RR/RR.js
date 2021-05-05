@@ -1,21 +1,24 @@
 import React, { useEffect } from 'react';
+import Loadable from 'react-loadable';
+import VisibilitySensor from 'react-visibility-sensor';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
-import VisibilitySensor from 'react-visibility-sensor';
-import UniversalFilter from '../Shared/UniversalFilter';
-import SectionHeader from './../Shared/SectionHeader';
-import SectionFooter from './../Shared/SectionFooter';
-import RROverview from './RROverview';
-import RROverviewTrends from './RROverviewTrends';
-import RRCounty from './RRCounty';
-import RRPartner from './RRPartner';
 import { enableStickyFilter, disableStickyFilter, changeRRTab, changeCurrentPage } from "../../actions/Shared/uiActions";
 import { enableFacilityFilter, disableFacilityFilter, enableAgencyFilter, disableAgencyFilter, enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
 import { loadOverallReportingRatesByFacilityReported } from "../../actions/RR/overallReportingRatesByFacilityReported";
 import { loadOverallReportingRatesByFacilityNotReported } from "../../actions/RR/overallReportingRatesByFacilityNotReported";
 import { loadConsistencyByFacilityNotReported } from "../../actions/RR/consistencyByFacilityNotReported";
-import { RR_TABS, PAGES } from "../../constants";
-import RRIndicatorDefinition from './RRIndicatorDefinition';
+import { LOADING_DELAY, RR_TABS, PAGES } from "../../constants";
+import Loading from './../Shared/Loading';
+import UniversalFilter from '../Shared/UniversalFilter';
+import SectionHeader from './../Shared/SectionHeader';
+import SectionFooter from './../Shared/SectionFooter';
+
+const RROverview = Loadable({ loader: () => import('./RROverview'), loading: Loading, delay: LOADING_DELAY });
+const RROverviewTrends = Loadable({ loader: () => import('./RROverviewTrends'), loading: Loading, delay: LOADING_DELAY });
+const RRCounty = Loadable({ loader: () => import('./RRCounty'), loading: Loading, delay: LOADING_DELAY });
+const RRPartner = Loadable({ loader: () => import('./RRPartner'), loading: Loading, delay: LOADING_DELAY });
+const RRIndicatorDefinition = Loadable({ loader: () => import('./RRIndicatorDefinition'), loading: Loading, delay: LOADING_DELAY });
 
 const RR = () => {
     const dispatch = useDispatch();

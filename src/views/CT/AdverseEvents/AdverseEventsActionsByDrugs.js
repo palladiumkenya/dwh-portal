@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
-import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import { Card, CardBody, CardHeader } from 'reactstrap';
+import { formatNumber } from './../../../utils/utils';
+import { useSelector } from 'react-redux';
 import * as adverseEventsActionsByDrugsNewSelectors from '../../../selectors/CT/AdverseEvents/adverseEventsActionsByDrugsNew';
 
 const AdverseEventsActionsByDrugs = ({ tab }) => {
@@ -10,14 +11,20 @@ const AdverseEventsActionsByDrugs = ({ tab }) => {
     const methodCalled = tab === 'adult' ? adverseEventsActionsByDrugsNewSelectors.getAdverseEventsActionsByDrugsNew
         : adverseEventsActionsByDrugsNewSelectors.getAdverseEventsActionsByDrugsNewCalHIV;
     const adverseEventsActionsByDrugs = useSelector(methodCalled);
+    const [n, setN] = useState(0);
 
     const loadActionsByDrugs = useCallback(async () => {
         const series = [];
+        let count = 0;
         for(let i = 0; i < adverseEventsActionsByDrugs.actions.length; i++) {
             series.push(
                 { data: adverseEventsActionsByDrugs.data[i], name: adverseEventsActionsByDrugs.actions[i], type: 'column'}
             );
+            for(let j = 0; j < adverseEventsActionsByDrugs.data[i].length; j++) {
+                count = count + parseInt(adverseEventsActionsByDrugs.data[i][j]);
+            }
         }
+        setN(count);
         setActionsByDrugs({
             title: { text: '' },
             xAxis: [{ categories: adverseEventsActionsByDrugs.drugs, crosshair: true }],
@@ -36,7 +43,7 @@ const AdverseEventsActionsByDrugs = ({ tab }) => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header">
-                ADVERSE EVENTS ACTIONS BY DRUGS
+                ADVERSE EVENTS ACTIONS BY DRUGS (N={n ? formatNumber(n): 0})
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
