@@ -1,43 +1,36 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-    Card,
-    CardBody,
-    CardHeader,
-    Col,
-    Nav,
-    NavItem,
-    NavLink,
-    Row,
-    TabContent,
-    TabPane
-} from 'reactstrap';
-import VisibilitySensor from 'react-visibility-sensor';
-import UniversalFilter from '../../Shared/UniversalFilter';
-import SectionHeader from '../../Shared/SectionHeader';
-import SectionFooter from '../../Shared/SectionFooter';
-import ViralLoadOverview from './ViralLoadOverview';
-import ViralLoadOverallUptakeAndSuppressionBySex from './ViralLoadOverallUptakeAndSuppressionBySex';
-import MedianTimeTo1stVlByYear from './MedianTimeTo1stVlByYear';
-import MedianTimeTo1stVlByCounty from './MedianTimeTo1stVlByCounty';
-import MedianTimeTo1stVlByPartner from './MedianTimeTo1stVlByPartner';
-import ViralLoadUptakeBySex from './ViralLoadUptakeBySex';
-import ViralLoadUptakeByAge from './ViralLoadUptakeByAge';
-import ViralLoadUptakeByCounty from './ViralLoadUptakeByCounty';
-import ViralLoadUptakeByPartner from './ViralLoadUptakeByPartner';
-import ViralLoadOutcomesOverall from './ViralLoadOutcomesOverall';
-import ViralLoadOutcomesBySex from './ViralLoadOutcomesBySex';
-import ViralLoadSuppressionByAge from './ViralLoadSuppressionByAge';
-import ViralLoadSuppressionByRegimen from './ViralLoadSuppressionByRegimen';
-import ViralLoadSuppressionByYear from './ViralLoadSuppressionByYear';
-import ViralLoadSuppressionByCounty from './ViralLoadSuppressionByCounty';
-import ViralLoadSuppressionByPartner from './ViralLoadSuppressionByPartner';
-import ViralLoadSuppressionByYear6Month from './ViralLoadSuppressionByYear6Month';
-import ViralLoadSuppressionByYear12Month from './ViralLoadSuppressionByYear12Month';
-import ViralLoadSuppressionByYear24Month from './ViralLoadSuppressionByYear24Month';
-import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 import classnames from 'classnames';
-import ViralLoadOutcomesOverview from './ViralLoadOutcomesOverview';
+import Loadable from 'react-loadable';
+import VisibilitySensor from 'react-visibility-sensor';
+import { useDispatch, useSelector } from 'react-redux';
+import { Card, CardBody, CardHeader, Col, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
+import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
+import { LOADING_DELAY } from "../../../constants";
+import Loading from '../../Shared/Loading';
+import SectionFooter from '../../Shared/SectionFooter';
+import SectionHeader from '../../Shared/SectionHeader';
+import UniversalFilter from '../../Shared/UniversalFilter';
+
+const ViralLoadOverview = Loadable({ loader: () => import('./ViralLoadOverview'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadOverallUptakeAndSuppressionBySex = Loadable({ loader: () => import('./ViralLoadOverallUptakeAndSuppressionBySex'), loading: Loading, delay: LOADING_DELAY });
+const MedianTimeTo1stVlByYear = Loadable({ loader: () => import('./MedianTimeTo1stVlByYear'), loading: Loading, delay: LOADING_DELAY });
+const MedianTimeTo1stVlByCounty = Loadable({ loader: () => import('./MedianTimeTo1stVlByCounty'), loading: Loading, delay: LOADING_DELAY });
+const MedianTimeTo1stVlByPartner = Loadable({ loader: () => import('./MedianTimeTo1stVlByPartner'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadUptakeBySex = Loadable({ loader: () => import('./ViralLoadUptakeBySex'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadUptakeByAge = Loadable({ loader: () => import('./ViralLoadUptakeByAge'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadUptakeByCounty = Loadable({ loader: () => import('./ViralLoadUptakeByCounty'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadUptakeByPartner = Loadable({ loader: () => import('./ViralLoadUptakeByPartner'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadOutcomesOverall = Loadable({ loader: () => import('./ViralLoadOutcomesOverall'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadOutcomesBySex = Loadable({ loader: () => import('./ViralLoadOutcomesBySex'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadSuppressionByAge = Loadable({ loader: () => import('./ViralLoadSuppressionByAge'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadSuppressionByRegimen = Loadable({ loader: () => import('./ViralLoadSuppressionByRegimen'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadSuppressionByYear = Loadable({ loader: () => import('./ViralLoadSuppressionByYear'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadSuppressionByCounty = Loadable({ loader: () => import('./ViralLoadSuppressionByCounty'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadSuppressionByPartner = Loadable({ loader: () => import('./ViralLoadSuppressionByPartner'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadSuppressionByYear6Month = Loadable({ loader: () => import('./ViralLoadSuppressionByYear6Month'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadSuppressionByYear12Month = Loadable({ loader: () => import('./ViralLoadSuppressionByYear12Month'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadSuppressionByYear24Month = Loadable({ loader: () => import('./ViralLoadSuppressionByYear24Month'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadOutcomesOverview = Loadable({ loader: () => import('./ViralLoadOutcomesOverview'), loading: Loading, delay: LOADING_DELAY });
 
 const ViralLoad = () => {
     const branding = { title: "VIRAL LOAD", description: "OVERVIEW", overview: "Viral Load Monitoring" };

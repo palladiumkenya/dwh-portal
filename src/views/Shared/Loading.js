@@ -1,9 +1,9 @@
 import React from 'react';
 import { Spinner } from 'reactstrap';
 
-const Loading = () => {
+const Loading = ({ error }) => {
     return (
-        <Spinner color="danger" />
+        error ?  <p>An error occured while loading</p> : <Spinner color="danger" />
     );
 };
 
