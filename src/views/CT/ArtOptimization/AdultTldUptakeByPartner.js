@@ -10,7 +10,7 @@ const AdultTldUptakeByPartner = () => {
     const [adultRegimenUptakeByPartner, setAdultTldUptakeByPartner] = useState({});
     const sexGroups = useSelector(selectors.getSexGroups);
     const partners = useSelector(selectors.getPartners);
-    const adultsCurrentByPartner = useSelector(selectors.getCurrentTldByPartner);
+    const adultsCurrentByPartner = useSelector(selectors.getCurrentTldByPartnerAdult);
     const currentOnArtByPartnerData = useSelector(currentOnArtByPartnerSelectors.getCurrentOnArtByPartner);
 
     const loadAdultTldUptakeByPartner = useCallback(async () => {
