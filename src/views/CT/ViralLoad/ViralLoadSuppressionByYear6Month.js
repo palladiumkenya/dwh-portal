@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import _ from 'lodash';
 import * as viralLoad6MonthSuppressionByYearOfArtStart
     from '../../../selectors/CT/ViralLoad/viralLoad6MonthSuppressionByYearOfArtStart';
 

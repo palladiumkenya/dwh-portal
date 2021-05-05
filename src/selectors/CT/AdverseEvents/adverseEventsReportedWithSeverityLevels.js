@@ -51,8 +51,11 @@ export const getAdverseEventsReportedWithSeverityLevelsTabs = (list, tab) => {
     for(let i = 0; i < list.length; i++) {
         let severityIndex = severityCategories.indexOf(list[i].Severity);
         let categoryIndex = categories.indexOf(list[i].AdverseEvent.toUpperCase());
-        if(severityIndex === -1 || categoryIndex === -1 ) {
+        if(severityIndex === -1 && categories.indexOf('OTHER AEs') === -1) {
             continue;
+        }
+        if(categoryIndex === -1 ) {
+            categoryIndex = categories.indexOf('OTHER AEs');
         }
         data[severityIndex][categoryIndex] = data[severityIndex][categoryIndex] + parseInt(list[i].total);
     }

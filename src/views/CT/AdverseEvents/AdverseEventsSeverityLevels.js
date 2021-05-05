@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import _ from 'lodash';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import { formatNumber } from './../../../utils/utils';
 import { useSelector } from 'react-redux';
@@ -11,10 +12,10 @@ const AdverseEventsSeverityLevels = ({ tab }) => {
     const methodCalled = tab === 'adult' ? adverseEventsReportedWithSeverityLevelsSelectors.getAdverseEventsReportedWithSeverityLevels
         : adverseEventsReportedWithSeverityLevelsSelectors.getAdverseEventsReportedWithSeverityLevelsCalHIV;
     const adverseEventsReportedWithSeverityLevels = useSelector(methodCalled);
-    const n = parseInt(adverseEventsReportedWithSeverityLevels.data[0]) +
-        parseInt(adverseEventsReportedWithSeverityLevels.data[1]) +
-        parseInt(adverseEventsReportedWithSeverityLevels.data[2]) +
-        parseInt(adverseEventsReportedWithSeverityLevels.data[3]);
+    const n = _.sum(adverseEventsReportedWithSeverityLevels.data[0]) +
+        _.sum(adverseEventsReportedWithSeverityLevels.data[1]) +
+        _.sum(adverseEventsReportedWithSeverityLevels.data[2]) +
+        _.sum(adverseEventsReportedWithSeverityLevels.data[3]);
 
     const loadSeverityLevels = useCallback(async () => {
         setSeverityLevels({
