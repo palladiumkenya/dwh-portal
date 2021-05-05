@@ -1,6 +1,5 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from '../../Shared/UniversalFilter';
 import SectionHeader from '../../Shared/SectionHeader';
