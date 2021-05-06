@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { Card, CardHeader, CardBody, CardSubtitle } from 'reactstrap';
+import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import * as medianTimeToArtStartByYearSelectors from '../../../selectors/CT/NewOnArt/medianTimeToArtStartByYear';

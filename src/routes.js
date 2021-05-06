@@ -1,15 +1,18 @@
 import React from 'react';
+import Loadable from 'react-loadable';
 import withTracker from './withTracker';
+import Loading from './views/Shared/Loading';
+import { LOADING_DELAY } from "./constants";
 
-const Home = React.lazy(() => import('./views/Home/Home'));
-const RR = React.lazy(() => import('./views/RR/RR'));
-const HTS = React.lazy(() => import('./views/HTS/HTS'));
-const CT = React.lazy(() => import("./views/CT/CT"));
-const GIS = React.lazy(() => import("./views/GIS/GIS"));
-const HRH = React.lazy(() => import("./views/HRH/HRH"));
-const Resources = React.lazy(() => import('./views/Resources/Resources'));
-const Organizations = React.lazy(() => import('./views/Administration/Organizations/Organizations'));
-const Profile = React.lazy(() => import('./views/Users/Profile'));
+const Home = Loadable({ loader: () => import('./views/Home/Home'), loading: Loading, delay: LOADING_DELAY });
+const RR = Loadable({ loader: () => import('./views/RR/RR'), loading: Loading, delay: LOADING_DELAY });
+const HTS = Loadable({ loader: () => import('./views/HTS/HTS'), loading: Loading, delay: LOADING_DELAY });
+const CT = Loadable({ loader: () => import('./views/CT/CT'), loading: Loading, delay: LOADING_DELAY });
+const GIS = Loadable({ loader: () => import('./views/GIS/GIS'), loading: Loading, delay: LOADING_DELAY });
+const HRH = Loadable({ loader: () => import('./views/HRH/HRH'), loading: Loading, delay: LOADING_DELAY });
+const Resources = Loadable({ loader: () => import('./views/Resources/Resources'), loading: Loading, delay: LOADING_DELAY });
+const Organizations = Loadable({ loader: () => import('./views/Administration/Organizations/Organizations'), loading: Loading, delay: LOADING_DELAY });
+const Profile = Loadable({ loader: () => import('./views/Users/Profile'), loading: Loading, delay: LOADING_DELAY });
 
 const routes = [
   { path: "/", exact: true, name: "Home", component: withTracker(Home), private: false },

@@ -1,13 +1,15 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { formatNumber, roundNumber } from '../../../utils/utils';
+import { getNewOnArtLastYear } from '../../../selectors/CT/NewOnArt/newOnArtTrends';
 import { Row, Col } from 'reactstrap';
+import { useSelector } from 'react-redux';
+import DataCard from '../../Shared/DataCard';
 import * as newOnArtOverviewSelectors from '../../../selectors/CT/NewOnArt/newOnArtOverview';
 import * as treatmentOutcomesBySexSelectors from '../../../selectors/CT/TreatmentOutcomes/treatmentOutcomesBySex';
-import { formatNumber, roundNumber } from '../../../utils/utils';
-import DataCard from '../../Shared/DataCard';
 
 const TreatmentOutcomesOverview = () => {
     const startedOnArt = useSelector(newOnArtOverviewSelectors.getNewOnArt);
+    const startedOnArtLastYear = useSelector(getNewOnArtLastYear);
     const active = useSelector(treatmentOutcomesBySexSelectors.getActive);
     const dead = useSelector(treatmentOutcomesBySexSelectors.getDead);
     const ltfu = useSelector(treatmentOutcomesBySexSelectors.getLtfu);
@@ -25,9 +27,9 @@ const TreatmentOutcomesOverview = () => {
             <Row>
                 <Col>
                     <DataCard
-                        title="EVER STARTED ART"
+                        title="STARTED ART"
                         subtitle={null}
-                        data={formatNumber(startedOnArt)}
+                        data={formatNumber(startedOnArtLastYear)}
                     />
                 </Col>
                 <Col>

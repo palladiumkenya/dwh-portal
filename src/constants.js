@@ -44,6 +44,8 @@ export const CACHING = {
     EXTRA_LONG: 4320, // 3 days
 };
 
+export const LOADING_DELAY = 200;
+
 export const GA_TRACKING_ID = 'UA-137589703-1';
 
 export const DWH_API_URL = 'https://data.kenyahmis.org:8082';

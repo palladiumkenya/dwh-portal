@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
-import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import _ from 'lodash';
+import { Card, CardBody, CardHeader } from 'reactstrap';
+import { formatNumber } from './../../../utils/utils';
+import { useSelector } from 'react-redux';
 import * as adverseEventsReportedWithSeverityLevelsSelectors from '../../../selectors/CT/AdverseEvents/adverseEventsReportedWithSeverityLevels';
 
 const AdverseEventsSeverityLevels = ({ tab }) => {
@@ -10,6 +12,10 @@ const AdverseEventsSeverityLevels = ({ tab }) => {
     const methodCalled = tab === 'adult' ? adverseEventsReportedWithSeverityLevelsSelectors.getAdverseEventsReportedWithSeverityLevels
         : adverseEventsReportedWithSeverityLevelsSelectors.getAdverseEventsReportedWithSeverityLevelsCalHIV;
     const adverseEventsReportedWithSeverityLevels = useSelector(methodCalled);
+    const n = _.sum(adverseEventsReportedWithSeverityLevels.data[0]) +
+        _.sum(adverseEventsReportedWithSeverityLevels.data[1]) +
+        _.sum(adverseEventsReportedWithSeverityLevels.data[2]) +
+        _.sum(adverseEventsReportedWithSeverityLevels.data[3]);
 
     const loadSeverityLevels = useCallback(async () => {
         setSeverityLevels({
@@ -37,7 +43,7 @@ const AdverseEventsSeverityLevels = ({ tab }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        REPORTED ADVERSE EVENTS WITH SEVERITY LEVELS
+                        REPORTED ADVERSE EVENTS WITH SEVERITY LEVELS (N={n ? formatNumber(n): 0})
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

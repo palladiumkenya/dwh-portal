@@ -1,20 +1,24 @@
 import React from 'react';
+import Loadable from 'react-loadable';
+import VisibilitySensor from 'react-visibility-sensor';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
-import VisibilitySensor from 'react-visibility-sensor';
-import UniversalFilter from './../../Shared/UniversalFilter';
-import SectionHeader from '../../Shared/SectionHeader';
-import SectionFooter from '../../Shared/SectionFooter';
-import NewOnArtOverview from './NewOnArtOverview';
-import NewOnArtBySex from './NewOnArtBySex';
-import NewOnArtByAgeSex from './NewOnArtByAgeSex';
-import NewOnArtTrends from './NewOnArtTrends';
-import MedianTimeToArtStartByYear from './MedianTimeToArtStartByYear';
-import MedianTimeToArtStartByCounty from './MedianTimeToArtStartByCounty';
-import MedianTimeToArtStartByPartner from './MedianTimeToArtStartByPartner';
-import TimeFromDiagnosisToArtStart from './TimeFromDiagnosisToArtStart';
-import NewOnArtHtsPositive from './NewOnArtHtsPositive';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
+import { LOADING_DELAY } from "../../../constants";
+import Loading from './../../Shared/Loading';
+import SectionFooter from '../../Shared/SectionFooter';
+import SectionHeader from '../../Shared/SectionHeader';
+import UniversalFilter from './../../Shared/UniversalFilter';
+
+const MedianTimeToArtStartByCounty = Loadable({ loader: () => import('./MedianTimeToArtStartByCounty'), loading: Loading, delay: LOADING_DELAY });
+const MedianTimeToArtStartByPartner = Loadable({ loader: () => import('./MedianTimeToArtStartByPartner'), loading: Loading, delay: LOADING_DELAY });
+const MedianTimeToArtStartByYear = Loadable({ loader: () => import('./MedianTimeToArtStartByYear'), loading: Loading, delay: LOADING_DELAY });
+const NewOnArtByAgeSex = Loadable({ loader: () => import('./NewOnArtByAgeSex'), loading: Loading, delay: LOADING_DELAY });
+const NewOnArtBySex = Loadable({ loader: () => import('./NewOnArtBySex'), loading: Loading, delay: LOADING_DELAY });
+const NewOnArtHtsPositive = Loadable({ loader: () => import('./NewOnArtHtsPositive'), loading: Loading, delay: LOADING_DELAY });
+const NewOnArtOverview = Loadable({ loader: () => import('./NewOnArtOverview'), loading: Loading, delay: LOADING_DELAY });
+const NewOnArtTrends = Loadable({ loader: () => import('./NewOnArtTrends'), loading: Loading, delay: LOADING_DELAY });
+const TimeFromDiagnosisToArtStart = Loadable({ loader: () => import('./TimeFromDiagnosisToArtStart'), loading: Loading, delay: LOADING_DELAY });
 
 const NewOnArt = () => {
     const branding = { title: "NEWLY STARTED ON ART", description: "OVERVIEW", overview: "Newly Started on ART Information" };
