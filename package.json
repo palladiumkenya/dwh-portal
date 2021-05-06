@@ -12,7 +12,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
     "font-awesome": "^4.7.0",
-    "highcharts": "^8.2.2",
+    "highcharts": "^9.0.0",
     "highcharts-react-official": "^3.0.0",
     "lodash": "^4.17.20",
     "moment": "^2.27.0",
