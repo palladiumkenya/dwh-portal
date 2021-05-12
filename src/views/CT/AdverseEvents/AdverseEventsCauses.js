@@ -75,7 +75,7 @@ const AdverseEventsCauses = ({ tab }) => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                REPORTED CAUSES OF AEs (N={n ? formatNumber(n): 0})
+                REPORTED CAUSES OF AEs
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">

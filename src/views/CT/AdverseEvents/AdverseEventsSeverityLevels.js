@@ -43,7 +43,7 @@ const AdverseEventsSeverityLevels = ({ tab }) => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        REPORTED ADVERSE EVENTS WITH SEVERITY LEVELS (N={n ? formatNumber(n): 0})
+                        REPORTED ADVERSE EVENTS WITH SEVERITY LEVELS
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

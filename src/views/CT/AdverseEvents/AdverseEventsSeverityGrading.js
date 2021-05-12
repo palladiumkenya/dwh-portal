@@ -76,7 +76,7 @@ const AdverseEventsSeverityGrading = ({ tab }) => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                SEVERITY GRADING OF REPORTED CASES OF AEs (N={n ? formatNumber(n): 0})
+                SEVERITY GRADING OF REPORTED CASES OF AEs
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
