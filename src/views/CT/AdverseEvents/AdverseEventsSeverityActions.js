@@ -86,7 +86,7 @@ const AdverseEventsSeverityActions = ({ tab }) => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header">
-                ADVERSE EVENTS ACTIONS FOR ADULTS 15+ WHO DEVELOPED AEs (N={n ? formatNumber(n): 0})
+                ADVERSE EVENTS ACTIONS FOR ADULTS 15+ WHO DEVELOPED AEs
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
