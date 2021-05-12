@@ -43,7 +43,7 @@ const AdverseEventsActionsByDrugs = ({ tab }) => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header">
-                ADVERSE EVENTS ACTIONS BY DRUGS (N={n ? formatNumber(n): 0})
+                ADVERSE EVENTS ACTIONS BY DRUGS
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
