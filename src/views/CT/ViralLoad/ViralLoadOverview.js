@@ -24,14 +24,14 @@ const ViralLoadOverview = () => {
             <Col>
                 <DataCard
                     title="ELIGIBLE FOR VIRAL LOAD"
-                    subtitle={roundNumber(eligibleForVlPercent) + "%"}
+                    subtitle={roundNumber(eligibleForVlPercent, 1) + "%"}
                     data={formatNumber(eligibleForVl)}
                 />
             </Col>
             <Col>
                 <DataCard
                     title="VALID VIRAL LOAD"
-                    subtitle={roundNumber(hasCurrentVlPercent) + "%"}
+                    subtitle={roundNumber(hasCurrentVlPercent, 1) + "%"}
                     data={formatNumber(hasCurrentVl)}
                 />
             </Col>
