@@ -208,6 +208,7 @@ const CT = () => {
                 dispatch(loadCurrentOnArtByPartner());
                 dispatch(loadCurrentOnArtDistributionByCounty());
                 dispatch(loadCurrentOnArtDistributionByPartner());
+                dispatch(loadCurrentOnArtByAgeSex());
                 break;
             case 'vl':
                 dispatch(loadCurrentOnArtOverview());
