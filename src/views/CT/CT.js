@@ -204,6 +204,10 @@ const CT = () => {
                 dispatch(loadDsdUptakeOverall());
                 dispatch(loadDsdStableOverall());
                 dispatch(loadDsdUptakeOverallBySex());
+                dispatch(loadCurrentOnArtByCounty());
+                dispatch(loadCurrentOnArtByPartner());
+                dispatch(loadCurrentOnArtDistributionByCounty());
+                dispatch(loadCurrentOnArtDistributionByPartner());
                 break;
             case 'vl':
                 dispatch(loadCurrentOnArtOverview());
