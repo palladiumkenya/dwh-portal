@@ -9,10 +9,11 @@ import DataCard from '../../Shared/DataCard';
 
 const DSDOverview = () => {
     const currentOnArt = useSelector(currentOnArtOverviewSelectors.getCurrentOnArt);
+    const currentOnArtOver20 = useSelector(currentOnArtOverviewSelectors.getCurrentOnARTOver20);
     const mmd = useSelector(dsdStabilityStatusByAgeSexSelectors.getMmd);
     const mmdPercent = currentOnArt ? ((mmd/currentOnArt)*100) : 0;
     const stable = useSelector(dsdStabilityStatusByAgeSexSelectors.getStable);
-    const stablePercent = currentOnArt ? ((stable/currentOnArt)*100) : 0;
+    const stablePercent = currentOnArt ? ((stable/currentOnArtOver20)*100) : 0;
     const onArtLessThan12Months = useSelector(dsdUnstableSelectors.getOnArtLessThan12Months);
     const onArtLessThan12MonthsPercent = currentOnArt ? ((onArtLessThan12Months/currentOnArt)*100) : 0;
     const highVl = useSelector(dsdUnstableSelectors.getHighVl);
