@@ -66,11 +66,11 @@ export const getStable = createSelector(
     [listUnfilteredStable, listFilteredStable, filtered],
     (listUnfilteredStable, listFilteredStable, filtered) => {
         const list = filtered ? listFilteredStable : listUnfilteredStable;
-        const listExcluded = list.filter(obj => obj.ageGroup !== 'Under 1'
+        const listExcluded = list.length > 0 ? list.filter(obj => obj.ageGroup !== 'Under 1'
             && obj.ageGroup !== '1 to 4'
             && obj.ageGroup !== '5 to 9'
             && obj.ageGroup !== '10 to 14'
-            && obj.ageGroup !== '15 to 19');
+            && obj.ageGroup !== '15 to 19') : [];
         const stable = _.sumBy(listExcluded, 'Stable');
         return stable;
     }
