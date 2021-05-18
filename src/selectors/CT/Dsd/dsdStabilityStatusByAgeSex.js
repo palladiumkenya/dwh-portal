@@ -85,11 +85,6 @@ export const getStabilityStatusByAgeSex = createSelector(
         const listTXCurr = filtered ? listFilteredTXCurr : listUnfilteredTXCurr;
 
         const ageArr = [
-            { "Under 1": "<1" },
-            { "1 to 4": "1-4" },
-            { "5 to 9": "5-9" },
-            { "10 to 14" : "10-14" },
-            { "15 to 19" : "15-19" },
             { "20 to 24" : "20-24" },
             { "25 to 29" : "25-29" },
             { "30 to 34" : "30-34" },
@@ -102,11 +97,6 @@ export const getStabilityStatusByAgeSex = createSelector(
             {  "65+": "65+" }
         ];
         const ageGroups = [
-            "Under 1",
-            "1 to 4",
-            "5 to 9",
-            "10 to 14",
-            "15 to 19",
             "20 to 24",
             "25 to 29",
             "30 to 34",
