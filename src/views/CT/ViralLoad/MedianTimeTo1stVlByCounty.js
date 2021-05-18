@@ -31,7 +31,7 @@ const MedianTimeTo1stVlByCounty = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        MEDIAN TIME TO 1ST VL AFTER ART INITIATION BY COUNTY
+                        MEDIAN TIME TO 1ST VL AFTER ART INITIATION BY COUNTY*
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -39,6 +39,9 @@ const MedianTimeTo1stVlByCounty = () => {
                         </div>
                     </CardBody>
                 </Card>
+            </div>
+            <div className="col-12">
+                *Among those who started ART in the last 12 months.
             </div>
         </div>
     );
