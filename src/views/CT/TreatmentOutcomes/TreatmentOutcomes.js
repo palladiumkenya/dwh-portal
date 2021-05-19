@@ -47,13 +47,14 @@ const TreatmentOutcomes = () => {
                 <CardBody>
                     <ul>
                         <li>Started on ART =&gt; Number of patients whose documented ART start date is within the last 12 months.</li>
+                        <li>Current on ART =&gt; Number of adults and children Started on ART - In the Last 12 Months and currently receiving ART including those who have missed their appointment and 30 days have not passed since the last missed appointment. Assumptions on this computation can be found under Current on ART tab.</li>
+                        <li>Lost to Follow Up =&gt; A lost to follow up (LTFU) is a patient Started on ART who did not honor their last drug pick-up appointment and at least 30 days had elapsed since the last missed drug pick-up.</li>
+                        <li>Dead =&gt; A patient Started on ART whose outcome in the review period is documented in the EMR as "Died" during the review period.</li>
                         <li>Transfer out=&gt; A patient Started on ART whose outcome in the review period is documented in the EMR as transferred out (moved) to a different health facility to continue receiving continuum of care and have a corresponding outcome date within the review period.</li>
                         <li>Stopped ART =&gt; A patient Started on ART whose outcome in the review period is documented in the EMR as "Stopped ART" and have a corresponding outcome date within the review period.</li>
-                        <li>Lost to Follow Up =&gt; A lost to follow up (LTFU) is a patient Started on ART who did not honor their last drug pick-up appointment and at least 30 days had elapsed since the last missed drug pick-up.</li>
-                        <li>Current on ART =&gt; Number of adults and children Started on ART and currently receiving ART including those who have missed their appointment and 30 days have not passed since the last missed appointment. Assumptions on this computation can be found under Current on ART tab.</li>
-                        <li>Dead =&gt; A patient Started on ART whose outcome in the review period is documented in the EMR as "Died" during the review period.</li>
                         <em>Indicator notes:</em>
                         <li>This indicator is computed and displayed for the last completed month.</li>
+                        <li>All outcomes are computed for patients who started ART in the last 12 months.</li>
                         <li>The denominator for the treatment outcomes is "Started on ART" less "Stopped ART" and "Transfer Out".</li>
                     </ul>
                 </CardBody>
