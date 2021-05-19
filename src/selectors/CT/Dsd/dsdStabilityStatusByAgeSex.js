@@ -66,7 +66,13 @@ export const getStable = createSelector(
     [listUnfilteredStable, listFilteredStable, filtered],
     (listUnfilteredStable, listFilteredStable, filtered) => {
         const list = filtered ? listFilteredStable : listUnfilteredStable;
-        return list.Stable;
+        const listExcluded = list.length > 0 ? list.filter(obj => obj.ageGroup !== 'Under 1'
+            && obj.ageGroup !== '1 to 4'
+            && obj.ageGroup !== '5 to 9'
+            && obj.ageGroup !== '10 to 14'
+            && obj.ageGroup !== '15 to 19') : [];
+        const stable = _.sumBy(listExcluded, 'Stable');
+        return stable;
     }
 );
 
@@ -85,11 +91,6 @@ export const getStabilityStatusByAgeSex = createSelector(
         const listTXCurr = filtered ? listFilteredTXCurr : listUnfilteredTXCurr;
 
         const ageArr = [
-            { "Under 1": "<1" },
-            { "1 to 4": "1-4" },
-            { "5 to 9": "5-9" },
-            { "10 to 14" : "10-14" },
-            { "15 to 19" : "15-19" },
             { "20 to 24" : "20-24" },
             { "25 to 29" : "25-29" },
             { "30 to 34" : "30-34" },
@@ -102,11 +103,6 @@ export const getStabilityStatusByAgeSex = createSelector(
             {  "65+": "65+" }
         ];
         const ageGroups = [
-            "Under 1",
-            "1 to 4",
-            "5 to 9",
-            "10 to 14",
-            "15 to 19",
             "20 to 24",
             "25 to 29",
             "30 to 34",
