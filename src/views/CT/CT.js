@@ -76,6 +76,7 @@ import { loadViralLoadSuppressionByRegimen } from '../../actions/CT/ViralLoad/vi
 import { loadViralLoadOverallUptakeSuppressionByFacility } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeSuppressionByFacilityActions';
 import { loadViralLoadSuppressionByYearAndSuppressionCategory } from '../../actions/CT/ViralLoad/viralLoadSuppressionByYearAndSuppressionCategoryActions';
 
+import { loadTreatmentOutcomesOverallLast12m } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesOverallLast12mActions';
 import { loadTreatmentOutcomesBySex } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesBySexActions';
 import { loadTreatmentOutcomesByPopulationType } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByPopulationTypeActions';
 import { loadTreatmentOutcomesByAge } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByAgeActions';
@@ -234,6 +235,7 @@ const CT = () => {
                 break;
             case 'tOut':
                 dispatch(loadNewOnArtOverview());
+                dispatch(loadTreatmentOutcomesOverallLast12m());
                 dispatch(loadNewOnArtTrends());
                 dispatch(loadTreatmentOutcomesBySex());
                 dispatch(loadTreatmentOutcomesByPopulationType());
