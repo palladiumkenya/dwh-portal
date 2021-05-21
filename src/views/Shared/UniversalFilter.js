@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import moment from 'moment';
 import { DateInput } from 'semantic-ui-calendar-react';
 import { Dropdown } from 'semantic-ui-react';
 import { PAGES } from "../../constants";
@@ -258,7 +259,7 @@ const UniversalFilter = () => {
                             dateFormat="MMM YYYY"
                             closable={true}
                             clearable={true}
-                            // maxDate={moment()}
+                            maxDate={moment()}
                             placeholder={filters.toDateFilterEnabled ? 'From':'Period'}
                             fluid
                             value={filters.fromDate}
@@ -280,8 +281,8 @@ const UniversalFilter = () => {
                             dateFormat="MMM YYYY"
                             closable={true}
                             clearable={true}
-                            // minDate={filters.fromDate}
-                            // maxDate={moment()}
+                            minDate={filters.fromDate}
+                            maxDate={moment()}
                             placeholder="To"
                             fluid
                             value={filters.toDate}

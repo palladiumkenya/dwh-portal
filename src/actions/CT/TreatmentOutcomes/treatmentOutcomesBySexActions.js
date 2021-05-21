@@ -26,7 +26,9 @@ export const fetchTreatmentOutcomesBySex = () => async (dispatch, getState) => {
         facility: getState().filters.facilities,
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
-        project: getState().filters.projects
+        project: getState().filters.projects,
+        fromDate: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY-MM-DD") : null,
+        toDate: getState().filters.toDate ? moment(getState().filters.toDate, "MMM YYYY").format("YYYY-MM-DD") : null,
     };
     const response = await getAll('care-treatment/treatmentOutcomesBySex', params);
     dispatch({ type: actionTypes.CT_TREATMENT_OUTCOMES_BY_SEX_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
