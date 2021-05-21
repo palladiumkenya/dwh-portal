@@ -4,7 +4,7 @@ import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import Loadable from 'react-loadable';
 
 import { changeCtTab, changeCurrentPage } from "../../actions/Shared/uiActions";
-import { enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
+import { enableFromDateFilter, disableFromDateFilter, enableToDateFilter, disableToDateFilter } from "../../actions/Shared/filterActions";
 
 import { loadLinkagePositiveTrends } from '../../actions/HTS/Linkage/linkagePositiveTrendsActions';
 
@@ -250,10 +250,15 @@ const CT = () => {
             default:
                 break;
         }
-        if (ctTab === 'txNew') {
+        if (ctTab === 'txNew' || ctTab === 'tOut') {
             dispatch(enableFromDateFilter());
         } else {
             dispatch(disableFromDateFilter());
+        }
+        if (ctTab === 'tOut') {
+            dispatch(enableToDateFilter());
+        } else {
+            dispatch(disableToDateFilter());
         }
     }, [
         dispatch,

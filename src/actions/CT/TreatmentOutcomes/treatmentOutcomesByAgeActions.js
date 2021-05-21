@@ -26,8 +26,11 @@ export const fetchTreatmentOutcomesByAge = () => async (dispatch, getState) => {
         facility: getState().filters.facilities,
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
-        project: getState().filters.projects
+        project: getState().filters.projects,
+        fromDate: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY-MM-DD") : null,
+        toDate: getState().filters.toDate ? moment(getState().filters.toDate, "MMM YYYY").format("YYYY-MM-DD") : null,
     };
+    console.log(params)
     const response = await getAll('care-treatment/treatmentOutcomesByAge', params);
     dispatch({ type: actionTypes.CT_TREATMENT_OUTCOMES_BY_AGE_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };
