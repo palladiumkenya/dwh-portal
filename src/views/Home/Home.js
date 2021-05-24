@@ -4,11 +4,9 @@ import { Col, Row } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
 import Loadable from 'react-loadable';
 import { enableStickyFilter, disableStickyFilter, changeCurrentPage } from "../../actions/Shared/uiActions";
-import { enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
+import { disableFromDateFilter, disableToDateFilter } from "../../actions/Shared/filterActions";
 import { loadCurrentOnArtOverview } from '../../actions/CT/CurrentOnArt/currentOnArtOverviewActions';
 import { loadCurrentOnArtByAgeSex } from '../../actions/CT/CurrentOnArt/currentOnArtByAgeSexActions';
-import { loadDsdUptakeOverall } from '../../actions/CT/Dsd/dsdUptakeOverallActions';
-import { loadDsdUptakeOverallBySex } from '../../actions/CT/Dsd/dsdMmdUptakeOverallBySexActions';
 import { LOADING_DELAY, PAGES } from './../../constants';
 import Loading from './../Shared/Loading';
 import SectionHeader from './../Shared/SectionHeader';
@@ -42,16 +40,12 @@ const Home = () => {
     useEffect(() => {
         dispatch(changeCurrentPage(PAGES.home));
         dispatch(disableFromDateFilter());
-        return () => {
-            dispatch(enableFromDateFilter());
-        }
+        dispatch(disableToDateFilter());
     }, [dispatch]);
 
     useEffect(() => {
         dispatch(loadCurrentOnArtOverview());
         dispatch(loadCurrentOnArtByAgeSex());
-        dispatch(loadDsdUptakeOverall());
-        dispatch(loadDsdUptakeOverallBySex());
     }, [
         dispatch,
         counties,
