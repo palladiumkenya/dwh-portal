@@ -135,15 +135,30 @@ const CT = () => {
 
     useEffect(() => {
         dispatch(changeCurrentPage(PAGES.ct));
+        return () => {
+            dispatch(disableFromDateFilter());
+            dispatch(disableToDateFilter());
+        }
     }, [dispatch]);
+
+    useEffect(() => {
+        if (ctTab === 'txNew' || ctTab === 'tOut') {
+            dispatch(enableFromDateFilter());
+        } else {
+            dispatch(disableFromDateFilter());
+        }
+        if (ctTab === 'tOut') {
+            dispatch(enableToDateFilter());
+        } else {
+            dispatch(disableToDateFilter());
+        }
+    }, [dispatch, ctTab]);
 
     useEffect(() => {
         switch (ctTab) {
             case 'txNew':
                 dispatch(loadLinkagePositiveTrends());
-
                 dispatch(loadCurrentNewOnArtOverview());
-
                 dispatch(loadNewOnArtOverview());
                 dispatch(loadNewOnArtTrends());
                 dispatch(loadNewOnArtByAgeSex());
@@ -249,16 +264,6 @@ const CT = () => {
                 break;
             default:
                 break;
-        }
-        if (ctTab === 'txNew' || ctTab === 'tOut') {
-            dispatch(enableFromDateFilter());
-        } else {
-            dispatch(disableFromDateFilter());
-        }
-        if (ctTab === 'tOut') {
-            dispatch(enableToDateFilter());
-        } else {
-            dispatch(disableToDateFilter());
         }
     }, [
         dispatch,

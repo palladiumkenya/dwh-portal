@@ -9,6 +9,7 @@ import Loading from './../../Shared/Loading';
 import SectionFooter from '../../Shared/SectionFooter';
 import SectionHeader from '../../Shared/SectionHeader';
 import UniversalFilter from './../../Shared/UniversalFilter';
+import moment from 'moment';
 
 const SixMonthRetention = Loadable({ loader: () => import('./SixMonthRetention'), loading: Loading, delay: LOADING_DELAY });
 const ThreeMonthRetention = Loadable({ loader: () => import('./ThreeMonthRetention'), loading: Loading, delay: LOADING_DELAY });
@@ -25,6 +26,7 @@ const TwentyFourMonthRetention = Loadable({ loader: () => import('./TwentyFourMo
 const TreatmentOutcomes = () => {
     const branding = { title: "TREATMENT OUTCOMES", description: "OVERVIEW", overview: "Treatment Outcomes" };
     const ctTab = useSelector(state => state.ui.ctTab);
+    const filters = useSelector(state => state.filters);
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
         if (ctTab === 'tOut') {
@@ -41,6 +43,17 @@ const TreatmentOutcomes = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
+            <Card>
+                <CardBody style={{ textAlign: 'center'}}>
+                    <span style={{ fontSize: '1.2em'}}>
+                        Data displayed is for the period from <strong>{
+                            filters.fromDate ? filters.fromDate: moment().startOf('month').subtract(12, 'month').format('MMM YYYY')
+                        }</strong> to <strong>{
+                            filters.toDate ? filters.toDate: moment().startOf('month').subtract(1, 'month').format('MMM YYYY')
+                        }</strong>
+                    </span>
+                </CardBody>
+            </Card>
             <TreatmentOutcomesOverview />
             <Card>
                 <CardHeader>Indicator Definition</CardHeader>
