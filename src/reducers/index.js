@@ -114,6 +114,9 @@ import overallReportingRatesByFacilityNotReported from './RR/overallReportingRat
 
 import consistencyByFacilityNotReported from './RR/consistencyByFacilityNotReported';
 
+import otzEnrollmentAmongAlhivOnArtBySex from './CT/OTZ/otzEnrollmentAmongAlhivOnArtBySex';
+import otzEnrollmentAmongAlhivOnArtByAge from './CT/OTZ/otzEnrollmentAmongAlhivOnArtByAge';
+
 export default combineReducers({
     auth: authReducer,
 
@@ -221,4 +224,7 @@ export default combineReducers({
     overallReportingRatesByFacilityNotReported,
 
     consistencyByFacilityNotReported,
+
+    otzEnrollmentAmongAlhivOnArtBySex,
+    otzEnrollmentAmongAlhivOnArtByAge
 });

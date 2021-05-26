@@ -93,6 +93,9 @@ import { load6MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLoa
 import { load12MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLoad/viralLoad12MonthSuppressionByYearOfArtStartActions';
 import { load24MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLoad/viralLoad24MonthSuppressionByYearOfArtStartActions';
 
+import { loadOtzEnrollmentAmongAlhivOnArtBySex } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtBySexActions';
+import { loadOtzEnrollmentAmongAlhivOnArtByAge } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtByAgeActions';
+
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
 import Loading from './../Shared/Loading';
@@ -104,6 +107,7 @@ const TreatmentOutcomes = Loadable({ loader: () => import('./TreatmentOutcomes/T
 const ViralLoad = Loadable({ loader: () => import('./ViralLoad/ViralLoad'), loading: Loading, delay: LOADING_DELAY });
 const AdverseEvents = Loadable({ loader: () => import('./AdverseEvents/AdverseEvents'), loading: Loading, delay: LOADING_DELAY });
 const ArtOptimization = Loadable({ loader: () => import('./ArtOptimization/ArtOptimization'), loading: Loading, delay: LOADING_DELAY });
+const OTZ = Loadable({ loader: () => import('./OTZ/OTZ'), loading: Loading, delay: LOADING_DELAY });
 
 const CT = () => {
     const dispatch = useDispatch();
@@ -262,6 +266,11 @@ const CT = () => {
                 dispatch(loadTwelveMonthRetention());
                 dispatch(loadTwentyFourMonthRetention());
                 break;
+            case 'otz':
+                dispatch(loadOtzEnrollmentAmongAlhivOnArtBySex());
+                dispatch(loadOtzEnrollmentAmongAlhivOnArtByAge());
+
+                break;
             default:
                 break;
         }
@@ -304,6 +313,9 @@ const CT = () => {
                 </TabPane>
                 <TabPane tabId="tOut">
                     { ctTab === 'tOut' ? <TreatmentOutcomes/>: null }
+                </TabPane>
+                <TabPane tabId={"otz"}>
+                    { ctTab === 'otz' ? <OTZ /> : null }
                 </TabPane>
             </TabContent>
             <p></p><p></p>
