@@ -6,6 +6,7 @@ import Loading from '../../Shared/Loading';
 import { LOADING_DELAY } from '../../../constants';
 const OtzEnrollmentAmongAlhivOnArtBySex = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtBySex'), loading: Loading, delay: LOADING_DELAY });
 const OtzEnrollmentAmongAlhivOnArtByAge = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtByAge'), loading: Loading, delay: LOADING_DELAY });
+const OtzEnrollmentAmongAlhivOnArtByCounty = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtByCounty'), loading: Loading, delay: LOADING_DELAY });
 
 const OTZTabs = () => {
     const [activeTab, setActiveTab] = useState('otz_enrollment');
@@ -28,6 +29,11 @@ const OTZTabs = () => {
                         </Col>
                         <Col className={"col-6"}>
                             <OtzEnrollmentAmongAlhivOnArtByAge />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={"col-12"}>
+                            <OtzEnrollmentAmongAlhivOnArtByCounty />
                         </Col>
                     </Row>
                 </TabPane>

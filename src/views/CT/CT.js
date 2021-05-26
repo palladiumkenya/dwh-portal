@@ -94,6 +94,7 @@ import { load24MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLo
 
 import { loadOtzEnrollmentAmongAlhivOnArtBySex } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtBySexActions';
 import { loadOtzEnrollmentAmongAlhivOnArtByAge } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtByAgeActions';
+import { loadOtzEnrollmentAmongAlhivOnArtByCounty } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtByCountyActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -252,6 +253,7 @@ const CT = () => {
             case 'otz':
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtBySex());
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtByAge());
+                dispatch(loadOtzEnrollmentAmongAlhivOnArtByCounty());
 
                 break;
             default:
