@@ -258,6 +258,86 @@
   color: #00AD30;
 }
 
+.primary-card-otz {
+    background: #F2F2F2;
+    border: 1px solid #D2D2D2;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.primary-card-otz-title {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 25px;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+
+    color: #505050;
+}
+
+.primary-card-otz-body {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 45px;
+    line-height: 61px;
+    padding-right: 0px;
+    margin-right: 0px;
+    color: #000000;
+}
+
+.primary-card-otz-subtitle {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+
+    color: #888888;
+}
+
+.primary-card-otz-triangle {
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    text-align: right !important;
+    border-bottom: 5px solid green;
+    padding-bottom: 12px;
+    padding-left: 0px;
+    margin-left: 0px;
+}
+
+.primary-card-otz-percent {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 30px;
+    text-align: right;
+    text-transform: uppercase;
+    color: #00AD30;
+}
+
+.bb {
+    padding: 12px;
+    margin: auto;
+}
+
+.zero-margin-right {
+    padding-right: 0px;
+    margin-right: 0px;
+}
+
+.zero-margin-left {
+    padding-left: 0px;
+    margin-left: 0px;
+}
+
 .bigger-subtitle {
   font-size: 2.4em;
 }
