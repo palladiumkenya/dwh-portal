@@ -117,6 +117,7 @@ import consistencyByFacilityNotReported from './RR/consistencyByFacilityNotRepor
 import otzEnrollmentAmongAlhivOnArtBySex from './CT/OTZ/otzEnrollmentAmongAlhivOnArtBySex';
 import otzEnrollmentAmongAlhivOnArtByAge from './CT/OTZ/otzEnrollmentAmongAlhivOnArtByAge';
 import otzEnrollmentAmongAlhivOnArtByCounty from './CT/OTZ/otzEnrollmentAmongAlhivOnArtByCounty';
+import otzEnrollmentAmongAlhivOnArtByPartner from './CT/OTZ/otzEnrollmentAmongAlhivOnArtByPartner';
 
 export default combineReducers({
     auth: authReducer,
@@ -228,5 +229,6 @@ export default combineReducers({
 
     otzEnrollmentAmongAlhivOnArtBySex,
     otzEnrollmentAmongAlhivOnArtByAge,
-    otzEnrollmentAmongAlhivOnArtByCounty
+    otzEnrollmentAmongAlhivOnArtByCounty,
+    otzEnrollmentAmongAlhivOnArtByPartner
 });

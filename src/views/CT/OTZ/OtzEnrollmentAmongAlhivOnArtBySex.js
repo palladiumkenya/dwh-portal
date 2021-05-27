@@ -10,6 +10,24 @@ const OtzEnrollmentAmongAlhivOnArtBySex = () => {
     const [otzEnrollmentAmongAlHivOnArtBySex, setOtzEnrollmentAmongAlHivOnArtBySex] = useState({});
     const otzEnrollmentsBySex = useSelector(otzEnrollmentAmongAlhivBySex.getOtzEnrollmentAmongAlHivOnArtBySex);
 
+    let femalePercentage = 0;
+    let femaleTxCurr = 0;
+
+    let malePercentage = 0;
+    let maleTxCurr = 0;
+
+    const femaleVals = otzEnrollmentsBySex.filter(obj => obj.Gender === 'Female');
+    const maleVals = otzEnrollmentsBySex.filter(obj => obj.Gender === 'Male');
+    if (femaleVals.length > 0) {
+        femalePercentage = femaleVals[0].Percentage;
+        femaleTxCurr = femaleVals[0].TXCurr;
+    }
+
+    if (maleVals.length > 0) {
+        malePercentage = femaleVals[0].Percentage;
+        maleTxCurr = femaleVals[0].TXCurr;
+    }
+
     const loadOtzEnrollmentAmongAlHivOnArtBySex = useCallback(async () => {
         setOtzEnrollmentAmongAlHivOnArtBySex({
             chart: {
@@ -41,15 +59,15 @@ const OtzEnrollmentAmongAlhivOnArtBySex = () => {
                     data: [
                         {
                             name: 'MALES',
-                            y: Math.round(otzEnrollmentsBySex[0].Percentage),
+                            y: Math.round(malePercentage),
                             color: '#14084D',
-                            text: otzEnrollmentsBySex[0].TXCurr
+                            text: maleTxCurr
                         },
                         {
                             name: 'FEMALES',
-                            y: Math.round(otzEnrollmentsBySex[1].Percentage),
+                            y: Math.round(femalePercentage),
                             color: '#EA4C8B',
-                            text: otzEnrollmentsBySex[1].TXCurr,
+                            text: femaleTxCurr,
                         }
                     ]
                 }
