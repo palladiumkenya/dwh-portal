@@ -15,6 +15,10 @@ export const getOtzVlUptakeAmongAlhivEnrolledInOtzByCounty = createSelector(
             County: val.County
         }));
 
+        arrayVal.sort((a, b) => {
+            return b.y - a.y;
+        });
+
         return arrayVal;
     }
 );
