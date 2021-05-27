@@ -51,12 +51,12 @@ export const filterByDatimAgeGroup = datimAgeGroups => ({
 });
 
 export const filterByLatestPregnancy = latestPregnancies => ({
-    type: actionTypes.FILTER_BY_DATIM_AGE_GROUP,
+    type: actionTypes.FILTER_BY_LATEST_PREGNANCY,
     payload: { latestPregnancies }
 });
 
 export const filterByPopulationType = populationTypes => ({
-    type: actionTypes.FILTER_BY_DATIM_AGE_GROUP,
+    type: actionTypes.FILTER_BY_POPULATION_TYPE,
     payload: { populationTypes }
 });
 

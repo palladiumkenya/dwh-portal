@@ -32,8 +32,6 @@ export const fetchArtOptimizationOverview = () => async (dispatch, getState) => 
         latestPregnancy: getState().filters.latestPregnancies,
         populationType: getState().filters.populationTypes,
     };
-    console.log(params);
     const response = await getAll('care-treatment/getArtOptimizationOverview', params);
-    console.log(response);
     dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_OVERVIEW_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };
