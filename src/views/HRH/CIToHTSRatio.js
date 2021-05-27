@@ -8,7 +8,7 @@ import { getHtsProvidersByCounty } from '../../selectors/HRH/practitionersCountB
 const DistributionHTSCI = () => {
     const htsProvidersByCounty = useSelector(getHtsProvidersByCounty);
     const caseIdentificationToHTSProvidersRatioByCounty = {
-        title: { text: 'Case identification to HTS providers\' ratio by County' },
+        title: { text: 'Average tested by County' },
         subtitle: { text: 'Source: NASCOP HRIS' },
         xAxis: [{ categories: htsProvidersByCounty.counties, crosshair: true }],
         yAxis: [{ title: { text: 'CI to HTS Providers Ratio' }}],

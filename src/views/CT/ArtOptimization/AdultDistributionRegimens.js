@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardHeader, Spinner } from 'reactstrap';
 import DataTable from 'react-data-table-component';
+import CsvDownloader from 'react-csv-downloader';
 import * as selectors from '../../../selectors/CT/ArtOptimization/artOptimizationCurrentByRegimen';
 
 const AdultDistributionRegimens = () => {
@@ -11,6 +12,9 @@ const AdultDistributionRegimens = () => {
     const adultsOnThirdLine = useSelector(selectors.getAdultsOnThirdLine);
     const adultsOnUndocumentedLine = useSelector(selectors.getAdultsOnUndocumentedLine);
     const adults = useSelector(selectors.getAdults);
+    const loading = useSelector(state => state.artOptimizationCurrentByRegimen.loading);
+    const adultsAllData = useSelector(selectors.getAdultsAll);
+
     const loadAdultsByRegimenNames = useCallback(async () => {
         let data = {
             columns: [
@@ -24,7 +28,7 @@ const AdultDistributionRegimens = () => {
         for(let i = 0; i < adultsOnFirstLine.length; i++) {
             data.data.push({
                 regimenLine: 'FIRST LINE',
-                regimen: adultsOnFirstLine[i].lastRegimen,
+                regimen: adultsOnFirstLine[i].currentRegimen,
                 activeOnArt: adultsOnFirstLine[i].txCurr,
                 percentageOnArt: ((adultsOnFirstLine[i].txCurr/adults)*100).toFixed(2) + " %",
                 percentNumber: ((adultsOnFirstLine[i].txCurr/adults)*100).toFixed(2)
@@ -33,7 +37,7 @@ const AdultDistributionRegimens = () => {
         for(let i = 0; i < adultsOnSecondLine.length; i++) {
             data.data.push({
                 regimenLine: 'SECOND LINE',
-                regimen: adultsOnSecondLine[i].lastRegimen,
+                regimen: adultsOnSecondLine[i].currentRegimen,
                 activeOnArt: adultsOnSecondLine[i].txCurr,
                 percentageOnArt: ((adultsOnSecondLine[i].txCurr/adults)*100).toFixed(2) + " %",
                 percentNumber: ((adultsOnSecondLine[i].txCurr/adults)*100).toFixed(2)
@@ -42,7 +46,7 @@ const AdultDistributionRegimens = () => {
         for(let i = 0; i < adultsOnThirdLine.length; i++) {
             data.data.push({
                 regimenLine: 'THIRD LINE',
-                regimen: adultsOnThirdLine[i].lastRegimen,
+                regimen: adultsOnThirdLine[i].currentRegimen,
                 activeOnArt: adultsOnThirdLine[i].txCurr,
                 percentageOnArt: ((adultsOnThirdLine[i].txCurr/adults)*100).toFixed(2) + " %",
                 percentNumber: ((adultsOnThirdLine[i].txCurr/adults)*100).toFixed(2)
@@ -51,7 +55,7 @@ const AdultDistributionRegimens = () => {
         for(let i = 0; i < adultsOnUndocumentedLine.length; i++) {
             data.data.push({
                 regimenLine: 'UNDOCUMENTED REG LINE',
-                regimen: adultsOnUndocumentedLine[i].lastRegimen,
+                regimen: adultsOnUndocumentedLine[i].currentRegimen,
                 activeOnArt: adultsOnUndocumentedLine[i].txCurr,
                 percentageOnArt: ((adultsOnUndocumentedLine[i].txCurr/adults)*100).toFixed(2) + " %",
                 percentNumber: ((adultsOnUndocumentedLine[i].txCurr/adults)*100).toFixed(2)
@@ -71,15 +75,32 @@ const AdultDistributionRegimens = () => {
         <Card className="trends-card">
             <CardHeader className="trends-header">
                 PROPORTION OF ADULTS BY REGIMEN
+                {
+                    loading === true ?
+                    <Spinner className="pull-right"/> :
+                    <CsvDownloader
+                        filename="ndwh_proportion_of_adults_by_regimen"
+                        separator=","
+                        datas={adultsAllData}
+                        className="pull-right"
+                    >
+                        <i class="bordered download icon inverted black"></i>
+                    </CsvDownloader>
+                }
             </CardHeader>
             <CardBody className="trends-body">
                 <DataTable
                     columns={adultDistributionRegimens.columns}
                     data={adultDistributionRegimens.data}
-                    pagination={true}
-                    responsive={true}
-                    noHeader={true}
-                    dense={true}
+                    noHeader
+                    dense
+                    defaultSortField="regimenLine"
+                    defaultSortAsc={true}
+                    pagination
+                    responsive
+                    highlightOnHover
+                    progressPending={loading}
+                    progressComponent={<Spinner/>}
                 />
             </CardBody>
         </Card>

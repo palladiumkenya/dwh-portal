@@ -4,23 +4,27 @@ import { getAll } from '../../../views/Shared/Api';
 import { CACHING, PAGES } from '../../../constants';
 
 export const loadCurrentOnArtByAgeSex = () => async (dispatch, getState) => {
-    const diffInMinutes = moment().diff(
-        moment(getState().currentOnArtByAgeSex.lastFetch),
-        'minutes'
-    );
-    if (
-        getState().ui.ctTab !== 'txCurr' &&
-        getState().ui.ctTab !== 'txOpt' &&
-        getState().ui.ctTab !== 'advEv' &&
-        getState().ui.ctTab !== 'dsd' &&
-        getState().ui.currentPage !== PAGES.home
-    ) {
-        return;
-    }
-    else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
-        return;
-    } else {
+    if (getState().filters.noCache === true) {
         await dispatch(fetchCurrentOnArtByAgeSex());
+    } else {
+        const diffInMinutes = moment().diff(
+            moment(getState().currentOnArtByAgeSex.lastFetch),
+            'minutes'
+        );
+        if (
+            getState().ui.ctTab !== 'txCurr' &&
+            getState().ui.ctTab !== 'txOpt' &&
+            getState().ui.ctTab !== 'advEv' &&
+            getState().ui.ctTab !== 'dsd' &&
+            getState().ui.currentPage !== PAGES.home
+        ) {
+            return;
+        }
+        else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
+            return;
+        } else {
+            await dispatch(fetchCurrentOnArtByAgeSex());
+        }
     }
 };
 

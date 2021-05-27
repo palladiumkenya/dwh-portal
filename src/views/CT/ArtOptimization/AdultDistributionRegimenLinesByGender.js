@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { Row, Col, Card, CardBody, CardHeader } from 'reactstrap';
+import { Row, Col, Card, CardBody, CardHeader, Spinner } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import * as artOptimizationOverviewSelectors from '../../../selectors/CT/ArtOptimization/artOptimizationOverview';
@@ -8,6 +8,8 @@ import * as artOptimizationOverviewSelectors from '../../../selectors/CT/ArtOpti
 const AdultDistributionRegimenLinesByGender = () => {
     const [adultDistributionRegimenLinesMale, setAdultDistributionRegimenLinesMale] = useState({});
     const [adultDistributionRegimenLinesFemale, setAdultDistributionRegimenLinesFemale] = useState({});
+
+    const loading = useSelector(state => state.artOptimizationOverview.loading);
 
     const maleAdultsOnFirstLine = useSelector(artOptimizationOverviewSelectors.getMaleAdultsOnFirstLine);
     const maleAdultsOnSecondLine = useSelector(artOptimizationOverviewSelectors.getMaleAdultsOnSecondLine);
@@ -90,10 +92,18 @@ const AdultDistributionRegimenLinesByGender = () => {
             <CardBody className="trends-body">
                 <Row>
                     <Col>
-                        <HighchartsReact highcharts={Highcharts} options={adultDistributionRegimenLinesMale} />
+                        {
+                            loading === true ?
+                            <Spinner/> :
+                            <HighchartsReact highcharts={Highcharts} options={adultDistributionRegimenLinesMale} />
+                        }
                     </Col>
                     <Col>
-                        <HighchartsReact highcharts={Highcharts} options={adultDistributionRegimenLinesFemale} />
+                        {
+                            loading === true ?
+                            <Spinner/> :
+                            <HighchartsReact highcharts={Highcharts} options={adultDistributionRegimenLinesFemale} />
+                        }
                     </Col>
                 </Row>
             </CardBody>

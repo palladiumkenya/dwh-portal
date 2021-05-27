@@ -4,17 +4,21 @@ import { getAll } from '../../../views/Shared/Api';
 import { CACHING } from '../../../constants';
 
 export const loadArtOptimizationOverview = () => async (dispatch, getState) => {
-    const diffInMinutes = moment().diff(
-        moment(getState().artOptimizationOverview.lastFetch),
-        'minutes'
-    );
-    if (getState().ui.ctTab !== 'txOpt') {
-        return;
-    }
-    else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
-        return;
-    } else {
+    if (getState().filters.noCache === true) {
         await dispatch(fetchArtOptimizationOverview());
+    } else {
+        const diffInMinutes = moment().diff(
+            moment(getState().artOptimizationOverview.lastFetch),
+            'minutes'
+        );
+        if (getState().ui.ctTab !== 'txOpt') {
+            return;
+        }
+        else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
+            return;
+        } else {
+            await dispatch(fetchArtOptimizationOverview());
+        }
     }
 };
 
@@ -26,7 +30,11 @@ export const fetchArtOptimizationOverview = () => async (dispatch, getState) => 
         facility: getState().filters.facilities,
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
-        project: getState().filters.projects
+        project: getState().filters.projects,
+        gender: getState().filters.genders,
+        datimAgeGroup: getState().filters.datimAgeGroups,
+        latestPregnancy: getState().filters.latestPregnancies,
+        populationType: getState().filters.populationTypes,
     };
     const response = await getAll('care-treatment/getArtOptimizationOverview', params);
     dispatch({ type: actionTypes.CT_ART_OPTIMIZATION_OVERVIEW_FETCH, payload: { filtered: getState().filters.filtered, list: response }});

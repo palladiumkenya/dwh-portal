@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardHeader, Spinner } from 'reactstrap';
 import DataTable from 'react-data-table-component';
 import { useSelector } from 'react-redux';
+import CsvDownloader from 'react-csv-downloader';
 import * as selectors from '../../../selectors/CT/ArtOptimization/artOptimizationRegimenDistributionByWeightBands';
 
 const RegimenDistributionByWeightBands = () => {
     const [regimenDistributionByWeightBands, setRegimenDistributionByWeightBands] = useState({});
+    const loading = useSelector(state => state.artOptimizationRegimenDistributionByWeightBands.loading);
     const regimenDistribution = useSelector(selectors.getRegimenDistributionByWeightBands);
 
     const loadRegimenDistributionByWeightBands = useCallback(async () => {
@@ -37,15 +39,32 @@ const RegimenDistributionByWeightBands = () => {
         <Card className="trends-card">
             <CardHeader className="trends-header">
                 REGIMEN DISTRIBUTION BASED ON WEIGHT BANDS
+                {
+                    loading === true ?
+                    <Spinner className="pull-right"/> :
+                    <CsvDownloader
+                        filename="ndwh_regimen_distribution_by_weight_bands"
+                        separator=","
+                        datas={regimenDistribution}
+                        className="pull-right"
+                    >
+                        <i class="bordered download icon inverted black"></i>
+                    </CsvDownloader>
+                }
             </CardHeader>
             <CardBody className="trends-body">
                 <DataTable
                     columns={regimenDistributionByWeightBands.columns}
                     data={regimenDistributionByWeightBands.data}
-                    pagination={true}
-                    responsive={true}
-                    noHeader={true}
-                    dense={true}
+                    noHeader
+                    dense
+                    defaultSortField="regimenLine"
+                    defaultSortAsc={true}
+                    pagination
+                    responsive
+                    highlightOnHover
+                    progressPending={loading}
+                    progressComponent={<Spinner/>}
                 />
             </CardBody>
         </Card>
