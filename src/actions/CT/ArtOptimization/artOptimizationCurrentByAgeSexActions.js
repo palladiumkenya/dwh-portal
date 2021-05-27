@@ -4,17 +4,21 @@ import { getAll } from '../../../views/Shared/Api';
 import { CACHING } from '../../../constants';
 
 export const loadArtOptimizationCurrentByAgeSex = () => async (dispatch, getState) => {
-    const diffInMinutes = moment().diff(
-        moment(getState().artOptimizationCurrentByAgeSex.lastFetch),
-        'minutes'
-    );
-    if (getState().ui.ctTab !== 'txOpt') {
-        return;
-    }
-    else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
-        return;
-    } else {
+    if (getState().filters.noCache === true) {
         await dispatch(fetchArtOptimizationCurrentByAgeSex());
+    } else {
+        const diffInMinutes = moment().diff(
+            moment(getState().artOptimizationCurrentByAgeSex.lastFetch),
+            'minutes'
+        );
+        if (getState().ui.ctTab !== 'txOpt') {
+            return;
+        }
+        else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
+            return;
+        } else {
+            await dispatch(fetchArtOptimizationCurrentByAgeSex());
+        }
     }
 };
 

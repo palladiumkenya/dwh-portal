@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardHeader, Spinner } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import * as artOptimizationOverviewSelectors from '../../../selectors/CT/ArtOptimization/artOptimizationOverview';
 
 const AdultDistributionRegimenLines = () => {
     const [adultDistributionRegimenLines, setAdultDistributionRegimenLines] = useState({});
+    const loading = useSelector(state => state.artOptimizationOverview.loading);
     const adultsOnFirstLine = useSelector(artOptimizationOverviewSelectors.getAdultsOnFirstLine);
     const adultsOnSecondLine = useSelector(artOptimizationOverviewSelectors.getAdultsOnSecondLine);
     const adultsOnThirdLine = useSelector(artOptimizationOverviewSelectors.getAdultsOnThirdLine);
@@ -54,7 +55,11 @@ const AdultDistributionRegimenLines = () => {
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={adultDistributionRegimenLines} />
+                            {
+                                loading === true ?
+                                <Spinner/> :
+                                <HighchartsReact highcharts={Highcharts} options={adultDistributionRegimenLines} />
+                            }
                         </div>
                     </CardBody>
                 </Card>
