@@ -14,6 +14,8 @@ const AdultTldUptakeByAgeGender = () => {
     const adultsCurrentByAgeSex = useSelector(selectors.getCurrentTldByAgeSex);
     const currentOnArtByAgeSexData = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtByAgeSexList);
 
+    console.log(process.env.NODE_ENV);
+
     const loadAdultTldUptakeByAgeGender = useCallback(async () => {
         let ageGroups = _.remove(_.uniq(['Under 1', '1 to 4', '5 to 9', '10 to 14'].concat(ageGroupsOriginal)), function(element) {
             return element !== 'Under 1' && element !== '1 to 4' && element !== '5 to 9' && element !== '10 to 14';
@@ -72,8 +74,8 @@ const AdultTldUptakeByAgeGender = () => {
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'MALE', type: 'column', data: data[1], color: "#14084D", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
-                { name: 'FEMALE ', type: 'column', data: data[0], color: "#EA4C8B", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
+                { name: 'MALE', type: 'column', data: data[1] ? data[1] : [], color: "#14084D", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
+                { name: 'FEMALE ', type: 'column', data: data[0] ? data[0] : [], color: "#EA4C8B", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
             ],
         });
     }, [ageGroupsOriginal, sexGroups, adultsCurrentByAgeSex, currentOnArtByAgeSexData]);

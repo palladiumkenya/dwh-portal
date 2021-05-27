@@ -4,7 +4,20 @@ import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import Loadable from 'react-loadable';
 
 import { changeCtTab, changeCurrentPage } from "../../actions/Shared/uiActions";
-import { enableFromDateFilter, disableFromDateFilter, enableToDateFilter, disableToDateFilter } from "../../actions/Shared/filterActions";
+import {
+    enableFromDateFilter,
+    disableFromDateFilter,
+    enableToDateFilter,
+    disableToDateFilter,
+    enableGenderFilter,
+    disableGenderFilter,
+    enableDatimAgeGroupFilter,
+    disableDatimAgeGroupFilter,
+    enableLatestPregnancyFilter,
+    disableLatestPregnancyFilter,
+    enablePopulationTypeFilter,
+    disablePopulationTypeFilter
+} from "../../actions/Shared/filterActions";
 
 import { loadLinkagePositiveTrends } from '../../actions/HTS/Linkage/linkagePositiveTrendsActions';
 
@@ -119,6 +132,10 @@ const CT = () => {
     const partners = useSelector(state => state.filters.partners);
     const agencies = useSelector(state => state.filters.agencies);
     const projects = useSelector(state => state.filters.projects);
+    const genders = useSelector(state => state.filters.genders);
+    const datimAgeGroups = useSelector(state => state.filters.datimAgeGroups);
+    const latestPregnancies = useSelector(state => state.filters.latestPregnancies);
+    const populationTypes = useSelector(state => state.filters.populationTypes);
     const fromDate = useSelector(state => state.filters.fromDate);
     const toDate = useSelector(state => state.filters.toDate);
 
@@ -156,6 +173,17 @@ const CT = () => {
             dispatch(enableToDateFilter());
         } else {
             dispatch(disableToDateFilter());
+        }
+        if (ctTab === 'txOpt') {
+            dispatch(enableGenderFilter());
+            dispatch(enableDatimAgeGroupFilter());
+            dispatch(enableLatestPregnancyFilter());
+            dispatch(enablePopulationTypeFilter());
+        } else {
+            dispatch(disableGenderFilter());
+            dispatch(disableDatimAgeGroupFilter());
+            dispatch(disableLatestPregnancyFilter());
+            dispatch(disablePopulationTypeFilter());
         }
     }, [dispatch, ctTab]);
 
@@ -241,9 +269,7 @@ const CT = () => {
                 dispatch(loadViralLoadUptakeByAge());
                 dispatch(loadViralLoadUptakeByCounty());
                 dispatch(loadViralLoadUptakeByPartner());
-
                 dispatch(loadViralLoadOutcomesBySex());
-
                 dispatch(loadViralLoadSuppressionByAge());
                 dispatch(loadViralLoadSuppressionByYear());
                 dispatch(loadViralLoadSuppressionByRegimen());
@@ -271,7 +297,6 @@ const CT = () => {
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtBySex());
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtByAge());
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtByCounty());
-
                 break;
             default:
                 break;
@@ -286,6 +311,10 @@ const CT = () => {
         projects,
         fromDate,
         toDate,
+        genders,
+        datimAgeGroups,
+        latestPregnancies,
+        populationTypes,
         ctTab
     ]);
 
