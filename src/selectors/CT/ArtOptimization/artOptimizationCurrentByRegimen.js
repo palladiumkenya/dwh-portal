@@ -20,7 +20,15 @@ export const getAdultsOnFirstLine = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        return list.filter(list => list.ageGroup === "Adult" && list.regimenLine === "First Regimen Line");
+        return _.chain(list)
+            .filter(list => list.ageGroup === "Adult" && list.regimenLine === "First Regimen Line")
+            .groupBy('currentRegimen')
+            .map((objs, key) => ({
+                'currentRegimen': key,
+                'txCurr': _.sumBy(objs, 'txCurr')
+            }))
+            .orderBy('txCurr', 'desc')
+            .value();
     }
 );
 
@@ -29,7 +37,15 @@ export const getAdultsOnSecondLine = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        return list.filter(list => list.ageGroup === "Adult" && list.regimenLine === "Second Regimen Line");
+        return _.chain(list)
+            .filter(list => list.ageGroup === "Adult" && list.regimenLine === "Second Regimen Line")
+            .groupBy('currentRegimen')
+            .map((objs, key) => ({
+                'currentRegimen': key,
+                'txCurr': _.sumBy(objs, 'txCurr')
+            }))
+            .orderBy('txCurr', 'desc')
+            .value();
     }
 );
 
@@ -37,7 +53,15 @@ export const getAdultsOnThirdLine = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        return list.filter(list => list.ageGroup === "Adult" && list.regimenLine === "Third Regimen Line");
+        return _.chain(list)
+            .filter(list => list.ageGroup === "Adult" && list.regimenLine === "Third Regimen Line")
+            .groupBy('currentRegimen')
+            .map((objs, key) => ({
+                'currentRegimen': key,
+                'txCurr': _.sumBy(objs, 'txCurr')
+            }))
+            .orderBy('txCurr', 'desc')
+            .value();
     }
 );
 
@@ -45,7 +69,15 @@ export const getAdultsOnUndocumentedLine = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        return list.filter(list => list.ageGroup === "Adult" && list.regimenLine === "Undocumented Regimen Line");
+        return _.chain(list)
+            .filter(list => list.ageGroup === "Adult" && list.regimenLine === "Undocumented Regimen Line")
+            .groupBy('currentRegimen')
+            .map((objs, key) => ({
+                'currentRegimen': key,
+                'txCurr': _.sumBy(objs, 'txCurr')
+            }))
+            .orderBy('txCurr', 'desc')
+            .value();
     }
 );
 
