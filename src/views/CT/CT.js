@@ -109,7 +109,8 @@ import { load24MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLo
 import { loadOtzEnrollmentAmongAlhivOnArtBySex } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtBySexActions';
 import { loadOtzEnrollmentAmongAlhivOnArtByAge } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtByAgeActions';
 import { loadOtzEnrollmentAmongAlhivOnArtByCounty } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtByCountyActions';
-import { loadOtzEnrollmentAmongAlhivOnArtByPartner } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtByPartnerActions'
+import { loadOtzEnrollmentAmongAlhivOnArtByPartner } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtByPartnerActions';
+import { loadOtzVlUptakeAmongAlHivEnrolledInOtzBySex } from '../../actions/CT/OTZ/OtzVlUptakeAmongAlHivEnrolledInOtzBySexActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -300,6 +301,7 @@ const CT = () => {
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtByAge());
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtByCounty());
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtByPartner());
+                dispatch(loadOtzVlUptakeAmongAlHivEnrolledInOtzBySex());
 
                 break;
             default:

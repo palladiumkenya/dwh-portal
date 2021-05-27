@@ -8,7 +8,6 @@ import * as otzEnrollmentAmongAlHivByPartner from '../../../selectors/CT/OTZ/otz
 const OtzEnrollmentAmongAlhivOnArtByPartner = () => {
     const [otzEnrollmentAmongAlhivOnArtByPartner, setEnrollmentAmongAlhivOnArtByPartner] = useState({});
     const otzEnrollmentsByPartner = useSelector(otzEnrollmentAmongAlHivByPartner.getOtzEnrollmentAmongAlHivOnArtByPartner);
-    console.log(otzEnrollmentsByPartner);
 
     const loadOtzEnrollmentAmongAlhivOnArtByPartner = useCallback(async () => {
         setEnrollmentAmongAlhivOnArtByPartner({
