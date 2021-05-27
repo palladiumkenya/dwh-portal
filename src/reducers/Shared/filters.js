@@ -2,6 +2,7 @@ import * as actionTypes from "../../actions/types";
 
 const initialState = {
     filtered: false,
+    noCache: false,
     counties: [],
     subCounties: [],
     facilities: [],
@@ -282,6 +283,16 @@ export default (state = initialState, action) => {
                 ...state,
                 latestPregnancyFilterEnabled: false,
                 latestPregnancies: []
+            }
+        case actionTypes.ENABLE_CACHE:
+            return {
+                ...state,
+                noCache: false
+            }
+        case actionTypes.DISABLE_CACHE:
+            return {
+                ...state,
+                noCache: true
             }
         default:
             return state

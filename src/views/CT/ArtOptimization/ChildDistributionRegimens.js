@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardHeader, Spinner } from 'reactstrap';
 import DataTable from 'react-data-table-component';
+import CsvDownloader from 'react-csv-downloader';
 import * as selectors from '../../../selectors/CT/ArtOptimization/artOptimizationCurrentByRegimen';
 
 const ChildDistributionRegimens = () => {
@@ -11,6 +12,9 @@ const ChildDistributionRegimens = () => {
     const childrenOnThirdLine = useSelector(selectors.getChildrenOnThirdLine);
     const childrenOnUndocumentedLine = useSelector(selectors.getChildrenOnUndocumentedLine);
     const children = useSelector(selectors.getChildren);
+    const loading = useSelector(state => state.artOptimizationCurrentByRegimen.loading);
+    const childrenAllData = useSelector(selectors.getChildrenAll);
+
     const loadChildrenByRegimenNames = useCallback(async () => {
         let data = {
             columns: [
@@ -24,7 +28,7 @@ const ChildDistributionRegimens = () => {
         for(let i = 0; i < childrenOnFirstLine.length; i++) {
             data.data.push({
                 regimenLine: 'FIRST LINE',
-                regimen: childrenOnFirstLine[i].lastRegimen,
+                regimen: childrenOnFirstLine[i].currentRegimen,
                 activeOnArt: childrenOnFirstLine[i].txCurr,
                 percentageOnArt: ((childrenOnFirstLine[i].txCurr/children)*100).toFixed(2) + " %",
                 percentNumber: ((childrenOnFirstLine[i].txCurr/children)*100).toFixed(2)
@@ -33,7 +37,7 @@ const ChildDistributionRegimens = () => {
         for(let i = 0; i < childrenOnSecondLine.length; i++) {
             data.data.push({
                 regimenLine: 'SECOND LINE',
-                regimen: childrenOnSecondLine[i].lastRegimen,
+                regimen: childrenOnSecondLine[i].currentRegimen,
                 activeOnArt: childrenOnSecondLine[i].txCurr,
                 percentageOnArt: ((childrenOnSecondLine[i].txCurr/children)*100).toFixed(2) + " %",
                 percentNumber: ((childrenOnSecondLine[i].txCurr/children)*100).toFixed(2)
@@ -42,7 +46,7 @@ const ChildDistributionRegimens = () => {
         for(let i = 0; i < childrenOnThirdLine.length; i++) {
             data.data.push({
                 regimenLine: 'THIRD LINE',
-                regimen: childrenOnThirdLine[i].lastRegimen,
+                regimen: childrenOnThirdLine[i].currentRegimen,
                 activeOnArt: childrenOnThirdLine[i].txCurr,
                 percentageOnArt: ((childrenOnThirdLine[i].txCurr/children)*100).toFixed(2) + " %",
                 percentNumber: ((childrenOnThirdLine[i].txCurr/children)*100).toFixed(2)
@@ -51,15 +55,15 @@ const ChildDistributionRegimens = () => {
         for(let i = 0; i < childrenOnUndocumentedLine.length; i++) {
             data.data.push({
                 regimenLine: 'UNDOCUMENTED REG LINE',
-                regimen: childrenOnUndocumentedLine[i].lastRegimen,
+                regimen: childrenOnUndocumentedLine[i].currentRegimen,
                 activeOnArt: childrenOnUndocumentedLine[i].txCurr,
                 percentageOnArt: ((childrenOnUndocumentedLine[i].txCurr/children)*100).toFixed(2) + " %",
                 percentNumber: ((childrenOnUndocumentedLine[i].txCurr/children)*100).toFixed(2)
             });
         }
-        data.data.sort(function(a, b) {
-            return b.percentNumber - a.percentNumber;
-        });
+        // data.data.sort(function(a, b) {
+        //     return b.percentNumber - a.percentNumber;
+        // });
         setChildDistributionRegimens(data);
     }, [children, childrenOnFirstLine, childrenOnSecondLine, childrenOnThirdLine, childrenOnUndocumentedLine]);
 
@@ -71,15 +75,32 @@ const ChildDistributionRegimens = () => {
         <Card className="trends-card">
             <CardHeader className="trends-header">
                 PROPORTION OF CALHIV BY REGIMEN
+                {
+                    loading === true ?
+                    <Spinner className="pull-right"/> :
+                    <CsvDownloader
+                        filename="ndwh_proportion_of_children_by_regimen"
+                        separator=","
+                        datas={childrenAllData}
+                        className="pull-right"
+                    >
+                        <i class="bordered download icon inverted black"></i>
+                    </CsvDownloader>
+                }
             </CardHeader>
             <CardBody className="trends-body">
                 <DataTable
                     columns={childDistributionRegimens.columns}
                     data={childDistributionRegimens.data}
-                    pagination={true}
-                    responsive={true}
-                    noHeader={true}
-                    dense={true}
+                    noHeader
+                    dense
+                    defaultSortField="regimenLine"
+                    defaultSortAsc={true}
+                    pagination
+                    responsive
+                    highlightOnHover
+                    progressPending={loading}
+                    progressComponent={<Spinner/>}
                 />
             </CardBody>
         </Card>

@@ -123,3 +123,11 @@ export const enablePopulationTypeFilter = () => ({
 export const disablePopulationTypeFilter = () => ({
     type: actionTypes.DISABLE_POPULATION_TYPE_FILTER
 });
+
+export const enableCache = () => ({
+    type: actionTypes.ENABLE_CACHE
+});
+
+export const disableCache = () => ({
+    type: actionTypes.DISABLE_CACHE
+});

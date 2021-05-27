@@ -4,17 +4,21 @@ import moment from 'moment';
 import { CACHING } from '../../../constants';
 
 export const loadRegimenDistributionByAgeBands = () => async (dispatch, getState) => {
-    const diffInMinutes = moment().diff(
-        moment(getState().artOptimizationRegimenDistributionByAgeBands.lastFetch),
-        'minutes'
-    );
-    if (getState().ui.ctTab !== 'txOpt') {
-        return;
-    }
-    else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
-        return;
-    } else {
+    if (getState().filters.noCache === true) {
         await dispatch(fetchRegimenDistributionByAgeBands());
+    } else {
+        const diffInMinutes = moment().diff(
+            moment(getState().artOptimizationRegimenDistributionByAgeBands.lastFetch),
+            'minutes'
+        );
+        if (getState().ui.ctTab !== 'txOpt') {
+            return;
+        }
+        else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
+            return;
+        } else {
+            await dispatch(fetchRegimenDistributionByAgeBands());
+        }
     }
 };
 

@@ -126,6 +126,7 @@ const OTZ = Loadable({ loader: () => import('./OTZ/OTZ'), loading: Loading, dela
 const CT = () => {
     const dispatch = useDispatch();
     const ctTab = useSelector(state => state.ui.ctTab);
+    const noCache = useSelector(state => state.filters.noCache);
     const counties = useSelector(state => state.filters.counties);
     const subCounties = useSelector(state => state.filters.subCounties);
     const facilities = useSelector(state => state.filters.facilities);
@@ -315,7 +316,8 @@ const CT = () => {
         datimAgeGroups,
         latestPregnancies,
         populationTypes,
-        ctTab
+        ctTab,
+        noCache
     ]);
 
     return (
