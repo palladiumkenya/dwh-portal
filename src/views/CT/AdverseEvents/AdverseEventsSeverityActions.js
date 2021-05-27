@@ -1,13 +1,36 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
-import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import { Card, CardBody, CardHeader } from 'reactstrap';
+import { formatNumber } from './../../../utils/utils';
+import { useSelector } from 'react-redux';
+
 import * as adverseEventsSeverityActionsSelectors from '../../../selectors/CT/AdverseEvents/adverseEventsSeverityActions';
 
-const AdverseEventsSeverityActions = () => {
+const AdverseEventsSeverityActions = ({ tab }) => {
     const [adverseEventsActionsBySeverity, setAdverseEventsActionsBySeverity] = useState({});
-    const adverseEventsSeverityActions = useSelector(adverseEventsSeverityActionsSelectors.getAdverseEventsSeverityActions);
+    const methodCalled = tab === 'adult' ? adverseEventsSeverityActionsSelectors.getAdverseEventsSeverityActions : adverseEventsSeverityActionsSelectors.getAdverseEventsSeverityCalHIVActions;
+    const adverseEventsSeverityActions = useSelector(methodCalled);
+    const n = parseInt(adverseEventsSeverityActions.mild_medicineNotChanged_total) +
+        parseInt(adverseEventsSeverityActions.moderate_medicineNotChanged_total) +
+        parseInt(adverseEventsSeverityActions.severe_medicineNotChanged_total) +
+        parseInt(adverseEventsSeverityActions.unknown_medicineNotChanged_total) +
+        parseInt(adverseEventsSeverityActions.mild_doseReduced_total) +
+        parseInt(adverseEventsSeverityActions.moderate_doseReduced_total) +
+        parseInt(adverseEventsSeverityActions.severe_doseReduced_total) +
+        parseInt(adverseEventsSeverityActions.unknown_doseReduced_total) +
+        parseInt(adverseEventsSeverityActions.mild_medicine_withdrawn_total) +
+        parseInt(adverseEventsSeverityActions.moderate_medicine_withdrawn_total) +
+        parseInt(adverseEventsSeverityActions.severe_medicine_withdrawn_total) +
+        parseInt(adverseEventsSeverityActions.unknown_medicine_withdrawn_total) +
+        parseInt(adverseEventsSeverityActions.mild_all_drugs_stopped_total) +
+        parseInt(adverseEventsSeverityActions.moderate_all_drugs_stopped_total) +
+        parseInt(adverseEventsSeverityActions.severe_all_drugs_stopped_total) +
+        parseInt(adverseEventsSeverityActions.unknown_all_drugs_stopped_total) +
+        parseInt(adverseEventsSeverityActions.mild_undocumented_total) +
+        parseInt(adverseEventsSeverityActions.moderate_undocumented_total) +
+        parseInt(adverseEventsSeverityActions.severe_undocumented_total) +
+        parseInt(adverseEventsSeverityActions.unknown_undocumented_total);
 
     const loadAdverseEventsActionsBySeverity = useCallback(async () => {
         setAdverseEventsActionsBySeverity({
@@ -63,7 +86,7 @@ const AdverseEventsSeverityActions = () => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header">
-                ADVERSE EVENTS ACTIONS BY SEVERITY
+                ADVERSE EVENTS ACTIONS FOR ADULTS 15+ WHO DEVELOPED AEs
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">

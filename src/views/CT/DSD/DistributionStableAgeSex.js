@@ -41,12 +41,12 @@ const DistributionStableAgeSex = () => {
                 name: 'MALE',
                 data: stabilityStatusByAgeSex.stableMale,
                 color: "#14084D",
-                tooltip: { valueSuffix: '{point.percentage:.0f}%' + '({point.text})' }
+                tooltip: { valueSuffix: '{point.percentage:.0f}% ({point.text})' }
             }, {
                 name: 'FEMALE',
                 data: stabilityStatusByAgeSex.stableFemale,
                 color: "#EA4C8B",
-                tooltip: { valueSuffix: '{point.percentage:.0f}%' + '({point.text})' }
+                tooltip: { valueSuffix: '{point.percentage:.0f}% ({point.text})' }
             }]
         });
     }, [stabilityStatusByAgeSex]);

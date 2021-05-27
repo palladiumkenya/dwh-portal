@@ -23,9 +23,9 @@ const PNSContactsTestingOverview = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):""
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : moment().startOf('month').subtract(1, 'month').format("YYYY"),
+            month: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : moment().startOf('month').subtract(1, 'month').format("MM")
         };
-        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('hts/pnsIndex', params);
         setPnsIndex(result.indexClients ? parseInt(result.indexClients) : 0);
     }, [filters]);
@@ -38,9 +38,9 @@ const PNSContactsTestingOverview = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY"):""
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : moment().startOf('month').subtract(1, 'month').format("YYYY"),
+            month: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : moment().startOf('month').subtract(1, 'month').format("MM")
         };
-        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const data = await getAll('hts/pnsSexualContactsCascade', params);
         setPNSSexualContactsCascade({
             elicited: data.elicited ? data.elicited:0,

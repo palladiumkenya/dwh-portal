@@ -80,6 +80,7 @@ import viralLoadOverallUptakeSuppressionByFacility from "./CT/ViralLoad/viralLoa
 import viralLoadSuppressionByYearAndSuppressionCategory
     from './CT/ViralLoad/viralLoadSuppressionByYearAndSuppressionCategory';
 
+import treatmentOutcomesOverallLast12m from "./CT/TreatmentOutcomes/treatmentOutcomesOverallLast12m";
 import treatmentOutcomesBySex from "./CT/TreatmentOutcomes/treatmentOutcomesBySex";
 import treatmentOutcomesByPopulationType from "./CT/TreatmentOutcomes/treatmentOutcomesByPopulationType";
 import treatmentOutcomesByAge from "./CT/TreatmentOutcomes/treatmentOutcomesByAge";
@@ -107,6 +108,15 @@ import populationByCounty from './HRH/populationByCounty';
 
 import uptakeBySex from './HTS/Uptake/uptakeBySex';
 import uptakeByCounty from './HTS/Uptake/uptakeByCounty';
+
+import overallReportingRatesByFacilityReported from './RR/overallReportingRatesByFacilityReported';
+import overallReportingRatesByFacilityNotReported from './RR/overallReportingRatesByFacilityNotReported';
+
+import consistencyByFacilityNotReported from './RR/consistencyByFacilityNotReported';
+
+import otzEnrollmentAmongAlhivOnArtBySex from './CT/OTZ/otzEnrollmentAmongAlhivOnArtBySex';
+import otzEnrollmentAmongAlhivOnArtByAge from './CT/OTZ/otzEnrollmentAmongAlhivOnArtByAge';
+import otzEnrollmentAmongAlhivOnArtByCounty from './CT/OTZ/otzEnrollmentAmongAlhivOnArtByCounty';
 
 export default combineReducers({
     auth: authReducer,
@@ -194,6 +204,7 @@ export default combineReducers({
     viralLoad12MonthSuppressionByYearOfArtStart,
     viralLoad24MonthSuppressionByYearOfArtStart,
 
+    treatmentOutcomesOverallLast12m,
     treatmentOutcomesBySex,
     treatmentOutcomesByPopulationType,
     treatmentOutcomesByAge,
@@ -209,4 +220,13 @@ export default combineReducers({
 
     uptakeBySex,
     uptakeByCounty,
+
+    overallReportingRatesByFacilityReported,
+    overallReportingRatesByFacilityNotReported,
+
+    consistencyByFacilityNotReported,
+
+    otzEnrollmentAmongAlhivOnArtBySex,
+    otzEnrollmentAmongAlhivOnArtByAge,
+    otzEnrollmentAmongAlhivOnArtByCounty
 });

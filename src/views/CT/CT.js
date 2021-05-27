@@ -1,13 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
-import NewOnArt from './NewOnArt/NewOnArt';
-import CurrentOnArt from './CurrentOnArt/CurrentOnArt';
-import DSD from './DSD/DSD';
-import TreatmentOutcomes from './TreatmentOutcomes/TreatmentOutcomes';
-import ViralLoad from './ViralLoad/ViralLoad';
-import AdverseEvents from './AdverseEvents/AdverseEvents';
-import ArtOptimization from './ArtOptimization/ArtOptimization';
+import Loadable from 'react-loadable';
+
 import { changeCtTab, changeCurrentPage } from "../../actions/Shared/uiActions";
 import {
     enableFromDateFilter,
@@ -92,6 +87,7 @@ import { loadViralLoadSuppressionByRegimen } from '../../actions/CT/ViralLoad/vi
 import { loadViralLoadOverallUptakeSuppressionByFacility } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeSuppressionByFacilityActions';
 import { loadViralLoadSuppressionByYearAndSuppressionCategory } from '../../actions/CT/ViralLoad/viralLoadSuppressionByYearAndSuppressionCategoryActions';
 
+import { loadTreatmentOutcomesOverallLast12m } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesOverallLast12mActions';
 import { loadTreatmentOutcomesBySex } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesBySexActions';
 import { loadTreatmentOutcomesByPopulationType } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByPopulationTypeActions';
 import { loadTreatmentOutcomesByAge } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesByAgeActions';
@@ -102,13 +98,28 @@ import { loadSixMonthRetention } from '../../actions/CT/TreatmentOutcomes/sixMon
 import { loadTwelveMonthRetention } from '../../actions/CT/TreatmentOutcomes/twelveMonthRetentionActions';
 import { loadTwentyFourMonthRetention } from '../../actions/CT/TreatmentOutcomes/twentyFourMonthRetentionActions';
 
-import { CT_TABS, PAGES } from "../../constants";
 import { loadAdverseEventsProportionOfPLHIVWithAeRegimenWasStopped } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasStoppedActions';
 import { loadAdverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasNotAlteredActions';
 import { load6MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLoad/viralLoad6MonthSuppressionByYearOfArtStartActions';
 import { load12MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLoad/viralLoad12MonthSuppressionByYearOfArtStartActions';
 import { load24MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLoad/viralLoad24MonthSuppressionByYearOfArtStartActions';
 
+import { loadOtzEnrollmentAmongAlhivOnArtBySex } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtBySexActions';
+import { loadOtzEnrollmentAmongAlhivOnArtByAge } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtByAgeActions';
+import { loadOtzEnrollmentAmongAlhivOnArtByCounty } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtByCountyActions';
+
+import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
+
+import Loading from './../Shared/Loading';
+
+const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
+const CurrentOnArt = Loadable({ loader: () => import('./CurrentOnArt/CurrentOnArt'), loading: Loading, delay: LOADING_DELAY });
+const DSD = Loadable({ loader: () => import('./DSD/DSD'), loading: Loading, delay: LOADING_DELAY });
+const TreatmentOutcomes = Loadable({ loader: () => import('./TreatmentOutcomes/TreatmentOutcomes'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoad = Loadable({ loader: () => import('./ViralLoad/ViralLoad'), loading: Loading, delay: LOADING_DELAY });
+const AdverseEvents = Loadable({ loader: () => import('./AdverseEvents/AdverseEvents'), loading: Loading, delay: LOADING_DELAY });
+const ArtOptimization = Loadable({ loader: () => import('./ArtOptimization/ArtOptimization'), loading: Loading, delay: LOADING_DELAY });
+const OTZ = Loadable({ loader: () => import('./OTZ/OTZ'), loading: Loading, delay: LOADING_DELAY });
 
 const CT = () => {
     const dispatch = useDispatch();
@@ -140,15 +151,30 @@ const CT = () => {
 
     useEffect(() => {
         dispatch(changeCurrentPage(PAGES.ct));
+        return () => {
+            dispatch(disableFromDateFilter());
+            dispatch(disableToDateFilter());
+        }
     }, [dispatch]);
+
+    useEffect(() => {
+        if (ctTab === 'txNew' || ctTab === 'tOut') {
+            dispatch(enableFromDateFilter());
+        } else {
+            dispatch(disableFromDateFilter());
+        }
+        if (ctTab === 'tOut') {
+            dispatch(enableToDateFilter());
+        } else {
+            dispatch(disableToDateFilter());
+        }
+    }, [dispatch, ctTab]);
 
     useEffect(() => {
         switch (ctTab) {
             case 'txNew':
                 dispatch(loadLinkagePositiveTrends());
-
                 dispatch(loadCurrentNewOnArtOverview());
-
                 dispatch(loadNewOnArtOverview());
                 dispatch(loadNewOnArtTrends());
                 dispatch(loadNewOnArtByAgeSex());
@@ -210,6 +236,11 @@ const CT = () => {
                 dispatch(loadDsdUptakeOverall());
                 dispatch(loadDsdStableOverall());
                 dispatch(loadDsdUptakeOverallBySex());
+                dispatch(loadCurrentOnArtByCounty());
+                dispatch(loadCurrentOnArtByPartner());
+                dispatch(loadCurrentOnArtDistributionByCounty());
+                dispatch(loadCurrentOnArtDistributionByPartner());
+                dispatch(loadCurrentOnArtByAgeSex());
                 break;
             case 'vl':
                 dispatch(loadCurrentOnArtOverview());
@@ -235,6 +266,7 @@ const CT = () => {
                 break;
             case 'tOut':
                 dispatch(loadNewOnArtOverview());
+                dispatch(loadTreatmentOutcomesOverallLast12m());
                 dispatch(loadNewOnArtTrends());
                 dispatch(loadTreatmentOutcomesBySex());
                 dispatch(loadTreatmentOutcomesByPopulationType());
@@ -245,6 +277,12 @@ const CT = () => {
                 dispatch(loadSixMonthRetention());
                 dispatch(loadTwelveMonthRetention());
                 dispatch(loadTwentyFourMonthRetention());
+                break;
+            case 'otz':
+                dispatch(loadOtzEnrollmentAmongAlhivOnArtBySex());
+                dispatch(loadOtzEnrollmentAmongAlhivOnArtByAge());
+                dispatch(loadOtzEnrollmentAmongAlhivOnArtByCounty());
+
                 break;
             default:
                 break;
@@ -285,25 +323,28 @@ const CT = () => {
             </Nav>
             <TabContent activeTab={ctTab}>
                 <TabPane tabId="txNew">
-                    <NewOnArt/>
+                    { ctTab === 'txNew' ? <NewOnArt/>: null }
                 </TabPane>
                 <TabPane tabId="txCurr">
-                    <CurrentOnArt/>
+                    { ctTab === 'txCurr' ? <CurrentOnArt/>: null }
                 </TabPane>
                 <TabPane tabId="txOpt">
-                    <ArtOptimization/>
+                    { ctTab === 'txOpt' ? <ArtOptimization/>: null }
                 </TabPane>
                 <TabPane tabId="advEv">
-                    <AdverseEvents/>
+                    { ctTab === 'advEv' ? <AdverseEvents/>: null }
                 </TabPane>
                 <TabPane tabId="dsd">
-                    <DSD/>
+                    { ctTab === 'dsd' ? <DSD/>: null }
                 </TabPane>
                 <TabPane tabId="vl">
-                    <ViralLoad/>
+                    { ctTab === 'vl' ? <ViralLoad/>: null }
                 </TabPane>
                 <TabPane tabId="tOut">
-                    <TreatmentOutcomes/>
+                    { ctTab === 'tOut' ? <TreatmentOutcomes/>: null }
+                </TabPane>
+                <TabPane tabId={"otz"}>
+                    { ctTab === 'otz' ? <OTZ /> : null }
                 </TabPane>
             </TabContent>
             <p></p><p></p>

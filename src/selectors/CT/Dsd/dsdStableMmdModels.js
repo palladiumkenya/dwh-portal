@@ -17,18 +17,15 @@ export const getStableMmdModels = createSelector(
             "Facility ART distribution Group",
             "Not Documented"
         ];
+
         let data = [];
-        let txCurr = 0;
-        list.map(obj => {
-            txCurr = txCurr + parseInt(obj.TXCurr, 10);
-        });
-        for(let i = 0; i < list.length; i++) {
-            for(let j = 0; j < models.length; j++) {
+        for (let i = 0; i < list.length; i++) {
+            for (let j = 0; j < models.length; j++) {
                 if (list[i].differentiatedCare === models[j]) {
                     data.push(
                         {
                             name: models[j],
-                            y: parseInt((Math.round((parseInt(list[i].mmdModels)/txCurr)*100)).toString(), 10),
+                            y: Math.round(list[i].Percentage),
                             text: ' (' + formatNumber(list[i].mmdModels) + ')',
                         }
                     );
@@ -36,16 +33,17 @@ export const getStableMmdModels = createSelector(
                     data.push(
                         {
                             name: "Not Documented",
-                            y: parseInt((Math.round((parseInt(list[i].mmdModels)/txCurr)*100)).toString(), 10),
+                            y: Math.round(list[i].Percentage),
                             text: ' (' + formatNumber(list[i].mmdModels) + ')',
                         }
                     );
                 }
             }
         }
+
         data.sort(function(a, b) {
             return b.y - a.y;
         });
-        return { models, data, txCurr };
+        return { models, data };
     }
 );

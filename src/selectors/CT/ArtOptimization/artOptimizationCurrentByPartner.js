@@ -21,6 +21,14 @@ export const getCurrentTldByPartner = createSelector(
     }
 );
 
+export const getCurrentTldByPartnerAdult = createSelector(
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        return _.chain(list).filter(l => l.regimen === 'TLD' && l.Agegroup === 'Adult').value();
+    }
+);
+
 export const getPartners = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
