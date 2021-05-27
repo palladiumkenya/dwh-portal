@@ -1,21 +1,30 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
-import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import { Card, CardBody, CardHeader } from 'reactstrap';
+import { formatNumber } from './../../../utils/utils';
+import { useSelector } from 'react-redux';
 import * as adverseEventsActionsByDrugsNewSelectors from '../../../selectors/CT/AdverseEvents/adverseEventsActionsByDrugsNew';
 
-const AdverseEventsActionsByDrugs = () => {
+const AdverseEventsActionsByDrugs = ({ tab }) => {
     const [actionsByDrugs, setActionsByDrugs] = useState({});
-    const adverseEventsActionsByDrugs = useSelector(adverseEventsActionsByDrugsNewSelectors.getAdverseEventsActionsByDrugsNew);
+    const methodCalled = tab === 'adult' ? adverseEventsActionsByDrugsNewSelectors.getAdverseEventsActionsByDrugsNew
+        : adverseEventsActionsByDrugsNewSelectors.getAdverseEventsActionsByDrugsNewCalHIV;
+    const adverseEventsActionsByDrugs = useSelector(methodCalled);
+    const [n, setN] = useState(0);
 
     const loadActionsByDrugs = useCallback(async () => {
         const series = [];
+        let count = 0;
         for(let i = 0; i < adverseEventsActionsByDrugs.actions.length; i++) {
             series.push(
                 { data: adverseEventsActionsByDrugs.data[i], name: adverseEventsActionsByDrugs.actions[i], type: 'column'}
             );
+            for(let j = 0; j < adverseEventsActionsByDrugs.data[i].length; j++) {
+                count = count + parseInt(adverseEventsActionsByDrugs.data[i][j]);
+            }
         }
+        setN(count);
         setActionsByDrugs({
             title: { text: '' },
             xAxis: [{ categories: adverseEventsActionsByDrugs.drugs, crosshair: true }],

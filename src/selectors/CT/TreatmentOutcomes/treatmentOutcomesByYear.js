@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { createSelector } from 'reselect';
 
 const listUnfiltered = state => state.treatmentOutcomesByYear.listUnfiltered;
@@ -9,7 +10,7 @@ export const getTreatmentOutcomesByYear = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped', 'TransferOut'];
-        const yearCategories = [2011,2012,2013,2014,2015,2016,2017,2018,2019,2020, 2021];
+        const yearCategories = _.chain(list).map(l => parseInt(l.year)).filter(l => l >= 2011).uniq().sort().value();
         let data = [];
         for(let i = 0; i < treatmentOutcomesCategories.length; i++) {
             data[i] = [];

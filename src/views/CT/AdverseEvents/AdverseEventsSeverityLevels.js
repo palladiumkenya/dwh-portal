@@ -1,15 +1,23 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
-import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import _ from 'lodash';
+import { Card, CardBody, CardHeader } from 'reactstrap';
+import { formatNumber } from './../../../utils/utils';
+import { useSelector } from 'react-redux';
 import * as adverseEventsReportedWithSeverityLevelsSelectors from '../../../selectors/CT/AdverseEvents/adverseEventsReportedWithSeverityLevels';
 
-const AdverseEventsSeverityLevels = () => {
+const AdverseEventsSeverityLevels = ({ tab }) => {
     const [severityLevels, setSeverityLevels] = useState({});
-    const adverseEventsReportedWithSeverityLevels = useSelector(adverseEventsReportedWithSeverityLevelsSelectors.getAdverseEventsReportedWithSeverityLevels);
+    const methodCalled = tab === 'adult' ? adverseEventsReportedWithSeverityLevelsSelectors.getAdverseEventsReportedWithSeverityLevels
+        : adverseEventsReportedWithSeverityLevelsSelectors.getAdverseEventsReportedWithSeverityLevelsCalHIV;
+    const adverseEventsReportedWithSeverityLevels = useSelector(methodCalled);
+    const n = _.sum(adverseEventsReportedWithSeverityLevels.data[0]) +
+        _.sum(adverseEventsReportedWithSeverityLevels.data[1]) +
+        _.sum(adverseEventsReportedWithSeverityLevels.data[2]) +
+        _.sum(adverseEventsReportedWithSeverityLevels.data[3]);
 
-    const loadSeverityLevels = useCallback(async () => {        
+    const loadSeverityLevels = useCallback(async () => {
         setSeverityLevels({
             title: { text: '' },
             xAxis: [{ categories: adverseEventsReportedWithSeverityLevels.categories, crosshair: true }],

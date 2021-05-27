@@ -26,6 +26,7 @@ export const CT_TABS = {
     dsd: "DSD",
     vl: "VL MONITORING",
     tOut: "TREATMENT OUTCOMES",
+    otz: 'OTZ'
 }
 
 export const PAGES = {
@@ -43,6 +44,8 @@ export const CACHING = {
     LONG: 1440, // 1 day
     EXTRA_LONG: 4320, // 3 days
 };
+
+export const LOADING_DELAY = 200;
 
 export const GA_TRACKING_ID = 'UA-137589703-1';
 

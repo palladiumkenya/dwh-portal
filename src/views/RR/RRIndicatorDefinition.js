@@ -21,7 +21,13 @@ const RRIndicatorDefinition = () => {
                     <CardBody className={"indicator_definition_body"}>
                         <ul>
                             <li className={"indicator_word_wrap"}>
-                                Consistency of reporting = The proportion of EMR sites that submitted a report every month to the data warehouse within the preceding 3 months. i.e.,
+                                Expected Uploads: The number EMR sites that are anticipated to send an upload.
+                            </li>
+                            <li className={"indicator_word_wrap"}>
+                                Overall Reporting Rates: The proportion of EMR sites that sent uploads in a given month.
+                            </li>
+                            <li className={"indicator_word_wrap"}>
+                                Consistency of reporting: The proportion of EMR sites that submitted a report every month to the data warehouse within the preceding 3 months. i.e.,
                                 The consistency of reporting in {month} {year} is the proportion of EMR facilities that submitted each report to the NDW in {twoMonthsBackMonth}, {previousMonth} and {month} {year}.
                             </li>
                         </ul>

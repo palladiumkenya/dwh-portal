@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col } from 'reactstrap';
-import { Dropdown } from 'semantic-ui-react';
+import moment from 'moment';
 import { DateInput } from 'semantic-ui-calendar-react';
-import * as actions from "../../actions/Shared/filterActions";
-import * as rrSelectors from '../../selectors/Shared/rrSitesSelector';
-import * as htsSelectors from '../../selectors/Shared/htsSitesSelector';
-import * as ctSelectors from '../../selectors/Shared/ctSitesSelector';
+import { Dropdown } from 'semantic-ui-react';
 import { PAGES } from "../../constants";
+import { Row, Col } from 'reactstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from "../../actions/Shared/filterActions";
+import * as ctSelectors from '../../selectors/Shared/ctSitesSelector';
+import * as htsSelectors from '../../selectors/Shared/htsSitesSelector';
+import * as rrSelectors from '../../selectors/Shared/rrSitesSelector';
 
 const UniversalFilter = () => {
     const dispatch = useDispatch();
@@ -258,7 +259,7 @@ const UniversalFilter = () => {
                             dateFormat="MMM YYYY"
                             closable={true}
                             clearable={true}
-                            // maxDate={moment()}
+                            maxDate={moment()}
                             placeholder={filters.toDateFilterEnabled ? 'From':'Period'}
                             fluid
                             value={filters.fromDate}
@@ -280,8 +281,8 @@ const UniversalFilter = () => {
                             dateFormat="MMM YYYY"
                             closable={true}
                             clearable={true}
-                            // minDate={filters.fromDate}
-                            // maxDate={moment()}
+                            minDate={filters.fromDate}
+                            maxDate={moment()}
                             placeholder="To"
                             fluid
                             value={filters.toDate}

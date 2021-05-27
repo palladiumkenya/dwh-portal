@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
+import Loadable from 'react-loadable';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
-import Uptake from './Uptake/Uptake';
-import Linkage from './Linkage/Linkage';
-import PNS from './PNS/PNS';
-import { HTS_TABS, PAGES } from "../../constants";
-import { changeHtsTab, changeCurrentPage } from "../../actions/Shared/uiActions";
-import { enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
+import { HTS_TABS, PAGES, LOADING_DELAY } from './../../constants';
+import { changeHtsTab, changeCurrentPage } from './../../actions/Shared/uiActions';
+import { enableFromDateFilter, disableFromDateFilter } from './../../actions/Shared/filterActions';
+import Loading from './../Shared/Loading';
+
+const Uptake = Loadable({ loader: () => import('./Uptake/Uptake'), loading: Loading, delay: LOADING_DELAY });
+const Linkage = Loadable({ loader: () => import('./Linkage/Linkage'), loading: Loading, delay: LOADING_DELAY });
+const PNS = Loadable({ loader: () => import('./PNS/PNS'), loading: Loading, delay: LOADING_DELAY });
 
 const HTS = () => {
     const dispatch = useDispatch();
@@ -41,13 +44,13 @@ const HTS = () => {
             </Nav>
             <TabContent activeTab={htsTab}>
                 <TabPane tabId="uptake">
-                    <Uptake/>
+                    { htsTab === 'uptake' ? <Uptake/>: null }
                 </TabPane>
                 <TabPane tabId="linkage">
-                    <Linkage/>
+                    { htsTab === 'linkage' ? <Linkage/>: null }
                 </TabPane>
                 <TabPane tabId="pns">
-                    <PNS></PNS>
+                    { htsTab === 'pns' ? <PNS/>: null }
                 </TabPane>
             </TabContent>
             <p></p><p></p>

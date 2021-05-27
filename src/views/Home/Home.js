@@ -1,25 +1,22 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Col, Row } from 'reactstrap';
+import VisibilitySensor from 'react-visibility-sensor';
+import Loadable from 'react-loadable';
+import { enableStickyFilter, disableStickyFilter, changeCurrentPage } from "../../actions/Shared/uiActions";
+import { disableFromDateFilter, disableToDateFilter } from "../../actions/Shared/filterActions";
+import { loadCurrentOnArtOverview } from '../../actions/CT/CurrentOnArt/currentOnArtOverviewActions';
+import { loadCurrentOnArtByAgeSex } from '../../actions/CT/CurrentOnArt/currentOnArtByAgeSexActions';
+import { LOADING_DELAY, PAGES } from './../../constants';
+import Loading from './../Shared/Loading';
 import SectionHeader from './../Shared/SectionHeader';
 import SectionFooter from './../Shared/SectionFooter';
 import UniversalFilter from '../Shared/UniversalFilter';
-import HomeTxNew from './HomeTxNew';
-import HomeOverallMmdUptake from './HomeOverallMmdUptake';
-import HomeMmdUptakeBySex from './HomeMmdUptakeBySex';
-import HomeVLCascade from './HomeVLCascade';
-import HomeAgeDistribution from './HomeAgeDistribution';
-import HomeSexDistribution from './HomeSexDistribution';
-import VisibilitySensor from 'react-visibility-sensor';
-import HomeOverview from './HomeOverview';
-import HomeMaps from './HomeMaps';
-import { enableStickyFilter, disableStickyFilter, changeCurrentPage } from "../../actions/Shared/uiActions";
-import { enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
-import { loadCurrentOnArtOverview } from '../../actions/CT/CurrentOnArt/currentOnArtOverviewActions';
-import { loadCurrentOnArtByAgeSex } from '../../actions/CT/CurrentOnArt/currentOnArtByAgeSexActions';
-import { loadDsdUptakeOverall } from '../../actions/CT/Dsd/dsdUptakeOverallActions';
-import { loadDsdUptakeOverallBySex } from '../../actions/CT/Dsd/dsdMmdUptakeOverallBySexActions';
-import { PAGES } from './../../constants';
+
+const HomeVLCascade = Loadable({ loader: () => import('./HomeVLCascade'), loading: Loading, delay: LOADING_DELAY });
+const HomeAgeDistribution = Loadable({ loader: () => import('./HomeAgeDistribution'), loading: Loading, delay: LOADING_DELAY });
+const HomeOverview = Loadable({ loader: () => import('./HomeOverview'), loading: Loading, delay: LOADING_DELAY });
+const HomeMaps = Loadable({ loader: () => import('./HomeMaps'), loading: Loading, delay: LOADING_DELAY });
 
 const Home = () => {
     const branding = { title: "HOME", description: "HMIS STATISTICS", overview: "HMIS Statistics" };
@@ -43,16 +40,12 @@ const Home = () => {
     useEffect(() => {
         dispatch(changeCurrentPage(PAGES.home));
         dispatch(disableFromDateFilter());
-        return () => {
-            dispatch(enableFromDateFilter());
-        }
+        dispatch(disableToDateFilter());
     }, [dispatch]);
 
     useEffect(() => {
         dispatch(loadCurrentOnArtOverview());
         dispatch(loadCurrentOnArtByAgeSex());
-        dispatch(loadDsdUptakeOverall());
-        dispatch(loadDsdUptakeOverallBySex());
     }, [
         dispatch,
         counties,
@@ -63,7 +56,7 @@ const Home = () => {
         projects,
         page
     ]);
-    
+
     return (
         <div className="animated fadeIn">
             <SectionHeader title={branding.title} description={branding.description}/>
@@ -80,18 +73,6 @@ const Home = () => {
                 </Col>
                 <Col xl={3} lg={3} md={12} sm={12} xs={12}>
                     <HomeOverview />
-                </Col>
-            </Row>
-            <HomeSexDistribution/>
-            <SectionFooter overview={branding.overview}/>
-            <HomeTxNew/>
-            <SectionFooter overview={branding.overview}/>
-            <Row>
-                <Col sm={6}>
-                    <HomeOverallMmdUptake/>
-                </Col>
-                <Col sm={6}>
-                    <HomeMmdUptakeBySex/>
                 </Col>
             </Row>
             <SectionFooter overview={branding.overview}/>

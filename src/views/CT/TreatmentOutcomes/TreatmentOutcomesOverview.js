@@ -1,18 +1,17 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { Row, Col } from 'reactstrap';
-import * as newOnArtOverviewSelectors from '../../../selectors/CT/NewOnArt/newOnArtOverview';
-import * as treatmentOutcomesBySexSelectors from '../../../selectors/CT/TreatmentOutcomes/treatmentOutcomesBySex';
 import { formatNumber, roundNumber } from '../../../utils/utils';
+import { Row, Col } from 'reactstrap';
+import { useSelector } from 'react-redux';
 import DataCard from '../../Shared/DataCard';
+import * as treatmentOutcomesOverallLast12m from '../../../selectors/CT/TreatmentOutcomes/treatmentOutcomesOverallLast12m';
 
 const TreatmentOutcomesOverview = () => {
-    const startedOnArt = useSelector(newOnArtOverviewSelectors.getNewOnArt);
-    const active = useSelector(treatmentOutcomesBySexSelectors.getActive);
-    const dead = useSelector(treatmentOutcomesBySexSelectors.getDead);
-    const ltfu = useSelector(treatmentOutcomesBySexSelectors.getLtfu);
-    const stopped = useSelector(treatmentOutcomesBySexSelectors.getStopped);
-    const transferOut = useSelector(treatmentOutcomesBySexSelectors.getTransferOut);
+    const startedOnArt = useSelector(treatmentOutcomesOverallLast12m.getStartedOnArt);
+    const active = useSelector(treatmentOutcomesOverallLast12m.getActive);
+    const dead = useSelector(treatmentOutcomesOverallLast12m.getDead);
+    const ltfu = useSelector(treatmentOutcomesOverallLast12m.getLtfu);
+    const stopped = useSelector(treatmentOutcomesOverallLast12m.getStopped);
+    const transferOut = useSelector(treatmentOutcomesOverallLast12m.getTransferOut);
     const netCohort = startedOnArt > 0 ? (startedOnArt - transferOut - stopped) : 0;
     const activePercent = startedOnArt > 0 ? ((active/startedOnArt)*100) : 0;
     const deadPercent = netCohort > 0 ? ((dead/netCohort)*100) : 0;
@@ -25,7 +24,7 @@ const TreatmentOutcomesOverview = () => {
             <Row>
                 <Col>
                     <DataCard
-                        title="EVER STARTED ART"
+                        title="STARTED ART"
                         subtitle={null}
                         data={formatNumber(startedOnArt)}
                     />

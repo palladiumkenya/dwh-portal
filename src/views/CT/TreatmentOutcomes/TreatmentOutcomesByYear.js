@@ -4,6 +4,7 @@ import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import * as treatmentOutcomesByYearSelectors from '../../../selectors/CT/TreatmentOutcomes/treatmentOutcomesByYear';
+import { min } from 'moment';
 
 const TreatmentOutcomesByYear = () => {
     const [treatmentOutcomesByYear, setTreatmentOutcomesByYear] = useState({});
@@ -13,7 +14,7 @@ const TreatmentOutcomesByYear = () => {
         setTreatmentOutcomesByYear({
             title: { text: '' },
             plotOptions: { column: { stacking: 'percent' }},
-            xAxis: [{ categories: treatmentOutcomesByYearData.yearCategories, title: { text: 'Year of start from 2011' }, crosshair: true}],
+            xAxis: [{ categories: treatmentOutcomesByYearData.yearCategories, title: { text: treatmentOutcomesByYearData.yearCategories.length ? 'Year of start from ' + treatmentOutcomesByYearData.yearCategories[0] : 'Year of start' }, crosshair: true}],
             yAxis: [{ title: { text: 'Percentage of Patients' }}],
             tooltip: { shared: true },
             legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
