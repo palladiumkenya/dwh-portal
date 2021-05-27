@@ -120,6 +120,7 @@ import otzEnrollmentAmongAlhivOnArtByCounty from './CT/OTZ/otzEnrollmentAmongAlh
 import otzEnrollmentAmongAlhivOnArtByPartner from './CT/OTZ/otzEnrollmentAmongAlhivOnArtByPartner';
 import otzVlUptakeAmongAlHivEnrolledInOtzBySex from './CT/OTZ/otzVlUptakeAmongAlHivEnrolledInOtzBySex';
 import otzVlUptakeAmongAlHivEnrolledInOtzByAge from './CT/OTZ/otzVlUptakeAmongAlHivEnrolledInOtzByAge';
+import otzVlUptakeAmongAlHivEnrolledInOtzByCounty from './CT/OTZ/otzVlUptakeAmongAlHivEnrolledInOtzByCounty';
 
 export default combineReducers({
     auth: authReducer,
@@ -234,5 +235,6 @@ export default combineReducers({
     otzEnrollmentAmongAlhivOnArtByCounty,
     otzEnrollmentAmongAlhivOnArtByPartner,
     otzVlUptakeAmongAlHivEnrolledInOtzBySex,
-    otzVlUptakeAmongAlHivEnrolledInOtzByAge
+    otzVlUptakeAmongAlHivEnrolledInOtzByAge,
+    otzVlUptakeAmongAlHivEnrolledInOtzByCounty
 });
