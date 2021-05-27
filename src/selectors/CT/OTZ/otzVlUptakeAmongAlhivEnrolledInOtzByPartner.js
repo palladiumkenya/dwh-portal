@@ -15,6 +15,10 @@ export const getOtzVlUptakeAmongAlhivEnrolledInOtzByPartner = createSelector(
             partner: val.partner
         }));
 
+        arrayVal.sort((a, b) => {
+            return b.y - a.y;
+        });
+
         return arrayVal;
     }
 );
