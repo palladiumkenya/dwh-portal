@@ -9,6 +9,7 @@ const OtzEnrollmentAmongAlhivOnArtByAge = Loadable({ loader: () => import('./Otz
 const OtzEnrollmentAmongAlhivOnArtByCounty = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtByCounty'), loading: Loading, delay: LOADING_DELAY });
 const OtzEnrollmentAmongAlhivOnArtByPartner = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtByPartner'), loading: Loading, delay: LOADING_DELAY });
 const VLUptakeAmongAlHivEnrolledInOtzBySex = Loadable({ loader: () => import('./vlUptakeAmongAlHivEnrolledInOtzBySex'), loading: Loading, delay: LOADING_DELAY });
+const VlUptakeAmongAlHivEnrolledInOTZByAge = Loadable({ loader: () => import('./VlUptakeAmongAlHivEnrolledInOTZByAge'), loading: Loading, delay: LOADING_DELAY });
 
 const OTZTabs = () => {
     const [activeTab, setActiveTab] = useState('otz_enrollment');
@@ -46,6 +47,9 @@ const OTZTabs = () => {
                     <Row>
                         <Col className={"col-6"}>
                             <VLUptakeAmongAlHivEnrolledInOtzBySex />
+                        </Col>
+                        <Col className={"col-6"}>
+                            <VlUptakeAmongAlHivEnrolledInOTZByAge />
                         </Col>
                     </Row>
                 </TabPane>

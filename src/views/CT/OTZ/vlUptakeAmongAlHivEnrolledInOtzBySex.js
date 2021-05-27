@@ -19,12 +19,12 @@ const VLUptakeAmongAlHivEnrolledInOtzBySex = () => {
     const femaleVals = vlUptakeAmongAlHivInOtzBySex.filter(obj => obj.Gender === 'Female');
     const maleVals = vlUptakeAmongAlHivInOtzBySex.filter(obj => obj.Gender === 'Male');
     if (femaleVals.length > 0) {
-        femalePercentage = femaleVals[0].vl_uptake_percent;
+        femalePercentage = Math.round(femaleVals[0].vl_uptake_percent);
         femaleText = 'lastVL: ' +  femaleVals[0].lastVL + ' eligibleVL: ' + femaleVals[0].eligibleVL;
     }
 
     if (maleVals.length > 0) {
-        malePercentage = maleVals[0].vl_uptake_percent;
+        malePercentage = Math.round(maleVals[0].vl_uptake_percent);
         maleText = 'lastVL: ' +  maleVals[0].lastVL + ' eligibleVL: ' + maleVals[0].eligibleVL;
     }
 
@@ -73,7 +73,7 @@ const VLUptakeAmongAlHivEnrolledInOtzBySex = () => {
                 }
             ]
         });
-    },[]);
+    },[vlUptakeAmongAlHivInOtzBySex]);
 
     useEffect(() => {
         loadVlUptakeAmongAlHivOnArtBySex();

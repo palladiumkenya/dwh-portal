@@ -111,6 +111,7 @@ import { loadOtzEnrollmentAmongAlhivOnArtByAge } from '../../actions/CT/OTZ/OtzE
 import { loadOtzEnrollmentAmongAlhivOnArtByCounty } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtByCountyActions';
 import { loadOtzEnrollmentAmongAlhivOnArtByPartner } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtByPartnerActions';
 import { loadOtzVlUptakeAmongAlHivEnrolledInOtzBySex } from '../../actions/CT/OTZ/OtzVlUptakeAmongAlHivEnrolledInOtzBySexActions';
+import { loadOtzVlUptakeAmongAlHivEnrolledInOtzByAge } from '../../actions/CT/OTZ/OtzVlUptakeAmongAlHivEnrolledInOtzByAgeActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -302,7 +303,7 @@ const CT = () => {
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtByCounty());
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtByPartner());
                 dispatch(loadOtzVlUptakeAmongAlHivEnrolledInOtzBySex());
-
+                dispatch(loadOtzVlUptakeAmongAlHivEnrolledInOtzByAge());
                 break;
             default:
                 break;
