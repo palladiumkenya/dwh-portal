@@ -1,11 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Row, Col } from 'reactstrap';
+import { Row, Col, Spinner } from 'reactstrap';
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import * as artOptimizationOverviewSelectors from '../../../selectors/CT/ArtOptimization/artOptimizationOverview';
 import DataCard from '../../Shared/DataCard';
 
 const AdultArtOptimizationOverview = () => {
+    const loading = useSelector(state => state.artOptimizationOverview.loading);
     const adults = useSelector(artOptimizationOverviewSelectors.getAdults);
     const adultsOnFirstLine = useSelector(artOptimizationOverviewSelectors.getAdultsOnFirstLine);
     const adultsOnFirstLinePercent = adults ? (adultsOnFirstLine/adults)*100 : 0;
@@ -26,48 +27,72 @@ const AdultArtOptimizationOverview = () => {
         <>
             <Row>
                 <Col>
-                    <DataCard
-                        title="ADULTS ON FIRST LINE"
-                        subtitle={roundNumber(adultsOnFirstLinePercent) + "%"}
-                        data={formatNumber(adultsOnFirstLine)}
-                    />
+                    {
+                        loading === true ?
+                        <Spinner/> :
+                        <DataCard
+                            title="ADULTS ON FIRST LINE"
+                            subtitle={roundNumber(adultsOnFirstLinePercent) + "%"}
+                            data={formatNumber(adultsOnFirstLine)}
+                        />
+                    }
                 </Col>
                 <Col>
-                    <DataCard
-                        title="ADULTS ON SECOND LINE"
-                        subtitle={roundNumber(adultsOnSecondLinePercent) + "%"}
-                        data={formatNumber(adultsOnSecondLine)}
-                    />
+                    {
+                        loading === true ?
+                        <Spinner/> :
+                        <DataCard
+                            title="ADULTS ON SECOND LINE"
+                            subtitle={roundNumber(adultsOnSecondLinePercent) + "%"}
+                            data={formatNumber(adultsOnSecondLine)}
+                        />
+                    }
                 </Col>
                 <Col>
-                    <DataCard
-                        title="ADULTS ON THIRD LINE"
-                        subtitle={roundNumber(adultsOnThirdLinePercent) + "%"}
-                        data={formatNumber(adultsOnThirdLine)}
-                    />
+                    {
+                        loading === true ?
+                        <Spinner/> :
+                        <DataCard
+                            title="ADULTS ON THIRD LINE"
+                            subtitle={roundNumber(adultsOnThirdLinePercent) + "%"}
+                            data={formatNumber(adultsOnThirdLine)}
+                        />
+                    }
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <DataCard
-                        title={"ADULTS ON UNDOCUMENTED LINE"}
-                        subtitle={roundNumber(adultsOnUndocumentedPercent) + "%"}
-                        data={formatNumber(adultsOnUndocumented)}
+                    {
+                        loading === true ?
+                        <Spinner/> :
+                        <DataCard
+                            title={"ADULTS ON UNDOCUMENTED LINE"}
+                            subtitle={roundNumber(adultsOnUndocumentedPercent) + "%"}
+                            data={formatNumber(adultsOnUndocumented)}
                         />
+                    }
                 </Col>
                 <Col>
-                    <DataCard
-                        title="ADULTS ON TLD"
-                        subtitle={roundNumber(adultsOnTldPercent) + "%"}
-                        data={formatNumber(adultsOnTld)}
-                    />
+                    {
+                        loading === true ?
+                        <Spinner/> :
+                        <DataCard
+                            title="ADULTS ON TLD"
+                            subtitle={roundNumber(adultsOnTldPercent) + "%"}
+                            data={formatNumber(adultsOnTld)}
+                        />
+                    }
                 </Col>
                 <Col>
-                    <DataCard
-                        title="ADULTS ON NVP-BASED REGIMEN"
-                        subtitle={roundNumber(adultsOnNvpPercent) + "%"}
-                        data={formatNumber(adultsOnNvp)}
-                    />
+                    {
+                        loading === true ?
+                        <Spinner/> :
+                        <DataCard
+                            title="ADULTS ON NVP-BASED REGIMEN"
+                            subtitle={roundNumber(adultsOnNvpPercent) + "%"}
+                            data={formatNumber(adultsOnNvp)}
+                        />
+                    }
                 </Col>
             </Row>
         </>
