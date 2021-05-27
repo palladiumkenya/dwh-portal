@@ -72,8 +72,8 @@ const AdultTldUptakeByAgeGender = () => {
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'MALE', type: 'column', data: data[1], color: "#14084D", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
-                { name: 'FEMALE ', type: 'column', data: data[0], color: "#EA4C8B", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
+                { name: 'MALE', type: 'column', data: data[1] ? data[1] : [], color: "#14084D", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
+                { name: 'FEMALE ', type: 'column', data: data[0] ? data[0] : [], color: "#EA4C8B", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
             ],
         });
     }, [ageGroupsOriginal, sexGroups, adultsCurrentByAgeSex, currentOnArtByAgeSexData]);

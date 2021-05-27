@@ -24,7 +24,7 @@ const AdultDistributionRegimens = () => {
         for(let i = 0; i < adultsOnFirstLine.length; i++) {
             data.data.push({
                 regimenLine: 'FIRST LINE',
-                regimen: adultsOnFirstLine[i].lastRegimen,
+                regimen: adultsOnFirstLine[i].currentRegimen,
                 activeOnArt: adultsOnFirstLine[i].txCurr,
                 percentageOnArt: ((adultsOnFirstLine[i].txCurr/adults)*100).toFixed(2) + " %",
                 percentNumber: ((adultsOnFirstLine[i].txCurr/adults)*100).toFixed(2)
@@ -33,7 +33,7 @@ const AdultDistributionRegimens = () => {
         for(let i = 0; i < adultsOnSecondLine.length; i++) {
             data.data.push({
                 regimenLine: 'SECOND LINE',
-                regimen: adultsOnSecondLine[i].lastRegimen,
+                regimen: adultsOnSecondLine[i].currentRegimen,
                 activeOnArt: adultsOnSecondLine[i].txCurr,
                 percentageOnArt: ((adultsOnSecondLine[i].txCurr/adults)*100).toFixed(2) + " %",
                 percentNumber: ((adultsOnSecondLine[i].txCurr/adults)*100).toFixed(2)
@@ -42,7 +42,7 @@ const AdultDistributionRegimens = () => {
         for(let i = 0; i < adultsOnThirdLine.length; i++) {
             data.data.push({
                 regimenLine: 'THIRD LINE',
-                regimen: adultsOnThirdLine[i].lastRegimen,
+                regimen: adultsOnThirdLine[i].currentRegimen,
                 activeOnArt: adultsOnThirdLine[i].txCurr,
                 percentageOnArt: ((adultsOnThirdLine[i].txCurr/adults)*100).toFixed(2) + " %",
                 percentNumber: ((adultsOnThirdLine[i].txCurr/adults)*100).toFixed(2)
@@ -51,7 +51,7 @@ const AdultDistributionRegimens = () => {
         for(let i = 0; i < adultsOnUndocumentedLine.length; i++) {
             data.data.push({
                 regimenLine: 'UNDOCUMENTED REG LINE',
-                regimen: adultsOnUndocumentedLine[i].lastRegimen,
+                regimen: adultsOnUndocumentedLine[i].currentRegimen,
                 activeOnArt: adultsOnUndocumentedLine[i].txCurr,
                 percentageOnArt: ((adultsOnUndocumentedLine[i].txCurr/adults)*100).toFixed(2) + " %",
                 percentNumber: ((adultsOnUndocumentedLine[i].txCurr/adults)*100).toFixed(2)
@@ -76,10 +76,13 @@ const AdultDistributionRegimens = () => {
                 <DataTable
                     columns={adultDistributionRegimens.columns}
                     data={adultDistributionRegimens.data}
-                    pagination={true}
-                    responsive={true}
-                    noHeader={true}
-                    dense={true}
+                    noHeader
+                    dense
+                    defaultSortField="regimenLine"
+                    defaultSortAsc={true}
+                    pagination
+                    responsive
+                    highlightOnHover
                 />
             </CardBody>
         </Card>
