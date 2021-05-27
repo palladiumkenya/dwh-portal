@@ -59,7 +59,7 @@ export const getHtsProvidersByCounty = createSelector(
             count: l.count,
             population: Number((l.count/(l.population/1000)).toFixed(2)),
             cases: l.cases,
-            caseToCountRatio: l.cases > 0 ? Number((l.count/l.cases).toFixed(5)) : 0
+            caseToCountRatio: l.count > 0 ? Number((l.cases/l.count).toFixed(5)) : 0
         })).orderBy('caseToCountRatio', 'desc').value();
         return {
             counties: result.map(l => l.county),
