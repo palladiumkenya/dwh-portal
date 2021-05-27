@@ -21,9 +21,18 @@ const HRH = () => {
         dispatch(loadPopulationByCounty());
         dispatch(loadUptakeByCounty());
     }, [dispatch]);
-    
+
     return (
         <div className="animated fadeIn">
+            {/*
+                TODO:
+                - hts/use testing and positive
+                - add county name to scatter
+                - number
+                - HCW supporting HIV
+                - NASCOP HRIS
+                - Supporting services
+            */}
             <SectionHeader title={branding.title}/>
             <DistributionDensityHCW/>
             <DistributionDensityNCK/>
