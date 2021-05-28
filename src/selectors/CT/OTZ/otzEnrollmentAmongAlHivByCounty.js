@@ -16,6 +16,10 @@ export const getOtzEnrollmentAmongAlHivOnArtByCounty = createSelector(
             TXCurr: val.TXCurr,
         }));
 
+        arrayVal.sort((a, b) => {
+            return b.y - a.y;
+        });
+
         return arrayVal;
     }
 );
