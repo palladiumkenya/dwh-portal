@@ -7,8 +7,13 @@ const listUnfiltered = state => state.otzProportionOfAlHivWhoHaveCompletedOtzTra
 export const getProportionOfAlhivEnrolledInOtzWhoHaveCompletedTrainingByCounty = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
-        const list = filtered ? listFiltered : listUnfiltered;
-        console.log(list);
+        let list = filtered ? listFiltered : listUnfiltered;
+
+        list = list.map(val => ({
+            count_training: val.count_training,
+            partner: val.partner,
+            proportion_training_percent: Math.round(val.proportion_training_percent)
+        }));
 
         list.sort((a, b) => {
             return b.proportion_training_percent - a.proportion_training_percent;
