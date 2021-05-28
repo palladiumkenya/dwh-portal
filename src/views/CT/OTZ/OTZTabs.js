@@ -15,6 +15,7 @@ const VlUptakeAmongAlHivEnrolledInOTZByPartner = Loadable({ loader: () => import
 const OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTraining = Loadable({ loader: () => import('./OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTraining'), loading: Loading, delay: LOADING_DELAY });
 const OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingByCounty = Loadable({ loader: () => import('./OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingByCounty'), loading: Loading, delay: LOADING_DELAY });
 const OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingByPartner = Loadable({ loader: () => import('./OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingByPartner'), loading: Loading, delay: LOADING_DELAY });
+const OtzOutcomesAmongAlhivWithBaselineVl = Loadable({ loader: () => import('./OtzOutcomesAmongAlhivWithBaselineVl'), loading: Loading, delay: LOADING_DELAY });
 
 const OTZTabs = () => {
     const [activeTab, setActiveTab] = useState('otz_enrollment');
@@ -82,7 +83,15 @@ const OTZTabs = () => {
                     </Row>
                 </TabPane>
                 <TabPane tabId={"otz_outcomes"}>
+                    <Row>
+                        <Col className={"col-6"}>
+                            <OtzOutcomesAmongAlhivWithBaselineVl />
+                        </Col>
 
+                        <Col className={"col-6"}>
+
+                        </Col>
+                    </Row>
                 </TabPane>
             </TabContent>
         </div>
