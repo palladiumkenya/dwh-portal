@@ -18,26 +18,41 @@ const OtzOutcomesAmongAlhivWithReSuppression = () => {
                 text: ''
             },
             xAxis: {
-                categories: ['ALHIV WITH VL >1000 AT BASELINE', 'ALHIV WITH VL <1000 WITH REPEAT VL', 'NUMBER WITH VL <1000 UPON REPEAT VL', 'NUMBER WITH VL >1000 UPON REPEAT'],
+                categories: ['ALHIV WITH VL >1000 AT BASELINE', 'ALHIV WITH VL <1000 WITH REPEAT VL', 'NUMBER WITH VL >1000 UPON REPEAT'],
                 crosshair: true
             },
             yAxis: {
                 min: 0,
-                max: 100,
                 title: {
                     text: 'PERCENTAGE OF PATIENTS'
                 },
-                labels: { format: '{value} %' }
+                labels: { format: '{value}' }
             },
             legend: {
                 enabled: false
             },
-            plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.y + '%'; } }, tooltip: { valueSuffix: '% ({point.text:.0f})' }, }},
+            plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.y + '(' + this.point.text  + '%)'; } }, tooltip: { valueSuffix: '% ({point.text:.0f})' }, }},
             series: [
                 {
-                    name: 'OTZ OUTCOMES AMONG ALHIV WITH BASELINE VL',
+                    name: 'OTZ OUTCOMES AMONG ALHIV WITH RE-SUPPRESSION',
                     color: '#14084D',
-                    data: []
+                    data: [
+                        {
+                            name: 'ALHIV WITH VL >1000 AT BASELINE',
+                            y: otzOutcomesWithReSuppression[0].AlHivWithVlGreaterThan1000,
+                            text: otzOutcomesWithReSuppression[0].AlHivWithVlGreaterThan1000Perc
+                        },
+                        {
+                            name: 'ALHIV WITH VL <1000 WITH REPEAT VL',
+                            y: otzOutcomesWithReSuppression[0].ALHivWithVLLessThan1000WithRepeatVL,
+                            text: otzOutcomesWithReSuppression[0].ALHivWithVLLessThan1000WithRepeatVLPerc
+                        },
+                        {
+                            name: 'NUMBER WITH VL >1000 UPON REPEAT',
+                            y: otzOutcomesWithReSuppression[0].ALHivWithVLGreaterThan1000WithRepeatVL,
+                            text: otzOutcomesWithReSuppression[0].ALHivWithVLGreaterThan1000WithRepeatVLPerc
+                        }
+                    ]
                 }
             ]
         });
