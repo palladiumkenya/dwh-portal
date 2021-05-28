@@ -115,6 +115,8 @@ import { loadOtzVlUptakeAmongAlHivEnrolledInOtzByAge } from '../../actions/CT/OT
 import { loadOtzVlUptakeAmongAlHivEnrolledInOtzByCounty } from '../../actions/CT/OTZ/OtzVlUptakeAmongAlHivEnrolledInOtzByCountyActions';
 import { loadOtzVlUptakeAmongAlHivEnrolledInOtzByPartner } from '../../actions/CT/OTZ/OtzVlUptakeAmongAlHivEnrolledInOtzByPartnerActions';
 import { loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTraining } from '../../actions/CT/OTZ/OtzProportionOfAlHivEnrolledInOtzWhoHaveCompletedOtzTrainingActions';
+import { loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByCounty } from '../../actions/CT/OTZ/OtzProportionOfAlHivEnrolledInOtzWhoHaveCompletedOtzTrainingByCountyActions';
+import { loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByPartner } from '../../actions/CT/OTZ/OtzProportionOfAlHivEnrolledInOtzWhoHaveCompletedOtzTrainingByPartnerActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -310,6 +312,9 @@ const CT = () => {
                 dispatch(loadOtzVlUptakeAmongAlHivEnrolledInOtzByCounty());
                 dispatch(loadOtzVlUptakeAmongAlHivEnrolledInOtzByPartner());
                 dispatch(loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTraining());
+                dispatch(loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByCounty());
+                dispatch(loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByPartner());
+
                 break;
             default:
                 break;
