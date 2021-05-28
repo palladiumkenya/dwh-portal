@@ -10,7 +10,7 @@ export const getProportionOfAlhivEnrolledInOtzWhoHaveCompletedTrainingByPartner 
         let list = filtered ? listFiltered : listUnfiltered;
 
         list = list.map(val => ({
-            County: val.County,
+            partner: val.partner,
             count_training: val.count_training,
             proportion_training_percent: Math.round(val.proportion_training_percent)
         }));
