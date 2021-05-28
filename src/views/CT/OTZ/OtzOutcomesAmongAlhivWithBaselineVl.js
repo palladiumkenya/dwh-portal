@@ -23,16 +23,15 @@ const OtzOutcomesAmongAlhivWithBaselineVl = () => {
             },
             yAxis: {
                 min: 0,
-                max: 100,
                 title: {
                     text: 'PERCENTAGE OF PATIENTS'
                 },
-                labels: { format: '{value} %' }
+                labels: { format: '{value}' }
             },
             legend: {
                 enabled: false
             },
-            plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.y + '%'; } }, tooltip: { valueSuffix: '% ({point.text:.0f})' }, }},
+            plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.y + '(' + this.point.text  + '%)'; } }, tooltip: { valueSuffix: '({point.text:.0f})' }, }},
             series: [
                 {
                     name: 'OTZ OUTCOMES AMONG ALHIV WITH BASELINE VL',
@@ -40,23 +39,23 @@ const OtzOutcomesAmongAlhivWithBaselineVl = () => {
                     data: [
                         {
                             name: 'AYPs Enrolled in OTZ',
-                            y: otzOutcomesWithBaselineVl[0].AlHivEnrolledInOTZPerc,
-                            text: otzOutcomesWithBaselineVl[0].AlHivEnrolledInOTZ
+                            y: otzOutcomesWithBaselineVl[0].AlHivEnrolledInOTZ,
+                            text: otzOutcomesWithBaselineVl[0].AlHivEnrolledInOTZPerc
                         },
                         {
                             name: 'ALHIV in OTZ with Baseline VL',
-                            y: otzOutcomesWithBaselineVl[0].AlHivWithBaselineVlPerc,
-                            text: otzOutcomesWithBaselineVl[0].AlHivWithBaselineVl
+                            y: otzOutcomesWithBaselineVl[0].AlHivWithBaselineVl,
+                            text: otzOutcomesWithBaselineVl[0].AlHivWithBaselineVlPerc
                         },
                         {
                             name: 'ALHIV with VL<1000',
-                            y: otzOutcomesWithBaselineVl[0].AlHivWithVlGreaterThan1000Perc,
-                            text: otzOutcomesWithBaselineVl[0].AlHivWithVlGreaterThan1000
+                            y: otzOutcomesWithBaselineVl[0].AlHivWithVlLessThan1000,
+                            text: otzOutcomesWithBaselineVl[0].AlHivWithVlLessThan1000Perc
                         },
                         {
                             name: 'ALHIV with VL>1000',
-                            y: otzOutcomesWithBaselineVl[0].AlHivWithVlLessThan1000Perc,
-                            text: otzOutcomesWithBaselineVl[0].AlHivWithVlLessThan1000
+                            y: otzOutcomesWithBaselineVl[0].AlHivWithVlGreaterThan1000,
+                            text: otzOutcomesWithBaselineVl[0].AlHivWithVlGreaterThan1000Perc
                         }
                     ]
                 }

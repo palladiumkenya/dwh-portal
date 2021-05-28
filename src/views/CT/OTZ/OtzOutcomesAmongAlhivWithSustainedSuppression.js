@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import * as otzOutcomesAmongAlhivWithReSuppression from '../../../selectors/CT/OTZ/otzOutcomesAmongAlhivWithReSuppression';
 
-const OtzOutcomesAmongAlhivWithReSuppression = () => {
+const OtzOutcomesAmongAlhivWithSustainedSuppression = () => {
     const [otzOutcomesAmongAlHivReSuppression, setOtzOutcomesAmongAlHivReSuppression] = useState({});
     const otzOutcomesWithReSuppression = useSelector(otzOutcomesAmongAlhivWithReSuppression.getOtzOutcomesAmongAlHivWithReSuppression);
 
@@ -61,4 +61,4 @@ const OtzOutcomesAmongAlhivWithReSuppression = () => {
     );
 };
 
-export default OtzOutcomesAmongAlhivWithReSuppression;
+export default OtzOutcomesAmongAlhivWithSustainedSuppression;
