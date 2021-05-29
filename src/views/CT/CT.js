@@ -119,6 +119,7 @@ import { loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByCounty } fr
 import { loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByPartner } from '../../actions/CT/OTZ/OtzProportionOfAlHivEnrolledInOtzWhoHaveCompletedOtzTrainingByPartnerActions';
 import { loadOtzOutcomesAmongAlHivWithBaselineVL } from '../../actions/CT/OTZ/OtzOutcomesAmongAlHivWithBaselineVLActions';
 import { loadOtzOutcomesAmongAlHivWithReSuppression } from '../../actions/CT/OTZ/OtzOutcomesAmongAlHivWithReSuppressionActions';
+import { loadOtzOutcomesByGender } from '../../actions/CT/OTZ/OtzOutcomesByGenderActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -318,6 +319,7 @@ const CT = () => {
                 dispatch(loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByPartner());
                 dispatch(loadOtzOutcomesAmongAlHivWithBaselineVL());
                 dispatch(loadOtzOutcomesAmongAlHivWithReSuppression());
+                dispatch(loadOtzOutcomesByGender());
 
                 break;
             default:
