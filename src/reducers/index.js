@@ -128,6 +128,10 @@ import otzProportionOfAlHivWhoHaveCompletedOtzTrainingByPartner from './CT/OTZ/o
 import otzOutcomesAmongAlHivWithBaselineVL from './CT/OTZ/otzOutcomesAmongAlHivWithBaselineVL';
 import otzOutcomesAmongAlHivWithReSuppression from './CT/OTZ/otzOutcomesAmongAlHivWithReSuppression';
 import otzOutcomesByGender from './CT/OTZ/otzOutcomesByGender';
+import otzOutcomesByPopulationType from './CT/OTZ/otzOutcomesByPopulationType';
+import otzOutcomesByYearOfArtStart from './CT/OTZ/otzOutcomesByYearOfArtStart';
+import otzOutcomesByCounty from './CT/OTZ/otzOutcomesByCounty';
+import otzOutcomesByPartner from './CT/OTZ/otzOutcomesByPartner';
 
 export default combineReducers({
     auth: authReducer,
@@ -250,5 +254,9 @@ export default combineReducers({
     otzProportionOfAlHivWhoHaveCompletedOtzTrainingByPartner,
     otzOutcomesAmongAlHivWithReSuppression,
     otzOutcomesAmongAlHivWithBaselineVL,
-    otzOutcomesByGender
+    otzOutcomesByGender,
+    otzOutcomesByPopulationType,
+    otzOutcomesByYearOfArtStart,
+    otzOutcomesByCounty,
+    otzOutcomesByPartner
 });
