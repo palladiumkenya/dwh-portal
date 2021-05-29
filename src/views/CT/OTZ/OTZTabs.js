@@ -18,6 +18,7 @@ const OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingByPartner = Loada
 const OtzOutcomesAmongAlhivWithBaselineVl = Loadable({ loader: () => import('./OtzOutcomesAmongAlhivWithBaselineVl'), loading: Loading, delay: LOADING_DELAY });
 const OtzOutcomesAmongAlhivWithReSuppression = Loadable({ loader: () => import('./OtzOutcomesAmongAlhivWithReSuppression'), loading: Loading, delay: LOADING_DELAY });
 const OtzOutcomesAmongAlhivWithSustainedSuppression = Loadable({ loader: () => import('./OtzOutcomesAmongAlhivWithSustainedSuppression'), loading: Loading, delay: LOADING_DELAY });
+const OtzOutcomesByGender = Loadable({ loader: () => import('./OtzOutcomesByGender'), loading: Loading, delay: LOADING_DELAY });
 
 const OTZTabs = () => {
     const [activeTab, setActiveTab] = useState('otz_enrollment');
@@ -94,9 +95,17 @@ const OTZTabs = () => {
                             <OtzOutcomesAmongAlhivWithReSuppression />
                         </Col>
                     </Row>
-                    <Row>
+                    {/*<Row>
                         <Col className={"col-12"}>
                             <OtzOutcomesAmongAlhivWithSustainedSuppression />
+                        </Col>
+                    </Row>*/}
+                    <Row>
+                        <Col className={"col-6"}>
+                            <OtzOutcomesByGender />
+                        </Col>
+                        <Col className={"col-6"}>
+
                         </Col>
                     </Row>
                 </TabPane>
