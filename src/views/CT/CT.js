@@ -120,6 +120,10 @@ import { loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByPartner } f
 import { loadOtzOutcomesAmongAlHivWithBaselineVL } from '../../actions/CT/OTZ/OtzOutcomesAmongAlHivWithBaselineVLActions';
 import { loadOtzOutcomesAmongAlHivWithReSuppression } from '../../actions/CT/OTZ/OtzOutcomesAmongAlHivWithReSuppressionActions';
 import { loadOtzOutcomesByGender } from '../../actions/CT/OTZ/OtzOutcomesByGenderActions';
+import { loadOtzOutcomesByPopulationType } from '../../actions/CT/OTZ/OtzOutcomesByPopulationTypeActions';
+import { loadOtzOutcomesByYearOfArtStart } from '../../actions/CT/OTZ/OtzOutcomesByYearOfArtStartActions';
+import { loadOtzOutcomesByCounty } from '../../actions/CT/OTZ/OtzOutcomesByCountyActions';
+import { loadOtzOutcomesByPartner } from '../../actions/CT/OTZ/OtzOutcomesByPartnerActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -320,6 +324,10 @@ const CT = () => {
                 dispatch(loadOtzOutcomesAmongAlHivWithBaselineVL());
                 dispatch(loadOtzOutcomesAmongAlHivWithReSuppression());
                 dispatch(loadOtzOutcomesByGender());
+                dispatch(loadOtzOutcomesByPopulationType());
+                dispatch(loadOtzOutcomesByYearOfArtStart());
+                dispatch(loadOtzOutcomesByCounty());
+                dispatch(loadOtzOutcomesByPartner());
 
                 break;
             default:

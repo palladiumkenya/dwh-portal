@@ -19,6 +19,11 @@ const OtzOutcomesAmongAlhivWithBaselineVl = Loadable({ loader: () => import('./O
 const OtzOutcomesAmongAlhivWithReSuppression = Loadable({ loader: () => import('./OtzOutcomesAmongAlhivWithReSuppression'), loading: Loading, delay: LOADING_DELAY });
 const OtzOutcomesAmongAlhivWithSustainedSuppression = Loadable({ loader: () => import('./OtzOutcomesAmongAlhivWithSustainedSuppression'), loading: Loading, delay: LOADING_DELAY });
 const OtzOutcomesByGender = Loadable({ loader: () => import('./OtzOutcomesByGender'), loading: Loading, delay: LOADING_DELAY });
+const OtzOutcomesByPopulationType = Loadable({ loader: () => import('./OtzOutcomesByPopulationType'), loading: Loading, delay: LOADING_DELAY });
+const OtzOutcomesByAgeGroup = Loadable({ loader: () => import('./OtzOutcomesByAgeGroup'), loading: Loading, delay: LOADING_DELAY });
+const OtzOutcomesByYearOfArtStart = Loadable({ loader: () => import('./OtzOutcomesByYearOfArtStart'), loading: Loading, delay: LOADING_DELAY });
+const OtzOutcomesByCounty = Loadable({ loader: () => import('./OtzOutcomesByCounty'), loading: Loading, delay: LOADING_DELAY });
+const OtzOutcomesByPartner = Loadable({ loader: () => import('./OtzOutcomesByPartner'), loading: Loading, delay: LOADING_DELAY });
 
 const OTZTabs = () => {
     const [activeTab, setActiveTab] = useState('otz_enrollment');
@@ -105,7 +110,27 @@ const OTZTabs = () => {
                             <OtzOutcomesByGender />
                         </Col>
                         <Col className={"col-6"}>
-
+                            <OtzOutcomesByPopulationType />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={"col-12"}>
+                            <OtzOutcomesByAgeGroup />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={"col-12"}>
+                            <OtzOutcomesByYearOfArtStart />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={"col-12"}>
+                            <OtzOutcomesByCounty />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={"col-12"}>
+                            <OtzOutcomesByPartner />
                         </Col>
                     </Row>
                 </TabPane>
