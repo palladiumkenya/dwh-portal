@@ -1,16 +1,16 @@
-import React, { useCallback, useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import * as otzEnrollmentAmongAlHivByCounty from '../../../selectors/CT/OTZ/otzEnrollmentAmongAlHivByCounty';
+import * as otzOutcomesAmongAlhivWithReSuppression from '../../../selectors/CT/OTZ/otzOutcomesAmongAlhivWithReSuppression';
 
-const OtzEnrollmentAmongAlhivOnArtByCounty = () => {
-    const [otzEnrollmentAmongAlhivOnArtByCounty, setEnrollmentAmongAlhivOnArtByCounty] = useState({});
-    const otzEnrollmentsByCounty = useSelector(otzEnrollmentAmongAlHivByCounty.getOtzEnrollmentAmongAlHivOnArtByCounty);
+const OtzOutcomesAmongAlhivWithSustainedSuppression = () => {
+    const [otzOutcomesAmongAlHivReSuppression, setOtzOutcomesAmongAlHivReSuppression] = useState({});
+    const otzOutcomesWithReSuppression = useSelector(otzOutcomesAmongAlhivWithReSuppression.getOtzOutcomesAmongAlHivWithReSuppression);
 
-    const loadOtzEnrollmentAmongAlhivOnArtByCounty = useCallback(async () => {
-        setEnrollmentAmongAlhivOnArtByCounty({
+    const loadOtzOutcomesAmongAlhivWithReSuppression = useCallback(async () => {
+        setOtzOutcomesAmongAlHivReSuppression({
             chart: {
                 type: 'column'
             },
@@ -18,7 +18,7 @@ const OtzEnrollmentAmongAlhivOnArtByCounty = () => {
                 text: ''
             },
             xAxis: {
-                categories: otzEnrollmentsByCounty.map(obj => obj.County),
+                categories: ['ALHIV WITH VL >1000 AT BASELINE', 'ALHIV WITH VL <1000 WITH REPEAT VL', 'NUMBER WITH VL <1000 UPON REPEAT VL', 'NUMBER WITH VL >1000 UPON REPEAT'],
                 crosshair: true
             },
             yAxis: {
@@ -35,30 +35,30 @@ const OtzEnrollmentAmongAlhivOnArtByCounty = () => {
             plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.y + '%'; } }, tooltip: { valueSuffix: '% ({point.text:.0f})' }, }},
             series: [
                 {
-                    name: 'OTZ ENROLMENT AMONG ALHIV AND ON ART BY COUNTY',
-                    data: otzEnrollmentsByCounty,
+                    name: 'OTZ OUTCOMES AMONG ALHIV WITH BASELINE VL',
                     color: '#14084D',
+                    data: []
                 }
             ]
         });
-    }, [otzEnrollmentsByCounty]);
+    },[otzOutcomesWithReSuppression]);
 
     useEffect(() => {
-        loadOtzEnrollmentAmongAlhivOnArtByCounty();
-    }, [loadOtzEnrollmentAmongAlhivOnArtByCounty]);
+        loadOtzOutcomesAmongAlhivWithReSuppression();
+    }, [loadOtzOutcomesAmongAlhivWithReSuppression]);
 
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                OTZ ENROLMENT AMONG ALHIV AND ON ART BY COUNTY
+                OTZ OUTCOMES AMONG ALHIV WITH RE-SUPPRESSION
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
-                    <HighchartsReact highcharts={Highcharts} options={otzEnrollmentAmongAlhivOnArtByCounty} />
+                    <HighchartsReact highcharts={Highcharts} options={otzOutcomesAmongAlHivReSuppression} />
                 </div>
             </CardBody>
         </Card>
     );
-}
+};
 
-export default OtzEnrollmentAmongAlhivOnArtByCounty;
+export default OtzOutcomesAmongAlhivWithSustainedSuppression;

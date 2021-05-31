@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
 
 const filtered = state => state.filters.filtered;
-const listFiltered = state => state.otzEnrollmentAmongAlhivOnArtByCounty.listFiltered;
-const listUnfiltered = state => state.otzEnrollmentAmongAlhivOnArtByCounty.listUnfiltered;
+const listFiltered = state => state.otzEnrollmentAmongAlhivOnArtByPartner.listFiltered;
+const listUnfiltered = state => state.otzEnrollmentAmongAlhivOnArtByPartner.listUnfiltered;
 
-export const getOtzEnrollmentAmongAlHivOnArtByCounty = createSelector(
+export const getOtzEnrollmentAmongAlHivOnArtByPartner = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
@@ -12,7 +12,7 @@ export const getOtzEnrollmentAmongAlHivOnArtByCounty = createSelector(
         const arrayVal = list.map(val => ({
             y: Math.round(val.Percentage),
             text: val.TXCurr,
-            County: val.County,
+            partner: val.partner,
             TXCurr: val.TXCurr,
         }));
 

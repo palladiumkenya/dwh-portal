@@ -3,14 +3,14 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { useSelector } from 'react-redux';
-import * as otzEnrollmentAmongAlHivByCounty from '../../../selectors/CT/OTZ/otzEnrollmentAmongAlHivByCounty';
+import * as otzVlUptakeAmongAlhivEnrolledInOtzByAge from '../../../selectors/CT/OTZ/otzVlUptakeAmongAlhivEnrolledInOtzByAge';
 
-const OtzEnrollmentAmongAlhivOnArtByCounty = () => {
-    const [otzEnrollmentAmongAlhivOnArtByCounty, setEnrollmentAmongAlhivOnArtByCounty] = useState({});
-    const otzEnrollmentsByCounty = useSelector(otzEnrollmentAmongAlHivByCounty.getOtzEnrollmentAmongAlHivOnArtByCounty);
+const VlUptakeAmongAlHivEnrolledInOTZByAge = () => {
+    const [vlUptakeAmongAlhivInOtzByAge, setVlUptakeAmongAlhivInOtzByAge] = useState({});
+    const vlUptakeAmongAlHivInOtzByAge = useSelector(otzVlUptakeAmongAlhivEnrolledInOtzByAge.getOtzVlUptakeAmongAlhivEnrolledInOtzByAge);
 
-    const loadOtzEnrollmentAmongAlhivOnArtByCounty = useCallback(async () => {
-        setEnrollmentAmongAlhivOnArtByCounty({
+    const loadVlUptakeAmongAlHivOnArtByAge = useCallback(async () => {
+        setVlUptakeAmongAlhivInOtzByAge({
             chart: {
                 type: 'column'
             },
@@ -18,7 +18,7 @@ const OtzEnrollmentAmongAlhivOnArtByCounty = () => {
                 text: ''
             },
             xAxis: {
-                categories: otzEnrollmentsByCounty.map(obj => obj.County),
+                categories: vlUptakeAmongAlHivInOtzByAge.map(obj => obj.ageGroup),
                 crosshair: true
             },
             yAxis: {
@@ -35,30 +35,31 @@ const OtzEnrollmentAmongAlhivOnArtByCounty = () => {
             plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.y + '%'; } }, tooltip: { valueSuffix: '% ({point.text:.0f})' }, }},
             series: [
                 {
-                    name: 'OTZ ENROLMENT AMONG ALHIV AND ON ART BY COUNTY',
-                    data: otzEnrollmentsByCounty,
+                    name: 'VL UPTAKE AMONG ALHIV ENROLLED IN OTZ BY AGE',
+                    data: vlUptakeAmongAlHivInOtzByAge,
                     color: '#14084D',
                 }
             ]
         });
-    }, [otzEnrollmentsByCounty]);
+    }, [vlUptakeAmongAlHivInOtzByAge]);
 
     useEffect(() => {
-        loadOtzEnrollmentAmongAlhivOnArtByCounty();
-    }, [loadOtzEnrollmentAmongAlhivOnArtByCounty]);
+        loadVlUptakeAmongAlHivOnArtByAge();
+    }, [loadVlUptakeAmongAlHivOnArtByAge]);
 
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                OTZ ENROLMENT AMONG ALHIV AND ON ART BY COUNTY
+                VL UPTAKE AMONG ALHIV ENROLLED IN OTZ BY AGE
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
-                    <HighchartsReact highcharts={Highcharts} options={otzEnrollmentAmongAlhivOnArtByCounty} />
+                    <HighchartsReact highcharts={Highcharts} options={vlUptakeAmongAlhivInOtzByAge} />
                 </div>
             </CardBody>
         </Card>
     );
-}
+};
 
-export default OtzEnrollmentAmongAlhivOnArtByCounty;
+export default VlUptakeAmongAlHivEnrolledInOTZByAge;
+

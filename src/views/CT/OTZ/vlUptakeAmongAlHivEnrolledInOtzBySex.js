@@ -2,34 +2,34 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import * as otzVlUptakeAmongAlhivEnrolledInOtzBySex
+    from '../../../selectors/CT/OTZ/otzVlUptakeAmongAlhivEnrolledInOtzBySex';
 import { useSelector } from 'react-redux';
-import * as otzEnrollmentAmongAlhivBySex
-    from '../../../selectors/CT/OTZ/otzEnrollmentAmongAlhivBySex';
 
-const OtzEnrollmentAmongAlhivOnArtBySex = () => {
-    const [otzEnrollmentAmongAlHivOnArtBySex, setOtzEnrollmentAmongAlHivOnArtBySex] = useState({});
-    const otzEnrollmentsBySex = useSelector(otzEnrollmentAmongAlhivBySex.getOtzEnrollmentAmongAlHivOnArtBySex);
+const VLUptakeAmongAlHivEnrolledInOtzBySex = () => {
+    const [vlUptakeAmongAlhivInOtzBySex, setVlUptakeAmongAlhivInOtzBySex] = useState({});
+    const vlUptakeAmongAlHivInOtzBySex = useSelector(otzVlUptakeAmongAlhivEnrolledInOtzBySex.getOtzVlUptakeAmongAlhivEnrolledInOtzBySex);
 
     let femalePercentage = 0;
-    let femaleTxCurr = 0;
+    let femaleText = null;
 
     let malePercentage = 0;
-    let maleTxCurr = 0;
+    let maleText = null;
 
-    const femaleVals = otzEnrollmentsBySex.filter(obj => obj.Gender === 'Female');
-    const maleVals = otzEnrollmentsBySex.filter(obj => obj.Gender === 'Male');
+    const femaleVals = vlUptakeAmongAlHivInOtzBySex.filter(obj => obj.Gender === 'Female');
+    const maleVals = vlUptakeAmongAlHivInOtzBySex.filter(obj => obj.Gender === 'Male');
     if (femaleVals.length > 0) {
-        femalePercentage = femaleVals[0].Percentage;
-        femaleTxCurr = femaleVals[0].TXCurr;
+        femalePercentage = Math.round(femaleVals[0].vl_uptake_percent);
+        femaleText = 'lastVL: ' +  femaleVals[0].lastVL + ' eligibleVL: ' + femaleVals[0].eligibleVL;
     }
 
     if (maleVals.length > 0) {
-        malePercentage = maleVals[0].Percentage;
-        maleTxCurr = maleVals[0].TXCurr;
+        malePercentage = Math.round(maleVals[0].vl_uptake_percent);
+        maleText = 'lastVL: ' +  maleVals[0].lastVL + ' eligibleVL: ' + maleVals[0].eligibleVL;
     }
 
-    const loadOtzEnrollmentAmongAlHivOnArtBySex = useCallback(async () => {
-        setOtzEnrollmentAmongAlHivOnArtBySex({
+    const loadVlUptakeAmongAlHivOnArtBySex = useCallback(async () => {
+        setVlUptakeAmongAlhivInOtzBySex({
             chart: {
                 type: 'column'
             },
@@ -54,43 +54,43 @@ const OtzEnrollmentAmongAlhivOnArtBySex = () => {
             plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.y + '%'; } }, tooltip: { valueSuffix: '% ({point.text:.0f})' }, }},
             series: [
                 {
-                    name: 'OTZ ENROLMENT AMONG ALHIV AND ON ART BY SEX',
+                    name: 'VL UPTAKE AMONG ALHIV ENROLLED IN OTZ BY SEX',
                     colorByPoint: true,
                     data: [
                         {
                             name: 'MALES',
-                            y: Math.round(malePercentage),
+                            y: malePercentage,
                             color: '#14084D',
-                            text: maleTxCurr
+                            text: maleText
                         },
                         {
                             name: 'FEMALES',
-                            y: Math.round(femalePercentage),
+                            y: femalePercentage,
                             color: '#EA4C8B',
-                            text: femaleTxCurr,
+                            text: femaleText,
                         }
                     ]
                 }
             ]
         });
-    },[otzEnrollmentsBySex]);
+    },[vlUptakeAmongAlHivInOtzBySex]);
 
     useEffect(() => {
-        loadOtzEnrollmentAmongAlHivOnArtBySex();
-    }, [loadOtzEnrollmentAmongAlHivOnArtBySex]);
+        loadVlUptakeAmongAlHivOnArtBySex();
+    }, [loadVlUptakeAmongAlHivOnArtBySex]);
 
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                OTZ ENROLMENT AMONG ALHIV AND ON ART BY SEX
+                VL UPTAKE AMONG ALHIV ENROLLED IN OTZ BY SEX
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
-                    <HighchartsReact highcharts={Highcharts} options={otzEnrollmentAmongAlHivOnArtBySex} />
+                    <HighchartsReact highcharts={Highcharts} options={vlUptakeAmongAlhivInOtzBySex} />
                 </div>
             </CardBody>
         </Card>
     );
 }
 
-export default OtzEnrollmentAmongAlhivOnArtBySex;
+export default VLUptakeAmongAlHivEnrolledInOtzBySex;

@@ -117,6 +117,21 @@ import consistencyByFacilityNotReported from './RR/consistencyByFacilityNotRepor
 import otzEnrollmentAmongAlhivOnArtBySex from './CT/OTZ/otzEnrollmentAmongAlhivOnArtBySex';
 import otzEnrollmentAmongAlhivOnArtByAge from './CT/OTZ/otzEnrollmentAmongAlhivOnArtByAge';
 import otzEnrollmentAmongAlhivOnArtByCounty from './CT/OTZ/otzEnrollmentAmongAlhivOnArtByCounty';
+import otzEnrollmentAmongAlhivOnArtByPartner from './CT/OTZ/otzEnrollmentAmongAlhivOnArtByPartner';
+import otzVlUptakeAmongAlHivEnrolledInOtzBySex from './CT/OTZ/otzVlUptakeAmongAlHivEnrolledInOtzBySex';
+import otzVlUptakeAmongAlHivEnrolledInOtzByAge from './CT/OTZ/otzVlUptakeAmongAlHivEnrolledInOtzByAge';
+import otzVlUptakeAmongAlHivEnrolledInOtzByCounty from './CT/OTZ/otzVlUptakeAmongAlHivEnrolledInOtzByCounty';
+import otzVlUptakeAmongAlHivEnrolledInOtzByPartner from './CT/OTZ/otzVlUptakeAmongAlHivEnrolledInOtzByPartner';
+import otzProportionOfAlHivWhoHaveCompletedOtzTraining from './CT/OTZ/otzProportionOfAlHivWhoHaveCompletedOtzTraining';
+import otzProportionOfAlHivWhoHaveCompletedOtzTrainingByCounty from './CT/OTZ/otzProportionOfAlHivWhoHaveCompletedOtzTrainingByCounty';
+import otzProportionOfAlHivWhoHaveCompletedOtzTrainingByPartner from './CT/OTZ/otzProportionOfAlHivWhoHaveCompletedOtzTrainingByPartner';
+import otzOutcomesAmongAlHivWithBaselineVL from './CT/OTZ/otzOutcomesAmongAlHivWithBaselineVL';
+import otzOutcomesAmongAlHivWithReSuppression from './CT/OTZ/otzOutcomesAmongAlHivWithReSuppression';
+import otzOutcomesByGender from './CT/OTZ/otzOutcomesByGender';
+import otzOutcomesByPopulationType from './CT/OTZ/otzOutcomesByPopulationType';
+import otzOutcomesByYearOfArtStart from './CT/OTZ/otzOutcomesByYearOfArtStart';
+import otzOutcomesByCounty from './CT/OTZ/otzOutcomesByCounty';
+import otzOutcomesByPartner from './CT/OTZ/otzOutcomesByPartner';
 
 export default combineReducers({
     auth: authReducer,
@@ -228,5 +243,20 @@ export default combineReducers({
 
     otzEnrollmentAmongAlhivOnArtBySex,
     otzEnrollmentAmongAlhivOnArtByAge,
-    otzEnrollmentAmongAlhivOnArtByCounty
+    otzEnrollmentAmongAlhivOnArtByCounty,
+    otzEnrollmentAmongAlhivOnArtByPartner,
+    otzVlUptakeAmongAlHivEnrolledInOtzBySex,
+    otzVlUptakeAmongAlHivEnrolledInOtzByAge,
+    otzVlUptakeAmongAlHivEnrolledInOtzByCounty,
+    otzVlUptakeAmongAlHivEnrolledInOtzByPartner,
+    otzProportionOfAlHivWhoHaveCompletedOtzTraining,
+    otzProportionOfAlHivWhoHaveCompletedOtzTrainingByCounty,
+    otzProportionOfAlHivWhoHaveCompletedOtzTrainingByPartner,
+    otzOutcomesAmongAlHivWithReSuppression,
+    otzOutcomesAmongAlHivWithBaselineVL,
+    otzOutcomesByGender,
+    otzOutcomesByPopulationType,
+    otzOutcomesByYearOfArtStart,
+    otzOutcomesByCounty,
+    otzOutcomesByPartner
 });

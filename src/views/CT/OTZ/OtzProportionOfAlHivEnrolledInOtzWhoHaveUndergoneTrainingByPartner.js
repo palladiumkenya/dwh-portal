@@ -3,14 +3,14 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { useSelector } from 'react-redux';
-import * as otzEnrollmentAmongAlHivByCounty from '../../../selectors/CT/OTZ/otzEnrollmentAmongAlHivByCounty';
+import * as otzProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByPartner from '../../../selectors/CT/OTZ/otzProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByPartner';
 
-const OtzEnrollmentAmongAlhivOnArtByCounty = () => {
-    const [otzEnrollmentAmongAlhivOnArtByCounty, setEnrollmentAmongAlhivOnArtByCounty] = useState({});
-    const otzEnrollmentsByCounty = useSelector(otzEnrollmentAmongAlHivByCounty.getOtzEnrollmentAmongAlHivOnArtByCounty);
+const OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingByPartner = () => {
+    const [proportionOfAlHivEnrolledInWhoWhoHaveTrainedByPartner, setProportionOfAlHivEnrolledInWhoWhoHaveTrainedByPartner] = useState({});
+    const proportionByPartner = useSelector(otzProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByPartner.getProportionOfAlhivEnrolledInOtzWhoHaveCompletedTrainingByPartner);
 
-    const loadOtzEnrollmentAmongAlhivOnArtByCounty = useCallback(async () => {
-        setEnrollmentAmongAlhivOnArtByCounty({
+    const loadProportionByPartner = useCallback(async () => {
+        setProportionOfAlHivEnrolledInWhoWhoHaveTrainedByPartner({
             chart: {
                 type: 'column'
             },
@@ -18,7 +18,7 @@ const OtzEnrollmentAmongAlhivOnArtByCounty = () => {
                 text: ''
             },
             xAxis: {
-                categories: otzEnrollmentsByCounty.map(obj => obj.County),
+                categories: proportionByPartner.map(obj => obj.partner),
                 crosshair: true
             },
             yAxis: {
@@ -35,30 +35,30 @@ const OtzEnrollmentAmongAlhivOnArtByCounty = () => {
             plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.y + '%'; } }, tooltip: { valueSuffix: '% ({point.text:.0f})' }, }},
             series: [
                 {
-                    name: 'OTZ ENROLMENT AMONG ALHIV AND ON ART BY COUNTY',
-                    data: otzEnrollmentsByCounty,
+                    name: 'PROPORTION OF ALHIV ENROLLED IN OTZ WHO HAVE COMPLETED OTZ TRAINING BY PARTNER',
+                    data: proportionByPartner.map(obj => obj.proportion_training_percent),
                     color: '#14084D',
                 }
             ]
         });
-    }, [otzEnrollmentsByCounty]);
+    }, [proportionByPartner]);
 
     useEffect(() => {
-        loadOtzEnrollmentAmongAlhivOnArtByCounty();
-    }, [loadOtzEnrollmentAmongAlhivOnArtByCounty]);
+        loadProportionByPartner();
+    }, [loadProportionByPartner]);
 
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                OTZ ENROLMENT AMONG ALHIV AND ON ART BY COUNTY
+                PROPORTION OF ALHIV ENROLLED IN OTZ WHO HAVE COMPLETED OTZ TRAINING BY PARTNER
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
-                    <HighchartsReact highcharts={Highcharts} options={otzEnrollmentAmongAlhivOnArtByCounty} />
+                    <HighchartsReact highcharts={Highcharts} options={proportionOfAlHivEnrolledInWhoWhoHaveTrainedByPartner} />
                 </div>
             </CardBody>
         </Card>
     );
-}
+};
 
-export default OtzEnrollmentAmongAlhivOnArtByCounty;
+export default OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingByPartner;

@@ -109,6 +109,21 @@ import { load24MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLo
 import { loadOtzEnrollmentAmongAlhivOnArtBySex } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtBySexActions';
 import { loadOtzEnrollmentAmongAlhivOnArtByAge } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtByAgeActions';
 import { loadOtzEnrollmentAmongAlhivOnArtByCounty } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtByCountyActions';
+import { loadOtzEnrollmentAmongAlhivOnArtByPartner } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtByPartnerActions';
+import { loadOtzVlUptakeAmongAlHivEnrolledInOtzBySex } from '../../actions/CT/OTZ/OtzVlUptakeAmongAlHivEnrolledInOtzBySexActions';
+import { loadOtzVlUptakeAmongAlHivEnrolledInOtzByAge } from '../../actions/CT/OTZ/OtzVlUptakeAmongAlHivEnrolledInOtzByAgeActions';
+import { loadOtzVlUptakeAmongAlHivEnrolledInOtzByCounty } from '../../actions/CT/OTZ/OtzVlUptakeAmongAlHivEnrolledInOtzByCountyActions';
+import { loadOtzVlUptakeAmongAlHivEnrolledInOtzByPartner } from '../../actions/CT/OTZ/OtzVlUptakeAmongAlHivEnrolledInOtzByPartnerActions';
+import { loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTraining } from '../../actions/CT/OTZ/OtzProportionOfAlHivEnrolledInOtzWhoHaveCompletedOtzTrainingActions';
+import { loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByCounty } from '../../actions/CT/OTZ/OtzProportionOfAlHivEnrolledInOtzWhoHaveCompletedOtzTrainingByCountyActions';
+import { loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByPartner } from '../../actions/CT/OTZ/OtzProportionOfAlHivEnrolledInOtzWhoHaveCompletedOtzTrainingByPartnerActions';
+import { loadOtzOutcomesAmongAlHivWithBaselineVL } from '../../actions/CT/OTZ/OtzOutcomesAmongAlHivWithBaselineVLActions';
+import { loadOtzOutcomesAmongAlHivWithReSuppression } from '../../actions/CT/OTZ/OtzOutcomesAmongAlHivWithReSuppressionActions';
+import { loadOtzOutcomesByGender } from '../../actions/CT/OTZ/OtzOutcomesByGenderActions';
+import { loadOtzOutcomesByPopulationType } from '../../actions/CT/OTZ/OtzOutcomesByPopulationTypeActions';
+import { loadOtzOutcomesByYearOfArtStart } from '../../actions/CT/OTZ/OtzOutcomesByYearOfArtStartActions';
+import { loadOtzOutcomesByCounty } from '../../actions/CT/OTZ/OtzOutcomesByCountyActions';
+import { loadOtzOutcomesByPartner } from '../../actions/CT/OTZ/OtzOutcomesByPartnerActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -298,6 +313,22 @@ const CT = () => {
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtBySex());
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtByAge());
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtByCounty());
+                dispatch(loadOtzEnrollmentAmongAlhivOnArtByPartner());
+                dispatch(loadOtzVlUptakeAmongAlHivEnrolledInOtzBySex());
+                dispatch(loadOtzVlUptakeAmongAlHivEnrolledInOtzByAge());
+                dispatch(loadOtzVlUptakeAmongAlHivEnrolledInOtzByCounty());
+                dispatch(loadOtzVlUptakeAmongAlHivEnrolledInOtzByPartner());
+                dispatch(loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTraining());
+                dispatch(loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByCounty());
+                dispatch(loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByPartner());
+                dispatch(loadOtzOutcomesAmongAlHivWithBaselineVL());
+                dispatch(loadOtzOutcomesAmongAlHivWithReSuppression());
+                dispatch(loadOtzOutcomesByGender());
+                dispatch(loadOtzOutcomesByPopulationType());
+                dispatch(loadOtzOutcomesByYearOfArtStart());
+                dispatch(loadOtzOutcomesByCounty());
+                dispatch(loadOtzOutcomesByPartner());
+
                 break;
             default:
                 break;
