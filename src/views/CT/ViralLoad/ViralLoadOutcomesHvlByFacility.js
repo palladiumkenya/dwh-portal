@@ -31,7 +31,7 @@ const ViralLoadOutcomesHvlByFacility = () => {
                         <CardBody className="trends-body">
                             <DataTable
                                 columns={[
-                                    { name: 'MFL Code', selector: 'MFLCode', sortable: true },
+                                    { name: 'MFL Code', selector: 'mfl', sortable: true },
                                     { name: 'Facility', selector: 'facility', sortable: true },
                                     { name: 'County', selector: 'county', sortable: true },
                                     { name: 'Sub-County', selector: 'subCounty', sortable: true },
