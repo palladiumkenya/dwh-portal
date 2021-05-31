@@ -14,12 +14,12 @@ const ViralLoadOutcomesHvlByFacility = () => {
                 <Col>
                     <Card className="trends-card">
                         <CardHeader className="trends-header">
-                            HVL BY FACILITY
+                            Number of Patients with High Viral Load - By Facility
                             {
                                 loading === true ?
                                 <Spinner className="pull-right"/> :
                                 <CsvDownloader
-                                    filename="ndwh_hvl_by_facility"
+                                    filename="ndwh_patients_with_high_viral_load_by_facility"
                                     separator=","
                                     datas={viralLoadOutcomesHvlByFacility}
                                     className="pull-right"
@@ -36,7 +36,7 @@ const ViralLoadOutcomesHvlByFacility = () => {
                                     { name: 'County', selector: 'county', sortable: true },
                                     { name: 'Sub-County', selector: 'subCounty', sortable: true },
                                     { name: 'Partner', selector: 'partner', sortable: true },
-                                    { name: 'Patients', selector: 'patients', sortable: true },
+                                    { name: '# Patients', selector: 'patients', sortable: true },
                                 ]}
                                 data={viralLoadOutcomesHvlByFacility}
                                 noHeader
@@ -51,21 +51,6 @@ const ViralLoadOutcomesHvlByFacility = () => {
                             />
                         </CardBody>
                     </Card>
-                </Col>
-            </Row>
-            <Row>
-                <Col sm={4}>
-                    {
-                        loading === true ?
-                        <Spinner/> :
-                        <CsvDownloader
-                            filename="ndwh_hvl_by_facility"
-                            separator=","
-                            datas={viralLoadOutcomesHvlByFacility}
-                            text="Download HVL by facility"
-                            className="btn btn-danger"
-                        />
-                    }
                 </Col>
             </Row>
         </>
