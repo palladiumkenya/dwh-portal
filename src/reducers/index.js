@@ -79,6 +79,7 @@ import viralLoadSuppressionByRegimen from "./CT/ViralLoad/viralLoadSuppressionBy
 import viralLoadOverallUptakeSuppressionByFacility from "./CT/ViralLoad/viralLoadOverallUptakeSuppressionByFacility";
 import viralLoadSuppressionByYearAndSuppressionCategory
     from './CT/ViralLoad/viralLoadSuppressionByYearAndSuppressionCategory';
+import viralLoadOutcomesHvlByFacility from "./CT/ViralLoad/viralLoadOutcomesHvlByFacility";
 
 import treatmentOutcomesOverallLast12m from "./CT/TreatmentOutcomes/treatmentOutcomesOverallLast12m";
 import treatmentOutcomesBySex from "./CT/TreatmentOutcomes/treatmentOutcomesBySex";
@@ -218,6 +219,7 @@ export default combineReducers({
     viralLoad6MonthSuppressionByYearOfArtStart,
     viralLoad12MonthSuppressionByYearOfArtStart,
     viralLoad24MonthSuppressionByYearOfArtStart,
+    viralLoadOutcomesHvlByFacility,
 
     treatmentOutcomesOverallLast12m,
     treatmentOutcomesBySex,
