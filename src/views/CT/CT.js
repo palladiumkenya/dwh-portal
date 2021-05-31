@@ -105,6 +105,7 @@ import { loadAdverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered } from '..
 import { load6MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLoad/viralLoad6MonthSuppressionByYearOfArtStartActions';
 import { load12MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLoad/viralLoad12MonthSuppressionByYearOfArtStartActions';
 import { load24MonthSuppressionByYearOfArtStart } from '../../actions/CT/ViralLoad/viralLoad24MonthSuppressionByYearOfArtStartActions';
+import { loadViralLoadOutcomesHvlByFacility } from '../../actions/CT/ViralLoad/viralLoadOutcomesHvlByFacilityActions';
 
 import { loadOtzEnrollmentAmongAlhivOnArtBySex } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtBySexActions';
 import { loadOtzEnrollmentAmongAlhivOnArtByAge } from '../../actions/CT/OTZ/OtzEnrollmentAmongAlhivOnArtByAgeActions';
@@ -294,6 +295,7 @@ const CT = () => {
                 dispatch(load6MonthSuppressionByYearOfArtStart());
                 dispatch(load12MonthSuppressionByYearOfArtStart());
                 dispatch(load24MonthSuppressionByYearOfArtStart());
+                dispatch(loadViralLoadOutcomesHvlByFacility());
                 break;
             case 'tOut':
                 dispatch(loadNewOnArtOverview());
