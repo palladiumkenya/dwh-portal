@@ -124,6 +124,10 @@ import { loadOtzOutcomesByPopulationType } from '../../actions/CT/OTZ/OtzOutcome
 import { loadOtzOutcomesByYearOfArtStart } from '../../actions/CT/OTZ/OtzOutcomesByYearOfArtStartActions';
 import { loadOtzOutcomesByCounty } from '../../actions/CT/OTZ/OtzOutcomesByCountyActions';
 import { loadOtzOutcomesByPartner } from '../../actions/CT/OTZ/OtzOutcomesByPartnerActions';
+import { loadOtzTotalAdolescents } from '../../actions/CT/OTZ/OtzTotalAdolescentsActions';
+import { loadOtzEnrolled } from '../../actions/CT/OTZ/OtzEnrolledActions';
+import { loadOtzTotalWithVLResults } from '../../actions/CT/OTZ/OtzTotalWithVlResultsActions';
+import { loadOtzTotalWithVLResultsLessThan1000 } from '../../actions/CT/OTZ/OtzTotalWithWithResultsLessThan1000Actions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -328,6 +332,10 @@ const CT = () => {
                 dispatch(loadOtzOutcomesByYearOfArtStart());
                 dispatch(loadOtzOutcomesByCounty());
                 dispatch(loadOtzOutcomesByPartner());
+                dispatch(loadOtzTotalAdolescents());
+                dispatch(loadOtzEnrolled());
+                dispatch(loadOtzTotalWithVLResults());
+                dispatch(loadOtzTotalWithVLResultsLessThan1000());
 
                 break;
             default:

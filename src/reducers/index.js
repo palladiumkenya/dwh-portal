@@ -132,6 +132,10 @@ import otzOutcomesByPopulationType from './CT/OTZ/otzOutcomesByPopulationType';
 import otzOutcomesByYearOfArtStart from './CT/OTZ/otzOutcomesByYearOfArtStart';
 import otzOutcomesByCounty from './CT/OTZ/otzOutcomesByCounty';
 import otzOutcomesByPartner from './CT/OTZ/otzOutcomesByPartner';
+import otzTotalAdolescents from './CT/OTZ/otzTotalAdolescents';
+import otzEnrolled from './CT/OTZ/otzEnrolled';
+import otzTotalWithVlResults from './CT/OTZ/otzTotalWithVlResults';
+import otzTotalWithWithResultsLessThan1000 from './CT/OTZ/otzTotalWithWithResultsLessThan1000';
 
 export default combineReducers({
     auth: authReducer,
@@ -258,5 +262,9 @@ export default combineReducers({
     otzOutcomesByPopulationType,
     otzOutcomesByYearOfArtStart,
     otzOutcomesByCounty,
-    otzOutcomesByPartner
+    otzOutcomesByPartner,
+    otzTotalAdolescents,
+    otzEnrolled,
+    otzTotalWithVlResults,
+    otzTotalWithWithResultsLessThan1000
 });

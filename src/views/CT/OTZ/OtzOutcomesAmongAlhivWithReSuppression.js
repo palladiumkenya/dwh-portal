@@ -39,18 +39,18 @@ const OtzOutcomesAmongAlhivWithReSuppression = () => {
                     data: [
                         {
                             name: 'ALHIV WITH VL >1000 AT BASELINE',
-                            y: otzOutcomesWithReSuppression[0].AlHivWithVlGreaterThan1000,
-                            text: otzOutcomesWithReSuppression[0].AlHivWithVlGreaterThan1000Perc
+                            y: otzOutcomesWithReSuppression.length > 0 ? otzOutcomesWithReSuppression[0].AlHivWithVlGreaterThan1000 : 0,
+                            text:otzOutcomesWithReSuppression.length > 0 ? otzOutcomesWithReSuppression[0].AlHivWithVlGreaterThan1000Perc : 0
                         },
                         {
                             name: 'ALHIV WITH VL <1000 WITH REPEAT VL',
-                            y: otzOutcomesWithReSuppression[0].ALHivWithVLLessThan1000WithRepeatVL,
-                            text: otzOutcomesWithReSuppression[0].ALHivWithVLLessThan1000WithRepeatVLPerc
+                            y: otzOutcomesWithReSuppression.length > 0 ? otzOutcomesWithReSuppression[0].ALHivWithVLLessThan1000WithRepeatVL : 0,
+                            text: otzOutcomesWithReSuppression.length > 0 ? otzOutcomesWithReSuppression[0].ALHivWithVLLessThan1000WithRepeatVLPerc : 0
                         },
                         {
                             name: 'NUMBER WITH VL >1000 UPON REPEAT',
-                            y: otzOutcomesWithReSuppression[0].ALHivWithVLGreaterThan1000WithRepeatVL,
-                            text: otzOutcomesWithReSuppression[0].ALHivWithVLGreaterThan1000WithRepeatVLPerc
+                            y: otzOutcomesWithReSuppression.length > 0 ? otzOutcomesWithReSuppression[0].ALHivWithVLGreaterThan1000WithRepeatVL : 0,
+                            text: otzOutcomesWithReSuppression.length > 0 ? otzOutcomesWithReSuppression[0].ALHivWithVLGreaterThan1000WithRepeatVLPerc : 0
                         }
                     ]
                 }

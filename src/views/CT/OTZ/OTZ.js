@@ -34,21 +34,8 @@ const OTZ = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <Nav tabs>
-                <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'otz' })} onClick={() => { setActiveTab('otz') }}>OTZ CHARTS</NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'ovc' })} onClick={() => { setActiveTab('ovc') }}>OVC CHARTS</NavLink>
-                </NavItem>
-            </Nav>
-            <TabContent activeTab={activeTab}>
-                <TabPane tabId="otz">
-                    {/*<OTZOverview />*/}
-
-                    <OTZTabs />
-                </TabPane>
-            </TabContent>
+            <OTZOverview />
+            <OTZTabs />
         </div>
     );
 }
