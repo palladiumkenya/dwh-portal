@@ -39,23 +39,23 @@ const OtzOutcomesAmongAlhivWithBaselineVl = () => {
                     data: [
                         {
                             name: 'AYPs Enrolled in OTZ',
-                            y: otzOutcomesWithBaselineVl[0].AlHivEnrolledInOTZ,
-                            text: otzOutcomesWithBaselineVl[0].AlHivEnrolledInOTZPerc
+                            y: otzOutcomesWithBaselineVl.length > 0 ? otzOutcomesWithBaselineVl[0].AlHivEnrolledInOTZ : 0,
+                            text: otzOutcomesWithBaselineVl.length > 0 ? otzOutcomesWithBaselineVl[0].AlHivEnrolledInOTZPerc : 0
                         },
                         {
                             name: 'ALHIV in OTZ with Baseline VL',
-                            y: otzOutcomesWithBaselineVl[0].AlHivWithBaselineVl,
-                            text: otzOutcomesWithBaselineVl[0].AlHivWithBaselineVlPerc
+                            y: otzOutcomesWithBaselineVl.length > 0 ? otzOutcomesWithBaselineVl[0].AlHivWithBaselineVl : 0,
+                            text: otzOutcomesWithBaselineVl.length > 0 ? otzOutcomesWithBaselineVl[0].AlHivWithBaselineVlPerc : 0
                         },
                         {
                             name: 'ALHIV with VL<1000',
-                            y: otzOutcomesWithBaselineVl[0].AlHivWithVlLessThan1000,
-                            text: otzOutcomesWithBaselineVl[0].AlHivWithVlLessThan1000Perc
+                            y: otzOutcomesWithBaselineVl.length > 0 ? otzOutcomesWithBaselineVl[0].AlHivWithVlLessThan1000 : 0,
+                            text: otzOutcomesWithBaselineVl.length > 0 ? otzOutcomesWithBaselineVl[0].AlHivWithVlLessThan1000Perc : 0
                         },
                         {
                             name: 'ALHIV with VL>1000',
-                            y: otzOutcomesWithBaselineVl[0].AlHivWithVlGreaterThan1000,
-                            text: otzOutcomesWithBaselineVl[0].AlHivWithVlGreaterThan1000Perc
+                            y: otzOutcomesWithBaselineVl.length > 0 ? otzOutcomesWithBaselineVl[0].AlHivWithVlGreaterThan1000 : 0,
+                            text: otzOutcomesWithBaselineVl.length > 0 ? otzOutcomesWithBaselineVl[0].AlHivWithVlGreaterThan1000Perc : 0
                         }
                     ]
                 }
