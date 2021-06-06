@@ -26,7 +26,8 @@ export const CT_TABS = {
     dsd: "DSD",
     vl: "VL MONITORING",
     tOut: "TREATMENT OUTCOMES",
-    otz: 'OTZ'
+    otz: 'OTZ',
+    ovc: 'OVC'
 }
 
 export const PAGES = {

@@ -128,6 +128,14 @@ import { loadOtzTotalAdolescents } from '../../actions/CT/OTZ/OtzTotalAdolescent
 import { loadOtzEnrolled } from '../../actions/CT/OTZ/OtzEnrolledActions';
 import { loadOtzTotalWithVLResults } from '../../actions/CT/OTZ/OtzTotalWithVlResultsActions';
 import { loadOtzTotalWithVLResultsLessThan1000 } from '../../actions/CT/OTZ/OtzTotalWithWithResultsLessThan1000Actions';
+import { loadOvcOverallServ } from '../../actions/CT/OVC/ovcOverallServActions';
+import { loadOvcServBySex } from '../../actions/CT/OVC/ovcServByGenderActions';
+import { loadOvcCareGiversRelationshipToOvcClient } from '../../actions/CT/OVC/ovcCareGiversRelationshipToOvcClientActions';
+import { loadOvcProportionOfClientsCpimsOverall } from '../../actions/CT/OVC/ovcProportionOfClientsInCpimsOverallActions';
+import { loadOvcProportionOfClientsCpimsByGender } from '../../actions/CT/OVC/ovcProportionOfClientsInCpimsByGenderActions';
+import { loadOvcServDistributionByPartner } from '../../actions/CT/OVC/ovcServDistributionByPartnerActions';
+import { loadOvcServDistributionByCounty } from '../../actions/CT/OVC/ovcServDistributionByCountyActions';
+import { loadOvcClientsExitReasons } from '../../actions/CT/OVC/ovcClientsExitReasonsActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -141,6 +149,7 @@ const ViralLoad = Loadable({ loader: () => import('./ViralLoad/ViralLoad'), load
 const AdverseEvents = Loadable({ loader: () => import('./AdverseEvents/AdverseEvents'), loading: Loading, delay: LOADING_DELAY });
 const ArtOptimization = Loadable({ loader: () => import('./ArtOptimization/ArtOptimization'), loading: Loading, delay: LOADING_DELAY });
 const OTZ = Loadable({ loader: () => import('./OTZ/OTZ'), loading: Loading, delay: LOADING_DELAY });
+const OVC = Loadable({ loader: () => import('./OVC/OVC'), loading: Loading, delay: LOADING_DELAY });
 
 const CT = () => {
     const dispatch = useDispatch();
@@ -336,7 +345,16 @@ const CT = () => {
                 dispatch(loadOtzEnrolled());
                 dispatch(loadOtzTotalWithVLResults());
                 dispatch(loadOtzTotalWithVLResultsLessThan1000());
-
+                break;
+            case 'ovc':
+                dispatch(loadOvcOverallServ());
+                dispatch(loadOvcServBySex());
+                dispatch(loadOvcCareGiversRelationshipToOvcClient());
+                dispatch(loadOvcProportionOfClientsCpimsOverall());
+                dispatch(loadOvcProportionOfClientsCpimsByGender());
+                dispatch(loadOvcServDistributionByCounty());
+                dispatch(loadOvcServDistributionByPartner());
+                dispatch(loadOvcClientsExitReasons());
                 break;
             default:
                 break;
@@ -388,6 +406,9 @@ const CT = () => {
                 </TabPane>
                 <TabPane tabId={"otz"}>
                     { ctTab === 'otz' ? <OTZ /> : null }
+                </TabPane>
+                <TabPane tabId={"ovc"}>
+                    { ctTab === 'ovc'? <OVC /> : null }
                 </TabPane>
             </TabContent>
             <p></p><p></p>
