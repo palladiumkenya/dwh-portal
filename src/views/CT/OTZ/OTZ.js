@@ -4,8 +4,6 @@ import { disableStickyFilter, enableStickyFilter } from '../../../actions/Shared
 import SectionHeader from '../../Shared/SectionHeader';
 import UniversalFilter from '../../Shared/UniversalFilter';
 import VisibilitySensor from 'react-visibility-sensor';
-import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
-import classnames from 'classnames';
 import Loadable from 'react-loadable';
 import Loading from '../../Shared/Loading';
 import { LOADING_DELAY } from '../../../constants';

@@ -137,6 +137,14 @@ import otzTotalAdolescents from './CT/OTZ/otzTotalAdolescents';
 import otzEnrolled from './CT/OTZ/otzEnrolled';
 import otzTotalWithVlResults from './CT/OTZ/otzTotalWithVlResults';
 import otzTotalWithWithResultsLessThan1000 from './CT/OTZ/otzTotalWithWithResultsLessThan1000';
+import ovcOverallServ from './CT/OVC/ovcOverallServ';
+import ovcServByGender from './CT/OVC/ovcServByGender';
+import ovcCareGiversRelationshipToOvcClient from './CT/OVC/ovcCareGiversRelationshipToOvcClient';
+import ovcProportionOfClientsInCpimsOverall from './CT/OVC/ovcProportionOfClientsInCpimsOverall';
+import ovcProportionOfClientsInCpimsByGender from './CT/OVC/ovcProportionOfClientsInCpimsByGender';
+import ovcServDistributionByCounty from './CT/OVC/ovcServDistributionByCounty';
+import ovcServDistributionByPartner from './CT/OVC/ovcServDistributionByPartner';
+import ovcClientsExitReasons from './CT/OVC/ovcClientsExitReasons';
 
 export default combineReducers({
     auth: authReducer,
@@ -268,5 +276,14 @@ export default combineReducers({
     otzTotalAdolescents,
     otzEnrolled,
     otzTotalWithVlResults,
-    otzTotalWithWithResultsLessThan1000
+    otzTotalWithWithResultsLessThan1000,
+
+    ovcOverallServ,
+    ovcServByGender,
+    ovcCareGiversRelationshipToOvcClient,
+    ovcProportionOfClientsInCpimsOverall,
+    ovcProportionOfClientsInCpimsByGender,
+    ovcServDistributionByCounty,
+    ovcServDistributionByPartner,
+    ovcClientsExitReasons
 });
