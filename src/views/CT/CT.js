@@ -136,6 +136,8 @@ import { loadOvcProportionOfClientsCpimsByGender } from '../../actions/CT/OVC/ov
 import { loadOvcServDistributionByPartner } from '../../actions/CT/OVC/ovcServDistributionByPartnerActions';
 import { loadOvcServDistributionByCounty } from '../../actions/CT/OVC/ovcServDistributionByCountyActions';
 import { loadOvcClientsExitReasons } from '../../actions/CT/OVC/ovcClientsExitReasonsActions';
+import { loadOvcViralSuppressionAmongOvcPatientsOverall } from '../../actions/CT/OVC/ovcViralSuppressionAmongOvcPatientsOverallActions';
+import { loadOvcViralSuppressionAmongOvcPatientsByGender } from '../../actions/CT/OVC/ovcViralSuppressionAmongOvcPatientsByGenderActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -355,6 +357,8 @@ const CT = () => {
                 dispatch(loadOvcServDistributionByCounty());
                 dispatch(loadOvcServDistributionByPartner());
                 dispatch(loadOvcClientsExitReasons());
+                dispatch(loadOvcViralSuppressionAmongOvcPatientsOverall());
+                dispatch(loadOvcViralSuppressionAmongOvcPatientsByGender());
                 break;
             default:
                 break;
