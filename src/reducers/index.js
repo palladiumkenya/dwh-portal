@@ -10,6 +10,7 @@ import ctSites from "./Shared/ctSites";
 import gpsSites from "./Home/gpsSites";
 
 import linkagePositiveTrends from "./HTS/Linkage/linkagePositiveTrends";
+import linkageNumberNotLinkedByFacility from "./HTS/Linkage/linkageNumberNotLinkedByFacility";
 
 import currentNewOnArtOverview from "./CT/NewOnArt/currentNewOnArtOverview";
 
@@ -91,6 +92,8 @@ import threeMonthRetention from "./CT/TreatmentOutcomes/threeMonthRetention";
 import sixMonthRetention from "./CT/TreatmentOutcomes/sixMonthRetention";
 import twelveMonthRetention from "./CT/TreatmentOutcomes/twelveMonthRetention";
 import twentyFourMonthRetention from "./CT/TreatmentOutcomes/twentyFourMonthRetention";
+import treatmentOutcomesUndocumentedByFacility from "./CT/TreatmentOutcomes/treatmentOutcomesUndocumentedByFacility";
+
 import dsdMmdUptakeOverallBySex from './CT/Dsd/dsdMmdUptakeOverallBySex';
 import adverseEventsProportionOfPlHivAeRelatedToArtDrugs
     from './CT/AdverseEvents/adverseEventsProportionOfPlHivAeRelatedToArtDrugs';
@@ -160,6 +163,7 @@ export default combineReducers({
     gpsSites,
 
     linkagePositiveTrends,
+    linkageNumberNotLinkedByFacility,
 
     currentNewOnArtOverview,
 
@@ -245,6 +249,7 @@ export default combineReducers({
     sixMonthRetention,
     twelveMonthRetention,
     twentyFourMonthRetention,
+    treatmentOutcomesUndocumentedByFacility,
 
     practitionersCountByCountyQualification,
     populationByCounty,
