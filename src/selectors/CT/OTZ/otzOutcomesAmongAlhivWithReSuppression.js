@@ -14,10 +14,10 @@ export const getOtzOutcomesAmongAlHivWithReSuppression = createSelector(
             AlHivWithVlGreaterThan1000Perc: 100,
 
             ALHivWithVLLessThan1000WithRepeatVL: val.ALHivWithVLLessThan1000WithRepeatVL,
-            ALHivWithVLLessThan1000WithRepeatVLPerc: Math.round(((val.ALHivWithVLLessThan1000WithRepeatVL/val.AlHivWithVlGreaterThan1000)*100)),
+            ALHivWithVLLessThan1000WithRepeatVLPerc: val.AlHivWithVlGreaterThan1000 > 0 ? Math.round(((val.ALHivWithVLLessThan1000WithRepeatVL/val.AlHivWithVlGreaterThan1000)*100)) : 0,
 
             ALHivWithVLGreaterThan1000WithRepeatVL: val.ALHivWithVLGreaterThan1000WithRepeatVL,
-            ALHivWithVLGreaterThan1000WithRepeatVLPerc: Math.round(((val.ALHivWithVLGreaterThan1000WithRepeatVL/val.AlHivWithVlGreaterThan1000)*100)),
+            ALHivWithVLGreaterThan1000WithRepeatVLPerc: val.AlHivWithVlGreaterThan1000 > 0 ? Math.round(((val.ALHivWithVLGreaterThan1000WithRepeatVL/val.AlHivWithVlGreaterThan1000)*100)) : 0,
         }));
 
         return ArrayVal;
