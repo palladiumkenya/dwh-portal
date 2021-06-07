@@ -12,6 +12,7 @@ import LinkageByPopulationType from './LinkageByPopulationType';
 import LinkageByStrategyEntryPoint from './LinkageByStrategyEntryPoint';
 import LinkageByPartner from './LinkageByPartner';
 import LinkageByCounty from './LinkageByCounty';
+import LinkageNumberNotLinkedByFacility from './LinkageNumberNotLinkedByFacility';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 
 const Linkage = () => {
@@ -59,6 +60,8 @@ const Linkage = () => {
             <LinkageByCounty/>
             <SectionFooter overview={branding.overview}/>
             <LinkageByPartner/>
+            <SectionFooter overview={branding.overview}/>
+            <LinkageNumberNotLinkedByFacility/>
             <SectionFooter overview={branding.overview}/>
         </div>
     );

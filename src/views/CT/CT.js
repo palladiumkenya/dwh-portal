@@ -99,6 +99,7 @@ import { loadThreeMonthRetention } from '../../actions/CT/TreatmentOutcomes/thre
 import { loadSixMonthRetention } from '../../actions/CT/TreatmentOutcomes/sixMonthRetentionActions';
 import { loadTwelveMonthRetention } from '../../actions/CT/TreatmentOutcomes/twelveMonthRetentionActions';
 import { loadTwentyFourMonthRetention } from '../../actions/CT/TreatmentOutcomes/twentyFourMonthRetentionActions';
+import { loadTreatmentOutcomesUndocumentedByFacility } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesUndocumentedByFacilityActions';
 
 import { loadAdverseEventsProportionOfPLHIVWithAeRegimenWasStopped } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasStoppedActions';
 import { loadAdverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered } from '../../actions/CT/AdverseEvents/adverseEventsProportionOfPLHIVWithAeRegimenWasNotAlteredActions';
@@ -325,6 +326,7 @@ const CT = () => {
                 dispatch(loadSixMonthRetention());
                 dispatch(loadTwelveMonthRetention());
                 dispatch(loadTwentyFourMonthRetention());
+                dispatch(loadTreatmentOutcomesUndocumentedByFacility());
                 break;
             case 'otz':
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtBySex());
