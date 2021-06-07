@@ -22,6 +22,7 @@ const TreatmentOutcomesByYear = Loadable({ loader: () => import('./TreatmentOutc
 const TreatmentOutcomesOverview = Loadable({ loader: () => import('./TreatmentOutcomesOverview'), loading: Loading, delay: LOADING_DELAY });
 const TwelveMonthRetention = Loadable({ loader: () => import('./TwelveMonthRetention'), loading: Loading, delay: LOADING_DELAY });
 const TwentyFourMonthRetention = Loadable({ loader: () => import('./TwentyFourMonthRetention'), loading: Loading, delay: LOADING_DELAY });
+const TreatmentOutcomesUndocumentedByFacility = Loadable({ loader: () => import('./TreatmentOutcomesUndocumentedByFacility'), loading: Loading, delay: LOADING_DELAY });
 
 const TreatmentOutcomes = () => {
     const branding = { title: "TREATMENT OUTCOMES", description: "OVERVIEW", overview: "Treatment Outcomes" };
@@ -96,6 +97,8 @@ const TreatmentOutcomes = () => {
             <TwelveMonthRetention />
             <SectionFooter overview={branding.overview}/>
             <TwentyFourMonthRetention />
+            <SectionFooter overview={branding.overview}/>
+            <TreatmentOutcomesUndocumentedByFacility />
             <SectionFooter overview={branding.overview}/>
         </div>
     );

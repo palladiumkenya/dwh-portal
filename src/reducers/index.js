@@ -10,6 +10,7 @@ import ctSites from "./Shared/ctSites";
 import gpsSites from "./Home/gpsSites";
 
 import linkagePositiveTrends from "./HTS/Linkage/linkagePositiveTrends";
+import linkageNumberNotLinkedByFacility from "./HTS/Linkage/linkageNumberNotLinkedByFacility";
 
 import currentNewOnArtOverview from "./CT/NewOnArt/currentNewOnArtOverview";
 
@@ -79,6 +80,7 @@ import viralLoadSuppressionByRegimen from "./CT/ViralLoad/viralLoadSuppressionBy
 import viralLoadOverallUptakeSuppressionByFacility from "./CT/ViralLoad/viralLoadOverallUptakeSuppressionByFacility";
 import viralLoadSuppressionByYearAndSuppressionCategory
     from './CT/ViralLoad/viralLoadSuppressionByYearAndSuppressionCategory';
+import viralLoadOutcomesHvlByFacility from "./CT/ViralLoad/viralLoadOutcomesHvlByFacility";
 
 import treatmentOutcomesOverallLast12m from "./CT/TreatmentOutcomes/treatmentOutcomesOverallLast12m";
 import treatmentOutcomesBySex from "./CT/TreatmentOutcomes/treatmentOutcomesBySex";
@@ -90,6 +92,8 @@ import threeMonthRetention from "./CT/TreatmentOutcomes/threeMonthRetention";
 import sixMonthRetention from "./CT/TreatmentOutcomes/sixMonthRetention";
 import twelveMonthRetention from "./CT/TreatmentOutcomes/twelveMonthRetention";
 import twentyFourMonthRetention from "./CT/TreatmentOutcomes/twentyFourMonthRetention";
+import treatmentOutcomesUndocumentedByFacility from "./CT/TreatmentOutcomes/treatmentOutcomesUndocumentedByFacility";
+
 import dsdMmdUptakeOverallBySex from './CT/Dsd/dsdMmdUptakeOverallBySex';
 import adverseEventsProportionOfPlHivAeRelatedToArtDrugs
     from './CT/AdverseEvents/adverseEventsProportionOfPlHivAeRelatedToArtDrugs';
@@ -117,6 +121,35 @@ import consistencyByFacilityNotReported from './RR/consistencyByFacilityNotRepor
 import otzEnrollmentAmongAlhivOnArtBySex from './CT/OTZ/otzEnrollmentAmongAlhivOnArtBySex';
 import otzEnrollmentAmongAlhivOnArtByAge from './CT/OTZ/otzEnrollmentAmongAlhivOnArtByAge';
 import otzEnrollmentAmongAlhivOnArtByCounty from './CT/OTZ/otzEnrollmentAmongAlhivOnArtByCounty';
+import otzEnrollmentAmongAlhivOnArtByPartner from './CT/OTZ/otzEnrollmentAmongAlhivOnArtByPartner';
+import otzVlUptakeAmongAlHivEnrolledInOtzBySex from './CT/OTZ/otzVlUptakeAmongAlHivEnrolledInOtzBySex';
+import otzVlUptakeAmongAlHivEnrolledInOtzByAge from './CT/OTZ/otzVlUptakeAmongAlHivEnrolledInOtzByAge';
+import otzVlUptakeAmongAlHivEnrolledInOtzByCounty from './CT/OTZ/otzVlUptakeAmongAlHivEnrolledInOtzByCounty';
+import otzVlUptakeAmongAlHivEnrolledInOtzByPartner from './CT/OTZ/otzVlUptakeAmongAlHivEnrolledInOtzByPartner';
+import otzProportionOfAlHivWhoHaveCompletedOtzTraining from './CT/OTZ/otzProportionOfAlHivWhoHaveCompletedOtzTraining';
+import otzProportionOfAlHivWhoHaveCompletedOtzTrainingByCounty from './CT/OTZ/otzProportionOfAlHivWhoHaveCompletedOtzTrainingByCounty';
+import otzProportionOfAlHivWhoHaveCompletedOtzTrainingByPartner from './CT/OTZ/otzProportionOfAlHivWhoHaveCompletedOtzTrainingByPartner';
+import otzOutcomesAmongAlHivWithBaselineVL from './CT/OTZ/otzOutcomesAmongAlHivWithBaselineVL';
+import otzOutcomesAmongAlHivWithReSuppression from './CT/OTZ/otzOutcomesAmongAlHivWithReSuppression';
+import otzOutcomesByGender from './CT/OTZ/otzOutcomesByGender';
+import otzOutcomesByPopulationType from './CT/OTZ/otzOutcomesByPopulationType';
+import otzOutcomesByYearOfArtStart from './CT/OTZ/otzOutcomesByYearOfArtStart';
+import otzOutcomesByCounty from './CT/OTZ/otzOutcomesByCounty';
+import otzOutcomesByPartner from './CT/OTZ/otzOutcomesByPartner';
+import otzTotalAdolescents from './CT/OTZ/otzTotalAdolescents';
+import otzEnrolled from './CT/OTZ/otzEnrolled';
+import otzTotalWithVlResults from './CT/OTZ/otzTotalWithVlResults';
+import otzTotalWithWithResultsLessThan1000 from './CT/OTZ/otzTotalWithWithResultsLessThan1000';
+import ovcOverallServ from './CT/OVC/ovcOverallServ';
+import ovcServByGender from './CT/OVC/ovcServByGender';
+import ovcCareGiversRelationshipToOvcClient from './CT/OVC/ovcCareGiversRelationshipToOvcClient';
+import ovcProportionOfClientsInCpimsOverall from './CT/OVC/ovcProportionOfClientsInCpimsOverall';
+import ovcProportionOfClientsInCpimsByGender from './CT/OVC/ovcProportionOfClientsInCpimsByGender';
+import ovcServDistributionByCounty from './CT/OVC/ovcServDistributionByCounty';
+import ovcServDistributionByPartner from './CT/OVC/ovcServDistributionByPartner';
+import ovcClientsExitReasons from './CT/OVC/ovcClientsExitReasons';
+import ovcViralSuppressionAmongOvcPatientsOverall from './CT/OVC/ovcViralSuppressionAmongOvcPatientsOverall';
+import ovcViralSuppressionAmongOvcPatientsByGender from './CT/OVC/ovcViralSuppressionAmongOvcPatientsByGender';
 
 export default combineReducers({
     auth: authReducer,
@@ -130,6 +163,7 @@ export default combineReducers({
     gpsSites,
 
     linkagePositiveTrends,
+    linkageNumberNotLinkedByFacility,
 
     currentNewOnArtOverview,
 
@@ -203,6 +237,7 @@ export default combineReducers({
     viralLoad6MonthSuppressionByYearOfArtStart,
     viralLoad12MonthSuppressionByYearOfArtStart,
     viralLoad24MonthSuppressionByYearOfArtStart,
+    viralLoadOutcomesHvlByFacility,
 
     treatmentOutcomesOverallLast12m,
     treatmentOutcomesBySex,
@@ -214,6 +249,7 @@ export default combineReducers({
     sixMonthRetention,
     twelveMonthRetention,
     twentyFourMonthRetention,
+    treatmentOutcomesUndocumentedByFacility,
 
     practitionersCountByCountyQualification,
     populationByCounty,
@@ -228,5 +264,35 @@ export default combineReducers({
 
     otzEnrollmentAmongAlhivOnArtBySex,
     otzEnrollmentAmongAlhivOnArtByAge,
-    otzEnrollmentAmongAlhivOnArtByCounty
+    otzEnrollmentAmongAlhivOnArtByCounty,
+    otzEnrollmentAmongAlhivOnArtByPartner,
+    otzVlUptakeAmongAlHivEnrolledInOtzBySex,
+    otzVlUptakeAmongAlHivEnrolledInOtzByAge,
+    otzVlUptakeAmongAlHivEnrolledInOtzByCounty,
+    otzVlUptakeAmongAlHivEnrolledInOtzByPartner,
+    otzProportionOfAlHivWhoHaveCompletedOtzTraining,
+    otzProportionOfAlHivWhoHaveCompletedOtzTrainingByCounty,
+    otzProportionOfAlHivWhoHaveCompletedOtzTrainingByPartner,
+    otzOutcomesAmongAlHivWithReSuppression,
+    otzOutcomesAmongAlHivWithBaselineVL,
+    otzOutcomesByGender,
+    otzOutcomesByPopulationType,
+    otzOutcomesByYearOfArtStart,
+    otzOutcomesByCounty,
+    otzOutcomesByPartner,
+    otzTotalAdolescents,
+    otzEnrolled,
+    otzTotalWithVlResults,
+    otzTotalWithWithResultsLessThan1000,
+
+    ovcOverallServ,
+    ovcServByGender,
+    ovcCareGiversRelationshipToOvcClient,
+    ovcProportionOfClientsInCpimsOverall,
+    ovcProportionOfClientsInCpimsByGender,
+    ovcServDistributionByCounty,
+    ovcServDistributionByPartner,
+    ovcClientsExitReasons,
+    ovcViralSuppressionAmongOvcPatientsOverall,
+    ovcViralSuppressionAmongOvcPatientsByGender
 });

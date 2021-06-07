@@ -31,6 +31,7 @@ const ViralLoadSuppressionByYear6Month = Loadable({ loader: () => import('./Vira
 const ViralLoadSuppressionByYear12Month = Loadable({ loader: () => import('./ViralLoadSuppressionByYear12Month'), loading: Loading, delay: LOADING_DELAY });
 const ViralLoadSuppressionByYear24Month = Loadable({ loader: () => import('./ViralLoadSuppressionByYear24Month'), loading: Loading, delay: LOADING_DELAY });
 const ViralLoadOutcomesOverview = Loadable({ loader: () => import('./ViralLoadOutcomesOverview'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadOutcomesHvlByFacility = Loadable({ loader: () => import('./ViralLoadOutcomesHvlByFacility'), loading: Loading, delay: LOADING_DELAY });
 
 const ViralLoad = () => {
     const branding = { title: "VIRAL LOAD", description: "OVERVIEW", overview: "Viral Load Monitoring" };
@@ -141,6 +142,8 @@ const ViralLoad = () => {
                     <ViralLoadSuppressionByYear12Month />
                     <SectionFooter overview={branding.overview}/>
                     <ViralLoadSuppressionByYear24Month />
+                    <SectionFooter overview={branding.overview}/>
+                    <ViralLoadOutcomesHvlByFacility />
                     <SectionFooter overview={branding.overview}/>
                 </TabPane>
             </TabContent>

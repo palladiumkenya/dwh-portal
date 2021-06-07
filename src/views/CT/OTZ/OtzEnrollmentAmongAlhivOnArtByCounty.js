@@ -9,7 +9,7 @@ const OtzEnrollmentAmongAlhivOnArtByCounty = () => {
     const [otzEnrollmentAmongAlhivOnArtByCounty, setEnrollmentAmongAlhivOnArtByCounty] = useState({});
     const otzEnrollmentsByCounty = useSelector(otzEnrollmentAmongAlHivByCounty.getOtzEnrollmentAmongAlHivOnArtByCounty);
 
-    const loadOtzEnrollmentAmongAlhivOnArtByAge = useCallback(async () => {
+    const loadOtzEnrollmentAmongAlhivOnArtByCounty = useCallback(async () => {
         setEnrollmentAmongAlhivOnArtByCounty({
             chart: {
                 type: 'column'
@@ -44,8 +44,8 @@ const OtzEnrollmentAmongAlhivOnArtByCounty = () => {
     }, [otzEnrollmentsByCounty]);
 
     useEffect(() => {
-        loadOtzEnrollmentAmongAlhivOnArtByAge();
-    }, [loadOtzEnrollmentAmongAlhivOnArtByAge]);
+        loadOtzEnrollmentAmongAlhivOnArtByCounty();
+    }, [loadOtzEnrollmentAmongAlhivOnArtByCounty]);
 
     return (
         <Card className="trends-card">
