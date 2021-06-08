@@ -19,6 +19,7 @@ const NewOnArtHtsPositive = Loadable({ loader: () => import('./NewOnArtHtsPositi
 const NewOnArtOverview = Loadable({ loader: () => import('./NewOnArtOverview'), loading: Loading, delay: LOADING_DELAY });
 const NewOnArtTrends = Loadable({ loader: () => import('./NewOnArtTrends'), loading: Loading, delay: LOADING_DELAY });
 const TimeFromDiagnosisToArtStart = Loadable({ loader: () => import('./TimeFromDiagnosisToArtStart'), loading: Loading, delay: LOADING_DELAY });
+const MissingDiagnosisDateByFacility = Loadable({ loader: () => import('./MissingDiagnosisDateByFacility'), loading: Loading, delay: LOADING_DELAY });
 
 const NewOnArt = () => {
     const branding = { title: "NEWLY STARTED ON ART", description: "OVERVIEW", overview: "Newly Started on ART Information" };
@@ -81,6 +82,8 @@ const NewOnArt = () => {
             <TimeFromDiagnosisToArtStart />
             <SectionFooter overview={branding.overview}/>
             <NewOnArtHtsPositive />
+            <SectionFooter overview={branding.overview}/>
+            <MissingDiagnosisDateByFacility />
             <SectionFooter overview={branding.overview}/>
         </div>
     );

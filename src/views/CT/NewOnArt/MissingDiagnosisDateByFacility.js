@@ -3,25 +3,25 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader, Col, Row, Spinner } from 'reactstrap';
 import DataTable from 'react-data-table-component';
 import CsvDownloader from 'react-csv-downloader';
-import { getLinkageNumberNotLinkedByFacility } from '../../../selectors/HTS/Linkage/linkageNumberNotLinkedByFacility';
+import { getMissingDiagnosisDateByFacility } from '../../../selectors/CT/NewOnArt/missingDiagnosisDateByFacility';
 
-const LinkageNumberNotLinkedByFacility = () => {
-    const linkageNumberNotLinkedByFacility = useSelector(getLinkageNumberNotLinkedByFacility);
-    const loading = useSelector(state => state.linkageNumberNotLinkedByFacility.loading);
+const MissingDiagnosisDateByFacility = () => {
+    const missingDiagnosisDateByFacility = useSelector(getMissingDiagnosisDateByFacility);
+    const loading = useSelector(state => state.missingDiagnosisDateByFacility.loading);
     return (
         <>
             <Row>
                 <Col>
                     <Card className="trends-card">
                         <CardHeader className="trends-header">
-                            Number of Positive Patients who have not been linked - By Facility
+                            Number of Patients - Currently on ART - Missing HIV Diagnosis Date - By Facility
                             {
                                 loading === true ?
                                 <Spinner className="pull-right"/> :
                                 <CsvDownloader
-                                    filename="ndwh_positive_patients_not_linked_by_facility"
+                                    filename="ndwh_patients_missing_hiv_diagnosis_date_by_facility"
                                     separator=","
-                                    datas={linkageNumberNotLinkedByFacility}
+                                    datas={missingDiagnosisDateByFacility}
                                     className="pull-right"
                                 >
                                     <i className="bordered download icon inverted black"></i>
@@ -36,11 +36,9 @@ const LinkageNumberNotLinkedByFacility = () => {
                                     { name: 'County', selector: 'county', sortable: true },
                                     { name: 'Sub-County', selector: 'subCounty', sortable: true },
                                     { name: 'Partner', selector: 'partner', sortable: true },
-                                    { name: '# Positive', selector: 'positive', sortable: true },
-                                    { name: '# Linked', selector: 'linked', sortable: true },
-                                    { name: '# Not Linked', selector: 'notLinked', sortable: true },
+                                    { name: '# Patients', selector: 'patients', sortable: true },
                                 ]}
-                                data={linkageNumberNotLinkedByFacility}
+                                data={missingDiagnosisDateByFacility}
                                 noHeader
                                 dense
                                 defaultSortField="facility"
@@ -59,4 +57,4 @@ const LinkageNumberNotLinkedByFacility = () => {
     );
 };
 
-export default LinkageNumberNotLinkedByFacility;
+export default MissingDiagnosisDateByFacility;
