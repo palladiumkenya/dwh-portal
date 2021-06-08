@@ -1,11 +1,11 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
 
-const listUnfiltered = state => state.linkageNumberNotLinkedByFacility.listUnfiltered;
-const listFiltered = state => state.linkageNumberNotLinkedByFacility.listFiltered;
+const listUnfiltered = state => state.missingDiagnosisDateByFacility.listUnfiltered;
+const listFiltered = state => state.missingDiagnosisDateByFacility.listFiltered;
 const filtered = state => state.filters.filtered;
 
-export const getLinkageNumberNotLinkedByFacility = createSelector(
+export const getMissingDiagnosisDateByFacility = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
@@ -16,9 +16,7 @@ export const getLinkageNumberNotLinkedByFacility = createSelector(
                 county: l.county ? l.county : '',
                 subCounty: l.subCounty ? l.subCounty : '',
                 partner: l.partner ? l.partner : '',
-                positive: l.positive ? l.positive : '',
-                linked: l.linked ? l.linked : '',
-                notLinked: l.positive && l.linked ? parseInt(l.positive) - parseInt(l.linked) : '',
+                patients: l.patients ? l.patients : '',
             }))
             .value();
     }

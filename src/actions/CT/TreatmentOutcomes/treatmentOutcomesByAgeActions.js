@@ -30,7 +30,6 @@ export const fetchTreatmentOutcomesByAge = () => async (dispatch, getState) => {
         fromDate: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY-MM-DD") : null,
         toDate: getState().filters.toDate ? moment(getState().filters.toDate, "MMM YYYY").format("YYYY-MM-DD") : null,
     };
-    console.log(params)
     const response = await getAll('care-treatment/treatmentOutcomesByAge', params);
     dispatch({ type: actionTypes.CT_TREATMENT_OUTCOMES_BY_AGE_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };
