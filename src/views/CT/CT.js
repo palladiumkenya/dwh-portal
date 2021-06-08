@@ -30,6 +30,7 @@ import { loadMedianTimeToArtStartByYear } from '../../actions/CT/NewOnArt/median
 import { loadMedianTimeToArtStartByCounty } from '../../actions/CT/NewOnArt/medianTimeToArtStartByCountyActions';
 import { loadMedianTimeToArtStartByPartner } from '../../actions/CT/NewOnArt/medianTimeToArtStartByPartnerActions';
 import { loadTimeFromDiagnosisToArtStart } from '../../actions/CT/NewOnArt/timeFromDiagnosisToArtStartActions';
+import { loadMissingDiagnosisDateByFacility } from '../../actions/CT/NewOnArt/missingDiagnosisDateByFacilityActions';
 
 import { loadCurrentOnArtOverview } from '../../actions/CT/CurrentOnArt/currentOnArtOverviewActions';
 import { loadCurrentOnArtByAgeSex } from '../../actions/CT/CurrentOnArt/currentOnArtByAgeSexActions';
@@ -232,6 +233,7 @@ const CT = () => {
                 dispatch(loadMedianTimeToArtStartByCounty());
                 dispatch(loadMedianTimeToArtStartByPartner());
                 dispatch(loadTimeFromDiagnosisToArtStart());
+                dispatch(loadMissingDiagnosisDateByFacility());
                 break;
             case 'txCurr':
                 dispatch(loadCurrentOnArtOverview());

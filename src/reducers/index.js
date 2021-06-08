@@ -21,6 +21,7 @@ import medianTimeToArtStartByYear from "./CT/NewOnArt/medianTimeToArtStartByYear
 import medianTimeToArtStartByCounty from "./CT/NewOnArt/medianTimeToArtStartByCounty";
 import medianTimeToArtStartByPartner from "./CT/NewOnArt/medianTimeToArtStartByPartner";
 import timeFromDiagnosisToArtStart from "./CT/NewOnArt/timeFromDiagnosisToArtStart";
+import missingDiagnosisDateByFacility from "./CT/NewOnArt/missingDiagnosisDateByFacility";
 
 import currentOnArtOverview from "./CT/CurrentOnArt/currentOnArtOverview";
 import currentOnArtByAgeSex from "./CT/CurrentOnArt/currentOnArtByAgeSex";
@@ -174,6 +175,7 @@ export default combineReducers({
     medianTimeToArtStartByCounty,
     medianTimeToArtStartByPartner,
     timeFromDiagnosisToArtStart,
+    missingDiagnosisDateByFacility,
 
     currentOnArtOverview,
     currentOnArtByAgeSex,

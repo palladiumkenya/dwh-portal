@@ -10,10 +10,10 @@ const initialState = {
 export default (state = initialState, action) => {
     let newState = { ...state };
     switch (action.type) {
-        case actionTypes.CT_TREATMENT_OUTCOMES_UNDOCUMENTED_BY_FACILITY_REQUEST:
+        case actionTypes.CT_MISSING_DIAGNOSIS_DATE_BY_FACILITY_REQUEST:
             newState.loading = true;
             return newState;
-        case actionTypes.CT_TREATMENT_OUTCOMES_UNDOCUMENTED_BY_FACILITY_FETCH:
+        case actionTypes.CT_MISSING_DIAGNOSIS_DATE_BY_FACILITY_FETCH:
             if (action.payload.filtered === true) {
                 newState.listFiltered = action.payload.list;
             } else {
@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
             }
             newState.loading = false;
             return newState;
-        case actionTypes.CT_TREATMENT_OUTCOMES_UNDOCUMENTED_BY_FACILITY_REQUEST_FAILED:
+        case actionTypes.CT_MISSING_DIAGNOSIS_DATE_BY_FACILITY_REQUEST_FAILED:
             newState.loading = false;
             return newState;
         default:
