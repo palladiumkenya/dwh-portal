@@ -141,6 +141,7 @@ import { loadOvcServDistributionByCounty } from '../../actions/CT/OVC/ovcServDis
 import { loadOvcClientsExitReasons } from '../../actions/CT/OVC/ovcClientsExitReasonsActions';
 import { loadOvcViralSuppressionAmongOvcPatientsOverall } from '../../actions/CT/OVC/ovcViralSuppressionAmongOvcPatientsOverallActions';
 import { loadOvcViralSuppressionAmongOvcPatientsByGender } from '../../actions/CT/OVC/ovcViralSuppressionAmongOvcPatientsByGenderActions';
+import { loadTreatmentOutcomesNetCohort } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesNetCohortActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -329,6 +330,7 @@ const CT = () => {
                 dispatch(loadTwelveMonthRetention());
                 dispatch(loadTwentyFourMonthRetention());
                 dispatch(loadTreatmentOutcomesUndocumentedByFacility());
+                dispatch(loadTreatmentOutcomesNetCohort());
                 break;
             case 'otz':
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtBySex());

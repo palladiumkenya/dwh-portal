@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import Highcharts from 'highcharts';
+import * as treatmentOutcomesByAgeSelectors from '../../../selectors/CT/TreatmentOutcomes/treatmentOutcomesByAge';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
-import * as treatmentOutcomesByAgeSelectors from '../../../selectors/CT/TreatmentOutcomes/treatmentOutcomesByAge';
+import Highcharts from 'highcharts';
 
-const TreatmentOutcomesByAge = () => {
+const TreatmentOutcomesRetentionByAge = () => {
     const [treatmentOutcomesByAge, setTreatmentOutcomesByAge] = useState({});
     const treatmentOutcomesByAgeData = useSelector(treatmentOutcomesByAgeSelectors.getTreatmentOutcomesByAge);
 
@@ -21,8 +21,6 @@ const TreatmentOutcomesByAge = () => {
                 { name: 'DEAD', data: treatmentOutcomesByAgeData.data[1], type: 'column', color: "#E15759", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
                 { name: 'LTFU', data: treatmentOutcomesByAgeData.data[2], type: 'column', color: "#F28E2B", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
                 { name: 'ACTIVE', data: treatmentOutcomesByAgeData.data[0], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'STOPPED ART', data: treatmentOutcomesByAgeData.data[3], type: 'column', color: "#FDC538", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'TRANSFER OUT', data: treatmentOutcomesByAgeData.data[4], type: 'column', color: "#142459", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [treatmentOutcomesByAgeData]);
@@ -52,4 +50,4 @@ const TreatmentOutcomesByAge = () => {
     );
 };
 
-export default TreatmentOutcomesByAge;
+export default TreatmentOutcomesRetentionByAge;
