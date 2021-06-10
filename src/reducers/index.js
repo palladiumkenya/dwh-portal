@@ -151,6 +151,7 @@ import ovcServDistributionByPartner from './CT/OVC/ovcServDistributionByPartner'
 import ovcClientsExitReasons from './CT/OVC/ovcClientsExitReasons';
 import ovcViralSuppressionAmongOvcPatientsOverall from './CT/OVC/ovcViralSuppressionAmongOvcPatientsOverall';
 import ovcViralSuppressionAmongOvcPatientsByGender from './CT/OVC/ovcViralSuppressionAmongOvcPatientsByGender';
+import treatmentOutcomesNetCohort from './CT/TreatmentOutcomes/treatmentOutcomesNetCohort';
 
 export default combineReducers({
     auth: authReducer,
@@ -252,6 +253,7 @@ export default combineReducers({
     twelveMonthRetention,
     twentyFourMonthRetention,
     treatmentOutcomesUndocumentedByFacility,
+    treatmentOutcomesNetCohort,
 
     practitionersCountByCountyQualification,
     populationByCounty,
