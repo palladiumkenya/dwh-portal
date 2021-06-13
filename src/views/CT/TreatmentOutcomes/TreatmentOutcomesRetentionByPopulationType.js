@@ -5,13 +5,11 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import * as treatmentOutcomesByPopulationTypeSelectors from '../../../selectors/CT/TreatmentOutcomes/treatmentOutcomesByPopulationType';
 
-const TreatmentOutcomesByPopulationType = () => {
+const TreatmentOutcomesRetentionByPopulationType = () => {
     const [treatmentOutcomesByPopulationType, setTreatmentOutcomesByPopulationType] = useState({});
     const activeByPopulationType = useSelector(treatmentOutcomesByPopulationTypeSelectors.getActiveByPopulationType);
     const deadByPopulationType = useSelector(treatmentOutcomesByPopulationTypeSelectors.getDeadByPopulationType);
     const ltfuByPopulationType = useSelector(treatmentOutcomesByPopulationTypeSelectors.getLtfuByPopulationType);
-    const stoppedByPopulationType = useSelector(treatmentOutcomesByPopulationTypeSelectors.getStoppedByPopulationType);
-    const transferOutByPopulationType = useSelector(treatmentOutcomesByPopulationTypeSelectors.getTransferOutByPopulationType);
 
     const loadTreatmentOutcomesByPopulationType = useCallback(async () => {
         setTreatmentOutcomesByPopulationType({
@@ -23,13 +21,11 @@ const TreatmentOutcomesByPopulationType = () => {
             legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'DEAD', data: deadByPopulationType, type: 'column', color: "#E15759", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'TRANSFER OUT', data: transferOutByPopulationType, type: 'column', color: "#142459", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
                 { name: 'LTFU', data: ltfuByPopulationType, type: 'column', color: "#F28E2B", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'STOPPED ART', data: stoppedByPopulationType, type: 'column', color: "#FDC538", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
                 { name: 'ACTIVE', data: activeByPopulationType, type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
-    }, [activeByPopulationType, deadByPopulationType, ltfuByPopulationType, stoppedByPopulationType, transferOutByPopulationType]);
+    }, [activeByPopulationType, deadByPopulationType, ltfuByPopulationType]);
 
     useEffect(() => {
         loadTreatmentOutcomesByPopulationType();
@@ -56,4 +52,4 @@ const TreatmentOutcomesByPopulationType = () => {
     );
 };
 
-export default TreatmentOutcomesByPopulationType;
+export default TreatmentOutcomesRetentionByPopulationType;
