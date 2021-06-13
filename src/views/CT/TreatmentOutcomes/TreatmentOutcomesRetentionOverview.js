@@ -48,8 +48,6 @@ const TreatmentOutcomesRetentionOverview = () => {
                         data={formatNumber(ltfu)}
                     />
                 </Col>
-            </Row>
-            <Row>
                 <Col className={"col-3"}>
                     <DataCard
                         title="DEAD"
