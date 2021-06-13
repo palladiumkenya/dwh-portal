@@ -19,10 +19,10 @@ const TreatmentOutcomesByAge = () => {
             legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'DEAD', data: treatmentOutcomesByAgeData.data[1], type: 'column', color: "#E15759", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'LTFU', data: treatmentOutcomesByAgeData.data[2], type: 'column', color: "#F28E2B", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'ACTIVE', data: treatmentOutcomesByAgeData.data[0], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'STOPPED ART', data: treatmentOutcomesByAgeData.data[3], type: 'column', color: "#FDC538", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
                 { name: 'TRANSFER OUT', data: treatmentOutcomesByAgeData.data[4], type: 'column', color: "#142459", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'LTFU', data: treatmentOutcomesByAgeData.data[2], type: 'column', color: "#F28E2B", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'STOPPED ART', data: treatmentOutcomesByAgeData.data[3], type: 'column', color: "#FDC538", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'ACTIVE', data: treatmentOutcomesByAgeData.data[0], type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [treatmentOutcomesByAgeData]);
