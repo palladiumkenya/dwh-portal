@@ -27,21 +27,21 @@ const TreatmentOutcomesRetentionOverview = () => {
     return (
         <>
             <Row>
-                <Col>
+                <Col className={"col-3"}>
                     <DataCard
                         title="NET COHORT"
                         subtitle={null}
                         data={formatNumber(netCohort)}
                     />
                 </Col>
-                <Col>
+                <Col className={"col-3"}>
                     <DataCard
                         title="CURRENT ON ART"
                         subtitle={roundNumber(activePercent) + "%"}
                         data={formatNumber(active)}
                     />
                 </Col>
-                <Col>
+                <Col className={"col-3"}>
                     <DataCard
                         title="LOST TO FOLLOW UP"
                         subtitle={roundNumber(ltfuPercent) + "%"}

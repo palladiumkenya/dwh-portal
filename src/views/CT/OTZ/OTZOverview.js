@@ -6,6 +6,7 @@ import * as otzTotalAdolescentsSelector from '../../../selectors/CT/OTZ/otzTotal
 import * as otzEnrolledSelector from '../../../selectors/CT/OTZ/otzEnrolled';
 import * as otzTotalWithVlResultsSelector from '../../../selectors/CT/OTZ/otzTotalWithVlResults';
 import * as otzTotalWithWithResultsLessThan1000Selector from '../../../selectors/CT/OTZ/otzTotalWithWithResultsLessThan1000';
+import { formatNumber } from '../../../utils/utils';
 
 const OTZOverview = () => {
     const [otzTotalAdolescents, setOtzTotalAdolescents] = useState({});
@@ -33,16 +34,16 @@ const OTZOverview = () => {
     return (
         <Row>
             <Col>
-                <DataCardOTZ title={"TOTAL ADOLESCENTS"} body={otzTotalAdolescents.otzTotalAdolescents} subtitle={""} percent={null}  />
+                <DataCardOTZ title={"TOTAL ADOLESCENTS"} body={formatNumber(otzTotalAdolescents.otzTotalAdolescents)} subtitle={""} percent={null}  />
             </Col>
             <Col>
-                <DataCardOTZ title={"ENROLLED ON OTZ"} body={otzTotalAdolescents.enrolledInOTZ} subtitle={""} percent={(otzTotalAdolescents.enrolledInOTZPerc ? otzTotalAdolescents.enrolledInOTZPerc.toFixed(1) : 0) + "%"} />
+                <DataCardOTZ title={"ENROLLED ON OTZ"} body={formatNumber(otzTotalAdolescents.enrolledInOTZ)} subtitle={""} percent={(otzTotalAdolescents.enrolledInOTZPerc ? otzTotalAdolescents.enrolledInOTZPerc.toFixed(1) : 0) + "%"} />
             </Col>
             <Col>
-                <DataCardOTZ title={"TOTAL WITH VL RESULTS"} body={otzTotalAdolescents.totalWithVlResults} subtitle={""} percent={(otzTotalAdolescents.totalWithVlResultsPerc ? otzTotalAdolescents.totalWithVlResultsPerc.toFixed(1) : 0) + "%"} />
+                <DataCardOTZ title={"TOTAL WITH VL RESULTS"} body={formatNumber(otzTotalAdolescents.totalWithVlResults)} subtitle={""} percent={(otzTotalAdolescents.totalWithVlResultsPerc ? otzTotalAdolescents.totalWithVlResultsPerc.toFixed(1) : 0) + "%"} />
             </Col>
             <Col>
-                <DataCardOTZ title={"TOTAL WITH VL<1000"} body={otzTotalAdolescents.totalWithVlLessThan1000} subtitle={""} percent={(otzTotalAdolescents.totalWithVlLessThan1000Perc ? otzTotalAdolescents.totalWithVlLessThan1000Perc.toFixed(1) : 0) + "%"} />
+                <DataCardOTZ title={"TOTAL WITH VL<1000"} body={formatNumber(otzTotalAdolescents.totalWithVlLessThan1000)} subtitle={""} percent={(otzTotalAdolescents.totalWithVlLessThan1000Perc ? otzTotalAdolescents.totalWithVlLessThan1000Perc.toFixed(1) : 0) + "%"} />
             </Col>
         </Row>
     );
