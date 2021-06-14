@@ -4,6 +4,7 @@ import DataCardOTZ from '../../Shared/DataCardOTZ';
 import { useSelector } from 'react-redux';
 import * as ovcOverallServSelector from '../../../selectors/CT/OVC/ovcOverallServ';
 import * as ovcServByGenderSelector from '../../../selectors/CT/OVC/ovcServByGender';
+import { formatNumber } from '../../../utils/utils';
 
 
 const OVCOverview = () => {
@@ -29,13 +30,13 @@ const OVCOverview = () => {
     return (
         <Row>
             <Col className={"col-4"}>
-                <DataCardOTZ title={"OVERALL OVC_SERV"} body={ovcOverallServ.ovcOverallServ} subtitle={""} percent={null} />
+                <DataCardOTZ title={"OVERALL OVC_SERV"} body={formatNumber(ovcOverallServ.ovcOverallServ)} subtitle={""} percent={null} />
             </Col>
             <Col className={"col-4"}>
-                <DataCardOTZ title={"FEMALE OVC_SERV"} body={ovcOverallServ.femaleServ} subtitle={""} percent={null} />
+                <DataCardOTZ title={"FEMALE OVC_SERV"} body={formatNumber(ovcOverallServ.femaleServ)} subtitle={""} percent={null} />
             </Col>
             <Col className={"col-4"}>
-                <DataCardOTZ title={"MALE OVC_SERV"} body={ovcOverallServ.maleServ} subtitle={""} percent={null} />
+                <DataCardOTZ title={"MALE OVC_SERV"} body={formatNumber(ovcOverallServ.maleServ)} subtitle={""} percent={null} />
             </Col>
         </Row>
     );
