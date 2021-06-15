@@ -92,7 +92,7 @@ const TreatmentOutcomes = () => {
                                     All outcomes are computed for patients who started ART within the period selected (Default is last 12 months). The Outcomes are computed and displayed for the last completed month
                                     <ol>
                                         <li>
-                                            Current on ART =&gt; Number of adults and children currently receiving ART including those who have missed their appointment and 30 days have not passed since the last missed appointment. Assumptions on this computation can be found under Current on ART tab.
+                                            Current on ART =&gt; Number of patients whose documented ART start date is within the period selected (Default is last 12 months).
                                         </li>
                                         <li>
                                             Lost to Follow Up =&gt; A lost to follow up (LTFU) is a patient Started on ART who did not honor their last drug pick-up appointment and at least 30 days had elapsed since the last missed drug pick-up.
@@ -167,6 +167,9 @@ const TreatmentOutcomes = () => {
                         <CardBody>
                             <ul>
                                 <li>Net Cohort =&gt; Number of patients whose documented ART start date is within the period selected (Default is last 12 months). This computed as "Started on ART" less "Stopped ART" and "Transfer Out"</li>
+                                <li>
+                                    All outcomes are computed for patients who started ART within the period selected (Default is last 12 months). The Outcomes are computed and displayed for the last completed month
+                                </li>
                                 <li>
                                     Current on ART =&gt; Number of adults and children currently receiving ART including those who have missed their appointment and 30 days have not passed since the last missed appointment. Assumptions on this computation can be found under Current on ART tab.
                                 </li>
