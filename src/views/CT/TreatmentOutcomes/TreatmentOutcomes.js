@@ -159,6 +159,11 @@ const TreatmentOutcomes = () => {
                                     </strong>
                                 </span>
                             </p>
+                            <p>
+                                <span style={{ fontSize: '1.2em'}}>
+                                    Outcomes are as at <strong>{ moment().startOf('month').subtract(1, 'month').format('MMM YYYY') }</strong>
+                                </span>
+                            </p>
                         </CardBody>
                     </Card>
 
