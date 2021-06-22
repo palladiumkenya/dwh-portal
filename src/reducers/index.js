@@ -152,6 +152,7 @@ import ovcClientsExitReasons from './CT/OVC/ovcClientsExitReasons';
 import ovcViralSuppressionAmongOvcPatientsOverall from './CT/OVC/ovcViralSuppressionAmongOvcPatientsOverall';
 import ovcViralSuppressionAmongOvcPatientsByGender from './CT/OVC/ovcViralSuppressionAmongOvcPatientsByGender';
 import treatmentOutcomesNetCohort from './CT/TreatmentOutcomes/treatmentOutcomesNetCohort';
+import otzEnrollmentAdolescentsByAgeGroup from './CT/OTZ/otzEnrollmentAdolescentsByAgeGroup';
 
 export default combineReducers({
     auth: authReducer,
@@ -288,6 +289,7 @@ export default combineReducers({
     otzEnrolled,
     otzTotalWithVlResults,
     otzTotalWithWithResultsLessThan1000,
+    otzEnrollmentAdolescentsByAgeGroup,
 
     ovcOverallServ,
     ovcServByGender,

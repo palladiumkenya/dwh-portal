@@ -142,6 +142,7 @@ import { loadOvcClientsExitReasons } from '../../actions/CT/OVC/ovcClientsExitRe
 import { loadOvcViralSuppressionAmongOvcPatientsOverall } from '../../actions/CT/OVC/ovcViralSuppressionAmongOvcPatientsOverallActions';
 import { loadOvcViralSuppressionAmongOvcPatientsByGender } from '../../actions/CT/OVC/ovcViralSuppressionAmongOvcPatientsByGenderActions';
 import { loadTreatmentOutcomesNetCohort } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesNetCohortActions';
+import { loadOtzEnrolledAdolescentsByAgeGroup } from '../../actions/CT/OTZ/otzEnrolledAdolescentsByAgeGroupActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -355,6 +356,7 @@ const CT = () => {
                 dispatch(loadOtzEnrolled());
                 dispatch(loadOtzTotalWithVLResults());
                 dispatch(loadOtzTotalWithVLResultsLessThan1000());
+                dispatch(loadOtzEnrolledAdolescentsByAgeGroup());
                 break;
             case 'ovc':
                 dispatch(loadOvcOverallServ());
