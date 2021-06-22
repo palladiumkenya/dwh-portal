@@ -87,7 +87,7 @@ const TreatmentOutcomes = () => {
                         <CardHeader>Indicator Definition</CardHeader>
                         <CardBody>
                             <ul>
-                                <li>Started on ART =&gt; Number of patients whose documented ART start date is within the last 12 months.</li>
+                                <li>Started on ART =&gt; Number of patients whose documented ART start date is within the period selected (Default is last 12 months).</li>
                                 <li>
                                     All outcomes are computed for patients who started ART within the period selected (Default is last 12 months). The Outcomes are computed and displayed for the last completed month
                                     <ol>
@@ -208,6 +208,39 @@ const TreatmentOutcomes = () => {
                     <SectionFooter overview={branding.overview}/>
                     <TreatmentOutcomesRetentionByPartner />
                     <SectionFooter overview={branding.overview}/>
+                    <Card>
+                        <CardBody style={{ textAlign: 'center'}}>
+                            <p>
+                                <span style={{ fontSize: '1.2em'}}>
+                                    <strong>RETENTION BY YEAR OF ART START</strong>
+                                </span>
+                            </p>
+                        </CardBody>
+                    </Card>
+
+                    <Card>
+                        <CardHeader>Indicator Definitions</CardHeader>
+                        <CardBody>
+                            <ul>
+                                <li>
+                                    Started on ART => Number of patients whose documented ART start date is in the specified year.
+                                </li>
+                                <li>
+                                    Net Cohort =>Number of patients whose documented ART start date is in the specified year. This computed as "Started on ART" less "Stopped ART" and "Transfer Out"
+                                </li>
+                                <li>
+                                    Retention Outcomes are computed as at a point in time (e.g. 3/6/12/18 months after ART Start) for patients who started ART in the specified Year
+                                </li>
+                                <li>
+                                    Active and Retained => Number of adults and children who were receiving ART at a point in time(e.g. 3/6/12/18 months after ART Start) including those who have missed their appointment and 30 days had not passed since the last missed appointment.
+                                </li>
+                                <li>
+                                    Retention = Active and Retained / Net Cohort
+                                    e.g. 3 Month Retention = Active and Retained at 3 months / Net Cohort at 3 months
+                                </li>
+                            </ul>
+                        </CardBody>
+                    </Card>
                     <ThreeMonthRetention />
                     <SectionFooter overview={branding.overview}/>}
                     <SixMonthRetention />

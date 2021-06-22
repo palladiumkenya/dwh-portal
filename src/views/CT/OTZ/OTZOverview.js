@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Col, Row } from 'reactstrap';
-import DataCardOTZ from '../../Shared/DataCardOTZ';
 import { useSelector } from 'react-redux';
 import * as otzTotalAdolescentsSelector from '../../../selectors/CT/OTZ/otzTotalAdolescents';
 import * as otzEnrolledSelector from '../../../selectors/CT/OTZ/otzEnrolled';
 import * as otzTotalWithVlResultsSelector from '../../../selectors/CT/OTZ/otzTotalWithVlResults';
 import * as otzTotalWithWithResultsLessThan1000Selector from '../../../selectors/CT/OTZ/otzTotalWithWithResultsLessThan1000';
-import { formatNumber } from '../../../utils/utils';
+import { formatNumber, roundNumber } from '../../../utils/utils';
+import DataCard from '../../Shared/DataCard';
+import moment from 'moment';
 
 const OTZOverview = () => {
     const [otzTotalAdolescents, setOtzTotalAdolescents] = useState({});
@@ -14,6 +15,7 @@ const OTZOverview = () => {
     const otzEnrolled = useSelector(otzEnrolledSelector.getOtzEnrolled);
     const otzTotalWithVlResults = useSelector(otzTotalWithVlResultsSelector.getOtzTotalWithVlResults);
     const otzTotalWithVlResultsLessThan1000 = useSelector(otzTotalWithWithResultsLessThan1000Selector.getOtzTotalWithVlResultsLessThan1000);
+    const currentOnArtText = "ADOLESCENTS CURRENT ON ART as at " + moment().startOf('month').subtract(1, 'month').format('MMM YYYY');
 
     const loadOtzTotalAdolescents = useCallback(async () => {
         setOtzTotalAdolescents({
@@ -34,16 +36,32 @@ const OTZOverview = () => {
     return (
         <Row>
             <Col>
-                <DataCardOTZ title={"TOTAL ADOLESCENTS"} body={formatNumber(otzTotalAdolescents.otzTotalAdolescents)} subtitle={""} percent={null}  />
+                <DataCard
+                    title={currentOnArtText}
+                    subtitle={null}
+                    data={formatNumber(otzTotalAdolescents.otzTotalAdolescents)}
+                />
             </Col>
             <Col>
-                <DataCardOTZ title={"ENROLLED ON OTZ"} body={formatNumber(otzTotalAdolescents.enrolledInOTZ)} subtitle={""} percent={(otzTotalAdolescents.enrolledInOTZPerc ? otzTotalAdolescents.enrolledInOTZPerc.toFixed(1) : 0) + "%"} />
+                <DataCard
+                    title="ENROLLED ON OTZ"
+                    subtitle={roundNumber(otzTotalAdolescents.enrolledInOTZPerc) + "%"}
+                    data={formatNumber(otzTotalAdolescents.enrolledInOTZ)}
+                />
             </Col>
             <Col>
-                <DataCardOTZ title={"TOTAL WITH VL RESULTS"} body={formatNumber(otzTotalAdolescents.totalWithVlResults)} subtitle={""} percent={(otzTotalAdolescents.totalWithVlResultsPerc ? otzTotalAdolescents.totalWithVlResultsPerc.toFixed(1) : 0) + "%"} />
+                <DataCard
+                    title="ADOLESCENTS ON OTZ WITH VALID VL"
+                    subtitle={roundNumber(otzTotalAdolescents.totalWithVlResultsPerc) + "%"}
+                    data={formatNumber(otzTotalAdolescents.totalWithVlResults)}
+                />
             </Col>
             <Col>
-                <DataCardOTZ title={"TOTAL WITH VL<1000"} body={formatNumber(otzTotalAdolescents.totalWithVlLessThan1000)} subtitle={""} percent={(otzTotalAdolescents.totalWithVlLessThan1000Perc ? otzTotalAdolescents.totalWithVlLessThan1000Perc.toFixed(1) : 0) + "%"} />
+                <DataCard
+                    title="ADOLESCENTS ON OTZ VIRALLY SUPPRESSED"
+                    subtitle={roundNumber(otzTotalAdolescents.totalWithVlLessThan1000Perc) + "%"}
+                    data={formatNumber(otzTotalAdolescents.totalWithVlLessThan1000)}
+                />
             </Col>
         </Row>
     );

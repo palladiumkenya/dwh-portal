@@ -1,0 +1,36 @@
+import * as actionTypes from "../../../actions/types";
+import {
+    CT_OTZ_ENROLLED_ADOLESCENTS_BY_AGE_GROUP_FAILED,
+    CT_OTZ_ENROLLED_ADOLESCENTS_BY_AGE_GROUP_FETCH,
+    CT_OTZ_ENROLLED_ADOLESCENTS_BY_AGE_GROUP_REQUEST
+} from '../../../actions/types';
+
+const initialState = {
+    lastFetch: null,
+    loading: false,
+    listUnfiltered: [],
+    listFiltered: [],
+};
+
+export default (state = initialState, action) => {
+    let newState = { ...state };
+    switch (action.type) {
+        case actionTypes.CT_OTZ_ENROLLED_ADOLESCENTS_BY_AGE_GROUP_REQUEST:
+            newState.loading = true;
+            return newState;
+        case actionTypes.CT_OTZ_ENROLLED_ADOLESCENTS_BY_AGE_GROUP_FETCH:
+            if (action.payload.filtered === true) {
+                newState.listFiltered = action.payload.list;
+            } else {
+                newState.listUnfiltered = action.payload.list;
+                newState.lastFetch = Date.now();
+            }
+            newState.loading = false;
+            return newState;
+        case actionTypes.CT_OTZ_ENROLLED_ADOLESCENTS_BY_AGE_GROUP_FAILED:
+            newState.loading = false;
+            return newState;
+        default:
+            return state;
+    }
+}
