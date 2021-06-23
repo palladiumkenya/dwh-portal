@@ -143,6 +143,8 @@ import { loadOvcViralSuppressionAmongOvcPatientsOverall } from '../../actions/CT
 import { loadOvcViralSuppressionAmongOvcPatientsByGender } from '../../actions/CT/OVC/ovcViralSuppressionAmongOvcPatientsByGenderActions';
 import { loadTreatmentOutcomesNetCohort } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesNetCohortActions';
 import { loadOtzEnrolledAdolescentsByAgeGroup } from '../../actions/CT/OTZ/otzEnrolledAdolescentsByAgeGroupActions';
+import { loadOtzEnrolledAdolescentsByCounty } from '../../actions/CT/OTZ/OtzEnrolledAdolescentsByCountyActions';
+import { loadOtzEnrolledAdolescentsByPartner } from '../../actions/CT/OTZ/OtzEnrolledAdolescentsByPartnerActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -357,6 +359,8 @@ const CT = () => {
                 dispatch(loadOtzTotalWithVLResults());
                 dispatch(loadOtzTotalWithVLResultsLessThan1000());
                 dispatch(loadOtzEnrolledAdolescentsByAgeGroup());
+                dispatch(loadOtzEnrolledAdolescentsByCounty());
+                dispatch(loadOtzEnrolledAdolescentsByPartner());
                 break;
             case 'ovc':
                 dispatch(loadOvcOverallServ());
