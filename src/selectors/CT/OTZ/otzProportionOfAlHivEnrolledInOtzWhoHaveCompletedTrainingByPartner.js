@@ -12,8 +12,6 @@ export const getProportionOfAlhivEnrolledInOtzWhoHaveCompletedTrainingByPartner 
         let list = filtered ? listFiltered : listUnfiltered;
         let listPartner = filtered ? listFilteredPartner : listUnfilteredPartner;
 
-        console.log(listPartner);
-
         const ArrayList = [];
         for (const listElement of list) {
             let percent = 0;
