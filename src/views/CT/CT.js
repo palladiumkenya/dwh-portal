@@ -145,6 +145,7 @@ import { loadTreatmentOutcomesNetCohort } from '../../actions/CT/TreatmentOutcom
 import { loadOtzEnrolledAdolescentsByAgeGroup } from '../../actions/CT/OTZ/otzEnrolledAdolescentsByAgeGroupActions';
 import { loadOtzEnrolledAdolescentsByCounty } from '../../actions/CT/OTZ/OtzEnrolledAdolescentsByCountyActions';
 import { loadOtzEnrolledAdolescentsByPartner } from '../../actions/CT/OTZ/OtzEnrolledAdolescentsByPartnerActions';
+import { loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingBySex } from '../../actions/CT/OTZ/OtzProportionOfAlHivWhoHaveCompletedOtzTrainingBySexActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -361,6 +362,7 @@ const CT = () => {
                 dispatch(loadOtzEnrolledAdolescentsByAgeGroup());
                 dispatch(loadOtzEnrolledAdolescentsByCounty());
                 dispatch(loadOtzEnrolledAdolescentsByPartner());
+                dispatch(loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingBySex());
                 break;
             case 'ovc':
                 dispatch(loadOvcOverallServ());
