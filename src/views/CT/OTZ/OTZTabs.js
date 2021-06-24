@@ -24,6 +24,8 @@ const OtzOutcomesByAgeGroup = Loadable({ loader: () => import('./OtzOutcomesByAg
 const OtzOutcomesByYearOfArtStart = Loadable({ loader: () => import('./OtzOutcomesByYearOfArtStart'), loading: Loading, delay: LOADING_DELAY });
 const OtzOutcomesByCounty = Loadable({ loader: () => import('./OtzOutcomesByCounty'), loading: Loading, delay: LOADING_DELAY });
 const OtzOutcomesByPartner = Loadable({ loader: () => import('./OtzOutcomesByPartner'), loading: Loading, delay: LOADING_DELAY });
+const OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingMales = Loadable({ loader: () => import('./OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingMales'), loading: Loading, delay: LOADING_DELAY });
+const OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingFemales = Loadable({ loader: () => import('./OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingFemales'), loading: Loading, delay: LOADING_DELAY });
 
 const OTZTabs = () => {
     const [activeTab, setActiveTab] = useState('otz_enrollment');
@@ -77,8 +79,14 @@ const OTZTabs = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col className={"col-6"}>
+                        <Col className={"col-4"}>
                             <OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTraining />
+                        </Col>
+                        <Col className={"col-4"}>
+                            <OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingMales />
+                        </Col>
+                        <Col className={"col-4"}>
+                            <OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingFemales />
                         </Col>
                     </Row>
                     <Row>
