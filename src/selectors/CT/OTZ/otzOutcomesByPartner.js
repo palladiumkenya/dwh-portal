@@ -10,7 +10,7 @@ export const getOtzOutcomesByPartner = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         let catPartners = list.map(obj => obj.partner);
         catPartners = [...new Set(catPartners)];
-        const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care'];
+        const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care', 'Active'];
         const ArrayValOptOut = [];
         const ArrayValLostToFollowUp = [];
         const ArrayValDead = [];

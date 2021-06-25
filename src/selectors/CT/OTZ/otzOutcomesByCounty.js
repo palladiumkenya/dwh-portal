@@ -10,7 +10,7 @@ export const getOtzOutcomesByCounty = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         let catCounties = list.map(obj => obj.County);
         catCounties = [...new Set(catCounties)];
-        const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care'];
+        const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care', 'Active'];
         const ArrayValOptOut = [];
         const ArrayValLostToFollowUp = [];
         const ArrayValDead = [];
