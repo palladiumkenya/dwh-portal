@@ -49,6 +49,11 @@ const OtzOutcomesByCounty = () => {
                 color: '#142459',
                 data: outcomesCounty.ArrayValTransitionToAdultCare,
                 tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
+            }, {
+                name: 'ACTIVE',
+                color: '#AA46BE',
+                data: outcomesCounty.ArrayValActive,
+                tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
             }]
         });
     },[outcomesCounty]);

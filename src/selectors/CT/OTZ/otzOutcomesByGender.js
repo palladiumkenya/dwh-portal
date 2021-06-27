@@ -14,6 +14,7 @@ export const getOtzOutcomesByGender = createSelector(
         const ArrayValDead = [];
         const ArrayValTransferOut = [];
         const ArrayValTransitionToAdultCare = [];
+        const ArrayValActive = [];
         for (const category of categories) {
             const catFilterMale = list.filter(obj => obj.Outcome.toUpperCase() === category.toUpperCase() && obj.Gender === 'Male');
             const catFilterFeMale = list.filter(obj => obj.Outcome.toUpperCase() === category.toUpperCase() && obj.Gender === 'Female');
@@ -147,9 +148,35 @@ export const getOtzOutcomesByGender = createSelector(
                     });
                 }
             }
+
+            if (category === 'Active') {
+                if (catFilterMale.length > 0) {
+                    ArrayValActive.push({
+                        category,
+                        y: catFilterMale[0].outcomesByGender,
+                    });
+                } else {
+                    ArrayValActive.push({
+                        category,
+                        y: 0,
+                    });
+                }
+
+                if (catFilterFeMale.length > 0) {
+                    ArrayValActive.push({
+                        category,
+                        y: catFilterFeMale[0].outcomesByGender,
+                    });
+                } else {
+                    ArrayValActive.push({
+                        category,
+                        y: 0,
+                    });
+                }
+            }
         }
 
-        return { ArrayValOptOut, ArrayValLostToFollowUp, ArrayValDead, ArrayValTransferOut, ArrayValTransitionToAdultCare };
+        return { ArrayValOptOut, ArrayValLostToFollowUp, ArrayValDead, ArrayValTransferOut, ArrayValTransitionToAdultCare, ArrayValActive };
     }
 );
 
