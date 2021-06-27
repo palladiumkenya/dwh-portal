@@ -147,6 +147,10 @@ import { loadOtzEnrolledAdolescentsByCounty } from '../../actions/CT/OTZ/OtzEnro
 import { loadOtzEnrolledAdolescentsByPartner } from '../../actions/CT/OTZ/OtzEnrolledAdolescentsByPartnerActions';
 import { loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingBySex } from '../../actions/CT/OTZ/OtzProportionOfAlHivWhoHaveCompletedOtzTrainingBySexActions';
 import { loadOtzOutcomesByAgeGroup } from '../../actions/CT/OTZ/OtzOutcomesByAgeGroupActions';
+import { loadOtzVlSuppressionBySex } from '../../actions/CT/OTZ/OtzVlSuppressionBySexActions';
+import { loadOtzVlSuppressionByAge } from '../../actions/CT/OTZ/OtzVlSuppressionByAgeActions';
+import { loadOtzVlSuppressionByCounty } from '../../actions/CT/OTZ/OtzVlSuppressionByCountyActions';
+import { loadOtzVlSuppressionByPartner } from '../../actions/CT/OTZ/OtzVlSuppressionByPartnerActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -365,6 +369,10 @@ const CT = () => {
                 dispatch(loadOtzEnrolledAdolescentsByPartner());
                 dispatch(loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingBySex());
                 dispatch(loadOtzOutcomesByAgeGroup());
+                dispatch(loadOtzVlSuppressionBySex());
+                dispatch(loadOtzVlSuppressionByAge());
+                dispatch(loadOtzVlSuppressionByCounty());
+                dispatch(loadOtzVlSuppressionByPartner());
                 break;
             case 'ovc':
                 dispatch(loadOvcOverallServ());

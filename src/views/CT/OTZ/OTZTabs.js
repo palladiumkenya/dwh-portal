@@ -27,6 +27,11 @@ const OtzOutcomesByPartner = Loadable({ loader: () => import('./OtzOutcomesByPar
 const OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingMales = Loadable({ loader: () => import('./OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingMales'), loading: Loading, delay: LOADING_DELAY });
 const OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingFemales = Loadable({ loader: () => import('./OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingFemales'), loading: Loading, delay: LOADING_DELAY });
 
+const OtzVlSuppressionBySex = Loadable({ loader: () => import('./OtzVlSuppressionBySex'), loading: Loading, delay: LOADING_DELAY });
+const OtzVlSuppressionByAge = Loadable({ loader: () => import('./OtzVlSuppressionByAge'), loading: Loading, delay: LOADING_DELAY });
+const OtzVlSuppressionByCounty = Loadable({ loader: () => import('./OtzVlSuppressionByCounty'), loading: Loading, delay: LOADING_DELAY });
+const OtzVlSuppressionByPartner = Loadable({ loader: () => import('./OtzVlSuppressionByPartner'), loading: Loading, delay: LOADING_DELAY });
+
 const OTZTabs = () => {
     const [activeTab, setActiveTab] = useState('otz_enrollment');
 
@@ -113,6 +118,24 @@ const OTZTabs = () => {
                             <OtzOutcomesAmongAlhivWithSustainedSuppression />
                         </Col>
                     </Row>*/}
+                    <Row>
+                        <Col className={"col-6"}>
+                            <OtzVlSuppressionBySex />
+                        </Col>
+                        <Col className={"col-6"}>
+                            <OtzVlSuppressionByAge />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={"col-12"}>
+                            <OtzVlSuppressionByCounty />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={"col-12"}>
+                            <OtzVlSuppressionByPartner />
+                        </Col>
+                    </Row>
                     <Row>
                         <Col className={"col-6"}>
                             <OtzOutcomesByGender />
