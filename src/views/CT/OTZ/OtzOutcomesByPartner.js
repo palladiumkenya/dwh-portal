@@ -49,6 +49,11 @@ const OtzOutcomesByPartner = () => {
                 color: '#142459',
                 data: outcomesPartners.ArrayValTransitionToAdultCare,
                 tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
+            }, {
+                name: 'ACTIVE',
+                color: '#AA46BE',
+                data: outcomesPartners.ArrayValActive,
+                tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
             }]
         });
     },[outcomesPartners]);

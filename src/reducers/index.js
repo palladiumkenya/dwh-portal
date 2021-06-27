@@ -156,6 +156,7 @@ import otzEnrollmentAdolescentsByAgeGroup from './CT/OTZ/otzEnrollmentAdolescent
 import otzEnrolledAdolescentsByCounty from './CT/OTZ/otzEnrolledAdolescentsByCounty';
 import otzEnrolledAdolescentsByPartner from './CT/OTZ/otzEnrolledAdolescentsByPartner';
 import otzProportionOfAlHivWhoHaveCompletedOtzTrainingBySex from './CT/OTZ/otzProportionOfAlHivWhoHaveCompletedOtzTrainingBySex';
+import otzOutcomesByAgeGroup from './CT/OTZ/otzOutcomesByAgeGroup';
 
 export default combineReducers({
     auth: authReducer,
@@ -296,6 +297,7 @@ export default combineReducers({
     otzEnrolledAdolescentsByCounty,
     otzEnrolledAdolescentsByPartner,
     otzProportionOfAlHivWhoHaveCompletedOtzTrainingBySex,
+    otzOutcomesByAgeGroup,
 
     ovcOverallServ,
     ovcServByGender,

@@ -49,6 +49,11 @@ const OtzOutcomesByPopulationType = () => {
                 color: '#142459',
                 data: outcomesByGender.ArrayValTransitionToAdultCare,
                 tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
+            }, {
+                name: 'ACTIVE',
+                color: '#AA46BE',
+                data: outcomesByGender.ArrayValActive,
+                tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
             }]
         });
     },[outcomesByGender]);

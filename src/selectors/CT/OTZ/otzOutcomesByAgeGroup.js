@@ -1,17 +1,17 @@
 import { createSelector } from 'reselect';
+import _ from 'lodash';
 
 const filtered = state => state.filters.filtered;
-const listFiltered = state => state.otzOutcomesByYearOfArtStart.listFiltered;
-const listUnfiltered = state => state.otzOutcomesByYearOfArtStart.listUnfiltered;
+const listFiltered = state => state.otzOutcomesByAgeGroup.listFiltered;
+const listUnfiltered = state => state.otzOutcomesByAgeGroup.listUnfiltered;
 
-export const getOtzOutcomesByYearOfArtStart = createSelector(
+export const getOtzOutcomesByAgeGroup = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        list.sort((a, b) => {
-            return a.OTZStart_Year - b.OTZStart_Year;
-        });
-        const catYears = list.map(obj => obj.OTZStart_Year);
+
+        let catAgeGroups = list.map(obj => obj.AgeGroup);
+        catAgeGroups = _.uniq(catAgeGroups);
         const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care', 'Active'];
         const ArrayValOptOut = [];
         const ArrayValLostToFollowUp = [];
@@ -20,20 +20,20 @@ export const getOtzOutcomesByYearOfArtStart = createSelector(
         const ArrayValTransitionToAdultCare = [];
         const ArrayValActive = [];
         for (const category of categories) {
-            for (const catYear of catYears) {
-                const catFilterYear = list.filter(obj => obj.OTZStart_Year === catYear && obj.Outcome.toUpperCase() === category.toUpperCase());
+            for (const ageGroup of catAgeGroups) {
+                const catFilterYear = list.filter(obj => obj.AgeGroup === ageGroup && obj.Outcome.toUpperCase() === category.toUpperCase());
                 if (category === 'opt out of OTZ') {
                     if (catFilterYear.length > 0) {
                         ArrayValOptOut.push({
                             category,
-                            y: catFilterYear[0].outcomesByYearOfArtStart,
-                            catYear
+                            y: catFilterYear[0].outcomesByAgeGroup,
+                            ageGroup
                         });
                     } else {
                         ArrayValOptOut.push({
                             category,
                             y: 0,
-                            catYear
+                            ageGroup
                         });
                     }
                 }
@@ -42,14 +42,14 @@ export const getOtzOutcomesByYearOfArtStart = createSelector(
                     if (catFilterYear.length > 0) {
                         ArrayValLostToFollowUp.push({
                             category,
-                            y: catFilterYear[0].outcomesByYearOfArtStart,
-                            catYear
+                            y: catFilterYear[0].outcomesByAgeGroup,
+                            ageGroup
                         });
                     } else {
                         ArrayValLostToFollowUp.push({
                             category,
                             y: 0,
-                            catYear
+                            ageGroup
                         });
                     }
                 }
@@ -58,14 +58,14 @@ export const getOtzOutcomesByYearOfArtStart = createSelector(
                     if (catFilterYear.length > 0) {
                         ArrayValDead.push({
                             category,
-                            y: catFilterYear[0].outcomesByYearOfArtStart,
-                            catYear
+                            y: catFilterYear[0].outcomesByAgeGroup,
+                            ageGroup
                         });
                     } else {
                         ArrayValDead.push({
                             category,
                             y: 0,
-                            catYear
+                            ageGroup
                         });
                     }
                 }
@@ -74,14 +74,14 @@ export const getOtzOutcomesByYearOfArtStart = createSelector(
                     if (catFilterYear.length > 0) {
                         ArrayValTransferOut.push({
                             category,
-                            y: catFilterYear[0].outcomesByYearOfArtStart,
-                            catYear
+                            y: catFilterYear[0].outcomesByAgeGroup,
+                            ageGroup
                         });
                     } else {
                         ArrayValTransferOut.push({
                             category,
                             y: 0,
-                            catYear
+                            ageGroup
                         });
                     }
                 }
@@ -90,14 +90,14 @@ export const getOtzOutcomesByYearOfArtStart = createSelector(
                     if (catFilterYear.length > 0) {
                         ArrayValTransitionToAdultCare.push({
                             category,
-                            y: catFilterYear[0].outcomesByYearOfArtStart,
-                            catYear
+                            y: catFilterYear[0].outcomesByAgeGroup,
+                            ageGroup
                         });
                     } else {
                         ArrayValTransitionToAdultCare.push({
                             category,
                             y: 0,
-                            catYear
+                            ageGroup
                         });
                     }
                 }
@@ -106,22 +106,20 @@ export const getOtzOutcomesByYearOfArtStart = createSelector(
                     if (catFilterYear.length > 0) {
                         ArrayValActive.push({
                             category,
-                            y: catFilterYear[0].outcomesByYearOfArtStart,
-                            catYear
+                            y: catFilterYear[0].outcomesByAgeGroup,
+                            ageGroup
                         });
                     } else {
                         ArrayValActive.push({
                             category,
                             y: 0,
-                            catYear
+                            ageGroup
                         });
                     }
                 }
             }
         }
 
-        return { catYears, ArrayValOptOut, ArrayValLostToFollowUp, ArrayValDead, ArrayValTransferOut, ArrayValTransitionToAdultCare, ArrayValActive };
+        return { catAgeGroups, ArrayValOptOut, ArrayValLostToFollowUp, ArrayValDead, ArrayValTransferOut, ArrayValTransitionToAdultCare, ArrayValActive };
     }
 );
-
-
