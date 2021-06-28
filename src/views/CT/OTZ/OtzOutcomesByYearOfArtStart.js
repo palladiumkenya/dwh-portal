@@ -49,6 +49,11 @@ const OtzOutcomesByYearOfArtStart = () => {
                 color: '#142459',
                 data: outcomesYearOfArtStart.ArrayValTransitionToAdultCare,
                 tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
+            }, {
+                name: 'ACTIVE',
+                color: '#AA46BE',
+                data: outcomesYearOfArtStart.ArrayValActive,
+                tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
             }]
         });
     },[outcomesYearOfArtStart]);

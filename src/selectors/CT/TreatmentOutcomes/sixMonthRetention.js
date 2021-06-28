@@ -8,18 +8,11 @@ export const getSixMonthRetention = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        const yearCategories = [2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021];
-        let data = [];
-        for(let i = 0; i < yearCategories.length; i++) {
-            data[i] = 0;
-        }
-        for(let i = 0; i < list.length; i++) {
-            let yearIndex = yearCategories.indexOf(list[i].year);
-            if(yearIndex === -1 ) {
-                continue;
-            }
-            data[yearIndex] = data[yearIndex] + parseInt(list[i].retention);
-        }
+        const yearCategories = list.map(obj => obj.StartARTYear);
+        const data = list.map(obj => ({
+            y: Math.round(obj.Percentage),
+            absoluteY: obj.m6Retention
+        }));
         return { yearCategories, data };
     }
 );

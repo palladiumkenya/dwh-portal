@@ -3,11 +3,11 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import * as otzOutcomesByGenderSelector from '../../../selectors/CT/OTZ/otzOutcomesByGender';
+import * as otzOutcomesByAgeGroupSelector from '../../../selectors/CT/OTZ/otzOutcomesByAgeGroup';
 
 const OtzOutcomesByAgeGroup = () => {
     const [otzOutcomesByAgeGroup, setOtzOutcomesByAgeGroup] = useState({});
-    const outcomesByGender = useSelector(otzOutcomesByGenderSelector.getOtzOutcomesByGender);
+    const outcomesByAgeGroup = useSelector(otzOutcomesByAgeGroupSelector.getOtzOutcomesByAgeGroup);
 
     const loadOtzOutcomesByAgeGroup = useCallback(async () => {
         setOtzOutcomesByAgeGroup({
@@ -18,7 +18,7 @@ const OtzOutcomesByAgeGroup = () => {
                 text: ''
             },
             xAxis: {
-                categories: ['MALE', 'FEMALE']
+                categories: outcomesByAgeGroup.catAgeGroups
             },
             yAxis: [{ title: { text: 'Percentage of Patients' }}],
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80, reversed: true },
@@ -27,31 +27,36 @@ const OtzOutcomesByAgeGroup = () => {
             series: [{
                 name: 'OPT OUT OF OTZ',
                 color: '#28B294',
-                data: outcomesByGender.ArrayValOptOut,
+                data: outcomesByAgeGroup.ArrayValOptOut,
                 tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
             }, {
                 name: 'LOST TO FOLLOW UP',
                 color: '#FDC538',
-                data: outcomesByGender.ArrayValLostToFollowUp,
+                data: outcomesByAgeGroup.ArrayValLostToFollowUp,
                 tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
             }, {
                 name: 'DEAD',
                 color: '#FC2626',
-                data: outcomesByGender.ArrayValDead,
+                data: outcomesByAgeGroup.ArrayValDead,
                 tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
             }, {
                 name: 'TRANSFER OUT',
                 color: '#2D73F5',
-                data: outcomesByGender.ArrayValTransferOut,
+                data: outcomesByAgeGroup.ArrayValTransferOut,
                 tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
             }, {
                 name: 'TRANSITION TO ADULT CARE',
                 color: '#142459',
-                data: outcomesByGender.ArrayValTransitionToAdultCare,
+                data: outcomesByAgeGroup.ArrayValTransitionToAdultCare,
+                tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
+            }, {
+                name: 'ACTIVE',
+                color: '#AA46BE',
+                data: outcomesByAgeGroup.ArrayValActive,
                 tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
             }]
         });
-    },[outcomesByGender]);
+    },[outcomesByAgeGroup]);
 
     useEffect(() => {
         loadOtzOutcomesByAgeGroup();

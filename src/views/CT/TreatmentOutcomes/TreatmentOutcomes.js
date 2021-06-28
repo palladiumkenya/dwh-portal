@@ -87,12 +87,12 @@ const TreatmentOutcomes = () => {
                         <CardHeader>Indicator Definition</CardHeader>
                         <CardBody>
                             <ul>
-                                <li>Started on ART =&gt; Number of patients whose documented ART start date is within the last 12 months.</li>
+                                <li>Started on ART =&gt; Number of patients whose documented ART start date is within the period selected (Default is last 12 months).</li>
                                 <li>
                                     All outcomes are computed for patients who started ART within the period selected (Default is last 12 months). The Outcomes are computed and displayed for the last completed month
                                     <ol>
                                         <li>
-                                            Current on ART =&gt; Number of adults and children currently receiving ART including those who have missed their appointment and 30 days have not passed since the last missed appointment. Assumptions on this computation can be found under Current on ART tab.
+                                            Current on ART =&gt; Number of patients whose documented ART start date is within the period selected (Default is last 12 months).
                                         </li>
                                         <li>
                                             Lost to Follow Up =&gt; A lost to follow up (LTFU) is a patient Started on ART who did not honor their last drug pick-up appointment and at least 30 days had elapsed since the last missed drug pick-up.
@@ -159,6 +159,11 @@ const TreatmentOutcomes = () => {
                                     </strong>
                                 </span>
                             </p>
+                            <p>
+                                <span style={{ fontSize: '1.2em'}}>
+                                    Outcomes are as at <strong>{ moment().startOf('month').subtract(1, 'month').format('MMM YYYY') }</strong>
+                                </span>
+                            </p>
                         </CardBody>
                     </Card>
 
@@ -167,6 +172,9 @@ const TreatmentOutcomes = () => {
                         <CardBody>
                             <ul>
                                 <li>Net Cohort =&gt; Number of patients whose documented ART start date is within the period selected (Default is last 12 months). This computed as "Started on ART" less "Stopped ART" and "Transfer Out"</li>
+                                <li>
+                                    All outcomes are computed for patients who started ART within the period selected (Default is last 12 months). The Outcomes are computed and displayed for the last completed month
+                                </li>
                                 <li>
                                     Current on ART =&gt; Number of adults and children currently receiving ART including those who have missed their appointment and 30 days have not passed since the last missed appointment. Assumptions on this computation can be found under Current on ART tab.
                                 </li>
@@ -200,6 +208,39 @@ const TreatmentOutcomes = () => {
                     <SectionFooter overview={branding.overview}/>
                     <TreatmentOutcomesRetentionByPartner />
                     <SectionFooter overview={branding.overview}/>
+                    <Card>
+                        <CardBody style={{ textAlign: 'center'}}>
+                            <p>
+                                <span style={{ fontSize: '1.2em'}}>
+                                    <strong>RETENTION BY YEAR OF ART START</strong>
+                                </span>
+                            </p>
+                        </CardBody>
+                    </Card>
+
+                    <Card>
+                        <CardHeader>Indicator Definitions</CardHeader>
+                        <CardBody>
+                            <ul>
+                                <li>
+                                    Started on ART => Number of patients whose documented ART start date is in the specified year.
+                                </li>
+                                <li>
+                                    Net Cohort =>Number of patients whose documented ART start date is in the specified year. This computed as "Started on ART" less "Stopped ART" and "Transfer Out"
+                                </li>
+                                <li>
+                                    Retention Outcomes are computed as at a point in time (e.g. 3/6/12/18 months after ART Start) for patients who started ART in the specified Year
+                                </li>
+                                <li>
+                                    Active and Retained => Number of adults and children who were receiving ART at a point in time(e.g. 3/6/12/18 months after ART Start) including those who have missed their appointment and 30 days had not passed since the last missed appointment.
+                                </li>
+                                <li>
+                                    Retention = Active and Retained / Net Cohort
+                                    e.g. 3 Month Retention = Active and Retained at 3 months / Net Cohort at 3 months
+                                </li>
+                            </ul>
+                        </CardBody>
+                    </Card>
                     <ThreeMonthRetention />
                     <SectionFooter overview={branding.overview}/>}
                     <SixMonthRetention />
