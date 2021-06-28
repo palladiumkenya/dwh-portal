@@ -36,7 +36,7 @@ const OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingByPartner = () =>
             series: [
                 {
                     name: 'PROPORTION OF ALHIV ENROLLED IN OTZ WHO HAVE COMPLETED OTZ TRAINING BY PARTNER',
-                    data: proportionByPartner.map(obj => obj.proportion_training_percent),
+                    data: proportionByPartner,
                     color: '#14084D',
                 }
             ]

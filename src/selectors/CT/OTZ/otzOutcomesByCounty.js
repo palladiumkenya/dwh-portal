@@ -10,12 +10,13 @@ export const getOtzOutcomesByCounty = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         let catCounties = list.map(obj => obj.County);
         catCounties = [...new Set(catCounties)];
-        const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care'];
+        const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care', 'Active'];
         const ArrayValOptOut = [];
         const ArrayValLostToFollowUp = [];
         const ArrayValDead = [];
         const ArrayValTransferOut = [];
         const ArrayValTransitionToAdultCare = [];
+        const ArrayValActive = [];
         for (const category of categories) {
             for (const catCounty of catCounties) {
                 const catFilterYear = list.filter(obj => obj.County === catCounty && obj.Outcome.toUpperCase() === category.toUpperCase());
@@ -98,10 +99,26 @@ export const getOtzOutcomesByCounty = createSelector(
                         });
                     }
                 }
+
+                if (category === 'Active') {
+                    if (catFilterYear.length > 0) {
+                        ArrayValActive.push({
+                            category,
+                            y: catFilterYear[0].outcomesByCounty,
+                            catCounty
+                        });
+                    } else {
+                        ArrayValActive.push({
+                            category,
+                            y: 0,
+                            catCounty
+                        });
+                    }
+                }
             }
         }
 
-        return { catCounties, ArrayValOptOut, ArrayValLostToFollowUp, ArrayValDead, ArrayValTransferOut, ArrayValTransitionToAdultCare };
+        return { catCounties, ArrayValOptOut, ArrayValLostToFollowUp, ArrayValDead, ArrayValTransferOut, ArrayValTransitionToAdultCare, ArrayValActive };
     }
 );
 

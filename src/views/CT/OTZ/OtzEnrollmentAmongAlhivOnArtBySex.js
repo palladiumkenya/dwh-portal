@@ -5,10 +5,12 @@ import HighchartsReact from 'highcharts-react-official';
 import { useSelector } from 'react-redux';
 import * as otzEnrollmentAmongAlhivBySex
     from '../../../selectors/CT/OTZ/otzEnrollmentAmongAlhivBySex';
+import * as otzTotalAdolescentsSelector from '../../../selectors/CT/OTZ/otzTotalAdolescents';
 
 const OtzEnrollmentAmongAlhivOnArtBySex = () => {
     const [otzEnrollmentAmongAlHivOnArtBySex, setOtzEnrollmentAmongAlHivOnArtBySex] = useState({});
     const otzEnrollmentsBySex = useSelector(otzEnrollmentAmongAlhivBySex.getOtzEnrollmentAmongAlHivOnArtBySex);
+    const adolescents = useSelector(otzTotalAdolescentsSelector.getOtzTotalAdolescentsByGender);
 
     let femalePercentage = 0;
     let femaleTxCurr = 0;
@@ -19,12 +21,25 @@ const OtzEnrollmentAmongAlhivOnArtBySex = () => {
     const femaleVals = otzEnrollmentsBySex.filter(obj => obj.Gender === 'Female');
     const maleVals = otzEnrollmentsBySex.filter(obj => obj.Gender === 'Male');
     if (femaleVals.length > 0) {
-        femalePercentage = femaleVals[0].Percentage;
+        const femaleAdolescents = adolescents.filter(obj => obj.Gender === 'Female');
+        if (femaleAdolescents.length > 0) {
+            const totalFemaleAdolescents = femaleAdolescents[0].totalAdolescents;
+            if (totalFemaleAdolescents > 0) {
+                femalePercentage = ((femaleVals[0].TXCurr/totalFemaleAdolescents)*100);
+            }
+        }
         femaleTxCurr = femaleVals[0].TXCurr;
     }
 
     if (maleVals.length > 0) {
-        malePercentage = maleVals[0].Percentage;
+        const maleAdolescents = adolescents.filter(obj => obj.Gender === 'Male');
+        if (maleAdolescents.length > 0) {
+            const totalMaleAdolescents = maleAdolescents[0].totalAdolescents;
+            if (totalMaleAdolescents > 0) {
+                malePercentage = ((maleVals[0].TXCurr/totalMaleAdolescents)*100);
+            }
+        }
+
         maleTxCurr = maleVals[0].TXCurr;
     }
 
@@ -41,8 +56,8 @@ const OtzEnrollmentAmongAlhivOnArtBySex = () => {
                 crosshair: true
             },
             yAxis: {
-                min: 0,
-                max: 100,
+                type: 'logarithmic',
+                minorTickInterval: 0.1,
                 title: {
                     text: 'PERCENTAGE OF PATIENTS'
                 },
@@ -59,13 +74,13 @@ const OtzEnrollmentAmongAlhivOnArtBySex = () => {
                     data: [
                         {
                             name: 'MALES',
-                            y: Math.round(malePercentage),
+                            y: Math.round((malePercentage + Number.EPSILON) * 100) / 100,
                             color: '#14084D',
                             text: maleTxCurr
                         },
                         {
                             name: 'FEMALES',
-                            y: Math.round(femalePercentage),
+                            y: Math.round((femalePercentage + Number.EPSILON) * 100) / 100,
                             color: '#EA4C8B',
                             text: femaleTxCurr,
                         }

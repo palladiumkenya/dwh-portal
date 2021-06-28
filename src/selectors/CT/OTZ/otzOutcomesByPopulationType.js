@@ -8,12 +8,13 @@ export const getOtzOutcomesByPopulationType = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care'];
+        const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care', 'Active'];
         const ArrayValOptOut = [];
         const ArrayValLostToFollowUp = [];
         const ArrayValDead = [];
         const ArrayValTransferOut = [];
         const ArrayValTransitionToAdultCare = [];
+        const ArrayValActive = [];
         for (const category of categories) {
             const catFilterGeneral = list.filter(obj => obj.Outcome.toUpperCase() === category.toUpperCase() && obj.PopulationType === 'General Population');
             const catFilterKeyPop = list.filter(obj => obj.Outcome.toUpperCase() === category.toUpperCase() && obj.PopulationType === 'Key Population');
@@ -147,9 +148,35 @@ export const getOtzOutcomesByPopulationType = createSelector(
                     });
                 }
             }
+
+            if (category === 'Active') {
+                if (catFilterGeneral.length > 0) {
+                    ArrayValActive.push({
+                        category,
+                        y: catFilterGeneral[0].outcomesByPopulationType,
+                    });
+                } else {
+                    ArrayValActive.push({
+                        category,
+                        y: 0,
+                    });
+                }
+
+                if (catFilterKeyPop.length > 0) {
+                    ArrayValActive.push({
+                        category,
+                        y: catFilterKeyPop[0].outcomesByPopulationType,
+                    });
+                } else {
+                    ArrayValActive.push({
+                        category,
+                        y: 0,
+                    });
+                }
+            }
         }
 
-        return { ArrayValOptOut, ArrayValLostToFollowUp, ArrayValDead, ArrayValTransferOut, ArrayValTransitionToAdultCare };
+        return { ArrayValOptOut, ArrayValLostToFollowUp, ArrayValDead, ArrayValTransferOut, ArrayValTransitionToAdultCare, ArrayValActive };
     }
 );
 

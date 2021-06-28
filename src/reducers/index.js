@@ -152,6 +152,15 @@ import ovcClientsExitReasons from './CT/OVC/ovcClientsExitReasons';
 import ovcViralSuppressionAmongOvcPatientsOverall from './CT/OVC/ovcViralSuppressionAmongOvcPatientsOverall';
 import ovcViralSuppressionAmongOvcPatientsByGender from './CT/OVC/ovcViralSuppressionAmongOvcPatientsByGender';
 import treatmentOutcomesNetCohort from './CT/TreatmentOutcomes/treatmentOutcomesNetCohort';
+import otzEnrollmentAdolescentsByAgeGroup from './CT/OTZ/otzEnrollmentAdolescentsByAgeGroup';
+import otzEnrolledAdolescentsByCounty from './CT/OTZ/otzEnrolledAdolescentsByCounty';
+import otzEnrolledAdolescentsByPartner from './CT/OTZ/otzEnrolledAdolescentsByPartner';
+import otzProportionOfAlHivWhoHaveCompletedOtzTrainingBySex from './CT/OTZ/otzProportionOfAlHivWhoHaveCompletedOtzTrainingBySex';
+import otzOutcomesByAgeGroup from './CT/OTZ/otzOutcomesByAgeGroup';
+import otzVlSuppressionBySex from './CT/OTZ/otzVlSuppressionBySex';
+import otzVlSuppressionByAge from './CT/OTZ/otzVlSuppressionByAge';
+import otzVlSuppressionByCounty from './CT/OTZ/otzVlSuppressionByCounty';
+import otzVlSuppressionByPartner from './CT/OTZ/otzVlSuppressionByPartner';
 
 export default combineReducers({
     auth: authReducer,
@@ -288,6 +297,15 @@ export default combineReducers({
     otzEnrolled,
     otzTotalWithVlResults,
     otzTotalWithWithResultsLessThan1000,
+    otzEnrollmentAdolescentsByAgeGroup,
+    otzEnrolledAdolescentsByCounty,
+    otzEnrolledAdolescentsByPartner,
+    otzProportionOfAlHivWhoHaveCompletedOtzTrainingBySex,
+    otzOutcomesByAgeGroup,
+    otzVlSuppressionBySex,
+    otzVlSuppressionByAge,
+    otzVlSuppressionByCounty,
+    otzVlSuppressionByPartner,
 
     ovcOverallServ,
     ovcServByGender,

@@ -3,22 +3,36 @@ import { createSelector } from 'reselect';
 const filtered = state => state.filters.filtered;
 const listFiltered = state => state.otzProportionOfAlHivWhoHaveCompletedOtzTrainingByCounty.listFiltered;
 const listUnfiltered = state => state.otzProportionOfAlHivWhoHaveCompletedOtzTrainingByCounty.listUnfiltered;
+const listFilteredCounty = state => state.otzEnrollmentAmongAlhivOnArtByCounty.listFiltered;
+const listUnfilteredCounty = state => state.otzEnrollmentAmongAlhivOnArtByCounty.listUnfiltered;
 
 export const getProportionOfAlhivEnrolledInOtzWhoHaveCompletedTrainingByCounty = createSelector(
-    [listUnfiltered, listFiltered, filtered],
-    (listUnfiltered, listFiltered, filtered) => {
+    [listUnfiltered, listUnfilteredCounty, listFiltered, listFilteredCounty, filtered],
+    (listUnfiltered, listUnfilteredCounty, listFiltered, listFilteredCounty, filtered) => {
         let list = filtered ? listFiltered : listUnfiltered;
+        let listCounty = filtered ? listFilteredCounty : listUnfilteredCounty;
 
-        list = list.map(val => ({
-            count_training: val.count_training,
-            County: val.County,
-            proportion_training_percent: Math.round(val.proportion_training_percent)
-        }));
+        const ArrayList = [];
+        for (const listElement of list) {
+            let percent = 0;
+            const selectedCounty = listCounty.filter(obj => obj.County === listElement.County);
+            if (selectedCounty.length > 0) {
+                percent = ((listElement.count_training / selectedCounty[0].count_training) * 100);
+            }
+            ArrayList.push(
+                {
+                    count_training: listElement.count_training,
+                    County: listElement.County,
+                    y: Math.round((percent + Number.EPSILON) * 100) / 100,
+                    text: listElement.count_training
+                }
+            );
+        }
 
-        list.sort((a, b) => {
-            return b.proportion_training_percent - a.proportion_training_percent;
+        ArrayList.sort((a, b) => {
+            return b.y - a.y;
         });
 
-        return list;
+        return ArrayList;
     }
 );

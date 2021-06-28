@@ -142,6 +142,15 @@ import { loadOvcClientsExitReasons } from '../../actions/CT/OVC/ovcClientsExitRe
 import { loadOvcViralSuppressionAmongOvcPatientsOverall } from '../../actions/CT/OVC/ovcViralSuppressionAmongOvcPatientsOverallActions';
 import { loadOvcViralSuppressionAmongOvcPatientsByGender } from '../../actions/CT/OVC/ovcViralSuppressionAmongOvcPatientsByGenderActions';
 import { loadTreatmentOutcomesNetCohort } from '../../actions/CT/TreatmentOutcomes/treatmentOutcomesNetCohortActions';
+import { loadOtzEnrolledAdolescentsByAgeGroup } from '../../actions/CT/OTZ/otzEnrolledAdolescentsByAgeGroupActions';
+import { loadOtzEnrolledAdolescentsByCounty } from '../../actions/CT/OTZ/OtzEnrolledAdolescentsByCountyActions';
+import { loadOtzEnrolledAdolescentsByPartner } from '../../actions/CT/OTZ/OtzEnrolledAdolescentsByPartnerActions';
+import { loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingBySex } from '../../actions/CT/OTZ/OtzProportionOfAlHivWhoHaveCompletedOtzTrainingBySexActions';
+import { loadOtzOutcomesByAgeGroup } from '../../actions/CT/OTZ/OtzOutcomesByAgeGroupActions';
+import { loadOtzVlSuppressionBySex } from '../../actions/CT/OTZ/OtzVlSuppressionBySexActions';
+import { loadOtzVlSuppressionByAge } from '../../actions/CT/OTZ/OtzVlSuppressionByAgeActions';
+import { loadOtzVlSuppressionByCounty } from '../../actions/CT/OTZ/OtzVlSuppressionByCountyActions';
+import { loadOtzVlSuppressionByPartner } from '../../actions/CT/OTZ/OtzVlSuppressionByPartnerActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -355,6 +364,15 @@ const CT = () => {
                 dispatch(loadOtzEnrolled());
                 dispatch(loadOtzTotalWithVLResults());
                 dispatch(loadOtzTotalWithVLResultsLessThan1000());
+                dispatch(loadOtzEnrolledAdolescentsByAgeGroup());
+                dispatch(loadOtzEnrolledAdolescentsByCounty());
+                dispatch(loadOtzEnrolledAdolescentsByPartner());
+                dispatch(loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingBySex());
+                dispatch(loadOtzOutcomesByAgeGroup());
+                dispatch(loadOtzVlSuppressionBySex());
+                dispatch(loadOtzVlSuppressionByAge());
+                dispatch(loadOtzVlSuppressionByCounty());
+                dispatch(loadOtzVlSuppressionByPartner());
                 break;
             case 'ovc':
                 dispatch(loadOvcOverallServ());

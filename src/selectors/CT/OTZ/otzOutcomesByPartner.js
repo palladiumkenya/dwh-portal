@@ -10,12 +10,13 @@ export const getOtzOutcomesByPartner = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         let catPartners = list.map(obj => obj.partner);
         catPartners = [...new Set(catPartners)];
-        const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care'];
+        const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care', 'Active'];
         const ArrayValOptOut = [];
         const ArrayValLostToFollowUp = [];
         const ArrayValDead = [];
         const ArrayValTransferOut = [];
         const ArrayValTransitionToAdultCare = [];
+        const ArrayValActive = [];
         for (const category of categories) {
             for (const catPartner of catPartners) {
                 const catFilterYear = list.filter(obj => obj.partner === catPartner && obj.Outcome.toUpperCase() === category.toUpperCase());
@@ -98,10 +99,26 @@ export const getOtzOutcomesByPartner = createSelector(
                         });
                     }
                 }
+
+                if (category === 'Active') {
+                    if (catFilterYear.length > 0) {
+                        ArrayValActive.push({
+                            category,
+                            y: catFilterYear[0].outcomesByPartner,
+                            catPartner
+                        });
+                    } else {
+                        ArrayValActive.push({
+                            category,
+                            y: 0,
+                            catPartner
+                        });
+                    }
+                }
             }
         }
 
-        return { catPartners, ArrayValOptOut, ArrayValLostToFollowUp, ArrayValDead, ArrayValTransferOut, ArrayValTransitionToAdultCare };
+        return { catPartners, ArrayValOptOut, ArrayValLostToFollowUp, ArrayValDead, ArrayValTransferOut, ArrayValTransitionToAdultCare, ArrayValActive };
     }
 );
 

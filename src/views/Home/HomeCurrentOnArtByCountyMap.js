@@ -13,7 +13,7 @@ const HomeCurrentOnArtByCountyMap = () => {
         const result = await getAll('care-treatment/txCurrDistributionByCounty', []);
         for (let i = 0; i < result.length; i++) {
             let resultCounty = result[i].County;
-            resultCounty = resultCounty.toLowerCase();
+            resultCounty = resultCounty ? resultCounty.toLowerCase() : '';
             resultCounty = resultCounty.replace(/[`~!@#$%^&*()_|+\-=?;:'",.<>{}[]\\\/]/gi, '');
             resultCounty = resultCounty.replace(' ', '');
             for (let j = 0; j < mappedCounties.length; j++) {
@@ -30,7 +30,7 @@ const HomeCurrentOnArtByCountyMap = () => {
                 }
             }
         }
-        
+
         setHomeCurrentOnArtByCountyMap({
             chart: { map: 'custom/ke-county' },
             title: { text: '' },

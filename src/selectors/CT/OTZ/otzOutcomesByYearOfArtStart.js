@@ -12,12 +12,13 @@ export const getOtzOutcomesByYearOfArtStart = createSelector(
             return a.OTZStart_Year - b.OTZStart_Year;
         });
         const catYears = list.map(obj => obj.OTZStart_Year);
-        const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care'];
+        const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care', 'Active'];
         const ArrayValOptOut = [];
         const ArrayValLostToFollowUp = [];
         const ArrayValDead = [];
         const ArrayValTransferOut = [];
         const ArrayValTransitionToAdultCare = [];
+        const ArrayValActive = [];
         for (const category of categories) {
             for (const catYear of catYears) {
                 const catFilterYear = list.filter(obj => obj.OTZStart_Year === catYear && obj.Outcome.toUpperCase() === category.toUpperCase());
@@ -100,10 +101,26 @@ export const getOtzOutcomesByYearOfArtStart = createSelector(
                         });
                     }
                 }
+
+                if (category === 'Active') {
+                    if (catFilterYear.length > 0) {
+                        ArrayValActive.push({
+                            category,
+                            y: catFilterYear[0].outcomesByYearOfArtStart,
+                            catYear
+                        });
+                    } else {
+                        ArrayValActive.push({
+                            category,
+                            y: 0,
+                            catYear
+                        });
+                    }
+                }
             }
         }
 
-        return { catYears, ArrayValOptOut, ArrayValLostToFollowUp, ArrayValDead, ArrayValTransferOut, ArrayValTransitionToAdultCare };
+        return { catYears, ArrayValOptOut, ArrayValLostToFollowUp, ArrayValDead, ArrayValTransferOut, ArrayValTransitionToAdultCare, ArrayValActive };
     }
 );
 
