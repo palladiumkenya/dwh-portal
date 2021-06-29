@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import * as otzVlSuppressionBySexSelector from '../../../selectors/CT/OTZ/otzVlSuppressionBySex';
 import { Card, CardBody, CardHeader } from 'reactstrap';
@@ -9,6 +9,25 @@ const OtzVlSuppressionBySex = () => {
     const [otzVlSuppressionBySex, setOtzVlSuppressionBySex] = useState({});
     const vlSuppressionGender = useSelector(otzVlSuppressionBySexSelector.getOtzVlSuppressionBySex);
 
+    const loadVlSuppressionBySex = useCallback(async () => {
+        setOtzVlSuppressionBySex({
+            title: { text: '' },
+            plotOptions: { column: { stacking: 'percent' } },
+            xAxis: [{ categories: vlSuppressionGender.genders, crosshair: true }],
+            yAxis: [{ title: { text: 'Percentage of Patients' }}],
+            tooltip: { shared: true },
+            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+            series: [
+                { name: 'HVL', data: vlSuppressionGender.data[0], type: 'column', color: "#E15759", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'LLV', data: vlSuppressionGender.data[1], type: 'column', color: "#F28E2B", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'VS', data: vlSuppressionGender.data[2], type: 'column', color: "#3475B3", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+            ]
+        });
+    }, [vlSuppressionGender]);
+
+    useEffect(() => {
+        loadVlSuppressionBySex();
+    }, [loadVlSuppressionBySex]);
 
     return (
         <Card className="trends-card">
