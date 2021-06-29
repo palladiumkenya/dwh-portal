@@ -48,6 +48,9 @@ const OTZ = () => {
                         <li>
                             High Viral Load (HVL) =&gt; Adolescents on OTZ (10-24 years)  who are current on treatment with valid viral load results of &#8805;1,000 copies/ml.
                         </li>
+                        <li>
+                            Completed Training: Computed as having completed 7 out of 8 of the modules:OTZ_Orientation,OTZ_Participation,OTZ_MakingDecisions,OTZ_Transition,OTZ_Leadership,OTZ_TreatmentLiteracy,OTZ_SRH,OTZ_Beyond
+                        </li>
                     </ul>
                 </CardBody>
             </Card>
