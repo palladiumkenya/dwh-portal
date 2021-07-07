@@ -46,7 +46,7 @@ const DefaultHeader = () => {
     const getAdministrationTab = async () => {
         return <Administration />
         const res = await getUserType();
-        return  res === 1 ? <Administration /> : null;
+        return  (res === 1 || res === 2) ? <Administration /> : null;
     }
 
     useEffect(() => {
@@ -96,7 +96,7 @@ const DefaultHeader = () => {
                 }
 
                 {
-                    userType.userType === 1 ? <Administration /> : null
+                    (userType.userType === 1 || userType.userType === 2) ? <Administration userType={userType} /> : null
                 }
 
             </Nav>
@@ -128,12 +128,12 @@ const Adhoc = () => {
     );
 };
 
-const Administration = () => {
+const Administration = (userType) => {
     return (
         <UncontrolledDropdown nav inNavbar>
             <DropdownToggle nav caret><strong>Administration</strong></DropdownToggle>
             <DropdownMenu right>
-                <DropdownItem><Link to="/administration/organizations" className="nav-link">Organizations</Link></DropdownItem>
+                { userType.userType === 1 ? <DropdownItem><Link to="/administration/organizations" className="nav-link">Organizations</Link></DropdownItem> : '' }
                 <DropdownItem><a href="https://auth.kenyahmis.org/nascop/Users" className="nav-link">Users</a></DropdownItem>
             </DropdownMenu>
         </UncontrolledDropdown>
