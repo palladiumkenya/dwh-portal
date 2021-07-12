@@ -123,7 +123,7 @@ const DefaultHeader = () => {
 const Adhoc = () => {
     return (
         <NavItem className="px-3">
-            <a href="https://dwh.nascop.org:7010/" className="nav-link active"><strong>Adhoc</strong></a>
+            <a href="https://data.kenyahmis.org:9090/" className="nav-link active"><strong>Adhoc</strong></a>
         </NavItem>
     );
 };
@@ -134,7 +134,7 @@ const Administration = (userType) => {
             <DropdownToggle nav caret><strong>Administration</strong></DropdownToggle>
             <DropdownMenu right>
                 { userType.userType === 1 ? <DropdownItem><Link to="/administration/organizations" className="nav-link">Organizations</Link></DropdownItem> : '' }
-                <DropdownItem><a href="https://auth.kenyahmis.org/nascop/Users" className="nav-link">Users</a></DropdownItem>
+                <DropdownItem><a href="https://auth.kenyahmis.org/DwhIdentity/Users" className="nav-link">Users</a></DropdownItem>
             </DropdownMenu>
         </UncontrolledDropdown>
     );
