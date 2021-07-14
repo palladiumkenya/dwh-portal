@@ -47,6 +47,7 @@ const HomeEmrSitesMap = () => {
         }
         setHomeEmrSitesMap({
             title: { text: '' },
+            plotOptions: { series: { turboThreshold: 5000 } },
             tooltip: { pointFormat: '<b>{point.name}</b>' },
             legend: { title: { text: 'KEY: EMR SITES' }, layout: 'vertical', align: 'right', verticalAlign: 'bottom' },
             series: data
