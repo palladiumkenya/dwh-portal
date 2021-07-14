@@ -16,14 +16,14 @@ const HomeEmrSitesMap = () => {
         let emrSites = [];
         for(let i = 0; i < gpsSites.length; i++) {
             if (emrNames.indexOf(gpsSites[i].emr) === -1) {
-                emrNames.push(gpsSites[i].emr);
+                emrNames.push(gpsSites[i].emr.replace(/\s/g, ""));
             }
         }
         for(let j = 0; j < emrNames.length; j++) {
             emrSites[j] = [];
         }
         for (let k = 0; k < gpsSites.length; k++) {
-            let index = emrNames.indexOf(gpsSites[k].emr);
+            let index = emrNames.indexOf(gpsSites[k].emr.replace(/\s/g, ""));
             let lat = parseFloat(gpsSites[k].latitude);
             let lon = parseFloat(gpsSites[k].longitude);
             if (Number.isFinite(lat) && lat < 5 && lat > -5 && Number.isFinite(lon) && lon > 34 && lon < 41) {
