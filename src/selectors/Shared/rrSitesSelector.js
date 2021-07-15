@@ -64,22 +64,22 @@ export const getFacilities = createSelector(
             .filter(list => {
                 let val = false;
                 if (filteredCounties.length > 0 && filteredSubCounties.length > 0 && filteredPartners.length > 0) {
-                    val = filteredCounties.includes(list.county.toUpperCase()) &&
-                        filteredSubCounties.includes(list.subCounty.toUpperCase()) &&
+                    val = filteredCounties.includes(list.county? list.county.toUpperCase(): '') &&
+                        filteredSubCounties.includes(list.subCounty ? list.subCounty.toUpperCase(): '') &&
                         filteredPartners.includes(list.partner);
                 } else if (filteredCounties.length > 0 && filteredSubCounties.length) {
-                    val = filteredCounties.includes(list.county.toUpperCase()) &&
-                        filteredSubCounties.includes(list.subCounty.toUpperCase());
+                    val = filteredCounties.includes(list.county ? list.county.toUpperCase() : '') &&
+                        filteredSubCounties.includes(list.subCounty ? list.subCounty.toUpperCase(): '');
                 } else if (filteredCounties.length > 0 && filteredPartners.length > 0) {
-                    val = filteredCounties.includes(list.county.toUpperCase()) &&
+                    val = filteredCounties.includes(list.county ? list.county.toUpperCase(): '') &&
                         filteredPartners.includes(list.partner);
                 } else if (filteredSubCounties.length > 0 && filteredPartners.length > 0) {
-                    val = filteredSubCounties.includes(list.subCounty.toUpperCase()) &&
+                    val = filteredSubCounties.includes(list.subCounty ? list.subCounty.toUpperCase(): '') &&
                         filteredPartners.includes(list.partner);
                 } else if (filteredCounties.length > 0) {
-                    val = filteredCounties.includes(list.county.toUpperCase());
+                    val = filteredCounties.includes(list.county ? list.county.toUpperCase(): '');
                 } else if (filteredSubCounties.length > 0) {
-                    val = filteredSubCounties.includes(list.subCounty.toUpperCase());
+                    val = filteredSubCounties.includes(list.subCounty ? list.subCounty.toUpperCase(): '');
                 } else if (filteredPartners.length > 0) {
                     val = filteredPartners.includes(list.partner);
                 }
@@ -101,12 +101,12 @@ export const getPartners = createSelector(
             .filter(list => {
                 let val = false;
                 if (filteredCounties.length > 0 && filteredSubCounties.length > 0) {
-                    val = filteredCounties.includes(list.county.toUpperCase()) &&
-                        filteredSubCounties.includes(list.subCounty.toUpperCase());
+                    val = filteredCounties.includes(list.county ? list.county.toUpperCase(): '') &&
+                        filteredSubCounties.includes(list.subCounty ? list.subCounty.toUpperCase(): '');
                 } else if (filteredCounties.length > 0) {
-                    val = filteredCounties.includes(list.county.toUpperCase());
+                    val = filteredCounties.includes(list.county ? list.county.toUpperCase(): '');
                 } else if (filteredSubCounties.length > 0) {
-                    val = filteredSubCounties.includes(list.subCounty.toUpperCase());
+                    val = filteredSubCounties.includes(list.subCounty ? list.subCounty.toUpperCase(): '');
                 }
                 return val;
             })
@@ -126,12 +126,12 @@ export const getAgencies = createSelector(
             .filter(list => {
                 let val = false;
                 if (filteredCounties.length > 0 && filteredSubCounties.length > 0) {
-                    val = filteredCounties.includes(list.county.toUpperCase()) &&
-                        filteredSubCounties.includes(list.subCounty.toUpperCase());
+                    val = filteredCounties.includes(list.county ? list.county.toUpperCase(): '') &&
+                        filteredSubCounties.includes(list.subCounty ? list.subCounty.toUpperCase(): '');
                 } else if (filteredCounties.length > 0) {
-                    val = filteredCounties.includes(list.county.toUpperCase());
+                    val = filteredCounties.includes(list.county ? list.county.toUpperCase(): '');
                 } else if (filteredSubCounties.length > 0) {
-                    val = filteredSubCounties.includes(list.subCounty.toUpperCase());
+                    val = filteredSubCounties.includes(list.subCounty ? list.subCounty.toUpperCase() : '');
                 }
                 return val;
             })
@@ -152,12 +152,12 @@ export const getProjects = createSelector(
             .filter(list => {
                 let val = false;
                 if (filteredCounties.length > 0 && filteredSubCounties.length > 0) {
-                    val = filteredCounties.includes(list.county.toUpperCase()) &&
-                        filteredSubCounties.includes(list.subCounty.toUpperCase());
+                    val = filteredCounties.includes(list.county ? list.county.toUpperCase(): '') &&
+                        filteredSubCounties.includes(list.subCounty ? list.subCounty.toUpperCase(): '');
                 } else if (filteredCounties.length > 0) {
-                    val = filteredCounties.includes(list.county.toUpperCase());
+                    val = filteredCounties.includes(list.county ? list.county.toUpperCase(): '');
                 } else if (filteredSubCounties.length > 0) {
-                    val = filteredSubCounties.includes(list.subCounty.toUpperCase());
+                    val = filteredSubCounties.includes(list.subCounty ? list.subCounty.toUpperCase(): '');
                 }
                 return val;
             })
