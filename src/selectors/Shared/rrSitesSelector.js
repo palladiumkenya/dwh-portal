@@ -39,10 +39,10 @@ export const getSubCounties = createSelector(
             .filter(list => {
                 let val = false;
                 if (filteredCounties.length > 0 && filteredPartners.length > 0) {
-                    val = filteredCounties.includes(list.county.toUpperCase()) &&
+                    val = filteredCounties.includes(list.county ? list.county.toUpperCase() : '') &&
                         filteredPartners.includes(list.partner);
                 } else if (filteredCounties.length > 0) {
-                    val = filteredCounties.includes(list.county.toUpperCase());
+                    val = filteredCounties.includes(list.county ? list.county.toUpperCase() : '');
                 } else if (filteredPartners.length > 0) {
                     val = filteredPartners.includes(list.partner);
                 }
