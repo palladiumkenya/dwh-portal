@@ -165,6 +165,7 @@ const AdverseEvents = Loadable({ loader: () => import('./AdverseEvents/AdverseEv
 const ArtOptimization = Loadable({ loader: () => import('./ArtOptimization/ArtOptimization'), loading: Loading, delay: LOADING_DELAY });
 const OTZ = Loadable({ loader: () => import('./OTZ/OTZ'), loading: Loading, delay: LOADING_DELAY });
 const OVC = Loadable({ loader: () => import('./OVC/OVC'), loading: Loading, delay: LOADING_DELAY });
+const COVID = Loadable({ loader: () => import('./Covid/Covid'), loading: Loading, delay: LOADING_DELAY });
 
 const CT = () => {
     const dispatch = useDispatch();
@@ -439,6 +440,9 @@ const CT = () => {
                 </TabPane>
                 <TabPane tabId={"ovc"}>
                     { ctTab === 'ovc'? <OVC /> : null }
+                </TabPane>
+                <TabPane tabId={"covid"}>
+                    { ctTab === 'covid' ? <COVID /> : null }
                 </TabPane>
             </TabContent>
             <p></p><p></p>
