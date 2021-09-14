@@ -13,6 +13,8 @@ const TreatmentOutcomesBySex = () => {
     const stoppedBySex = useSelector(treatmentOutcomesBySexSelectors.getStoppedBySex);
     const transferOutBySex = useSelector(treatmentOutcomesBySexSelectors.getTransferOutBySex);
 
+    console.log(deadBySex);
+
     const loadTreatmentOutcomesBySex = useCallback(async () => {
         setTreatmentOutcomesBySex({
             title: { text: '' },
