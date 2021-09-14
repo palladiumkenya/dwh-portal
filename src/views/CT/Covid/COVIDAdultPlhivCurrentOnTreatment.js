@@ -5,10 +5,16 @@ import Highcharts from "highcharts/highcharts.js";
 import highchartsMore from "highcharts/highcharts-more.js";
 import solidGauge from "highcharts/modules/solid-gauge.js";
 import HighchartsReact from "highcharts-react-official";
+import moment from 'moment';
+
+import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtByAgeSex';
+import { useSelector } from 'react-redux';
 
 const COVIDAdultPlhivCurrentOnTreatment = () => {
     highchartsMore(Highcharts);
     solidGauge(Highcharts);
+
+    const currentOnArtAdults = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtAdults).currentOnArt;
 
     const options = {
         chart: {
@@ -20,7 +26,7 @@ const COVIDAdultPlhivCurrentOnTreatment = () => {
             useHTML: true,
             text: `
           <div>
-            <p>AS AT SEP 2021</p>
+            <p><strong>AS AT `+ moment().startOf('month').subtract(1, 'month').format('MMM YYYY')  + `</strong></p>
           </div>
         `,
             align: 'center',
@@ -81,7 +87,7 @@ const COVIDAdultPlhivCurrentOnTreatment = () => {
                         color: "#e6cb00",
                         radius: "100%",
                         innerRadius: "88%",
-                        y: 800000
+                        y: currentOnArtAdults
                     }
                 ]
             }

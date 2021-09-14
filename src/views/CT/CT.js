@@ -387,6 +387,9 @@ const CT = () => {
                 dispatch(loadOvcViralSuppressionAmongOvcPatientsOverall());
                 dispatch(loadOvcViralSuppressionAmongOvcPatientsByGender());
                 break;
+            case 'covid':
+                dispatch(loadCurrentOnArtOverview());
+                break;
             default:
                 break;
         }
