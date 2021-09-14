@@ -8,7 +8,7 @@ import Loadable from 'react-loadable';
 import Loading from '../../Shared/Loading';
 import { LOADING_DELAY } from '../../../constants';
 
-const COVIDOverview = Loadable({ loader: () => import('./COVIDOverview'), loading: Loading, delay: LOADING_DELAY });
+const COVIDTabs = Loadable({ loader: () => import('./COVIDTabs'), loading: Loading, delay: LOADING_DELAY });
 
 const Covid = () => {
     const branding = { title: "COVID-19", description: "OVERVIEW", overview: "COVID-19" };
@@ -31,7 +31,7 @@ const Covid = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <COVIDOverview />
+            <COVIDTabs />
         </div>
     );
 }
