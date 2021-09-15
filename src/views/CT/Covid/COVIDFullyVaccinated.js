@@ -6,10 +6,22 @@ import highchartsMore from "highcharts/highcharts-more.js";
 import solidGauge from "highcharts/modules/solid-gauge.js";
 import HighchartsReact from "highcharts-react-official";
 import moment from 'moment';
+import { useSelector } from 'react-redux';
+import { formatNumber } from '../../../utils/utils';
+
+import * as covidAdultPLHIVFullyVaccinatedSelectors from '../../../selectors/CT/Covid/covidAdultPLHIVFullyVaccinated';
+import * as covidAdultPLHIVCurrentOnTreatmentSelectors
+    from '../../../selectors/CT/Covid/covidAdultPLHIVCurrentOnTreatment';
 
 const COVIDFullyVaccinated = () => {
     highchartsMore(Highcharts);
     solidGauge(Highcharts);
+
+    const currentOnArtAdults = useSelector(covidAdultPLHIVCurrentOnTreatmentSelectors.getAdultPLHIVCurrentOnTreatment).covidAdultsPLHIVCurrentOnTreatment;
+    const fullyVaccinated = useSelector(covidAdultPLHIVFullyVaccinatedSelectors.getAdultPLHIVFullyVaccinated).fullyVaccinated;
+
+    let percentFullyVaccinated = fullyVaccinated && Number(fullyVaccinated) > 0 ? ((Number(fullyVaccinated)/Number(currentOnArtAdults))*100) : 0;
+    percentFullyVaccinated = Math.round((percentFullyVaccinated + Number.EPSILON) * 100) / 100;
 
     const options = {
         chart: {
@@ -23,7 +35,7 @@ const COVIDFullyVaccinated = () => {
             useHTML: true,
             text: `
           <div class="primary-card-body-subtitle-red">
-                20.1%
+                ${percentFullyVaccinated}%
           </div>
         `,
             align: 'center',
@@ -80,13 +92,13 @@ const COVIDFullyVaccinated = () => {
                         color: "#FF0000",
                         radius: "100%",
                         innerRadius: "88%",
-                        y: 22
+                        y: percentFullyVaccinated
                     }
                 ],
                 dataLabels: {
                     useHTML: true,
                     format: '<div class="row">' +
-                        '<div class="col-12" style="text-align:center;font-size:40px; font-weight: bold;">1,210,000</div>' +
+                        '<div class="col-12" style="text-align:center;font-size:40px; font-weight: bold;">' + formatNumber(fullyVaccinated) + '</div>' +
                         '<div class="col-12" style="font-size:18px;">AS AT '+ moment().startOf('month').subtract(1, 'month').format('MMM YYYY').toUpperCase() +'</div></div>'
                 },
             }

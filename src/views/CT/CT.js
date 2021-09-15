@@ -153,6 +153,8 @@ import { loadOtzVlSuppressionByCounty } from '../../actions/CT/OTZ/OtzVlSuppress
 import { loadOtzVlSuppressionByPartner } from '../../actions/CT/OTZ/OtzVlSuppressionByPartnerActions';
 
 import { loadCovidAdultPLHIVCurrentOnTreatment } from '../../actions/CT/Covid/covidAdultPLHIVCurrentOnTreatmentActions';
+import { loadCovidAdultPLHIVPartiallyVaccinated } from '../../actions/CT/Covid/covidAdultPLHIVPartiallyVaccinatedActions';
+import { loadCovidAdultPLHIVFullyVaccinated } from '../../actions/CT/Covid/covidAdultPLHIVFullyVaccinatedActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -391,6 +393,8 @@ const CT = () => {
                 break;
             case 'covid':
                 dispatch(loadCovidAdultPLHIVCurrentOnTreatment());
+                dispatch(loadCovidAdultPLHIVPartiallyVaccinated());
+                dispatch(loadCovidAdultPLHIVFullyVaccinated());
                 break;
             default:
                 break;
