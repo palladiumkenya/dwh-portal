@@ -14,7 +14,7 @@ const COVIDPLHIVEverHadInfection = () => {
     const options = {
         chart: {
             type: "solidgauge",
-            height: "100%"
+            height: "70%"
         },
         legend: {
             enabled: true

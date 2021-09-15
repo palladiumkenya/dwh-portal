@@ -162,6 +162,8 @@ import otzVlSuppressionByAge from './CT/OTZ/otzVlSuppressionByAge';
 import otzVlSuppressionByCounty from './CT/OTZ/otzVlSuppressionByCounty';
 import otzVlSuppressionByPartner from './CT/OTZ/otzVlSuppressionByPartner';
 
+import CovidAdultPLHIVCurrentOnTreatment from './CT/Covid/covidAdultPLHIVCurrentOnTreatment';
+
 export default combineReducers({
     auth: authReducer,
 
@@ -316,5 +318,7 @@ export default combineReducers({
     ovcServDistributionByPartner,
     ovcClientsExitReasons,
     ovcViralSuppressionAmongOvcPatientsOverall,
-    ovcViralSuppressionAmongOvcPatientsByGender
+    ovcViralSuppressionAmongOvcPatientsByGender,
+
+    CovidAdultPLHIVCurrentOnTreatment
 });
