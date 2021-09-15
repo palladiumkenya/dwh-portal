@@ -5,6 +5,7 @@ import Highcharts from "highcharts/highcharts.js";
 import highchartsMore from "highcharts/highcharts-more.js";
 import solidGauge from "highcharts/modules/solid-gauge.js";
 import HighchartsReact from "highcharts-react-official";
+import moment from 'moment';
 
 const COVIDPartiallyVaccinated = () => {
     highchartsMore(Highcharts);
@@ -15,17 +16,19 @@ const COVIDPartiallyVaccinated = () => {
             type: "solidgauge",
             height: "100%"
         },
-
+        legend: {
+            enabled: true
+        },
         title: {
             useHTML: true,
             text: `
-          <div>
-            <p>AS AT SEP 2021</p>
+          <div class="primary-card-body-subtitle">
+                70.1%
           </div>
         `,
             align: 'center',
             verticalAlign: 'middle',
-            y: 70,
+            y: -40,
             x: 0,
         },
 
@@ -68,7 +71,8 @@ const COVIDPartiallyVaccinated = () => {
                 },
                 linecap: "round",
                 stickyTracking: false,
-                rounded: false
+                rounded: false,
+                showInLegend: true
             }
         },
 
@@ -81,9 +85,15 @@ const COVIDPartiallyVaccinated = () => {
                         color: "#00ff00",
                         radius: "100%",
                         innerRadius: "88%",
-                        y: 80
+                        y: 75
                     }
-                ]
+                ],
+                dataLabels: {
+                    useHTML: true,
+                    format: '<div class="row">' +
+                        '<div class="col-12" style="text-align:center;font-size:40px; font-weight: bold;">750,000</div>' +
+                        '<div class="col-12" style="font-size:18px;">AS AT '+ moment().startOf('month').subtract(1, 'month').format('MMM YYYY').toUpperCase() +'</div></div>'
+                },
             }
         ]
     };

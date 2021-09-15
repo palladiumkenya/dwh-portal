@@ -21,7 +21,9 @@ const COVIDAdultPlhivCurrentOnTreatment = () => {
             type: "solidgauge",
             height: "100%"
         },
-
+        legend: {
+            enabled: true
+        },
         title: {
             useHTML: true,
             text: `
@@ -74,7 +76,8 @@ const COVIDAdultPlhivCurrentOnTreatment = () => {
                 },
                 linecap: "round",
                 stickyTracking: false,
-                rounded: false
+                rounded: false,
+                showInLegend: true
             }
         },
 
