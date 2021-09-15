@@ -163,6 +163,8 @@ import otzVlSuppressionByCounty from './CT/OTZ/otzVlSuppressionByCounty';
 import otzVlSuppressionByPartner from './CT/OTZ/otzVlSuppressionByPartner';
 
 import CovidAdultPLHIVCurrentOnTreatment from './CT/Covid/covidAdultPLHIVCurrentOnTreatment';
+import CovidAdultPLHIVPartiallyVaccinated from './CT/Covid/covidAdultPLHIVPartiallyVaccinated';
+import CovidAdultPLHIVFullyVaccinated from './CT/Covid/covidAdultPLHIVFullyVaccinated';
 
 export default combineReducers({
     auth: authReducer,
@@ -320,5 +322,7 @@ export default combineReducers({
     ovcViralSuppressionAmongOvcPatientsOverall,
     ovcViralSuppressionAmongOvcPatientsByGender,
 
-    CovidAdultPLHIVCurrentOnTreatment
+    CovidAdultPLHIVCurrentOnTreatment,
+    CovidAdultPLHIVPartiallyVaccinated,
+    CovidAdultPLHIVFullyVaccinated
 });
