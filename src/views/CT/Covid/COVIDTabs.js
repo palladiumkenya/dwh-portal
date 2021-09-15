@@ -12,6 +12,7 @@ const COVIDCumulativeReceivedVaccination = Loadable({ loader: () => import('./CO
 const COVIDAdultPLHIVVaccinatedByCounty = Loadable({ loader: () => import('./COVIDAdultPLHIVVaccinatedByCounty'), loading: Loading, delay: LOADING_DELAY });
 const COVIDAdultPLHIVVaccinatedByPartner = Loadable({ loader: () => import('./COVIDAdultPLHIVVaccinatedByPartner'), loading: Loading, delay: LOADING_DELAY });
 const COVIDTrendsOfAdultPLHIVVaccinationInTheLast12Months = Loadable({ loader: () => import('./COVIDTrendsOfAdultPLHIVVaccinationInTheLast12Months'), loading: Loading, delay: LOADING_DELAY });
+const InfectionsAndOutcomesOverview = Loadable({ loader: () => import('./InfectionsAndOutcomesOverview'), loading: Loading, delay: LOADING_DELAY });
 
 const COVIDTabs = () => {
     const [activeTab, setActiveTab] = useState('vaccination');
@@ -69,7 +70,11 @@ const COVIDTabs = () => {
                 </TabPane>
 
                 <TabPane tabId="infection&Outcomes">
-
+                    <Row>
+                        <Col className={"col-12"}>
+                            <InfectionsAndOutcomesOverview />
+                        </Col>
+                    </Row>
                 </TabPane>
             </TabContent>
         </div>
