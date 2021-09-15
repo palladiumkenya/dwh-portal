@@ -7,19 +7,19 @@ import solidGauge from "highcharts/modules/solid-gauge.js";
 import HighchartsReact from "highcharts-react-official";
 import moment from 'moment';
 
-import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtByAgeSex';
+import * as covidAdultPLHIVCurrentOnTreatmentSelectors from '../../../selectors/CT/Covid/covidAdultPLHIVCurrentOnTreatment';
 import { useSelector } from 'react-redux';
 
 const COVIDAdultPlhivCurrentOnTreatment = () => {
     highchartsMore(Highcharts);
     solidGauge(Highcharts);
 
-    const currentOnArtAdults = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtAdults).currentOnArt;
+    const currentOnArtAdults = useSelector(covidAdultPLHIVCurrentOnTreatmentSelectors.getAdultPLHIVCurrentOnTreatment).covidAdultsPLHIVCurrentOnTreatment;
 
     const options = {
         chart: {
             type: "solidgauge",
-            height: "100%"
+            height: "70%"
         },
         legend: {
             enabled: true

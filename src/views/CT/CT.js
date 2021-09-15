@@ -152,6 +152,8 @@ import { loadOtzVlSuppressionByAge } from '../../actions/CT/OTZ/OtzVlSuppression
 import { loadOtzVlSuppressionByCounty } from '../../actions/CT/OTZ/OtzVlSuppressionByCountyActions';
 import { loadOtzVlSuppressionByPartner } from '../../actions/CT/OTZ/OtzVlSuppressionByPartnerActions';
 
+import { loadCovidAdultPLHIVCurrentOnTreatment } from '../../actions/CT/Covid/covidAdultPLHIVCurrentOnTreatmentActions';
+
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
 import Loading from './../Shared/Loading';
@@ -388,7 +390,7 @@ const CT = () => {
                 dispatch(loadOvcViralSuppressionAmongOvcPatientsByGender());
                 break;
             case 'covid':
-                dispatch(loadCurrentOnArtOverview());
+                dispatch(loadCovidAdultPLHIVCurrentOnTreatment());
                 break;
             default:
                 break;

@@ -14,7 +14,7 @@ const COVIDFullyVaccinated = () => {
     const options = {
         chart: {
             type: "solidgauge",
-            height: "100%"
+            height: "70%"
         },
         legend: {
             enabled: true
@@ -86,7 +86,7 @@ const COVIDFullyVaccinated = () => {
                 dataLabels: {
                     useHTML: true,
                     format: '<div class="row">' +
-                        '<div class="col-12" style="text-align:center;font-size:40px; font-weight: bold;">210,000</div>' +
+                        '<div class="col-12" style="text-align:center;font-size:40px; font-weight: bold;">1,210,000</div>' +
                         '<div class="col-12" style="font-size:18px;">AS AT '+ moment().startOf('month').subtract(1, 'month').format('MMM YYYY').toUpperCase() +'</div></div>'
                 },
             }

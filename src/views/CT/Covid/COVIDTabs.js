@@ -25,7 +25,7 @@ const COVIDTabs = () => {
                 </NavItem>
 
                 <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'infection&Outcomes' })} onClick={() => { setActiveTab('infection&Outcomes') }}>INFECTIONS & OUTCOMES</NavLink>
+                    <NavLink className={classnames({ active: activeTab === 'infection&Outcomes' })} onClick={() => { setActiveTab('infection&Outcomes') }}>INFECTIONS & Management</NavLink>
                 </NavItem>
             </Nav>
             <TabContent activeTab={activeTab}>
