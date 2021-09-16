@@ -157,6 +157,8 @@ import { loadCovidAdultPLHIVPartiallyVaccinated } from '../../actions/CT/Covid/c
 import { loadCovidAdultPLHIVFullyVaccinated } from '../../actions/CT/Covid/covidAdultPLHIVFullyVaccinatedActions';
 import { loadCovidAdultPLHIVVaccinatedByAgeGroup } from '../../actions/CT/Covid/covidAdultPLHIVVaccinatedByAgeGroupActions';
 import { loadCovidAdultPLHIVVaccinatedByGender } from '../../actions/CT/Covid/covidAdultPLHIVVaccinatedByGenderActions';
+import { loadCovidAdultPLHIVVaccinatedByCounty } from '../../actions/CT/Covid/covidAdultPLHIVVaccinatedByCountyActions';
+import { loadCovidAdultPLHIVVaccinatedByPartner } from '../../actions/CT/Covid/covidAdultPLHIVVaccinatedByPartnerActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -399,6 +401,8 @@ const CT = () => {
                 dispatch(loadCovidAdultPLHIVFullyVaccinated());
                 dispatch(loadCovidAdultPLHIVVaccinatedByAgeGroup());
                 dispatch(loadCovidAdultPLHIVVaccinatedByGender());
+                dispatch(loadCovidAdultPLHIVVaccinatedByCounty());
+                dispatch(loadCovidAdultPLHIVVaccinatedByPartner());
                 break;
             default:
                 break;
