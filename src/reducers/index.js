@@ -166,6 +166,7 @@ import CovidAdultPLHIVCurrentOnTreatment from './CT/Covid/covidAdultPLHIVCurrent
 import CovidAdultPLHIVPartiallyVaccinated from './CT/Covid/covidAdultPLHIVPartiallyVaccinated';
 import CovidAdultPLHIVFullyVaccinated from './CT/Covid/covidAdultPLHIVFullyVaccinated';
 import CovidAdultPLHIVVaccinatedByAgeGroup from './CT/Covid/covidAdultPLHIVVaccinatedByAgeGroup';
+import CovidAdultPLHIVVaccinatedByGender from './CT/Covid/covidAdultPLHIVVaccinatedByGender';
 
 export default combineReducers({
     auth: authReducer,
@@ -326,5 +327,6 @@ export default combineReducers({
     CovidAdultPLHIVCurrentOnTreatment,
     CovidAdultPLHIVPartiallyVaccinated,
     CovidAdultPLHIVFullyVaccinated,
-    CovidAdultPLHIVVaccinatedByAgeGroup
+    CovidAdultPLHIVVaccinatedByAgeGroup,
+    CovidAdultPLHIVVaccinatedByGender
 });
