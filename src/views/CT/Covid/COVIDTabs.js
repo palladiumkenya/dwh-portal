@@ -16,6 +16,8 @@ const InfectionsAndOutcomesOverview = Loadable({ loader: () => import('./Infecti
 const COVIDSeverityOfInfectionByGender = Loadable({ loader: () => import('./COVIDSeverityOfInfectionByGender'), loading: Loading, delay: LOADING_DELAY });
 const COVIDTrendsOfSeverity = Loadable({ loader: () => import('./COVIDTrendsOfSeverity'), loading: Loading, delay: LOADING_DELAY });
 const COVIDAdmissionOfCovidSymptomatic = Loadable({ loader: () => import('./COVIDAdmissionOfCovid-19Symptomatic'), loading: Loading, delay: LOADING_DELAY });
+const COVIDAdmissionByAge = Loadable({ loader: () => import('./COVIDAdmissionByAge'), loading: Loading, delay: LOADING_DELAY });
+const COVIDManagementInHospital = Loadable({ loader: () => import('./COVIDManagementInHospital'), loading: Loading, delay: LOADING_DELAY });
 
 const COVIDTabs = () => {
     const [activeTab, setActiveTab] = useState('vaccination');
@@ -91,6 +93,17 @@ const COVIDTabs = () => {
                             <COVIDAdmissionOfCovidSymptomatic />
                         </Col>
                     </Row>
+                    <Row>
+                        <Col className={"col-12"}>
+                            <COVIDAdmissionByAge />
+                        </Col>
+                    </Row>
+                    {/*<Row>
+                        <Col className={"col-12"}>
+                            <COVIDManagementInHospital />
+                        </Col>
+                    </Row>*/}
+
                 </TabPane>
             </TabContent>
         </div>

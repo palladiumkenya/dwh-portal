@@ -6,10 +6,19 @@ import highchartsMore from "highcharts/highcharts-more.js";
 import solidGauge from "highcharts/modules/solid-gauge.js";
 import HighchartsReact from "highcharts-react-official";
 import moment from 'moment';
+import { useSelector } from 'react-redux';
+import * as covidSymptomaticInfectionsSelectors from '../../../selectors/CT/Covid/covidSymptomaticInfections';
+import { formatNumber } from '../../../utils/utils';
+import * as covidEverHadInfectionSelectors from '../../../selectors/CT/Covid/covidEverHadInfection';
 
 const COVIDPLHIVWhoHadSymptomaticInfection = () => {
     highchartsMore(Highcharts);
     solidGauge(Highcharts);
+
+    const symptomaticInfections = useSelector(covidSymptomaticInfectionsSelectors.getSymptomaticInfections);
+    const everHadInfection = useSelector(covidEverHadInfectionSelectors.getEverHadInfection);
+    let percent = Number(symptomaticInfections.symptomaticInfections) > 0 ? ((Number(symptomaticInfections.symptomaticInfections)/Number(everHadInfection.everHadInfection))*100) : 0;
+    percent = Math.round((percent + Number.EPSILON) * 100) / 100;
 
     const options = {
         chart: {
@@ -23,7 +32,7 @@ const COVIDPLHIVWhoHadSymptomaticInfection = () => {
             useHTML: true,
             text: `
           <div class="primary-card-body-subtitle-red">
-                10.1%
+                ${percent}%
           </div>
         `,
             align: 'center',
@@ -80,13 +89,13 @@ const COVIDPLHIVWhoHadSymptomaticInfection = () => {
                         color: "#69B34C",
                         radius: "100%",
                         innerRadius: "88%",
-                        y: 20
+                        y: percent
                     }
                 ],
                 dataLabels: {
                     useHTML: true,
                     format: '<div class="row">' +
-                        '<div class="col-12" style="text-align:center;font-size:40px; font-weight: bold;">200,000</div>' +
+                        '<div class="col-12" style="text-align:center;font-size:40px; font-weight: bold;">'+ formatNumber(symptomaticInfections.symptomaticInfections) +'</div>' +
                         '<div class="col-12" style="font-size:18px;">AS AT '+ moment().startOf('month').subtract(1, 'month').format('MMM YYYY').toUpperCase() +'</div></div>'
                 },
             }

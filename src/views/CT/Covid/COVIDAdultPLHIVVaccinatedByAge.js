@@ -8,7 +8,6 @@ import * as covidAdultPLHIVVaccinatedByAgeGroupSelectors from '../../../selector
 
 const COVIDAdultPLHIVVaccinatedByAge = () => {
     const [covidVaccinatedByAge, setCovidVaccinatedByAge] = useState({});
-
     const fullyVaccinated = useSelector(covidAdultPLHIVVaccinatedByAgeGroupSelectors.getAdultPLHIVVaccinatedByAgeGroups);
 
     const loadVaccinatedByAge = useCallback(async () => {

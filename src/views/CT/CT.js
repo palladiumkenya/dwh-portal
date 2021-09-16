@@ -168,6 +168,8 @@ import { loadCovidSeverityByGender } from '../../actions/CT/Covid/covidSeverityB
 import { loadCovidOverallAdmission } from '../../actions/CT/Covid/covidAdmissionOverallActions';
 import { loadCovidOverallAdmissionMales } from '../../actions/CT/Covid/covidAdmissionOverallMaleActions';
 import { loadCovidOverallAdmissionFemales } from '../../actions/CT/Covid/covidAdmissionOverallFemaleActions';
+import { loadCovidEverHadInfection } from '../../actions/CT/Covid/covidEverHadInfectionActions';
+import { loadCovidSymptomaticInfections } from '../../actions/CT/Covid/covidSymptomaticInfectionsActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -421,6 +423,8 @@ const CT = () => {
                 dispatch(loadCovidOverallAdmission());
                 dispatch(loadCovidOverallAdmissionMales());
                 dispatch(loadCovidOverallAdmissionFemales());
+                dispatch(loadCovidEverHadInfection());
+                dispatch(loadCovidSymptomaticInfections());
                 break;
             default:
                 break;
