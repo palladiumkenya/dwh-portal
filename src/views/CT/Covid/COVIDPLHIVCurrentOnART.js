@@ -6,10 +6,16 @@ import highchartsMore from "highcharts/highcharts-more.js";
 import solidGauge from "highcharts/modules/solid-gauge.js";
 import HighchartsReact from "highcharts-react-official";
 import moment from 'moment';
+import { useSelector } from 'react-redux';
+import * as covidPLHIVCurrentOnArtSelectors
+    from '../../../selectors/CT/Covid/covidPLHIVCurrentOnArt';
+import { formatNumber } from '../../../utils/utils';
 
 const COVIDPLHIVCurrentOnART = () => {
     highchartsMore(Highcharts);
     solidGauge(Highcharts);
+
+    const currentOnArtAdults = useSelector(covidPLHIVCurrentOnArtSelectors.getPLHIVCurrentOnArt);
 
     const options = {
         chart: {
@@ -78,7 +84,7 @@ const COVIDPLHIVCurrentOnART = () => {
                 dataLabels: {
                     useHTML: true,
                     format: '<div class="row">' +
-                        '<div class="col-12" style="text-align:center;font-size:40px; font-weight: bold;">710,000</div>' +
+                        '<div class="col-12" style="text-align:center;font-size:40px; font-weight: bold;">' + formatNumber(currentOnArtAdults.plhivCurrentOnArt) + ' </div>' +
                         '<div class="col-12" style="font-size:18px;">AS AT '+ moment().startOf('month').subtract(1, 'month').format('MMM YYYY').toUpperCase() +'</div></div>'
                 },
             }

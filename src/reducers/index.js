@@ -173,6 +173,7 @@ import CovidAdultPLHIVCurrentOnTreatmentByGender from './CT/Covid/covidAdultPLHI
 import CovidAdultPLHIVCurrentOnTreatmentByCounty from './CT/Covid/covidAdultPLHIVCurrentOnTreatmentByCounty';
 import CovidAdultPLHIVCurrentOnTreatmentByPartner from './CT/Covid/covidAdultPLHIVCurrentOnTreatmentByPartner';
 import CovidAdultPLHIVCurrentOnTreatmentByAgeGroup from './CT/Covid/covidAdultPLHIVCurrentOnTreatmentByAgeGroup';
+import CovidPLHIVCurrentOnArt from './CT/Covid/covidPLHIVCurrentOnArt';
 
 export default combineReducers({
     auth: authReducer,
@@ -340,5 +341,6 @@ export default combineReducers({
     CovidAdultPLHIVCurrentOnTreatmentByGender,
     CovidAdultPLHIVCurrentOnTreatmentByCounty,
     CovidAdultPLHIVCurrentOnTreatmentByPartner,
-    CovidAdultPLHIVCurrentOnTreatmentByAgeGroup
+    CovidAdultPLHIVCurrentOnTreatmentByAgeGroup,
+    CovidPLHIVCurrentOnArt
 });
