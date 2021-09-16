@@ -164,6 +164,10 @@ import { loadCovidAdultPLHIVCurrentOnTreatmentByPartner } from '../../actions/CT
 import { loadCovidAdultPLHIVCurrentOnTreatmentByCounty } from '../../actions/CT/Covid/covidAdultPLHIVCurrentOnTreatmentByCountyActions';
 import { loadCovidAdultPLHIVCurrentOnTreatmentByAgeGroup } from '../../actions/CT/Covid/covidAdultPLHIVCurrentOnTreatmentByAgeGroupActions';
 import { loadCovidPLHIVCurrentOnArt } from '../../actions/CT/Covid/covidPLHIVCurrentOnArtActions';
+import { loadCovidSeverityByGender } from '../../actions/CT/Covid/covidSeverityByGenderActions';
+import { loadCovidOverallAdmission } from '../../actions/CT/Covid/covidAdmissionOverallActions';
+import { loadCovidOverallAdmissionMales } from '../../actions/CT/Covid/covidAdmissionOverallMaleActions';
+import { loadCovidOverallAdmissionFemales } from '../../actions/CT/Covid/covidAdmissionOverallFemaleActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -413,6 +417,10 @@ const CT = () => {
                 dispatch(loadCovidAdultPLHIVCurrentOnTreatmentByCounty());
                 dispatch(loadCovidAdultPLHIVCurrentOnTreatmentByAgeGroup());
                 dispatch(loadCovidPLHIVCurrentOnArt());
+                dispatch(loadCovidSeverityByGender());
+                dispatch(loadCovidOverallAdmission());
+                dispatch(loadCovidOverallAdmissionMales());
+                dispatch(loadCovidOverallAdmissionFemales());
                 break;
             default:
                 break;

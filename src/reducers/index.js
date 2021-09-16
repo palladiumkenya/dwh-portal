@@ -174,6 +174,10 @@ import CovidAdultPLHIVCurrentOnTreatmentByCounty from './CT/Covid/covidAdultPLHI
 import CovidAdultPLHIVCurrentOnTreatmentByPartner from './CT/Covid/covidAdultPLHIVCurrentOnTreatmentByPartner';
 import CovidAdultPLHIVCurrentOnTreatmentByAgeGroup from './CT/Covid/covidAdultPLHIVCurrentOnTreatmentByAgeGroup';
 import CovidPLHIVCurrentOnArt from './CT/Covid/covidPLHIVCurrentOnArt';
+import CovidSeverityByGender from './CT/Covid/covidSeverityByGender';
+import CovidOverallAdmission from './CT/Covid/covidOverallAdmission';
+import CovidOverallAdmissionFemale from './CT/Covid/covidOverallAdmissionFemale';
+import CovidOverallAdmissionMale from './CT/Covid/covidOverallAdmissionMale';
 
 export default combineReducers({
     auth: authReducer,
@@ -342,5 +346,9 @@ export default combineReducers({
     CovidAdultPLHIVCurrentOnTreatmentByCounty,
     CovidAdultPLHIVCurrentOnTreatmentByPartner,
     CovidAdultPLHIVCurrentOnTreatmentByAgeGroup,
-    CovidPLHIVCurrentOnArt
+    CovidPLHIVCurrentOnArt,
+    CovidSeverityByGender,
+    CovidOverallAdmission,
+    CovidOverallAdmissionFemale,
+    CovidOverallAdmissionMale
 });
