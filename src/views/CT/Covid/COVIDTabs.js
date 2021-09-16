@@ -13,6 +13,9 @@ const COVIDAdultPLHIVVaccinatedByCounty = Loadable({ loader: () => import('./COV
 const COVIDAdultPLHIVVaccinatedByPartner = Loadable({ loader: () => import('./COVIDAdultPLHIVVaccinatedByPartner'), loading: Loading, delay: LOADING_DELAY });
 const COVIDTrendsOfAdultPLHIVVaccinationInTheLast12Months = Loadable({ loader: () => import('./COVIDTrendsOfAdultPLHIVVaccinationInTheLast12Months'), loading: Loading, delay: LOADING_DELAY });
 const InfectionsAndOutcomesOverview = Loadable({ loader: () => import('./InfectionsAndOutcomesOverview'), loading: Loading, delay: LOADING_DELAY });
+const COVIDSeverityOfInfectionByGender = Loadable({ loader: () => import('./COVIDSeverityOfInfectionByGender'), loading: Loading, delay: LOADING_DELAY });
+const COVIDTrendsOfSeverity = Loadable({ loader: () => import('./COVIDTrendsOfSeverity'), loading: Loading, delay: LOADING_DELAY });
+const COVIDAdmissionOfCovidSymptomatic = Loadable({ loader: () => import('./COVIDAdmissionOfCovid-19Symptomatic'), loading: Loading, delay: LOADING_DELAY });
 
 const COVIDTabs = () => {
     const [activeTab, setActiveTab] = useState('vaccination');
@@ -73,6 +76,19 @@ const COVIDTabs = () => {
                     <Row>
                         <Col className={"col-12"}>
                             <InfectionsAndOutcomesOverview />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={"col-6"}>
+                            <COVIDSeverityOfInfectionByGender />
+                        </Col>
+                        <Col className={"col-6"}>
+                            <COVIDTrendsOfSeverity />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={"col-12"}>
+                            <COVIDAdmissionOfCovidSymptomatic />
                         </Col>
                     </Row>
                 </TabPane>
