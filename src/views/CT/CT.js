@@ -155,6 +155,7 @@ import { loadOtzVlSuppressionByPartner } from '../../actions/CT/OTZ/OtzVlSuppres
 import { loadCovidAdultPLHIVCurrentOnTreatment } from '../../actions/CT/Covid/covidAdultPLHIVCurrentOnTreatmentActions';
 import { loadCovidAdultPLHIVPartiallyVaccinated } from '../../actions/CT/Covid/covidAdultPLHIVPartiallyVaccinatedActions';
 import { loadCovidAdultPLHIVFullyVaccinated } from '../../actions/CT/Covid/covidAdultPLHIVFullyVaccinatedActions';
+import { loadCovidAdultPLHIVVaccinatedByAgeGroup } from '../../actions/CT/Covid/covidAdultPLHIVVaccinatedByAgeGroupActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -395,6 +396,7 @@ const CT = () => {
                 dispatch(loadCovidAdultPLHIVCurrentOnTreatment());
                 dispatch(loadCovidAdultPLHIVPartiallyVaccinated());
                 dispatch(loadCovidAdultPLHIVFullyVaccinated());
+                dispatch(loadCovidAdultPLHIVVaccinatedByAgeGroup());
                 break;
             default:
                 break;

@@ -2,21 +2,26 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
+import { useSelector } from 'react-redux';
+
+import * as covidAdultPLHIVVaccinatedByAgeGroupSelectors from '../../../selectors/CT/Covid/covidAdultPLHIVVaccinatedByAgeGroup';
 
 const COVIDAdultPLHIVVaccinatedByAge = () => {
     const [covidVaccinatedByAge, setCovidVaccinatedByAge] = useState({});
+
+    const fullyVaccinated = useSelector(covidAdultPLHIVVaccinatedByAgeGroupSelectors.getAdultPLHIVVaccinatedByAgeGroups);
 
     const loadVaccinatedByAge = useCallback(async () => {
         setCovidVaccinatedByAge({
             title: { text: '' },
             plotOptions: { column: { stacking: 'percent' } },
-            xAxis: [{ categories: ['18-25 YRS', '26-35 YRS', '36-45 YRS', '46-55 YRS', '56-65 YRS', '>=66 YRS'], crosshair: true }],
+            xAxis: [{ categories: fullyVaccinated.ageGroups, crosshair: true }],
             yAxis: [{ title: { text: 'Percentage of Patients' }}],
             tooltip: { shared: true },
             legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'PARTIALLY VACCINATED', data: [45, 80, 30, 25, 66, 22], type: 'column', color: "#F08532", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'FULLY VACCINATED', data: [55, 20, 78, 90, 21, 22], type: 'column', color: "#69B34C", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'PARTIALLY VACCINATED', data: fullyVaccinated.partiallyVaccinated, type: 'column', color: "#F08532", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'FULLY VACCINATED', data: fullyVaccinated.fullyVaccinated, type: 'column', color: "#69B34C", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, []);

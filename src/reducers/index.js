@@ -165,6 +165,7 @@ import otzVlSuppressionByPartner from './CT/OTZ/otzVlSuppressionByPartner';
 import CovidAdultPLHIVCurrentOnTreatment from './CT/Covid/covidAdultPLHIVCurrentOnTreatment';
 import CovidAdultPLHIVPartiallyVaccinated from './CT/Covid/covidAdultPLHIVPartiallyVaccinated';
 import CovidAdultPLHIVFullyVaccinated from './CT/Covid/covidAdultPLHIVFullyVaccinated';
+import CovidAdultPLHIVVaccinatedByAgeGroup from './CT/Covid/covidAdultPLHIVVaccinatedByAgeGroup';
 
 export default combineReducers({
     auth: authReducer,
@@ -324,5 +325,6 @@ export default combineReducers({
 
     CovidAdultPLHIVCurrentOnTreatment,
     CovidAdultPLHIVPartiallyVaccinated,
-    CovidAdultPLHIVFullyVaccinated
+    CovidAdultPLHIVFullyVaccinated,
+    CovidAdultPLHIVVaccinatedByAgeGroup
 });
