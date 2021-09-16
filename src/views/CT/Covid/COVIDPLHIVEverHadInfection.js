@@ -6,10 +6,21 @@ import highchartsMore from "highcharts/highcharts-more.js";
 import solidGauge from "highcharts/modules/solid-gauge.js";
 import HighchartsReact from "highcharts-react-official";
 import moment from 'moment';
+import { useSelector } from 'react-redux';
+
+import * as covidEverHadInfectionSelectors
+    from '../../../selectors/CT/Covid/covidEverHadInfection';
+import { formatNumber } from '../../../utils/utils';
+import * as covidPLHIVCurrentOnArtSelectors from '../../../selectors/CT/Covid/covidPLHIVCurrentOnArt';
 
 const COVIDPLHIVEverHadInfection = () => {
     highchartsMore(Highcharts);
     solidGauge(Highcharts);
+    const everHadInfection = useSelector(covidEverHadInfectionSelectors.getEverHadInfection);
+    const currentOnArtAdults = useSelector(covidPLHIVCurrentOnArtSelectors.getPLHIVCurrentOnArt);
+    let percent = Number(everHadInfection) > 0 ? ((Number(everHadInfection)/Number(currentOnArtAdults))*100) : 0;
+    percent = Math.round((percent + Number.EPSILON) * 100) / 100;
+
 
     const options = {
         chart: {
@@ -23,7 +34,7 @@ const COVIDPLHIVEverHadInfection = () => {
             useHTML: true,
             text: `
           <div class="primary-card-body-subtitle-red">
-                20.1%
+                ${percent}%
           </div>
         `,
             align: 'center',
@@ -80,13 +91,13 @@ const COVIDPLHIVEverHadInfection = () => {
                         color: "#FC2626",
                         radius: "100%",
                         innerRadius: "88%",
-                        y: 36
+                        y: percent
                     }
                 ],
                 dataLabels: {
                     useHTML: true,
                     format: '<div class="row">' +
-                        '<div class="col-12" style="text-align:center;font-size:40px; font-weight: bold;">350,000</div>' +
+                        '<div class="col-12" style="text-align:center;font-size:40px; font-weight: bold;">'+ formatNumber(everHadInfection.everHadInfection) +'</div>' +
                         '<div class="col-12" style="font-size:18px;">AS AT '+ moment().startOf('month').subtract(1, 'month').format('MMM YYYY').toUpperCase() +'</div></div>'
                 },
             }

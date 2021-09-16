@@ -178,6 +178,8 @@ import CovidSeverityByGender from './CT/Covid/covidSeverityByGender';
 import CovidOverallAdmission from './CT/Covid/covidOverallAdmission';
 import CovidOverallAdmissionFemale from './CT/Covid/covidOverallAdmissionFemale';
 import CovidOverallAdmissionMale from './CT/Covid/covidOverallAdmissionMale';
+import CovidEverHadInfection from './CT/Covid/covidEverHadInfection';
+import CovidSymptomaticInfections from './CT/Covid/covidSymptomaticInfections';
 
 export default combineReducers({
     auth: authReducer,
@@ -350,5 +352,7 @@ export default combineReducers({
     CovidSeverityByGender,
     CovidOverallAdmission,
     CovidOverallAdmissionFemale,
-    CovidOverallAdmissionMale
+    CovidOverallAdmissionMale,
+    CovidEverHadInfection,
+    CovidSymptomaticInfections
 });
