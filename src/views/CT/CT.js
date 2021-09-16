@@ -159,6 +159,10 @@ import { loadCovidAdultPLHIVVaccinatedByAgeGroup } from '../../actions/CT/Covid/
 import { loadCovidAdultPLHIVVaccinatedByGender } from '../../actions/CT/Covid/covidAdultPLHIVVaccinatedByGenderActions';
 import { loadCovidAdultPLHIVVaccinatedByCounty } from '../../actions/CT/Covid/covidAdultPLHIVVaccinatedByCountyActions';
 import { loadCovidAdultPLHIVVaccinatedByPartner } from '../../actions/CT/Covid/covidAdultPLHIVVaccinatedByPartnerActions';
+import { loadCovidAdultPLHIVCurrentOnTreatmentByGender } from '../../actions/CT/Covid/covidAdultPLHIVCurrentOnTreatmentByGenderActions';
+import { loadCovidAdultPLHIVCurrentOnTreatmentByPartner } from '../../actions/CT/Covid/covidAdultPLHIVCurrentOnTreatmentByPartnerActions';
+import { loadCovidAdultPLHIVCurrentOnTreatmentByCounty } from '../../actions/CT/Covid/covidAdultPLHIVCurrentOnTreatmentByCountyActions';
+import { loadCovidAdultPLHIVCurrentOnTreatmentByAgeGroup } from '../../actions/CT/Covid/covidAdultPLHIVCurrentOnTreatmentByAgeGroupActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -403,6 +407,10 @@ const CT = () => {
                 dispatch(loadCovidAdultPLHIVVaccinatedByGender());
                 dispatch(loadCovidAdultPLHIVVaccinatedByCounty());
                 dispatch(loadCovidAdultPLHIVVaccinatedByPartner());
+                dispatch(loadCovidAdultPLHIVCurrentOnTreatmentByGender());
+                dispatch(loadCovidAdultPLHIVCurrentOnTreatmentByPartner());
+                dispatch(loadCovidAdultPLHIVCurrentOnTreatmentByCounty());
+                dispatch(loadCovidAdultPLHIVCurrentOnTreatmentByAgeGroup());
                 break;
             default:
                 break;
