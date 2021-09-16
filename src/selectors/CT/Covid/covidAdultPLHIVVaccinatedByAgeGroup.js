@@ -3,12 +3,15 @@ import { createSelector } from 'reselect';
 
 const listUnfiltered = state => state.CovidAdultPLHIVVaccinatedByAgeGroup.listUnfiltered;
 const listFiltered = state => state.CovidAdultPLHIVVaccinatedByAgeGroup.listFiltered;
+const listUnfilteredAgeGroup = state => state.CovidAdultPLHIVCurrentOnTreatmentByAgeGroup.listUnfiltered;
+const listFilteredAgeGroup = state => state.CovidAdultPLHIVCurrentOnTreatmentByAgeGroup.listFiltered;
 const filtered = state => state.filters.filtered;
 
 export const getAdultPLHIVVaccinatedByAgeGroups = createSelector(
-    [listUnfiltered, listFiltered, filtered],
-    (listUnfiltered, listFiltered, filtered) => {
+    [listUnfiltered, listUnfilteredAgeGroup, listFiltered, listFilteredAgeGroup, filtered],
+    (listUnfiltered, listUnfilteredAgeGroup, listFiltered, listFilteredAgeGroup, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
+        const listAgeGroup = filtered ? listFilteredAgeGroup : listUnfilteredAgeGroup;
 
         let ageGroups = [
             "15-19",
@@ -28,17 +31,28 @@ export const getAdultPLHIVVaccinatedByAgeGroups = createSelector(
 
         for (let j = 0; j < ageGroups.length; j++) {
             const filteredAgeGroups = list.filter(obj => obj.AgeGroup === ageGroups[j]);
+            const ageGroupAdults = listAgeGroup.filter(obj => obj.AgeGroup === ageGroups[j]);
+            let totalAgeGroupAdults = 0;
+            if (ageGroupAdults.length > 0) {
+                totalAgeGroupAdults = ageGroupAdults[0].Adults;
+            }
+
             if (filteredAgeGroups.length > 0) {
                 const filterFully = filteredAgeGroups.filter(obj => obj.VaccinationStatus === 'Fully Vaccinated');
                 const filterPartial = filteredAgeGroups.filter(obj => obj.VaccinationStatus === 'Partially Vaccinated');
                 if (filterFully.length > 0) {
-                    fullyVaccinated.push(Number(filterFully[0].Num));
+                    let percent = Number(filterFully[0].Num) > 0 ? ((Number(filterFully[0].Num)/Number(totalAgeGroupAdults))*100) : 0;
+                    percent = Math.round((percent + Number.EPSILON) * 100) / 100;
+
+                    fullyVaccinated.push(percent);
                 } else {
                     fullyVaccinated.push(0);
                 }
 
                 if (filterPartial.length > 0) {
-                    partiallyVaccinated.push(Number(filterPartial[0].Num));
+                    let percent = Number(filterPartial[0].Num) > 0 ? ((Number(filterPartial[0].Num)/Number(totalAgeGroupAdults))*100) : 0;
+                    percent = Math.round((percent + Number.EPSILON) * 100) / 100;
+                    partiallyVaccinated.push(percent);
                 } else {
                     partiallyVaccinated.push(0);
                 }
