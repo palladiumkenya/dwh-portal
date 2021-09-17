@@ -14,14 +14,14 @@ const COVIDAdultPLHIVVaccinatedByGender = () => {
     const loadVaccinatedBySex = useCallback(async () => {
         setCovidVaccinatedByGender({
             title: { text: '' },
-            plotOptions: { column: { stacking: 'percent' } },
+            plotOptions: { column: { stacking: 'normal' } },
             xAxis: [{ categories: vaccinated.gender, crosshair: true }],
             yAxis: [{ title: { text: 'Percentage of Patients' }}],
             tooltip: { shared: true },
             legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'PARTIALLY VACCINATED', data: vaccinated.partiallyVaccinated, type: 'column', color: "#F08532", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'FULLY VACCINATED', data: vaccinated.fullyVaccinated, type: 'column', color: "#69B34C", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'PARTIALLY VACCINATED', data: vaccinated.partiallyVaccinated, type: 'column', color: "#F08532", tooltip: { valueSuffix: '% ({point.text:.0f})' } },
+                { name: 'FULLY VACCINATED', data: vaccinated.fullyVaccinated, type: 'column', color: "#69B34C", tooltip: { valueSuffix: '% ({point.text:.0f})' } },
             ]
         });
     }, []);

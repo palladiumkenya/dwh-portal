@@ -180,6 +180,7 @@ import CovidOverallAdmissionFemale from './CT/Covid/covidOverallAdmissionFemale'
 import CovidOverallAdmissionMale from './CT/Covid/covidOverallAdmissionMale';
 import CovidEverHadInfection from './CT/Covid/covidEverHadInfection';
 import CovidSymptomaticInfections from './CT/Covid/covidSymptomaticInfections';
+import CovidOverallMissedAppointments from './CT/Covid/covidOverallMissedAppointments';
 
 export default combineReducers({
     auth: authReducer,
@@ -354,5 +355,6 @@ export default combineReducers({
     CovidOverallAdmissionFemale,
     CovidOverallAdmissionMale,
     CovidEverHadInfection,
-    CovidSymptomaticInfections
+    CovidSymptomaticInfections,
+    CovidOverallMissedAppointments
 });

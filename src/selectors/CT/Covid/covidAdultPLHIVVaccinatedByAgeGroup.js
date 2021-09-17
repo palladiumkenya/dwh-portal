@@ -44,21 +44,51 @@ export const getAdultPLHIVVaccinatedByAgeGroups = createSelector(
                     let percent = Number(filterFully[0].Num) > 0 ? ((Number(filterFully[0].Num)/Number(totalAgeGroupAdults))*100) : 0;
                     percent = Math.round((percent + Number.EPSILON) * 100) / 100;
 
-                    fullyVaccinated.push(percent);
+                    fullyVaccinated.push(
+                        {
+                            y: percent,
+                            text: filterFully[0].Num
+                        }
+                    );
                 } else {
-                    fullyVaccinated.push(0);
+                    fullyVaccinated.push(
+                        {
+                            y: 0,
+                            text: 0
+                        }
+                    );
                 }
 
                 if (filterPartial.length > 0) {
                     let percent = Number(filterPartial[0].Num) > 0 ? ((Number(filterPartial[0].Num)/Number(totalAgeGroupAdults))*100) : 0;
                     percent = Math.round((percent + Number.EPSILON) * 100) / 100;
-                    partiallyVaccinated.push(percent);
+                    partiallyVaccinated.push(
+                        {
+                            y: percent,
+                            text: filterPartial[0].Num
+                        }
+                    );
                 } else {
-                    partiallyVaccinated.push(0);
+                    partiallyVaccinated.push(
+                        {
+                            y: 0,
+                            text: 0
+                        }
+                    );
                 }
             } else {
-                fullyVaccinated.push(0);
-                partiallyVaccinated.push(0);
+                fullyVaccinated.push(
+                    {
+                        y: 0,
+                        text: 0
+                    }
+                );
+                partiallyVaccinated.push(
+                    {
+                        y: 0,
+                        text: 0
+                    }
+                );
             }
         }
 
