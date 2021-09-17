@@ -30,25 +30,74 @@ export const getAdultPLHIVVaccinatedByPartner = createSelector(
                 const filterPartial = filteredPartners.filter(obj => obj.VaccinationStatus === 'Partially Vaccinated');
 
                 if (filterFully.length > 0) {
-                    let percent = Number(filterFully[0].Adults) > 0 ? ((Number(filterFully[0].Adults)/Number(totalPartnerAdults))*100) : 0;
+                    let percent = Number(filterFully[0].Num) > 0 ? ((Number(filterFully[0].Num)/Number(totalPartnerAdults))*100) : 0;
                     percent = Math.round((percent + Number.EPSILON) * 100) / 100;
-                    fullyVaccinated.push(percent);
+                    fullyVaccinated.push(
+                        {
+                            y: percent,
+                            text: filterFully[0].Num,
+                            partner: partners[j]
+                        }
+                    );
                 } else {
-                    fullyVaccinated.push(0);
+                    fullyVaccinated.push(
+                        {
+                            y: 0,
+                            text: 0,
+                            partner: partners[j]
+                        }
+                    );
                 }
 
                 if (filterPartial.length > 0) {
                     let percent = Number(filterPartial[0].Num) > 0 ? ((Number(filterPartial[0].Num)/Number(totalPartnerAdults))*100) : 0;
                     percent = Math.round((percent + Number.EPSILON) * 100) / 100;
-                    partiallyVaccinated.push(percent);
+                    partiallyVaccinated.push(
+                        {
+                            y: percent,
+                            text: filterPartial[0].Num,
+                            partner: partners[j]
+                        }
+                    );
                 } else {
-                    partiallyVaccinated.push(0);
+                    partiallyVaccinated.push(
+                        {
+                            y: 0,
+                            text: 0,
+                            partner: partners[j]
+                        }
+                    );
                 }
             } else {
-                fullyVaccinated.push(0);
-                partiallyVaccinated.push(0);
+                fullyVaccinated.push(
+                    {
+                        y: 0,
+                        text: 0,
+                        partner: partners[j]
+                    }
+                );
+                partiallyVaccinated.push(
+                    {
+                        y: 0,
+                        text: 0,
+                        partner: partners[j]
+                    }
+                );
             }
         }
+
+        fullyVaccinated.sort((a, b) => {
+            return b.y - a.y;
+        });
+        partners = fullyVaccinated.map(obj => obj.partner);
+        const orderedPartially = [];
+        for (let i = 0; i < fullyVaccinated.length; i++) {
+            const obj = partiallyVaccinated.filter(obj => obj.partner === fullyVaccinated[i].partner);
+            if (obj.length > 0) {
+                orderedPartially.push(obj[0]);
+            }
+        }
+        partiallyVaccinated = orderedPartially;
 
         return { partners, fullyVaccinated, partiallyVaccinated };
     }

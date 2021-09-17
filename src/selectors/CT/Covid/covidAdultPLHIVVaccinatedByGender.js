@@ -17,7 +17,7 @@ export const getAdultPLHIVVaccinatedByGender = createSelector(
         let totalFemales = 0;
         const filterMales = listGender.filter(obj => obj.Gender === "Male");
         const filterFemales = listGender.filter(obj => obj.Gender === "Female");
-        if (filterMales > 0) {
+        if (filterMales.length > 0) {
             totalMales = filterMales[0].Adults;
         }
         if (filterFemales.length > 0) {
@@ -40,21 +40,51 @@ export const getAdultPLHIVVaccinatedByGender = createSelector(
                 if (filterFully.length > 0) {
                     let percent = Number(filterFully[0].Num) > 0 ? ((Number(filterFully[0].Num)/Number(currentOnArtAdults))*100) : 0;
                     percent = Math.round((percent + Number.EPSILON) * 100) / 100;
-                    fullyVaccinated.push(percent);
+                    fullyVaccinated.push(
+                        {
+                            y: percent,
+                            text: filterFully[0].Num
+                        }
+                    );
                 } else {
-                    fullyVaccinated.push(0);
+                    fullyVaccinated.push(
+                        {
+                            y: 0,
+                            text: 0
+                        }
+                    );
                 }
 
                 if (filterPartial.length > 0) {
                     let percent = Number(filterPartial[0].Num) > 0 ? ((Number(filterPartial[0].Num)/Number(currentOnArtAdults))*100) : 0;
                     percent = Math.round((percent + Number.EPSILON) * 100) / 100;
-                    partiallyVaccinated.push(percent);
+                    partiallyVaccinated.push(
+                        {
+                            y: percent,
+                            text: filterPartial[0].Num
+                        }
+                    );
                 } else {
-                    partiallyVaccinated.push(0);
+                    partiallyVaccinated.push(
+                        {
+                            y: 0,
+                            text: 0
+                        }
+                    );
                 }
             } else {
-                fullyVaccinated.push(0);
-                partiallyVaccinated.push(0);
+                fullyVaccinated.push(
+                    {
+                        y: 0,
+                        text: 0
+                    }
+                );
+                partiallyVaccinated.push(
+                    {
+                        y: 0,
+                        text: 0
+                    }
+                );
             }
         }
 

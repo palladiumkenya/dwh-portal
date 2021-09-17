@@ -170,6 +170,7 @@ import { loadCovidOverallAdmissionMales } from '../../actions/CT/Covid/covidAdmi
 import { loadCovidOverallAdmissionFemales } from '../../actions/CT/Covid/covidAdmissionOverallFemaleActions';
 import { loadCovidEverHadInfection } from '../../actions/CT/Covid/covidEverHadInfectionActions';
 import { loadCovidSymptomaticInfections } from '../../actions/CT/Covid/covidSymptomaticInfectionsActions';
+import { loadCovidOverallMissedAppointment } from '../../actions/CT/Covid/covidOverallMissedAppointmentsActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -425,6 +426,7 @@ const CT = () => {
                 dispatch(loadCovidOverallAdmissionFemales());
                 dispatch(loadCovidEverHadInfection());
                 dispatch(loadCovidSymptomaticInfections());
+                dispatch(loadCovidOverallMissedAppointment());
                 break;
             default:
                 break;

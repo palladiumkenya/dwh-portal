@@ -13,14 +13,14 @@ const COVIDAdultPLHIVVaccinatedByAge = () => {
     const loadVaccinatedByAge = useCallback(async () => {
         setCovidVaccinatedByAge({
             title: { text: '' },
-            plotOptions: { column: { stacking: 'percent' } },
+            plotOptions: { column: { stacking: 'normal' } },
             xAxis: [{ categories: fullyVaccinated.ageGroups, crosshair: true }],
             yAxis: [{ title: { text: 'Percentage of Patients' }}],
             tooltip: { shared: true },
             legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'PARTIALLY VACCINATED', data: fullyVaccinated.partiallyVaccinated, type: 'column', color: "#F08532", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'FULLY VACCINATED', data: fullyVaccinated.fullyVaccinated, type: 'column', color: "#69B34C", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'PARTIALLY VACCINATED', data: fullyVaccinated.partiallyVaccinated, type: 'column', color: "#F08532", tooltip: { valueSuffix: '% ({point.text:.0f})' } },
+                { name: 'FULLY VACCINATED', data: fullyVaccinated.fullyVaccinated, type: 'column', color: "#69B34C", tooltip: { valueSuffix: '% ({point.text:.0f})' } },
             ]
         });
     }, []);

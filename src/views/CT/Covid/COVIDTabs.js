@@ -18,6 +18,7 @@ const COVIDTrendsOfSeverity = Loadable({ loader: () => import('./COVIDTrendsOfSe
 const COVIDAdmissionOfCovidSymptomatic = Loadable({ loader: () => import('./COVIDAdmissionOfCovid-19Symptomatic'), loading: Loading, delay: LOADING_DELAY });
 const COVIDAdmissionByAge = Loadable({ loader: () => import('./COVIDAdmissionByAge'), loading: Loading, delay: LOADING_DELAY });
 const COVIDManagementInHospital = Loadable({ loader: () => import('./COVIDManagementInHospital'), loading: Loading, delay: LOADING_DELAY });
+const COVIDPercentageWhoMissedAppointment = Loadable({ loader: () => import('./COVIDPercentageWhoMissedAppointment'), loading: Loading, delay: LOADING_DELAY });
 
 const COVIDTabs = () => {
     const [activeTab, setActiveTab] = useState('vaccination');
@@ -30,7 +31,7 @@ const COVIDTabs = () => {
                 </NavItem>
 
                 <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'infection&Outcomes' })} onClick={() => { setActiveTab('infection&Outcomes') }}>INFECTIONS & Management</NavLink>
+                    <NavLink className={classnames({ active: activeTab === 'infection&Outcomes' })} onClick={() => { setActiveTab('infection&Outcomes') }}>INFECTIONS & MANAGEMENT</NavLink>
                 </NavItem>
             </Nav>
             <TabContent activeTab={activeTab}>
@@ -98,12 +99,11 @@ const COVIDTabs = () => {
                             <COVIDAdmissionByAge />
                         </Col>
                     </Row>
-                    {/*<Row>
+                    <Row>
                         <Col className={"col-12"}>
-                            <COVIDManagementInHospital />
+                            <COVIDPercentageWhoMissedAppointment />
                         </Col>
-                    </Row>*/}
-
+                    </Row>
                 </TabPane>
             </TabContent>
         </div>
