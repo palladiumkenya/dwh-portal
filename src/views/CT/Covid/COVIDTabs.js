@@ -19,6 +19,9 @@ const COVIDAdmissionOfCovidSymptomatic = Loadable({ loader: () => import('./COVI
 const COVIDAdmissionByAge = Loadable({ loader: () => import('./COVIDAdmissionByAge'), loading: Loading, delay: LOADING_DELAY });
 const COVIDManagementInHospital = Loadable({ loader: () => import('./COVIDManagementInHospital'), loading: Loading, delay: LOADING_DELAY });
 const COVIDPercentageWhoMissedAppointment = Loadable({ loader: () => import('./COVIDPercentageWhoMissedAppointment'), loading: Loading, delay: LOADING_DELAY });
+const COVIDPercentageWhoMissedAppointmentByAge = Loadable({ loader: () => import('./COVIDPercentageWhoMissedAppointmentByAge'), loading: Loading, delay: LOADING_DELAY });
+const COVIDPercentageWhoMissedAppointmentByCounty = Loadable( { loader: () => import('./COVIDPercentageWhoMissedAppointmentByCounty'), loading: Loading, delay: LOADING_DELAY });
+const COVIDPercentageWhoMissedAppointmentByPartner = Loadable( { loader: () => import('./COVIDPercentageWhoMissedAppointmentByPartner'), loading: Loading, delay: LOADING_DELAY });
 
 const COVIDTabs = () => {
     const [activeTab, setActiveTab] = useState('vaccination');
@@ -102,6 +105,21 @@ const COVIDTabs = () => {
                     <Row>
                         <Col className={"col-12"}>
                             <COVIDPercentageWhoMissedAppointment />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={"col-12"}>
+                            <COVIDPercentageWhoMissedAppointmentByAge />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={"col-12"}>
+                            <COVIDPercentageWhoMissedAppointmentByCounty />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={"col-12"}>
+                            <COVIDPercentageWhoMissedAppointmentByPartner />
                         </Col>
                     </Row>
                 </TabPane>
