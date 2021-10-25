@@ -181,6 +181,9 @@ import CovidOverallAdmissionMale from './CT/Covid/covidOverallAdmissionMale';
 import CovidEverHadInfection from './CT/Covid/covidEverHadInfection';
 import CovidSymptomaticInfections from './CT/Covid/covidSymptomaticInfections';
 import CovidOverallMissedAppointments from './CT/Covid/covidOverallMissedAppointments';
+import CovidPercentageMissedAppointmentsByAgeGroup from './CT/Covid/covidPercentageMissedAppointmentsByAgeGroup';
+import CovidPercentageMissedAppointmentsByCounty from './CT/Covid/covidPercentageMissedAppointmentsByCounty';
+import CovidPercentageMissedAppointmentsByPartner from './CT/Covid/covidPercentageMissedAppointmentsByPartner';
 
 export default combineReducers({
     auth: authReducer,
@@ -356,5 +359,8 @@ export default combineReducers({
     CovidOverallAdmissionMale,
     CovidEverHadInfection,
     CovidSymptomaticInfections,
-    CovidOverallMissedAppointments
+    CovidOverallMissedAppointments,
+    CovidPercentageMissedAppointmentsByAgeGroup,
+    CovidPercentageMissedAppointmentsByCounty,
+    CovidPercentageMissedAppointmentsByPartner
 });

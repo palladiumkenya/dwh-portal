@@ -1,10 +1,52 @@
 import { Card, CardBody, CardHeader } from 'reactstrap';
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import { useSelector } from 'react-redux';
+import * as covidPercentageWhoMissedAppointmentsByPartnerSelectors
+    from '../../../selectors/CT/Covid/covidPercentageWhoMissedAppointmentsByPartner';
 
 const COVIDPercentageWhoMissedAppointmentByPartner = () => {
     const [missedAppointmentsByPartner, setMissedAppointmentsByPartner] = useState({});
+    const percentageOfMissedAppointmentsByPartner = useSelector(covidPercentageWhoMissedAppointmentsByPartnerSelectors.getPercentageWhoMissedAppointmentsByPartner);
+
+    const loadMissedAppointmentsByPartner = useCallback(async () => {
+        setMissedAppointmentsByPartner({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: ''
+            },
+            xAxis: {
+                categories: percentageOfMissedAppointmentsByPartner.map(obj => obj.partner),
+                crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                max: 100,
+                title: {
+                    text: 'PERCENTAGE OF PATIENTS'
+                },
+                labels: { format: '{value} %' }
+            },
+            legend: {
+                enabled: false
+            },
+            plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.y + '%'; } }, tooltip: { valueSuffix: '% ({point.text:.0f})' }, }},
+            series: [
+                {
+                    name: 'PERCENTAGE OF MISSED APPOINTMENT DUE TO COVID BY PARTNER',
+                    data: percentageOfMissedAppointmentsByPartner,
+                    color: '#14084D',
+                }
+            ]
+        });
+    }, [percentageOfMissedAppointmentsByPartner]);
+
+    useEffect(() => {
+        loadMissedAppointmentsByPartner();
+    }, [loadMissedAppointmentsByPartner]);
 
     return (
         <Card className="trends-card">
