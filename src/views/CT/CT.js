@@ -171,6 +171,9 @@ import { loadCovidOverallAdmissionFemales } from '../../actions/CT/Covid/covidAd
 import { loadCovidEverHadInfection } from '../../actions/CT/Covid/covidEverHadInfectionActions';
 import { loadCovidSymptomaticInfections } from '../../actions/CT/Covid/covidSymptomaticInfectionsActions';
 import { loadCovidOverallMissedAppointment } from '../../actions/CT/Covid/covidOverallMissedAppointmentsActions';
+import { loadCovidPercentageWhoMissedAppointmentsByAgeGroup } from '../../actions/CT/Covid/covidPercentageWhoMissedAppointmentsByAgeGroupActions';
+import { loadCovidPercentageWhoMissedAppointmentsByCounty } from '../../actions/CT/Covid/covidPercentageWhoMissedAppointmentsByCountyActions';
+import { loadCovidPercentageWhoMissedAppointmentsByPartner } from '../../actions/CT/Covid/covidPercentageWhoMissedAppointmentsByPartnerActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -427,6 +430,9 @@ const CT = () => {
                 dispatch(loadCovidEverHadInfection());
                 dispatch(loadCovidSymptomaticInfections());
                 dispatch(loadCovidOverallMissedAppointment());
+                dispatch(loadCovidPercentageWhoMissedAppointmentsByAgeGroup());
+                dispatch(loadCovidPercentageWhoMissedAppointmentsByCounty());
+                dispatch(loadCovidPercentageWhoMissedAppointmentsByPartner());
                 break;
             default:
                 break;
