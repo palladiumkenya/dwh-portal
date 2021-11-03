@@ -12,14 +12,14 @@ export const getOtzVlSuppressionByCounty = createSelector(
 
         const data = [];
         const suppressionCategories = ['HVL', 'LVL', 'VL'];
-        let counties = list.map(obj => obj.County.toUpperCase());
+        let counties = list.map(obj => (obj && obj.County) ? obj.County.toUpperCase() : "");
         counties = _.uniq(counties);
 
         for (const suppressionCategory of suppressionCategories) {
             let vlSuppression = 0;
             const catArray = [];
             for (const county of counties) {
-                const arrayFilter = list.filter(obj => obj.Last12MVLResult === suppressionCategory && obj.County.toUpperCase() === county);
+                const arrayFilter = list.filter(obj => obj.Last12MVLResult === suppressionCategory && ((obj && obj.County) ? obj.County.toUpperCase() : "") === county);
                 if (arrayFilter.length > 0) {
                     vlSuppression = arrayFilter[0].vlSuppression;
                 } else {

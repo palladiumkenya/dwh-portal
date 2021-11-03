@@ -5,7 +5,7 @@ import { getAll } from '../../../views/Shared/Api';
 
 export const loadAdverseEventsProportionOfPlHivAeRelatedToArt = () => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
-        moment(getState().adverseEventsProportionOfPlHivWithAeByCausativeDrugs.lastFetch),
+        moment(getState().adverseEventsProportionOfPlHivAeRelatedToArtDrugs.lastFetch),
         'minutes'
     );
     if (getState().ui.ctTab !== 'advEv') {
