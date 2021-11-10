@@ -3,14 +3,26 @@ import Highcharts from '../../utils/highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../Shared/Api';
 import countyMapping from '../Shared/countyMapping.json';
+import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 const HomeSuppressionByCountyMap = () => {
+    const filters = useSelector(state => state.filters);
     const [suppressionByCounty, setHomeSuppressionByCountyMap] = useState({});
 
     const loadSuppressionByCounty = useCallback(async () => {
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
+        };
         const data = [];
         const mappedCounties = countyMapping;
-        const result = await getAll('care-treatment/vlUptakeByCounty', []);
+        const result = await getAll('care-treatment/vlUptakeByCounty', params);
         for (let i = 0; i < result.length; i++) {
             let resultCounty = result[i].county;
             resultCounty = resultCounty.toLowerCase();
@@ -30,7 +42,7 @@ const HomeSuppressionByCountyMap = () => {
                 }
             }
         }
-        
+
         setHomeSuppressionByCountyMap({
             chart: { map: 'custom/ke-county' },
             title: { text: '' },
@@ -52,7 +64,7 @@ const HomeSuppressionByCountyMap = () => {
                 { name: 'Suppression', data: data, joinBy: ['CC_1', 'id'], states: { hover: { color: '#000000' } } }
             ]
         });
-    }, []);
+    }, [filters]);
 
     useEffect(() => {
         loadSuppressionByCounty();
