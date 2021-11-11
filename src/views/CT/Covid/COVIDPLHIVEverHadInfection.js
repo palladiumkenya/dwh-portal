@@ -34,7 +34,7 @@ const COVIDPLHIVEverHadInfection = () => {
             useHTML: true,
             text: `
           <div class="primary-card-body-subtitle-red">
-                ${percent}%
+                ${ percent ? percent : 0 }%
           </div>
         `,
             align: 'center',
@@ -91,7 +91,7 @@ const COVIDPLHIVEverHadInfection = () => {
                         color: "#FC2626",
                         radius: "100%",
                         innerRadius: "88%",
-                        y: percent
+                        y: percent ? percent : 0
                     }
                 ],
                 dataLabels: {

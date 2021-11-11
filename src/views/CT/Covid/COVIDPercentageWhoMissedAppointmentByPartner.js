@@ -19,7 +19,7 @@ const COVIDPercentageWhoMissedAppointmentByPartner = () => {
                 text: ''
             },
             xAxis: {
-                categories: percentageOfMissedAppointmentsByPartner.map(obj => obj.partner),
+                categories: percentageOfMissedAppointmentsByPartner.length > 0 ? percentageOfMissedAppointmentsByPartner.map(obj => obj.partner) : [],
                 crosshair: true
             },
             yAxis: {
@@ -37,7 +37,7 @@ const COVIDPercentageWhoMissedAppointmentByPartner = () => {
             series: [
                 {
                     name: 'PERCENTAGE OF MISSED APPOINTMENT DUE TO COVID BY PARTNER',
-                    data: percentageOfMissedAppointmentsByPartner,
+                    data: percentageOfMissedAppointmentsByPartner.length > 0 ? percentageOfMissedAppointmentsByPartner : [],
                     color: '#14084D',
                 }
             ]
