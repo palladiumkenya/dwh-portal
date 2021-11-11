@@ -90,7 +90,7 @@ const COVIDAdultPlhivCurrentOnTreatment = () => {
                         color: "#F08532",
                         radius: "100%",
                         innerRadius: "88%",
-                        y: currentOnArtAdults
+                        y: currentOnArtAdults ? currentOnArtAdults : 0
                     }
                 ]
             }

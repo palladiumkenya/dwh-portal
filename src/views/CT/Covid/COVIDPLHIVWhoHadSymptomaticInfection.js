@@ -32,7 +32,7 @@ const COVIDPLHIVWhoHadSymptomaticInfection = () => {
             useHTML: true,
             text: `
           <div class="primary-card-body-subtitle-red">
-                ${percent}%
+                ${percent ? percent : 0}%
           </div>
         `,
             align: 'center',
@@ -89,7 +89,7 @@ const COVIDPLHIVWhoHadSymptomaticInfection = () => {
                         color: "#69B34C",
                         radius: "100%",
                         innerRadius: "88%",
-                        y: percent
+                        y: percent ? percent : 0
                     }
                 ],
                 dataLabels: {

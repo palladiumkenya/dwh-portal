@@ -35,7 +35,7 @@ const COVIDFullyVaccinated = () => {
             useHTML: true,
             text: `
           <div class="primary-card-body-subtitle-red">
-                ${percentFullyVaccinated}%
+                ${percentFullyVaccinated ? percentFullyVaccinated : 0 }%
           </div>
         `,
             align: 'center',
@@ -92,7 +92,7 @@ const COVIDFullyVaccinated = () => {
                         color: "#FF0000",
                         radius: "100%",
                         innerRadius: "88%",
-                        y: percentFullyVaccinated
+                        y: percentFullyVaccinated ? percentFullyVaccinated : 0
                     }
                 ],
                 dataLabels: {
