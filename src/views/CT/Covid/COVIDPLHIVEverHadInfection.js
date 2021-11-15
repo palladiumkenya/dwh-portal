@@ -15,7 +15,9 @@ import * as covidPLHIVCurrentOnArtSelectors from '../../../selectors/CT/Covid/co
 
 const COVIDPLHIVEverHadInfection = () => {
     highchartsMore(Highcharts);
-    solidGauge(Highcharts);
+    if (Highcharts && !Highcharts.seriesTypes.solidgauge) {
+        solidGauge(Highcharts);
+    }
     const everHadInfection = useSelector(covidEverHadInfectionSelectors.getEverHadInfection);
     const currentOnArtAdults = useSelector(covidPLHIVCurrentOnArtSelectors.getPLHIVCurrentOnArt);
     let percent = Number(everHadInfection) > 0 ? ((Number(everHadInfection)/Number(currentOnArtAdults))*100) : 0;

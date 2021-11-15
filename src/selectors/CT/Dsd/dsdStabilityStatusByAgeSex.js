@@ -71,7 +71,7 @@ export const getStable = createSelector(
             && obj.ageGroup !== '5 to 9'
             && obj.ageGroup !== '10 to 14'
             && obj.ageGroup !== '15 to 19') : [];
-        const stable = _.sumBy(listExcluded, 'Stable');
+        const stable = _.sumBy(listExcluded, 'TXCurr');
         return stable;
     }
 );

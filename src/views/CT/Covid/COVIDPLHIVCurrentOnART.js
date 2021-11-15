@@ -13,7 +13,9 @@ import { formatNumber } from '../../../utils/utils';
 
 const COVIDPLHIVCurrentOnART = () => {
     highchartsMore(Highcharts);
-    solidGauge(Highcharts);
+    if (Highcharts && !Highcharts.seriesTypes.solidgauge) {
+        solidGauge(Highcharts);
+    }
 
     const currentOnArtAdults = useSelector(covidPLHIVCurrentOnArtSelectors.getPLHIVCurrentOnArt);
 

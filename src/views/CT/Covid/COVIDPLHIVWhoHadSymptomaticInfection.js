@@ -13,7 +13,9 @@ import * as covidEverHadInfectionSelectors from '../../../selectors/CT/Covid/cov
 
 const COVIDPLHIVWhoHadSymptomaticInfection = () => {
     highchartsMore(Highcharts);
-    solidGauge(Highcharts);
+    if (Highcharts && !Highcharts.seriesTypes.solidgauge) {
+        solidGauge(Highcharts);
+    }
 
     const symptomaticInfections = useSelector(covidSymptomaticInfectionsSelectors.getSymptomaticInfections);
     const everHadInfection = useSelector(covidEverHadInfectionSelectors.getEverHadInfection);

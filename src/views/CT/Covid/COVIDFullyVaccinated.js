@@ -15,7 +15,9 @@ import * as covidAdultPLHIVCurrentOnTreatmentSelectors
 
 const COVIDFullyVaccinated = () => {
     highchartsMore(Highcharts);
-    solidGauge(Highcharts);
+    if (Highcharts && !Highcharts.seriesTypes.solidgauge) {
+        solidGauge(Highcharts);
+    }
 
     const currentOnArtAdults = useSelector(covidAdultPLHIVCurrentOnTreatmentSelectors.getAdultPLHIVCurrentOnTreatment).covidAdultsPLHIVCurrentOnTreatment;
     const fullyVaccinated = useSelector(covidAdultPLHIVFullyVaccinatedSelectors.getAdultPLHIVFullyVaccinated).fullyVaccinated;

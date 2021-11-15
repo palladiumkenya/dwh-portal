@@ -16,7 +16,8 @@ import {
     enableLatestPregnancyFilter,
     disableLatestPregnancyFilter,
     enablePopulationTypeFilter,
-    disablePopulationTypeFilter
+    disablePopulationTypeFilter,
+    enableAgencyFilter
 } from "../../actions/Shared/filterActions";
 
 import { loadLinkagePositiveTrends } from '../../actions/HTS/Linkage/linkagePositiveTrendsActions';
@@ -252,6 +253,9 @@ const CT = () => {
             dispatch(disableDatimAgeGroupFilter());
             dispatch(disableLatestPregnancyFilter());
             dispatch(disablePopulationTypeFilter());
+        }
+        if (ctTab) {
+            dispatch(enableAgencyFilter());
         }
     }, [dispatch, ctTab]);
 
