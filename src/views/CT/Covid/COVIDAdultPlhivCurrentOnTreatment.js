@@ -12,7 +12,9 @@ import { useSelector } from 'react-redux';
 
 const COVIDAdultPlhivCurrentOnTreatment = () => {
     highchartsMore(Highcharts);
-    solidGauge(Highcharts);
+    if (Highcharts && !Highcharts.seriesTypes.solidgauge) {
+        solidGauge(Highcharts);
+    }
 
     const currentOnArtAdults = useSelector(covidAdultPLHIVCurrentOnTreatmentSelectors.getAdultPLHIVCurrentOnTreatment).covidAdultsPLHIVCurrentOnTreatment;
 
