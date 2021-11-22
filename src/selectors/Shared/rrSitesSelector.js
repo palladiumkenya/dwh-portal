@@ -120,6 +120,8 @@ export const getPartners = createSelector(
 export const getAgencies = createSelector(
     [list, agencies, filteredCounties, filteredSubCounties],
     (list, agencies, filteredCounties, filteredSubCounties) => {
+        return agencies;
+        /*
         return filteredCounties.length === 0 && filteredSubCounties.length === 0 ?
             agencies :
             _.chain(list)
@@ -139,6 +141,8 @@ export const getAgencies = createSelector(
             .uniq()
             .sort()
             .value();
+
+         */
     }
 );
 
