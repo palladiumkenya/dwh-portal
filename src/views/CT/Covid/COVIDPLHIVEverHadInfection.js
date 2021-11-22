@@ -10,21 +10,22 @@ import { useSelector } from 'react-redux';
 
 import * as covidEverHadInfectionSelectors
     from '../../../selectors/CT/Covid/covidEverHadInfection';
-import { formatNumber } from '../../../utils/utils';
+import { formatNumber, roundNumber } from '../../../utils/utils';
 import * as covidPLHIVCurrentOnArtSelectors from '../../../selectors/CT/Covid/covidPLHIVCurrentOnArt';
+import DataCard from '../../Shared/DataCard';
 
 const COVIDPLHIVEverHadInfection = () => {
-    highchartsMore(Highcharts);
+    /*highchartsMore(Highcharts);
     if (Highcharts && !Highcharts.seriesTypes.solidgauge) {
         solidGauge(Highcharts);
-    }
+    }*/
     const everHadInfection = useSelector(covidEverHadInfectionSelectors.getEverHadInfection);
     const currentOnArtAdults = useSelector(covidPLHIVCurrentOnArtSelectors.getPLHIVCurrentOnArt);
     let percent = Number(everHadInfection) > 0 ? ((Number(everHadInfection)/Number(currentOnArtAdults))*100) : 0;
     percent = Math.round((percent + Number.EPSILON) * 100) / 100;
 
 
-    const options = {
+    /*const options = {
         chart: {
             type: "solidgauge",
             height: "70%"
@@ -104,18 +105,15 @@ const COVIDPLHIVEverHadInfection = () => {
                 },
             }
         ]
-    };
+    };*/
 
 
     return (
-        <div className={"row"}>
-            <div className={"col-12"}>
-                <HighchartsReact
-                    highcharts={Highcharts}
-                    options={options}
-                />
-            </div>
-        </div>
+        <DataCard
+            title="PLHIV EVER HAD COVID-19 INFECTION"
+            subtitle={roundNumber(percent) + "%"}
+            data={formatNumber(everHadInfection.everHadInfection)}
+        />
     );
 };
 

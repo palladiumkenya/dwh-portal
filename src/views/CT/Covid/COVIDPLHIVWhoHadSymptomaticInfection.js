@@ -8,21 +8,22 @@ import HighchartsReact from "highcharts-react-official";
 import moment from 'moment';
 import { useSelector } from 'react-redux';
 import * as covidSymptomaticInfectionsSelectors from '../../../selectors/CT/Covid/covidSymptomaticInfections';
-import { formatNumber } from '../../../utils/utils';
+import { formatNumber, roundNumber } from '../../../utils/utils';
 import * as covidEverHadInfectionSelectors from '../../../selectors/CT/Covid/covidEverHadInfection';
+import DataCard from '../../Shared/DataCard';
 
 const COVIDPLHIVWhoHadSymptomaticInfection = () => {
-    highchartsMore(Highcharts);
+    /*highchartsMore(Highcharts);
     if (Highcharts && !Highcharts.seriesTypes.solidgauge) {
         solidGauge(Highcharts);
-    }
+    }*/
 
     const symptomaticInfections = useSelector(covidSymptomaticInfectionsSelectors.getSymptomaticInfections);
     const everHadInfection = useSelector(covidEverHadInfectionSelectors.getEverHadInfection);
     let percent = Number(symptomaticInfections.symptomaticInfections) > 0 ? ((Number(symptomaticInfections.symptomaticInfections)/Number(everHadInfection.everHadInfection))*100) : 0;
     percent = Math.round((percent + Number.EPSILON) * 100) / 100;
 
-    const options = {
+    /*const options = {
         chart: {
             type: "solidgauge",
             height: "70%"
@@ -102,18 +103,15 @@ const COVIDPLHIVWhoHadSymptomaticInfection = () => {
                 },
             }
         ]
-    };
+    };*/
 
 
     return (
-        <div className={"row"}>
-            <div className={"col-12"}>
-                <HighchartsReact
-                    highcharts={Highcharts}
-                    options={options}
-                />
-            </div>
-        </div>
+        <DataCard
+            title="PLHIV WHO HAVE HAD SYMPTOMATIC COVID-19 INFECTION"
+            subtitle={roundNumber(percent) + "%"}
+            data={formatNumber(symptomaticInfections.symptomaticInfections)}
+        />
     );
 };
 

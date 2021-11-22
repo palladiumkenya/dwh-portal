@@ -7,17 +7,18 @@ import solidGauge from "highcharts/modules/solid-gauge.js";
 import HighchartsReact from "highcharts-react-official";
 import moment from 'moment';
 import { useSelector } from 'react-redux';
-import { formatNumber } from '../../../utils/utils';
+import { formatNumber, roundNumber } from '../../../utils/utils';
 
 import * as covidAdultPLHIVFullyVaccinatedSelectors from '../../../selectors/CT/Covid/covidAdultPLHIVFullyVaccinated';
 import * as covidAdultPLHIVCurrentOnTreatmentSelectors
     from '../../../selectors/CT/Covid/covidAdultPLHIVCurrentOnTreatment';
+import DataCard from '../../Shared/DataCard';
 
 const COVIDFullyVaccinated = () => {
-    highchartsMore(Highcharts);
+    /*highchartsMore(Highcharts);
     if (Highcharts && !Highcharts.seriesTypes.solidgauge) {
         solidGauge(Highcharts);
-    }
+    }*/
 
     const currentOnArtAdults = useSelector(covidAdultPLHIVCurrentOnTreatmentSelectors.getAdultPLHIVCurrentOnTreatment).covidAdultsPLHIVCurrentOnTreatment;
     const fullyVaccinated = useSelector(covidAdultPLHIVFullyVaccinatedSelectors.getAdultPLHIVFullyVaccinated).fullyVaccinated;
@@ -25,7 +26,7 @@ const COVIDFullyVaccinated = () => {
     let percentFullyVaccinated = fullyVaccinated && Number(fullyVaccinated) > 0 ? ((Number(fullyVaccinated)/Number(currentOnArtAdults))*100) : 0;
     percentFullyVaccinated = Math.round((percentFullyVaccinated + Number.EPSILON) * 100) / 100;
 
-    const options = {
+    /*const options = {
         chart: {
             type: "solidgauge",
             height: "70%"
@@ -105,19 +106,15 @@ const COVIDFullyVaccinated = () => {
                 },
             }
         ]
-    };
+    };*/
 
 
     return (
-        <div className={"row"}>
-            <div className={"col-12"}>
-                <HighchartsReact
-                    highcharts={Highcharts}
-                    options={options}
-                />
-            </div>
-        </div>
-
+        <DataCard
+            title="FULLY VACCINATED"
+            subtitle={roundNumber(percentFullyVaccinated) + "%"}
+            data={formatNumber(fullyVaccinated)}
+        />
     );
 };
 
