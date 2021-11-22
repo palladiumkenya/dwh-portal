@@ -7,17 +7,18 @@ import solidGauge from "highcharts/modules/solid-gauge.js";
 import HighchartsReact from "highcharts-react-official";
 import moment from 'moment';
 import { useSelector } from 'react-redux';
-import { formatNumber } from '../../../utils/utils';
+import { formatNumber, roundNumber } from '../../../utils/utils';
 
 import * as covidAdultPLHIVPartiallyVaccinatedSelectors from '../../../selectors/CT/Covid/covidAdultPLHIVPartiallyVaccinated';
 import * as covidAdultPLHIVCurrentOnTreatmentSelectors
     from '../../../selectors/CT/Covid/covidAdultPLHIVCurrentOnTreatment';
+import DataCard from '../../Shared/DataCard';
 
 const COVIDPartiallyVaccinated = () => {
-    highchartsMore(Highcharts);
+    /*highchartsMore(Highcharts);
     if (Highcharts && !Highcharts.seriesTypes.solidgauge) {
         solidGauge(Highcharts);
-    }
+    }*/
 
     const currentOnArtAdults = useSelector(covidAdultPLHIVCurrentOnTreatmentSelectors.getAdultPLHIVCurrentOnTreatment).covidAdultsPLHIVCurrentOnTreatment;
     const partiallyVaccinated = useSelector(covidAdultPLHIVPartiallyVaccinatedSelectors.getAdultPLHIVPartiallyVaccinated).partiallyVaccinated;
@@ -25,7 +26,7 @@ const COVIDPartiallyVaccinated = () => {
     let percentPartially = partiallyVaccinated && Number(partiallyVaccinated) > 0 ? ((Number(partiallyVaccinated)/Number(currentOnArtAdults))*100) : 0;
     percentPartially = Math.round((percentPartially + Number.EPSILON) * 100) / 100;
 
-    const options = {
+    /*const options = {
         chart: {
             type: "solidgauge",
             height: "70%"
@@ -110,12 +111,13 @@ const COVIDPartiallyVaccinated = () => {
                 },
             }
         ]
-    };
+    };*/
 
     return (
-        <HighchartsReact
-            highcharts={Highcharts}
-            options={options}
+        <DataCard
+            title="PARTIALLY VACCINATED"
+            subtitle={roundNumber(percentPartially) + "%"}
+            data={formatNumber(partiallyVaccinated)}
         />
     );
 };

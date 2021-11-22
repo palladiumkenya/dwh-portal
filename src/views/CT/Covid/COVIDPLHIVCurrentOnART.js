@@ -9,17 +9,18 @@ import moment from 'moment';
 import { useSelector } from 'react-redux';
 import * as covidPLHIVCurrentOnArtSelectors
     from '../../../selectors/CT/Covid/covidPLHIVCurrentOnArt';
-import { formatNumber } from '../../../utils/utils';
+import { formatNumber, roundNumber } from '../../../utils/utils';
+import DataCard from '../../Shared/DataCard';
 
 const COVIDPLHIVCurrentOnART = () => {
-    highchartsMore(Highcharts);
+    /*highchartsMore(Highcharts);
     if (Highcharts && !Highcharts.seriesTypes.solidgauge) {
         solidGauge(Highcharts);
-    }
+    }*/
 
     const currentOnArtAdults = useSelector(covidPLHIVCurrentOnArtSelectors.getPLHIVCurrentOnArt);
 
-    const options = {
+    /*const options = {
         chart: {
             type: "solidgauge",
             height: "70%"
@@ -91,18 +92,15 @@ const COVIDPLHIVCurrentOnART = () => {
                 },
             }
         ]
-    };
+    };*/
 
 
     return (
-        <div className={"row"}>
-            <div className={"col-12"}>
-                <HighchartsReact
-                    highcharts={Highcharts}
-                    options={options}
-                />
-            </div>
-        </div>
+        <DataCard
+            title="PLHIV CURRENT ON ART"
+            subtitle=""
+            data={formatNumber(currentOnArtAdults.plhivCurrentOnArt)}
+        />
     );
 };
 
