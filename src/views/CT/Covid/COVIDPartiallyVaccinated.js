@@ -1,11 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-// Import Highcharts
-import Highcharts from "highcharts/highcharts.js";
-import highchartsMore from "highcharts/highcharts-more.js";
-import solidGauge from "highcharts/modules/solid-gauge.js";
-import HighchartsReact from "highcharts-react-official";
-import moment from 'moment';
 import { useSelector } from 'react-redux';
 import { formatNumber, roundNumber } from '../../../utils/utils';
 
@@ -15,10 +9,6 @@ import * as covidAdultPLHIVCurrentOnTreatmentSelectors
 import DataCard from '../../Shared/DataCard';
 
 const COVIDPartiallyVaccinated = () => {
-    /*highchartsMore(Highcharts);
-    if (Highcharts && !Highcharts.seriesTypes.solidgauge) {
-        solidGauge(Highcharts);
-    }*/
 
     const currentOnArtAdults = useSelector(covidAdultPLHIVCurrentOnTreatmentSelectors.getAdultPLHIVCurrentOnTreatment).covidAdultsPLHIVCurrentOnTreatment;
     const partiallyVaccinated = useSelector(covidAdultPLHIVPartiallyVaccinatedSelectors.getAdultPLHIVPartiallyVaccinated).partiallyVaccinated;
