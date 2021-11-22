@@ -1,20 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
-
-// Import Highcharts
-import Highcharts from "highcharts/highcharts.js";
-import highchartsMore from "highcharts/highcharts-more.js";
-import solidGauge from "highcharts/modules/solid-gauge.js";
-import HighchartsReact from "highcharts-react-official";
-import moment from 'moment';
 import { useSelector } from 'react-redux';
 import * as covidOverallMissedAppointmentSelectors
     from '../../../selectors/CT/Covid/covidOverallMissedAppointment';
 import * as covidEverHadInfectionSelectors
     from '../../../selectors/CT/Covid/covidEverHadInfection';
+import { formatNumber, roundNumber } from '../../../utils/utils';
+import DataCard from '../../Shared/DataCard';
 
 const COVIDOverallMissedAppointment = () => {
-    highchartsMore(Highcharts);
-    solidGauge(Highcharts);
 
     const overallMissedAppointment = useSelector(covidOverallMissedAppointmentSelectors.getOverallMissedAppointments).overallMissedAppointment;
     const everHadInfection = useSelector(covidEverHadInfectionSelectors.getEverHadInfection).everHadInfection;
@@ -22,7 +15,7 @@ const COVIDOverallMissedAppointment = () => {
     let percentMissedAppointment = overallMissedAppointment && Number(overallMissedAppointment) > 0 ? ((Number(overallMissedAppointment)/Number(everHadInfection))*100) : 0;
     percentMissedAppointment = Math.round((percentMissedAppointment + Number.EPSILON) * 100) / 100;
 
-    const options = {
+    /*const options = {
         chart: {
             type: "solidgauge",
             height: "70%"
@@ -92,12 +85,13 @@ const COVIDOverallMissedAppointment = () => {
                 ]
             }
         ]
-    };
+    };*/
 
     return (
-        <HighchartsReact
-            highcharts={Highcharts}
-            options={options}
+        <DataCard
+            title="OVERALL MISSED APPOINTMENTS"
+            subtitle={roundNumber(percentMissedAppointment) + "%"}
+            data={formatNumber(overallMissedAppointment)}
         />
     );
 };

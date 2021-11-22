@@ -1,11 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-// Import Highcharts
-import Highcharts from "highcharts/highcharts.js";
-import highchartsMore from "highcharts/highcharts-more.js";
-import solidGauge from "highcharts/modules/solid-gauge.js";
-import HighchartsReact from "highcharts-react-official";
-import moment from 'moment';
 import { useSelector } from 'react-redux';
 
 import * as covidEverHadInfectionSelectors
@@ -15,10 +9,6 @@ import * as covidPLHIVCurrentOnArtSelectors from '../../../selectors/CT/Covid/co
 import DataCard from '../../Shared/DataCard';
 
 const COVIDPLHIVEverHadInfection = () => {
-    /*highchartsMore(Highcharts);
-    if (Highcharts && !Highcharts.seriesTypes.solidgauge) {
-        solidGauge(Highcharts);
-    }*/
     const everHadInfection = useSelector(covidEverHadInfectionSelectors.getEverHadInfection);
     const currentOnArtAdults = useSelector(covidPLHIVCurrentOnArtSelectors.getPLHIVCurrentOnArt);
     let percent = Number(everHadInfection) > 0 ? ((Number(everHadInfection)/Number(currentOnArtAdults))*100) : 0;

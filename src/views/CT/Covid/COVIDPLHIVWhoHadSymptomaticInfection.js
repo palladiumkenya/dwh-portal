@@ -1,11 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
-// Import Highcharts
-import Highcharts from "highcharts/highcharts.js";
-import highchartsMore from "highcharts/highcharts-more.js";
-import solidGauge from "highcharts/modules/solid-gauge.js";
-import HighchartsReact from "highcharts-react-official";
-import moment from 'moment';
 import { useSelector } from 'react-redux';
 import * as covidSymptomaticInfectionsSelectors from '../../../selectors/CT/Covid/covidSymptomaticInfections';
 import { formatNumber, roundNumber } from '../../../utils/utils';
@@ -13,11 +7,6 @@ import * as covidEverHadInfectionSelectors from '../../../selectors/CT/Covid/cov
 import DataCard from '../../Shared/DataCard';
 
 const COVIDPLHIVWhoHadSymptomaticInfection = () => {
-    /*highchartsMore(Highcharts);
-    if (Highcharts && !Highcharts.seriesTypes.solidgauge) {
-        solidGauge(Highcharts);
-    }*/
-
     const symptomaticInfections = useSelector(covidSymptomaticInfectionsSelectors.getSymptomaticInfections);
     const everHadInfection = useSelector(covidEverHadInfectionSelectors.getEverHadInfection);
     let percent = Number(symptomaticInfections.symptomaticInfections) > 0 ? ((Number(symptomaticInfections.symptomaticInfections)/Number(everHadInfection.everHadInfection))*100) : 0;
