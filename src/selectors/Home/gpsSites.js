@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { createSelector } from 'reselect';
 
 const listUnfiltered = state => state.gpsSites.list;
