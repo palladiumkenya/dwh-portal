@@ -3,14 +3,26 @@ import Highcharts from '../../utils/highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { getAll } from '../Shared/Api';
 import countyMapping from '../Shared/countyMapping.json';
+import moment from 'moment';
+import { useSelector } from 'react-redux';
 
 const HomeCurrentOnArtByCountyMap = () => {
+    const filters = useSelector(state => state.filters);
     const [currentOnArtByCounty, setHomeCurrentOnArtByCountyMap] = useState({});
 
     const loadCurrentOnArtByCounty = useCallback(async () => {
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
+        };
         const data = [];
         const mappedCounties = countyMapping;
-        const result = await getAll('care-treatment/txCurrDistributionByCounty', []);
+        const result = await getAll('care-treatment/txCurrDistributionByCounty', params);
         for (let i = 0; i < result.length; i++) {
             let resultCounty = result[i].County;
             resultCounty = resultCounty ? resultCounty.toLowerCase() : '';
@@ -53,7 +65,7 @@ const HomeCurrentOnArtByCountyMap = () => {
                 { name: 'Current on ART', data: data, joinBy: ['CC_1', 'id'], states: { hover: { color: '#000000' } } }
             ]
         });
-    }, []);
+    }, [filters]);
 
     useEffect(() => {
         loadCurrentOnArtByCounty();

@@ -7,6 +7,7 @@ import { enableStickyFilter, disableStickyFilter, changeCurrentPage } from "../.
 import { disableFromDateFilter, disableToDateFilter } from "../../actions/Shared/filterActions";
 import { loadCurrentOnArtOverview } from '../../actions/CT/CurrentOnArt/currentOnArtOverviewActions';
 import { loadCurrentOnArtByAgeSex } from '../../actions/CT/CurrentOnArt/currentOnArtByAgeSexActions';
+import { loadGpsSites } from '../../actions/Home/gpsSitesActions';
 import { LOADING_DELAY, PAGES } from './../../constants';
 import Loading from './../Shared/Loading';
 import SectionHeader from './../Shared/SectionHeader';
@@ -46,6 +47,7 @@ const Home = () => {
     useEffect(() => {
         dispatch(loadCurrentOnArtOverview());
         dispatch(loadCurrentOnArtByAgeSex());
+        dispatch(loadGpsSites());
     }, [
         dispatch,
         counties,

@@ -16,7 +16,8 @@ import {
     enableLatestPregnancyFilter,
     disableLatestPregnancyFilter,
     enablePopulationTypeFilter,
-    disablePopulationTypeFilter
+    disablePopulationTypeFilter,
+    enableAgencyFilter
 } from "../../actions/Shared/filterActions";
 
 import { loadLinkagePositiveTrends } from '../../actions/HTS/Linkage/linkagePositiveTrendsActions';
@@ -152,6 +153,29 @@ import { loadOtzVlSuppressionByAge } from '../../actions/CT/OTZ/OtzVlSuppression
 import { loadOtzVlSuppressionByCounty } from '../../actions/CT/OTZ/OtzVlSuppressionByCountyActions';
 import { loadOtzVlSuppressionByPartner } from '../../actions/CT/OTZ/OtzVlSuppressionByPartnerActions';
 
+import { loadCovidAdultPLHIVCurrentOnTreatment } from '../../actions/CT/Covid/covidAdultPLHIVCurrentOnTreatmentActions';
+import { loadCovidAdultPLHIVPartiallyVaccinated } from '../../actions/CT/Covid/covidAdultPLHIVPartiallyVaccinatedActions';
+import { loadCovidAdultPLHIVFullyVaccinated } from '../../actions/CT/Covid/covidAdultPLHIVFullyVaccinatedActions';
+import { loadCovidAdultPLHIVVaccinatedByAgeGroup } from '../../actions/CT/Covid/covidAdultPLHIVVaccinatedByAgeGroupActions';
+import { loadCovidAdultPLHIVVaccinatedByGender } from '../../actions/CT/Covid/covidAdultPLHIVVaccinatedByGenderActions';
+import { loadCovidAdultPLHIVVaccinatedByCounty } from '../../actions/CT/Covid/covidAdultPLHIVVaccinatedByCountyActions';
+import { loadCovidAdultPLHIVVaccinatedByPartner } from '../../actions/CT/Covid/covidAdultPLHIVVaccinatedByPartnerActions';
+import { loadCovidAdultPLHIVCurrentOnTreatmentByGender } from '../../actions/CT/Covid/covidAdultPLHIVCurrentOnTreatmentByGenderActions';
+import { loadCovidAdultPLHIVCurrentOnTreatmentByPartner } from '../../actions/CT/Covid/covidAdultPLHIVCurrentOnTreatmentByPartnerActions';
+import { loadCovidAdultPLHIVCurrentOnTreatmentByCounty } from '../../actions/CT/Covid/covidAdultPLHIVCurrentOnTreatmentByCountyActions';
+import { loadCovidAdultPLHIVCurrentOnTreatmentByAgeGroup } from '../../actions/CT/Covid/covidAdultPLHIVCurrentOnTreatmentByAgeGroupActions';
+import { loadCovidPLHIVCurrentOnArt } from '../../actions/CT/Covid/covidPLHIVCurrentOnArtActions';
+import { loadCovidSeverityByGender } from '../../actions/CT/Covid/covidSeverityByGenderActions';
+import { loadCovidOverallAdmission } from '../../actions/CT/Covid/covidAdmissionOverallActions';
+import { loadCovidOverallAdmissionMales } from '../../actions/CT/Covid/covidAdmissionOverallMaleActions';
+import { loadCovidOverallAdmissionFemales } from '../../actions/CT/Covid/covidAdmissionOverallFemaleActions';
+import { loadCovidEverHadInfection } from '../../actions/CT/Covid/covidEverHadInfectionActions';
+import { loadCovidSymptomaticInfections } from '../../actions/CT/Covid/covidSymptomaticInfectionsActions';
+import { loadCovidOverallMissedAppointment } from '../../actions/CT/Covid/covidOverallMissedAppointmentsActions';
+import { loadCovidPercentageWhoMissedAppointmentsByAgeGroup } from '../../actions/CT/Covid/covidPercentageWhoMissedAppointmentsByAgeGroupActions';
+import { loadCovidPercentageWhoMissedAppointmentsByCounty } from '../../actions/CT/Covid/covidPercentageWhoMissedAppointmentsByCountyActions';
+import { loadCovidPercentageWhoMissedAppointmentsByPartner } from '../../actions/CT/Covid/covidPercentageWhoMissedAppointmentsByPartnerActions';
+
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
 import Loading from './../Shared/Loading';
@@ -165,6 +189,7 @@ const AdverseEvents = Loadable({ loader: () => import('./AdverseEvents/AdverseEv
 const ArtOptimization = Loadable({ loader: () => import('./ArtOptimization/ArtOptimization'), loading: Loading, delay: LOADING_DELAY });
 const OTZ = Loadable({ loader: () => import('./OTZ/OTZ'), loading: Loading, delay: LOADING_DELAY });
 const OVC = Loadable({ loader: () => import('./OVC/OVC'), loading: Loading, delay: LOADING_DELAY });
+const COVID = Loadable({ loader: () => import('./Covid/Covid'), loading: Loading, delay: LOADING_DELAY });
 
 const CT = () => {
     const dispatch = useDispatch();
@@ -228,6 +253,9 @@ const CT = () => {
             dispatch(disableDatimAgeGroupFilter());
             dispatch(disableLatestPregnancyFilter());
             dispatch(disablePopulationTypeFilter());
+        }
+        if (ctTab) {
+            dispatch(enableAgencyFilter());
         }
     }, [dispatch, ctTab]);
 
@@ -386,6 +414,30 @@ const CT = () => {
                 dispatch(loadOvcViralSuppressionAmongOvcPatientsOverall());
                 dispatch(loadOvcViralSuppressionAmongOvcPatientsByGender());
                 break;
+            case 'covid':
+                dispatch(loadCovidAdultPLHIVCurrentOnTreatment());
+                dispatch(loadCovidAdultPLHIVPartiallyVaccinated());
+                dispatch(loadCovidAdultPLHIVFullyVaccinated());
+                dispatch(loadCovidAdultPLHIVVaccinatedByAgeGroup());
+                dispatch(loadCovidAdultPLHIVVaccinatedByGender());
+                dispatch(loadCovidAdultPLHIVVaccinatedByCounty());
+                dispatch(loadCovidAdultPLHIVVaccinatedByPartner());
+                dispatch(loadCovidAdultPLHIVCurrentOnTreatmentByGender());
+                dispatch(loadCovidAdultPLHIVCurrentOnTreatmentByPartner());
+                dispatch(loadCovidAdultPLHIVCurrentOnTreatmentByCounty());
+                dispatch(loadCovidAdultPLHIVCurrentOnTreatmentByAgeGroup());
+                dispatch(loadCovidPLHIVCurrentOnArt());
+                dispatch(loadCovidSeverityByGender());
+                dispatch(loadCovidOverallAdmission());
+                dispatch(loadCovidOverallAdmissionMales());
+                dispatch(loadCovidOverallAdmissionFemales());
+                dispatch(loadCovidEverHadInfection());
+                dispatch(loadCovidSymptomaticInfections());
+                dispatch(loadCovidOverallMissedAppointment());
+                dispatch(loadCovidPercentageWhoMissedAppointmentsByAgeGroup());
+                dispatch(loadCovidPercentageWhoMissedAppointmentsByCounty());
+                dispatch(loadCovidPercentageWhoMissedAppointmentsByPartner());
+                break;
             default:
                 break;
         }
@@ -439,6 +491,9 @@ const CT = () => {
                 </TabPane>
                 <TabPane tabId={"ovc"}>
                     { ctTab === 'ovc'? <OVC /> : null }
+                </TabPane>
+                <TabPane tabId={"covid"}>
+                    { ctTab === 'covid' ? <COVID /> : null }
                 </TabPane>
             </TabContent>
             <p></p><p></p>

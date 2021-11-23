@@ -31,6 +31,7 @@ export const getAdverseEventsActionsByDrugsNewTabs = (list, tab) => {
         .map(l => l.AdverseEventActionTaken)
         .uniq()
         .value();
+
     let data = [];
     for(let i = 0; i < actions.length; i++) {
         data[i] = [];
