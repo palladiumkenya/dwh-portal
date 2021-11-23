@@ -27,7 +27,8 @@ export const CT_TABS = {
     vl: "VL MONITORING",
     tOut: "TREATMENT OUTCOMES",
     otz: 'OTZ',
-    ovc: 'OVC'
+    ovc: 'OVC',
+    covid: 'COVID-19'
 }
 
 export const PAGES = {

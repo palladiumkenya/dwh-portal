@@ -60,32 +60,32 @@ const DistributionUnstable = () => {
             series: [
                 { name: 'PERCENT OF PATIENTS', data: [
                         {
-                            name: categories[0],
+                            name: data[0].name,
                             y: data[0].y,
                             text: ' (' + formatNumber(highVl) + ')'
                         },
                         {
-                            name: categories[1],
+                            name: data[1].name,
                             y: data[1].y,
                             text: ' (' + formatNumber(onArtLessThan12Months) + ')'
                         },
                         {
-                            name: categories[2],
+                            name: data[2].name,
                             y: data[2].y,
                             text: ' (' + formatNumber(ageLessThan20Years) + ')'
                         },
                         {
-                            name: categories[3],
+                            name: data[3].name,
                             y: data[3].y,
                             text: ' (' + formatNumber(poorAdherence) + ')'
                         },
                         {
-                            name: categories[4],
+                            name: data[4].name,
                             y: data[4].y,
                             text: ' (' + formatNumber(bmiLessThan18) + ')'
                         },
                         {
-                            name: categories[5],
+                            name: data[5].name,
                             y: data[5].y,
                             text: ' (' + formatNumber(pregnantAndBreastFeeding) + ')'
                         }

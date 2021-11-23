@@ -19,7 +19,7 @@ const initialState = {
     subCountyFilterEnabled: true,
     facilityFilterEnabled: true,
     partnerFilterEnabled: true,
-    agencyFilterEnabled: false,
+    agencyFilterEnabled: true,
     projectFilterEnabled: false,
     fromDateFilterEnabled: false,
     toDateFilterEnabled: false,

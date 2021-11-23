@@ -5,7 +5,7 @@ import { getAll } from '../../../views/Shared/Api';
 
 export const loadDsdStableOverall = () => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
-        moment(getState().dsdUnstable.lastFetch),
+        moment(getState().dsdStableOverall.lastFetch),
         'minutes'
     );
     if (getState().ui.ctTab !== 'dsd') {

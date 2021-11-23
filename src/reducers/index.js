@@ -162,6 +162,29 @@ import otzVlSuppressionByAge from './CT/OTZ/otzVlSuppressionByAge';
 import otzVlSuppressionByCounty from './CT/OTZ/otzVlSuppressionByCounty';
 import otzVlSuppressionByPartner from './CT/OTZ/otzVlSuppressionByPartner';
 
+import CovidAdultPLHIVCurrentOnTreatment from './CT/Covid/covidAdultPLHIVCurrentOnTreatment';
+import CovidAdultPLHIVPartiallyVaccinated from './CT/Covid/covidAdultPLHIVPartiallyVaccinated';
+import CovidAdultPLHIVFullyVaccinated from './CT/Covid/covidAdultPLHIVFullyVaccinated';
+import CovidAdultPLHIVVaccinatedByAgeGroup from './CT/Covid/covidAdultPLHIVVaccinatedByAgeGroup';
+import CovidAdultPLHIVVaccinatedByGender from './CT/Covid/covidAdultPLHIVVaccinatedByGender';
+import CovidAdultPLHIVVaccinatedByCounty from './CT/Covid/covidAdultPLHIVVaccinatedByCounty';
+import CovidAdultPLHIVVaccinatedByPartner from './CT/Covid/covidAdultPLHIVVaccinatedByPartner';
+import CovidAdultPLHIVCurrentOnTreatmentByGender from './CT/Covid/covidAdultPLHIVCurrentOnTreatmentByGender';
+import CovidAdultPLHIVCurrentOnTreatmentByCounty from './CT/Covid/covidAdultPLHIVCurrentOnTreatmentByCounty';
+import CovidAdultPLHIVCurrentOnTreatmentByPartner from './CT/Covid/covidAdultPLHIVCurrentOnTreatmentByPartner';
+import CovidAdultPLHIVCurrentOnTreatmentByAgeGroup from './CT/Covid/covidAdultPLHIVCurrentOnTreatmentByAgeGroup';
+import CovidPLHIVCurrentOnArt from './CT/Covid/covidPLHIVCurrentOnArt';
+import CovidSeverityByGender from './CT/Covid/covidSeverityByGender';
+import CovidOverallAdmission from './CT/Covid/covidOverallAdmission';
+import CovidOverallAdmissionFemale from './CT/Covid/covidOverallAdmissionFemale';
+import CovidOverallAdmissionMale from './CT/Covid/covidOverallAdmissionMale';
+import CovidEverHadInfection from './CT/Covid/covidEverHadInfection';
+import CovidSymptomaticInfections from './CT/Covid/covidSymptomaticInfections';
+import CovidOverallMissedAppointments from './CT/Covid/covidOverallMissedAppointments';
+import CovidPercentageMissedAppointmentsByAgeGroup from './CT/Covid/covidPercentageMissedAppointmentsByAgeGroup';
+import CovidPercentageMissedAppointmentsByCounty from './CT/Covid/covidPercentageMissedAppointmentsByCounty';
+import CovidPercentageMissedAppointmentsByPartner from './CT/Covid/covidPercentageMissedAppointmentsByPartner';
+
 export default combineReducers({
     auth: authReducer,
 
@@ -316,5 +339,28 @@ export default combineReducers({
     ovcServDistributionByPartner,
     ovcClientsExitReasons,
     ovcViralSuppressionAmongOvcPatientsOverall,
-    ovcViralSuppressionAmongOvcPatientsByGender
+    ovcViralSuppressionAmongOvcPatientsByGender,
+
+    CovidAdultPLHIVCurrentOnTreatment,
+    CovidAdultPLHIVPartiallyVaccinated,
+    CovidAdultPLHIVFullyVaccinated,
+    CovidAdultPLHIVVaccinatedByAgeGroup,
+    CovidAdultPLHIVVaccinatedByGender,
+    CovidAdultPLHIVVaccinatedByCounty,
+    CovidAdultPLHIVVaccinatedByPartner,
+    CovidAdultPLHIVCurrentOnTreatmentByGender,
+    CovidAdultPLHIVCurrentOnTreatmentByCounty,
+    CovidAdultPLHIVCurrentOnTreatmentByPartner,
+    CovidAdultPLHIVCurrentOnTreatmentByAgeGroup,
+    CovidPLHIVCurrentOnArt,
+    CovidSeverityByGender,
+    CovidOverallAdmission,
+    CovidOverallAdmissionFemale,
+    CovidOverallAdmissionMale,
+    CovidEverHadInfection,
+    CovidSymptomaticInfections,
+    CovidOverallMissedAppointments,
+    CovidPercentageMissedAppointmentsByAgeGroup,
+    CovidPercentageMissedAppointmentsByCounty,
+    CovidPercentageMissedAppointmentsByPartner
 });

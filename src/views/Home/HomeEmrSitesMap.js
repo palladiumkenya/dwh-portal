@@ -3,11 +3,12 @@ import { Row, Col } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Highcharts from '../../utils/highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import { loadGpsSites } from '../../actions/Home/gpsSitesActions';
+import * as gpsSitesSelectors from '../../selectors/Home/gpsSites';
 
 const HomeEmrSitesMap = () => {
     const [emrSitesMap, setHomeEmrSitesMap] = useState({});
-    const gpsSites = useSelector(state => state.gpsSites.list);
+    // const gpsSites = useSelector(state => state.gpsSites.list);
+    const gpsSites = useSelector(gpsSitesSelectors.getGpsSites);
     const dispatch = useDispatch();
 
     const loadEmrSitesMaps = useCallback(async () => {
@@ -55,9 +56,8 @@ const HomeEmrSitesMap = () => {
     }, [gpsSites]);
 
     useEffect(() => {
-        dispatch(loadGpsSites());
         loadEmrSitesMaps();
-    }, [dispatch, loadEmrSitesMaps]);
+    }, [loadEmrSitesMaps]);
 
     return (
         <Row>
