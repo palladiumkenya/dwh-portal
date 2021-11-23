@@ -4,7 +4,7 @@ let url = null;
 let url_identity = null;
 
 if(process.env.NODE_ENV.trim() === 'production') {
-    url = 'api/';
+    url = 'https://data.kenyahmis.org:8082/api/';
     url_identity = 'https://auth.kenyahmis.org/DwhIdentity/api/';
 } else {
     url = 'http://localhost:7000/api/';
