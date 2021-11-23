@@ -156,7 +156,7 @@ const UniversalFilter = () => {
             <Row>
                 {
                     filters.countyFilterEnabled ?
-                    <Col>
+                    <Col className={"col-2"}>
                         <div className="form-group">
                             <label htmlFor="county">County</label>
                             <Dropdown
@@ -178,7 +178,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.subCountyFilterEnabled ?
-                    <Col>
+                    <Col className={"col-2"}>
                         <div className="form-group">
                             <label htmlFor="county">Sub-County</label>
                             <Dropdown
@@ -200,7 +200,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.facilityFilterEnabled ?
-                    <Col>
+                    <Col className={"col-2"}>
                         <div className="form-group">
                             <label htmlFor="county">Facility</label>
                             <Dropdown
@@ -222,7 +222,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.partnerFilterEnabled ?
-                    <Col>
+                    <Col className={"col-2"}>
                         <div className="form-group">
                             <label htmlFor="partner">Partner</label>
                             <Dropdown
@@ -244,7 +244,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.agencyFilterEnabled ?
-                    <Col>
+                    <Col className={"col-2"}>
                         <div className="form-group">
                             <label htmlFor="agency">Agency</label>
                             <Dropdown
@@ -266,7 +266,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.projectFilterEnabled ?
-                    <Col>
+                    <Col className={"col-2"}>
                         <div className="form-group">
                             <label htmlFor="project">Project</label>
                             <Dropdown
@@ -288,7 +288,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.fromDateFilterEnabled ?
-                    <Col>
+                    <Col className={"col-2"}>
                         <div className="form-group">
                             <label htmlFor="fromDate">{filters.toDateFilterEnabled ? 'From':'Period'}</label>
                             <DateInput
@@ -310,7 +310,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.toDateFilterEnabled ?
-                    <Col>
+                    <Col className={"col-2"}>
                         <div className="form-group">
                             <label htmlFor="toDate">To</label>
                             <DateInput
@@ -331,33 +331,33 @@ const UniversalFilter = () => {
                         </div>
                     </Col> : null
                 }
+                {
+                    filters.genderFilterEnabled ?
+                        <Col className={"col-2"}>
+                            <div className="form-group">
+                                <label htmlFor="gender">Gender</label>
+                                <Dropdown
+                                    id="gender"
+                                    name="gender"
+                                    placeholder="Select Gender"
+                                    fluid
+                                    multiple
+                                    selection
+                                    search
+                                    options={genders}
+                                    value={filters.genders}
+                                    onChange={(e, data) => {
+                                        dispatch(actions.filterByGender(data.value));
+                                    }}
+                                />
+                            </div>
+                        </Col> : null
+                }
             </Row>
             <Row>
                 {
-                    filters.genderFilterEnabled ?
-                    <Col>
-                        <div className="form-group">
-                            <label htmlFor="gender">Gender</label>
-                            <Dropdown
-                                id="gender"
-                                name="gender"
-                                placeholder="Select Gender"
-                                fluid
-                                multiple
-                                selection
-                                search
-                                options={genders}
-                                value={filters.genders}
-                                onChange={(e, data) => {
-                                    dispatch(actions.filterByGender(data.value));
-                                }}
-                            />
-                        </div>
-                    </Col> : null
-                }
-                {
                     filters.datimAgeGroupFilterEnabled ?
-                    <Col>
+                    <Col className={"col-2"}>
                         <div className="form-group">
                             <label htmlFor="datimAgeGroup">Age Group</label>
                             <Dropdown
@@ -379,7 +379,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.latestPregnancyFilterEnabled ?
-                    <Col>
+                    <Col className={"col-2"}>
                         <div className="form-group">
                             <label htmlFor="latestPregnancy">Pregnancy</label>
                             <Dropdown
@@ -401,7 +401,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.populationTypeFilterEnabled ?
-                    <Col>
+                    <Col className={"col-2"}>
                         <div className="form-group">
                             <label htmlFor="populationType">Population Type</label>
                             <Dropdown

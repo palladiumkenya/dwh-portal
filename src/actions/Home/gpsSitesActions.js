@@ -1,18 +1,9 @@
 import moment from 'moment';
 import * as actionTypes from '../types';
 import { getAll } from '../../views/Shared/Api';
-import { CACHING } from '../../constants';
 
 export const loadGpsSites = () => async (dispatch, getState) => {
-    const diffInMinutes = moment().diff(
-        moment(getState().gpsSites.lastFetch),
-        'minutes'
-    );
-    if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
-        return;
-    } else {
-        await dispatch(fetchGpsSites());
-    }
+    await dispatch(fetchGpsSites());
 };
 
 export const fetchGpsSites = () => async (dispatch, getState) => {
