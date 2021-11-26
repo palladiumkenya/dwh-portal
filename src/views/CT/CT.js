@@ -257,6 +257,7 @@ const CT = () => {
         if (ctTab) {
             dispatch(enableAgencyFilter());
             dispatch(enableGenderFilter());
+            dispatch(enableDatimAgeGroupFilter());
         }
     }, [dispatch, ctTab]);
 

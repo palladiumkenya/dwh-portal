@@ -331,6 +331,8 @@ const UniversalFilter = () => {
                         </div>
                     </Col> : null
                 }
+            </Row>
+            <Row>
                 {
                     filters.genderFilterEnabled ?
                         <Col className={"col-2"}>
@@ -353,8 +355,6 @@ const UniversalFilter = () => {
                             </div>
                         </Col> : null
                 }
-            </Row>
-            <Row>
                 {
                     filters.datimAgeGroupFilterEnabled ?
                     <Col className={"col-2"}>
