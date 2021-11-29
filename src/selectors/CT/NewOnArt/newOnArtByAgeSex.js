@@ -28,15 +28,20 @@ export const getNewOnArtByAgeSex = createSelector(
         ];
         let newOnArtMale = [];
         let newOnArtFemale = [];
-        
-        for(let i = 0; i < list.length; i++) {
-            if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
-                let index = ageGroups.indexOf(list[i].AgeGroup);
-                newOnArtMale.splice(index, 0, parseInt(list[i].txNew));
+
+        for (const ageGroup of ageGroups) {
+            const ageGroupMaleFilter = list.filter(obj => obj.AgeGroup === ageGroup && (obj.Gender.toLowerCase() === "M".toLowerCase() || obj.Gender.toLowerCase() === "Male".toLowerCase()));
+            const ageGroupFemaleFilter = list.filter(obj => obj.AgeGroup === ageGroup && (obj.Gender.toLowerCase() === "F".toLowerCase() || obj.Gender.toLowerCase() === "Female".toLowerCase()));
+            if (ageGroupMaleFilter.length > 0) {
+                newOnArtMale.push(ageGroupMaleFilter[0].txNew);
+            } else {
+                newOnArtMale.push(0);
             }
-            else if (list[i].Gender.toLowerCase() === "F".toLowerCase() || list[i].Gender.toLowerCase() === "Female".toLowerCase()) {
-                let index = ageGroups.indexOf(list[i].AgeGroup);
-                newOnArtFemale.splice(index, 0, parseInt(list[i].txNew));
+
+            if (ageGroupFemaleFilter.length > 0) {
+                newOnArtFemale.push(ageGroupFemaleFilter[0].txNew);
+            } else {
+                newOnArtFemale.push(0);
             }
         }
 
@@ -53,7 +58,7 @@ export const getNewOnArtBySex = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         let newOnArtMale = 0;
         let newOnArtFemale = 0;
-        
+
         for(let i = 0; i < list.length; i++) {
             if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
                 newOnArtMale = newOnArtMale + parseInt(list[i].txNew);
