@@ -90,7 +90,7 @@ const COVIDAdultPlhivCurrentOnTreatment = () => {
             }
         ]
     };*/
-    const adultPLHIVCurrentOnTreatment = "ADULT PLHIV CURRENT ON TREATMENT as at " + moment().startOf('month').subtract(1, 'month').format('MMM YYYY');
+    const adultPLHIVCurrentOnTreatment = "ADULT >18 YEARS PLHIV CURRENT ON TREATMENT as at " + moment().startOf('month').subtract(1, 'month').format('MMM YYYY');
 
     return (
         <DataCard
