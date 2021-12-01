@@ -13,13 +13,14 @@ export const getAdultPLHIVVaccinatedByCounty = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         const listCounty = filtered ? listFilteredCounty : listUnfilteredCounty;
 
-        let counties = list.map(obj => obj.County);
+        let counties = list.map(obj => obj.County.toUpperCase().toString());
+        counties = [...new Set(counties)];
         let fullyVaccinated = [];
         let partiallyVaccinated = [];
 
         for (let j = 0; j < counties.length; j++) {
-            const filteredCounties = list.filter(obj => obj.County === counties[j]);
-            const countyAdults = listCounty.filter(obj => obj.County === counties[j]);
+            const filteredCounties = list.filter(obj => obj.County ? obj.County.toUpperCase().toString() === counties[j].toUpperCase().toString() : []);
+            const countyAdults = listCounty.filter(obj => obj.County ? obj.County.toUpperCase().toString() === counties[j].toUpperCase().toString(): []);
             let totalCountyAdults = 0;
             if (countyAdults.length > 0) {
                 totalCountyAdults = countyAdults[0].Adults;
