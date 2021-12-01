@@ -175,6 +175,7 @@ import { loadCovidOverallMissedAppointment } from '../../actions/CT/Covid/covidO
 import { loadCovidPercentageWhoMissedAppointmentsByAgeGroup } from '../../actions/CT/Covid/covidPercentageWhoMissedAppointmentsByAgeGroupActions';
 import { loadCovidPercentageWhoMissedAppointmentsByCounty } from '../../actions/CT/Covid/covidPercentageWhoMissedAppointmentsByCountyActions';
 import { loadCovidPercentageWhoMissedAppointmentsByPartner } from '../../actions/CT/Covid/covidPercentageWhoMissedAppointmentsByPartnerActions';
+import { loadCovidCumulativeWhoReceivedAtLeastOneDose } from '../../actions/CT/Covid/covidCumulativeWhoReceivedAtLeastOneDoseActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -439,6 +440,7 @@ const CT = () => {
                 dispatch(loadCovidPercentageWhoMissedAppointmentsByAgeGroup());
                 dispatch(loadCovidPercentageWhoMissedAppointmentsByCounty());
                 dispatch(loadCovidPercentageWhoMissedAppointmentsByPartner());
+                dispatch(loadCovidCumulativeWhoReceivedAtLeastOneDose());
                 break;
             default:
                 break;
