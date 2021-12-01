@@ -1,21 +1,18 @@
-import moment from 'moment';
 import * as actionTypes from '../../types';
+import moment from 'moment';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING, PAGES } from '../../../constants';
 
-export const loadCurrentOnArtByAgeSex = () => async (dispatch, getState) => {
+export const loadCovidCumulativeWhoReceivedAtLeastOneDose = () => async (dispatch, getState) => {
     if (getState().filters.noCache === true) {
-        await dispatch(fetchCurrentOnArtByAgeSex());
+        await dispatch(fetchCovidCumulativeWhoReceivedAtLeastOneDose());
     } else {
         const diffInMinutes = moment().diff(
-            moment(getState().currentOnArtByAgeSex.lastFetch),
+            moment(getState().CovidCumulativeWhoReceivedAtLeastOneDose.lastFetch),
             'minutes'
         );
         if (
-            getState().ui.ctTab !== 'txCurr' &&
-            getState().ui.ctTab !== 'txOpt' &&
-            getState().ui.ctTab !== 'advEv' &&
-            getState().ui.ctTab !== 'dsd' &&
+            getState().ui.ctTab !== 'covid' &&
             getState().ui.currentPage !== PAGES.home
         ) {
             return;
@@ -23,13 +20,13 @@ export const loadCurrentOnArtByAgeSex = () => async (dispatch, getState) => {
         else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
             return;
         } else {
-            await dispatch(fetchCurrentOnArtByAgeSex());
+            await dispatch(fetchCovidCumulativeWhoReceivedAtLeastOneDose());
         }
     }
 };
 
-export const fetchCurrentOnArtByAgeSex = () => async (dispatch, getState) => {
-    dispatch({ type: actionTypes.CT_CURRENT_ON_ART_BY_AGE_SEX_REQUEST });
+export const fetchCovidCumulativeWhoReceivedAtLeastOneDose = () => async (dispatch, getState) => {
+    dispatch({ type: actionTypes.CT_COVID_CUMULATIVE_WHO_RECEIVED_AT_LEAST_ONE_DOSE_REQUEST });
     const params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,
@@ -37,11 +34,10 @@ export const fetchCurrentOnArtByAgeSex = () => async (dispatch, getState) => {
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
         project: getState().filters.projects,
-        gender: getState().filters.genders,
-        datimAgeGroup: getState().filters.datimAgeGroups,
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
-    const response = await getAll('care-treatment/txCurrByAgeAndSex', params);
-    dispatch({ type: actionTypes.CT_CURRENT_ON_ART_BY_AGE_SEX_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
+    const response = await getAll('care-treatment/getCumulativeNumberAdultPlhivWhoReceivedAtleastOneDose', params);
+    dispatch({ type: actionTypes.CT_COVID_CUMULATIVE_WHO_RECEIVED_AT_LEAST_ONE_DOSE_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };
+

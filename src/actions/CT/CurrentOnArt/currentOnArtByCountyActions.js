@@ -31,6 +31,8 @@ export const fetchCurrentOnArtByCounty = () => async (dispatch, getState) => {
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
         project: getState().filters.projects,
+        gender: getState().filters.genders,
+        datimAgeGroup: getState().filters.datimAgeGroups,
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };

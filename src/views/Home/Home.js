@@ -14,6 +14,20 @@ import SectionHeader from './../Shared/SectionHeader';
 import SectionFooter from './../Shared/SectionFooter';
 import UniversalFilter from '../Shared/UniversalFilter';
 
+import {
+    enableFromDateFilter,
+    enableToDateFilter,
+    enableGenderFilter,
+    disableGenderFilter,
+    enableDatimAgeGroupFilter,
+    disableDatimAgeGroupFilter,
+    enableLatestPregnancyFilter,
+    disableLatestPregnancyFilter,
+    enablePopulationTypeFilter,
+    disablePopulationTypeFilter,
+    enableAgencyFilter
+} from "../../actions/Shared/filterActions";
+
 const HomeVLCascade = Loadable({ loader: () => import('./HomeVLCascade'), loading: Loading, delay: LOADING_DELAY });
 const HomeAgeDistribution = Loadable({ loader: () => import('./HomeAgeDistribution'), loading: Loading, delay: LOADING_DELAY });
 const HomeOverview = Loadable({ loader: () => import('./HomeOverview'), loading: Loading, delay: LOADING_DELAY });
@@ -42,6 +56,8 @@ const Home = () => {
         dispatch(changeCurrentPage(PAGES.home));
         dispatch(disableFromDateFilter());
         dispatch(disableToDateFilter());
+        dispatch(enableGenderFilter());
+        // dispatch(enableDatimAgeGroupFilter());
     }, [dispatch]);
 
     useEffect(() => {
