@@ -17,7 +17,7 @@ export const loadCovidPercentageWhoMissedAppointmentsByCounty = () => async (dis
         ) {
             return;
         }
-        else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
+        else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
             return;
         } else {
             await dispatch(fetchCovidPercentageWhoMissedAppointmentsByCounty());

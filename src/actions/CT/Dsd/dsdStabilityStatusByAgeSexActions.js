@@ -11,7 +11,7 @@ export const loadDsdStabilityStatusByAgeSex = () => async (dispatch, getState) =
     if (getState().ui.ctTab !== 'dsd' && getState().ui.currentPage !== PAGES.home) {
         return;
     }
-    else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
+    else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
         return;
     } else {
         await dispatch(fetchDsdStabilityStatusByAgeSex());

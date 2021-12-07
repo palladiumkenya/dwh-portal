@@ -14,7 +14,7 @@ export const loadCurrentOnArtByPartner = () => async (dispatch, getState) => {
         if (getState().ui.ctTab !== 'txCurr' && getState().ui.ctTab !== 'txOpt' && getState().ui.ctTab !== 'dsd') {
             return;
         }
-        else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
+        else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
             return;
         } else {
             await dispatch(fetchCurrentOnArtByPartner());
