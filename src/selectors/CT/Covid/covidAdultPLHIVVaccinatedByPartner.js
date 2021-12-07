@@ -17,6 +17,7 @@ export const getAdultPLHIVVaccinatedByPartner = createSelector(
         partners = [...new Set(partners)];
         let fullyVaccinated = [];
         let partiallyVaccinated = [];
+        let totalVaccinated = [];
 
         for (let j = 0; j < partners.length; j++) {
             const filteredPartners = list.filter(obj => obj.CTPartner ? obj.CTPartner.toUpperCase().toString() === partners[j].toUpperCase().toString() : []);
@@ -50,6 +51,8 @@ export const getAdultPLHIVVaccinatedByPartner = createSelector(
                     );
                 }
 
+                const totalFullyVaccinated = filterFully.length > 0 ? filterFully[0].Num : 0;
+
                 if (filterPartial.length > 0) {
                     let percent = Number(filterPartial[0].Num) > 0 ? ((Number(filterPartial[0].Num)/Number(totalPartnerAdults))*100) : 0;
                     percent = Math.round((percent + Number.EPSILON) * 100) / 100;
@@ -69,6 +72,15 @@ export const getAdultPLHIVVaccinatedByPartner = createSelector(
                         }
                     );
                 }
+                const totalPartiallyVaccinated = filterPartial.length > 0 ? filterPartial[0].Num : 0;
+                const totalVacc = totalFullyVaccinated + totalPartiallyVaccinated;
+                totalVaccinated.push(
+                    {
+                        y: totalVacc,
+                        text: totalVacc,
+                        partner: partners[j]
+                    }
+                );
             } else {
                 fullyVaccinated.push(
                     {
@@ -84,21 +96,34 @@ export const getAdultPLHIVVaccinatedByPartner = createSelector(
                         partner: partners[j]
                     }
                 );
+                totalVaccinated.push(
+                    {
+                        y: 0,
+                        text: 0,
+                        partner: partners[j]
+                    }
+                );
             }
         }
 
-        fullyVaccinated.sort((a, b) => {
-            return b.y - a.y;
+        totalVaccinated.sort((a, b) => {
+            return b.text - a.text;
         });
-        partners = fullyVaccinated.map(obj => obj.partner);
+        partners = totalVaccinated.map(obj => obj.partner);
         const orderedPartially = [];
-        for (let i = 0; i < fullyVaccinated.length; i++) {
-            const obj = partiallyVaccinated.filter(obj => obj.partner === fullyVaccinated[i].partner);
+        const orderedFully = [];
+        for (let i = 0; i < totalVaccinated.length; i++) {
+            const obj = partiallyVaccinated.filter(obj => obj.partner === totalVaccinated[i].partner);
+            const objFully = fullyVaccinated.filter(obj => obj.partner === totalVaccinated[i].partner);
             if (obj.length > 0) {
                 orderedPartially.push(obj[0]);
             }
+            if (objFully.length > 0) {
+                orderedFully.push(objFully[0]);
+            }
         }
         partiallyVaccinated = orderedPartially;
+        fullyVaccinated = orderedFully;
 
         return { partners, fullyVaccinated, partiallyVaccinated };
     }

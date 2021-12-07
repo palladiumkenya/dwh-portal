@@ -15,19 +15,19 @@ const COVIDAdultPLHIVVaccinatedByAge = () => {
             title: { text: '' },
             plotOptions: { column: { stacking: 'normal' } },
             xAxis: [{ categories: fullyVaccinated.ageGroups, crosshair: true }],
-            yAxis: [{ title: { text: 'Percentage of Patients' }}],
+            yAxis: [{ title: { text: 'Number of Patients' }}],
             tooltip: { shared: true },
             legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'PARTIALLY VACCINATED', data: fullyVaccinated.partiallyVaccinated, type: 'column', color: "#F08532", tooltip: { valueSuffix: '% ({point.text:.0f})' } },
-                { name: 'FULLY VACCINATED', data: fullyVaccinated.fullyVaccinated, type: 'column', color: "#69B34C", tooltip: { valueSuffix: '% ({point.text:.0f})' } },
+                { name: 'PARTIALLY VACCINATED', data: fullyVaccinated.partiallyVaccinated.map(obj => obj.text), type: 'column', color: "#F08532" },
+                { name: 'FULLY VACCINATED', data: fullyVaccinated.fullyVaccinated.map(obj => obj.text), type: 'column', color: "#69B34C" },
             ]
         });
-    }, []);
+    }, [fullyVaccinated]);
 
     useEffect(() => {
         loadVaccinatedByAge();
-    }, []);
+    }, [loadVaccinatedByAge]);
 
     return (
         <Card className="trends-card">

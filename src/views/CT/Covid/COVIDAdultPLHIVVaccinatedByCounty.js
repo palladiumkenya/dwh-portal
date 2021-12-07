@@ -15,19 +15,19 @@ const COVIDAdultPLHIVVaccinatedByCounty = () => {
             title: { text: '' },
             plotOptions: { column: { stacking: 'normal' } },
             xAxis: [{ categories: countiesVaccinated.counties, crosshair: true }],
-            yAxis: [{ title: { text: 'Percentage of Patients' }}],
+            yAxis: [{ title: { text: 'Number of Patients' }}],
             tooltip: { shared: true },
             legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'PARTIALLY VACCINATED', data: countiesVaccinated.partiallyVaccinated, type: 'column', color: "#F08532", tooltip: { valueSuffix: '% ({point.text:.0f})' } },
-                { name: 'FULLY VACCINATED', data: countiesVaccinated.fullyVaccinated, type: 'column', color: "#69B34C", tooltip: { valueSuffix: '% ({point.text:.0f})' } },
+                { name: 'PARTIALLY VACCINATED', data: countiesVaccinated.partiallyVaccinated.map(obj => obj.text), type: 'column', color: "#F08532" },
+                { name: 'FULLY VACCINATED', data: countiesVaccinated.fullyVaccinated.map(obj => obj.text), type: 'column', color: "#69B34C" },
             ]
         });
-    }, []);
+    }, [countiesVaccinated]);
 
     useEffect(() => {
         loadVaccinatedByCounty();
-    }, []);
+    }, [loadVaccinatedByCounty]);
 
     return (
         <Card className="trends-card">

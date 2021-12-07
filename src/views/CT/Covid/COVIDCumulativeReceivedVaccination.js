@@ -25,11 +25,11 @@ const COVIDCumulativeReceivedVaccination = () => {
                 { name: 'Number of Patients', data: cumulativeWhoReceivedAtLeastOneVaccine.cumulative, type: 'spline', color: "#E06F07" },
             ]
         });
-    }, []);
+    }, [cumulativeWhoReceivedAtLeastOneVaccine]);
 
     useEffect(() => {
         loadNewOnArtTrendsChart();
-    }, []);
+    }, [loadNewOnArtTrendsChart]);
 
     return (
         <Card className="trends-card">

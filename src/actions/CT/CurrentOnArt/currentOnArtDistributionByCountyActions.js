@@ -11,7 +11,7 @@ export const loadCurrentOnArtDistributionByCounty = () => async (dispatch, getSt
     if (getState().ui.ctTab !== 'txCurr' && getState().ui.ctTab !== 'dsd') {
         return;
     }
-    else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
+    else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
         return;
     } else {
         await dispatch(fetchCurrentOnArtDistributionByCounty());
