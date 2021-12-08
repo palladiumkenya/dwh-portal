@@ -13,21 +13,21 @@ const COVIDTrendsOfAdultPLHIVVaccinationInTheLast12Months = () => {
     const loadTrendsOfPLHIVVaccination = useCallback(async () => {
         setCovidTrendsOfPLHIVVaccination({
             title: { text: '' },
-            plotOptions: { column: { stacking: 'percent' } },
+            plotOptions: { column: { stacking: 'normal' } },
             xAxis: [{ categories: trendsPLHIVVaccinationInTheLast12Months.yearMonthTrends, crosshair: true }],
-            yAxis: [{ title: { text: 'Percentage of Patients' }}],
+            yAxis: [{ title: { text: 'Number of Patients' }}],
             tooltip: { shared: true },
             legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'PARTIALLY VACCINATED', data: trendsPLHIVVaccinationInTheLast12Months.trendsPartiallyVaccinated, type: 'column', color: "#F08532", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'FULLY VACCINATED', data: trendsPLHIVVaccinationInTheLast12Months.trendsFullyVaccinated, type: 'column', color: "#69B34C", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'PARTIALLY VACCINATED', data: trendsPLHIVVaccinationInTheLast12Months.trendsPartiallyVaccinated, type: 'column', color: "#F08532" },
+                { name: 'FULLY VACCINATED', data: trendsPLHIVVaccinationInTheLast12Months.trendsFullyVaccinated, type: 'column', color: "#69B34C" },
             ]
         });
-    }, []);
+    }, [trendsPLHIVVaccinationInTheLast12Months]);
 
     useEffect(() => {
         loadTrendsOfPLHIVVaccination();
-    }, []);
+    }, [loadTrendsOfPLHIVVaccination]);
 
     return (
         <Card className="trends-card">

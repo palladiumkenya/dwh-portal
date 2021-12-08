@@ -11,7 +11,7 @@ export const loadAdverseEventsProportionOfPlHivAeRelatedToArt = () => async (dis
     if (getState().ui.ctTab !== 'advEv') {
         return;
     }
-    else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
+    else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
         return;
     } else {
         await dispatch(fetchAdverseEventsProportionOfPLHIVAeRelatedToArt());

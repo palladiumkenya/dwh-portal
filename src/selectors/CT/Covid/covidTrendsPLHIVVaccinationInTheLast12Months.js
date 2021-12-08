@@ -10,12 +10,36 @@ export const getTrendsPLHIVVaccinationInTheLast12Months = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
 
-        const yearMonthTrends = list.map(obj => obj.DategivenFirstDose + ' ' + obj.YearFirstDose);
-        const fullyVaccinated = list.filter(obj => obj.VaccinationStatus === 'Fully Vaccinated');
-        const partiallyVaccinated = list.filter(obj => obj.VaccinationStatus === 'Partially Vaccinated');
+        console.log(list);
 
-        const trendsFullyVaccinated = fullyVaccinated.map(obj => obj.Num);
-        const trendsPartiallyVaccinated = partiallyVaccinated.map(obj => obj.Num);
+        let yearMonthTrends = list.map(obj => obj.DategivenFirstDose + ' ' + obj.YearFirstDose);
+        yearMonthTrends = [...new Set(yearMonthTrends)];
+        let trendsFullyVaccinated = [];
+        let trendsPartiallyVaccinated = [];
+        for (let i = 0; i < yearMonthTrends.length; i++) {
+            const arrayVals = yearMonthTrends[i].split(" ");
+            const fullyVaccinated = list.filter(obj => obj.VaccinationStatus === 'Fully Vaccinated'
+                && obj.DategivenFirstDose === arrayVals[0]
+                && obj.YearFirstDose === arrayVals[1]);
+            const partiallyVaccinated = list.filter(obj => obj.VaccinationStatus === 'Partially Vaccinated'
+                && obj.DategivenFirstDose === arrayVals[0]
+                && obj.YearFirstDose === arrayVals[1]);
+
+            if (fullyVaccinated.length > 0) {
+                trendsFullyVaccinated.push(fullyVaccinated[0].Num);
+            } else {
+                trendsFullyVaccinated.push(0);
+            }
+
+            if (partiallyVaccinated.length > 0) {
+                trendsPartiallyVaccinated.push(partiallyVaccinated[0].Num);
+            } else {
+                trendsPartiallyVaccinated.push(0);
+            }
+        }
+
+        // const trendsFullyVaccinated = fullyVaccinated.map(obj => obj.Num);
+        // const trendsPartiallyVaccinated = partiallyVaccinated.map(obj => obj.Num);
 
         return { yearMonthTrends, trendsFullyVaccinated, trendsPartiallyVaccinated };
     }
