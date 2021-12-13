@@ -431,17 +431,17 @@ const CT = () => {
                 dispatch(loadCovidAdultPLHIVCurrentOnTreatmentByCounty());
                 dispatch(loadCovidAdultPLHIVCurrentOnTreatmentByAgeGroup());
                 dispatch(loadCovidPLHIVCurrentOnArt());
-                dispatch(loadCovidSeverityByGender());
-                dispatch(loadCovidOverallAdmission());
-                dispatch(loadCovidOverallAdmissionMales());
-                dispatch(loadCovidOverallAdmissionFemales());
-                dispatch(loadCovidEverHadInfection());
-                dispatch(loadCovidSymptomaticInfections());
-                dispatch(loadCovidOverallMissedAppointment());
-                dispatch(loadCovidPercentageWhoMissedAppointmentsByAgeGroup());
-                dispatch(loadCovidPercentageWhoMissedAppointmentsByCounty());
-                dispatch(loadCovidPercentageWhoMissedAppointmentsByPartner());
-                dispatch(loadCovidCumulativeWhoReceivedAtLeastOneDose());
+                // dispatch(loadCovidSeverityByGender());
+                // dispatch(loadCovidOverallAdmission());
+                // dispatch(loadCovidOverallAdmissionMales());
+                // dispatch(loadCovidOverallAdmissionFemales());
+                // dispatch(loadCovidEverHadInfection());
+                // dispatch(loadCovidSymptomaticInfections());
+                // dispatch(loadCovidOverallMissedAppointment());
+                // dispatch(loadCovidPercentageWhoMissedAppointmentsByAgeGroup());
+                // dispatch(loadCovidPercentageWhoMissedAppointmentsByCounty());
+                // dispatch(loadCovidPercentageWhoMissedAppointmentsByPartner());
+                // dispatch(loadCovidCumulativeWhoReceivedAtLeastOneDose());
                 dispatch(loadCovidTrendsPLHIVVaccinationInTheLast12Months());
                 break;
             default:
