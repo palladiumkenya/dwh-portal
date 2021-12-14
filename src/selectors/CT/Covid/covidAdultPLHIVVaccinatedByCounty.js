@@ -13,8 +13,9 @@ export const getAdultPLHIVVaccinatedByCounty = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         const listCounty = filtered ? listFilteredCounty : listUnfilteredCounty;
 
-        let counties = list.map(obj => obj.County.toUpperCase().toString());
+        let counties = list.map(obj => obj.County ? obj.County.toUpperCase().toString() : null);
         counties = [...new Set(counties)];
+        counties = counties.filter(n => n);
         let fullyVaccinated = [];
         let partiallyVaccinated = [];
         let totalVaccinated = [];
