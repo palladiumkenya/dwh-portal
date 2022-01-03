@@ -13,8 +13,9 @@ export const getAdultPLHIVVaccinatedByPartner = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         const listPartner = filtered ? listFilteredPartner : listUnfilteredPartner;
 
-        let partners = list.map(obj => obj.CTPartner.toUpperCase().toString());
+        let partners = list.map(obj => obj.CTPartner ? obj.CTPartner.toUpperCase().toString() : null);
         partners = [...new Set(partners)];
+        partners = partners.filter(n => n);
         let fullyVaccinated = [];
         let partiallyVaccinated = [];
         let totalVaccinated = [];
