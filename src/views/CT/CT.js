@@ -178,6 +178,9 @@ import { loadCovidPercentageWhoMissedAppointmentsByPartner } from '../../actions
 import { loadCovidCumulativeWhoReceivedAtLeastOneDose } from '../../actions/CT/Covid/covidCumulativeWhoReceivedAtLeastOneDoseActions';
 import { loadCovidTrendsPLHIVVaccinationInTheLast12Months } from '../../actions/CT/Covid/covidTrendsPLHIVVaccinationInTheLast12MonthsActions';
 
+import { loadOvcOverallCalHIV } from '../../actions/CT/OVC/ovcOverallCalHIVActions';
+import { loadOvcCalHIVByGender } from '../../actions/CT/OVC/ovcCALHIVByGenderActions';
+
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
 import Loading from './../Shared/Loading';
@@ -426,6 +429,8 @@ const CT = () => {
                 dispatch(loadOvcClientsExitReasons());
                 dispatch(loadOvcViralSuppressionAmongOvcPatientsOverall());
                 dispatch(loadOvcViralSuppressionAmongOvcPatientsByGender());
+                dispatch(loadOvcOverallCalHIV());
+                dispatch(loadOvcCalHIVByGender());
                 break;
             case 'covid':
                 dispatch(loadCovidAdultPLHIVCurrentOnTreatment());
