@@ -9,7 +9,7 @@ import DataCard from '../../Shared/DataCard';
 const COVIDAdultPlhivCurrentOnTreatment = () => {
 
     const currentOnArtAdults = useSelector(covidAdultPLHIVCurrentOnTreatmentSelectors.getAdultPLHIVCurrentOnTreatment).covidAdultsPLHIVCurrentOnTreatment;
-    const adultPLHIVCurrentOnTreatment = "ADULT >18 YEARS PLHIV CURRENT ON TREATMENT as at " + moment().startOf('month').subtract(1, 'month').format('MMM YYYY');
+    const adultPLHIVCurrentOnTreatment = "ADULT >15 YEARS PLHIV CURRENT ON TREATMENT as at " + moment().startOf('month').subtract(1, 'month').format('MMM YYYY');
 
     return (
         <DataCard
