@@ -57,7 +57,7 @@ const Home = () => {
         dispatch(disableFromDateFilter());
         dispatch(disableToDateFilter());
         dispatch(enableGenderFilter());
-        // dispatch(enableDatimAgeGroupFilter());
+        dispatch(enableDatimAgeGroupFilter());
     }, [dispatch]);
 
     useEffect(() => {

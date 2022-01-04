@@ -256,7 +256,16 @@ const CT = () => {
             dispatch(disableLatestPregnancyFilter());
             dispatch(disablePopulationTypeFilter());
         }
-        if (ctTab) {
+        if (ctTab === 'txNew'
+            || ctTab === 'txCurr'
+            || ctTab === 'txOpt'
+            || ctTab === 'advEv'
+            || ctTab === 'dsd'
+            || ctTab === 'vl'
+            || ctTab === 'tOut'
+            || ctTab === 'otz'
+            || ctTab === 'ovc'
+            || ctTab === 'covid') {
             dispatch(enableAgencyFilter());
             dispatch(enableGenderFilter());
             dispatch(enableDatimAgeGroupFilter());
