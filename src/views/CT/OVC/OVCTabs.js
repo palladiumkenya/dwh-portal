@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import classnames from 'classnames';
+import Loadable from 'react-loadable';
+import Loading from '../../Shared/Loading';
+import { LOADING_DELAY } from '../../../constants';
+
+const OVCOverview = Loadable({ loader: () => import('./OVCOverview'), loading: Loading, delay: LOADING_DELAY });
+const OVCIndicatorDefinition = Loadable({ loader: () => import('./OVCIndicatorDefinition'), loading: Loading, delay: LOADING_DELAY });
 
 const OVCTabs = () => {
     const [activeTab, setActiveTab] = useState('distributionOfOvcClients');
@@ -18,6 +24,9 @@ const OVCTabs = () => {
             </Nav>
             <TabContent activeTab={activeTab}>
                 <TabPane tabId="distributionOfOvcClients">
+                    <OVCOverview />
+
+                    <OVCIndicatorDefinition />
 
                 </TabPane>
 

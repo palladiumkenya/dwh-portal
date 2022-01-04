@@ -12,16 +12,10 @@ const OVCIndicatorDefinition = () => {
                     <CardBody className={"indicator_definition_body"}>
                         <ul>
                             <li>
-                                OVC_SERV => Semi-annual number of beneficiaries served by OVC programs for children and families affected by HIV.
+                                CALHIV => Children and adolescents aged 0-19 years who are current on ART by the end of the previous month.
                             </li>
                             <li>
-                                OVC Comprehensive => OVC beneficiaries enrolled in any OVC comprehensive program. Includes Active and Graduated beneficiaries. Includes children and caregivers.
-                            </li>
-                            <li>
-                                DREAMS beneficiaries => Female OVC beneficiaries aged 10-17-years who are active in DREAMS and receiving approved OVC services.
-                            </li>
-                            <li>
-                                OVC Preventive => OVC beneficiaries aged 9-14-years receiving one of the approved primary prevention of sexual violence and HIV curricula.
+                                OVC => Semi-annual number of beneficiaries served by OVC programs for children and families affected by HIV.
                             </li>
                         </ul>
                     </CardBody>

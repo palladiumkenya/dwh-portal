@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardBody, CardText, CardTitle, Row, Col } from 'reactstrap';
 
-const DataCard = ({ title, subtitle, data }) => {
+const DataCard = ({ title, subtitle, data, bottomSubTitle }) => {
     return (
         <Card className="primary-card">
             <CardBody className="primary-card-body">
@@ -16,6 +16,13 @@ const DataCard = ({ title, subtitle, data }) => {
                     </Col>
                 </Row>
                 <CardText className="primary-card-body-text text-center">{data}</CardText>
+                <Row>
+                    <Col className={"col-12"}>
+                        <CardText tag="h5" className="text-center card-bottom-sub-title">
+                            {bottomSubTitle}
+                        </CardText>
+                    </Col>
+                </Row>
             </CardBody>
         </Card>
     );

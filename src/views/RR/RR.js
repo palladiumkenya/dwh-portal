@@ -67,12 +67,12 @@ const RR = () => {
         dispatch(disableFacilityFilter());
         dispatch(enableAgencyFilter());
         dispatch(enableFromDateFilter());
+        dispatch(disableGenderFilter());
+        dispatch(disableDatimAgeGroupFilter());
         return () => {
             dispatch(enableFacilityFilter());
             dispatch(disableAgencyFilter());
             dispatch(disableFromDateFilter());
-            dispatch(disableGenderFilter());
-            dispatch(disableDatimAgeGroupFilter());
         }
     }, [dispatch]);
 
