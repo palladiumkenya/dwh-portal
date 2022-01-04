@@ -6,6 +6,7 @@ import * as ovcOverallServSelector from '../../../selectors/CT/OVC/ovcOverallSer
 import * as ovcServByGenderSelector from '../../../selectors/CT/OVC/ovcServByGender';
 import { formatNumber } from '../../../utils/utils';
 import DataCard from '../../Shared/DataCard';
+import moment from 'moment';
 
 
 const OVCOverview = () => {
@@ -15,6 +16,8 @@ const OVCOverview = () => {
 
     const maleServ = overServByGender.filter(obj => obj.Gender === "Male");
     const femaleServ = overServByGender.filter(obj => obj.Gender === "Female");
+
+    const monthYear = moment().startOf('month').subtract(1, 'month').format('MMM YYYY');
 
     const loadOvcOverallServ = useCallback(async () => {
         setOvcOverallServ({
@@ -30,27 +33,68 @@ const OVCOverview = () => {
 
     return (
         <Row>
-            <Col className={"col-4"}>
-                <DataCard
-                    title={"OVERALL OVC_SERV"}
-                    subtitle={null}
-                    data={formatNumber(ovcOverallServ.ovcOverallServ)}
-                />
+            <Col className={"col-12"}>
+                <Row>
+                    <Col className={"col-4"}>
+                        <DataCard
+                            title={"OVERALL CALHIV"}
+                            subtitle={null}
+                            data={formatNumber(ovcOverallServ.ovcOverallServ)}
+                            bottomSubTitle={"Total CHILDREN - " + monthYear}
+                        />
+                    </Col>
+
+                    <Col className={"col-4"}>
+                        <DataCard
+                            title={"MALE CALHIV"}
+                            subtitle={null}
+                            data={formatNumber(ovcOverallServ.femaleServ)}
+                            bottomSubTitle={"FEMALE CHILDREN - " + monthYear}
+                        />
+                    </Col>
+
+                    <Col className={"col-4"}>
+                        <DataCard
+                            title={"FEMALE CALHIV"}
+                            subtitle={null}
+                            data={formatNumber(ovcOverallServ.maleServ)}
+                            bottomSubTitle={"MALE CHILDREN - " + monthYear}
+                        />
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col className={"col-4"}>
+                        <DataCard
+                            title={"OVERALL OVC"}
+                            subtitle={null}
+                            data={formatNumber(ovcOverallServ.ovcOverallServ)}
+                            bottomSubTitle={"TOTAL ADOLESCENTS - " + monthYear}
+                        />
+                    </Col>
+
+                    <Col className={"col-4"}>
+                        <DataCard
+                            title={"MALE OVC"}
+                            subtitle={null}
+                            data={formatNumber(ovcOverallServ.maleServ)}
+                            bottomSubTitle={"MALE OVC - " + monthYear}
+                        />
+                    </Col>
+
+                    <Col className={"col-4"}>
+                        <DataCard
+                            title={"FEMALE OVC"}
+                            subtitle={null}
+                            data={formatNumber(ovcOverallServ.femaleServ)}
+                            bottomSubTitle={"FEMALE OVC - " + monthYear}
+                        />
+                    </Col>
+                </Row>
             </Col>
-            <Col className={"col-4"}>
-                <DataCard
-                    title={"FEMALE OVC_SERV"}
-                    subtitle={null}
-                    data={formatNumber(ovcOverallServ.femaleServ)}
-                />
-            </Col>
-            <Col className={"col-4"}>
-                <DataCard
-                    title={"MALE OVC_SERV"}
-                    subtitle={null}
-                    data={formatNumber(ovcOverallServ.maleServ)}
-                />
-            </Col>
+
+
+
         </Row>
     );
 };
