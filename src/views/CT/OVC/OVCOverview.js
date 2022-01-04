@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Col, Row } from 'reactstrap';
-import DataCardOTZ from '../../Shared/DataCardOTZ';
 import { useSelector } from 'react-redux';
 import * as ovcOverallServSelector from '../../../selectors/CT/OVC/ovcOverallServ';
 import * as ovcServByGenderSelector from '../../../selectors/CT/OVC/ovcServByGender';
+import * as ovcOverallCALHIVSelector from '../../../selectors/CT/OVC/ovcOverallCALHIV';
+import * as ovcCALHIVByGenderSelector from '../../../selectors/CT/OVC/ovcCALHIVByGender';
 import { formatNumber } from '../../../utils/utils';
 import DataCard from '../../Shared/DataCard';
 import moment from 'moment';
@@ -13,9 +14,14 @@ const OVCOverview = () => {
     const [ovcOverallServ, setOvcOverallServ] = useState({});
     const overallServ = useSelector(ovcOverallServSelector.getOvcOverallServ);
     const overServByGender = useSelector(ovcServByGenderSelector.getOvcServByGender);
+    const overallCALHIV = useSelector(ovcOverallCALHIVSelector.getOvcOverallCALHIV);
+    const ovcCALHIVByGender = useSelector(ovcCALHIVByGenderSelector.getOvcCALHIVByGender);
 
     const maleServ = overServByGender.filter(obj => obj.Gender === "Male");
     const femaleServ = overServByGender.filter(obj => obj.Gender === "Female");
+
+    const maleCALHIV = ovcCALHIVByGender.filter(obj => obj.Gender === "Male");
+    const femaleCALHIV = ovcCALHIVByGender.filter(obj => obj.Gender === "Female");
 
     const monthYear = moment().startOf('month').subtract(1, 'month').format('MMM YYYY');
 
@@ -23,9 +29,12 @@ const OVCOverview = () => {
         setOvcOverallServ({
             ovcOverallServ: overallServ.overallOvcServ,
             maleServ: maleServ.length > 0 ? maleServ[0].overallOvcServ : 0,
-            femaleServ: femaleServ.length > 0 ? femaleServ[0].overallOvcServ : 0
+            femaleServ: femaleServ.length > 0 ? femaleServ[0].overallOvcServ : 0,
+            overallCALHIV: overallCALHIV.overallCALHIV,
+            maleCALHIV: maleCALHIV.length > 0 ? maleCALHIV[0].CALHIV : 0,
+            femaleCALHIV: femaleCALHIV.length > 0 ? femaleCALHIV[0].CALHIV : 0,
         });
-    },[overallServ, overServByGender]);
+    },[overallServ, overServByGender, overallCALHIV, ovcCALHIVByGender]);
 
     useEffect(() => {
         loadOvcOverallServ();
@@ -39,7 +48,7 @@ const OVCOverview = () => {
                         <DataCard
                             title={"OVERALL CALHIV"}
                             subtitle={null}
-                            data={formatNumber(ovcOverallServ.ovcOverallServ)}
+                            data={formatNumber(ovcOverallServ.overallCALHIV)}
                             bottomSubTitle={"Total CHILDREN - " + monthYear}
                         />
                     </Col>
@@ -48,8 +57,8 @@ const OVCOverview = () => {
                         <DataCard
                             title={"MALE CALHIV"}
                             subtitle={null}
-                            data={formatNumber(ovcOverallServ.femaleServ)}
-                            bottomSubTitle={"FEMALE CHILDREN - " + monthYear}
+                            data={formatNumber(ovcOverallServ.maleCALHIV)}
+                            bottomSubTitle={"MALE CHILDREN - " + monthYear}
                         />
                     </Col>
 
@@ -57,8 +66,8 @@ const OVCOverview = () => {
                         <DataCard
                             title={"FEMALE CALHIV"}
                             subtitle={null}
-                            data={formatNumber(ovcOverallServ.maleServ)}
-                            bottomSubTitle={"MALE CHILDREN - " + monthYear}
+                            data={formatNumber(ovcOverallServ.femaleCALHIV)}
+                            bottomSubTitle={"FEMALE CHILDREN - " + monthYear}
                         />
                     </Col>
                 </Row>
