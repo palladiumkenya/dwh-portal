@@ -9,6 +9,10 @@ const OVCOverview = Loadable({ loader: () => import('./OVCOverview'), loading: L
 const OVCIndicatorDefinition = Loadable({ loader: () => import('./OVCIndicatorDefinition'), loading: Loading, delay: LOADING_DELAY });
 const OVCDistributionOfCALHIVByAgeSex = Loadable({ loader: () => import('./OVCDistributionOfCALHIVByAgeSex'), loading: Loading, delay: LOADING_DELAY });
 const OVCDistributionOfPatientsByAgeSex = Loadable({ loader: () => import('./OVCDistributionOfPatientsByAgeSex'), loading: Loading, delay: LOADING_DELAY });
+const OVCCareGiversRelationshipToOvcClient = Loadable({ loader: () => import('./OVCCareGiversRelationshipToOvcClient'), loading: Loading, delay: LOADING_DELAY });
+const OVCProportionOfOvcClientsEnrolledInCPIMSOverall = Loadable({ loader: () => import('./OVCProportionOfOvcClientsEnrolledInCPIMSOverall'), loading: Loading, delay: LOADING_DELAY });
+const OVCProportionOfOvcClientsEnrolledInCPIMSMale = Loadable({ loader: () => import('./OVCProportionOfOvcClientsEnrolledInCPIMSMale'), loading: Loading, delay: LOADING_DELAY });
+const OVCProportionOfOvcClientsEnrolledInCPIMSFemale = Loadable({ loader: () => import('./OVCProportionOfOvcClientsEnrolledInCPIMSFemale'), loading: Loading, delay: LOADING_DELAY });
 
 const OVCTabs = () => {
     const [activeTab, setActiveTab] = useState('distributionOfOvcClients');
@@ -37,6 +41,26 @@ const OVCTabs = () => {
 
                         <Col className={"col-6"}>
                             <OVCDistributionOfPatientsByAgeSex />
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col className={"col-12"}>
+                            <OVCCareGiversRelationshipToOvcClient />
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col className={"col-4"}>
+                            <OVCProportionOfOvcClientsEnrolledInCPIMSOverall />
+                        </Col>
+
+                        <Col className={"col-4"}>
+                            <OVCProportionOfOvcClientsEnrolledInCPIMSMale />
+                        </Col>
+
+                        <Col className={"col-4"}>
+                            <OVCProportionOfOvcClientsEnrolledInCPIMSFemale />
                         </Col>
                     </Row>
                 </TabPane>

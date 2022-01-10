@@ -8,7 +8,6 @@ import * as ovcDistributionOfCALHIVByAgeSexSelector from '../../../selectors/CT/
 const OVCDistributionOfCALHIVByAgeSex = () => {
     const [ovcDistributionOfCALHIVByAgeSex, setOvcDistributionOfCALHIVByAgeSex] = useState({});
     const distributionOfCALHIVByAgeSex = useSelector(ovcDistributionOfCALHIVByAgeSexSelector.getOvcDistributionOfCALHIVByAgeSex);
-    console.log(distributionOfCALHIVByAgeSex);
 
     const loadOvcDistributionOfCALHIVByAgeSex = useCallback(async () => {
         setOvcDistributionOfCALHIVByAgeSex({
