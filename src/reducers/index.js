@@ -188,6 +188,8 @@ import CovidCumulativeWhoReceivedAtLeastOneDose from './CT/Covid/covidCumulative
 import CovidTrendsPLHIVVaccinationInTheLast12Months from './CT/Covid/covidTrendsPLHIVVaccinationInTheLast12Months';
 import OvcOverallCALHIV from './CT/OVC/ovcOverallCALHIV';
 import OvcCALHIVByGender from './CT/OVC/ovcCALHIVByGender';
+import OvcDistributionOfCALHIVByAgeSex from './CT/OVC/ovcDistributionOfCALHIVByAgeSex';
+import OvcDistributionOfPatientsByAgeSex from './CT/OVC/ovcDistributionOfPatientsByAgeSex';
 
 export default combineReducers({
     auth: authReducer,
@@ -371,5 +373,7 @@ export default combineReducers({
     CovidTrendsPLHIVVaccinationInTheLast12Months,
 
     OvcOverallCALHIV,
-    OvcCALHIVByGender
+    OvcCALHIVByGender,
+    OvcDistributionOfCALHIVByAgeSex,
+    OvcDistributionOfPatientsByAgeSex
 });
