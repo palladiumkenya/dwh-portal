@@ -180,6 +180,8 @@ import { loadCovidTrendsPLHIVVaccinationInTheLast12Months } from '../../actions/
 
 import { loadOvcOverallCalHIV } from '../../actions/CT/OVC/ovcOverallCalHIVActions';
 import { loadOvcCalHIVByGender } from '../../actions/CT/OVC/ovcCALHIVByGenderActions';
+import { loadOvcDistributionOfCALHIVByAgeSex } from '../../actions/CT/OVC/ovcDistributionOfCALHIVByAgeSexActions';
+import { loadOvcDistributionOfPatientsByAgeSex } from '../../actions/CT/OVC/ovcDistributionOfPatientsByAgeSexActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -431,6 +433,8 @@ const CT = () => {
                 dispatch(loadOvcViralSuppressionAmongOvcPatientsByGender());
                 dispatch(loadOvcOverallCalHIV());
                 dispatch(loadOvcCalHIVByGender());
+                dispatch(loadOvcDistributionOfCALHIVByAgeSex());
+                dispatch(loadOvcDistributionOfPatientsByAgeSex());
                 break;
             case 'covid':
                 dispatch(loadCovidAdultPLHIVCurrentOnTreatment());
