@@ -84,7 +84,7 @@ const ChildDistributionRegimens = () => {
                         datas={childrenAllData}
                         className="pull-right"
                     >
-                        <i class="bordered download icon inverted black"></i>
+                        <i className="bordered download icon inverted black"></i>
                     </CsvDownloader>
                 }
             </CardHeader>

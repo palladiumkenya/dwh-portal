@@ -36,7 +36,7 @@ const SectionHeader = ({ title, description}) => {
                             {
                                 (currentPage === PAGES.ct && ctTab === 'txOpt') ?
                                 <div className="reporting-rates-card-year" style={{marginTop: '-0.2em'}}>
-                                    <i class="bordered trash icon inverted black" onClick={() => {
+                                    <i className="bordered trash icon inverted black" onClick={() => {
                                         dispatch(disableCache());
                                         setTimeout(
                                             function() {
