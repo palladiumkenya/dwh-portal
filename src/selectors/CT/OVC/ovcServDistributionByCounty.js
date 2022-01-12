@@ -10,7 +10,8 @@ export const getOvcServDistributionByCounty = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         const arrayList = list.map(obj => ({
             County: obj.County,
-            y: Math.round(obj.Percentage),
+            // y: Math.round(obj.Percentage),
+            y: obj.count,
             text: obj.count
         }));
 

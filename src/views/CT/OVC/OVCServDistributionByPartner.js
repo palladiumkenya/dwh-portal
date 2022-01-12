@@ -22,20 +22,16 @@ const OVCServDistributionByPartner = () => {
                 crosshair: true
             },
             yAxis: {
-                min: 0,
-                max: 100,
                 title: {
-                    text: 'PERCENTAGE OF PATIENTS'
+                    text: 'NUMBER OF PATIENTS'
                 },
-                labels: { format: '{value} %' }
             },
             legend: {
                 enabled: false
             },
-            plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.y + '%'; } }, tooltip: { valueSuffix: '% ({point.text:.0f})' }, }},
             series: [
                 {
-                    name: 'OVC_SERV DISTRIBUTION BY PARTNER',
+                    name: 'OVC DISTRIBUTION BY PARTNER',
                     data: servDistributionByPartner,
                     color: '#14084D',
                 }
@@ -50,7 +46,7 @@ const OVCServDistributionByPartner = () => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                OVC_SERV DISTRIBUTION BY PARTNER
+                OVC DISTRIBUTION BY PARTNER
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">

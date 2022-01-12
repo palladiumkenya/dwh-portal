@@ -13,6 +13,8 @@ const OVCCareGiversRelationshipToOvcClient = Loadable({ loader: () => import('./
 const OVCProportionOfOvcClientsEnrolledInCPIMSOverall = Loadable({ loader: () => import('./OVCProportionOfOvcClientsEnrolledInCPIMSOverall'), loading: Loading, delay: LOADING_DELAY });
 const OVCProportionOfOvcClientsEnrolledInCPIMSMale = Loadable({ loader: () => import('./OVCProportionOfOvcClientsEnrolledInCPIMSMale'), loading: Loading, delay: LOADING_DELAY });
 const OVCProportionOfOvcClientsEnrolledInCPIMSFemale = Loadable({ loader: () => import('./OVCProportionOfOvcClientsEnrolledInCPIMSFemale'), loading: Loading, delay: LOADING_DELAY });
+const OVCServDistributionByCounty = Loadable({ loader: () => import('./OVCServDistributionByCounty'), loading: Loading, delay: LOADING_DELAY });
+const OVCServDistributionByPartner = Loadable({ loader: () => import('./OVCServDistributionByPartner'), loading: Loading, delay: LOADING_DELAY });
 
 const OVCTabs = () => {
     const [activeTab, setActiveTab] = useState('distributionOfOvcClients');
@@ -61,6 +63,18 @@ const OVCTabs = () => {
 
                         <Col className={"col-4"}>
                             <OVCProportionOfOvcClientsEnrolledInCPIMSFemale />
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col className={"col-12"}>
+                            <OVCServDistributionByCounty />
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col className={"col-12"}>
+                            <OVCServDistributionByPartner />
                         </Col>
                     </Row>
                 </TabPane>

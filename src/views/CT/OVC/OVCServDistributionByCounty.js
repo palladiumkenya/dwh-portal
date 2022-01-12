@@ -23,20 +23,16 @@ const OVCServDistributionByCounty = () => {
                 crosshair: true
             },
             yAxis: {
-                min: 0,
-                max: 100,
                 title: {
-                    text: 'PERCENTAGE OF PATIENTS'
+                    text: 'NUMBER OF PATIENTS'
                 },
-                labels: { format: '{value} %' }
             },
             legend: {
                 enabled: false
             },
-            plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.y + '%'; } }, tooltip: { valueSuffix: '% ({point.text:.0f})' }, }},
             series: [
                 {
-                    name: 'OVC_SERV DISTRIBUTION BY COUNTY',
+                    name: 'OVC DISTRIBUTION BY COUNTY',
                     data: servDistributionByCounty,
                     color: '#14084D',
                 }
@@ -51,7 +47,7 @@ const OVCServDistributionByCounty = () => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                OVC_SERV DISTRIBUTION BY COUNTY
+                OVC DISTRIBUTION BY COUNTY
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
