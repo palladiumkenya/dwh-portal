@@ -190,6 +190,12 @@ import OvcOverallCALHIV from './CT/OVC/ovcOverallCALHIV';
 import OvcCALHIVByGender from './CT/OVC/ovcCALHIVByGender';
 import OvcDistributionOfCALHIVByAgeSex from './CT/OVC/ovcDistributionOfCALHIVByAgeSex';
 import OvcDistributionOfPatientsByAgeSex from './CT/OVC/ovcDistributionOfPatientsByAgeSex';
+import CALHIVCurrentOnArt from './CT/OVC/CALHIVCurrentOnArt';
+import CALHIVOnDTG from './CT/OVC/CALHIVOnDTG';
+import OvcCurrentOnArt from './CT/OVC/ovcCurrentOnArt';
+import OvcTotalOnTld from './CT/OVC/ovcTotalOnTld';
+import CALHIVTotalOnMMD from './CT/OVC/CALHIVTotalOnMMD';
+import OvcTotalOnMMD from './CT/OVC/ovcTotalOnMMD';
 
 export default combineReducers({
     auth: authReducer,
@@ -375,5 +381,11 @@ export default combineReducers({
     OvcOverallCALHIV,
     OvcCALHIVByGender,
     OvcDistributionOfCALHIVByAgeSex,
-    OvcDistributionOfPatientsByAgeSex
+    OvcDistributionOfPatientsByAgeSex,
+    CALHIVCurrentOnArt,
+    CALHIVOnDTG,
+    OvcCurrentOnArt,
+    OvcTotalOnTld,
+    CALHIVTotalOnMMD,
+    OvcTotalOnMMD
 });

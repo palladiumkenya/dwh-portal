@@ -15,6 +15,12 @@ const OVCProportionOfOvcClientsEnrolledInCPIMSMale = Loadable({ loader: () => im
 const OVCProportionOfOvcClientsEnrolledInCPIMSFemale = Loadable({ loader: () => import('./OVCProportionOfOvcClientsEnrolledInCPIMSFemale'), loading: Loading, delay: LOADING_DELAY });
 const OVCServDistributionByCounty = Loadable({ loader: () => import('./OVCServDistributionByCounty'), loading: Loading, delay: LOADING_DELAY });
 const OVCServDistributionByPartner = Loadable({ loader: () => import('./OVCServDistributionByPartner'), loading: Loading, delay: LOADING_DELAY });
+const OVCDTGUptakeAmongCALHIV = Loadable({ loader: () => import('./OVCDTGUptakeAmongCALHIV'), loading: Loading, delay: LOADING_DELAY });
+const OVCDTGUptakeAmongOvcPatients = Loadable({ loader: () => import('./OVCDTGUptakeAmongOvcPatients'), loading: Loading, delay: LOADING_DELAY });
+const OVCMMDUptakeAmongCALHIVPatients = Loadable({ loader: () => import('./OVCMMDUptakeAmongCALHIVPatients'), loading: Loading, delay: LOADING_DELAY });
+const OVCMMDUptakeAmongOvcPatients = Loadable({ loader: () => import('./OVCMMDUptakeAmongOvcPatients'), loading: Loading, delay: LOADING_DELAY });
+const OVCInterruptionInTreatmentAmongCALHIV = Loadable({ loader: () => import('./OVCInterruptionInTreatmentAmongCALHIV'), loading: Loading, delay: LOADING_DELAY });
+const OVCInterruptionInTreatmentAmongOVCPatients = Loadable({ loader: () => import('./OVCInterruptionInTreatmentAmongOVCPatients'), loading: Loading, delay: LOADING_DELAY });
 
 const OVCTabs = () => {
     const [activeTab, setActiveTab] = useState('distributionOfOvcClients');
@@ -80,7 +86,34 @@ const OVCTabs = () => {
                 </TabPane>
 
                 <TabPane tabId="managementOfOvcClients">
+                    <Row>
+                        <Col className={"col-6"}>
+                            <OVCDTGUptakeAmongCALHIV />
+                        </Col>
+                        <Col className={"col-6"}>
+                            <OVCDTGUptakeAmongOvcPatients />
+                        </Col>
+                    </Row>
 
+                    <Row>
+                        <Col className={"col-6"}>
+                            <OVCMMDUptakeAmongCALHIVPatients />
+                        </Col>
+
+                        <Col className={"col-6"}>
+                            <OVCMMDUptakeAmongOvcPatients />
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col className={"col-6"}>
+                            <OVCInterruptionInTreatmentAmongCALHIV />
+                        </Col>
+
+                        <Col className={"col-6"}>
+                            <OVCInterruptionInTreatmentAmongOVCPatients />
+                        </Col>
+                    </Row>
                 </TabPane>
             </TabContent>
         </div>

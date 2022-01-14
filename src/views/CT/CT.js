@@ -182,10 +182,16 @@ import { loadOvcOverallCalHIV } from '../../actions/CT/OVC/ovcOverallCalHIVActio
 import { loadOvcCalHIVByGender } from '../../actions/CT/OVC/ovcCALHIVByGenderActions';
 import { loadOvcDistributionOfCALHIVByAgeSex } from '../../actions/CT/OVC/ovcDistributionOfCALHIVByAgeSexActions';
 import { loadOvcDistributionOfPatientsByAgeSex } from '../../actions/CT/OVC/ovcDistributionOfPatientsByAgeSexActions';
+import { loadCalHIVCurrentOnArt } from '../../actions/CT/OVC/CALHIVCurrentOnARTActions';
+import { loadOvcCurrentOnArt } from '../../actions/CT/OVC/ovcCurrentOnArtActions';
+import { loadOvcTotalOnTld } from '../../actions/CT/OVC/ovcTotalOnTldActions';
+import { loadCALHIVTotalOnMMD } from '../../actions/CT/OVC/CALHIVTotalOnMMDActions';
+import { loadOvcTotalOnMMD } from '../../actions/CT/OVC/ovcTotalOnMMDActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
 import Loading from './../Shared/Loading';
+import { loadCalHIVOnDTG } from '../../actions/CT/OVC/CALHIVOnDTGActions';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({ loader: () => import('./CurrentOnArt/CurrentOnArt'), loading: Loading, delay: LOADING_DELAY });
@@ -435,6 +441,12 @@ const CT = () => {
                 dispatch(loadOvcCalHIVByGender());
                 dispatch(loadOvcDistributionOfCALHIVByAgeSex());
                 dispatch(loadOvcDistributionOfPatientsByAgeSex());
+                dispatch(loadCalHIVCurrentOnArt());
+                dispatch(loadCalHIVOnDTG());
+                dispatch(loadOvcCurrentOnArt());
+                dispatch(loadOvcTotalOnTld());
+                dispatch(loadCALHIVTotalOnMMD());
+                dispatch(loadOvcTotalOnMMD());
                 break;
             case 'covid':
                 dispatch(loadCovidAdultPLHIVCurrentOnTreatment());
