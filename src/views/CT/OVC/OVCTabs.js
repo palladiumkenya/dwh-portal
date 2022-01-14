@@ -21,6 +21,8 @@ const OVCMMDUptakeAmongCALHIVPatients = Loadable({ loader: () => import('./OVCMM
 const OVCMMDUptakeAmongOvcPatients = Loadable({ loader: () => import('./OVCMMDUptakeAmongOvcPatients'), loading: Loading, delay: LOADING_DELAY });
 const OVCInterruptionInTreatmentAmongCALHIV = Loadable({ loader: () => import('./OVCInterruptionInTreatmentAmongCALHIV'), loading: Loading, delay: LOADING_DELAY });
 const OVCInterruptionInTreatmentAmongOVCPatients = Loadable({ loader: () => import('./OVCInterruptionInTreatmentAmongOVCPatients'), loading: Loading, delay: LOADING_DELAY });
+const OVCOverallVLUptakeAndSuppressionAmongCALHIV = Loadable({ loader: () => import('./OVCOverallVLUptakeAndSuppressionAmongCALHIV'), loading: Loading, delay: LOADING_DELAY });
+const OVCOverallVLUptakeAndSuppressionAmongOVC = Loadable({ loader: () => import('./OVCOverallVLUptakeAndSuppressionAmongOVC'), loading: Loading, delay: LOADING_DELAY });
 
 const OVCTabs = () => {
     const [activeTab, setActiveTab] = useState('distributionOfOvcClients');
@@ -112,6 +114,16 @@ const OVCTabs = () => {
 
                         <Col className={"col-6"}>
                             <OVCInterruptionInTreatmentAmongOVCPatients />
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col className={"col-6"}>
+                            <OVCOverallVLUptakeAndSuppressionAmongCALHIV />
+                        </Col>
+
+                        <Col className={"col-6"}>
+                            <OVCOverallVLUptakeAndSuppressionAmongOVC />
                         </Col>
                     </Row>
                 </TabPane>

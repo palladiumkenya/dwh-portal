@@ -187,6 +187,16 @@ import { loadOvcCurrentOnArt } from '../../actions/CT/OVC/ovcCurrentOnArtActions
 import { loadOvcTotalOnTld } from '../../actions/CT/OVC/ovcTotalOnTldActions';
 import { loadCALHIVTotalOnMMD } from '../../actions/CT/OVC/CALHIVTotalOnMMDActions';
 import { loadOvcTotalOnMMD } from '../../actions/CT/OVC/ovcTotalOnMMDActions';
+import { loadCalHIVIIT } from '../../actions/CT/OVC/CALHIVIITActions';
+import { loadCalHIVDEAD } from '../../actions/CT/OVC/CALHIVDEADActions';
+import { loadOVCIIT } from '../../actions/CT/OVC/ovcIITActions';
+import { loadOVCDEAD } from '../../actions/CT/OVC/ovcDEADActions';
+import { loadCalHIVEligibleVL } from '../../actions/CT/OVC/CALHIVEligibleVLActions';
+import { loadCalHIVVLDone } from '../../actions/CT/OVC/CALHIVVLDoneActions';
+import { loadCalHIVVLSuppressed } from '../../actions/CT/OVC/CALHIVVLSuppressedActions';
+import { loadOVCEligibleVL } from '../../actions/CT/OVC/ovcEligibleVLActions';
+import { loadOVCVLDone } from '../../actions/CT/OVC/ovcVLDoneActions';
+import { loadOVCVLSuppressed } from '../../actions/CT/OVC/ovcVLSuppressedActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -447,6 +457,16 @@ const CT = () => {
                 dispatch(loadOvcTotalOnTld());
                 dispatch(loadCALHIVTotalOnMMD());
                 dispatch(loadOvcTotalOnMMD());
+                dispatch(loadCalHIVIIT());
+                dispatch(loadCalHIVDEAD());
+                dispatch(loadOVCIIT());
+                dispatch(loadOVCDEAD());
+                dispatch(loadCalHIVEligibleVL());
+                dispatch(loadCalHIVVLDone());
+                dispatch(loadCalHIVVLSuppressed());
+                dispatch(loadOVCEligibleVL());
+                dispatch(loadOVCVLDone());
+                dispatch(loadOVCVLSuppressed());
                 break;
             case 'covid':
                 dispatch(loadCovidAdultPLHIVCurrentOnTreatment());

@@ -3,21 +3,25 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { useSelector } from 'react-redux';
-import * as ovcCurrentOnArtSelector from '../../../selectors/CT/OVC/ovcCurrentOnArt';
-import * as ovcTotalOnMMDSelector from '../../../selectors/CT/OVC/ovcTotalOnMMD';
+import * as CALHIVCurrentOnArtSelector from '../../../selectors/CT/OVC/CALHIVCurrentOnArt';
+import * as CALHIVOnIITSelector from '../../../selectors/CT/OVC/CALHIVOnIIT';
+import * as CALHIVDEADSelector from '../../../selectors/CT/OVC/CALHIVDEAD';
+import moment from 'moment';
 
 const OVCInterruptionInTreatmentAmongCALHIV = () => {
     const [interruptionInTreatmentAmongCALHIV, setInterruptionInTreatmentAmongCALHIV] = useState({});
-    const ovcCurrentOnArt = useSelector(ovcCurrentOnArtSelector.getOvcCurrentOnArt);
-    const ovcTotalOnMMD = useSelector(ovcTotalOnMMDSelector.getOvcTotalOnMMD);
+    const CALHIVCurrentOnArt = useSelector(CALHIVCurrentOnArtSelector.getCALHIVCurrentOnArt);
+    const CALHIVOnIIT = useSelector(CALHIVOnIITSelector.getCALHIVOnIIT);
+    const CALHIVDEAD = useSelector(CALHIVDEADSelector.getCALHIVDEAD);
+    const monthYear = moment().startOf('month').subtract(1, 'month').format('MMM YYYY');
 
     const loadInterruptionInTreatmentAmongCALHIV = useCallback(async () => {
-        /*setInterruptionInTreatmentAmongCALHIV({
+        setInterruptionInTreatmentAmongCALHIV({
             chart: {
                 type: 'column'
             },
             title: { text: '' },
-            xAxis: [{ categories: ['OVC CURRENT ON ART', 'OVC TOTAL ON MMD'], crosshair: true }],
+            xAxis: [{ categories: ['CALHIV CURRENT ON ART IN ' + monthYear, 'IIT', 'DEAD'], crosshair: true }],
             yAxis: [
                 { title: { text: 'Number of Patients' } }
             ],
@@ -52,27 +56,34 @@ const OVCInterruptionInTreatmentAmongCALHIV = () => {
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80, enabled: false },
             series: [
                 {
-                    name: 'MMD UPTAKE AMONG OVC PATIENTS',
+                    name: 'INTERRUPTION IN TREATMENT AMONG CALHIV PATIENTS',
                     data: [
                         {
-                            name: 'OVC CURRENT ON ART',
-                            y: ovcCurrentOnArt.OVConART,
-                            color: "#14084D",
-                            text: ovcCurrentOnArt.OVConART,
-                            cText: 'OVC CURRENT ON ART: ' + ovcCurrentOnArt.OVConART
+                            name: 'CALHIV CURRENT ON ART IN ' + monthYear,
+                            y: CALHIVCurrentOnArt.CALHIVonART,
+                            color: "#006800",
+                            text: CALHIVCurrentOnArt.CALHIVonART,
+                            cText: 'CALHIV CURRENT ON ART: ' + CALHIVCurrentOnArt.CALHIVonART
                         },
                         {
-                            name: 'OVC TOTAL ON MMD',
-                            y: ovcTotalOnMMD.ovcTotalOnMmd,
-                            color: "#14084D",
-                            text: ovcTotalOnMMD.ovcTotalOnMmd.toLocaleString('en') + ' (' + parseFloat(((ovcTotalOnMMD.ovcTotalOnMmd/ovcCurrentOnArt.OVConART)*100).toString()).toFixed(0) + '%)',
-                            cText: 'OVC TOTAL ON MMD: ' + ovcTotalOnMMD.ovcTotalOnMmd
+                            name: 'IIT',
+                            y: CALHIVOnIIT.CALHIVIIT,
+                            color: "#F26522",
+                            text: CALHIVOnIIT.CALHIVIIT.toLocaleString('en') + ' (' + parseFloat(((CALHIVOnIIT.CALHIVIIT/CALHIVCurrentOnArt.CALHIVonART)*100).toString()).toFixed(0) + '%)',
+                            cText: 'IIT: ' + CALHIVOnIIT.CALHIVIIT
+                        },
+                        {
+                            name: 'DEAD',
+                            y: CALHIVDEAD.CALHIVDead,
+                            color: "#B50706",
+                            text: CALHIVDEAD.CALHIVDead.toLocaleString('en') + ' (' + parseFloat(((CALHIVDEAD.CALHIVDead/CALHIVCurrentOnArt.CALHIVonART)*100).toString()).toFixed(0) + '%)',
+                            cText: 'IIT: ' + CALHIVDEAD.CALHIVDead
                         }
                     ]
                 },
             ]
-        });*/
-    }, [ovcCurrentOnArt, ovcTotalOnMMD]);
+        });
+    }, [CALHIVCurrentOnArt, CALHIVOnIIT, CALHIVDEAD]);
 
     useEffect(() => {
         loadInterruptionInTreatmentAmongCALHIV();

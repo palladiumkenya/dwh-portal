@@ -196,6 +196,16 @@ import OvcCurrentOnArt from './CT/OVC/ovcCurrentOnArt';
 import OvcTotalOnTld from './CT/OVC/ovcTotalOnTld';
 import CALHIVTotalOnMMD from './CT/OVC/CALHIVTotalOnMMD';
 import OvcTotalOnMMD from './CT/OVC/ovcTotalOnMMD';
+import CALHIVIIT from './CT/OVC/CALHIVIIT';
+import CALHIVDEAD from './CT/OVC/CALHIVDEAD';
+import OvcIIT from './CT/OVC/ovcIIT';
+import OvcDEAD from './CT/OVC/ovcDEAD';
+import CALHIVEligibleVL from './CT/OVC/CALHIVEligibleVL';
+import CALHIVVLDone from './CT/OVC/CALHIVVLDone';
+import CALHIVVLSuppressed from './CT/OVC/CALHIVVLSuppressed';
+import ovcEligibleVL from './CT/OVC/ovcEligibleVL';
+import ovcVLDone from './CT/OVC/ovcVLDone';
+import ovcVLSuppressed from './CT/OVC/ovcVLSuppressed';
 
 export default combineReducers({
     auth: authReducer,
@@ -387,5 +397,15 @@ export default combineReducers({
     OvcCurrentOnArt,
     OvcTotalOnTld,
     CALHIVTotalOnMMD,
-    OvcTotalOnMMD
+    OvcTotalOnMMD,
+    CALHIVIIT,
+    CALHIVDEAD,
+    OvcIIT,
+    OvcDEAD,
+    CALHIVEligibleVL,
+    CALHIVVLDone,
+    CALHIVVLSuppressed,
+    ovcEligibleVL,
+    ovcVLDone,
+    ovcVLSuppressed
 });
