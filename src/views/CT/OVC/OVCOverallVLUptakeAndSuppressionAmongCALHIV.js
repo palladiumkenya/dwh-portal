@@ -83,7 +83,7 @@ const OVCOverallVLUptakeAndSuppressionAmongCALHIV = () => {
                             name: 'VIRALLY SUPPRESSED',
                             y: CALHIVVLSuppressed.CALHIVVLSuppressed,
                             color: "#006800",
-                            text: CALHIVVLSuppressed.CALHIVVLSuppressed.toLocaleString('en') + ' (' + parseFloat(((CALHIVVLSuppressed.CALHIVVLSuppressed/CALHIVCurrentOnArt.CALHIVonART)*100).toString()).toFixed(0) + '%)',
+                            text: CALHIVVLSuppressed.CALHIVVLSuppressed.toLocaleString('en') + ' (' + parseFloat(((CALHIVVLSuppressed.CALHIVVLSuppressed/CALHIVVLDone.CALHIVVLDone)*100).toString()).toFixed(0) + '%)',
                             cText: 'VIRALLY SUPPRESSED: ' + CALHIVVLSuppressed.CALHIVVLSuppressed
                         }
                     ]

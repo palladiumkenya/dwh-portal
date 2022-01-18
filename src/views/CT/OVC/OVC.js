@@ -31,56 +31,6 @@ const OVC = () => {
             </VisibilitySensor>
 
             <OVCTabs />
-
-            {/*<OVCOverview />
-            <OVCIndicatorDefinition />
-            <Row>
-                <Col className={"col-6"}>
-                    <OvcDistributionOfOvcClients />
-                </Col>
-
-                <Col className={"col-6"}>
-                    <OVCCareGiversRelationshipToOvcClient />
-                </Col>
-            </Row>
-            <Row>
-                <Col className={"col-4"}>
-                    <OVCProportionOfOvcClientsEnrolledInCPIMSOverall />
-                </Col>
-
-                <Col className={"col-4"}>
-                    <OVCProportionOfOvcClientsEnrolledInCPIMSFemale />
-                </Col>
-                <Col className={"col-4"}>
-                    <OVCProportionOfOvcClientsEnrolledInCPIMSMale />
-                </Col>
-            </Row>
-            <Row>
-                <Col className={"col-12"}>
-                    <OVCServDistributionByCounty />
-                </Col>
-            </Row>
-            <Row>
-                <Col className={"col-12"}>
-                    <OVCServDistributionByPartner />
-                </Col>
-            </Row>
-            <Row>
-                <Col className={"col-12"}>
-                    <OVCClientExitReasons />
-                </Col>
-            </Row>
-            <Row>
-                <Col className={"col-4"}>
-                    <OVCViralSuppressionAmongOvcPatientsOverall />
-                </Col>
-                <Col className={"col-4"}>
-                    <OVCViralSuppressionAmongOvcPatientsFemale />
-                </Col>
-                <Col className={"col-4"}>
-                    <OVCViralSuppressionAmongOvcPatientsMale />
-                </Col>
-            </Row>*/}
         </div>
     );
 };
