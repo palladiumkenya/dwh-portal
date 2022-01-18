@@ -83,7 +83,7 @@ const OVCOverallVLUptakeAndSuppressionAmongOVC = () => {
                             name: 'VIRALLY SUPPRESSED',
                             y: ovcVLSuppressed.OVCVLSuppressed,
                             color: "#006800",
-                            text: ovcVLSuppressed.OVCVLSuppressed.toLocaleString('en') + ' (' + parseFloat(((ovcVLSuppressed.OVCVLSuppressed/ovcCurrentOnArt.OVConART)*100).toString()).toFixed(0) + '%)',
+                            text: ovcVLSuppressed.OVCVLSuppressed.toLocaleString('en') + ' (' + parseFloat(((ovcVLSuppressed.OVCVLSuppressed/ovcVLDone.OVCVLDone)*100).toString()).toFixed(0) + '%)',
                             cText: 'VIRALLY SUPPRESSED: ' + ovcVLSuppressed.OVCVLSuppressed
                         }
                     ]
