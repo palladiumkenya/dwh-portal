@@ -32,5 +32,5 @@ jobs:
     - run: yarn install
     #- run: npm run build --if-present
     #- run: yarn install
-    - run: yarn start
+    #- run: yarn start
     - run: yarn test
