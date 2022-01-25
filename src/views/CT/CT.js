@@ -491,7 +491,7 @@ const CT = () => {
                 // dispatch(loadCovidPercentageWhoMissedAppointmentsByAgeGroup());
                 // dispatch(loadCovidPercentageWhoMissedAppointmentsByCounty());
                 // dispatch(loadCovidPercentageWhoMissedAppointmentsByPartner());
-                // dispatch(loadCovidCumulativeWhoReceivedAtLeastOneDose());
+                dispatch(loadCovidCumulativeWhoReceivedAtLeastOneDose());
                 dispatch(loadCovidTrendsPLHIVVaccinationInTheLast12Months());
                 break;
             default:
