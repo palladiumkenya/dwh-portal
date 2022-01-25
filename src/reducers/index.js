@@ -186,6 +186,26 @@ import CovidPercentageMissedAppointmentsByCounty from './CT/Covid/covidPercentag
 import CovidPercentageMissedAppointmentsByPartner from './CT/Covid/covidPercentageMissedAppointmentsByPartner';
 import CovidCumulativeWhoReceivedAtLeastOneDose from './CT/Covid/covidCumulativeWhoReceivedAtLeastOneDose';
 import CovidTrendsPLHIVVaccinationInTheLast12Months from './CT/Covid/covidTrendsPLHIVVaccinationInTheLast12Months';
+import OvcOverallCALHIV from './CT/OVC/ovcOverallCALHIV';
+import OvcCALHIVByGender from './CT/OVC/ovcCALHIVByGender';
+import OvcDistributionOfCALHIVByAgeSex from './CT/OVC/ovcDistributionOfCALHIVByAgeSex';
+import OvcDistributionOfPatientsByAgeSex from './CT/OVC/ovcDistributionOfPatientsByAgeSex';
+import CALHIVCurrentOnArt from './CT/OVC/CALHIVCurrentOnArt';
+import CALHIVOnDTG from './CT/OVC/CALHIVOnDTG';
+import OvcCurrentOnArt from './CT/OVC/ovcCurrentOnArt';
+import OvcTotalOnTld from './CT/OVC/ovcTotalOnTld';
+import CALHIVTotalOnMMD from './CT/OVC/CALHIVTotalOnMMD';
+import OvcTotalOnMMD from './CT/OVC/ovcTotalOnMMD';
+import CALHIVIIT from './CT/OVC/CALHIVIIT';
+import CALHIVDEAD from './CT/OVC/CALHIVDEAD';
+import OvcIIT from './CT/OVC/ovcIIT';
+import OvcDEAD from './CT/OVC/ovcDEAD';
+import CALHIVEligibleVL from './CT/OVC/CALHIVEligibleVL';
+import CALHIVVLDone from './CT/OVC/CALHIVVLDone';
+import CALHIVVLSuppressed from './CT/OVC/CALHIVVLSuppressed';
+import ovcEligibleVL from './CT/OVC/ovcEligibleVL';
+import ovcVLDone from './CT/OVC/ovcVLDone';
+import ovcVLSuppressed from './CT/OVC/ovcVLSuppressed';
 
 export default combineReducers({
     auth: authReducer,
@@ -366,5 +386,26 @@ export default combineReducers({
     CovidPercentageMissedAppointmentsByCounty,
     CovidPercentageMissedAppointmentsByPartner,
     CovidCumulativeWhoReceivedAtLeastOneDose,
-    CovidTrendsPLHIVVaccinationInTheLast12Months
+    CovidTrendsPLHIVVaccinationInTheLast12Months,
+
+    OvcOverallCALHIV,
+    OvcCALHIVByGender,
+    OvcDistributionOfCALHIVByAgeSex,
+    OvcDistributionOfPatientsByAgeSex,
+    CALHIVCurrentOnArt,
+    CALHIVOnDTG,
+    OvcCurrentOnArt,
+    OvcTotalOnTld,
+    CALHIVTotalOnMMD,
+    OvcTotalOnMMD,
+    CALHIVIIT,
+    CALHIVDEAD,
+    OvcIIT,
+    OvcDEAD,
+    CALHIVEligibleVL,
+    CALHIVVLDone,
+    CALHIVVLSuppressed,
+    ovcEligibleVL,
+    ovcVLDone,
+    ovcVLSuppressed
 });

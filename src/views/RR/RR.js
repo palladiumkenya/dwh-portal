@@ -4,7 +4,15 @@ import VisibilitySensor from 'react-visibility-sensor';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import { enableStickyFilter, disableStickyFilter, changeRRTab, changeCurrentPage } from "../../actions/Shared/uiActions";
-import { enableFacilityFilter, disableFacilityFilter, enableAgencyFilter, disableAgencyFilter, enableFromDateFilter, disableFromDateFilter } from "../../actions/Shared/filterActions";
+import {
+    enableFacilityFilter,
+    disableFacilityFilter,
+    enableAgencyFilter,
+    disableAgencyFilter,
+    enableFromDateFilter,
+    disableFromDateFilter,
+    disableGenderFilter, disableDatimAgeGroupFilter
+} from '../../actions/Shared/filterActions';
 import { loadOverallReportingRatesByFacilityReported } from "../../actions/RR/overallReportingRatesByFacilityReported";
 import { loadOverallReportingRatesByFacilityNotReported } from "../../actions/RR/overallReportingRatesByFacilityNotReported";
 import { loadConsistencyByFacilityNotReported } from "../../actions/RR/consistencyByFacilityNotReported";
@@ -59,6 +67,8 @@ const RR = () => {
         dispatch(disableFacilityFilter());
         dispatch(enableAgencyFilter());
         dispatch(enableFromDateFilter());
+        dispatch(disableGenderFilter());
+        dispatch(disableDatimAgeGroupFilter());
         return () => {
             dispatch(enableFacilityFilter());
             dispatch(disableAgencyFilter());

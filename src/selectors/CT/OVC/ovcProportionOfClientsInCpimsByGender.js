@@ -19,13 +19,13 @@ export const getOvcProportionOfClientsInCpimsByMale = createSelector(
         arrayVal.push({
             name: 'ENROLLED',
             y: totalEnrolled,
-            color: "#69B34C"
+            color: "#006800"
         });
 
         arrayVal.push({
             name: 'NOT ENROLLED',
             y: totalNotEnrolled,
-            color: "#142459"
+            color: "#B50706"
         });
 
         return arrayVal;
@@ -46,13 +46,13 @@ export const getOvcProportionOfClientsInCpimsByFemale = createSelector(
         arrayVal.push({
             name: 'ENROLLED',
             y: totalEnrolled,
-            color: "#69B34C"
+            color: "#006800"
         });
 
         arrayVal.push({
             name: 'NOT ENROLLED',
             y: totalNotEnrolled,
-            color: "#142459"
+            color: "#B50706"
         });
 
         return arrayVal;

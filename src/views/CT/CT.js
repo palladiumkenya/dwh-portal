@@ -178,9 +178,30 @@ import { loadCovidPercentageWhoMissedAppointmentsByPartner } from '../../actions
 import { loadCovidCumulativeWhoReceivedAtLeastOneDose } from '../../actions/CT/Covid/covidCumulativeWhoReceivedAtLeastOneDoseActions';
 import { loadCovidTrendsPLHIVVaccinationInTheLast12Months } from '../../actions/CT/Covid/covidTrendsPLHIVVaccinationInTheLast12MonthsActions';
 
+import { loadOvcOverallCalHIV } from '../../actions/CT/OVC/ovcOverallCalHIVActions';
+import { loadOvcCalHIVByGender } from '../../actions/CT/OVC/ovcCALHIVByGenderActions';
+import { loadOvcDistributionOfCALHIVByAgeSex } from '../../actions/CT/OVC/ovcDistributionOfCALHIVByAgeSexActions';
+import { loadOvcDistributionOfPatientsByAgeSex } from '../../actions/CT/OVC/ovcDistributionOfPatientsByAgeSexActions';
+import { loadCalHIVCurrentOnArt } from '../../actions/CT/OVC/CALHIVCurrentOnARTActions';
+import { loadOvcCurrentOnArt } from '../../actions/CT/OVC/ovcCurrentOnArtActions';
+import { loadOvcTotalOnTld } from '../../actions/CT/OVC/ovcTotalOnTldActions';
+import { loadCALHIVTotalOnMMD } from '../../actions/CT/OVC/CALHIVTotalOnMMDActions';
+import { loadOvcTotalOnMMD } from '../../actions/CT/OVC/ovcTotalOnMMDActions';
+import { loadCalHIVIIT } from '../../actions/CT/OVC/CALHIVIITActions';
+import { loadCalHIVDEAD } from '../../actions/CT/OVC/CALHIVDEADActions';
+import { loadOVCIIT } from '../../actions/CT/OVC/ovcIITActions';
+import { loadOVCDEAD } from '../../actions/CT/OVC/ovcDEADActions';
+import { loadCalHIVEligibleVL } from '../../actions/CT/OVC/CALHIVEligibleVLActions';
+import { loadCalHIVVLDone } from '../../actions/CT/OVC/CALHIVVLDoneActions';
+import { loadCalHIVVLSuppressed } from '../../actions/CT/OVC/CALHIVVLSuppressedActions';
+import { loadOVCEligibleVL } from '../../actions/CT/OVC/ovcEligibleVLActions';
+import { loadOVCVLDone } from '../../actions/CT/OVC/ovcVLDoneActions';
+import { loadOVCVLSuppressed } from '../../actions/CT/OVC/ovcVLSuppressedActions';
+
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
 import Loading from './../Shared/Loading';
+import { loadCalHIVOnDTG } from '../../actions/CT/OVC/CALHIVOnDTGActions';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({ loader: () => import('./CurrentOnArt/CurrentOnArt'), loading: Loading, delay: LOADING_DELAY });
@@ -256,7 +277,16 @@ const CT = () => {
             dispatch(disableLatestPregnancyFilter());
             dispatch(disablePopulationTypeFilter());
         }
-        if (ctTab) {
+        if (ctTab === 'txNew'
+            || ctTab === 'txCurr'
+            || ctTab === 'txOpt'
+            || ctTab === 'advEv'
+            || ctTab === 'dsd'
+            || ctTab === 'vl'
+            || ctTab === 'tOut'
+            || ctTab === 'otz'
+            || ctTab === 'ovc'
+            || ctTab === 'covid') {
             dispatch(enableAgencyFilter());
             dispatch(enableGenderFilter());
             dispatch(enableDatimAgeGroupFilter());
@@ -417,6 +447,26 @@ const CT = () => {
                 dispatch(loadOvcClientsExitReasons());
                 dispatch(loadOvcViralSuppressionAmongOvcPatientsOverall());
                 dispatch(loadOvcViralSuppressionAmongOvcPatientsByGender());
+                dispatch(loadOvcOverallCalHIV());
+                dispatch(loadOvcCalHIVByGender());
+                dispatch(loadOvcDistributionOfCALHIVByAgeSex());
+                dispatch(loadOvcDistributionOfPatientsByAgeSex());
+                dispatch(loadCalHIVCurrentOnArt());
+                dispatch(loadCalHIVOnDTG());
+                dispatch(loadOvcCurrentOnArt());
+                dispatch(loadOvcTotalOnTld());
+                dispatch(loadCALHIVTotalOnMMD());
+                dispatch(loadOvcTotalOnMMD());
+                dispatch(loadCalHIVIIT());
+                dispatch(loadCalHIVDEAD());
+                dispatch(loadOVCIIT());
+                dispatch(loadOVCDEAD());
+                dispatch(loadCalHIVEligibleVL());
+                dispatch(loadCalHIVVLDone());
+                dispatch(loadCalHIVVLSuppressed());
+                dispatch(loadOVCEligibleVL());
+                dispatch(loadOVCVLDone());
+                dispatch(loadOVCVLSuppressed());
                 break;
             case 'covid':
                 dispatch(loadCovidAdultPLHIVCurrentOnTreatment());

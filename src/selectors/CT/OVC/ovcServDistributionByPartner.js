@@ -9,7 +9,8 @@ export const getOvcServDistributionByPartner = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         const arrayList = list.map(obj => ({
-            y: Math.round(obj.Percentage),
+            // y: Math.round(obj.Percentage),
+            y : obj.count,
             text: obj.count,
             partner: obj.partner,
         }));
