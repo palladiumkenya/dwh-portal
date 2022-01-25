@@ -69,21 +69,21 @@ const OVCOverallVLUptakeAndSuppressionAmongCALHIV = () => {
                             name: 'ELIGIBLE FOR VL',
                             y: CALHIVEligibleVL.CALHIVEligible,
                             color: "#456DE4",
-                            text: CALHIVEligibleVL.CALHIVEligible.toLocaleString('en') + ' (' + parseFloat(((CALHIVEligibleVL.CALHIVEligible/CALHIVCurrentOnArt.CALHIVonART)*100).toString()).toFixed(0) + '%)',
+                            text: CALHIVEligibleVL.CALHIVEligible ? CALHIVEligibleVL.CALHIVEligible.toLocaleString('en') + ' (' + parseFloat(((CALHIVEligibleVL.CALHIVEligible/CALHIVCurrentOnArt.CALHIVonART)*100).toString()).toFixed(0) + '%)' : null,
                             cText: 'ELIGIBLE FOR VL: ' + CALHIVEligibleVL.CALHIVEligible
                         },
                         {
                             name: 'VL DONE',
                             y: CALHIVVLDone.CALHIVVLDone,
                             color: "#EEA616",
-                            text: CALHIVVLDone.CALHIVVLDone.toLocaleString('en') + ' (' + parseFloat(((CALHIVVLDone.CALHIVVLDone/CALHIVCurrentOnArt.CALHIVonART)*100).toString()).toFixed(0) + '%)',
+                            text: CALHIVVLDone.CALHIVVLDone ? CALHIVVLDone.CALHIVVLDone.toLocaleString('en') + ' (' + parseFloat(((CALHIVVLDone.CALHIVVLDone/CALHIVCurrentOnArt.CALHIVonART)*100).toString()).toFixed(0) + '%)' : null,
                             cText: 'VL DONE: ' + CALHIVVLDone.CALHIVVLDone
                         },
                         {
                             name: 'VIRALLY SUPPRESSED',
                             y: CALHIVVLSuppressed.CALHIVVLSuppressed,
                             color: "#006800",
-                            text: CALHIVVLSuppressed.CALHIVVLSuppressed.toLocaleString('en') + ' (' + parseFloat(((CALHIVVLSuppressed.CALHIVVLSuppressed/CALHIVVLDone.CALHIVVLDone)*100).toString()).toFixed(0) + '%)',
+                            text: CALHIVVLSuppressed.CALHIVVLSuppressed ? CALHIVVLSuppressed.CALHIVVLSuppressed.toLocaleString('en') + ' (' + parseFloat(((CALHIVVLSuppressed.CALHIVVLSuppressed/CALHIVVLDone.CALHIVVLDone)*100).toString()).toFixed(0) + '%)' : null,
                             cText: 'VIRALLY SUPPRESSED: ' + CALHIVVLSuppressed.CALHIVVLSuppressed
                         }
                     ]
