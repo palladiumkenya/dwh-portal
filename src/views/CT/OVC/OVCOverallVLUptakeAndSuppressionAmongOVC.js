@@ -69,21 +69,21 @@ const OVCOverallVLUptakeAndSuppressionAmongOVC = () => {
                             name: 'ELIGIBLE FOR VL',
                             y: ovcEligibleVL.OVCEligible,
                             color: "#456DE4",
-                            text: ovcEligibleVL.OVCEligible.toLocaleString('en') + ' (' + parseFloat(((ovcEligibleVL.OVCEligible/ovcCurrentOnArt.OVConART)*100).toString()).toFixed(0) + '%)',
+                            text: ovcEligibleVL.OVCEligible ? ovcEligibleVL.OVCEligible.toLocaleString('en') + ' (' + parseFloat(((ovcEligibleVL.OVCEligible/ovcCurrentOnArt.OVConART)*100).toString()).toFixed(0) + '%)' : null,
                             cText: 'ELIGIBLE FOR VL: ' + ovcEligibleVL.OVCEligible
                         },
                         {
                             name: 'VL DONE',
                             y: ovcVLDone.OVCVLDone,
                             color: "#EEA616",
-                            text: ovcVLDone.OVCVLDone.toLocaleString('en') + ' (' + parseFloat(((ovcVLDone.OVCVLDone/ovcCurrentOnArt.OVConART)*100).toString()).toFixed(0) + '%)',
+                            text: ovcVLDone.OVCVLDone ? ovcVLDone.OVCVLDone.toLocaleString('en') + ' (' + parseFloat(((ovcVLDone.OVCVLDone/ovcCurrentOnArt.OVConART)*100).toString()).toFixed(0) + '%)' : null,
                             cText: 'VL DONE: ' + ovcVLDone.OVCVLDone
                         },
                         {
                             name: 'VIRALLY SUPPRESSED',
                             y: ovcVLSuppressed.OVCVLSuppressed,
                             color: "#006800",
-                            text: ovcVLSuppressed.OVCVLSuppressed.toLocaleString('en') + ' (' + parseFloat(((ovcVLSuppressed.OVCVLSuppressed/ovcVLDone.OVCVLDone)*100).toString()).toFixed(0) + '%)',
+                            text: ovcVLSuppressed.OVCVLSuppressed ? ovcVLSuppressed.OVCVLSuppressed.toLocaleString('en') + ' (' + parseFloat(((ovcVLSuppressed.OVCVLSuppressed/ovcVLDone.OVCVLDone)*100).toString()).toFixed(0) + '%)' : null,
                             cText: 'VIRALLY SUPPRESSED: ' + ovcVLSuppressed.OVCVLSuppressed
                         }
                     ]
