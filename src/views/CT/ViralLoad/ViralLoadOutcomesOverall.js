@@ -29,7 +29,7 @@ const ViralLoadOutcomesOverall = () => {
                 name:"Overall VL Outcomes",
                 colorByPoint: true,
                 data: [
-                    { name: 'SUPPRESSED', y: viralLoadOutcomesOverallData.data[0], color: "#485969" },
+                    { name: 'LDL', y: viralLoadOutcomesOverallData.data[0], color: "#485969" },
                     { name: 'HVL', y: viralLoadOutcomesOverallData.data[2], color: "#1AB394" },
                     { name: 'LLV', y: viralLoadOutcomesOverallData.data[1], color: "#BBE65F" },
                 ]

@@ -20,7 +20,7 @@ const ViralLoadOutcomesOverview = () => {
         <Row>
             <Col>
                 <DataCard
-                    title="VIRALLY SUPPRESSED"
+                    title="LESS THAN DETECTABLE LEVEL(LDL)"
                     subtitle={roundNumber(suppressedPercent, 1) + "%"}
                     data={formatNumber(suppressed)}
                 />
