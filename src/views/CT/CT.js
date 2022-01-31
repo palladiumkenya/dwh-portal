@@ -197,6 +197,7 @@ import { loadCalHIVVLSuppressed } from '../../actions/CT/OVC/CALHIVVLSuppressedA
 import { loadOVCEligibleVL } from '../../actions/CT/OVC/ovcEligibleVLActions';
 import { loadOVCVLDone } from '../../actions/CT/OVC/ovcVLDoneActions';
 import { loadOVCVLSuppressed } from '../../actions/CT/OVC/ovcVLSuppressedActions';
+import { loadCovidNumberScreened } from '../../actions/CT/Covid/covidNumberScreenedActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -493,6 +494,7 @@ const CT = () => {
                 // dispatch(loadCovidPercentageWhoMissedAppointmentsByPartner());
                 dispatch(loadCovidCumulativeWhoReceivedAtLeastOneDose());
                 dispatch(loadCovidTrendsPLHIVVaccinationInTheLast12Months());
+                dispatch(loadCovidNumberScreened());
                 break;
             default:
                 break;
