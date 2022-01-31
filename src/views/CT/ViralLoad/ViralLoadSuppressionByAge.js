@@ -20,7 +20,7 @@ const ViralLoadSuppressionByAge = () => {
             series: [
                 { name: 'HVL', data: viralLoadSuppressionByAgeData.data[2], type: 'column', color: "#E15759", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
                 { name: 'LLV', data: viralLoadSuppressionByAgeData.data[1], type: 'column', color: "#F28E2B", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'VS', data: viralLoadSuppressionByAgeData.data[0], type: 'column', color: "#3475B3", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'LDL', data: viralLoadSuppressionByAgeData.data[0], type: 'column', color: "#3475B3", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [viralLoadSuppressionByAgeData]);

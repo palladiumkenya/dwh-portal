@@ -20,7 +20,7 @@ const ViralLoadSuppressionByRegimen = () => {
             series: [
                 { name: 'HVL', data: viralLoadSuppressionByRegimenData.data[1], type: 'column',color: "#E15759", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
                 { name: 'LLV', data: viralLoadSuppressionByRegimenData.data[2], type: 'column', color: "#F28E2B", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'VS', data: viralLoadSuppressionByRegimenData.data[0], type: 'column', color: "#3475B3", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
+                { name: 'LDL', data: viralLoadSuppressionByRegimenData.data[0], type: 'column', color: "#3475B3", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
             ]
         });
     }, [viralLoadSuppressionByRegimenData]);
