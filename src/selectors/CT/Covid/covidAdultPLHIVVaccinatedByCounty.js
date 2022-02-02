@@ -19,6 +19,7 @@ export const getAdultPLHIVVaccinatedByCounty = createSelector(
         let fullyVaccinated = [];
         let partiallyVaccinated = [];
         let totalVaccinated = [];
+        let notVaccinated = [];
 
         for (let j = 0; j < counties.length; j++) {
             const filteredCounties = list.filter(obj => obj.County ? obj.County.toUpperCase().toString() === counties[j].toUpperCase().toString() : []);
@@ -31,6 +32,7 @@ export const getAdultPLHIVVaccinatedByCounty = createSelector(
             if (filteredCounties.length > 0) {
                 const filterFully = filteredCounties.filter(obj => obj.VaccinationStatus === 'Fully Vaccinated');
                 const filterPartial = filteredCounties.filter(obj => obj.VaccinationStatus === 'Partially Vaccinated');
+                const filterNotVac = filteredCounties.filter(obj => obj.VaccinationStatus === 'Not Vaccinated');
                 if (filterFully.length > 0) {
                     let percent = Number(filterFully[0].Num) > 0 ? ((Number(filterFully[0].Num)/Number(totalCountyAdults))*100) : 0;
                     percent = Math.round((percent + Number.EPSILON) * 100) / 100;
@@ -77,7 +79,30 @@ export const getAdultPLHIVVaccinatedByCounty = createSelector(
 
                 const totalPartiallyVaccinated = filterPartial.length > 0 ? filterPartial[0].Num : 0;
 
-                const total = totalFullyVaccinated + totalPartiallyVaccinated;
+                if (filterNotVac.length > 0) {
+                    let percent = Number(filterNotVac[0].Num) > 0 ? ((Number(filterNotVac[0].Num)/Number(totalCountyAdults))*100) : 0;
+                    percent = Math.round((percent + Number.EPSILON) * 100) / 100;
+
+                    notVaccinated.push(
+                        {
+                            y: percent,
+                            text: filterNotVac[0].Num,
+                            county: counties[j]
+                        }
+                    );
+                } else {
+                    notVaccinated.push(
+                        {
+                            y: 0,
+                            text: 0,
+                            county: counties[j]
+                        }
+                    );
+                }
+
+                const totalNotVaccinated = filterNotVac.length > 0 ? filterNotVac[0].Num : 0;
+
+                const total = totalFullyVaccinated + totalPartiallyVaccinated + totalNotVaccinated;
                 totalVaccinated.push(
                     {
                         y: total,
@@ -94,6 +119,13 @@ export const getAdultPLHIVVaccinatedByCounty = createSelector(
                     }
                 );
                 partiallyVaccinated.push(
+                    {
+                        y: 0,
+                        text: 0,
+                        county: counties[j]
+                    }
+                );
+                notVaccinated.push(
                     {
                         y: 0,
                         text: 0,
@@ -117,19 +149,25 @@ export const getAdultPLHIVVaccinatedByCounty = createSelector(
         counties = totalVaccinated.map(obj => obj.county);
         const orderedPartially = [];
         const orderedFully = [];
+        const orderedNotVac = [];
         for (let i = 0; i < totalVaccinated.length; i++) {
             const obj = partiallyVaccinated.filter(obj => obj.county === totalVaccinated[i].county);
             const objFully = fullyVaccinated.filter(obj => obj.county === totalVaccinated[i].county);
+            const objNotVac = notVaccinated.filter(obj => obj.county === totalVaccinated[i].county);
             if (obj.length > 0) {
                 orderedPartially.push(obj[0]);
             }
             if (objFully.length > 0) {
                 orderedFully.push(objFully[0]);
             }
+            if (objNotVac.length > 0) {
+                orderedNotVac.push(objNotVac[0]);
+            }
         }
         partiallyVaccinated = orderedPartially;
         fullyVaccinated = orderedFully;
+        notVaccinated = orderedNotVac;
 
-        return { counties, fullyVaccinated, partiallyVaccinated };
+        return { counties, fullyVaccinated, partiallyVaccinated, notVaccinated };
     }
 );

@@ -16,12 +16,16 @@ export const getTrendsPLHIVVaccinationInTheLast12Months = createSelector(
         yearMonthTrends = [...new Set(yearMonthTrends)];
         let trendsFullyVaccinated = [];
         let trendsPartiallyVaccinated = [];
+        let trendsNotVaccinated = [];
         for (let i = 0; i < yearMonthTrends.length; i++) {
             const arrayVals = yearMonthTrends[i].split(" ");
             const fullyVaccinated = list.filter(obj => obj.VaccinationStatus === 'Fully Vaccinated'
                 && obj.DategivenFirstDose === arrayVals[0]
                 && obj.YearFirstDose === arrayVals[1]);
             const partiallyVaccinated = list.filter(obj => obj.VaccinationStatus === 'Partially Vaccinated'
+                && obj.DategivenFirstDose === arrayVals[0]
+                && obj.YearFirstDose === arrayVals[1]);
+            const notVaccinated = list.filter(obj => obj.VaccinationStatus === 'Not Vaccinated'
                 && obj.DategivenFirstDose === arrayVals[0]
                 && obj.YearFirstDose === arrayVals[1]);
 
@@ -36,11 +40,17 @@ export const getTrendsPLHIVVaccinationInTheLast12Months = createSelector(
             } else {
                 trendsPartiallyVaccinated.push(0);
             }
+
+            if (notVaccinated.length > 0) {
+                trendsNotVaccinated.push(notVaccinated[0].Num);
+            } else {
+                trendsNotVaccinated.push(0);
+            }
         }
 
         // const trendsFullyVaccinated = fullyVaccinated.map(obj => obj.Num);
         // const trendsPartiallyVaccinated = partiallyVaccinated.map(obj => obj.Num);
 
-        return { yearMonthTrends, trendsFullyVaccinated, trendsPartiallyVaccinated };
+        return { yearMonthTrends, trendsFullyVaccinated, trendsPartiallyVaccinated, trendsNotVaccinated };
     }
 );
