@@ -19,13 +19,16 @@ const COVIDAdultPlhivCurrentOnTreatment = () => {
 
     const data = [{
         y: currentOnArtAdults * 100 / currentOnArtAdults,
-        color: '#063970'
+        color: 'blue'
     }, {
         y: 100 - currentOnArtAdults,
         color: 'rgba(0,0,0,0)'
     }];
 
-    let title = `<p> </p><br><p style="font-size: 35px;font-weight: bold; line-height: 2">${currentOnArtAdults.toLocaleString()}</p><br><p>AS AT ${moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</p>`;
+    let title = `<div class="row" style="text-align:center;">
+        <div class="col-12" style="font-size:40px; font-weight: bold;">${formatNumber(currentOnArtAdults)}</div>
+        <div class="col-12" style="font-size:18px;">AS AT ${moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</div>
+    </div>`;
     const loadCovidAdultPlhivCurrentOnTreatment = useCallback(async () => {
         setCovidAdultPlhivCurrentOnTreatment({
             chart: {
@@ -34,6 +37,7 @@ const COVIDAdultPlhivCurrentOnTreatment = () => {
             },
             title: {
                 text: title,
+                useHTML: true,
                 align: 'center',
                 verticalAlign: 'middle',
                 y: 0
@@ -65,7 +69,7 @@ const COVIDAdultPlhivCurrentOnTreatment = () => {
     return (
         <div>
             <HighchartsReact highcharts={Highcharts} options={covidAdultPlhivCurrentOnTreatment}/>
-            <p style={{fontWeight: 'bold', textAlign: 'center', fontSize: '20px' }}>{label}</p>
+            <p style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '20px' }}>{label}</p>
         </div>
     );
 };
