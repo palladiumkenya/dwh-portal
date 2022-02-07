@@ -27,7 +27,12 @@ const COVIDFullyVaccinated = () => {
         color: 'rgba(0,0,0,0)'
     }];
 
-    let title = `<p style="font-size: 15px">${percentFullyVaccinated} %</p><br><p style="font-size: 35px;font-weight: bold">${fullyVaccinated.toLocaleString()}</p><br><p>AS AT ${moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</p>`;
+    // let title = `<p style="font-size: 15px">${percentFullyVaccinated} %</p><br><p style="font-size: 35px;font-weight: bold">${fullyVaccinated.toLocaleString()}</p><br><p>AS AT ${moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</p>`;
+    let title = `<div class="row" style="">
+        <div class="col-12" style="font-size:15px; text-align:center;">${roundNumber(percentFullyVaccinated)}%</div>
+        <div class="col-12" style="font-size:40px; font-weight: bold; text-align:center;">${formatNumber(fullyVaccinated)}</div>
+        <div class="col-12" style="font-size:18px; text-align:center;">AS AT ${moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</div>
+    </div>`;
     const loadCovidFullyVaccinated = useCallback(async () => {
         setCovidFullyVaccinated({
             chart: {
@@ -36,6 +41,7 @@ const COVIDFullyVaccinated = () => {
             },
             title: {
                 text: title,
+                useHTML: true,
                 align: 'center',
                 verticalAlign: 'middle',
                 y: 0
