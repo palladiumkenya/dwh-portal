@@ -65,7 +65,7 @@ const COVIDNumberScreened = () => {
     return (
         <div>
             <HighchartsReact highcharts={Highcharts} options={covidNumberScreened}/>
-            <p>{label}</p>
+            <p style={{fontWeight: 'bold', textAlign: 'center', fontSize: '20px' }}>{label}</p>
         </div>
     );
 };

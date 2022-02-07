@@ -65,7 +65,7 @@ const COVIDAdultPlhivCurrentOnTreatment = () => {
     return (
         <div>
             <HighchartsReact highcharts={Highcharts} options={covidAdultPlhivCurrentOnTreatment}/>
-            <p>{label}</p>
+            <p style={{fontWeight: 'bold', textAlign: 'center', fontSize: '20px' }}>{label}</p>
         </div>
     );
 };

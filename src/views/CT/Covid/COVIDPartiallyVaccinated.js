@@ -67,7 +67,7 @@ const COVIDPartiallyVaccinated = () => {
     return (
         <div>
             <HighchartsReact highcharts={Highcharts} options={covidPartiallyVaccinated}/>
-            <p>{label}</p>
+            <p style={{fontWeight: 'bold', textAlign: 'center', fontSize: '20px' }}>{label}</p>
         </div>
     );
 };
