@@ -27,7 +27,7 @@ const COVIDAdultPLHIVVaccinatedByCounty = () => {
                         enabled: true
                     } } },
             xAxis: [{ categories: countiesVaccinated.counties, crosshair: true }],
-            yAxis: [{ title: { text: 'Number of Patients' }}],
+            yAxis: [{ title: { text: 'Percentage of Patients' }}],
             tooltip: { shared: true },
             legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             series: [
