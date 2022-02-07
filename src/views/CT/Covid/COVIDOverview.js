@@ -8,6 +8,7 @@ import { LOADING_DELAY } from '../../../constants';
 const COVIDAdultPLHIVCurrentOnTreatment = Loadable({ loader: () => import('./COVIDAdultPlhivCurrentOnTreatment'), loading: Loading, delay: LOADING_DELAY });
 const COVIDPartiallyVaccinated = Loadable( { loader: () => import('./COVIDPartiallyVaccinated'), loading: Loading, delay: LOADING_DELAY });
 const COVIDFullyVaccinated = Loadable( { loader: () => import('./COVIDFullyVaccinated'), loading: Loading, delay: LOADING_DELAY });
+const COVIDNumberScreened = Loadable( { loader: () => import('./COVIDNumberScreened'), loading: Loading, delay: LOADING_DELAY });
 
 const COVIDOverview = () => {
 
@@ -15,6 +16,10 @@ const COVIDOverview = () => {
         <Row>
             <Col>
                 <COVIDAdultPLHIVCurrentOnTreatment />
+            </Col>
+
+            <Col>
+                <COVIDNumberScreened />
             </Col>
 
             <Col>

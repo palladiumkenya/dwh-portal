@@ -19,6 +19,7 @@ export const getAdultPLHIVVaccinatedByPartner = createSelector(
         let fullyVaccinated = [];
         let partiallyVaccinated = [];
         let totalVaccinated = [];
+        let notVaccinated = [];
 
         for (let j = 0; j < partners.length; j++) {
             const filteredPartners = list.filter(obj => obj.CTPartner ? obj.CTPartner.toUpperCase().toString() === partners[j].toUpperCase().toString() : []);
@@ -31,6 +32,7 @@ export const getAdultPLHIVVaccinatedByPartner = createSelector(
             if (filteredPartners.length > 0) {
                 const filterFully = filteredPartners.filter(obj => obj.VaccinationStatus === 'Fully Vaccinated');
                 const filterPartial = filteredPartners.filter(obj => obj.VaccinationStatus === 'Partially Vaccinated');
+                const filterNotVac = filteredPartners.filter(obj => obj.VaccinationStatus === 'Not Vaccinated');
 
                 if (filterFully.length > 0) {
                     let percent = Number(filterFully[0].Num) > 0 ? ((Number(filterFully[0].Num)/Number(totalPartnerAdults))*100) : 0;
@@ -74,7 +76,30 @@ export const getAdultPLHIVVaccinatedByPartner = createSelector(
                     );
                 }
                 const totalPartiallyVaccinated = filterPartial.length > 0 ? filterPartial[0].Num : 0;
-                const totalVacc = totalFullyVaccinated + totalPartiallyVaccinated;
+
+
+                if (filterNotVac.length > 0) {
+                    let percent = Number(filterNotVac[0].Num) > 0 ? ((Number(filterNotVac[0].Num)/Number(totalPartnerAdults))*100) : 0;
+                    percent = Math.round((percent + Number.EPSILON) * 100) / 100;
+                    notVaccinated.push(
+                        {
+                            y: percent,
+                            text: filterNotVac[0].Num,
+                            partner: partners[j]
+                        }
+                    );
+                } else {
+                    notVaccinated.push(
+                        {
+                            y: 0,
+                            text: 0,
+                            partner: partners[j]
+                        }
+                    );
+                }
+                const totalNotVaccinated = filterNotVac.length > 0 ? filterNotVac[0].Num : 0;
+
+                const totalVacc = totalFullyVaccinated + totalPartiallyVaccinated + totalNotVaccinated;
                 totalVaccinated.push(
                     {
                         y: totalVacc,
@@ -104,6 +129,13 @@ export const getAdultPLHIVVaccinatedByPartner = createSelector(
                         partner: partners[j]
                     }
                 );
+                notVaccinated.push(
+                    {
+                        y: 0,
+                        text: 0,
+                        partner: partners[j]
+                    }
+                );
             }
         }
 
@@ -113,19 +145,25 @@ export const getAdultPLHIVVaccinatedByPartner = createSelector(
         partners = totalVaccinated.map(obj => obj.partner);
         const orderedPartially = [];
         const orderedFully = [];
+        const orderedNotVac = [];
         for (let i = 0; i < totalVaccinated.length; i++) {
             const obj = partiallyVaccinated.filter(obj => obj.partner === totalVaccinated[i].partner);
             const objFully = fullyVaccinated.filter(obj => obj.partner === totalVaccinated[i].partner);
+            const objNotVac = fullyVaccinated.filter(obj => obj.partner === totalVaccinated[i].partner);
             if (obj.length > 0) {
                 orderedPartially.push(obj[0]);
             }
             if (objFully.length > 0) {
                 orderedFully.push(objFully[0]);
             }
+            if (objNotVac.length > 0) {
+                orderedNotVac.push(objNotVac[0]);
+            }
         }
         partiallyVaccinated = orderedPartially;
         fullyVaccinated = orderedFully;
+        notVaccinated = orderedNotVac;
 
-        return { partners, fullyVaccinated, partiallyVaccinated };
+        return { partners, fullyVaccinated, partiallyVaccinated, notVaccinated };
     }
 );

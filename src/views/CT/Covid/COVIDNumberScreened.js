@@ -1,36 +1,35 @@
 import React, { useCallback, useEffect, useState } from 'react';
-
-import { useSelector } from 'react-redux';
+import DataCard from '../../Shared/DataCard';
 import { formatNumber, roundNumber } from '../../../utils/utils';
 
-import * as covidAdultPLHIVPartiallyVaccinatedSelectors
-    from '../../../selectors/CT/Covid/covidAdultPLHIVPartiallyVaccinated';
+import * as covidNumberScreenedSelectors from '../../../selectors/CT/Covid/covidNumberScreened';
 import * as covidAdultPLHIVCurrentOnTreatmentSelectors
     from '../../../selectors/CT/Covid/covidAdultPLHIVCurrentOnTreatment';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 
-const COVIDPartiallyVaccinated = () => {
-    const [covidPartiallyVaccinated, setCovidPartiallyVaccinated] = useState({});
+const COVIDNumberScreened = () => {
+    const [covidNumberScreened, setCovidNumberScreened] = useState({});
     const currentOnArtAdults = useSelector(covidAdultPLHIVCurrentOnTreatmentSelectors.getAdultPLHIVCurrentOnTreatment).covidAdultsPLHIVCurrentOnTreatment;
-    const partiallyVaccinated = useSelector(covidAdultPLHIVPartiallyVaccinatedSelectors.getAdultPLHIVPartiallyVaccinated).partiallyVaccinated || 0;
+    const screened = useSelector(covidNumberScreenedSelectors.getCovidNumberScreened).Screened || 0;
+    let percentScreened = screened && Number(screened) > 0 ? ((Number(screened) / Number(currentOnArtAdults)) * 100) : 0;
+    percentScreened = Math.round((percentScreened + Number.EPSILON) * 100) / 100;
 
-    let percentPartially = partiallyVaccinated && Number(partiallyVaccinated) > 0 ? ((Number(partiallyVaccinated) / Number(currentOnArtAdults)) * 100) : 0;
-    percentPartially = Math.round((percentPartially + Number.EPSILON) * 100) / 100;
-
-    let label = `PARTIALLY VACCINATED PLHIV`
     const data = [{
-        y: percentPartially,
-        color: '#d32b3a'
+        y: percentScreened,
+        color: '#e88134'
     }, {
-        y: 100 - percentPartially,
+        y: 100 - percentScreened,
         color: 'rgba(0,0,0,0)'
     }];
 
-    let title = `<p style="font-size: 15px">${percentPartially} %</p><br><p style="font-size: 35px;font-weight: bold">${partiallyVaccinated.toLocaleString()}</p><br><p>AS AT ${moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</p>`;
-    const loadCovidPartiallyVaccinated = useCallback(async () => {
-        setCovidPartiallyVaccinated({
+    let label = 'SCREENED FOR VACCINATION'
+
+    let title = `<p style="font-size: 15px">${percentScreened} %</p><br><p style="font-size: 35px;font-weight: bold">${screened.toLocaleString()}</p><br><p>AS AT ${moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</p>`;
+    const loadCovidNumberScreened = useCallback(async () => {
+        setCovidNumberScreened({
             chart: {
                 renderTo: 'container',
                 type: 'pie'
@@ -58,18 +57,17 @@ const COVIDPartiallyVaccinated = () => {
                 enabled: false
             }
         });
-    }, [partiallyVaccinated]);
+    }, [screened]);
 
     useEffect(() => {
-        loadCovidPartiallyVaccinated();
-    }, [loadCovidPartiallyVaccinated]);
-
+        loadCovidNumberScreened();
+    }, [loadCovidNumberScreened]);
     return (
         <div>
-            <HighchartsReact highcharts={Highcharts} options={covidPartiallyVaccinated}/>
+            <HighchartsReact highcharts={Highcharts} options={covidNumberScreened}/>
             <p style={{fontWeight: 'bold', textAlign: 'center', fontSize: '20px' }}>{label}</p>
         </div>
     );
 };
+export default COVIDNumberScreened;
 
-export default COVIDPartiallyVaccinated;

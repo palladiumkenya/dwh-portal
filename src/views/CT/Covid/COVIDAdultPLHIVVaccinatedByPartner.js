@@ -13,14 +13,46 @@ const COVIDAdultPLHIVVaccinatedByPartner = () => {
     const loadVaccinatedByPartner = useCallback(async () => {
         setCovidVaccinatedByPartner({
             title: { text: '' },
-            plotOptions: { column: { stacking: 'normal' } },
+            plotOptions: {
+                column: {
+                    stacking: 'percent',
+                    tooltip: {
+                        valueSuffix: ' ({point.percentage:.0f}%)'
+                    },
+                    dataLabels: {
+                        formatter: function() {
+                            if (this.y) {
+                                return Math.round(100 * this.y / this.total) + '%';
+                            }
+                            return '0%';
+                        },
+                        enabled: true
+                    }
+                }
+            },
             xAxis: [{ categories: partnersVaccinated.partners, crosshair: true }],
-            yAxis: [{ title: { text: 'Number of Patients' }}],
+            yAxis: [{ title: { text: 'Percentage of Patients' } }],
             tooltip: { shared: true },
             legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'PARTIALLY VACCINATED', data: partnersVaccinated.partiallyVaccinated.map(obj => obj.text), type: 'column', color: "#F08532" },
-                { name: 'FULLY VACCINATED', data: partnersVaccinated.fullyVaccinated.map(obj => obj.text), type: 'column', color: "#69B34C" },
+                {
+                    name: 'NOT VACCINATED',
+                    data: partnersVaccinated.notVaccinated.map(obj => obj.text),
+                    type: 'column',
+                    color: 'red'
+                },
+                {
+                    name: 'PARTIALLY VACCINATED',
+                    data: partnersVaccinated.partiallyVaccinated.map(obj => obj.text),
+                    type: 'column',
+                    color: '#F08532'
+                },
+                {
+                    name: 'FULLY VACCINATED',
+                    data: partnersVaccinated.fullyVaccinated.map(obj => obj.text),
+                    type: 'column',
+                    color: '#69B34C'
+                }
             ]
         });
     }, [partnersVaccinated]);
@@ -31,12 +63,12 @@ const COVIDAdultPLHIVVaccinatedByPartner = () => {
 
     return (
         <Card className="trends-card">
-            <CardHeader className="trends-header" style={{textTransform: 'none'}}>
+            <CardHeader className="trends-header" style={{ textTransform: 'none' }}>
                 ADULT PLHIV VACCINATED AGAINIST COVID-19 BY PARTNER
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
-                    <HighchartsReact highcharts={Highcharts} options={covidVaccinatedByPartner} />
+                    <HighchartsReact highcharts={Highcharts} options={covidVaccinatedByPartner}/>
                 </div>
             </CardBody>
         </Card>

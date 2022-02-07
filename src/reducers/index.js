@@ -206,6 +206,7 @@ import CALHIVVLSuppressed from './CT/OVC/CALHIVVLSuppressed';
 import ovcEligibleVL from './CT/OVC/ovcEligibleVL';
 import ovcVLDone from './CT/OVC/ovcVLDone';
 import ovcVLSuppressed from './CT/OVC/ovcVLSuppressed';
+import CovidNumberScreened from './CT/Covid/covidNumberScreened';
 
 export default combineReducers({
     auth: authReducer,
@@ -407,5 +408,6 @@ export default combineReducers({
     CALHIVVLSuppressed,
     ovcEligibleVL,
     ovcVLDone,
-    ovcVLSuppressed
+    ovcVLSuppressed,
+    CovidNumberScreened
 });
