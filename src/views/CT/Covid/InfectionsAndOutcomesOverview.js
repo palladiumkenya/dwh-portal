@@ -11,15 +11,15 @@ const COVIDPLHIVWhoHadSymptomaticInfection = Loadable({ loader: () => import('./
 const InfectionsAndOutcomesOverview = () => {
     return (
         <Row>
-            <Col className={"col-4"}>
+            <Col className={"col-4 col-lg-4 col-md-4 col-sm-12 col-xs-12"}>
                 <COVIDPLHIVCurrentOnART />
             </Col>
 
-            <Col className={"col-4"}>
+            <Col className={"col-4 col-lg-4 col-md-4 col-sm-12 col-xs-12"}>
                 <COVIDPLHIVEverHadInfection />
             </Col>
 
-            <Col className={"col-4"}>
+            <Col className={"col-4 col-lg-4 col-md-4 col-sm-12 col-xs-12"}>
                 <COVIDPLHIVWhoHadSymptomaticInfection />
             </Col>
         </Row>
