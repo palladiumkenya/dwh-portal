@@ -123,7 +123,7 @@ const DefaultHeader = () => {
 const Adhoc = () => {
     return (
         <NavItem className="px-3">
-            <a href="https://dwh.nascop.org:7010/" className="nav-link active"><strong>Adhoc</strong></a>
+            <a href="https://data.kenyahmis.org:9090/" className="nav-link active"><strong>Adhoc</strong></a>
         </NavItem>
     );
 };
