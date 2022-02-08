@@ -5,12 +5,69 @@ import * as covidSymptomaticInfectionsSelectors from '../../../selectors/CT/Covi
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import * as covidEverHadInfectionSelectors from '../../../selectors/CT/Covid/covidEverHadInfection';
 import DataCard from '../../Shared/DataCard';
+import moment from 'moment';
+import HighchartsReact from 'highcharts-react-official';
+import Highcharts from 'highcharts';
 
 const COVIDPLHIVWhoHadSymptomaticInfection = () => {
-    const symptomaticInfections = useSelector(covidSymptomaticInfectionsSelectors.getSymptomaticInfections);
-    const everHadInfection = useSelector(covidEverHadInfectionSelectors.getEverHadInfection);
-    let percent = Number(symptomaticInfections.symptomaticInfections) > 0 ? ((Number(symptomaticInfections.symptomaticInfections)/Number(everHadInfection.everHadInfection))*100) : 0;
+    const [covidPlhivWhoHadSymptomaticInfection, setCovidPlhivWhoHadSymptomaticInfection] = useState({});
+
+    const symptomaticInfections = useSelector(covidSymptomaticInfectionsSelectors.getSymptomaticInfections).symptomaticInfections;
+    const everHadInfection = useSelector(covidEverHadInfectionSelectors.getEverHadInfection).everHadInfection;
+    let percent = Number(symptomaticInfections) > 0 ? ((Number(symptomaticInfections)/Number(everHadInfection))*100) : 0;
     percent = Math.round((percent + Number.EPSILON) * 100) / 100;
+
+    const label = 'PLHIV WHO HAVE HAD SYMPTOMATIC COVID-19 INFECTION';
+
+    const data = [{
+        y: percent,
+        color: 'red'
+    }, {
+        y: 100 - percent,
+        color: 'rgba(0,0,0,0)'
+    }];
+
+    let title = `<div class="row" style="">
+        <div class="col-12" style="font-size:15px; text-align:center;">${roundNumber(percent)}%</div>
+        <div class="col-12" style="font-size:40px; font-weight: bold; text-align:center;">${formatNumber(symptomaticInfections)}</div>
+        <div class="col-12" style="font-size:18px; text-align:center;">AS AT ${moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</div>
+    </div>`;
+    const loadCovidPlhivWhoHadSymptomaticInfection = useCallback(async () => {
+        setCovidPlhivWhoHadSymptomaticInfection({
+            chart: {
+                renderTo: 'container',
+                type: 'pie'
+            },
+            title: {
+                text: title,
+                useHTML: true,
+                align: 'center',
+                verticalAlign: 'middle',
+                y: 0
+            },
+            plotOptions: {
+                pie: {
+                    innerSize: 300,
+                    dataLabels: false
+                }
+            },
+            series: [{
+                data: data
+            }],
+            credits: {
+                enabled: false
+            },
+            tooltip: { enabled: false },
+            exporting: {
+                enabled: false
+            }
+        });
+    }, [symptomaticInfections]);
+
+    useEffect(() => {
+        loadCovidPlhivWhoHadSymptomaticInfection();
+    }, [loadCovidPlhivWhoHadSymptomaticInfection]);
+
 
     /*const options = {
         chart: {
@@ -96,11 +153,10 @@ const COVIDPLHIVWhoHadSymptomaticInfection = () => {
 
 
     return (
-        <DataCard
-            title="PLHIV WHO HAVE HAD SYMPTOMATIC COVID-19 INFECTION"
-            subtitle={roundNumber(percent) + "%"}
-            data={formatNumber(symptomaticInfections.symptomaticInfections)}
-        />
+        <div>
+            <HighchartsReact highcharts={Highcharts} options={covidPlhivWhoHadSymptomaticInfection}/>
+            <p style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '20px' }}>{label}</p>
+        </div>
     );
 };
 

@@ -5,29 +5,45 @@ import Loadable from 'react-loadable';
 import Loading from '../../Shared/Loading';
 import { LOADING_DELAY } from '../../../constants';
 
-const COVIDAdultPLHIVCurrentOnTreatment = Loadable({ loader: () => import('./COVIDAdultPlhivCurrentOnTreatment'), loading: Loading, delay: LOADING_DELAY });
-const COVIDPartiallyVaccinated = Loadable( { loader: () => import('./COVIDPartiallyVaccinated'), loading: Loading, delay: LOADING_DELAY });
-const COVIDFullyVaccinated = Loadable( { loader: () => import('./COVIDFullyVaccinated'), loading: Loading, delay: LOADING_DELAY });
-const COVIDNumberScreened = Loadable( { loader: () => import('./COVIDNumberScreened'), loading: Loading, delay: LOADING_DELAY });
+const COVIDAdultPLHIVCurrentOnTreatment = Loadable({
+    loader: () => import('./COVIDAdultPlhivCurrentOnTreatment'),
+    loading: Loading,
+    delay: LOADING_DELAY
+});
+const COVIDPartiallyVaccinated = Loadable({
+    loader: () => import('./COVIDPartiallyVaccinated'),
+    loading: Loading,
+    delay: LOADING_DELAY
+});
+const COVIDFullyVaccinated = Loadable({
+    loader: () => import('./COVIDFullyVaccinated'),
+    loading: Loading,
+    delay: LOADING_DELAY
+});
+const COVIDNumberScreened = Loadable({
+    loader: () => import('./COVIDNumberScreened'),
+    loading: Loading,
+    delay: LOADING_DELAY
+});
 
 const COVIDOverview = () => {
 
     return (
         <Row>
-            <Col>
-                <COVIDAdultPLHIVCurrentOnTreatment />
+            <Col className={'col-3'}>
+                <COVIDAdultPLHIVCurrentOnTreatment/>
             </Col>
 
-            <Col>
-                <COVIDNumberScreened />
+            <Col className={'col-3'}>
+                <COVIDNumberScreened/>
             </Col>
 
-            <Col>
-                <COVIDPartiallyVaccinated />
+            <Col className={'col-3'}>
+                <COVIDPartiallyVaccinated/>
             </Col>
 
-            <Col>
-                <COVIDFullyVaccinated />
+            <Col className={'col-3'}>
+                <COVIDFullyVaccinated/>
             </Col>
         </Row>
     );

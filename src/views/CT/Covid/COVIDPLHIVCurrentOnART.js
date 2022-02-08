@@ -4,10 +4,64 @@ import * as covidPLHIVCurrentOnArtSelectors
     from '../../../selectors/CT/Covid/covidPLHIVCurrentOnArt';
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import DataCard from '../../Shared/DataCard';
+import moment from 'moment';
+import HighchartsReact from 'highcharts-react-official';
+import Highcharts from 'highcharts';
 
 const COVIDPLHIVCurrentOnART = () => {
+    const [covidPlhivCurrentOnTreatment, setCovidPlhivCurrentOnTreatment] = useState({});
 
-    const currentOnArtAdults = useSelector(covidPLHIVCurrentOnArtSelectors.getPLHIVCurrentOnArt);
+    const currentOnArtAdults = useSelector(covidPLHIVCurrentOnArtSelectors.getPLHIVCurrentOnArt).plhivCurrentOnArt;
+
+    const label = 'PLHIV CURRENT ON ART';
+
+    const data = [{
+        y: currentOnArtAdults * 100 / currentOnArtAdults,
+        color: 'orange'
+    }, {
+        y: 100 - currentOnArtAdults,
+        color: 'rgba(0,0,0,0)'
+    }];
+
+    let title = `<div class="row" >
+        <div class="col-12" style="font-size:40px; text-align:center; font-weight: bold;">${formatNumber(currentOnArtAdults)}</div>
+        <div class="col-12" style="font-size:18px; text-align:center;">AS AT ${moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</div>
+    </div>`;
+    const loadCovidPlhivCurrentOnTreatment = useCallback(async () => {
+        setCovidPlhivCurrentOnTreatment({
+            chart: {
+                renderTo: 'container',
+                type: 'pie'
+            },
+            title: {
+                text: title,
+                useHTML: true,
+                align: 'center',
+                verticalAlign: 'middle',
+                y: 0
+            },
+            plotOptions: {
+                pie: {
+                    innerSize: 300,
+                    dataLabels: false
+                }
+            },
+            series: [{
+                data: data
+            }],
+            credits: {
+                enabled: false
+            },
+            tooltip: { enabled: false },
+            exporting: {
+                enabled: false
+            }
+        });
+    }, [currentOnArtAdults]);
+
+    useEffect(() => {
+        loadCovidPlhivCurrentOnTreatment();
+    }, [loadCovidPlhivCurrentOnTreatment]);
 
     /*const options = {
         chart: {
@@ -85,11 +139,10 @@ const COVIDPLHIVCurrentOnART = () => {
 
 
     return (
-        <DataCard
-            title="PLHIV CURRENT ON ART"
-            subtitle=""
-            data={formatNumber(currentOnArtAdults.plhivCurrentOnArt)}
-        />
+        <div>
+            <HighchartsReact highcharts={Highcharts} options={covidPlhivCurrentOnTreatment}/>
+            <p style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '20px' }}>{label}</p>
+        </div>
     );
 };
 
