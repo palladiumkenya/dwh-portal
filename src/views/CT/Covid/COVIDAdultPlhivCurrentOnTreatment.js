@@ -44,8 +44,9 @@ const COVIDAdultPlhivCurrentOnTreatment = () => {
             },
             plotOptions: {
                 pie: {
-                    innerSize: 300,
-                    dataLabels: false
+                    innerSize: 270,
+                    dataLabels: false,
+                    size: 290
                 }
             },
             series: [{
