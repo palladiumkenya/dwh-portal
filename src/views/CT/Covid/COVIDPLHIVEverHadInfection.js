@@ -7,13 +7,68 @@ import * as covidEverHadInfectionSelectors
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import * as covidPLHIVCurrentOnArtSelectors from '../../../selectors/CT/Covid/covidPLHIVCurrentOnArt';
 import DataCard from '../../Shared/DataCard';
+import moment from 'moment';
+import HighchartsReact from 'highcharts-react-official';
+import Highcharts from 'highcharts';
 
 const COVIDPLHIVEverHadInfection = () => {
-    const everHadInfection = useSelector(covidEverHadInfectionSelectors.getEverHadInfection);
-    const currentOnArtAdults = useSelector(covidPLHIVCurrentOnArtSelectors.getPLHIVCurrentOnArt);
+    const [covidPlhivEverHadInfection, setCovidPlhivEverHadInfection] = useState({});
+
+    const everHadInfection = useSelector(covidEverHadInfectionSelectors.getEverHadInfection).everHadInfection;
+    const currentOnArtAdults = useSelector(covidPLHIVCurrentOnArtSelectors.getPLHIVCurrentOnArt).plhivCurrentOnArt;
     let percent = Number(everHadInfection) > 0 ? ((Number(everHadInfection)/Number(currentOnArtAdults))*100) : 0;
     percent = Math.round((percent + Number.EPSILON) * 100) / 100;
 
+    const label = 'PLHIV EVER HAD COVID-19 INFECTION';
+
+    const data = [{
+        y: percent,
+        color: 'red'
+    }, {
+        y: 100 - percent,
+        color: 'rgba(0,0,0,0)'
+    }];
+
+    let title = `<div class="row" style="">
+        <div class="col-12" style="font-size:15px; text-align:center;">${roundNumber(percent)}%</div>
+        <div class="col-12" style="font-size:40px; font-weight: bold; text-align:center;">${formatNumber(everHadInfection)}</div>
+        <div class="col-12" style="font-size:18px; text-align:center;">AS AT ${moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</div>
+    </div>`;
+    const loadCovidPlhivEverHadInfection = useCallback(async () => {
+        setCovidPlhivEverHadInfection({
+            chart: {
+                renderTo: 'container',
+                type: 'pie'
+            },
+            title: {
+                text: title,
+                useHTML: true,
+                align: 'center',
+                verticalAlign: 'middle',
+                y: 0
+            },
+            plotOptions: {
+                pie: {
+                    innerSize: 300,
+                    dataLabels: false
+                }
+            },
+            series: [{
+                data: data
+            }],
+            credits: {
+                enabled: false
+            },
+            tooltip: { enabled: false },
+            exporting: {
+                enabled: false
+            }
+        });
+    }, [everHadInfection]);
+
+    useEffect(() => {
+        loadCovidPlhivEverHadInfection();
+    }, [loadCovidPlhivEverHadInfection]);
 
     /*const options = {
         chart: {
@@ -99,11 +154,10 @@ const COVIDPLHIVEverHadInfection = () => {
 
 
     return (
-        <DataCard
-            title="PLHIV EVER HAD COVID-19 INFECTION"
-            subtitle={roundNumber(percent) + "%"}
-            data={formatNumber(everHadInfection.everHadInfection)}
-        />
+        <div>
+            <HighchartsReact highcharts={Highcharts} options={covidPlhivEverHadInfection}/>
+            <p style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '20px' }}>{label}</p>
+        </div>
     );
 };
 

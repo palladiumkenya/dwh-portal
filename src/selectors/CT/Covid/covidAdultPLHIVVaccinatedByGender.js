@@ -30,6 +30,7 @@ export const getAdultPLHIVVaccinatedByGender = createSelector(
         ];
         let fullyVaccinated = [];
         let partiallyVaccinated = [];
+        let notVaccinated = [];
 
         for (let j = 0; j < gender.length; j++) {
             const filteredGenders = list.filter(obj => obj.gender === gender[j]);
@@ -37,6 +38,7 @@ export const getAdultPLHIVVaccinatedByGender = createSelector(
             if (filteredGenders.length > 0) {
                 const filterFully = filteredGenders.filter(obj => obj.VaccinationStatus === 'Fully Vaccinated');
                 const filterPartial = filteredGenders.filter(obj => obj.VaccinationStatus === 'Partially Vaccinated');
+                const filterNotVac = filteredGenders.filter(obj => obj.VaccinationStatus === 'Not Vaccinated');
                 if (filterFully.length > 0) {
                     let percent = Number(filterFully[0].Num) > 0 ? ((Number(filterFully[0].Num)/Number(currentOnArtAdults))*100) : 0;
                     percent = Math.round((percent + Number.EPSILON) * 100) / 100;
@@ -72,6 +74,24 @@ export const getAdultPLHIVVaccinatedByGender = createSelector(
                         }
                     );
                 }
+
+                if (filterNotVac.length > 0) {
+                    let percent = Number(filterNotVac[0].Num) > 0 ? ((Number(filterNotVac[0].Num)/Number(currentOnArtAdults))*100) : 0;
+                    percent = Math.round((percent + Number.EPSILON) * 100) / 100;
+                    notVaccinated.push(
+                        {
+                            y: percent,
+                            text: filterNotVac[0].Num
+                        }
+                    );
+                } else {
+                    notVaccinated.push(
+                        {
+                            y: 0,
+                            text: 0
+                        }
+                    );
+                }
             } else {
                 fullyVaccinated.push(
                     {
@@ -85,9 +105,15 @@ export const getAdultPLHIVVaccinatedByGender = createSelector(
                         text: 0
                     }
                 );
+                notVaccinated.push(
+                    {
+                        y: 0,
+                        text: 0
+                    }
+                );
             }
         }
 
-        return { gender, fullyVaccinated, partiallyVaccinated };
+        return { gender, fullyVaccinated, partiallyVaccinated, notVaccinated };
     }
 );
