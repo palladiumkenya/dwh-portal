@@ -34,10 +34,11 @@ export const fetchCovidAdultPLHIVFullyVaccinated = () => async (dispatch, getSta
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
         project: getState().filters.projects,
+        gender: getState().filters.genders,
+        datimAgeGroup: getState().filters.datimAgeGroups,
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
     const response = await getAll('care-treatment/getCovidFullyVaccinated', params);
     dispatch({ type: actionTypes.CT_COVID_ADULT_PLHIV_FULLY_VACCINATED_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };
-
