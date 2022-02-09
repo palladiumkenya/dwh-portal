@@ -34,10 +34,11 @@ export const fetchCovidCumulativeWhoReceivedAtLeastOneDose = () => async (dispat
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
         project: getState().filters.projects,
+        gender: getState().filters.genders,
+        datimAgeGroup: getState().filters.datimAgeGroups,
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
     const response = await getAll('care-treatment/getCumulativeNumberAdultPlhivWhoReceivedAtleastOneDose', params);
     dispatch({ type: actionTypes.CT_COVID_CUMULATIVE_WHO_RECEIVED_AT_LEAST_ONE_DOSE_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };
-
