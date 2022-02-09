@@ -34,10 +34,11 @@ export const fetchCovidAdultPLHIVVaccinatedByCounty = () => async (dispatch, get
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
         project: getState().filters.projects,
+        gender: getState().filters.genders,
+        datimAgeGroup: getState().filters.datimAgeGroups,
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
     const response = await getAll('care-treatment/getCovidAdultPLHIVVaccinatedByCounty', params);
     dispatch({ type: actionTypes.CT_COVID_ADULT_PLHIV_VACCINATED_BY_COUNTY_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };
-
