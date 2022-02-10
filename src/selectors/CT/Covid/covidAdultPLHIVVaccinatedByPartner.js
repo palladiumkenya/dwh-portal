@@ -149,7 +149,7 @@ export const getAdultPLHIVVaccinatedByPartner = createSelector(
         for (let i = 0; i < totalVaccinated.length; i++) {
             const obj = partiallyVaccinated.filter(obj => obj.partner === totalVaccinated[i].partner);
             const objFully = fullyVaccinated.filter(obj => obj.partner === totalVaccinated[i].partner);
-            const objNotVac = fullyVaccinated.filter(obj => obj.partner === totalVaccinated[i].partner);
+            const objNotVac = notVaccinated.filter(obj => obj.partner === totalVaccinated[i].partner);
             if (obj.length > 0) {
                 orderedPartially.push(obj[0]);
             }
