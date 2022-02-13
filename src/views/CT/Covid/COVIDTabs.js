@@ -80,7 +80,9 @@ const COVIDTabs = () => {
 
                 <TabPane tabId="infection&Outcomes">
                     <Row>
-                        <Col className={"col-12"}>
+                        <Col className={"col-1"}>
+                        </Col>
+                        <Col className={"col-10"}>
                             <InfectionsAndOutcomesOverview />
                         </Col>
                     </Row>
