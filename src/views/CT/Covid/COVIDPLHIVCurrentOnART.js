@@ -5,95 +5,76 @@ import * as covidPLHIVCurrentOnArtSelectors
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import DataCard from '../../Shared/DataCard';
 import moment from 'moment';
-import HighchartsReact from 'highcharts-react-official';
-import Highcharts from 'highcharts';
-import HCSoldGauge from 'highcharts/modules/solid-gauge';
-import * as ChartModuleMore from 'highcharts/highcharts-more.js';
+import { Doughnut as Donut } from 'react-chartjs-2';
+import { Chart, ArcElement } from 'chart.js';
 
-ChartModuleMore(Highcharts);
-HCSoldGauge(Highcharts);
+Chart.register(ArcElement);
 
 const COVIDPLHIVCurrentOnART = () => {
+    const [covidPlhivCurrentOnART, setCovidPlhivCurrentOnART] = useState({});
 
     const currentOnArtAdults = useSelector(covidPLHIVCurrentOnArtSelectors.getPLHIVCurrentOnArt).plhivCurrentOnArt;
 
     const label = 'PLHIV CURRENT ON ART';
 
 
-    let title = `<div class="row" >
+    let title = `<div class="row" style="text-align:center;">
         <div class="col-12" style="font-size:40px; text-align:center; font-weight: bold;">${formatNumber(currentOnArtAdults)}</div>
         <div class="col-12" style="font-size:18px; text-align:center;">AS AT ${moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</div>
     </div>`;
 
-    const options = {
-        chart: {
-            renderTo: 'container',
-            type: 'solidgauge'
+    let options = {
+        aspectRatio: 1,
+        maintainAspectRatio: false,
+        legend: {
+            display: false
         },
-        exporting: {
-            enabled: false
-        },
+        responsive: false,
         title: {
-            useHTML: true,
-            text: ``
+            display: false
         },
-        pane: {
-            startAngle: 0,
-            endAngle: 360,
-            background: [
-                {
-                    outerRadius: 290,
-                    innerRadius: 270,
-                    backgroundColor: 'rgba(0,0,0,0)',
-                    borderWidth: 0
-                }
-            ]
-        },
-        yAxis: {
-            min: 0,
-            max: 100,
-            lineWidth: 0,
-            tickPositions: []
-        },
-        plotOptions: {
-            solidgauge: {
-                dataLabels: {
-                    enabled: true,
-                    borderColor: '#ffffff',
-                    x: 0,
-                    y: -35
-                },
-                linecap: 'round',
-                stickyTracking: false,
-                rounded: false
-            }
-        },
-        series: [
-            {
-                name: 'PLHIV CURRENT ON ART',
-                type: 'solidgauge',
-                data: [
-                    {
-                        color: 'orange',
-                        radius: '100%',
-                        innerRadius: '93%',
-                        y: 100
-                    }
-                ],
-                dataLabels: {
-                    useHTML: true,
-                    format: title
-                }
-            }
-        ],
-        credits: { enabled: false },
-        tooltip: { enabled: false }
+        cutout: '93%'
     };
 
 
     return (
         <div>
-            <HighchartsReact highcharts={Highcharts} options={options}/>
+            <div className={'row'} style={{
+                zIndex: '100',
+                position: 'absolute',
+                verticalAlign: 'middle',
+                top: '90px',
+                whiteSpace: 'normal',
+                textAlign: 'center',
+                display: 'flex',
+                justifyContent: 'center',
+                margin: 'auto'
+            }}>
+                <div className={'col-1'}/>
+                <div className={'col-11'} style={{
+                    fontSize: '40px',
+                    textAlign: 'center',
+                    fontWeight: 'bold'
+                }}>{formatNumber(currentOnArtAdults)}</div>
+                <div className={'col-12'} style={{ fontSize: '18px', textAlign: 'center' }}>AS
+                    AT {moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</div>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <Donut style={{ alignSelf: 'center' }}
+                    options={options}
+                    data={{
+                        datasets: [
+                            {
+                                'backgroundColor': ['orange'],
+                                'borderWidth': 0,
+                                'data': [100]
+                            }
+                        ]
+                    }}
+                    height={300}
+                    width={300}
+                />
+            </div>
             <p style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '20px' }}>{label}</p>
         </div>
     );

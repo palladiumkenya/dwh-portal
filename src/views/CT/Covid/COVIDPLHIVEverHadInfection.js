@@ -10,11 +10,10 @@ import DataCard from '../../Shared/DataCard';
 import moment from 'moment';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import HCSoldGauge from 'highcharts/modules/solid-gauge';
-import * as ChartModuleMore from 'highcharts/highcharts-more.js';
+import { Doughnut as Donut } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement } from 'chart.js';
 
-ChartModuleMore(Highcharts);
-HCSoldGauge(Highcharts);
+ChartJS.register(ArcElement);
 
 const COVIDPLHIVEverHadInfection = () => {
     const [covidPlhivEverHadInfection, setCovidPlhivEverHadInfection] = useState({});
@@ -33,129 +32,70 @@ const COVIDPLHIVEverHadInfection = () => {
         y: 100 - percent,
         color: 'rgba(0,0,0,0)'
     }];
+    console.log(percent, everHadInfection);
 
     let title = `<div class="row" style="">
         <div class="col-12" style="font-size:40px; font-weight: bold; text-align:center;">${formatNumber(everHadInfection)}</div>
         <div class="col-12" style="font-size:18px; text-align:center;">AS AT ${moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</div>
     </div>`;
-    // const loadCovidPlhivEverHadInfection = useCallback(async () => {
-    //     setCovidPlhivEverHadInfection({
-    //         chart: {
-    //             renderTo: 'container',
-    //             type: 'pie'
-    //         },
-    //         title: {
-    //             text: title,
-    //             useHTML: true,
-    //             align: 'center',
-    //             verticalAlign: 'middle',
-    //             textAnchor: 'middle',
-    //             y: 0
-    //         },
-    //         plotOptions: {
-    //             pie: {
-    //                 innerSize: 270,
-    //                 dataLabels: false,
-    //                 size: 290
-    //             }
-    //         },
-    //         series: [{
-    //             data: data
-    //         }],
-    //         credits: {
-    //             enabled: false
-    //         },
-    //         tooltip: { enabled: false },
-    //         exporting: {
-    //             enabled: false
-    //         }
-    //     });
-    // }, [everHadInfection]);
-    //
-    // useEffect(() => {
-    //     loadCovidPlhivEverHadInfection();
-    // }, [loadCovidPlhivEverHadInfection]);
 
-    const options = {
-        chart: {
-            renderTo: 'container',
-            type: 'solidgauge'
-        },
+    let options = {
+        aspectRatio: 1,
+        maintainAspectRatio: false,
         legend: {
-            enabled: false
+            display: false
         },
-        exporting: {
-            enabled: false
-        },
+        responsive: false,
         title: {
-            useHTML: true,
-            text: `
-          <div class="primary-card-body-subtitle-red" style="font-size:15px;">
-                ${percent ? percent : 0}%
-          </div>
-        `,
-            align: 'center',
-            verticalAlign: 'middle',
-            y: -40,
-            x: 0
+            display: false
         },
-        pane: {
-            startAngle: 0,
-            endAngle: 360,
-            background: [
-                {
-                    outerRadius: 290,
-                    innerRadius: 270,
-                    backgroundColor: 'rgba(0,0,0,0)',
-                    borderWidth: 0
-                }
-            ]
-        },
-        yAxis: {
-            min: 0,
-            max: 100,
-            lineWidth: 0,
-            tickPositions: []
-        },
-        plotOptions: {
-            solidgauge: {
-                dataLabels: {
-                    enabled: true,
-                    borderColor: '#ffffff',
-                    x: 0,
-                    y: -35
-                },
-                linecap: 'round',
-                stickyTracking: false,
-                rounded: false
-            }
-        },
-        series: [
-            {
-                name: 'PLHIV EVER HAD COVID-19 INFECTION',
-                type: 'solidgauge',
-                data: [
-                    {
-                        color: 'red',
-                        radius: '100%',
-                        innerRadius: '93%',
-                        y: percent ? percent : 0
-                    }
-                ],
-                dataLabels: {
-                    useHTML: true,
-                    format: title
-                }
-            }
-        ],
-        credits: { enabled: false },
-        tooltip: { enabled: false }
+        cutout: '93%'
     };
-
 
     return (
         <div>
-            <HighchartsReact highcharts={Highcharts} options={options}/>
+            <div className={'row'} style={{
+                zIndex: '100',
+                position: 'absolute',
+                verticalAlign: 'middle',
+                top: '90px',
+                whiteSpace: 'normal',
+                textAlign: 'center',
+                display: 'flex',
+                justifyContent: 'center',
+                margin: 'auto'
+            }}>
+                <div className={'col-1'}></div>
+                <div className={"col-11"} style={{fontSize:'15px', textAlign:'center'}}>{roundNumber(percent)}%
+                </div>
+                <div className={'col-1'}></div>
+                <div className={'col-11'}> <p  style={{
+                    fontSize: '40px',
+                    textAlign: 'center',
+                    fontWeight: 'bold'
+                }}>{formatNumber(everHadInfection)}</p></div>
+                <div className={'col-1'} ></div>
+                <div className={'col-11'} ><p style={{ fontSize: '18px', textAlign: 'center' }}>AS
+                    AT {moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</p></div>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <Donut style={{ alignSelf: 'center' }}
+                       options={options}
+                       data={{
+                           datasets: [
+                               {
+                                   'backgroundColor': ['red', 'rgba(0,0,0,0)'],
+                                   'borderWidth': 0,
+                                   'data': [
+                                       percent, 100-percent
+                                   ]
+                               }
+                           ]
+                       }}
+                       height={300}
+                       width={300}
+                />
+            </div>
             <p style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '20px' }}>{label}</p>
         </div>
     );

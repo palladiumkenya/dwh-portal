@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.21.1",
     "bootstrap": "^4.4.1",
+    "chart.js": "^3.7.1",
     "font-awesome": "^4.7.0",
     "highcharts": "^8.2.2",
     "highcharts-react-official": "^3.0.0",
