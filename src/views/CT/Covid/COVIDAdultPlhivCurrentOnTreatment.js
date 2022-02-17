@@ -40,6 +40,7 @@ const COVIDAdultPlhivCurrentOnTreatment = () => {
                 useHTML: true,
                 align: 'center',
                 verticalAlign: 'middle',
+                floating: true,
                 y: 0
             },
             plotOptions: {

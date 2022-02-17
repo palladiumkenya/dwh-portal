@@ -24,7 +24,7 @@ const COVIDAdultPLHIVVaccinatedByCounty = () => {
                             }
                             return '0%';
                         },
-                        enabled: true
+                        enabled: false
                     } } },
             xAxis: [{ categories: countiesVaccinated.counties, crosshair: true }],
             yAxis: [{ title: { text: 'Percentage of Patients' }}],
