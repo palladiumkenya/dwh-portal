@@ -1,40 +1,39 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import DataCard from '../../Shared/DataCard';
 import { formatNumber, roundNumber } from '../../../utils/utils';
 
-import * as covidAdultPLHIVFullyVaccinatedSelectors from '../../../selectors/CT/Covid/covidAdultPLHIVFullyVaccinated';
+import * as covidNumberScreenedSelectors from '../../../selectors/CT/Covid/covidNumberScreened';
 import * as covidAdultPLHIVCurrentOnTreatmentSelectors
     from '../../../selectors/CT/Covid/covidAdultPLHIVCurrentOnTreatment';
-import DataCard from '../../Shared/DataCard';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 
-const COVIDFullyVaccinated = () => {
-    const [covidFullyVaccinated, setCovidFullyVaccinated] = useState({});
+const COVIDNumberScreened = () => {
+    const [covidNumberScreened, setCovidNumberScreened] = useState({});
     const currentOnArtAdults = useSelector(covidAdultPLHIVCurrentOnTreatmentSelectors.getAdultPLHIVCurrentOnTreatment).covidAdultsPLHIVCurrentOnTreatment;
-    const fullyVaccinated = useSelector(covidAdultPLHIVFullyVaccinatedSelectors.getAdultPLHIVFullyVaccinated).fullyVaccinated;
+    const screened = useSelector(covidNumberScreenedSelectors.getCovidNumberScreened).Screened || 0;
+    let percentScreened = screened && Number(screened) > 0 ? ((Number(screened) / Number(currentOnArtAdults)) * 100) : 0;
+    percentScreened = Math.round((percentScreened + Number.EPSILON) * 100) / 100;
 
-    let percentFullyVaccinated = fullyVaccinated && Number(fullyVaccinated) > 0 ? ((Number(fullyVaccinated) / Number(currentOnArtAdults)) * 100) : 0;
-    percentFullyVaccinated = Math.round((percentFullyVaccinated + Number.EPSILON) * 100) / 100;
-
-    let label = `FULLY VACCINATED PLHIV`
     const data = [{
-        y: percentFullyVaccinated,
-        color: '#1c943e'
+        y: percentScreened,
+        color: '#e88134'
     }, {
-        y: 100 - percentFullyVaccinated,
+        y: 100 - percentScreened,
         color: 'rgba(0,0,0,0)'
     }];
 
-    // let title = `<p style="font-size: 15px">${percentFullyVaccinated} %</p><br><p style="font-size: 35px;font-weight: bold">${fullyVaccinated.toLocaleString()}</p><br><p>AS AT ${moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</p>`;
+    let label = 'SCREENED FOR VACCINATION'
+
     let title = `<div class="row" style="">
-        <div class="col-12" style="font-size:15px; text-align:center;">${roundNumber(percentFullyVaccinated)}%</div>
-        <div class="col-12" style="font-size:40px; font-weight: bold; text-align:center;">${formatNumber(fullyVaccinated)}</div>
+        <div class="col-12" style="font-size:15px; text-align:center;">${roundNumber(percentScreened)}%</div>
+        <div class="col-12" style="font-size:40px; font-weight: bold; text-align:center;">${formatNumber(screened)}</div>
         <div class="col-12" style="font-size:18px; text-align:center;">AS AT ${moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</div>
     </div>`;
-    const loadCovidFullyVaccinated = useCallback(async () => {
-        setCovidFullyVaccinated({
+    const loadCovidNumberScreened = useCallback(async () => {
+        setCovidNumberScreened({
             chart: {
                 renderTo: 'container',
                 type: 'pie'
@@ -64,18 +63,17 @@ const COVIDFullyVaccinated = () => {
                 enabled: false
             }
         });
-    }, [fullyVaccinated]);
+    }, [screened]);
 
     useEffect(() => {
-        loadCovidFullyVaccinated();
-    }, [loadCovidFullyVaccinated]);
-
+        loadCovidNumberScreened();
+    }, [loadCovidNumberScreened]);
     return (
         <div>
-            <HighchartsReact highcharts={Highcharts} options={covidFullyVaccinated}/>
+            <HighchartsReact highcharts={Highcharts} options={covidNumberScreened}/>
             <p style={{fontWeight: 'bold', textAlign: 'center', fontSize: '20px' }}>{label}</p>
         </div>
     );
 };
+export default COVIDNumberScreened;
 
-export default COVIDFullyVaccinated;
