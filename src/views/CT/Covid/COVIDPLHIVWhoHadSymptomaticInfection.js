@@ -4,157 +4,98 @@ import { useSelector } from 'react-redux';
 import * as covidSymptomaticInfectionsSelectors from '../../../selectors/CT/Covid/covidSymptomaticInfections';
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import * as covidEverHadInfectionSelectors from '../../../selectors/CT/Covid/covidEverHadInfection';
-import DataCard from '../../Shared/DataCard';
 import moment from 'moment';
 import HighchartsReact from 'highcharts-react-official';
-import Highcharts from 'highcharts';
+import { Chart } from 'react-chartjs-2';
+import { Doughnut as Donut } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement } from 'chart.js';
+
+ChartJS.register(ArcElement);
 
 const COVIDPLHIVWhoHadSymptomaticInfection = () => {
     const [covidPlhivWhoHadSymptomaticInfection, setCovidPlhivWhoHadSymptomaticInfection] = useState({});
 
     const symptomaticInfections = useSelector(covidSymptomaticInfectionsSelectors.getSymptomaticInfections).symptomaticInfections;
     const everHadInfection = useSelector(covidEverHadInfectionSelectors.getEverHadInfection).everHadInfection;
-    let percent = Number(symptomaticInfections) > 0 ? ((Number(symptomaticInfections)/Number(everHadInfection))*100) : 0;
+    let percent = Number(symptomaticInfections) > 0 ? ((Number(symptomaticInfections) / Number(everHadInfection)) * 100) : 0;
     percent = Math.round((percent + Number.EPSILON) * 100) / 100;
 
     const label = 'PLHIV WHO HAVE HAD SYMPTOMATIC COVID-19 INFECTION';
 
-    const data = [{
-        y: percent,
-        color: 'red'
-    }, {
-        y: 100 - percent,
-        color: 'rgba(0,0,0,0)'
-    }];
 
-    let title = `<div class="row" style="">
-        <div class="col-12" style="font-size:15px; text-align:center;">${roundNumber(percent)}%</div>
+    let title = `<div class="row" style="position: absolute;top: 0px; left: 0px;width: 100%;height: 100%;z-index: 5;display: flex;justify-content: center;align-items: center;pointer-events: none;font-size: 1.5rem;padding-top: 1.5rem;">
         <div class="col-12" style="font-size:40px; font-weight: bold; text-align:center;">${formatNumber(symptomaticInfections)}</div>
         <div class="col-12" style="font-size:18px; text-align:center;">AS AT ${moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</div>
     </div>`;
-    const loadCovidPlhivWhoHadSymptomaticInfection = useCallback(async () => {
-        setCovidPlhivWhoHadSymptomaticInfection({
-            chart: {
-                renderTo: 'container',
-                type: 'pie'
-            },
-            title: {
-                text: title,
-                useHTML: true,
-                align: 'center',
-                verticalAlign: 'middle',
-                y: 0
-            },
-            plotOptions: {
-                pie: {
-                    innerSize: 300,
-                    dataLabels: false
-                }
-            },
-            series: [{
-                data: data
-            }],
-            credits: {
-                enabled: false
-            },
-            tooltip: { enabled: false },
-            exporting: {
-                enabled: false
-            }
-        });
-    }, [symptomaticInfections]);
 
-    useEffect(() => {
-        loadCovidPlhivWhoHadSymptomaticInfection();
-    }, [loadCovidPlhivWhoHadSymptomaticInfection]);
+    var data = {
+        labels: [],
+        datasets: [{
+            label: '',
+            data: [20, 100 - percent],
+            backgroundColor: [
+                'green',
+                'rgba(255, 99, 132, 0)'
+            ],
+            hoverOffset: 0
+        }]
+    };
 
-
-    /*const options = {
-        chart: {
-            type: "solidgauge",
-            height: "70%"
-        },
+    let options = {
+        aspectRatio: 1,
+        maintainAspectRatio: false,
         legend: {
-            enabled: true
+            display: false
         },
+        responsive: false,
         title: {
-            useHTML: true,
-            text: `
-          <div class="primary-card-body-subtitle-red">
-                ${percent ? percent : 0}%
-          </div>
-        `,
-            align: 'center',
-            verticalAlign: 'middle',
-            y: -40,
-            x: 0,
+            display: false
         },
-        tooltip: {
-            enabled: false,
-        },
-        pane: {
-            startAngle: 0,
-            endAngle: 360,
-            background: [
-                {
-                    outerRadius: "100%",
-                    innerRadius: "88%",
-                    backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0])
-                        .setOpacity(0.3)
-                        .get(),
-                    borderWidth: 0
-                }
-            ]
-        },
-        yAxis: {
-            min: 0,
-            max: 100,
-            lineWidth: 0,
-            tickPositions: []
-        },
-        plotOptions: {
-            solidgauge: {
-                dataLabels: {
-                    enabled: true,
-                    borderColor: '#ffffff',
-                    style: {
-                        fontSize: '40px'
-                    },
-                    x: 0,
-                    y: -35
-                },
-                linecap: "round",
-                stickyTracking: false,
-                rounded: false,
-                showInLegend: true
-            }
-        },
-        series: [
-            {
-                name: "PLHIV WHO HAVE HAD SYMPTOMATIC COVID-19 INFECTION",
-                type: "solidgauge",
-                data: [
-                    {
-                        color: "#69B34C",
-                        radius: "100%",
-                        innerRadius: "88%",
-                        y: percent ? percent : 0
-                    }
-                ],
-                dataLabels: {
-                    useHTML: true,
-                    format: '<div class="row">' +
-                        '<div class="col-12" style="text-align:center;font-size:40px; font-weight: bold;">'+ formatNumber(symptomaticInfections.symptomaticInfections) +'</div>' +
-                        '<div class="col-12" style="font-size:18px;">AS AT '+ moment().startOf('month').subtract(1, 'month').format('MMM YYYY').toUpperCase() +'</div></div>'
-                },
-            }
-        ]
-    };*/
-
+        cutout: '93%'
+    };
 
     return (
         <div>
-            <HighchartsReact highcharts={Highcharts} options={covidPlhivWhoHadSymptomaticInfection}/>
+            <div className={'row'} style={{
+                zIndex: '100',
+                position: 'absolute',
+                verticalAlign: 'middle',
+                top: '90px',
+                whiteSpace: 'normal',
+                textAlign: 'center',
+                display: 'flex',
+                justifyContent: 'center',
+                margin: 'auto'
+            }}>
+                <div className={'col-1'}/>
+                <div className={"col-11"} style={{fontSize:'15px', textAlign:'center'}}>{roundNumber(percent)}%
+                </div>
+                <div className={'col-1'}/>
+                <div className={'col-11'} style={{
+                    fontSize: '40px',
+                    textAlign: 'center',
+                    fontWeight: 'bold'
+                }}>{formatNumber(symptomaticInfections)}</div>
+                <div className={'col-1'}/>
+                <div className={'col-11'} style={{ fontSize: '18px', textAlign: 'center' }}>AS
+                    AT {moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</div>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <Donut style={{ alignSelf: 'center' }}
+                       options={options}
+                       data={{
+                           datasets: [
+                               {
+                                   'backgroundColor': ['green', 'rgba(0,0,0,0)'],
+                                   'borderWidth': 0,
+                                   'data': [percent, 100-percent]
+                               }
+                           ]
+                       }}
+                       height={270}
+                       width={270}
+                />
+            </div>
             <p style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '20px' }}>{label}</p>
         </div>
     );

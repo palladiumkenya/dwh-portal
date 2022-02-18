@@ -48,9 +48,9 @@ const COVIDFullyVaccinated = () => {
             },
             plotOptions: {
                 pie: {
-                    innerSize: 270,
                     dataLabels: false,
-                    size: 290
+                    innerSize: 251,
+                    size: 270
                 }
             },
             series: [{
