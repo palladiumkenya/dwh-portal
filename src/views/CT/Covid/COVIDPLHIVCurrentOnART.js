@@ -71,8 +71,8 @@ const COVIDPLHIVCurrentOnART = () => {
                             }
                         ]
                     }}
-                    height={300}
-                    width={300}
+                    height={270}
+                    width={270}
                 />
             </div>
             <p style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '20px' }}>{label}</p>

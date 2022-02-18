@@ -67,16 +67,16 @@ const COVIDPLHIVWhoHadSymptomaticInfection = () => {
                 justifyContent: 'center',
                 margin: 'auto'
             }}>
-                <div className={'col-1'}></div>
+                <div className={'col-1'}/>
                 <div className={"col-11"} style={{fontSize:'15px', textAlign:'center'}}>{roundNumber(percent)}%
                 </div>
-                <div className={'col-1'}></div>
+                <div className={'col-1'}/>
                 <div className={'col-11'} style={{
                     fontSize: '40px',
                     textAlign: 'center',
                     fontWeight: 'bold'
                 }}>{formatNumber(symptomaticInfections)}</div>
-                <div className={'col-1'}></div>
+                <div className={'col-1'}/>
                 <div className={'col-11'} style={{ fontSize: '18px', textAlign: 'center' }}>AS
                     AT {moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</div>
             </div>
@@ -88,14 +88,12 @@ const COVIDPLHIVWhoHadSymptomaticInfection = () => {
                                {
                                    'backgroundColor': ['green', 'rgba(0,0,0,0)'],
                                    'borderWidth': 0,
-                                   'data': [
-                                       percent, 100-percent
-                                   ]
+                                   'data': [percent, 100-percent]
                                }
                            ]
                        }}
-                       height={300}
-                       width={300}
+                       height={270}
+                       width={270}
                 />
             </div>
             <p style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '20px' }}>{label}</p>
