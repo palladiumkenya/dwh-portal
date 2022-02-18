@@ -26,7 +26,7 @@ const COVIDAdultPLHIVVaccinatedByPartner = () => {
                             }
                             return '0%';
                         },
-                        enabled: true
+                        enabled: false
                     }
                 }
             },

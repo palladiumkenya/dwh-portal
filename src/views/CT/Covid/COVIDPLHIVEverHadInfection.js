@@ -25,14 +25,6 @@ const COVIDPLHIVEverHadInfection = () => {
 
     const label = 'PLHIV EVER HAD COVID-19 INFECTION';
 
-    const data = [{
-        y: percent,
-        color: 'red'
-    }, {
-        y: 100 - percent,
-        color: 'rgba(0,0,0,0)'
-    }];
-    console.log(percent, everHadInfection);
 
     let title = `<div class="row" style="">
         <div class="col-12" style="font-size:40px; font-weight: bold; text-align:center;">${formatNumber(everHadInfection)}</div>
@@ -65,16 +57,15 @@ const COVIDPLHIVEverHadInfection = () => {
                 justifyContent: 'center',
                 margin: 'auto'
             }}>
-                <div className={'col-1'}></div>
-                <div className={"col-11"} style={{fontSize:'15px', textAlign:'center'}}>{roundNumber(percent)}%
+                <div className={"col-12"} style={{fontSize:'15px', textAlign:'center'}}>{roundNumber(percent)}%
                 </div>
-                <div className={'col-1'}></div>
+                <div className={'col-1'}/>
                 <div className={'col-11'}> <p  style={{
                     fontSize: '40px',
                     textAlign: 'center',
                     fontWeight: 'bold'
                 }}>{formatNumber(everHadInfection)}</p></div>
-                <div className={'col-1'} ></div>
+                <div className={'col-1'} />
                 <div className={'col-11'} ><p style={{ fontSize: '18px', textAlign: 'center' }}>AS
                     AT {moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</p></div>
             </div>
@@ -86,14 +77,12 @@ const COVIDPLHIVEverHadInfection = () => {
                                {
                                    'backgroundColor': ['red', 'rgba(0,0,0,0)'],
                                    'borderWidth': 0,
-                                   'data': [
-                                       percent, 100-percent
-                                   ]
+                                   'data': [percent, 100-percent]
                                }
                            ]
                        }}
-                       height={300}
-                       width={300}
+                       height={270}
+                       width={270}
                 />
             </div>
             <p style={{ fontWeight: 'bold', textAlign: 'center', fontSize: '20px' }}>{label}</p>
