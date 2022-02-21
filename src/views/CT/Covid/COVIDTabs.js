@@ -40,7 +40,7 @@ const COVIDTabs = () => {
             <TabContent activeTab={activeTab}>
                 <TabPane tabId="vaccination">
                     <Row>
-                        <Col className={"col-12"}>
+                        <Col className={"col-12 pt-5 pb-5"}>
                             <COVIDOverview />
                         </Col>
                     </Row>
