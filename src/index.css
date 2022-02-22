@@ -25,3 +25,6 @@ span.smallfont {
 .app-header .nav-item .nav-link {
     color: black!important;
 }
+* {
+    font-family: 'Nunito', sans-serif;
+}
