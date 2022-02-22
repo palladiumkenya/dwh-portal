@@ -27,16 +27,16 @@ const COVIDNumberScreened = () => {
 
     let label = 'SCREENED FOR VACCINATION'
 
-    let title = `<div class="row" style="font-family: 'Nunito', sans-serif;">
+    let title = `<div class="row" style="">
         <div class="col-12" style="font-size:15px; text-align:center;">${roundNumber(percentScreened)}%</div>
         <div class="col-12" style="font-size:40px; font-weight: bold; text-align:center;">${formatNumber(screened)}</div>
-        </div>`;
+        <div class="col-12" style="font-size:18px; text-align:center;">AS AT ${moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}</div>
+    </div>`;
     const loadCovidNumberScreened = useCallback(async () => {
         setCovidNumberScreened({
             chart: {
                 renderTo: 'container',
-                type: 'pie',
-                height: 280,
+                type: 'pie'
             },
             title: {
                 text: title,
@@ -48,20 +48,8 @@ const COVIDNumberScreened = () => {
             plotOptions: {
                 pie: {
                     dataLabels: false,
-                    innerSize: 210,
-                    size: 250,
-                    point: {
-                        events: {
-                            mouseOver() {
-                                this.originalColor = this.color;
-                                let colors = ["#f88149", "#bbbbbb"];
-                                this.update({ color: colors[this.index] });
-                            },
-                            mouseOut(){
-                                this.update({ color: this.originalColor });
-                            }
-                        }
-                    }
+                    innerSize: 251,
+                    size: 270
                 }
             },
             series: [{
@@ -83,7 +71,7 @@ const COVIDNumberScreened = () => {
     return (
         <div>
             <HighchartsReact highcharts={Highcharts} options={covidNumberScreened}/>
-            <p style={{fontFamily: 'Nunito, sans-serif', textAlign: 'center', fontSize: '15px' }}>{label}</p>
+            <p style={{fontWeight: 'bold', textAlign: 'center', fontSize: '20px' }}>{label}</p>
         </div>
     );
 };
