@@ -22,7 +22,7 @@ export const getAdultPLHIVVaccinatedByPartner = createSelector(
         let notVaccinated = [];
 
         for (let j = 0; j < partners.length; j++) {
-            const filteredPartners = list.filter(obj => obj.CTPartner ? obj.CTPartner.toUpperCase().toString() === partners[j].toUpperCase().toString() : []);
+            const filteredPartners = list.filter(obj => obj.CTPartner ? obj.CTPartner.toUpperCase().toString() === partners[j].toUpperCase().toString() : [] && obj.CTPartner !== null);
             const partnerAdults = listPartner.filter(obj => obj.CTPartner ? obj.CTPartner.toUpperCase().toString() === partners[j].toUpperCase().toString() : []);
             let totalPartnerAdults = 0;
             if (partnerAdults.length > 0) {

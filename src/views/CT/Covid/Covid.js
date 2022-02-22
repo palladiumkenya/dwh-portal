@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SectionHeader from '../../Shared/SectionHeader';
-import UniversalFilter from '../../Shared/UniversalFilter';
+import CovidFilter from '../../Shared/CovidFilter';
 import VisibilitySensor from 'react-visibility-sensor';
 import { useDispatch, useSelector } from 'react-redux';
 import { disableStickyFilter, enableStickyFilter } from '../../../actions/Shared/uiActions';
@@ -29,7 +29,7 @@ const Covid = () => {
         <div className="animated fadeIn">
             <SectionHeader title={branding.title}/>
             <VisibilitySensor onChange={onVisibilityChange}>
-                <UniversalFilter/>
+                <CovidFilter/>
             </VisibilitySensor>
             <COVIDTabs />
         </div>
