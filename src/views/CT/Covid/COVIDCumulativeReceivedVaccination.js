@@ -18,7 +18,7 @@ const COVIDCumulativeReceivedVaccination = () => {
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             tooltip: {
                 formatter: function () {
-                    return 'Series: CUMULATIVE NUMBER OF ADULT PLHIV WHO RECIEVED AT LEAST ONE DOSE OF COVID - 19 VACCINE <br><b>' + this.x +': </b>' + this.y + '</b>';
+                    return 'Series: CUMULATIVE NUMBER OF PLHIV WHO RECIEVED AT LEAST ONE DOSE OF COVID - 19 VACCINE <br><b>' + this.x +': </b>' + this.y + '</b>';
                 }
             },
             series: [
@@ -34,7 +34,7 @@ const COVIDCumulativeReceivedVaccination = () => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                CUMULATIVE NUMBER OF ADULT PLHIV WHO RECEIVED AT LEAST ONE DOSE OF COVID - 19 VACCINE
+                CUMULATIVE NUMBER OF PLHIV WHO RECEIVED AT LEAST ONE DOSE OF COVID - 19 VACCINE
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">

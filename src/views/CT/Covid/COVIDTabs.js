@@ -33,9 +33,9 @@ const COVIDTabs = () => {
                     <NavLink className={classnames({ active: activeTab === 'vaccination' })} onClick={() => { setActiveTab('vaccination') }}>VACCINATION</NavLink>
                 </NavItem>
 
-                <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'infection&Outcomes' })} onClick={() => { setActiveTab('infection&Outcomes') }}>INFECTIONS & MANAGEMENT</NavLink>
-                </NavItem>
+                {/*<NavItem>*/}
+                {/*    <NavLink className={classnames({ active: activeTab === 'infection&Outcomes' })} onClick={() => { setActiveTab('infection&Outcomes') }}>INFECTIONS & OUTCOMES</NavLink>*/}
+                {/*</NavItem>*/}
             </Nav>
             <TabContent activeTab={activeTab}>
                 <TabPane tabId="vaccination">

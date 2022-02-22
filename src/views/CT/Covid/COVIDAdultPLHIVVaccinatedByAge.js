@@ -65,7 +65,7 @@ const COVIDAdultPLHIVVaccinatedByAge = () => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{ textTransform: 'none' }}>
-                ADULT PLHIV VACCINATED AGAINST COVID-19 BY AGE
+                PLHIV VACCINATED AGAINST COVID-19 BY AGE
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
