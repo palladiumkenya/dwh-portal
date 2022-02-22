@@ -28,7 +28,7 @@ const COVIDPartiallyVaccinated = () => {
         color: 'rgba(0,0,0,0)'
     }];
 
-    let title = `<div class="row" style="font-family: 'Nunito',serif;">
+    let title = `<div class="row">
         <div class="col-12" style="font-size:15px; text-align:center;">${roundNumber(percentPartially)}%</div>
         <div class="col-12" style="font-size:40px; font-weight: bold; text-align:center;">${formatNumber(partiallyVaccinated)}</div></div>`;
     const loadCovidPartiallyVaccinated = useCallback(async () => {
@@ -84,7 +84,7 @@ const COVIDPartiallyVaccinated = () => {
     return (
         <div>
             <HighchartsReact highcharts={Highcharts} options={covidPartiallyVaccinated}/>
-            <p style={{fontFamily: 'Nunito', textAlign: 'center', fontSize: '15px' }}>{label}</p>
+            <p style={{textAlign: 'center', fontSize: '15px' }}>{label}</p>
         </div>
     );
 };

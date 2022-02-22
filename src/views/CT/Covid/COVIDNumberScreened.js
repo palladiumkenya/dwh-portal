@@ -27,7 +27,7 @@ const COVIDNumberScreened = () => {
 
     let label = 'SCREENED FOR VACCINATION'
 
-    let title = `<div class="row" style="font-family: 'Nunito', sans-serif;">
+    let title = `<div class="row">
         <div class="col-12" style="font-size:15px; text-align:center;">${roundNumber(percentScreened)}%</div>
         <div class="col-12" style="font-size:40px; font-weight: bold; text-align:center;">${formatNumber(screened)}</div>
         </div>`;
@@ -83,7 +83,7 @@ const COVIDNumberScreened = () => {
     return (
         <div>
             <HighchartsReact highcharts={Highcharts} options={covidNumberScreened}/>
-            <p style={{fontFamily: 'Nunito, sans-serif', textAlign: 'center', fontSize: '15px' }}>{label}</p>
+            <p style={{textAlign: 'center', fontSize: '15px' }}>{label}</p>
         </div>
     );
 };

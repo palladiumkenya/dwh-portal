@@ -84,7 +84,7 @@ const COVIDFullyVaccinated = () => {
     return (
         <div>
             <HighchartsReact highcharts={Highcharts} options={covidFullyVaccinated}/>
-            <p style={{fontFamily: 'Nunito, sans-serif', textAlign: 'center', fontSize: '15px' }}>{label}</p>
+            <p style={{textAlign: 'center', fontSize: '15px' }}>{label}</p>
         </div>
     );
 };

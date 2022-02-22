@@ -25,7 +25,7 @@ const COVIDAdultPlhivCurrentOnTreatment = () => {
         color: 'rgba(0,0,0,0)'
     }];
 
-    let title = `<div class="row" style="font-family: 'Nunito', sans-serif;"><div class="col-12" style="font-size:40px; font-weight: bold;">${formatNumber(currentOnArtAdults)}</div></div>`;
+    let title = `<div class="row" ><div class="col-12" style="font-size:40px; font-weight: bold;">${formatNumber(currentOnArtAdults)}</div></div>`;
     const loadCovidAdultPlhivCurrentOnTreatment = useCallback(async () => {
         setCovidAdultPlhivCurrentOnTreatment({
             chart: {
@@ -69,7 +69,7 @@ const COVIDAdultPlhivCurrentOnTreatment = () => {
     return (
         <div>
             <HighchartsReact highcharts={Highcharts} options={covidAdultPlhivCurrentOnTreatment}/>
-            <p style={{ fontFamily: 'Nunito, sans-serif', textAlign: 'center', fontSize: '15px' }}>{label}</p>
+            <p style={{ textAlign: 'center', fontSize: '15px' }}>{label}</p>
         </div>
     );
 };
