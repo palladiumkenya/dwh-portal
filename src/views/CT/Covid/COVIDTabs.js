@@ -71,11 +71,11 @@ const COVIDTabs = () => {
                         </Col>
                     </Row>
 
-                    <Row>
-                        <Col className={"col-12"}>
-                            <COVIDTrendsOfAdultPLHIVVaccinationInTheLast12Months />
-                        </Col>
-                    </Row>
+                    {/*<Row>*/}
+                    {/*    <Col className={"col-12"}>*/}
+                    {/*        <COVIDTrendsOfAdultPLHIVVaccinationInTheLast12Months />*/}
+                    {/*    </Col>*/}
+                    {/*</Row>*/}
                 </TabPane>
 
                 <TabPane tabId="infection&Outcomes">
