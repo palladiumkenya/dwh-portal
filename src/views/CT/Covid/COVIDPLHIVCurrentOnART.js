@@ -46,7 +46,7 @@ const COVIDPLHIVCurrentOnART = () => {
                 height: 280,
             },
             title: {
-                text: title,
+                text: `<div class="row" style="text-align:center;"><div class="col-12" style="font-size:40px; font-weight: bold;">${formatNumber(currentOnArtAdults)}</div></div>`,
                 useHTML: true,
                 align: 'center',
                 verticalAlign: 'middle',
