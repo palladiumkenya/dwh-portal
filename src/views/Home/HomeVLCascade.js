@@ -8,7 +8,8 @@ import moment from 'moment';
 
 const HomeVLCascade = () => {
     const currentOnArt = useSelector(currentOnArtOverviewSelectors.getCurrentOnArt);
-    const currentOnArtText = "CURRENT ON ART as at " + moment().startOf('month').subtract(1, 'month').format('MMM YYYY');
+    const currentOnArtText = "CURRENT ON ART " ;
+    const currentOnArtTextBottom = "CURRENT ON ART AS AT " + moment().startOf('month').subtract(1, 'month').format('MMM YYYY');
     const eligibleForVl = useSelector(currentOnArtOverviewSelectors.getEligibleForVl);
     const eligibleForVlPercent = currentOnArt ? ((eligibleForVl/currentOnArt)*100) : 0;
     const hasCurrentVl = useSelector(currentOnArtOverviewSelectors.getHasCurrentVl);
@@ -21,7 +22,7 @@ const HomeVLCascade = () => {
     return (
         <Row>
             <Col>
-                <DataCard
+                <DataCard bottomSubTitle={currentOnArtTextBottom}
                     title={currentOnArtText}
                     subtitle={null}
                     data={formatNumber(currentOnArt)}

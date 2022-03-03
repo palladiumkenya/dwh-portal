@@ -18,7 +18,7 @@ const DataCard = ({ title, subtitle, data, bottomSubTitle }) => {
                 <CardText className="primary-card-body-text text-center">{data}</CardText>
                 <Row>
                     <Col className={"col-12"}>
-                        <CardText tag="h5" className="text-center card-bottom-sub-title">
+                        <CardText  className="text-center card-bottom-sub-title">
                             {bottomSubTitle}
                         </CardText>
                     </Col>

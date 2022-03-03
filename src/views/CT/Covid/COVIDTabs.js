@@ -22,6 +22,7 @@ const COVIDPercentageWhoMissedAppointment = Loadable({ loader: () => import('./C
 const COVIDPercentageWhoMissedAppointmentByAge = Loadable({ loader: () => import('./COVIDPercentageWhoMissedAppointmentByAge'), loading: Loading, delay: LOADING_DELAY });
 const COVIDPercentageWhoMissedAppointmentByCounty = Loadable( { loader: () => import('./COVIDPercentageWhoMissedAppointmentByCounty'), loading: Loading, delay: LOADING_DELAY });
 const COVIDPercentageWhoMissedAppointmentByPartner = Loadable( { loader: () => import('./COVIDPercentageWhoMissedAppointmentByPartner'), loading: Loading, delay: LOADING_DELAY });
+const COVIDCumulativeNumberAdultPLHIVWithMissingDateGivenFirstDose = Loadable({loader: () => import('./CovidCumulativeNumberAdultPlhivWithMissingDateGivenFirstDose'), loading: Loading, delay: LOADING_DELAY })
 
 const COVIDTabs = () => {
     const [activeTab, setActiveTab] = useState('vaccination');
@@ -56,6 +57,12 @@ const COVIDTabs = () => {
                     <Row>
                         <Col className={"col-12"}>
                             <COVIDCumulativeReceivedVaccination />
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col className={"col-12"}>
+                            <COVIDCumulativeNumberAdultPLHIVWithMissingDateGivenFirstDose />
                         </Col>
                     </Row>
 
