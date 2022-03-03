@@ -47,7 +47,6 @@ const HomeEmrSitesMap = () => {
             });
         }
         setHomeEmrSitesMap({
-            mapNavigation: { enabled: true, enableButtons: true, enableDoubleClickZoom: true, buttons: {zoomIn:{align : 'right' }}},
             title: { text: '' },
             plotOptions: { series: { turboThreshold: 5000 } },
             tooltip: { pointFormat: '<b>{point.name}</b>' },

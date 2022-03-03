@@ -86,7 +86,7 @@ const Home = () => {
                 <Col xl={3} lg={3} md={12} sm={12} xs={12}>
                     <HomeAgeDistribution/>
                 </Col>
-                <Col className={{height: '100%'}} xl={6} lg={6} md={12} sm={12} xs={12}>
+                <Col xl={6} lg={6} md={12} sm={12} xs={12}>
                     <HomeMaps/>
                 </Col>
                 <Col xl={3} lg={3} md={12} sm={12} xs={12}>

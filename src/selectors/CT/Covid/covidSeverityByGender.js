@@ -27,8 +27,8 @@ export const getCovidSeverityByGender = createSelector(
             }
 
             if (filteredGenders.length > 0) {
-                const filterSymptomatic = filteredGenders.filter(obj => obj.PatientStatus === 'Yes');
-                const filterAsymptomatic = filteredGenders.filter(obj => obj.PatientStatus === 'No');
+                const filterSymptomatic = filteredGenders.filter(obj => obj.PatientStatus === 'Symptomatic');
+                const filterAsymptomatic = filteredGenders.filter(obj => obj.PatientStatus === 'Asymptomatic');
 
                 if (filterSymptomatic.length > 0) {
                     let percent = Number(filterSymptomatic[0].Num) > 0 ? ((Number(filterSymptomatic[0].Num)/Number(totalGender))*100) : 0;
