@@ -17,7 +17,7 @@ const NewOnArtHtsPositive = () => {
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Total New on Treatment', type: 'column', data: newOnArtHtsPositiveData.txNew, yAxis: 0, color: "#485969",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
+                { name: 'Total New on Treatment', type: 'column', data: newOnArtHtsPositiveData.txNew, yAxis: 0, color: "#142459",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
                 { name: 'Total HTS Positives ', type: 'column', data: newOnArtHtsPositiveData.positives, yAxis: 0, color: "#1AB394",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
             ],
         });

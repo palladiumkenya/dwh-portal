@@ -17,7 +17,7 @@ const TwelveMonthRetention = () => {
             plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none', format: '{y} %' } } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Percentage of Patients', data: twelveMonthRetentionData.data, type: 'column', color: "#485969", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
+                { name: 'Percentage of Patients', data: twelveMonthRetentionData.data, type: 'column', color: "#142459", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
             ]
         });
     }, [twelveMonthRetentionData]);

@@ -89,7 +89,7 @@ const DistributionUnstable = () => {
                             y: data[5].y,
                             text: ' (' + formatNumber(pregnantAndBreastFeeding) + ')'
                         }
-                    ], type: 'column', color: "#485969" },
+                    ], type: 'column', color: "#142459" },
             ]
         });
     }, [highVl, onArtLessThan12Months, ageLessThan20Years, poorAdherence, bmiLessThan18, pregnantAndBreastFeeding]);
