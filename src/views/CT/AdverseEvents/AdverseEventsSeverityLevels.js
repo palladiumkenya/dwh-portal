@@ -26,10 +26,10 @@ const AdverseEventsSeverityLevels = ({ tab }) => {
             tooltip: { shared: true, headerFormat: '<b>{point.x}</b><br/>', pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}' },
             plotOptions: { column: { stacking: 'normal'}},
             series: [
-                { data: adverseEventsReportedWithSeverityLevels.data[3], name: 'UNDOCUMENTED', type: 'column', color: "#2F4050" },
-                { data: adverseEventsReportedWithSeverityLevels.data[2], name: 'SEVERE', type: 'column', color: "#E15759" },
-                { data: adverseEventsReportedWithSeverityLevels.data[1], name: 'MODERATE', type: 'column', color: "#F7ED00" },
-                { data: adverseEventsReportedWithSeverityLevels.data[0], name: 'MILD', type: 'column', color: "#1AB394" },
+                { data: adverseEventsReportedWithSeverityLevels.data[3], name: 'UNDOCUMENTED', type: 'column', color: "#5d6180" },
+                { data: adverseEventsReportedWithSeverityLevels.data[2], name: 'SEVERE', type: 'column', color: "#ff0d0d" },
+                { data: adverseEventsReportedWithSeverityLevels.data[1], name: 'MODERATE', type: 'column', color: "#fdc538" },
+                { data: adverseEventsReportedWithSeverityLevels.data[0], name: 'MILD', type: 'column', color: "#16c21d" },
             ]
         });
     }, [adverseEventsReportedWithSeverityLevels]);

@@ -50,16 +50,16 @@ const RRCounty = () => {
             if (r <= 50) {
                 return {
                     y: r,
-                    color: 'red'
+                    color: '#ff0d0d'
                 }
             } else if (r >= 51 && r <= 89) {
-                return { y: r, color: '#E06F07' }
+                return { y: r, color: '#f7941d' }
             } else if (r >= 90) {
                 return { y: r, color: '#59A14F' }
             } else {
                 return {
                     y: r,
-                    color: 'red'
+                    color: '#ff0d0d'
                 }
             }
         });
@@ -78,17 +78,17 @@ const RRCounty = () => {
                 consistency_values.push({
                     county: key,
                     y: cos,
-                    color: 'red'
+                    color: '#ff0d0d'
                 });
             } else if (cos >= 51 && cos <= 89) {
-                consistency_values.push({ county: key, y: cos, color: '#E06F07' });
+                consistency_values.push({ county: key, y: cos, color: '#f7941d' });
             } else if (cos >= 90) {
                 consistency_values.push({ county: key, y: cos > 100 ? 100 : cos, color: '#59A14F' });
             } else {
                 consistency_values.push({
                     county: key,
                     y: cos,
-                    color: 'red'
+                    color: '#ff0d0d'
                 });
             }
         }
@@ -102,9 +102,9 @@ const RRCounty = () => {
 
         setReportingByCounty({
             title: { text: '' },
-            xAxis: [{ categories: counties, title: { text: 'Counties' }, crosshair: true }],
+            xAxis: [{ categories: counties.map(name=> name?name.toUpperCase(): name), title: { text: 'Counties'.toUpperCase() }, crosshair: true }],
             yAxis: [
-                { title: { text: '' } }
+                { title: { text: 'NUMBER OF EMR SITES' } }
             ],
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80, enabled: false },
             tooltip: { shared: true },
@@ -119,8 +119,8 @@ const RRCounty = () => {
             chart: { type: 'bar' },
             title: { text: '' },
             subtitle: { text: '' },
-            xAxis: { categories: overAllReportingCounties, title: { text: null } },
-            yAxis: { min: 0, max: 120, title: { text: 'Percentage (%) of Overall Reporting Rates', align: 'high' }, labels: { overflow: 'justify' } },
+            xAxis: { categories: overAllReportingCounties.map(name=> name?name.toUpperCase(): name), title: { text: null } },
+            yAxis: { min: 0, max: 120, title: { text: 'Percentage (%) of Overall Reporting Rates'.toUpperCase(), align: 'high' }, labels: { overflow: 'justify' } },
             tooltip: { valueSuffix: '' },
             plotOptions: { bar: { dataLabels: { enabled: true, format: '{y} %' } } },
             legend: { enabled: false },
@@ -131,8 +131,8 @@ const RRCounty = () => {
             chart: { type: 'bar' },
             title: { text: '' },
             subtitle: { text: '' },
-            xAxis: { categories: consistency_counties, title: { text: null } },
-            yAxis: { min: 0, max: 120, title: { text: 'Percentage (%) of Consistency of Reporting', align: 'high' }, labels: { overflow: 'justify' } },
+            xAxis: { categories: consistency_counties.map(name=> name?name.toUpperCase(): name), title: { text: null } },
+            yAxis: { min: 0, max: 120, title: { text: 'Percentage (%) of Consistency of Reporting'.toUpperCase(), align: 'high' }, labels: { overflow: 'justify' } },
             tooltip: { valueSuffix: '' },
             plotOptions: { bar: { dataLabels: { enabled: true, format: '{y} %' } } },
             legend: { enabled: false },

@@ -92,7 +92,7 @@ const LinkageNumberPositive = () => {
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'New', type: 'column', data: positive[0], color: "#1AB394" },
-                { name: 'Retest', type: 'column', data: positive[1], color: "#485969" },
+                { name: 'Retest', type: 'column', data: positive[1], color: "#142459" },
                 { name: 'Linkage', type: 'spline', data: linkage, yAxis: 1, color: "#E06F07", dashStyle: 'ShortDot', tooltip: { valueSuffix: '%' } }
             ]
         });

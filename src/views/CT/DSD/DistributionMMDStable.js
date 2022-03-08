@@ -33,7 +33,7 @@ const DistributionMMDStable = () => {
                     name: 'PERCENT OF PATIENTS',
                     data: stableMmdModels.data,
                     type: 'column',
-                    color: "#485969"
+                    color: "#142459"
                 },
             ]
         });

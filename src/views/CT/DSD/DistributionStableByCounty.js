@@ -21,7 +21,7 @@ const DistributionStableByCounty = () => {
                 }
             },
             series: [
-                { data: stabilityStatusByCounty.stability, name: 'Number of Patients', type: 'column', color: "#485969" }
+                { data: stabilityStatusByCounty.stability, name: 'Number of Patients', type: 'column', color: "#142459" }
             ]
         });
     }, [stabilityStatusByCounty]);

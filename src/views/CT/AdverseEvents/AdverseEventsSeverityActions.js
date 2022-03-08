@@ -46,7 +46,7 @@ const AdverseEventsSeverityActions = ({ tab }) => {
                     adverseEventsSeverityActions.moderate_medicineNotChanged_total,
                     adverseEventsSeverityActions.severe_medicineNotChanged_total,
                     adverseEventsSeverityActions.unknown_medicineNotChanged_total
-                ], name: 'Medicine not changed', type: 'column', color: "#485969",
+                ], name: 'Medicine not changed', type: 'column', color: "#142459",
             }, {
                 data: [
                     adverseEventsSeverityActions.mild_doseReduced_total,

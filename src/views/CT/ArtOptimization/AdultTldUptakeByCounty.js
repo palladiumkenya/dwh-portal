@@ -59,7 +59,7 @@ const AdultTldUptakeByCounty = () => {
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             plotOptions: { column: { dataLabels: { enabled: true, formatter: function () { return '' + this.point.text; } } }},
             series: [
-                { name: 'TLD UPTAKE', type: 'column', data: valChartData, color: "#485969", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
+                { name: 'TLD UPTAKE', type: 'column', data: valChartData, color: "#142459", tooltip: { valueSuffix: '% ({point.absoluteY})'} },
             ],
         });
     }, [counties, sexGroups, adultsCurrentByCounty, currentOnArtByCountyData]);

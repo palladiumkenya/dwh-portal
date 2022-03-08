@@ -41,10 +41,10 @@ const AdultDistributionRegimenLinesByGender = () => {
                 name:"ADULT DISTRIBUTION OF REGIMEN LINES",
                 colorByPoint: true,
                 data: [
-                    { name: 'FIRST LINE', y: maleAdultsOnFirstLine ? maleAdultsOnFirstLine: 0, color: "#485969" },
+                    { name: 'FIRST LINE', y: maleAdultsOnFirstLine ? maleAdultsOnFirstLine: 0, color: "#142459" },
                     { name: 'SECOND LINE', y: maleAdultsOnSecondLine ? maleAdultsOnSecondLine: 0, color: "#1AB394" },
                     { name: 'THIRD LINE', y: maleAdultsOnThirdLine ? maleAdultsOnThirdLine: 0, color: "#BBE65F" },
-                    { name: 'UNDOCUMENTED REG LINE', y: maleAdultsOnUndocumentedLine ? maleAdultsOnUndocumentedLine: 0, color: "#60A6E5" },
+                    { name: 'UNDOCUMENTED REG LINE', y: maleAdultsOnUndocumentedLine ? maleAdultsOnUndocumentedLine: 0, color: "#2D73F5" },
                 ]
             }]
         });
@@ -70,10 +70,10 @@ const AdultDistributionRegimenLinesByGender = () => {
                 name:"ADULT DISTRIBUTION OF REGIMEN LINES",
                 colorByPoint: true,
                 data: [
-                    { name: 'FIRST LINE', y: femaleAdultsOnFirstLine ? femaleAdultsOnFirstLine: 0, color: "#485969" },
+                    { name: 'FIRST LINE', y: femaleAdultsOnFirstLine ? femaleAdultsOnFirstLine: 0, color: "#142459" },
                     { name: 'SECOND LINE', y: femaleAdultsOnSecondLine ? femaleAdultsOnSecondLine: 0, color: "#1AB394" },
                     { name: 'THIRD LINE', y: femaleAdultsOnThirdLine ? femaleAdultsOnThirdLine: 0, color: "#BBE65F" },
-                    { name: 'UNDOCUMENTED REG LINE', y: femaleAdultsOnUndocumentedLine ? femaleAdultsOnUndocumentedLine: 0, color: "#60A6E5" },
+                    { name: 'UNDOCUMENTED REG LINE', y: femaleAdultsOnUndocumentedLine ? femaleAdultsOnUndocumentedLine: 0, color: "#2D73F5" },
                 ]
             }]
         });

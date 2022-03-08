@@ -18,7 +18,7 @@ const MedianTimeToArtStartByCounty = () => {
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Time (Days)', data: medianTimeToArtStartByCountyData.times, type: 'column', color: "#485969" },
+                { name: 'Time (Days)', data: medianTimeToArtStartByCountyData.times, type: 'column', color: "#142459" },
             ]
         });
     }, [medianTimeToArtStartByCountyData]);

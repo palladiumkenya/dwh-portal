@@ -18,10 +18,10 @@ const TimeFromDiagnosisToArtStart = () => {
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Same Day', data: timeFromDiagnosisToArtStartData.firstPeriodPercent, type: 'column', color: "#485969", tooltip: { valueSuffix: ' %' } },
-                { name: '1-7 Days', data: timeFromDiagnosisToArtStartData.secondPeriodPercent, type: 'column', color: "#1AB394", tooltip: { valueSuffix: ' %' } },
-                { name: '8-14 Days', data: timeFromDiagnosisToArtStartData.thirdPeriodPercent, type: 'column', color: "#60A6E5", tooltip: { valueSuffix: ' %' } },
-                { name: '> 14 Days', data: timeFromDiagnosisToArtStartData.fourthPeriodPercent, type: 'column', color: "#E15759", tooltip: { valueSuffix: ' %' } },
+                { name: 'Same Day', data: timeFromDiagnosisToArtStartData.firstPeriodPercent, type: 'column', color: "#16c21d", tooltip: { valueSuffix: ' %' } },
+                { name: '1-7 Days', data: timeFromDiagnosisToArtStartData.secondPeriodPercent, type: 'column', color: "#5d6180", tooltip: { valueSuffix: ' %' } },
+                { name: '8-14 Days', data: timeFromDiagnosisToArtStartData.thirdPeriodPercent, type: 'column', color: "#FDc538", tooltip: { valueSuffix: ' %' } },
+                { name: '> 14 Days', data: timeFromDiagnosisToArtStartData.fourthPeriodPercent, type: 'column', color: "#FF0d0d", tooltip: { valueSuffix: ' %' } },
             ]
         });
     }, [timeFromDiagnosisToArtStartData]);
