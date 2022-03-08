@@ -18,7 +18,7 @@ const DistributionDensityHCW = () => {
         tooltip: { shared: true },
         legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80, floating: true, borderWidth: 1 },
         series: [
-            { name: 'No of HCWs', type: 'column', data: healthCareWorkersByCounty.count, color: "#485969" },
+            { name: 'No of HCWs', type: 'column', data: healthCareWorkersByCounty.count, color: "#142459" },
             { name: 'Ratio to 10,000 pop', yAxis: 1, type: 'spline', data: healthCareWorkersByCounty.population, color: "#E06F07" },
         ]
     };

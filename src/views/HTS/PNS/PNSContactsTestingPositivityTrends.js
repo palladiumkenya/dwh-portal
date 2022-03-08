@@ -62,7 +62,7 @@ const PNSContactsTestingPositivityTrends = () => {
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Sexual Contacts Tested', type: 'column', data: tested.slice(-12), yAxis: 0, color: "#485969",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
+                { name: 'Sexual Contacts Tested', type: 'column', data: tested.slice(-12), yAxis: 0, color: "#142459",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
                 { name: 'Sexual Contacts Positive ', type: 'column', data: positive.slice(-12), yAxis: 0, color: "#1AB394",  dataLabels: { enabled: true }, tooltip: { valueSuffix: ' ' } },
                 { name: 'Positivity Percentage', type: 'spline', data: positivity.slice(-12), yAxis: 1, color: "#E06F07", dataLabels: { enabled: true, format: '{y} %' }, tooltip: { valueSuffix: ' %' }, dashStyle: 'ShortDot' }
             ],

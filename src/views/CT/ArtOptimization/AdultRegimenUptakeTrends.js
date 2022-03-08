@@ -45,7 +45,7 @@ const AdultRegimenUptakeTrends = () => {
         }
         setAdultRegimenUptakeTrends({
             title: { text: '' },
-            xAxis: { categories: monthYear, title: { text: 'YEAR' }, crosshair: true },
+            xAxis: { categories: monthYear.map(name=> name? name.toUpperCase(): name), title: { text: 'YEAR' }, crosshair: true },
             yAxis: { title: { text: 'PERCENT OF PATIENTS' }},
             tooltip: { shared: true },
             plotOptions: {

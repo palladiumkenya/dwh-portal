@@ -21,7 +21,7 @@ const DistributionStableByPartner = () => {
             },
             plotOptions: { column: { dataLabels: { enabled: true, format: '{point.y:,.0f}%' } } },
             series: [
-                { data: stabilityStatusByPartner.stability, name: 'PERCENT OF PATIENTS', type: 'column', color: "#485969" }
+                { data: stabilityStatusByPartner.stability, name: 'PERCENT OF PATIENTS', type: 'column', color: "#142459" }
             ]
         });
     }, [stabilityStatusByPartner]);

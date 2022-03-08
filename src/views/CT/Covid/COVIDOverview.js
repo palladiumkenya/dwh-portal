@@ -30,19 +30,19 @@ const COVIDOverview = () => {
 
     return (
         <Row>
-            <Col className={'col-3 col-lg-3 col-md-3 col-sm-12 col-xs-12'}>
+            <Col className={'col-3 col-lg-3 col-md-6 col-sm-12 col-xs-12'}>
                 <COVIDAdultPLHIVCurrentOnTreatment/>
             </Col>
 
-            <Col className={'col-3 col-lg-3 col-md-3 col-sm-12 col-xs-12'}>
+            <Col className={'col-3 col-lg-3 col-md-6 col-sm-12 col-xs-12'}>
                 <COVIDNumberScreened/>
             </Col>
 
-            <Col className={'col-3 col-lg-3 col-md-3 col-sm-12 col-xs-12'}>
+            <Col className={'col-3 col-lg-3 col-md-6 col-sm-12 col-xs-12'}>
                 <COVIDPartiallyVaccinated/>
             </Col>
 
-            <Col className={'col-3 col-lg-3 col-md-3 col-sm-12 col-xs-12'}>
+            <Col className={'col-3 col-lg-3 col-md-6 col-sm-12 col-xs-12'}>
                 <COVIDFullyVaccinated/>
             </Col>
         </Row>

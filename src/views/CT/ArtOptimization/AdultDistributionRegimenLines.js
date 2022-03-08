@@ -33,10 +33,10 @@ const AdultDistributionRegimenLines = () => {
                 name:"ADULT DISTRIBUTION OF REGIMEN LINES",
                 colorByPoint: true,
                 data: [
-                    { name: 'FIRST LINE', y: adultsOnFirstLine ? adultsOnFirstLine: 0, color: "#485969" },
+                    { name: 'FIRST LINE', y: adultsOnFirstLine ? adultsOnFirstLine: 0, color: "#142459" },
                     { name: 'SECOND LINE', y: adultsOnSecondLine ? adultsOnSecondLine: 0, color: "#1AB394" },
                     { name: 'THIRD LINE', y: adultsOnThirdLine ? adultsOnThirdLine: 0, color: "#BBE65F" },
-                    { name: 'UNDOCUMENTED REG LINE', y: adultsOnUndocumentedLine ? adultsOnUndocumentedLine: 0, color: "#60A6E5" },
+                    { name: 'UNDOCUMENTED REG LINE', y: adultsOnUndocumentedLine ? adultsOnUndocumentedLine: 0, color: "#2D73F5" },
                 ]
             }]
         });

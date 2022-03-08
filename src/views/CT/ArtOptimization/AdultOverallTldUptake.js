@@ -30,7 +30,7 @@ const AdultOverallTldUptake = () => {
                 name:"OVERALL TLD UPTAKE",
                 colorByPoint: true,
                 data: [
-                    { name: 'TLD', y: adultsOnTld ? adultsOnTld: 0, color: "#485969" },
+                    { name: 'TLD', y: adultsOnTld ? adultsOnTld: 0, color: "#142459" },
                     { name: 'OTHER REGIMENS', y: adultsOnNonTld ? adultsOnNonTld: 0, color: "#1AB394" },
                 ]
             }]

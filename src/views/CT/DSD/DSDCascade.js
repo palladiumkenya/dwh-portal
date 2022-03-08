@@ -20,7 +20,7 @@ const DSDCascade = () => {
             yAxis: [{ title: { text: 'Number of Patients' }}],
             legend: { enabled: false },
             plotOptions: { column: { dataLabels: { enabled: true, format: '{point.y:,.0f}{point.text}' } } },
-            series: [{ name: 'DSD Cascade', type: 'column', color: "#485969", tooltip: { valueSuffix: '{point.text}' }, data: [
+            series: [{ name: 'DSD Cascade', type: 'column', color: "#142459", tooltip: { valueSuffix: '{point.text}' }, data: [
                 { name: categories[0], y: data[0] },
                 { name: categories[1], y: data[1], text: ' (' + parseFloat(((data[1]/data[0])*100).toString()).toFixed(0) + '%)' },
             ]}]
