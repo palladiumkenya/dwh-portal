@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Col, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
+import { Card, CardBody, CardHeader, Col, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
 import classnames from 'classnames';
 import Loadable from 'react-loadable';
 import Loading from '../../Shared/Loading';
@@ -45,6 +45,16 @@ const COVIDTabs = () => {
                             <COVIDOverview />
                         </Col>
                     </Row>
+                    <Card>
+                        <CardHeader>Indicator Definition</CardHeader>
+                        <CardBody>
+                            <ul>
+                                <li>Screened for Vaccination => PLHIV Aged 15+Years who are current on ART and have been assessed for COVID 19 vaccination.</li>
+                                <li>Partially Vaccinated PLHIV => PLHIV Aged 15+Years who are current on ART and have received at least one dose.</li>
+                                <li>Fully Vaccinated PLHIV=> PLHIV Aged 15+Years who are current on ART and have received full vaccination doses according to MoH guidelines.</li>
+                            </ul>
+                        </CardBody>
+                    </Card>
                     <Row>
                         <Col className={"col-6"}>
                             <COVIDAdultPLHIVVaccinatedByGender />
