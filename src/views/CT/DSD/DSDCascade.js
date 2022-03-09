@@ -17,7 +17,7 @@ const DSDCascade = () => {
         setDSDCascade({
             title: { text: '' },
             xAxis: [{ categories: categories, crosshair: true }],
-            yAxis: [{ title: { text: 'Number of Patients' }}],
+            yAxis: [{ title: { text: 'Number of Patients'.toUpperCase() }}],
             legend: { enabled: false },
             plotOptions: { column: { dataLabels: { enabled: true, format: '{point.y:,.0f}{point.text}' } } },
             series: [{ name: 'DSD Cascade', type: 'column', color: "#142459", tooltip: { valueSuffix: '{point.text}' }, data: [

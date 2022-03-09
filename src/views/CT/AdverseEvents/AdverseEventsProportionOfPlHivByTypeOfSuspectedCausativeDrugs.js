@@ -23,7 +23,7 @@ const AdverseEventsProportionOfPlHivByTypeOfSuspectedCausativeDrugs = ({ tab }) 
                 text: ''
             },
             xAxis: {
-                categories: adverseEventsProportionOfPLHIVByCausativeDrugs.map(obj => obj.adverseEventCause),
+                categories: adverseEventsProportionOfPLHIVByCausativeDrugs.map(obj => obj.adverseEventCause.toUpperCase()),
                 crosshair: true
             },
             yAxis: {

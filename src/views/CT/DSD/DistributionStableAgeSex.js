@@ -18,7 +18,7 @@ const DistributionStableAgeSex = () => {
                 text: ''
             },
             xAxis: {
-                categories: stabilityStatusByAgeSex.ageGroups,
+                categories: stabilityStatusByAgeSex.ageGroups.map(name=>name.toUpperCase()),
                 crosshair: true
             },
             yAxis: {

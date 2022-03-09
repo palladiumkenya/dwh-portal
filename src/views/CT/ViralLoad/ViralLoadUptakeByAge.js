@@ -16,8 +16,8 @@ const ViralLoadUptakeByAge = () => {
             },
             title: { text: '' },
             plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.text; } } }},
-            xAxis: [{ categories: viralLoadUptakeByAgeData.arrKeys, crosshair: true }],
-            yAxis: [{ title: { text: 'Percentage of Patients' }, labels: { format: '{value} %' }}],
+            xAxis: [{ categories: viralLoadUptakeByAgeData.arrKeys.map(name=> name.toUpperCase()), crosshair: true }],
+            yAxis: [{ title: { text: 'Percentage of Patients'.toUpperCase() }, labels: { format: '{value} %' }}],
             tooltip: {
                 formatter: function() {
                     let currentPoint = this,
