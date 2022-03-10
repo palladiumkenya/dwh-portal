@@ -40,7 +40,7 @@ const COVIDAdultPLHIVVaccinatedByGender = () => {
                     name: 'NOT VACCINATED',
                     data: vaccinated.notVaccinated.map(obj => obj.text),
                     type: 'column',
-                    color: '#A81616'
+                    color: '#bb1414'
                 },
                 {
                     name: 'PARTIALLY VACCINATED',
