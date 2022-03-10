@@ -331,8 +331,6 @@ const UniversalFilter = () => {
                         </div>
                     </Col> : null
                 }
-            </Row>
-            <Row>
                 {
                     filters.genderFilterEnabled ?
                         <Col className={"col-2"}>
