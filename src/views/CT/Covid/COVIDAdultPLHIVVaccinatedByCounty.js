@@ -31,7 +31,7 @@ const COVIDAdultPLHIVVaccinatedByCounty = () => {
             tooltip: { shared: true },
             legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'NOT VACCINATED', data: countiesVaccinated.notVaccinated.map(obj => obj.text), type: 'column', color: "#A81616" },
+                { name: 'NOT VACCINATED', data: countiesVaccinated.notVaccinated.map(obj => obj.text), type: 'column', color: "#bb1414" },
                 { name: 'PARTIALLY VACCINATED', data: countiesVaccinated.partiallyVaccinated.map(obj => obj.text), type: 'column', color: "#F08532" },
                 { name: 'FULLY VACCINATED', data: countiesVaccinated.fullyVaccinated.map(obj => obj.text), type: 'column', color: "#00AD30" },
             ]

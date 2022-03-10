@@ -39,7 +39,7 @@ const COVIDTrendsOfAdultPLHIVVaccinationInTheLast12Months = () => {
                     name: 'NOT VACCINATED',
                     data: trendsPLHIVVaccinationInTheLast12Months.trendsNotVaccinated,
                     type: 'column',
-                    color: '#A81616'
+                    color: '#bb1414'
                 },
                 {
                     name: 'PARTIALLY VACCINATED',
