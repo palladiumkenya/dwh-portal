@@ -50,7 +50,7 @@ const RRCounty = () => {
             if (r <= 50) {
                 return {
                     y: r,
-                    color: '#ff0d0d'
+                    color: '#BB1414'
                 }
             } else if (r >= 51 && r <= 89) {
                 return { y: r, color: '#f7941d' }
@@ -59,7 +59,7 @@ const RRCounty = () => {
             } else {
                 return {
                     y: r,
-                    color: '#ff0d0d'
+                    color: '#BB1414'
                 }
             }
         });
@@ -78,7 +78,7 @@ const RRCounty = () => {
                 consistency_values.push({
                     county: key,
                     y: cos,
-                    color: '#ff0d0d'
+                    color: '#BB1414'
                 });
             } else if (cos >= 51 && cos <= 89) {
                 consistency_values.push({ county: key, y: cos, color: '#f7941d' });
@@ -88,7 +88,7 @@ const RRCounty = () => {
                 consistency_values.push({
                     county: key,
                     y: cos,
-                    color: '#ff0d0d'
+                    color: '#BB1414'
                 });
             }
         }

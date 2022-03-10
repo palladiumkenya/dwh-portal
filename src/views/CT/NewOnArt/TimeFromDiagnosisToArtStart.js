@@ -21,7 +21,7 @@ const TimeFromDiagnosisToArtStart = () => {
                 { name: 'Same Day', data: timeFromDiagnosisToArtStartData.firstPeriodPercent, type: 'column', color: "#16c21d", tooltip: { valueSuffix: ' %' } },
                 { name: '1-7 Days', data: timeFromDiagnosisToArtStartData.secondPeriodPercent, type: 'column', color: "#5d6180", tooltip: { valueSuffix: ' %' } },
                 { name: '8-14 Days', data: timeFromDiagnosisToArtStartData.thirdPeriodPercent, type: 'column', color: "#FDc538", tooltip: { valueSuffix: ' %' } },
-                { name: '> 14 Days', data: timeFromDiagnosisToArtStartData.fourthPeriodPercent, type: 'column', color: "#FF0d0d", tooltip: { valueSuffix: ' %' } },
+                { name: '> 14 Days', data: timeFromDiagnosisToArtStartData.fourthPeriodPercent, type: 'column', color: "#BB1414", tooltip: { valueSuffix: ' %' } },
             ]
         });
     }, [timeFromDiagnosisToArtStartData]);

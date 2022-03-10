@@ -57,7 +57,7 @@ const AdverseEventsSeverityGrading = ({ tab }) => {
                     {
                         name: 'SEVERE',
                         y: adverseEventsSeverityGrading.severeVal,
-                        color: "#ff0d0d"
+                        color: "#BB1414"
                     },
                     {
                         name: 'UNDOCUMENTED',

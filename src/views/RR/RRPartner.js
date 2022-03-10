@@ -53,7 +53,7 @@ const RRPartner = () => {
             if (r <= 50) {
                 return {
                     y: r,
-                    color: '#ff0d0d'
+                    color: '#BB1414'
                 }
             } else if (r >= 51 && r <= 89) {
                 return { y: r, color: '#f7941d' }
@@ -62,7 +62,7 @@ const RRPartner = () => {
             } else {
                 return {
                     y: r,
-                    color: '#ff0d0d'
+                    color: '#BB1414'
                 }
             }
         });
@@ -81,7 +81,7 @@ const RRPartner = () => {
                 consistency_values.push({
                     partner: key,
                     y: cos,
-                    color: '#ff0d0d'
+                    color: '#BB1414'
                 });
             } else if (cos >= 51 && cos <= 89) {
                 consistency_values.push({ partner: key, y: cos, color: '#f7941d' });
@@ -91,7 +91,7 @@ const RRPartner = () => {
                 consistency_values.push({
                     partner: key,
                     y: cos,
-                    color: '#ff0d0d'
+                    color: '#BB1414'
                 });
             }
         }

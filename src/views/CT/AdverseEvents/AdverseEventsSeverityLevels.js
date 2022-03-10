@@ -27,7 +27,7 @@ const AdverseEventsSeverityLevels = ({ tab }) => {
             plotOptions: { column: { stacking: 'normal'}},
             series: [
                 { data: adverseEventsReportedWithSeverityLevels.data[3], name: 'UNDOCUMENTED', type: 'column', color: "#5d6180" },
-                { data: adverseEventsReportedWithSeverityLevels.data[2], name: 'SEVERE', type: 'column', color: "#ff0d0d" },
+                { data: adverseEventsReportedWithSeverityLevels.data[2], name: 'SEVERE', type: 'column', color: "#BB1414" },
                 { data: adverseEventsReportedWithSeverityLevels.data[1], name: 'MODERATE', type: 'column', color: "#fdc538" },
                 { data: adverseEventsReportedWithSeverityLevels.data[0], name: 'MILD', type: 'column', color: "#16c21d" },
             ]
