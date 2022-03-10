@@ -31,8 +31,8 @@ const COVIDAdultPLHIVVaccinatedByAge = () => {
                     }
                 }
             },
-            xAxis: [{ categories: fullyVaccinated.ageGroups, crosshair: true }],
-            yAxis: [{ title: { text: 'Percentage of Patients' } }],
+            xAxis: [{ categories: fullyVaccinated.ageGroups.map(n => n.toUpperCase()), crosshair: true }],
+            yAxis: [{ title: { text: 'Percentage of Patients'.toUpperCase() } }],
             tooltip: { shared: true },
             legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             series: [
@@ -40,7 +40,7 @@ const COVIDAdultPLHIVVaccinatedByAge = () => {
                     name: 'NOT VACCINATED',
                     data: fullyVaccinated.notVaccinated.map(obj => obj.text),
                     type: 'column',
-                    color: 'red'
+                    color: '#A81616'
                 },
                 {
                     name: 'PARTIALLY VACCINATED',
@@ -52,7 +52,7 @@ const COVIDAdultPLHIVVaccinatedByAge = () => {
                     name: 'FULLY VACCINATED',
                     data: fullyVaccinated.fullyVaccinated.map(obj => obj.text),
                     type: 'column',
-                    color: '#69B34C'
+                    color: '#00AD30'
                 }
             ]
         });
