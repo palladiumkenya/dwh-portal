@@ -13,7 +13,7 @@ const DistributionMMDStable = () => {
     const loadDistributionMMDStable = useCallback(async () => {
         setDistributionMMDStable({
             title: { text: '' },
-            xAxis: [{ categories: stableMmdModels.data.map(a => a.name), crosshair: true }],
+            xAxis: [{ categories: stableMmdModels.data.map(a => a.name.toUpperCase()), crosshair: true }],
             yAxis: [
                 {
                     min: 0,

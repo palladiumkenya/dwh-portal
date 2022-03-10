@@ -21,7 +21,7 @@ const ViralLoadOverallUptakeAndSuppressionBySex = () => {
             title: { text: '' },
             xAxis: [{ categories: viralLoadOverallUptakeSuppressionBySexData.vlCategoryNames, crosshair: true }],
             yAxis: [
-                { title: { text: 'Number of Patients' } }
+                { title: { text: 'Number of Patients'.toUpperCase() } }
             ],
             tooltip: {
                 formatter: function() {

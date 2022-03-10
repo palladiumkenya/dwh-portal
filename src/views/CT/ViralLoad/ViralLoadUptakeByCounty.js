@@ -12,8 +12,8 @@ const ViralLoadUptakeByCounty = () => {
     const loadViralLoadUptakeByCounty = useCallback(async () => {
         setViralLoadUptakeByCounty({
             title: { text: '' },
-            xAxis: [{ categories: viralLoadUptakeByCountyData.data.map(function(d) { return d['c']; }), title: { text: 'County' }, crosshair: true }],
-            yAxis: [{ title: { text: 'Percentage of Patients' }, labels: { format: '{value} %' }}],
+            xAxis: [{ categories: viralLoadUptakeByCountyData.data.map(function(d) { return d['c']? d['c'].toUpperCase() :d['c']; }), title: { text: 'COUNTY' }, crosshair: true }],
+            yAxis: [{ title: { text: 'Percentage of Patients'.toUpperCase() }, labels: { format: '{value} %' }}],
             plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none', format: '{y}%' } } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [

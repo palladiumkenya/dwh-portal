@@ -13,8 +13,8 @@ const COVIDCumulativeReceivedVaccination = () => {
     const loadNewOnArtTrendsChart = useCallback(async () => {
         setCumulativeVaccinatedByMonths({
             title: { text: '' },
-            xAxis: [{ categories: cumulativeWhoReceivedAtLeastOneVaccine.yearMonths, title: { text: 'Months' }, crosshair: true }],
-            yAxis: [{ title: { text: 'Number of Patients'}}],
+            xAxis: [{ categories: cumulativeWhoReceivedAtLeastOneVaccine.yearMonths.map(n => n.toUpperCase()), title: { text: 'MONTHS' }, crosshair: true }],
+            yAxis: [{ title: { text: 'Number of Patients'.toUpperCase()}}],
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             tooltip: {
                 formatter: function () {

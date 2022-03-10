@@ -14,7 +14,7 @@ const AppointmentDurationStableByCounty = () => {
         setAppointmentDurationStableByCounty({
             title: { text: '' },
             xAxis: [{ categories: stabilityStatusByCountyMmd.counties, crosshair: true }],
-            yAxis: [{ title: { text: 'Percentage of Patients' }}],
+            yAxis: [{ title: { text: 'Percentage of Patients'.toUpperCase() }}],
             tooltip: { shared: true },
             plotOptions: { column: { stacking: 'percent' } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80, reversed: true },

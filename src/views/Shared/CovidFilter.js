@@ -177,7 +177,7 @@ const CovidFilter = () => {
                             <Dropdown
                                 id="partner"
                                 name="partner"
-                                placeholder="Select Service Delivery Partner"
+                                placeholder="Select Partner"
                                 fluid
                                 multiple
                                 selection
