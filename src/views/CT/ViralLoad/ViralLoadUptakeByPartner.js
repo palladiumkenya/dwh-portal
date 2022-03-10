@@ -12,8 +12,8 @@ const ViralLoadUptakeByPartner = () => {
     const loadViralLoadUptakeByPartner = useCallback(async () => {
         setViralLoadUptakeByPartner({
             title: { text: '' },
-            xAxis: [{ categories: viralLoadUptakeByPartnerData.data.map(function(d) { return d['p']; }), title: { text: 'Service Delivery Partner' }, crosshair: true }],
-            yAxis: [{ title: { text: 'Percentage of Patients' }, labels: { format: '{value} %' }}],
+            xAxis: [{ categories: viralLoadUptakeByPartnerData.data.map(function(d) { return d['p']? d['p'].toUpperCase():d['p'] ; }), title: { text: 'Service Delivery Partner'.toUpperCase() }, crosshair: true }],
+            yAxis: [{ title: { text: 'Percentage of Patients'.toUpperCase() }, labels: { format: '{value} %' }}],
             plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none', format: '{y}%' } } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [

@@ -12,8 +12,8 @@ const AppointmentDurationBySex = () => {
     const loadAppointmentDurationBySex = useCallback(async () => {
         setAppointmentDurationBySex({
             title: { text: '' },
-            xAxis: [{ categories: appointmentDurationBySexData.sexCategories, crosshair: true }],
-            yAxis: [{ title: { text: 'Percentage of Patients' }}],
+            xAxis: [{ categories: appointmentDurationBySexData.sexCategories.map(name => name.toUpperCase()), crosshair: true }],
+            yAxis: [{ title: { text: 'Percentage of Patients'.toUpperCase() }}],
             tooltip: { shared: true },
             plotOptions: { column: { stacking: 'percent' } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80, reversed: true },

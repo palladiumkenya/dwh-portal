@@ -12,9 +12,9 @@ const MedianTimeTo1stVlByYear = () => {
     const loadMedianTimeTo1stVlByYear = useCallback(async () => {
         setMedianTimeTo1stVlByYear({
             title: { text: '' },
-            xAxis: [{ categories: medianTimeTo1stVlByYearData.years, crosshair: true, title: { text: 'Year of Start' } }],
+            xAxis: [{ categories: medianTimeTo1stVlByYearData.years, crosshair: true, title: { text: 'Year of Start'.toUpperCase() } }],
             yAxis: [
-                { title: { text: 'Time (Months)' } },
+                { title: { text: 'Time (Months)'.toUpperCase() } },
             ],
             // plotOptions: { spline: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },

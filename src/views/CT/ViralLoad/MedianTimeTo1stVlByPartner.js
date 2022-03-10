@@ -12,8 +12,8 @@ const MedianTimeTo1stVlByPartner = () => {
     const loadMedianTimeTo1stVlByPartner = useCallback(async () => {
         setMedianTimeTo1stVlByPartner({
             title: { text: '' },
-            xAxis: [{ categories: medianTimeTo1stVlByPartnerData.partners, crosshair: true, title: { text: 'Partner' } }],
-            yAxis: [{ title: { text: 'Time (Months)' }}],
+            xAxis: [{ categories: medianTimeTo1stVlByPartnerData.partners.map(name=>name.toUpperCase()), crosshair: true, title: { text: 'Partner'.toUpperCase() } }],
+            yAxis: [{ title: { text: 'Time (Months)'.toUpperCase() }}],
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
