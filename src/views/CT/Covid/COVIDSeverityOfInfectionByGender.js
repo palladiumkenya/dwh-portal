@@ -13,13 +13,13 @@ export const COVIDSeverityOfInfectionByGender = () => {
         setSeverityOfInfectionByGender({
             title: { text: '' },
             plotOptions: { column: { stacking: 'normal' } },
-            xAxis: [{ categories: severityByGender.genders, crosshair: true }],
-            yAxis: [{ title: { text: 'Percentage of Patients' }}],
+            xAxis: [{ categories: severityByGender.genders.map(n => n.toUpperCase()), crosshair: true }],
+            yAxis: [{ title: { text: 'Percentage of Patients'.toUpperCase() }}],
             tooltip: { shared: true },
             legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'ASYMPTOMATIC', data: severityByGender.asymptomatic, type: 'column', color: "#F08532", tooltip: { valueSuffix: '% ({point.text:.0f})' } },
-                { name: 'SYMPTOMATIC', data: severityByGender.symptomatic, type: 'column', color: "#69B34C", tooltip: { valueSuffix: '% ({point.text:.0f})' } },
+                { name: 'SYMPTOMATIC', data: severityByGender.symptomatic, type: 'column', color: "#00AD30", tooltip: { valueSuffix: '% ({point.text:.0f})' } },
             ]
         });
     }, []);

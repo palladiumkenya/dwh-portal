@@ -18,7 +18,7 @@ const DistributionDensityMPDB = () => {
         tooltip: { shared: true },
         legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80, floating: true, borderWidth: 1 },
         series: [
-            { name: 'Density', type: 'column', yAxis: 1, data: medicalDoctorsByCounty.count, color: "#485969" },
+            { name: 'Density', type: 'column', yAxis: 1, data: medicalDoctorsByCounty.count, color: "#142459" },
             { name: 'Ratio to 10,000 pop', type: 'spline', data: medicalDoctorsByCounty.population, color: "#E06F07" },
         ]
     };

@@ -24,7 +24,7 @@ const CurrentOnArtByPartner = () => {
                 useHTML: true
             },
             plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
-            series: [{ data: currentOnArtByPartnerData.currentOnArt, name: 'Number currently on ART', type: 'column', color: "#485969", }]
+            series: [{ data: currentOnArtByPartnerData.currentOnArt, name: 'Number currently on ART', type: 'column', color: "#142459", }]
         });
     }, [currentOnArtByPartnerData]);
 

@@ -23,7 +23,7 @@ const AdverseEventsProportionOfPlHivWithAeRelatedToArtOrSuspectedArt = ({ tab })
                 text: ''
             },
             xAxis: {
-                categories: adverseEventsProportionOfPLHIVAeRelatedToArtDrugs.map(obj => obj.adverseEventCause),
+                categories: adverseEventsProportionOfPLHIVAeRelatedToArtDrugs.map(obj => obj.adverseEventCause.toUpperCase()),
                 crosshair: true
             },
             yAxis: {

@@ -13,7 +13,7 @@ const DistributionMMDStable = () => {
     const loadDistributionMMDStable = useCallback(async () => {
         setDistributionMMDStable({
             title: { text: '' },
-            xAxis: [{ categories: stableMmdModels.data.map(a => a.name), crosshair: true }],
+            xAxis: [{ categories: stableMmdModels.data.map(a => a.name.toUpperCase()), crosshair: true }],
             yAxis: [
                 {
                     min: 0,
@@ -33,7 +33,7 @@ const DistributionMMDStable = () => {
                     name: 'PERCENT OF PATIENTS',
                     data: stableMmdModels.data,
                     type: 'column',
-                    color: "#485969"
+                    color: "#142459"
                 },
             ]
         });

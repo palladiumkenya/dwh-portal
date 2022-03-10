@@ -198,6 +198,9 @@ import { loadOVCEligibleVL } from '../../actions/CT/OVC/ovcEligibleVLActions';
 import { loadOVCVLDone } from '../../actions/CT/OVC/ovcVLDoneActions';
 import { loadOVCVLSuppressed } from '../../actions/CT/OVC/ovcVLSuppressedActions';
 import { loadCovidNumberScreened } from '../../actions/CT/Covid/covidNumberScreenedActions';
+import {
+    loadCovidCumulativeWithMissingDateGivenFirstDose
+} from '../../actions/CT/Covid/covidCumulativeWithMissingDateGivenFirstDoseActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from "../../constants";
 
@@ -493,6 +496,7 @@ const CT = () => {
                 dispatch(loadCovidPercentageWhoMissedAppointmentsByCounty());
                 dispatch(loadCovidPercentageWhoMissedAppointmentsByPartner());
                 dispatch(loadCovidCumulativeWhoReceivedAtLeastOneDose());
+                dispatch(loadCovidCumulativeWithMissingDateGivenFirstDose());
                 dispatch(loadCovidTrendsPLHIVVaccinationInTheLast12Months());
                 dispatch(loadCovidNumberScreened());
                 break;

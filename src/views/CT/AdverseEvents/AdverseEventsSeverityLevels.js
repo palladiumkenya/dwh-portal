@@ -20,16 +20,16 @@ const AdverseEventsSeverityLevels = ({ tab }) => {
     const loadSeverityLevels = useCallback(async () => {
         setSeverityLevels({
             title: { text: '' },
-            xAxis: [{ categories: adverseEventsReportedWithSeverityLevels.categories, crosshair: true }],
-            yAxis: [{ title: { text: 'Number of Patients' }, stackLabels: { enabled: true, style: { fontWeight: 'bold', color: "#808080" }}}],
+            xAxis: [{ categories: adverseEventsReportedWithSeverityLevels.categories.map(name=>name.toUpperCase()), crosshair: true }],
+            yAxis: [{ title: { text: 'Number of Patients'.toUpperCase() }, stackLabels: { enabled: true, style: { fontWeight: 'bold', color: "#808080" }}}],
             legend: { align: 'left', reversed: true, verticalAlign: 'top', y: 0, x: 80 },
             tooltip: { shared: true, headerFormat: '<b>{point.x}</b><br/>', pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}' },
             plotOptions: { column: { stacking: 'normal'}},
             series: [
-                { data: adverseEventsReportedWithSeverityLevels.data[3], name: 'UNDOCUMENTED', type: 'column', color: "#2F4050" },
-                { data: adverseEventsReportedWithSeverityLevels.data[2], name: 'SEVERE', type: 'column', color: "#E15759" },
-                { data: adverseEventsReportedWithSeverityLevels.data[1], name: 'MODERATE', type: 'column', color: "#F7ED00" },
-                { data: adverseEventsReportedWithSeverityLevels.data[0], name: 'MILD', type: 'column', color: "#1AB394" },
+                { data: adverseEventsReportedWithSeverityLevels.data[3], name: 'UNDOCUMENTED', type: 'column', color: "#5d6180" },
+                { data: adverseEventsReportedWithSeverityLevels.data[2], name: 'SEVERE', type: 'column', color: "#BB1414" },
+                { data: adverseEventsReportedWithSeverityLevels.data[1], name: 'MODERATE', type: 'column', color: "#fdc538" },
+                { data: adverseEventsReportedWithSeverityLevels.data[0], name: 'MILD', type: 'column', color: "#16c21d" },
             ]
         });
     }, [adverseEventsReportedWithSeverityLevels]);

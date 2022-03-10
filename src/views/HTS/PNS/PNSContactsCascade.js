@@ -9,7 +9,7 @@ import moment from "moment";
 const PNSContactsCascade = () => {
     const filters = useSelector(state => state.filters);
     const [pnsContactsCascade, setPNSContactsCascade] = useState({});
-    
+
     const loadPNSContactsCascade = useCallback(async () => {
         let categories = [
             'Index Clients',
@@ -64,7 +64,7 @@ const PNSContactsCascade = () => {
             plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () {
                 return '' + this.point.text;
             }}}},
-            series: [{ name: 'PNS Cascade of Sexual Contacts', color: "#485969", type: 'column', data: [
+            series: [{ name: 'PNS Cascade of Sexual Contacts', color: "#142459", type: 'column', data: [
                 { name: categories[0], y: data[0], text: data[0].toLocaleString('en') },
                 { name: categories[1], y: data[1], text: data[1].toLocaleString('en') + ' (' + parseFloat(((data[1]/data[0])*100).toString()).toFixed(0) + '%)'  },
                 { name: categories[2], y: data[2], text: data[2].toLocaleString('en') + ' (' + parseFloat(((data[2]/data[0])*100).toString()).toFixed(0) + '%)' },

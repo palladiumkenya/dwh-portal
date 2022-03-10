@@ -8,7 +8,7 @@ import * as viralLoadOverallUptakeSuppressionByFacilitySelectors from '../../../
 const ViralLoadSuppressionByCounty = () => {
     const [vlSuppressionByCounty, setViralLoadSuppressionByCounty] = useState({});
     const viralLoadOverallUptakeSuppressionByCountyData = useSelector(viralLoadOverallUptakeSuppressionByFacilitySelectors.getViralLoadOverallUptakeSuppressionByCounty);
-    
+
     const loadViralLoadSuppressionByCounty = useCallback(async () => {
         setViralLoadSuppressionByCounty({
             title: { text: '' },
@@ -17,7 +17,7 @@ const ViralLoadSuppressionByCounty = () => {
             plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.text; } } }},
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Percentage of Patients', data: viralLoadOverallUptakeSuppressionByCountyData.data, type: 'column', color: "#485969", tooltip: { valueSuffix: ' % ({point.absoluteY})' }}
+                { name: 'Percentage of Patients', data: viralLoadOverallUptakeSuppressionByCountyData.data, type: 'column', color: "#142459", tooltip: { valueSuffix: ' % ({point.absoluteY})' }}
             ]
         });
     }, [viralLoadOverallUptakeSuppressionByCountyData]);

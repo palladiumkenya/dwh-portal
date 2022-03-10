@@ -13,9 +13,9 @@ const ViralLoadUptakeBySex = () => {
         setViralLoadUptakeBySex({
             title: { text: '' },
             plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.text; } } }},
-            xAxis: [{ categories: viralLoadUptakeBySexData.sexCategories, crosshair: true }],
+            xAxis: [{ categories: viralLoadUptakeBySexData.sexCategories.map(name=> name.toUpperCase()), crosshair: true }],
             yAxis: [
-                { title: { text: 'Percentage of Patients' }, labels: { format: '{value} %' }}
+                { title: { text: 'Percentage of Patients'.toUpperCase() }, labels: { format: '{value} %' }}
             ],
             legend: { enabled: false },
             series: [

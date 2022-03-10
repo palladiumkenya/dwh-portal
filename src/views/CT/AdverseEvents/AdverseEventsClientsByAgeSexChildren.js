@@ -12,9 +12,9 @@ const AdverseEventsClientsByAgeSexChildren = () => {
     const loadUnder15AdverseEventsDesegregation =  useCallback(async () => {
         setUnder15AdverseEventsDesegregation({
             title: { text: '' },
-            xAxis: [{ categories: adverseEventsClientsChildren.ageGroups.map(y => y + ' YRS'), crosshair: true }],
+            xAxis: [{ categories: adverseEventsClientsChildren.ageGroups.map(y => y.toUpperCase() + ' YRS'), crosshair: true }],
             yAxis: [
-                { title: { text: 'Number of Patients' }, stackLabels: { enabled: true, style: { fontWeight: 'bold', color: "#808080" }}}
+                { title: { text: 'Number of Patients'.toUpperCase() }, stackLabels: { enabled: true, style: { fontWeight: 'bold', color: "#808080" }}}
             ],
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             tooltip: {

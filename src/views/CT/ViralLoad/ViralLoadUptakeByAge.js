@@ -16,8 +16,8 @@ const ViralLoadUptakeByAge = () => {
             },
             title: { text: '' },
             plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, dataLabels: { enabled: true, formatter: function () { return '' + this.point.text; } } }},
-            xAxis: [{ categories: viralLoadUptakeByAgeData.arrKeys, crosshair: true }],
-            yAxis: [{ title: { text: 'Percentage of Patients' }, labels: { format: '{value} %' }}],
+            xAxis: [{ categories: viralLoadUptakeByAgeData.arrKeys.map(name=> name.toUpperCase()), crosshair: true }],
+            yAxis: [{ title: { text: 'Percentage of Patients'.toUpperCase() }, labels: { format: '{value} %' }}],
             tooltip: {
                 formatter: function() {
                     let currentPoint = this,
@@ -108,7 +108,7 @@ const ViralLoadUptakeByAge = () => {
                             cText: 'Male: ' + viralLoadUptakeByAgeData.arrayData[20].percentage + '% (VLDone:' + viralLoadUptakeByAgeData.arrayData[20].vlDone  +', Eligible: '+ viralLoadUptakeByAgeData.arrayData[20].eligible +') <br /> Female: ' + viralLoadUptakeByAgeData.arrayData[21].percentage + '% (VLDone:' + viralLoadUptakeByAgeData.arrayData[21].vlDone  +', Eligible: '+ viralLoadUptakeByAgeData.arrayData[21].eligible +')'
                         }
                     ],
-                    color: "#485969",
+                    color: "#142459",
                 }
             ]
         });

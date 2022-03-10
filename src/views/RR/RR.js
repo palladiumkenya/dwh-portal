@@ -108,15 +108,16 @@ const RR = () => {
                     <RRIndicatorDefinition />
                     <RROverview/>
                     <RROverviewTrends/>
-                    <SectionFooter overview={"The Overall reporting rates refers to the proportion of EMR sites that submitted the most recent i.e. The Jan 2020 Overall reporting rates in the number of EMR sites that uploaded data to the NDW in Jan 2020 and so forth."}
+                    <SectionFooter overview={"The Overall reporting rates refers to the proportion of EMR sites that submitted the most recent i.e. The "+ moment().format('MMMM, YYYY') + " Overall reporting rates in the number of EMR sites that uploaded data to the NDW in " + moment().format('MMMM, YYYY') + " and so forth."}
                     />
                     {/*<SectionHeader title="REPORTING RATES" description="BY COUNTY"/>*/}
                     <RRCounty/>
-                    <SectionFooter overview={"The overall reporting rate for "+ moment().format('MMMM, YYYY') +" is the number of EMR sites that uploaded data in March, 2020"}
+                    <SectionFooter overview={"The overall reporting rate for "+ moment().format('MMMM, YYYY') +" is the number of EMR sites that uploaded data in "+ moment().format('MMMM, YYYY') }
                     />
                     {/*<SectionHeader title="REPORTING RATES" description="BY PARTNER"/>*/}
                     <RRPartner/>
-                    <SectionFooter overview={'The overall reporting rate for ' + moment().format('MMMM, YYYY') +",is the number of EMR sites that uploaded data in March, " + moment().format('MMMM, YYYY') }
+                    <SectionFooter overview={'The overall reporting rate for ' + moment().format('MMMM, YYYY') +",is the number of EMR sites that uploaded data in " + moment().format('MMMM, YYYY') }
+
                     />
                 </TabPane>
             </TabContent>

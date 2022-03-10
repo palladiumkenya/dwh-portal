@@ -30,7 +30,7 @@ const ViralLoadOutcomesBySex = () => {
                 name:"VL Outcomes (Male)",
                 colorByPoint: true,
                 data: [
-                    { name: 'LDL', y: viralLoadOutcomesBySexData.data[0][0], color: "#485969" },
+                    { name: 'LDL', y: viralLoadOutcomesBySexData.data[0][0], color: "#142459" },
                     { name: 'HVL', y: viralLoadOutcomesBySexData.data[0][2], color: "#1AB394" },
                     { name: 'LLV', y: viralLoadOutcomesBySexData.data[0][1], color: "#BBE65F" },
                 ]
@@ -55,7 +55,7 @@ const ViralLoadOutcomesBySex = () => {
                 name:"VL Outcomes (Female)",
                 colorByPoint: true,
                 data: [
-                    { name: 'LDL', y: viralLoadOutcomesBySexData.data[1][0], color: "#485969" },
+                    { name: 'LDL', y: viralLoadOutcomesBySexData.data[1][0], color: "#142459" },
                     { name: 'HVL', y: viralLoadOutcomesBySexData.data[1][2], color: "#1AB394" },
                     { name: 'LLV', y: viralLoadOutcomesBySexData.data[1][1], color: "#BBE65F" },
                 ]

@@ -61,8 +61,8 @@ const RROverviewTrends = () => {
         const dataProcessed = dataRecent.map(d => parseInt((d/expected) * 100));
         setOverallReportingTrend({
             title: { text: '', },
-            xAxis: [{ categories: categories, crosshair: true }],
-            yAxis: [{ title: { text: 'Percentage' }, labels: { format: '{value}' } }],
+            xAxis: [{ labels: { style: { fontSize: '9px' } },categories: categories.map(name => name ? name.toUpperCase() : name), crosshair: true }],
+            yAxis: [{ title: { text: 'Percentage'.toUpperCase() }, labels: { format: '{value}' } }],
             plotOptions: { column: { dataLabels: { enabled: true, format: '<b>{point.y} %</b>' } } },
             legend: { enabled: false },
             series: [ { name: "Overall Reporting Rates", type: "column", data: dataProcessed, color: "#1AB394", tooltip: { valueSuffix: ' %' } } ]
@@ -105,8 +105,8 @@ const RROverviewTrends = () => {
         const dataProcessed = dataRecent.map(d => parseInt((d/expected) * 100));
         setConsistencyTrend({
             title: { text: '', },
-            xAxis: [{ categories: categories, crosshair: true }],
-            yAxis: [{ title: { text: 'Percentage' }}],
+            xAxis: [{ labels: { style: { fontSize: '9px' } }, categories: categories.map(name => name ? name.toUpperCase() : name), crosshair: true }],
+            yAxis: [{ title: { text: 'Percentage'.toUpperCase() }}],
             plotOptions: { column: { dataLabels: { enabled: true, format: '<b>{point.y} %</b>' }}},
             legend: { enabled: false },
             series: [ { name: "Consistency of Reporting", type: "column", data: dataProcessed, color: "#2F4050", tooltip: { valueSuffix: ' %' }}]

@@ -12,8 +12,8 @@ const MedianTimeTo1stVlByCounty = () => {
     const loadMedianTimeTo1stVlByCounty = useCallback(async () => {
         setMedianTimeTo1stVlByCounty({
             title: { text: '' },
-            xAxis: [{ categories: medianTimeTo1stVlByCountyData.counties, crosshair: true, title: { text: 'County' } }],
-            yAxis: [{ title: { text: 'Time (Months)' }}],
+            xAxis: [{ categories: medianTimeTo1stVlByCountyData.counties, crosshair: true, title: { text: 'County'.toUpperCase() } }],
+            yAxis: [{ title: { text: 'Time (Months)'.toUpperCase() }}],
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [

@@ -30,7 +30,7 @@ const HomeOverallMmdUptake = () => {
                 name:"OVERALL MMD UPTAKE",
                 colorByPoint: true,
                 data: [
-                    { name: 'NON MMD', y: nonMmd, color: "#485969" },
+                    { name: 'NON MMD', y: nonMmd, color: "#142459" },
                     { name: 'MMD', y: mmd, color: "#1AB394" },
                 ]
             }]

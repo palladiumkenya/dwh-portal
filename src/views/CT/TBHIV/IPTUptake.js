@@ -50,7 +50,7 @@ const IPTUptake = () => {
                 backgroundColor: Highcharts.defaultOptions.legend.backgroundColor || 'rgba(255,255,255,0.25)'
             },
             series: [
-                { name: 'Number of Patients', data: data, type: 'column', color: "#485969" },
+                { name: 'Number of Patients', data: data, type: 'column', color: "#142459" },
             ]
         });
     }, [filters]);

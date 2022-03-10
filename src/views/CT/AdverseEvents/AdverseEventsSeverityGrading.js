@@ -47,22 +47,22 @@ const AdverseEventsSeverityGrading = ({ tab }) => {
                     {
                         name: 'MILD',
                         y: adverseEventsSeverityGrading.mildVal,
-                        color: "#1AB394"
+                        color: "#16c21d"
                     },
                     {
                         name: 'MODERATE',
                         y: adverseEventsSeverityGrading.moderateVal,
-                        color: "#F7ED00"
+                        color: "#fdc538"
                     },
                     {
                         name: 'SEVERE',
                         y: adverseEventsSeverityGrading.severeVal,
-                        color: "#E15759"
+                        color: "#BB1414"
                     },
                     {
                         name: 'UNDOCUMENTED',
                         y: adverseEventsSeverityGrading.notindictatedVal,
-                        color: "#2F4050"
+                        color: "#5d6180"
                     }]
                 }
             ]
