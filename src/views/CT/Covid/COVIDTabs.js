@@ -46,7 +46,7 @@ const COVIDTabs = () => {
                         </Col>
                     </Row>
                     <Card>
-                        <CardHeader>Indicator Definition</CardHeader>
+                        <CardHeader  className="covid-definition-header">Indicator Definition</CardHeader>
                         <CardBody>
                             <ul>
                                 <li>Screened for Vaccination => PLHIV Aged 15+Years who are current on ART and have been assessed for COVID 19 vaccination.</li>
