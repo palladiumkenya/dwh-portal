@@ -33,7 +33,7 @@ const HTS = () => {
                         <NavLink active={active_tab === value} onClick={() => {
                             dispatch(changeHtsTab(value));
                             toggle(value);
-                        }} >
+                        }} replace >
                             {HTS_TABS[value]}
                         </NavLink>
                     </NavItem>
@@ -72,7 +72,7 @@ const HTS = () => {
         noCache
     ]);
 
-    const DEFAULT_ACTIVE_TAB = useSelector(state => state.ui.htsTab);
+    const DEFAULT_ACTIVE_TAB = htsTab;
     const { active_tab } = useParams();
     const history = useHistory();
     useEffect(() => {
@@ -81,6 +81,9 @@ const HTS = () => {
         }
     }, []);
 
+    if(!active_tab){
+        history.push(`/hiv-testing/${htsTab}`);
+    }
     const toggle = tab => {
         if (active_tab !== tab) {
             history.push(`/hiv-testing/${tab}`);
@@ -92,15 +95,15 @@ const HTS = () => {
             <Nav tabs>
                 {renderTabNavItems()}
             </Nav>
-            <TabContent activeTab={active_tab}>
+            <TabContent activeTab={htsTab}>
                 <TabPane tabId="uptake">
-                    { active_tab === 'uptake' ? <Uptake/>: null }
+                    { htsTab === 'uptake' ? <Uptake/>: null }
                 </TabPane>
                 <TabPane tabId="linkage">
-                    { active_tab === 'linkage' ? <Linkage/>: null }
+                    { htsTab === 'linkage' ? <Linkage/>: null }
                 </TabPane>
                 <TabPane tabId="pns">
-                    { active_tab === 'pns' ? <PNS/>: null }
+                    { htsTab === 'pns' ? <PNS/>: null }
                 </TabPane>
             </TabContent>
             <p></p><p></p>
