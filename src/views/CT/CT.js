@@ -647,7 +647,7 @@ const CT = () => {
         noCache
     ]);
 
-    const DEFAULT_ACTIVE_TAB = 'hiv-treatment';
+    const DEFAULT_ACTIVE_TAB = useSelector(state => state.ui.ctTab);
     const { active_tab } = useParams();
     const history = useHistory();
     useEffect(() => {
