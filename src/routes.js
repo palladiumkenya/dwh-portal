@@ -16,9 +16,9 @@ const Profile = Loadable({ loader: () => import('./views/Users/Profile'), loadin
 
 const routes = [
   { path: "/", exact: true, name: "Home", component: withTracker(Home), private: false },
-  { path: "/reporting-rates", exact: true, name: "Reporting Rates", component: withTracker(RR), private: false },
-  { path: "/hiv-testing", exact: true, name: 'HIV Testing & Prevention', component: withTracker(HTS), private: false },
-  { path: "/hiv-treatment", exact: true, name: "HIV Treatment", component: withTracker(CT), private: false },
+  { path: "/reporting-rates/:active_tab?", exact: true, name: "Reporting Rates", component: withTracker(RR), private: false },
+  { path: "/hiv-testing/:active_tab?", exact: true, name: 'HIV Testing & Prevention', component: withTracker(HTS), private: false },
+  { path: "/hiv-treatment/:active_tab?", exact: true, name: "HIV Treatment", component: withTracker(CT), private: false },
   { path: "/gis", exact: true, name: "GIS", component: withTracker(GIS), private: false },
   { path: "/hrh", exact: true, name: "HRH", component: withTracker(HRH), private: false },
   { path: "/resources", exact: true, name: "Resources", component: withTracker(Resources), private: false },
