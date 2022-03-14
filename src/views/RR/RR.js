@@ -107,6 +107,10 @@ const RR = () => {
         }
     }, []);
 
+    if(!active_tab){
+        history.push(`/reporting-rates/${rrTab}`);
+    }
+
     const toggle = tab => {
         if (active_tab !== tab) {
             history.push(`/reporting-rates/${tab}`);

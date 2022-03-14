@@ -656,6 +656,10 @@ const CT = () => {
         }
     }, []);
 
+    if(!active_tab){
+        history.push(`/hiv-treatment/${ctTab}`);
+    }
+
     const toggle = tab => {
         if (active_tab !== tab) {
             history.push(`/hiv-treatment/${tab}`);
