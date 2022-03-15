@@ -22,7 +22,8 @@ import UniversalFilter from '../Shared/UniversalFilter';
 import SectionHeader from './../Shared/SectionHeader';
 import SectionFooter from './../Shared/SectionFooter';
 import moment from 'moment';
-import { useHistory, useParams } from 'react-router-dom';
+import { Route, useHistory, useParams } from 'react-router-dom';
+import { Page404 } from '../Pages';
 
 const RROverview = Loadable({ loader: () => import('./RROverview'), loading: Loading, delay: LOADING_DELAY });
 const RROverviewTrends = Loadable({ loader: () => import('./RROverviewTrends'), loading: Loading, delay: LOADING_DELAY });
@@ -55,7 +56,7 @@ const RR = () => {
             Object.keys(RR_TABS).map((value) => {
                 return (
                     <NavItem key={value}>
-                        <NavLink active={active_tab === value} onClick={() => {
+                        <NavLink active={rrTab === value} onClick={() => {
                             dispatch(changeRRTab(value));
                             toggle(value);
                         }} >
@@ -98,22 +99,48 @@ const RR = () => {
         rrTab
     ]);
 
-    const DEFAULT_ACTIVE_TAB = useSelector(state => state.ui.rrTab);
-    const { active_tab } = useParams();
+    let urls = [
+        {
+            id: 'ct',
+            url: 'care-and-treatment'
+        },
+        {
+            id: 'hts',
+            url: 'hiv-testing-services'
+        },
+        {
+            id: 'pkv',
+            url: 'patient-key-values'
+        },
+    ]
+
+    const DEFAULT_ACTIVE_TAB = rrTab
+    let { active_tab } = useParams();
+
     const history = useHistory();
     useEffect(() => {
         if (!active_tab) {
-            history.push(`/reporting-rates/${DEFAULT_ACTIVE_TAB}`);
+            let tab = urls.filter(t => t.id === DEFAULT_ACTIVE_TAB)[0]
+            if (tab) history.push(`/reporting-rates/${tab.url}`);
+            else return <Route path="*" component={Page404} status={404}/>
         }
     }, []);
 
+    if (!urls.filter(t => t.url === active_tab)[0]) return <Route path="*" component={Page404} status={404}/>
+
+    if (active_tab) {
+        active_tab = urls.filter(t => t.url === active_tab)[0].id
+    }
+
     if(!active_tab){
-        history.push(`/reporting-rates/${rrTab}`);
+        let tab = urls.filter(t => t.id === rrTab)[0].url
+        history.push(`/reporting-rates/${tab}`);
     }
 
     const toggle = tab => {
         if (active_tab !== tab) {
-            history.push(`/reporting-rates/${tab}`);
+            let t = urls.filter(t => t.id === tab)[0].url
+            history.push(`/reporting-rates/${t}`);
         }
     };
 
@@ -122,8 +149,8 @@ const RR = () => {
             <Nav tabs>
                 {renderTabNavItems()}
             </Nav>
-            <TabContent activeTab={active_tab}>
-                <TabPane tabId={active_tab}>
+            <TabContent activeTab={rrTab}>
+                <TabPane tabId={rrTab}>
                     <SectionHeader title="REPORTING RATES" description="OVERVIEW"/>
                     <VisibilitySensor onChange={onVisibilityChange}>
                         <UniversalFilter/>
