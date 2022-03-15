@@ -6,6 +6,7 @@ import * as adverseEventsByAgeSexSelectors from '../../../selectors/CT/AdverseEv
 import * as adverseEventsClientsByAgeSexSelectors from '../../../selectors/CT/AdverseEvents/adverseEventsClientsByAgeSex';
 import { formatNumber } from '../../../utils/utils';
 import DataCard from '../../Shared/DataCard';
+import DataCardCT from '../../Shared/DataCardCT';
 
 const AdverseEventsOverviewChildren = () => {
     const currentOnArtChildren = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtChildren);
@@ -15,21 +16,21 @@ const AdverseEventsOverviewChildren = () => {
     return (
         <Row>
             <Col>
-                <DataCard
+                <DataCardCT
                     title="CHILDREN CURRENTLY ON ART"
                     subtitle={null}
                     data={formatNumber(currentOnArtChildren.currentOnArt)}
                 />
             </Col>
             <Col>
-                <DataCard
+                <DataCardCT
                     title="CHILDREN ON ART AND DEVELOPED AEs"
                     subtitle={null}
                     data={formatNumber(adverseEventsClientsChildren.adverseEvents)}
                 />
             </Col>
             <Col>
-                <DataCard
+                <DataCardCT
                     title="NUMBER OF AEs REPORTED CASES IN CHILDREN"
                     subtitle={null}
                     data={formatNumber(adverseEventsChildren.adverseEvents)}

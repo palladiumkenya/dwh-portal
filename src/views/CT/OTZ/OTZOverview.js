@@ -8,6 +8,7 @@ import * as otzTotalWithWithResultsLessThan1000Selector from '../../../selectors
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import DataCard from '../../Shared/DataCard';
 import moment from 'moment';
+import DataCardCT from '../../Shared/DataCardCT';
 
 const OTZOverview = () => {
     const [otzTotalAdolescents, setOtzTotalAdolescents] = useState({});
@@ -36,28 +37,28 @@ const OTZOverview = () => {
     return (
         <Row>
             <Col>
-                <DataCard
+                <DataCardCT
                     title={currentOnArtText}
                     subtitle={null}
                     data={formatNumber(otzTotalAdolescents.otzTotalAdolescents)}
                 />
             </Col>
             <Col>
-                <DataCard
+                <DataCardCT
                     title="ENROLLED ON OTZ"
                     subtitle={roundNumber(otzTotalAdolescents.enrolledInOTZPerc) + "%"}
                     data={formatNumber(otzTotalAdolescents.enrolledInOTZ)}
                 />
             </Col>
             <Col>
-                <DataCard
+                <DataCardCT
                     title="ADOLESCENTS ON OTZ WITH VALID VL"
                     subtitle={roundNumber(otzTotalAdolescents.totalWithVlResultsPerc) + "%"}
                     data={formatNumber(otzTotalAdolescents.totalWithVlResults)}
                 />
             </Col>
             <Col>
-                <DataCard
+                <DataCardCT
                     title="ADOLESCENTS ON OTZ VIRALLY SUPPRESSED"
                     subtitle={roundNumber(otzTotalAdolescents.totalWithVlLessThan1000Perc) + "%"}
                     data={formatNumber(otzTotalAdolescents.totalWithVlLessThan1000)}

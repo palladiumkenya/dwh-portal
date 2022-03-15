@@ -22,11 +22,20 @@ const NewOnArtOverview = () => {
         <>
             <Row>
                 <Col>
-                    <DataCard
-                        title="NEWLY STARTED ON ART"
-                        subtitle={null}
-                        data={formatNumber(newOnArt)}
-                    />
+                    <Card className="card-uploads-consistency-rates">
+                        <CardHeader className="expected-uploads-header">
+                            NEWLY STARTED ON ART
+                        </CardHeader>
+                        <CardBody
+                            className="align-items-center d-flex justify-content-center"
+                            style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
+                        >
+                            <div className="col-12">
+                                <span className="expected-uploads-text">{formatNumber(newOnArt)} </span>
+                                <sup className="overall-rates-sup overall-rates-sup-perc"></sup>
+                            </div>
+                        </CardBody>
+                    </Card>
                 </Col>
                 <Col>
                     <DataCard

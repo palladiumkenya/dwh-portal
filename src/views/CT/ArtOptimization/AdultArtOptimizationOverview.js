@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Row, Col, Spinner } from 'reactstrap';
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import * as artOptimizationOverviewSelectors from '../../../selectors/CT/ArtOptimization/artOptimizationOverview';
-import DataCard from '../../Shared/DataCard';
+import DataCardCT from '../../Shared/DataCardCT';
 
 const AdultArtOptimizationOverview = () => {
     const loading = useSelector(state => state.artOptimizationOverview.loading);
@@ -30,7 +30,7 @@ const AdultArtOptimizationOverview = () => {
                     {
                         loading === true ?
                         <Spinner/> :
-                        <DataCard
+                        <DataCardCT
                             title="ADULTS ON FIRST LINE"
                             subtitle={roundNumber(adultsOnFirstLinePercent) + "%"}
                             data={formatNumber(adultsOnFirstLine)}
@@ -41,7 +41,7 @@ const AdultArtOptimizationOverview = () => {
                     {
                         loading === true ?
                         <Spinner/> :
-                        <DataCard
+                        <DataCardCT
                             title="ADULTS ON SECOND LINE"
                             subtitle={roundNumber(adultsOnSecondLinePercent) + "%"}
                             data={formatNumber(adultsOnSecondLine)}
@@ -52,7 +52,7 @@ const AdultArtOptimizationOverview = () => {
                     {
                         loading === true ?
                         <Spinner/> :
-                        <DataCard
+                        <DataCardCT
                             title="ADULTS ON THIRD LINE"
                             subtitle={roundNumber(adultsOnThirdLinePercent) + "%"}
                             data={formatNumber(adultsOnThirdLine)}
@@ -65,7 +65,7 @@ const AdultArtOptimizationOverview = () => {
                     {
                         loading === true ?
                         <Spinner/> :
-                        <DataCard
+                        <DataCardCT
                             title={"ADULTS ON UNDOCUMENTED LINE"}
                             subtitle={roundNumber(adultsOnUndocumentedPercent) + "%"}
                             data={formatNumber(adultsOnUndocumented)}
@@ -76,7 +76,7 @@ const AdultArtOptimizationOverview = () => {
                     {
                         loading === true ?
                         <Spinner/> :
-                        <DataCard
+                        <DataCardCT
                             title="ADULTS ON TLD"
                             subtitle={roundNumber(adultsOnTldPercent) + "%"}
                             data={formatNumber(adultsOnTld)}
@@ -87,7 +87,7 @@ const AdultArtOptimizationOverview = () => {
                     {
                         loading === true ?
                         <Spinner/> :
-                        <DataCard
+                        <DataCardCT
                             title="ADULTS ON NVP-BASED REGIMEN"
                             subtitle={roundNumber(adultsOnNvpPercent) + "%"}
                             data={formatNumber(adultsOnNvp)}

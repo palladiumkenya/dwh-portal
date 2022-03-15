@@ -5,6 +5,7 @@ import * as currentOnArtOverviewSelectors from '../../../selectors/CT/CurrentOnA
 import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtByAgeSex';
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import DataCard from '../../Shared/DataCard';
+import DataCardCT from '../../Shared/DataCardCT';
 
 const CurrentOnArtOverview = () => {
     const currentOnArt = useSelector(currentOnArtOverviewSelectors.getCurrentOnArt);
@@ -23,21 +24,21 @@ const CurrentOnArtOverview = () => {
         <>
             <Row>
                 <Col>
-                    <DataCard
+                    <DataCardCT
                         title="CURRENTLY ON ART"
                         subtitle={null}
                         data={formatNumber(currentOnArt)}
                     />
                 </Col>
                 <Col>
-                    <DataCard
+                    <DataCardCT
                         title="MALES CURRENT ON ART"
                         subtitle={roundNumber(currentOnArtMalePercent) + "%"}
                         data={formatNumber(currentOnArtMale)}
                     />
                 </Col>
                 <Col>
-                    <DataCard
+                    <DataCardCT
                         title="FEMALES CURRENT ON ART"
                         subtitle={roundNumber(currentOnArtFemalePercent) + "%"}
                         data={formatNumber(currentOnArtFemale)}
@@ -46,21 +47,21 @@ const CurrentOnArtOverview = () => {
             </Row>
             <Row>
                 <Col>
-                    <DataCard
+                    <DataCardCT
                         title="ADULTS CURRENT ON ART(15+ YRS)"
                         subtitle={roundNumber(currentOnArtAdultsPercent) + "%"}
                         data={formatNumber(currentOnArtAdults)}
                     />
                 </Col>
                 <Col>
-                    <DataCard
+                    <DataCardCT
                         title="CHILDREN CURRENT ON ART(<15 YRS)"
                         subtitle={roundNumber(currentOnArtChildrenPercent) + "%"}
                         data={formatNumber(currentOnArtChildren)}
                     />
                 </Col>
                 <Col>
-                    <DataCard
+                    <DataCardCT
                         title="ADOLESCENTS CURRENT ON ART(10 - 19 YRS)"
                         subtitle={roundNumber(currentOnArtAdolescentsPercent) + "%"}
                         data={formatNumber(currentOnArtAdolescents)}

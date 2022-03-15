@@ -4,6 +4,7 @@ import { Col, Row } from 'reactstrap';
 import * as currentOnArtOverviewSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import DataCard from '../../Shared/DataCard';
+import DataCardCT from '../../Shared/DataCardCT';
 
 const ViralLoadOutcomesOverview = () => {
     const currentOnArt = useSelector(currentOnArtOverviewSelectors.getCurrentOnArt);
@@ -19,21 +20,21 @@ const ViralLoadOutcomesOverview = () => {
     return (
         <Row>
             <Col>
-                <DataCard
+                <DataCardCT
                     title="LESS THAN DETECTABLE LEVEL(LDL)"
                     subtitle={roundNumber(suppressedPercent, 1) + "%"}
                     data={formatNumber(suppressed)}
                 />
             </Col>
             <Col>
-                <DataCard
+                <DataCardCT
                     title="HIGH VIRAL LOAD"
                     subtitle={roundNumber(highViralLoadPercent, 1) + "%"}
                     data={formatNumber(highViralLoad)}
                 />
             </Col>
             <Col>
-                <DataCard
+                <DataCardCT
                     title="LOW LEVEL VIREMIA"
                     subtitle={roundNumber(lowLevelViremiaPercent, 1) + "%"}
                     data={formatNumber(lowLevelViremia)}
