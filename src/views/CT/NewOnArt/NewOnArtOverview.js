@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import React from 'react';
-import { Col, Row } from 'reactstrap';
+import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
 import * as currentNewOnArtOverviewSelectors from '../../../selectors/CT/NewOnArt/currentNewOnArtOverview';
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import DataCard from '../../Shared/DataCard';
@@ -22,48 +22,107 @@ const NewOnArtOverview = () => {
         <>
             <Row>
                 <Col>
-                    <DataCard
-                        title="NEWLY STARTED ON ART"
-                        subtitle={null}
-                        data={formatNumber(newOnArt)}
-                    />
+                    <Card className="card-uploads-consistency-rates">
+                        <CardHeader className="expected-uploads-header">
+                            NEWLY STARTED ON ART
+                        </CardHeader>
+                        <CardBody
+                            className="align-items-center d-flex justify-content-center"
+                            style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
+                        >
+                            <div className="col-12">
+                                <span className="expected-uploads-text">{formatNumber(newOnArt)} </span>
+                                <sup className="overall-rates-sup overall-rates-sup-perc"></sup>
+                            </div>
+                        </CardBody>
+                    </Card>
                 </Col>
                 <Col>
-                    <DataCard
-                        title="MALES STARTED ON ART"
-                        subtitle={roundNumber(newOnArtMalePercent) + "%"}
-                        data={formatNumber(newOnArtMale)}
-                    />
+                    <Card className="card-uploads-consistency-rates">
+                        <CardHeader className="expected-uploads-header">
+                            MALES STARTED ON ART
+                        </CardHeader>
+
+                        <CardBody
+                            className="align-items-center d-flex justify-content-center"
+                            style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
+                        >
+                            <div className="col-12">
+                                <span className="expected-uploads-text">{formatNumber(newOnArtMale)} </span>
+                                <sup className="overall-rates-sup overall-rates-sup-perc"> {roundNumber(newOnArtMalePercent) + "%"}</sup>
+                            </div>
+                        </CardBody>
+                    </Card>
                 </Col>
                 <Col>
-                    <DataCard
-                        title="FEMALES STARTED ON ART"
-                        subtitle={roundNumber(newOnArtFemalePercent) + "%"}
-                        data={formatNumber(newOnArtFemale)}
-                    />
+                    <Card className="card-uploads-consistency-rates">
+                        <CardHeader className="expected-uploads-header">
+                            FEMALES STARTED ON ART
+                        </CardHeader>
+
+                        <CardBody
+                            className="align-items-center d-flex justify-content-center"
+                            style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
+                        >
+                            <div className="col-12">
+                                <span className="expected-uploads-text">{formatNumber(newOnArtFemale)} </span>
+                                <sup className="overall-rates-sup overall-rates-sup-perc"> {roundNumber(newOnArtFemalePercent) + "%"}</sup>
+                            </div>
+                        </CardBody>
+                    </Card>
                 </Col>
             </Row>
             <Row>
                 <Col>
-                    <DataCard
-                        title="ADULTS STARTED ON ART(15+ YRS)"
-                        subtitle={roundNumber(newOnArtAdultsPercent) + "%"}
-                        data={formatNumber(newOnArtAdults)}
-                    />
+                    <Card className="card-uploads-consistency-rates">
+                        <CardHeader className="expected-uploads-header">
+                            ADULTS STARTED ON ART(15+ YRS)
+                        </CardHeader>
+
+                        <CardBody
+                            className="align-items-center d-flex justify-content-center"
+                            style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
+                        >
+                            <div className="col-12">
+                                <span className="expected-uploads-text">{formatNumber(newOnArtAdults)} </span>
+                                <sup className="overall-rates-sup overall-rates-sup-perc"> {roundNumber(newOnArtAdultsPercent) + "%"}</sup>
+                            </div>
+                        </CardBody>
+                    </Card>
                 </Col>
                 <Col>
-                    <DataCard
-                        title="CHILDREN STARTED ON ART(&lt;14 YRS)"
-                        subtitle={roundNumber(newOnArtChildrenPercent) + "%"}
-                        data={formatNumber(newOnArtChildren)}
-                    />
+                    <Card className="card-uploads-consistency-rates">
+                        <CardHeader className="expected-uploads-header">
+                            CHILDREN STARTED ON ART(&lt;14 YRS)
+                        </CardHeader>
+
+                        <CardBody
+                            className="align-items-center d-flex justify-content-center"
+                            style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
+                        >
+                            <div className="col-12">
+                                <span className="expected-uploads-text">{formatNumber(newOnArtChildren)} </span>
+                                <sup className="overall-rates-sup overall-rates-sup-perc"> {roundNumber(newOnArtChildrenPercent) + "%"}</sup>
+                            </div>
+                        </CardBody>
+                    </Card>
                 </Col>
                 <Col>
-                    <DataCard
-                        title="ADOLESCENTS STARTED ON ART(10 - 19 YRS)"
-                        subtitle={roundNumber(newOnArtAdolescentsPercent) + "%"}
-                        data={formatNumber(newOnArtAdolescents)}
-                    />
+                    <Card className="card-uploads-consistency-rates">
+                        <CardHeader className="expected-uploads-header">
+                            ADOLESCENTS STARTED ON ART(10 - 19 YRS)
+                        </CardHeader>
+
+                        <CardBody
+                            className="align-items-center d-flex justify-content-center"
+                            style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
+                        >
+                            <div className="col-12">
+                                <span className="expected-uploads-text">{formatNumber(newOnArtAdolescents)} </span>
+                                <sup className="overall-rates-sup overall-rates-sup-perc"> {roundNumber(newOnArtAdolescentsPercent) + "%"}</sup>
+                            </div>
+                        </CardBody>
+                    </Card>
                 </Col>
             </Row>
         </>

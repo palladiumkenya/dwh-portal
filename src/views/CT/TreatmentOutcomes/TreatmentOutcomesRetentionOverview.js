@@ -8,6 +8,7 @@ import * as treatmentOutcomesOverallLast12m
 
 import * as treatmentOutcomesNetCohort
     from '../../../selectors/CT/TreatmentOutcomes/treatmentOutcomesNetCohort';
+import DataCardCT from '../../Shared/DataCardCT';
 
 const TreatmentOutcomesRetentionOverview = () => {
     const startedOnArt = useSelector(treatmentOutcomesOverallLast12m.getStartedOnArt);
@@ -24,28 +25,28 @@ const TreatmentOutcomesRetentionOverview = () => {
         <>
             <Row>
                 <Col className={"col-3"}>
-                    <DataCard
+                    <DataCardCT
                         title="NET COHORT"
                         subtitle={null}
                         data={formatNumber(netCohort)}
                     />
                 </Col>
                 <Col className={"col-3"}>
-                    <DataCard
+                    <DataCardCT
                         title="CURRENT ON ART"
                         subtitle={roundNumber(activePercent) + "%"}
                         data={formatNumber(active)}
                     />
                 </Col>
                 <Col className={"col-3"}>
-                    <DataCard
+                    <DataCardCT
                         title="LOST TO FOLLOW UP"
                         subtitle={roundNumber(ltfuPercent) + "%"}
                         data={formatNumber(ltfu)}
                     />
                 </Col>
                 <Col className={"col-3"}>
-                    <DataCard
+                    <DataCardCT
                         title="DEAD"
                         subtitle={roundNumber(deadPercent) + "%"}
                         data={formatNumber(dead)}
