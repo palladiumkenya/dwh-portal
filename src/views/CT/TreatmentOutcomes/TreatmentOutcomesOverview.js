@@ -4,6 +4,7 @@ import { Row, Col } from 'reactstrap';
 import { useSelector } from 'react-redux';
 import DataCard from '../../Shared/DataCard';
 import * as treatmentOutcomesOverallLast12m from '../../../selectors/CT/TreatmentOutcomes/treatmentOutcomesOverallLast12m';
+import DataCardCT from '../../Shared/DataCardCT';
 
 const TreatmentOutcomesOverview = () => {
     const startedOnArt = useSelector(treatmentOutcomesOverallLast12m.getStartedOnArt);
@@ -23,21 +24,21 @@ const TreatmentOutcomesOverview = () => {
         <>
             <Row>
                 <Col>
-                    <DataCard
+                    <DataCardCT
                         title="STARTED ART"
                         subtitle={null}
                         data={formatNumber(startedOnArt)}
                     />
                 </Col>
                 <Col>
-                    <DataCard
+                    <DataCardCT
                         title="CURRENT ON ART"
                         subtitle={roundNumber(activePercent) + "%"}
                         data={formatNumber(active)}
                     />
                 </Col>
                 <Col>
-                    <DataCard
+                    <DataCardCT
                         title="LOST TO FOLLOW UP"
                         subtitle={roundNumber(ltfuPercent) + "%"}
                         data={formatNumber(ltfu)}
@@ -46,21 +47,21 @@ const TreatmentOutcomesOverview = () => {
             </Row>
             <Row>
                 <Col>
-                    <DataCard
+                    <DataCardCT
                         title="DEAD"
                         subtitle={roundNumber(deadPercent) + "%"}
                         data={formatNumber(dead)}
                     />
                 </Col>
                 <Col>
-                    <DataCard
+                    <DataCardCT
                         title="TRANSFER OUT"
                         subtitle={roundNumber(transferOutPercent) + "%"}
                         data={formatNumber(transferOut)}
                     />
                 </Col>
                 <Col>
-                    <DataCard
+                    <DataCardCT
                         title="STOPPED ART"
                         subtitle={roundNumber(stoppedPercent) + "%"}
                         data={formatNumber(stopped)}

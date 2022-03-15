@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Row, Col, Spinner } from 'reactstrap';
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import * as artOptimizationOverviewSelectors from '../../../selectors/CT/ArtOptimization/artOptimizationOverview';
-import DataCard from '../../Shared/DataCard';
+import DataCardCT from '../../Shared/DataCardCT';
 
 const ChildArtOptimizationOverview = () => {
     const loading = useSelector(state => state.artOptimizationOverview.loading);
@@ -25,7 +25,7 @@ const ChildArtOptimizationOverview = () => {
                     {
                         loading === true ?
                         <Spinner/> :
-                        <DataCard
+                        <DataCardCT
                             title="CALHIV ON FIRST LINE"
                             subtitle={roundNumber(childrenOnFirstLinePercent) + "%"}
                             data={formatNumber(childrenOnFirstLine)}
@@ -36,7 +36,7 @@ const ChildArtOptimizationOverview = () => {
                     {
                         loading === true ?
                         <Spinner/> :
-                            <DataCard
+                            <DataCardCT
                             title="CALHIV ON SECOND LINE"
                             subtitle={roundNumber(childrenOnSecondLinePercent) + "%"}
                             data={formatNumber(childrenOnSecondLine)}
@@ -47,7 +47,7 @@ const ChildArtOptimizationOverview = () => {
                     {
                         loading === true ?
                         <Spinner/> :
-                        <DataCard
+                        <DataCardCT
                             title="CALHIV ON THIRD LINE"
                             subtitle={roundNumber(childrenOnThirdLinePercent) + "%"}
                             data={formatNumber(childrenOnThirdLine)}
@@ -60,7 +60,7 @@ const ChildArtOptimizationOverview = () => {
                     {
                         loading === true ?
                         <Spinner/> :
-                        <DataCard
+                        <DataCardCT
                             title="CALHIV ON UNDOCUMENTED LINE"
                             subtitle={roundNumber(childrenOnUndocumentedLinePercent) + "%"}
                             data={formatNumber(childrenOnUndocumentedLine)}

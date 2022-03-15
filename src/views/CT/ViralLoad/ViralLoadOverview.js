@@ -4,6 +4,7 @@ import { Row, Col } from 'reactstrap';
 import * as currentOnArtOverviewSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import DataCard from '../../Shared/DataCard';
+import DataCardCT from '../../Shared/DataCardCT';
 
 const ViralLoadOverview = () => {
     const currentOnArt = useSelector(currentOnArtOverviewSelectors.getCurrentOnArt);
@@ -15,21 +16,21 @@ const ViralLoadOverview = () => {
     return (
         <Row>
             <Col>
-                <DataCard
+                <DataCardCT
                     title="CURRENTLY ON ART"
                     subtitle={null}
                     data={formatNumber(currentOnArt)}
                 />
             </Col>
             <Col>
-                <DataCard
+                <DataCardCT
                     title="ELIGIBLE FOR VIRAL LOAD"
                     subtitle={roundNumber(eligibleForVlPercent, 1) + "%"}
                     data={formatNumber(eligibleForVl)}
                 />
             </Col>
             <Col>
-                <DataCard
+                <DataCardCT
                     title="VALID VIRAL LOAD"
                     subtitle={roundNumber(hasCurrentVlPercent, 1) + "%"}
                     data={formatNumber(hasCurrentVl)}

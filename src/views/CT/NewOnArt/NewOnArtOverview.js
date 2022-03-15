@@ -22,7 +22,7 @@ const NewOnArtOverview = () => {
         <>
             <Row>
                 <Col>
-                    <Card  className="card-uploads-consistency-rates">
+                    <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
                             NEWLY STARTED ON ART
                         </CardHeader>
@@ -32,7 +32,7 @@ const NewOnArtOverview = () => {
                         >
                             <div className="col-12">
                                 <span className="expected-uploads-text">{formatNumber(newOnArt)} </span>
-                                <sup className="overall-rates-sup overall-rates-sup-perc"> ui</sup>
+                                <sup className="overall-rates-sup overall-rates-sup-perc"></sup>
                             </div>
                         </CardBody>
                     </Card>
