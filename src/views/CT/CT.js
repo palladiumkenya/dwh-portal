@@ -365,7 +365,7 @@ const CT = () => {
             Object.keys(CT_TABS).map((value) => {
                 return (
                     <NavItem key={value}>
-                        <NavLink active={active_tab === value} onClick={() => {
+                        <NavLink active={ctTab === value} onClick={() => {
                             dispatch(changeCtTab(value));
                             toggle(value);
                         }}>
@@ -647,22 +647,72 @@ const CT = () => {
         noCache
     ]);
 
-    const DEFAULT_ACTIVE_TAB = useSelector(state => state.ui.ctTab);
-    const { active_tab } = useParams();
+    let urls = [
+        {
+            id: 'txNew',
+            url: 'newly-started-on-art'
+        },
+        {
+            id: 'txCurr',
+            url: 'current-on-art'
+        },
+        {
+            id: 'txOpt',
+            url: 'art-optimization'
+        },
+        {
+            id: 'advEv',
+            url: 'adverse-events'
+        },
+        {
+            id: 'dsd',
+            url: 'dsd'
+        },
+        {
+            id: 'vl',
+            url: 'vl-monitoring'
+        },
+        {
+            id: 'tOut',
+            url: 'treatment-outcomes'
+        },
+        {
+            id: 'otz',
+            url: 'otz'
+        },
+        {
+            id: 'ovc',
+            url: 'ovc'
+        },
+        {
+            id: 'covid',
+            url: 'covid'
+        },
+    ];
+
+    const DEFAULT_ACTIVE_TAB = ctTab;
+    let { active_tab } = useParams();
+
+    if (active_tab) {
+        active_tab = urls.filter(t => t.url === active_tab)[0].id
+    }
     const history = useHistory();
     useEffect(() => {
         if (!active_tab) {
-            history.push(`/hiv-treatment/${DEFAULT_ACTIVE_TAB}`);
+            let tab = urls.filter(t => t.id === DEFAULT_ACTIVE_TAB)[0].url
+            history.push(`/hiv-treatment/${tab}`);
         }
     }, []);
 
-    if(!active_tab){
-        history.push(`/hiv-treatment/${ctTab}`);
+    if (!active_tab) {
+        let tab = urls.filter(t => t.id === ctTab)[0].url
+        history.push(`/hiv-treatment/${tab}`);
     }
 
     const toggle = tab => {
         if (active_tab !== tab) {
-            history.push(`/hiv-treatment/${tab}`);
+            let t = urls.filter(t => t.id === tab)[0].url
+            history.push(`/hiv-treatment/${t}`);
         }
     };
 
@@ -671,36 +721,36 @@ const CT = () => {
             <Nav tabs>
                 {renderTabNavItems()}
             </Nav>
-            <TabContent activeTab={active_tab}>
+            <TabContent activeTab={ctTab}>
                 <TabPane tabId="txNew">
-                    {active_tab === 'txNew' ? <NewOnArt/> : null}
+                    {ctTab === 'txNew' ? <NewOnArt/> : null}
                 </TabPane>
                 <TabPane tabId="txCurr">
-                    {active_tab === 'txCurr' ? <CurrentOnArt/> : null}
+                    {ctTab === 'txCurr' ? <CurrentOnArt/> : null}
                 </TabPane>
                 <TabPane tabId="txOpt">
-                    {active_tab === 'txOpt' ? <ArtOptimization/> : null}
+                    {ctTab === 'txOpt' ? <ArtOptimization/> : null}
                 </TabPane>
                 <TabPane tabId="advEv">
-                    {active_tab === 'advEv' ? <AdverseEvents/> : null}
+                    {ctTab === 'advEv' ? <AdverseEvents/> : null}
                 </TabPane>
                 <TabPane tabId="dsd">
-                    {active_tab === 'dsd' ? <DSD/> : null}
+                    {ctTab === 'dsd' ? <DSD/> : null}
                 </TabPane>
                 <TabPane tabId="vl">
-                    {active_tab === 'vl' ? <ViralLoad/> : null}
+                    {ctTab === 'vl' ? <ViralLoad/> : null}
                 </TabPane>
                 <TabPane tabId="tOut">
-                    {active_tab === 'tOut' ? <TreatmentOutcomes/> : null}
+                    {ctTab === 'tOut' ? <TreatmentOutcomes/> : null}
                 </TabPane>
                 <TabPane tabId={'otz'}>
-                    {active_tab === 'otz' ? <OTZ/> : null}
+                    {ctTab === 'otz' ? <OTZ/> : null}
                 </TabPane>
                 <TabPane tabId={'ovc'}>
-                    {active_tab === 'ovc' ? <OVC/> : null}
+                    {ctTab === 'ovc' ? <OVC/> : null}
                 </TabPane>
                 <TabPane tabId={'covid'}>
-                    {active_tab === 'covid' ? <COVID/> : null}
+                    {ctTab === 'covid' ? <COVID/> : null}
                 </TabPane>
             </TabContent>
             <p></p><p></p>
