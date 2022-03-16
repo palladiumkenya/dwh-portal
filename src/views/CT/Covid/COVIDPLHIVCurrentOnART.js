@@ -20,23 +20,9 @@ const COVIDPLHIVCurrentOnART = () => {
     const label = 'PLHIV CURRENT ON ART';
     const data = [{
         y: 100,
-        color: 'orange'
+        color: '#e88134'
     }];
 
-    let title = `<div class="row" style="text-align:center;"><div class="col-12" style="font-size:40px; text-align:center; font-weight: bold;">${formatNumber(currentOnArtAdults)}</div></div>`;
-
-    let options = {
-        aspectRatio: 1,
-        maintainAspectRatio: false,
-        legend: {
-            display: false
-        },
-        responsive: false,
-        title: {
-            display: false
-        },
-        cutout: '84%'
-    };
 
     const loadCovidPartiallyVaccinated = useCallback(async () => {
         setCovidPlhivCurrentOnART({

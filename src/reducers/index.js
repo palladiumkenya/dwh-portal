@@ -208,6 +208,7 @@ import ovcVLDone from './CT/OVC/ovcVLDone';
 import ovcVLSuppressed from './CT/OVC/ovcVLSuppressed';
 import CovidNumberScreened from './CT/Covid/covidNumberScreened';
 import CovidCumulativeWithMissingDateGivenFirstDose from './CT/Covid/covidCumulativeWithMissingDateGivenFirstDose';
+import CovidAdmissionSymptomaticByAge from './CT/Covid/covidAdmissionSymptomaticByAge';
 
 export default combineReducers({
     auth: authReducer,
@@ -411,5 +412,6 @@ export default combineReducers({
     ovcEligibleVL,
     ovcVLDone,
     ovcVLSuppressed,
-    CovidNumberScreened
+    CovidNumberScreened,
+    CovidAdmissionSymptomaticByAge,
 });

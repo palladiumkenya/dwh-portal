@@ -309,6 +309,7 @@ import { loadCovidNumberScreened } from '../../actions/CT/Covid/covidNumberScree
 import {
     loadCovidCumulativeWithMissingDateGivenFirstDose
 } from '../../actions/CT/Covid/covidCumulativeWithMissingDateGivenFirstDoseActions';
+import { loadCovidAdmissionSymptomaticByAge } from '../../actions/CT/Covid/covidAdmissionSymptomaticByAgeActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from '../../constants';
 
@@ -625,6 +626,7 @@ const CT = () => {
                 dispatch(loadCovidCumulativeWithMissingDateGivenFirstDose());
                 dispatch(loadCovidTrendsPLHIVVaccinationInTheLast12Months());
                 dispatch(loadCovidNumberScreened());
+                dispatch(loadCovidAdmissionSymptomaticByAge());
                 break;
             default:
                 break;

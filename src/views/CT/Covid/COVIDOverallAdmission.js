@@ -14,7 +14,7 @@ export const COVIDOverallAdmission = () => {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
-                type: 'pie'
+                type: 'pie',
             },
             title: { text: '' },
             tooltip: { pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>' },
