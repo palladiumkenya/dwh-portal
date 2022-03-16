@@ -42,7 +42,7 @@ const COVIDTabs = () => {
                 <TabPane tabId="vaccination">
                     <Row>
                         <Col className={"col-12 pt-5 pb-5"}>
-                            <COVIDOverview />
+                            <COVIDOverview tab={activeTab}/>
                         </Col>
                     </Row>
                     <Card>
@@ -96,12 +96,7 @@ const COVIDTabs = () => {
                 </TabPane>
 
                 <TabPane tabId="infection&Outcomes">
-                    <Row className={'pt-5 mb-5'}>
-                        <Col className={"col-1"} />
-                        <Col className={"col-10"}>
-                            <InfectionsAndOutcomesOverview />
-                        </Col>
-                    </Row>
+                    <COVIDOverview tab={activeTab}/>
                     <Row>
                         <Col className={"col-6"}>
                             <COVIDSeverityOfInfectionByGender />
