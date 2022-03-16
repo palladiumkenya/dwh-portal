@@ -22,7 +22,7 @@ const COVIDNumberScreened = () => {
         color: '#e88134'
     }, {
         y: 100 - percentScreened,
-        color: 'rgba(0,0,0,0)'
+        color: '#f0f0f0'
     }];
 
     let label = 'SCREENED FOR VACCINATION'
