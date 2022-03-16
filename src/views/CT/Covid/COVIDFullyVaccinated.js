@@ -24,7 +24,7 @@ const COVIDFullyVaccinated = () => {
         color: '#1c943e'
     }, {
         y: 100 - percentFullyVaccinated,
-        color: 'rgba(0,0,0,0)'
+        color: '#f0f0f0'
     }];
 
     let title = `<div class="row" style="font-family: 'Nunito', sans-serif;">

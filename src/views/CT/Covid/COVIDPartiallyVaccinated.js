@@ -25,7 +25,7 @@ const COVIDPartiallyVaccinated = () => {
         color: '#d32b3a'
     }, {
         y: 100 - percentPartially,
-        color: 'rgba(0,0,0,0)'
+        color: '#f0f0f0'
     }];
 
     let title = `<div class="row">
