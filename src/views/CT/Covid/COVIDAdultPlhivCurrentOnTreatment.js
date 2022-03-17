@@ -16,7 +16,7 @@ const COVIDAdultPlhivCurrentOnTreatment = () => {
     const label = 'ADULT >= 15 YEARS PLHIV CURRENT ON TREATMENT';
 
     const data = [{
-        y: currentOnArtAdults * 100 / currentOnArtAdults,
+        y: 100,
         color: 'blue'
     }, {
         y: 100 - currentOnArtAdults,
