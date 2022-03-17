@@ -1,7 +1,7 @@
 import moment from 'moment';
 import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
-import { CACHING } from '../../../constants';
+import { CACHING, PAGES } from '../../../constants';
 
 export const loadMissingDiagnosisDateByFacility = () => async (dispatch, getState) => {
     if (getState().filters.noCache === true) {
@@ -11,7 +11,8 @@ export const loadMissingDiagnosisDateByFacility = () => async (dispatch, getStat
             moment(getState().missingDiagnosisDateByFacility.lastFetch),
             'minutes'
         );
-        if (getState().ui.ctTab !== 'txNew') {
+        if (getState().ui.ctTab !== 'txNew' &&
+            getState().ui.currentPage !== PAGES.ct) {
             return;
         }
         else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {

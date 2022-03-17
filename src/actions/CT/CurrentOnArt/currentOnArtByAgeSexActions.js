@@ -3,7 +3,7 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING, PAGES } from '../../../constants';
 
-export const loadCurrentOnArtByAgeSex = () => async (dispatch, getState) => {
+export const loadCurrentOnArtByAgeSex = (tab) => async (dispatch, getState) => {
     if (getState().filters.noCache === true) {
         await dispatch(fetchCurrentOnArtByAgeSex());
     } else {
@@ -16,6 +16,10 @@ export const loadCurrentOnArtByAgeSex = () => async (dispatch, getState) => {
             getState().ui.ctTab !== 'txOpt' &&
             getState().ui.ctTab !== 'advEv' &&
             getState().ui.ctTab !== 'dsd' &&
+            tab !== 'dsd' &&
+            tab !== 'txCurr' &&
+            tab !== 'txOpt' &&
+            tab !== 'advEv' &&
             getState().ui.currentPage !== PAGES.home
         ) {
             return;

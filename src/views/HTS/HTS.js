@@ -75,6 +75,7 @@ const HTS = () => {
     const DEFAULT_ACTIVE_TAB = htsTab;
     const { active_tab } = useParams();
     const history = useHistory();
+    console.log(active_tab, htsTab)
     useEffect(() => {
         if (!active_tab) {
             history.push(`/hiv-testing/${DEFAULT_ACTIVE_TAB}`);
@@ -95,15 +96,15 @@ const HTS = () => {
             <Nav tabs>
                 {renderTabNavItems()}
             </Nav>
-            <TabContent activeTab={htsTab}>
+            <TabContent activeTab={active_tab}>
                 <TabPane tabId="uptake">
-                    { htsTab === 'uptake' ? <Uptake/>: null }
+                    { active_tab === 'uptake' ? <Uptake/>: null }
                 </TabPane>
                 <TabPane tabId="linkage">
-                    { htsTab === 'linkage' ? <Linkage/>: null }
+                    { active_tab === 'linkage' ? <Linkage/>: null }
                 </TabPane>
                 <TabPane tabId="pns">
-                    { htsTab === 'pns' ? <PNS/>: null }
+                    { active_tab === 'pns' ? <PNS/>: null }
                 </TabPane>
             </TabContent>
             <p></p><p></p>

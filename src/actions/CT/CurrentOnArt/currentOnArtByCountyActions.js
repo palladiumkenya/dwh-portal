@@ -3,7 +3,7 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING } from '../../../constants';
 
-export const loadCurrentOnArtByCounty = () => async (dispatch, getState) => {
+export const loadCurrentOnArtByCounty = (tab) => async (dispatch, getState) => {
     if (getState().filters.noCache === true) {
         await dispatch(fetchCurrentOnArtByCounty());
     } else {
@@ -11,7 +11,12 @@ export const loadCurrentOnArtByCounty = () => async (dispatch, getState) => {
             moment(getState().currentOnArtByCounty.lastFetch),
             'minutes'
         );
-        if (getState().ui.ctTab !== 'txCurr' && getState().ui.ctTab !== 'txOpt' && getState().ui.ctTab !== 'dsd') {
+        if (getState().ui.ctTab !== 'txCurr' &&
+            getState().ui.ctTab !== 'txOpt' &&
+            getState().ui.ctTab !== 'dsd' &&
+            tab !== 'dsd' &&
+            tab !== 'txCurr' &&
+            tab !== 'txOpt') {
             return;
         }
         else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {

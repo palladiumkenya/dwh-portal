@@ -3,7 +3,7 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING, PAGES } from '../../../constants';
 
-export const loadCurrentOnArtOverview = () => async (dispatch, getState) => {
+export const loadCurrentOnArtOverview = (tab) => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
         moment(getState().currentOnArtOverview.lastFetch),
         'minutes'
@@ -12,6 +12,9 @@ export const loadCurrentOnArtOverview = () => async (dispatch, getState) => {
         getState().ui.ctTab !== 'txCurr' &&
         getState().ui.ctTab !== 'dsd' &&
         getState().ui.ctTab !== 'vl' &&
+        tab !== 'dsd' &&
+        tab !== 'vl' &&
+        tab !== 'txCurr' &&
         getState().ui.currentPage !== PAGES.home
     ) {
         return;

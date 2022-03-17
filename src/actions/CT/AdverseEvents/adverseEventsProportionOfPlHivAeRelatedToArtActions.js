@@ -3,12 +3,12 @@ import { CACHING } from '../../../constants';
 import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 
-export const loadAdverseEventsProportionOfPlHivAeRelatedToArt = () => async (dispatch, getState) => {
+export const loadAdverseEventsProportionOfPlHivAeRelatedToArt = (tab) => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
         moment(getState().adverseEventsProportionOfPlHivAeRelatedToArtDrugs.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'advEv') {
+    if (getState().ui.ctTab !== 'advEv' && tab !== 'advEv') {
         return;
     }
     else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {

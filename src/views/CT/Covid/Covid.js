@@ -7,12 +7,14 @@ import { disableStickyFilter, enableStickyFilter } from '../../../actions/Shared
 import Loadable from 'react-loadable';
 import Loading from '../../Shared/Loading';
 import { LOADING_DELAY } from '../../../constants';
+import { useParams } from 'react-router-dom';
 
 const COVIDTabs = Loadable({ loader: () => import('./COVIDTabs'), loading: Loading, delay: LOADING_DELAY });
 
 const Covid = () => {
     const branding = { title: "COVID-19", description: "OVERVIEW", overview: "COVID-19" };
-    const ctTab = useSelector(state => state.ui.ctTab);
+    const { active_tab } = useParams();
+    const ctTab = active_tab
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
         if (ctTab === 'covid') {

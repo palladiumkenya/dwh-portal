@@ -13,7 +13,8 @@ export const loadCovidAdultPLHIVCurrentOnTreatment = () => async (dispatch, getS
         );
         if (
             getState().ui.ctTab !== 'covid' &&
-            getState().ui.currentPage !== PAGES.home
+            getState().ui.currentPage !== PAGES.home &&
+            getState().ui.currentPage !== PAGES.ct
         ) {
             return;
         }

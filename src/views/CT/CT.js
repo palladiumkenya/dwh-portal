@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import Loadable from 'react-loadable';
@@ -316,6 +316,7 @@ import { CT_TABS, PAGES, LOADING_DELAY } from '../../constants';
 import Loading from './../Shared/Loading';
 import { loadCalHIVOnDTG } from '../../actions/CT/OVC/CALHIVOnDTGActions';
 import { useHistory, useParams } from 'react-router-dom';
+import * as actions from '../../actions/types';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({
@@ -361,6 +362,11 @@ const CT = () => {
     const fromDate = useSelector(state => state.filters.fromDate);
     const toDate = useSelector(state => state.filters.toDate);
 
+    const DEFAULT_ACTIVE_TAB = useSelector(state => state.ui.ctTab);
+    const { active_tab } = useParams();
+    const history = useHistory();
+
+
     const renderTabNavItems = () => {
         return (
             Object.keys(CT_TABS).map((value) => {
@@ -387,17 +393,17 @@ const CT = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (ctTab === 'txNew' || ctTab === 'tOut') {
+        if (active_tab === 'txNew' || active_tab === 'tOut') {
             dispatch(enableFromDateFilter());
         } else {
             dispatch(disableFromDateFilter());
         }
-        if (ctTab === 'tOut') {
+        if (active_tab === 'tOut') {
             dispatch(enableToDateFilter());
         } else {
             dispatch(disableToDateFilter());
         }
-        if (ctTab === 'txOpt') {
+        if (active_tab === 'txOpt') {
             dispatch(enableGenderFilter());
             dispatch(enableDatimAgeGroupFilter());
             dispatch(enableLatestPregnancyFilter());
@@ -408,24 +414,24 @@ const CT = () => {
             dispatch(disableLatestPregnancyFilter());
             dispatch(disablePopulationTypeFilter());
         }
-        if (ctTab === 'txNew'
-            || ctTab === 'txCurr'
-            || ctTab === 'txOpt'
-            || ctTab === 'advEv'
-            || ctTab === 'dsd'
-            || ctTab === 'vl'
-            || ctTab === 'tOut'
-            || ctTab === 'otz'
-            || ctTab === 'ovc'
-            || ctTab === 'covid') {
+        if (active_tab === 'txNew'
+            || active_tab === 'txCurr'
+            || active_tab === 'txOpt'
+            || active_tab === 'advEv'
+            || active_tab === 'dsd'
+            || active_tab === 'vl'
+            || active_tab === 'tOut'
+            || active_tab === 'otz'
+            || active_tab === 'ovc'
+            || active_tab === 'covid') {
             dispatch(enableAgencyFilter());
             dispatch(enableGenderFilter());
             dispatch(enableDatimAgeGroupFilter());
         }
-    }, [dispatch, ctTab]);
+    }, [dispatch, active_tab]);
 
     useEffect(() => {
-        switch (ctTab) {
+        switch (active_tab) {
             case 'txNew':
                 dispatch(loadLinkagePositiveTrends());
                 dispatch(loadCurrentNewOnArtOverview());
@@ -439,100 +445,100 @@ const CT = () => {
                 dispatch(loadMissingDiagnosisDateByFacility());
                 break;
             case 'txCurr':
-                dispatch(loadCurrentOnArtOverview());
-                dispatch(loadCurrentOnArtByAgeSex());
-                dispatch(loadCurrentOnArtByCounty());
-                dispatch(loadCurrentOnArtByPartner());
-                dispatch(loadCurrentOnArtDistributionByCounty());
-                dispatch(loadCurrentOnArtDistributionByPartner());
+                dispatch(loadCurrentOnArtOverview(active_tab));
+                dispatch(loadCurrentOnArtByAgeSex(active_tab));
+                dispatch(loadCurrentOnArtByCounty(active_tab));
+                dispatch(loadCurrentOnArtByPartner(active_tab));
+                dispatch(loadCurrentOnArtDistributionByCounty(active_tab));
+                dispatch(loadCurrentOnArtDistributionByPartner(active_tab));
                 break;
             case 'txOpt':
-                dispatch(loadCurrentOnArtByAgeSex());
-                dispatch(loadCurrentOnArtByCounty());
-                dispatch(loadCurrentOnArtByPartner());
-                dispatch(loadArtOptimizationOverview());
-                dispatch(loadArtOptimizationCurrentByRegimen());
-                dispatch(loadArtOptimizationCurrentByAgeSex());
-                dispatch(loadArtOptimizationCurrentByCounty());
-                dispatch(loadArtOptimizationCurrentByPartner());
-                dispatch(loadArtOptimizationNewByCounty());
-                dispatch(loadArtOptimizationNewByPartner());
-                dispatch(loadArtOptimizationNewByYear());
-                dispatch(loadRegimenDistributionByWeightBands());
-                dispatch(loadRegimenDistributionByAgeBands());
+                dispatch(loadCurrentOnArtByAgeSex(active_tab));
+                dispatch(loadCurrentOnArtByCounty(active_tab));
+                dispatch(loadCurrentOnArtByPartner(active_tab));
+                dispatch(loadArtOptimizationOverview(active_tab));
+                dispatch(loadArtOptimizationCurrentByRegimen(active_tab));
+                dispatch(loadArtOptimizationCurrentByAgeSex(active_tab));
+                dispatch(loadArtOptimizationCurrentByCounty(active_tab));
+                dispatch(loadArtOptimizationCurrentByPartner(active_tab));
+                dispatch(loadArtOptimizationNewByCounty(active_tab));
+                dispatch(loadArtOptimizationNewByPartner(active_tab));
+                dispatch(loadArtOptimizationNewByYear(active_tab));
+                dispatch(loadRegimenDistributionByWeightBands(active_tab));
+                dispatch(loadRegimenDistributionByAgeBands(active_tab));
                 break;
             case 'advEv':
-                dispatch(loadCurrentOnArtByAgeSex());
-                dispatch(loadAdverseEventsByAgeSex());
-                dispatch(loadAdverseEventsClientsByAgeSex());
-                dispatch(loadAdverseEventsSeverityGrading());
-                dispatch(loadAdverseEventsSeverityActions());
-                dispatch(loadAdverseEventsReportedWithSeverityLevels());
-                dispatch(loadAdverseEventsActionsByDrugs());
-                dispatch(loadAdverseEventsActionsByDrugsNew());
-                dispatch(loadAdverseEventsProportionOfPlHivWithAeByCausativeDrugs());
-                dispatch(loadAdverseEventsProportionOfPlHivAeRelatedToArt());
-                dispatch(loadAdverseEventsProportionOfPLHIVWithAeRegimenChanged());
-                dispatch(loadAdverseEventsProportionOfPLHIVWithAeRegimenWasStopped());
-                dispatch(loadAdverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered());
+                dispatch(loadCurrentOnArtByAgeSex(active_tab));
+                dispatch(loadAdverseEventsByAgeSex(active_tab));
+                dispatch(loadAdverseEventsClientsByAgeSex(active_tab));
+                dispatch(loadAdverseEventsSeverityGrading(active_tab));
+                dispatch(loadAdverseEventsSeverityActions(active_tab));
+                dispatch(loadAdverseEventsReportedWithSeverityLevels(active_tab));
+                dispatch(loadAdverseEventsActionsByDrugs(active_tab));
+                dispatch(loadAdverseEventsActionsByDrugsNew(active_tab));
+                dispatch(loadAdverseEventsProportionOfPlHivWithAeByCausativeDrugs(active_tab));
+                dispatch(loadAdverseEventsProportionOfPlHivAeRelatedToArt(active_tab));
+                dispatch(loadAdverseEventsProportionOfPLHIVWithAeRegimenChanged(active_tab));
+                dispatch(loadAdverseEventsProportionOfPLHIVWithAeRegimenWasStopped(active_tab));
+                dispatch(loadAdverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered(active_tab));
                 break;
             case 'dsd':
-                dispatch(loadCurrentOnArtOverview());
-                dispatch(loadDsdStabilityStatusByAgeSex());
-                dispatch(loadDsdStabilityStatusByCounty());
-                dispatch(loadDsdStabilityStatusByPartner());
-                dispatch(loadDsdUnstable());
-                dispatch(loadDsdStableMmdModels());
-                dispatch(loadDsdAppointmentDurationByStabilityStatus());
-                dispatch(loadDsdAppointmentDurationBySex());
-                dispatch(loadDsdAppointmentDurationByAge());
-                dispatch(loadDsdAppointmentDurationByCounty());
-                dispatch(loadDsdAppointmentDurationByPartner());
-                dispatch(loadDsdUptakeOverall());
-                dispatch(loadDsdStableOverall());
-                dispatch(loadDsdUptakeOverallBySex());
-                dispatch(loadCurrentOnArtByCounty());
-                dispatch(loadCurrentOnArtByPartner());
-                dispatch(loadCurrentOnArtDistributionByCounty());
-                dispatch(loadCurrentOnArtDistributionByPartner());
-                dispatch(loadCurrentOnArtByAgeSex());
+                dispatch(loadCurrentOnArtOverview(active_tab));
+                dispatch(loadDsdStabilityStatusByAgeSex(active_tab));
+                dispatch(loadDsdStabilityStatusByCounty(active_tab));
+                dispatch(loadDsdStabilityStatusByPartner(active_tab));
+                dispatch(loadDsdUnstable(active_tab));
+                dispatch(loadDsdStableMmdModels(active_tab));
+                dispatch(loadDsdAppointmentDurationByStabilityStatus(active_tab));
+                dispatch(loadDsdAppointmentDurationBySex(active_tab));
+                dispatch(loadDsdAppointmentDurationByAge(active_tab));
+                dispatch(loadDsdAppointmentDurationByCounty(active_tab));
+                dispatch(loadDsdAppointmentDurationByPartner(active_tab));
+                dispatch(loadDsdUptakeOverall(active_tab));
+                dispatch(loadDsdStableOverall(active_tab));
+                dispatch(loadDsdUptakeOverallBySex(active_tab));
+                dispatch(loadCurrentOnArtByCounty(active_tab));
+                dispatch(loadCurrentOnArtByPartner(active_tab));
+                dispatch(loadCurrentOnArtDistributionByCounty(active_tab));
+                dispatch(loadCurrentOnArtDistributionByPartner(active_tab));
+                dispatch(loadCurrentOnArtByAgeSex(active_tab));
                 break;
             case 'vl':
-                dispatch(loadCurrentOnArtOverview());
-                dispatch(loadViralLoadOverallUptakeSuppressionBySex());
-                dispatch(loadMedianTimeTo1stVlByYear());
-                dispatch(loadMedianTimeTo1stVlByCounty());
-                dispatch(loadMedianTimeTo1stVlByPartner());
-                dispatch(loadViralLoadUptakeBySex());
-                dispatch(loadViralLoadUptakeByAge());
-                dispatch(loadViralLoadUptakeByCounty());
-                dispatch(loadViralLoadUptakeByPartner());
-                dispatch(loadViralLoadOutcomesBySex());
-                dispatch(loadViralLoadSuppressionByAge());
-                dispatch(loadViralLoadSuppressionByYear());
-                dispatch(loadViralLoadSuppressionByRegimen());
-                dispatch(loadViralLoadSuppressionByYearAndSuppressionCategory());
-                dispatch(loadViralLoadOverallUptakeSuppressionByFacility());
-                dispatch(load6MonthSuppressionByYearOfArtStart());
-                dispatch(load12MonthSuppressionByYearOfArtStart());
-                dispatch(load24MonthSuppressionByYearOfArtStart());
-                dispatch(loadViralLoadOutcomesHvlByFacility());
+                dispatch(loadCurrentOnArtOverview(active_tab));
+                dispatch(loadViralLoadOverallUptakeSuppressionBySex(active_tab));
+                dispatch(loadMedianTimeTo1stVlByYear(active_tab));
+                dispatch(loadMedianTimeTo1stVlByCounty(active_tab));
+                dispatch(loadMedianTimeTo1stVlByPartner(active_tab));
+                dispatch(loadViralLoadUptakeBySex(active_tab));
+                dispatch(loadViralLoadUptakeByAge(active_tab));
+                dispatch(loadViralLoadUptakeByCounty(active_tab));
+                dispatch(loadViralLoadUptakeByPartner(active_tab));
+                dispatch(loadViralLoadOutcomesBySex(active_tab));
+                dispatch(loadViralLoadSuppressionByAge(active_tab));
+                dispatch(loadViralLoadSuppressionByYear(active_tab));
+                dispatch(loadViralLoadSuppressionByRegimen(active_tab));
+                dispatch(loadViralLoadSuppressionByYearAndSuppressionCategory(active_tab));
+                dispatch(loadViralLoadOverallUptakeSuppressionByFacility(active_tab));
+                dispatch(load6MonthSuppressionByYearOfArtStart(active_tab));
+                dispatch(load12MonthSuppressionByYearOfArtStart(active_tab));
+                dispatch(load24MonthSuppressionByYearOfArtStart(active_tab));
+                dispatch(loadViralLoadOutcomesHvlByFacility(active_tab));
                 break;
             case 'tOut':
-                dispatch(loadNewOnArtOverview());
-                dispatch(loadTreatmentOutcomesOverallLast12m());
-                dispatch(loadNewOnArtTrends());
-                dispatch(loadTreatmentOutcomesBySex());
-                dispatch(loadTreatmentOutcomesByPopulationType());
-                dispatch(loadTreatmentOutcomesByAge());
-                dispatch(loadTreatmentOutcomesByYear());
-                dispatch(loadTreatmentOutcomesByFacility());
-                dispatch(loadThreeMonthRetention());
-                dispatch(loadSixMonthRetention());
-                dispatch(loadTwelveMonthRetention());
-                dispatch(loadTwentyFourMonthRetention());
-                dispatch(loadTreatmentOutcomesUndocumentedByFacility());
-                dispatch(loadTreatmentOutcomesNetCohort());
+                dispatch(loadNewOnArtOverview(active_tab));
+                dispatch(loadTreatmentOutcomesOverallLast12m(active_tab));
+                dispatch(loadNewOnArtTrends(active_tab));
+                dispatch(loadTreatmentOutcomesBySex(active_tab));
+                dispatch(loadTreatmentOutcomesByPopulationType(active_tab));
+                dispatch(loadTreatmentOutcomesByAge(active_tab));
+                dispatch(loadTreatmentOutcomesByYear(active_tab));
+                dispatch(loadTreatmentOutcomesByFacility(active_tab));
+                dispatch(loadThreeMonthRetention(active_tab));
+                dispatch(loadSixMonthRetention(active_tab));
+                dispatch(loadTwelveMonthRetention(active_tab));
+                dispatch(loadTwentyFourMonthRetention(active_tab));
+                dispatch(loadTreatmentOutcomesUndocumentedByFacility(active_tab));
+                dispatch(loadTreatmentOutcomesNetCohort(active_tab));
                 break;
             case 'otz':
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtBySex());
@@ -645,13 +651,10 @@ const CT = () => {
         datimAgeGroups,
         latestPregnancies,
         populationTypes,
-        ctTab,
+        active_tab,
         noCache
     ]);
 
-    const DEFAULT_ACTIVE_TAB = useSelector(state => state.ui.ctTab);
-    const { active_tab } = useParams();
-    const history = useHistory();
     useEffect(() => {
         if (!active_tab) {
             history.push(`/hiv-treatment/${DEFAULT_ACTIVE_TAB}`);
@@ -659,7 +662,7 @@ const CT = () => {
     }, []);
 
     if(!active_tab){
-        history.push(`/hiv-treatment/${ctTab}`);
+        history.push(`/hiv-treatment/${DEFAULT_ACTIVE_TAB}`);
     }
 
     const toggle = tab => {

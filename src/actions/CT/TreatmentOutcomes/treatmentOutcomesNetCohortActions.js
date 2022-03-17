@@ -3,12 +3,12 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING } from '../../../constants';
 
-export const loadTreatmentOutcomesNetCohort = () => async (dispatch, getState) => {
+export const loadTreatmentOutcomesNetCohort = (tab) => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
         moment(getState().treatmentOutcomesNetCohort.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'tOut') {
+    if (getState().ui.ctTab !== 'tOut' && tab !== 'tOut') {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {

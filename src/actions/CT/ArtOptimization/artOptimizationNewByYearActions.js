@@ -3,7 +3,7 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING } from '../../../constants';
 
-export const loadArtOptimizationNewByYear = () => async (dispatch, getState) => {
+export const loadArtOptimizationNewByYear = (tab) => async (dispatch, getState) => {
     if (getState().filters.noCache === true) {
         await dispatch(fetchArtOptimizationNewByYear());
     } else {
@@ -11,7 +11,8 @@ export const loadArtOptimizationNewByYear = () => async (dispatch, getState) => 
             moment(getState().artOptimizationNewByYear.lastFetch),
             'minutes'
         );
-        if (getState().ui.ctTab !== 'txOpt') {
+        if (getState().ui.ctTab !== 'txOpt' &&
+            tab !== 'txOpt') {
             return;
         }
         else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {

@@ -11,6 +11,7 @@ import SectionHeader from '../../Shared/SectionHeader';
 import UniversalFilter from './../../Shared/UniversalFilter';
 import moment from 'moment';
 import classnames from 'classnames';
+import { useParams } from 'react-router-dom';
 
 const SixMonthRetention = Loadable({ loader: () => import('./SixMonthRetention'), loading: Loading, delay: LOADING_DELAY });
 const ThreeMonthRetention = Loadable({ loader: () => import('./ThreeMonthRetention'), loading: Loading, delay: LOADING_DELAY });
@@ -35,8 +36,9 @@ const TreatmentOutcomesUndocumentedByFacility = Loadable({ loader: () => import(
 const TreatmentOutcomes = () => {
     const branding = { title: "TREATMENT OUTCOMES", description: "OVERVIEW", overview: "Treatment Outcomes" };
     const [activeTab, setActiveTab] = useState('outcomes');
-    const ctTab = useSelector(state => state.ui.ctTab);
     const filters = useSelector(state => state.filters);
+    const { active_tab } = useParams();
+    const ctTab = active_tab
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
         if (ctTab === 'tOut') {

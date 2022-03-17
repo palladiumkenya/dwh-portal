@@ -8,6 +8,7 @@ import Loadable from 'react-loadable';
 import Loading from '../../Shared/Loading';
 import { LOADING_DELAY } from '../../../constants';
 import { Card, CardBody, CardHeader } from 'reactstrap';
+import { useParams } from 'react-router-dom';
 
 const OTZOverview = Loadable({ loader: () => import('./OTZOverview'), loading: Loading, delay: LOADING_DELAY });
 const OTZTabs = Loadable({ loader: () => import('./OTZTabs'), loading: Loading, delay: LOADING_DELAY });
@@ -15,8 +16,10 @@ const OTZTabs = Loadable({ loader: () => import('./OTZTabs'), loading: Loading, 
 const OTZ = () => {
     const branding = { title: "OTZ", description: "OVERVIEW", overview: "OTZ" };
     const [activeTab, setActiveTab] = useState('otz');
-    const ctTab = useSelector(state => state.ui.ctTab);
+    const { active_tab } = useParams();
+    const ctTab = active_tab
     const dispatch = useDispatch();
+    console.log(active_tab, ctTab)
     const onVisibilityChange = (isVisible) => {
         if (ctTab === 'otz') {
             if (isVisible) {
