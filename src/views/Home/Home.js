@@ -42,6 +42,7 @@ const Home = () => {
     const partners = useSelector(state => state.filters.partners);
     const agencies = useSelector(state => state.filters.agencies);
     const projects = useSelector(state => state.filters.projects);
+    const datimAgeGroups = useSelector(state => state.filters.datimAgeGroups);
     const dispatch = useDispatch();
 
     const onVisibilityChange = (isVisible) => {
@@ -72,6 +73,7 @@ const Home = () => {
         partners,
         agencies,
         projects,
+        datimAgeGroups,
         page
     ]);
 

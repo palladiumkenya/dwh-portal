@@ -11,11 +11,11 @@ const COVIDOverallAdmissionFemale = Loadable({ loader: () => import('./COVIDOver
 const COVIDAdmissionOfCovid19Symptomatic = () => {
 
     return (
-        <Card className="trends-card">
+        <Card className="">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
                 ADMISSION OF COVID-19 SYMPTOMATIC PATIENTS AMONG PLHIV
             </CardHeader>
-            <CardBody className="trends-body">
+            <CardBody className="">
                 <div className={"row"}>
                     <div className="col-4">
                         <COVIDOverallAdmission />

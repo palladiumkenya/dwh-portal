@@ -309,6 +309,7 @@ import { loadCovidNumberScreened } from '../../actions/CT/Covid/covidNumberScree
 import {
     loadCovidCumulativeWithMissingDateGivenFirstDose
 } from '../../actions/CT/Covid/covidCumulativeWithMissingDateGivenFirstDoseActions';
+import { loadCovidAdmissionSymptomaticByAge } from '../../actions/CT/Covid/covidAdmissionSymptomaticByAgeActions';
 
 import { CT_TABS, PAGES, LOADING_DELAY } from '../../constants';
 
@@ -365,7 +366,7 @@ const CT = () => {
             Object.keys(CT_TABS).map((value) => {
                 return (
                     <NavItem key={value}>
-                        <NavLink active={ctTab === value} onClick={() => {
+                        <NavLink active={active_tab === value} onClick={() => {
                             dispatch(changeCtTab(value));
                             toggle(value);
                         }}>
@@ -625,6 +626,7 @@ const CT = () => {
                 dispatch(loadCovidCumulativeWithMissingDateGivenFirstDose());
                 dispatch(loadCovidTrendsPLHIVVaccinationInTheLast12Months());
                 dispatch(loadCovidNumberScreened());
+                dispatch(loadCovidAdmissionSymptomaticByAge());
                 break;
             default:
                 break;
@@ -647,72 +649,22 @@ const CT = () => {
         noCache
     ]);
 
-    let urls = [
-        {
-            id: 'txNew',
-            url: 'newly-started-on-art'
-        },
-        {
-            id: 'txCurr',
-            url: 'current-on-art'
-        },
-        {
-            id: 'txOpt',
-            url: 'art-optimization'
-        },
-        {
-            id: 'advEv',
-            url: 'adverse-events'
-        },
-        {
-            id: 'dsd',
-            url: 'dsd'
-        },
-        {
-            id: 'vl',
-            url: 'vl-monitoring'
-        },
-        {
-            id: 'tOut',
-            url: 'treatment-outcomes'
-        },
-        {
-            id: 'otz',
-            url: 'otz'
-        },
-        {
-            id: 'ovc',
-            url: 'ovc'
-        },
-        {
-            id: 'covid',
-            url: 'covid'
-        },
-    ];
-
-    const DEFAULT_ACTIVE_TAB = ctTab;
-    let { active_tab } = useParams();
-
-    if (active_tab) {
-        active_tab = urls.filter(t => t.url === active_tab)[0].id
-    }
+    const DEFAULT_ACTIVE_TAB = useSelector(state => state.ui.ctTab);
+    const { active_tab } = useParams();
     const history = useHistory();
     useEffect(() => {
         if (!active_tab) {
-            let tab = urls.filter(t => t.id === DEFAULT_ACTIVE_TAB)[0].url
-            history.push(`/hiv-treatment/${tab}`);
+            history.push(`/hiv-treatment/${DEFAULT_ACTIVE_TAB}`);
         }
     }, []);
 
-    if (!active_tab) {
-        let tab = urls.filter(t => t.id === ctTab)[0].url
-        history.push(`/hiv-treatment/${tab}`);
+    if(!active_tab){
+        history.push(`/hiv-treatment/${ctTab}`);
     }
 
     const toggle = tab => {
         if (active_tab !== tab) {
-            let t = urls.filter(t => t.id === tab)[0].url
-            history.push(`/hiv-treatment/${t}`);
+            history.push(`/hiv-treatment/${tab}`);
         }
     };
 
@@ -721,36 +673,36 @@ const CT = () => {
             <Nav tabs>
                 {renderTabNavItems()}
             </Nav>
-            <TabContent activeTab={ctTab}>
+            <TabContent activeTab={active_tab}>
                 <TabPane tabId="txNew">
-                    {ctTab === 'txNew' ? <NewOnArt/> : null}
+                    {active_tab === 'txNew' ? <NewOnArt/> : null}
                 </TabPane>
                 <TabPane tabId="txCurr">
-                    {ctTab === 'txCurr' ? <CurrentOnArt/> : null}
+                    {active_tab === 'txCurr' ? <CurrentOnArt/> : null}
                 </TabPane>
                 <TabPane tabId="txOpt">
-                    {ctTab === 'txOpt' ? <ArtOptimization/> : null}
+                    {active_tab === 'txOpt' ? <ArtOptimization/> : null}
                 </TabPane>
                 <TabPane tabId="advEv">
-                    {ctTab === 'advEv' ? <AdverseEvents/> : null}
+                    {active_tab === 'advEv' ? <AdverseEvents/> : null}
                 </TabPane>
                 <TabPane tabId="dsd">
-                    {ctTab === 'dsd' ? <DSD/> : null}
+                    {active_tab === 'dsd' ? <DSD/> : null}
                 </TabPane>
                 <TabPane tabId="vl">
-                    {ctTab === 'vl' ? <ViralLoad/> : null}
+                    {active_tab === 'vl' ? <ViralLoad/> : null}
                 </TabPane>
                 <TabPane tabId="tOut">
-                    {ctTab === 'tOut' ? <TreatmentOutcomes/> : null}
+                    {active_tab === 'tOut' ? <TreatmentOutcomes/> : null}
                 </TabPane>
                 <TabPane tabId={'otz'}>
-                    {ctTab === 'otz' ? <OTZ/> : null}
+                    {active_tab === 'otz' ? <OTZ/> : null}
                 </TabPane>
                 <TabPane tabId={'ovc'}>
-                    {ctTab === 'ovc' ? <OVC/> : null}
+                    {active_tab === 'ovc' ? <OVC/> : null}
                 </TabPane>
                 <TabPane tabId={'covid'}>
-                    {ctTab === 'covid' ? <COVID/> : null}
+                    {active_tab === 'covid' ? <COVID/> : null}
                 </TabPane>
             </TabContent>
             <p></p><p></p>

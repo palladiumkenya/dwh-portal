@@ -7,8 +7,6 @@ import * as covidAdultPLHIVCurrentOnTreatmentSelectors
     from '../../../selectors/CT/Covid/covidAdultPLHIVCurrentOnTreatment';
 import { useSelector } from 'react-redux';
 import { formatNumber } from '../../../utils/utils';
-import DataCard from '../../Shared/DataCard';
-import { Card, CardBody, CardFooter } from 'reactstrap';
 
 const COVIDAdultPlhivCurrentOnTreatment = () => {
     const [covidAdultPlhivCurrentOnTreatment, setCovidAdultPlhivCurrentOnTreatment] = useState({});
@@ -18,11 +16,11 @@ const COVIDAdultPlhivCurrentOnTreatment = () => {
     const label = 'ADULT >= 15 YEARS PLHIV CURRENT ON TREATMENT';
 
     const data = [{
-        y: currentOnArtAdults * 100 / currentOnArtAdults,
+        y: 100,
         color: 'blue'
     }, {
         y: 100 - currentOnArtAdults,
-        color: 'rgba(0,0,0,0)'
+        color: '#f0f0f0'
     }];
 
     let title = `<div class="row" ><div class="col-12" style="font-size:40px; font-weight: bold;">${formatNumber(currentOnArtAdults)}</div></div>`;

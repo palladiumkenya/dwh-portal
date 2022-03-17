@@ -7,8 +7,7 @@ import { changeHtsTab, changeCurrentPage } from './../../actions/Shared/uiAction
 import { enableFromDateFilter, disableFromDateFilter, enableAgencyFilter } from './../../actions/Shared/filterActions';
 import { loadLinkageNumberNotLinkedByFacility } from '../../actions/HTS/Linkage/linkageNumberNotLinkedByFacilityActions';
 import Loading from './../Shared/Loading';
-import { Route, useHistory, useParams } from 'react-router-dom';
-import { Page404 } from '../Pages';
+import { useHistory, useParams } from 'react-router-dom';
 
 const Uptake = Loadable({ loader: () => import('./Uptake/Uptake'), loading: Loading, delay: LOADING_DELAY });
 const Linkage = Loadable({ loader: () => import('./Linkage/Linkage'), loading: Loading, delay: LOADING_DELAY });
@@ -31,7 +30,7 @@ const HTS = () => {
             Object.keys(HTS_TABS).map((value) => {
                 return (
                     <NavItem key={value}>
-                        <NavLink active={htsTab === value} onClick={() => {
+                        <NavLink active={active_tab === value} onClick={() => {
                             dispatch(changeHtsTab(value));
                             toggle(value);
                         }} replace >
@@ -72,46 +71,22 @@ const HTS = () => {
         htsTab,
         noCache
     ]);
-    let urls = [
-        {
-            id: 'uptake',
-            url: 'hts-uptake'
-        },
-        {
-            id: 'linkage',
-            url: 'hts-linkage'
-        },
-        {
-            id: 'pns',
-            url: 'partner-notification-service'
-        }
-    ]
 
     const DEFAULT_ACTIVE_TAB = htsTab;
-    let { active_tab } = useParams();
+    const { active_tab } = useParams();
     const history = useHistory();
     useEffect(() => {
         if (!active_tab) {
-            let tab = urls.filter(t => t.id === DEFAULT_ACTIVE_TAB)[0]
-            if (tab) history.push(`/hiv-testing/${tab.url}`);
-            else return <Route path="*" component={Page404} status={404}/>
+            history.push(`/hiv-testing/${DEFAULT_ACTIVE_TAB}`);
         }
     }, []);
 
-    if (!urls.filter(t => t.url === active_tab)[0]) return <Route path="*" component={Page404} status={404}/>
-
-    if (active_tab) {
-        active_tab = urls.filter(t => t.url === active_tab)[0].id
-    }
-
     if(!active_tab){
-        let tab = urls.filter(t => t.id === htsTab)[0].url
-        history.push(`/hiv-testing/${tab}`);
+        history.push(`/hiv-testing/${htsTab}`);
     }
     const toggle = tab => {
         if (active_tab !== tab) {
-            let t = urls.filter(t => t.id === tab)[0].url
-            history.push(`/hiv-testing/${t}`);
+            history.push(`/hiv-testing/${tab}`);
         }
     };
 
