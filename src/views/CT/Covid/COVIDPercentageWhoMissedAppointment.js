@@ -14,7 +14,7 @@ const COVIDPercentageWhoMissedAppointment = () => {
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
                 PERCENTAGE OF PLHIV WHO MISSED APPOINTMENT DUE TO COVID-19 INFECTION
             </CardHeader>
-            <CardBody className="trends-body">
+            <CardBody className="">
                 <div className={"row"}>
                     <div className="col-4">
                         <COVIDOverallMissedAppointment />
