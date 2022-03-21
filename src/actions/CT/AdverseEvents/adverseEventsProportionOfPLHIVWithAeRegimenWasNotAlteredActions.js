@@ -8,7 +8,7 @@ export const loadAdverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered = (tab
         moment(getState().adverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'advEv' && tab !== 'advEv') {
+    if (getState().ui.ctTab !== "adverseEvent" && tab !== "adverseEvent") {
         return;
     }
     else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {

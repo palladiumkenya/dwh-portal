@@ -14,12 +14,12 @@ export const loadCurrentOnArtByAgeSex = (tab) => async (dispatch, getState) => {
         if (
             getState().ui.ctTab !== "currentOnArt" &&
             getState().ui.ctTab !== "artOptimization" &&
-            getState().ui.ctTab !== 'advEv' &&
+            getState().ui.ctTab !== "adverseEvent" &&
             getState().ui.ctTab !== 'dsd' &&
             tab !== 'dsd' &&
             tab !== "currentOnArt" &&
             tab !== "artOptimization" &&
-            tab !== 'advEv' &&
+            tab !== "adverseEvent" &&
             getState().ui.currentPage !== PAGES.home
         ) {
             return;

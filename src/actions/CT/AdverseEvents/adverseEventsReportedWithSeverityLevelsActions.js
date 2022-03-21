@@ -8,7 +8,7 @@ export const loadAdverseEventsReportedWithSeverityLevels = (tab) => async (dispa
         moment(getState().adverseEventsReportedWithSeverityLevels.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'advEv' && tab !== 'advEv') {
+    if (getState().ui.ctTab !== "adverseEvent" && tab !== "adverseEvent") {
         return;
     }
     else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {

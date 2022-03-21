@@ -34,7 +34,7 @@ const AdverseEvents = () => {
     const ctTab = active_tab
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
-        if (ctTab === 'advEv') {
+        if (ctTab === "adverseEvent") {
             if (isVisible) {
                 dispatch(disableStickyFilter());
             } else {

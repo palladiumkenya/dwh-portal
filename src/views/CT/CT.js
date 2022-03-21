@@ -417,7 +417,7 @@ const CT = () => {
         if (active_tab === 'newlyOnArt'
             || active_tab === "currentOnArt"
             || active_tab === "artOptimization"
-            || active_tab === 'advEv'
+            || active_tab === "adverseEvent"
             || active_tab === 'dsd'
             || active_tab === 'vl'
             || active_tab === 'tOut'
@@ -467,7 +467,7 @@ const CT = () => {
                 dispatch(loadRegimenDistributionByWeightBands(active_tab));
                 dispatch(loadRegimenDistributionByAgeBands(active_tab));
                 break;
-            case 'advEv':
+            case "adverseEvent":
                 dispatch(loadCurrentOnArtByAgeSex(active_tab));
                 dispatch(loadAdverseEventsByAgeSex(active_tab));
                 dispatch(loadAdverseEventsClientsByAgeSex(active_tab));
@@ -686,8 +686,8 @@ const CT = () => {
                 <TabPane tabId="artOptimization">
                     {active_tab === "artOptimization" ? <ArtOptimization/> : null}
                 </TabPane>
-                <TabPane tabId="advEv">
-                    {active_tab === 'advEv' ? <AdverseEvents/> : null}
+                <TabPane tabId="adverseEvent">
+                    {active_tab === "adverseEvent" ? <AdverseEvents/> : null}
                 </TabPane>
                 <TabPane tabId="dsd">
                     {active_tab === 'dsd' ? <DSD/> : null}

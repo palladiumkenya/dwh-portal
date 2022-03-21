@@ -22,7 +22,7 @@ export const CT_TABS = {
     currentOnArt: "CURRENT ON ART",
     artOptimization: "ART OPTIMIZATION",
     // tbHiv: "TB/HIV",
-    advEv: "ADVERSE EVENTS - AE",
+    adverseEvent: "ADVERSE EVENTS - AE",
     dsd: "DSD",
     vl: "VL MONITORING",
     tOut: "TREATMENT OUTCOMES",
