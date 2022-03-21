@@ -13,10 +13,10 @@ export const loadCurrentOnArtByPartner = (tab) => async (dispatch, getState) => 
         );
         if (
             getState().ui.ctTab !== "currentOnArt" &&
-            getState().ui.ctTab !== 'txOpt' &&
+            getState().ui.ctTab !== "artOptimization" &&
             getState().ui.ctTab !== 'dsd' &&
             tab !== 'dsd' &&
-            tab !== 'txOpt' &&
+            tab !== "artOptimization" &&
             tab !== "currentOnArt"
         ) {
             return;

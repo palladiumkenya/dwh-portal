@@ -39,7 +39,7 @@ const ArtOptimization = () => {
     const ctTab = active_tab
 
     const onVisibilityChange = (isVisible) => {
-        if (ctTab === 'txOpt') {
+        if (ctTab === "artOptimization") {
             if (isVisible) {
                 dispatch(disableStickyFilter());
             } else {

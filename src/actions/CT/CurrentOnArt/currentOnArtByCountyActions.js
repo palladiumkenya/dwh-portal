@@ -12,11 +12,11 @@ export const loadCurrentOnArtByCounty = (tab) => async (dispatch, getState) => {
             'minutes'
         );
         if (getState().ui.ctTab !== "currentOnArt" &&
-            getState().ui.ctTab !== 'txOpt' &&
+            getState().ui.ctTab !== "artOptimization" &&
             getState().ui.ctTab !== 'dsd' &&
             tab !== 'dsd' &&
             tab !== "currentOnArt" &&
-            tab !== 'txOpt') {
+            tab !== "artOptimization") {
             return;
         }
         else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {

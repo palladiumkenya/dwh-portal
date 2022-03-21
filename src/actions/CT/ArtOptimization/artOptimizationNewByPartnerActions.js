@@ -11,8 +11,8 @@ export const loadArtOptimizationNewByPartner = (tab) => async (dispatch, getStat
             moment(getState().artOptimizationNewByPartner.lastFetch),
             'minutes'
         );
-        if (getState().ui.ctTab !== 'txOpt' &&
-            tab !== 'txOpt') {
+        if (getState().ui.ctTab !== "artOptimization" &&
+            tab !== "artOptimization") {
             return;
         }
         else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {

@@ -11,8 +11,8 @@ export const loadArtOptimizationCurrentByCounty = (tab) => async (dispatch, getS
             moment(getState().artOptimizationCurrentByCounty.lastFetch),
             'minutes'
         );
-        if (getState().ui.ctTab !== 'txOpt' &&
-            tab !== 'txOpt') {
+        if (getState().ui.ctTab !== "artOptimization" &&
+            tab !== "artOptimization") {
             return;
         }
         else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {

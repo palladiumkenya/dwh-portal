@@ -20,7 +20,7 @@ export const HTS_TABS = {
 export const CT_TABS = {
     newlyOnArt: "NEWLY STARTED ON ART",
     currentOnArt: "CURRENT ON ART",
-    txOpt: "ART OPTIMIZATION",
+    artOptimization: "ART OPTIMIZATION",
     // tbHiv: "TB/HIV",
     advEv: "ADVERSE EVENTS - AE",
     dsd: "DSD",

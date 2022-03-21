@@ -403,7 +403,7 @@ const CT = () => {
         } else {
             dispatch(disableToDateFilter());
         }
-        if (active_tab === 'txOpt') {
+        if (active_tab === "artOptimization") {
             dispatch(enableGenderFilter());
             dispatch(enableDatimAgeGroupFilter());
             dispatch(enableLatestPregnancyFilter());
@@ -416,7 +416,7 @@ const CT = () => {
         }
         if (active_tab === 'newlyOnArt'
             || active_tab === "currentOnArt"
-            || active_tab === 'txOpt'
+            || active_tab === "artOptimization"
             || active_tab === 'advEv'
             || active_tab === 'dsd'
             || active_tab === 'vl'
@@ -452,7 +452,7 @@ const CT = () => {
                 dispatch(loadCurrentOnArtDistributionByCounty(active_tab));
                 dispatch(loadCurrentOnArtDistributionByPartner(active_tab));
                 break;
-            case 'txOpt':
+            case "artOptimization":
                 dispatch(loadCurrentOnArtByAgeSex(active_tab));
                 dispatch(loadCurrentOnArtByCounty(active_tab));
                 dispatch(loadCurrentOnArtByPartner(active_tab));
@@ -683,8 +683,8 @@ const CT = () => {
                 <TabPane tabId="currentOnArt">
                     {active_tab === "currentOnArt" ? <CurrentOnArt/> : null}
                 </TabPane>
-                <TabPane tabId="txOpt">
-                    {active_tab === 'txOpt' ? <ArtOptimization/> : null}
+                <TabPane tabId="artOptimization">
+                    {active_tab === "artOptimization" ? <ArtOptimization/> : null}
                 </TabPane>
                 <TabPane tabId="advEv">
                     {active_tab === 'advEv' ? <AdverseEvents/> : null}

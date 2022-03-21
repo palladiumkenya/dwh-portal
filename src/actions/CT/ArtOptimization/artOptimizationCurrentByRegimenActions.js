@@ -11,7 +11,7 @@ export const loadArtOptimizationCurrentByRegimen = (tab) => async (dispatch, get
             moment(getState().artOptimizationCurrentByRegimen.lastFetch),
             'minutes'
         );
-        if (getState().ui.ctTab !== 'txOpt' && tab !== 'txOpt') {
+        if (getState().ui.ctTab !== "artOptimization" && tab !== "artOptimization") {
             return;
         }
         else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
