@@ -34,7 +34,7 @@ const SectionHeader = ({ title, description}) => {
                         </Col>
                         <Col sm={2}>
                             {
-                                (currentPage === PAGES.ct && ctTab === 'txOpt') ?
+                                (currentPage === PAGES.ct && ctTab === "artOptimization") ?
                                 <div className="reporting-rates-card-year" style={{marginTop: '-0.2em'}}>
                                     <i className="bordered trash icon inverted black" onClick={() => {
                                         dispatch(disableCache());

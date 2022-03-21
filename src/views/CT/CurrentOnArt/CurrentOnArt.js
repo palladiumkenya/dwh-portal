@@ -9,6 +9,7 @@ import Loading from './../../Shared/Loading';
 import SectionFooter from './../../Shared/SectionFooter';
 import SectionHeader from './../../Shared/SectionHeader';
 import UniversalFilter from './../../Shared/UniversalFilter';
+import { useParams } from 'react-router-dom';
 
 const CurrentOnArtByAgeSex  = Loadable({ loader: () => import('./CurrentOnArtByAgeSex'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArtByCounty  = Loadable({ loader: () => import('./CurrentOnArtByCounty'), loading: Loading, delay: LOADING_DELAY });
@@ -18,10 +19,11 @@ const CurrentOnArtOverview  = Loadable({ loader: () => import('./CurrentOnArtOve
 
 const CurrentOnART = () => {
     const branding = { title: "CURRENT ON ART", description: "OVERVIEW", overview: "Current on ART" };
-    const ctTab = useSelector(state => state.ui.ctTab);
+    const { active_tab } = useParams();
+    const ctTab = active_tab
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
-        if (ctTab === 'txCurr') {
+        if (ctTab === "currentOnArt") {
             if (isVisible) {
                 dispatch(disableStickyFilter());
             } else {

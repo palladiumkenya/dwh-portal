@@ -18,14 +18,14 @@ export const HTS_TABS = {
 }
 
 export const CT_TABS = {
-    txNew: "NEWLY STARTED ON ART",
-    txCurr: "CURRENT ON ART",
-    txOpt: "ART OPTIMIZATION",
+    newlyOnArt: "NEWLY STARTED ON ART",
+    currentOnArt: "CURRENT ON ART",
+    artOptimization: "ART OPTIMIZATION",
     // tbHiv: "TB/HIV",
-    advEv: "ADVERSE EVENTS - AE",
+    adverseEvent: "ADVERSE EVENTS - AE",
     dsd: "DSD",
     vl: "VL MONITORING",
-    tOut: "TREATMENT OUTCOMES",
+    treatmentOutcomes: "TREATMENT OUTCOMES",
     otz: 'OTZ',
     ovc: 'OVC',
     covid: 'COVID-19'

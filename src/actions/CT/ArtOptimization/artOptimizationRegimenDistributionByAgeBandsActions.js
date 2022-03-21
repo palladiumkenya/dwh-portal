@@ -3,7 +3,7 @@ import { getAll } from '../../../views/Shared/Api';
 import moment from 'moment';
 import { CACHING } from '../../../constants';
 
-export const loadRegimenDistributionByAgeBands = () => async (dispatch, getState) => {
+export const loadRegimenDistributionByAgeBands = (tab) => async (dispatch, getState) => {
     if (getState().filters.noCache === true) {
         await dispatch(fetchRegimenDistributionByAgeBands());
     } else {
@@ -11,7 +11,8 @@ export const loadRegimenDistributionByAgeBands = () => async (dispatch, getState
             moment(getState().artOptimizationRegimenDistributionByAgeBands.lastFetch),
             'minutes'
         );
-        if (getState().ui.ctTab !== 'txOpt') {
+        if (getState().ui.ctTab !== "artOptimization" &&
+            tab !== "artOptimization") {
             return;
         }
         else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {

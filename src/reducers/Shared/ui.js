@@ -6,7 +6,7 @@ const initialState = {
     homeTab: "emr",
     rrTab: "ct",
     htsTab: "uptake",
-    ctTab: "txNew"
+    ctTab: "newlyOnArt"
 };
 
 export default (state = initialState, action) => {

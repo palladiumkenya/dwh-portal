@@ -10,6 +10,7 @@ import Loading from '../../Shared/Loading';
 import SectionFooter from '../../Shared/SectionFooter';
 import SectionHeader from '../../Shared/SectionHeader';
 import UniversalFilter from '../../Shared/UniversalFilter';
+import { useParams } from 'react-router-dom';
 
 const ViralLoadOverview = Loadable({ loader: () => import('./ViralLoadOverview'), loading: Loading, delay: LOADING_DELAY });
 const ViralLoadOverallUptakeAndSuppressionBySex = Loadable({ loader: () => import('./ViralLoadOverallUptakeAndSuppressionBySex'), loading: Loading, delay: LOADING_DELAY });
@@ -36,7 +37,8 @@ const ViralLoadOutcomesHvlByFacility = Loadable({ loader: () => import('./ViralL
 const ViralLoad = () => {
     const branding = { title: "VIRAL LOAD", description: "OVERVIEW", overview: "Viral Load Monitoring" };
     const [activeTab, setActiveTab] = useState('uptake');
-    const ctTab = useSelector(state => state.ui.ctTab);
+    const { active_tab } = useParams();
+    const ctTab = active_tab
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
         if (ctTab === 'vl') {

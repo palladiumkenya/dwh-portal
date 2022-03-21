@@ -9,6 +9,7 @@ import Loading from './../../Shared/Loading';
 import SectionFooter from '../../Shared/SectionFooter';
 import SectionHeader from '../../Shared/SectionHeader';
 import UniversalFilter from './../../Shared/UniversalFilter';
+import { useParams } from 'react-router-dom';
 
 const MedianTimeToArtStartByCounty = Loadable({ loader: () => import('./MedianTimeToArtStartByCounty'), loading: Loading, delay: LOADING_DELAY });
 const MedianTimeToArtStartByPartner = Loadable({ loader: () => import('./MedianTimeToArtStartByPartner'), loading: Loading, delay: LOADING_DELAY });
@@ -23,10 +24,11 @@ const MissingDiagnosisDateByFacility = Loadable({ loader: () => import('./Missin
 
 const NewOnArt = () => {
     const branding = { title: "NEWLY STARTED ON ART", description: "OVERVIEW", overview: "Newly Started on ART Information" };
-    const ctTab = useSelector(state => state.ui.ctTab);
+    const { active_tab } = useParams();
+    const ctTab = active_tab
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
-        if (ctTab === 'txNew') {
+        if (ctTab === 'newlyOnArt') {
             if (isVisible) {
                 dispatch(disableStickyFilter());
             } else {

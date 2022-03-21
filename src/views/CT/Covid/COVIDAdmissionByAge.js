@@ -10,7 +10,6 @@ export const COVIDAdmissionByAge = () => {
     const [admissionOfSymptomaticByAge, setAdmissionOfSymptomaticByAge] = useState({});
     const covidAdmissionSymptomaticByAge = useSelector(covidAdmissionSymptomaticByAgeSelector.getCovidAdmissionSymptomaticByAge);
 
-    console.log(covidAdmissionSymptomaticByAge);
     const loadCovidAdmissionSymptomaticByAge = useCallback(async () => {
         setAdmissionOfSymptomaticByAge({
             title: { text: '' },

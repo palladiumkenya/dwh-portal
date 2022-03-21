@@ -31,7 +31,6 @@ export const getCovidAdmissionSymptomaticByAge = createSelector(
 
         for (let j = 0; j < ageGroups.length; j++) {
             const filteredAgeGroups = list.filter(obj => obj.AgeGroup === ageGroups[j]);
-            console.log(list)
 
             if (filteredAgeGroups.length > 0) {
 

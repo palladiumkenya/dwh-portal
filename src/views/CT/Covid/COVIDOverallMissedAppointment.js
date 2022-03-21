@@ -6,8 +6,11 @@ import * as covidEverHadInfectionSelectors
     from '../../../selectors/CT/Covid/covidEverHadInfection';
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import DataCard from '../../Shared/DataCard';
+import HighchartsReact from 'highcharts-react-official';
+import Highcharts from 'highcharts';
 
 const COVIDOverallMissedAppointment = () => {
+    const [covidOverallMissedAppointment, setOverallMissedAppointment] = useState({});
 
     const overallMissedAppointment = useSelector(covidOverallMissedAppointmentSelectors.getOverallMissedAppointments).overallMissedAppointment;
     const everHadInfection = useSelector(covidEverHadInfectionSelectors.getEverHadInfection).everHadInfection;
@@ -15,6 +18,64 @@ const COVIDOverallMissedAppointment = () => {
     let percentMissedAppointment = overallMissedAppointment && Number(overallMissedAppointment) > 0 ? ((Number(overallMissedAppointment)/Number(everHadInfection))*100) : 0;
     percentMissedAppointment = Math.round((percentMissedAppointment + Number.EPSILON) * 100) / 100;
 
+    let title = `<div class="row" >
+        <div class="col-12" style="font-size:18px; text-align:center;">${roundNumber(percentMissedAppointment)}%</div>`;
+    const data = [{
+        y: percentMissedAppointment,
+        color: '#d32b3a'
+    }, {
+        y: 100 - percentMissedAppointment,
+        color: '#f0f0f0'
+    }];
+    const loadOverallMissedAppointment = useCallback(async () => {
+        setOverallMissedAppointment({
+            chart: {
+                renderTo: 'container',
+                type: 'pie',
+                height: 280,
+            },
+            title: {
+                text: title,
+                useHTML: true,
+                align: 'center',
+                verticalAlign: 'middle',
+                y: 0
+            },
+            plotOptions: {
+                pie: {
+                    dataLabels: false,
+                    innerSize: 210,
+                    size: 250,
+                    point: {
+                        events: {
+                            mouseOver() {
+                                this.originalColor = this.color;
+                                let colors = ["#f53447", "#bbbbbb"];
+                                this.update({ color: colors[this.index] });
+                            },
+                            mouseOut(){
+                                this.update({ color: this.originalColor });
+                            }
+                        }
+                    }
+                }
+            },
+            series: [{
+                data: data
+            }],
+            credits: {
+                enabled: false
+            },
+            tooltip: { enabled: false },
+            exporting: {
+                enabled: false
+            }
+        });
+    }, [everHadInfection]);
+
+    useEffect(() => {
+        loadOverallMissedAppointment();
+    }, [loadOverallMissedAppointment]);
     /*const options = {
         chart: {
             type: "solidgauge",
@@ -88,11 +149,7 @@ const COVIDOverallMissedAppointment = () => {
     };*/
 
     return (
-        <DataCard
-            title="OVERALL MISSED APPOINTMENTS"
-            subtitle={roundNumber(percentMissedAppointment) + "%"}
-            data={formatNumber(overallMissedAppointment)}
-        />
+        <HighchartsReact highcharts={Highcharts} options={covidOverallMissedAppointment}/>
     );
 };
 

@@ -7,11 +7,13 @@ import { disableStickyFilter, enableStickyFilter } from '../../../actions/Shared
 import Loadable from 'react-loadable';
 import Loading from '../../Shared/Loading';
 import { LOADING_DELAY } from '../../../constants';
+import { useParams } from 'react-router-dom';
 const OVCTabs = Loadable({ loader: () => import('./OVCTabs'), loading: Loading, delay: LOADING_DELAY });
 
 const OVC = () => {
     const branding = { title: "OVC", description: "OVERVIEW", overview: "OVC" };
-    const ctTab = useSelector(state => state.ui.ctTab);
+    const { active_tab } = useParams();
+    const ctTab = active_tab
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
         if (ctTab === 'ovc') {

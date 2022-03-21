@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { CACHING } from '../../../constants';
+import { CACHING, PAGES } from '../../../constants';
 import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 
@@ -8,7 +8,8 @@ export const loadOtzVlSuppressionByPartner = () => async (dispatch, getState) =>
         moment(getState().otzVlSuppressionByPartner.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'otz') {
+    if (getState().ui.ctTab !== 'otz' &&
+        getState().ui.currentPage !== PAGES.ct) {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {

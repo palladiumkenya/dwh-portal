@@ -8,7 +8,7 @@ export const loadOtzEnrollmentAmongAlhivOnArtBySex = () => async (dispatch, getS
         moment(getState().otzEnrollmentAmongAlhivOnArtBySex.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'otz') {
+    if (getState().ui.ctTab !== 'otz' ) {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {

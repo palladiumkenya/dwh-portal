@@ -3,12 +3,12 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING } from '../../../constants';
 
-export const loadAdverseEventsClientsByAgeSex = () => async (dispatch, getState) => {
+export const loadAdverseEventsClientsByAgeSex = (tab) => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
         moment(getState().adverseEventsClientsByAgeSex.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'advEv') {
+    if (getState().ui.ctTab !== "adverseEvent" && tab !== "adverseEvent") {
         return;
     }
     else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {

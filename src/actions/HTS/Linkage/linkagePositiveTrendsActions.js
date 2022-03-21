@@ -1,14 +1,15 @@
 import moment from 'moment';
 import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
-import { CACHING } from '../../../constants';
+import { CACHING, PAGES } from '../../../constants';
 
 export const loadLinkagePositiveTrends = () => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
         moment(getState().linkagePositiveTrends.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'txNew') {
+    if (getState().ui.ctTab !== 'newlyOnArt' &&
+        getState().ui.currentPage !== PAGES.ct) {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {

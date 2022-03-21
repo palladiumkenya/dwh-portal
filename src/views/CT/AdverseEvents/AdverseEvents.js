@@ -10,6 +10,7 @@ import Loading from './../../Shared/Loading';
 import SectionFooter from './../../Shared/SectionFooter';
 import SectionHeader from './../../Shared/SectionHeader';
 import UniversalFilter from './../../Shared/UniversalFilter';
+import { useParams } from 'react-router-dom';
 
 const AdverseEventsActionsByDrugs = Loadable({ loader: () => import('./AdverseEventsActionsByDrugs'), loading: Loading, delay: LOADING_DELAY });
 const AdverseEventsCauses = Loadable({ loader: () => import('./AdverseEventsCauses'), loading: Loading, delay: LOADING_DELAY });
@@ -29,10 +30,11 @@ const AdverseEventsSeverityLevels = Loadable({ loader: () => import('./AdverseEv
 const AdverseEvents = () => {
     const branding = { title: "ADVERSE EVENTS (AEs)", description: "OVERVIEW", overview: "Adverse Events (AEs)" };
     const [activeTab, setActiveTab] = useState('adults');
-    const ctTab = useSelector(state => state.ui.ctTab);
+    const { active_tab } = useParams();
+    const ctTab = active_tab
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
-        if (ctTab === 'advEv') {
+        if (ctTab === "adverseEvent") {
             if (isVisible) {
                 dispatch(disableStickyFilter());
             } else {

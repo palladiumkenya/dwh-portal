@@ -3,12 +3,12 @@ import { CACHING, PAGES } from '../../../constants';
 import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 
-export const loadDsdUptakeOverall = () => async (dispatch, getState) => {
+export const loadDsdUptakeOverall = (tab) => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
         moment(getState().dsdUptakeOverall.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'dsd' && getState().ui.currentPage !== PAGES.home) {
+    if (getState().ui.ctTab !== 'dsd' && getState().ui.currentPage !== PAGES.home && tab !== 'dsd') {
         return;
     }
     else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {

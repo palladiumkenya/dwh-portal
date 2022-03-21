@@ -10,6 +10,7 @@ import Loading from './../../Shared/Loading';
 import SectionFooter from '../../Shared/SectionFooter';
 import SectionHeader from '../../Shared/SectionHeader';
 import UniversalFilter from '../../Shared/UniversalFilter';
+import { useParams } from 'react-router-dom';
 
 const AdultArtOptimizationOverview = Loadable({ loader: () => import('./AdultArtOptimizationOverview'), loading: Loading, delay: LOADING_DELAY });
 const AdultDistributionRegimenLines = Loadable({ loader: () => import('./AdultDistributionRegimenLines'), loading: Loading, delay: LOADING_DELAY });
@@ -34,10 +35,11 @@ const ArtOptimization = () => {
     const dispatch = useDispatch();
     const branding = { title: "ART OPTIMIZATION", description: "OVERVIEW", overview: "ART Optimization" };
     const [activeTab, setActiveTab] = useState('adults');
-    const ctTab = useSelector(state => state.ui.ctTab);
+    const { active_tab } = useParams();
+    const ctTab = active_tab
 
     const onVisibilityChange = (isVisible) => {
-        if (ctTab === 'txOpt') {
+        if (ctTab === "artOptimization") {
             if (isVisible) {
                 dispatch(disableStickyFilter());
             } else {

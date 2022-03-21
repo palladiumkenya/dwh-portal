@@ -3,7 +3,7 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING } from '../../../constants';
 
-export const loadViralLoadOutcomesHvlByFacility = () => async (dispatch, getState) => {
+export const loadViralLoadOutcomesHvlByFacility = (tab) => async (dispatch, getState) => {
     if (getState().filters.noCache === true) {
         await dispatch(fetchViralLoadOutcomesHvlByFacility());
     } else {
@@ -11,7 +11,8 @@ export const loadViralLoadOutcomesHvlByFacility = () => async (dispatch, getStat
             moment(getState().viralLoadOutcomesHvlByFacility.lastFetch),
             'minutes'
         );
-        if (getState().ui.ctTab !== 'vl') {
+        if (getState().ui.ctTab !== 'vl' &&
+            tab !== 'vl') {
             return;
         }
         else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {

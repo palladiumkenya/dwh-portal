@@ -9,6 +9,7 @@ import Loading from './../../Shared/Loading';
 import SectionFooter from '../../Shared/SectionFooter';
 import SectionHeader from '../../Shared/SectionHeader';
 import UniversalFilter from './../../Shared/UniversalFilter';
+import { useParams } from 'react-router-dom';
 
 const AppointmentDurationByAge  = Loadable({ loader: () => import('./AppointmentDurationByAge'), loading: Loading, delay: LOADING_DELAY });
 const AppointmentDurationBySex  = Loadable({ loader: () => import('./AppointmentDurationBySex'), loading: Loading, delay: LOADING_DELAY });
@@ -26,8 +27,10 @@ const DSDOverview  = Loadable({ loader: () => import('./DSDOverview'), loading: 
 
 const DSD = () => {
     const branding = { title: "DIFFERENTIATED SERVICE DELIVERY", description: "OVERVIEW", overview: "Differenciated Service Delivery" };
-    const ctTab = useSelector(state => state.ui.ctTab);
+    const { active_tab } = useParams();
+    const ctTab = active_tab
     const dispatch = useDispatch();
+
     const onVisibilityChange = (isVisible) => {
         if (ctTab === 'dsd') {
             if (isVisible) {

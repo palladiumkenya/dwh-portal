@@ -3,12 +3,12 @@ import moment from 'moment';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING } from '../../../constants';
 
-export const loadAdverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered = () => async (dispatch, getState) => {
+export const loadAdverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered = (tab) => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
         moment(getState().adverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'advEv') {
+    if (getState().ui.ctTab !== "adverseEvent" && tab !== "adverseEvent") {
         return;
     }
     else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {

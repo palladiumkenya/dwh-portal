@@ -3,7 +3,7 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING } from '../../../constants';
 
-export const loadTreatmentOutcomesUndocumentedByFacility = () => async (dispatch, getState) => {
+export const loadTreatmentOutcomesUndocumentedByFacility = (tab) => async (dispatch, getState) => {
     if (getState().filters.noCache === true) {
         await dispatch(fetchTreatmentOutcomesUndocumentedByFacility());
     } else {
@@ -11,7 +11,7 @@ export const loadTreatmentOutcomesUndocumentedByFacility = () => async (dispatch
             moment(getState().treatmentOutcomesUndocumentedByFacility.lastFetch),
             'minutes'
         );
-        if (getState().ui.ctTab !== 'tOut') {
+        if (getState().ui.ctTab !== "treatmentOutcomes" && tab !== "treatmentOutcomes") {
             return;
         }
         else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
