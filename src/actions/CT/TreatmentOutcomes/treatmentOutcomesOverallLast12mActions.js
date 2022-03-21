@@ -8,7 +8,7 @@ export const loadTreatmentOutcomesOverallLast12m = (tab) => async (dispatch, get
         moment(getState().treatmentOutcomesOverallLast12m.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'tOut' && tab !== 'tOut') {
+    if (getState().ui.ctTab !== "treatmentOutcomes" && tab !== "treatmentOutcomes") {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {

@@ -8,7 +8,7 @@ export const loadTwentyFourMonthRetention = (tab) => async (dispatch, getState) 
         moment(getState().twentyFourMonthRetention.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'tOut' && tab !== 'tOut') {
+    if (getState().ui.ctTab !== "treatmentOutcomes" && tab !== "treatmentOutcomes") {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {

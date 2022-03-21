@@ -8,7 +8,7 @@ export const loadNewOnArtTrends = () => async (dispatch, getState) => {
         moment(getState().newOnArtTrends.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'newlyOnArt' && getState().ui.ctTab !== 'tOut' &&
+    if (getState().ui.ctTab !== 'newlyOnArt' && getState().ui.ctTab !== "treatmentOutcomes" &&
         getState().ui.currentPage !== PAGES.ct) {
         return;
     }

@@ -41,7 +41,7 @@ const TreatmentOutcomes = () => {
     const ctTab = active_tab
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
-        if (ctTab === 'tOut') {
+        if (ctTab === "treatmentOutcomes") {
             if (isVisible) {
                 dispatch(disableStickyFilter());
             } else {

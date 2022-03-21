@@ -393,12 +393,12 @@ const CT = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (active_tab === 'newlyOnArt' || active_tab === 'tOut') {
+        if (active_tab === 'newlyOnArt' || active_tab === "treatmentOutcomes") {
             dispatch(enableFromDateFilter());
         } else {
             dispatch(disableFromDateFilter());
         }
-        if (active_tab === 'tOut') {
+        if (active_tab === "treatmentOutcomes") {
             dispatch(enableToDateFilter());
         } else {
             dispatch(disableToDateFilter());
@@ -420,7 +420,7 @@ const CT = () => {
             || active_tab === "adverseEvent"
             || active_tab === 'dsd'
             || active_tab === 'vl'
-            || active_tab === 'tOut'
+            || active_tab === "treatmentOutcomes"
             || active_tab === 'otz'
             || active_tab === 'ovc'
             || active_tab === 'covid') {
@@ -524,7 +524,7 @@ const CT = () => {
                 dispatch(load24MonthSuppressionByYearOfArtStart(active_tab));
                 dispatch(loadViralLoadOutcomesHvlByFacility(active_tab));
                 break;
-            case 'tOut':
+            case "treatmentOutcomes":
                 dispatch(loadNewOnArtOverview(active_tab));
                 dispatch(loadTreatmentOutcomesOverallLast12m(active_tab));
                 dispatch(loadNewOnArtTrends(active_tab));
@@ -695,8 +695,8 @@ const CT = () => {
                 <TabPane tabId="vl">
                     {active_tab === 'vl' ? <ViralLoad/> : null}
                 </TabPane>
-                <TabPane tabId="tOut">
-                    {active_tab === 'tOut' ? <TreatmentOutcomes/> : null}
+                <TabPane tabId="treatmentOutcomes">
+                    {active_tab === "treatmentOutcomes" ? <TreatmentOutcomes/> : null}
                 </TabPane>
                 <TabPane tabId={'otz'}>
                     {active_tab === 'otz' ? <OTZ/> : null}

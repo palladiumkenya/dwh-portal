@@ -25,7 +25,7 @@ export const CT_TABS = {
     adverseEvent: "ADVERSE EVENTS - AE",
     dsd: "DSD",
     vl: "VL MONITORING",
-    tOut: "TREATMENT OUTCOMES",
+    treatmentOutcomes: "TREATMENT OUTCOMES",
     otz: 'OTZ',
     ovc: 'OVC',
     covid: 'COVID-19'
