@@ -28,7 +28,7 @@ const NewOnArt = () => {
     const ctTab = active_tab
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
-        if (ctTab === 'txNew') {
+        if (ctTab === 'newlyOnArt') {
             if (isVisible) {
                 dispatch(disableStickyFilter());
             } else {

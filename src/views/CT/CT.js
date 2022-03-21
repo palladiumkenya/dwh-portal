@@ -393,7 +393,7 @@ const CT = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (active_tab === 'txNew' || active_tab === 'tOut') {
+        if (active_tab === 'newlyOnArt' || active_tab === 'tOut') {
             dispatch(enableFromDateFilter());
         } else {
             dispatch(disableFromDateFilter());
@@ -414,7 +414,7 @@ const CT = () => {
             dispatch(disableLatestPregnancyFilter());
             dispatch(disablePopulationTypeFilter());
         }
-        if (active_tab === 'txNew'
+        if (active_tab === 'newlyOnArt'
             || active_tab === 'txCurr'
             || active_tab === 'txOpt'
             || active_tab === 'advEv'
@@ -432,7 +432,7 @@ const CT = () => {
 
     useEffect(() => {
         switch (active_tab) {
-            case 'txNew':
+            case 'newlyOnArt':
                 dispatch(loadLinkagePositiveTrends());
                 dispatch(loadCurrentNewOnArtOverview());
                 dispatch(loadNewOnArtOverview());
@@ -677,8 +677,8 @@ const CT = () => {
                 {renderTabNavItems()}
             </Nav>
             <TabContent activeTab={active_tab}>
-                <TabPane tabId="txNew">
-                    {active_tab === 'txNew' ? <NewOnArt/> : null}
+                <TabPane tabId="newlyOnArt">
+                    {active_tab === 'newlyOnArt' ? <NewOnArt/> : null}
                 </TabPane>
                 <TabPane tabId="txCurr">
                     {active_tab === 'txCurr' ? <CurrentOnArt/> : null}

@@ -8,7 +8,7 @@ export const loadLinkagePositiveTrends = () => async (dispatch, getState) => {
         moment(getState().linkagePositiveTrends.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'txNew' &&
+    if (getState().ui.ctTab !== 'newlyOnArt' &&
         getState().ui.currentPage !== PAGES.ct) {
         return;
     }

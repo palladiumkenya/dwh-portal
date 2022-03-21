@@ -8,7 +8,7 @@ export const loadTimeFromDiagnosisToArtStart = () => async (dispatch, getState) 
         moment(getState().timeFromDiagnosisToArtStart.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'txNew' &&
+    if (getState().ui.ctTab !== 'newlyOnArt' &&
         getState().ui.currentPage !== PAGES.ct) {
         return;
     }

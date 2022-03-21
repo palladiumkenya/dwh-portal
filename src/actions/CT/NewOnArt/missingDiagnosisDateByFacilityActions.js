@@ -11,7 +11,7 @@ export const loadMissingDiagnosisDateByFacility = () => async (dispatch, getStat
             moment(getState().missingDiagnosisDateByFacility.lastFetch),
             'minutes'
         );
-        if (getState().ui.ctTab !== 'txNew' &&
+        if (getState().ui.ctTab !== 'newlyOnArt' &&
             getState().ui.currentPage !== PAGES.ct) {
             return;
         }

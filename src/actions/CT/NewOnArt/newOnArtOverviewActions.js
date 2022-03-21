@@ -8,7 +8,7 @@ export const loadNewOnArtOverview = () => async (dispatch, getState) => {
         moment(getState().newOnArtOverview.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'txNew' && getState().ui.ctTab !== 'tOut' &&
+    if (getState().ui.ctTab !== 'newlyOnArt' && getState().ui.ctTab !== 'tOut' &&
         getState().ui.currentPage !== PAGES.ct) {
         return;
     }

@@ -18,8 +18,8 @@ export const HTS_TABS = {
 }
 
 export const CT_TABS = {
-    txNew: "NEWLY STARTED ON ART",
-    txCurr: "CURRENT ON ART",
+    newlyOnArt: "NEWLY STARTED ON ART",
+    currentOnArt: "CURRENT ON ART",
     txOpt: "ART OPTIMIZATION",
     // tbHiv: "TB/HIV",
     advEv: "ADVERSE EVENTS - AE",
