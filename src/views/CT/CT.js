@@ -415,7 +415,7 @@ const CT = () => {
             dispatch(disablePopulationTypeFilter());
         }
         if (active_tab === 'newlyOnArt'
-            || active_tab === 'txCurr'
+            || active_tab === "currentOnArt"
             || active_tab === 'txOpt'
             || active_tab === 'advEv'
             || active_tab === 'dsd'
@@ -444,7 +444,7 @@ const CT = () => {
                 dispatch(loadTimeFromDiagnosisToArtStart());
                 dispatch(loadMissingDiagnosisDateByFacility());
                 break;
-            case 'txCurr':
+            case "currentOnArt":
                 dispatch(loadCurrentOnArtOverview(active_tab));
                 dispatch(loadCurrentOnArtByAgeSex(active_tab));
                 dispatch(loadCurrentOnArtByCounty(active_tab));
@@ -680,8 +680,8 @@ const CT = () => {
                 <TabPane tabId="newlyOnArt">
                     {active_tab === 'newlyOnArt' ? <NewOnArt/> : null}
                 </TabPane>
-                <TabPane tabId="txCurr">
-                    {active_tab === 'txCurr' ? <CurrentOnArt/> : null}
+                <TabPane tabId="currentOnArt">
+                    {active_tab === "currentOnArt" ? <CurrentOnArt/> : null}
                 </TabPane>
                 <TabPane tabId="txOpt">
                     {active_tab === 'txOpt' ? <ArtOptimization/> : null}

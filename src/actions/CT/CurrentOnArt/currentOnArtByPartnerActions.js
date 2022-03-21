@@ -12,12 +12,12 @@ export const loadCurrentOnArtByPartner = (tab) => async (dispatch, getState) => 
             'minutes'
         );
         if (
-            getState().ui.ctTab !== 'txCurr' &&
+            getState().ui.ctTab !== "currentOnArt" &&
             getState().ui.ctTab !== 'txOpt' &&
             getState().ui.ctTab !== 'dsd' &&
             tab !== 'dsd' &&
             tab !== 'txOpt' &&
-            tab !== 'txCurr'
+            tab !== "currentOnArt"
         ) {
             return;
         }

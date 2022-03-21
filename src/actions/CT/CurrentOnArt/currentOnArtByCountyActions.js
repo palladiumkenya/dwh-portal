@@ -11,11 +11,11 @@ export const loadCurrentOnArtByCounty = (tab) => async (dispatch, getState) => {
             moment(getState().currentOnArtByCounty.lastFetch),
             'minutes'
         );
-        if (getState().ui.ctTab !== 'txCurr' &&
+        if (getState().ui.ctTab !== "currentOnArt" &&
             getState().ui.ctTab !== 'txOpt' &&
             getState().ui.ctTab !== 'dsd' &&
             tab !== 'dsd' &&
-            tab !== 'txCurr' &&
+            tab !== "currentOnArt" &&
             tab !== 'txOpt') {
             return;
         }

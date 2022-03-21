@@ -9,12 +9,12 @@ export const loadCurrentOnArtOverview = (tab) => async (dispatch, getState) => {
         'minutes'
     );
     if (
-        getState().ui.ctTab !== 'txCurr' &&
+        getState().ui.ctTab !== "currentOnArt" &&
         getState().ui.ctTab !== 'dsd' &&
         getState().ui.ctTab !== 'vl' &&
         tab !== 'dsd' &&
         tab !== 'vl' &&
-        tab !== 'txCurr' &&
+        tab !== "currentOnArt" &&
         getState().ui.currentPage !== PAGES.home
     ) {
         return;

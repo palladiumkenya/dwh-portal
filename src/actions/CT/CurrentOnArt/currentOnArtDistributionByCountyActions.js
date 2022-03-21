@@ -9,10 +9,10 @@ export const loadCurrentOnArtDistributionByCounty = (tab) => async (dispatch, ge
         'minutes'
     );
     if (
-        getState().ui.ctTab !== 'txCurr' &&
+        getState().ui.ctTab !== "currentOnArt" &&
         getState().ui.ctTab !== 'dsd' &&
         tab !== 'dsd' &&
-        tab !== 'txCurr'
+        tab !== "currentOnArt"
     ) {
         return;
     }
