@@ -17,7 +17,7 @@ const COVIDPLHIVWhoHadSymptomaticInfection = () => {
     let percent = Number(symptomaticInfections) > 0 ? ((Number(symptomaticInfections) / Number(everHadInfection)) * 100) : 0;
     percent = Math.round((percent + Number.EPSILON) * 100) / 100;
 
-    const label = 'PLHIV WHO HAVE HAD SYMPTOMATIC COVID-19 INFECTION';
+    const label = 'PLHIV WHO HAVE HAD SEVERE COVID-19 INFECTION';
 
 
     let title =`<div class="row">

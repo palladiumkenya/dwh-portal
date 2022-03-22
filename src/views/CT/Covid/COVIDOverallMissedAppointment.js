@@ -17,8 +17,10 @@ const COVIDOverallMissedAppointment = () => {
     let percentMissedAppointment = overallMissedAppointment && Number(overallMissedAppointment) > 0 ? ((Number(overallMissedAppointment)/Number(everHadInfection))*100) : 0;
     percentMissedAppointment = Math.round((percentMissedAppointment + Number.EPSILON) * 100) / 100;
 
-    let title = `<div class="row" >
-        <div class="col-12" style="font-size:40px; font-weight: bold;">${roundNumber(percentMissedAppointment)}%</div>`;
+    let title = `<div>
+        <div style="font-size:40px; font-weight: bold; text-align: center">${roundNumber(percentMissedAppointment)}%</div>
+        <div style="font-size:14px; text-align: center">OVERALL</div>
+        </div>`;
     const data = [{
         y: percentMissedAppointment,
         color: '#00AD30'

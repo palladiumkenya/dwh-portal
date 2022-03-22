@@ -10,7 +10,6 @@ const COVIDTrendsOfSeverity = () => {
     const [trendsOfSeverity, setTrendsOfSeverity] = useState({});
     const covidManagementAdmitted = useSelector(covidManagementAdmittedSelectors.getCovidManagementAdmitted);
 
-    console.log(covidManagementAdmitted)
     const loadTrendsOfPLHIVVaccination = useCallback(async () => {
         setTrendsOfSeverity({
             title: { text: '' },
