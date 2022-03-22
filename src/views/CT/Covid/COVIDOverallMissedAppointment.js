@@ -4,8 +4,7 @@ import * as covidOverallMissedAppointmentSelectors
     from '../../../selectors/CT/Covid/covidOverallMissedAppointment';
 import * as covidEverHadInfectionSelectors
     from '../../../selectors/CT/Covid/covidEverHadInfection';
-import { formatNumber, roundNumber } from '../../../utils/utils';
-import DataCard from '../../Shared/DataCard';
+import {  roundNumber } from '../../../utils/utils';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 
@@ -19,10 +18,10 @@ const COVIDOverallMissedAppointment = () => {
     percentMissedAppointment = Math.round((percentMissedAppointment + Number.EPSILON) * 100) / 100;
 
     let title = `<div class="row" >
-        <div class="col-12" style="font-size:18px; text-align:center;">${roundNumber(percentMissedAppointment)}%</div>`;
+        <div class="col-12" style="font-size:40px; font-weight: bold;">${roundNumber(percentMissedAppointment)}%</div>`;
     const data = [{
         y: percentMissedAppointment,
-        color: '#d32b3a'
+        color: '#00AD30'
     }, {
         y: 100 - percentMissedAppointment,
         color: '#f0f0f0'
@@ -50,7 +49,7 @@ const COVIDOverallMissedAppointment = () => {
                         events: {
                             mouseOver() {
                                 this.originalColor = this.color;
-                                let colors = ["#f53447", "#bbbbbb"];
+                                let colors = ["#00AD30", "#bbbbbb"];
                                 this.update({ color: colors[this.index] });
                             },
                             mouseOut(){
@@ -76,77 +75,6 @@ const COVIDOverallMissedAppointment = () => {
     useEffect(() => {
         loadOverallMissedAppointment();
     }, [loadOverallMissedAppointment]);
-    /*const options = {
-        chart: {
-            type: "solidgauge",
-            height: "70%"
-        },
-        legend: {
-            enabled: true
-        },
-        title: {
-            text: ``
-        },
-
-        tooltip: {
-            enabled: false,
-        },
-
-        pane: {
-            startAngle: 0,
-            endAngle: 360,
-            background: [
-                {
-                    outerRadius: "100%",
-                    innerRadius: "88%",
-                    backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0])
-                        .setOpacity(0.3)
-                        .get(),
-                    borderWidth: 0
-                }
-            ]
-        },
-
-        yAxis: {
-            min: 0,
-            max: 100,
-            lineWidth: 0,
-            tickPositions: []
-        },
-
-        plotOptions: {
-            solidgauge: {
-                dataLabels: {
-                    enabled: true,
-                    borderColor: '#ffffff',
-                    style: {
-                        fontSize: '40px'
-                    },
-                    x: 0,
-                    y: -35
-                },
-                linecap: "round",
-                stickyTracking: false,
-                rounded: false,
-                showInLegend: true
-            }
-        },
-
-        series: [
-            {
-                name: "OVERALL",
-                type: "solidgauge",
-                data: [
-                    {
-                        color: "#69B34C",
-                        radius: "100%",
-                        innerRadius: "88%",
-                        y: percentMissedAppointment
-                    }
-                ]
-            }
-        ]
-    };*/
 
     return (
         <HighchartsReact highcharts={Highcharts} options={covidOverallMissedAppointment}/>
