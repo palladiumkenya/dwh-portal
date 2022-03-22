@@ -107,15 +107,15 @@ const OVCTabs = () => {
                         </Col>
                     </Row>
 
-                    <Row>
-                        <Col className={"col-6"}>
-                            <OVCInterruptionInTreatmentAmongCALHIV />
-                        </Col>
+                    {/*<Row>*/}
+                    {/*    <Col className={"col-6"}>*/}
+                    {/*        <OVCInterruptionInTreatmentAmongCALHIV />*/}
+                    {/*    </Col>*/}
 
-                        <Col className={"col-6"}>
-                            <OVCInterruptionInTreatmentAmongOVCPatients />
-                        </Col>
-                    </Row>
+                    {/*    <Col className={"col-6"}>*/}
+                    {/*        <OVCInterruptionInTreatmentAmongOVCPatients />*/}
+                    {/*    </Col>*/}
+                    {/*</Row>*/}
 
                     <Row>
                         <Col className={"col-6"}>
