@@ -29,6 +29,8 @@ export const fetchTreatmentOutcomesOverallLast12m = () => async (dispatch, getSt
         project: getState().filters.projects,
         fromDate: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY-MM-DD") : null,
         toDate: getState().filters.toDate ? moment(getState().filters.toDate, "MMM YYYY").format("YYYY-MM-DD") : null,
+        gender: getState().filters.genders,
+        datimAgeGroup: getState().filters.datimAgeGroups,
     };
     const response = await getAll('care-treatment/treatmentOutcomesOverallLast12m', params);
     dispatch({ type: actionTypes.CT_TREATMENT_OUTCOMES_OVERALL_LAST_12M_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
