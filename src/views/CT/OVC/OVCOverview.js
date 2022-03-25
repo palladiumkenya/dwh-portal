@@ -6,8 +6,8 @@ import * as ovcServByGenderSelector from '../../../selectors/CT/OVC/ovcServByGen
 import * as ovcOverallCALHIVSelector from '../../../selectors/CT/OVC/ovcOverallCALHIV';
 import * as ovcCALHIVByGenderSelector from '../../../selectors/CT/OVC/ovcCALHIVByGender';
 import { formatNumber } from '../../../utils/utils';
-import DataCard from '../../Shared/DataCard';
 import moment from 'moment';
+import DataCardCT from '../../Shared/DataCardCT';
 
 
 const OVCOverview = () => {
@@ -45,64 +45,62 @@ const OVCOverview = () => {
             <Col className={"col-12"}>
                 <Row>
                     <Col className={"col-4"}>
-                        <DataCard
+                        <DataCardCT
                             title={"OVERALL CALHIV"}
                             subtitle={null}
                             data={formatNumber(ovcOverallServ.overallCALHIV)}
-                            bottomSubTitle={"Total CHILDREN - " + monthYear}
+                            // bottomSubTitle={"Total CHILDREN - " + monthYear}
                         />
                     </Col>
 
                     <Col className={"col-4"}>
-                        <DataCard
+                        <DataCardCT
                             title={"MALE CALHIV"}
                             subtitle={null}
                             data={formatNumber(ovcOverallServ.maleCALHIV)}
-                            bottomSubTitle={"MALE CHILDREN - " + monthYear}
+                            // bottomSubTitle={"MALE CHILDREN - " + monthYear}
                         />
                     </Col>
 
                     <Col className={"col-4"}>
-                        <DataCard
+                        <DataCardCT
                             title={"FEMALE CALHIV"}
                             subtitle={null}
                             data={formatNumber(ovcOverallServ.femaleCALHIV)}
-                            bottomSubTitle={"FEMALE CHILDREN - " + monthYear}
+                            // bottomSubTitle={"FEMALE CHILDREN - " + monthYear}
                         />
                     </Col>
                 </Row>
 
                 <Row>
                     <Col className={"col-4"}>
-                        <DataCard
+                        <DataCardCT
                             title={"OVERALL OVC"}
                             subtitle={null}
                             data={formatNumber(ovcOverallServ.ovcOverallServ)}
-                            bottomSubTitle={"TOTAL ADOLESCENTS - " + monthYear}
+                            // bottomSubTitle={"TOTAL ADOLESCENTS - " + monthYear}
                         />
                     </Col>
 
                     <Col className={"col-4"}>
-                        <DataCard
+                        <DataCardCT
                             title={"MALE OVC"}
                             subtitle={null}
                             data={formatNumber(ovcOverallServ.maleServ)}
-                            bottomSubTitle={"MALE OVC - " + monthYear}
+                            // bottomSubTitle={"MALE OVC - " + monthYear}
                         />
                     </Col>
 
                     <Col className={"col-4"}>
-                        <DataCard
+                        <DataCardCT
                             title={"FEMALE OVC"}
                             subtitle={null}
                             data={formatNumber(ovcOverallServ.femaleServ)}
-                            bottomSubTitle={"FEMALE OVC - " + monthYear}
+                            // bottomSubTitle={"FEMALE OVC - " + monthYear}
                         />
                     </Col>
                 </Row>
             </Col>
-
-
 
         </Row>
     );
