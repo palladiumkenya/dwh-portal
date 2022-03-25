@@ -26,7 +26,9 @@ export const fetchTwelveMonthRetention = () => async (dispatch, getState) => {
         facility: getState().filters.facilities,
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
-        project: getState().filters.projects
+        project: getState().filters.projects,
+        gender: getState().filters.genders,
+        datimAgeGroup: getState().filters.datimAgeGroups,
     };
     const response = await getAll('care-treatment/treatmentOutcomesRetention12m', params);
     dispatch({ type: actionTypes.CT_TWELVE_MONTH_RETENTION_FETCH, payload: { filtered: getState().filters.filtered, list: response }});

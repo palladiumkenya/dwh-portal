@@ -42,6 +42,7 @@ const Home = () => {
     const partners = useSelector(state => state.filters.partners);
     const agencies = useSelector(state => state.filters.agencies);
     const projects = useSelector(state => state.filters.projects);
+    const gender = useSelector(state => state.filters.genders);
     const datimAgeGroups = useSelector(state => state.filters.datimAgeGroups);
     const dispatch = useDispatch();
 
@@ -74,6 +75,7 @@ const Home = () => {
         agencies,
         projects,
         datimAgeGroups,
+        gender,
         page
     ]);
 
