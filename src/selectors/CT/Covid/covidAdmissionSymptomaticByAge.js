@@ -11,26 +11,26 @@ export const getCovidAdmissionSymptomaticByAge = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
 
         let ageGroups = [
-            '< 1',
-            '1-4',
-            '5-9',
-            '10-14',
-            '15-19',
-            '20-24',
-            '25-29',
-            '30-34',
-            '35-39',
-            '40-44',
-            '45-49',
-            '50-54',
-            '55-59',
-            '60-64',
+            'Under 1',
+            '1 to 4',
+            '5 to 9',
+            '10 to 14',
+            '15 to 19',
+            '20 to 24',
+            '25 to 29',
+            '30 to 34',
+            '35 to 39',
+            '40 to 44',
+            '45 to 49',
+            '50 to 54',
+            '55 to 59',
+            '60 to 64',
             '65+'
         ];
         let symptomaticPatients = [];
 
         for (let j = 0; j < ageGroups.length; j++) {
-            const filteredAgeGroups = list.filter(obj => obj.AgeGroup === ageGroups[j]);
+            const filteredAgeGroups = list.filter(obj => obj.DATIM_AgeGroup === ageGroups[j]);
 
             if (filteredAgeGroups.length > 0) {
 

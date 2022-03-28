@@ -22,11 +22,11 @@ export const COVIDSeverityOfInfectionByGender = () => {
                 { name: 'SYMPTOMATIC', data: severityByGender.symptomatic, type: 'column', color: "#00AD30", tooltip: { valueSuffix: '% ({point.text:.0f})' } },
             ]
         });
-    }, []);
+    }, [severityByGender]);
 
     useEffect(() => {
         loadSeverityOfInfectionByGender();
-    }, []);
+    }, [loadSeverityOfInfectionByGender]);
 
     return (
         <Card className="trends-card">
