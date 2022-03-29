@@ -34,17 +34,12 @@ const COVIDTabs = () => {
                     <NavLink className={classnames({ active: activeTab === 'vaccination' })} onClick={() => { setActiveTab('vaccination') }}>VACCINATION</NavLink>
                 </NavItem>
 
-                {/*<NavItem>*/}
-                {/*    <NavLink className={classnames({ active: activeTab === 'infection&Outcomes' })} onClick={() => { setActiveTab('infection&Outcomes') }}>INFECTIONS & OUTCOMES</NavLink>*/}
-                {/*</NavItem>*/}
+                <NavItem>
+                    <NavLink className={classnames({ active: activeTab === 'infection&Outcomes' })} onClick={() => { setActiveTab('infection&Outcomes') }}>INFECTIONS & OUTCOMES</NavLink>
+                </NavItem>
             </Nav>
             <TabContent activeTab={activeTab}>
                 <TabPane tabId="vaccination">
-                    <Row>
-                        <Col className={"col-12 pt-5 pb-5"}>
-                            <COVIDOverview tab={activeTab}/>
-                        </Col>
-                    </Row>
                     <Card>
                         <CardHeader  className="covid-definition-header">Indicator Definition</CardHeader>
                         <CardBody>
@@ -55,6 +50,11 @@ const COVIDTabs = () => {
                             </ul>
                         </CardBody>
                     </Card>
+                    <Row>
+                        <Col className={"col-12 pt-5 pb-5"}>
+                            <COVIDOverview tab={activeTab}/>
+                        </Col>
+                    </Row>
                     <Row>
                         <Col className={"col-6"}>
                             <COVIDAdultPLHIVVaccinatedByGender />
@@ -115,11 +115,8 @@ const COVIDTabs = () => {
                             <COVIDAdmissionByAge />
                         </Col>
                     </Row>
-                    <Row>
-                        <Col className={"col-12"}>
-                            <COVIDPercentageWhoMissedAppointment />
-                        </Col>
-                    </Row>
+                    <COVIDPercentageWhoMissedAppointment />
+
                     <Row>
                         <Col className={"col-12"}>
                             <COVIDPercentageWhoMissedAppointmentByAge />
