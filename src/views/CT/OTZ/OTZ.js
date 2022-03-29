@@ -36,7 +36,6 @@ const OTZ = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <OTZOverview />
             <Card>
                 <CardHeader>Indicator Definition</CardHeader>
                 <CardBody>
@@ -57,6 +56,7 @@ const OTZ = () => {
                     </ul>
                 </CardBody>
             </Card>
+            <OTZOverview />
             <OTZTabs />
         </div>
     );

@@ -40,9 +40,9 @@ const OVCTabs = () => {
             </Nav>
             <TabContent activeTab={activeTab}>
                 <TabPane tabId="distributionOfOvcClients">
-                    <OVCOverview />
-
                     <OVCIndicatorDefinition />
+
+                    <OVCOverview />
 
                     <Row>
                         <Col className={"col-6"}>

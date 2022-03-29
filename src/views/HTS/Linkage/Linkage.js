@@ -40,7 +40,6 @@ const Linkage = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <LinkageOverview/>
             <Card>
                 <CardHeader>Indicator Definition</CardHeader>
                 <CardBody>
@@ -49,6 +48,7 @@ const Linkage = () => {
                     </ul>
                 </CardBody>
             </Card>
+            <LinkageOverview/>
             <LinkageNumberPositive/>
             <SectionFooter overview={branding.overview}/>
             <LinkageByAgeSex />
