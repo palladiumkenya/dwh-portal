@@ -40,8 +40,8 @@ const Uptake = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <UptakeOverview/>
             <HtsUptakeIndicatorDefinition />
+            <UptakeOverview/>
             <UptakeNumberTestedAndPositivity/>
             <SectionFooter overview={branding.overview}/>
             <UptakeByAgeSex/>

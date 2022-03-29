@@ -41,7 +41,6 @@ const NewOnArt = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <NewOnArtOverview />
             <Card>
                 <CardHeader>Indicator Definition</CardHeader>
                 <CardBody>
@@ -52,6 +51,7 @@ const NewOnArt = () => {
                     </ul>
                 </CardBody>
             </Card>
+            <NewOnArtOverview />
             <Row>
                 <Col>
                     <NewOnArtBySex />

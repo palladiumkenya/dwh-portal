@@ -35,7 +35,6 @@ const CurrentOnART = () => {
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            <CurrentOnArtOverview />
             <Card>
                 <CardHeader>Indicator Definition</CardHeader>
                 <CardBody>
@@ -48,6 +47,7 @@ const CurrentOnART = () => {
                     </ul>
                 </CardBody>
             </Card>
+            <CurrentOnArtOverview />
             <Row>
                 <Col>
                     <CurrentOnArtBySex />
