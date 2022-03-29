@@ -40,7 +40,12 @@ export const getNewOnArtHtsPositive = createSelector(
             }
             previousYearDate = moment(previousYearDate).add(1, 'month').toDate();
         }
-
+        if (filtered) {
+            months = []
+            list.forEach(date => {
+                months.push(monthNames[date.month] + ' ' + date.year)
+            })
+        }
         return { months, txNew, positives };
     }
 );
