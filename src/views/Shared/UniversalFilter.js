@@ -405,7 +405,7 @@ const UniversalFilter = () => {
                             <Dropdown
                                 id="populationType"
                                 name="populationType"
-                                placeholder="Select Pregnancy"
+                                placeholder="Select Popuplation Type"
                                 fluid
                                 multiple
                                 selection
