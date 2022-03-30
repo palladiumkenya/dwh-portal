@@ -191,6 +191,7 @@ import OvcCALHIVByGender from './CT/OVC/ovcCALHIVByGender';
 import OvcDistributionOfCALHIVByAgeSex from './CT/OVC/ovcDistributionOfCALHIVByAgeSex';
 import OvcDistributionOfPatientsByAgeSex from './CT/OVC/ovcDistributionOfPatientsByAgeSex';
 import CALHIVCurrentOnArt from './CT/OVC/CALHIVCurrentOnArt';
+import CALHIVCurrentOnArtNotInOvc from './CT/OVC/CALHIVCurrentOnArtNotInOvc';
 import CALHIVOnDTG from './CT/OVC/CALHIVOnDTG';
 import OvcCurrentOnArt from './CT/OVC/ovcCurrentOnArt';
 import OvcTotalOnTld from './CT/OVC/ovcTotalOnTld';
@@ -396,6 +397,7 @@ export default combineReducers({
     OvcDistributionOfCALHIVByAgeSex,
     OvcDistributionOfPatientsByAgeSex,
     CALHIVCurrentOnArt,
+    CALHIVCurrentOnArtNotInOvc,
     CALHIVOnDTG,
     OvcCurrentOnArt,
     OvcTotalOnTld,
