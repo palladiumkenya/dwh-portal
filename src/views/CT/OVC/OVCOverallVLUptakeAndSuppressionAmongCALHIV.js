@@ -10,7 +10,7 @@ import Highcharts from 'highcharts';
 
 const OVCOverallVLUptakeAndSuppressionAmongCALHIV = () => {
     const [overAllVLUptakeAndSuppressionAmongCALHIV, setOverAllVLUptakeAndSuppressionAmongCALHIV] = useState({});
-    const CALHIVCurrentOnArt = useSelector(CALHIVCurrentOnArtSelector.getCALHIVCurrentOnArt);
+    const CALHIVCurrentOnArt = useSelector(CALHIVCurrentOnArtSelector.getCALHIVCurrentOnArtNotInOvc);
     const CALHIVEligibleVL = useSelector(CALHIVEligibleVLSelector.getCALHIVEligibleVL);
     const CALHIVVLDone = useSelector(CALHIVVLDoneSelector.getCALHIVVLDone);
     const CALHIVVLSuppressed = useSelector(CALHIVVLSuppressedSelector.getCALHIVVLSuppressed);
@@ -101,7 +101,7 @@ const OVCOverallVLUptakeAndSuppressionAmongCALHIV = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        OVERALL VL UPTAKE AND SUPPRESSION AMONG CALHIV PATIENTS
+                        OVERALL VL UPTAKE AND SUPPRESSION AMONG CALHIV PATIENTS NOT IN OVC
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

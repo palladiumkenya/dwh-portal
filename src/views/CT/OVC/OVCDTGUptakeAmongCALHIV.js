@@ -8,7 +8,7 @@ import * as CALHIVOnDTGSelector from '../../../selectors/CT/OVC/CALHIVOnDTG';
 
 const OVCDTGUptakeAmongCALHIV = () => {
     const [DTGUptakeAmongCALHIV, setDTGUptakeAmongCALHIV] = useState({});
-    const CALHIVCurrentOnArt = useSelector(CALHIVCurrentOnArtSelector.getCALHIVCurrentOnArt);
+    const CALHIVCurrentOnArt = useSelector(CALHIVCurrentOnArtSelector.getCALHIVCurrentOnArtNotInOvc);
     const CALHIVOnDTG = useSelector(CALHIVOnDTGSelector.getCALHIVOnDTG);
 
     const loadDTGUptakeAmongCALHIV = useCallback(async () => {
@@ -83,7 +83,7 @@ const OVCDTGUptakeAmongCALHIV = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        DTG UPTAKE AMONG CALHIV PATIENTS
+                        DTG UPTAKE AMONG CALHIV PATIENTS NOT IN OVC
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

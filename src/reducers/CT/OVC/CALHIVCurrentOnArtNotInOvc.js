@@ -10,10 +10,10 @@ const initialState = {
 export default (state = initialState, action) => {
     let newState = { ...state };
     switch (action.type) {
-        case actionTypes.CT_CALHIV_CURRENT_ON_ART_REQUEST:
+        case actionTypes.CT_CALHIV_CURRENT_ON_ART_NOT_IN_OVC_REQUEST:
             newState.loading = true;
             return newState;
-        case actionTypes.CT_CALHIV_CURRENT_ON_ART_FETCH:
+        case actionTypes.CT_CALHIV_CURRENT_ON_ART_NOT_IN_OVC_FETCH:
             if (action.payload.filtered === true) {
                 newState.listFiltered = action.payload.list;
             } else {
@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
             }
             newState.loading = false;
             return newState;
-        case actionTypes.CT_CALHIV_CURRENT_ON_ART_FAILED:
+        case actionTypes.CT_CALHIV_CURRENT_ON_ART_NOT_IN_OVC_FAILED:
             newState.loading = false;
             return newState;
         default:

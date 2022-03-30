@@ -8,7 +8,7 @@ import * as CALHIVTotalOnMMDSelector from '../../../selectors/CT/OVC/CALHIVTotal
 
 const OVCMMDUptakeAmongCALHIVPatients = () => {
     const [mmdUptakeAmongCALHIV, setMmdUptakeAmongCALHIV] = useState({});
-    const CALHIVCurrentOnArt = useSelector(CALHIVCurrentOnArtSelector.getCALHIVCurrentOnArt);
+    const CALHIVCurrentOnArt = useSelector(CALHIVCurrentOnArtSelector.getCALHIVCurrentOnArtNotInOvc);
     const CALHIVTotalOnMMD = useSelector(CALHIVTotalOnMMDSelector.getCALHIVTotalOnMMD);
 
     const loadMMDUptakeAmongCALHIV = useCallback(async () => {
@@ -83,7 +83,7 @@ const OVCMMDUptakeAmongCALHIVPatients = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        MMD UPTAKE AMONG CALHIV PATIENTS
+                        MMD UPTAKE AMONG CALHIV PATIENTS NOT IN OVC
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
