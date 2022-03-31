@@ -104,7 +104,8 @@ export const getAdultPLHIVVaccinatedByPartner = createSelector(
                     {
                         y: totalVacc,
                         text: totalVacc,
-                        partner: partners[j]
+                        partner: partners[j],
+                        perctotal: totalVacc > 0 ? (totalFullyVaccinated/totalVacc) * 100: 0
                     }
                 );
             } else {
@@ -133,14 +134,15 @@ export const getAdultPLHIVVaccinatedByPartner = createSelector(
                     {
                         y: 0,
                         text: 0,
-                        partner: partners[j]
+                        partner: partners[j],
+                        perctotal: 0
                     }
                 );
             }
         }
 
         totalVaccinated.sort((a, b) => {
-            return b.text - a.text;
+            return b.perctotal - a.perctotal;
         });
         partners = totalVaccinated.map(obj => obj.partner);
         const orderedPartially = [];
