@@ -107,7 +107,8 @@ export const getAdultPLHIVVaccinatedByCounty = createSelector(
                     {
                         y: total,
                         text: total,
-                        county: counties[j]
+                        county: counties[j],
+                        perctotal: total > 0 ? (totalFullyVaccinated/total) * 100: 0
                     }
                 );
             } else {
@@ -136,14 +137,15 @@ export const getAdultPLHIVVaccinatedByCounty = createSelector(
                     {
                         y: 0,
                         text: 0,
-                        county: counties[j]
+                        county: counties[j],
+                        perctotal: 0
                     }
                 );
             }
         }
 
         totalVaccinated.sort((a, b) => {
-            return b.text - a.text;
+            return b.perctotal - a.perctotal;
         });
 
         counties = totalVaccinated.map(obj => obj.county);
