@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Loadable from 'react-loadable';
 import VisibilitySensor from 'react-visibility-sensor';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +11,7 @@ import SectionHeader from '../../Shared/SectionHeader';
 import UniversalFilter from './../../Shared/UniversalFilter';
 import moment from 'moment';
 import classnames from 'classnames';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 const SixMonthRetention = Loadable({ loader: () => import('./SixMonthRetention'), loading: Loading, delay: LOADING_DELAY });
 const ThreeMonthRetention = Loadable({ loader: () => import('./ThreeMonthRetention'), loading: Loading, delay: LOADING_DELAY });
@@ -49,6 +49,25 @@ const TreatmentOutcomes = () => {
             }
         }
     };
+
+    const { mini_tab } = useParams();
+    const history = useHistory();
+
+    useEffect(() => {
+        if (!mini_tab) {
+            history.push(`/hiv-treatment/treatmentOutcomes/${activeTab}`);
+        }
+    }, [mini_tab, history, activeTab]);
+
+    if(!mini_tab){
+        history.push(`/hiv-treatment/treatmentOutcomes/${activeTab}`);
+    }
+
+    const toggle = tab => {
+        if (mini_tab !== tab) {
+            history.push(`/hiv-treatment/treatmentOutcomes/${tab}`);
+        }
+    };
     return (
         <div className="animated fadeIn">
             <SectionHeader title={branding.title}/>
@@ -57,13 +76,13 @@ const TreatmentOutcomes = () => {
             </VisibilitySensor>
             <Nav tabs>
                 <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'outcomes' })} onClick={() => { setActiveTab('outcomes') }}>TREATMENT OUTCOMES</NavLink>
+                    <NavLink className={classnames({ active: mini_tab === 'outcomes' })} onClick={() => { setActiveTab('outcomes'); toggle("outcomes") }}>TREATMENT OUTCOMES</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'retention' })} onClick={() => { setActiveTab('retention') }}>RETENTION</NavLink>
+                    <NavLink className={classnames({ active: mini_tab === 'retention' })} onClick={() => { setActiveTab('retention'); toggle("retention") }}>RETENTION</NavLink>
                 </NavItem>
             </Nav>
-            <TabContent activeTab={activeTab}>
+            <TabContent activeTab={mini_tab}>
                 <TabPane tabId="outcomes">
                     <Card>
                         <CardBody style={{ textAlign: 'center'}}>

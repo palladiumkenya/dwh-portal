@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
 import classnames from 'classnames';
 import Loadable from 'react-loadable';
 import Loading from '../../Shared/Loading';
 import { LOADING_DELAY } from '../../../constants';
+import { useHistory, useParams } from 'react-router-dom';
 const OtzEnrollmentAmongAlhivOnArtBySex = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtBySex'), loading: Loading, delay: LOADING_DELAY });
 const OtzEnrollmentAmongAlhivOnArtByAge = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtByAge'), loading: Loading, delay: LOADING_DELAY });
 const OtzEnrollmentAmongAlhivOnArtByCounty = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtByCounty'), loading: Loading, delay: LOADING_DELAY });
@@ -35,17 +36,36 @@ const OtzVlSuppressionByPartner = Loadable({ loader: () => import('./OtzVlSuppre
 const OTZTabs = () => {
     const [activeTab, setActiveTab] = useState('otz_enrollment');
 
+    const { mini_tab } = useParams();
+    const history = useHistory();
+
+    useEffect(() => {
+        if (!mini_tab) {
+            history.push(`/hiv-treatment/otz/${activeTab}`);
+        }
+    }, [activeTab, history, mini_tab]);
+
+    if(!mini_tab){
+        history.push(`/hiv-treatment/otz/${activeTab}`);
+    }
+
+    const toggle = tab => {
+        if (mini_tab !== tab) {
+            history.push(`/hiv-treatment/otz/${tab}`);
+        }
+    };
+
     return (
         <div>
             <Nav tabs>
                 <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'otz_enrollment' })} onClick={() => { setActiveTab('otz_enrollment') }}>OTZ ENROLLMENT</NavLink>
+                    <NavLink className={classnames({ active: mini_tab === 'otz_enrollment' })} onClick={() => { setActiveTab('otz_enrollment'); toggle("otz_enrollment") }}>OTZ ENROLLMENT</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'otz_outcomes' })} onClick={() => { setActiveTab('otz_outcomes') }}>OTZ OUTCOMES</NavLink>
+                    <NavLink className={classnames({ active: mini_tab === 'otz_outcomes' })} onClick={() => { setActiveTab('otz_outcomes'); toggle("otz_outcomes") }}>OTZ OUTCOMES</NavLink>
                 </NavItem>
             </Nav>
-            <TabContent activeTab={activeTab}>
+            <TabContent activeTab={mini_tab}>
                 <TabPane tabId="otz_enrollment">
                     <Row>
                         <Col className={"col-6"}>

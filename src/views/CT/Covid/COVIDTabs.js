@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader, Col, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
 import classnames from 'classnames';
 import Loadable from 'react-loadable';
 import Loading from '../../Shared/Loading';
 import { LOADING_DELAY } from '../../../constants';
+import { useHistory, useParams } from 'react-router-dom';
 
 const COVIDOverview = Loadable({ loader: () => import('./COVIDOverview'), loading: Loading, delay: LOADING_DELAY });
 const COVIDAdultPLHIVVaccinatedByAge = Loadable({ loader: () => import('./COVIDAdultPLHIVVaccinatedByAge'), loading: Loading, delay: LOADING_DELAY });
@@ -27,18 +28,36 @@ const COVIDCumulativeNumberAdultPLHIVWithMissingDateGivenFirstDose = Loadable({l
 const COVIDTabs = () => {
     const [activeTab, setActiveTab] = useState('vaccination');
 
+    const { mini_tab } = useParams();
+    const history = useHistory();
+
+    useEffect(() => {
+        if (!mini_tab) {
+            history.push(`/hiv-treatment/covid/${activeTab}`);
+        }
+    }, [mini_tab, history, activeTab]);
+
+    if(!mini_tab){
+        history.push(`/hiv-treatment/covid/${activeTab}`);
+    }
+
+    const toggle = tab => {
+        if (mini_tab !== tab) {
+            history.push(`/hiv-treatment/covid/${tab}`);
+        }
+    };
     return (
         <div>
             <Nav tabs>
                 <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'vaccination' })} onClick={() => { setActiveTab('vaccination') }}>VACCINATION</NavLink>
+                    <NavLink className={classnames({ active: mini_tab === 'vaccination' })} onClick={() => { setActiveTab('vaccination'); toggle("vaccination") }}>VACCINATION</NavLink>
                 </NavItem>
 {/* 
                 <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'infection&Outcomes' })} onClick={() => { setActiveTab('infection&Outcomes') }}>INFECTIONS & OUTCOMES</NavLink>
+                    <NavLink className={classnames({ active: mini_tab === 'infection&Outcomes' })} onClick={() => { setActiveTab('infection&Outcomes'); toggle("infection&Outcomes") }}>INFECTIONS & OUTCOMES</NavLink>
                 </NavItem> */}
             </Nav>
-            <TabContent activeTab={activeTab}>
+            <TabContent activeTab={mini_tab}>
                 <TabPane tabId="vaccination">
                     <Card>
                         <CardHeader  className="covid-definition-header">Indicator Definition</CardHeader>
@@ -52,7 +71,7 @@ const COVIDTabs = () => {
                     </Card>
                     <Row>
                         <Col className={"col-12 pt-5 pb-5"}>
-                            <COVIDOverview tab={activeTab}/>
+                            <COVIDOverview tab={mini_tab}/>
                         </Col>
                     </Row>
                     <Row>
@@ -96,7 +115,7 @@ const COVIDTabs = () => {
                 </TabPane>
 
                 <TabPane tabId="infection&Outcomes">
-                    <COVIDOverview tab={activeTab}/>
+                    <COVIDOverview tab={mini_tab}/>
                     <Row>
                         <Col className={"col-6"}>
                             <COVIDSeverityOfInfectionByGender />
