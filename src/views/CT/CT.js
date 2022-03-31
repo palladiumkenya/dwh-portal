@@ -318,6 +318,7 @@ import Loading from './../Shared/Loading';
 import { loadCalHIVOnDTG } from '../../actions/CT/OVC/CALHIVOnDTGActions';
 import { useHistory, useParams } from 'react-router-dom';
 import * as actions from '../../actions/types';
+import { loadCalHIVCurrentOnArtNotInOvc } from '../../actions/CT/OVC/CALHIVCurrentOnARTNotInOvcActions';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({
@@ -605,6 +606,7 @@ const CT = () => {
                 dispatch(loadOVCEligibleVL());
                 dispatch(loadOVCVLDone());
                 dispatch(loadOVCVLSuppressed());
+                dispatch(loadCalHIVCurrentOnArtNotInOvc());
                 break;
             case 'covid':
                 dispatch(loadCovidAdultPLHIVCurrentOnTreatment());
