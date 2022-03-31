@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
 import Loadable from 'react-loadable';
 import VisibilitySensor from 'react-visibility-sensor';
@@ -10,7 +10,7 @@ import Loading from '../../Shared/Loading';
 import SectionFooter from '../../Shared/SectionFooter';
 import SectionHeader from '../../Shared/SectionHeader';
 import UniversalFilter from '../../Shared/UniversalFilter';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 const ViralLoadOverview = Loadable({ loader: () => import('./ViralLoadOverview'), loading: Loading, delay: LOADING_DELAY });
 const ViralLoadOverallUptakeAndSuppressionBySex = Loadable({ loader: () => import('./ViralLoadOverallUptakeAndSuppressionBySex'), loading: Loading, delay: LOADING_DELAY });
@@ -49,6 +49,26 @@ const ViralLoad = () => {
             }
         }
     };
+
+    const { mini_tab } = useParams();
+    const history = useHistory();
+
+    useEffect(() => {
+        if (!mini_tab) {
+            history.push(`/hiv-treatment/vl/${activeTab}`);
+        }
+    }, [activeTab, history, mini_tab]);
+
+    if(!mini_tab){
+        history.push(`/hiv-treatment/vl/${activeTab}`);
+    }
+
+    const toggle = tab => {
+        if (mini_tab !== tab) {
+            history.push(`/hiv-treatment/vl/${tab}`);
+        }
+    };
+
     return (
         <div className="animated fadeIn">
             <VisibilitySensor onChange={onVisibilityChange}>
@@ -56,13 +76,13 @@ const ViralLoad = () => {
             </VisibilitySensor>
             <Nav tabs>
                 <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'uptake' })} onClick={() => { setActiveTab('uptake') }}>VIRAL LOAD UPTAKE</NavLink>
+                    <NavLink className={classnames({ active: mini_tab === 'uptake' })} onClick={() => { setActiveTab('uptake'); toggle("uptake") }}>VIRAL LOAD UPTAKE</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'outcomes' })} onClick={() => { setActiveTab('outcomes') }}>VIRAL LOAD OUTCOMES</NavLink>
+                    <NavLink className={classnames({ active: mini_tab === 'outcomes' })} onClick={() => { setActiveTab('outcomes'); toggle("outcomes") }}>VIRAL LOAD OUTCOMES</NavLink>
                 </NavItem>
             </Nav>
-            <TabContent activeTab={activeTab}>
+            <TabContent activeTab={mini_tab}>
                 <TabPane tabId="uptake">
                     <SectionHeader title={branding.title + " UPTAKE"}/>
                     <Card>

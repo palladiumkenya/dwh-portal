@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
 import classnames from 'classnames';
 import Loadable from 'react-loadable';
 import Loading from '../../Shared/Loading';
 import { LOADING_DELAY } from '../../../constants';
+import { useHistory, useParams } from 'react-router-dom';
 
 const OVCOverview = Loadable({ loader: () => import('./OVCOverview'), loading: Loading, delay: LOADING_DELAY });
 const OVCIndicatorDefinition = Loadable({ loader: () => import('./OVCIndicatorDefinition'), loading: Loading, delay: LOADING_DELAY });
@@ -27,18 +28,36 @@ const OVCOverallVLUptakeAndSuppressionAmongOVC = Loadable({ loader: () => import
 const OVCTabs = () => {
     const [activeTab, setActiveTab] = useState('distributionOfOvcClients');
 
+    const { mini_tab } = useParams();
+    const history = useHistory();
+
+    useEffect(() => {
+        if (!mini_tab) {
+            history.push(`/hiv-treatment/ovc/${activeTab}`);
+        }
+    }, [activeTab, history, mini_tab]);
+
+    if(!mini_tab){
+        history.push(`/hiv-treatment/ovc/${activeTab}`);
+    }
+
+    const toggle = tab => {
+        if (mini_tab !== tab) {
+            history.push(`/hiv-treatment/ovc/${tab}`);
+        }
+    };
     return (
         <div>
             <Nav tabs>
                 <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'distributionOfOvcClients' })} onClick={() => { setActiveTab('distributionOfOvcClients') }}>DISTRIBUTION OF OVC CLIENTS</NavLink>
+                    <NavLink className={classnames({ active: mini_tab === 'distributionOfOvcClients' })} onClick={() => { setActiveTab('distributionOfOvcClients'); toggle("distributionOfOvcClients") }}>DISTRIBUTION OF OVC CLIENTS</NavLink>
                 </NavItem>
 
                 <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'managementOfOvcClients' })} onClick={() => { setActiveTab('managementOfOvcClients') }}>MANAGEMENT OF OVC CLIENTS</NavLink>
+                    <NavLink className={classnames({ active: mini_tab === 'managementOfOvcClients' })} onClick={() => { setActiveTab('managementOfOvcClients'); toggle("managementOfOvcClients") }}>MANAGEMENT OF OVC CLIENTS</NavLink>
                 </NavItem>
             </Nav>
-            <TabContent activeTab={activeTab}>
+            <TabContent activeTab={mini_tab}>
                 <TabPane tabId="distributionOfOvcClients">
                     <OVCIndicatorDefinition />
 
