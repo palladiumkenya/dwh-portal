@@ -156,7 +156,7 @@ const UniversalFilter = () => {
             <Row>
                 {
                     filters.countyFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-xl-2 col-lg-3 col-md-3 col-sm-6 col-xs-6"}>
                         <div className="form-group">
                             <label htmlFor="county">County</label>
                             <Dropdown
@@ -178,7 +178,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.subCountyFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="county">Sub-County</label>
                             <Dropdown
@@ -200,7 +200,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.facilityFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="county">Facility</label>
                             <Dropdown
@@ -222,7 +222,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.partnerFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="partner">Partner</label>
                             <Dropdown
@@ -244,7 +244,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.agencyFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="agency">Agency</label>
                             <Dropdown
@@ -266,7 +266,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.projectFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="project">Project</label>
                             <Dropdown
@@ -288,7 +288,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.fromDateFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="fromDate">{filters.toDateFilterEnabled ? 'From':'Period'}</label>
                             <DateInput
@@ -310,7 +310,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.toDateFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="toDate">To</label>
                             <DateInput
@@ -333,7 +333,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.genderFilterEnabled ?
-                        <Col className={"col-2"}>
+                        <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                             <div className="form-group">
                                 <label htmlFor="gender">Gender</label>
                                 <Dropdown
@@ -355,7 +355,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.datimAgeGroupFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="datimAgeGroup">Age Group</label>
                             <Dropdown
@@ -377,7 +377,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.latestPregnancyFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="latestPregnancy">Pregnancy</label>
                             <Dropdown
@@ -399,13 +399,13 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.populationTypeFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="populationType">Population Type</label>
                             <Dropdown
                                 id="populationType"
                                 name="populationType"
-                                placeholder="Select Popuplation Type"
+                                placeholder="Select Population Type"
                                 fluid
                                 multiple
                                 selection
