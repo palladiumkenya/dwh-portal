@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import moment from 'moment';
-import { DateInput } from 'semantic-ui-calendar-react';
+import { DateInput, MonthInput, MonthRangeInput, YearInput } from 'semantic-ui-calendar-react';
 import { Dropdown } from 'semantic-ui-react';
 import { PAGES } from "../../constants";
 import { Row, Col } from 'reactstrap';
@@ -287,7 +287,7 @@ const UniversalFilter = () => {
                     </Col> : null
                 }
                 {
-                    filters.fromDateFilterEnabled ?
+                    filters.fromDateFilterEnabled && !filters.toDateFilterEnabled ?
                     <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="fromDate">{filters.toDateFilterEnabled ? 'From':'Period'}</label>
@@ -312,20 +312,40 @@ const UniversalFilter = () => {
                     filters.toDateFilterEnabled ?
                     <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
-                            <label htmlFor="toDate">To</label>
-                            <DateInput
+                            <label htmlFor="toDate">Date Range</label>
+
+                            {/*<MonthRangeInput*/}
+                            {/*    name="toDate"*/}
+                            {/*    dateFormat="MMM YYYY"*/}
+                            {/*    closable={true}*/}
+                            {/*    clearable={true}*/}
+                            {/*    maxDate={moment()}*/}
+                            {/*    placeholder={'From and To'}*/}
+                            {/*    fluid*/}
+                            {/*    value={filters.toDate}*/}
+                            {/*    iconPosition="left"*/}
+                            {/*    onChange={(e, data) => {*/}
+                            {/*        let date = data.value.split(' - ')*/}
+                            {/*        console.log(date)*/}
+                            {/*        dispatch(actions.filterByFromDate(date[0]));*/}
+                            {/*        // date.length > 1 ? dispatch(actions.filterByToDate(date[1])): null;*/}
+                            {/*    }}*/}
+                            {/*/>*/}
+                            <MonthRangeInput
                                 name="toDate"
                                 dateFormat="MMM YYYY"
                                 closable={true}
                                 clearable={true}
                                 minDate={filters.fromDate}
                                 maxDate={moment()}
-                                placeholder="To"
+                                placeholder="From - To"
                                 fluid
-                                value={filters.toDate}
+                                value={filters.fromDate}
                                 iconPosition="left"
                                 onChange={(e, data) => {
-                                    dispatch(actions.filterByToDate(data.value));
+                                    let date = data.value.split(' - ')
+                                    dispatch(actions.filterByFromDate(data.value));
+                                    dispatch(actions.filterByToDate(date[1]));
                                 }}
                             />
                         </div>

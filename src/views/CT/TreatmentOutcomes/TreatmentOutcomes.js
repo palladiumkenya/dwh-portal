@@ -90,7 +90,7 @@ const TreatmentOutcomes = () => {
                                 <span style={{ fontSize: '1.2em'}}>
                                     Data displayed is for the patients started on ART between &nbsp;
                                     <strong>
-                                        {filters.fromDate ? filters.fromDate: moment().startOf('month').subtract(12, 'month').format('MMM YYYY')}
+                                        {filters.fromDate ? filters.fromDate.split(' - ')[0]: moment().startOf('month').subtract(12, 'month').format('MMM YYYY')}
                                     </strong> to &nbsp;
                                     <strong>
                                         {filters.toDate ? filters.toDate: moment().startOf('month').subtract(1, 'month').format('MMM YYYY')}
