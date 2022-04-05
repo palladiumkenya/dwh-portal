@@ -290,19 +290,21 @@ const UniversalFilter = () => {
                     filters.fromDateFilterEnabled && !filters.toDateFilterEnabled ?
                     <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
-                            <label htmlFor="fromDate">{filters.toDateFilterEnabled ? 'From':'Period'}</label>
-                            <DateInput
+                            <label htmlFor="fromDate">{filters.toDateFilterEnabled && !filters.toDateFilterEnabled ? 'From':'Period'}</label>
+                            <MonthRangeInput
                                 name="fromDate"
                                 dateFormat="MMM YYYY"
                                 closable={true}
                                 clearable={true}
                                 maxDate={moment()}
-                                placeholder={filters.toDateFilterEnabled ? 'From':'Period'}
+                                placeholder="Period"
                                 fluid
-                                value={filters.fromDate}
+                                value={filters.toDate}
                                 iconPosition="left"
                                 onChange={(e, data) => {
-                                    dispatch(actions.filterByFromDate(data.value));
+                                    let date = data.value.split(' - ')
+                                    dispatch(actions.filterByFromDate(date[0]));
+                                    dispatch(actions.filterByToDate(data.value + date[0]));
                                 }}
                             />
                         </div>
