@@ -52,7 +52,7 @@ const RROverview = () => {
         };
         params.period = filters.fromDate ?
             moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M') :
-            moment().startOf('month').subtract(2, 'month').format('YYYY,M');
+            moment().startOf('month').subtract(1, 'month').format('YYYY,M');
         const data = await getAll('manifests/expected/' + rrTab, params);
         setExpected(data.expected.toLocaleString('en'));
     }, [filters, rrTab]);
@@ -69,7 +69,7 @@ const RROverview = () => {
         };
         params.period = filters.fromDate ?
             moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M') :
-            moment().startOf('month').subtract(2, 'month').format('YYYY,M');
+            moment().startOf('month').subtract(1, 'month').format('YYYY,M');
         const data = await getAll('manifests/consistency/' + rrTab, params);
         setConsistnecy({ consistency: [], stats: data.consistency ? data.consistency.toLocaleString('en') : [], statsPerc: getPerc(data.consistency , expected) });
     }, [filters, rrTab, expected]);
@@ -86,7 +86,7 @@ const RROverview = () => {
         };
         params.period = filters.fromDate ?
             moment(params.fromDate, "MMM YYYY").startOf('month').subtract(0, 'month').format('YYYY,M') :
-            moment().startOf('month').subtract(1, 'month').format('YYYY,M');
+            moment().startOf('month').format('YYYY,M');
         const data = await getAll('manifests/recency/' + rrTab, params);
         setRecency({ recency: [], stats: data.recency ? data.recency.toLocaleString('en') : [], statsPerc: getPerc(data.recency , expected) });
     }, [filters, rrTab, expected]);
@@ -163,7 +163,7 @@ const RROverview = () => {
                                 sub_county: l.subcounty,
                                 agency: l.agency,
                                 partner: l.partner,
-                                reporting_date: filters.fromDate ? filters.fromDate : moment().startOf('month').subtract(1, 'month').format("MMM YYYY"),
+                                reporting_date: filters.fromDate ? filters.fromDate : moment().startOf('month').format("MMM YYYY"),
                             }))}
                             text="Download facilities not reporting"
                             className="btn btn-danger"
@@ -205,7 +205,7 @@ const RROverview = () => {
                                 sub_county: l.Subcounty,
                                 agency: l.Agency,
                                 partner: l.Partner,
-                                reporting_date: filters.fromDate ? filters.fromDate : moment().startOf('month').subtract(1, 'month').format("MMM YYYY"),
+                                reporting_date: filters.fromDate ? filters.fromDate : moment().startOf('month').format("MMM YYYY"),
                                 number_of_uploads: l.NumberOfUploads
                             }))}
                             text="Download facilities not consistent"
