@@ -3,8 +3,9 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import Loadable from 'react-loadable';
 import Loading from '../../Shared/Loading';
 import { LOADING_DELAY } from '../../../constants';
+import COVIDOverallMissedAppointment from './COVIDOverallMissedAppointment'
 
-const COVIDOverallMissedAppointment = Loadable({ loader: () => import('./COVIDOverallMissedAppointment'), loading: Loading, delay: LOADING_DELAY });
+// const COVIDOverallMissedAppointment = Loadable({ loader: () => import('./COVIDOverallMissedAppointment'), loading: Loading, delay: LOADING_DELAY });
 const COVIDOverallMissedAppointmentMale = Loadable({ loader: () => import('./COVIDOverallMissedAppointmentMale'), loading: Loading, delay: LOADING_DELAY });
 const COVIDOverallMissedAppointmentFemale = Loadable({ loader: () => import('./COVIDOverallMissedAppointmentFemale'), loading: Loading, delay: LOADING_DELAY });
 
@@ -14,7 +15,7 @@ const COVIDPercentageWhoMissedAppointment = () => {
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
                 PERCENTAGE OF PLHIV WHO MISSED APPOINTMENT DUE TO COVID-19 INFECTION
             </CardHeader>
-            <CardBody className="trends-body">
+            <CardBody className="">
                 <div className={"row"}>
                     <div className="col-4">
                         <COVIDOverallMissedAppointment />

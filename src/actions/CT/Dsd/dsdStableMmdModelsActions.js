@@ -3,12 +3,12 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING, PAGES } from '../../../constants';
 
-export const loadDsdStableMmdModels = () => async (dispatch, getState) => {
+export const loadDsdStableMmdModels = (tab) => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
         moment(getState().dsdStableMmdModels.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'dsd' && getState().ui.currentPage !== PAGES.home) {
+    if (getState().ui.ctTab !== 'dsd' && tab !== 'dsd' && getState().ui.currentPage !== PAGES.home) {
         return;
     }
     else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {

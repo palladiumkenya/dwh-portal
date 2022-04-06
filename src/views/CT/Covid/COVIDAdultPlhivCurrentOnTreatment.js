@@ -18,9 +18,6 @@ const COVIDAdultPlhivCurrentOnTreatment = () => {
     const data = [{
         y: 100,
         color: 'blue'
-    }, {
-        y: 100 - currentOnArtAdults,
-        color: '#f0f0f0'
     }];
 
     let title = `<div class="row" ><div class="col-12" style="font-size:40px; font-weight: bold;">${formatNumber(currentOnArtAdults)}</div></div>`;

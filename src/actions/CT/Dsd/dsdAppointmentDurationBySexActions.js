@@ -3,12 +3,12 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING } from '../../../constants';
 
-export const loadDsdAppointmentDurationBySex = () => async (dispatch, getState) => {
+export const loadDsdAppointmentDurationBySex = (tab) => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
         moment(getState().dsdAppointmentDurationBySex.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'dsd') {
+    if (getState().ui.ctTab !== 'dsd' && tab !== 'dsd') {
         return;
     }
     else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {

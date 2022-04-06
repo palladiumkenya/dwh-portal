@@ -3,12 +3,13 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING } from '../../../constants';
 
-export const loadMedianTimeTo1stVlByYear = () => async (dispatch, getState) => {
+export const loadMedianTimeTo1stVlByYear = (tab) => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
         moment(getState().medianTimeTo1stVlByYear.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'vl') {
+    if (getState().ui.ctTab !== 'vl' &&
+        tab !== 'vl') {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {

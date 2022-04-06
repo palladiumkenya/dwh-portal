@@ -7,6 +7,7 @@ import { changeHtsTab, changeCurrentPage } from './../../actions/Shared/uiAction
 import { enableFromDateFilter, disableFromDateFilter, enableAgencyFilter } from './../../actions/Shared/filterActions';
 import { loadLinkageNumberNotLinkedByFacility } from '../../actions/HTS/Linkage/linkageNumberNotLinkedByFacilityActions';
 import Loading from './../Shared/Loading';
+import { useHistory, useParams } from 'react-router-dom';
 
 const Uptake = Loadable({ loader: () => import('./Uptake/Uptake'), loading: Loading, delay: LOADING_DELAY });
 const Linkage = Loadable({ loader: () => import('./Linkage/Linkage'), loading: Loading, delay: LOADING_DELAY });
@@ -29,7 +30,10 @@ const HTS = () => {
             Object.keys(HTS_TABS).map((value) => {
                 return (
                     <NavItem key={value}>
-                        <NavLink active={htsTab === value} onClick={() => { dispatch(changeHtsTab(value)); }} >
+                        <NavLink active={active_tab === value} onClick={() => {
+                            dispatch(changeHtsTab(value));
+                            toggle(value);
+                        }} replace >
                             {HTS_TABS[value]}
                         </NavLink>
                     </NavItem>
@@ -68,20 +72,39 @@ const HTS = () => {
         noCache
     ]);
 
+    const DEFAULT_ACTIVE_TAB = htsTab;
+    const { active_tab } = useParams();
+    const history = useHistory();
+    console.log(active_tab, htsTab)
+    useEffect(() => {
+        if (!active_tab) {
+            history.push(`/hiv-testing/${DEFAULT_ACTIVE_TAB}`);
+        }
+    }, []);
+
+    if(!active_tab){
+        history.push(`/hiv-testing/${htsTab}`);
+    }
+    const toggle = tab => {
+        if (active_tab !== tab) {
+            history.push(`/hiv-testing/${tab}`);
+        }
+    };
+
     return (
         <div>
             <Nav tabs>
                 {renderTabNavItems()}
             </Nav>
-            <TabContent activeTab={htsTab}>
+            <TabContent activeTab={active_tab}>
                 <TabPane tabId="uptake">
-                    { htsTab === 'uptake' ? <Uptake/>: null }
+                    { active_tab === 'uptake' ? <Uptake/>: null }
                 </TabPane>
                 <TabPane tabId="linkage">
-                    { htsTab === 'linkage' ? <Linkage/>: null }
+                    { active_tab === 'linkage' ? <Linkage/>: null }
                 </TabPane>
                 <TabPane tabId="pns">
-                    { htsTab === 'pns' ? <PNS/>: null }
+                    { active_tab === 'pns' ? <PNS/>: null }
                 </TabPane>
             </TabContent>
             <p></p><p></p>

@@ -209,6 +209,8 @@ import ovcVLDone from './CT/OVC/ovcVLDone';
 import ovcVLSuppressed from './CT/OVC/ovcVLSuppressed';
 import CovidNumberScreened from './CT/Covid/covidNumberScreened';
 import CovidCumulativeWithMissingDateGivenFirstDose from './CT/Covid/covidCumulativeWithMissingDateGivenFirstDose';
+import CovidAdmissionSymptomaticByAge from './CT/Covid/covidAdmissionSymptomaticByAge';
+import CovidManagementAdmitted from './CT/Covid/covidManagementAdmitted';
 
 export default combineReducers({
     auth: authReducer,
@@ -391,6 +393,9 @@ export default combineReducers({
     CovidCumulativeWhoReceivedAtLeastOneDose,
     CovidTrendsPLHIVVaccinationInTheLast12Months,
     CovidCumulativeWithMissingDateGivenFirstDose,
+    CovidManagementAdmitted,
+    CovidNumberScreened,
+    CovidAdmissionSymptomaticByAge,
 
     OvcOverallCALHIV,
     OvcCALHIVByGender,
@@ -413,5 +418,4 @@ export default combineReducers({
     ovcEligibleVL,
     ovcVLDone,
     ovcVLSuppressed,
-    CovidNumberScreened
 });

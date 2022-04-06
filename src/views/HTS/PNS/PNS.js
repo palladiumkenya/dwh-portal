@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import classnames from 'classnames';
@@ -19,6 +19,7 @@ import PNSPositivityTrends from './PNSPositivityTrends';
 import PNSContactsTestingPositivityByCounty from './PNSContactsTestingPositivityByCounty';
 import PNSContactsTestingPositivityByPartner from './PNSContactsTestingPositivityByPartner';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
+import { useHistory, useParams } from 'react-router-dom';
 
 const PNS = () => {
     const dispatch = useDispatch();
@@ -38,7 +39,27 @@ const PNS = () => {
             }
         }
     };
-    
+
+    const { mini_tab } = useParams();
+    const history = useHistory();
+
+    useEffect(() => {
+        if (!mini_tab) {
+            history.push(`/hiv-testing/pns/${activeTab}`);
+        }
+    }, [activeTab, history, mini_tab]);
+
+    if(!mini_tab){
+        history.push(`/hiv-testing/pns/${activeTab}`);
+    }
+
+    const toggle = tab => {
+        if (mini_tab !== tab) {
+            history.push(`/hiv-testing/pns/${tab}`);
+        }
+    };
+
+
     return (
         <div className="animated fadeIn">
             <VisibilitySensor onChange={onVisibilityChange}>
@@ -46,13 +67,13 @@ const PNS = () => {
             </VisibilitySensor>
             <Nav tabs>
                 <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'contacts' })} onClick={() => { setActiveTab('contacts') }}>SEXUAL CONTACT TESTING</NavLink>
+                    <NavLink className={classnames({ active: mini_tab === 'contacts' })} onClick={() => { setActiveTab('contacts'); toggle("contacts") }}>SEXUAL CONTACT TESTING</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'family' })} onClick={() => { setActiveTab('family') }}>FAMILY TESTING</NavLink>
+                    <NavLink className={classnames({ active: mini_tab === 'family' })} onClick={() => { setActiveTab('family'); toggle("family") }}>FAMILY TESTING</NavLink>
                 </NavItem>
             </Nav>
-            <TabContent activeTab={activeTab}>
+            <TabContent activeTab={mini_tab}>
                 <TabPane tabId="contacts">
                     <SectionHeader title={branding.title} description="SEXUAL CONTACT TESTING"/>
                     <PNSContactsTestingOverview/>

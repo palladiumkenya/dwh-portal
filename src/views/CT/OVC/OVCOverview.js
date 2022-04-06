@@ -6,7 +6,6 @@ import * as ovcServByGenderSelector from '../../../selectors/CT/OVC/ovcServByGen
 import * as ovcOverallCALHIVSelector from '../../../selectors/CT/OVC/ovcOverallCALHIV';
 import * as ovcCALHIVByGenderSelector from '../../../selectors/CT/OVC/ovcCALHIVByGender';
 import { formatNumber } from '../../../utils/utils';
-import DataCard from '../../Shared/DataCard';
 import moment from 'moment';
 import DataCardCT from '../../Shared/DataCardCT';
 
@@ -102,8 +101,6 @@ const OVCOverview = () => {
                     </Col>
                 </Row>
             </Col>
-
-
 
         </Row>
     );

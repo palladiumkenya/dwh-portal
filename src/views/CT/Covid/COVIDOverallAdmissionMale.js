@@ -39,11 +39,11 @@ export const COVIDOverallAdmissionMale = () => {
                 ]
             }]
         });
-    }, []);
+    }, [overallAdmissionData]);
 
     useEffect(() => {
         loadOverallAdmissionMale();
-    }, []);
+    }, [loadOverallAdmissionMale]);
 
     return (
         <HighchartsReact highcharts={Highcharts} options={overallAdmissionMale} />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import moment from 'moment';
-import { DateInput } from 'semantic-ui-calendar-react';
+import { DateInput, MonthInput, MonthRangeInput, YearInput } from 'semantic-ui-calendar-react';
 import { Dropdown } from 'semantic-ui-react';
 import { PAGES } from "../../constants";
 import { Row, Col } from 'reactstrap';
@@ -156,7 +156,7 @@ const UniversalFilter = () => {
             <Row>
                 {
                     filters.countyFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-xl-2 col-lg-3 col-md-3 col-sm-6 col-xs-6"}>
                         <div className="form-group">
                             <label htmlFor="county">County</label>
                             <Dropdown
@@ -178,7 +178,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.subCountyFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="county">Sub-County</label>
                             <Dropdown
@@ -200,7 +200,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.facilityFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="county">Facility</label>
                             <Dropdown
@@ -222,7 +222,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.partnerFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="partner">Partner</label>
                             <Dropdown
@@ -244,7 +244,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.agencyFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="agency">Agency</label>
                             <Dropdown
@@ -266,7 +266,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.projectFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="project">Project</label>
                             <Dropdown
@@ -287,22 +287,24 @@ const UniversalFilter = () => {
                     </Col> : null
                 }
                 {
-                    filters.fromDateFilterEnabled ?
-                    <Col className={"col-2"}>
+                    filters.fromDateFilterEnabled && !filters.toDateFilterEnabled ?
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
-                            <label htmlFor="fromDate">{filters.toDateFilterEnabled ? 'From':'Period'}</label>
-                            <DateInput
+                            <label htmlFor="fromDate">{filters.toDateFilterEnabled && !filters.toDateFilterEnabled ? 'From':'Period'}</label>
+                            <MonthRangeInput
                                 name="fromDate"
                                 dateFormat="MMM YYYY"
                                 closable={true}
                                 clearable={true}
                                 maxDate={moment()}
-                                placeholder={filters.toDateFilterEnabled ? 'From':'Period'}
+                                placeholder="Period"
                                 fluid
-                                value={filters.fromDate}
+                                value={filters.toDate}
                                 iconPosition="left"
                                 onChange={(e, data) => {
-                                    dispatch(actions.filterByFromDate(data.value));
+                                    let date = data.value.split(' - ')
+                                    dispatch(actions.filterByFromDate(date[0]));
+                                    dispatch(actions.filterByToDate(data.value + date[0]));
                                 }}
                             />
                         </div>
@@ -310,22 +312,42 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.toDateFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
-                            <label htmlFor="toDate">To</label>
-                            <DateInput
+                            <label htmlFor="toDate">Date Range</label>
+
+                            {/*<MonthRangeInput*/}
+                            {/*    name="toDate"*/}
+                            {/*    dateFormat="MMM YYYY"*/}
+                            {/*    closable={true}*/}
+                            {/*    clearable={true}*/}
+                            {/*    maxDate={moment()}*/}
+                            {/*    placeholder={'From and To'}*/}
+                            {/*    fluid*/}
+                            {/*    value={filters.toDate}*/}
+                            {/*    iconPosition="left"*/}
+                            {/*    onChange={(e, data) => {*/}
+                            {/*        let date = data.value.split(' - ')*/}
+                            {/*        console.log(date)*/}
+                            {/*        dispatch(actions.filterByFromDate(date[0]));*/}
+                            {/*        // date.length > 1 ? dispatch(actions.filterByToDate(date[1])): null;*/}
+                            {/*    }}*/}
+                            {/*/>*/}
+                            <MonthRangeInput
                                 name="toDate"
                                 dateFormat="MMM YYYY"
                                 closable={true}
                                 clearable={true}
                                 minDate={filters.fromDate}
                                 maxDate={moment()}
-                                placeholder="To"
+                                placeholder="From - To"
                                 fluid
-                                value={filters.toDate}
+                                value={filters.fromDate}
                                 iconPosition="left"
                                 onChange={(e, data) => {
-                                    dispatch(actions.filterByToDate(data.value));
+                                    let date = data.value.split(' - ')
+                                    dispatch(actions.filterByFromDate(data.value));
+                                    dispatch(actions.filterByToDate(date[1]));
                                 }}
                             />
                         </div>
@@ -333,7 +355,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.genderFilterEnabled ?
-                        <Col className={"col-2"}>
+                        <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                             <div className="form-group">
                                 <label htmlFor="gender">Gender</label>
                                 <Dropdown
@@ -355,7 +377,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.datimAgeGroupFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="datimAgeGroup">Age Group</label>
                             <Dropdown
@@ -377,7 +399,7 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.latestPregnancyFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="latestPregnancy">Pregnancy</label>
                             <Dropdown
@@ -399,13 +421,13 @@ const UniversalFilter = () => {
                 }
                 {
                     filters.populationTypeFilterEnabled ?
-                    <Col className={"col-2"}>
+                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                         <div className="form-group">
                             <label htmlFor="populationType">Population Type</label>
                             <Dropdown
                                 id="populationType"
                                 name="populationType"
-                                placeholder="Select Popuplation Type"
+                                placeholder="Select Population Type"
                                 fluid
                                 multiple
                                 selection

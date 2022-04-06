@@ -3,15 +3,18 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING, PAGES } from '../../../constants';
 
-export const loadCurrentOnArtOverview = () => async (dispatch, getState) => {
+export const loadCurrentOnArtOverview = (tab) => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
         moment(getState().currentOnArtOverview.lastFetch),
         'minutes'
     );
     if (
-        getState().ui.ctTab !== 'txCurr' &&
+        getState().ui.ctTab !== "currentOnArt" &&
         getState().ui.ctTab !== 'dsd' &&
         getState().ui.ctTab !== 'vl' &&
+        tab !== 'dsd' &&
+        tab !== 'vl' &&
+        tab !== "currentOnArt" &&
         getState().ui.currentPage !== PAGES.home
     ) {
         return;

@@ -3,15 +3,15 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING } from '../../../constants';
 
-export const loadDsdAppointmentDurationByStabilityStatus = () => async (dispatch, getState) => {
+export const loadDsdAppointmentDurationByStabilityStatus = (tab) => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
         moment(getState().dsdAppointmentDurationByStabilityStatus.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'dsd') {
+    if (getState().ui.ctTab !== 'dsd' && tab !== 'dsd') {
         return;
     }
-    else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
+    else if ((diffInMinutes < CACHING.MID) && tab === 'dsd' && getState().filters.filtered === false) {
         return;
     } else {
         await dispatch(fetchDsdAppointmentDurationByStabilityStatus());

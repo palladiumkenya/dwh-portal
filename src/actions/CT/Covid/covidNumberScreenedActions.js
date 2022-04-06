@@ -13,7 +13,8 @@ export const loadCovidNumberScreened = () => async (dispatch, getState) => {
         );
         if (
             getState().ui.ctTab !== 'covid' &&
-            getState().ui.currentPage !== PAGES.home
+            getState().ui.currentPage !== PAGES.home &&
+            getState().ui.currentPage !== PAGES.ct
         ) {
             return;
         }

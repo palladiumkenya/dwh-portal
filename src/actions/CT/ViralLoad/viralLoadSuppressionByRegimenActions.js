@@ -3,12 +3,13 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING } from '../../../constants';
 
-export const loadViralLoadSuppressionByRegimen = () => async (dispatch, getState) => {
+export const loadViralLoadSuppressionByRegimen = (tab) => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
         moment(getState().viralLoadSuppressionByRegimen.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'vl') {
+    if (getState().ui.ctTab !== 'vl' &&
+        tab !== 'vl') {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {

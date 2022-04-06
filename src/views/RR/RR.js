@@ -22,6 +22,7 @@ import UniversalFilter from '../Shared/UniversalFilter';
 import SectionHeader from './../Shared/SectionHeader';
 import SectionFooter from './../Shared/SectionFooter';
 import moment from 'moment';
+import { useHistory, useParams } from 'react-router-dom';
 
 const RROverview = Loadable({ loader: () => import('./RROverview'), loading: Loading, delay: LOADING_DELAY });
 const RROverviewTrends = Loadable({ loader: () => import('./RROverviewTrends'), loading: Loading, delay: LOADING_DELAY });
@@ -54,7 +55,10 @@ const RR = () => {
             Object.keys(RR_TABS).map((value) => {
                 return (
                     <NavItem key={value}>
-                        <NavLink active={rrTab === value} onClick={() => { dispatch(changeRRTab(value)); }} >
+                        <NavLink active={active_tab === value} onClick={() => {
+                            dispatch(changeRRTab(value));
+                            toggle(value);
+                        }} >
                             {RR_TABS[value]}
                         </NavLink>
                     </NavItem>
@@ -94,13 +98,32 @@ const RR = () => {
         rrTab
     ]);
 
+    const DEFAULT_ACTIVE_TAB = useSelector(state => state.ui.rrTab);
+    const { active_tab } = useParams();
+    const history = useHistory();
+    useEffect(() => {
+        if (!active_tab) {
+            history.push(`/reporting-rates/${DEFAULT_ACTIVE_TAB}`);
+        }
+    }, []);
+
+    if(!active_tab){
+        history.push(`/reporting-rates/${rrTab}`);
+    }
+
+    const toggle = tab => {
+        if (active_tab !== tab) {
+            history.push(`/reporting-rates/${tab}`);
+        }
+    };
+
     return (
         <div>
             <Nav tabs>
                 {renderTabNavItems()}
             </Nav>
-            <TabContent activeTab={rrTab}>
-                <TabPane tabId={rrTab}>
+            <TabContent activeTab={active_tab}>
+                <TabPane tabId={active_tab}>
                     <SectionHeader title="REPORTING RATES" description="OVERVIEW"/>
                     <VisibilitySensor onChange={onVisibilityChange}>
                         <UniversalFilter/>
@@ -117,7 +140,6 @@ const RR = () => {
                     {/*<SectionHeader title="REPORTING RATES" description="BY PARTNER"/>*/}
                     <RRPartner/>
                     <SectionFooter overview={'The overall reporting rate for ' + moment().format('MMMM, YYYY') +",is the number of EMR sites that uploaded data in " + moment().format('MMMM, YYYY') }
-
                     />
                 </TabPane>
             </TabContent>

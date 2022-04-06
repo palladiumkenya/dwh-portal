@@ -3,12 +3,13 @@ import { getAll } from '../../../views/Shared/Api';
 import moment from 'moment';
 import { CACHING } from '../../../constants';
 
-export const load6MonthSuppressionByYearOfArtStart = () => async (dispatch, getState) => {
+export const load6MonthSuppressionByYearOfArtStart = (tab) => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
         moment(getState().viralLoad6MonthSuppressionByYearOfArtStart.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'vl') {
+    if (getState().ui.ctTab !== 'vl' &&
+        tab !== 'vl') {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {

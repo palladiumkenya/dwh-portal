@@ -18,14 +18,14 @@ export const HTS_TABS = {
 }
 
 export const CT_TABS = {
-    txNew: "NEWLY STARTED ON ART",
-    txCurr: "CURRENT ON ART",
-    txOpt: "ART OPTIMIZATION",
+    newlyOnArt: "NEWLY STARTED ON ART",
+    currentOnArt: "CURRENT ON ART",
+    artOptimization: "ART OPTIMIZATION",
     // tbHiv: "TB/HIV",
-    advEv: "ADVERSE EVENTS - AE",
+    adverseEvent: "ADVERSE EVENTS - AE",
     dsd: "DSD",
     vl: "VL MONITORING",
-    tOut: "TREATMENT OUTCOMES",
+    treatmentOutcomes: "TREATMENT OUTCOMES",
     otz: 'OTZ',
     ovc: 'OVC',
     covid: 'COVID-19'
@@ -49,7 +49,7 @@ export const CACHING = {
 
 export const LOADING_DELAY = 200;
 
-export const GA_TRACKING_ID = 'UA-137589703-2';
+export const GA_TRACKING_ID = 'UA-137589703-1';
 
-export const DWH_API_URL = 'https://dwh.nascop.org';
+export const DWH_API_URL = 'https://data.kenyahmis.org:8082';
 export const HRH_API_URL = 'https://hrh.datacompanion.org';

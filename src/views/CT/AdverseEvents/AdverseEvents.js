@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classnames from 'classnames';
 import Loadable from 'react-loadable';
 import VisibilitySensor from 'react-visibility-sensor';
@@ -10,6 +10,7 @@ import Loading from './../../Shared/Loading';
 import SectionFooter from './../../Shared/SectionFooter';
 import SectionHeader from './../../Shared/SectionHeader';
 import UniversalFilter from './../../Shared/UniversalFilter';
+import { useHistory, useParams } from 'react-router-dom';
 
 const AdverseEventsActionsByDrugs = Loadable({ loader: () => import('./AdverseEventsActionsByDrugs'), loading: Loading, delay: LOADING_DELAY });
 const AdverseEventsCauses = Loadable({ loader: () => import('./AdverseEventsCauses'), loading: Loading, delay: LOADING_DELAY });
@@ -29,10 +30,11 @@ const AdverseEventsSeverityLevels = Loadable({ loader: () => import('./AdverseEv
 const AdverseEvents = () => {
     const branding = { title: "ADVERSE EVENTS (AEs)", description: "OVERVIEW", overview: "Adverse Events (AEs)" };
     const [activeTab, setActiveTab] = useState('adults');
-    const ctTab = useSelector(state => state.ui.ctTab);
+    const { active_tab } = useParams();
+    const ctTab = active_tab
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
-        if (ctTab === 'advEv') {
+        if (ctTab === "adverseEvent") {
             if (isVisible) {
                 dispatch(disableStickyFilter());
             } else {
@@ -40,6 +42,26 @@ const AdverseEvents = () => {
             }
         }
     };
+
+    const { mini_tab } = useParams();
+    const history = useHistory();
+
+    useEffect(() => {
+        if (!mini_tab) {
+            history.push(`/hiv-treatment/adverseEvent/${activeTab}`);
+        }
+    }, [activeTab, history, mini_tab]);
+
+    if(!mini_tab){
+        history.push(`/hiv-treatment/adverseEvent/${activeTab}`);
+    }
+
+    const toggle = tab => {
+        if (mini_tab !== tab) {
+            history.push(`/hiv-treatment/adverseEvent/${tab}`);
+        }
+    };
+
     return (
         <div className="animated fadeIn">
             <VisibilitySensor onChange={onVisibilityChange}>
@@ -47,13 +69,13 @@ const AdverseEvents = () => {
             </VisibilitySensor>
             <Nav tabs>
                 <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'adults' })} onClick={() => { setActiveTab('adults') }}>ADULTS</NavLink>
+                    <NavLink className={classnames({ active: mini_tab === 'adults' })} onClick={() => { setActiveTab('adults'); toggle("adults") }}>ADULTS</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink className={classnames({ active: activeTab === 'children' })} onClick={() => { setActiveTab('children') }}>CALHIV</NavLink>
+                    <NavLink className={classnames({ active: mini_tab === 'children' })} onClick={() => { setActiveTab('children'); toggle("children") }}>CALHIV</NavLink>
                 </NavItem>
             </Nav>
-            <TabContent activeTab={activeTab}>
+            <TabContent activeTab={mini_tab}>
                 <TabPane tabId="adults">
                     <SectionHeader title={branding.title + " - ADULTS"}/>
                     <AdverseEventsOverviewAdults/>
