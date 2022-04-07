@@ -58,7 +58,7 @@ const RROverviewTrends = () => {
         }
         const categories = Object.values(months).slice(-12);
         const dataRecent = Object.values(data).slice(-12);
-        const dataProcessed = dataRecent.map(d => parseInt((d/expected) * 100));
+        const dataProcessed = dataRecent.map(d => Math.round((d/expected) * 100));
         setOverallReportingTrend({
             title: { text: '', },
             xAxis: [{ labels: { style: { fontSize: '9px' } },categories: categories.map(name => name ? name.toUpperCase() : name), crosshair: true }],
@@ -102,7 +102,7 @@ const RROverviewTrends = () => {
         }
         const categories = Object.values(months).slice(-12);
         const dataRecent = Object.values(data).slice(-12);
-        const dataProcessed = dataRecent.map(d => parseInt((d/expected) * 100));
+        const dataProcessed = dataRecent.map(d => Math.round((d/expected) * 100));
         setConsistencyTrend({
             title: { text: '', },
             xAxis: [{ labels: { style: { fontSize: '9px' } }, categories: categories.map(name => name ? name.toUpperCase() : name), crosshair: true }],
