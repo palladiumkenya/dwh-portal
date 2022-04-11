@@ -100,7 +100,7 @@ const RROverview = () => {
     return (
         <>
             <div className="row">
-                <div className="col-4">
+                <div className="col-12 col-lg-4 col-md-6 col-sm-6 col-xs-6 col-xl-4">
                     <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
                             EXPECTED UPLOADS
@@ -115,7 +115,7 @@ const RROverview = () => {
                         </CardBody>
                     </Card>
                 </div>
-                <div className="col-4">
+                <div className="col-12 col-lg-4 col-md-6 col-sm-6 col-xs-6 col-xl-4">
                     <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
                             OVERALL REPORTING RATES
@@ -131,7 +131,7 @@ const RROverview = () => {
                         </CardBody>
                     </Card>
                 </div>
-                <div className="col-4">
+                <div className="col-12 col-lg-4 col-md-12 col-sm-12 col-xs-12 col-xl-4">
                     <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
                             CONSISTENCY OF REPORTING
