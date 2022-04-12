@@ -111,6 +111,8 @@ import { loadMedianTimeTo1stVlByYear } from '../../actions/CT/ViralLoad/medianTi
 import { loadMedianTimeTo1stVlByCounty } from '../../actions/CT/ViralLoad/medianTimeTo1stVlByCountyActions';
 import { loadMedianTimeTo1stVlByPartner } from '../../actions/CT/ViralLoad/medianTimeTo1stVlByPartnerActions';
 import { loadViralLoadUptakeBySex } from '../../actions/CT/ViralLoad/viralLoadUptakeBySexActions';
+import { loadViralLoadOverallUptakeSuppressionLessIntense } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeSuppressionReferredLessIntenseActions';
+import { loadViralLoadOverallUptakeSuppressionBySexVlDone } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeSuppressionBySexVlDoneActions';
 import { loadViralLoadUptakeByAge } from '../../actions/CT/ViralLoad/viralLoadUptakeByAgeActions';
 import { loadViralLoadUptakeByCounty } from '../../actions/CT/ViralLoad/viralLoadUptakeByCountyActions';
 import { loadViralLoadUptakeByPartner } from '../../actions/CT/ViralLoad/viralLoadUptakeByPartnerActions';
@@ -525,6 +527,8 @@ const CT = () => {
                 dispatch(load12MonthSuppressionByYearOfArtStart(active_tab));
                 dispatch(load24MonthSuppressionByYearOfArtStart(active_tab));
                 dispatch(loadViralLoadOutcomesHvlByFacility(active_tab));
+                dispatch(loadViralLoadOverallUptakeSuppressionBySexVlDone(active_tab));
+                dispatch(loadViralLoadOverallUptakeSuppressionLessIntense(active_tab));
                 break;
             case "treatmentOutcomes":
                 dispatch(loadNewOnArtOverview(active_tab));

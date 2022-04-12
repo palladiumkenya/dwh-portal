@@ -107,6 +107,7 @@ import adverseEventsProportionOfPLHIVWithAeRegimenWasStopped
 import viralLoad6MonthSuppressionByYearOfArtStart from './CT/ViralLoad/viralLoad6MonthSuppressionByYearOfArtStart';
 import viralLoad12MonthSuppressionByYearOfArtStart from './CT/ViralLoad/viralLoad12MonthSuppressionByYearOfArtStart';
 import viralLoad24MonthSuppressionByYearOfArtStart from './CT/ViralLoad/viralLoad24MonthSuppressionByYearOfArtStart';
+import viralLoadOverallUptakeSuppressionBySexVlDone from './CT/ViralLoad/viralLoadOverallUptakeSuppressionBySexVlDone';
 
 import practitionersCountByCountyQualification from './HRH/practitionersCountByCountyQualification';
 import populationByCounty from './HRH/populationByCounty';
@@ -211,6 +212,8 @@ import CovidNumberScreened from './CT/Covid/covidNumberScreened';
 import CovidCumulativeWithMissingDateGivenFirstDose from './CT/Covid/covidCumulativeWithMissingDateGivenFirstDose';
 import CovidAdmissionSymptomaticByAge from './CT/Covid/covidAdmissionSymptomaticByAge';
 import CovidManagementAdmitted from './CT/Covid/covidManagementAdmitted';
+import viralLoadOverallUptakeSuppressionReferredLessIntense
+    from './CT/ViralLoad/viralLoadOverallUptakeSuppressionReferredLessIntense';
 
 export default combineReducers({
     auth: authReducer,
@@ -300,6 +303,8 @@ export default combineReducers({
     viralLoad12MonthSuppressionByYearOfArtStart,
     viralLoad24MonthSuppressionByYearOfArtStart,
     viralLoadOutcomesHvlByFacility,
+    viralLoadOverallUptakeSuppressionBySexVlDone,
+    viralLoadOverallUptakeSuppressionReferredLessIntense,
 
     treatmentOutcomesOverallLast12m,
     treatmentOutcomesBySex,
