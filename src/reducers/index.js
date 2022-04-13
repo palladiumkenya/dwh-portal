@@ -214,6 +214,12 @@ import CovidAdmissionSymptomaticByAge from './CT/Covid/covidAdmissionSymptomatic
 import CovidManagementAdmitted from './CT/Covid/covidManagementAdmitted';
 import viralLoadOverallUptakeSuppressionReferredLessIntense
     from './CT/ViralLoad/viralLoadOverallUptakeSuppressionReferredLessIntense';
+import viralLoadOverallUptakeGt1000Copies from './CT/ViralLoad/viralLoadOverallUptakeGt1000Copies';
+import viralLoadOverallUptakeGt1000CopiesEac from './CT/ViralLoad/viralLoadOverallUptakeGt1000CopiesEac';
+import viralLoadOverallUptakeGt1000CopiesReceivedFollowTests
+    from './CT/ViralLoad/viralLoadOverallUptakeGt1000CopiesReceivedFollowTests';
+import viralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll
+    from './CT/ViralLoad/viralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll';
 
 export default combineReducers({
     auth: authReducer,
@@ -305,6 +311,10 @@ export default combineReducers({
     viralLoadOutcomesHvlByFacility,
     viralLoadOverallUptakeSuppressionBySexVlDone,
     viralLoadOverallUptakeSuppressionReferredLessIntense,
+    viralLoadOverallUptakeGt1000Copies,
+    viralLoadOverallUptakeGt1000CopiesEac,
+    viralLoadOverallUptakeGt1000CopiesReceivedFollowTests,
+    viralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll,
 
     treatmentOutcomesOverallLast12m,
     treatmentOutcomesBySex,
