@@ -32,7 +32,7 @@ const ViralLoadOverallUptakeAndSuppressionBySex = () => {
             title: { text: '' },
             xAxis: [{
                 categories: ['NUMBER OF PLHIV ON ART', 'NUMBER OF PLHIV THAT REQUIRE AT LEAST ONE ROUTINE ANNUAL VL TEST',
-                    'NUMBER OF PLHIV ON ART WHO RECEIVED A VL TEST', 'NUMBER OF PLHIV WHO ARE VIEALLY SUPPRESSED',
+                    'NUMBER OF PLHIV ON ART WHO RECEIVED A VL TEST', 'NUMBER OF PLHIV WHO ARE VIRALLY SUPPRESSED',
                     'NUMBER OF VIRALLY SUPPRESSED PLHIV REFERRED TO LESS INTENSE MODEL OF CARE'],
                 crosshair: true
             }],
@@ -66,11 +66,16 @@ const ViralLoadOverallUptakeAndSuppressionBySex = () => {
                     pointPadding: 0.2,
                     borderWidth: 0,
                     dataLabels: {
-                        enabled: true,
+                        enabled: true,crop: false,
+                        overflow: 'none',
+                        useHTML: true,
                         formatter: function() {
-                            return '' + this.point.text;
+                            return '<div style="text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black; text-align: center">' + this.point.text + '</div>';
                         }
                     }
+                },
+                series: {
+                    align: 'center',
                 }
             },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80, enabled: false },
@@ -97,16 +102,10 @@ const ViralLoadOverallUptakeAndSuppressionBySex = () => {
                             text: viralLoadCascade[2].toLocaleString('en') + ' (' + parseFloat(((viralLoadCascade[2] / viralLoadCascade[1]) * 100).toString()).toFixed(0) + '%)',
                             cText: 'Male: ' + viralLoadOverallUptakeSuppressionBySexData.data[0][2] + ' <br /> Female: ' + viralLoadOverallUptakeSuppressionBySexData.data[1][2]
                         },
-                        // {
-                        //     name: viralLoadOverallUptakeSuppressionBySexData.vlCategoryNames[3],
-                        //     y: viralLoadCascade[3], color: '#142459',
-                        //     text: viralLoadCascade[3].toLocaleString('en') + ' (' + parseFloat(((viralLoadCascade[3] / viralLoadCascade[2]) * 100).toString()).toFixed(0) + '%)',
-                        //     cText: 'Male: ' + viralLoadOverallUptakeSuppressionBySexData.data[0][3] + ' <br /> Female: ' + viralLoadOverallUptakeSuppressionBySexData.data[1][3]
-                        // },
                         {
-                            name: "(400 999)",
+                            name: "(400-999)",
                             y: viralLoadSupCascade[0], color: '#f88149',
-                            text: viralLoadSupCascade[0].toLocaleString('en') + ' (' + parseFloat(((viralLoadSupCascade[0] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)',
+                            text: viralLoadSupCascade[0].toLocaleString('en') + ' (' + parseFloat(((viralLoadSupCascade[0] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)<br/>(400-999)',
                             // cText: 'Male: ' + viralLoadOverallUptakeSuppressionBySexData.data[0][3] + ' <br /> Female: ' + viralLoadOverallUptakeSuppressionBySexData.data[1][3]
                         },
                         {
@@ -124,8 +123,7 @@ const ViralLoadOverallUptakeAndSuppressionBySex = () => {
                         {
                             name: "(51-399) ",
                             y: viralLoadSupCascade[1], color: 'blue',
-                            text: viralLoadSupCascade[1].toLocaleString('en') + ' (' + parseFloat(((viralLoadSupCascade[1] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)'
-                            // cText: 'Male: ' + viralLoadOverallUptakeSuppressionBySexData.data[0][3] + ' <br /> Female: ' + viralLoadOverallUptakeSuppressionBySexData.data[1][3]
+                            text: viralLoadSupCascade[1].toLocaleString('en') + ' (' + parseFloat(((viralLoadSupCascade[1] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%) <br/> (51-399) '
                         },null
                     ]
                 },
@@ -136,8 +134,7 @@ const ViralLoadOverallUptakeAndSuppressionBySex = () => {
                         {
                             name: "LDL (<=50 copies) ",
                             y: viralLoadSupCascade[2], color: '#1dad87',
-                            text: viralLoadSupCascade[2].toLocaleString('en') + ' (' + parseFloat(((viralLoadSupCascade[2] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)',
-                            // cText: 'Male: ' + viralLoadOverallUptakeSuppressionBySexData.data[0][3] + ' <br /> Female: ' + viralLoadOverallUptakeSuppressionBySexData.data[1][3]
+                            text: "   "+viralLoadSupCascade[2].toLocaleString('en') + ' (' + parseFloat(((viralLoadSupCascade[2] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)<br/> LDL (<=50 copies)',
                         }, null
                     ]
                 }
