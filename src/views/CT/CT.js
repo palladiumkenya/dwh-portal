@@ -319,8 +319,15 @@ import { CT_TABS, PAGES, LOADING_DELAY } from '../../constants';
 import Loading from './../Shared/Loading';
 import { loadCalHIVOnDTG } from '../../actions/CT/OVC/CALHIVOnDTGActions';
 import { useHistory, useParams } from 'react-router-dom';
-import * as actions from '../../actions/types';
 import { loadCalHIVCurrentOnArtNotInOvc } from '../../actions/CT/OVC/CALHIVCurrentOnARTNotInOvcActions';
+import { loadViralLoadOverallUptakeGt1000Copies } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeGt1000Copies';
+import { loadViralLoadOverallUptakeGt1000CopiesEac } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeGt1000CopiesEac';
+import {
+    loadViralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll
+} from '../../actions/CT/ViralLoad/viralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll';
+import {
+    loadViralLoadOverallUptakeGt1000CopiesReceivedFollowTests
+} from '../../actions/CT/ViralLoad/viralLoadOverallUptakeGt1000CopiesReceivedFollowTests';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({
@@ -529,6 +536,10 @@ const CT = () => {
                 dispatch(loadViralLoadOutcomesHvlByFacility(active_tab));
                 dispatch(loadViralLoadOverallUptakeSuppressionBySexVlDone(active_tab));
                 dispatch(loadViralLoadOverallUptakeSuppressionLessIntense(active_tab));
+                dispatch(loadViralLoadOverallUptakeGt1000Copies(active_tab));
+                dispatch(loadViralLoadOverallUptakeGt1000CopiesEac(active_tab));
+                dispatch(loadViralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll(active_tab));
+                dispatch(loadViralLoadOverallUptakeGt1000CopiesReceivedFollowTests(active_tab));
                 break;
             case "treatmentOutcomes":
                 dispatch(loadNewOnArtOverview(active_tab));

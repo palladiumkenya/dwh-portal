@@ -14,6 +14,7 @@ import { useHistory, useParams } from 'react-router-dom';
 
 const ViralLoadOverview = Loadable({ loader: () => import('./ViralLoadOverview'), loading: Loading, delay: LOADING_DELAY });
 const ViralLoadOverallUptakeAndSuppressionBySex = Loadable({ loader: () => import('./ViralLoadOverallUptakeAndSuppressionBySex'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadOverallNonSuppressedVlTest = Loadable({ loader: () => import('./ViralLoadOverallNonSuppressedVlTest'), loading: Loading, delay: LOADING_DELAY });
 const MedianTimeTo1stVlByYear = Loadable({ loader: () => import('./MedianTimeTo1stVlByYear'), loading: Loading, delay: LOADING_DELAY });
 const MedianTimeTo1stVlByCounty = Loadable({ loader: () => import('./MedianTimeTo1stVlByCounty'), loading: Loading, delay: LOADING_DELAY });
 const MedianTimeTo1stVlByPartner = Loadable({ loader: () => import('./MedianTimeTo1stVlByPartner'), loading: Loading, delay: LOADING_DELAY });
@@ -80,6 +81,9 @@ const ViralLoad = () => {
                 </NavItem>
                 <NavItem>
                     <NavLink className={classnames({ active: mini_tab === 'outcomes' })} onClick={() => { setActiveTab('outcomes'); toggle("outcomes") }}>VIRAL LOAD OUTCOMES</NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink className={classnames({ active: mini_tab === 'unsuppressed' })} onClick={() => { setActiveTab('unsuppressed'); toggle("unsuppressed") }}>VIRAL LOAD OUTCOMES UNSUPPRESSED</NavLink>
                 </NavItem>
             </Nav>
             <TabContent activeTab={mini_tab}>
@@ -164,6 +168,11 @@ const ViralLoad = () => {
                     <ViralLoadSuppressionByYear12Month />
                     <SectionFooter overview={branding.overview}/>
                     <ViralLoadSuppressionByYear24Month />
+                    <SectionFooter overview={branding.overview}/>
+                </TabPane>
+                <TabPane tabId="unsuppressed">
+                    <SectionHeader title={branding.title + " OUTCOMES UNSUPPRESSED"}/>
+                    <ViralLoadOverallNonSuppressedVlTest />
                     <SectionFooter overview={branding.overview}/>
                     <ViralLoadOutcomesHvlByFacility />
                     <SectionFooter overview={branding.overview}/>
