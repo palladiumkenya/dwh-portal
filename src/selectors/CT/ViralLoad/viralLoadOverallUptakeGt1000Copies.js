@@ -1,14 +1,21 @@
 import { createSelector } from 'reselect';
+import viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment
+    from '../../../reducers/CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
 
 const listUnfiltered = state => state.viralLoadOverallUptakeGt1000Copies.listUnfiltered;
 const listFiltered = state => state.viralLoadOverallUptakeGt1000Copies.listFiltered;
 
 const listUnfilteredEAC = state => state.viralLoadOverallUptakeGt1000CopiesEac.listUnfiltered;
 const listFilteredEAC = state => state.viralLoadOverallUptakeGt1000CopiesEac.listFiltered;
+
 const listUnfilteredFollowTestsAll = state => state.viralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll.listUnfiltered;
 const listFilteredFollowTestsAll = state => state.viralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll.listFiltered;
+
 const listUnfilteredFollowTests = state => state.viralLoadOverallUptakeGt1000CopiesReceivedFollowTests.listUnfiltered;
 const listFilteredFollowTests = state => state.viralLoadOverallUptakeGt1000CopiesReceivedFollowTests.listFiltered;
+
+const listUnfilteredFollowTestsSecondlineRegiment = state => state.viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment.listUnfiltered;
+const listFilteredFollowTestsSecondlineRegiment = state => state.viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment.listFiltered;
 const filtered = state => state.filters.filtered;
 
 export const getViralLoadOverallUptakeGt1000CopiesData = createSelector(
@@ -45,5 +52,14 @@ export const getViralLoadOverallUptakeGt1000CopiesReceivedFollowTestData = creat
         const list = filtered ? listFiltered : listUnfiltered;
 
         return { data: list };
+    }
+);
+
+export const getViralLoadOverallNumberGt1000CopiesSecondlineRegimentData = createSelector(
+    [listUnfilteredFollowTestsSecondlineRegiment, listFilteredFollowTestsSecondlineRegiment, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+
+        return { data: list[0].Num  };
     }
 );

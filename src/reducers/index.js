@@ -220,6 +220,8 @@ import viralLoadOverallUptakeGt1000CopiesReceivedFollowTests
     from './CT/ViralLoad/viralLoadOverallUptakeGt1000CopiesReceivedFollowTests';
 import viralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll
     from './CT/ViralLoad/viralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll';
+import viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment
+    from './CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
 
 export default combineReducers({
     auth: authReducer,
@@ -315,6 +317,7 @@ export default combineReducers({
     viralLoadOverallUptakeGt1000CopiesEac,
     viralLoadOverallUptakeGt1000CopiesReceivedFollowTests,
     viralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll,
+    viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment,
 
     treatmentOutcomesOverallLast12m,
     treatmentOutcomesBySex,

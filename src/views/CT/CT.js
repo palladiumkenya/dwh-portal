@@ -328,6 +328,9 @@ import {
 import {
     loadViralLoadOverallUptakeGt1000CopiesReceivedFollowTests
 } from '../../actions/CT/ViralLoad/viralLoadOverallUptakeGt1000CopiesReceivedFollowTests';
+import {
+    loadViralLoadOverallNumberGt1000CopiesSecondlineRegiment
+} from '../../actions/CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({
@@ -540,6 +543,7 @@ const CT = () => {
                 dispatch(loadViralLoadOverallUptakeGt1000CopiesEac(active_tab));
                 dispatch(loadViralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll(active_tab));
                 dispatch(loadViralLoadOverallUptakeGt1000CopiesReceivedFollowTests(active_tab));
+                dispatch(loadViralLoadOverallNumberGt1000CopiesSecondlineRegiment(active_tab));
                 break;
             case "treatmentOutcomes":
                 dispatch(loadNewOnArtOverview(active_tab));
