@@ -59,6 +59,14 @@ const HomeSuppressionByCountyMap = () => {
                     this.point.properties.NAME_1 + ': <b>' + this.point.value + ' %</b>';
                 }
             },
+            mapNavigation: {
+                enabled: true,
+                enableMouseWheelZoom: true,
+                enableButtons: false,
+                buttonOptions: {
+                    verticalAlign: 'bottom'
+                }
+            },
             legend: { title: { text: 'KEY: VIRAL SUPPRESSION' }, layout: 'vertical', align: 'right', verticalAlign: 'bottom', valueDecimals: 0, backgroundColor: 'white', floating: true, labelFormat: "{name} %" },
             series: [
                 { name: 'Suppression', data: data, joinBy: ['CC_1', 'id'], states: { hover: { color: '#000000' } } }
