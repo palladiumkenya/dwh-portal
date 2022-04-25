@@ -1,42 +1,43 @@
 export const HOME_TABS = {
-    emr: "EMR SITES",
-    txCurr: "CURRENT ON ART",
-    hasCurrVl: "VALID VIRAL LOAD",
-    suppressed: "VIRAL SUPPRESSION",
-}
+    emr: 'EMR SITES',
+    txCurr: 'CURRENT ON ART',
+    hasCurrVl: 'VALID VIRAL LOAD',
+    suppressed: 'VIRAL SUPPRESSION',
+};
 
 export const RR_TABS = {
-    ct: "CARE & TREATMENT",
-    hts: "HIV TESTING SERVICES",
-    pkv: "PATIENT KEY VALUES",
-}
+    ct: 'CARE & TREATMENT',
+    hts: 'HIV TESTING SERVICES',
+    pkv: 'PATIENT KEY VALUES',
+};
 
 export const HTS_TABS = {
-    uptake: "HIV TESTING SERVICES UPTAKE",
-    linkage: "HIV TESTING SERVICES LINKAGE",
-    pns: "PARTNER NOTIFICATION SERVICES",
-}
+    uptake: 'HIV TESTING SERVICES UPTAKE',
+    linkage: 'HIV TESTING SERVICES LINKAGE',
+    pns: 'PARTNER NOTIFICATION SERVICES',
+    prep: 'PrEP',
+};
 
 export const CT_TABS = {
-    newlyOnArt: "NEWLY STARTED ON ART",
-    currentOnArt: "CURRENT ON ART",
-    artOptimization: "ART OPTIMIZATION",
+    newlyOnArt: 'NEWLY STARTED ON ART',
+    currentOnArt: 'CURRENT ON ART',
+    artOptimization: 'ART OPTIMIZATION',
     // tbHiv: "TB/HIV",
-    adverseEvent: "ADVERSE EVENTS - AE",
-    dsd: "DSD",
-    vl: "VL MONITORING",
-    treatmentOutcomes: "TREATMENT OUTCOMES",
+    adverseEvent: 'ADVERSE EVENTS - AE',
+    dsd: 'DSD',
+    vl: 'VL MONITORING',
+    treatmentOutcomes: 'TREATMENT OUTCOMES',
     otz: 'OTZ',
     ovc: 'OVC',
-    covid: 'COVID-19'
-}
+    covid: 'COVID-19',
+};
 
 export const PAGES = {
-    home: "HOME",
-    rr: "REPORTING_RATES",
-    hts: "HIV_TESTING_SERVICES",
-    ct: "CARE_AND_TREATMENT",
-    hrh: "HRH"
+    home: 'HOME',
+    rr: 'REPORTING_RATES',
+    hts: 'HIV_TESTING_SERVICES',
+    ct: 'CARE_AND_TREATMENT',
+    hrh: 'HRH',
 };
 
 export const CACHING = {
