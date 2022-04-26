@@ -2,12 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
     Row,
-    Col,
-    Nav,
-    NavItem,
-    NavLink,
-    TabContent,
-    TabPane,
+    Col
 } from 'reactstrap';
 import classnames from 'classnames';
 import VisibilitySensor from 'react-visibility-sensor';
@@ -16,9 +11,20 @@ import SectionHeader from '../../Shared/SectionHeader';
 import SectionFooter from '../../Shared/SectionFooter';
 import {
     enableStickyFilter,
-    disableStickyFilter,
+    disableStickyFilter
 } from '../../../actions/Shared/uiActions';
-import { useHistory, useParams } from 'react-router-dom';
+import PrEPOverview from './PrEPOverview';
+import PrEPScreeningOverall from './PrEPScreeningOverall';
+import PrEPScreeningByAge from './PrEPScreeningByAge';
+import PrEPNewByAgeSex from './PrEPNewByAgeSex';
+import PrEPUsePopulation1stMonth from './PrEPUsePopulation1stMonth';
+import PrEPHIVTesting1stMonth from './PrEPHIVTesting1stMonth';
+import PrEPContinuityByAgeSex from './PrEPContinuityByAgeSex';
+import PrEPHIV1STMonthRefill from './PrEPHIV1STMonthRefill';
+import PrEPUsePopulation3RDMonth from './PrEPUsePopulation3RDMonth';
+import PrEPHIVTesting3RDMonth from './PrEPHIVTesting3RDMonth';
+import PrEPHIV3RDMonthRefill from './PrEPHIV3RDMonthRefill';
+import PrEPScreeningDiscontinuation from './PrEPScreeningDiscontinuation';
 
 const PrEP = () => {
     const dispatch = useDispatch();
@@ -27,7 +33,7 @@ const PrEP = () => {
     const branding = {
         title: 'PrEP',
         description: 'OVERVIEW',
-        overview: 'PrEP',
+        overview: 'PrEP'
     };
     const onVisibilityChange = (isVisible) => {
         if (htsTab === 'prep') {
@@ -61,31 +67,53 @@ const PrEP = () => {
     return (
         <div className="animated fadeIn">
             <VisibilitySensor onChange={onVisibilityChange}>
-                <UniversalFilter />
+                <UniversalFilter/>
             </VisibilitySensor>
 
             <SectionHeader
                 title={branding.title}
                 description=""
             />
-            
+            <PrEPOverview/>
+
             <Row>
                 <Col>
-                    
+                    <PrEPScreeningOverall/>
                 </Col>
                 <Col>
-                    
+                    <PrEPScreeningByAge/>
                 </Col>
             </Row>
+            <SectionFooter/>
+            <PrEPNewByAgeSex/>
+            <SectionFooter/>
+            <PrEPContinuityByAgeSex/>
+            <SectionFooter/>
             <Row>
                 <Col>
-                    
+                    <PrEPUsePopulation1stMonth/>
                 </Col>
                 <Col>
-                    
+                    <PrEPHIVTesting1stMonth/>
                 </Col>
             </Row>
-            
+            <SectionFooter/>
+            <PrEPHIV1STMonthRefill/>
+            <SectionFooter/>
+            <Row>
+                <Col>
+                    <PrEPUsePopulation3RDMonth/>
+                </Col>
+                <Col>
+                    <PrEPHIVTesting3RDMonth/>
+                </Col>
+            </Row>
+            <SectionFooter/>
+            <PrEPHIV3RDMonthRefill/>
+            <SectionFooter/>
+            <PrEPScreeningDiscontinuation/>
+            <SectionFooter/>
+
         </div>
     );
 };
