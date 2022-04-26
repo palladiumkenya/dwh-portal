@@ -22,7 +22,6 @@ export const getViralLoadOverallUptakeGt1000CopiesData = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        console.log(list)
 
         return { data: list[0].Num };
     }
@@ -42,7 +41,7 @@ export const getViralLoadOverallUptakeGt1000CopiesReceivedFollowTestAllData = cr
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
 
-        return { data: list[0].Num };
+        return { data: list[0]?.Num };
     }
 );
 
