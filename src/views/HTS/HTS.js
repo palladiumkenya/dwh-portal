@@ -12,6 +12,7 @@ import { useHistory, useParams } from 'react-router-dom';
 const Uptake = Loadable({ loader: () => import('./Uptake/Uptake'), loading: Loading, delay: LOADING_DELAY });
 const Linkage = Loadable({ loader: () => import('./Linkage/Linkage'), loading: Loading, delay: LOADING_DELAY });
 const PNS = Loadable({ loader: () => import('./PNS/PNS'), loading: Loading, delay: LOADING_DELAY });
+const PrEP = Loadable({ loader: () => import('./PrEP/PrEP'), loading: Loading, delay: LOADING_DELAY });
 
 const HTS = () => {
     const dispatch = useDispatch();
@@ -75,7 +76,7 @@ const HTS = () => {
     const DEFAULT_ACTIVE_TAB = htsTab;
     const { active_tab } = useParams();
     const history = useHistory();
-    console.log(active_tab, htsTab)
+    
     useEffect(() => {
         if (!active_tab) {
             history.push(`/hiv-testing/${DEFAULT_ACTIVE_TAB}`);
@@ -105,6 +106,9 @@ const HTS = () => {
                 </TabPane>
                 <TabPane tabId="pns">
                     { active_tab === 'pns' ? <PNS/>: null }
+                </TabPane>
+                <TabPane tabId="prep">
+                    { active_tab === 'prep' ? <PrEP/>: null }
                 </TabPane>
             </TabContent>
             <p></p><p></p>

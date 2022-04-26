@@ -60,6 +60,14 @@ const HomeCurrentOnArtByCountyMap = () => {
                     this.point.properties.NAME_1 + ': <b>' + this.point.value + '</b>';
                 }
             },
+            mapNavigation: {
+                enabled: true,
+                enableMouseWheelZoom: true,
+                enableButtons: false,
+                buttonOptions: {
+                    verticalAlign: 'bottom'
+                }
+            },
             legend: { title: { text: 'KEY: CURRENT ON ART' }, layout: 'vertical', align: 'right', verticalAlign: 'bottom', valueDecimals: 0, backgroundColor: 'white', floating: true, },
             series: [
                 { name: 'Current on ART', data: data, joinBy: ['CC_1', 'id'], states: { hover: { color: '#000000' } } }
