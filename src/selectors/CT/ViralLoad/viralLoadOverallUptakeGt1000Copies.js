@@ -23,7 +23,7 @@ export const getViralLoadOverallUptakeGt1000CopiesData = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
 
-        return { data: list[0].Num };
+        return { data: list[0]?.Num || 0 };
     }
 );
 
@@ -32,7 +32,7 @@ export const getViralLoadOverallUptakeGt1000CopiesEacData = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
 
-        return { data: list[0] };
+        return { data: list[0] || 0 };
     }
 );
 
@@ -41,7 +41,7 @@ export const getViralLoadOverallUptakeGt1000CopiesReceivedFollowTestAllData = cr
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
 
-        return { data: list[0]?.Num };
+        return { data: list[0]?.Num || 0 };
     }
 );
 
@@ -59,6 +59,6 @@ export const getViralLoadOverallNumberGt1000CopiesSecondlineRegimentData = creat
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
 
-        return { data: list[0].Num  };
+        return { data: list[0]?.Num  };
     }
 );
