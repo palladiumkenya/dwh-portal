@@ -9,6 +9,6 @@ export const getViralLoadOverallUptakeSuppressionReferredLessIntense = createSel
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
 
-        return { data: list[0].Num };
+        return { data: list[0]?.Num ||0 };
     }
 );

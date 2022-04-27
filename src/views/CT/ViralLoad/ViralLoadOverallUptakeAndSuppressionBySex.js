@@ -22,7 +22,7 @@ const ViralLoadOverallUptakeAndSuppressionBySex = () => {
             return num + viralLoadOverallUptakeSuppressionBySexData.data[1][idx];
         });
         let viralLoadSupCascade = viralLoadOverallUptakeSuppressionBySexVlDoneData.data.map((num) => {
-            return num.Num;
+            return num?.Num;
         });
 
         setViralLoadOverallUptakeAndSuppressionBySex({
@@ -48,7 +48,6 @@ const ViralLoadOverallUptakeAndSuppressionBySex = () => {
 
                     allSeries.forEach(function(ser) {
                         if (ser.options.stack === thisPoint.series.options.stack) {
-                            console.log(ser)
                             if (ser.data[thisIndex].y !== null) {
                                 returnString += ser.points[thisIndex].name + ' : ' + ser.points[thisIndex].y + '<br/>';
                             }
@@ -66,7 +65,7 @@ const ViralLoadOverallUptakeAndSuppressionBySex = () => {
                     pointPadding: 0.2,
                     borderWidth: 0,
                     dataLabels: {
-                        enabled: true,crop: false,
+                        enabled: true, crop: false,
                         overflow: 'none',
                         useHTML: true,
                         formatter: function() {
@@ -75,7 +74,7 @@ const ViralLoadOverallUptakeAndSuppressionBySex = () => {
                     }
                 },
                 series: {
-                    align: 'center',
+                    align: 'center'
                 }
             },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80, enabled: false },
@@ -88,53 +87,49 @@ const ViralLoadOverallUptakeAndSuppressionBySex = () => {
                             y: viralLoadCascade[0],
                             color: '#1dad87',
                             text: viralLoadCascade[0].toLocaleString('en'),
-                            cText: 'Male: ' + viralLoadOverallUptakeSuppressionBySexData.data[0][0] + ' <br /> Female: ' + viralLoadOverallUptakeSuppressionBySexData.data[1][0]
                         },
                         {
-                            name: "Number of PLHIV on ART that require atleast one* routine annual vl test",
+                            name: 'Number of PLHIV on ART that require atleast one* routine annual vl test',
                             y: viralLoadCascade[1], color: '#142459',
                             text: viralLoadCascade[1].toLocaleString('en') + ' (' + parseFloat(((viralLoadCascade[1] / viralLoadCascade[0]) * 100).toString()).toFixed(0) + '%)',
-                            cText: 'Male: ' + viralLoadOverallUptakeSuppressionBySexData.data[0][1] + ' <br /> Female: ' + viralLoadOverallUptakeSuppressionBySexData.data[1][1]
                         },
                         {
-                            name: "NUMBER OF PLHIV ON ART WHO RECEIVED A VL TEST",
+                            name: 'NUMBER OF PLHIV ON ART WHO RECEIVED A VL TEST',
                             y: viralLoadCascade[2], color: '#655788',
                             text: viralLoadCascade[2].toLocaleString('en') + ' (' + parseFloat(((viralLoadCascade[2] / viralLoadCascade[1]) * 100).toString()).toFixed(0) + '%)',
-                            cText: 'Male: ' + viralLoadOverallUptakeSuppressionBySexData.data[0][2] + ' <br /> Female: ' + viralLoadOverallUptakeSuppressionBySexData.data[1][2]
                         },
                         {
-                            name: "(400-999)",
+                            name: '(400-999)',
                             y: viralLoadSupCascade[0], color: '#f88149',
-                            text: viralLoadSupCascade[0].toLocaleString('en') + ' (' + parseFloat(((viralLoadSupCascade[0] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)<br/>(400-999)',
-                            // cText: 'Male: ' + viralLoadOverallUptakeSuppressionBySexData.data[0][3] + ' <br /> Female: ' + viralLoadOverallUptakeSuppressionBySexData.data[1][3]
+                            text: viralLoadSupCascade[0].toLocaleString('en') + ' (' + parseFloat(((viralLoadSupCascade[0] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)<br/>(400-999)'
                         },
                         {
-                            name: "NUMBER OF VIRALLY SUPPRESSED PLHIV REFERRED TO LESS INTENSE MODEL OF CARE",
+                            name: 'NUMBER OF VIRALLY SUPPRESSED PLHIV REFERRED TO LESS INTENSE MODEL OF CARE',
                             y: viralLoadOverallUptakeSuppressionReferredLessIntenseData.data, color: '#1dad87',
-                            text: viralLoadOverallUptakeSuppressionReferredLessIntenseData.data.toLocaleString('en') + ' (' + parseFloat(((viralLoadSupCascade[0] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)',
-                            // cText: 'Male: ' + viralLoadOverallUptakeSuppressionBySexData.data[0][3] + ' <br /> Female: ' + viralLoadOverallUptakeSuppressionBySexData.data[1][3]
+                            text: viralLoadOverallUptakeSuppressionReferredLessIntenseData.data.toLocaleString('en') +
+                                ' (' + parseFloat(((viralLoadOverallUptakeSuppressionReferredLessIntenseData.data / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)'
                         }
                     ]
                 },
                 {
                     name: 'VIRAL LOAD CASCADE',
                     data: [
-                        null,null,null,
+                        null, null, null,
                         {
-                            name: "(51-399) ",
+                            name: '(51-399) ',
                             y: viralLoadSupCascade[1], color: 'blue',
                             text: viralLoadSupCascade[1].toLocaleString('en') + ' (' + parseFloat(((viralLoadSupCascade[1] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%) <br/> (51-399) '
-                        },null
+                        }, null
                     ]
                 },
                 {
                     name: 'VIRAL LOAD CASCADE',
                     data: [
-                        null,null,null,
+                        null, null, null,
                         {
-                            name: "LDL (<=50 copies) ",
+                            name: 'LDL (<=50 copies) ',
                             y: viralLoadSupCascade[2], color: '#1dad87',
-                            text: "   "+viralLoadSupCascade[2].toLocaleString('en') + ' (' + parseFloat(((viralLoadSupCascade[2] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)<br/> LDL (<=50 copies)',
+                            text: '   ' + viralLoadSupCascade[2].toLocaleString('en') + ' (' + parseFloat(((viralLoadSupCascade[2] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)<br/> LDL (<=50 copies)'
                         }, null
                     ]
                 }
