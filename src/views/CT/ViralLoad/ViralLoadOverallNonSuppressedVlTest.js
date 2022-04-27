@@ -56,7 +56,7 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
                     returnString += 'Total: ' + this.point.stackTotal;
 
                     return returnString;
-                }
+                },
             },
             plotOptions: {
                 column: {
