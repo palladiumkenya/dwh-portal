@@ -20,8 +20,8 @@ jobs:
           cd /apps/github-workflows/dwh-portal
           git pull origin prod
           git status
-          npm install
-          npm build
+          yarn install
+          yarn build
           sudo mv build /var/www/
           sudo mv /var/www/dwh /tmp/
           sudo mv /var/www/build/ /var/www/dwh
