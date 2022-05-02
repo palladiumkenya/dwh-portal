@@ -1,0 +1,28 @@
+name: deploy to production
+on:
+  push:
+    branches: [ prod ]
+jobs:
+
+  build:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote connection
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.CICD_SECRET }}
+        port: ${{ secrets.PORT }}
+        script: |
+          git config --global --add safe.directory /apps/github-workflows/dwh-portal      
+          cd /apps/github-workflows/dwh-portal
+          git pull origin prod
+          git status
+          npm install
+          npm build
+          sudo mv build /var/www/
+          sudo mv /var/www/dwh /tmp/
+          sudo mv /var/www/build/ /var/www/dwh
+
