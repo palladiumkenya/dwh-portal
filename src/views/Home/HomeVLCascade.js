@@ -7,16 +7,38 @@ import DataCard from '../Shared/DataCard';
 import moment from 'moment';
 
 const HomeVLCascade = () => {
-    const currentOnArt = useSelector(currentOnArtOverviewSelectors.getCurrentOnArt);
-    const currentOnArtText = "CURRENT ON ART as at " + moment().startOf('month').subtract(1, 'month').format('MMM YYYY');
-    const eligibleForVl = useSelector(currentOnArtOverviewSelectors.getEligibleForVl);
-    const eligibleForVlPercent = currentOnArt ? ((eligibleForVl/currentOnArt)*100) : 0;
-    const hasCurrentVl = useSelector(currentOnArtOverviewSelectors.getHasCurrentVl);
-    const hasCurrentVlPercent = currentOnArt ? ((hasCurrentVl/eligibleForVl)*100) : 0;
-    const virallySuppressed = useSelector(currentOnArtOverviewSelectors.getVirallySuppressed);
-    const lowLevelViremia = useSelector(currentOnArtOverviewSelectors.getLowLevelViremia);
+    const currentOnArt = useSelector(
+        currentOnArtOverviewSelectors.getCurrentOnArt
+    );
+    const currentOnArtText =
+        'CURRENT ON ART as at ' +
+        moment()
+            .startOf('month')
+            .subtract(2, 'month')
+            .add(15, 'days')
+            .format('MMM YYYY');
+    const eligibleForVl = useSelector(
+        currentOnArtOverviewSelectors.getEligibleForVl
+    );
+    const eligibleForVlPercent = currentOnArt
+        ? (eligibleForVl / currentOnArt) * 100
+        : 0;
+    const hasCurrentVl = useSelector(
+        currentOnArtOverviewSelectors.getHasCurrentVl
+    );
+    const hasCurrentVlPercent = currentOnArt
+        ? (hasCurrentVl / eligibleForVl) * 100
+        : 0;
+    const virallySuppressed = useSelector(
+        currentOnArtOverviewSelectors.getVirallySuppressed
+    );
+    const lowLevelViremia = useSelector(
+        currentOnArtOverviewSelectors.getLowLevelViremia
+    );
     const suppressed = virallySuppressed + lowLevelViremia;
-    const suppressedPercent = currentOnArt ? ((suppressed/hasCurrentVl)*100) : 0;
+    const suppressedPercent = currentOnArt
+        ? (suppressed / hasCurrentVl) * 100
+        : 0;
 
     return (
         <Row>
@@ -30,21 +52,21 @@ const HomeVLCascade = () => {
             <Col>
                 <DataCard
                     title="ELIGIBLE FOR VL"
-                    subtitle={roundNumber(eligibleForVlPercent) + "%"}
+                    subtitle={roundNumber(eligibleForVlPercent) + '%'}
                     data={formatNumber(eligibleForVl)}
                 />
             </Col>
             <Col>
                 <DataCard
                     title="VALID VIRAL LOAD"
-                    subtitle={roundNumber(hasCurrentVlPercent) + "%"}
+                    subtitle={roundNumber(hasCurrentVlPercent) + '%'}
                     data={formatNumber(hasCurrentVl)}
                 />
             </Col>
             <Col>
                 <DataCard
                     title="VIRALLY SUPPRESSED"
-                    subtitle={roundNumber(suppressedPercent) + "%"}
+                    subtitle={roundNumber(suppressedPercent) + '%'}
                     data={formatNumber(suppressed)}
                 />
             </Col>
