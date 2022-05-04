@@ -31,35 +31,21 @@ const PrEPScreeningByAge = () => {
                     text: 'PERCENTAGE OF PATIENTS'
                 }
             },
-            // tooltip: {
-            //     headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            //     pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            //         '<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
-            //     footerFormat: '</table>',
-            //     shared: true,
-            //     useHTML: true
-            // },
             legend: {
-                align: 'right',
-                x: -30,
+                align: 'left',
                 verticalAlign: 'top',
-                y: 25,
-                floating: true,
-                backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || 'white',
-                borderColor: '#CCC',
-                borderWidth: 1,
-                shadow: false
+
             },
             tooltip: {
                 headerFormat: '<b>{point.x}</b><br/>',
-                pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+                pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}',
+                shared: true,
             },
             plotOptions: {
                 column: {
                     stacking: 'percent',
                     dataLabels: {
-                        enabled: true
+                        enabled: false
                     }
                 }
             },
@@ -70,10 +56,11 @@ const PrEPScreeningByAge = () => {
             }, {
                 name: 'ELIGIBLE',
                 data: [12, 20, 43],
-                color: '#00a65a'
+                color: 'rgb(144, 237, 125)'
             }, {
                 name: 'INITIATED TO PREP',
-                data: [53, 64, 14]
+                data: [53, 64, 14],
+                color: '#00a65a'
             }]
         });
     }, []);
