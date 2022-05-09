@@ -78,18 +78,18 @@ const PNS = () => {
                     <SectionHeader title={branding.title} description="SEXUAL CONTACT TESTING"/>
                     <PNSContactsTestingOverview/>
                     <Row>
-                        <Col>
+                        <Col className={"col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6"}>
                             <PNSContactsCascade/>
                         </Col>
-                        <Col>
+                        <Col className={"col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6"}>
                             <PNSDistributionElicitedAgeSex/>
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
+                        <Col className={"col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6"}>
                             <PNSContactsHivStatus/>
                         </Col>
-                        <Col>
+                        <Col className={"col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6"}>
                             <PNSDistributionPositiveAgeSex/>
                         </Col>
                     </Row>

@@ -57,8 +57,8 @@ const LinkageOverview = () => {
             }
         }
         if (data.totalPositive > 0) {
-           data.malePositivePercent = ((data.malePositive/data.totalPositive)*100).toFixed(1);
-           data.femalePositivePercent = ((data.femalePositive/data.totalPositive)*100).toFixed(1);
+            data.malePositivePercent = ((data.malePositive/data.totalPositive)*100).toFixed(1);
+            data.femalePositivePercent = ((data.femalePositive/data.totalPositive)*100).toFixed(1);
         }
         if (data.totalPositive > 0) {
             data.totalLinkedPercent = ((data.totalLinked/data.totalPositive)*100).toFixed(1);
