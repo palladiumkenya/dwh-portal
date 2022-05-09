@@ -14,6 +14,6 @@ export const getViralLoadOverallUptakeSuppressionBySexVlDone = createSelector(
         list.sort((a, b) => (a.Last12MVLResult > b.Last12MVLResult) ? 1 : -1)
 
 
-        return { vlCategories, data: list };
+        return { vlCategories, data: list || [{Num: 0},{Num: 0},{Num: 0}] };
     }
 );
