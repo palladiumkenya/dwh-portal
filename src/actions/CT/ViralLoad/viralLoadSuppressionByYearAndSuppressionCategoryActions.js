@@ -27,7 +27,9 @@ export const fetchViralLoadSuppressionByYearAndSuppressionCategory = () => async
         facility: getState().filters.facilities,
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
-        project: getState().filters.projects
+        project: getState().filters.projects,
+        gender: getState().filters.genders,
+        datimAgeGroup: getState().filters.datimAgeGroups,
     };
     const response = await getAll('care-treatment/getVlSuppressionByYearAndSuppressionCategory', params);
     dispatch({ type: actionTypes.CT_VIRAL_LOAD_SUPPRESSION_BY_YEAR_AND_SUPPRESSION_CATEGORY_FETCH, payload: { filtered: getState().filters.filtered, list: response }});

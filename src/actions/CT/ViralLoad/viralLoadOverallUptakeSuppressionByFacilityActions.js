@@ -27,7 +27,9 @@ export const fetchViralLoadOverallUptakeSuppressionByFacility = () => async (dis
         facility: getState().filters.facilities,
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
-        project: getState().filters.projects
+        project: getState().filters.projects,
+        gender: getState().filters.genders,
+        datimAgeGroup: getState().filters.datimAgeGroups,
     };
     const response = await getAll('care-treatment/vlOverallUptakeAndSuppressionByFacility', params);
     dispatch({ type: actionTypes.CT_VIRAL_LOAD_OVERALL_UPTAKE_SUPPRESSION_BY_FACILITY_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
