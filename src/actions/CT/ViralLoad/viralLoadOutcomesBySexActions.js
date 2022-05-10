@@ -27,7 +27,9 @@ export const fetchViralLoadOutcomesBySex = () => async (dispatch, getState) => {
         facility: getState().filters.facilities,
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
-        project: getState().filters.projects
+        project: getState().filters.projects,
+        gender: getState().filters.genders,
+        datimAgeGroup: getState().filters.datimAgeGroups,
     };
     const response = await getAll('care-treatment/vlOutcomesBySex', params);
     dispatch({ type: actionTypes.CT_VIRAL_LOAD_OUTCOMES_BY_SEX_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
