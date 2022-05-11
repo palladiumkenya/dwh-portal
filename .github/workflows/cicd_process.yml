@@ -22,6 +22,6 @@ jobs:
           git status
           yarn install
           yarn build
-          sudo mv build /var/www/
-          sudo mv /var/www/dwh /tmp/
-          sudo mv /var/www/build/ /var/www/dwh
+          sudo cp -R build /var/www/
+          sudo cp -R /var/www/dwh /tmp/
+          sudo cp -R /var/www/build/ /var/www/dwh
