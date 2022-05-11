@@ -23,6 +23,5 @@ jobs:
           yarn install
           yarn build
           sudo mv build /var/www/
-          sudo mv /var/www/dwh /tmp/
-          sudo mv /var/www/build/ /var/www/dwh
-
+          sudo mv -R /var/www/dwh /tmp/
+          sudo mv -R /var/www/build/ /var/www/dwh
