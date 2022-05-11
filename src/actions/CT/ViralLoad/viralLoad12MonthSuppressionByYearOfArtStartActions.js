@@ -27,7 +27,9 @@ export const fetch12MonthSuppressionByYearOfArtStart = () => async (dispatch, ge
         facility: getState().filters.facilities,
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
-        project: getState().filters.projects
+        project: getState().filters.projects,
+        gender: getState().filters.genders,
+        datimAgeGroup: getState().filters.datimAgeGroups,
     };
     const response = await getAll('care-treatment/get12MonthViralSuppressionByYearOfArtStart', params);
     dispatch({ type: actionTypes.CT_VIRAL_LOAD_12_MONTH_SUPPRESSION_BY_YEAR_OF_ART_START_FETCH, payload: { filtered: getState().filters.filtered, list: response }});

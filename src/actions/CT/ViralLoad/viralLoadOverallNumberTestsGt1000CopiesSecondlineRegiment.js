@@ -34,7 +34,8 @@ export const fetchViralLoadOverallNumberGt1000CopiesSecondlineRegiment = () => a
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
         project: getState().filters.projects,
-        gender: getState().filters.genders
+        gender: getState().filters.genders,
+        datimAgeGroup: getState().filters.datimAgeGroups,
     };
     const response = await getAll('care-treatment/getVlOverallNumberGt1000CopiesSecondlineRegiment', params);
     dispatch({ type: actionTypes.CT_VIRAL_LOAD_OVERALL_UPTAKE_GT_1000_COPIES_SECOND_LINE_REGIMENT_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
