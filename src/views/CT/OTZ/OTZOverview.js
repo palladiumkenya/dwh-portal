@@ -25,7 +25,6 @@ const OTZOverview = () => {
     const currentOnArtText =
         'ADOLESCENTS CURRENT ON ART as at ' +
         moment()
-            .startOf('month')
             .subtract(2, 'month')
             .add(15, 'days')
             .format('MMM YYYY');
