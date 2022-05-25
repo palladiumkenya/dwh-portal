@@ -1,8 +1,9 @@
 import { createSelector } from 'reselect';
 
-const listUnfiltered = state => state.medianTimeToArtStartByYear.listUnfiltered;
-const listFiltered = state => state.medianTimeToArtStartByYear.listFiltered;
-const filtered = state => state.filters.filtered;
+const listUnfiltered = (state) =>
+    state.medianTimeToArtStartByYear.listUnfiltered;
+const listFiltered = (state) => state.medianTimeToArtStartByYear.listFiltered;
+const filtered = (state) => state.filters.filtered;
 
 export const getMedianTimeToArtStartByYear = createSelector(
     [listUnfiltered, listFiltered, filtered],
@@ -11,8 +12,8 @@ export const getMedianTimeToArtStartByYear = createSelector(
         let years = [];
         let times = [];
 
-        for(let i = 0; i < list.length; i++) {
-            years.push(list[i].StartYr);
+        for (let i = 0; i < list.length; i++) {
+            years.push(list[i].StartYr || list[i].year);
             times.push(parseInt(list[i].medianTime, 10));
         }
 

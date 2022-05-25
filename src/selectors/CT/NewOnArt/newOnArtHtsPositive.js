@@ -84,10 +84,12 @@ export const getNewOnArtHtsPositive = createSelector(
                 .toDate();
         }
         if (filtered) {
-            months = [];
-            list.forEach((date) => {
-                months.push(monthNames[date.month] + ' ' + date.year);
-            });
+            if (txNew.length === 1) {
+                months = [];
+                list.forEach((date) => {
+                    months.push(monthNames[date.month] + ' ' + date.year);
+                });
+            }
         }
         return { months, txNew, positives };
     }

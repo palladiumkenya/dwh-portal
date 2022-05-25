@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
+import moment from 'moment';
 
 const listUnfiltered = (state) => state.newOnArtTrends.listUnfiltered;
 const listFiltered = (state) => state.newOnArtTrends.listFiltered;
@@ -27,8 +28,9 @@ export const getNewOnArtTrends = createSelector(
         let txNew = [];
 
         for (let i = 0; i < list.length; i++) {
-            const selectedArr = list.filter((obj) =>
-                obj.month === list[i].month && obj.year === list[i].year
+            const selectedArr = list.filter(
+                (obj) =>
+                    obj.month === list[i].month && obj.year === list[i].year
             );
 
             if (
@@ -43,7 +45,9 @@ export const getNewOnArtTrends = createSelector(
                 for (const selectedArrElement of selectedArr) {
                     if (
                         months.indexOf(
-                            monthNames[selectedArrElement.month] + ' ' + selectedArrElement.year.toString()
+                            monthNames[selectedArrElement.month] +
+                                ' ' +
+                                selectedArrElement.year.toString()
                         ) === -1
                     ) {
                         months.push(
@@ -52,7 +56,8 @@ export const getNewOnArtTrends = createSelector(
                                 selectedArrElement.year.toString()
                         );
                     }
-                    totalTxNew = totalTxNew + parseInt(selectedArrElement.txNew, 10);
+                    totalTxNew =
+                        totalTxNew + parseInt(selectedArrElement.txNew, 10);
                     if (selectedArrElement.gender === 'Female') {
                         femaleVal = parseInt(selectedArrElement.txNew, 10);
                     }
@@ -71,9 +76,19 @@ export const getNewOnArtTrends = createSelector(
                 });
             }
         }
-
-        months = months.slice(Math.max(months.length - 12, 0));
-        txNew = txNew.slice(Math.max(txNew.length - 12, 0));
+        if (filtered) {
+            months = months.slice(Math.max(months.length - 13, 0));
+            txNew = txNew.slice(Math.max(txNew.length - 13, 0));
+        } else {
+            months = months.slice(
+                Math.max(months.length - 13, 0),
+                Math.max(months.length - 1, 0)
+            );
+            txNew = txNew.slice(
+                Math.max(txNew.length - 13, 0),
+                Math.max(txNew.length - 1, 0)
+            );
+        }
 
         return { months, txNew };
     }
