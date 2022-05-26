@@ -125,6 +125,8 @@ const NewOnArt = () => {
             <SectionFooter overview={branding.overview} />
             <MedianTimeToArtStartByYear />
             <SectionFooter overview={branding.overview} />
+            <AdultRegimenUptakeTrends />
+            <SectionFooter overview={branding.overview} />
             <Card>
                 <CardHeader>Indicator Definition</CardHeader>
                 <CardBody>
@@ -137,8 +139,6 @@ const NewOnArt = () => {
                     </ul>
                 </CardBody>
             </Card>
-            <AdultRegimenUptakeTrends />
-            <SectionFooter overview={branding.overview} />
             <MedianTimeToArtStartByCounty />
             <SectionFooter overview={branding.overview} />
             <MedianTimeToArtStartByPartner />
