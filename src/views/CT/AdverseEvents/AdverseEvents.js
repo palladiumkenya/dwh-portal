@@ -65,29 +65,53 @@ const AdverseEvents = () => {
     return (
         <div className="animated fadeIn">
             <VisibilitySensor onChange={onVisibilityChange}>
-                <UniversalFilter/>
+                <UniversalFilter />
             </VisibilitySensor>
             <Nav tabs>
                 <NavItem>
-                    <NavLink className={classnames({ active: mini_tab === 'adults' })} onClick={() => { setActiveTab('adults'); toggle("adults") }}>ADULTS</NavLink>
+                    <NavLink
+                        className={classnames({
+                            active: mini_tab === 'adults',
+                        })}
+                        onClick={() => {
+                            setActiveTab('adults');
+                            toggle('adults');
+                        }}
+                    >
+                        ADULTS
+                    </NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink className={classnames({ active: mini_tab === 'children' })} onClick={() => { setActiveTab('children'); toggle("children") }}>CALHIV</NavLink>
+                    <NavLink
+                        className={classnames({
+                            active: mini_tab === 'children',
+                        })}
+                        onClick={() => {
+                            setActiveTab('children');
+                            toggle('children');
+                        }}
+                    >
+                        CALHIV
+                    </NavLink>
                 </NavItem>
             </Nav>
             <TabContent activeTab={mini_tab}>
                 <TabPane tabId="adults">
-                    <SectionHeader title={branding.title + " - ADULTS"}/>
-                    <AdverseEventsOverviewAdults/>
-                    <AdverseEventsClientsByAgeSexAdults/>
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionHeader title={branding.title + ' - ADULTS'} />
+                    <AdverseEventsOverviewAdults />
+                    <AdverseEventsClientsByAgeSexAdults />
+                    <SectionFooter overview={branding.overview} />
                     <Row>
-                        <Col><AdverseEventsSeverityGrading tab={'adult'} /></Col>
-                        <Col><AdverseEventsSeverityActions tab={'adult'} /></Col>
+                        <Col className={'col-6'}>
+                            <AdverseEventsSeverityGrading tab={'adult'} />
+                        </Col>
+                        <Col className={'col-6'}>
+                            <AdverseEventsSeverityActions tab={'adult'} />
+                        </Col>
                     </Row>
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                     <AdverseEventsSeverityLevels tab={'adult'} />
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                     <Row>
                         <Col>
                             <AdverseEventsCauses tab={'adult'} />
@@ -96,29 +120,33 @@ const AdverseEvents = () => {
                             <AdverseEventsActionsByDrugs tab={'adult'} />
                         </Col>
                     </Row>
-                    <SectionFooter overview={branding.overview}/>
-                    <AdverseEventsProportionOfPlHivByTypeOfSuspectedCausativeDrugs tab={'adult'} />
-                    <SectionFooter overview={branding.overview}/>
-                    <AdverseEventsProportionOfPlHivWithAeRelatedToArtOrSuspectedArt tab={'adult'} />
-                    <SectionFooter overview={branding.overview}/>
-                    <Row className={"col-12"}>
-                        <Col className={"col-4"}>
+                    <SectionFooter overview={branding.overview} />
+                    <AdverseEventsProportionOfPlHivByTypeOfSuspectedCausativeDrugs
+                        tab={'adult'}
+                    />
+                    <SectionFooter overview={branding.overview} />
+                    <AdverseEventsProportionOfPlHivWithAeRelatedToArtOrSuspectedArt
+                        tab={'adult'}
+                    />
+                    <SectionFooter overview={branding.overview} />
+                    <Row className={'col-12'}>
+                        <Col className={'col-4'}>
                             <AdverseEventsProportionOfPlHivWithAeRegimenChanged />
                         </Col>
-                        <Col className={"col-4"}>
+                        <Col className={'col-4'}>
                             <AdverseEventsProportionOfPlHivWithAeRegimenStopped />
                         </Col>
-                        <Col className={"col-4"}>
+                        <Col className={'col-4'}>
                             <AdverseEventsProportionOfPlHivWithAeRegimenNotAltered />
                         </Col>
                     </Row>
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                 </TabPane>
                 <TabPane tabId="children">
-                    <SectionHeader title={branding.title + " - CHILDREN"}/>
-                    <AdverseEventsOverviewChildren/>
-                    <AdverseEventsClientsByAgeSexChildren/>
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionHeader title={branding.title + ' - CHILDREN'} />
+                    <AdverseEventsOverviewChildren />
+                    <AdverseEventsClientsByAgeSexChildren />
+                    <SectionFooter overview={branding.overview} />
                     <Row>
                         <Col className={'col-6'}>
                             <AdverseEventsSeverityGrading tab={'calhiv'} />
@@ -127,9 +155,9 @@ const AdverseEvents = () => {
                             <AdverseEventsSeverityActions tab={'calhiv'} />
                         </Col>
                     </Row>
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                     <AdverseEventsSeverityLevels tab={'calhiv'} />
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                     <Row>
                         <Col className={'col-6'}>
                             <AdverseEventsCauses tab={'calhiv'} />
@@ -138,7 +166,7 @@ const AdverseEvents = () => {
                             <AdverseEventsActionsByDrugs tab={'calhiv'} />
                         </Col>
                     </Row>
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                 </TabPane>
             </TabContent>
         </div>

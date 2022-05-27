@@ -76,7 +76,10 @@ const RRPartner = () => {
                 expected = expectedPartner[0].totalexpected;
             }
 
-            const cos = expected === 0 ? 0 : parseInt(((value/expected)*100).toString());
+            const cos =
+                expected === 0
+                    ? 0
+                    : Math.round(((value / expected) * 100).toString());
             if (cos <= 50) {
                 consistency_values.push({
                     partner: key,

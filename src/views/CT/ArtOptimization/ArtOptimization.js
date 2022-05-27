@@ -21,7 +21,6 @@ const AdultMaleTldUptake = Loadable({ loader: () => import('./AdultMaleTldUptake
 const AdultOverallTldUptake = Loadable({ loader: () => import('./AdultOverallTldUptake'), loading: Loading, delay: LOADING_DELAY });
 const AdultRegimenUptakeByCounty = Loadable({ loader: () => import('./AdultRegimenUptakeByCounty'), loading: Loading, delay: LOADING_DELAY });
 const AdultRegimenUptakeByPartner = Loadable({ loader: () => import('./AdultRegimenUptakeByPartner'), loading: Loading, delay: LOADING_DELAY });
-const AdultRegimenUptakeTrends = Loadable({ loader: () => import('./AdultRegimenUptakeTrends'), loading: Loading, delay: LOADING_DELAY });
 const AdultTldUptakeByAgeGender = Loadable({ loader: () => import('./AdultTldUptakeByAgeGender'), loading: Loading, delay: LOADING_DELAY });
 const AdultTldUptakeByCounty = Loadable({ loader: () => import('./AdultTldUptakeByCounty'), loading: Loading, delay: LOADING_DELAY });
 const AdultTldUptakeByPartner = Loadable({ loader: () => import('./AdultTldUptakeByPartner'), loading: Loading, delay: LOADING_DELAY });
@@ -91,8 +90,6 @@ const ArtOptimization = () => {
                     </Row>
                     <SectionFooter overview={branding.overview}/>
                     <AdultDistributionRegimenLinesByGender/>
-                    <SectionFooter overview={branding.overview}/>
-                    <AdultRegimenUptakeTrends/>
                     <SectionFooter overview={branding.overview}/>
                     <AdultRegimenUptakeByCounty/>
                     <SectionFooter overview={branding.overview}/>
