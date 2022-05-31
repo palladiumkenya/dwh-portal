@@ -9,10 +9,7 @@ import * as covidPLHIVCurrentOnArtSelectors from '../../../selectors/CT/Covid/co
 import moment from 'moment';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import { Doughnut as Donut } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement } from 'chart.js';
 
-ChartJS.register(ArcElement);
 
 const COVIDPLHIVEverHadInfection = () => {
     const [covidPlhivEverHadInfection, setCovidPlhivEverHadInfection] = useState({});
