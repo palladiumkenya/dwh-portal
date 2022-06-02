@@ -25,6 +25,9 @@ import PrEPUsePopulation3RDMonth from './PrEPUsePopulation3RDMonth';
 import PrEPHIVTesting3RDMonth from './PrEPHIVTesting3RDMonth';
 import PrEPHIV3RDMonthRefill from './PrEPHIV3RDMonthRefill';
 import PrEPScreeningDiscontinuation from './PrEPScreeningDiscontinuation';
+import PrEPCascade from './PrEPCascade';
+import PrEPEligibleVsNewlyBySubPopulation from './PrEPEligibleVsNewlyBySubPopulation';
+import PrEPEligibleVsNewInitiatedTrends from './PrEPEligibleVsNewInitiatedTrends';
 
 const PrEP = () => {
     const dispatch = useDispatch();
@@ -67,53 +70,60 @@ const PrEP = () => {
     return (
         <div className="animated fadeIn">
             <VisibilitySensor onChange={onVisibilityChange}>
-                <UniversalFilter/>
+                <UniversalFilter />
             </VisibilitySensor>
 
-            <SectionHeader
-                title={branding.title}
-                description=""
-            />
-            <PrEPOverview/>
+            <SectionHeader title={branding.title} description="" />
+            <PrEPOverview />
 
             <Row>
                 <Col>
-                    <PrEPScreeningOverall/>
+                    <PrEPCascade />
                 </Col>
                 <Col>
-                    <PrEPScreeningByAge/>
+                    <PrEPEligibleVsNewlyBySubPopulation />
                 </Col>
             </Row>
-            <SectionFooter/>
-            <PrEPNewByAgeSex/>
-            <SectionFooter/>
-            <PrEPContinuityByAgeSex/>
-            <SectionFooter/>
+            <SectionFooter />
+            <PrEPNewByAgeSex />
+            <SectionFooter />
+            <PrEPEligibleVsNewInitiatedTrends />
+            <SectionFooter />
             <Row>
                 <Col>
-                    <PrEPUsePopulation1stMonth/>
+                    <PrEPScreeningOverall />
                 </Col>
                 <Col>
-                    <PrEPHIVTesting1stMonth/>
+                    <PrEPScreeningByAge />
                 </Col>
             </Row>
-            <SectionFooter/>
-            <PrEPHIV1STMonthRefill/>
-            <SectionFooter/>
+            <SectionFooter />
+            <PrEPContinuityByAgeSex />
+            <SectionFooter />
             <Row>
                 <Col>
-                    <PrEPUsePopulation3RDMonth/>
+                    <PrEPUsePopulation1stMonth />
                 </Col>
                 <Col>
-                    <PrEPHIVTesting3RDMonth/>
+                    <PrEPHIVTesting1stMonth />
                 </Col>
             </Row>
-            <SectionFooter/>
-            <PrEPHIV3RDMonthRefill/>
-            <SectionFooter/>
-            <PrEPScreeningDiscontinuation/>
-            <SectionFooter/>
-
+            <SectionFooter />
+            <PrEPHIV1STMonthRefill />
+            <SectionFooter />
+            <Row>
+                <Col>
+                    <PrEPUsePopulation3RDMonth />
+                </Col>
+                <Col>
+                    <PrEPHIVTesting3RDMonth />
+                </Col>
+            </Row>
+            <SectionFooter />
+            <PrEPHIV3RDMonthRefill />
+            <SectionFooter />
+            <PrEPScreeningDiscontinuation />
+            <SectionFooter />
         </div>
     );
 };
