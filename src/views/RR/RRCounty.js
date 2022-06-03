@@ -30,17 +30,29 @@ const RRCounty = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
+            fromDate: filters.fromDate
+                ? filters.fromDate
+                : moment()
+                      .subtract(2, 'month')
+                      .add(15, 'days')
+                      .format('MMM YYYY'),
         };
-        params.period = filters.fromDate ?
-            moment(params.fromDate, "MMM YYYY").startOf('month').subtract(0, 'month').format('YYYY,M') :
-            moment().startOf('month').subtract(1, 'month').format('YYYY,M');
+        params.period = filters.fromDate
+            ? moment(params.fromDate, 'MMM YYYY')
+                  .startOf('month')
+                  .subtract(0, 'month')
+                  .format('YYYY,M')
+            : moment()
+                  .subtract(2, 'month')
+                  .add(15, 'days')
+                  .format('YYYY,M');
         const overallReportingRateResult = await getAll('manifests/recencyreportingbycounty/' + rrTab, params);
         params.period = filters.fromDate ?
             moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M') :
-            moment().startOf('month').subtract(2, 'month').format('YYYY,M');
+            moment().subtract(3, 'month').add(15, 'days').format('YYYY,M');
         const consistencyResult = await getAll('manifests/consistencyreportingbycountypartner/' + rrTab + '?reportingType=county', params);
         const rrData = await getAll('manifests/expectedPartnerCounty/' + rrTab + '?reportingType=county', params);
+        console.log(params)
 
         /* Overall reporting */
         const overAllReportingData = _.orderBy(overallReportingRateResult, [function(resultItem) { return parseInt(resultItem.Percentage, 10); }], ['desc']);
