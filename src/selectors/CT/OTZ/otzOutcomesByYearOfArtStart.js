@@ -11,7 +11,8 @@ export const getOtzOutcomesByYearOfArtStart = createSelector(
         list.sort((a, b) => {
             return a.OTZStart_Year - b.OTZStart_Year;
         });
-        const catYears = list.map(obj => obj.OTZStart_Year);
+        const catYears =[...new Set( list.map(obj => obj.OTZStart_Year))];
+        // console.log( [...new Set(catYears)]);
         const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care', 'Active'];
         const ArrayValOptOut = [];
         const ArrayValLostToFollowUp = [];
