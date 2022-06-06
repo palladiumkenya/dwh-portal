@@ -22,8 +22,8 @@ const OtzEnrollmentAmongAlhivOnArtByPartner = () => {
                 crosshair: true
             },
             yAxis: {
-                type: 'logarithmic',
-                minorTickInterval: 0.1,
+                // type: 'logarithmic',
+                // minorTickInterval: 0.1,
                 title: {
                     text: 'PERCENTAGE OF PATIENTS'
                 },

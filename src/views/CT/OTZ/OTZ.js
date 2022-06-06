@@ -19,7 +19,6 @@ const OTZ = () => {
     const { active_tab } = useParams();
     const ctTab = active_tab
     const dispatch = useDispatch();
-    console.log(active_tab, ctTab)
     const onVisibilityChange = (isVisible) => {
         if (ctTab === 'otz') {
             if (isVisible) {
