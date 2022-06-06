@@ -22,7 +22,7 @@ const OtzEnrollmentAmongAlhivOnArtByCounty = () => {
                 crosshair: true
             },
             yAxis: {
-                type: 'logarithmic',
+                // type: 'logarithmic',
                 minorTickInterval: 0.1,
                 title: {
                     text: 'PERCENTAGE OF PATIENTS'
