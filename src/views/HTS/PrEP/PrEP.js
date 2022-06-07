@@ -34,6 +34,9 @@ import PrEPCurrentVsTestedPositiveTrends from './PrEPCurrentVsTestedPositiveTren
 import PrEPSTIScreeningOutcome from './PrEPSTIScreeningOutcome';
 import PrEPSTITreatmentOutcome from './PrEPSTITreatmentOutcome';
 import PrEPTestedPositiveBySubPopulation from './PrEPTestedPositiveBySubPopulation';
+import PrEPEligibleVsNewlyByAge from './PrEPEligibleVsNewlyByAge';
+import PrEPDiagnosedWithSTITrends from './PrEPDiagnosedWithSTITrends';
+import PrEPDiscontinuationTrends from './PrEPDiscontinuationTrends';
 
 const PrEP = () => {
     const dispatch = useDispatch();
@@ -95,8 +98,15 @@ const PrEP = () => {
                         'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
                     }
                 >
-                    <PrEPEligibleVsNewlyBySubPopulation />
+                    <PrEPEligibleVsNewlyByAge />
                 </Col>
+                {/* <Col
+                    className={
+                        'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
+                    }
+                >
+                    <PrEPEligibleVsNewlyBySubPopulation />
+                </Col> */}
             </Row>
             <SectionFooter />
             <PrEPNewByAgeSex />
@@ -109,7 +119,7 @@ const PrEP = () => {
                         'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
                     }
                 >
-                    <PrEPScreeningOverall />
+                    <PrEPEligibleVsNewlyBySubPopulation />
                 </Col>
                 <Col
                     className={
@@ -183,7 +193,11 @@ const PrEP = () => {
             <SectionFooter />
             <PrEPTestedPositiveBySubPopulation />
             <SectionFooter />
+            <PrEPDiagnosedWithSTITrends />
+            <SectionFooter />
             <PrEPScreeningDiscontinuation />
+            <SectionFooter />
+            <PrEPDiscontinuationTrends />
             <SectionFooter />
         </div>
     );

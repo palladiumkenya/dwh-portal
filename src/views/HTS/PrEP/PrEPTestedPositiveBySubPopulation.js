@@ -27,7 +27,7 @@ const PrEPTestedPositiveBySubPopulation = () => {
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'PERCENTAGE OF PATIENTS',
+                    text: 'NUMBER OF PATIENTS',
                 },
             },
             legend: {
@@ -50,9 +50,9 @@ const PrEPTestedPositiveBySubPopulation = () => {
             },
             series: [
                 {
-                    name: 'DISCORDANT COUIPLES',
+                    name: 'DISCORDANT COUPLES',
                     data: [23.6, 46, 70, 22, 40, 32, 53, 64, 76],
-                    color: '#2F4050',
+                    color: '#142459',
                 },
                 {
                     name: 'GENERAL POPULATION',
