@@ -32,12 +32,21 @@ export const CT_TABS = {
     covid: 'COVID-19',
 };
 
+export const OPERATIONALHIS_TABS = {
+    overview: 'OVERVIEW',
+    completeness: 'COMPLETENESS',
+    accuracy: 'ACCURACY',
+    consistency: 'CONSISTENCY',
+    dataQualityAssessment: 'DATA QUALITY ASSESSMENT',
+}
+
 export const PAGES = {
     home: 'HOME',
     rr: 'REPORTING_RATES',
     hts: 'HIV_TESTING_SERVICES',
     ct: 'CARE_AND_TREATMENT',
     hrh: 'HRH',
+    operationalHIS: 'OPERATIONAL_AND_HIS',
 };
 
 export const CACHING = {
