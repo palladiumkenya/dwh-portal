@@ -85,7 +85,7 @@ const PrEPTestedPositiveBySubPopulation = () => {
     return (
         <Card>
             <CardHeader className="cardTitle">
-                CURRENT ON PREP BY SUB-POPULATION(JAN-2022)
+                TESTED POSITIVE WHILE ON PrEP BY SUB-POPULATION
             </CardHeader>
             <CardBody>
                 <HighchartsReact
