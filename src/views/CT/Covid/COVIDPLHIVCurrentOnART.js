@@ -5,7 +5,6 @@ import * as covidPLHIVCurrentOnArtSelectors
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import DataCard from '../../Shared/DataCard';
 import moment from 'moment';
-import { Doughnut as Donut } from 'react-chartjs-2';
 import { Chart, ArcElement } from 'chart.js';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';

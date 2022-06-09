@@ -65,11 +65,17 @@ const RROverview = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
+            fromDate: filters.fromDate ? filters.fromDate : moment().subtract(2, 'month').add(15, 'days').format('MMM YYYY')
         };
-        params.period = filters.fromDate ?
-            moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M') :
-            moment().startOf('month').subtract(2, 'month').format('YYYY,M');
+        params.period = filters.fromDate
+            ? moment(params.fromDate, 'MMM YYYY')
+                  .startOf('month')
+                  .subtract(1, 'month')
+                  .format('YYYY,M')
+            : moment()
+                  .subtract(3, 'month')
+                  .add(15, 'days')
+                  .format('YYYY,M');
         const data = await getAll('manifests/consistency/' + rrTab, params);
         setConsistnecy({ consistency: [], stats: data.consistency ? data.consistency.toLocaleString('en') : [], statsPerc: getPerc(data.consistency , expected) });
     }, [filters, rrTab, expected]);
@@ -82,11 +88,22 @@ const RROverview = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
+            fromDate: filters.fromDate
+                ? filters.fromDate
+                : moment()
+                      .subtract(2, 'month')
+                      .add(15, 'days')
+                      .format('MMM YYYY'),
         };
-        params.period = filters.fromDate ?
-            moment(params.fromDate, "MMM YYYY").startOf('month').subtract(0, 'month').format('YYYY,M') :
-            moment().startOf('month').subtract(1, 'month').format('YYYY,M');
+        params.period = filters.fromDate
+            ? moment(params.fromDate, 'MMM YYYY')
+                  .startOf('month')
+                  .subtract(0, 'month')
+                  .format('YYYY,M')
+            : moment()
+                  .subtract(2, 'month')
+                  .add(15, 'days')
+                  .format('YYYY,M');
         const data = await getAll('manifests/recency/' + rrTab, params);
         setRecency({ recency: [], stats: data.recency ? data.recency.toLocaleString('en') : [], statsPerc: getPerc(data.recency , expected) });
     }, [filters, rrTab, expected]);

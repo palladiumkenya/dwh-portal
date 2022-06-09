@@ -25,6 +25,15 @@ import PrEPUsePopulation3RDMonth from './PrEPUsePopulation3RDMonth';
 import PrEPHIVTesting3RDMonth from './PrEPHIVTesting3RDMonth';
 import PrEPHIV3RDMonthRefill from './PrEPHIV3RDMonthRefill';
 import PrEPScreeningDiscontinuation from './PrEPScreeningDiscontinuation';
+import PrEPCascade from './PrEPCascade';
+import PrEPEligibleVsNewlyBySubPopulation from './PrEPEligibleVsNewlyBySubPopulation';
+import PrEPEligibleVsNewInitiatedTrends from './PrEPEligibleVsNewInitiatedTrends';
+import PrEPCurrentBySubPopulation from './PrEPCurrentBySubPopulation';
+import PrEPCurrentTrends from './PrEPCurrentTrends';
+import PrEPCurrentVsTestedPositiveTrends from './PrEPCurrentVsTestedPositiveTrends';
+import PrEPSTIScreeningOutcome from './PrEPSTIScreeningOutcome';
+import PrEPSTITreatmentOutcome from './PrEPSTITreatmentOutcome';
+import PrEPTestedPositiveBySubPopulation from './PrEPTestedPositiveBySubPopulation';
 
 const PrEP = () => {
     const dispatch = useDispatch();
@@ -67,53 +76,115 @@ const PrEP = () => {
     return (
         <div className="animated fadeIn">
             <VisibilitySensor onChange={onVisibilityChange}>
-                <UniversalFilter/>
+                <UniversalFilter />
             </VisibilitySensor>
 
-            <SectionHeader
-                title={branding.title}
-                description=""
-            />
-            <PrEPOverview/>
+            <SectionHeader title={branding.title} description="" />
+            <PrEPOverview />
 
             <Row>
-                <Col>
-                    <PrEPScreeningOverall/>
+                <Col
+                    className={
+                        'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
+                    }
+                >
+                    <PrEPCascade />
                 </Col>
-                <Col>
-                    <PrEPScreeningByAge/>
+                <Col
+                    className={
+                        'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
+                    }
+                >
+                    <PrEPEligibleVsNewlyBySubPopulation />
                 </Col>
             </Row>
-            <SectionFooter/>
-            <PrEPNewByAgeSex/>
-            <SectionFooter/>
-            <PrEPContinuityByAgeSex/>
-            <SectionFooter/>
+            <SectionFooter />
+            <PrEPNewByAgeSex />
+            <SectionFooter />
+            <PrEPEligibleVsNewInitiatedTrends />
+            <SectionFooter />
             <Row>
-                <Col>
-                    <PrEPUsePopulation1stMonth/>
+                <Col
+                    className={
+                        'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
+                    }
+                >
+                    <PrEPScreeningOverall />
                 </Col>
-                <Col>
-                    <PrEPHIVTesting1stMonth/>
+                <Col
+                    className={
+                        'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
+                    }
+                >
+                    <PrEPCurrentBySubPopulation />
                 </Col>
             </Row>
-            <SectionFooter/>
-            <PrEPHIV1STMonthRefill/>
-            <SectionFooter/>
+            <SectionFooter />
+            <PrEPCurrentTrends />
+            <SectionFooter />
+            <PrEPCurrentVsTestedPositiveTrends />
+            <SectionFooter />
+            <PrEPContinuityByAgeSex />
+            <SectionFooter />
             <Row>
-                <Col>
-                    <PrEPUsePopulation3RDMonth/>
+                <Col
+                    className={
+                        'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
+                    }
+                >
+                    <PrEPUsePopulation1stMonth />
                 </Col>
-                <Col>
-                    <PrEPHIVTesting3RDMonth/>
+                <Col
+                    className={
+                        'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
+                    }
+                >
+                    <PrEPHIVTesting1stMonth />
                 </Col>
             </Row>
-            <SectionFooter/>
-            <PrEPHIV3RDMonthRefill/>
-            <SectionFooter/>
-            <PrEPScreeningDiscontinuation/>
-            <SectionFooter/>
-
+            <SectionFooter />
+            <PrEPHIV1STMonthRefill />
+            <SectionFooter />
+            <Row>
+                <Col
+                    className={
+                        'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
+                    }
+                >
+                    <PrEPUsePopulation3RDMonth />
+                </Col>
+                <Col
+                    className={
+                        'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
+                    }
+                >
+                    <PrEPHIVTesting3RDMonth />
+                </Col>
+            </Row>
+            <SectionFooter />
+            <PrEPHIV3RDMonthRefill />
+            <SectionFooter />
+            <Row>
+                <Col
+                    className={
+                        'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
+                    }
+                >
+                    <PrEPSTIScreeningOutcome />
+                </Col>
+                <Col
+                    className={
+                        'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
+                    }
+                >
+                    <PrEPSTITreatmentOutcome />
+                </Col>
+            </Row>
+            <SectionFooter />
+            <PrEPTestedPositiveBySubPopulation />
+            <SectionFooter />
+            <PrEPScreeningDiscontinuation />
+            <SectionFooter />
         </div>
     );
 };
