@@ -3,17 +3,17 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import moment from 'moment';
 
 
-const PrEPEligibleVsNewlyBySubPopulation = () => {
+const PrEPEligibleVsNewlyByAge = () => {
     const filters = useSelector((state) => state.filters);
-    const [
-        prepEligibleVsNewlyBySubPopulation,
-        setPrepEligibleVsNewlyBySubPopulation,
-    ] = useState({});
+    const [prepEligibleVsNewlyByAge, setPrepEligibleVsNewlyByAge] = useState(
+        {}
+    );
 
-    const loadPrepEligibleVsNewlyBySubPopulation = useCallback(async () => {
-        setPrepEligibleVsNewlyBySubPopulation({
+    const loadPrepEligibleVsNewlyByAge = useCallback(async () => {
+        setPrepEligibleVsNewlyByAge({
             chart: {
                 type: 'column',
             },
@@ -21,17 +21,8 @@ const PrEPEligibleVsNewlyBySubPopulation = () => {
                 text: '',
             },
             xAxis: {
-                categories: [
-                    'DISCORDANT COUPLE',
-                    'FSW',
-                    'GENERAL POPULATION',
-                    'MSM',
-                    'PWID',
-                ],
+                categories: ['15 TO 19', '20 TO 24', '25+'],
                 crosshair: true,
-                title: {
-                    text: 'AGE',
-                },
             },
             yAxis: {
                 min: 0,
@@ -54,7 +45,7 @@ const PrEPEligibleVsNewlyBySubPopulation = () => {
                     dataLabels: {
                         enabled: true,
                         format: '{point.y}%',
-                    }
+                    },
                 },
                 column: {
                     pointPadding: 0.01,
@@ -66,19 +57,21 @@ const PrEPEligibleVsNewlyBySubPopulation = () => {
             },
             series: [
                 {
+                    type: 'column',
                     name: 'ELIGIBLE',
-                    data: [83.6, 66, 70, 22, 57],
+                    data: [12, 20, 43],
                     color: '#142459',
                 },
                 {
-                    name: 'NEW',
-                    data: [50, 78.8, 88, 4, 44],
-                    color: '#1AB394',
+                    type: 'column',
+                    name: 'NEWLY INITIATED',
+                    data: [53, 64, 14],
+                    color: 'rgb(124, 181, 236)',
                 },
                 {
                     type: 'scatter',
                     name: '% of Patients Eligible',
-                    data: [83.6, 78.8, 98,67, 97],
+                    data: [83.6, 78.8, 98],
                     color: 'orange',
                     marker: {
                         symbol: 'circle',
@@ -89,22 +82,23 @@ const PrEPEligibleVsNewlyBySubPopulation = () => {
     }, []);
 
     useEffect(() => {
-        loadPrepEligibleVsNewlyBySubPopulation();
-    }, [loadPrepEligibleVsNewlyBySubPopulation]);
+        loadPrepEligibleVsNewlyByAge();
+    }, [loadPrepEligibleVsNewlyByAge]);
 
     return (
         <Card>
             <CardHeader className="cardTitle">
-                ELIGIBLE VS NEWLY INITIALTED ON PREP BY SUB-POPULATION(JAN-2022)
+                ELIGIBLE VS NEWLY INITIATED ON PrEP BY AGE AS AT{' '}
+                {moment(filters.date).format('MMM YYYY')}
             </CardHeader>
             <CardBody>
                 <HighchartsReact
                     highcharts={Highcharts}
-                    options={prepEligibleVsNewlyBySubPopulation}
+                    options={prepEligibleVsNewlyByAge}
                 />
             </CardBody>
         </Card>
     );
 };
 
-export default PrEPEligibleVsNewlyBySubPopulation;
+export default PrEPEligibleVsNewlyByAge;

@@ -68,7 +68,7 @@ const PrEPCurrentVsTestedPositiveTrends = () => {
                     type: 'column',
                     name: 'CURRENT ON PREP',
                     data: [23.6, 78.8, 98.5, 20, 10, 50, 70, 20, 90],
-                    color: '#2F4050',
+                    color: '#142459',
                 },
                 {
                     type: 'column',
@@ -84,7 +84,7 @@ const PrEPCurrentVsTestedPositiveTrends = () => {
                     },
                     crisp: false,
                     name: 'POSITIVITY',
-                    data: [32, 100, 90, 27, 19, 70, 50, 70, 100],
+                    data: [32, 100, 90, 27, 19, 60, 80, 70, 100],
                     color: 'orange',
                 },
             ],
