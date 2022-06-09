@@ -24,6 +24,31 @@ import SectionFooter from '../Shared/SectionFooter';
 import moment from 'moment';
 import { useHistory, useParams } from 'react-router-dom';
 
+const Overview = Loadable({
+    loader: () => import ('./Overview/Overview'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const Accuracy = Loadable({
+    loader: () => import ('./Accuracy/Accuracy'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const Completeness = Loadable({
+    loader: () => import ('./Completeness/Completeness'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const Consistency = Loadable({
+    loader: () => import ('./Consistency/Consistency'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const DataQualityAssessment = Loadable({
+    loader: () => import ('./Data Quality Assessment/DataQualityAssessment'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 
 const OperationalHIS = () => {
     const dispatch = useDispatch();
@@ -117,15 +142,24 @@ const OperationalHIS = () => {
 
     return (
         <div>
-            <Nav tabs>
-                {renderTabNavItems()}
-            </Nav>
+            <Nav tabs>{renderTabNavItems()}</Nav>
             <TabContent activeTab={active_tab}>
-                <TabPane tabId={active_tab}>
-                    
+                <TabPane tabId={'overview'}>
+                    {active_tab === 'overview' ? <Overview /> : null}
+                </TabPane>
+                <TabPane tabId={'completeness'}>
+                    {active_tab === 'completeness' ? <Completeness /> : null}
+                </TabPane>
+                <TabPane tabId={'accuracy'}>
+                    {active_tab === 'accuracy' ? <Accuracy /> : null}
+                </TabPane>
+                <TabPane tabId={'consistency'}>
+                    {active_tab === 'consistency' ? <Consistency /> : null}
+                </TabPane>
+                <TabPane tabId={'dataQualityAssessment'}>
+                    {active_tab === 'dataQualityAssessment' ? <DataQualityAssessment /> : null}
                 </TabPane>
             </TabContent>
-            <p></p><p></p>
         </div>
     );
 
