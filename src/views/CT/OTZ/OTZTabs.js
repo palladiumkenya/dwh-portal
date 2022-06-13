@@ -5,6 +5,7 @@ import Loadable from 'react-loadable';
 import Loading from '../../Shared/Loading';
 import { LOADING_DELAY } from '../../../constants';
 import { useHistory, useParams } from 'react-router-dom';
+import OTZCALHIVByAgeSex from './OTZCALHIVByAgeSex';
 const OtzEnrollmentAmongAlhivOnArtBySex = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtBySex'), loading: Loading, delay: LOADING_DELAY });
 const OtzEnrollmentAmongAlhivOnArtByAge = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtByAge'), loading: Loading, delay: LOADING_DELAY });
 const OtzEnrollmentAmongAlhivOnArtByCounty = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtByCounty'), loading: Loading, delay: LOADING_DELAY });
@@ -32,6 +33,7 @@ const OtzVlSuppressionBySex = Loadable({ loader: () => import('./OtzVlSuppressio
 const OtzVlSuppressionByAge = Loadable({ loader: () => import('./OtzVlSuppressionByAge'), loading: Loading, delay: LOADING_DELAY });
 const OtzVlSuppressionByCounty = Loadable({ loader: () => import('./OtzVlSuppressionByCounty'), loading: Loading, delay: LOADING_DELAY });
 const OtzVlSuppressionByPartner = Loadable({ loader: () => import('./OtzVlSuppressionByPartner'), loading: Loading, delay: LOADING_DELAY });
+import OTZByAgeSex from './OTZByAgeSex';
 
 const OTZTabs = () => {
     const [activeTab, setActiveTab] = useState('otz_enrollment');
@@ -68,6 +70,12 @@ const OTZTabs = () => {
             <TabContent activeTab={mini_tab}>
                 <TabPane tabId="otz_enrollment">
                     <Row>
+                        <Col className={"col-6"}>
+                            <OTZCALHIVByAgeSex />
+                        </Col>
+                        <Col className={"col-6"}>
+                            <OTZByAgeSex />
+                        </Col>
                         <Col className={"col-6"}>
                             <OtzEnrollmentAmongAlhivOnArtBySex />
                         </Col>
