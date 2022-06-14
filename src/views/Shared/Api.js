@@ -5,7 +5,7 @@ let url_identity = null;
 
 if(process.env.NODE_ENV.trim() === 'production') {
     url = 'https://data.kenyahmis.org:8082/api/';
-    url_identity = 'https://auth.kenyahmis.org/DwhIdentity/api/';
+    url_identity = 'https://auth.kenyahmis.org/nascop/api/';
 } else {
     url = 'http://localhost:7000/api/';
     url_identity = 'https://localhost:5006/api/';
