@@ -4,13 +4,13 @@ let config = {};
 
 if(process.env.NODE_ENV.trim() === 'production') {
     config = {
-        authority: "https://auth.kenyahmis.org/dwhidentity",
-        client_id: "dwh.spa",
-        redirect_uri: "https://data.kenyahmis.org:9000/#/signin-oidc#",
-        response_type: "id_token token",
-        scope: "openid profile apiApp",
-        post_logout_redirect_uri: "https://data.kenyahmis.org:9000",
-    }
+        authority: 'https://auth.kenyahmis.org/nascop',
+        client_id: 'nascop.spa',
+        redirect_uri: 'https://dwh.nascop.org/#/signin-oidc#',
+        response_type: 'id_token token',
+        scope: 'openid profile apiApp',
+        post_logout_redirect_uri: 'https://dwh.nascop.org',
+    };
 } else {
     config = {
         authority: "https://localhost:5006",
