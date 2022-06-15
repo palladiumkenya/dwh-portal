@@ -27,8 +27,8 @@ const LinkageOverview = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate , //removed month when page loads because it was showing blanks
-            month: filters.fromDate //removed month when page loads because it was showing blanks
+            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : null, //removed month when page loads because it was showing blanks
+            month: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : null,//removed month when page loads because it was showing blanks
         };
         const result = await getAll('hts/linkageBySex', params);
         let data = {
