@@ -53,13 +53,13 @@ const PrEPDiscontinuationTrends = () => {
             },
             series: [
                 {
-                    name: 'DISCORDANT COUIPLES',
+                    name: 'DISCORDANT COUPLES',
                     data: [23.6, 46, 70, 22, 40, 32, 53, 64, 76],
                     color: '#1AB394',
                     fillOpacity: 0.2,
                     marker: {
                         radius: 7,
-                        fillColor: 'rgba(26, 179, 148, 0.2)',
+                        fillColor: '#1AB394CC',
                     },
                 },
             ],

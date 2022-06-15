@@ -51,9 +51,15 @@ const PrEPDiagnosedWithSTITrends = () => {
             },
             series: [
                 {
-                    data: [23.6, 46, 70, 22, 40, 32, 53, 64, 76],
+                    name: "",
+                    data: [236, 146, 70, 222, 140, 232, 153, 344, 476],
                     color: '#E06F07',
-                    fillOpacity: 0.2,
+                    fillOpacity: 0.66,
+                    marker: {
+                        radius: 7,
+                        fillColor: '#E06F07CC',
+                    },
+                    showInLegend: false,
                 },
             ],
         });
