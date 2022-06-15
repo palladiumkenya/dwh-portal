@@ -24,7 +24,7 @@ const PNSContactsTestingOverview = () => {
             agency: filters.agencies,
             project: filters.projects,
             year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : null,
-            month: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : null
+            month: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : null
         };
         const result = await getAll('hts/pnsIndex', params);
         setPnsIndex(result.indexClients ? parseInt(result.indexClients) : 0);
