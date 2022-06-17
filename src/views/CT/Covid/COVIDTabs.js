@@ -63,9 +63,9 @@ const COVIDTabs = () => {
                         <CardHeader  className="covid-definition-header">Indicator Definition</CardHeader>
                         <CardBody>
                             <ul>
-                                <li>Screened for Vaccination => PLHIV Aged 15+Years who are current on ART and have been assessed for COVID 19 vaccination.</li>
-                                <li>Partially Vaccinated PLHIV => PLHIV Aged 15+Years who are current on ART and have received at least one dose.</li>
-                                <li>Fully Vaccinated PLHIV=> PLHIV Aged 15+Years who are current on ART and have received full vaccination doses according to MoH guidelines.</li>
+                                <li>{'Screened for Vaccination => PLHIV Aged 15+Years who are current on ART and have been assessed for COVID 19 vaccination.'}</li>
+                                <li>{'Partially Vaccinated PLHIV => PLHIV Aged 15+Years who are current on ART and have received at least one dose.'}</li>
+                                <li>{'Fully Vaccinated PLHIV=> PLHIV Aged 15+Years who are current on ART and have received full vaccination doses according to MoH guidelines.'}</li>
                             </ul>
                         </CardBody>
                     </Card>

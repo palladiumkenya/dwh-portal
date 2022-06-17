@@ -41,8 +41,8 @@ const ViralLoadOutcomesHvlByFacility = () => {
                                 data={viralLoadOutcomesHvlByFacility}
                                 noHeader
                                 dense
-                                defaultSortField="facility"
-                                defaultSortAsc={true}
+                                defaultSortField="patients"
+                                defaultSortAsc={false}
                                 pagination
                                 responsive
                                 highlightOnHover

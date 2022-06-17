@@ -12,23 +12,47 @@ import DataCardCT from '../../Shared/DataCardCT';
 
 const OTZOverview = () => {
     const [otzTotalAdolescents, setOtzTotalAdolescents] = useState({});
-    const adolescents = useSelector(otzTotalAdolescentsSelector.getOtzTotalAdolescents);
+    const adolescents = useSelector(
+        otzTotalAdolescentsSelector.getOtzTotalAdolescents
+    );
     const otzEnrolled = useSelector(otzEnrolledSelector.getOtzEnrolled);
-    const otzTotalWithVlResults = useSelector(otzTotalWithVlResultsSelector.getOtzTotalWithVlResults);
-    const otzTotalWithVlResultsLessThan1000 = useSelector(otzTotalWithWithResultsLessThan1000Selector.getOtzTotalWithVlResultsLessThan1000);
-    const currentOnArtText = "ADOLESCENTS CURRENT ON ART as at " + moment().startOf('month').subtract(1, 'month').format('MMM YYYY');
+    const otzTotalWithVlResults = useSelector(
+        otzTotalWithVlResultsSelector.getOtzTotalWithVlResults
+    );
+    const otzTotalWithVlResultsLessThan1000 = useSelector(
+        otzTotalWithWithResultsLessThan1000Selector.getOtzTotalWithVlResultsLessThan1000
+    );
+    const currentOnArtText =
+        'ADOLESCENTS CURRENT ON ART as at ' +
+        moment()
+            .subtract(2, 'month')
+            .add(15, 'days')
+            .format('MMM YYYY');
 
     const loadOtzTotalAdolescents = useCallback(async () => {
         setOtzTotalAdolescents({
-            otzTotalAdolescents : adolescents.totalAdolescents,
+            otzTotalAdolescents: adolescents.totalAdolescents,
             enrolledInOTZ: otzEnrolled.enrolledInOTZ,
-            enrolledInOTZPerc: parseInt(adolescents.totalAdolescents, 10) > 0 ? ((otzEnrolled.enrolledInOTZ/adolescents.totalAdolescents)*100) : 0,
+            enrolledInOTZPerc:
+                parseInt(adolescents.totalAdolescents, 10) > 0
+                    ? (otzEnrolled.enrolledInOTZ / adolescents.totalAdolescents) * 100 : 0,
             totalWithVlResults: otzTotalWithVlResults.totalWithVlResults,
-            totalWithVlResultsPerc: parseInt(otzEnrolled.enrolledInOTZ, 10) > 0 ? ((otzTotalWithVlResults.totalWithVlResults/otzEnrolled.enrolledInOTZ)*100) : 0,
-            totalWithVlLessThan1000: otzTotalWithVlResultsLessThan1000.totalWithVlLessThan1000,
-            totalWithVlLessThan1000Perc: parseInt(otzEnrolled.enrolledInOTZ, 10) > 0 ? ((otzTotalWithVlResultsLessThan1000.totalWithVlLessThan1000/otzEnrolled.enrolledInOTZ)*100) : 0,
+            totalWithVlResultsPerc:
+                parseInt(otzEnrolled.enrolledInOTZ, 10) > 0
+                    ? (otzTotalWithVlResults.totalWithVlResults /
+                          otzEnrolled.enrolledInOTZ) *
+                      100
+                    : 0,
+            totalWithVlLessThan1000:
+                otzTotalWithVlResultsLessThan1000.totalWithVlLessThan1000,
+            totalWithVlLessThan1000Perc:
+                parseInt(otzEnrolled.enrolledInOTZ, 10) > 0
+                    ? (otzTotalWithVlResultsLessThan1000.totalWithVlLessThan1000 /
+                          otzEnrolled.enrolledInOTZ) *
+                      100
+                    : 0,
         });
-    },[adolescents]);
+    }, [adolescents]);
 
     useEffect(() => {
         loadOtzTotalAdolescents();
@@ -46,26 +70,38 @@ const OTZOverview = () => {
             <Col>
                 <DataCardCT
                     title="ENROLLED ON OTZ"
-                    subtitle={roundNumber(otzTotalAdolescents.enrolledInOTZPerc) + "%"}
+                    subtitle={
+                        roundNumber(otzTotalAdolescents.enrolledInOTZPerc) + '%'
+                    }
                     data={formatNumber(otzTotalAdolescents.enrolledInOTZ)}
                 />
             </Col>
             <Col>
                 <DataCardCT
                     title="ADOLESCENTS ON OTZ WITH VALID VL"
-                    subtitle={roundNumber(otzTotalAdolescents.totalWithVlResultsPerc) + "%"}
+                    subtitle={
+                        roundNumber(
+                            otzTotalAdolescents.totalWithVlResultsPerc
+                        ) + '%'
+                    }
                     data={formatNumber(otzTotalAdolescents.totalWithVlResults)}
                 />
             </Col>
             <Col>
                 <DataCardCT
                     title="ADOLESCENTS ON OTZ VIRALLY SUPPRESSED"
-                    subtitle={roundNumber(otzTotalAdolescents.totalWithVlLessThan1000Perc) + "%"}
-                    data={formatNumber(otzTotalAdolescents.totalWithVlLessThan1000)}
+                    subtitle={
+                        roundNumber(
+                            otzTotalAdolescents.totalWithVlLessThan1000Perc
+                        ) + '%'
+                    }
+                    data={formatNumber(
+                        otzTotalAdolescents.totalWithVlLessThan1000
+                    )}
                 />
             </Col>
         </Row>
     );
-}
+};
 
 export default OTZOverview;

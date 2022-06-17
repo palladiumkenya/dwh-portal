@@ -15,12 +15,12 @@ const HomeEmrSitesMap = () => {
         const data = [];
         const emrNames = [];
         let emrSites = [];
-        for(let i = 0; i < gpsSites.length; i++) {
+        for (let i = 0; i < gpsSites.length; i++) {
             if (emrNames.indexOf(gpsSites[i].emr) === -1) {
                 emrNames.push(gpsSites[i].emr);
             }
         }
-        for(let j = 0; j < emrNames.length; j++) {
+        for (let j = 0; j < emrNames.length; j++) {
             emrSites[j] = [];
         }
         for (let k = 0; k < gpsSites.length; k++) {
@@ -38,18 +38,27 @@ const HomeEmrSitesMap = () => {
             nullColor: 'rgba(200, 200, 200, 0.3)',
             showInLegend: false
         });
-        for(let j = 0; j < emrNames.length; j++) {
+        for (let j = 0; j < emrNames.length; j++) {
             data.push({
                 name: emrNames[j] === null ? 'Unknown' : emrNames[j],
                 type: 'mappoint',
                 data: emrSites[j],
-                dataLabels: { enabled: false },
+                dataLabels: { enabled: false }
             });
         }
         setHomeEmrSitesMap({
             title: { text: '' },
             plotOptions: { series: { turboThreshold: 5000 } },
             tooltip: { pointFormat: '<b>{point.name}</b>' },
+
+            mapNavigation: {
+                enabled: true,
+                enableMouseWheelZoom: true,
+                enableButtons: false,
+                buttonOptions: {
+                    verticalAlign: 'bottom'
+                }
+            },
             legend: { title: { text: 'KEY: EMR SITES' }, layout: 'vertical', align: 'right', verticalAlign: 'bottom' },
             series: data
         });
@@ -66,6 +75,6 @@ const HomeEmrSitesMap = () => {
             </Col>
         </Row>
     );
-}
+};
 
 export default HomeEmrSitesMap;

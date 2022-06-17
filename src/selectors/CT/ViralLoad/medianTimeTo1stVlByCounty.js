@@ -13,7 +13,7 @@ export const getMedianTimeTo1stVlByCounty = createSelector(
 
         for(let i = 0; i < list.length; i++) {
             counties.push(list[i].County);
-            times.push(parseInt(list[i].medianTime, 10));
+            times.push(list[i].medianTime);
         }
 
         return { counties, times };

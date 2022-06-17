@@ -27,7 +27,7 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
             },
             title: { text: '' },
             xAxis: [{
-                categories: ['NUMBER OF PLHIV ON ART WITH VL > 1000 COPIES/ML', 'NUMBER OF PLHIV ON ART WITH VL > 1000 COPIES/ML WHO RECEIVED EAC',
+                categories: ['NUMBER OF PLHIV WITH > 1000cpm', 'NUMBER OF PLHIV ON ART WITH VL > 1000 COPIES/ML WHO RECEIVED EAC',
                     'NUMBER OF PLHIV ON ART WITH VL > 1000 COPIES/ML WHO RECEIVED FOLLOW UP VL TESTS', 'NUMBER OF PLHIV ON ART WITH VL > 1000 COPIES/ML WHO RECEIVED FOLLOW UP VL TESTS',
                     'NUMBER WITH FOLLOW UP VL TEST AT VL > 1000 COPIES/ML SWITCHED TO SECOND LINE REGIMENT'],
                 crosshair: true
@@ -39,7 +39,6 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
                 formatter: function() {
                     let thisPoint = this.point,
                         allSeries = this.series.chart.series,
-                        stackName = this.series.userOptions.stack,
                         thisIndex = thisPoint.index,
                         returnString = '<b>' + this.x + '</b><br/>';
 
@@ -56,7 +55,7 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
                     returnString += 'Total: ' + this.point.stackTotal;
 
                     return returnString;
-                }
+                },
             },
             plotOptions: {
                 column: {
@@ -80,7 +79,7 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
                     name: 'VIRAL LOAD CASCADE',
                     data: [
                         {
-                            name: 'NUMBER OF PLHIV ON ART WITH VL > 1000 COPIES/ML',
+                            name: 'NUMBER OF PLHIV WITH > 1000cpm',
                             y: viralLoadUptakeGt1000Copies,
                             color: '#bb1414',
                             text: viralLoadUptakeGt1000Copies.toLocaleString('en'),
