@@ -76,7 +76,7 @@ const RRCounty = () => {
             }
         });
 
-        /* Consistency of reporting */
+        /* Comparison of reporting */
         const consistency_values = [];
         let expected = 0;
         for (const [key, value] of Object.entries(consistencyResult)) {
@@ -123,7 +123,7 @@ const RRCounty = () => {
             series: [
                 { name: 'Distribution of EMR Sites', type: 'column', data: emrResultSeries, color: "#2F4050" },
                 // { name: 'Overall Reporting Rate', type: 'spline', data: overallReportingRateResultSeries, yAxis: 1, color: "#E06F07", dataLabels: { enabled: false, format: '{y} %' }, tooltip: { valueSuffix: ' %' }, dashStyle: 'ShortDot' },
-                // { name: 'Consistency of Reporting', type: 'spline', data: consistencyResultSeries, yAxis: 1, color: "#59A14F", dataLabels: { enabled: false, format: '{y} %' }, tooltip: { valueSuffix: ' %' }, dashStyle: 'ShortDot' }
+                // { name: 'Comparison of Reporting', type: 'spline', data: consistencyResultSeries, yAxis: 1, color: "#59A14F", dataLabels: { enabled: false, format: '{y} %' }, tooltip: { valueSuffix: ' %' }, dashStyle: 'ShortDot' }
             ]
         });
 
@@ -144,11 +144,11 @@ const RRCounty = () => {
             title: { text: '' },
             subtitle: { text: '' },
             xAxis: { categories: consistency_counties.map(name=> name?name.toUpperCase(): name), title: { text: null } },
-            yAxis: { min: 0, max: 120, title: { text: 'Percentage (%) of Consistency of Reporting'.toUpperCase(), align: 'high' }, labels: { overflow: 'justify' } },
+            yAxis: { min: 0, max: 120, title: { text: 'Percentage (%) of Comparison of Reporting'.toUpperCase(), align: 'high' }, labels: { overflow: 'justify' } },
             tooltip: { valueSuffix: '' },
             plotOptions: { bar: { dataLabels: { enabled: true, format: '{y} %' } } },
             legend: { enabled: false },
-            series: [{ data: consistency_values, name: 'Consistency of Reporting', tooltip: { valueSuffix: ' %' } }]
+            series: [{ data: consistency_values, name: 'Comparison of Reporting', tooltip: { valueSuffix: ' %' } }]
         });
     }, [filters, rrTab]);
 

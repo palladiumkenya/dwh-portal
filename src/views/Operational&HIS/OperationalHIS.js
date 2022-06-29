@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import Loadable from 'react-loadable';
-import VisibilitySensor from 'react-visibility-sensor';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
-import { enableStickyFilter, disableStickyFilter, changeOpertationalHISTab, changeCurrentPage } from "../../actions/Shared/uiActions";
+import { changeOpertationalHISTab, changeCurrentPage } from "../../actions/Shared/uiActions";
 import {
     enableFacilityFilter,
     disableFacilityFilter,
@@ -18,11 +17,13 @@ import { loadOverallReportingRatesByFacilityNotReported } from "../../actions/RR
 import { loadConsistencyByFacilityNotReported } from "../../actions/RR/consistencyByFacilityNotReported";
 import { LOADING_DELAY, OPERATIONALHIS_TABS, PAGES } from "../../constants";
 import Loading from '../Shared/Loading';
-import UniversalFilter from '../Shared/UniversalFilter';
-import SectionHeader from '../Shared/SectionHeader';
-import SectionFooter from '../Shared/SectionFooter';
-import moment from 'moment';
 import { useHistory, useParams } from 'react-router-dom';
+
+const Comparison = Loadable({
+    loader: () => import ('./Comparison/Comparison'),
+    loading: () => Loading,
+    delay: LOADING_DELAY,
+});
 
 const Overview = Loadable({
     loader: () => import ('./Overview/Overview'),
@@ -62,13 +63,6 @@ const OperationalHIS = () => {
     const fromDate = useSelector(state => state.filters.fromDate);
     const toDate = useSelector(state => state.filters.toDate);
 
-    const onVisibilityChange = (isVisible) => {
-        if (isVisible) {
-            dispatch(disableStickyFilter());
-        } else {
-            dispatch(enableStickyFilter());
-        }
-    };
 
     const renderTabNavItems = () => {
         return Object.keys(OPERATIONALHIS_TABS).map((value) => {
@@ -158,6 +152,9 @@ const OperationalHIS = () => {
                 </TabPane>
                 <TabPane tabId={'dataQualityAssessment'}>
                     {active_tab === 'dataQualityAssessment' ? <DataQualityAssessment /> : null}
+                </TabPane>
+                <TabPane tabId={'comparison'}>
+                    {active_tab === 'comparison' ? <Comparison /> : null}
                 </TabPane>
             </TabContent>
         </div>
