@@ -109,7 +109,7 @@ const RROverviewTrends = () => {
             yAxis: [{ title: { text: 'Percentage'.toUpperCase() }}],
             plotOptions: { column: { dataLabels: { enabled: true, format: '<b>{point.y} %</b>' }}},
             legend: { enabled: false },
-            series: [ { name: "Comparison of Reporting", type: "column", data: dataProcessed, color: "#2F4050", tooltip: { valueSuffix: ' %' }}]
+            series: [ { name: "Consistency of Reporting", type: "column", data: dataProcessed, color: "#2F4050", tooltip: { valueSuffix: ' %' }}]
         });
     }, [filters, rrTab, expected]);
 
