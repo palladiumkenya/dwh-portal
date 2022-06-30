@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import * as newlyStartedOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/newlyStartedOnArtKHIS';
 
 
 const ComparisonNewlyTrends = () => {
@@ -11,6 +12,8 @@ const ComparisonNewlyTrends = () => {
         comparisonNewlyTrends,
         setComparisonNewlyTrends,
     ] = useState({});
+
+    let newlyKHIS =  useSelector(newlyStartedOnArtKHIS.getNewlyStartedOnArtTrendsKHIS);
 
     const loadComparisonNewlyTrends = useCallback(async () => {
         setComparisonNewlyTrends({
@@ -21,17 +24,7 @@ const ComparisonNewlyTrends = () => {
                 text: '',
             },
             xAxis: {
-                categories: [
-                    'MAY-2021',
-                    'JUN-2021',
-                    'JUL-2021',
-                    'AUG-2021',
-                    'SEP-2021',
-                    'OCT-2021',
-                    'NOV-2021',
-                    'DEC-2021',
-                    'JAN-2022',
-                ],
+                categories: newlyKHIS.labels,
                 crosshair: true,
                 title: {
                     text: 'MONTHS',
@@ -67,7 +60,7 @@ const ComparisonNewlyTrends = () => {
                         enabled: true,
                     },
                     name: 'DWH',
-                    data: [32, 100, 90, 27, 19, 70, 50, 70, 100],
+                    data: [3200, 10000, 9000, 2700, 1900, 7000, 5400, 7000, 7100, 8400, 7700, 7400],
                     color: '#2F4050',
                 },
                 {
@@ -77,12 +70,12 @@ const ComparisonNewlyTrends = () => {
                         enabled: true
                     },
                     name: 'KHIS',
-                    data: [11, 130, 190, 327, 219, 470, 150,77 , 80],
+                    data: newlyKHIS.data,
                     color: '#1AB394',
                 },
             ],
         });
-    }, []);
+    }, [newlyKHIS]);
 
     useEffect(() => {
         loadComparisonNewlyTrends();

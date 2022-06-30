@@ -29,7 +29,7 @@ const Comparison = () => {
     let Indicator = 'NEWLY STARTED ON ART';
     return (
         <>
-            {Indicator == 'NEWLY STARTED ON ART' ?
+            {Indicator === 'NEWLY STARTED ON ART' ?
                 <>
                     <SectionHeader
                         title={Indicator}

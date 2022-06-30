@@ -223,6 +223,9 @@ import viralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll
 import viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment
     from './CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
 
+import newlyStartedOnArtKHIS from './Operational&HIS/Comparison/newlyStartedOnArtKHIS';
+import newlyStartedOnArtTrendsKHIS from './Operational&HIS/Comparison/newlyStartedOnArtTrendsKHIS';
+
 export default combineReducers({
     auth: authReducer,
 
@@ -436,4 +439,8 @@ export default combineReducers({
     ovcEligibleVL,
     ovcVLDone,
     ovcVLSuppressed,
+
+
+    newlyStartedOnArtKHIS,
+    newlyStartedOnArtTrendsKHIS,
 });

@@ -12,16 +12,18 @@ import {
     disableFromDateFilter,
     disableGenderFilter, disableDatimAgeGroupFilter
 } from '../../actions/Shared/filterActions';
-import { loadOverallReportingRatesByFacilityReported } from "../../actions/RR/overallReportingRatesByFacilityReported";
-import { loadOverallReportingRatesByFacilityNotReported } from "../../actions/RR/overallReportingRatesByFacilityNotReported";
-import { loadConsistencyByFacilityNotReported } from "../../actions/RR/consistencyByFacilityNotReported";
 import { LOADING_DELAY, OPERATIONALHIS_TABS, PAGES } from "../../constants";
 import Loading from '../Shared/Loading';
 import { useHistory, useParams } from 'react-router-dom';
+import {loadNewlyStartedOnArtKHIS} from '../../actions/Operational&HIS/Comparison/newlyStartedOnArtKHISActions';
+import {
+    loadNewlyStartedOnArtTrendsKHIS
+} from '../../actions/Operational&HIS/Comparison/newlyStartedOnArtTrendsKHISActions';
+
 
 const Comparison = Loadable({
     loader: () => import ('./Comparison/Comparison'),
-    loading: () => Loading,
+    loading: Loading,
     delay: LOADING_DELAY,
 });
 
@@ -97,9 +99,8 @@ const OperationalHIS = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(loadOverallReportingRatesByFacilityReported());
-        dispatch(loadOverallReportingRatesByFacilityNotReported());
-        dispatch(loadConsistencyByFacilityNotReported());
+        dispatch(loadNewlyStartedOnArtKHIS());
+        dispatch(loadNewlyStartedOnArtTrendsKHIS())
     }, [
         dispatch,
         counties,

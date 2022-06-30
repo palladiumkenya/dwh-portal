@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap/lib';
 import { Col, Row } from 'reactstrap';
+import * as newlyStartedOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/newlyStartedOnArtKHIS';
+import { useSelector } from 'react-redux';
 
 
 const ComparisonOverview = () => {
+    let newlyKHIS =  useSelector(newlyStartedOnArtKHIS.getNewlyStartedOnArtKHIS);
 
     return (
         <>
@@ -21,7 +24,7 @@ const ComparisonOverview = () => {
                                     <Col md={6}>
                                         <div >
                                             <span className="comparison-card-text">KHIS</span><br/>
-                                            <span className="comparison-card-numbers">{"73900"}</span>
+                                            <span className="comparison-card-numbers">{newlyKHIS.totalNewlyStarted}</span>
                                         </div>
                                     </Col>
                                     <Col md={6}>
@@ -48,7 +51,7 @@ const ComparisonOverview = () => {
                                     <Col md={6}>
                                         <div >
                                             <span className="comparison-card-text">KHIS</span><br/>
-                                            <span className="comparison-card-numbers">{"73900"}</span>
+                                            <span className="comparison-card-numbers">{newlyKHIS.malesNewlyStarted}</span>
                                         </div>
                                     </Col>
                                     <Col md={6}>
@@ -75,7 +78,7 @@ const ComparisonOverview = () => {
                                     <Col md={6}>
                                         <div >
                                             <span className="comparison-card-text">KHIS</span><br/>
-                                            <span className="comparison-card-numbers">{"73900"}</span>
+                                            <span className="comparison-card-numbers">{newlyKHIS.femalesNewlyStarted}</span>
                                         </div>
                                     </Col>
                                     <Col md={6}>
@@ -102,7 +105,7 @@ const ComparisonOverview = () => {
                                     <Col md={6}>
                                         <div >
                                             <span className="comparison-card-text">KHIS</span><br/>
-                                            <span className="comparison-card-numbers">{"73900"}</span>
+                                            <span className="comparison-card-numbers">{newlyKHIS.adultsNewlyStarted}</span>
                                         </div>
                                     </Col>
                                     <Col md={6}>
@@ -129,7 +132,7 @@ const ComparisonOverview = () => {
                                     <Col md={6}>
                                         <div >
                                             <span className="comparison-card-text">KHIS</span><br/>
-                                            <span className="comparison-card-numbers">{"73900"}</span>
+                                            <span className="comparison-card-numbers">{newlyKHIS.childrenNewlyStarted}</span>
                                         </div>
                                     </Col>
                                     <Col md={6}>
@@ -156,7 +159,7 @@ const ComparisonOverview = () => {
                                     <Col md={6}>
                                         <div >
                                             <span className="comparison-card-text">KHIS</span><br/>
-                                            <span className="comparison-card-numbers">{"73900"}</span>
+                                            <span className="comparison-card-numbers">{newlyKHIS.adolescentsNewlyStarted}</span>
                                         </div>
                                     </Col>
                                     <Col md={6}>

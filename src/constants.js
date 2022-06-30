@@ -38,6 +38,7 @@ export const OPERATIONALHIS_TABS = {
     accuracy: 'ACCURACY',
     consistency: 'CONSISTENCY',
     dataQualityAssessment: 'DATA QUALITY ASSESSMENT',
+    comparison: 'COMPARISON DWH & KHIS',
 }
 
 export const PAGES = {
