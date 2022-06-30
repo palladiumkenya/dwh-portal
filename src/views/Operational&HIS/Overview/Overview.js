@@ -6,11 +6,24 @@ import SectionFooter from '../../Shared/SectionFooter';
 import { Col, Row } from 'reactstrap';
 import ActiveARTDataQualityCategories from './ActiveARTDataQualityCategories';
 import InvalidDataCategories from './InvalidDataCategories';
+import VisibilitySensor from 'react-visibility-sensor';
+import UniversalFilter from '../../Shared/UniversalFilter';
+import { disableStickyFilter, enableStickyFilter } from '../../../actions/Shared/uiActions';
+import { useDispatch } from 'react-redux';
 
 const Overview = () => {
+    const dispatch = useDispatch();
     useEffect(() => {
         console.log('overview');
     }, []);
+    const onVisibilityChange = (isVisible) => {
+            if (isVisible) {
+                dispatch(disableStickyFilter());
+            } else {
+                dispatch(enableStickyFilter());
+
+        }
+    };
 
     return (
         <>
@@ -18,6 +31,9 @@ const Overview = () => {
                 title={'OVERVIEW'}
                 description={`YEAR ${moment().year()}`}
             />
+            <VisibilitySensor onChange={onVisibilityChange}>
+                <UniversalFilter/>
+            </VisibilitySensor>
             <Card>
                 <CardHeader className="covid-definition-header">
                     INVALID DATA QUATITY CATEGORIES
