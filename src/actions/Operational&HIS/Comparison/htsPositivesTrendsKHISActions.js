@@ -3,25 +3,24 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING, PAGES } from '../../../constants';
 
-export const loadLinkagePositiveTrends = () => async (dispatch, getState) => {
+export const loadHTSPositivesTrendsKHIS = () => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
-        moment(getState().linkagePositiveTrends.lastFetch),
+        moment(getState().htsPositivesTrendsKHIS.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'newlyOnArt' &&
-        getState().ui.currentPage !== PAGES.ct &&
-        getState().ui.currentPage !== PAGES.operationalHIS) {
+
+    if (getState().ui.currentPage !== PAGES.operationalHIS) {
         return;
     }
-    else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
+    else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
         return;
     } else {
-        await dispatch(fetchLinkagePositiveTrends());
+        await dispatch(fetchHTSPositivesTrendsKHIS());
     }
 };
 
-export const fetchLinkagePositiveTrends = () => async (dispatch, getState) => {
-    dispatch({ type: actionTypes.HTS_LINKAGE_POSITIVE_TRENDS_REQUEST });
+export const fetchHTSPositivesTrendsKHIS = () => async (dispatch, getState) => {
+    dispatch({ type: actionTypes.KHIS_HTS_POSITIVES_TRENDS_REQUEST });
     const params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,
@@ -29,9 +28,11 @@ export const fetchLinkagePositiveTrends = () => async (dispatch, getState) => {
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
         project: getState().filters.projects,
+        gender: getState().filters.genders,
+        datimAgeGroup: getState().filters.datimAgeGroups,
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
-    const response = await getAll('hts/linkageNumberPositive', params);
-    dispatch({ type: actionTypes.HTS_LINKAGE_POSITIVE_TRENDS_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
+    const response = await getAll('operational-his/htsPositivesTrends', params);
+    dispatch({ type: actionTypes.KHIS_HTS_POSITIVES_TRENDS_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };

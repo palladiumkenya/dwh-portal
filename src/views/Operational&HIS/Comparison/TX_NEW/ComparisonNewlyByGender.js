@@ -4,12 +4,15 @@ import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import * as newlyStartedOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/newlyStartedOnArtKHIS';
+import * as currentNewOnArtOverviewSelectors from '../../../../selectors/CT/NewOnArt/currentNewOnArtOverview';
 
 
 const ComparisonNewlyByGender = () => {
     const filters = useSelector(state => state.filters);
     const [comparisonNewlyByGender, setComparisonNewlyByGender] = useState({});
     let newlyKHIS =  useSelector(newlyStartedOnArtKHIS.getNewlyStartedOnArtKHIS);
+    const newOnArtMale = useSelector(currentNewOnArtOverviewSelectors.getNewOnArtMale);
+    const newOnArtFemale = useSelector(currentNewOnArtOverviewSelectors.getNewOnArtFemale);
 
     const loadComparisonNewlyByGender = useCallback(async () => {
         setComparisonNewlyByGender({
@@ -52,15 +55,17 @@ const ComparisonNewlyByGender = () => {
             },
             series: [{
                 name: 'MALE',
-                data: [newlyKHIS.malesNewlyStarted, 788],
-                color: '#14084D'
+                data: [newlyKHIS.malesNewlyStarted, newOnArtMale],
+                color: '#14084D',
+                dataLabels: { enabled: true },
             }, {
                 name: 'FEMALE',
-                data: [newlyKHIS.femalesNewlyStarted, 450],
-                color: "#EA4C8B"
+                data: [newlyKHIS.femalesNewlyStarted, newOnArtFemale],
+                color: "#EA4C8B",
+                dataLabels: { enabled: true },
             }]
         });
-    }, [newlyKHIS]);
+    }, [newlyKHIS, newOnArtMale, newOnArtFemale]);
 
     useEffect(() => {
         loadComparisonNewlyByGender();

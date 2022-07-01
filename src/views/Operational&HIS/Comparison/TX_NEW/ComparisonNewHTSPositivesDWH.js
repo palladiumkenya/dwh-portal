@@ -3,11 +3,16 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import * as newOnArtTrendsSelectors from '../../../../selectors/CT/NewOnArt/newOnArtTrends';
+import * as newOnArtHtsPositiveSelectors from '../../../../selectors/CT/NewOnArt/newOnArtHtsPositive';
 
 
 const ComparisonNewVsHTSPositivesDWH = () => {
     const filters = useSelector(state => state.filters);
     const [comparisonNewVsHTSPositivesDWH, setComparisonNewVsHTSPositivesDWH] = useState({});
+
+    const newOnArtTrendsData = useSelector(newOnArtTrendsSelectors.getNewOnArtTrends);
+    const newOnArtHtsPositiveData = useSelector(newOnArtHtsPositiveSelectors.getNewOnArtHtsPositive);
 
     const loadComparisonNewVsHTSPositivesDWH = useCallback(async () => {
         setComparisonNewVsHTSPositivesDWH({
@@ -18,9 +23,7 @@ const ComparisonNewVsHTSPositivesDWH = () => {
                 text: '',
             },
             xAxis: {
-                categories: [
-                    'JAN 2021', 'FEB 2021', 'MAR 2021', 'APR 2021', 'MAY 2021', 'JUN 2021', 'JUL 2021', 'AUG 2021', 'SEP-2021', 'OCT-2021', 'NOV-2021', 'DEC-2021'
-                ],
+                categories: newOnArtTrendsData.months,
                 crosshair: true,
                 title: {
                     text: 'MONTHS',
@@ -61,17 +64,19 @@ const ComparisonNewVsHTSPositivesDWH = () => {
             series: [
                 {
                     name: 'TOTAL NEW ON TREATMENT',
-                    data: [23.6, 78.8, 98.5, 20, 10, 50, 70, 20, 90 ,10, 20, 30],
+                    data: newOnArtTrendsData.txNew,
                     color: '#14084D',
+                    dataLabels: { enabled: true },
                 },
                 {
                     name: 'TOTAL HTS POSITIVES',
-                    data: [18, 45, 90, 27, 19, 70, 50, 70, 100, 40, 30, 50],
+                    data: newOnArtHtsPositiveData.positives,
                     color: '#00a65a',
+                    dataLabels: { enabled: true },
                 }
             ],
         });
-    }, []);
+    }, [newOnArtTrendsData, newOnArtHtsPositiveData]);
 
     useEffect(() => {
         loadComparisonNewVsHTSPositivesDWH();

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Loadable from 'react-loadable';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
-import { changeOpertationalHISTab, changeCurrentPage } from "../../actions/Shared/uiActions";
+import { changeOpertationalHISTab, changeCurrentPage } from '../../actions/Shared/uiActions';
 import {
     enableFacilityFilter,
     disableFacilityFilter,
@@ -12,45 +12,49 @@ import {
     disableFromDateFilter,
     disableGenderFilter, disableDatimAgeGroupFilter
 } from '../../actions/Shared/filterActions';
-import { LOADING_DELAY, OPERATIONALHIS_TABS, PAGES } from "../../constants";
+import { LOADING_DELAY, OPERATIONALHIS_TABS, PAGES } from '../../constants';
 import Loading from '../Shared/Loading';
 import { useHistory, useParams } from 'react-router-dom';
-import {loadNewlyStartedOnArtKHIS} from '../../actions/Operational&HIS/Comparison/newlyStartedOnArtKHISActions';
+import { loadNewlyStartedOnArtKHIS } from '../../actions/Operational&HIS/Comparison/newlyStartedOnArtKHISActions';
 import {
     loadNewlyStartedOnArtTrendsKHIS
 } from '../../actions/Operational&HIS/Comparison/newlyStartedOnArtTrendsKHISActions';
+import { loadCurrentNewOnArtOverview } from '../../actions/CT/NewOnArt/currentNewOnArtOverviewActions';
+import { loadNewOnArtTrends } from '../../actions/CT/NewOnArt/newOnArtTrendsActions';
+import { loadLinkagePositiveTrends } from '../../actions/HTS/Linkage/linkagePositiveTrendsActions';
+import { loadHTSPositivesTrendsKHIS } from '../../actions/Operational&HIS/Comparison/htsPositivesTrendsKHISActions';
 
 
 const Comparison = Loadable({
     loader: () => import ('./Comparison/Comparison'),
     loading: Loading,
-    delay: LOADING_DELAY,
+    delay: LOADING_DELAY
 });
 
 const Overview = Loadable({
     loader: () => import ('./Overview/Overview'),
     loading: Loading,
-    delay: LOADING_DELAY,
+    delay: LOADING_DELAY
 });
 const Accuracy = Loadable({
     loader: () => import ('./Accuracy/Accuracy'),
     loading: Loading,
-    delay: LOADING_DELAY,
+    delay: LOADING_DELAY
 });
 const Completeness = Loadable({
     loader: () => import ('./Completeness/Completeness'),
     loading: Loading,
-    delay: LOADING_DELAY,
+    delay: LOADING_DELAY
 });
 const Consistency = Loadable({
     loader: () => import ('./Consistency/Consistency'),
     loading: Loading,
-    delay: LOADING_DELAY,
+    delay: LOADING_DELAY
 });
 const DataQualityAssessment = Loadable({
     loader: () => import ('./Data Quality Assessment/DataQualityAssessment'),
     loading: Loading,
-    delay: LOADING_DELAY,
+    delay: LOADING_DELAY
 });
 
 const OperationalHIS = () => {
@@ -95,12 +99,16 @@ const OperationalHIS = () => {
             dispatch(enableFacilityFilter());
             dispatch(disableAgencyFilter());
             dispatch(disableFromDateFilter());
-        }
+        };
     }, [dispatch]);
 
     useEffect(() => {
         dispatch(loadNewlyStartedOnArtKHIS());
-        dispatch(loadNewlyStartedOnArtTrendsKHIS())
+        dispatch(loadNewlyStartedOnArtTrendsKHIS());
+        dispatch(loadCurrentNewOnArtOverview());
+        dispatch(loadNewOnArtTrends());
+        dispatch(loadLinkagePositiveTrends());
+        dispatch(loadHTSPositivesTrendsKHIS());
     }, [
         dispatch,
         counties,
@@ -111,7 +119,7 @@ const OperationalHIS = () => {
         projects,
         fromDate,
         toDate,
-        opHIStab,
+        opHIStab
     ]);
 
     const DEFAULT_ACTIVE_TAB = useSelector(
@@ -125,7 +133,7 @@ const OperationalHIS = () => {
         }
     }, []);
 
-    if(!active_tab){
+    if (!active_tab) {
         history.push(`/operational-and-his/${opHIStab}`);
     }
 
@@ -140,22 +148,22 @@ const OperationalHIS = () => {
             <Nav tabs>{renderTabNavItems()}</Nav>
             <TabContent activeTab={active_tab}>
                 <TabPane tabId={'overview'}>
-                    {active_tab === 'overview' ? <Overview /> : null}
+                    {active_tab === 'overview' ? <Overview/> : null}
                 </TabPane>
                 <TabPane tabId={'completeness'}>
-                    {active_tab === 'completeness' ? <Completeness /> : null}
+                    {active_tab === 'completeness' ? <Completeness/> : null}
                 </TabPane>
                 <TabPane tabId={'accuracy'}>
-                    {active_tab === 'accuracy' ? <Accuracy /> : null}
+                    {active_tab === 'accuracy' ? <Accuracy/> : null}
                 </TabPane>
                 <TabPane tabId={'consistency'}>
-                    {active_tab === 'consistency' ? <Consistency /> : null}
+                    {active_tab === 'consistency' ? <Consistency/> : null}
                 </TabPane>
                 <TabPane tabId={'dataQualityAssessment'}>
-                    {active_tab === 'dataQualityAssessment' ? <DataQualityAssessment /> : null}
+                    {active_tab === 'dataQualityAssessment' ? <DataQualityAssessment/> : null}
                 </TabPane>
                 <TabPane tabId={'comparison'}>
-                    {active_tab === 'comparison' ? <Comparison /> : null}
+                    {active_tab === 'comparison' ? <Comparison/> : null}
                 </TabPane>
             </TabContent>
         </div>
