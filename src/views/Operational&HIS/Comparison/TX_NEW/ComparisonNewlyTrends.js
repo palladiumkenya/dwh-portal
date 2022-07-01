@@ -4,37 +4,40 @@ import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import * as newlyStartedOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/newlyStartedOnArtKHIS';
+import * as newOnArtTrendsSelectors from '../../../../selectors/CT/NewOnArt/newOnArtTrends';
 
 
 const ComparisonNewlyTrends = () => {
     const filters = useSelector((state) => state.filters);
     const [
         comparisonNewlyTrends,
-        setComparisonNewlyTrends,
+        setComparisonNewlyTrends
     ] = useState({});
 
-    let newlyKHIS =  useSelector(newlyStartedOnArtKHIS.getNewlyStartedOnArtTrendsKHIS);
+    const newlyKHIS = useSelector(newlyStartedOnArtKHIS.getNewlyStartedOnArtTrendsKHIS);
+    const newOnArtTrendsData = useSelector(newOnArtTrendsSelectors.getNewOnArtTrends);
+
 
     const loadComparisonNewlyTrends = useCallback(async () => {
         setComparisonNewlyTrends({
             chart: {
-                type: 'column',
+                type: 'column'
             },
             title: {
-                text: '',
+                text: ''
             },
             xAxis: {
                 categories: newlyKHIS.labels,
                 crosshair: true,
                 title: {
-                    text: 'MONTHS',
-                },
+                    text: 'MONTHS'
+                }
             },
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'PERCENTAGE OF PATIENTS',
-                },
+                    text: 'PERCENTAGE OF PATIENTS'
+                }
             },
             tooltip: {
                 headerFormat:
@@ -44,24 +47,24 @@ const ComparisonNewlyTrends = () => {
                     '<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
-                useHTML: true,
+                useHTML: true
             },
             legend: {
                 align: 'left',
-                verticalAlign: 'top',
+                verticalAlign: 'top'
             },
-            plotOptions: {
-            },
+            plotOptions: {},
             series: [
                 {
                     type: 'spline',
                     dashStyle: 'shortdot',
                     marker: {
-                        enabled: true,
+                        enabled: true
                     },
                     name: 'DWH',
-                    data: [3200, 10000, 9000, 2700, 1900, 7000, 5400, 7000, 7100, 8400, 7700, 7400],
+                    data: newOnArtTrendsData.txNew,
                     color: '#2F4050',
+                    dataLabels: { enabled: true },
                 },
                 {
                     type: 'spline',
@@ -72,10 +75,11 @@ const ComparisonNewlyTrends = () => {
                     name: 'KHIS',
                     data: newlyKHIS.data,
                     color: '#1AB394',
-                },
-            ],
+                    dataLabels: { enabled: true },
+                }
+            ]
         });
-    }, [newlyKHIS]);
+    }, [newlyKHIS, newOnArtTrendsData]);
 
     useEffect(() => {
         loadComparisonNewlyTrends();

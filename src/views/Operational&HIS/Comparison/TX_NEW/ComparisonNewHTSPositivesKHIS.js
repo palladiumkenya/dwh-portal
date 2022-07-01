@@ -3,11 +3,16 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import * as newlyStartedOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/newlyStartedOnArtKHIS';
+import * as htsPositivesTrendsKHIS from '../../../../selectors/Operational&HIS/Comparison/htsPositivesTrendsKHIS';
 
 
 const ComparisonNewVsHTSPositivesKHIS = () => {
     const filters = useSelector(state => state.filters);
     const [comparisonNewVsHTSPositivesKHIS, setComparisonNewVsHTSPositivesKHIS] = useState({});
+
+    const newlyKHIS =  useSelector(newlyStartedOnArtKHIS.getNewlyStartedOnArtTrendsKHIS);
+    const htsKHIS =  useSelector(htsPositivesTrendsKHIS.getHTSPositivesTrendsKHIS);
 
     const loadComparisonNewVsHTSPositivesKHIS = useCallback(async () => {
         setComparisonNewVsHTSPositivesKHIS({
@@ -18,9 +23,7 @@ const ComparisonNewVsHTSPositivesKHIS = () => {
                 text: '',
             },
             xAxis: {
-                categories: [
-                    'JAN 2021', 'FEB 2021', 'MAR-2021', 'APR-2021', 'MAY-2021', 'JUN-2021', 'JUL-2021', 'AUG-2021', 'SEP-2021', 'OCT-2021', 'NOV-2021', 'DEC-2021'
-                ],
+                categories:  newlyKHIS.labels,
                 crosshair: true,
                 title: {
                     text: 'MONTHS',
@@ -61,17 +64,19 @@ const ComparisonNewVsHTSPositivesKHIS = () => {
             series: [
                 {
                     name: 'TOTAL NEW ON TREATMENT',
-                    data: [23.6, 78.8, 98.5, 20, 10, 50, 70, 20, 90 ,10, 20, 30],
+                    data: newlyKHIS.data,
                     color: '#14084D',
+                    dataLabels: { enabled: true },
                 },
                 {
                     name: 'TOTAL HTS POSITIVES',
-                    data: [18, 45, 90, 27, 19, 70, 50, 70, 100, 40, 30, 50],
+                    data: htsKHIS.data,
                     color: '#00a65a',
+                    dataLabels: { enabled: true },
                 }
             ],
         });
-    }, []);
+    }, [newlyKHIS]);
 
     useEffect(() => {
         loadComparisonNewVsHTSPositivesKHIS();
