@@ -10,7 +10,7 @@ import {
     disableAgencyFilter,
     enableFromDateFilter,
     disableFromDateFilter,
-    disableGenderFilter, disableDatimAgeGroupFilter
+    disableGenderFilter, disableDatimAgeGroupFilter, enableIndicatorFilter
 } from '../../actions/Shared/filterActions';
 import { LOADING_DELAY, OPERATIONALHIS_TABS, PAGES } from '../../constants';
 import Loading from '../Shared/Loading';
@@ -68,6 +68,7 @@ const OperationalHIS = () => {
     const projects = useSelector(state => state.filters.projects);
     const fromDate = useSelector(state => state.filters.fromDate);
     const toDate = useSelector(state => state.filters.toDate);
+    const indicator = useSelector(state => state.filters.indicator);
 
 
     const renderTabNavItems = () => {
@@ -95,12 +96,15 @@ const OperationalHIS = () => {
         dispatch(enableFromDateFilter());
         dispatch(disableGenderFilter());
         dispatch(disableDatimAgeGroupFilter());
+        if (opHIStab === 'comparison') {
+            dispatch(enableIndicatorFilter());
+        }
         return () => {
             dispatch(enableFacilityFilter());
             dispatch(disableAgencyFilter());
             dispatch(disableFromDateFilter());
         };
-    }, [dispatch]);
+    }, [dispatch, opHIStab]);
 
     useEffect(() => {
         dispatch(loadNewlyStartedOnArtKHIS());
@@ -119,7 +123,8 @@ const OperationalHIS = () => {
         projects,
         fromDate,
         toDate,
-        opHIStab
+        opHIStab,
+        indicator
     ]);
 
     const DEFAULT_ACTIVE_TAB = useSelector(

@@ -226,6 +226,9 @@ import viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment
 import newlyStartedOnArtKHIS from './Operational&HIS/Comparison/newlyStartedOnArtKHIS';
 import newlyStartedOnArtTrendsKHIS from './Operational&HIS/Comparison/newlyStartedOnArtTrendsKHIS';
 import htsPositivesTrendsKHIS from './Operational&HIS/Comparison/htsPositivesTrendsKHIS';
+import currOnArtKHIS from './Operational&HIS/Comparison/currOnArtKHIS';
+import currOnArtKHISByCounty from './Operational&HIS/Comparison/currOnArtKHISByCounty';
+import currOnArtKHISByPartner from './Operational&HIS/Comparison/currOnArtKHISByPartner';
 
 export default combineReducers({
     auth: authReducer,
@@ -445,4 +448,7 @@ export default combineReducers({
     newlyStartedOnArtKHIS,
     newlyStartedOnArtTrendsKHIS,
     htsPositivesTrendsKHIS,
+    currOnArtKHIS,
+    currOnArtKHISByCounty,
+    currOnArtKHISByPartner,
 });

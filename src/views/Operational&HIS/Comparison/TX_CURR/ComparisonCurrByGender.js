@@ -4,15 +4,18 @@ import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import * as newlyStartedOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/newlyStartedOnArtKHIS';
+import * as currentNewOnArtOverviewSelectors from '../../../../selectors/CT/NewOnArt/currentNewOnArtOverview';
 
 
-const ComparisonNewlyByAge = () => {
+const ComparisonCurrByGender = () => {
     const filters = useSelector(state => state.filters);
-    const [comparisonNewlyByAge, setComparisonNewlyByAge] = useState({});
+    const [comparisonNewlyByGender, setComparisonNewlyByGender] = useState({});
     let newlyKHIS =  useSelector(newlyStartedOnArtKHIS.getNewlyStartedOnArtKHIS);
+    const newOnArtMale = useSelector(currentNewOnArtOverviewSelectors.getNewOnArtMale);
+    const newOnArtFemale = useSelector(currentNewOnArtOverviewSelectors.getNewOnArtFemale);
 
-    const loadComparisonNewlyByAge = useCallback(async () => {
-        setComparisonNewlyByAge({
+    const loadComparisonNewlyByGender = useCallback(async () => {
+        setComparisonNewlyByGender({
             chart: {
                 type: 'column'
             },
@@ -20,10 +23,10 @@ const ComparisonNewlyByAge = () => {
                 text: ''
             },
             xAxis: {
-                categories: ['UNDER 1', '1-9', '10-14', '15-19', '20-24', '25+'],
+                categories: ['KHIS', 'DWH'],
                 crosshair: true,
                 title: {
-                    text: 'AGE GROUP'
+                    text: 'Source'
                 }
             },
             yAxis: {
@@ -51,31 +54,33 @@ const ComparisonNewlyByAge = () => {
                 }
             },
             series: [{
-                name: 'DWH',
-                data: [236, 788, 641, 589, 542, 842],
-                color: '#2F4050'
+                name: 'MALE',
+                data: [newlyKHIS.malesNewlyStarted, newOnArtMale],
+                color: '#14084D',
+                dataLabels: { enabled: true },
             }, {
-                name: 'KHIS',
-                data: newlyKHIS.newlyStartedByAge,
-                color: "#1AB394"
+                name: 'FEMALE',
+                data: [newlyKHIS.femalesNewlyStarted, newOnArtFemale],
+                color: "#EA4C8B",
+                dataLabels: { enabled: true },
             }]
         });
-    }, [newlyKHIS]);
+    }, [newlyKHIS, newOnArtMale, newOnArtFemale]);
 
     useEffect(() => {
-        loadComparisonNewlyByAge();
-    }, [loadComparisonNewlyByAge]);
+        loadComparisonNewlyByGender();
+    }, [loadComparisonNewlyByGender]);
 
     return (
         <Card>
             <CardHeader className="cardTitle">
-                DISTRIBUTION OF PATIENTS NEWLY STARTED ON ART BY AGE
+                CURRENT ON ART BY GENDER
             </CardHeader>
             <CardBody>
-                <HighchartsReact highcharts={Highcharts} options={comparisonNewlyByAge}/>
+                <HighchartsReact highcharts={Highcharts} options={comparisonNewlyByGender}/>
             </CardBody>
         </Card>
     );
 };
 
-export default ComparisonNewlyByAge;
+export default ComparisonCurrByGender;
