@@ -37,6 +37,12 @@ import {
     loadCurrentOnArtDistributionByPartner
 } from '../../actions/CT/CurrentOnArt/currentOnArtDistributionByPartnerActions';
 import { loadNewOnArtByAgeSex } from '../../actions/CT/NewOnArt/newOnArtByAgeSexActions';
+import {
+    loadCurrOnARTPartnerFacilityKHIS
+} from '../../actions/Operational&HIS/Comparison/currOnArtByPartnerFacilityKHISActions';
+import {
+    loadNewOnARTPartnerFacilityKHIS
+} from '../../actions/Operational&HIS/Comparison/newOnArtByPartnerFacilityKHISActions';
 
 
 const Comparison = Loadable({
@@ -127,6 +133,8 @@ const OperationalHIS = () => {
         dispatch(loadCurrentNewOnArtOverview());
         dispatch(loadNewOnArtTrends());
         dispatch(loadNewOnArtByAgeSex());
+        dispatch(loadCurrOnARTPartnerFacilityKHIS());
+        dispatch(loadNewOnARTPartnerFacilityKHIS());
         dispatch(loadLinkagePositiveTrends());
         dispatch(loadHTSPositivesTrendsKHIS());
         dispatch(loadCurrOnARTKHIS())

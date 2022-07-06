@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader, Col, Row, Spinner } from 'reactstrap';
 import DataTable from 'react-data-table-component';
 import CsvDownloader from 'react-csv-downloader';
-import { getMissingDiagnosisDateByFacility } from '../../../../selectors/CT/NewOnArt/missingDiagnosisDateByFacility';
+import { getCurrOnArtByFacilityPartnerKHIS } from '../../../../selectors/Operational&HIS/Comparison/currStartedOnArtByFacilityPartnerKHIS'
 
 const ComparisonTXCurrByGender = () => {
-    const missingDiagnosisDateByFacility = useSelector(getMissingDiagnosisDateByFacility);
-    const loading = useSelector(state => state.missingDiagnosisDateByFacility.loading);
+    const currOnArt = useSelector(getCurrOnArtByFacilityPartnerKHIS).data;
+    const loading = useSelector(state => state.currOnArtByFacilityKHIS.loading);
     return (
         <>
             <Row>
@@ -19,9 +19,9 @@ const ComparisonTXCurrByGender = () => {
                                 loading === true ?
                                 <Spinner className="pull-right"/> :
                                 <CsvDownloader
-                                    filename="ndwh_patients_missing_hiv_diagnosis_date_by_facility"
+                                    filename="COMPARISON_OF_TX_CURR_BASED_ON_GENDER"
                                     separator=","
-                                    datas={missingDiagnosisDateByFacility}
+                                    datas={currOnArt}
                                     className="pull-right"
                                 >
                                     <i className="bordered download icon inverted black"></i>
@@ -31,14 +31,19 @@ const ComparisonTXCurrByGender = () => {
                         <CardBody className="trends-body">
                             <DataTable
                                 columns={[
-                                    { name: 'Facility', selector: 'facility', sortable: true },
-                                    { name: 'County', selector: 'county', sortable: true },
-                                    { name: 'Sub-County', selector: 'subCounty', sortable: true },
-                                    { name: 'AGENCY', selector: 'agency', sortable: true },
-                                    { name: 'Partner', selector: 'partner', sortable: true },
-                                    { name: '# Patients', selector: 'patients', sortable: true },
+                                    { name: 'Facility', selector: 'FacilityName', sortable: true },
+                                    { name: 'County', selector: 'County', sortable: true },
+                                    { name: 'Sub-County', selector: 'SubCounty', sortable: true },
+                                    { name: 'AGENCY', selector: 'CTAgency', sortable: true },
+                                    { name: 'Partner', selector: 'CTPartner', sortable: true },
+                                    { name: 'MALE NDWH', selector: 'KHISMale', sortable: true },
+                                    { name: 'FEMALE NDWH', selector: 'KHISFemale', sortable: true },
+                                    { name: 'TOTAL NDWH', selector: 'KHIStxCurr', sortable: true },
+                                    { name: 'MALE KHIS', selector: 'DWHmale', sortable: true },
+                                    { name: 'FEMALE KHIS', selector: 'DWHFemale', sortable: true },
+                                    { name: 'TOTAL KHIS', selector: 'DWHtxCurr', sortable: true },
                                 ]}
-                                data={missingDiagnosisDateByFacility}
+                                data={currOnArt}
                                 noHeader
                                 dense
                                 defaultSortField="facility"
