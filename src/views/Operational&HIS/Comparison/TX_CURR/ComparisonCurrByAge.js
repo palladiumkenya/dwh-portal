@@ -3,15 +3,15 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as newlyStartedOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/newlyStartedOnArtKHIS';
+import * as currentOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/currOnArtKHIS';
 
 
-const ComparisonNewlyByAge = () => {
-    const [comparisonNewlyByAge, setComparisonNewlyByAge] = useState({});
-    let newlyKHIS =  useSelector(newlyStartedOnArtKHIS.getNewlyStartedOnArtKHIS);
+const ComparisonCurrByAge = () => {
+    const [comparisonCurrByAge, setComparisonCurrByAge] = useState({});
+    let currKHIS =  useSelector(currentOnArtKHIS.getCurrOnArtKHIS);
 
-    const loadComparisonNewlyByAge = useCallback(async () => {
-        setComparisonNewlyByAge({
+    const loadComparisonCurrByAge = useCallback(async () => {
+        setComparisonCurrByAge({
             chart: {
                 type: 'column'
             },
@@ -51,30 +51,30 @@ const ComparisonNewlyByAge = () => {
             },
             series: [{
                 name: 'DWH',
-                data: newlyKHIS.newOnARTByAgeDWH,
+                data: currKHIS.OnARTByAgeDWH,
                 color: '#2F4050'
             }, {
                 name: 'KHIS',
-                data: newlyKHIS.newlyStartedByAge,
+                data: currKHIS.OnARTByAge,
                 color: "#1AB394"
             }]
         });
-    }, [newlyKHIS]);
+    }, [currKHIS]);
 
     useEffect(() => {
-        loadComparisonNewlyByAge();
-    }, [loadComparisonNewlyByAge]);
+        loadComparisonCurrByAge();
+    }, [loadComparisonCurrByAge]);
 
     return (
         <Card>
             <CardHeader className="cardTitle">
-                DISTRIBUTION OF PATIENTS NEWLY STARTED ON ART BY AGE
+                DISTRIBUTION OF PATIENTS CURRENT ON ART BY AGE
             </CardHeader>
             <CardBody>
-                <HighchartsReact highcharts={Highcharts} options={comparisonNewlyByAge}/>
+                <HighchartsReact highcharts={Highcharts} options={comparisonCurrByAge}/>
             </CardBody>
         </Card>
     );
 };
 
-export default ComparisonNewlyByAge;
+export default ComparisonCurrByAge;

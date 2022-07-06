@@ -8,10 +8,10 @@ export const loadCurrentOnArtDistributionByPartner = (tab) => async (dispatch, g
         moment(getState().currentOnArtDistributionByPartner.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== "currentOnArt" && getState().ui.ctTab !== 'dsd' && tab !== 'dsd') {
+    if (getState().ui.ctTab !== 'currentOnArt' && getState().ui.ctTab !== 'dsd' &&
+        tab !== 'comparison' && tab !== 'dsd') {
         return;
-    }
-    else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
+    } else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
         return;
     } else {
         await dispatch(fetchCurrentOnArtDistributionByPartner());
@@ -29,9 +29,12 @@ export const fetchCurrentOnArtDistributionByPartner = () => async (dispatch, get
         project: getState().filters.projects,
         gender: getState().filters.genders,
         datimAgeGroup: getState().filters.datimAgeGroups,
-        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
-        month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
+        year: getState().filters.fromDate ? moment(getState().filters.fromDate, 'MMM YYYY').format('YYYY') : '',
+        month: getState().filters.fromDate ? moment(getState().filters.fromDate, 'MMM YYYY').format('MM') : ''
     };
     const response = await getAll('care-treatment/getTxCurrAgeGroupDistributionByPartner', params);
-    dispatch({ type: actionTypes.CT_CURRENT_ON_ART_DISTRIBUTION_BY_PARTNER_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
+    dispatch({
+        type: actionTypes.CT_CURRENT_ON_ART_DISTRIBUTION_BY_PARTNER_FETCH,
+        payload: { filtered: getState().filters.filtered, list: response }
+    });
 };

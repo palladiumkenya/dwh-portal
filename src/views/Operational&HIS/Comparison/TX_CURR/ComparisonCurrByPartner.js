@@ -3,15 +3,15 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as newlyStartedOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/newlyStartedOnArtKHIS';
+import * as currentOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/currOnARTByPartnerKHIS';
 
 
-const ComparisonNewlyByAge = () => {
-    const [comparisonNewlyByAge, setComparisonNewlyByAge] = useState({});
-    let newlyKHIS =  useSelector(newlyStartedOnArtKHIS.getNewlyStartedOnArtKHIS);
+const ComparisonCurrByPartner = () => {
+    const [comparisonCurrByPartner, setComparisonCurrByPartner] = useState({});
+    let currKHIS =  useSelector(currentOnArtKHIS.getCurrentOnARTByPartnerKHIS);
 
-    const loadComparisonNewlyByAge = useCallback(async () => {
-        setComparisonNewlyByAge({
+    const loadComparisonCurrByPartner = useCallback(async () => {
+        setComparisonCurrByPartner({
             chart: {
                 type: 'column'
             },
@@ -19,10 +19,10 @@ const ComparisonNewlyByAge = () => {
                 text: ''
             },
             xAxis: {
-                categories: ['UNDER 1', '1-9', '10-14', '15-19', '20-24', '25+'],
+                categories: currKHIS.labels,
                 crosshair: true,
                 title: {
-                    text: 'AGE GROUP'
+                    text: 'SERVICE DELIVERY PARTNER'
                 }
             },
             yAxis: {
@@ -51,30 +51,30 @@ const ComparisonNewlyByAge = () => {
             },
             series: [{
                 name: 'DWH',
-                data: newlyKHIS.newOnARTByAgeDWH,
-                color: '#2F4050'
+                data: currKHIS.dataDwh,
+                color: '#2F4050',  dataLabels: { enabled: true }
             }, {
                 name: 'KHIS',
-                data: newlyKHIS.newlyStartedByAge,
-                color: "#1AB394"
+                data: currKHIS.data,
+                color: "#1AB394", dataLabels: { enabled: true }
             }]
         });
-    }, [newlyKHIS]);
+    }, [currKHIS]);
 
     useEffect(() => {
-        loadComparisonNewlyByAge();
-    }, [loadComparisonNewlyByAge]);
+        loadComparisonCurrByPartner();
+    }, [loadComparisonCurrByPartner]);
 
     return (
         <Card>
             <CardHeader className="cardTitle">
-                DISTRIBUTION OF PATIENTS NEWLY STARTED ON ART BY AGE
+                DISTRIBUTION OF PATIENTS CURRENT ON ART BY SERVICE DELIVERY PARTNER
             </CardHeader>
             <CardBody>
-                <HighchartsReact highcharts={Highcharts} options={comparisonNewlyByAge}/>
+                <HighchartsReact highcharts={Highcharts} options={comparisonCurrByPartner}/>
             </CardBody>
         </Card>
     );
 };
 
-export default ComparisonNewlyByAge;
+export default ComparisonCurrByPartner;

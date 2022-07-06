@@ -26,6 +26,7 @@ const UniversalFilter = () => {
     const [datimAgeGroups, setDatimAgeGroups] = useState([]);
     const [populationTypes, setPopulationTypes] = useState([]);
     const [latestPregnancies, setLatestPregnancies] = useState([]);
+    const [indicators, setIndicators] = useState([]);
     const rrCounties = useSelector(rrSelectors.getCounties);
     const rrSubCounties = useSelector(rrSelectors.getSubCounties);
     const rrFacilities = useSelector(rrSelectors.getFacilities);
@@ -122,6 +123,7 @@ const UniversalFilter = () => {
             'UNKNOWN',
             'YES',
         ].map(c => ({ value: c, key: c, text: c })));
+        setIndicators(['Tx_New', 'Tx_Curr'].map(c => ({ value: c, key: c, text: c })))
     }, [
         ui,
 
@@ -440,6 +442,27 @@ const UniversalFilter = () => {
                             />
                         </div>
                     </Col> : null
+                }
+                {
+                    filters.indicatorFilterEnabled ?
+                        <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
+                            <div className="form-group">
+                                <label htmlFor="indicator">Indicator</label>
+                                <Dropdown
+                                    id="indicator"
+                                    name="indicator"
+                                    placeholder="Select Indicator"
+                                    fluid
+                                    selection
+                                    search
+                                    options={indicators}
+                                    value={filters.indicators}
+                                    onChange={(e, data) => {
+                                        dispatch(actions.filterByIndicator(data.value));
+                                    }}
+                                />
+                            </div>
+                        </Col> : null
                 }
             </Row>
         </>

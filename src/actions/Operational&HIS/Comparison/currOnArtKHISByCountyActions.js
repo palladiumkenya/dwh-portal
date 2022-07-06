@@ -3,32 +3,24 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING, PAGES } from '../../../constants';
 
-export const loadCurrentOnArtOverview = (tab) => async (dispatch, getState) => {
+export const loadCurrOnARTKHISByCounty = () => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
-        moment(getState().currentOnArtOverview.lastFetch),
+        moment(getState().currOnArtKHISByCounty.lastFetch),
         'minutes'
     );
-    if (
-        getState().ui.ctTab !== "currentOnArt" &&
-        getState().ui.ctTab !== 'dsd' &&
-        getState().ui.ctTab !== 'vl' &&
-        tab !== 'dsd' &&
-        tab !== 'vl' &&
-        tab !== "currentOnArt" &&
-        tab !== "comparison" &&
-        getState().ui.currentPage !== PAGES.home
-    ) {
+
+    if (getState().ui.currentPage !== PAGES.operationalHIS) {
         return;
     }
     else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
         return;
     } else {
-        await dispatch(fetchCurrentOnArtOverview());
+        await dispatch(fetchCurrOnARTKHISByCounty());
     }
 };
 
-export const fetchCurrentOnArtOverview = () => async (dispatch, getState) => {
-    dispatch({ type: actionTypes.CT_CURRENT_ON_ART_OVERVIEW_REQUEST });
+export const fetchCurrOnARTKHISByCounty = () => async (dispatch, getState) => {
+    dispatch({ type: actionTypes.KHIS_CURR_ON_ART_BY_COUNTY_REQUEST });
     const params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,
@@ -41,6 +33,6 @@ export const fetchCurrentOnArtOverview = () => async (dispatch, getState) => {
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
-    const response = await getAll('care-treatment/viralLoadCascade', params);
-    dispatch({ type: actionTypes.CT_CURRENT_ON_ART_OVERVIEW_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
+    const response = await getAll('operational-his/getTxCurrKHISCounty', params);
+    dispatch({ type: actionTypes.KHIS_CURR_ON_ART_BY_COUNTY_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };
