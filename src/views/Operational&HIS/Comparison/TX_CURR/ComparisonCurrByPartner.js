@@ -3,15 +3,15 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as newlyStartedOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/newlyStartedOnArtKHIS';
+import * as currentOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/currOnARTByPartnerKHIS';
 
 
 const ComparisonCurrByPartner = () => {
-    const [comparisonCurrByAge, setComparisonCurrByAge] = useState({});
-    let currKHIS =  useSelector(newlyStartedOnArtKHIS.getNewlyStartedOnArtKHIS);
+    const [comparisonCurrByPartner, setComparisonCurrByPartner] = useState({});
+    let currKHIS =  useSelector(currentOnArtKHIS.getCurrentOnARTByPartnerKHIS);
 
-    const loadComparisonCurrByAge = useCallback(async () => {
-        setComparisonCurrByAge({
+    const loadComparisonCurrByPartner = useCallback(async () => {
+        setComparisonCurrByPartner({
             chart: {
                 type: 'column'
             },
@@ -19,7 +19,7 @@ const ComparisonCurrByPartner = () => {
                 text: ''
             },
             xAxis: {
-                categories: ['AHF', 'BHF', 'CHF', 'DHF', 'EHF', 'FHF', 'GHF', 'HHF', 'IHF', 'JHF', 'KHF', 'LHF', 'MHF', 'NHF', 'OHF', 'PHF', 'QHF', 'RHF', 'SHF', 'THF', 'UHF', 'VHF', 'WHF', 'XHF', 'YHF', 'ZHF'],
+                categories: currKHIS.labels,
                 crosshair: true,
                 title: {
                     text: 'SERVICE DELIVERY PARTNER'
@@ -51,19 +51,19 @@ const ComparisonCurrByPartner = () => {
             },
             series: [{
                 name: 'DWH',
-                data: [236, 788, 641, 589, 542, 842],
-                color: '#2F4050'
+                data: currKHIS.dataDwh,
+                color: '#2F4050',  dataLabels: { enabled: true }
             }, {
                 name: 'KHIS',
-                data: currKHIS.newlyStartedByAge,
-                color: "#1AB394"
+                data: currKHIS.data,
+                color: "#1AB394", dataLabels: { enabled: true }
             }]
         });
     }, [currKHIS]);
 
     useEffect(() => {
-        loadComparisonCurrByAge();
-    }, [loadComparisonCurrByAge]);
+        loadComparisonCurrByPartner();
+    }, [loadComparisonCurrByPartner]);
 
     return (
         <Card>
@@ -71,7 +71,7 @@ const ComparisonCurrByPartner = () => {
                 DISTRIBUTION OF PATIENTS CURRENT ON ART BY SERVICE DELIVERY PARTNER
             </CardHeader>
             <CardBody>
-                <HighchartsReact highcharts={Highcharts} options={comparisonCurrByAge}/>
+                <HighchartsReact highcharts={Highcharts} options={comparisonCurrByPartner}/>
             </CardBody>
         </Card>
     );

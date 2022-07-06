@@ -33,6 +33,6 @@ export const fetchCurrOnARTKHISByPartner = () => async (dispatch, getState) => {
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
-    const response = await getAll('operational-his/txCurrKHIS', params);
+    const response = await getAll('operational-his/getTxCurrKHISPartner', params);
     dispatch({ type: actionTypes.KHIS_CURR_ON_ART_BY_PARTNER_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };

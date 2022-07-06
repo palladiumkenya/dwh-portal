@@ -23,6 +23,20 @@ import { loadCurrentNewOnArtOverview } from '../../actions/CT/NewOnArt/currentNe
 import { loadNewOnArtTrends } from '../../actions/CT/NewOnArt/newOnArtTrendsActions';
 import { loadLinkagePositiveTrends } from '../../actions/HTS/Linkage/linkagePositiveTrendsActions';
 import { loadHTSPositivesTrendsKHIS } from '../../actions/Operational&HIS/Comparison/htsPositivesTrendsKHISActions';
+import { loadCurrOnARTKHIS } from '../../actions/Operational&HIS/Comparison/currOnArtKHISActions';
+import { loadCurrOnARTKHISByCounty } from '../../actions/Operational&HIS/Comparison/currOnArtKHISByCountyActions';
+import { loadCurrOnARTKHISByPartner } from '../../actions/Operational&HIS/Comparison/currOnArtKHISByPartnerActions';
+import { loadCurrentOnArtOverview } from '../../actions/CT/CurrentOnArt/currentOnArtOverviewActions';
+import { loadCurrentOnArtByAgeSex } from '../../actions/CT/CurrentOnArt/currentOnArtByAgeSexActions';
+import { loadCurrentOnArtByCounty } from '../../actions/CT/CurrentOnArt/currentOnArtByCountyActions';
+import { loadCurrentOnArtByPartner } from '../../actions/CT/CurrentOnArt/currentOnArtByPartnerActions';
+import {
+    loadCurrentOnArtDistributionByCounty
+} from '../../actions/CT/CurrentOnArt/currentOnArtDistributionByCountyActions';
+import {
+    loadCurrentOnArtDistributionByPartner
+} from '../../actions/CT/CurrentOnArt/currentOnArtDistributionByPartnerActions';
+import { loadNewOnArtByAgeSex } from '../../actions/CT/NewOnArt/newOnArtByAgeSexActions';
 
 
 const Comparison = Loadable({
@@ -88,6 +102,7 @@ const OperationalHIS = () => {
             );
         });
     };
+    const { active_tab } = useParams();
 
     useEffect(() => {
         dispatch(changeCurrentPage(PAGES.operationalHIS));
@@ -111,8 +126,18 @@ const OperationalHIS = () => {
         dispatch(loadNewlyStartedOnArtTrendsKHIS());
         dispatch(loadCurrentNewOnArtOverview());
         dispatch(loadNewOnArtTrends());
+        dispatch(loadNewOnArtByAgeSex());
         dispatch(loadLinkagePositiveTrends());
         dispatch(loadHTSPositivesTrendsKHIS());
+        dispatch(loadCurrOnARTKHIS())
+        dispatch(loadCurrOnARTKHISByCounty())
+        dispatch(loadCurrOnARTKHISByPartner())
+        dispatch(loadCurrentOnArtOverview(active_tab));
+        dispatch(loadCurrentOnArtByAgeSex(active_tab));
+        dispatch(loadCurrentOnArtByCounty(active_tab));
+        dispatch(loadCurrentOnArtByPartner(active_tab));
+        dispatch(loadCurrentOnArtDistributionByCounty(active_tab));
+        dispatch(loadCurrentOnArtDistributionByPartner(active_tab));
     }, [
         dispatch,
         counties,
@@ -124,19 +149,19 @@ const OperationalHIS = () => {
         fromDate,
         toDate,
         opHIStab,
-        indicator
+        indicator,
+        active_tab
     ]);
 
     const DEFAULT_ACTIVE_TAB = useSelector(
         (state) => state.ui.operationalHISTab
     );
-    const { active_tab } = useParams();
     const history = useHistory();
     useEffect(() => {
         if (!active_tab) {
             history.push(`/operational-and-his/${DEFAULT_ACTIVE_TAB}`);
         }
-    }, []);
+    }, [active_tab, history, DEFAULT_ACTIVE_TAB]);
 
     if (!active_tab) {
         history.push(`/operational-and-his/${opHIStab}`);

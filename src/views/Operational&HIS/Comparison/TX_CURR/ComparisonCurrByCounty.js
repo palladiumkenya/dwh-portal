@@ -3,15 +3,15 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as newlyStartedOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/newlyStartedOnArtKHIS';
+import * as currentOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/currOnARTByCountyKHIS';
 
 
 const ComparisonCurrByCounty = () => {
-    const [comparisonCurrByAge, setComparisonCurrByAge] = useState({});
-    let currKHIS =  useSelector(newlyStartedOnArtKHIS.getNewlyStartedOnArtKHIS);
+    const [comparisonCurrByCounty, setComparisonCurrByCounty] = useState({});
+    let currKHIS = useSelector(currentOnArtKHIS.getCurrentOnARTByCountyKHIS);
 
-    const loadComparisonCurrByAge = useCallback(async () => {
-        setComparisonCurrByAge({
+    const loadComparisonCurrByCounty = useCallback(async () => {
+        setComparisonCurrByCounty({
             chart: {
                 type: 'column'
             },
@@ -19,7 +19,7 @@ const ComparisonCurrByCounty = () => {
                 text: ''
             },
             xAxis: {
-                categories: ['UNDER 1', '1-9', '10-14', '15-19', '20-24', '25+'],
+                categories: currKHIS.labels,
                 crosshair: true,
                 title: {
                     text: 'COUNTY'
@@ -41,7 +41,7 @@ const ComparisonCurrByCounty = () => {
             },
             legend: {
                 align: 'left',
-                verticalAlign: 'top',
+                verticalAlign: 'top'
             },
             plotOptions: {
                 column: {
@@ -51,19 +51,19 @@ const ComparisonCurrByCounty = () => {
             },
             series: [{
                 name: 'DWH',
-                data: [236, 788, 641, 589, 542, 842],
-                color: '#2F4050'
+                data: currKHIS.dataDwh,
+                color: '#2F4050', dataLabels: { enabled: true }
             }, {
                 name: 'KHIS',
-                data: currKHIS.newlyStartedByAge,
-                color: "#1AB394"
+                data: currKHIS.data,
+                color: '#1AB394', dataLabels: { enabled: true }
             }]
         });
     }, [currKHIS]);
 
     useEffect(() => {
-        loadComparisonCurrByAge();
-    }, [loadComparisonCurrByAge]);
+        loadComparisonCurrByCounty();
+    }, [loadComparisonCurrByCounty]);
 
     return (
         <Card>
@@ -71,7 +71,7 @@ const ComparisonCurrByCounty = () => {
                 DISTRIBUTION OF PATIENTS CURRENT ON ART BY COUNTY
             </CardHeader>
             <CardBody>
-                <HighchartsReact highcharts={Highcharts} options={comparisonCurrByAge}/>
+                <HighchartsReact highcharts={Highcharts} options={comparisonCurrByCounty}/>
             </CardBody>
         </Card>
     );

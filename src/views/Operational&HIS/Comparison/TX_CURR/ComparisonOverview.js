@@ -1,31 +1,33 @@
 import React, { useEffect } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap/lib';
 import { Col, Row } from 'reactstrap';
-import * as newlyStartedOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/newlyStartedOnArtKHIS';
+import * as newlyStartedOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/currOnArtKHIS';
 import { useSelector } from 'react-redux';
 import { formatNumber, roundNumber } from '../../../../utils/utils';
-import * as currentNewOnArtOverviewSelectors from '../../../../selectors/CT/NewOnArt/currentNewOnArtOverview';
+import * as currentOnArtOverviewSelectors from '../../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
+import * as currentOnArtByAgeSexSelectors from '../../../../selectors/CT/CurrentOnArt/currentOnArtByAgeSex';
 
 
 const ComparisonOverviewTxCurr = () => {
-    let newlyKHIS =  useSelector(newlyStartedOnArtKHIS.getNewlyStartedOnArtKHIS);
-    const newOnArt = useSelector(currentNewOnArtOverviewSelectors.getNewOnArt);
-    const newOnArtMale = useSelector(currentNewOnArtOverviewSelectors.getNewOnArtMale);
-    const newOnArtMalePercent = newOnArt ? ((newOnArtMale/newOnArt)*100) : 0;
-    const newOnArtFemale = useSelector(currentNewOnArtOverviewSelectors.getNewOnArtFemale);
-    const newOnArtFemalePercent = newOnArt ? ((newOnArtFemale/newOnArt)*100) : 0;
-    const newOnArtAdults = useSelector(currentNewOnArtOverviewSelectors.getNewOnArtAdults);
-    const newOnArtAdultsPercent = newOnArt ? ((newOnArtAdults/newOnArt)*100) : 0;
-    const newOnArtAdolescents = useSelector(currentNewOnArtOverviewSelectors.getNewOnArtAdolescents);
-    const newOnArtAdolescentsPercent = newOnArt ? ((newOnArtAdolescents/newOnArt)*100) : 0;
-    const newOnArtChildren = useSelector(currentNewOnArtOverviewSelectors.getNewOnArtChildren);
-    const newOnArtChildrenPercent = newOnArt ? ((newOnArtChildren/newOnArt)*100) : 0;
+    let currARTKHIS =  useSelector(newlyStartedOnArtKHIS.getCurrOnArtKHIS);
 
-    let percOfNewly = (newly, total) => {
+    const currentOnArt = useSelector(currentOnArtOverviewSelectors.getCurrentOnArt);
+    const currentOnArtMale = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtBySex).currentOnArtMale;
+    const currentOnArtMalePercent = currentOnArt ? ((currentOnArtMale/currentOnArt)*100) : 0;
+    const currentOnArtFemale = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtBySex).currentOnArtFemale;
+    const currentOnArtFemalePercent = currentOnArt ? ((currentOnArtFemale/currentOnArt)*100) : 0;
+    const currentOnArtAdults = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtAdults).currentOnArt;
+    const currentOnArtAdultsPercent = currentOnArt ? ((currentOnArtAdults/currentOnArt)*100) : 0;
+    const currentOnArtAdolescents = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtAdolescents).currentOnArt;
+    const currentOnArtAdolescentsPercent = currentOnArt ? ((currentOnArtAdolescents/currentOnArt)*100) : 0;
+    const currentOnArtChildren = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtChildren).currentOnArt;
+    const currentOnArtChildrenPercent = currentOnArt ? ((currentOnArtChildren/currentOnArt)*100) : 0;
+
+    let percOfNewly = (curr, total) => {
         if (total === 0) {
             return 0  + "%";
         }
-        return roundNumber((newly / total) * 100) + "%";
+        return roundNumber((curr / total) * 100) + "%";
     }
 
     return (
@@ -44,13 +46,13 @@ const ComparisonOverviewTxCurr = () => {
                                     <Col md={6}>
                                         <div >
                                             <span className="comparison-card-text">KHIS</span><br/>
-                                            <span className="comparison-card-numbers">{formatNumber(newlyKHIS.totalNewlyStarted)}</span>
+                                            <span className="comparison-card-numbers">{formatNumber(currARTKHIS.totalOnART)}</span>
                                         </div>
                                     </Col>
                                     <Col md={6}>
                                         <div>
                                             <span className="comparison-card-text">DWH</span><br />
-                                            <span className="comparison-card-numbers">{formatNumber(newOnArt)}</span>
+                                            <span className="comparison-card-numbers">{formatNumber(currentOnArt)}</span>
                                         </div>
                                     </Col>
                                 </Row>
@@ -71,15 +73,15 @@ const ComparisonOverviewTxCurr = () => {
                                     <Col md={6}>
                                         <div >
                                             <span className="comparison-card-text">KHIS</span><br/>
-                                            <span className="comparison-card-numbers">{formatNumber(newlyKHIS.malesNewlyStarted)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {percOfNewly(newlyKHIS.malesNewlyStarted, newlyKHIS.totalNewlyStarted)}</sup>
+                                            <span className="comparison-card-numbers">{formatNumber(currARTKHIS.malesOnART)}</span>
+                                            <sup className="comparison-sup comparison-sup-perc"> {percOfNewly(currARTKHIS.malesOnART, currARTKHIS.totalOnART)}</sup>
                                         </div>
                                     </Col>
                                     <Col md={6}>
                                         <div>
                                             <span className="comparison-card-text">DWH</span><br />
-                                            <span className="comparison-card-numbers">{formatNumber(newOnArtMale)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {roundNumber(newOnArtMalePercent) + "%"}</sup>
+                                            <span className="comparison-card-numbers">{formatNumber(currentOnArtMale)}</span>
+                                            <sup className="comparison-sup comparison-sup-perc"> {roundNumber(currentOnArtMalePercent) + "%"}</sup>
                                         </div>
                                     </Col>
                                 </Row>
@@ -100,15 +102,15 @@ const ComparisonOverviewTxCurr = () => {
                                     <Col md={6}>
                                         <div >
                                             <span className="comparison-card-text">KHIS</span><br/>
-                                            <span className="comparison-card-numbers">{formatNumber(newlyKHIS.femalesNewlyStarted)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {percOfNewly(newlyKHIS.femalesNewlyStarted, newlyKHIS.totalNewlyStarted)}</sup>
+                                            <span className="comparison-card-numbers">{formatNumber(currARTKHIS.femalesOnART)}</span>
+                                            <sup className="comparison-sup comparison-sup-perc"> {percOfNewly(currARTKHIS.femalesOnART, currARTKHIS.totalOnART)}</sup>
                                         </div>
                                     </Col>
                                     <Col md={6}>
                                         <div>
                                             <span className="comparison-card-text">DWH</span><br />
-                                            <span className="comparison-card-numbers">{formatNumber(newOnArtFemale)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {roundNumber(newOnArtFemalePercent) + "%"}</sup>
+                                            <span className="comparison-card-numbers">{formatNumber(currentOnArtFemale)}</span>
+                                            <sup className="comparison-sup comparison-sup-perc"> {roundNumber(currentOnArtFemalePercent) + "%"}</sup>
                                         </div>
                                     </Col>
                                 </Row>
@@ -129,15 +131,15 @@ const ComparisonOverviewTxCurr = () => {
                                     <Col md={6}>
                                         <div >
                                             <span className="comparison-card-text">KHIS</span><br/>
-                                            <span className="comparison-card-numbers">{formatNumber(newlyKHIS.adultsNewlyStarted)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {percOfNewly(newlyKHIS.adultsNewlyStarted, newlyKHIS.totalNewlyStarted)}</sup>
+                                            <span className="comparison-card-numbers">{formatNumber(currARTKHIS.adultsOnART)}</span>
+                                            <sup className="comparison-sup comparison-sup-perc"> {percOfNewly(currARTKHIS.adultsOnART, currARTKHIS.totalOnART)}</sup>
                                         </div>
                                     </Col>
                                     <Col md={6}>
                                         <div>
                                             <span className="comparison-card-text">DWH</span><br />
-                                            <span className="comparison-card-numbers">{formatNumber(newOnArtAdults)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {roundNumber(newOnArtAdultsPercent) + "%"}</sup>
+                                            <span className="comparison-card-numbers">{formatNumber(currentOnArtAdults)}</span>
+                                            <sup className="comparison-sup comparison-sup-perc"> {roundNumber(currentOnArtAdultsPercent) + "%"}</sup>
                                         </div>
                                     </Col>
                                 </Row>
@@ -158,15 +160,15 @@ const ComparisonOverviewTxCurr = () => {
                                     <Col md={6}>
                                         <div >
                                             <span className="comparison-card-text">KHIS</span><br/>
-                                            <span className="comparison-card-numbers">{formatNumber(newlyKHIS.childrenNewlyStarted)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {percOfNewly(newlyKHIS.childrenNewlyStarted, newlyKHIS.totalNewlyStarted)}</sup>
+                                            <span className="comparison-card-numbers">{formatNumber(currARTKHIS.childrenOnART)}</span>
+                                            <sup className="comparison-sup comparison-sup-perc"> {percOfNewly(currARTKHIS.childrenOnART, currARTKHIS.totalOnART)}</sup>
                                         </div>
                                     </Col>
                                     <Col md={6}>
                                         <div>
                                             <span className="comparison-card-text">DWH</span><br />
-                                            <span className="comparison-card-numbers">{formatNumber(newOnArtChildren)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {roundNumber(newOnArtChildrenPercent) + "%"}</sup>
+                                            <span className="comparison-card-numbers">{formatNumber(currentOnArtChildren)}</span>
+                                            <sup className="comparison-sup comparison-sup-perc"> {roundNumber(currentOnArtChildrenPercent) + "%"}</sup>
                                         </div>
                                     </Col>
                                 </Row>
@@ -187,15 +189,15 @@ const ComparisonOverviewTxCurr = () => {
                                     <Col md={6}>
                                         <div >
                                             <span className="comparison-card-text">KHIS</span><br/>
-                                            <span className="comparison-card-numbers">{formatNumber(newlyKHIS.adolescentsNewlyStarted)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {percOfNewly(newlyKHIS.adolescentsNewlyStarted, newlyKHIS.totalNewlyStarted)}</sup>
+                                            <span className="comparison-card-numbers">{formatNumber(currARTKHIS.adolescentsOnART)}</span>
+                                            <sup className="comparison-sup comparison-sup-perc"> {percOfNewly(currARTKHIS.adolescentsOnART, currARTKHIS.totalOnART)}</sup>
                                         </div>
                                     </Col>
                                     <Col md={6}>
                                         <div>
                                             <span className="comparison-card-text">DWH</span><br />
-                                            <span className="comparison-card-numbers">{formatNumber(newOnArtAdolescents)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {roundNumber(newOnArtAdolescentsPercent) + "%"}</sup>
+                                            <span className="comparison-card-numbers">{formatNumber(currentOnArtAdolescents)}</span>
+                                            <sup className="comparison-sup comparison-sup-perc"> {roundNumber(currentOnArtAdolescentsPercent) + "%"}</sup>
                                         </div>
                                     </Col>
                                 </Row>

@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as newlyStartedOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/newlyStartedOnArtKHIS';
+import * as currentOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/currOnArtKHIS';
 
 
 const ComparisonCurrByAge = () => {
     const [comparisonCurrByAge, setComparisonCurrByAge] = useState({});
-    let currKHIS =  useSelector(newlyStartedOnArtKHIS.getNewlyStartedOnArtKHIS);
+    let currKHIS =  useSelector(currentOnArtKHIS.getCurrOnArtKHIS);
 
     const loadComparisonCurrByAge = useCallback(async () => {
         setComparisonCurrByAge({
@@ -51,11 +51,11 @@ const ComparisonCurrByAge = () => {
             },
             series: [{
                 name: 'DWH',
-                data: [236, 788, 641, 589, 542, 842],
+                data: currKHIS.OnARTByAgeDWH,
                 color: '#2F4050'
             }, {
                 name: 'KHIS',
-                data: currKHIS.newlyStartedByAge,
+                data: currKHIS.OnARTByAge,
                 color: "#1AB394"
             }]
         });

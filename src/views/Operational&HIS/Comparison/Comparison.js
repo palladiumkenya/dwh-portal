@@ -28,7 +28,6 @@ const Comparison = () => {
     const dispatch = useDispatch();
     const indicator = useSelector(state => state.filters.indicators);
 
-    console.log(indicator);
     const onVisibilityChange = (isVisible) => {
         if (isVisible) {
             dispatch(disableStickyFilter());

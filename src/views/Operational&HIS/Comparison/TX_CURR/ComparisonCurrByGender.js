@@ -3,16 +3,15 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as newlyStartedOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/newlyStartedOnArtKHIS';
-import * as currentNewOnArtOverviewSelectors from '../../../../selectors/CT/NewOnArt/currentNewOnArtOverview';
+import * as currentOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/currOnArtKHIS';
+import * as currentOnArtByAgeSexSelectors from '../../../../selectors/CT/CurrentOnArt/currentOnArtByAgeSex';
 
 
 const ComparisonCurrByGender = () => {
     const filters = useSelector(state => state.filters);
     const [comparisonNewlyByGender, setComparisonNewlyByGender] = useState({});
-    let newlyKHIS =  useSelector(newlyStartedOnArtKHIS.getNewlyStartedOnArtKHIS);
-    const newOnArtMale = useSelector(currentNewOnArtOverviewSelectors.getNewOnArtMale);
-    const newOnArtFemale = useSelector(currentNewOnArtOverviewSelectors.getNewOnArtFemale);
+    let currKHIS =  useSelector(currentOnArtKHIS.getCurrOnArtKHIS);
+    const currentOnArtBySexData = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtBySex); // Sex info for DWH
 
     const loadComparisonNewlyByGender = useCallback(async () => {
         setComparisonNewlyByGender({
@@ -55,17 +54,17 @@ const ComparisonCurrByGender = () => {
             },
             series: [{
                 name: 'MALE',
-                data: [newlyKHIS.malesNewlyStarted, newOnArtMale],
+                data: [currKHIS.malesOnART, currentOnArtBySexData.currentOnArtMale],
                 color: '#14084D',
                 dataLabels: { enabled: true },
             }, {
                 name: 'FEMALE',
-                data: [newlyKHIS.femalesNewlyStarted, newOnArtFemale],
+                data: [currKHIS.femalesOnART, currentOnArtBySexData.currentOnArtFemale],
                 color: "#EA4C8B",
                 dataLabels: { enabled: true },
             }]
         });
-    }, [newlyKHIS, newOnArtMale, newOnArtFemale]);
+    }, [currKHIS.malesOnART, currKHIS.femalesOnART, currentOnArtBySexData.currentOnArtMale, currentOnArtBySexData.currentOnArtFemale]);
 
     useEffect(() => {
         loadComparisonNewlyByGender();

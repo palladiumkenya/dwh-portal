@@ -7,7 +7,6 @@ import * as newlyStartedOnArtKHIS from '../../../../selectors/Operational&HIS/Co
 
 
 const ComparisonNewlyByAge = () => {
-    const filters = useSelector(state => state.filters);
     const [comparisonNewlyByAge, setComparisonNewlyByAge] = useState({});
     let newlyKHIS =  useSelector(newlyStartedOnArtKHIS.getNewlyStartedOnArtKHIS);
 
@@ -52,7 +51,7 @@ const ComparisonNewlyByAge = () => {
             },
             series: [{
                 name: 'DWH',
-                data: [236, 788, 641, 589, 542, 842],
+                data: newlyKHIS.newOnARTByAgeDWH,
                 color: '#2F4050'
             }, {
                 name: 'KHIS',
