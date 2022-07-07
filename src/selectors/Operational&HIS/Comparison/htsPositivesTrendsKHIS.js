@@ -11,7 +11,8 @@ export const getHTSPositivesTrendsKHIS = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
 
-        list.length = 12;
+        if (list.length >= 12)
+            list.length = 12;
 
         const labels = list.map((item) => {
             return moment( item.ReportMonth_Year ).format('MMM YYYY').toUpperCase();
