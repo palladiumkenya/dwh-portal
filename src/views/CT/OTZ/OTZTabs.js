@@ -166,12 +166,12 @@ const OTZTabs = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col className={"col-6"}>
+                        <Col className={"col-12"}>
                             <OtzOutcomesByGender />
                         </Col>
-                        <Col className={"col-6"}>
-                            <OtzOutcomesByPopulationType />
-                        </Col>
+                        {/*<Col className={"col-6"}>*/}
+                        {/*    <OtzOutcomesByPopulationType />*/}
+                        {/*</Col>*/}
                     </Row>
                     <Row>
                         <Col className={"col-12"}>

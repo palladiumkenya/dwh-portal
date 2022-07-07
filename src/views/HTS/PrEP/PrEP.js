@@ -119,7 +119,7 @@ const PrEP = () => {
                         'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
                     }
                 >
-                    <PrEPEligibleVsNewlyBySubPopulation />
+                    {/*<PrEPEligibleVsNewlyBySubPopulation />*/}
                 </Col>
                 <Col
                     className={
@@ -191,8 +191,8 @@ const PrEP = () => {
                 </Col>
             </Row>
             <SectionFooter />
-            <PrEPTestedPositiveBySubPopulation />
-            <SectionFooter />
+            {/*<PrEPTestedPositiveBySubPopulation />*/}
+            {/*<SectionFooter />*/}
             <PrEPDiagnosedWithSTITrends />
             <SectionFooter />
             <PrEPScreeningDiscontinuation />

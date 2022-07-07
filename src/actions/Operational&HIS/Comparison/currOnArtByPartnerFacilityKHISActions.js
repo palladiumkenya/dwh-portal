@@ -31,7 +31,7 @@ export const fetchCurrOnARTByFacilityKHIS = () => async (dispatch, getState) => 
         project: getState().filters.projects,
         gender: getState().filters.genders,
         datimAgeGroup: getState().filters.datimAgeGroups,
-        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYYMM") : moment().format("YYYYMM"),
+        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYYMM") : moment().subtract(2, 'month').add(15, 'days').format("YYYYMM"),
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
     const response = await getAll('operational-his/getTxCurrBySex', params);

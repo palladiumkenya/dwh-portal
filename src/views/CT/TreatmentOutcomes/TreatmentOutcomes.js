@@ -136,12 +136,12 @@ const TreatmentOutcomes = () => {
                     <TreatmentOutcomesOverview />
 
                     <Row>
-                        <Col className={"col-6"}>
+                        <Col className={"col-12"}>
                             <TreatmentOutcomesBySex />
                         </Col>
-                        <Col className={"col-6"}>
-                            <TreatmentOutcomesByPopulationType />
-                        </Col>
+                        {/*<Col className={"col-6"}>*/}
+                        {/*    <TreatmentOutcomesByPopulationType />*/}
+                        {/*</Col>*/}
                     </Row>
 
                     <SectionFooter overview={branding.overview}/>
@@ -213,12 +213,15 @@ const TreatmentOutcomes = () => {
                     <TreatmentOutcomesRetentionOverview />
 
                     <Row>
-                        <Col className={"col-6"}>
+                        <Col className={"col-12"}>
                             <TreatmentOutcomesRetentionBySex />
                         </Col>
-                        <Col className={"col-6"}>
-                            <TreatmentOutcomesRetentionByPopulationType />
-                        </Col>
+                        {
+                            // Request to hide population type charts
+                        }
+                        {/*<Col className={"col-6"}>*/}
+                        {/*    <TreatmentOutcomesRetentionByPopulationType />*/}
+                        {/*</Col>*/}
                     </Row>
                     <SectionFooter overview={branding.overview}/>
                     <TreatmentOutcomesRetentionByAge />
