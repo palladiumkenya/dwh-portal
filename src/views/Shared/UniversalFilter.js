@@ -456,7 +456,7 @@ const UniversalFilter = () => {
                                     selection
                                     search
                                     options={indicators}
-                                    value={filters.indicators}
+                                    value={filters.indicators ? filters.indicators : 'Tx_New'}
                                     onChange={(e, data) => {
                                         dispatch(actions.filterByIndicator(data.value));
                                     }}

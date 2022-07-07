@@ -15,7 +15,6 @@ import ComparisonNewlyTrends from './TX_NEW/ComparisonNewlyTrends';
 import ComparisonNewVsHTSPositivesKHIS from './TX_NEW/ComparisonNewHTSPositivesKHIS';
 import ComparisonNewVsHTSPositivesDWH from './TX_NEW/ComparisonNewHTSPositivesDWH';
 import ComparisonTXNewByGender from './TX_NEW/ComparisonTX_NewByGender';
-import { enableFromDateFilter, enableIndicatorFilter } from '../../../actions/Shared/filterActions';
 import ComparisonOverviewTxCurr from './TX_CURR/ComparisonOverview';
 import ComparisonIndicatorNotesTxCurr from './TX_CURR/ComparisonIndicator';
 import ComparisonCurrByAge from './TX_CURR/ComparisonCurrByAge';
@@ -39,13 +38,13 @@ const Comparison = () => {
     return (
         <>
             <SectionHeader
-                title={indicator === 'Tx_New' ? 'NEWLY STARTED ON ART': 'CURRENT ON ART'}
+                title={indicator === 'Tx_New' || indicator === '' ? 'NEWLY STARTED ON ART': 'CURRENT ON ART'}
                 description={`YEAR ${moment().year()}`}
             />
             <VisibilitySensor onChange={onVisibilityChange}>
                 <UniversalFilter/>
             </VisibilitySensor>
-            {indicator === 'Tx_New' ?
+            {indicator === 'Tx_New' || indicator === ''  ?
                 <>
                     <ComparisonOverview/>
                     <Row>

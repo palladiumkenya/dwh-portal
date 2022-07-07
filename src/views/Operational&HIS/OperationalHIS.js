@@ -10,7 +10,12 @@ import {
     disableAgencyFilter,
     enableFromDateFilter,
     disableFromDateFilter,
-    disableGenderFilter, disableDatimAgeGroupFilter, enableIndicatorFilter
+    disableGenderFilter,
+    disableDatimAgeGroupFilter,
+    enableIndicatorFilter,
+    disableIndicatorFilter,
+    enableGenderFilter,
+    enableDatimAgeGroupFilter
 } from '../../actions/Shared/filterActions';
 import { LOADING_DELAY, OPERATIONALHIS_TABS, PAGES } from '../../constants';
 import Loading from '../Shared/Loading';
@@ -113,19 +118,21 @@ const OperationalHIS = () => {
     useEffect(() => {
         dispatch(changeCurrentPage(PAGES.operationalHIS));
         dispatch(disableFacilityFilter());
-        dispatch(enableAgencyFilter());
         dispatch(enableFromDateFilter());
-        dispatch(disableGenderFilter());
-        dispatch(disableDatimAgeGroupFilter());
-        if (opHIStab === 'comparison') {
+        dispatch(enableGenderFilter());
+        dispatch(enableDatimAgeGroupFilter());
+        if (active_tab === 'comparison') {
             dispatch(enableIndicatorFilter());
-        }
-        return () => {
+            dispatch(disableFacilityFilter());
+            dispatch(enableAgencyFilter());
+        } else {
+            dispatch(disableIndicatorFilter());
             dispatch(enableFacilityFilter());
             dispatch(disableAgencyFilter());
-            dispatch(disableFromDateFilter());
-        };
-    }, [dispatch, opHIStab]);
+
+        }
+
+    }, [dispatch, active_tab]);
 
     useEffect(() => {
         dispatch(loadNewlyStartedOnArtKHIS());
@@ -137,9 +144,9 @@ const OperationalHIS = () => {
         dispatch(loadNewOnARTPartnerFacilityKHIS());
         dispatch(loadLinkagePositiveTrends());
         dispatch(loadHTSPositivesTrendsKHIS());
-        dispatch(loadCurrOnARTKHIS())
-        dispatch(loadCurrOnARTKHISByCounty())
-        dispatch(loadCurrOnARTKHISByPartner())
+        dispatch(loadCurrOnARTKHIS());
+        dispatch(loadCurrOnARTKHISByCounty());
+        dispatch(loadCurrOnARTKHISByPartner());
         dispatch(loadCurrentOnArtOverview(active_tab));
         dispatch(loadCurrentOnArtByAgeSex(active_tab));
         dispatch(loadCurrentOnArtByCounty(active_tab));

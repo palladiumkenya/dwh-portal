@@ -36,7 +36,7 @@ export const OPERATIONALHIS_TABS = {
     overview: 'OVERVIEW',
     completeness: 'COMPLETENESS',
     accuracy: 'ACCURACY',
-    consistency: 'CONSISTENCY',
+    // consistency: 'CONSISTENCY',
     dataQualityAssessment: 'DATA QUALITY ASSESSMENT',
     comparison: 'COMPARISON DWH & KHIS',
 }
