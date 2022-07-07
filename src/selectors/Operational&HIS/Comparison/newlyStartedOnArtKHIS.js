@@ -19,8 +19,6 @@ export const getNewlyStartedOnArtKHIS = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         const listDWH = filtered ? listFilteredDWH : listUnfilteredDWH;
 
-        console.log(listDWH);
-
         const totalNewlyStarted = list.StartedART_Total;
         const malesNewlyStarted = list.Start_ART_25_Plus_M + list.Start_ART_20_24_M + list.Start_ART_15_19_M + list.Start_ART_10_14_M;
         const femalesNewlyStarted = list.Start_ART_25_Plus_F + list.Start_ART_20_24_F + list.Start_ART_15_19_F + list.Start_ART_10_14_F;
