@@ -444,7 +444,7 @@ const UniversalFilter = () => {
                     // </Col> : null
                 }
                 {
-                    filters.indicatorFilterEnabled ?
+                    filters.indicatorFilterEnabled && ui.currentPage === PAGES.operationalHIS ?
                         <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
                             <div className="form-group">
                                 <label htmlFor="indicator">Indicator</label>
