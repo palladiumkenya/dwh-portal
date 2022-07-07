@@ -422,26 +422,26 @@ const UniversalFilter = () => {
                     </Col> : null
                 }
                 {
-                    filters.populationTypeFilterEnabled ?
-                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
-                        <div className="form-group">
-                            <label htmlFor="populationType">Population Type</label>
-                            <Dropdown
-                                id="populationType"
-                                name="populationType"
-                                placeholder="Select Population Type"
-                                fluid
-                                multiple
-                                selection
-                                search
-                                options={populationTypes}
-                                value={filters.populationTypes}
-                                onChange={(e, data) => {
-                                    dispatch(actions.filterByPopulationType(data.value));
-                                }}
-                            />
-                        </div>
-                    </Col> : null
+                    filters.populationTypeFilterEnabled ? null:null
+                    // <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
+                    //     <div className="form-group">
+                    //         <label htmlFor="populationType">Population Type</label>
+                    //         <Dropdown
+                    //             id="populationType"
+                    //             name="populationType"
+                    //             placeholder="Select Population Type"
+                    //             fluid
+                    //             multiple
+                    //             selection
+                    //             search
+                    //             options={populationTypes}
+                    //             value={filters.populationTypes}
+                    //             onChange={(e, data) => {
+                    //                 dispatch(actions.filterByPopulationType(data.value));
+                    //             }}
+                    //         />
+                    //     </div>
+                    // </Col> : null
                 }
                 {
                     filters.indicatorFilterEnabled ?
