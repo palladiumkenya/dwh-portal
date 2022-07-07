@@ -16,6 +16,7 @@ export const loadCurrentOnArtByCounty = (tab) => async (dispatch, getState) => {
             getState().ui.ctTab !== 'dsd' &&
             tab !== 'dsd' &&
             tab !== "currentOnArt" &&
+            tab !== "comparison" &&
             tab !== "artOptimization") {
             return;
         }

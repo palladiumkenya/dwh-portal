@@ -25,6 +25,11 @@ export const changeRRTab = tab => ({
     payload: { tab }
 });
 
+export const changeOpertationalHISTab = tab => ({
+    type: actionTypes.CHANGE_OPERATIONAL_AND_HIS_TAB,
+    payload: { tab }
+});
+
 export const changeHtsTab = tab => ({
     type: actionTypes.CHANGE_HTS_TAB,
     payload: { tab }

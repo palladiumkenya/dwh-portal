@@ -43,22 +43,7 @@ const PrEPOverview = () => {
             <Col>
                 <Card className="card-uploads-consistency-rates" style={{borderRadius: 10, overflow: 'hidden'}}>
                     <CardHeader className="expected-uploads-header">
-                        NEW ON PREP
-                    </CardHeader>
-                    <CardBody
-                        className="align-items-center d-flex justify-content-center"
-                        style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
-                    >
-                        <div className="col-12">
-                            <span className="expected-uploads-text">{ pnsChildrenCascade.elicited ? Number(pnsChildrenCascade.elicited).toLocaleString('en') : '' }</span>
-                        </div>
-                    </CardBody>
-                </Card>
-            </Col>
-            <Col>
-                <Card className="card-uploads-consistency-rates" style={{borderRadius: 10, overflow: 'hidden'}}>
-                    <CardHeader className="expected-uploads-header">
-                        CURRENT ON PREP
+                        CURRENT ON PrEP
                     </CardHeader>
                     <CardBody
                         className="align-items-center d-flex justify-content-center"
@@ -80,8 +65,39 @@ const PrEPOverview = () => {
             </Col>
             <Col>
                 <Card className="card-uploads-consistency-rates" style={{borderRadius: 10, overflow: 'hidden'}}>
+                    <CardHeader className="expected-uploads-header">
+                        NEW ON PrEP
+                    </CardHeader>
+                    <CardBody
+                        className="align-items-center d-flex justify-content-center"
+                        style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
+                    >
+                        <div className="col-12">
+                            <span className="expected-uploads-text">{ pnsChildrenCascade.elicited ? Number(pnsChildrenCascade.elicited).toLocaleString('en') : '' }</span>
+                        </div>
+                    </CardBody>
+                </Card>
+            </Col>
+            <Col>
+                <Card className="card-uploads-consistency-rates" style={{borderRadius: 10, overflow: 'hidden'}}>
+                    <CardHeader className="expected-uploads-header">
+                        CONTINUING ON PrEP
+                    </CardHeader>
+                    <CardBody
+                        className="align-items-center d-flex justify-content-center"
+                        style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
+                    >
+                        <div className="col-12">
+                            <span className="expected-uploads-text">{ pnsChildrenCascade.elicited ? Number(pnsChildrenCascade.elicited).toLocaleString('en') : '' }</span>
+                        </div>
+                        <span className=""></span>
+                    </CardBody>
+                </Card>
+            </Col>
+            <Col>
+                <Card className="card-uploads-consistency-rates" style={{borderRadius: 10, overflow: 'hidden'}}>
                     <CardHeader className="expected-uploads-header" >
-                        PREP DISCONTINUATION
+                        PrEP DISCONTINUATION
                     </CardHeader>
                     <CardBody
                         className="align-items-center d-flex justify-content-center"

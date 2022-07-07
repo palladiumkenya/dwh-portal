@@ -21,7 +21,7 @@ const PrEPCurrentBySubPopulation = () => {
                 categories: ['OCT 2021', 'NOV 2021', 'DEC 2021', 'JAN 2022'],
                 crosshair: true,
                 title: {
-                    text: 'AGE',
+                    text: 'MONTH',
                 },
             },
             yAxis: {
@@ -85,7 +85,7 @@ const PrEPCurrentBySubPopulation = () => {
     return (
         <Card>
             <CardHeader className="cardTitle">
-                CURRENT ON PREP BY SUB-POPULATION(JAN-2022)
+                CURRENT ON PREP BY SUB-POPULATION
             </CardHeader>
             <CardBody>
                 <HighchartsReact

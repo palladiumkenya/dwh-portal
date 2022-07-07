@@ -26,6 +26,7 @@ const UniversalFilter = () => {
     const [datimAgeGroups, setDatimAgeGroups] = useState([]);
     const [populationTypes, setPopulationTypes] = useState([]);
     const [latestPregnancies, setLatestPregnancies] = useState([]);
+    const [indicators, setIndicators] = useState([]);
     const rrCounties = useSelector(rrSelectors.getCounties);
     const rrSubCounties = useSelector(rrSelectors.getSubCounties);
     const rrFacilities = useSelector(rrSelectors.getFacilities);
@@ -122,6 +123,7 @@ const UniversalFilter = () => {
             'UNKNOWN',
             'YES',
         ].map(c => ({ value: c, key: c, text: c })));
+        setIndicators(['Tx_New', 'Tx_Curr'].map(c => ({ value: c, key: c, text: c })))
     }, [
         ui,
 
@@ -420,26 +422,47 @@ const UniversalFilter = () => {
                     </Col> : null
                 }
                 {
-                    filters.populationTypeFilterEnabled ?
-                    <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
-                        <div className="form-group">
-                            <label htmlFor="populationType">Population Type</label>
-                            <Dropdown
-                                id="populationType"
-                                name="populationType"
-                                placeholder="Select Population Type"
-                                fluid
-                                multiple
-                                selection
-                                search
-                                options={populationTypes}
-                                value={filters.populationTypes}
-                                onChange={(e, data) => {
-                                    dispatch(actions.filterByPopulationType(data.value));
-                                }}
-                            />
-                        </div>
-                    </Col> : null
+                    filters.populationTypeFilterEnabled ? null:null
+                    // <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
+                    //     <div className="form-group">
+                    //         <label htmlFor="populationType">Population Type</label>
+                    //         <Dropdown
+                    //             id="populationType"
+                    //             name="populationType"
+                    //             placeholder="Select Population Type"
+                    //             fluid
+                    //             multiple
+                    //             selection
+                    //             search
+                    //             options={populationTypes}
+                    //             value={filters.populationTypes}
+                    //             onChange={(e, data) => {
+                    //                 dispatch(actions.filterByPopulationType(data.value));
+                    //             }}
+                    //         />
+                    //     </div>
+                    // </Col> : null
+                }
+                {
+                    filters.indicatorFilterEnabled && ui.currentPage === PAGES.operationalHIS ?
+                        <Col className={"col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2"}>
+                            <div className="form-group">
+                                <label htmlFor="indicator">Indicator</label>
+                                <Dropdown
+                                    id="indicator"
+                                    name="indicator"
+                                    placeholder="Select Indicator"
+                                    fluid
+                                    selection
+                                    search
+                                    options={indicators}
+                                    value={filters.indicators ? filters.indicators : 'Tx_New'}
+                                    onChange={(e, data) => {
+                                        dispatch(actions.filterByIndicator(data.value));
+                                    }}
+                                />
+                            </div>
+                        </Col> : null
                 }
             </Row>
         </>

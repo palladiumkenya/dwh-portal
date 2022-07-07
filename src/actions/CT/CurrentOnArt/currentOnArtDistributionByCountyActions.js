@@ -12,6 +12,7 @@ export const loadCurrentOnArtDistributionByCounty = (tab) => async (dispatch, ge
         getState().ui.ctTab !== "currentOnArt" &&
         getState().ui.ctTab !== 'dsd' &&
         tab !== 'dsd' &&
+        tab !== "comparison" &&
         tab !== "currentOnArt"
     ) {
         return;

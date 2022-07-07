@@ -21,7 +21,13 @@ const PrEPEligibleVsNewlyBySubPopulation = () => {
                 text: '',
             },
             xAxis: {
-                categories: ['15 TO 19', '20 TO 24', '25+'],
+                categories: [
+                    'DISCORDANT COUPLE',
+                    'FSW',
+                    'GENERAL POPULATION',
+                    'MSM',
+                    'PWID',
+                ],
                 crosshair: true,
                 title: {
                     text: 'AGE',
@@ -30,7 +36,7 @@ const PrEPEligibleVsNewlyBySubPopulation = () => {
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'PERCENTAGE OF PATIENTS',
+                    text: 'NUMBER OF PATIENTS',
                 },
             },
             legend: {
@@ -44,8 +50,15 @@ const PrEPEligibleVsNewlyBySubPopulation = () => {
                 shared: true,
             },
             plotOptions: {
+                scatter: {
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.y}%',
+                    }
+                },
                 column: {
-                    stacking: 'percent',
+                    pointPadding: 0.01,
+                    borderWidth: 0,
                     dataLabels: {
                         enabled: false,
                     },
@@ -53,29 +66,23 @@ const PrEPEligibleVsNewlyBySubPopulation = () => {
             },
             series: [
                 {
-                    name: 'SCREENED',
-                    data: [83.6, 66, 70],
-                    color: '#2F4050',
-                },
-                {
                     name: 'ELIGIBLE',
-                    data: [87, 78.8, 54],
-                    color: 'rgb(124, 181, 236)',
+                    data: [83.6, 66, 70, 22, 57],
+                    color: '#142459',
                 },
                 {
-                    name: 'INITIATED TO PREP',
-                    data: [45, 70, 23],
-                    color: '#3281CC',
-                },
-                {
-                    name: 'CONTINUING PREP',
-                    data: [50, 78.8, 88],
+                    name: 'NEW',
+                    data: [50, 78.8, 88, 4, 44],
                     color: '#1AB394',
                 },
                 {
-                    name: 'CURRENT ON PREP',
-                    data: [33.6, 68.8, 12],
-                    color: 'rgb(144, 237, 125)',
+                    type: 'scatter',
+                    name: '% of Patients Eligible',
+                    data: [83.6, 78.8, 98,67, 97],
+                    color: 'orange',
+                    marker: {
+                        symbol: 'circle',
+                    },
                 },
             ],
         });

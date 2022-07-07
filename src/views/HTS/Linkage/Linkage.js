@@ -53,8 +53,8 @@ const Linkage = () => {
             <SectionFooter overview={branding.overview}/>
             <LinkageByAgeSex />
             <SectionFooter overview={branding.overview}/>
-            <LinkageByPopulationType/>
-            <SectionFooter overview={branding.overview}/>
+            {/*<LinkageByPopulationType/>*/}
+            {/*<SectionFooter overview={branding.overview}/>*/}
             <LinkageByStrategyEntryPoint/>
             <SectionFooter overview={branding.overview}/>
             <LinkageByCounty/>

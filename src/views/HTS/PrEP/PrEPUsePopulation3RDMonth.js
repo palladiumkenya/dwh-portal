@@ -27,7 +27,7 @@ const PrEPUsePopulation3RDMonth = () => {
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'PERCENTAGE OF PATIENTS'
+                    text: 'NUMBER OF PATIENTS'
                 }
             },
             tooltip: {

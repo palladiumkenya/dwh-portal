@@ -223,6 +223,15 @@ import viralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll
 import viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment
     from './CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
 
+import newlyStartedOnArtKHIS from './Operational&HIS/Comparison/newlyStartedOnArtKHIS';
+import newlyStartedOnArtTrendsKHIS from './Operational&HIS/Comparison/newlyStartedOnArtTrendsKHIS';
+import htsPositivesTrendsKHIS from './Operational&HIS/Comparison/htsPositivesTrendsKHIS';
+import currOnArtKHIS from './Operational&HIS/Comparison/currOnArtKHIS';
+import currOnArtKHISByCounty from './Operational&HIS/Comparison/currOnArtKHISByCounty';
+import currOnArtKHISByPartner from './Operational&HIS/Comparison/currOnArtKHISByPartner';
+import currOnArtByFacilityKHIS from './Operational&HIS/Comparison/currOnArtByFacilityKHIS';
+import newOnArtByFacilityKHIS from './Operational&HIS/Comparison/newOnArtByFacilityKHIS';
+
 export default combineReducers({
     auth: authReducer,
 
@@ -436,4 +445,14 @@ export default combineReducers({
     ovcEligibleVL,
     ovcVLDone,
     ovcVLSuppressed,
+
+
+    newlyStartedOnArtKHIS,
+    newlyStartedOnArtTrendsKHIS,
+    htsPositivesTrendsKHIS,
+    currOnArtKHIS,
+    currOnArtKHISByCounty,
+    currOnArtKHISByPartner,
+    currOnArtByFacilityKHIS,
+    newOnArtByFacilityKHIS,
 });
