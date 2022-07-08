@@ -41,7 +41,7 @@ export const getCurrOnArtKHIS = createSelector(
         let twentyFivePlus = ["25-29", "30-34", "35-39", "40-44","45-49", "50-54", "55-59","60-64", "65+"]
 
         let OnARTByAgeDWH = [loopAgeGroups(listDWH, under1), loopAgeGroups(listDWH, oneToNine), loopAgeGroups(listDWH, tenToFourteen), loopAgeGroups(listDWH, fifteenToNineteen), loopAgeGroups(listDWH, twentyToTwentyFour), loopAgeGroups(listDWH, twentyFivePlus)];
-        console.log(OnARTByAgeDWH);
+        
         return {
             totalOnART,
             malesOnART,
