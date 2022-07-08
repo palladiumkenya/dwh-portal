@@ -48,6 +48,12 @@ import {
 import {
     loadNewOnARTPartnerFacilityKHIS
 } from '../../actions/Operational&HIS/Comparison/newOnArtByPartnerFacilityKHISActions';
+import {
+    loadCurrOnARTPartnerFacilityDWH
+} from '../../actions/Operational&HIS/Comparison/currOnArtByPartnerFacilityDWHActions';
+import {
+    loadNewOnARTPartnerFacilityDWH
+} from '../../actions/Operational&HIS/Comparison/newOnArtByPartnerFacilityDWHActions';
 
 
 const Comparison = Loadable({
@@ -142,11 +148,14 @@ const OperationalHIS = () => {
         dispatch(loadNewOnArtByAgeSex());
         dispatch(loadCurrOnARTPartnerFacilityKHIS());
         dispatch(loadNewOnARTPartnerFacilityKHIS());
+        dispatch(loadCurrOnARTPartnerFacilityDWH());
+        dispatch(loadNewOnARTPartnerFacilityDWH());
         dispatch(loadLinkagePositiveTrends());
         dispatch(loadHTSPositivesTrendsKHIS());
         dispatch(loadCurrOnARTKHIS());
         dispatch(loadCurrOnARTKHISByCounty());
         dispatch(loadCurrOnARTKHISByPartner());
+
         dispatch(loadCurrentOnArtOverview(active_tab));
         dispatch(loadCurrentOnArtByAgeSex(active_tab));
         dispatch(loadCurrentOnArtByCounty(active_tab));

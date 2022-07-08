@@ -2,10 +2,11 @@ import moment from 'moment';
 import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING, PAGES } from '../../../constants';
+import { KHIS_CURR_ON_ART_BY_PARTNER_FACILITY_REQUEST } from '../../types';
 
-export const loadNewlyStartedOnArtKHIS = () => async (dispatch, getState) => {
+export const loadCurrOnARTPartnerFacilityDWH = () => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
-        moment(getState().newlyStartedOnArtKHIS.lastFetch),
+        moment(getState().currOnArtByFacilityDWH.lastFetch),
         'minutes'
     );
 
@@ -15,12 +16,12 @@ export const loadNewlyStartedOnArtKHIS = () => async (dispatch, getState) => {
     else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
         return;
     } else {
-        await dispatch(fetchNewlyStartedOnArtKHIS());
+        await dispatch(fetchCurrOnARTByFacilityDWH());
     }
 };
 
-export const fetchNewlyStartedOnArtKHIS = () => async (dispatch, getState) => {
-    dispatch({ type: actionTypes.KHIS_NEWLY_STARTED_ART_REQUEST });
+export const fetchCurrOnARTByFacilityDWH = () => async (dispatch, getState) => {
+    dispatch({ type: actionTypes.DWH_CURR_ON_ART_BY_PARTNER_FACILITY_REQUEST });
     const params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,
@@ -33,6 +34,6 @@ export const fetchNewlyStartedOnArtKHIS = () => async (dispatch, getState) => {
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : moment().subtract(2, 'month').add(15, 'days').format("YYYY"),
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") :  moment().subtract(2, 'month').add(15, 'days').format("MM"),
     };
-    const response = await getAll('operational-his/txnewKHIS', params);
-    dispatch({ type: actionTypes.KHIS_NEWLY_STARTED_ART_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
+    const response = await getAll('operational-his/getTxCurrBySexDwh', params);
+    dispatch({ type: actionTypes.DWH_CURR_ON_ART_BY_PARTNER_FACILITY_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };

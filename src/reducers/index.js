@@ -231,6 +231,8 @@ import currOnArtKHISByCounty from './Operational&HIS/Comparison/currOnArtKHISByC
 import currOnArtKHISByPartner from './Operational&HIS/Comparison/currOnArtKHISByPartner';
 import currOnArtByFacilityKHIS from './Operational&HIS/Comparison/currOnArtByFacilityKHIS';
 import newOnArtByFacilityKHIS from './Operational&HIS/Comparison/newOnArtByFacilityKHIS';
+import currOnArtByFacilityDWH from './Operational&HIS/Comparison/currOnArtByFacilityDWH';
+import newOnArtByFacilityDWH from './Operational&HIS/Comparison/newOnArtByFacilityDWH';
 
 export default combineReducers({
     auth: authReducer,
@@ -455,4 +457,6 @@ export default combineReducers({
     currOnArtKHISByPartner,
     currOnArtByFacilityKHIS,
     newOnArtByFacilityKHIS,
+    currOnArtByFacilityDWH,
+    newOnArtByFacilityDWH,
 });

@@ -3,9 +3,9 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING, PAGES } from '../../../constants';
 
-export const loadNewlyStartedOnArtKHIS = () => async (dispatch, getState) => {
+export const loadNewOnARTPartnerFacilityDWH = () => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
-        moment(getState().newlyStartedOnArtKHIS.lastFetch),
+        moment(getState().newOnArtByFacilityDWH.lastFetch),
         'minutes'
     );
 
@@ -15,12 +15,12 @@ export const loadNewlyStartedOnArtKHIS = () => async (dispatch, getState) => {
     else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
         return;
     } else {
-        await dispatch(fetchNewlyStartedOnArtKHIS());
+        await dispatch(fetchNewOnARTByFacilityDWH());
     }
 };
 
-export const fetchNewlyStartedOnArtKHIS = () => async (dispatch, getState) => {
-    dispatch({ type: actionTypes.KHIS_NEWLY_STARTED_ART_REQUEST });
+export const fetchNewOnARTByFacilityDWH = () => async (dispatch, getState) => {
+    dispatch({ type: actionTypes.DWH_NEW_ON_ART_BY_PARTNER_FACILITY_REQUEST });
     const params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,
@@ -33,6 +33,6 @@ export const fetchNewlyStartedOnArtKHIS = () => async (dispatch, getState) => {
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : moment().subtract(2, 'month').add(15, 'days').format("YYYY"),
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") :  moment().subtract(2, 'month').add(15, 'days').format("MM"),
     };
-    const response = await getAll('operational-his/txnewKHIS', params);
-    dispatch({ type: actionTypes.KHIS_NEWLY_STARTED_ART_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
+    const response = await getAll('operational-his/getTxNewBySexDwh', params);
+    dispatch({ type: actionTypes.DWH_NEW_ON_ART_BY_PARTNER_FACILITY_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };
