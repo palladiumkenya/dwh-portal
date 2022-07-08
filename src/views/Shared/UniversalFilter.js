@@ -154,8 +154,6 @@ const UniversalFilter = () => {
     }, [loadSites]);
     let currentLocation = window.location.href.split('#')[0];
 
-    console.log(window.location.href.split('#'));
-
     return (
         <>
             {
