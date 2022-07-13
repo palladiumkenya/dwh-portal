@@ -157,7 +157,7 @@ const Administration = (userType) => {
             <DropdownToggle nav caret><strong>Administration</strong></DropdownToggle>
             <DropdownMenu right>
                 { userType.userType === 1 ? <DropdownItem><Link to="/administration/organizations" className="nav-link">Organizations</Link></DropdownItem> : '' }
-                <DropdownItem><a href="https://auth.kenyahmis.org/DwhIdentity/Users" className="nav-link">Users</a></DropdownItem>
+                <DropdownItem><a href="https://auth.kenyahmis.org/nascop/Users" className="nav-link">Users</a></DropdownItem>
             </DropdownMenu>
         </UncontrolledDropdown>
     );
