@@ -14,7 +14,7 @@ export const getCurrentOnARTByPartnerKHIS = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         const listDWH = filtered ? listFilteredDWH : listUnfilteredDWH;
 
-        const labels = list.map((item) => item.partner ? item.partner.toUpperCase() : 'NO PARTNER');
+        const labels = list.map((item) => item.SDP ? item.SDP.toUpperCase() : 'NO PARTNER');
         const data = list.map(item => item.OnART);
 
         const dataDwh = labels.map(item => {

@@ -36,12 +36,12 @@ const ComparisonTXNewByGender = () => {
                                     { name: 'Sub-County', selector: 'SubCounty', sortable: true },
                                     { name: 'AGENCY', selector: 'CTAgency', sortable: true },
                                     { name: 'Partner', selector: 'CTPartner', sortable: true },
-                                    { name: 'MALE NDWH', selector: 'KHISMale', sortable: true },
-                                    { name: 'FEMALE NDWH', selector: 'KHISFemale', sortable: true },
-                                    { name: 'TOTAL NDWH', selector: 'KHIStxNew', sortable: true },
-                                    { name: 'MALE KHIS', selector: 'DWHmale', sortable: true },
-                                    { name: 'FEMALE KHIS', selector: 'DWHFemale', sortable: true },
-                                    { name: 'TOTAL KHIS', selector: 'DWHtxNew', sortable: true },
+                                    { name: 'MALE NDWH', selector: 'DWHmale', sortable: true },
+                                    { name: 'FEMALE NDWH', selector: 'DWHFemale', sortable: true },
+                                    { name: 'TOTAL NDWH', selector: 'DWHtxNew', sortable: true },
+                                    { name: 'MALE KHIS', selector: 'KHISMale', sortable: true },
+                                    { name: 'FEMALE KHIS', selector: 'KHISFemale', sortable: true },
+                                    { name: 'TOTAL KHIS', selector: 'KHIStxNew', sortable: true },
                                 ]}
                                 data={txCurrByGender}
                                 noHeader
