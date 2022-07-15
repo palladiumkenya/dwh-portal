@@ -36,12 +36,12 @@ const ComparisonTXCurrByGender = () => {
                                     { name: 'Sub-County', selector: 'SubCounty', sortable: true },
                                     { name: 'AGENCY', selector: 'CTAgency', sortable: true },
                                     { name: 'Partner', selector: 'CTPartner', sortable: true },
-                                    { name: 'MALE NDWH', selector: 'KHISMale', sortable: true },
-                                    { name: 'FEMALE NDWH', selector: 'KHISFemale', sortable: true },
-                                    { name: 'TOTAL NDWH', selector: 'KHIStxCurr', sortable: true },
-                                    { name: 'MALE KHIS', selector: 'DWHmale', sortable: true },
-                                    { name: 'FEMALE KHIS', selector: 'DWHFemale', sortable: true },
-                                    { name: 'TOTAL KHIS', selector: 'DWHtxCurr', sortable: true },
+                                    { name: 'MALE NDWH', selector: 'DWHmale', sortable: true },
+                                    { name: 'FEMALE NDWH', selector: 'DWHFemale', sortable: true },
+                                    { name: 'TOTAL NDWH', selector: 'DWHtxCurr', sortable: true },
+                                    { name: 'MALE KHIS', selector: 'KHISMale', sortable: true },
+                                    { name: 'FEMALE KHIS', selector: 'KHISFemale', sortable: true },
+                                    { name: 'TOTAL KHIS', selector: 'KHIStxCurr', sortable: true },
                                 ]}
                                 data={currOnArt}
                                 noHeader

@@ -22,8 +22,6 @@ const CovidFilter = () => {
     const [projects, setProjects] = useState([]);
     const [genders, setGenders] = useState([]);
     const [datimAgeGroups, setDatimAgeGroups] = useState([]);
-    const [populationTypes, setPopulationTypes] = useState([]);
-    const [latestPregnancies, setLatestPregnancies] = useState([]);
 
     const ctCounties = useSelector(ctSelectors.getCounties);
     const ctSubCounties = useSelector(ctSelectors.getSubCounties);
@@ -68,21 +66,6 @@ const CovidFilter = () => {
             '55 to 59',
             '60 to 64',
             '65+'
-        ].map(c => ({ value: c, key: c, text: c })));
-        setPopulationTypes([
-            ' FSW',
-            ' General Population',
-            ' MSM',
-            ' PWID',
-            'General Population',
-            'Key population',
-        ].map(c => ({ value: c, key: c, text: c })));
-        setLatestPregnancies([
-            'LIVE BIRTH',
-            'No',
-            'RECENTLY MISCARRIAGED',
-            'UNKNOWN',
-            'YES',
         ].map(c => ({ value: c, key: c, text: c })));
     }, [
         ui,

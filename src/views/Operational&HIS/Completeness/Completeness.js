@@ -1,15 +1,30 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Icon } from 'semantic-ui-react';
 import { Row, Col } from 'reactstrap'
 import moment from 'moment';
 import { Card, CardBody, CardHeader } from 'reactstrap/lib';
 import SectionFooter from '../../Shared/SectionFooter';
 import SectionHeader from './../../Shared/SectionHeader';
+import ActiveCompletenessCategories from './ActiveCompletenessCategories';
+import CompletenessByAgency from './CompletenessByAgency';
+import CompletenessByCounty from './CompletenessByCounty';
+import CompletenessByPartner from './CompletenessByPartner';
+import VisibilitySensor from 'react-visibility-sensor';
+import UniversalFilter from '../../Shared/UniversalFilter';
+import { useDispatch } from 'react-redux';
+import { disableStickyFilter, enableStickyFilter } from '../../../actions/Shared/uiActions';
 
 const Copmleteness = () => {
-    useEffect(() => {
-        console.log('completeness');
-    }, []);
+    const dispatch = useDispatch();
+
+    const onVisibilityChange = (isVisible) => {
+        if (isVisible) {
+            dispatch(disableStickyFilter());
+        } else {
+            dispatch(enableStickyFilter());
+
+        }
+    };
 
     return (
         <>
@@ -17,6 +32,10 @@ const Copmleteness = () => {
                 title={'COMPLETENESS'}
                 description={`YEAR ${moment().year()}`}
             />
+            <VisibilitySensor onChange={onVisibilityChange}>
+                <UniversalFilter/>
+            </VisibilitySensor>
+            <br/>
             <span>
                 <strong>Completeness:</strong> Measures the existence of values
                 in data elements in the active on ART client record set.
@@ -58,7 +77,6 @@ const Copmleteness = () => {
                     </span>
                 </CardBody>
             </Card>
-            <SectionFooter  />
 
             {/* <Row>
                 <Col md={4}>
@@ -106,6 +124,21 @@ const Copmleteness = () => {
                 </Col>
             </Row> */}
             {/* {'completeness'} */}
+            <SectionFooter overview={'Completeness'}/>
+            <Row>
+                <Col md="6">
+                    <ActiveCompletenessCategories/>
+                </Col>
+                <Col md="6">
+                    <CompletenessByAgency/>
+                </Col>
+            </Row>
+            <SectionFooter overview={'Completeness'}/>
+            <CompletenessByCounty />
+            <SectionFooter overview={'Completeness'}/>
+            <CompletenessByPartner />
+            <SectionFooter overview={'Completeness'}/>
+            <SectionFooter overview={'Completeness'}/>
         </>
     );
 }
