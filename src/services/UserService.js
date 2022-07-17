@@ -2,7 +2,17 @@ import { UserManager } from 'oidc-client';
 import { storeUser, storeUserError } from '../actions/Shared/AuthActions';
 let config = {};
 
-if(process.env.NODE_ENV.trim() === 'production') {
+if(process.env) {
+    config = {
+        authority: process.env.REACT_APP_AUTHORITY,
+        client_id: process.env.REACT_APP_CLIENT,
+        redirect_uri: process.env.REACT_APP_REDIRECT_URI,
+        response_type: "id_token token",
+        scope: process.env.REACT_APP_SCOPE,
+        post_logout_redirect_uri: process.env.REACT_APP_POST_LOGOUT_REDIRECT_URI,
+        filterProtocolClaims: process.env.REACT_APP_FILTER_PROTOCOL_CLAIMS,
+    }
+} else {
     config = {
         authority: "https://auth.kenyahmis.org/dwhidentity",
         client_id: "dwh.spa",
@@ -10,16 +20,6 @@ if(process.env.NODE_ENV.trim() === 'production') {
         response_type: "id_token token",
         scope: "openid profile apiApp",
         post_logout_redirect_uri: "https://data.kenyahmis.org:9000",
-    }
-} else {
-    config = {
-        authority: "https://localhost:5006",
-        client_id: "dwh.spa",
-        redirect_uri: "http://localhost:3000/#/signin-oidc#",
-        response_type: "id_token token",
-        scope: "openid profile apiApp",
-        post_logout_redirect_uri: "http://localhost:3000",
-        filterProtocolClaims: true,
     }
 }
 

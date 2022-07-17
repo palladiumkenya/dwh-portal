@@ -1,5 +1,6 @@
 import axios from 'axios';
-import moment from 'moment'
+import moment from 'moment';
+
 let url = null;
 let url_identity = null;
 
@@ -18,8 +19,7 @@ export const getAll = async (endpoint, params) => {
     }
     try {
         const response = await request;
-        const result = response.data;
-        return result;
+        return response.data;
     } catch (e) {
         console.error(e);
     }
