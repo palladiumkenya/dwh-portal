@@ -15,7 +15,7 @@ const initialState = {
     populationTypes: [],
     fromDate: '',
     toDate: '',
-    indicators: '',
+    indicators: 'Tx_Curr',
     countyFilterEnabled: true,
     subCountyFilterEnabled: true,
     facilityFilterEnabled: true,

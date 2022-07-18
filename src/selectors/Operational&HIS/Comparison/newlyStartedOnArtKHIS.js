@@ -62,10 +62,18 @@ export const getNewlyStartedOnArtKHIS = createSelector(
 export const getNewlyStartedOnArtTrendsKHIS = createSelector(
     [listUnfilteredTrends, listFilteredTrends, filteredTrends],
     (listUnfiltered, listFiltered, filtered) => {
-        const list = filtered ? listFiltered : listUnfiltered;
+        let list = filtered ? listFiltered : listUnfiltered;
 
-        if (list.length >= 12)
+        let ReportingMonthYear = moment().subtract(1, 'months').add(15, 'days').format('YMM')
+
+        if (list.length >= 12) {
+            list = list.filter(item => {
+                if (item.ReportMonth_Year < ReportingMonthYear) {
+                    return item;
+                }
+            })
             list.length = 12;
+        }
 
         const labels = list.map((item) => {
             return moment( item.ReportMonth_Year ).format('MMM YYYY').toUpperCase();
