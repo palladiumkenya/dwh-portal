@@ -5,8 +5,7 @@ let config = {};
 if(process.env) {
     config = {
         authority: process.env.REACT_APP_AUTHORITY,
-        client_id: "nascop.spa"
-//         client_id: process.env.REACT_APP_CLIENT,
+        client_id: "nascop.spa",
         redirect_uri: process.env.REACT_APP_REDIRECT_URI,
         response_type: "id_token token",
         scope: process.env.REACT_APP_SCOPE,
@@ -14,6 +13,7 @@ if(process.env) {
         filterProtocolClaims: process.env.REACT_APP_FILTER_PROTOCOL_CLAIMS,
     }
 } else {
+//         client_id: process.env.REACT_APP_CLIENT,
     config = {
         authority: "https://auth.kenyahmis.org/dwhidentity",
         client_id: "dwh.spa",
