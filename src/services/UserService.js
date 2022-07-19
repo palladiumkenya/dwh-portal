@@ -5,7 +5,8 @@ let config = {};
 if(process.env) {
     config = {
         authority: process.env.REACT_APP_AUTHORITY,
-        client_id: process.env.REACT_APP_CLIENT,
+        client_id: "nascop.spa"
+//         client_id: process.env.REACT_APP_CLIENT,
         redirect_uri: process.env.REACT_APP_REDIRECT_URI,
         response_type: "id_token token",
         scope: process.env.REACT_APP_SCOPE,
