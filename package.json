@@ -13,6 +13,7 @@
     "bootstrap": "^4.4.1",
     "chart.js": "^3.7.1",
     "dotenv": "^16.0.1",
+    "env-cmd": "^10.1.0",
     "font-awesome": "^4.7.0",
     "highcharts": "^8.2.2",
     "highcharts-react-official": "^3.0.0",
@@ -48,7 +49,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start:dev": "env-cmd -f ./.env.development react-scripts start",
+    "start:prod": "env-cmd -f ./.env.production react-scripts start",
+    "start:nascop": "env-cmd -f ./.env.nascop react-scripts start",
     "build": "react-scripts build",
+    "build:testing": "env-cmd -f ./.env.testing react-scripts build",
+    "build:nascop": "env-cmd -f ./.env.nascop react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

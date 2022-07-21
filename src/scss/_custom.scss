@@ -412,3 +412,19 @@ body {
 .comparison-sup-perc {
     font-size: 19px;
 }
+
+.vertical_dotted_line:after
+{
+    content:"";
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    height: 100%;
+    height: inherit;
+    border-left: 1px dashed #808080;
+} 
+.vertical_dotted_line{
+    position: relative;
+}
