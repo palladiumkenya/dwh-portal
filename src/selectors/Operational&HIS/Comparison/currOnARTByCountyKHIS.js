@@ -13,7 +13,7 @@ export const getCurrentOnARTByCountyKHIS = createSelector(
     (listUnfiltered, listFiltered, filtered, listUnfilteredDWH, listFilteredDWH) => {
         const list = filtered ? listFiltered : listUnfiltered;
         const listDWH = filtered ? listFilteredDWH : listUnfilteredDWH;
-console.log(listDWH, list);
+        
 //KHIS
         const labels = list.map((item) => item.County ? item.County.toUpperCase() : 'UNKNOWN');
         const data = list.map(item => item.OnART);
