@@ -11,6 +11,7 @@ if(process.env) {
         scope: process.env.REACT_APP_SCOPE,
         post_logout_redirect_uri: process.env.REACT_APP_POST_LOGOUT_REDIRECT_URI,
         filterProtocolClaims: process.env.REACT_APP_FILTER_PROTOCOL_CLAIMS,
+
     }
 } else {
 //         client_id: process.env.REACT_APP_CLIENT,

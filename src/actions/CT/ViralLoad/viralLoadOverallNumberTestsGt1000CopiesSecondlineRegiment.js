@@ -3,6 +3,14 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING } from '../../../constants';
 
+import {
+    loadViralLoadOverallUptakeGt1000CopiesReceivedFollowTests
+} from './viralLoadOverallUptakeGt1000CopiesReceivedFollowTests';
+import { CT_VIRAL_LOAD_OVERALL_UPTAKE_GT_1000_COPIES_SECOND_LINE_REGIMENT_REQUEST } from '../../types';
+import viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment
+    from '../../../reducers/CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
+
+
 export const loadViralLoadOverallNumberGt1000CopiesSecondlineRegiment = (tab) => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
         moment(getState().viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment.lastFetch),

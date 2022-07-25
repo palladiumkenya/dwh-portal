@@ -4,6 +4,7 @@ import moment from 'moment';
 let url = null;
 let url_identity = null;
 
+
 if(process.env) {
     url = process.env.REACT_APP_ENDPOINT;
     url_identity = process.env.REACT_APP_IDENTITY_URL
