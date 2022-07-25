@@ -46,8 +46,8 @@ const Uptake = () => {
             <SectionFooter overview={branding.overview}/>
             <UptakeByAgeSex/>
             <SectionFooter overview={branding.overview}/>
-            <UptakeByPopulationType/>
-            <SectionFooter overview={branding.overview}/>
+            {/*<UptakeByPopulationType/>*/}
+            {/*<SectionFooter overview={branding.overview}/>*/}
             <UptakeTestingStrategy/>
             <SectionFooter overview={branding.overview}/>
             <UptakeByCounty/>

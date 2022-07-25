@@ -60,6 +60,11 @@ export const filterByPopulationType = populationTypes => ({
     payload: { populationTypes }
 });
 
+export const filterByIndicator = indicators => ({
+    type: actionTypes.FILTER_BY_INDICATOR,
+    payload: { indicators }
+});
+
 export const enableFromDateFilter = () => ({
     type: actionTypes.ENABLE_FROM_DATE_FILTER
 });
@@ -98,6 +103,14 @@ export const enableGenderFilter = () => ({
 
 export const disableGenderFilter = () => ({
     type: actionTypes.DISABLE_GENDER_FILTER
+});
+
+export const enableIndicatorFilter = (tab) => ({
+    type: actionTypes.ENABLE_INDICATOR_FILTER
+});
+
+export const disableIndicatorFilter = () => ({
+    type: actionTypes.DISABLE_INDICATOR_FILTER
 });
 
 export const enableDatimAgeGroupFilter = () => ({

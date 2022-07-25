@@ -6,7 +6,8 @@ const initialState = {
     homeTab: "emr",
     rrTab: "ct",
     htsTab: "uptake",
-    ctTab: "newlyOnArt"
+    ctTab: "newlyOnArt",
+    operationalHISTab: "overview",
 };
 
 export default (state = initialState, action) => {
@@ -25,6 +26,8 @@ export default (state = initialState, action) => {
             return { ...state, htsTab: action.payload.tab }
         case actions.CHANGE_CT_TAB:
             return { ...state, ctTab: action.payload.tab }
+        case actions.CHANGE_OPERATIONAL_AND_HIS_TAB:
+            return { ...state, operationalHISTab: action.payload.tab }
         default:
             return state
     }

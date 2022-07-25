@@ -16,6 +16,7 @@ export const loadCurrentOnArtByCounty = (tab) => async (dispatch, getState) => {
             getState().ui.ctTab !== 'dsd' &&
             tab !== 'dsd' &&
             tab !== "currentOnArt" &&
+            tab !== "comparison" &&
             tab !== "artOptimization") {
             return;
         }
@@ -41,6 +42,6 @@ export const fetchCurrentOnArtByCounty = () => async (dispatch, getState) => {
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
-    const response = await getAll('care-treatment/txCurrDistributionByCounty', params);
+        const response = await getAll('care-treatment/txCurrDistributionByCounty', params);
     dispatch({ type: actionTypes.CT_CURRENT_ON_ART_BY_COUNTY_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
 };

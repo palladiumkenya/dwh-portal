@@ -4,11 +4,11 @@ import { Col, Row } from 'reactstrap';
 import VisibilitySensor from 'react-visibility-sensor';
 import Loadable from 'react-loadable';
 import { enableStickyFilter, disableStickyFilter, changeCurrentPage } from "../../actions/Shared/uiActions";
-import { disableFromDateFilter, disableToDateFilter } from "../../actions/Shared/filterActions";
+import { disableFromDateFilter, disableToDateFilter, enableFacilityFilter } from '../../actions/Shared/filterActions';
 import { loadCurrentOnArtOverview } from '../../actions/CT/CurrentOnArt/currentOnArtOverviewActions';
 import { loadCurrentOnArtByAgeSex } from '../../actions/CT/CurrentOnArt/currentOnArtByAgeSexActions';
 import { loadGpsSites } from '../../actions/Home/gpsSitesActions';
-import { LOADING_DELAY, PAGES } from './../../constants';
+import { LOADING_DELAY, PAGES } from '../../constants';
 import Loading from './../Shared/Loading';
 import SectionHeader from './../Shared/SectionHeader';
 import SectionFooter from './../Shared/SectionFooter';
@@ -60,6 +60,8 @@ const Home = () => {
         dispatch(disableToDateFilter());
         dispatch(enableGenderFilter());
         dispatch(enableDatimAgeGroupFilter());
+        dispatch(enableFacilityFilter());
+        dispatch(enableAgencyFilter())
     }, [dispatch]);
 
     useEffect(() => {

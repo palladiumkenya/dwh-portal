@@ -15,6 +15,7 @@ export const loadCurrentOnArtOverview = (tab) => async (dispatch, getState) => {
         tab !== 'dsd' &&
         tab !== 'vl' &&
         tab !== "currentOnArt" &&
+        tab !== "comparison" &&
         getState().ui.currentPage !== PAGES.home
     ) {
         return;

@@ -20,6 +20,7 @@ export const loadCurrentOnArtByAgeSex = (tab) => async (dispatch, getState) => {
             tab !== "currentOnArt" &&
             tab !== "artOptimization" &&
             tab !== "adverseEvent" &&
+            tab !== "comparison" &&
             getState().ui.currentPage !== PAGES.home
         ) {
             return;

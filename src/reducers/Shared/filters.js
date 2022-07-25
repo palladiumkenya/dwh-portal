@@ -15,6 +15,7 @@ const initialState = {
     populationTypes: [],
     fromDate: '',
     toDate: '',
+    indicators: 'Tx_Curr',
     countyFilterEnabled: true,
     subCountyFilterEnabled: true,
     facilityFilterEnabled: true,
@@ -27,6 +28,7 @@ const initialState = {
     datimAgeGroupFilterEnabled: false,
     latestPregnancyFilterEnabled: false,
     populationTypeFilterEnabled: false,
+    indicatorFilterEnabled: false,
 };
 
 export default (state = initialState, action) => {
@@ -122,6 +124,16 @@ export default (state = initialState, action) => {
                 filtered,
                 genders: action.payload.genders
             }
+        case actionTypes.FILTER_BY_INDICATOR:
+            filtered = state.counties.length > 0 || state.subCounties.length > 0 || state.facilities.length > 0 ||
+                state.partners.length > 0 || state.agencies.length > 0 || state.projects.length > 0  || state.genders.length > 0 ||
+                state.datimAgeGroups.length > 0 ||  state.populationTypes.length > 0 || state.latestPregnancies.length > 0 ||
+                state.fromDate !== '' || state.toDate !== '' || false;
+            return {
+                ...state,
+                filtered,
+                indicators: action.payload.indicators
+            }
         case actionTypes.FILTER_BY_DATIM_AGE_GROUP:
             filtered = state.counties.length > 0 || state.subCounties.length > 0 || state.facilities.length > 0 ||
                 state.partners.length > 0 || state.agencies.length > 0 || state.projects.length > 0  || state.genders.length > 0 ||
@@ -195,6 +207,17 @@ export default (state = initialState, action) => {
                 ...state,
                 partnerFilterEnabled: false,
                 partners: [],
+            }
+        case actionTypes.ENABLE_INDICATOR_FILTER:
+            return {
+                ...state,
+                indicatorFilterEnabled: true
+            }
+        case actionTypes.DISABLE_INDICATOR_FILTER:
+            return {
+                ...state,
+                indicatorFilterEnabled: false,
+                indicators: '',
             }
         case actionTypes.ENABLE_AGENCY_FILTER:
             return {

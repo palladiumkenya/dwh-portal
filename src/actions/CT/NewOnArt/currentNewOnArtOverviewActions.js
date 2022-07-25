@@ -9,7 +9,8 @@ export const loadCurrentNewOnArtOverview = () => async (dispatch, getState) => {
         'minutes'
     );
     if (getState().ui.ctTab !== 'newlyOnArt' &&
-        getState().ui.currentPage !== PAGES.ct) {
+        getState().ui.currentPage !== PAGES.ct &&
+        getState().ui.currentPage !== PAGES.operationalHIS) {
         return;
     }
     else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
@@ -21,7 +22,7 @@ export const loadCurrentNewOnArtOverview = () => async (dispatch, getState) => {
 
 export const fetchCurrentNewOnArtOverview = () => async (dispatch, getState) => {
     dispatch({ type: actionTypes.CT_CURRENT_NEW_ON_ART_OVERVIEW_REQUEST });
-    const previousMonth = moment().startOf('month').subtract(1, 'month');
+    const previousMonth = moment().subtract(2, 'month').add(15, 'days');
     const params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,

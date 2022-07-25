@@ -457,6 +457,7 @@ const CT = () => {
                 dispatch(loadMedianTimeToArtStartByPartner());
                 dispatch(loadTimeFromDiagnosisToArtStart());
                 dispatch(loadMissingDiagnosisDateByFacility());
+                dispatch(loadArtOptimizationCurrentByRegimen(active_tab));
                 break;
             case "currentOnArt":
                 dispatch(loadCurrentOnArtOverview(active_tab));
@@ -471,7 +472,6 @@ const CT = () => {
                 dispatch(loadCurrentOnArtByCounty(active_tab));
                 dispatch(loadCurrentOnArtByPartner(active_tab));
                 dispatch(loadArtOptimizationOverview(active_tab));
-                dispatch(loadArtOptimizationCurrentByRegimen(active_tab));
                 dispatch(loadArtOptimizationCurrentByAgeSex(active_tab));
                 dispatch(loadArtOptimizationCurrentByCounty(active_tab));
                 dispatch(loadArtOptimizationCurrentByPartner(active_tab));

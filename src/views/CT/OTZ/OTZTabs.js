@@ -5,6 +5,9 @@ import Loadable from 'react-loadable';
 import Loading from '../../Shared/Loading';
 import { LOADING_DELAY } from '../../../constants';
 import { useHistory, useParams } from 'react-router-dom';
+import OTZCALHIVByAgeSex from './OTZCALHIVByAgeSex';
+import OTZByAgeSex from './OTZByAgeSex';
+
 const OtzEnrollmentAmongAlhivOnArtBySex = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtBySex'), loading: Loading, delay: LOADING_DELAY });
 const OtzEnrollmentAmongAlhivOnArtByAge = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtByAge'), loading: Loading, delay: LOADING_DELAY });
 const OtzEnrollmentAmongAlhivOnArtByCounty = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtByCounty'), loading: Loading, delay: LOADING_DELAY });
@@ -68,6 +71,12 @@ const OTZTabs = () => {
             <TabContent activeTab={mini_tab}>
                 <TabPane tabId="otz_enrollment">
                     <Row>
+                        <Col className={"col-6"}>
+                            <OTZCALHIVByAgeSex />
+                        </Col>
+                        <Col className={"col-6"}>
+                            <OTZByAgeSex />
+                        </Col>
                         <Col className={"col-6"}>
                             <OtzEnrollmentAmongAlhivOnArtBySex />
                         </Col>
@@ -157,12 +166,12 @@ const OTZTabs = () => {
                         </Col>
                     </Row>
                     <Row>
-                        <Col className={"col-6"}>
+                        <Col className={"col-12"}>
                             <OtzOutcomesByGender />
                         </Col>
-                        <Col className={"col-6"}>
-                            <OtzOutcomesByPopulationType />
-                        </Col>
+                        {/*<Col className={"col-6"}>*/}
+                        {/*    <OtzOutcomesByPopulationType />*/}
+                        {/*</Col>*/}
                     </Row>
                     <Row>
                         <Col className={"col-12"}>

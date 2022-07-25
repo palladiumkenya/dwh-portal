@@ -17,6 +17,7 @@ export const loadCurrentOnArtByPartner = (tab) => async (dispatch, getState) => 
             getState().ui.ctTab !== 'dsd' &&
             tab !== 'dsd' &&
             tab !== "artOptimization" &&
+            tab !== "comparison" &&
             tab !== "currentOnArt"
         ) {
             return;
