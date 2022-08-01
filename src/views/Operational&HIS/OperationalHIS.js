@@ -103,7 +103,6 @@ const OperationalHIS = () => {
     const datimAgeGroups = useSelector((state) => state.filters.datimAgeGroups);
     const indicator = useSelector(state => state.filters.indicator);
 
-// console.log(getState().filters.genders);
 
     const renderTabNavItems = () => {
         return Object.keys(OPERATIONALHIS_TABS).map((value) => {
