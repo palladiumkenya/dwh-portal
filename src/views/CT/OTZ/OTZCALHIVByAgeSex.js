@@ -95,7 +95,7 @@ const OTZCALHIVByAgeSex = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        DISTRIBUTION OF CALHIV BY AGE AND SEX
+                        DISTRIBUTION OF CALHIV PATIENTS BY AGE AND SEX
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
