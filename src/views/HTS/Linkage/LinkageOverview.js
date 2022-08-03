@@ -44,7 +44,7 @@ const LinkageOverview = () => {
             femaleLinked: 0,
             femaleLinkedPercent: 0,
         }
-        console.log(result)
+        
         for(let i = 0; i < result.length; i++) {
             data.totalPositive = data.totalPositive + parseInt(result[i].positive);
             data.totalLinked = data.totalLinked + parseInt(result[i].linked);
