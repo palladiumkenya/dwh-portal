@@ -146,6 +146,7 @@ const Adhoc = () => {
     return (
         <NavItem className="px-3">
             <a href={process.env.REACT_APP_ADHOC_URL} className="nav-link active"><strong>Adhoc</strong></a>
+
         </NavItem>
     );
 };
@@ -156,7 +157,8 @@ const Administration = (userType) => {
             <DropdownToggle nav caret><strong>Administration</strong></DropdownToggle>
             <DropdownMenu right>
                 { userType.userType === 1 ? <DropdownItem><Link to="/administration/organizations" className="nav-link">Organizations</Link></DropdownItem> : '' }
-                <DropdownItem><a href={process.env.REACT_APP_IDENTITY_USER_URL} className="nav-link">Users</a></DropdownItem>
+
+                <DropdownItem><a href="https://auth.kenyahmis.org/nascop/Users" className="nav-link">Users</a></DropdownItem>
             </DropdownMenu>
         </UncontrolledDropdown>
     );

@@ -3,6 +3,11 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING } from '../../../constants';
 
+import {
+    loadViralLoadOverallUptakeGt1000CopiesReceivedFollowTests
+} from './viralLoadOverallUptakeGt1000CopiesReceivedFollowTests';
+
+
 export const loadViralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll = (tab) => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
         moment(getState().viralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll.lastFetch),

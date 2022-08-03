@@ -36,6 +36,7 @@ const OTZOverview = () => {
             enrolledInOTZPerc:
                 parseInt(adolescents.totalAdolescents, 10) > 0
                     ? (otzEnrolled.enrolledInOTZ / adolescents.totalAdolescents) * 100 : 0,
+
             totalWithVlResults: otzTotalWithVlResults.totalWithVlResults,
             totalWithVlResultsPerc:
                 parseInt(otzEnrolled.enrolledInOTZ, 10) > 0
