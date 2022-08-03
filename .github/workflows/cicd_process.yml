@@ -16,9 +16,13 @@ jobs:
         key: ${{ secrets.CICD_SECRET }}
         port: ${{ secrets.PORT }}
         script: |
-          git config --global --add safe.directory /apps/github-workflows/dwh-portal      
-          cd /apps/github-workflows/dwh-portal
-          git pull origin prod
+          cd /var/www
+          sudo rm -rf dwh
+          sudo mkdir dwh
+          sudo chown -R cicd2:cicd2 dwh
+          git config --global --add safe.directory /apps/github-workflows/mhealth-apps/dwh/
+          cd dwh/
+          git clone -b master https://github.com/palladiumkenya/dwh-portal.git .
           git status
           yarn install
           yarn build
