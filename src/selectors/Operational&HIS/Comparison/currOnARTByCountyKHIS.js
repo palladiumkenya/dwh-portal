@@ -35,7 +35,7 @@ export const getCurrentOnARTByCountyKHIS = createSelector(
         );
         let data = [];
 
-        if (filtered && datimAgeGroups) {
+        if (filtered && datimAgeGroups.length>0) {
             list.map((item) => item.OnART1 = 0 )
             for (let i = 0; i < datimAgeGroups.length; i++) {
                 if (datimAgeGroups[i] === 'Under 1') {

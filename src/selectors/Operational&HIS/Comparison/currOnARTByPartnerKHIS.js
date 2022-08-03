@@ -18,7 +18,7 @@ export const getCurrentOnARTByPartnerKHIS = createSelector(
         const labels = list.map((item) => item.SDP ? item.SDP.toUpperCase() : 'NO PARTNER');
         let data = [];
 
-        if (filtered && datimAgeGroups) {
+        if (filtered && datimAgeGroups.length>0) {
             list.map((item) => (item.OnART1 = 0));
             for (let i = 0; i < datimAgeGroups.length; i++) {
                 if (datimAgeGroups[i] === 'Under 1') {
