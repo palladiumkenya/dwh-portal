@@ -43,7 +43,7 @@ export const getNewlyStartedOnArtKHIS = createSelector(
 
         let newlyStartedByAge = [0, 0, 0, 0, 0, 0];
 
-        if (filtered && datimAgeGroups) {
+        if (filtered && datimAgeGroups.length>0) {
             for (let i = 0; i < datimAgeGroups.length; i++) {
                 if (datimAgeGroups[i] === 'Under 1') {
                     totalNewlyStarted += list.Start_ART_Under_1;
@@ -225,7 +225,7 @@ export const getNewlyStartedOnArtTrendsKHIS = createSelector(
             .reverse();
         
         let data = [];
-        if (filtered && datimAgeGroups) {
+        if (filtered && datimAgeGroups.length>0) {
             list.map((item) => (item.StartART1 = 0));
             for (let i = 0; i < datimAgeGroups.length; i++) {
                 if (datimAgeGroups[i] === 'Under 1') {
