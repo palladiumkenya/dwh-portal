@@ -1,6 +1,5 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
-import moment from 'moment';
 
 const listUnfiltered = (state) => state.newOnArtTrends.listUnfiltered;
 const listFiltered = (state) => state.newOnArtTrends.listFiltered;
@@ -11,18 +10,18 @@ export const getNewOnArtTrends = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         const monthNames = {
-            1: 'January',
-            2: 'February',
-            3: 'March',
-            4: 'April',
-            5: 'May',
-            6: 'June',
-            7: 'July',
-            8: 'August',
-            9: 'September',
-            10: 'October',
-            11: 'November',
-            12: 'December',
+            1: 'JANUARY',
+            2: 'FEBRUARY',
+            3: 'MARCH',
+            4: 'APRIL',
+            5: 'MAY',
+            6: 'JUNE',
+            7: 'JULY',
+            8: 'AUGUST',
+            9: 'SEPTEMBER',
+            10: 'OCTOBER',
+            11: 'NOVEMBER',
+            12: 'DECEMBER',
         };
         let months = [];
         let txNew = [];
@@ -77,8 +76,8 @@ export const getNewOnArtTrends = createSelector(
             }
         }
         if (filtered) {
-            months = months.slice(Math.max(months.length - 13, 0));
-            txNew = txNew.slice(Math.max(txNew.length - 13, 0));
+            months = months.slice(Math.max(months.length - 12, 0));
+            txNew = txNew.slice(Math.max(txNew.length - 12, 0));
         } else {
             months = months.slice(
                 Math.max(months.length - 13, 0),
@@ -132,13 +131,13 @@ export const getNewOnArtLastYear = createSelector(
                 for (const selectedArrElement of selectedArr) {
                     if (
                         months.indexOf(
-                            monthNames[selectedArrElement.month] +
+                            monthNames[selectedArrElement.month].toUpperCase() +
                                 ' ' +
                                 selectedArrElement.year.toString()
                         ) === -1
                     ) {
                         months.push(
-                            monthNames[selectedArrElement.month] +
+                            monthNames[selectedArrElement.month].toUpperCase() +
                                 ' ' +
                                 selectedArrElement.year.toString()
                         );

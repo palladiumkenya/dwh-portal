@@ -56,6 +56,7 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
 
                     return returnString;
                 },
+
             },
             plotOptions: {
                 column: {

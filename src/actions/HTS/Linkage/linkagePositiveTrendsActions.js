@@ -9,7 +9,8 @@ export const loadLinkagePositiveTrends = () => async (dispatch, getState) => {
         'minutes'
     );
     if (getState().ui.ctTab !== 'newlyOnArt' &&
-        getState().ui.currentPage !== PAGES.ct) {
+        getState().ui.currentPage !== PAGES.ct &&
+        getState().ui.currentPage !== PAGES.operationalHIS) {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {

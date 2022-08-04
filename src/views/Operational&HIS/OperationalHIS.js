@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import Loadable from 'react-loadable';
-import VisibilitySensor from 'react-visibility-sensor';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
-import { enableStickyFilter, disableStickyFilter, changeOpertationalHISTab, changeCurrentPage } from "../../actions/Shared/uiActions";
+import { changeOpertationalHISTab, changeCurrentPage } from '../../actions/Shared/uiActions';
 import {
     enableFacilityFilter,
     disableFacilityFilter,
@@ -11,43 +10,82 @@ import {
     disableAgencyFilter,
     enableFromDateFilter,
     disableFromDateFilter,
-    disableGenderFilter, disableDatimAgeGroupFilter
+    disableGenderFilter,
+    disableDatimAgeGroupFilter,
+    enableIndicatorFilter,
+    disableIndicatorFilter,
+    enableGenderFilter,
+    enableDatimAgeGroupFilter
 } from '../../actions/Shared/filterActions';
-import { loadOverallReportingRatesByFacilityReported } from "../../actions/RR/overallReportingRatesByFacilityReported";
-import { loadOverallReportingRatesByFacilityNotReported } from "../../actions/RR/overallReportingRatesByFacilityNotReported";
-import { loadConsistencyByFacilityNotReported } from "../../actions/RR/consistencyByFacilityNotReported";
-import { LOADING_DELAY, OPERATIONALHIS_TABS, PAGES } from "../../constants";
+import { LOADING_DELAY, OPERATIONALHIS_TABS, PAGES } from '../../constants';
 import Loading from '../Shared/Loading';
-import UniversalFilter from '../Shared/UniversalFilter';
-import SectionHeader from '../Shared/SectionHeader';
-import SectionFooter from '../Shared/SectionFooter';
-import moment from 'moment';
 import { useHistory, useParams } from 'react-router-dom';
+import { loadNewlyStartedOnArtKHIS } from '../../actions/Operational&HIS/Comparison/newlyStartedOnArtKHISActions';
+import {
+    loadNewlyStartedOnArtTrendsKHIS
+} from '../../actions/Operational&HIS/Comparison/newlyStartedOnArtTrendsKHISActions';
+import { loadCurrentNewOnArtOverview } from '../../actions/CT/NewOnArt/currentNewOnArtOverviewActions';
+import { loadNewOnArtTrends } from '../../actions/CT/NewOnArt/newOnArtTrendsActions';
+import { loadLinkagePositiveTrends } from '../../actions/HTS/Linkage/linkagePositiveTrendsActions';
+import { loadHTSPositivesTrendsKHIS } from '../../actions/Operational&HIS/Comparison/htsPositivesTrendsKHISActions';
+import { loadCurrOnARTKHIS } from '../../actions/Operational&HIS/Comparison/currOnArtKHISActions';
+import { loadCurrOnARTKHISByCounty } from '../../actions/Operational&HIS/Comparison/currOnArtKHISByCountyActions';
+import { loadCurrOnARTKHISByPartner } from '../../actions/Operational&HIS/Comparison/currOnArtKHISByPartnerActions';
+import { loadCurrentOnArtOverview } from '../../actions/CT/CurrentOnArt/currentOnArtOverviewActions';
+import { loadCurrentOnArtByAgeSex } from '../../actions/CT/CurrentOnArt/currentOnArtByAgeSexActions';
+import { loadCurrentOnArtByCounty } from '../../actions/CT/CurrentOnArt/currentOnArtByCountyActions';
+import { loadCurrentOnArtByPartner } from '../../actions/CT/CurrentOnArt/currentOnArtByPartnerActions';
+import {
+    loadCurrentOnArtDistributionByCounty
+} from '../../actions/CT/CurrentOnArt/currentOnArtDistributionByCountyActions';
+import {
+    loadCurrentOnArtDistributionByPartner
+} from '../../actions/CT/CurrentOnArt/currentOnArtDistributionByPartnerActions';
+import { loadNewOnArtByAgeSex } from '../../actions/CT/NewOnArt/newOnArtByAgeSexActions';
+import {
+    loadCurrOnARTPartnerFacilityKHIS
+} from '../../actions/Operational&HIS/Comparison/currOnArtByPartnerFacilityKHISActions';
+import {
+    loadNewOnARTPartnerFacilityKHIS
+} from '../../actions/Operational&HIS/Comparison/newOnArtByPartnerFacilityKHISActions';
+import {
+    loadCurrOnARTPartnerFacilityDWH
+} from '../../actions/Operational&HIS/Comparison/currOnArtByPartnerFacilityDWHActions';
+import {
+    loadNewOnARTPartnerFacilityDWH
+} from '../../actions/Operational&HIS/Comparison/newOnArtByPartnerFacilityDWHActions';
+
+
+const Comparison = Loadable({
+    loader: () => import ('./Comparison/Comparison'),
+    loading: Loading,
+    delay: LOADING_DELAY
+});
 
 const Overview = Loadable({
     loader: () => import ('./Overview/Overview'),
     loading: Loading,
-    delay: LOADING_DELAY,
+    delay: LOADING_DELAY
 });
 const Accuracy = Loadable({
     loader: () => import ('./Accuracy/Accuracy'),
     loading: Loading,
-    delay: LOADING_DELAY,
+    delay: LOADING_DELAY
 });
 const Completeness = Loadable({
     loader: () => import ('./Completeness/Completeness'),
     loading: Loading,
-    delay: LOADING_DELAY,
+    delay: LOADING_DELAY
 });
 const Consistency = Loadable({
     loader: () => import ('./Consistency/Consistency'),
     loading: Loading,
-    delay: LOADING_DELAY,
+    delay: LOADING_DELAY
 });
 const DataQualityAssessment = Loadable({
     loader: () => import ('./Data Quality Assessment/DataQualityAssessment'),
     loading: Loading,
-    delay: LOADING_DELAY,
+    delay: LOADING_DELAY
 });
 
 const OperationalHIS = () => {
@@ -61,14 +99,8 @@ const OperationalHIS = () => {
     const projects = useSelector(state => state.filters.projects);
     const fromDate = useSelector(state => state.filters.fromDate);
     const toDate = useSelector(state => state.filters.toDate);
+    const indicator = useSelector(state => state.filters.indicator);
 
-    const onVisibilityChange = (isVisible) => {
-        if (isVisible) {
-            dispatch(disableStickyFilter());
-        } else {
-            dispatch(enableStickyFilter());
-        }
-    };
 
     const renderTabNavItems = () => {
         return Object.keys(OPERATIONALHIS_TABS).map((value) => {
@@ -87,25 +119,49 @@ const OperationalHIS = () => {
             );
         });
     };
+    const { active_tab } = useParams();
 
     useEffect(() => {
         dispatch(changeCurrentPage(PAGES.operationalHIS));
         dispatch(disableFacilityFilter());
-        dispatch(enableAgencyFilter());
         dispatch(enableFromDateFilter());
-        dispatch(disableGenderFilter());
-        dispatch(disableDatimAgeGroupFilter());
-        return () => {
+        dispatch(enableGenderFilter());
+        dispatch(enableDatimAgeGroupFilter());
+        if (active_tab === 'comparison') {
+            dispatch(enableIndicatorFilter());
+            dispatch(disableFacilityFilter());
+            dispatch(enableAgencyFilter());
+        } else {
+            dispatch(disableIndicatorFilter());
             dispatch(enableFacilityFilter());
             dispatch(disableAgencyFilter());
-            dispatch(disableFromDateFilter());
+
         }
-    }, [dispatch]);
+
+    }, [dispatch, active_tab]);
 
     useEffect(() => {
-        dispatch(loadOverallReportingRatesByFacilityReported());
-        dispatch(loadOverallReportingRatesByFacilityNotReported());
-        dispatch(loadConsistencyByFacilityNotReported());
+        dispatch(loadNewlyStartedOnArtKHIS());
+        dispatch(loadNewlyStartedOnArtTrendsKHIS());
+        dispatch(loadCurrentNewOnArtOverview());
+        dispatch(loadNewOnArtTrends());
+        dispatch(loadNewOnArtByAgeSex());
+        dispatch(loadCurrOnARTPartnerFacilityKHIS());
+        dispatch(loadNewOnARTPartnerFacilityKHIS());
+        dispatch(loadCurrOnARTPartnerFacilityDWH());
+        dispatch(loadNewOnARTPartnerFacilityDWH());
+        dispatch(loadLinkagePositiveTrends());
+        dispatch(loadHTSPositivesTrendsKHIS());
+        dispatch(loadCurrOnARTKHIS());
+        dispatch(loadCurrOnARTKHISByCounty());
+        dispatch(loadCurrOnARTKHISByPartner());
+
+        dispatch(loadCurrentOnArtOverview(active_tab));
+        dispatch(loadCurrentOnArtByAgeSex(active_tab));
+        dispatch(loadCurrentOnArtByCounty(active_tab));
+        dispatch(loadCurrentOnArtByPartner(active_tab));
+        dispatch(loadCurrentOnArtDistributionByCounty(active_tab));
+        dispatch(loadCurrentOnArtDistributionByPartner(active_tab));
     }, [
         dispatch,
         counties,
@@ -117,20 +173,21 @@ const OperationalHIS = () => {
         fromDate,
         toDate,
         opHIStab,
+        indicator,
+        active_tab
     ]);
 
     const DEFAULT_ACTIVE_TAB = useSelector(
         (state) => state.ui.operationalHISTab
     );
-    const { active_tab } = useParams();
     const history = useHistory();
     useEffect(() => {
         if (!active_tab) {
             history.push(`/operational-and-his/${DEFAULT_ACTIVE_TAB}`);
         }
-    }, []);
+    }, [active_tab, history, DEFAULT_ACTIVE_TAB]);
 
-    if(!active_tab){
+    if (!active_tab) {
         history.push(`/operational-and-his/${opHIStab}`);
     }
 
@@ -145,19 +202,22 @@ const OperationalHIS = () => {
             <Nav tabs>{renderTabNavItems()}</Nav>
             <TabContent activeTab={active_tab}>
                 <TabPane tabId={'overview'}>
-                    {active_tab === 'overview' ? <Overview /> : null}
+                    {active_tab === 'overview' ? <Overview/> : null}
                 </TabPane>
                 <TabPane tabId={'completeness'}>
-                    {active_tab === 'completeness' ? <Completeness /> : null}
+                    {active_tab === 'completeness' ? <Completeness/> : null}
                 </TabPane>
                 <TabPane tabId={'accuracy'}>
-                    {active_tab === 'accuracy' ? <Accuracy /> : null}
+                    {active_tab === 'accuracy' ? <Accuracy/> : null}
                 </TabPane>
                 <TabPane tabId={'consistency'}>
-                    {active_tab === 'consistency' ? <Consistency /> : null}
+                    {active_tab === 'consistency' ? <Consistency/> : null}
                 </TabPane>
                 <TabPane tabId={'dataQualityAssessment'}>
-                    {active_tab === 'dataQualityAssessment' ? <DataQualityAssessment /> : null}
+                    {active_tab === 'dataQualityAssessment' ? <DataQualityAssessment/> : null}
+                </TabPane>
+                <TabPane tabId={'comparison'}>
+                    {active_tab === 'comparison' ? <Comparison/> : null}
                 </TabPane>
             </TabContent>
         </div>

@@ -140,6 +140,7 @@ const RR = () => {
                     {/*<SectionHeader title="REPORTING RATES" description="BY PARTNER"/>*/}
                     <RRPartner/>
                     <SectionFooter overview={'The overall reporting rate for ' + moment().format('MMMM, YYYY') +",is the number of EMR sites that uploaded data in " + moment().format('MMMM, YYYY') }
+
                     />
                 </TabPane>
             </TabContent>

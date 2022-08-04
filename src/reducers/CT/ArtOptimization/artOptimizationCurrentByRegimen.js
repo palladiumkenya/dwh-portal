@@ -1,10 +1,10 @@
-import * as actionTypes from "../../../actions/types";
+import * as actionTypes from '../../../actions/types';
 
 const initialState = {
     lastFetch: null,
     loading: false,
     listUnfiltered: [],
-    listFiltered: [],
+    listFiltered: []
 };
 
 export default (state = initialState, action) => {
@@ -26,6 +26,6 @@ export default (state = initialState, action) => {
             newState.loading = false;
             return newState;
         default:
-            return state
+            return state;
     }
 }

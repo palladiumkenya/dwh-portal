@@ -36,8 +36,9 @@ export const OPERATIONALHIS_TABS = {
     overview: 'OVERVIEW',
     completeness: 'COMPLETENESS',
     accuracy: 'ACCURACY',
-    consistency: 'CONSISTENCY',
+    // consistency: 'CONSISTENCY',
     dataQualityAssessment: 'DATA QUALITY ASSESSMENT',
+    comparison: 'COMPARISON DWH & KHIS',
 }
 
 export const PAGES = {
@@ -59,7 +60,8 @@ export const CACHING = {
 
 export const LOADING_DELAY = 200;
 
-export const GA_TRACKING_ID = 'UA-137589703-1';
+export const GA_TRACKING_ID = 'UA-137589703-2';
 
-export const DWH_API_URL = 'https://data.kenyahmis.org:8082';
+
+export const DWH_API_URL = 'https://dwh.nascop.org';
 export const HRH_API_URL = 'https://hrh.datacompanion.org';

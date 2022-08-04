@@ -76,7 +76,7 @@ const HTS = () => {
     const DEFAULT_ACTIVE_TAB = htsTab;
     const { active_tab } = useParams();
     const history = useHistory();
-    
+
     useEffect(() => {
         if (!active_tab) {
             history.push(`/hiv-testing/${DEFAULT_ACTIVE_TAB}`);
