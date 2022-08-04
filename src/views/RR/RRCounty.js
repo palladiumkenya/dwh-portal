@@ -52,7 +52,7 @@ const RRCounty = () => {
             moment().subtract(3, 'month').add(15, 'days').format('YYYY,M');
         const consistencyResult = await getAll('manifests/consistencyreportingbycountypartner/' + rrTab + '?reportingType=county', params);
         const rrData = await getAll('manifests/expectedPartnerCounty/' + rrTab + '?reportingType=county', params);
-        console.log(params)
+        
 
         /* Overall reporting */
         const overAllReportingData = _.orderBy(overallReportingRateResult, [function(resultItem) { return parseInt(resultItem.Percentage, 10); }], ['desc']);

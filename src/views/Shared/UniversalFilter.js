@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react'; 
+import { useHistory, useParams } from 'react-router-dom';
 import moment from 'moment';
 import { DateInput, MonthInput, MonthRangeInput, YearInput } from 'semantic-ui-calendar-react';
 import { Dropdown, Message } from 'semantic-ui-react';
@@ -15,6 +16,7 @@ const UniversalFilter = () => {
 
     const filters = useSelector(state => state.filters);
     const ui = useSelector(state => state.ui);
+    const { active_tab } = useParams();
 
     const [counties, setCounties] = useState([]);
     const [subCounties, setSubCounties] = useState([]);
@@ -47,6 +49,35 @@ const UniversalFilter = () => {
     const ctPartners = useSelector(ctSelectors.getPartners);
     const ctAgencies = useSelector(ctSelectors.getAgencies);
     const ctProjects = useSelector(ctSelectors.getProjects);
+
+    let ageGroups;
+    if (active_tab === 'comparison')
+        ageGroups = [
+            'Under 1',
+            '1 to 9',
+            '10 to 14',
+            '15 to 19',
+            '20 to 24',
+            '25+',
+        ];
+    else
+        ageGroups = [
+            'Under 1',
+            '1 to 4',
+            '5 to 9',
+            '10 to 14',
+            '15 to 19',
+            '20 to 24',
+            '25 to 29',
+            '30 to 34',
+            '35 to 39',
+            '40 to 44',
+            '45 to 49',
+            '50 to 54',
+            '55 to 59',
+            '60 to 64',
+            '65+',
+        ];
 
     const loadSites = useCallback(async () => {
         switch (ui.currentPage) {
@@ -91,23 +122,7 @@ const UniversalFilter = () => {
                 setProjects(rrProjects.map(p => ({ value: p, key: p, text: p })));
         }
         setGenders(['Male', 'Female'].map(c => ({ value: c, key: c, text: c })));
-        setDatimAgeGroups([
-            'Under 1',
-            '1 to 4',
-            '5 to 9',
-            '10 to 14',
-            '15 to 19',
-            '20 to 24',
-            '25 to 29',
-            '30 to 34',
-            '35 to 39',
-            '40 to 44',
-            '45 to 49',
-            '50 to 54',
-            '55 to 59',
-            '60 to 64',
-            '65+'
-        ].map(c => ({ value: c, key: c, text: c })));
+        setDatimAgeGroups(ageGroups.map(c => ({ value: c, key: c, text: c })));
         setPopulationTypes([
             ' FSW',
             ' General Population',

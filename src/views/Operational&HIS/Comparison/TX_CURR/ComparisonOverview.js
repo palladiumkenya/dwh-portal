@@ -39,20 +39,36 @@ const ComparisonOverviewTxCurr = () => {
                             TOTAL CURRENT ON ART
                         </CardHeader>
                         <CardBody
-                            style={{ backgroundColor: '#F6F6F6', height: '100%' }}>
-                            <div
-                                style={{ background: 'linear-gradient(#000, #000) no-repeat center/2px 100%' }}>
+                            className="vertical_dotted_line"
+                            style={{
+                                backgroundColor: '#F6F6F6',
+                                height: '100%',
+                            }}
+                        >
+                            <div>
                                 <Row>
                                     <Col md={6}>
-                                        <div >
-                                            <span className="comparison-card-text">KHIS</span><br/>
-                                            <span className="comparison-card-numbers">{formatNumber(currARTKHIS.totalOnART)}</span>
+                                        <div>
+                                            <span className="comparison-card-text">
+                                                KHIS
+                                            </span>
+                                            <br />
+                                            <span className="comparison-card-numbers">
+                                                {formatNumber(
+                                                    currARTKHIS.totalOnART
+                                                )}
+                                            </span>
                                         </div>
                                     </Col>
                                     <Col md={6}>
                                         <div>
-                                            <span className="comparison-card-text">DWH</span><br />
-                                            <span className="comparison-card-numbers">{formatNumber(currentOnArt)}</span>
+                                            <span className="comparison-card-text">
+                                                DWH
+                                            </span>
+                                            <br />
+                                            <span className="comparison-card-numbers">
+                                                {formatNumber(currentOnArt)}
+                                            </span>
                                         </div>
                                     </Col>
                                 </Row>
@@ -66,22 +82,49 @@ const ComparisonOverviewTxCurr = () => {
                             MALES CURRENT ON ART
                         </CardHeader>
                         <CardBody
-                            style={{ backgroundColor: '#F6F6F6', height: '100%' }}>
-                            <div
-                                style={{ background: 'linear-gradient(#000, #000) no-repeat center/2px 100%' }}>
+                            className="vertical_dotted_line"
+                            style={{
+                                backgroundColor: '#F6F6F6',
+                                height: '100%',
+                            }}
+                        >
+                            <div>
                                 <Row>
                                     <Col md={6}>
-                                        <div >
-                                            <span className="comparison-card-text">KHIS</span><br/>
-                                            <span className="comparison-card-numbers">{formatNumber(currARTKHIS.malesOnART)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {percOfNewly(currARTKHIS.malesOnART, currARTKHIS.totalOnART)}</sup>
+                                        <div>
+                                            <span className="comparison-card-text">
+                                                KHIS
+                                            </span>
+                                            <br />
+                                            <span className="comparison-card-numbers">
+                                                {formatNumber(
+                                                    currARTKHIS.malesOnART
+                                                )}
+                                            </span>
+                                            <sup className="comparison-sup comparison-sup-perc">
+                                                {' '}
+                                                {percOfNewly(
+                                                    currARTKHIS.malesOnART,
+                                                    currARTKHIS.totalOnART
+                                                )}
+                                            </sup>
                                         </div>
                                     </Col>
                                     <Col md={6}>
                                         <div>
-                                            <span className="comparison-card-text">DWH</span><br />
-                                            <span className="comparison-card-numbers">{formatNumber(currentOnArtMale)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {roundNumber(currentOnArtMalePercent) + "%"}</sup>
+                                            <span className="comparison-card-text">
+                                                DWH
+                                            </span>
+                                            <br />
+                                            <span className="comparison-card-numbers">
+                                                {formatNumber(currentOnArtMale)}
+                                            </span>
+                                            <sup className="comparison-sup comparison-sup-perc">
+                                                {' '}
+                                                {roundNumber(
+                                                    currentOnArtMalePercent
+                                                ) + '%'}
+                                            </sup>
                                         </div>
                                     </Col>
                                 </Row>
@@ -95,22 +138,51 @@ const ComparisonOverviewTxCurr = () => {
                             FEMALES CURRENT ON ART
                         </CardHeader>
                         <CardBody
-                            style={{ backgroundColor: '#F6F6F6', height: '100%' }}>
-                            <div
-                                style={{ background: 'linear-gradient(#000, #000) no-repeat center/2px 100%' }}>
+                            className="vertical_dotted_line"
+                            style={{
+                                backgroundColor: '#F6F6F6',
+                                height: '100%',
+                            }}
+                        >
+                            <div>
                                 <Row>
                                     <Col md={6}>
-                                        <div >
-                                            <span className="comparison-card-text">KHIS</span><br/>
-                                            <span className="comparison-card-numbers">{formatNumber(currARTKHIS.femalesOnART)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {percOfNewly(currARTKHIS.femalesOnART, currARTKHIS.totalOnART)}</sup>
+                                        <div>
+                                            <span className="comparison-card-text">
+                                                KHIS
+                                            </span>
+                                            <br />
+                                            <span className="comparison-card-numbers">
+                                                {formatNumber(
+                                                    currARTKHIS.femalesOnART
+                                                )}
+                                            </span>
+                                            <sup className="comparison-sup comparison-sup-perc">
+                                                {' '}
+                                                {percOfNewly(
+                                                    currARTKHIS.femalesOnART,
+                                                    currARTKHIS.totalOnART
+                                                )}
+                                            </sup>
                                         </div>
                                     </Col>
                                     <Col md={6}>
                                         <div>
-                                            <span className="comparison-card-text">DWH</span><br />
-                                            <span className="comparison-card-numbers">{formatNumber(currentOnArtFemale)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {roundNumber(currentOnArtFemalePercent) + "%"}</sup>
+                                            <span className="comparison-card-text">
+                                                DWH
+                                            </span>
+                                            <br />
+                                            <span className="comparison-card-numbers">
+                                                {formatNumber(
+                                                    currentOnArtFemale
+                                                )}
+                                            </span>
+                                            <sup className="comparison-sup comparison-sup-perc">
+                                                {' '}
+                                                {roundNumber(
+                                                    currentOnArtFemalePercent
+                                                ) + '%'}
+                                            </sup>
                                         </div>
                                     </Col>
                                 </Row>
@@ -121,25 +193,54 @@ const ComparisonOverviewTxCurr = () => {
                 <Col md={4}>
                     <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
-                            {"ADULTS CURRENT ON ART(15+ YRS)"}
+                            {'ADULTS CURRENT ON ART(15+ YRS)'}
                         </CardHeader>
                         <CardBody
-                            style={{ backgroundColor: '#F6F6F6', height: '100%' }}>
-                            <div
-                                style={{ background: 'linear-gradient(#000, #000) no-repeat center/2px 100%' }}>
+                            className="vertical_dotted_line"
+                            style={{
+                                backgroundColor: '#F6F6F6',
+                                height: '100%',
+                            }}
+                        >
+                            <div>
                                 <Row>
                                     <Col md={6}>
-                                        <div >
-                                            <span className="comparison-card-text">KHIS</span><br/>
-                                            <span className="comparison-card-numbers">{formatNumber(currARTKHIS.adultsOnART)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {percOfNewly(currARTKHIS.adultsOnART, currARTKHIS.totalOnART)}</sup>
+                                        <div>
+                                            <span className="comparison-card-text">
+                                                KHIS
+                                            </span>
+                                            <br />
+                                            <span className="comparison-card-numbers">
+                                                {formatNumber(
+                                                    currARTKHIS.adultsOnART
+                                                )}
+                                            </span>
+                                            <sup className="comparison-sup comparison-sup-perc">
+                                                {' '}
+                                                {percOfNewly(
+                                                    currARTKHIS.adultsOnART,
+                                                    currARTKHIS.totalOnART
+                                                )}
+                                            </sup>
                                         </div>
                                     </Col>
                                     <Col md={6}>
                                         <div>
-                                            <span className="comparison-card-text">DWH</span><br />
-                                            <span className="comparison-card-numbers">{formatNumber(currentOnArtAdults)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {roundNumber(currentOnArtAdultsPercent) + "%"}</sup>
+                                            <span className="comparison-card-text">
+                                                DWH
+                                            </span>
+                                            <br />
+                                            <span className="comparison-card-numbers">
+                                                {formatNumber(
+                                                    currentOnArtAdults
+                                                )}
+                                            </span>
+                                            <sup className="comparison-sup comparison-sup-perc">
+                                                {' '}
+                                                {roundNumber(
+                                                    currentOnArtAdultsPercent
+                                                ) + '%'}
+                                            </sup>
                                         </div>
                                     </Col>
                                 </Row>
@@ -150,25 +251,54 @@ const ComparisonOverviewTxCurr = () => {
                 <Col md={4}>
                     <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
-                            {"CHILDREN CURRENT ON ART(<14 YRS)"}
+                            {'CHILDREN CURRENT ON ART(<14 YRS)'}
                         </CardHeader>
                         <CardBody
-                            style={{ backgroundColor: '#F6F6F6', height: '100%' }}>
-                            <div
-                                style={{ background: 'linear-gradient(#000, #000) no-repeat center/2px 100%' }}>
+                            className="vertical_dotted_line"
+                            style={{
+                                backgroundColor: '#F6F6F6',
+                                height: '100%',
+                            }}
+                        >
+                            <div>
                                 <Row>
                                     <Col md={6}>
-                                        <div >
-                                            <span className="comparison-card-text">KHIS</span><br/>
-                                            <span className="comparison-card-numbers">{formatNumber(currARTKHIS.childrenOnART)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {percOfNewly(currARTKHIS.childrenOnART, currARTKHIS.totalOnART)}</sup>
+                                        <div>
+                                            <span className="comparison-card-text">
+                                                KHIS
+                                            </span>
+                                            <br />
+                                            <span className="comparison-card-numbers">
+                                                {formatNumber(
+                                                    currARTKHIS.childrenOnART
+                                                )}
+                                            </span>
+                                            <sup className="comparison-sup comparison-sup-perc">
+                                                {' '}
+                                                {percOfNewly(
+                                                    currARTKHIS.childrenOnART,
+                                                    currARTKHIS.totalOnART
+                                                )}
+                                            </sup>
                                         </div>
                                     </Col>
                                     <Col md={6}>
                                         <div>
-                                            <span className="comparison-card-text">DWH</span><br />
-                                            <span className="comparison-card-numbers">{formatNumber(currentOnArtChildren)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {roundNumber(currentOnArtChildrenPercent) + "%"}</sup>
+                                            <span className="comparison-card-text">
+                                                DWH
+                                            </span>
+                                            <br />
+                                            <span className="comparison-card-numbers">
+                                                {formatNumber(
+                                                    currentOnArtChildren
+                                                )}
+                                            </span>
+                                            <sup className="comparison-sup comparison-sup-perc">
+                                                {' '}
+                                                {roundNumber(
+                                                    currentOnArtChildrenPercent
+                                                ) + '%'}
+                                            </sup>
                                         </div>
                                     </Col>
                                 </Row>
@@ -182,22 +312,51 @@ const ComparisonOverviewTxCurr = () => {
                             ADOLESCENTS CURRENT ON ART(10 - 19 YRS)
                         </CardHeader>
                         <CardBody
-                            style={{ backgroundColor: '#F6F6F6', height: '100%' }}>
-                            <div
-                                style={{ background: 'linear-gradient(#000, #000) no-repeat center/2px 100%' }}>
+                            className="vertical_dotted_line"
+                            style={{
+                                backgroundColor: '#F6F6F6',
+                                height: '100%',
+                            }}
+                        >
+                            <div>
                                 <Row>
                                     <Col md={6}>
-                                        <div >
-                                            <span className="comparison-card-text">KHIS</span><br/>
-                                            <span className="comparison-card-numbers">{formatNumber(currARTKHIS.adolescentsOnART)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {percOfNewly(currARTKHIS.adolescentsOnART, currARTKHIS.totalOnART)}</sup>
+                                        <div>
+                                            <span className="comparison-card-text">
+                                                KHIS
+                                            </span>
+                                            <br />
+                                            <span className="comparison-card-numbers">
+                                                {formatNumber(
+                                                    currARTKHIS.adolescentsOnART
+                                                )}
+                                            </span>
+                                            <sup className="comparison-sup comparison-sup-perc">
+                                                {' '}
+                                                {percOfNewly(
+                                                    currARTKHIS.adolescentsOnART,
+                                                    currARTKHIS.totalOnART
+                                                )}
+                                            </sup>
                                         </div>
                                     </Col>
                                     <Col md={6}>
                                         <div>
-                                            <span className="comparison-card-text">DWH</span><br />
-                                            <span className="comparison-card-numbers">{formatNumber(currentOnArtAdolescents)}</span>
-                                            <sup className="comparison-sup comparison-sup-perc"> {roundNumber(currentOnArtAdolescentsPercent) + "%"}</sup>
+                                            <span className="comparison-card-text">
+                                                DWH
+                                            </span>
+                                            <br />
+                                            <span className="comparison-card-numbers">
+                                                {formatNumber(
+                                                    currentOnArtAdolescents
+                                                )}
+                                            </span>
+                                            <sup className="comparison-sup comparison-sup-perc">
+                                                {' '}
+                                                {roundNumber(
+                                                    currentOnArtAdolescentsPercent
+                                                ) + '%'}
+                                            </sup>
                                         </div>
                                     </Col>
                                 </Row>
@@ -207,7 +366,6 @@ const ComparisonOverviewTxCurr = () => {
                 </Col>
             </Row>
         </>
-
     );
 };
 
