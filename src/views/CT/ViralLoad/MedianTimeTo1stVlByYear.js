@@ -43,7 +43,7 @@ const MedianTimeTo1stVlByYear = () => {
                 </Card>
             </div>
             <div className="col-12">
-                *Among those who started ART in the last 12 months.
+                {/* *Among those who started ART in the last 12 months. */}
             </div>
         </div>
     );

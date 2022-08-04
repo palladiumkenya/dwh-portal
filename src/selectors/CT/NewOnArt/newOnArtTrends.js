@@ -76,8 +76,17 @@ export const getNewOnArtTrends = createSelector(
             }
         }
         if (filtered) {
-            months = months.slice(Math.max(months.length - 12, 0));
-            txNew = txNew.slice(Math.max(txNew.length - 12, 0));
+            if (list.length > 12) {
+                months = months.slice(
+                    Math.max(months.length - 13, 0),
+                    Math.max(months.length - 1, 0)
+                ) 
+                txNew = txNew.slice(
+                    Math.max(txNew.length - 13, 0),
+                    Math.max(txNew.length - 1, 0)
+                );
+            }
+        
         } else {
             months = months.slice(
                 Math.max(months.length - 13, 0),
