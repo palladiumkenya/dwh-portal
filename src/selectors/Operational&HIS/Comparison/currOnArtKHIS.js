@@ -166,7 +166,7 @@ export const getCurrOnArtKHIS = createSelector(
                     OnARTByAgeDWH.splice(
                         2,
                         1,
-                        loopAgeGroups(listDWH, fifteenToNineteen)
+                        loopAgeGroups(listDWH, tenToFourteen)
                     );
                 }
                 if (datimAgeGroups[i] === '15 to 19') {
