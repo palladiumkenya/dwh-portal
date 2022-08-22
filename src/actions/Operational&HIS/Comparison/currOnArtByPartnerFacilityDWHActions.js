@@ -2,7 +2,6 @@ import moment from 'moment';
 import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING, PAGES } from '../../../constants';
-import { KHIS_CURR_ON_ART_BY_PARTNER_FACILITY_REQUEST } from '../../types';
 
 export const loadCurrOnARTPartnerFacilityDWH = () => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
