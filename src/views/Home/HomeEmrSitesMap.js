@@ -15,6 +15,8 @@ const HomeEmrSitesMap = () => {
         const data = [];
         const emrNames = [];
         let emrSites = [];
+        if (gpsSites === undefined || gpsSites === null) gpsSites = [];
+        
         for (let i = 0; i < gpsSites.length; i++) {
             if (emrNames.indexOf(gpsSites[i].emr) === -1) {
                 emrNames.push(gpsSites[i].emr);
