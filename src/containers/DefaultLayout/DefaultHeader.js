@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Nav, NavItem } from 'reactstrap';
+import { Nav, NavItem, Dropdown } from 'reactstrap';
+// import NavDropdown from 'react-bootstrap/NavDropdown';
 import { AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from '../../assets/img/brand/dwh2.png';
 import sygnet from '../../assets/img/brand/ic_launcher.png';
@@ -11,6 +12,7 @@ import { signinRedirect, signoutRedirect } from '../../services/UserService';
 import { getUserById } from '../../views/Shared/Api';
 
 const DefaultHeader = () => {
+    const [dropdownOpen, setDropdownOpen] = useState(false);
     const user = useSelector(state => state.auth.user)
     const loginAction = user ? "Logout" : "Login";
     const [userType, setUserType] = useState({
@@ -48,6 +50,13 @@ const DefaultHeader = () => {
         return  (res === 1 || res === 2) ? <Administration /> : null;
     }
 
+    const clearCacheData = () => {
+        localStorage.clear();
+        window.location.reload()
+        alert('Complete Cache Cleared');
+    };
+    const toggle = () => setDropdownOpen(!dropdownOpen);
+
     useEffect(() => {
         loadUserType()
     }, [loadUserType]);
@@ -83,6 +92,16 @@ const DefaultHeader = () => {
                         <strong>HIV Treatment</strong>
                     </NavLink>
                 </NavItem>
+                <Dropdown nav isOpen={dropdownOpen} toggle={toggle}>
+                    <DropdownToggle nav caret>
+                        <strong>Site Actions</strong>
+                    </DropdownToggle>
+                    <DropdownMenu>
+                        <DropdownItem onClick={() => clearCacheData()}>
+                            Clear Cached Data
+                        </DropdownItem>
+                    </DropdownMenu>
+                </Dropdown>
                 {/* <NavItem className="px-3">
                     <NavLink
                         to="/operational-and-his"
