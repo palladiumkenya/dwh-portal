@@ -92,16 +92,6 @@ const DefaultHeader = () => {
                         <strong>HIV Treatment</strong>
                     </NavLink>
                 </NavItem>
-                <Dropdown nav isOpen={dropdownOpen} toggle={toggle}>
-                    <DropdownToggle nav caret>
-                        <strong>Site Actions</strong>
-                    </DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem onClick={() => clearCacheData()}>
-                            Clear Cached Data
-                        </DropdownItem>
-                    </DropdownMenu>
-                </Dropdown>
                 {/* <NavItem className="px-3">
                     <NavLink
                         to="/operational-and-his"
@@ -120,6 +110,15 @@ const DefaultHeader = () => {
                     >
                         <strong>Resources</strong>
                     </a>
+                </NavItem>
+                <NavItem className="px-3">
+                    <NavLink
+                        to="/"
+                        className="nav-link active"
+                        onClick={() => clearCacheData()}
+                    >
+                        <strong>Clear Cached Data</strong>
+                    </NavLink>
                 </NavItem>
 
                 {user ? <Adhoc /> : null}
