@@ -28,16 +28,41 @@ export const getCurrentOnArtByAgeSex = createSelector(
         ];
         let currentOnArtMale = [];
         let currentOnArtFemale = [];
+        for (const ageGroup of ageGroups) {
+            const ageGroupMaleFilter = list.filter(
+                (obj) =>
+                    obj.ageGroup === ageGroup &&
+                    (obj.Gender.toLowerCase() === 'M'.toLowerCase() ||
+                        obj.Gender.toLowerCase() === 'Male'.toLowerCase())
+            );
+            const ageGroupFemaleFilter = list.filter(
+                (obj) =>
+                    obj.ageGroup === ageGroup &&
+                    (obj.Gender.toLowerCase() === 'F'.toLowerCase() ||
+                        obj.Gender.toLowerCase() === 'Female'.toLowerCase())
+            );
+            if (ageGroupMaleFilter.length > 0) {
+                currentOnArtMale.push(ageGroupMaleFilter[0].txCurr);
+            } else {
+                currentOnArtMale.push(0);
+            }
 
-        for (let i = 0; i < list.length; i++) {
-            if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
-                let index = ageGroups.indexOf(list[i].ageGroup);
-                currentOnArtMale.splice(index, 0, parseInt(list[i].txCurr));
-            } else if (list[i].Gender.toLowerCase() === "F".toLowerCase() || list[i].Gender.toLowerCase() === "Female".toLowerCase()) {
-                let index = ageGroups.indexOf(list[i].ageGroup);
-                currentOnArtFemale.splice(index, 0, parseInt(list[i].txCurr));
+            if (ageGroupFemaleFilter.length > 0) {
+                currentOnArtFemale.push(ageGroupFemaleFilter[0].txCurr);
+            } else {
+                currentOnArtFemale.push(0);
             }
         }
+
+        // for (let i = 0; i < list.length; i++) {
+        //     if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
+        //         let index = ageGroups.indexOf(list[i].ageGroup);
+        //         currentOnArtMale.splice(index, 0, parseInt(list[i].txCurr));
+        //     } else if (list[i].Gender.toLowerCase() === "F".toLowerCase() || list[i].Gender.toLowerCase() === "Female".toLowerCase()) {
+        //         let index = ageGroups.indexOf(list[i].ageGroup);
+        //         currentOnArtFemale.splice(index, 0, parseInt(list[i].txCurr));
+        //     }
+        // }
 
         let max = _.max([_.max(currentOnArtMale), _.max(currentOnArtFemale)]);
         currentOnArtMale = currentOnArtMale.map(x => x * -1);

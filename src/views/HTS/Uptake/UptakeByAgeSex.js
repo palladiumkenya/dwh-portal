@@ -18,9 +18,14 @@ const UptakeByAgeSex = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : ''
+            year: filters.fromDate
+                ? moment(filters.fromDate, 'MMM YYYY').format('YYYY')
+                : moment().subtract(2, 'month').add(17, 'days').format('YYYY'),
+            month: filters.fromDate
+                ? moment(filters.fromDate, 'MMM YYYY').format('MM')
+                : moment().subtract(2, 'month').add(17, 'days').format('MM'),
         };
-        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
+        // params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const ageGroups = [];
         let tested_male = [];
         let tested_female = [];

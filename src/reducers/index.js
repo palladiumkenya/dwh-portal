@@ -229,6 +229,7 @@ import newlyStartedOnArtTrendsKHIS from './Operational&HIS/Comparison/newlyStart
 import htsPositivesTrendsKHIS from './Operational&HIS/Comparison/htsPositivesTrendsKHIS';
 import currOnArtKHIS from './Operational&HIS/Comparison/currOnArtKHIS';
 import currOnArtKHISByCounty from './Operational&HIS/Comparison/currOnArtKHISByCounty';
+import currOnArtDWHByCounty from './Operational&HIS/Comparison/currOnArtDWHByCounty';
 import currOnArtKHISByPartner from './Operational&HIS/Comparison/currOnArtKHISByPartner';
 import currOnArtByFacilityKHIS from './Operational&HIS/Comparison/currOnArtByFacilityKHIS';
 import newOnArtByFacilityKHIS from './Operational&HIS/Comparison/newOnArtByFacilityKHIS';
@@ -450,7 +451,6 @@ export default combineReducers({
     ovcVLDone,
     ovcVLSuppressed,
 
-
     newlyStartedOnArtKHIS,
     newlyStartedOnArtTrendsKHIS,
     htsPositivesTrendsKHIS,
@@ -461,4 +461,5 @@ export default combineReducers({
     newOnArtByFacilityKHIS,
     currOnArtByFacilityDWH,
     newOnArtByFacilityDWH,
+    currOnArtDWHByCounty,
 });

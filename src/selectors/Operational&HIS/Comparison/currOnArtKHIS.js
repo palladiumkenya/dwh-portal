@@ -40,7 +40,7 @@ export const getCurrOnArtKHIS = createSelector(
         let OnARTByAge = [0,0,0,0,0,0]
 
 
-        if (filtered && datimAgeGroups) {
+        if (filtered && datimAgeGroups.length>0) {
             for (let i = 0; i < datimAgeGroups.length; i++) {
                 if (datimAgeGroups[i] === 'Under 1') {
                     totalOnART += list.On_ART_Under_1;
@@ -150,7 +150,7 @@ export const getCurrOnArtKHIS = createSelector(
         ];
         let OnARTByAgeDWH = [0, 0, 0, 0, 0, 0];
         
-        if (filtered && datimAgeGroups) {
+        if (filtered && datimAgeGroups.length>0) {
             for (let i = 0; i < datimAgeGroups.length; i++) {
                 if (datimAgeGroups[i] === 'Under 1') {
                     OnARTByAgeDWH.splice(0, 1, loopAgeGroups(listDWH, under1));}
@@ -166,7 +166,7 @@ export const getCurrOnArtKHIS = createSelector(
                     OnARTByAgeDWH.splice(
                         2,
                         1,
-                        loopAgeGroups(listDWH, fifteenToNineteen)
+                        loopAgeGroups(listDWH, tenToFourteen)
                     );
                 }
                 if (datimAgeGroups[i] === '15 to 19') {

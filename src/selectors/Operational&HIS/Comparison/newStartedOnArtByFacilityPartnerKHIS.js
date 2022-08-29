@@ -30,7 +30,7 @@ export const getNewOnArtByFacilityPartnerKHIS = createSelector(
 
         let data = [];
 
-        if (filtered && datimAgeGroups) {
+        if (filtered && datimAgeGroups.length>0) {
             list.map((item) => {
                 item.KHISMale1 = 0;
                 item.KHISFemale1 = 0;

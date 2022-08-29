@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import SectionHeader from '../../Shared/SectionHeader';
 import moment from 'moment';
 import VisibilitySensor from 'react-visibility-sensor';
-import UniversalFilter from '../../Shared/UniversalFilter';
+import KHISComparisonFilter from '../../Shared/KHISComparisonFilter';
 import { useDispatch, useSelector } from 'react-redux';
 import { disableStickyFilter, enableStickyFilter } from '../../../actions/Shared/uiActions';
 import { Col, Row } from 'reactstrap';
@@ -32,55 +32,59 @@ const Comparison = () => {
             dispatch(disableStickyFilter());
         } else {
             dispatch(enableStickyFilter());
-
         }
     };
     return (
         <>
             <SectionHeader
-                title={indicator === 'Tx_New' || indicator === '' ? 'NEWLY STARTED ON ART': 'CURRENT ON ART'}
+                title={
+                    indicator === 'Tx_New' || indicator === ''
+                        ? 'NEWLY STARTED ON ART'
+                        : 'CURRENT ON ART'
+                }
                 description={`YEAR ${moment().year()}`}
             />
             <VisibilitySensor onChange={onVisibilityChange}>
-                <UniversalFilter/>
+                <KHISComparisonFilter />
             </VisibilitySensor>
-            {indicator === 'Tx_New' || indicator === ''  ?
+            {indicator === 'Tx_New' || indicator === '' ? (
                 <>
-                    <ComparisonOverview/>
+                    <ComparisonOverview />
                     <Row>
                         <Col md={12}>
-                            <ComparisonIndicator/>
+                            <ComparisonIndicator />
                         </Col>
                     </Row>
-                    <SectionFooter/>
-                    <Row>
-                        <Col md={6}>
-                            <ComparisonNewlyByGender/>
-                        </Col>
-                        <Col md={6}>
-                            <ComparisonNewlyByAge/>
-                        </Col>
-                    </Row>
-                    <SectionFooter/>
-                    <ComparisonNewlyTrends/>
-                    <SectionFooter/>
-                    <ComparisonNewVsHTSPositivesKHIS/>
-                    <SectionFooter/>
-                    <ComparisonNewVsHTSPositivesDWH/>
-                    <SectionFooter/>
-                    <ComparisonTXNewByGender/>
-                    <SectionFooter/>
-                </> :
-                <>
-                    <ComparisonOverviewTxCurr/>
-                    <ComparisonIndicatorNotesTxCurr/>
                     <SectionFooter />
                     <Row>
                         <Col md={6}>
-                            <ComparisonCurrByGender/>
+                            <ComparisonNewlyByGender />
                         </Col>
                         <Col md={6}>
-                            <ComparisonCurrByAge/>
+                            <ComparisonNewlyByAge />
+                        </Col>
+                    </Row>
+                    <SectionFooter />
+                    <ComparisonNewlyTrends />
+                    <SectionFooter />
+                    <ComparisonNewVsHTSPositivesKHIS />
+                    <SectionFooter />
+                    <ComparisonNewVsHTSPositivesDWH />
+                    <SectionFooter />
+                    <ComparisonTXNewByGender />
+                    <SectionFooter />
+                </>
+            ) : (
+                <>
+                    <ComparisonOverviewTxCurr />
+                    <ComparisonIndicatorNotesTxCurr />
+                    <SectionFooter />
+                    <Row>
+                        <Col md={6}>
+                            <ComparisonCurrByGender />
+                        </Col>
+                        <Col md={6}>
+                            <ComparisonCurrByAge />
                         </Col>
                     </Row>
                     <SectionFooter />
@@ -90,10 +94,8 @@ const Comparison = () => {
                     <SectionFooter />
                     <ComparisonTX_CurrNewByGender />
                     <SectionFooter />
-
                 </>
-            }
-
+            )}
         </>
     );
 };

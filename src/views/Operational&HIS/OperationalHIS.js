@@ -31,6 +31,7 @@ import { loadHTSPositivesTrendsKHIS } from '../../actions/Operational&HIS/Compar
 import { loadCurrOnARTKHIS } from '../../actions/Operational&HIS/Comparison/currOnArtKHISActions';
 import { loadCurrOnARTKHISByCounty } from '../../actions/Operational&HIS/Comparison/currOnArtKHISByCountyActions';
 import { loadCurrOnARTKHISByPartner } from '../../actions/Operational&HIS/Comparison/currOnArtKHISByPartnerActions';
+import { loadCurrentOnArtDistributionByCountyDWH } from '../../actions/Operational&HIS/Comparison/currentOnArtDistributionByCountyActions';
 import { loadCurrentOnArtOverview } from '../../actions/CT/CurrentOnArt/currentOnArtOverviewActions';
 import { loadCurrentOnArtByAgeSex } from '../../actions/CT/CurrentOnArt/currentOnArtByAgeSexActions';
 import { loadCurrentOnArtByCounty } from '../../actions/CT/CurrentOnArt/currentOnArtByCountyActions';
@@ -156,6 +157,7 @@ const OperationalHIS = () => {
         dispatch(loadCurrOnARTKHIS());
         dispatch(loadCurrOnARTKHISByCounty());
         dispatch(loadCurrOnARTKHISByPartner());
+        dispatch(loadCurrentOnArtDistributionByCountyDWH());
 
         dispatch(loadCurrentOnArtOverview(active_tab));
         dispatch(loadCurrentOnArtByAgeSex(active_tab));
