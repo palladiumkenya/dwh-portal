@@ -117,7 +117,7 @@ const DefaultHeader = () => {
                         className="nav-link active"
                         onClick={() => clearCacheData()}
                     >
-                        <strong>Clear Cached Data</strong>
+                        <strong style={{"color": "red"}}>Clear Cached Data</strong>
                     </NavLink>
                 </NavItem>
 
