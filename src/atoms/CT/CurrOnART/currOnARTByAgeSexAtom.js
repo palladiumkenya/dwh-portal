@@ -19,12 +19,11 @@ export const currentOnArtByAgeSexAtom = atom({
 
 export const currentOnArtByAgeSexSelector = selector({
     key: 'selectorCurrentOnArtByAgeSex',
-    get: ({get}) => {
-    const filtered = get(filtersAtom);
-    const listFiltered = get(currentOnArtByAgeSexAtom).filtered;
-    const listUnFiltered = get(currentOnArtByAgeSexAtom).unfiltered;
+    get: ({ get }) => {
+        const filtered = get(filtersAtom);
+        const listFiltered = get(currentOnArtByAgeSexAtom).filtered;
+        const listUnFiltered = get(currentOnArtByAgeSexAtom).unfiltered;
 
-    
         const list = filtered ? listFiltered : listUnFiltered;
         let ageGroups = [
             '< 1',
@@ -75,5 +74,5 @@ export const currentOnArtByAgeSexSelector = selector({
         currentOnArtMale = currentOnArtMale.map((x) => x * -1);
 
         return { ageGroups, max, currentOnArtFemale, currentOnArtMale };
-    }
+    },
 });

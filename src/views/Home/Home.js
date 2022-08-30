@@ -13,6 +13,11 @@ import Loading from './../Shared/Loading';
 import SectionHeader from './../Shared/SectionHeader';
 import SectionFooter from './../Shared/SectionFooter';
 import UniversalFilter from '../Shared/UniversalFilter';
+import { filtersAtom } from '../../atoms/Shared/filtersAtom';
+import { uiAtom } from '../../atoms/Shared/uiAtom';
+import { useRecoilState } from 'recoil';
+import { useCurrOnART } from '../../hooks/CT/CurrOnART/useCurrOnART';
+
 
 import {
     enableFromDateFilter,
@@ -32,8 +37,11 @@ const HomeVLCascade = Loadable({ loader: () => import('./HomeVLCascade'), loadin
 const HomeAgeDistribution = Loadable({ loader: () => import('./HomeAgeDistribution'), loading: Loading, delay: LOADING_DELAY });
 const HomeOverview = Loadable({ loader: () => import('./HomeOverview'), loading: Loading, delay: LOADING_DELAY });
 const HomeMaps = Loadable({ loader: () => import('./HomeMaps'), loading: Loading, delay: LOADING_DELAY });
-
 const Home = () => {
+    let [filters, setFilters] = useRecoilState(filtersAtom);
+    let [ui, setUi] = useRecoilState(uiAtom);
+    const currOnARTHook = useCurrOnART();
+
     const branding = { title: "HOME", description: "HMIS STATISTICS", overview: "HMIS Statistics" };
     const page = useSelector(state => state.ui.currentPage);
     const counties = useSelector(state => state.filters.counties);
@@ -48,21 +56,42 @@ const Home = () => {
 
     const onVisibilityChange = (isVisible) => {
         if (isVisible) {
-            dispatch(disableStickyFilter());
+            setUi({
+                ...ui,
+                stickyFilter: false,
+            });
         } else {
-            dispatch(enableStickyFilter());
+            setUi({
+                ...ui,
+                stickyFilter: true,
+            });
         }
     };
 
     useEffect(() => {
-        dispatch(changeCurrentPage(PAGES.home));
-        dispatch(disableFromDateFilter());
-        dispatch(disableToDateFilter());
-        dispatch(enableGenderFilter());
-        dispatch(enableDatimAgeGroupFilter());
-        dispatch(enableFacilityFilter());
-        dispatch(enableAgencyFilter())
-    }, [dispatch]);
+        setFilters({
+            ...filters,
+            fromDateFilterEnabled: false,
+            toDateFilterEnabled: false,
+            genderFilterEnabled: true,
+            datimAgeGroupFilterEnabled: true,
+            agencyFilterEnabled: true,
+            facilityFilterEnabled: true,
+        });
+        setUi({
+            ...ui,
+            currentPage: PAGES.home,
+        });
+    }, []);
+    // useEffect(() => {
+    //     dispatch(changeCurrentPage(PAGES.home));
+    //     dispatch(disableFromDateFilter());
+    //     dispatch(disableToDateFilter());
+    //     dispatch(enableGenderFilter());
+    //     dispatch(enableDatimAgeGroupFilter());
+    //     dispatch(enableFacilityFilter());
+    //     dispatch(enableAgencyFilter())
+    // }, [dispatch]);
 
     useEffect(() => {
         dispatch(loadCurrentOnArtOverview());
