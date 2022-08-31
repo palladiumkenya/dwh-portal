@@ -11,7 +11,7 @@ export const getOvcDistributionOfCALHIVByAgeSex = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        const ovcAgeGroups = ageGroups.ovcAgeGroups;
+        let ovcAgeGroups = ageGroups.ovcAgeGroups;
 
         let distributionMale = [];
         let distributionFemale = [];
