@@ -7,7 +7,6 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import { loadCtSites } from './actions/Shared/ctSitesActions';
 import { loadHtsSites } from './actions/Shared/htsSitesActions';
 import { loadRrSites } from './actions/Shared/rrSitesActions';
-import { useCtSites } from './hooks/Shared/useCtSites'
 import { store } from './store';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -29,13 +28,9 @@ if (typeof Highcharts === 'object') {
 }
 
 const App = () => {
-    const ctSitesHook = useCtSites();
     const dispatch = useDispatch();
     const history = useHistory();
 
-    useEffect(() => {
-        ctSitesHook();
-    },[])
     useEffect(() => {
         // fetch current user from cookies
         loadUserFromStorage(store);

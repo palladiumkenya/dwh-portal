@@ -8,202 +8,21 @@ import { PAGES } from '../../constants';
 import { Row, Col } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../actions/Shared/filterActions';
-// import * as ctSelectors from '../../selectors/Shared/ctSitesSelector';
+import * as ctSelectors from '../../selectors/Shared/ctSitesSelector';
 import * as htsSelectors from '../../selectors/Shared/htsSitesSelector';
 import * as rrSelectors from '../../selectors/Shared/rrSitesSelector';
-
-
-import * as ctSelectors from './../../atoms/Shared/ctSitesAtom';
-import { filtersAtom } from '../../atoms/Shared/filtersAtom'
-import { useRecoilValue, useRecoilState } from 'recoil';
-
 function useQuery() {
     const { search } = useLocation();
 
     return React.useMemo(() => new URLSearchParams(search), [search]);
 }
 const UniversalFilter = () => {
-    //new recoil store
-    let [filters, setFilters] = useRecoilState(filtersAtom);
-
     const dispatch = useDispatch();
     const history = useHistory();
     let query = useQuery();
-    let queried_partner = query.get('partner') ? [query.get('partner')] : [];
+    let queried_partner = query.get('partner') ? [query.get('partner')]: [];
 
-    const isFiltered = (list, filter) => {
-        let filtered = false
-        switch (filter) {
-            case 'county':
-                filtered =
-                    list.length > 0 ||
-                    filters.subCounties.length > 0 ||
-                    filters.facilities.length > 0 ||
-                    filters.partners.length > 0 ||
-                    filters.agencies.length > 0 ||
-                    filters.projects.length > 0 ||
-                    filters.genders.length > 0 ||
-                    filters.datimAgeGroups.length > 0 ||
-                    filters.populationTypes.length > 0 ||
-                    filters.latestPregnancies.length > 0 ||
-                    filters.fromDate !== '' ||
-                    filters.toDate !== '';
-                    break;
-            case 'subcounty': 
-                filtered =
-                    filters.counties.length > 0 ||
-                    list.length > 0 ||
-                    filters.facilities.length > 0 ||
-                    filters.partners.length > 0 ||
-                    filters.agencies.length > 0 ||
-                    filters.projects.length > 0 ||
-                    filters.genders.length > 0 ||
-                    filters.datimAgeGroups.length > 0 ||
-                    filters.populationTypes.length > 0 ||
-                    filters.latestPregnancies.length > 0 ||
-                    filters.fromDate !== '' ||
-                    filters.toDate !== '';
-                    break
-            case 'facility':
-                filtered =
-                    filters.counties.length > 0 ||
-                    list.length > 0 ||
-                    filters.subCounties.length > 0 ||
-                    filters.partners.length > 0 ||
-                    filters.agencies.length > 0 ||
-                    filters.projects.length > 0 ||
-                    filters.genders.length > 0 ||
-                    filters.datimAgeGroups.length > 0 ||
-                    filters.populationTypes.length > 0 ||
-                    filters.latestPregnancies.length > 0 ||
-                    filters.fromDate !== '' ||
-                    filters.toDate !== '';
-                    break
-            case 'parnter':
-                filtered =
-                    filters.counties.length > 0 ||
-                    list.length > 0 ||
-                    filters.facilities.length > 0 ||
-                    filters.subCounties.length > 0 ||
-                    filters.agencies.length > 0 ||
-                    filters.projects.length > 0 ||
-                    filters.genders.length > 0 ||
-                    filters.datimAgeGroups.length > 0 ||
-                    filters.populationTypes.length > 0 ||
-                    filters.latestPregnancies.length > 0 ||
-                    filters.fromDate !== '' ||
-                    filters.toDate !== '';
-                break
-            case 'agency':
-                filtered =
-                    filters.counties.length > 0 ||
-                    list.length > 0 ||
-                    filters.facilities.length > 0 ||
-                    filters.subCounties.length > 0 ||
-                    filters.subCounties.length > 0 ||
-                    filters.projects.length > 0 ||
-                    filters.genders.length > 0 ||
-                    filters.datimAgeGroups.length > 0 ||
-                    filters.populationTypes.length > 0 ||
-                    filters.latestPregnancies.length > 0 ||
-                    filters.fromDate !== '' ||
-                    filters.toDate !== '';
-                break
-            case 'project':
-                filtered =
-                    filters.counties.length > 0 ||
-                    list.length > 0 ||
-                    filters.facilities.length > 0 ||
-                    filters.subCounties.length > 0 ||
-                    filters.agencies.length > 0 ||
-                    filters.subCounties.length > 0 ||
-                    filters.genders.length > 0 ||
-                    filters.datimAgeGroups.length > 0 ||
-                    filters.populationTypes.length > 0 ||
-                    filters.latestPregnancies.length > 0 ||
-                    filters.fromDate !== '' ||
-                    filters.toDate !== '';
-                break
-            case 'gender':
-                filtered =
-                    filters.counties.length > 0 ||
-                    list.length > 0 ||
-                    filters.facilities.length > 0 ||
-                    filters.subCounties.length > 0 ||
-                    filters.agencies.length > 0 ||
-                    filters.projects.length > 0 ||
-                    filters.subCounties.length > 0 ||
-                    filters.datimAgeGroups.length > 0 ||
-                    filters.populationTypes.length > 0 ||
-                    filters.latestPregnancies.length > 0 ||
-                    filters.fromDate !== '' ||
-                    filters.toDate !== '';
-                break
-            case 'agegroup':
-                filtered =
-                    filters.counties.length > 0 ||
-                    list.length > 0 ||
-                    filters.facilities.length > 0 ||
-                    filters.subCounties.length > 0 ||
-                    filters.agencies.length > 0 ||
-                    filters.projects.length > 0 ||
-                    filters.genders.length > 0 ||
-                    filters.subCounties.length > 0 ||
-                    filters.populationTypes.length > 0 ||
-                    filters.latestPregnancies.length > 0 ||
-                    filters.fromDate !== '' ||
-                    filters.toDate !== '';
-                break
-            case 'pregnancy':
-                filtered =
-                    filters.counties.length > 0 ||
-                    list.length > 0 ||
-                    filters.facilities.length > 0 ||
-                    filters.subCounties.length > 0 ||
-                    filters.agencies.length > 0 ||
-                    filters.projects.length > 0 ||
-                    filters.genders.length > 0 ||
-                    filters.datimAgeGroups.length > 0 ||
-                    filters.populationTypes.length > 0 ||
-                    filters.subCounties.length > 0 ||
-                    filters.fromDate !== '' ||
-                    filters.toDate !== '';
-                break
-            case 'fromdate':
-                filtered =
-                    filters.counties.length > 0 ||
-                    filters.subCounties.length > 0 ||
-                    filters.facilities.length > 0 ||
-                    filters.subCounties.length > 0 ||
-                    filters.agencies.length > 0 ||
-                    filters.projects.length > 0 ||
-                    filters.genders.length > 0 ||
-                    filters.datimAgeGroups.length > 0 ||
-                    filters.populationTypes.length > 0 ||
-                    filters.latestPregnancies.length > 0 ||
-                    list !== '' ||
-                    filters.toDate !== '';
-                break
-            case 'todate':
-                filtered =
-                    filters.counties.length > 0 ||
-                    filters.subCounties.length > 0 ||
-                    filters.facilities.length > 0 ||
-                    filters.subCounties.length > 0 ||
-                    filters.agencies.length > 0 ||
-                    filters.projects.length > 0 ||
-                    filters.genders.length > 0 ||
-                    filters.datimAgeGroups.length > 0 ||
-                    filters.populationTypes.length > 0 ||
-                    filters.latestPregnancies.length > 0 ||
-                    list !== '' ||
-                    filters.fromDate !== '';
-                break
-        }
-        return filtered;
-    };
-
-    // const filters = useSelector((state) => state.filters);
+    const filters = useSelector((state) => state.filters);
     const ui = useSelector((state) => state.ui);
     const { active_tab } = useParams();
 
@@ -232,21 +51,23 @@ const UniversalFilter = () => {
     const htsAgencies = useSelector(htsSelectors.getAgencies);
     const htsProjects = useSelector(htsSelectors.getProjects);
 
-    const ctCounties = useRecoilValue(ctSelectors.getCounties);
-    const ctSubCounties = useRecoilValue(ctSelectors.getSubCounties);
-    const ctFacilities = useRecoilValue(ctSelectors.getFacilities);
-    const ctPartners = useRecoilValue(ctSelectors.getPartners);
-    const ctAgencies = useRecoilValue(ctSelectors.getAgencies);
-    const ctProjects = useRecoilValue(ctSelectors.getProjects);
+    const ctCounties = useSelector(ctSelectors.getCounties);
+    const ctSubCounties = useSelector(ctSelectors.getSubCounties);
+    const ctFacilities = useSelector(ctSelectors.getFacilities);
+    const ctPartners = useSelector(ctSelectors.getPartners);
+    const ctAgencies = useSelector(ctSelectors.getAgencies);
+    const ctProjects = useSelector(ctSelectors.getProjects);
 
     const changeFromQuery = (len) => {
         if (len === 0) {
+            console.log("aaa")
             query.delete('partner');
             history.replace({
                 search: query.toString(),
             });
         }
-    };
+
+    }
     let ageGroups;
     if (active_tab === 'comparison')
         ageGroups = [
@@ -428,14 +249,11 @@ const UniversalFilter = () => {
     ]);
 
     useEffect(() => {
+        // if (queried_partner) dispatch(actions.filterByPartner(queried_partner));
         loadSites();
     }, [loadSites]);
-
     useEffect(() => {
-        console.log(filters.filtered);
-    }, [filters]);
-
-    useEffect(() => {
+        console.log(filters.partners);
         if (queried_partner) {
             dispatch(actions.filterByPartner(queried_partner));
             return;
@@ -476,16 +294,10 @@ const UniversalFilter = () => {
                                 search
                                 options={counties}
                                 value={filters.counties}
-                                onChange={async (e, data) => {
-                                    setFilters({
-                                        ...filters,
-                                        counties: data.value,
-                                        filtered: isFiltered(data.value, 'county'),
-                                    });
-                                    
-                                    // dispatch(
-                                    //     actions.filterByCounty(data.value)
-                                    // );
+                                onChange={(e, data) => {
+                                    dispatch(
+                                        actions.filterByCounty(data.value)
+                                    );
                                 }}
                             />
                         </div>
@@ -510,14 +322,9 @@ const UniversalFilter = () => {
                                 options={subCounties}
                                 value={filters.subCounties}
                                 onChange={(e, data) => {
-                                    setFilters({
-                                        ...filters,
-                                        subCounties: data.value,
-                                        filtered: isFiltered(
-                                            data.value,
-                                            'subcounty'
-                                        ),
-                                    });
+                                    dispatch(
+                                        actions.filterBySubCounty(data.value)
+                                    );
                                 }}
                             />
                         </div>
@@ -542,14 +349,9 @@ const UniversalFilter = () => {
                                 options={facilities}
                                 value={filters.facilities}
                                 onChange={(e, data) => {
-                                    setFilters({
-                                        ...filters,
-                                        facilities: data.value,
-                                        filtered: isFiltered(
-                                            data.value,
-                                            'facility'
-                                        ),
-                                    });
+                                    dispatch(
+                                        actions.filterByFacility(data.value)
+                                    );
                                 }}
                             />
                         </div>
@@ -574,14 +376,9 @@ const UniversalFilter = () => {
                                 options={partners}
                                 value={filters.partners}
                                 onChange={(e, data) => {
-                                    setFilters({
-                                        ...filters,
-                                        partners: data.value,
-                                        filtered: isFiltered(
-                                            data.value,
-                                            'partner'
-                                        ),
-                                    });
+                                    dispatch(
+                                        actions.filterByPartner(data.value)
+                                    );
                                     changeFromQuery(data.value.length);
                                 }}
                             />
@@ -607,14 +404,9 @@ const UniversalFilter = () => {
                                 options={agencies}
                                 value={filters.agencies}
                                 onChange={(e, data) => {
-                                    setFilters({
-                                        ...filters,
-                                        counties: data.value,
-                                        agencies: isFiltered(
-                                            data.value,
-                                            'agency'
-                                        ),
-                                    });
+                                    dispatch(
+                                        actions.filterByAgency(data.value)
+                                    );
                                 }}
                             />
                         </div>
@@ -639,14 +431,9 @@ const UniversalFilter = () => {
                                 options={projects}
                                 value={filters.projects}
                                 onChange={(e, data) => {
-                                    setFilters({
-                                        ...filters,
-                                        projects: data.value,
-                                        filtered: isFiltered(
-                                            data.value,
-                                            'project'
-                                        ),
-                                    });
+                                    dispatch(
+                                        actions.filterByProject(data.value)
+                                    );
                                 }}
                             />
                         </div>
@@ -661,7 +448,6 @@ const UniversalFilter = () => {
                     >
                         <div className="form-group">
                             <label htmlFor="fromDate">
-                                //TODO: Revisit this logic
                                 {filters.toDateFilterEnabled &&
                                 !filters.toDateFilterEnabled
                                     ? 'From'
@@ -679,22 +465,12 @@ const UniversalFilter = () => {
                                 iconPosition="left"
                                 onChange={(e, data) => {
                                     let date = data.value.split(' - ');
-                                    setFilters({
-                                        ...filters,
-                                        fromDate: date[0],
-                                        toDate: data.value + date[0],
-                                        filtered: isFiltered(
-                                            date[0],
-                                            'fromdate'
-                                        ),
-                                    });
-
-                                    // dispatch(actions.filterByFromDate(date[0]));
-                                    // dispatch(
-                                    //     actions.filterByToDate(
-                                    //         data.value + date[0]
-                                    //     )
-                                    // );
+                                    dispatch(actions.filterByFromDate(date[0]));
+                                    dispatch(
+                                        actions.filterByToDate(
+                                            data.value + date[0]
+                                        )
+                                    );
                                 }}
                             />
                         </div>
@@ -739,16 +515,10 @@ const UniversalFilter = () => {
                                 iconPosition="left"
                                 onChange={(e, data) => {
                                     let date = data.value.split(' - ');
-                                    setFilters({
-                                        ...filters,
-                                        fromDate: data.value,
-                                        toDate: date[1],
-                                        filtered: isFiltered(date[1], 'todate'),
-                                    });
-                                    // dispatch(
-                                    //     actions.filterByFromDate(data.value)
-                                    // );
-                                    // dispatch(actions.filterByToDate(date[1]));
+                                    dispatch(
+                                        actions.filterByFromDate(data.value)
+                                    );
+                                    dispatch(actions.filterByToDate(date[1]));
                                 }}
                             />
                         </div>
@@ -773,14 +543,9 @@ const UniversalFilter = () => {
                                 options={genders}
                                 value={filters.genders}
                                 onChange={(e, data) => {
-                                    setFilters({
-                                        ...filters,
-                                        genders: data.value,
-                                        filtered: isFiltered(
-                                            data.value,
-                                            'gender'
-                                        ),
-                                    });
+                                    dispatch(
+                                        actions.filterByGender(data.value)
+                                    );
                                 }}
                             />
                         </div>
@@ -805,14 +570,11 @@ const UniversalFilter = () => {
                                 options={datimAgeGroups}
                                 value={filters.datimAgeGroups}
                                 onChange={(e, data) => {
-                                    setFilters({
-                                        ...filters,
-                                        ageGroups: data.value,
-                                        filtered: isFiltered(
-                                            data.value,
-                                            'agegroup'
-                                        ),
-                                    });
+                                    dispatch(
+                                        actions.filterByDatimAgeGroup(
+                                            data.value
+                                        )
+                                    );
                                 }}
                             />
                         </div>
@@ -837,14 +599,11 @@ const UniversalFilter = () => {
                                 options={latestPregnancies}
                                 value={filters.latestPregnancies}
                                 onChange={(e, data) => {
-                                    setFilters({
-                                        ...filters,
-                                        latestPregnancies: data.value,
-                                        filtered: isFiltered(
-                                            data.value,
-                                            'pregnancy'
-                                        ),
-                                    });
+                                    dispatch(
+                                        actions.filterByLatestPregnancy(
+                                            data.value
+                                        )
+                                    );
                                 }}
                             />
                         </div>
@@ -895,10 +654,9 @@ const UniversalFilter = () => {
                                         : 'Tx_New'
                                 }
                                 onChange={(e, data) => {
-                                    setFilters({
-                                        ...filters,
-                                        indicators: data.value,
-                                    });
+                                    dispatch(
+                                        actions.filterByIndicator(data.value)
+                                    );
                                 }}
                             />
                         </div>

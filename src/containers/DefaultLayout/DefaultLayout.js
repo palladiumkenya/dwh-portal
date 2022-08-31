@@ -12,16 +12,12 @@ import routes from './../../routes';
 import UniversalFilter from './../../views/Shared/UniversalFilter';
 import CovidFilter from './../../views/Shared/CovidFilter';
 import KHISComparisonFilter from './../../views/Shared/KHISComparisonFilter';
-import { uiAtom } from '../../atoms/Shared/uiAtom';
-import { useRecoilValue } from 'recoil';
 
 const DefaultFooter = Loadable({ loader: () => import('./DefaultFooter'), loading: Loading, delay: LOADING_DELAY });
 const DefaultHeader = Loadable({ loader: () => import('./DefaultHeader'), loading: Loading, delay: LOADING_DELAY });
 
 const DefaultLayout = () => {
-    let ui = useRecoilValue(uiAtom);
-
-    // const ui = useSelector(state => state.ui
+    const ui = useSelector(state => state.ui)
     const ctTab = useSelector(state => state.ui.ctTab);
     const comparisonTab = useSelector((state) => state.ui.operationalHISTab);
 
