@@ -34,6 +34,7 @@ export const getOvcDistributionOfCALHIVByAgeSex = createSelector(
 
         let max = _.max([_.max(distributionMale), _.max(distributionFemale)]);
         distributionMale = distributionMale.map(x => x * -1);
+        ovcAgeGroups.splice(ovcAgeGroups.length - 1, 1, '15 to 17');
 
         return { max, ovcAgeGroups, distributionMale, distributionFemale };
     }

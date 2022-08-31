@@ -1,16 +1,19 @@
 import { atom, useRecoilState, useRecoilValue } from 'recoil';
 import moment from 'moment';
+import useSWR from 'swr';
 import {filtersAtom} from "../../../atoms/Shared/filtersAtom"
 import {currentOnArtByAgeSexAtom} from "../../../atoms/CT/CurrOnART/currOnARTByAgeSexAtom"
 import { getAll } from '../../../views/Shared/Api';
 
 
 export const useCurrOnART = () => {
+    const fetcher = (...args) => fetch(...args).then((res) => res.json());
+    const { data, error } = useSWR('care-treatment/txCurrByAgeAndSex', getData);
 
     const filtered = useRecoilValue(filtersAtom);
     const [list, setList] = useRecoilState(currentOnArtByAgeSexAtom);
 
-    return async function getData ()
+    async function getData ()
     {
         const params = {}
         //     county: getState().filters.counties,
@@ -33,6 +36,6 @@ export const useCurrOnART = () => {
             ? setList(Object.assign({}, list, { filtered: response }))
             : setList(Object.assign({}, list, { unfiltered: response, lastfetch: Date.now() }));
     }
-
+    return data
 
 };
