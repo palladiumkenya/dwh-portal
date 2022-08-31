@@ -14,22 +14,73 @@ const OVCDistributionOfCALHIVByAgeSex = () => {
             chart: { type: 'bar' },
             title: { text: '' },
             xAxis: [
-                { categories: distributionOfCALHIVByAgeSex.ovcAgeGroups, title: { text: '' }, reversed: false },
-                { categories: distributionOfCALHIVByAgeSex.ovcAgeGroups, title: { text: '' }, reversed: false, linkedTo: 0, opposite: true }
+                {
+                    categories: [
+                        'Under 1',
+                        '1 to 4',
+                        '5 to 9',
+                        '10 to 14',
+                        '15 to 17',
+                    ],
+                    title: { text: '' },
+                    reversed: false,
+                },
+                {
+                    categories: [
+                        'Under 1',
+                        '1 to 4',
+                        '5 to 9',
+                        '10 to 14',
+                        '15 to 17',
+                    ],
+                    title: { text: '' },
+                    reversed: false,
+                    linkedTo: 0,
+                    opposite: true,
+                },
             ],
-            yAxis: [{ min: -(distributionOfCALHIVByAgeSex.max), max: distributionOfCALHIVByAgeSex.max, title: { text: 'Number Of Patients' }, labels: { formatter: function () {
-                        return Math.abs(this.value);
-                    }}}],
-            plotOptions: { series: { stacking: 'normal' }, bar: { pointWidth: 18, } },
-            tooltip: { formatter: function () {
-                    return '<b>' + this.series.name + ', Age Group ' + this.point.category + '</b><br/>' +
-                        'Number Of Patients: ' + Highcharts.numberFormat(Math.abs(this.point.y), 1);
-                }},
+            yAxis: [
+                {
+                    min: -distributionOfCALHIVByAgeSex.max,
+                    max: distributionOfCALHIVByAgeSex.max,
+                    title: { text: 'Number Of Patients' },
+                    labels: {
+                        formatter: function () {
+                            return Math.abs(this.value);
+                        },
+                    },
+                },
+            ],
+            plotOptions: {
+                series: { stacking: 'normal' },
+                bar: { pointWidth: 18 },
+            },
+            tooltip: {
+                formatter: function () {
+                    return (
+                        '<b>' +
+                        this.series.name +
+                        ', Age Group ' +
+                        this.point.category +
+                        '</b><br/>' +
+                        'Number Of Patients: ' +
+                        Highcharts.numberFormat(Math.abs(this.point.y), 1)
+                    );
+                },
+            },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'Female', data: distributionOfCALHIVByAgeSex.distributionFemale, color: "#EA4C8B" },
-                { name: 'Male', data: distributionOfCALHIVByAgeSex.distributionMale, color: "#14084D" }
-            ]
+                {
+                    name: 'Female',
+                    data: distributionOfCALHIVByAgeSex.distributionFemale,
+                    color: '#EA4C8B',
+                },
+                {
+                    name: 'Male',
+                    data: distributionOfCALHIVByAgeSex.distributionMale,
+                    color: '#14084D',
+                },
+            ],
         });
     }, [distributionOfCALHIVByAgeSex]);
 
