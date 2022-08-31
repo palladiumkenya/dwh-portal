@@ -17,7 +17,7 @@ export const getOvcDistributionOfPatientsByAgeSex = createSelector(
         let distributionMale = [];
         let distributionFemale = [];
 
-        for (const ageGroup of ovcAgeGroups) {
+        for (let ageGroup of ovcAgeGroups) {
             const ageGroupMaleFilter = list.filter(obj => obj.DATIM_AgeGroup === ageGroup && (obj.Gender.toLowerCase() === "M".toLowerCase() || obj.Gender.toLowerCase() === "Male".toLowerCase()));
             const ageGroupFemaleFilter = list.filter(obj => obj.DATIM_AgeGroup === ageGroup && (obj.Gender.toLowerCase() === "F".toLowerCase() || obj.Gender.toLowerCase() === "Female".toLowerCase()));
             if (ageGroupMaleFilter.length > 0) {
@@ -35,7 +35,6 @@ export const getOvcDistributionOfPatientsByAgeSex = createSelector(
 
         let max = _.max([_.max(distributionMale), _.max(distributionFemale)]);
         distributionMale = distributionMale.map(x => x * -1);
-        ovcAgeGroups.splice(ovcAgeGroups.length - 1, 1, '15 to 17')
 
         return { max, ovcAgeGroups, distributionMale, distributionFemale };
     }
