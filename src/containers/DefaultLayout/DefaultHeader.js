@@ -50,10 +50,12 @@ const DefaultHeader = () => {
         return  (res === 1 || res === 2) ? <Administration /> : null;
     }
 
-    const clearCacheData = () => {
-        localStorage.clear();
-        window.location.reload()
-        alert('Complete Cache Cleared');
+    const clearCacheData = async () => {
+        await localStorage.clear();
+        if (localStorage.length === 0){
+            alert('Complete Cache Cleared'); 
+            window.location.reload();
+        }
     };
     const toggle = () => setDropdownOpen(!dropdownOpen);
 
