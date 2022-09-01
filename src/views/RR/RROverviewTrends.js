@@ -21,7 +21,12 @@ const RROverviewTrends = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            fromDate: filters.fromDate ? filters.fromDate : moment().subtract(1, 'month').format("MMM YYYY")
+            fromDate: filters.fromDate
+                ? filters.fromDate
+                : moment()
+                      .subtract(2, 'month')
+                      .add(15, 'days')
+                      .format('MMM YYYY'),
         };
         params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
         const data = await getAll('manifests/expected/' + rrTab, params);
@@ -36,13 +41,23 @@ const RROverviewTrends = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            fromDate: filters.fromDate ? filters.fromDate : moment().subtract(1, 'month').format("MMM YYYY")
+            fromDate: filters.fromDate
+                ? filters.fromDate
+                : moment()
+                      .subtract(2, 'month')
+                      .add(15, 'days')
+                      .format('MMM YYYY'),
         };
         // params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
         const result = await getAll('manifests/recency/trends/' + rrTab, params);
         const months = {};
         const data = {};
-        const periodDate = moment(filters.fromDate ? filters.fromDate: moment().subtract(1, 'month'), 'MMM YYYY');
+        const periodDate = moment(
+            filters.fromDate
+                ? filters.fromDate
+                : moment().subtract(2, 'month').add(15, 'days'),
+            'MMM YYYY'
+        );
         for (const element of result) {
             let dataDate = moment(element.year + "-" + element.month, 'YYYY-M');
             if (dataDate.isAfter(periodDate)) {
@@ -78,14 +93,30 @@ const RROverviewTrends = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
+            fromDate: filters.fromDate
+                ? filters.fromDate
+                : moment()
+                      .subtract(2, 'month')
+                      .add(15, 'days')
+                      .format('MMM YYYY'),
         };
-        params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
-        let endDate = moment().subtract(1, 'month').endOf('month');
+        params.period = moment(params.fromDate, 'MMM YYYY')
+            .subtract(2, 'month')
+            .add(15, 'days')
+            .format('YYYY,M');
+        let endDate = moment()
+            .subtract(2, 'month')
+            .add(15, 'days')
+            .endOf('month');
         if (filters.toDate || filters.fromDate) {
             endDate = moment(filters.toDate ? filters.toDate: filters.fromDate, 'MMM YYYY').endOf('month');
         }
-        const startDate = endDate.clone().subtract(numberOfMonths, 'month').add(1, 'month').startOf('month');
+        const startDate = endDate
+            .clone()
+            .subtract(numberOfMonths, 'month')
+            .subtract(2, 'month')
+            .add(15, 'days')
+            .startOf('month');
         params.startDate = startDate.format('YYYY-MM-DD');
         params.endDate = endDate.format('YYYY-MM-DD');
         let result = await getAll('manifests/consistency/trends/' + rrTab, params);
