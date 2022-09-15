@@ -12,6 +12,8 @@ import gpsSites from "./Home/gpsSites";
 import linkagePositiveTrends from "./HTS/Linkage/linkagePositiveTrends";
 import linkageNumberNotLinkedByFacility from "./HTS/Linkage/linkageNumberNotLinkedByFacility";
 
+import newOnPrep from './HTS/Prep/newOnPrep';
+
 import currentNewOnArtOverview from "./CT/NewOnArt/currentNewOnArtOverview";
 
 import newOnArtOverview from "./CT/NewOnArt/newOnArtOverview";
@@ -462,4 +464,6 @@ export default combineReducers({
     currOnArtByFacilityDWH,
     newOnArtByFacilityDWH,
     currOnArtDWHByCounty,
+
+    newOnPrep,
 });

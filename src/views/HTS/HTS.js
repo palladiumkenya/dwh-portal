@@ -6,6 +6,7 @@ import { HTS_TABS, PAGES, LOADING_DELAY } from './../../constants';
 import { changeHtsTab, changeCurrentPage } from './../../actions/Shared/uiActions';
 import { enableFromDateFilter, disableFromDateFilter, enableAgencyFilter } from './../../actions/Shared/filterActions';
 import { loadLinkageNumberNotLinkedByFacility } from '../../actions/HTS/Linkage/linkageNumberNotLinkedByFacilityActions';
+import { loadNewOnPrep } from '../../actions/HTS/Prep/newOnPrepAction';
 import Loading from './../Shared/Loading';
 import { useHistory, useParams } from 'react-router-dom';
 
@@ -34,7 +35,7 @@ const HTS = () => {
                         <NavLink active={active_tab === value} onClick={() => {
                             dispatch(changeHtsTab(value));
                             toggle(value);
-                        }} replace >
+                        }} >
                             {HTS_TABS[value]}
                         </NavLink>
                     </NavItem>
@@ -53,9 +54,13 @@ const HTS = () => {
     }, [dispatch]);
 
     useEffect(() => {
+                console.log(htsTab);
         switch (htsTab) {
             case 'linkage':
                 dispatch(loadLinkageNumberNotLinkedByFacility());
+                break;
+            case 'prep':
+                dispatch(loadNewOnPrep());
                 break;
             default:
                 break;
@@ -73,9 +78,10 @@ const HTS = () => {
         noCache
     ]);
 
-    const DEFAULT_ACTIVE_TAB = htsTab;
+    const DEFAULT_ACTIVE_TAB = useSelector((state) => state.ui.htsTab);
     const { active_tab } = useParams();
     const history = useHistory();
+
 
     useEffect(() => {
         if (!active_tab) {

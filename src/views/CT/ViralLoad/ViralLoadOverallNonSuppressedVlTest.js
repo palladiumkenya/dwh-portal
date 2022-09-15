@@ -168,7 +168,7 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VL CASCADE FOR PATIENTS WITH A NON-SUPPRESSED VL TEST RESULT (VL > 1000 copies/ml)
+                        {'VL CASCADE FOR PATIENTS WITH A NON-SUPPRESSED VL TEST RESULT (VL > 1000 copies/ml)'}
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
