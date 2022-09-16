@@ -25,6 +25,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-chartjs-2": "^4.0.1",
+    "react-cookie": "^4.1.1",
     "react-csv-downloader": "^2.2.0",
     "react-data-table-component": "^6.11.2",
     "react-datepicker": "^3.8.0",
