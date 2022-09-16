@@ -87,6 +87,15 @@ export const getUserById = async (endpoint, token) => {
     return [];
 }
 
+export const metabaseLogin = async () => {
+    let sessionId;
+    try{
+      sessionId = (await axios.get(`${url}self-service/metabase`)).data.id;
+    }catch(e) {
+        console.error(e);
+    }
+    return sessionId;
+}
 export const getYearMonths = (minYear) => {
     const yearMonths = [];
     const startDate = moment([minYear]);
