@@ -472,6 +472,7 @@ const CT = () => {
                 dispatch(loadCurrentOnArtByPartner(active_tab));
                 dispatch(loadCurrentOnArtDistributionByCounty(active_tab));
                 dispatch(loadCurrentOnArtDistributionByPartner(active_tab));
+                dispatch(loadArtOptimizationNewByYear(active_tab));
                 break;
             case "artOptimization":
                 dispatch(loadCurrentOnArtByAgeSex(active_tab));
