@@ -463,6 +463,7 @@ const CT = () => {
                 dispatch(loadTimeFromDiagnosisToArtStart());
                 dispatch(loadMissingDiagnosisDateByFacility());
                 dispatch(loadArtOptimizationCurrentByRegimen(active_tab));
+                dispatch(loadArtOptimizationNewByYear(active_tab));
                 break;
             case "currentOnArt":
                 currOnARTHook();

@@ -1,7 +1,7 @@
 import moment from 'moment';
 import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
-import { CACHING } from '../../../constants';
+import { CACHING, PAGES } from '../../../constants';
 
 export const loadArtOptimizationNewByYear = (tab) => async (dispatch, getState) => {
     if (getState().filters.noCache === true) {
