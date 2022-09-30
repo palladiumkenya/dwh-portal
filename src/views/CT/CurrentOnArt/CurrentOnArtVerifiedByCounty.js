@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import * as currentOnArtByCountySelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtByCounty';
+import * as currentOnArtByCountySelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByCounty';
 
 const CurrentOnArtVerifiedByCounty = () => {
     const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState(
@@ -23,7 +23,7 @@ const CurrentOnArtVerifiedByCounty = () => {
                 },
             ],
             yAxis: [{ title: { text: '' } }],
-            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+            legend: { enabled : false, align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             tooltip: {
                 headerFormat:
                     '<span style="font-size:10px">{point.key}</span><table>',
@@ -48,9 +48,9 @@ const CurrentOnArtVerifiedByCounty = () => {
             series: [
                 {
                     data: currentOnArtByCountyData.currentOnArt,
-                    name: 'Number currently on ART',
+                    name: 'Number currently on ART & Verified',
                     type: 'column',
-                    color: '#142459',
+                    color: '#2F4050',
                 },
             ],
         });

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
-// import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtByAgeSex';
+import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByAgeSex';
 import { currentOnArtByAgeSexSelector } from '../../../atoms/CT/CurrOnART/currOnARTByAgeSexAtom';
 import { useRecoilValue } from 'recoil';
 import moment from 'moment';
@@ -12,10 +12,12 @@ const CurrentOnArtVerifiedByAgeSex = () => {
     const [currentOnArtByAgeSexChart, setCurrentOnArtByAgeSexChart] = useState(
         {}
     );
-    const currentOnArtByAgeSexData = useRecoilValue(
-        currentOnArtByAgeSexSelector
+    // const currentOnArtByAgeSexData = useRecoilValue(
+    //     currentOnArtByAgeSexSelector
+    // );
+    const currentOnArtByAgeSexData = useSelector(
+        currentOnArtByAgeSexSelectors.getCurrentOnArtByAgeSex
     );
-    // useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtByAgeSex);
 
     const loadCurrentOnArtByAgeSexChart = useCallback(async () => {
         setCurrentOnArtByAgeSexChart({
@@ -39,7 +41,7 @@ const CurrentOnArtVerifiedByAgeSex = () => {
                 {
                     min: -currentOnArtByAgeSexData.max,
                     max: currentOnArtByAgeSexData.max,
-                    title: { text: 'CURRENT ON ART' },
+                    title: { text: 'CURRENT ON ART & VERIFIED' },
                     labels: {
                         formatter: function () {
                             return Math.abs(this.value);

@@ -331,7 +331,10 @@ import {
 import {
     loadViralLoadOverallNumberGt1000CopiesSecondlineRegiment
 } from '../../actions/CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
-
+import { loadCurrentOnArtVerified } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedActions';
+import { loadCurrentOnArtVerifiedByPartner } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedByPartnerActions';
+import { loadCurrentOnArtVerifiedByCounty } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedByCountyActions';
+import { loadCurrentOnArtVerifiedByAgeSex } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedByAgeSexActions';
 import { useCurrOnART } from './../../hooks/CT/CurrOnART/useCurrOnART';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
@@ -467,6 +470,9 @@ const CT = () => {
                 break;
             case "currentOnArt":
                 currOnARTHook();
+                dispatch(loadCurrentOnArtVerifiedByAgeSex(active_tab))
+                dispatch(loadCurrentOnArtVerifiedByPartner(active_tab))
+                dispatch(loadCurrentOnArtVerifiedByCounty(active_tab))
                 dispatch(loadCurrentOnArtOverview(active_tab));
                 dispatch(loadCurrentOnArtByAgeSex(active_tab));
                 dispatch(loadCurrentOnArtByCounty(active_tab));
@@ -474,6 +480,7 @@ const CT = () => {
                 dispatch(loadCurrentOnArtDistributionByCounty(active_tab));
                 dispatch(loadCurrentOnArtDistributionByPartner(active_tab));
                 dispatch(loadArtOptimizationNewByYear(active_tab));
+                dispatch(loadCurrentOnArtVerified(active_tab))
                 break;
             case "artOptimization":
                 dispatch(loadCurrentOnArtByAgeSex(active_tab));

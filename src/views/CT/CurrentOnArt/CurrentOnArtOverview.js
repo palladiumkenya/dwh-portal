@@ -23,6 +23,7 @@ const CurrentOnArtOverview = () => {
     const currentOnArtAdolescentsPercent = currentOnArt ? ((currentOnArtAdolescents/currentOnArt)*100) : 0;
     const currentOnArtChildren = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtChildren).currentOnArt;
     const currentOnArtChildrenPercent = currentOnArt ? ((currentOnArtChildren/currentOnArt)*100) : 0;
+    const currentOnArtVerified = useSelector(currentOnArtOverviewSelectors.getCurrentOnArtVerified);
 
     return (
         <>
@@ -65,7 +66,7 @@ const CurrentOnArtOverview = () => {
                         >
                             <DataCardCT
                                 title={'VERIFIED & CURRENT ON ART'}
-                                data={formatNumber(currentOnArtMale)}
+                                data={formatNumber(currentOnArtVerified)}
                             />
                         </Col>
                         <Col

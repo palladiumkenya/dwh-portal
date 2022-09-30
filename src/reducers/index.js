@@ -214,6 +214,10 @@ import CovidNumberScreened from './CT/Covid/covidNumberScreened';
 import CovidCumulativeWithMissingDateGivenFirstDose from './CT/Covid/covidCumulativeWithMissingDateGivenFirstDose';
 import CovidAdmissionSymptomaticByAge from './CT/Covid/covidAdmissionSymptomaticByAge';
 import CovidManagementAdmitted from './CT/Covid/covidManagementAdmitted';
+import currentOnArtVerified from './CT/CurrentOnArt/currentOnArtVerified';
+import currentOnArtVerifiedByAgeSex from './CT/CurrentOnArt/currentOnArtVerifiedByAgeSex';
+import currentOnArtVerifiedByCounty from './CT/CurrentOnArt/currentOnArtVerifiedByCounty';
+import currentOnArtVerifiedByPartner from './CT/CurrentOnArt/currentOnArtVerifiedByPartner';
 import viralLoadOverallUptakeSuppressionReferredLessIntense
     from './CT/ViralLoad/viralLoadOverallUptakeSuppressionReferredLessIntense';
 import viralLoadOverallUptakeGt1000Copies from './CT/ViralLoad/viralLoadOverallUptakeGt1000Copies';
@@ -237,7 +241,6 @@ import currOnArtByFacilityKHIS from './Operational&HIS/Comparison/currOnArtByFac
 import newOnArtByFacilityKHIS from './Operational&HIS/Comparison/newOnArtByFacilityKHIS';
 import currOnArtByFacilityDWH from './Operational&HIS/Comparison/currOnArtByFacilityDWH';
 import newOnArtByFacilityDWH from './Operational&HIS/Comparison/newOnArtByFacilityDWH';
-
 
 export default combineReducers({
     auth: authReducer,
@@ -464,6 +467,10 @@ export default combineReducers({
     currOnArtByFacilityDWH,
     newOnArtByFacilityDWH,
     currOnArtDWHByCounty,
+    currentOnArtVerified,
+    currentOnArtVerifiedByCounty,
+    currentOnArtVerifiedByPartner,
+    currentOnArtVerifiedByAgeSex,
 
     newOnPrep,
 });
