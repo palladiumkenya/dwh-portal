@@ -4,6 +4,10 @@ import _ from 'lodash';
 const listUnfiltered = state => state.currentOnArtOverview.listUnfiltered;
 const listFiltered = state => state.currentOnArtOverview.listFiltered;
 
+const listUnfilteredVerified = (state) =>
+    state.currentOnArtVerified.listUnfiltered;
+const listFilteredVerified = (state) => state.currentOnArtVerified.listFiltered;
+
 const listUnFilteredCurrentOnArtByAge = state => state.currentOnArtByAgeSex.listUnfiltered;
 const listFilteredCurrentOnArtByAge = state => state.currentOnArtByAgeSex.listFiltered;
 
@@ -28,6 +32,14 @@ export const getCurrentOnArt = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return list.TX_CURR ? list.TX_CURR : 0;
+    }
+);
+
+export const getCurrentOnArtVerified = createSelector(
+    [listUnfilteredVerified, listFilteredVerified, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        return list.NumNupi ?? 0;
     }
 );
 

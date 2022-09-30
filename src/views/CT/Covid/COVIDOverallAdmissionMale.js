@@ -31,7 +31,7 @@ export const COVIDOverallAdmissionMale = () => {
                 }
             },
             series: [{
-                name:"OVERALL ADMISSION",
+                name:"MALES ADMITTED",
                 colorByPoint: true,
                 data: [
                     { name: 'ADMITTED', y: overallAdmissionData.admittedTotal, color: "#1AB394" },
