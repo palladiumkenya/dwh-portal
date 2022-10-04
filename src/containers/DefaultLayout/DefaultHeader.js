@@ -142,6 +142,7 @@ const DefaultHeader = () => {
                         <strong style={{ color: 'red' }}>
                             Clear Cached Data
                         </strong>
+                    </NavLink>
                 </NavItem>
                 {user && <Adhoc />}
                 {userType.userType === 1 || userType.userType === 2 ? (
