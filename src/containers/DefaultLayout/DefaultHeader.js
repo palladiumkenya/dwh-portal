@@ -124,13 +124,24 @@ const DefaultHeader = () => {
                     </a>
                 </NavItem>
                 <NavItem className="px-3">
+                    <a
+                        href="https://national-data-warehouse-gis-analytics-dwh.hub.arcgis.com/"
+                        className="nav-link active"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <strong>GIS</strong>
+                    </a>
+                </NavItem>
+                <NavItem className="px-3">
                     <NavLink
                         to="/"
                         className="nav-link active"
                         onClick={() => clearCacheData()}
                     >
-                        <strong style={{ "color": "red" }}>Clear Cached Data</strong>
-                    </NavLink>
+                        <strong style={{ color: 'red' }}>
+                            Clear Cached Data
+                        </strong>
                 </NavItem>
                 {user && <Adhoc />}
                 {userType.userType === 1 || userType.userType === 2 ? (
