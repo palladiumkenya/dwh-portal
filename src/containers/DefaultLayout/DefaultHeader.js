@@ -9,7 +9,8 @@ import { UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle } from
 import avatar from '../../assets/img/avatars/avatar.png';
 import { useSelector } from 'react-redux';
 import { signinRedirect, signoutRedirect } from '../../services/UserService';
-import { getUserById } from '../../views/Shared/Api';
+import { getUserById, metabaseLogin } from '../../views/Shared/Api';
+import { useCookies } from 'react-cookie';
 
 const DefaultHeader = () => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -18,7 +19,7 @@ const DefaultHeader = () => {
     const [userType, setUserType] = useState({
 
     });
-
+    const [cookies, setCookie] = useCookies(['metabase.SESSION', 'metabase.TIMEOUT']);
     const loadUserType = useCallback(async () => {
         const userType = await getUserType();
         setUserType({
@@ -26,6 +27,14 @@ const DefaultHeader = () => {
         });
     }, []);
 
+    const loadCookies = useCallback(async () => {
+        if (user && !cookies['metabase.SESSION'] && !cookies['metabase.TIMEOUT']){
+            let sessionId = await metabaseLogin();
+            if (sessionId) {
+                setCookie('metabase.SESSION', sessionId, { path: '/' });
+            }
+        }
+    }, []); 
     const login = async () => {
         const res = await getUserType();
         if (user && !user.expired) {
@@ -61,7 +70,8 @@ const DefaultHeader = () => {
 
     useEffect(() => {
         loadUserType()
-    }, [loadUserType]);
+        loadCookies()
+    }, [loadUserType, loadCookies]);
 
     return (
         <>
@@ -132,11 +142,8 @@ const DefaultHeader = () => {
                         <strong style={{ color: 'red' }}>
                             Clear Cached Data
                         </strong>
-                    </NavLink>
                 </NavItem>
-
-                {user ? <Adhoc /> : null}
-
+                {user && <Adhoc />}
                 {userType.userType === 1 || userType.userType === 2 ? (
                     <Administration userType={userType} />
                 ) : null}
@@ -176,10 +183,22 @@ const DefaultHeader = () => {
 
 const Adhoc = () => {
     return (
-        <NavItem className="px-3">
-            <a href={process.env.REACT_APP_ADHOC_URL} className="nav-link active"><strong>Adhoc</strong></a>
-
-        </NavItem>
+        <UncontrolledDropdown nav direction="down">
+        <DropdownToggle nav>
+            <strong>Adhoc</strong>
+        </DropdownToggle>
+        <DropdownMenu right>
+            <DropdownItem header tag="div">
+                <strong>Platforms supporting Adhoc</strong>
+            </DropdownItem>
+            <DropdownItem href={process.env.REACT_APP_ADHOC_URL} >
+                <strong>Flex monster</strong>
+            </DropdownItem>
+            <DropdownItem href={process.env.REACT_APP_METABASE_URL} >
+                <strong>Metabase</strong>
+            </DropdownItem>
+        </DropdownMenu>
+    </UncontrolledDropdown>
     );
 };
 
