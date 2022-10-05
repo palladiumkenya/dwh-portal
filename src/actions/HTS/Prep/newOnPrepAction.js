@@ -9,6 +9,7 @@ export const loadNewOnPrep = () => async (dispatch, getState) => {
         'minutes'
     );
     if (getState().ui.htsTab !== 'prep') {
+        
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {

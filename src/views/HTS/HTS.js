@@ -27,21 +27,26 @@ const HTS = () => {
     const projects = useSelector(state => state.filters.projects);
     const fromDate = useSelector(state => state.filters.fromDate);
 
+    const DEFAULT_ACTIVE_TAB = useSelector((state) => state.ui.htsTab);
+    const { active_tab } = useParams();
+    const history = useHistory();
+
     const renderTabNavItems = () => {
-        return (
-            Object.keys(HTS_TABS).map((value) => {
-                return (
-                    <NavItem key={value}>
-                        <NavLink active={active_tab === value} onClick={() => {
+        return Object.keys(HTS_TABS).map((value) => {
+            return (
+                <NavItem key={value}>
+                    <NavLink
+                        active={active_tab === value}
+                        onClick={() => {
                             dispatch(changeHtsTab(value));
                             toggle(value);
-                        }} >
-                            {HTS_TABS[value]}
-                        </NavLink>
-                    </NavItem>
-                );
-            })
-        );
+                        }}
+                    >
+                        {HTS_TABS[value]}
+                    </NavLink>
+                </NavItem>
+            );
+        });
     };
 
     useEffect(() => {
@@ -54,12 +59,14 @@ const HTS = () => {
     }, [dispatch]);
 
     useEffect(() => {
-                console.log(htsTab);
-        switch (htsTab) {
+        console.log(active_tab);
+        switch (active_tab) {
             case 'linkage':
+                dispatch(changeHtsTab(active_tab));
                 dispatch(loadLinkageNumberNotLinkedByFacility());
                 break;
             case 'prep':
+                dispatch(changeHtsTab(active_tab));
                 dispatch(loadNewOnPrep());
                 break;
             default:
@@ -74,14 +81,9 @@ const HTS = () => {
         agencies,
         projects,
         fromDate,
-        htsTab,
-        noCache
+        active_tab,
+        noCache,
     ]);
-
-    const DEFAULT_ACTIVE_TAB = useSelector((state) => state.ui.htsTab);
-    const { active_tab } = useParams();
-    const history = useHistory();
-
 
     useEffect(() => {
         if (!active_tab) {
@@ -90,7 +92,7 @@ const HTS = () => {
     }, []);
 
     if(!active_tab){
-        history.push(`/hiv-testing/${htsTab}`);
+        history.push(`/hiv-testing/${DEFAULT_ACTIVE_TAB}`);
     }
     const toggle = tab => {
         if (active_tab !== tab) {

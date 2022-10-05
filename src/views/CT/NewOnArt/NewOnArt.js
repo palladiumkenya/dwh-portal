@@ -105,7 +105,7 @@ const NewOnArt = () => {
                             were started on ART within the month of{' '}
                             {moment()
                                 .subtract(2, 'month')
-                                .add(15, 'days')
+                                .add(16, 'days')
                                 .format('MMMM YYYY')}
                         </li>
                     </ul>
