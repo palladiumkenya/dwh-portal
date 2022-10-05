@@ -25,7 +25,7 @@ const RROverviewTrends = () => {
                 ? filters.fromDate
                 : moment()
                       .subtract(2, 'month')
-                      .add(15, 'days')
+                      .add(16, 'days')
                       .format('MMM YYYY'),
         };
         params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
@@ -45,7 +45,7 @@ const RROverviewTrends = () => {
                 ? filters.fromDate
                 : moment()
                       .subtract(2, 'month')
-                      .add(15, 'days')
+                      .add(16, 'days')
                       .format('MMM YYYY'),
         };
         // params.period = moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M');
@@ -55,7 +55,7 @@ const RROverviewTrends = () => {
         const periodDate = moment(
             filters.fromDate
                 ? filters.fromDate
-                : moment().subtract(2, 'month').add(15, 'days'),
+                : moment().subtract(2, 'month').add(16, 'days'),
             'MMM YYYY'
         );
         for (const element of result) {
@@ -97,16 +97,16 @@ const RROverviewTrends = () => {
                 ? filters.fromDate
                 : moment()
                       .subtract(2, 'month')
-                      .add(15, 'days')
+                      .add(16, 'days')
                       .format('MMM YYYY'),
         };
         params.period = moment(params.fromDate, 'MMM YYYY')
             .subtract(2, 'month')
-            .add(15, 'days')
+            .add(16, 'days')
             .format('YYYY,M');
         let endDate = moment()
             .subtract(2, 'month')
-            .add(15, 'days')
+            .add(16, 'days')
             .endOf('month');
         if (filters.toDate || filters.fromDate) {
             endDate = moment(filters.toDate ? filters.toDate: filters.fromDate, 'MMM YYYY').endOf('month');
@@ -115,7 +115,7 @@ const RROverviewTrends = () => {
             .clone()
             .subtract(numberOfMonths, 'month')
             .subtract(2, 'month')
-            .add(15, 'days')
+            .add(16, 'days')
             .startOf('month');
         params.startDate = startDate.format('YYYY-MM-DD');
         params.endDate = endDate.format('YYYY-MM-DD');

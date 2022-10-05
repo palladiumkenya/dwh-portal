@@ -26,7 +26,7 @@ const OTZOverview = () => {
         'ADOLESCENTS CURRENT ON ART as at ' +
         moment()
             .subtract(2, 'month')
-            .add(15, 'days')
+            .add(16, 'days')
             .format('MMM YYYY');
 
     const loadOtzTotalAdolescents = useCallback(async () => {

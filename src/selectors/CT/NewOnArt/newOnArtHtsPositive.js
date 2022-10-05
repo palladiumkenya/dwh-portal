@@ -46,7 +46,7 @@ export const getNewOnArtHtsPositive = createSelector(
         let txNew = [];
         let positives = [];
 
-        const today = moment().subtract(2, 'month').add(15, 'days');
+        const today = moment().subtract(2, 'month').add(16, 'days');
         let previousYearDate = moment(today).subtract(1, 'years').toDate();
         previousYearDate = moment(previousYearDate).add(1, 'month').toDate();
 
