@@ -12,8 +12,6 @@ import gpsSites from "./Home/gpsSites";
 import linkagePositiveTrends from "./HTS/Linkage/linkagePositiveTrends";
 import linkageNumberNotLinkedByFacility from "./HTS/Linkage/linkageNumberNotLinkedByFacility";
 
-import newOnPrep from './HTS/Prep/newOnPrep';
-
 import currentNewOnArtOverview from "./CT/NewOnArt/currentNewOnArtOverview";
 
 import newOnArtOverview from "./CT/NewOnArt/newOnArtOverview";
@@ -241,6 +239,10 @@ import currOnArtByFacilityKHIS from './Operational&HIS/Comparison/currOnArtByFac
 import newOnArtByFacilityKHIS from './Operational&HIS/Comparison/newOnArtByFacilityKHIS';
 import currOnArtByFacilityDWH from './Operational&HIS/Comparison/currOnArtByFacilityDWH';
 import newOnArtByFacilityDWH from './Operational&HIS/Comparison/newOnArtByFacilityDWH';
+
+import newOnPrep from './HTS/Prep/newOnPrep';
+import prepDiscontinuation from './HTS/Prep/prepDiscontinuation'
+import prepDiscontinuationReason from './HTS/Prep/prepDiscontinuationReason';
 
 export default combineReducers({
     auth: authReducer,
@@ -473,4 +475,6 @@ export default combineReducers({
     currentOnArtVerifiedByAgeSex,
 
     newOnPrep,
+    prepDiscontinuation,
+    prepDiscontinuationReason,
 });
