@@ -9,6 +9,8 @@ import { loadLinkageNumberNotLinkedByFacility } from '../../actions/HTS/Linkage/
 import { loadNewOnPrep } from '../../actions/HTS/Prep/newOnPrepAction';
 import Loading from './../Shared/Loading';
 import { useHistory, useParams } from 'react-router-dom';
+import { loadPrepDiscontinuation } from '../../actions/HTS/Prep/prepDiscontinuationAction';
+import { loadPrepDiscontinuationReason } from '../../actions/HTS/Prep/prepDiscontinuationReasonAction';
 
 const Uptake = Loadable({ loader: () => import('./Uptake/Uptake'), loading: Loading, delay: LOADING_DELAY });
 const Linkage = Loadable({ loader: () => import('./Linkage/Linkage'), loading: Loading, delay: LOADING_DELAY });
@@ -68,6 +70,8 @@ const HTS = () => {
             case 'prep':
                 dispatch(changeHtsTab(active_tab));
                 dispatch(loadNewOnPrep());
+                dispatch(loadPrepDiscontinuation());
+                dispatch(loadPrepDiscontinuationReason());
                 break;
             default:
                 break;

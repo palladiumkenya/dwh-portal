@@ -15,6 +15,7 @@ const PrEPOverview = () => {
         knownPositive: 0,
     });
     let newOnPrep =  useSelector(newOnPrepSelector.getNewOnPrepTotal);
+    let prepDisc = useSelector(newOnPrepSelector.getPrEPDiscontinuation);
     const loadPNSChildrenCascade = useCallback(async () => {
         let params = {
             county: filters.counties,
@@ -152,7 +153,7 @@ const PrEPOverview = () => {
                     >
                         <div className="col-12">
                             <span className="expected-uploads-text">
-                                {pnsChildrenCascade.elicited
+                                {newOnPrep
                                     ? Number(newOnPrep).toLocaleString('en')
                                     : ''}
                             </span>
@@ -179,10 +180,8 @@ const PrEPOverview = () => {
                         <div className="col-12">
                             <span className="expected-uploads-text">
                                 {' '}
-                                {pnsChildrenCascade.positive
-                                    ? pnsChildrenCascade.positive.toLocaleString(
-                                          'en'
-                                      )
+                                {prepDisc
+                                    ? prepDisc.toLocaleString('en')
                                     : '0'}{' '}
                             </span>
                             <sup className="overall-rates-sup">
