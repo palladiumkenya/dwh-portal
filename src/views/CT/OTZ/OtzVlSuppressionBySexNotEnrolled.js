@@ -1,16 +1,18 @@
+import React, { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import * as otzVlSuppressionBySexSelector from '../../../selectors/CT/OTZ/otzVlSuppressionBySex';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import React, { useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import * as otzVlSuppressionByAgeSelector from '../../../selectors/CT/OTZ/otzVlSuppressionByAge';
 
-const OtzVlSuppressionByAge = () => {
-    const [otzVlSuppressionByAge, setOtzVlSuppressionByAge] = useState({});
-    const vlSuppressionAge = useSelector(otzVlSuppressionByAgeSelector.getOtzVlSuppressionByAge);
+const OtzVlSuppressionBySexNotEnrolled = () => {
+    const [otzVlSuppressionBySex, setOtzVlSuppressionBySex] = useState({});
+    const vlSuppressionGender = useSelector(
+        otzVlSuppressionBySexSelector.getOtzVlSuppressionBySex
+    );
 
-    const loadVlSuppressionByAge = useCallback(async () => {
-        setOtzVlSuppressionByAge({
+    const loadVlSuppressionBySex = useCallback(async () => {
+        setOtzVlSuppressionBySex({
             title: { text: '' },
             plotOptions: {
                 column: {
@@ -22,7 +24,12 @@ const OtzVlSuppressionByAge = () => {
                 },
             },
             xAxis: [
-                { categories: vlSuppressionAge.ageGroups, crosshair: true },
+                {
+                    categories: vlSuppressionGender.genders.map((g) =>
+                        g.toUpperCase()
+                    ),
+                    crosshair: true,
+                },
             ],
             yAxis: [{ title: { text: 'PERCENTAGE OF PATIENTS' } }],
             tooltip: { shared: true },
@@ -30,45 +37,51 @@ const OtzVlSuppressionByAge = () => {
             series: [
                 {
                     name: 'HVL',
-                    data: vlSuppressionAge.data[0],
+                    data: vlSuppressionGender.data[0],
                     type: 'column',
                     color: '#bb1414',
                     tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
                 },
                 {
                     name: 'LLV',
-                    data: vlSuppressionAge.data[1],
+                    data: vlSuppressionGender.data[1],
                     type: 'column',
                     color: '#F08532',
                     tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
                 },
                 {
                     name: 'VS',
-                    data: vlSuppressionAge.data[2],
+                    data: vlSuppressionGender.data[2],
                     type: 'column',
                     color: '#00AD30',
                     tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
                 },
             ],
         });
-    }, [vlSuppressionAge]);
+    }, [vlSuppressionGender]);
 
     useEffect(() => {
-        loadVlSuppressionByAge();
-    }, [loadVlSuppressionByAge]);
+        loadVlSuppressionBySex();
+    }, [loadVlSuppressionBySex]);
 
     return (
         <Card className="trends-card">
-            <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                VL SUPPRESSION AMONG CALHIV ENROLLED IN OTZ BY AGE
+            <CardHeader
+                className="trends-header"
+                style={{ textTransform: 'none' }}
+            >
+                VL SUPPRESSION AMONG CALHIV NOT ENROLLED IN OTZ BY GENDER
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
-                    <HighchartsReact highcharts={Highcharts} options={otzVlSuppressionByAge} />
+                    <HighchartsReact
+                        highcharts={Highcharts}
+                        options={otzVlSuppressionBySex}
+                    />
                 </div>
             </CardBody>
         </Card>
     );
 };
 
-export default OtzVlSuppressionByAge;
+export default OtzVlSuppressionBySexNotEnrolled;

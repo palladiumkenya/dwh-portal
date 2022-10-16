@@ -11,7 +11,7 @@ export const getOtzVlSuppressionBySex = createSelector(
 
         const data = [];
         const suppressionCategories = ['HVL', 'LVL', 'VL'];
-        const genders = ['Female', 'Male'];
+        const genders = ['Male','Female'];
         for (const suppressionCategory of suppressionCategories) {
             let vlSuppression = 0;
             const catArray = [];
