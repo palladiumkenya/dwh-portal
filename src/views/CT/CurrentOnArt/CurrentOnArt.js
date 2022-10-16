@@ -30,6 +30,11 @@ const CurrentOnArtVerifiedByPartner = Loadable({
     delay: LOADING_DELAY,
 });
 const CurrentOnArtBySex  = Loadable({ loader: () => import('./CurrentOnArtBySex'), loading: Loading, delay: LOADING_DELAY });
+const CurrentOnArtVsVerified = Loadable({
+    loader: () => import('./CurrentOnArtVsVerified'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 const CurrentOnArtOverview  = Loadable({ loader: () => import('./CurrentOnArtOverview'), loading: Loading, delay: LOADING_DELAY });
 
 const CurrentOnART = () => {
@@ -94,6 +99,8 @@ const CurrentOnART = () => {
             <CurrentOnArtByCounty />
             <SectionFooter overview={branding.overview} />
             <CurrentOnArtByPartner />
+            <SectionFooter overview={branding.overview} />
+            <CurrentOnArtVsVerified />
             <SectionFooter overview={branding.overview} />
             <CurrentOnArtVerifiedByAgeSex />
             <SectionFooter overview={branding.overview} />
