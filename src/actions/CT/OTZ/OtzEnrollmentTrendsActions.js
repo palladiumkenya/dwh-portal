@@ -3,23 +3,28 @@ import { CACHING, PAGES } from '../../../constants';
 import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 
-export const loadOvcDistributionOfCALHIVByAgeSex = () => async (dispatch, getState) => {
+export const loadOtzEnrollmentTrend = () => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
-        moment(getState().OvcDistributionOfCALHIVByAgeSex.lastFetch),
+        moment(getState().otzEnrollmentTrend.lastFetch),
         'minutes'
     );
-    if (getState().ui.currentPage !== PAGES.ct) {
+    if (
+        getState().ui.ctTab !== 'otz' &&
+        getState().ui.currentPage !== PAGES.ct
+    ) {
         return;
-    }
-    else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {
+    } else if (
+        diffInMinutes < CACHING.LONG &&
+        getState().filters.filtered === false
+    ) {
         return;
     } else {
-        await dispatch(fetchOvcDistributionOfCALHIVByAgeSex());
+        await dispatch(fetchOtzEnrolled());
     }
-}
+};
 
-export const fetchOvcDistributionOfCALHIVByAgeSex = () => async (dispatch, getState) => {
-    dispatch({ type: actionTypes.CT_OVC_DISTRIBUTION_OF_CALHIV_BY_AGE_SEX_REQUEST });
+export const fetchOtzEnrolled = () => async (dispatch, getState) => {
+    dispatch({ type: actionTypes.CT_OTZ_ENROLLMENT_TREND_REQUEST });
     const params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,
@@ -32,6 +37,12 @@ export const fetchOvcDistributionOfCALHIVByAgeSex = () => async (dispatch, getSt
         year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
-    const response = await getAll('care-treatment/getOvcDistributionCALHIVByAgeSex', params);
-    dispatch({ type: actionTypes.CT_OVC_DISTRIBUTION_OF_CALHIV_BY_AGE_SEX_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
+    const response = await getAll(
+        'care-treatment/getOtzEnrollmentTrend',
+        params
+    );
+    dispatch({
+        type: actionTypes.CT_OTZ_ENROLLMENT_TREND_FETCH,
+        payload: { filtered: getState().filters.filtered, list: response },
+    });
 };

@@ -336,6 +336,8 @@ import { loadCurrentOnArtVerifiedByPartner } from './../../actions/CT/CurrentOnA
 import { loadCurrentOnArtVerifiedByCounty } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedByCountyActions';
 import { loadCurrentOnArtVerifiedByAgeSex } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedByAgeSexActions';
 import { useCurrOnART } from './../../hooks/CT/CurrOnART/useCurrOnART';
+import { loadOtzEnrollmentTrend } from '../../actions/CT/OTZ/OtzEnrollmentTrendsActions';
+import { loadOtzEnrollmentByAgeSex } from '../../actions/CT/OTZ/OtzEnrollmentByAgeSexActions';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({
@@ -608,6 +610,9 @@ const CT = () => {
                 dispatch(loadOtzVlSuppressionByAge());
                 dispatch(loadOtzVlSuppressionByCounty());
                 dispatch(loadOtzVlSuppressionByPartner());
+                dispatch(loadOtzEnrollmentTrend());
+                dispatch(loadOtzEnrollmentByAgeSex());
+                dispatch(loadOvcDistributionOfCALHIVByAgeSex());
                 break;
             case 'ovc':
                 dispatch(loadOvcOverallServ());

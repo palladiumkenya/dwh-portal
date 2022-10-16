@@ -12,6 +12,12 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 const OtzEnrollmentAmongAlhivOnArtBySex = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtBySex'), loading: Loading, delay: LOADING_DELAY });
 const OtzEnrollmentAmongAlhivOnArtByAge = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtByAge'), loading: Loading, delay: LOADING_DELAY });
 const OtzEnrollmentAmongAlhivOnArtByCounty = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtByCounty'), loading: Loading, delay: LOADING_DELAY });
+const OtzEnrollmentTrends = Loadable({
+    loader: () => import('./OtzEnrollmentTrends'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const OVCDistributionOfCALHIVByAgeSex = Loadable({ loader: () => import('../OVC/OVCDistributionOfCALHIVByAgeSex'), loading: Loading, delay: LOADING_DELAY });
 const OtzEnrollmentAmongAlhivOnArtByPartner = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtByPartner'), loading: Loading, delay: LOADING_DELAY });
 const VLUptakeAmongAlHivEnrolledInOtzBySex = Loadable({ loader: () => import('./vlUptakeAmongAlHivEnrolledInOtzBySex'), loading: Loading, delay: LOADING_DELAY });
 const VlUptakeAmongAlHivEnrolledInOTZByAge = Loadable({ loader: () => import('./VlUptakeAmongAlHivEnrolledInOTZByAge'), loading: Loading, delay: LOADING_DELAY });
@@ -33,7 +39,17 @@ const OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingMales = Loadable(
 const OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingFemales = Loadable({ loader: () => import('./OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingFemales'), loading: Loading, delay: LOADING_DELAY });
 
 const OtzVlSuppressionBySex = Loadable({ loader: () => import('./OtzVlSuppressionBySex'), loading: Loading, delay: LOADING_DELAY });
+const OtzVlSuppressionBySexNotEnrolled = Loadable({
+    loader: () => import('./OtzVlSuppressionBySexNotEnrolled'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 const OtzVlSuppressionByAge = Loadable({ loader: () => import('./OtzVlSuppressionByAge'), loading: Loading, delay: LOADING_DELAY });
+const OtzVlSuppressionByAgeNotEnrolled = Loadable({
+    loader: () => import('./OtzVlSuppressionByAgeNotEnrolled'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 const OtzVlSuppressionByCounty = Loadable({ loader: () => import('./OtzVlSuppressionByCounty'), loading: Loading, delay: LOADING_DELAY });
 const OtzVlSuppressionByPartner = Loadable({ loader: () => import('./OtzVlSuppressionByPartner'), loading: Loading, delay: LOADING_DELAY });
 
@@ -116,30 +132,35 @@ const OTZTabs = () => {
                         <CardBody>
                             <ul>
                                 <li>
-                                    <strong>Adolescents Current on ART &#8594;</strong> Number of
-                                    adolescents currently receiving ART
-                                    including those who have missed their
+                                    <strong>
+                                        Adolescents Current on ART &#8594;
+                                    </strong>{' '}
+                                    Number of adolescents currently receiving
+                                    ART including those who have missed their
                                     appointment and 30 days have not passed
                                     since the last missed appointment.
                                 </li>
                                 <li>
-                                    <strong>Valid Viral Load &#8594;</strong> Adolescents on OTZ
-                                    (10-24 years) current on treatment for more
-                                    than 6 months and have a viral load result
-                                    whose sample was taken within the last 14
-                                    months of the latest visit.
+                                    <strong>Valid Viral Load &#8594;</strong>{' '}
+                                    Adolescents on OTZ (10-24 years) current on
+                                    treatment for more than 6 months and have a
+                                    viral load result whose sample was taken
+                                    within the last 14 months of the latest
+                                    visit.
                                 </li>
                                 <li>
-                                    <strong>Virally suppressed &#8594;</strong> Adolescents on
-                                    OTZ (10-24 years) who are current on
-                                    treatment with valid viral load results of
-                                    &#60;1000 copies/ml.
+                                    <strong>Virally suppressed &#8594;</strong>{' '}
+                                    Adolescents on OTZ (10-24 years) who are
+                                    current on treatment with valid viral load
+                                    results of &#60;1000 copies/ml.
                                 </li>
                                 <li>
-                                    <strong>High Viral Load (HVL) &#8594;</strong> Adolescents on
-                                    OTZ (10-24 years) who are current on
-                                    treatment with valid viral load results of
-                                    &#8805;1,000 copies/ml.
+                                    <strong>
+                                        High Viral Load (HVL) &#8594;
+                                    </strong>{' '}
+                                    Adolescents on OTZ (10-24 years) who are
+                                    current on treatment with valid viral load
+                                    results of &#8805;1,000 copies/ml.
                                 </li>
                                 <li>
                                     <strong>Completed Training &#8594;</strong>{' '}
@@ -160,6 +181,11 @@ const OTZTabs = () => {
                     </Row>
                     <Row>
                         <Col className={'col-12'}>
+                            <OtzEnrollmentTrends />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={'col-12'}>
                             <OtzEnrollmentAmongAlhivOnArtByCounty />
                         </Col>
                     </Row>
@@ -170,30 +196,13 @@ const OTZTabs = () => {
                     </Row>
                     <Row>
                         <Col className={'col-6'}>
-                            <OTZCALHIVByAgeSex />
+                            <OVCDistributionOfCALHIVByAgeSex />
                         </Col>
                         <Col className={'col-6'}>
                             <OTZByAgeSex />
                         </Col>
                     </Row>
-                    <Row>
-                        <Col className={'col-6'}>
-                            <VLUptakeAmongAlHivEnrolledInOtzBySex />
-                        </Col>
-                        <Col className={'col-6'}>
-                            <VlUptakeAmongAlHivEnrolledInOTZByAge />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className={'col-12'}>
-                            <VlUptakeAmongAlHivEnrolledInOTZByCounty />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className={'col-12'}>
-                            <VlUptakeAmongAlHivEnrolledInOTZByPartner />
-                        </Col>
-                    </Row>
+                    {/* TODO: 3 charts here */}
                     <Row>
                         <Col className={'col-4'}>
                             <OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTraining />
@@ -211,93 +220,57 @@ const OTZTabs = () => {
                         </Col>
                         <Col className={'col-12'}>
                             <OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingByPartner />
+                        </Col>
+                    </Row>
+                    {/* TODO: New Table Here */}
+                    <Row>
+                        <Col className={'col-6'}>
+                            <VLUptakeAmongAlHivEnrolledInOtzBySex />
+                        </Col>
+                        <Col className={'col-6'}>
+                            <VlUptakeAmongAlHivEnrolledInOTZByAge />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={'col-12'}>
+                            <VlUptakeAmongAlHivEnrolledInOTZByCounty />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={'col-12'}>
+                            <VlUptakeAmongAlHivEnrolledInOTZByPartner />
                         </Col>
                     </Row>
                 </TabPane>
                 <TabPane tabId="otz_management">
+                    <Row>{/* TODO: 2 charts here on DTG col6 */}</Row>
+                    <Row>{/* TODO: 2 charts here on MMD col6 */}</Row>
                     <Row>
-                        <Col className={'col-6'}>
-                            <OTZCALHIVByAgeSex />
-                        </Col>
-                        <Col className={'col-6'}>
-                            <OTZByAgeSex />
-                        </Col>
-                        <Col className={'col-6'}>
-                            <OtzEnrollmentAmongAlhivOnArtBySex />
-                        </Col>
-                        <Col className={'col-6'}>
-                            <OtzEnrollmentAmongAlhivOnArtByAge />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className={'col-12'}>
-                            <OtzEnrollmentAmongAlhivOnArtByCounty />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className={'col-12'}>
-                            <OtzEnrollmentAmongAlhivOnArtByPartner />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className={'col-6'}>
-                            <VLUptakeAmongAlHivEnrolledInOtzBySex />
-                        </Col>
-                        <Col className={'col-6'}>
-                            <VlUptakeAmongAlHivEnrolledInOTZByAge />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className={'col-12'}>
-                            <VlUptakeAmongAlHivEnrolledInOTZByCounty />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className={'col-12'}>
-                            <VlUptakeAmongAlHivEnrolledInOTZByPartner />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className={'col-4'}>
-                            <OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTraining />
-                        </Col>
-                        <Col className={'col-4'}>
-                            <OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingMales />
-                        </Col>
-                        <Col className={'col-4'}>
-                            <OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingFemales />
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col className={'col-12'}>
-                            <OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingByCounty />
-                        </Col>
-                        <Col className={'col-12'}>
-                            <OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingByPartner />
-                        </Col>
-                    </Row>
-                </TabPane>
-                <TabPane tabId={'otz_outcomes'}>
-                    <Row>
+                        <Col className={'col-6'}></Col>
                         <Col className={'col-6'}>
                             <OtzOutcomesAmongAlhivWithBaselineVl />
                         </Col>
-
+                    </Row>
+                    <Row>
+                        <Col className={'col-6'}></Col>
                         <Col className={'col-6'}>
                             <OtzOutcomesAmongAlhivWithReSuppression />
                         </Col>
                     </Row>
-                    {/*<Row>
-                        <Col className={"col-12"}>
-                            <OtzOutcomesAmongAlhivWithSustainedSuppression />
-                        </Col>
-                    </Row>*/}
                     <Row>
                         <Col className={'col-6'}>
                             <OtzVlSuppressionBySex />
                         </Col>
                         <Col className={'col-6'}>
+                            <OtzVlSuppressionBySexNotEnrolled />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col className={'col-6'}>
                             <OtzVlSuppressionByAge />
+                        </Col>
+                        <Col className={'col-6'}>
+                            <OtzVlSuppressionByAgeNotEnrolled />
                         </Col>
                     </Row>
                     <Row>
@@ -305,21 +278,26 @@ const OTZTabs = () => {
                             <OtzVlSuppressionByCounty />
                         </Col>
                     </Row>
+                    {/* TODO: VL SUPPRESSION among CALHIV NOT enrolled in Otz BY COUNTY  */}
                     <Row>
                         <Col className={'col-12'}>
                             <OtzVlSuppressionByPartner />
                         </Col>
                     </Row>
+                    {/* TODO: VL SUPPRESSION among CALHIV NOT enrolled in Otz BY PARTNER */}
+                    
+                </TabPane>
+                <TabPane tabId={'otz_outcomes'}>
+                    {/*<Row>
+                        <Col className={"col-12"}>
+                            <OtzOutcomesAmongAlhivWithSustainedSuppression />
+                        </Col>
+                    </Row>*/}
                     <Row>
-                        <Col className={'col-12'}>
+                        <Col className={'col-6'}>
                             <OtzOutcomesByGender />
                         </Col>
-                        {/*<Col className={"col-6"}>*/}
-                        {/*    <OtzOutcomesByPopulationType />*/}
-                        {/*</Col>*/}
-                    </Row>
-                    <Row>
-                        <Col className={'col-12'}>
+                        <Col className={'col-6'}>
                             <OtzOutcomesByAgeGroup />
                         </Col>
                     </Row>

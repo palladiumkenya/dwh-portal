@@ -13,15 +13,35 @@ const OtzVlSuppressionByCounty = () => {
         setOtzVlSuppressionByCounty({
             title: { text: '' },
             plotOptions: { column: { stacking: 'percent' } },
-            xAxis: [{ categories: vlSuppressionCounty.counties, crosshair: true }],
-            yAxis: [{ title: { text: 'Percentage of Patients' }}],
+            xAxis: [
+                { categories: vlSuppressionCounty.counties, crosshair: true },
+            ],
+            yAxis: [{ title: { text: 'PERCENTAGE OF PATIENTS' } }],
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'HVL', data: vlSuppressionCounty.data[0], type: 'column', color: "#E15759", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'LLV', data: vlSuppressionCounty.data[1], type: 'column', color: "#F28E2B", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'VS', data: vlSuppressionCounty.data[2], type: 'column', color: "#3475B3", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-            ]
+                {
+                    name: 'HVL',
+                    data: vlSuppressionCounty.data[0],
+                    type: 'column',
+                    color: '#bb1414',
+                    tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
+                },
+                {
+                    name: 'LLV',
+                    data: vlSuppressionCounty.data[1],
+                    type: 'column',
+                    color: '#F08532',
+                    tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
+                },
+                {
+                    name: 'VS',
+                    data: vlSuppressionCounty.data[2],
+                    type: 'column',
+                    color: '#00AD30',
+                    tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
+                },
+            ],
         });
     }, [vlSuppressionCounty]);
 
@@ -32,7 +52,7 @@ const OtzVlSuppressionByCounty = () => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                VL SUPPRESSION AMONG ALHIV ENROLLED IN OTZ BY COUNTY
+                VL SUPPRESSION AMONG CALHIV ENROLLED IN OTZ BY COUNTY
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">

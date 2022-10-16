@@ -23,7 +23,7 @@ const OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingMales = () => {
             },
             plotOptions: {
                 pie: {
-                    innerSize: '60%',
+                    innerSize: '80%',
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {

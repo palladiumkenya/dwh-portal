@@ -3,18 +3,26 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import * as otzVlSuppressionByPartnerSelector from '../../../selectors/CT/OTZ/otzVlSuppressionByPartner';
+import * as otzVlSuppressionByAgeSelector from '../../../selectors/CT/OTZ/otzVlSuppressionByAge';
 
-const OtzVlSuppressionByPartner = () => {
-    const [otzVlSuppressionByPartner, setOtzVlSuppressionByPartner] = useState({});
-    const vlSuppressionPartner = useSelector(otzVlSuppressionByPartnerSelector.getOtzVlSuppressionByPartner);
+const OtzVlSuppressionByAgeNotEnrolled = () => {
+    const [otzVlSuppressionByAge, setOtzVlSuppressionByAge] = useState({});
+    const vlSuppressionAge = useSelector(otzVlSuppressionByAgeSelector.getOtzVlSuppressionByAge);
 
-    const loadVlSuppressionByPartner = useCallback(async () => {
-        setOtzVlSuppressionByPartner({
+    const loadVlSuppressionByAge = useCallback(async () => {
+        setOtzVlSuppressionByAge({
             title: { text: '' },
-            plotOptions: { column: { stacking: 'percent' } },
+            plotOptions: {
+                column: {
+                    stacking: 'percent',
+                    dataLabels: {
+                        enabled: true,
+                        format: '{point.percentage:.0f}%',
+                    },
+                },
+            },
             xAxis: [
-                { categories: vlSuppressionPartner.partners, crosshair: true },
+                { categories: vlSuppressionAge.ageGroups, crosshair: true },
             ],
             yAxis: [{ title: { text: 'PERCENTAGE OF PATIENTS' } }],
             tooltip: { shared: true },
@@ -22,45 +30,45 @@ const OtzVlSuppressionByPartner = () => {
             series: [
                 {
                     name: 'HVL',
-                    data: vlSuppressionPartner.data[0],
+                    data: vlSuppressionAge.data[0],
                     type: 'column',
                     color: '#bb1414',
                     tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
                 },
                 {
                     name: 'LLV',
-                    data: vlSuppressionPartner.data[1],
+                    data: vlSuppressionAge.data[1],
                     type: 'column',
                     color: '#F08532',
                     tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
                 },
                 {
                     name: 'VS',
-                    data: vlSuppressionPartner.data[2],
+                    data: vlSuppressionAge.data[2],
                     type: 'column',
                     color: '#00AD30',
                     tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
                 },
             ],
         });
-    }, [vlSuppressionPartner]);
+    }, [vlSuppressionAge]);
 
     useEffect(() => {
-        loadVlSuppressionByPartner();
-    }, [loadVlSuppressionByPartner]);
+        loadVlSuppressionByAge();
+    }, [loadVlSuppressionByAge]);
 
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                VL SUPPRESSION AMONG CALHIV ENROLLED IN OTZ BY PARTNER
+                VL SUPPRESSION AMONG CALHIV NOT ENROLLED IN OTZ BY AGE
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
-                    <HighchartsReact highcharts={Highcharts} options={otzVlSuppressionByPartner} />
+                    <HighchartsReact highcharts={Highcharts} options={otzVlSuppressionByAge} />
                 </div>
             </CardBody>
         </Card>
     );
 };
 
-export default OtzVlSuppressionByPartner;
+export default OtzVlSuppressionByAgeNotEnrolled;
