@@ -20,6 +20,7 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
         viralLoadUptakeGt1000CopiesRecFollowTest.forEach(element => {
             totalFollowTest += element.Num;
         });
+        console.log(viralLoadUptakeGt1000CopiesRecFollowTest[0]?.b);
 
         setViralLoadOverallUptakeAndSuppressionBySex({
             chart: {
@@ -90,7 +91,7 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
                             name: 'EAC 3',
                             y: viralLoadUptakeGt1000CopiesEac.EACVisitDate_3,
                             color: '#1c943e',
-                            text: 'EAC 3<br/>' + viralLoadUptakeGt1000CopiesEac.EACVisitDate_3.toLocaleString('en') + ' (' + parseFloat(((viralLoadUptakeGt1000CopiesEac.EACVisitDate_3 / Object.values(viralLoadUptakeGt1000CopiesEac).reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)'
+                            text: 'EAC 3<br/>' + viralLoadUptakeGt1000CopiesEac.EACVisitDate_3?.toLocaleString('en') + ' (' + parseFloat(((viralLoadUptakeGt1000CopiesEac.EACVisitDate_3 / Object.values(viralLoadUptakeGt1000CopiesEac).reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)'
                             // cText: 'Male: ' + viralLoadOverallUptakeSuppressionBySexData.data[0][1] + ' <br /> Female: ' + viralLoadOverallUptakeSuppressionBySexData.data[1][1]
                         },
                         {
@@ -102,17 +103,17 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
                         },
                         {
                             name: 'NUMBER VIRALLY SUPPRESSED ON FOLLOW UP VL TEST',
-                            y: viralLoadUptakeGt1000CopiesRecFollowTest[0].Num,
+                            y: viralLoadUptakeGt1000CopiesRecFollowTest[0]?.Num ?? 0,
                             color: '#1c943e',
-                            text: '  NUMBER VIRALLY SUPPRESSED <br/> ON FOLLOW UP VL TEST ' + viralLoadUptakeGt1000CopiesRecFollowTest[0].Num.toLocaleString('en') + ' (' + parseFloat(((viralLoadUptakeGt1000CopiesRecFollowTest[0].Num / totalFollowTest) * 100).toString()).toFixed(0) + '%)'
+                            text: '  NUMBER VIRALLY SUPPRESSED <br/> ON FOLLOW UP VL TEST ' + viralLoadUptakeGt1000CopiesRecFollowTest[0]?.Num.toLocaleString('en') + ' (' + parseFloat(((viralLoadUptakeGt1000CopiesRecFollowTest[0]?.Num / totalFollowTest) * 100).toString()).toFixed(0) + '%)'
                             // cText: 'Male: ' + viralLoadOverallUptakeSuppressionBySexData.data[0][3] + ' <br /> Female: ' + viralLoadOverallUptakeSuppressionBySexData.data[1][3]
                         },
                         // TODO:: Last bar of the chart
                         {
                             name: 'NUMBER WITH FOLLOW UP VL TEST AT VL > 1000 COPIES/ML SWITCHED TO SECOND LINE REGIMENT',
-                            y: viralLoadOverallNumberGt1000CopiesSecondlineRegimentData,
+                            y: viralLoadOverallNumberGt1000CopiesSecondlineRegimentData ?? 0,
                             color: '#142459',
-                            text: viralLoadOverallNumberGt1000CopiesSecondlineRegimentData.toLocaleString('en') //+ ' (' + parseFloat(((viralLoadSupCascade[0] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)',
+                            text: viralLoadOverallNumberGt1000CopiesSecondlineRegimentData?.toLocaleString('en') //+ ' (' + parseFloat(((viralLoadSupCascade[0] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)',
                             // cText: 'Male: ' + viralLoadOverallUptakeSuppressionBySexData.data[0][3] + ' <br /> Female: ' + viralLoadOverallUptakeSuppressionBySexData.data[1][3]
                         }
                     ]
@@ -131,9 +132,9 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
                         null,
                         {
                             name: 'NUMBER WHO HAD > 1000 COPIES/ML ON A FOLLOW UP TEST',
-                            y: viralLoadUptakeGt1000CopiesRecFollowTest[1].Num,
+                            y: viralLoadUptakeGt1000CopiesRecFollowTest[1]?.Num ?? 0,
                             color: '#bb1414',
-                            text: 'NUMBER WHO HAD > 1000 COPIES/ML <br/> ON A FOLLOW UP TEST ' + viralLoadUptakeGt1000CopiesRecFollowTest[1].Num.toLocaleString('en') + ' (' + parseFloat(((viralLoadUptakeGt1000CopiesRecFollowTest[1].Num / totalFollowTest) * 100).toString()).toFixed(0) + '%)'
+                            text: 'NUMBER WHO HAD > 1000 COPIES/ML <br/> ON A FOLLOW UP TEST ' + viralLoadUptakeGt1000CopiesRecFollowTest[1]?.Num.toLocaleString('en') + ' (' + parseFloat(((viralLoadUptakeGt1000CopiesRecFollowTest[1]?.Num / totalFollowTest) * 100).toString()).toFixed(0) + '%)'
                             // cText: 'Male: ' + viralLoadOverallUptakeSuppressionBySexData.data[0][3] + ' <br /> Female: ' + viralLoadOverallUptakeSuppressionBySexData.data[1][3]
                         },
                         null
