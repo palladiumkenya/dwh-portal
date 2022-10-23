@@ -288,11 +288,6 @@ const OTZTabs = () => {
                     
                 </TabPane>
                 <TabPane tabId={'otz_outcomes'}>
-                    {/*<Row>
-                        <Col className={"col-12"}>
-                            <OtzOutcomesAmongAlhivWithSustainedSuppression />
-                        </Col>
-                    </Row>*/}
                     <Row>
                         <Col className={'col-6'}>
                             <OtzOutcomesByGender />
@@ -301,11 +296,11 @@ const OTZTabs = () => {
                             <OtzOutcomesByAgeGroup />
                         </Col>
                     </Row>
-                    <Row>
+                    {/* <Row>
                         <Col className={'col-12'}>
                             <OtzOutcomesByYearOfArtStart />
                         </Col>
-                    </Row>
+                    </Row> */}
                     <Row>
                         <Col className={'col-12'}>
                             <OtzOutcomesByCounty />

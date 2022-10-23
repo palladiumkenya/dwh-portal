@@ -12,49 +12,62 @@ const OtzOutcomesByPartner = () => {
     const loadOtzOutcomesByPartner = useCallback(async () => {
         setOtzOutcomesByPartner({
             chart: {
-                type: 'column'
+                type: 'column',
             },
             title: {
-                text: ''
+                text: '',
             },
             xAxis: {
-                categories: outcomesPartners.catPartners
+                categories: outcomesPartners.catPartners,
             },
-            yAxis: [{ title: { text: 'Percentage of Patients' }}],
-            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80, reversed: true },
+            yAxis: [{ title: { text: 'Percentage of Patients' } }],
+            legend: {
+                align: 'left',
+                verticalAlign: 'top',
+                y: 0,
+                x: 80,
+                reversed: true,
+            },
             tooltip: { shared: true },
             plotOptions: { column: { stacking: 'percent' } },
-            series: [{
-                name: 'OPT OUT OF OTZ',
-                color: '#28B294',
-                data: outcomesPartners.ArrayValOptOut,
-                tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
-            }, {
-                name: 'LOST TO FOLLOW UP',
-                color: '#FDC538',
-                data: outcomesPartners.ArrayValLostToFollowUp,
-                tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
-            }, {
-                name: 'DEAD',
-                color: '#FC2626',
-                data: outcomesPartners.ArrayValDead,
-                tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
-            }, {
-                name: 'TRANSFER OUT',
-                color: '#2D73F5',
-                data: outcomesPartners.ArrayValTransferOut,
-                tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
-            }, {
-                name: 'TRANSITION TO ADULT CARE',
-                color: '#142459',
-                data: outcomesPartners.ArrayValTransitionToAdultCare,
-                tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
-            }, {
-                name: 'ACTIVE',
-                color: '#AA46BE',
-                data: outcomesPartners.ArrayValActive,
-                tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' }
-            }]
+            series: [
+                {
+                    name: 'ACTIVE',
+                    color: '#28B294',
+                    data: outcomesPartners.ArrayValActive,
+                    tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
+                },
+                {
+                    name: 'TRANSFER OUT',
+                    color: '#FDC538',
+                    data: outcomesPartners.ArrayValTransferOut,
+                    tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
+                },
+                {
+                    name: 'LOST TO FOLLOW UP',
+                    color: '#808080',
+                    data: outcomesPartners.ArrayValLostToFollowUp,
+                    tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
+                },
+                {
+                    name: 'TRANSITION TO ADULT CARE',
+                    color: '#142459',
+                    data: outcomesPartners.ArrayValTransitionToAdultCare,
+                    tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
+                },
+                {
+                    name: 'DEAD',
+                    color: '#FC2626',
+                    data: outcomesPartners.ArrayValDead,
+                    tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
+                },
+                {
+                    name: 'OPT OUT OF OTZ',
+                    color: '#F08532',
+                    data: outcomesPartners.ArrayValOptOut,
+                    tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
+                },
+            ].reverse(),
         });
     },[outcomesPartners]);
 
