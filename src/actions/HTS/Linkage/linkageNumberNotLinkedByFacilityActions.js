@@ -39,7 +39,7 @@ export const fetchLinkageNumberNotLinkedByFacility = () => async (dispatch, getS
             : '',
         fromDate: getState().filters.fromDate
             ? moment(getState().filters.fromDate, 'MMM YYYY').format('YYYYMM')
-            : moment().subtract(14, 'month').format('YYYYMM'),
+            : moment().subtract(2, 'month').add(17, 'days').format('YYYYMM'),
         toDate: getState().filters.toDate
             ? moment(getState().filters.toDate, 'MMM YYYY').format('YYYYMM')
             : moment().subtract(2, 'month').add(17, 'days').format('YYYYMM'),
