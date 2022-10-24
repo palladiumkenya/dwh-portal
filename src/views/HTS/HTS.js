@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import { HTS_TABS, PAGES, LOADING_DELAY } from './../../constants';
 import { changeHtsTab, changeCurrentPage } from './../../actions/Shared/uiActions';
-import { enableFromDateFilter, disableFromDateFilter, enableAgencyFilter } from './../../actions/Shared/filterActions';
+import { enableFromDateFilter, disableFromDateFilter, enableAgencyFilter, enableToDateFilter } from './../../actions/Shared/filterActions';
 import { loadLinkageNumberNotLinkedByFacility } from '../../actions/HTS/Linkage/linkageNumberNotLinkedByFacilityActions';
 import { loadNewOnPrep } from '../../actions/HTS/Prep/newOnPrepAction';
 import Loading from './../Shared/Loading';
@@ -54,6 +54,7 @@ const HTS = () => {
     useEffect(() => {
         dispatch(changeCurrentPage(PAGES.hts));
         dispatch(enableFromDateFilter());
+        dispatch(enableToDateFilter())
         dispatch(enableAgencyFilter());
         return () => {
             dispatch(disableFromDateFilter());

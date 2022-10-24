@@ -24,6 +24,18 @@ const UptakeByPartner = () => {
             month: filters.fromDate
                 ? moment(filters.fromDate, 'MMM YYYY').format('MM')
                 : moment().subtract(2, 'month').add(17, 'days').format('MM'),
+            fromDate: filters.fromDate
+                ? moment(filters.fromDate, 'MMM YYYY').format('YYYYMM')
+                : moment()
+                      .subtract(2, 'month')
+                      .add(17, 'days')
+                      .format('YYYYMM'),
+            toDate: filters.toDate
+                ? moment(filters.toDate, 'MMM YYYY').format('YYYYMM')
+                : moment()
+                      .subtract(2, 'month')
+                      .add(17, 'days')
+                      .format('YYYYMM'),
         };
         // params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const partners = [];

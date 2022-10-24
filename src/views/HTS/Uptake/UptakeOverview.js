@@ -33,6 +33,18 @@ const UptakeOverview = () => {
             month: filters.fromDate
                 ? moment(filters.fromDate, 'MMM YYYY').format('MM')
                 : moment().subtract(2, 'month').add(17, 'days').format('MM'),
+            fromDate: filters.fromDate
+                ? moment(filters.fromDate, 'MMM YYYY').format('YYYYMM')
+                : moment()
+                      .subtract(2, 'month')
+                      .add(17, 'days')
+                      .format('YYYYMM'),
+            toDate: filters.toDate
+                ? moment(filters.toDate, 'MMM YYYY').format('YYYYMM')
+                : moment()
+                      .subtract(2, 'month')
+                      .add(17, 'days')
+                      .format('YYYYMM'),
         };
         const result = await getAll('hts/uptakeBySex', params);
         let data = {
@@ -49,7 +61,6 @@ const UptakeOverview = () => {
             femalePositivePercent: 0,
         }
         for(let i = 0; i < result.length; i++) {
-        console.log(result[i].gender);
             data.totalTested = data.totalTested + parseInt(result[i].tested);
             data.totalPositive = data.totalPositive + parseInt(result[i].positive);
             if (result[i].gender) {
