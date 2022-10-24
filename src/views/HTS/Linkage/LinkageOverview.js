@@ -35,7 +35,10 @@ const LinkageOverview = () => {
                 : null, //removed month when page loads because it was showing blanks
             fromDate: filters.fromDate
                 ? moment(filters.fromDate, 'MMM YYYY').format('YYYYMM')
-                : moment().subtract(14, 'month').format('YYYYMM'),
+                : moment()
+                      .subtract(2, 'month')
+                      .add(17, 'days')
+                      .format('YYYYMM'),
             toDate: filters.toDate
                 ? moment(filters.toDate, 'MMM YYYY').format('YYYYMM')
                 : moment()
