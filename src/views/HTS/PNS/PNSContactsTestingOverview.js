@@ -23,8 +23,24 @@ const PNSContactsTestingOverview = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : null,
-            month: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : null
+            year: filters.fromDate
+                ? moment(filters.fromDate, 'MMM YYYY').format('YYYY')
+                : null,
+            month: filters.fromDate
+                ? moment(filters.fromDate, 'MMM YYYY').format('MM')
+                : null,
+            fromDate: filters.fromDate
+                ? moment(filters.fromDate, 'MMM YYYY').format('YYYYMM')
+                : moment()
+                      .subtract(2, 'month')
+                      .add(17, 'days')
+                      .format('YYYYMM'),
+            toDate: filters.toDate
+                ? moment(filters.toDate, 'MMM YYYY').format('YYYYMM')
+                : moment()
+                      .subtract(2, 'month')
+                      .add(17, 'days')
+                      .format('YYYYMM'),
         };
         const result = await getAll('hts/pnsIndex', params);
         setPnsIndex(result.indexClients ? parseInt(result.indexClients) : 0);
@@ -38,8 +54,21 @@ const PNSContactsTestingOverview = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : null,
-            month: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : null
+            year: filters.fromDate
+                ? moment(filters.fromDate, 'MMM YYYY').format('YYYY')
+                : null,
+            month: filters.fromDate
+                ? moment(filters.fromDate, 'MMM YYYY').format('MM')
+                : null,
+            fromDate: filters.fromDate
+                ? moment(filters.fromDate, 'MMM YYYY').format('YYYYMM')
+                : moment().subtract(14, 'month').format('YYYYMM'),
+            toDate: filters.toDate
+                ? moment(filters.toDate, 'MMM YYYY').format('YYYYMM')
+                : moment()
+                      .subtract(2, 'month')
+                      .add(17, 'days')
+                      .format('YYYYMM'),
         };
         const data = await getAll('hts/pnsSexualContactsCascade', params);
         setPNSSexualContactsCascade({
