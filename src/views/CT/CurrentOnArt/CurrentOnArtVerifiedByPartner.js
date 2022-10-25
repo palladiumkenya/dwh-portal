@@ -22,7 +22,13 @@ const CurrentOnArtVerifiedByPartner = () => {
                 },
             ],
             yAxis: [{ title: { text: '' } }],
-            legend: { enabled: false, align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+            legend: {
+                enabled: true,
+                align: 'left',
+                verticalAlign: 'top',
+                y: 0,
+                x: 80,
+            },
             tooltip: {
                 headerFormat:
                     '<span style="font-size:10px">{point.key}</span><table>',
@@ -50,6 +56,12 @@ const CurrentOnArtVerifiedByPartner = () => {
                     name: 'Number currently on ART & Verified',
                     type: 'column',
                     color: '#2F4050',
+                },
+                {
+                    data: currentOnArtByPartnerData.currentOnArtVerified,
+                    name: 'Verified Current on ART',
+                    type: 'column',
+                    color: '#69B34C',
                 },
             ],
         });

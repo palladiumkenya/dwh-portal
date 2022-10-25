@@ -3,47 +3,84 @@ import Loadable from 'react-loadable';
 import VisibilitySensor from 'react-visibility-sensor';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
-import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
-import { LOADING_DELAY } from "../../../constants";
+import {
+    enableStickyFilter,
+    disableStickyFilter,
+} from '../../../actions/Shared/uiActions';
+import { LOADING_DELAY } from '../../../constants';
 import Loading from './../../Shared/Loading';
 import SectionFooter from './../../Shared/SectionFooter';
 import SectionHeader from './../../Shared/SectionHeader';
 import UniversalFilter from './../../Shared/UniversalFilter';
 import { useParams } from 'react-router-dom';
 
-const CurrentOnArtByAgeSex  = Loadable({ loader: () => import('./CurrentOnArtByAgeSex'), loading: Loading, delay: LOADING_DELAY });
+const CurrentOnArtByAgeSex = Loadable({
+    loader: () => import('./CurrentOnArtByAgeSex'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 const CurrentOnArtVerifiedByAgeSex = Loadable({
     loader: () => import('./CurrentOnArtVerifiedByAgeSex'),
     loading: Loading,
     delay: LOADING_DELAY,
 });
-const CurrentOnArtByCounty  = Loadable({ loader: () => import('./CurrentOnArtByCounty'), loading: Loading, delay: LOADING_DELAY });
+const CurrentOnArtByCounty = Loadable({
+    loader: () => import('./CurrentOnArtByCounty'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 const CurrentOnArtVerifiedByCounty = Loadable({
     loader: () => import('./CurrentOnArtVerifiedByCounty'),
     loading: Loading,
     delay: LOADING_DELAY,
 });
-const CurrentOnArtByPartner  = Loadable({ loader: () => import('./CurrentOnArtByPartner'), loading: Loading, delay: LOADING_DELAY });
+const CurrentOnArtByPartner = Loadable({
+    loader: () => import('./CurrentOnArtByPartner'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 const CurrentOnArtVerifiedByPartner = Loadable({
     loader: () => import('./CurrentOnArtVerifiedByPartner'),
     loading: Loading,
     delay: LOADING_DELAY,
 });
-const CurrentOnArtBySex  = Loadable({ loader: () => import('./CurrentOnArtBySex'), loading: Loading, delay: LOADING_DELAY });
+const CurrentOnArtVerifiedByAgeSexGT15 = Loadable({
+    loader: () => import('./CurrentOnArtVerifiedByAgeSexGT15'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const CurrentOnArtVerifiedByAgeSexLT15 = Loadable({
+    loader: () => import('./CurrentOnArtVerifiedByAgeSexLT15'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const CurrentOnArtBySex = Loadable({
+    loader: () => import('./CurrentOnArtBySex'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 const CurrentOnArtVsVerified = Loadable({
     loader: () => import('./CurrentOnArtVsVerified'),
     loading: Loading,
     delay: LOADING_DELAY,
 });
-const CurrentOnArtOverview  = Loadable({ loader: () => import('./CurrentOnArtOverview'), loading: Loading, delay: LOADING_DELAY });
+const CurrentOnArtOverview = Loadable({
+    loader: () => import('./CurrentOnArtOverview'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 
 const CurrentOnART = () => {
-    const branding = { title: "CURRENT ON ART", description: "OVERVIEW", overview: "Current on ART" };
+    const branding = {
+        title: 'CURRENT ON ART',
+        description: 'OVERVIEW',
+        overview: 'Current on ART',
+    };
     const { active_tab } = useParams();
-    const ctTab = active_tab
+    const ctTab = active_tab;
     const dispatch = useDispatch();
     const onVisibilityChange = (isVisible) => {
-        if (ctTab === "currentOnArt") {
+        if (ctTab === 'currentOnArt') {
             if (isVisible) {
                 dispatch(disableStickyFilter());
             } else {
@@ -96,13 +133,27 @@ const CurrentOnART = () => {
                 </Col>
             </Row>
             <SectionFooter overview={branding.overview} />
-            <CurrentOnArtByCounty />
+            {/* <CurrentOnArtByCounty />
             <SectionFooter overview={branding.overview} />
             <CurrentOnArtByPartner />
+            <SectionFooter overview={branding.overview} /> */}
+            <Row>
+                <Col>
+                    <CurrentOnArtVsVerified />
+                </Col>
+                <Col>
+                    <CurrentOnArtVerifiedByAgeSex />
+                </Col>
+            </Row>
             <SectionFooter overview={branding.overview} />
-            <CurrentOnArtVsVerified />
-            <SectionFooter overview={branding.overview} />
-            <CurrentOnArtVerifiedByAgeSex />
+            <Row>
+                <Col>
+                    <CurrentOnArtVerifiedByAgeSexLT15 />
+                </Col>
+                <Col>
+                    <CurrentOnArtVerifiedByAgeSexGT15 />
+                </Col>
+            </Row>
             <SectionFooter overview={branding.overview} />
             <CurrentOnArtVerifiedByCounty />
             <SectionFooter overview={branding.overview} />

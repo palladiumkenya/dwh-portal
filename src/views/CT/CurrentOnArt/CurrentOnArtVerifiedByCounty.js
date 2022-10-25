@@ -12,6 +12,7 @@ const CurrentOnArtVerifiedByCounty = () => {
     const currentOnArtByCountyData = useSelector(
         currentOnArtByCountySelectors.getCurrentOnArtByCounty
     );
+    console.log(currentOnArtByCountyData);
 
     const loadCurrentOnArtByCountyChart = useCallback(async () => {
         setCurrentOnArtByCountyChart({
@@ -23,7 +24,13 @@ const CurrentOnArtVerifiedByCounty = () => {
                 },
             ],
             yAxis: [{ title: { text: '' } }],
-            legend: { enabled : false, align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+            legend: {
+                enabled: true,
+                align: 'left',
+                verticalAlign: 'top',
+                y: 0,
+                x: 80,
+            },
             tooltip: {
                 headerFormat:
                     '<span style="font-size:10px">{point.key}</span><table>',
@@ -48,9 +55,15 @@ const CurrentOnArtVerifiedByCounty = () => {
             series: [
                 {
                     data: currentOnArtByCountyData.currentOnArt,
-                    name: 'Number currently on ART & Verified',
+                    name: 'Current on ART',
                     type: 'column',
                     color: '#2F4050',
+                },
+                {
+                    data: currentOnArtByCountyData.CurrentOnArtVerified,
+                    name: 'Verified Current on ART',
+                    type: 'column',
+                    color: '#69B34C',
                 },
             ],
         });
