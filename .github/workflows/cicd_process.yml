@@ -23,7 +23,7 @@ jobs:
           git config --global --add safe.directory /apps/githubworkflows/dwh-portal      
           cd /apps/githubworkflows/dwh-portal
           git clone -b dev https://github.com/palladiumkenya/dwh-portal.git .
-          sudo cp /apps/githubworkflows/dwh-portal/.env.production /apps/githubworkflows/dwh-portal/
+          sudo cp /apps/dockerApps/dwh-portal/.env.production /apps/githubworkflows/dwh-portal/
           sudo chown -R cicd:cicd /apps/githubworkflows/dwh-portal
           git status
           yarn install
