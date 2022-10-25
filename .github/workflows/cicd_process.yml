@@ -19,7 +19,7 @@ jobs:
           cd /apps/githubworkflows/
           sudo rm -rf dwh-portal
           sudo mkdir dwh-portal
-          cd
+          sudo chown -R cicd:cicd /apps/githubworkflows/dwh-portal
           git config --global --add safe.directory /apps/githubworkflows/dwh-portal      
           cd /apps/githubworkflows/dwh-portal
           git clone -b dev https://github.com/palladiumkenya/dwh-portal.git .
