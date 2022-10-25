@@ -49,16 +49,16 @@ const CurrentOnArtVsVerified= () => {
                     colorByPoint: true,
                     data: [
                         {
-                            name: 'Verified & Current On ART',
+                            name: 'VERIFIED',
                             y: currentOnArtVerified,
-                            color: '#00AD30',
+                            color: '#28B294',
                         },
                         {
-                            name: 'Not Verified & Current On ART',
+                            name: 'NOT VERIFIED',
                             y: notVerified,
                             sliced: true,
                             selected: true,
-                            color: '#F08532',
+                            color: '#142459',
                         },
                     ],
                 },
