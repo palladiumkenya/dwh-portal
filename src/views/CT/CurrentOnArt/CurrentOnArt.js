@@ -124,15 +124,15 @@ const CurrentOnART = () => {
                 </CardBody>
             </Card>
             <CurrentOnArtOverview />
-            <Row>
+            {/* <Row>
                 <Col>
                     <CurrentOnArtBySex />
                 </Col>
                 <Col>
                     <CurrentOnArtByAgeSex />
                 </Col>
-            </Row>
-            <SectionFooter overview={branding.overview} />
+            </Row> */}
+            {/* <SectionFooter overview={branding.overview} /> */}
             {/* <CurrentOnArtByCounty />
             <SectionFooter overview={branding.overview} />
             <CurrentOnArtByPartner />
