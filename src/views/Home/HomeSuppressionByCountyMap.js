@@ -36,7 +36,7 @@ const HomeSuppressionByCountyMap = () => {
                 if ( mappedCounty === resultCounty) {
                     data.push({
                         id: mappedCounties[j].id,
-                        value: result[i].txCurr > 0 ? ((result[i].suppressed/result[i].txCurr)*100).toFixed(1):0
+                        value: result[i].txCurr > 0 ? ((result[i].suppressed/result[i].vlDone)*100).toFixed(1):0
                     });
                     continue;
                 }
