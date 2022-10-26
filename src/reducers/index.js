@@ -164,6 +164,8 @@ import otzVlSuppressionBySex from './CT/OTZ/otzVlSuppressionBySex';
 import otzVlSuppressionByAge from './CT/OTZ/otzVlSuppressionByAge';
 import otzVlSuppressionByCounty from './CT/OTZ/otzVlSuppressionByCounty';
 import otzVlSuppressionByPartner from './CT/OTZ/otzVlSuppressionByPartner';
+import otzNotEnrolledPartner from './CT/OTZ/otzNotEnrolledPartner';
+import otzNotEnrolledCounty from './CT/OTZ/otzNotEnrolledCounty';
 
 import CovidAdultPLHIVCurrentOnTreatment from './CT/Covid/covidAdultPLHIVCurrentOnTreatment';
 import CovidAdultPLHIVPartiallyVaccinated from './CT/Covid/covidAdultPLHIVPartiallyVaccinated';
@@ -399,6 +401,8 @@ export default combineReducers({
     otzVlSuppressionByPartner,
     otzEnrollmentTrend,
     otzEnrollmentAgeSex,
+    otzNotEnrolledPartner,
+    otzNotEnrolledCounty,
 
     ovcOverallServ,
     ovcServByGender,

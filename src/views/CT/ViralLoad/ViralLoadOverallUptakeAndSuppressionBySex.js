@@ -101,7 +101,7 @@ const ViralLoadOverallUptakeAndSuppressionBySex = () => {
                         {
                             name: '(400-999)',
                             y: viralLoadSupCascade[0], color: '#f88149',
-                            text: viralLoadSupCascade[0].toLocaleString('en') + ' (' + parseFloat(((viralLoadSupCascade[0] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)<br/>(400-999)'
+                            text: viralLoadSupCascade[0]?.toLocaleString('en') + ' (' + parseFloat(((viralLoadSupCascade[0] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)<br/>(400-999)'
                         },
                         {
                             name: 'NUMBER OF VIRALLY SUPPRESSED PLHIV REFERRED TO LESS INTENSE MODEL OF CARE',
@@ -118,7 +118,7 @@ const ViralLoadOverallUptakeAndSuppressionBySex = () => {
                         {
                             name: '(51-399) ',
                             y: viralLoadSupCascade[1], color: 'blue',
-                            text: viralLoadSupCascade[1].toLocaleString('en') + ' (' + parseFloat(((viralLoadSupCascade[1] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%) <br/> (51-399) '
+                            text: viralLoadSupCascade[1]?.toLocaleString('en') + ' (' + parseFloat(((viralLoadSupCascade[1] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%) <br/> (51-399) '
                         }, null
                     ]
                 },
@@ -129,7 +129,7 @@ const ViralLoadOverallUptakeAndSuppressionBySex = () => {
                         {
                             name: 'LDL (<=50 copies) ',
                             y: viralLoadSupCascade[2], color: '#1dad87',
-                            text: '   ' + viralLoadSupCascade[2].toLocaleString('en') + ' (' + parseFloat(((viralLoadSupCascade[2] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)<br/> LDL (<=50 copies)'
+                            text: '   ' + viralLoadSupCascade[2]?.toLocaleString('en') + ' (' + parseFloat(((viralLoadSupCascade[2] / viralLoadSupCascade.reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)<br/> LDL (<=50 copies)'
                         }, null
                     ]
                 }
