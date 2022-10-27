@@ -8,29 +8,45 @@ const listFilteredAll = (state) => state.currentOnArtByAgeSex.listFiltered;
 const filtered = state => state.filters.filtered;
 
 export const getCurrentOnArtByAgeSex = createSelector(
-    [listUnfiltered, listFiltered, filtered],
-    (listUnfiltered, listFiltered, filtered) => {
+    [
+        listUnfiltered,
+        listFiltered,
+        listUnfilteredAll,
+        listFilteredAll,
+        filtered,
+    ],
+    (
+        listUnfiltered,
+        listFiltered,
+        listUnfilteredAll,
+        listFilteredAll,
+        filtered
+    ) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        
+        const listAll = filtered ? listFilteredAll : listUnfilteredAll;
+
         let ageGroups = [
-            "Under 1",
-            "1 to 4",
-            "5 to 9",
-            "10 to 14",
-            "15 to 19",
-            "20 to 24",
-            "25 to 29",
-            "30 to 34",
-            "35 to 39",
-            "40 to 44",
-            "45 to 49",
-            "50 to 54",
-            "55 to 59",
-            "60 to 64",
-            "65+"
+            'Under 1',
+            '1 to 4',
+            '5 to 9',
+            '10 to 14',
+            '15 to 19',
+            '20 to 24',
+            '25 to 29',
+            '30 to 34',
+            '35 to 39',
+            '40 to 44',
+            '45 to 49',
+            '50 to 54',
+            '55 to 59',
+            '60 to 64',
+            '65+',
         ];
         let currentOnArtMale = [];
         let currentOnArtFemale = [];
+        let verifiedPercFemale = [];
+        let verifiedPercMale = [];
+
         for (const ageGroup of ageGroups) {
             const ageGroupMaleFilter = list.filter(
                 (obj) =>
@@ -45,22 +61,57 @@ export const getCurrentOnArtByAgeSex = createSelector(
                         obj.Gender.toLowerCase() === 'Female'.toLowerCase())
             );
             if (ageGroupMaleFilter.length > 0) {
+                verifiedPercMale.push(
+                    (ageGroupMaleFilter[0].NumNupi * 100) /
+                        listAll.filter(
+                            (obj) =>
+                                obj.ageGroup
+                                    ?.replace('-', ' to ')
+                                    .replace('<', 'Under ') === ageGroup &&
+                                (obj.Gender.toLowerCase() ===
+                                    'M'.toLowerCase() ||
+                                    obj.Gender.toLowerCase() ===
+                                        'Male'.toLowerCase())
+                        )[0]?.txCurr
+                );
                 currentOnArtMale.push(ageGroupMaleFilter[0].NumNupi);
             } else {
+                verifiedPercMale.push(0);
                 currentOnArtMale.push(0);
             }
 
             if (ageGroupFemaleFilter.length > 0) {
+                verifiedPercFemale.push(
+                    (ageGroupMaleFilter[0].NumNupi * 100) /
+                        listAll.filter(
+                            (obj) =>
+                                obj.ageGroup
+                                    .replace('-', ' to ')
+                                    .replace('<', 'Under ') === ageGroup &&
+                                (obj.Gender.toLowerCase() ===
+                                    'F'.toLowerCase() ||
+                                    obj.Gender.toLowerCase() ===
+                                        'Female'.toLowerCase())
+                        )[0].txCurr
+                );
                 currentOnArtFemale.push(ageGroupFemaleFilter[0].NumNupi);
             } else {
+                verifiedPercFemale.push(0);
                 currentOnArtFemale.push(0);
             }
         }
 
         let max = _.max([_.max(currentOnArtMale), _.max(currentOnArtFemale)]);
-        currentOnArtMale = currentOnArtMale.map(x => x * -1);
+        currentOnArtMale = currentOnArtMale.map((x) => x * -1);
 
-        return { ageGroups, max, currentOnArtFemale, currentOnArtMale };
+        return {
+            ageGroups,
+            max,
+            currentOnArtFemale,
+            currentOnArtMale,
+            verifiedPercFemale,
+            verifiedPercMale,
+        };
     }
 );
 

@@ -7,6 +7,7 @@ import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnA
 import { currentOnArtByAgeSexSelector } from '../../../atoms/CT/CurrOnART/currOnARTByAgeSexAtom';
 import { useRecoilValue } from 'recoil';
 import moment from 'moment';
+import { roundNumber } from '../../../utils/utils';
 
 const CurrentOnArtVerifiedByAgeSex = () => {
     const [currentOnArtByAgeSexChart, setCurrentOnArtByAgeSexChart] = useState(
@@ -72,11 +73,37 @@ const CurrentOnArtVerifiedByAgeSex = () => {
                     name: 'Female',
                     data: currentOnArtByAgeSexData.currentOnArtFemale,
                     color: '#EA4C8B',
+                    dataLabels: {
+                        enabled: true,
+                        crop: false,
+                        formatter: function () {
+                            return (
+                                roundNumber(
+                                    currentOnArtByAgeSexData.verifiedPercFemale[
+                                        this.point.index
+                                    ]
+                                ) + '%'
+                            );
+                        },
+                    },
                 },
                 {
                     name: 'Male',
                     data: currentOnArtByAgeSexData.currentOnArtMale,
                     color: '#14084D',
+                    dataLabels: {
+                        enabled: true,
+                        crop: false,
+                        formatter: function () {
+                            return (
+                                roundNumber(
+                                    currentOnArtByAgeSexData.verifiedPercMale[
+                                        this.point.index
+                                    ]
+                                ) + '%'
+                            );
+                        },
+                    },
                 },
             ],
         });
