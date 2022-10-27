@@ -36,17 +36,17 @@ export const getCurrentOnArtByCounty = createSelector(
             verifiedPerc.push(
                 (((list.find(
                     (x) =>
-                        x.County.toUpperCase() ===
-                        listTxCurr[i].County.toUpperCase()
-                )?.NumNupi ?? 0) / listTxCurr[i].txCurr) * 100) ?? 0
+                        x.County?.toUpperCase() ===
+                        listTxCurr[i].County?.toUpperCase()
+                )?.NumNupi ?? 0) / listTxCurr[i]?.txCurr) * 100) ?? 0
             );
             counties.push(listTxCurr[i].County.toUpperCase());
             currentOnArt.push(listTxCurr[i].txCurr);
             CurrentOnArtVerified.push(
                 list.find(
                     (x) =>
-                        x.County.toUpperCase() ===
-                        listTxCurr[i].County.toUpperCase()
+                        x.County?.toUpperCase() ===
+                        listTxCurr[i]?.County.toUpperCase()
                 )?.NumNupi ?? 0 // 0 if NumNUPI isnt found
             );
         }
