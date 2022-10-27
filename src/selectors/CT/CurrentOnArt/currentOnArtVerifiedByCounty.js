@@ -23,15 +23,23 @@ export const getCurrentOnArtByCounty = createSelector(
         listFilteredTxCurr
     ) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        const counties = [];
-        const CurrentOnArtVerified = [];
+        let counties = [];
+        let CurrentOnArtVerified = [];
         const listTxCurr = filtered ? listFilteredTxCurr : listUnfilteredTxCurr;
-        const currentOnArt = [];
+        let currentOnArt = [];
+        let verifiedPerc = [];
 
         for (let i = 0; i < listTxCurr.length; i++) {
             if (!listTxCurr[i].County) {
                 continue;
             }
+            verifiedPerc.push(
+                (((list.find(
+                    (x) =>
+                        x.County.toUpperCase() ===
+                        listTxCurr[i].County.toUpperCase()
+                )?.NumNupi ?? 0) / listTxCurr[i].txCurr) * 100) ?? 0
+            );
             counties.push(listTxCurr[i].County.toUpperCase());
             currentOnArt.push(listTxCurr[i].txCurr);
             CurrentOnArtVerified.push(
@@ -43,6 +51,6 @@ export const getCurrentOnArtByCounty = createSelector(
             );
         }
 
-        return { counties, CurrentOnArtVerified, currentOnArt };
+        return { counties, CurrentOnArtVerified, currentOnArt, verifiedPerc };
     }
 );
