@@ -60,7 +60,6 @@ const UniversalFilter = () => {
 
     const changeFromQuery = (len) => {
         if (len === 0) {
-            console.log("aaa")
             query.delete('partner');
             history.replace({
                 search: query.toString(),
@@ -259,22 +258,9 @@ const UniversalFilter = () => {
             return;
         }
     }, []);
-    let currentLocation = window.location.href.split('#')[0];
 
     return (
         <>
-            {currentLocation !== 'https://dwh.nascop.org/' &&
-            currentLocation !== 'https://prod.kenyahmis.org/' ? (
-                <Message warning>
-                    <Message.Header>This is the test site</Message.Header>
-                    <p>
-                        Numbers may vary from those in{' '}
-                        <a href={'https://dwh.nascop.org'}>
-                            https://dwh.nascop.org
-                        </a>
-                    </p>
-                </Message>
-            ) : null}
             <Row>
                 {filters.countyFilterEnabled ? (
                     <Col

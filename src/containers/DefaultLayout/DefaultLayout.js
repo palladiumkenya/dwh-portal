@@ -4,6 +4,7 @@ import { AppFooter, AppHeader, AppBreadcrumb2 as AppBreadcrumb } from '@coreui/r
 import { Container } from 'reactstrap';
 import { Route, Switch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import {  Message } from 'semantic-ui-react';
 import { LOADING_DELAY } from './../../constants';
 import * as router from 'react-router-dom';
 import Loading from './../../views/Shared/Loading';
@@ -30,6 +31,7 @@ const DefaultLayout = () => {
             return <UniversalFilter />;
         }
     }
+    let currentLocation = window.location.href.split('#')[0];
 
 
     return (
@@ -37,33 +39,59 @@ const DefaultLayout = () => {
             <AppHeader fixed>
                 <DefaultHeader />
             </AppHeader>
-            <Container fluid className={ui.stickyFilter === true ? 'stickyUniversalFilter':'hiddenUniversalFilter'}>
+            <Container
+                fluid
+                className={
+                    ui.stickyFilter === true
+                        ? 'stickyUniversalFilter'
+                        : 'hiddenUniversalFilter'
+                }
+            >
                 {filter()}
             </Container>
             <div className="app-body">
-                <main className={"main"}>
+                <main className={'main'}>
                     <AppBreadcrumb appRoutes={routes} router={router} />
                     <Container fluid>
+                        {currentLocation !== 'https://dwh.nascop.org/' &&
+                        currentLocation !== 'https://prod.kenyahmis.org/' ? (
+                            <Message warning>
+                                <Message.Header>
+                                    This is the test site
+                                </Message.Header>
+                                <p>
+                                    Numbers may vary from those in{' '}
+                                    <a href={'https://dwh.nascop.org'}>
+                                        https://dwh.nascop.org
+                                    </a>
+                                </p>
+                            </Message>
+                        ) : null}
                         <Switch>
                             {routes.map((route, idx) => {
                                 return route.component ? (
-                                    route.private ? <PrivateRoute
+                                    route.private ? (
+                                        <PrivateRoute
                                             key={idx}
                                             path={route.path}
                                             exact={route.exact}
                                             name={route.name}
-                                            render={props => (
-                                                <route.component {...props}/>
-                                            )} /> :
-                                    <Route
-                                        key={idx}
-                                        path={route.path}
-                                        exact={route.exact}
-                                        name={route.name}
-                                        render={props => (
-                                            <route.component {...props}/>
-                                        )} />
-                                ) : (null);
+                                            render={(props) => (
+                                                <route.component {...props} />
+                                            )}
+                                        />
+                                    ) : (
+                                        <Route
+                                            key={idx}
+                                            path={route.path}
+                                            exact={route.exact}
+                                            name={route.name}
+                                            render={(props) => (
+                                                <route.component {...props} />
+                                            )}
+                                        />
+                                    )
+                                ) : null;
                             })}
                         </Switch>
                     </Container>
