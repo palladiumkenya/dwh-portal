@@ -76,6 +76,7 @@ const CurrentOnArtVerifiedByAgeSex = () => {
                     dataLabels: {
                         enabled: true,
                         crop: false,
+                        allowOverlap: true,
                         formatter: function () {
                             return (
                                 roundNumber(
@@ -85,6 +86,7 @@ const CurrentOnArtVerifiedByAgeSex = () => {
                                 ) + '%'
                             );
                         },
+                        inside: false,
                     },
                 },
                 {
@@ -94,6 +96,7 @@ const CurrentOnArtVerifiedByAgeSex = () => {
                     dataLabels: {
                         enabled: true,
                         crop: false,
+                        allowOverlap: true,
                         formatter: function () {
                             return (
                                 roundNumber(
@@ -103,6 +106,7 @@ const CurrentOnArtVerifiedByAgeSex = () => {
                                 ) + '%'
                             );
                         },
+                        inside: false,
                     },
                 },
             ],
