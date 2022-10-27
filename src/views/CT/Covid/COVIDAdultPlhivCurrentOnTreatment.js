@@ -13,7 +13,7 @@ const COVIDAdultPlhivCurrentOnTreatment = () => {
 
     const currentOnArtAdults = useSelector(covidAdultPLHIVCurrentOnTreatmentSelectors.getAdultPLHIVCurrentOnTreatment).covidAdultsPLHIVCurrentOnTreatment;
 
-    const label = 'ADULT >= 15 YEARS PLHIV CURRENT ON TREATMENT';
+    const label = '>= 12 YEARS PLHIV CURRENT ON TREATMENT';
 
     const data = [{
         y: 100,
