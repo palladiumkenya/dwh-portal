@@ -4,6 +4,7 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import * as currentOnArtByCountySelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByCounty';
+import { roundNumber } from '../../../utils/utils';
 
 const CurrentOnArtVerifiedByCounty = () => {
     const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState(
@@ -12,7 +13,6 @@ const CurrentOnArtVerifiedByCounty = () => {
     const currentOnArtByCountyData = useSelector(
         currentOnArtByCountySelectors.getCurrentOnArtByCounty
     );
-    console.log(currentOnArtByCountyData);
 
     const loadCurrentOnArtByCountyChart = useCallback(async () => {
         setCurrentOnArtByCountyChart({
@@ -43,27 +43,34 @@ const CurrentOnArtVerifiedByCounty = () => {
             },
             plotOptions: {
                 column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0,
-                    dataLabels: {
-                        enabled: true,
-                        crop: false,
-                        overflow: 'none',
-                    },
+                    // pointPadding: 0.1,
                 },
             },
             series: [
                 {
                     data: currentOnArtByCountyData.currentOnArt,
                     name: 'Current on ART',
-                    type: 'column',
                     color: '#2F4050',
+                    type: 'column',
                 },
                 {
                     data: currentOnArtByCountyData.CurrentOnArtVerified,
                     name: 'Verified Current on ART',
                     type: 'column',
                     color: '#69B34C',
+                    dataLabels: {
+                        enabled: true,
+                        crop: false,
+                        formatter: function () {
+                            return (
+                                roundNumber(
+                                    currentOnArtByCountyData.verifiedPerc[
+                                        this.point.index
+                                    ]
+                                ) + '%'
+                            );
+                        },
+                    },
                 },
             ],
         });

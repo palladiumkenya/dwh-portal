@@ -7,7 +7,7 @@ import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnA
 import { currentOnArtByAgeSexSelector } from '../../../atoms/CT/CurrOnART/currOnARTByAgeSexAtom';
 import { useRecoilValue } from 'recoil';
 import moment from 'moment';
-import { formatNumber } from '../../../utils/utils';
+import { formatNumber, roundNumber } from '../../../utils/utils';
 
 const CurrentOnArtVerifiedByAgeSexLT15 = () => {
     const [currentOnArtByAgeSexChart, setCurrentOnArtByAgeSexChart] = useState(
@@ -29,7 +29,7 @@ const CurrentOnArtVerifiedByAgeSexLT15 = () => {
                     categories: currentOnArtByAgeSexData.ageGroups,
                     title: { text: '' },
                     reversed: false,
-                }
+                },
             ],
             yAxis: [
                 {
@@ -64,11 +64,37 @@ const CurrentOnArtVerifiedByAgeSexLT15 = () => {
                     name: 'Male',
                     data: currentOnArtByAgeSexData.currentOnArtMale,
                     color: '#14084D',
+                    dataLabels: {
+                        enabled: true,
+                        crop: false,
+                        formatter: function () {
+                            return (
+                                roundNumber(
+                                    currentOnArtByAgeSexData.verifiedPercMale[
+                                        this.point.index
+                                    ]
+                                ) + '%'
+                            );
+                        },
+                    },
                 },
                 {
                     name: 'Female',
                     data: currentOnArtByAgeSexData.currentOnArtFemale,
                     color: '#EA4C8B',
+                    dataLabels: {
+                        enabled: true,
+                        crop: false,
+                        formatter: function () {
+                            return (
+                                roundNumber(
+                                    currentOnArtByAgeSexData.verifiedPercFemale[
+                                        this.point.index
+                                    ]
+                                ) + '%'
+                            );
+                        },
+                    },
                 },
             ],
         });

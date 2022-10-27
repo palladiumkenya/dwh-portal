@@ -4,10 +4,7 @@ import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByAgeSex';
-import { currentOnArtByAgeSexSelector } from '../../../atoms/CT/CurrOnART/currOnARTByAgeSexAtom';
-import { useRecoilValue } from 'recoil';
-import moment from 'moment';
-import { formatNumber } from '../../../utils/utils';
+import { formatNumber, roundNumber } from '../../../utils/utils';
 
 const CurrentOnArtVerifiedByAgeSexGT15 = () => {
     const [currentOnArtByAgeSexChart, setCurrentOnArtByAgeSexChart] = useState(
@@ -26,7 +23,7 @@ const CurrentOnArtVerifiedByAgeSexGT15 = () => {
                     categories: currentOnArtByAgeSexData.ageGroups,
                     title: { text: '' },
                     reversed: false,
-                }
+                },
             ],
             yAxis: [
                 {
@@ -61,11 +58,37 @@ const CurrentOnArtVerifiedByAgeSexGT15 = () => {
                     name: 'Male',
                     data: currentOnArtByAgeSexData.currentOnArtMale,
                     color: '#14084D',
+                    dataLabels: {
+                        enabled: true,
+                        crop: false,
+                        formatter: function () {
+                            return (
+                                roundNumber(
+                                    currentOnArtByAgeSexData.verifiedPercMale[
+                                        this.point.index
+                                    ]
+                                ) + '%'
+                            );
+                        },
+                    },
                 },
                 {
                     name: 'Female',
                     data: currentOnArtByAgeSexData.currentOnArtFemale,
                     color: '#EA4C8B',
+                    dataLabels: {
+                        enabled: true,
+                        crop: false,
+                        formatter: function () {
+                            return (
+                                roundNumber(
+                                    currentOnArtByAgeSexData.verifiedPercFemale[
+                                        this.point.index
+                                    ]
+                                ) + '%'
+                            );
+                        },
+                    },
                 },
             ],
         });

@@ -22,10 +22,11 @@ export const getCurrentOnArtByPartner = createSelector(
         listFilteredTxCurr
     ) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        const partners = [];
-        const currentOnArtVerified = [];
+        let partners = [];
+        let currentOnArtVerified = [];
         const listTxCurr = filtered ? listFilteredTxCurr : listUnfilteredTxCurr;
-        const currentOnArt = [];
+        let currentOnArt = [];
+        let verifiedPerc = [];
         
 
         for (let i = 0; i < listTxCurr.length; i++) {
@@ -34,6 +35,13 @@ export const getCurrentOnArtByPartner = createSelector(
             }
             partners.push(listTxCurr[i].CTPartner.toUpperCase());
             currentOnArt.push(listTxCurr[i].txCurr);
+            verifiedPerc.push(
+                (((list.find(
+                    (x) =>
+                        x.CTPartner.toUpperCase() ===
+                        listTxCurr[i].CTPartner.toUpperCase()
+                )?.NumNupi ?? 0 )/ listTxCurr[i].txCurr) * 100) ?? 0
+            );
             currentOnArtVerified.push(
                 list.find(
                     (x) =>
@@ -43,6 +51,6 @@ export const getCurrentOnArtByPartner = createSelector(
             );
         }
 
-        return { partners, currentOnArtVerified, currentOnArt };
+        return { partners, currentOnArtVerified, currentOnArt, verifiedPerc };
     }
 );

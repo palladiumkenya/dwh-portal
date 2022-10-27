@@ -4,6 +4,7 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import * as currentOnArtByPartnerSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByPartner';
+import { roundNumber } from '../../../utils/utils';
 
 const CurrentOnArtVerifiedByPartner = () => {
     const [currentOnArtByPartnerChart, setCurrentOnArtByPartnerChart] =
@@ -41,13 +42,7 @@ const CurrentOnArtVerifiedByPartner = () => {
             },
             plotOptions: {
                 column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0,
-                    dataLabels: {
-                        enabled: true,
-                        crop: false,
-                        overflow: 'none',
-                    },
+                    // pointPadding: 0.1,
                 },
             },
             series: [
@@ -62,6 +57,19 @@ const CurrentOnArtVerifiedByPartner = () => {
                     name: 'Verified Current on ART',
                     type: 'column',
                     color: '#69B34C',
+                    dataLabels: {
+                        enabled: true,
+                        crop: false,
+                        formatter: function () {
+                            return (
+                                roundNumber(
+                                    currentOnArtByPartnerData.verifiedPerc[
+                                        this.point.index
+                                    ]
+                                ) + '%'
+                            );
+                        },
+                    },
                 },
             ],
         });
