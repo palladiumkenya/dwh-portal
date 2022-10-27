@@ -60,12 +60,14 @@ const COVIDTabs = () => {
             <TabContent activeTab={mini_tab}>
                 <TabPane tabId="vaccination">
                     <Card>
-                        <CardHeader  className="covid-definition-header">Indicator Definition</CardHeader>
+                        <CardHeader className="covid-definition-header">
+                            Indicator Definition
+                        </CardHeader>
                         <CardBody>
                             <ul>
                                 <li>
                                     {
-                                        'Screened for Vaccination => PLHIV Aged 12+ xYears who are current on ART and have been assessed for COVID 19 vaccination.'
+                                        'Screened for Vaccination => PLHIV Aged 12+ Years who are current on ART and have been assessed for COVID 19 vaccination.'
                                     }
                                 </li>
                                 <li>
