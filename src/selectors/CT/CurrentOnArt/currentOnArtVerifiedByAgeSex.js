@@ -103,13 +103,13 @@ export const getCurrentOnArtByAgeSexLT15 = createSelector(
                         listAll.filter(
                             (obj) =>
                                 obj.ageGroup
-                                    .replace('-', ' to ')
+                                    ?.replace('-', ' to ')
                                     .replace('<', 'Under ') === ageGroup &&
                                 (obj.Gender.toLowerCase() ===
                                     'M'.toLowerCase() ||
                                     obj.Gender.toLowerCase() ===
                                         'Male'.toLowerCase())
-                        )[0].txCurr
+                        )[0]?.txCurr
                 );
                 sum += ageGroupMaleFilter[0].NumNupi;
                 currentOnArtMale.push(ageGroupMaleFilter[0].NumNupi);
@@ -197,7 +197,7 @@ export const getCurrentOnArtByAgeSexGT15 = createSelector(
             );
             if (ageGroupMaleFilter.length > 0) {
                 verifiedPercMale.push(
-                    (ageGroupMaleFilter[0].NumNupi * 100) /
+                    (ageGroupMaleFilter[0]?.NumNupi * 100) /
                         listAll.filter(
                             (obj) =>
                                 obj.ageGroup
@@ -207,7 +207,7 @@ export const getCurrentOnArtByAgeSexGT15 = createSelector(
                                     'M'.toLowerCase() ||
                                     obj.Gender.toLowerCase() ===
                                         'Male'.toLowerCase())
-                        )[0].txCurr
+                        )[0]?.txCurr
                 );
                 sum += ageGroupMaleFilter[0].NumNupi;
                 currentOnArtMale.push(ageGroupMaleFilter[0].NumNupi);
