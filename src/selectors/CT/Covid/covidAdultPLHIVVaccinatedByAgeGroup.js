@@ -14,6 +14,7 @@ export const getAdultPLHIVVaccinatedByAgeGroups = createSelector(
         const listAgeGroup = filtered ? listFilteredAgeGroup : listUnfilteredAgeGroup;
 
         let ageGroups = [
+            "10-14",
             "15-19",
             "20-24",
             "25-29",
@@ -117,6 +118,20 @@ export const getAdultPLHIVVaccinatedByAgeGroups = createSelector(
                 );
             }
         }
+        ageGroups = [
+            '12-14',
+            '15-19',
+            '20-24',
+            '25-29',
+            '30-34',
+            '35-39',
+            '40-44',
+            '45-49',
+            '50-54',
+            '55-59',
+            '60-64',
+            '65+',
+        ];
 
         return { ageGroups, fullyVaccinated, partiallyVaccinated, notVaccinated };
     }
