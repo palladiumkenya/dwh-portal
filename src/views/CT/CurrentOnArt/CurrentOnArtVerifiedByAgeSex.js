@@ -94,6 +94,7 @@ const CurrentOnArtVerifiedByAgeSex = () => {
                     data: currentOnArtByAgeSexData.currentOnArtMale,
                     color: '#14084D',
                     dataLabels: {
+                        x: -6,
                         enabled: true,
                         crop: false,
                         allowOverlap: true,
