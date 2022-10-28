@@ -4,7 +4,6 @@ import { AppFooter, AppHeader, AppBreadcrumb2 as AppBreadcrumb } from '@coreui/r
 import { Container } from 'reactstrap';
 import { Route, Switch } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {  Message } from 'semantic-ui-react';
 import { LOADING_DELAY } from './../../constants';
 import * as router from 'react-router-dom';
 import Loading from './../../views/Shared/Loading';
@@ -13,6 +12,7 @@ import routes from './../../routes';
 import UniversalFilter from './../../views/Shared/UniversalFilter';
 import CovidFilter from './../../views/Shared/CovidFilter';
 import KHISComparisonFilter from './../../views/Shared/KHISComparisonFilter';
+import TestMessage from "./TestMessage";
 
 const DefaultFooter = Loadable({ loader: () => import('./DefaultFooter'), loading: Loading, delay: LOADING_DELAY });
 const DefaultHeader = Loadable({ loader: () => import('./DefaultHeader'), loading: Loading, delay: LOADING_DELAY });
@@ -53,20 +53,7 @@ const DefaultLayout = () => {
                 <main className={'main'}>
                     <AppBreadcrumb appRoutes={routes} router={router} />
                     <Container fluid>
-                        {currentLocation !== 'https://dwh.nascop.org/' &&
-                        currentLocation !== 'https://prod.kenyahmis.org/' ? (
-                            <Message warning>
-                                <Message.Header>
-                                    This is the test site
-                                </Message.Header>
-                                <p>
-                                    Numbers may vary from those in{' '}
-                                    <a href={'https://dwh.nascop.org'}>
-                                        https://dwh.nascop.org
-                                    </a>
-                                </p>
-                            </Message>
-                        ) : null}
+                        <TestMessage />
                         <Switch>
                             {routes.map((route, idx) => {
                                 return route.component ? (
