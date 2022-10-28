@@ -82,7 +82,7 @@ export const getCurrentOnArtByAgeSex = createSelector(
 
             if (ageGroupFemaleFilter.length > 0) {
                 verifiedPercFemale.push(
-                    (ageGroupMaleFilter[0].NumNupi * 100) /
+                    (ageGroupFemaleFilter[0]?.NumNupi * 100) /
                         listAll.filter(
                             (obj) =>
                                 obj.ageGroup
@@ -92,7 +92,7 @@ export const getCurrentOnArtByAgeSex = createSelector(
                                     'F'.toLowerCase() ||
                                     obj.Gender.toLowerCase() ===
                                         'Female'.toLowerCase())
-                        )[0].txCurr
+                        )[0]?.txCurr
                 );
                 currentOnArtFemale.push(ageGroupFemaleFilter[0].NumNupi);
             } else {
@@ -171,7 +171,7 @@ export const getCurrentOnArtByAgeSexLT15 = createSelector(
 
             if (ageGroupFemaleFilter.length > 0) {
                 verifiedPercFemale.push(
-                    (ageGroupMaleFilter[0].NumNupi * 100) /
+                    (ageGroupFemaleFilter[0]?.NumNupi * 100) /
                         listAll.filter(
                             (obj) =>
                                 obj.ageGroup
@@ -181,7 +181,7 @@ export const getCurrentOnArtByAgeSexLT15 = createSelector(
                                     'F'.toLowerCase() ||
                                     obj.Gender.toLowerCase() ===
                                         'Female'.toLowerCase())
-                        )[0].txCurr
+                        )[0]?.txCurr
                 );
                 sum += ageGroupFemaleFilter[0].NumNupi;
                 currentOnArtFemale.push(ageGroupFemaleFilter[0].NumNupi);
@@ -269,7 +269,7 @@ export const getCurrentOnArtByAgeSexGT15 = createSelector(
 
             if (ageGroupFemaleFilter.length > 0) {
                 verifiedPercFemale.push(
-                    (ageGroupMaleFilter[0].NumNupi * 100) /
+                    (ageGroupFemaleFilter[0]?.NumNupi * 100) /
                         listAll.filter(
                             (obj) =>
                                 obj.ageGroup
@@ -279,7 +279,7 @@ export const getCurrentOnArtByAgeSexGT15 = createSelector(
                                     'F'.toLowerCase() ||
                                     obj.Gender.toLowerCase() ===
                                         'Female'.toLowerCase())
-                        )[0].txCurr
+                        )[0]?.txCurr
                 );
                 sum += ageGroupFemaleFilter[0].NumNupi;
                 currentOnArtFemale.push(ageGroupFemaleFilter[0].NumNupi);
