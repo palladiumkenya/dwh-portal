@@ -12,8 +12,6 @@ export const getOtzNotEnrolledAmongAlHivOnArtByCounty = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         const listPartner = filtered ? listFilteredPartner : listUnfilteredPartner;
 
-        console.log(list);
-
         const arrayVal = [];
         for (const listElement of list) {
 
@@ -21,7 +19,6 @@ export const getOtzNotEnrolledAmongAlHivOnArtByCounty = createSelector(
                 (obj) =>{
                     return obj.County === listElement.County;
             });
-            console.log(filterTotalAdolescents);
             if (filterTotalAdolescents.length > 0) {
                 const percentage =
                     (listElement.Num /
@@ -39,7 +36,6 @@ export const getOtzNotEnrolledAmongAlHivOnArtByCounty = createSelector(
         arrayVal.sort((a, b) => {
             return b.y - a.y;
         });
-        console.log(arrayVal);
 
         return arrayVal;
     }

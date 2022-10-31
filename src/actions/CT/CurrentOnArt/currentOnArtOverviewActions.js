@@ -19,9 +19,9 @@ export const loadCurrentOnArtOverview = (tab) => async (dispatch, getState) => {
         getState().ui.currentPage !== PAGES.home
     ) {
         return;
-    }
-    else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
-        return;
+    // }
+    // else if ( getState().filters.filtered === false) {
+    //     return;
     } else {
         await dispatch(fetchCurrentOnArtOverview());
     }
