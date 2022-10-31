@@ -7,7 +7,9 @@ import * as otzVlSuppressionByAgeSelector from '../../../selectors/CT/OTZ/otzVlS
 
 const OtzVlSuppressionByAgeNotEnrolled = () => {
     const [otzVlSuppressionByAge, setOtzVlSuppressionByAge] = useState({});
-    const vlSuppressionAge = useSelector(otzVlSuppressionByAgeSelector.getOtzVlSuppressionByAge);
+    const vlSuppressionAge = useSelector(
+        otzVlSuppressionByAgeSelector.getOtzVlSuppressionByAgeNotEnrolled
+    );
 
     const loadVlSuppressionByAge = useCallback(async () => {
         setOtzVlSuppressionByAge({
