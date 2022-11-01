@@ -5,9 +5,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import * as otzOutcomesAmongAlhivWithReSuppression from '../../../selectors/CT/OTZ/otzOutcomesAmongAlhivWithReSuppression';
 
-const OtzOutcomesAmongAlhivWithReSuppression = () => {
+const OtzAlhivWithReSuppression = () => {
     const [otzOutcomesAmongAlHivReSuppression, setOtzOutcomesAmongAlHivReSuppression] = useState({});
-    const otzOutcomesWithReSuppression = useSelector(otzOutcomesAmongAlhivWithReSuppression.getOtzOutcomesAmongAlHivWithReSuppression);
+    const otzOutcomesWithReSuppression = useSelector(
+        otzOutcomesAmongAlhivWithReSuppression.getOtzAlHivWithReSuppression
+    );
 
     const loadOtzOutcomesAmongAlhivWithReSuppression = useCallback(async () => {
         setOtzOutcomesAmongAlHivReSuppression({
@@ -19,8 +21,8 @@ const OtzOutcomesAmongAlhivWithReSuppression = () => {
             },
             xAxis: {
                 categories: [
-                    'OTZ WITH VL >1000 AT BASELINE',
-                    'OTZ WITH VL <1000 WITH REPEAT VLS',
+                    'ALHIV WITH VL >1000 AT BASELINE',
+                    'ALHIV WITH VL <1000 WITH REPEAT VLS',
                     'NUMBER WITH VL >1000 UPON REPEAT',
                 ],
                 crosshair: true,
@@ -58,43 +60,31 @@ const OtzOutcomesAmongAlhivWithReSuppression = () => {
                             name: 'ALHIV WITH VL >1000 AT BASELINE',
                             color: '#00AD30',
                             y:
-                                otzOutcomesWithReSuppression.length > 0
-                                    ? otzOutcomesWithReSuppression[0]
-                                          .AlHivWithVlGreaterThan1000
-                                    : 0,
+                                otzOutcomesWithReSuppression.AlHivWithVlGreaterThan1000
+                                    ?? 0,
                             text:
-                                otzOutcomesWithReSuppression.length > 0
-                                    ? otzOutcomesWithReSuppression[0]
-                                          .AlHivWithVlGreaterThan1000Perc
-                                    : 0,
+                                otzOutcomesWithReSuppression.AlHivWithVlGreaterThan1000Perc
+                                    ?? 0,
                         },
                         {
                             name: 'ALHIV WITH VL <1000 WITH REPEAT VL',
                             color: '#fad53f',
                             y:
-                                otzOutcomesWithReSuppression.length > 0
-                                    ? otzOutcomesWithReSuppression[0]
-                                          .ALHivWithVLLessThan1000WithRepeatVL
-                                    : 0,
+                                otzOutcomesWithReSuppression.ALHivWithVLLessThan1000WithRepeatVL
+                                    ?? 0,
                             text:
-                                otzOutcomesWithReSuppression.length > 0
-                                    ? otzOutcomesWithReSuppression[0]
-                                          .ALHivWithVLLessThan1000WithRepeatVLPerc
-                                    : 0,
+                                otzOutcomesWithReSuppression.ALHivWithVLLessThan1000WithRepeatVLPerc
+                                    ?? 0,
                         },
                         {
                             name: 'NUMBER WITH VL >1000 UPON REPEAT',
                             color: '#bb1414',
                             y:
-                                otzOutcomesWithReSuppression.length > 0
-                                    ? otzOutcomesWithReSuppression[0]
-                                          .ALHivWithVLGreaterThan1000WithRepeatVL
-                                    : 0,
+                                otzOutcomesWithReSuppression.ALHivWithVLGreaterThan1000WithRepeatVL
+                                    ?? 0,
                             text:
-                                otzOutcomesWithReSuppression.length > 0
-                                    ? otzOutcomesWithReSuppression[0]
-                                          .ALHivWithVLGreaterThan1000WithRepeatVLPerc
-                                    : 0,
+                                otzOutcomesWithReSuppression.ALHivWithVLGreaterThan1000WithRepeatVLPerc
+                                    ?? 0,
                         },
                     ],
                 },
@@ -112,7 +102,7 @@ const OtzOutcomesAmongAlhivWithReSuppression = () => {
                 className="trends-header"
                 style={{ textTransform: 'none' }}
             >
-                SUPPRESSION AMONG OTZ WITH REPEAT VLS (RESUPPRESSING)
+                SUPPRESSION AMONG CALHIV WITH REPEAT VLS (RESUPPRESSING)
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
@@ -126,4 +116,4 @@ const OtzOutcomesAmongAlhivWithReSuppression = () => {
     );
 };
 
-export default OtzOutcomesAmongAlhivWithReSuppression;
+export default OtzAlhivWithReSuppression;

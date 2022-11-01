@@ -8,15 +8,42 @@ export const getOtzOutcomesByCounty = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        let catCounties = list.map(obj => obj.County);
+        let catCounties = list.map(obj => obj.County.toUpperCase());
         catCounties = [...new Set(catCounties)];
-        const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care', 'Active'];
+        const categories = ['opt out of OTZ', 'LTFU','DIED' ,'Transfer out', 'Transition to Adult Care', 'Active'];
         const ArrayValOptOut = [];
         const ArrayValLostToFollowUp = [];
         const ArrayValDead = [];
         const ArrayValTransferOut = [];
         const ArrayValTransitionToAdultCare = [];
         const ArrayValActive = [];
+        let build_list = [];
+        console.log(list)
+        catCounties.forEach((c) => {
+            let partner_data = list.filter(
+                (x) => x.County.toUpperCase() === c.toUpperCase()
+            );
+            let partner_data_to = partner_data.filter(
+                (x) => x.Outcome.toUpperCase() === 'TRANSFER OUT'
+            );
+            let sum = partner_data.reduce(
+                (n, { outcomesByCounty }) => n + outcomesByCounty,
+                0
+            );
+            let perc =
+                ((partner_data_to[0]?.outcomesByCounty ?? 0) * 100) / sum;
+            partner_data.forEach((c) => {
+                c.perc = perc
+                c.County = c.County.toUpperCase()
+            });
+            build_list.push(...partner_data);
+            build_list.sort((b, a) => a.perc - b.perc);
+            console.log(build_list)
+        });
+
+        catCounties = build_list.map((obj) => obj.County.toUpperCase());
+        catCounties = [...new Set(catCounties)];
+
         for (const category of categories) {
             for (const catCounty of catCounties) {
                 const catFilterYear = list.filter(obj => obj.County === catCounty && obj.Outcome.toUpperCase() === category.toUpperCase());
@@ -36,7 +63,7 @@ export const getOtzOutcomesByCounty = createSelector(
                     }
                 }
 
-                if (category === 'Lost to follow up') {
+                if (category === 'LTFU') {
                     if (catFilterYear.length > 0) {
                         ArrayValLostToFollowUp.push({
                             category,
@@ -52,18 +79,18 @@ export const getOtzOutcomesByCounty = createSelector(
                     }
                 }
 
-                if (category === 'DEAD') {
+                if (category === 'DIED') {
                     if (catFilterYear.length > 0) {
                         ArrayValDead.push({
                             category,
                             y: catFilterYear[0].outcomesByCounty,
-                            catCounty
+                            catCounty,
                         });
                     } else {
                         ArrayValDead.push({
                             category,
                             y: 0,
-                            catCounty
+                            catCounty,
                         });
                     }
                 }

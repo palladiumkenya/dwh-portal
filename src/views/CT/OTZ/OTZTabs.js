@@ -29,6 +29,11 @@ const OtzNotEnrolledAmongAlhivOnArtByPartner = Loadable({
     loading: Loading,
     delay: LOADING_DELAY,
 });
+const OtzAlhivWithBaselineVl = Loadable({
+    loader: () => import('./OtzAlhivWithBaselineVl'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 const VLUptakeAmongAlHivEnrolledInOtzBySex = Loadable({ loader: () => import('./vlUptakeAmongAlHivEnrolledInOtzBySex'), loading: Loading, delay: LOADING_DELAY });
 const VlUptakeAmongAlHivEnrolledInOTZByAge = Loadable({ loader: () => import('./VlUptakeAmongAlHivEnrolledInOTZByAge'), loading: Loading, delay: LOADING_DELAY });
 const VlUptakeAmongAlHivEnrolledInOTZByCounty = Loadable({ loader: () => import('./VlUptakeAmongAlHivEnrolledInOTZByCounty'), loading: Loading, delay: LOADING_DELAY });
@@ -37,6 +42,11 @@ const OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTraining = Loadable({ loa
 const OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingByCounty = Loadable({ loader: () => import('./OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingByCounty'), loading: Loading, delay: LOADING_DELAY });
 const OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingByPartner = Loadable({ loader: () => import('./OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingByPartner'), loading: Loading, delay: LOADING_DELAY });
 const OtzOutcomesAmongAlhivWithBaselineVl = Loadable({ loader: () => import('./OtzOutcomesAmongAlhivWithBaselineVl'), loading: Loading, delay: LOADING_DELAY });
+const OtzAlhivWithReSuppression = Loadable({
+    loader: () => import('./OtzAlhivWithReSuppression'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 const OtzOutcomesAmongAlhivWithReSuppression = Loadable({ loader: () => import('./OtzOutcomesAmongAlhivWithReSuppression'), loading: Loading, delay: LOADING_DELAY });
 const OtzOutcomesAmongAlhivWithSustainedSuppression = Loadable({ loader: () => import('./OtzOutcomesAmongAlhivWithSustainedSuppression'), loading: Loading, delay: LOADING_DELAY });
 const OtzOutcomesByGender = Loadable({ loader: () => import('./OtzOutcomesByGender'), loading: Loading, delay: LOADING_DELAY });
@@ -46,6 +56,16 @@ const OtzOutcomesByYearOfArtStart = Loadable({ loader: () => import('./OtzOutcom
 const OtzOutcomesByCounty = Loadable({ loader: () => import('./OtzOutcomesByCounty'), loading: Loading, delay: LOADING_DELAY });
 const OtzOutcomesByPartner = Loadable({ loader: () => import('./OtzOutcomesByPartner'), loading: Loading, delay: LOADING_DELAY });
 const OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingMales = Loadable({ loader: () => import('./OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingMales'), loading: Loading, delay: LOADING_DELAY });
+const OtzVlSuppressionNotEnrolledByPartner = Loadable({
+    loader: () => import('./OtzVlSuppressionNotEnrolledByPartner'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const OtzVlSuppressionNotEnrolledByCounty = Loadable({
+    loader: () => import('./OtzVlSuppressionNotEnrolledByCounty'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 const OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingFemales = Loadable({ loader: () => import('./OtzProportionOfAlHivEnrolledInOtzWhoHaveUndergoneTrainingFemales'), loading: Loading, delay: LOADING_DELAY });
 
 const OtzVlSuppressionBySex = Loadable({ loader: () => import('./OtzVlSuppressionBySex'), loading: Loading, delay: LOADING_DELAY });
@@ -212,7 +232,7 @@ const OTZTabs = () => {
                             <OTZByAgeSex />
                         </Col>
                     </Row>
-                    {/* TODO: 3 charts here */}
+                    {/* TODO:: 1 charts here: caregivers relationship */}
                     <OtzNotEnrolledAmongAlhivOnArtByCounty />
                     <OtzNotEnrolledAmongAlhivOnArtByPartner />
                     <Row>
@@ -235,7 +255,7 @@ const OTZTabs = () => {
                         </Col>
                     </Row>
                     {/* TODO: New Table Here */}
-                    <Row>
+                    {/* <Row>
                         <Col className={'col-6'}>
                             <VLUptakeAmongAlHivEnrolledInOtzBySex />
                         </Col>
@@ -252,19 +272,23 @@ const OTZTabs = () => {
                         <Col className={'col-12'}>
                             <VlUptakeAmongAlHivEnrolledInOTZByPartner />
                         </Col>
-                    </Row>
+                    </Row> */}
                 </TabPane>
                 <TabPane tabId="otz_management">
                     <Row>{/* TODO: 2 charts here on DTG col6 */}</Row>
                     <Row>{/* TODO: 2 charts here on MMD col6 */}</Row>
                     <Row>
-                        <Col className={'col-6'}></Col>
+                        <Col className={'col-6'}>
+                            <OtzAlhivWithBaselineVl/>
+                        </Col>
                         <Col className={'col-6'}>
                             <OtzOutcomesAmongAlhivWithBaselineVl />
                         </Col>
                     </Row>
                     <Row>
-                        <Col className={'col-6'}></Col>
+                        <Col className={'col-6'}>
+                            <OtzAlhivWithReSuppression />
+                        </Col>
                         <Col className={'col-6'}>
                             <OtzOutcomesAmongAlhivWithReSuppression />
                         </Col>
@@ -290,13 +314,21 @@ const OTZTabs = () => {
                             <OtzVlSuppressionByCounty />
                         </Col>
                     </Row>
-                    {/* TODO: VL SUPPRESSION among CALHIV NOT enrolled in Otz BY COUNTY  */}
+                    <Row>
+                        <Col className={'col-12'}>
+                            <OtzVlSuppressionNotEnrolledByCounty />
+                        </Col>
+                    </Row>
                     <Row>
                         <Col className={'col-12'}>
                             <OtzVlSuppressionByPartner />
                         </Col>
                     </Row>
-                    {/* TODO: VL SUPPRESSION among CALHIV NOT enrolled in Otz BY PARTNER */}
+                    <Row>
+                        <Col className={'col-12'}>
+                            <OtzVlSuppressionNotEnrolledByPartner />
+                        </Col>
+                    </Row>
                 </TabPane>
                 <TabPane tabId={'otz_outcomes'}>
                     <Row>
@@ -322,6 +354,7 @@ const OTZTabs = () => {
                             <OtzOutcomesByPartner />
                         </Col>
                     </Row>
+                    {/* TODO:: COMPARISON OUTCOMES CHART */}
                 </TabPane>
             </TabContent>
         </div>
