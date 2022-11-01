@@ -18,6 +18,28 @@ export const getOtzVlSuppressionByPartner = createSelector(
         const suppressionCategories = ['HVL', 'LVL', 'VL'];
         let partners = list.map(obj => obj ? obj.CTPartner.toUpperCase() : '');
         partners = _.uniq(partners);
+        let build_list = [];
+        partners.forEach((c) => {
+            let partner_data = list.filter(
+                (x) => x.CTPartner.toUpperCase() === c
+            );
+            let partner_data_vl = partner_data.filter(
+                (x) => x.Last12MVLResult.toUpperCase() === 'VL'
+            );
+            let sum = partner_data.reduce(
+                (n, { vlSuppression }) => n + vlSuppression,
+                0
+            );
+            let perc = (partner_data_vl[0]?.vlSuppression * 100) / sum;
+            partner_data.forEach((c) => (c.perc = perc));
+            build_list.push(...partner_data);
+            build_list.sort((b, a) => a.perc - b.perc);
+        });
+
+        partners = build_list.map((obj) =>
+            obj && obj.CTPartner ? obj.CTPartner.toUpperCase() : ''
+        );
+        partners = _.uniq(partners);
 
         for (const suppressionCategory of suppressionCategories) {
             let vlSuppression = 0;
@@ -46,6 +68,28 @@ export const getOtzVlSuppressionByPartnerNotEnrolled = createSelector(
         const data = [];
         const suppressionCategories = ['HVL', 'LVL', 'VL'];
         let partners = list.map(obj => obj ? obj.CTPartner.toUpperCase() : '');
+        partners = _.uniq(partners);
+        let build_list = [];
+        partners.forEach((c) => {
+            let partner_data = list.filter(
+                (x) => x.CTPartner.toUpperCase() === c
+            );
+            let partner_data_vl = partner_data.filter(
+                (x) => x.Last12MVLResult.toUpperCase() === 'VL'
+            );
+            let sum = partner_data.reduce(
+                (n, { vlSuppression }) => n + vlSuppression,
+                0
+            );
+            let perc = (partner_data_vl[0]?.vlSuppression * 100) / sum;
+            partner_data.forEach((c) => (c.perc = perc));
+            build_list.push(...partner_data);
+            build_list.sort((b, a) => a.perc - b.perc);
+        });
+
+        partners = build_list.map((obj) =>
+            obj && obj.CTPartner ? obj.CTPartner.toUpperCase() : ''
+        );
         partners = _.uniq(partners);
 
         for (const suppressionCategory of suppressionCategories) {
