@@ -10,13 +10,41 @@ export const getOtzOutcomesByPartner = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         let catPartners = list.map(obj => obj.partner);
         catPartners = [...new Set(catPartners)];
-        const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care', 'Active'];
+        let build_list = [];
+        catPartners.forEach((c) => {
+            let partner_data = list.filter(
+                (x) => x.partner.toUpperCase() === c.toUpperCase()
+            );
+            let partner_data_to = partner_data.filter(
+                (x) => x.Outcome.toUpperCase() === 'TRANSFER OUT'
+            );
+            let sum = partner_data.reduce(
+                (n, { outcomesByPartner }) => n + outcomesByPartner,
+                0
+            );
+            let perc = (partner_data_to[0]?.outcomesByPartner ?? 0 )*100 / sum;
+            partner_data.forEach((c) => (c.perc = perc));
+            build_list.push(...partner_data);
+            build_list.sort((b, a) => a.perc - b.perc);
+        });
+
+        catPartners = build_list.map((obj) => obj.partner);
+        catPartners = [...new Set(catPartners)];
+        const categories = [
+            'opt out of OTZ',
+            'LTFU',
+            'Died',
+            'Transfer out',
+            'Transition to Adult Care',
+            'Active',
+        ];
         const ArrayValOptOut = [];
         const ArrayValLostToFollowUp = [];
         const ArrayValDead = [];
         const ArrayValTransferOut = [];
         const ArrayValTransitionToAdultCare = [];
         const ArrayValActive = [];
+
         for (const category of categories) {
             for (const catPartner of catPartners) {
                 const catFilterYear = list.filter(obj => obj.partner === catPartner && obj.Outcome.toUpperCase() === category.toUpperCase());
@@ -36,7 +64,7 @@ export const getOtzOutcomesByPartner = createSelector(
                     }
                 }
 
-                if (category === 'Lost to follow up') {
+                if (category === 'LTFU') {
                     if (catFilterYear.length > 0) {
                         ArrayValLostToFollowUp.push({
                             category,
@@ -52,7 +80,7 @@ export const getOtzOutcomesByPartner = createSelector(
                     }
                 }
 
-                if (category === 'DEAD') {
+                if (category === 'Died') {
                     if (catFilterYear.length > 0) {
                         ArrayValDead.push({
                             category,
