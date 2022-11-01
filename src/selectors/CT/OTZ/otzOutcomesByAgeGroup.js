@@ -13,7 +13,7 @@ export const getOtzOutcomesByAgeGroup = createSelector(
         let catAgeGroups = list.map(obj => obj.AgeGroup);
         catAgeGroups =['10 to 14', '15 to 19']
         
-        const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care', 'Active'];
+        const categories = ['opt out of OTZ', 'LTFU', 'DEAD', 'Transfer out', 'Transition to Adult Care', 'Active'];
         const ArrayValOptOut = [];
         const ArrayValLostToFollowUp = [];
         const ArrayValDead = [];
@@ -39,18 +39,18 @@ export const getOtzOutcomesByAgeGroup = createSelector(
                     }
                 }
 
-                if (category === 'Lost to follow up') {
+                if (category === 'LTFU') {
                     if (catFilterYear.length > 0) {
                         ArrayValLostToFollowUp.push({
                             category,
                             y: catFilterYear[0].outcomesByAgeGroup,
-                            ageGroup
+                            ageGroup,
                         });
                     } else {
                         ArrayValLostToFollowUp.push({
                             category,
                             y: 0,
-                            ageGroup
+                            ageGroup,
                         });
                     }
                 }
