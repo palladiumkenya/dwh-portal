@@ -4,6 +4,10 @@ import _ from 'lodash';
 const filtered = state => state.filters.filtered;
 const listFiltered = state => state.otzVlSuppressionByCounty.listFiltered;
 const listUnfiltered = state => state.otzVlSuppressionByCounty.listUnfiltered;
+const listFilteredNotEnrolled = (state) =>
+    state.otzVlSuppressionByCountyNotEnrolled.listFiltered;
+const listUnfilteredNotEnrolled = (state) =>
+    state.otzVlSuppressionByCountyNotEnrolled.listUnfiltered;
 
 export const getOtzVlSuppressionByCounty = createSelector(
     [listUnfiltered, listFiltered, filtered],
@@ -26,6 +30,38 @@ export const getOtzVlSuppressionByCounty = createSelector(
                     vlSuppression = 0;
                 }
 
+                catArray.push(vlSuppression);
+            }
+            data.push(catArray);
+        }
+
+        return { counties, data };
+    }
+);
+
+export const getOtzVlSuppressionByCountyNotEnrolled = createSelector(
+    [listUnfilteredNotEnrolled, listFilteredNotEnrolled, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+
+        const data = [];
+        const suppressionCategories = ['HVL', 'LVL', 'VL'];
+        let counties = list.map(obj => (obj && obj.County) ? obj.County.toUpperCase() : "");
+        counties = _.uniq(counties);
+
+        for (const suppressionCategory of suppressionCategories) {
+            let sum = 0;
+            let vlSuppression = 0;
+            const catArray = [];
+            for (const county of counties) {
+                const arrayFilter = list.filter(obj => obj.Last12MVLResult === suppressionCategory && ((obj && obj.County) ? obj.County.toUpperCase() : "") === county);
+                if (arrayFilter.length > 0) {
+                    vlSuppression = arrayFilter[0].vlSuppression;
+
+                } else {
+                    vlSuppression = 0;
+                }
+                sum+= vlSuppression
                 catArray.push(vlSuppression);
             }
             data.push(catArray);

@@ -1,35 +1,28 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import * as otzVlSuppressionBySexSelector from '../../../selectors/CT/OTZ/otzVlSuppressionBySex';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import * as otzVlSuppressionByCountySelector from '../../../selectors/CT/OTZ/otzVlSuppressionByCounty';
 
-const OtzVlSuppressionBySexNotEnrolled = () => {
-    const [otzVlSuppressionBySex, setOtzVlSuppressionBySex] = useState({});
-    const vlSuppressionGender = useSelector(
-        otzVlSuppressionBySexSelector.getOtzVlSuppressionBySexNotEnrolled
+const OtzVlSuppressionNotEnrolledByCounty = () => {
+    const [otzVlSuppressionByCounty, setOtzVlSuppressionByCounty] = useState(
+        {}
+    );
+    const vlSuppressionCounty = useSelector(
+        otzVlSuppressionByCountySelector.getOtzVlSuppressionByCountyNotEnrolled
     );
 
-    const loadVlSuppressionBySex = useCallback(async () => {
-        setOtzVlSuppressionBySex({
+    const loadVlSuppressionByCounty = useCallback(async () => {
+        setOtzVlSuppressionByCounty({
             title: { text: '' },
             plotOptions: {
                 column: {
                     stacking: 'percent',
-                    dataLabels: {
-                        enabled: true,
-                        format: '{point.percentage:.0f}%',
-                    },
                 },
             },
             xAxis: [
-                {
-                    categories: vlSuppressionGender.genders.map((g) =>
-                        g.toUpperCase()
-                    ),
-                    crosshair: true,
-                },
+                { categories: vlSuppressionCounty.counties, crosshair: true },
             ],
             yAxis: [{ title: { text: 'PERCENTAGE OF PATIENTS' } }],
             tooltip: { shared: true },
@@ -37,32 +30,32 @@ const OtzVlSuppressionBySexNotEnrolled = () => {
             series: [
                 {
                     name: 'HVL',
-                    data: vlSuppressionGender.data[0],
+                    data: vlSuppressionCounty.data[0],
                     type: 'column',
                     color: '#bb1414',
                     tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
                 },
                 {
                     name: 'LLV',
-                    data: vlSuppressionGender.data[1],
+                    data: vlSuppressionCounty.data[1],
                     type: 'column',
                     color: '#F08532',
                     tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
                 },
                 {
                     name: 'VS',
-                    data: vlSuppressionGender.data[2],
+                    data: vlSuppressionCounty.data[2],
                     type: 'column',
                     color: '#00AD30',
                     tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
                 },
             ],
         });
-    }, [vlSuppressionGender]);
+    }, [vlSuppressionCounty]);
 
     useEffect(() => {
-        loadVlSuppressionBySex();
-    }, [loadVlSuppressionBySex]);
+        loadVlSuppressionByCounty();
+    }, [loadVlSuppressionByCounty]);
 
     return (
         <Card className="trends-card">
@@ -70,13 +63,13 @@ const OtzVlSuppressionBySexNotEnrolled = () => {
                 className="trends-header"
                 style={{ textTransform: 'none' }}
             >
-                VL SUPPRESSION AMONG CALHIV NOT ENROLLED IN OTZ BY GENDER
+                VL SUPPRESSION AMONG CALHIV NOT ENROLLED IN OTZ BY COUNTY
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
                     <HighchartsReact
                         highcharts={Highcharts}
-                        options={otzVlSuppressionBySex}
+                        options={otzVlSuppressionByCounty}
                     />
                 </div>
             </CardBody>
@@ -84,4 +77,4 @@ const OtzVlSuppressionBySexNotEnrolled = () => {
     );
 };
 
-export default OtzVlSuppressionBySexNotEnrolled;
+export default OtzVlSuppressionNotEnrolledByCounty;

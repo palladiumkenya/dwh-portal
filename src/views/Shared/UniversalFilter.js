@@ -252,7 +252,6 @@ const UniversalFilter = () => {
         loadSites();
     }, [loadSites]);
     useEffect(() => {
-        console.log(filters.partners);
         if (queried_partner) {
             dispatch(actions.filterByPartner(queried_partner));
             return;

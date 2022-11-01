@@ -4,6 +4,7 @@ import Highcharts from 'highcharts';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import * as otzOutcomesByAgeGroupSelector from '../../../selectors/CT/OTZ/otzOutcomesByAgeGroup';
+import { roundNumber } from './../../../utils/utils';
 
 const OtzOutcomesByAgeGroup = () => {
     const [otzOutcomesByAgeGroup, setOtzOutcomesByAgeGroup] = useState({});
@@ -20,7 +21,7 @@ const OtzOutcomesByAgeGroup = () => {
             xAxis: {
                 categories: outcomesByAgeGroup.catAgeGroups,
             },
-            yAxis: [{ title: { text: 'Percentage of Patients' } }],
+            yAxis: [{ title: { text: 'PERCENTAGE OF PATIENTS' } }],
             legend: {
                 align: 'left',
                 verticalAlign: 'top',
@@ -29,7 +30,17 @@ const OtzOutcomesByAgeGroup = () => {
                 reversed: true,
             },
             tooltip: { shared: true },
-            plotOptions: { column: { stacking: 'percent' } },
+            plotOptions: {
+                column: {
+                    stacking: 'percent',
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return '' + roundNumber(this.point.percentage) + '%';
+                        },
+                    },
+                },
+            },
             series: [
                 {
                     name: 'ACTIVE',

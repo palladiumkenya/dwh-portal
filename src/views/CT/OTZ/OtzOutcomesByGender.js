@@ -4,6 +4,7 @@ import Highcharts from 'highcharts';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import * as otzOutcomesByGenderSelector from '../../../selectors/CT/OTZ/otzOutcomesByGender';
+import { roundNumber } from '../../../utils/utils';
 
 const OtzOutcomesByGender = () => {
     const [otzOutcomesByGender, setOtzOutcomesByGender] = useState({});
@@ -29,7 +30,19 @@ const OtzOutcomesByGender = () => {
                 reversed: true,
             },
             tooltip: { shared: true },
-            plotOptions: { column: { stacking: 'percent' } },
+            plotOptions: {
+                column: {
+                    stacking: 'percent',
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return (
+                                '' + roundNumber(this.point.percentage) + '%'
+                            );
+                        },
+                    },
+                },
+            },
             series: [
                 {
                     name: 'ACTIVE',

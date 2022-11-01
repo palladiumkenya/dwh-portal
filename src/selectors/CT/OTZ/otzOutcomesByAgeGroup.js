@@ -11,7 +11,8 @@ export const getOtzOutcomesByAgeGroup = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
 
         let catAgeGroups = list.map(obj => obj.AgeGroup);
-        catAgeGroups = _.uniq(catAgeGroups);
+        catAgeGroups =['10 to 14', '15 to 19']
+        
         const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care', 'Active'];
         const ArrayValOptOut = [];
         const ArrayValLostToFollowUp = [];
