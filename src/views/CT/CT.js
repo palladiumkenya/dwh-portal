@@ -332,7 +332,6 @@ import {
     loadViralLoadOverallNumberGt1000CopiesSecondlineRegiment
 } from '../../actions/CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
 
-import { useCurrOnART } from './../../hooks/CT/CurrOnART/useCurrOnART';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({
@@ -362,8 +361,6 @@ const OVC = Loadable({ loader: () => import('./OVC/OVC'), loading: Loading, dela
 const COVID = Loadable({ loader: () => import('./Covid/Covid'), loading: Loading, delay: LOADING_DELAY });
 
 const CT = () => {
-    //new recoil store
-    const currOnARTHook = useCurrOnART();
 
     const dispatch = useDispatch();
     const ctTab = useSelector(state => state.ui.ctTab);
@@ -465,7 +462,6 @@ const CT = () => {
                 dispatch(loadArtOptimizationCurrentByRegimen(active_tab));
                 break;
             case "currentOnArt":
-                currOnARTHook();
                 dispatch(loadCurrentOnArtOverview(active_tab));
                 dispatch(loadCurrentOnArtByAgeSex(active_tab));
                 dispatch(loadCurrentOnArtByCounty(active_tab));
