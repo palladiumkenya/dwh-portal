@@ -138,19 +138,35 @@ const CurrentOnART = () => {
             <CurrentOnArtByPartner />
             <SectionFooter overview={branding.overview} /> */}
             <Row>
-                <Col>
+                <Col
+                    className={
+                        'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
+                    }
+                >
                     <CurrentOnArtVsVerified />
                 </Col>
-                <Col>
+                <Col
+                    className={
+                        'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
+                    }
+                >
                     <CurrentOnArtVerifiedByAgeSex />
                 </Col>
             </Row>
             <SectionFooter overview={branding.overview} />
             <Row>
-                <Col>
+                <Col
+                    className={
+                        'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
+                    }
+                >
                     <CurrentOnArtVerifiedByAgeSexLT15 />
                 </Col>
-                <Col>
+                <Col
+                    className={
+                        'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
+                    }
+                >
                     <CurrentOnArtVerifiedByAgeSexGT15 />
                 </Col>
             </Row>

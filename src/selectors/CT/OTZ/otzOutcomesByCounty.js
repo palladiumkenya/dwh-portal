@@ -18,7 +18,6 @@ export const getOtzOutcomesByCounty = createSelector(
         const ArrayValTransitionToAdultCare = [];
         const ArrayValActive = [];
         let build_list = [];
-        console.log(list)
         catCounties.forEach((c) => {
             let partner_data = list.filter(
                 (x) => x.County.toUpperCase() === c.toUpperCase()
@@ -38,7 +37,6 @@ export const getOtzOutcomesByCounty = createSelector(
             });
             build_list.push(...partner_data);
             build_list.sort((b, a) => a.perc - b.perc);
-            console.log(build_list)
         });
 
         catCounties = build_list.map((obj) => obj.County.toUpperCase());
