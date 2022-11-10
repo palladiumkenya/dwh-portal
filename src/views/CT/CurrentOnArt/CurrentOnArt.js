@@ -69,6 +69,11 @@ const CurrentOnArtOverview = Loadable({
     loading: Loading,
     delay: LOADING_DELAY,
 });
+const CurrentOnArtByFacility = Loadable({
+    loader: () => import('./CurrentOnArtByFacility'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 
 const CurrentOnART = () => {
     const branding = {
@@ -174,6 +179,8 @@ const CurrentOnART = () => {
             <CurrentOnArtVerifiedByCounty />
             <SectionFooter overview={branding.overview} />
             <CurrentOnArtVerifiedByPartner />
+            <SectionFooter overview={branding.overview} />
+            <CurrentOnArtByFacility/>
             <SectionFooter overview={branding.overview} />
         </div>
     );
