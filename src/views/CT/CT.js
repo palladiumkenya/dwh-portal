@@ -345,6 +345,8 @@ import { loadOtzVlSuppressionByAgeNotEnrolled } from '../../actions/CT/OTZ/OtzVl
 import { loadOtzVlSuppressionBySexNotEnrolled } from '../../actions/CT/OTZ/OtzVlSuppressionBySexNotEnrolledActions';
 import { loadOtzVlSuppressionByPartnerNotEnrolled } from '../../actions/CT/OTZ/OtzVlSuppressionByPartnerNotEnrolledActions';
 import { loadOtzVlSuppressionByCountyNotEnrolled } from '../../actions/CT/OTZ/OtzVlSuppressionByCountyNotEnrolledActions';
+import { loadCurrentOnArtVerifiedByFacility } from '../../actions/CT/CurrentOnArt/currentOnArtVerifiedByFacilityActions';
+import { loadCurrentOnArtByFacility } from '../../actions/CT/CurrentOnArt/currentOnArtByFacilityActions';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({
@@ -489,7 +491,9 @@ const CT = () => {
                 dispatch(loadCurrentOnArtDistributionByCounty(active_tab));
                 dispatch(loadCurrentOnArtDistributionByPartner(active_tab));
                 dispatch(loadArtOptimizationNewByYear(active_tab));
-                dispatch(loadCurrentOnArtVerified(active_tab))
+                dispatch(loadCurrentOnArtVerified(active_tab));
+                dispatch(loadCurrentOnArtVerifiedByFacility(active_tab));
+                dispatch(loadCurrentOnArtByFacility(active_tab));
                 break;
             case "artOptimization":
                 dispatch(loadCurrentOnArtByAgeSex(active_tab));

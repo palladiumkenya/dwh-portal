@@ -225,6 +225,8 @@ import currentOnArtVerified from './CT/CurrentOnArt/currentOnArtVerified';
 import currentOnArtVerifiedByAgeSex from './CT/CurrentOnArt/currentOnArtVerifiedByAgeSex';
 import currentOnArtVerifiedByCounty from './CT/CurrentOnArt/currentOnArtVerifiedByCounty';
 import currentOnArtVerifiedByPartner from './CT/CurrentOnArt/currentOnArtVerifiedByPartner';
+import currentOnArtByFacility from './CT/CurrentOnArt/currentOnArtByFacility';
+import currentOnArtVerifiedByFacility from './CT/CurrentOnArt/currentOnArtVerifiedByFacility';
 import viralLoadOverallUptakeSuppressionReferredLessIntense
     from './CT/ViralLoad/viralLoadOverallUptakeSuppressionReferredLessIntense';
 import viralLoadOverallUptakeGt1000Copies from './CT/ViralLoad/viralLoadOverallUptakeGt1000Copies';
@@ -491,6 +493,8 @@ export default combineReducers({
     currentOnArtVerifiedByCounty,
     currentOnArtVerifiedByPartner,
     currentOnArtVerifiedByAgeSex,
+    currentOnArtByFacility,
+    currentOnArtVerifiedByFacility,
 
     newOnPrep,
     prepDiscontinuation,
