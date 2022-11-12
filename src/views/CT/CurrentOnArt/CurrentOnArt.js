@@ -13,6 +13,7 @@ import SectionFooter from './../../Shared/SectionFooter';
 import SectionHeader from './../../Shared/SectionHeader';
 import UniversalFilter from './../../Shared/UniversalFilter';
 import { useParams } from 'react-router-dom';
+import NupiDataset from './NupiDataset';
 
 const CurrentOnArtByAgeSex = Loadable({
     loader: () => import('./CurrentOnArtByAgeSex'),
