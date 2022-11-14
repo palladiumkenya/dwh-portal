@@ -50,7 +50,8 @@ const dictionary = [
     },
     {
         Indicator: '# Total Verified Central Registry',
-        Description: 'Represents  the total number of patients that have been verified in Central registry ',
+        Description:
+            'Represents  the total number of patients that have been verified in Central registry ',
     },
     {
         Indicator: '# without CCC No. Central Registry',
@@ -75,7 +76,7 @@ const dictionary = [
     {
         Indicator: '% MOH Central Registry verified of KHIS TXCurr',
         Description:
-            'The proportion of the patients verified from Central Registry : Total Number Central Registry/ KHIS TXCurr *100',
+            'The proportion of the patients verified from Central Registry and whose CCC numbers and MFLCodes match  in DWH: Total Number Central Registry/ KHIS TXCurr *100',
     },
     {
         Indicator: '# DWH verified & Matched',
