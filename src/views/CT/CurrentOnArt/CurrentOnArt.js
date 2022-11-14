@@ -130,7 +130,7 @@ const CurrentOnART = () => {
                 </CardBody>
             </Card>
             <CurrentOnArtOverview />
-            <Row>
+            <Row style={{paddingBottom: '18px'}}>
                 <Col>
                     <NupiDataset />
                 </Col>
