@@ -130,11 +130,11 @@ const CurrentOnART = () => {
                 </CardBody>
             </Card>
             <CurrentOnArtOverview />
-            {/* <Row>
+            <Row>
                 <Col>
                     <NupiDataset />
                 </Col>
-            </Row> */}
+            </Row>
             {/* <Row>
                 <Col>
                     <CurrentOnArtBySex />
