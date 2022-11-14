@@ -15,7 +15,6 @@ const TestMessage = () => {
             clearTimeout(timeId);
         };
     }, []);
-    console.log(show);
 
     if (!show) {
         return null;
