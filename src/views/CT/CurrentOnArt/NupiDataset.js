@@ -151,6 +151,9 @@ const NupiDataset = () => {
                         <ExcelColumn label="Description" value="Description" />
                     </ExcelSheet>
                     <ExcelSheet data={nupiDataset} name="Data">
+                        <ExcelColumn label="DateQueried" value="DateQueried" />
+                        <ExcelColumn label="MFLCode" value="MFLCode" />
+                        <ExcelColumn label="Facility" value="Facility" />
                         <ExcelColumn label="Partner" value="Partner" />
                         <ExcelColumn label="Agency" value="Agency" />
                         <ExcelColumn label="EMR" value="EMR" />
