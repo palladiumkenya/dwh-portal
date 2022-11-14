@@ -215,8 +215,8 @@ const NupiDataset = () => {
                             value="# Adults DWH verified & Matched"
                         />
                         <ExcelColumn
-                            label="# Adults DWH verified & Matched"
-                            value="# Adults DWH verified & Matched"
+                            label="# Adults TXCurr DWH"
+                            value="# Adults TXCurr DWH"
                         />
                         <ExcelColumn
                             label="% Adults DWH verified of Adults TXCurr DWH"
