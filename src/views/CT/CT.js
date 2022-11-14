@@ -17,7 +17,9 @@ import {
     disableLatestPregnancyFilter,
     enablePopulationTypeFilter,
     disablePopulationTypeFilter,
-    enableAgencyFilter
+    enableAgencyFilter,
+    enableDatimAgePopulationFilter,
+    disableDatimAgePopulationFilter
 } from '../../actions/Shared/filterActions';
 
 import { loadLinkagePositiveTrends } from '../../actions/HTS/Linkage/linkagePositiveTrendsActions';
@@ -390,6 +392,7 @@ const CT = () => {
     const projects = useSelector(state => state.filters.projects);
     const genders = useSelector(state => state.filters.genders);
     const datimAgeGroups = useSelector(state => state.filters.datimAgeGroups);
+    const datimAgePopulation = useSelector(state => state.filters.datimAgePopulation);
     const latestPregnancies = useSelector(state => state.filters.latestPregnancies);
     const populationTypes = useSelector(state => state.filters.populationTypes);
     const fromDate = useSelector(state => state.filters.fromDate);
@@ -426,6 +429,13 @@ const CT = () => {
     }, [dispatch]);
 
     useEffect(() => {
+        if (
+            active_tab === 'currentOnArt'
+        ) {
+            dispatch(enableDatimAgePopulationFilter());
+        } else {
+            dispatch(disableDatimAgePopulationFilter());
+        }
         if (active_tab === 'newlyOnArt' || active_tab === "treatmentOutcomes") {
             dispatch(enableFromDateFilter());
         } else {
@@ -710,6 +720,7 @@ const CT = () => {
         toDate,
         genders,
         datimAgeGroups,
+        datimAgePopulation,
         latestPregnancies,
         populationTypes,
         active_tab,

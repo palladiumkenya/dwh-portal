@@ -38,6 +38,7 @@ export const fetchCurrentOnArtByVerifiedByFacility =
             project: getState().filters.projects,
             gender: getState().filters.genders,
             datimAgeGroup: getState().filters.datimAgeGroups,
+            datimAgePopulations: getState().filters.datimAgePopulation,
             year: getState().filters.fromDate
                 ? moment(getState().filters.fromDate, 'MMM YYYY').format('YYYY')
                 : '',

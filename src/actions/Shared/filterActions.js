@@ -50,6 +50,11 @@ export const filterByDatimAgeGroup = datimAgeGroups => ({
     payload: { datimAgeGroups }
 });
 
+export const filterByDatimAgePopulation = datimAgePopulation => ({
+    type: actionTypes.FILTER_BY_DATIM_AGE_POPULATION,
+    payload: { datimAgePopulation }
+});
+
 export const filterByLatestPregnancy = latestPregnancies => ({
     type: actionTypes.FILTER_BY_LATEST_PREGNANCY,
     payload: { latestPregnancies }
@@ -119,6 +124,14 @@ export const enableDatimAgeGroupFilter = () => ({
 
 export const disableDatimAgeGroupFilter = () => ({
     type: actionTypes.DISABLE_DATIM_AGE_GROUP_FILTER
+});
+
+export const enableDatimAgePopulationFilter = () => ({
+    type: actionTypes.ENABLE_DATIM_AGE_POPULATION_FILTER
+});
+
+export const disableDatimAgePopulationFilter = () => ({
+    type: actionTypes.DISABLE_DATIM_AGE_POPULATION_FILTER
 });
 
 export const enableLatestPregnancyFilter = () => ({
