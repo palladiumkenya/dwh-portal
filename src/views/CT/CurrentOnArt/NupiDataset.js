@@ -142,10 +142,10 @@ const NupiDataset = () => {
                 <Loading />
             ) : (
                 <ExcelFile
-                    filename={`Nupidataset ${moment().format(
+                    filename={`NUPI dataset ${moment().format(
                         'DD-MM-YYYY HH:mm:ss a'
                     )}`}
-                    element={<Button positive>Export Nupi Dataset</Button>}
+                    element={<Button positive>Export NUPI Dataset</Button>}
                 >
                     <ExcelSheet data={dictionary} name="Dictionary">
                         <ExcelColumn label="Indicator" value="Indicator" />
