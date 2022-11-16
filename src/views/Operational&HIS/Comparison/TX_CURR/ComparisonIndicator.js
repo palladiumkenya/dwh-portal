@@ -20,7 +20,7 @@ const ComparisonIndicatorNotesTxCurr = () => {
                     <ul>
                         <li>The indicator is computed and displayed for the last completed month.</li>
                         <li>Patients who have a visit date but do not have a next appointment date have 30 days added to their visit date to impute the expected appointment date.</li>
-                        <li>This indicator is influenced by reporting rate (if a facility uploaded data to the data warehouse) and if uploaded database contains current patient visit and appointment date.</li>
+                        <li>This indicator is influenced by reporting rate (if a facility uploaded data to the data warehouse) and if uploaded database contains current patient visit and appointment data.</li>
                     </ul>
                 </CardBody>
             </Card>
