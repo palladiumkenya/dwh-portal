@@ -24,5 +24,4 @@ jobs:
           yarn build
           sudo rm -rf /tmp/dwh
           sudo mv /var/www/dwh /tmp/
-          sudo mv build /var/www/
-          sudo mv /var/www/build/ /var/www/dwh
+          sudo mv build /var/www/dwh

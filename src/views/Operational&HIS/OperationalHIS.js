@@ -31,6 +31,7 @@ import { loadHTSPositivesTrendsKHIS } from '../../actions/Operational&HIS/Compar
 import { loadCurrOnARTKHIS } from '../../actions/Operational&HIS/Comparison/currOnArtKHISActions';
 import { loadCurrOnARTKHISByCounty } from '../../actions/Operational&HIS/Comparison/currOnArtKHISByCountyActions';
 import { loadCurrOnARTKHISByPartner } from '../../actions/Operational&HIS/Comparison/currOnArtKHISByPartnerActions';
+import { loadCurrentOnArtDistributionByCountyDWH } from '../../actions/Operational&HIS/Comparison/currentOnArtDistributionByCountyActions';
 import { loadCurrentOnArtOverview } from '../../actions/CT/CurrentOnArt/currentOnArtOverviewActions';
 import { loadCurrentOnArtByAgeSex } from '../../actions/CT/CurrentOnArt/currentOnArtByAgeSexActions';
 import { loadCurrentOnArtByCounty } from '../../actions/CT/CurrentOnArt/currentOnArtByCountyActions';
@@ -99,6 +100,8 @@ const OperationalHIS = () => {
     const projects = useSelector(state => state.filters.projects);
     const fromDate = useSelector(state => state.filters.fromDate);
     const toDate = useSelector(state => state.filters.toDate);
+    const genders = useSelector((state) => state.filters.genders);
+    const datimAgeGroups = useSelector((state) => state.filters.datimAgeGroups);
     const indicator = useSelector(state => state.filters.indicator);
 
 
@@ -123,7 +126,6 @@ const OperationalHIS = () => {
 
     useEffect(() => {
         dispatch(changeCurrentPage(PAGES.operationalHIS));
-        dispatch(disableFacilityFilter());
         dispatch(enableFromDateFilter());
         dispatch(enableGenderFilter());
         dispatch(enableDatimAgeGroupFilter());
@@ -155,6 +157,7 @@ const OperationalHIS = () => {
         dispatch(loadCurrOnARTKHIS());
         dispatch(loadCurrOnARTKHISByCounty());
         dispatch(loadCurrOnARTKHISByPartner());
+        dispatch(loadCurrentOnArtDistributionByCountyDWH());
 
         dispatch(loadCurrentOnArtOverview(active_tab));
         dispatch(loadCurrentOnArtByAgeSex(active_tab));
@@ -172,9 +175,11 @@ const OperationalHIS = () => {
         projects,
         fromDate,
         toDate,
+        genders,
+        datimAgeGroups,
         opHIStab,
         indicator,
-        active_tab
+        active_tab,
     ]);
 
     const DEFAULT_ACTIVE_TAB = useSelector(

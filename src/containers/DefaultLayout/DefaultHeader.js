@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Nav, NavItem } from 'reactstrap';
+import { Nav, NavItem, Dropdown } from 'reactstrap';
+// import NavDropdown from 'react-bootstrap/NavDropdown';
 import { AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
 import logo from '../../assets/img/brand/dwh2.png';
 import sygnet from '../../assets/img/brand/ic_launcher.png';
@@ -11,6 +12,7 @@ import { signinRedirect, signoutRedirect } from '../../services/UserService';
 import { getUserById } from '../../views/Shared/Api';
 
 const DefaultHeader = () => {
+    const [dropdownOpen, setDropdownOpen] = useState(false);
     const user = useSelector(state => state.auth.user)
     const loginAction = user ? "Logout" : "Login";
     const [userType, setUserType] = useState({
@@ -47,6 +49,15 @@ const DefaultHeader = () => {
         const res = await getUserType();
         return  (res === 1 || res === 2) ? <Administration /> : null;
     }
+
+    const clearCacheData = async () => {
+        await localStorage.clear();
+        if (localStorage.length === 0){
+            alert('Complete Cache Cleared'); 
+            window.location.reload();
+        }
+    };
+    const toggle = () => setDropdownOpen(!dropdownOpen);
 
     useEffect(() => {
         loadUserType()
@@ -101,6 +112,15 @@ const DefaultHeader = () => {
                     >
                         <strong>Resources</strong>
                     </a>
+                </NavItem>
+                <NavItem className="px-3">
+                    <NavLink
+                        to="/"
+                        className="nav-link active"
+                        onClick={() => clearCacheData()}
+                    >
+                        <strong style={{"color": "red"}}>Clear Cached Data</strong>
+                    </NavLink>
                 </NavItem>
 
                 {user ? <Adhoc /> : null}

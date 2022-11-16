@@ -18,9 +18,26 @@ const UptakeMonthsSinceLastTest = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : ''
+            year: filters.fromDate
+                ? moment(filters.fromDate, 'MMM YYYY').format('YYYY')
+                : moment().subtract(2, 'month').add(17, 'days').format('YYYY'),
+            month: filters.fromDate
+                ? moment(filters.fromDate, 'MMM YYYY').format('MM')
+                : moment().subtract(2, 'month').add(17, 'days').format('MM'),
+            fromDate: filters.fromDate
+                ? moment(filters.fromDate, 'MMM YYYY').format('YYYYMM')
+                : moment()
+                      .subtract(2, 'month')
+                      .add(17, 'days')
+                      .format('YYYYMM'),
+            toDate: filters.toDate
+                ? moment(filters.toDate, 'MMM YYYY').format('YYYYMM')
+                : moment()
+                      .subtract(2, 'month')
+                      .add(17, 'days')
+                      .format('YYYYMM'),
         };
-        params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
+        // params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('hts/monthsSinceLastTest', params);
         const monthsSinceLastTest = [];
         let tested = [];

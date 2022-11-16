@@ -27,8 +27,24 @@ const UptakeOverview = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            year: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("YYYY") : null,
-            month: filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : null
+            year: filters.fromDate
+                ? moment(filters.fromDate, 'MMM YYYY').format('YYYY')
+                : moment().subtract(2, 'month').add(17, 'days').format('YYYY'),
+            month: filters.fromDate
+                ? moment(filters.fromDate, 'MMM YYYY').format('MM')
+                : moment().subtract(2, 'month').add(17, 'days').format('MM'),
+            fromDate: filters.fromDate
+                ? moment(filters.fromDate, 'MMM YYYY').format('YYYYMM')
+                : moment()
+                      .subtract(2, 'month')
+                      .add(17, 'days')
+                      .format('YYYYMM'),
+            toDate: filters.toDate
+                ? moment(filters.toDate, 'MMM YYYY').format('YYYYMM')
+                : moment()
+                      .subtract(2, 'month')
+                      .add(17, 'days')
+                      .format('YYYYMM'),
         };
         const result = await getAll('hts/uptakeBySex', params);
         let data = {
@@ -47,13 +63,20 @@ const UptakeOverview = () => {
         for(let i = 0; i < result.length; i++) {
             data.totalTested = data.totalTested + parseInt(result[i].tested);
             data.totalPositive = data.totalPositive + parseInt(result[i].positive);
-            if (result[i].gender.toLowerCase() === "m" || result[i].gender.toLowerCase() === "male") {
-                data.maleTested = data.maleTested + parseInt(result[i].tested);
-                data.malePositive = data.malePositive + parseFloat(result[i].positive);
-            }
-            if (result[i].gender.toLowerCase() === "f" || result[i].gender.toLowerCase() === "female") {
-                data.femaleTested = data.femaleTested + parseInt(result[i].tested);
-                data.femalePositive = data.femalePositive + parseFloat(result[i].positive);
+            if (result[i].gender) {
+                if (
+                    result[i].gender.toLowerCase() === 'm' ||
+                    result[i].gender.toLowerCase() === 'male'
+                ) {
+                    data.maleTested =
+                        data.maleTested + parseInt(result[i].tested);
+                    data.malePositive =
+                        data.malePositive + parseFloat(result[i].positive);
+                }
+                if (result[i].gender.toLowerCase() === "f" || result[i].gender.toLowerCase() === "female") {
+                    data.femaleTested = data.femaleTested + parseInt(result[i].tested);
+                    data.femalePositive = data.femalePositive + parseFloat(result[i].positive);
+                }
             }
         }
         if (data.totalTested > 0) {

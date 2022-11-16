@@ -332,6 +332,7 @@ import {
     loadViralLoadOverallNumberGt1000CopiesSecondlineRegiment
 } from '../../actions/CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
 
+
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({
     loader: () => import('./CurrentOnArt/CurrentOnArt'),
@@ -360,6 +361,7 @@ const OVC = Loadable({ loader: () => import('./OVC/OVC'), loading: Loading, dela
 const COVID = Loadable({ loader: () => import('./Covid/Covid'), loading: Loading, delay: LOADING_DELAY });
 
 const CT = () => {
+
     const dispatch = useDispatch();
     const ctTab = useSelector(state => state.ui.ctTab);
     const noCache = useSelector(state => state.filters.noCache);

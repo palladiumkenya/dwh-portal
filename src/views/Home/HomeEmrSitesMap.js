@@ -8,13 +8,15 @@ import * as gpsSitesSelectors from '../../selectors/Home/gpsSites';
 const HomeEmrSitesMap = () => {
     const [emrSitesMap, setHomeEmrSitesMap] = useState({});
     // const gpsSites = useSelector(state => state.gpsSites.list);
-    const gpsSites = useSelector(gpsSitesSelectors.getGpsSites);
+    let gpsSites = useSelector(gpsSitesSelectors.getGpsSites);
     const dispatch = useDispatch();
 
     const loadEmrSitesMaps = useCallback(async () => {
         const data = [];
         const emrNames = [];
         let emrSites = [];
+        if (gpsSites === undefined || gpsSites === null) gpsSites = [];
+        
         for (let i = 0; i < gpsSites.length; i++) {
             if (emrNames.indexOf(gpsSites[i].emr) === -1) {
                 emrNames.push(gpsSites[i].emr);

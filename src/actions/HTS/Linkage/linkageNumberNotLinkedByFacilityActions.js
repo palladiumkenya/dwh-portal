@@ -31,8 +31,18 @@ export const fetchLinkageNumberNotLinkedByFacility = () => async (dispatch, getS
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
         project: getState().filters.projects,
-        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
-        month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
+        year: getState().filters.fromDate
+            ? moment(getState().filters.fromDate, 'MMM YYYY').format('YYYY')
+            : '',
+        month: getState().filters.fromDate
+            ? moment(getState().filters.fromDate, 'MMM YYYY').format('MM')
+            : '',
+        fromDate: getState().filters.fromDate
+            ? moment(getState().filters.fromDate, 'MMM YYYY').format('YYYYMM')
+            : moment().subtract(2, 'month').add(17, 'days').format('YYYYMM'),
+        toDate: getState().filters.toDate
+            ? moment(getState().filters.toDate, 'MMM YYYY').format('YYYYMM')
+            : moment().subtract(2, 'month').add(17, 'days').format('YYYYMM'),
     };
     const response = await getAll('hts/linkageNumberNotLinkedByFacility', params);
     dispatch({ type: actionTypes.HTS_LINKAGE_NUMBER_NOT_LINKED_BY_FACILITY_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
