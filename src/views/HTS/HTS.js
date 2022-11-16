@@ -62,7 +62,6 @@ const HTS = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        console.log(active_tab);
         switch (active_tab) {
             case 'linkage':
                 dispatch(changeHtsTab(active_tab));

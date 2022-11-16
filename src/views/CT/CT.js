@@ -349,6 +349,7 @@ import { loadOtzVlSuppressionByPartnerNotEnrolled } from '../../actions/CT/OTZ/O
 import { loadOtzVlSuppressionByCountyNotEnrolled } from '../../actions/CT/OTZ/OtzVlSuppressionByCountyNotEnrolledActions';
 import { loadCurrentOnArtVerifiedByFacility } from '../../actions/CT/CurrentOnArt/currentOnArtVerifiedByFacilityActions';
 import { loadCurrentOnArtByFacility } from '../../actions/CT/CurrentOnArt/currentOnArtByFacilityActions';
+import { loadCurrentOnArt } from '../../actions/CT/CurrentOnArt/currentOnArtActions';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({
@@ -409,7 +410,7 @@ const CT = () => {
                 return (
                     <NavItem key={value}>
                         <NavLink active={active_tab === value} onClick={() => {
-                            dispatch(changeCtTab(value));
+                            dispatch(changeCtTab(active_tab));
                             toggle(value);
                         }}>
                             {CT_TABS[value]}
@@ -504,6 +505,7 @@ const CT = () => {
                 dispatch(loadCurrentOnArtVerified(active_tab));
                 dispatch(loadCurrentOnArtVerifiedByFacility(active_tab));
                 dispatch(loadCurrentOnArtByFacility(active_tab));
+                dispatch(loadCurrentOnArt());
                 break;
             case "artOptimization":
                 dispatch(loadCurrentOnArtByAgeSex(active_tab));

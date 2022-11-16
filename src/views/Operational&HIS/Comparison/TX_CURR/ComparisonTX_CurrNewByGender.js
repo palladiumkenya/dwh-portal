@@ -56,8 +56,6 @@ const ComparisonTXCurrByGender = () => {
                                         selector: 'CTPartner',
                                         sortable: true,
                                     },
-                                    // { name: 'MALE NDWH', selector: 'DWHmale', sortable: true },
-                                    // { name: 'FEMALE NDWH', selector: 'DWHFemale', sortable: true },
                                     {
                                         name: 'KHIS TOTAL',
                                         selector: 'KHIStxCurr',
@@ -73,6 +71,8 @@ const ComparisonTXCurrByGender = () => {
                                         selector: 'concordance',
                                         sortable: true,
                                     },
+                                    // { name: 'MALE NDWH', selector: 'DWHmale', sortable: true },
+                                    // { name: 'FEMALE NDWH', selector: 'DWHFemale', sortable: true },
                                     // { name: 'MALE KHIS', selector: 'KHISMale', sortable: true },
                                     // { name: 'FEMALE KHIS', selector: 'KHISFemale', sortable: true },
                                 ]}
