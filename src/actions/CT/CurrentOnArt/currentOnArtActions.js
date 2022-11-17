@@ -3,32 +3,30 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING, PAGES } from '../../../constants';
 
-export const loadCurrentOnArtVerifiedByFacility = (tab) => async (dispatch, getState) => {
+export const loadCurrentOnArt = () => async (dispatch, getState) => {
     if (getState().filters.noCache === true) {
-        await dispatch(fetchCurrentOnArtByVerifiedByFacility());
+        await dispatch(fetchCurrentOnArt());
     } else {
         const diffInMinutes = moment().diff(
-            moment(getState().currentOnArtVerifiedByFacility.lastFetch),
+            moment(getState().currentOnArt.lastFetch),
             'minutes'
         );
         if (
             getState().ui.ctTab !== "currentOnArt" &&
-            tab !== "currentOnArt" &&
             getState().ui.currentPage !== PAGES.home
         ) {
             return;
-        }
-        else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
+        } else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
             return;
         } else {
-            await dispatch(fetchCurrentOnArtByVerifiedByFacility());
+            await dispatch(fetchCurrentOnArt());
         }
     }
 };
 
-export const fetchCurrentOnArtByVerifiedByFacility =
+export const fetchCurrentOnArt =
     () => async (dispatch, getState) => {
-        dispatch({ type: actionTypes.CT_TX_CURR_FACILITY_VERIFIED_REQUEST });
+        dispatch({ type: actionTypes.CT_CURRENT_ON_ART_REQUEST });
         const params = {
             county: getState().filters.counties,
             subCounty: getState().filters.subCounties,
@@ -47,11 +45,11 @@ export const fetchCurrentOnArtByVerifiedByFacility =
                 : '',
         };
         const response = await getAll(
-            'care-treatment/txCurrByFacilityVerified',
+            'care-treatment/txCurr',
             params
         );
         dispatch({
-            type: actionTypes.CT_TX_CURR_FACILITY_VERIFIED_FETCH,
+            type: actionTypes.CT_CURRENT_ON_ART_FETCH,
             payload: { filtered: getState().filters.filtered, list: response },
         });
     };

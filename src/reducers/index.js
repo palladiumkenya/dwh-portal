@@ -223,6 +223,7 @@ import CovidAdmissionSymptomaticByAge from './CT/Covid/covidAdmissionSymptomatic
 import CovidManagementAdmitted from './CT/Covid/covidManagementAdmitted';
 import currentOnArtVerified from './CT/CurrentOnArt/currentOnArtVerified';
 import currentOnArtVerifiedByAgeSex from './CT/CurrentOnArt/currentOnArtVerifiedByAgeSex';
+import currentOnArt from './CT/CurrentOnArt/currentOnArt';
 import currentOnArtVerifiedByCounty from './CT/CurrentOnArt/currentOnArtVerifiedByCounty';
 import currentOnArtVerifiedByPartner from './CT/CurrentOnArt/currentOnArtVerifiedByPartner';
 import currentOnArtByFacility from './CT/CurrentOnArt/currentOnArtByFacility';
@@ -489,12 +490,14 @@ export default combineReducers({
     currOnArtByFacilityDWH,
     newOnArtByFacilityDWH,
     currOnArtDWHByCounty,
+
     currentOnArtVerified,
     currentOnArtVerifiedByCounty,
     currentOnArtVerifiedByPartner,
     currentOnArtVerifiedByAgeSex,
     currentOnArtByFacility,
     currentOnArtVerifiedByFacility,
+    currentOnArt,
 
     newOnPrep,
     prepDiscontinuation,

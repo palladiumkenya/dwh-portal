@@ -4,12 +4,13 @@ import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtByAgeSex';
+import * as currentOnArtAllSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArt';
 import * as currentOnArtSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
 
 const CurrentOnArtVsVerified= () => {
     const [currentOnArtChart, setCurrentOnArtChart] = useState({});
     const currentOnArtData = useSelector(
-        currentOnArtSelectors.getCurrentOnArt
+        currentOnArtAllSelectors.getCurrentOnArt
     );
     const currentOnArtVerified = useSelector(
         currentOnArtSelectors.getCurrentOnArtVerified

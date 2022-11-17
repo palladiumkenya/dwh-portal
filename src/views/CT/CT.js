@@ -17,7 +17,9 @@ import {
     disableLatestPregnancyFilter,
     enablePopulationTypeFilter,
     disablePopulationTypeFilter,
-    enableAgencyFilter
+    enableAgencyFilter,
+    enableDatimAgePopulationFilter,
+    disableDatimAgePopulationFilter
 } from '../../actions/Shared/filterActions';
 
 import { loadLinkagePositiveTrends } from '../../actions/HTS/Linkage/linkagePositiveTrendsActions';
@@ -347,6 +349,7 @@ import { loadOtzVlSuppressionByPartnerNotEnrolled } from '../../actions/CT/OTZ/O
 import { loadOtzVlSuppressionByCountyNotEnrolled } from '../../actions/CT/OTZ/OtzVlSuppressionByCountyNotEnrolledActions';
 import { loadCurrentOnArtVerifiedByFacility } from '../../actions/CT/CurrentOnArt/currentOnArtVerifiedByFacilityActions';
 import { loadCurrentOnArtByFacility } from '../../actions/CT/CurrentOnArt/currentOnArtByFacilityActions';
+import { loadCurrentOnArt } from '../../actions/CT/CurrentOnArt/currentOnArtActions';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({
@@ -390,6 +393,7 @@ const CT = () => {
     const projects = useSelector(state => state.filters.projects);
     const genders = useSelector(state => state.filters.genders);
     const datimAgeGroups = useSelector(state => state.filters.datimAgeGroups);
+    const datimAgePopulation = useSelector(state => state.filters.datimAgePopulation);
     const latestPregnancies = useSelector(state => state.filters.latestPregnancies);
     const populationTypes = useSelector(state => state.filters.populationTypes);
     const fromDate = useSelector(state => state.filters.fromDate);
@@ -406,7 +410,7 @@ const CT = () => {
                 return (
                     <NavItem key={value}>
                         <NavLink active={active_tab === value} onClick={() => {
-                            dispatch(changeCtTab(value));
+                            dispatch(changeCtTab(active_tab));
                             toggle(value);
                         }}>
                             {CT_TABS[value]}
@@ -426,6 +430,13 @@ const CT = () => {
     }, [dispatch]);
 
     useEffect(() => {
+        if (
+            active_tab === 'currentOnArt'
+        ) {
+            dispatch(enableDatimAgePopulationFilter());
+        } else {
+            dispatch(disableDatimAgePopulationFilter());
+        }
         if (active_tab === 'newlyOnArt' || active_tab === "treatmentOutcomes") {
             dispatch(enableFromDateFilter());
         } else {
@@ -494,6 +505,7 @@ const CT = () => {
                 dispatch(loadCurrentOnArtVerified(active_tab));
                 dispatch(loadCurrentOnArtVerifiedByFacility(active_tab));
                 dispatch(loadCurrentOnArtByFacility(active_tab));
+                dispatch(loadCurrentOnArt());
                 break;
             case "artOptimization":
                 dispatch(loadCurrentOnArtByAgeSex(active_tab));
@@ -710,6 +722,7 @@ const CT = () => {
         toDate,
         genders,
         datimAgeGroups,
+        datimAgePopulation,
         latestPregnancies,
         populationTypes,
         active_tab,

@@ -3,14 +3,13 @@ import React from 'react';
 import { Col, Row } from 'reactstrap';
 import * as currentOnArtOverviewSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
 import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtByAgeSex';
+import * as currentOnArtSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArt';
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import DataCardCT from '../../Shared/DataCardCT';
 
 const CurrentOnArtOverview = () => {
-    const currentOnArt = useSelector(
-        currentOnArtOverviewSelectors.getCurrentOnArt
-    );
+    const currentOnArt = useSelector(currentOnArtSelectors.getCurrentOnArt);
     const currentOnArtMale = useSelector(
         currentOnArtByAgeSexSelectors.getCurrentOnArtBySex
     ).currentOnArtMale;

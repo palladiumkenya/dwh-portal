@@ -34,6 +34,7 @@ const UniversalFilter = () => {
     const [projects, setProjects] = useState([]);
     const [genders, setGenders] = useState([]);
     const [datimAgeGroups, setDatimAgeGroups] = useState([]);
+    const [datimAgePopulations, setDatimAgePopulations] = useState([]);
     const [populationTypes, setPopulationTypes] = useState([]);
     const [latestPregnancies, setLatestPregnancies] = useState([]);
     const [indicators, setIndicators] = useState([]);
@@ -204,6 +205,9 @@ const UniversalFilter = () => {
         setDatimAgeGroups(
             ageGroups.map((c) => ({ value: c, key: c, text: c }))
         );
+        setDatimAgePopulations(
+            ['<18', '>18'].map((c) => ({ value: c, key: c, text: c }))
+        );
         setPopulationTypes(
             [
                 ' FSW',
@@ -252,7 +256,7 @@ const UniversalFilter = () => {
         loadSites();
     }, [loadSites]);
     useEffect(() => {
-        if (queried_partner) {
+        if (queried_partner.length > 0) {
             dispatch(actions.filterByPartner(queried_partner));
             return;
         }
@@ -557,6 +561,37 @@ const UniversalFilter = () => {
                                 onChange={(e, data) => {
                                     dispatch(
                                         actions.filterByDatimAgeGroup(
+                                            data.value
+                                        )
+                                    );
+                                }}
+                            />
+                        </div>
+                    </Col>
+                ) : null}
+                {filters.datimAgePopulationFilterEnabled ? (
+                    <Col
+                        className={
+                            'col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2'
+                        }
+                    >
+                        <div className="form-group">
+                            <label htmlFor="datimAgeGroup">
+                                Age Population
+                            </label>
+                            <Dropdown
+                                id="datimAgePopulation"
+                                name="datimAgePopulation"
+                                placeholder="Select Age Population"
+                                fluid
+                                multiple
+                                selection
+                                search
+                                options={datimAgePopulations}
+                                value={filters.datimAgePopulation}
+                                onChange={(e, data) => {
+                                    dispatch(
+                                        actions.filterByDatimAgePopulation(
                                             data.value
                                         )
                                     );
