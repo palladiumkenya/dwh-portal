@@ -15,7 +15,8 @@ import {
     enableIndicatorFilter,
     disableIndicatorFilter,
     enableGenderFilter,
-    enableDatimAgeGroupFilter
+    enableDatimAgeGroupFilter,
+    disableDatimAgePopulationFilter
 } from '../../actions/Shared/filterActions';
 import { LOADING_DELAY, OPERATIONALHIS_TABS, PAGES } from '../../constants';
 import Loading from '../Shared/Loading';
@@ -129,6 +130,7 @@ const OperationalHIS = () => {
         dispatch(enableFromDateFilter());
         dispatch(enableGenderFilter());
         dispatch(enableDatimAgeGroupFilter());
+        dispatch(disableDatimAgePopulationFilter());
         if (active_tab === 'comparison') {
             dispatch(enableIndicatorFilter());
             dispatch(disableFacilityFilter());

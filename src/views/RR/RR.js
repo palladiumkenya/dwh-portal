@@ -11,7 +11,7 @@ import {
     disableAgencyFilter,
     enableFromDateFilter,
     disableFromDateFilter,
-    disableGenderFilter, disableDatimAgeGroupFilter
+    disableGenderFilter, disableDatimAgeGroupFilter, disableDatimAgePopulationFilter
 } from '../../actions/Shared/filterActions';
 import { loadOverallReportingRatesByFacilityReported } from "../../actions/RR/overallReportingRatesByFacilityReported";
 import { loadOverallReportingRatesByFacilityNotReported } from "../../actions/RR/overallReportingRatesByFacilityNotReported";
@@ -74,6 +74,7 @@ const RR = () => {
         dispatch(enableFromDateFilter());
         dispatch(disableGenderFilter());
         dispatch(disableDatimAgeGroupFilter());
+        dispatch(disableDatimAgePopulationFilter());
         return () => {
             dispatch(enableFacilityFilter());
             dispatch(disableAgencyFilter());
