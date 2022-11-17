@@ -37,9 +37,13 @@ export const fetchCurrentOnArtVerifiedByAgeSex = () => async (dispatch, getState
         project: getState().filters.projects,
         gender: getState().filters.genders,
         datimAgeGroup: getState().filters.datimAgeGroups,
-            datimAgePopulations: getState().filters.datimAgePopulations,
-        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
-        month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
+        datimAgePopulations: getState().filters.datimAgePopulation,
+        year: getState().filters.fromDate
+            ? moment(getState().filters.fromDate, 'MMM YYYY').format('YYYY')
+            : '',
+        month: getState().filters.fromDate
+            ? moment(getState().filters.fromDate, 'MMM YYYY').format('MM')
+            : '',
     };
     const response = await getAll(
         'care-treatment/txCurrByAgeSexVerified',

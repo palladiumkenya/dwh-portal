@@ -4,7 +4,6 @@ import { getAll } from '../../../views/Shared/Api';
 import { CACHING, PAGES } from '../../../constants';
 
 export const loadCurrentOnArt = () => async (dispatch, getState) => {
-    console.log(getState().ui.ctTab);
     if (getState().filters.noCache === true) {
         await dispatch(fetchCurrentOnArt());
     } else {
