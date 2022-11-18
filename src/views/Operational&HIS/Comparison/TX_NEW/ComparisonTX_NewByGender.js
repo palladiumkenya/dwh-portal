@@ -15,9 +15,9 @@ const ComparisonTXNewByGender = () => {
                     <Card className="trends-card">
                         <CardHeader className="trends-header">
                             COMPARISON OF TX_NEW BASED ON GENDER
-                            {
-                                loading === true ?
-                                <Spinner className="pull-right"/> :
+                            {loading === true ? (
+                                <Spinner className="pull-right" />
+                            ) : (
                                 <CsvDownloader
                                     filename="ndwh_patients_missing_hiv_diagnosis_date_by_facility"
                                     separator=","
@@ -26,22 +26,55 @@ const ComparisonTXNewByGender = () => {
                                 >
                                     <i className="bordered download icon inverted black"></i>
                                 </CsvDownloader>
-                            }
+                            )}
                         </CardHeader>
                         <CardBody className="trends-body">
                             <DataTable
                                 columns={[
-                                    { name: 'Facility', selector: 'FacilityName', sortable: true },
-                                    { name: 'County', selector: 'County', sortable: true },
-                                    { name: 'Sub-County', selector: 'SubCounty', sortable: true },
-                                    { name: 'AGENCY', selector: 'CTAgency', sortable: true },
-                                    { name: 'Partner', selector: 'CTPartner', sortable: true },
-                                    { name: 'MALE NDWH', selector: 'DWHmale', sortable: true },
-                                    { name: 'FEMALE NDWH', selector: 'DWHFemale', sortable: true },
-                                    { name: 'TOTAL NDWH', selector: 'DWHtxNew', sortable: true },
-                                    { name: 'MALE KHIS', selector: 'KHISMale', sortable: true },
-                                    { name: 'FEMALE KHIS', selector: 'KHISFemale', sortable: true },
-                                    { name: 'TOTAL KHIS', selector: 'KHIStxNew', sortable: true },
+                                    {
+                                        name: 'FACILITY',
+                                        selector: 'FacilityName',
+                                        sortable: true,
+                                    },
+                                    {
+                                        name: 'COUNTY',
+                                        selector: 'County',
+                                        sortable: true,
+                                    },
+                                    {
+                                        name: 'SUB-COUNTY',
+                                        selector: 'SubCounty',
+                                        sortable: true,
+                                    },
+                                    {
+                                        name: 'AGENCY',
+                                        selector: 'CTAgency',
+                                        sortable: true,
+                                    },
+                                    {
+                                        name: 'PARTNER',
+                                        selector: 'CTPartner',
+                                        sortable: true,
+                                    },
+                                    {
+                                        name: 'KHIS TOTAL',
+                                        selector: 'KHIStxNew',
+                                        sortable: true,
+                                    },
+                                    {
+                                        name: 'DWH TOTAL',
+                                        selector: 'DWHtxNew',
+                                        sortable: true,
+                                    },
+                                    {
+                                        name: 'CONCORDANCE (%)',
+                                        selector: 'concordance',
+                                        sortable: true,
+                                    },
+                                    // { name: 'MALE NDWH', selector: 'DWHmale', sortable: true },
+                                    // { name: 'FEMALE NDWH', selector: 'DWHFemale', sortable: true },
+                                    // { name: 'MALE KHIS', selector: 'KHISMale', sortable: true },
+                                    // { name: 'FEMALE KHIS', selector: 'KHISFemale', sortable: true },
                                 ]}
                                 data={txCurrByGender}
                                 noHeader
@@ -52,7 +85,7 @@ const ComparisonTXNewByGender = () => {
                                 responsive
                                 highlightOnHover
                                 progressPending={loading}
-                                progressComponent={<Spinner/>}
+                                progressComponent={<Spinner />}
                             />
                         </CardBody>
                     </Card>
