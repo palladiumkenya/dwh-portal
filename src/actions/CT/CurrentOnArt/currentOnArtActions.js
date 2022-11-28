@@ -7,20 +7,21 @@ export const loadCurrentOnArt = () => async (dispatch, getState) => {
     if (getState().filters.noCache === true) {
         await dispatch(fetchCurrentOnArt());
     } else {
-        const diffInMinutes = moment().diff(
-            moment(getState().currentOnArt.lastFetch),
-            'minutes'
-        );
-        if (
-            getState().ui.ctTab !== "currentOnArt" &&
-            getState().ui.currentPage !== PAGES.home
-        ) {
-            return;
-        } else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
-            return;
-        } else {
-            await dispatch(fetchCurrentOnArt());
-        }
+        await dispatch(fetchCurrentOnArt());
+        //const diffInMinutes = moment().diff(
+        //    moment(getState().currentOnArt.lastFetch),
+        //    'minutes'
+        //);
+        //if (
+        //    getState().ui.ctTab !== "currentOnArt" &&
+        //    getState().ui.currentPage !== PAGES.home
+        //) {
+        //    return;
+        //} else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
+        //    return;
+        //} else {
+        //    await dispatch(fetchCurrentOnArt());
+        //}
     }
 };
 
