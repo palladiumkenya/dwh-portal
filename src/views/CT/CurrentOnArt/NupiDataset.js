@@ -48,28 +48,28 @@ const dictionary = [
         Description:
             'The year and month (YYYYMM) when a facility last updated CurrentOnART_Total numbers in KHIS. Please note that this date should not be more than 6 months from the reporting date',
     },
+    // {
+    //     Indicator: '# Total Verified Central Registry',
+    //     Description:
+    //         'Represents  the total number of patients that have been verified in Central registry ',
+    // },
+    // {
+    //     Indicator: '# without CCC No. Central Registry',
+    //     Description:
+    //         'Represent number of clients missing CCC numbers from the  Central registry',
+    // },
+    // {
+    //     Indicator: '# with CCC No. Central Registry',
+    //     Description:
+    //         'Represents number of clients with CCC numbers from the Central registry',
+    // },
     {
-        Indicator: '# Total Verified Central Registry',
-        Description:
-            'Represents  the total number of patients that have been verified in Central registry ',
-    },
-    {
-        Indicator: '# without CCC No. Central Registry',
-        Description:
-            'Represent number of clients missing CCC numbers from the  Central registry',
-    },
-    {
-        Indicator: '# with CCC No. Central Registry',
-        Description:
-            'Represents number of clients with CCC numbers from the Central registry',
-    },
-    {
-        Indicator: 'KHIS TXCurr (EMR Sites)',
+        Indicator: 'KHIS TXCurr',
         Description:
             'The CurrentOnART_Total indicator as reported in KHIS in the latest reporting month',
     },
     {
-        Indicator: '# MOH Central Registry Verified (EMR Sites)',
+        Indicator: '# MOH Central Registry Verified',
         Description:
             'The number of patients verified in Central Registry and whose CCC numbers and MFLCodes match  in DWH',
     },
@@ -167,7 +167,7 @@ const NupiDataset = () => {
                             label="KHIS TXCurr Latest Reporting Month"
                             value="KHIS TXCurr Latest Reporting Month"
                         />
-                        <ExcelColumn
+                        {/* <ExcelColumn
                             label="# Total Verified Central Registry"
                             value="# Total Verified Central Registry"
                         />
@@ -178,14 +178,14 @@ const NupiDataset = () => {
                         <ExcelColumn
                             label="# with CCC No. Central Registry"
                             value="# with CCC No. Central Registry"
+                        /> */}
+                        <ExcelColumn
+                            label="KHIS TXCurr"
+                            value="KHIS TXCurr"
                         />
                         <ExcelColumn
-                            label="KHIS TXCurr (EMR Sites)"
-                            value="KHIS TXCurr (EMR Sites)"
-                        />
-                        <ExcelColumn
-                            label="# MOH Central Registry Verified (EMR Sites)"
-                            value="# MOH Central Registry Verified (EMR Sites)"
+                            label="# MOH Central Registry Verified"
+                            value="# MOH Central Registry Verified"
                         />
                         <ExcelColumn
                             label="% MOH Central Registry verified of KHIS TXCurr"
