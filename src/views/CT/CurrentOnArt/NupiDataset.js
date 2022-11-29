@@ -179,13 +179,18 @@ const NupiDataset = () => {
                             label="# with CCC No. Central Registry"
                             value="# with CCC No. Central Registry"
                         /> */}
-                        <ExcelColumn
-                            label="KHIS TXCurr"
-                            value="KHIS TXCurr"
-                        />
+                        <ExcelColumn label="KHIS TXCurr" value="KHIS TXCurr" />
                         <ExcelColumn
                             label="# MOH Central Registry Verified"
                             value="# MOH Central Registry Verified"
+                        />
+                        <ExcelColumn
+                            label="# MOH UPI for non-art clients"
+                            value="# MOH UPI for non-art clients"
+                        />
+                        <ExcelColumn
+                            label="% MOH UPI for non-art clients of KHIS TXCurr"
+                            value="% MOH UPI for non-art clients of KHIS TXCurr"
                         />
                         <ExcelColumn
                             label="% MOH Central Registry verified of KHIS TXCurr"
