@@ -6,7 +6,7 @@ import HighchartsReact from 'highcharts-react-official';
 import * as currentOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/currOnArtKHIS';
 
 
-const ComparisonCurrByAge = () => {
+const ComparisonPosByAge = () => {
     const [comparisonCurrByAge, setComparisonCurrByAge] = useState({});
     let currKHIS =  useSelector(currentOnArtKHIS.getCurrOnArtKHIS);
 
@@ -80,7 +80,7 @@ const ComparisonCurrByAge = () => {
     return (
         <Card>
             <CardHeader className="cardTitle">
-                DISTRIBUTION OF PATIENTS CURRENT ON ART BY AGE
+                DISTRIBUTION OF PATIENTS TESTED HIV POSITIVE BY AGE
             </CardHeader>
             <CardBody>
                 <HighchartsReact highcharts={Highcharts} options={comparisonCurrByAge}/>
@@ -89,4 +89,4 @@ const ComparisonCurrByAge = () => {
     );
 };
 
-export default ComparisonCurrByAge;
+export default ComparisonPosByAge;

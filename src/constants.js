@@ -15,7 +15,7 @@ export const HTS_TABS = {
     uptake: 'HIV TESTING SERVICES UPTAKE',
     linkage: 'HIV TESTING SERVICES LINKAGE',
     pns: 'PARTNER NOTIFICATION SERVICES',
-    prep: 'PrEP',
+    // prep: 'PrEP',
 };
 
 export const CT_TABS = {
@@ -58,7 +58,7 @@ export const CACHING = {
     EXTRA_LONG: 4320, // 3 days
 };
 
-export const LOADING_DELAY = 200;
+export const LOADING_DELAY = 400;
 
 export const GA_TRACKING_ID = 'UA-137589703-2';
 

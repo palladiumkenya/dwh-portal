@@ -224,7 +224,7 @@ const UniversalFilter = () => {
             )
         );
         setIndicators(
-            ['Tx_New', 'Tx_Curr'].map((c) => ({ value: c, key: c, text: c }))
+            ['Tx_New', 'Tx_Curr', 'HTS_TESTED', 'HTS_POS'].map((c) => ({ value: c, key: c, text: c }))
         );
     }, [
         ui,

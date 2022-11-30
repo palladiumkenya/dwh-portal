@@ -5,7 +5,7 @@ import DataTable from 'react-data-table-component';
 import CsvDownloader from 'react-csv-downloader';
 import { getCurrOnArtByFacilityPartnerKHIS } from '../../../../selectors/Operational&HIS/Comparison/currStartedOnArtByFacilityPartnerKHIS'
 
-const ComparisonTXCurrByGender = () => {
+const ComparisonHTSTestedByGender = () => {
     const currOnArt = useSelector(getCurrOnArtByFacilityPartnerKHIS).data;
     const loading = useSelector(state => state.currOnArtByFacilityKHIS.loading);
     return (
@@ -14,7 +14,7 @@ const ComparisonTXCurrByGender = () => {
                 <Col>
                     <Card className="trends-card">
                         <CardHeader className="trends-header">
-                            COMPARISON OF TX_CURR BASED ON GENDER
+                            COMPARISON OF HTS TESTED BASED ON GENDER
                             {loading === true ? (
                                 <Spinner className="pull-right" />
                             ) : (
@@ -95,4 +95,4 @@ const ComparisonTXCurrByGender = () => {
     );
 };
 
-export default ComparisonTXCurrByGender;
+export default ComparisonHTSTestedByGender;
