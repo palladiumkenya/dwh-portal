@@ -158,6 +158,10 @@ const NupiDataset = () => {
                         <ExcelColumn label="Partner" value="SDIP" />
                         <ExcelColumn label="Agency" value="Agency" />
                         <ExcelColumn label="EMR" value="EMR" />
+                        <ExcelColumn
+                            label="FacilityType"
+                            value="FacilityType"
+                        />
                         <ExcelColumn label="County" value="County" />
                         <ExcelColumn
                             label="LatestDateUploaded"
