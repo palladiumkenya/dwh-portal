@@ -35,7 +35,10 @@ const OTZOverview = () => {
             enrolledInOTZ: otzEnrolled.enrolledInOTZ,
             enrolledInOTZPerc:
                 parseInt(adolescents.totalAdolescents, 10) > 0
-                    ? (otzEnrolled.enrolledInOTZ / adolescents.totalAdolescents) * 100 : 0,
+                    ? (otzEnrolled.enrolledInOTZ /
+                          adolescents.totalAdolescents) *
+                      100
+                    : 0,
 
             totalWithVlResults: otzTotalWithVlResults.totalWithVlResults,
             totalWithVlResultsPerc:
@@ -53,7 +56,12 @@ const OTZOverview = () => {
                       100
                     : 0,
         });
-    }, [adolescents]);
+    }, [
+        adolescents,
+        otzEnrolled,
+        otzTotalWithVlResults,
+        otzTotalWithVlResultsLessThan1000,
+    ]);
 
     useEffect(() => {
         loadOtzTotalAdolescents();
