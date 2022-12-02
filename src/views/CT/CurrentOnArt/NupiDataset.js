@@ -128,8 +128,8 @@ const NupiDataset = () => {
     const loadDataset = useCallback(async () => {
         if (nupiDataset.length === 0)
             try {
-                // let data = await getAll('care-treatment/nupiDataset', {});
-                // setNupiDataset(data)
+                let data = await getAll('care-treatment/nupiDataset', {});
+                setNupiDataset(data)
 
             } catch (e){
                 console.log(e)
