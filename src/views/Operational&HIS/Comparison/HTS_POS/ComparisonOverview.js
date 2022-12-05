@@ -1,19 +1,81 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Card, CardBody, CardHeader } from 'reactstrap/lib';
 import { Col, Row } from 'reactstrap';
 import { useSelector } from 'react-redux';
 import { formatNumber, roundNumber } from '../../../../utils/utils';
+import moment from 'moment';
+import { getAll } from './../../../Shared/Api';
 
 const ComparisonOverview= () => {
+    const filters = useSelector((state) => state.filters);
+    const [DWHHts, setDWHHtsOverview] = useState({
+        DWHHtsPos: 0,
+        DWHHtsPosAdult: 0,
+        DWHHtsPosChildren: 0,
+        DWHHtsPosAdolecents: 0,
+        KHISHtsPos: 0,
+        KHISHtsPosAdult: 0,
+        KHISHtsPosChildren: 0,
+        KHISHtsPosAdolecents: 0,
+    });
+    const loadComparisonOverview = useCallback(async () => {
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            year: filters.fromDate
+                ? moment(filters.fromDate, 'MMM YYYY').format('YYYY')
+                : moment().subtract(2, 'month').add(17, 'days').format('YYYY'),
+            month: filters.fromDate
+                ? moment(filters.fromDate, 'MMM YYYY').format('MM')
+                : moment().subtract(2, 'month').add(17, 'days').format('MM'),
+        };
+        const result = await getAll(
+            'operational-his/getDWHHTSPOSPositive',
+            params
+        );
+        const resultKHIS = await getAll(
+            'operational-his/getKHISHTSPOSPositive',
+            params
+        );
+        let data = {
+            DWHHtsPos: 0,
+            DWHHtsPosAdult: 0,
+            DWHHtsPosChildren: 0,
+            DWHHtsPosAdolecents: 0,
+            KHISHtsPos: 0,
+            KHISHtsPosAdult: 0,
+            KHISHtsPosChildren: 0,
+            KHISHtsPosAdolecents: 0,
+        };
 
-    const KHISHtsPos = 120500;
-    const DWHHtsPos = 100230;
-    const KHISHtsPosAdult = 21000;
-    const DWHHtsPosAdult = 45000;
-    const KHISHtsPosChildren = 25260;
-    const DWHHtsPosChildren = 31000;
-    const KHISHtsPosAdolecents = 17431;
-    const DWHHtsPosAdolecents = 10531;
+        for (let i = 0; i < result.length; i++) {
+            data.DWHHtsPos = data.DWHHtsPos + parseInt(result[i].positive);
+            data.DWHHtsPosAdult =
+                data.DWHHtsPosAdult + parseInt(result[i].adult);
+            data.DWHHtsPosChildren =
+                data.DWHHtsPosChildren + parseInt(result[i].children);
+            data.DWHHtsPosAdolecents =
+                data.DWHHtsPosAdolecents + parseInt(result[i].adolecent);
+        }
+                
+        data.KHISHtsPos = data.KHISHtsPos + parseInt(resultKHIS.Positive_Total);
+        data.KHISHtsPosAdult =
+            data.KHISHtsPosAdult + parseInt(resultKHIS.adults);
+        data.KHISHtsPosChildren =
+            data.KHISHtsPosChildren + parseInt(resultKHIS.Positive_1_9);
+        data.KHISHtsPosAdolecents =
+            data.KHISHtsPosAdolecents + parseInt(resultKHIS.adolecent);
+        
+        setDWHHtsOverview(data);
+    }, [filters]);
+
+    useEffect(() => {
+        loadComparisonOverview();
+    }, [loadComparisonOverview]);
 
     let percOfNewly = (curr, total) => {
         if (total === 0) {
@@ -56,7 +118,9 @@ const ComparisonOverview= () => {
                                                     justifyContent: 'center',
                                                 }}
                                             >
-                                                {formatNumber(KHISHtsPos)}
+                                                {formatNumber(
+                                                    DWHHts.KHISHtsPos
+                                                )}
                                             </span>
                                         </div>
                                     </Col>
@@ -74,7 +138,7 @@ const ComparisonOverview= () => {
                                                     justifyContent: 'center',
                                                 }}
                                             >
-                                                {formatNumber(DWHHtsPos)}
+                                                {formatNumber(DWHHts.DWHHtsPos)}
                                             </span>
                                         </div>
                                     </Col>
@@ -110,14 +174,14 @@ const ComparisonOverview= () => {
                                                     <br />
                                                     <span className="comparison-card-numbers">
                                                         {formatNumber(
-                                                            KHISHtsPosAdult
+                                                            DWHHts.KHISHtsPosAdult
                                                         )}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
                                                         {percOfNewly(
-                                                            KHISHtsPosAdult,
-                                                            KHISHtsPos
+                                                            DWHHts.KHISHtsPosAdult,
+                                                            DWHHts.KHISHtsPos
                                                         )}
                                                     </sup>
                                                 </div>
@@ -130,14 +194,14 @@ const ComparisonOverview= () => {
                                                     <br />
                                                     <span className="comparison-card-numbers">
                                                         {formatNumber(
-                                                            DWHHtsPosAdult
+                                                            DWHHts.DWHHtsPosAdult
                                                         )}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
                                                         {percOfNewly(
-                                                            DWHHtsPosAdult,
-                                                            DWHHtsPos
+                                                            DWHHts.DWHHtsPosAdult,
+                                                            DWHHts.DWHHtsPos
                                                         )}
                                                     </sup>
                                                 </div>
@@ -174,14 +238,14 @@ const ComparisonOverview= () => {
                                                     <br />
                                                     <span className="comparison-card-numbers">
                                                         {formatNumber(
-                                                            KHISHtsPosChildren
+                                                            DWHHts.KHISHtsPosChildren
                                                         )}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
                                                         {percOfNewly(
-                                                            KHISHtsPosChildren,
-                                                            KHISHtsPos
+                                                            DWHHts.KHISHtsPosChildren,
+                                                            DWHHts.KHISHtsPos
                                                         )}
                                                     </sup>
                                                 </div>
@@ -194,14 +258,14 @@ const ComparisonOverview= () => {
                                                     <br />
                                                     <span className="comparison-card-numbers">
                                                         {formatNumber(
-                                                            DWHHtsPosChildren
+                                                            DWHHts.DWHHtsPosChildren
                                                         )}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
                                                         {percOfNewly(
-                                                            DWHHtsPosChildren,
-                                                            DWHHtsPos
+                                                            DWHHts.DWHHtsPosChildren,
+                                                            DWHHts.DWHHtsPos
                                                         )}
                                                     </sup>
                                                 </div>
@@ -217,7 +281,8 @@ const ComparisonOverview= () => {
                                 style={{ height: '170px' }}
                             >
                                 <CardHeader className="expected-uploads-header">
-                                    ADOLESCENTS TESTED HIV POSITIVE (10 - 19 YRS)
+                                    ADOLESCENTS TESTED HIV POSITIVE (10 - 19
+                                    YRS)
                                 </CardHeader>
                                 <CardBody
                                     className="vertical_dotted_line"
@@ -236,14 +301,14 @@ const ComparisonOverview= () => {
                                                     <br />
                                                     <span className="comparison-card-numbers">
                                                         {formatNumber(
-                                                            KHISHtsPosAdolecents
+                                                            DWHHts.KHISHtsPosAdolecents
                                                         )}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
                                                         {percOfNewly(
-                                                            KHISHtsPosAdolecents,
-                                                            KHISHtsPos
+                                                            DWHHts.KHISHtsPosAdolecents,
+                                                            DWHHts.KHISHtsPos
                                                         )}
                                                     </sup>
                                                 </div>
@@ -256,14 +321,14 @@ const ComparisonOverview= () => {
                                                     <br />
                                                     <span className="comparison-card-numbers">
                                                         {formatNumber(
-                                                            DWHHtsPosAdolecents
+                                                            DWHHts.DWHHtsPosAdolecents
                                                         )}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
                                                         {percOfNewly(
-                                                            DWHHtsPosAdolecents,
-                                                            DWHHtsPos
+                                                            DWHHts.DWHHtsPosAdolecents,
+                                                            DWHHts.DWHHtsPos
                                                         )}
                                                     </sup>
                                                 </div>
