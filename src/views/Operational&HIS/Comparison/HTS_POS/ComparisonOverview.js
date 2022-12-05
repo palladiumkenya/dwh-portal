@@ -26,6 +26,8 @@ const ComparisonOverview= () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
+            gender: filters.genders,
+            datimAgeGroup: filters.datimAgeGroups,
             year: filters.fromDate
                 ? moment(filters.fromDate, 'MMM YYYY').format('YYYY')
                 : moment().subtract(2, 'month').add(17, 'days').format('YYYY'),
