@@ -7,11 +7,11 @@ import * as htsPosKHIS from '../../../../selectors/Operational&HIS/Comparison/ht
 
 
 const ComparisonPosByCounty = () => {
-    const [comparisonCurrByCounty, setComparisonCurrByCounty] = useState({});
-    let currKHIS = useSelector(htsPosKHIS.getHTSPOSByCountyKHIS);
+    const [comparisonPosByCounty, setComparisonPosByCounty] = useState({});
+    let posKHIS = useSelector(htsPosKHIS.getHTSPOSByCountyKHIS);
 
     const loadComparisonCurrByCounty = useCallback(async () => {
-        setComparisonCurrByCounty({
+        setComparisonPosByCounty({
             chart: {
                 type: 'column',
             },
@@ -19,7 +19,7 @@ const ComparisonPosByCounty = () => {
                 text: '',
             },
             xAxis: {
-                categories: currKHIS.labels,
+                categories: posKHIS.labels,
                 crosshair: true,
                 title: {
                     text: 'COUNTY',
@@ -54,19 +54,19 @@ const ComparisonPosByCounty = () => {
             series: [
                 {
                     name: 'KHIS',
-                    data: currKHIS.data,
+                    data: posKHIS.data,
                     color: '#2F4050',
                     dataLabels: { enabled: true },
                 },
                 {
                     name: 'DWH',
-                    data: currKHIS.dataDwh,
+                    data: posKHIS.dataDwh,
                     color: '#1AB394',
                     dataLabels: { enabled: true },
                 },
             ],
         });
-    }, [currKHIS]);
+    }, [posKHIS]);
 
     useEffect(() => {
         loadComparisonCurrByCounty();
@@ -78,7 +78,7 @@ const ComparisonPosByCounty = () => {
                 DISTRIBUTION OF PATIENTS TESTED HIV POSITIVE BY COUNTY
             </CardHeader>
             <CardBody>
-                <HighchartsReact highcharts={Highcharts} options={comparisonCurrByCounty}/>
+                <HighchartsReact highcharts={Highcharts} options={comparisonPosByCounty}/>
             </CardBody>
         </Card>
     );
