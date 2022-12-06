@@ -3,17 +3,15 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as htsPosKHIS from '../../../../selectors/Operational&HIS/Comparison/htsPosByGenderKHIS';
+import * as htsPos from '../../../../selectors/Operational&HIS/Comparison/htsPosByPartnerKHIS'
 
 
-const ComparisonPosByGender = () => {
-    const filters = useSelector((state) => state.filters);
-    const [comparisonPosByGender, setComparisonPosByGender] = useState({});
-    let posKHIS = useSelector(htsPosKHIS.getHTSPOSKHIS);
-    
+const ComparisonPosByPartner = () => {
+    const [comparisonCurrByPartner, setComparisonCurrByPartner] = useState({});
+    let currKHIS = useSelector(htsPos.getHTSPOSByPartnerKHIS);
 
-    const loadComparisonNewlyByGender = useCallback(async () => {
-        setComparisonPosByGender({
+    const loadComparisonCurrByPartner = useCallback(async () => {
+        setComparisonCurrByPartner({
             chart: {
                 type: 'column',
             },
@@ -21,10 +19,10 @@ const ComparisonPosByGender = () => {
                 text: '',
             },
             xAxis: {
-                categories: ['KHIS', 'DWH'],
+                categories: currKHIS.labels,
                 crosshair: true,
                 title: {
-                    text: 'Source',
+                    text: 'SERVICE DELIVERY PARTNER',
                 },
             },
             yAxis: {
@@ -55,39 +53,38 @@ const ComparisonPosByGender = () => {
             },
             series: [
                 {
-                    name: 'MALE',
-                    data: [posKHIS.malesPositive, 2000],
-                    color: '#14084D',
+                    name: 'KHIS',
+                    data: currKHIS.data,
+                    color: '#2F4050',
                     dataLabels: { enabled: true },
                 },
                 {
-                    name: 'FEMALE',
-                    data: [posKHIS.femalesPositive, 3600],
-                    color: '#EA4C8B',
+                    name: 'DWH',
+                    data: currKHIS.dataDwh,
+                    color: '#1AB394',
                     dataLabels: { enabled: true },
                 },
             ],
         });
-    }, [
-        posKHIS.malesPositive,
-        posKHIS.femalesPositive,
-    ]);
+    }, [currKHIS]);
 
     useEffect(() => {
-        loadComparisonNewlyByGender();
-    }, [loadComparisonNewlyByGender]);
+        loadComparisonCurrByPartner();
+    }, [loadComparisonCurrByPartner]);
 
     return (
         <Card>
-            <CardHeader className="cardTitle">TESTED HIV POSITIVE BY GENDER</CardHeader>
+            <CardHeader className="cardTitle">
+                DISTRIBUTION OF PATIENTS TESTED HIV POSITIVE BY SERVICE DELIVERY PARTNERS
+            </CardHeader>
             <CardBody>
                 <HighchartsReact
                     highcharts={Highcharts}
-                    options={comparisonPosByGender}
+                    options={comparisonCurrByPartner}
                 />
             </CardBody>
         </Card>
     );
 };
 
-export default ComparisonPosByGender;
+export default ComparisonPosByPartner;

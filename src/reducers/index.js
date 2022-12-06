@@ -241,6 +241,9 @@ import viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment
 
 
 import newlyStartedOnArtKHIS from './Operational&HIS/Comparison/newlyStartedOnArtKHIS';
+import htsPosByGenderKHIS from './Operational&HIS/Comparison/htsPosByGenderKHIS';
+import htsPosByCountyKHIS from './Operational&HIS/Comparison/htsPosByCountyKHIS';
+import htsPosByPartnerKHIS from './Operational&HIS/Comparison/htsPosByPartnerKHIS';
 import newlyStartedOnArtTrendsKHIS from './Operational&HIS/Comparison/newlyStartedOnArtTrendsKHIS';
 import htsPositivesTrendsKHIS from './Operational&HIS/Comparison/htsPositivesTrendsKHIS';
 import currOnArtKHIS from './Operational&HIS/Comparison/currOnArtKHIS';
@@ -490,6 +493,10 @@ export default combineReducers({
     currOnArtByFacilityDWH,
     newOnArtByFacilityDWH,
     currOnArtDWHByCounty,
+
+    htsPosByGenderKHIS,
+    htsPosByCountyKHIS,
+    htsPosByPartnerKHIS,
 
     currentOnArtVerified,
     currentOnArtVerifiedByCounty,

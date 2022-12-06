@@ -56,6 +56,9 @@ import {
 import {
     loadNewOnARTPartnerFacilityDWH
 } from '../../actions/Operational&HIS/Comparison/newOnArtByPartnerFacilityDWHActions';
+import { loadHTSPosByGenderKHIS } from '../../actions/Operational&HIS/Comparison/htsPosByGenderKHISActions';
+import { loadHTSPosByPartnerKHIS } from './../../actions/Operational&HIS/Comparison/htsPosByPartnerKHISActions';
+import { loadHTSPosByCountyKHIS } from './../../actions/Operational&HIS/Comparison/htsPosByCountyKHISActions';
 
 
 const Comparison = Loadable({
@@ -87,6 +90,7 @@ const Consistency = Loadable({
 const DataQualityAssessment = Loadable({
     loader: () => import ('./Data Quality Assessment/DataQualityAssessment'),
     loading: Loading,
+
     delay: LOADING_DELAY
 });
 
@@ -160,6 +164,9 @@ const OperationalHIS = () => {
         dispatch(loadCurrOnARTKHISByCounty());
         dispatch(loadCurrOnARTKHISByPartner());
         dispatch(loadCurrentOnArtDistributionByCountyDWH());
+        dispatch(loadHTSPosByGenderKHIS());
+        dispatch(loadHTSPosByPartnerKHIS());
+        dispatch(loadHTSPosByCountyKHIS());
 
         dispatch(loadCurrentOnArtOverview(active_tab));
         dispatch(loadCurrentOnArtByAgeSex(active_tab));
