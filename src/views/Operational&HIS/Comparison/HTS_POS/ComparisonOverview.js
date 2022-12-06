@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { formatNumber, roundNumber } from '../../../../utils/utils';
 import moment from 'moment';
 import { getAll } from './../../../Shared/Api';
+import * as htsPosKHIS from '../../../../selectors/Operational&HIS/Comparison/htsPosByGenderKHIS';
 
 const ComparisonOverview= () => {
     const filters = useSelector((state) => state.filters);
@@ -18,6 +19,8 @@ const ComparisonOverview= () => {
         KHISHtsPosChildren: 0,
         KHISHtsPosAdolecents: 0,
     });
+    let posKHIS = useSelector(htsPosKHIS.getHTSPOSKHIS);
+
     const loadComparisonOverview = useCallback(async () => {
         let params = {
             county: filters.counties,
@@ -39,10 +42,6 @@ const ComparisonOverview= () => {
             'operational-his/getDWHHTSPOSPositive',
             params
         );
-        const resultKHIS = await getAll(
-            'operational-his/getKHISHTSPOSPositive',
-            params
-        );
         let data = {
             DWHHtsPos: 0,
             DWHHtsPosAdult: 0,
@@ -61,19 +60,16 @@ const ComparisonOverview= () => {
             data.DWHHtsPosChildren =
                 data.DWHHtsPosChildren + parseInt(result[i].children);
             data.DWHHtsPosAdolecents =
-                data.DWHHtsPosAdolecents + parseInt(result[i].adolecent);
+                data.DWHHtsPosAdolecents + parseInt(result[i].adolescent);
         }
-                
-        data.KHISHtsPos = data.KHISHtsPos + parseInt(resultKHIS.Positive_Total);
-        data.KHISHtsPosAdult =
-            data.KHISHtsPosAdult + parseInt(resultKHIS.adults);
-        data.KHISHtsPosChildren =
-            data.KHISHtsPosChildren + parseInt(resultKHIS.Positive_1_9);
-        data.KHISHtsPosAdolecents =
-            data.KHISHtsPosAdolecents + parseInt(resultKHIS.adolecent);
-        
+
+        data.KHISHtsPos = posKHIS.totalPositive;
+        data.KHISHtsPosAdult = posKHIS.adultsPositive;
+        data.KHISHtsPosChildren = posKHIS.childrenPositive;
+        data.KHISHtsPosAdolecents = posKHIS.adolescentsPositive;
+
         setDWHHtsOverview(data);
-    }, [filters]);
+    }, [filters, posKHIS]);
 
     useEffect(() => {
         loadComparisonOverview();

@@ -3,20 +3,17 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as currentOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/currOnArtKHIS';
-import * as currentOnArtByAgeSexSelectors from '../../../../selectors/CT/CurrentOnArt/currentOnArtByAgeSex';
+import * as htsPosKHIS from '../../../../selectors/Operational&HIS/Comparison/htsPosByGenderKHIS';
 
 
 const ComparisonPosByGender = () => {
     const filters = useSelector((state) => state.filters);
-    const [comparisonNewlyByGender, setComparisonNewlyByGender] = useState({});
-    let currKHIS = useSelector(currentOnArtKHIS.getCurrOnArtKHIS);
-    const currentOnArtBySexData = useSelector(
-        currentOnArtByAgeSexSelectors.getCurrentOnArtBySex
-    ); // Sex info for DWH
+    const [comparisonPosByGender, setComparisonPosByGender] = useState({});
+    let posKHIS = useSelector(htsPosKHIS.getHTSPOSKHIS);
+    
 
     const loadComparisonNewlyByGender = useCallback(async () => {
-        setComparisonNewlyByGender({
+        setComparisonPosByGender({
             chart: {
                 type: 'column',
             },
@@ -59,30 +56,19 @@ const ComparisonPosByGender = () => {
             series: [
                 {
                     name: 'MALE',
-                    data: [
-                        currKHIS.malesOnART,
-                        currentOnArtBySexData.currentOnArtMale,
-                    ],
+                    data: [posKHIS.malesPositive, posKHIS.genderDWH.male],
                     color: '#14084D',
                     dataLabels: { enabled: true },
                 },
                 {
                     name: 'FEMALE',
-                    data: [
-                        currKHIS.femalesOnART,
-                        currentOnArtBySexData.currentOnArtFemale,
-                    ],
+                    data: [posKHIS.femalesPositive, posKHIS.genderDWH.female],
                     color: '#EA4C8B',
                     dataLabels: { enabled: true },
                 },
             ],
         });
-    }, [
-        currKHIS.malesOnART,
-        currKHIS.femalesOnART,
-        currentOnArtBySexData.currentOnArtMale,
-        currentOnArtBySexData.currentOnArtFemale,
-    ]);
+    }, [posKHIS.malesPositive, posKHIS.femalesPositive, posKHIS.genderDWH]);
 
     useEffect(() => {
         loadComparisonNewlyByGender();
@@ -94,7 +80,7 @@ const ComparisonPosByGender = () => {
             <CardBody>
                 <HighchartsReact
                     highcharts={Highcharts}
-                    options={comparisonNewlyByGender}
+                    options={comparisonPosByGender}
                 />
             </CardBody>
         </Card>

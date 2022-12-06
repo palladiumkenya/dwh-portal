@@ -56,6 +56,15 @@ import {
 import {
     loadNewOnARTPartnerFacilityDWH
 } from '../../actions/Operational&HIS/Comparison/newOnArtByPartnerFacilityDWHActions';
+import { loadHTSPosByGenderKHIS } from '../../actions/Operational&HIS/Comparison/htsPosByGenderKHISActions';
+import { loadHTSPosByPartnerKHIS } from './../../actions/Operational&HIS/Comparison/htsPosByPartnerKHISActions';
+import { loadHTSPosByCountyKHIS } from './../../actions/Operational&HIS/Comparison/htsPosByCountyKHISActions';
+import { loadHTSPosByFacilityKHIS } from '../../actions/Operational&HIS/Comparison/htsPosByFacilityKHISActions';
+import { loadHTSPosByPartnerDWH } from '../../actions/Operational&HIS/Comparison/htsPosByPartnerDWHActions';
+import { loadHTSPosByAgeDWH } from '../../actions/Operational&HIS/Comparison/htsPosByAgeDWHActions';
+import { loadHTSPosByCountyDWH } from '../../actions/Operational&HIS/Comparison/htsPosByCountyDWHActions';
+import { loadHTSPosByFacilityDWH } from '../../actions/Operational&HIS/Comparison/htsPosByFacilityDWHActions';
+import { loadHTSPosByGenderDWH } from '../../actions/Operational&HIS/Comparison/htsPosByGenderDWHActions';
 
 
 const Comparison = Loadable({
@@ -87,6 +96,7 @@ const Consistency = Loadable({
 const DataQualityAssessment = Loadable({
     loader: () => import ('./Data Quality Assessment/DataQualityAssessment'),
     loading: Loading,
+
     delay: LOADING_DELAY
 });
 
@@ -160,6 +170,15 @@ const OperationalHIS = () => {
         dispatch(loadCurrOnARTKHISByCounty());
         dispatch(loadCurrOnARTKHISByPartner());
         dispatch(loadCurrentOnArtDistributionByCountyDWH());
+        dispatch(loadHTSPosByGenderKHIS());
+        dispatch(loadHTSPosByPartnerKHIS());
+        dispatch(loadHTSPosByCountyKHIS());
+        dispatch(loadHTSPosByFacilityKHIS());
+        dispatch(loadHTSPosByPartnerDWH());
+        dispatch(loadHTSPosByAgeDWH());
+        dispatch(loadHTSPosByCountyDWH());
+        dispatch(loadHTSPosByFacilityDWH());
+        dispatch(loadHTSPosByGenderDWH());
 
         dispatch(loadCurrentOnArtOverview(active_tab));
         dispatch(loadCurrentOnArtByAgeSex(active_tab));

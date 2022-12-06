@@ -3,15 +3,15 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as htsPosKHIS from '../../../../selectors/Operational&HIS/Comparison/htsPosByGenderKHIS';
+import * as htsPos from '../../../../selectors/Operational&HIS/Comparison/htsPosByPartnerKHIS'
 
 
-const ComparisonPosByAge = () => {
-    const [comparisonCurrByAge, setComparisonCurrByAge] = useState({});
-    let currKHIS = useSelector(htsPosKHIS.getHTSPOSKHIS);
+const ComparisonPosByPartner = () => {
+    const [comparisonCurrByPartner, setComparisonCurrByPartner] = useState({});
+    let currKHIS = useSelector(htsPos.getHTSPOSByPartnerKHIS);
 
-    const loadComparisonCurrByAge = useCallback(async () => {
-        setComparisonCurrByAge({
+    const loadComparisonCurrByPartner = useCallback(async () => {
+        setComparisonCurrByPartner({
             chart: {
                 type: 'column',
             },
@@ -19,17 +19,10 @@ const ComparisonPosByAge = () => {
                 text: '',
             },
             xAxis: {
-                categories: [
-                    'UNDER 1',
-                    '1-9',
-                    '10-14',
-                    '15-19',
-                    '20-24',
-                    '25+',
-                ],
+                categories: currKHIS.labels,
                 crosshair: true,
                 title: {
-                    text: 'AGE GROUP',
+                    text: 'SERVICE DELIVERY PARTNER',
                 },
             },
             yAxis: {
@@ -61,32 +54,37 @@ const ComparisonPosByAge = () => {
             series: [
                 {
                     name: 'KHIS',
-                    data: currKHIS.htsPosByAge,
+                    data: currKHIS.data,
                     color: '#2F4050',
+                    dataLabels: { enabled: true },
                 },
                 {
                     name: 'DWH',
-                    data: currKHIS.htsPosByAgeDWH,
+                    data: currKHIS.dataDwh,
                     color: '#1AB394',
+                    dataLabels: { enabled: true },
                 },
             ],
         });
     }, [currKHIS]);
 
     useEffect(() => {
-        loadComparisonCurrByAge();
-    }, [loadComparisonCurrByAge]);
+        loadComparisonCurrByPartner();
+    }, [loadComparisonCurrByPartner]);
 
     return (
         <Card>
             <CardHeader className="cardTitle">
-                DISTRIBUTION OF PATIENTS TESTED HIV POSITIVE BY AGE
+                DISTRIBUTION OF PATIENTS TESTED HIV POSITIVE BY SERVICE DELIVERY PARTNERS
             </CardHeader>
             <CardBody>
-                <HighchartsReact highcharts={Highcharts} options={comparisonCurrByAge}/>
+                <HighchartsReact
+                    highcharts={Highcharts}
+                    options={comparisonCurrByPartner}
+                />
             </CardBody>
         </Card>
     );
 };
 
-export default ComparisonPosByAge;
+export default ComparisonPosByPartner;

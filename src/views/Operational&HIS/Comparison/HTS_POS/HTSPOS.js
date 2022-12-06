@@ -14,6 +14,10 @@ import ComparisonOverview from './ComparisonOverview';
 import ComparisonIndicatorNotes from './ComparisonIndicator';
 import ComparisonPosByGender from './ComparisonPosByGender';
 import ComparisonPosByAge from './ComparisonPosByAge';
+import ComparisonPosTrends from './ComparisonPosTrends';
+import ComparisonPosByPartner from './ComparisonPosByPartner';
+import ComparisonPosByCounty from './ComparisonPosByCounty';
+import ComparisonHTSPosByFacility from './ComparisonPosByFacility';
 
 
 const HTSPOS = () => {
@@ -47,6 +51,14 @@ const HTSPOS = () => {
                         <ComparisonPosByAge />
                     </Col>
                 </Row>
+                <SectionFooter />
+                <ComparisonPosTrends />
+                <SectionFooter />
+                <ComparisonPosByCounty />
+                <SectionFooter />
+                <ComparisonPosByPartner />
+                <SectionFooter />
+                <ComparisonHTSPosByFacility />
                 <SectionFooter />
             </>
         </>
