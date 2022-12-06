@@ -4,8 +4,8 @@ const listUnfiltered = (state) => state.htsPosByPartnerKHIS.listUnfiltered;
 const listFiltered = (state) => state.htsPosByPartnerKHIS.listFiltered;
 const filtered = (state) => state.filters.filtered;
 
-const listUnfilteredDWH = (state) => state.currOnArtDWHByCounty.listUnfiltered;
-const listFilteredDWH = (state) => state.currOnArtDWHByCounty.listFiltered;
+const listUnfilteredDWH = (state) => state.htsPosByPartnerDWH.listUnfiltered;
+const listFilteredDWH = (state) => state.htsPosByPartnerDWH.listFiltered;
 
 let datimAgeGroups = state => state.filters.datimAgeGroups;
 
@@ -87,20 +87,19 @@ export const getHTSPOSByPartnerKHIS = createSelector(
             data = list.map((item) => item.Positive_Total);
         }
         //DWH
-        const dataDwh = []
-        //  labels.map((item) => {
-        //     let number = 0;
+        const dataDwh = labels.map((item) => {
+            let number = 0;
 
-        //     listDWH.map((itemDWH) => {
-        //         if (itemDWH.County !== null)
-        //             if (item === itemDWH.County.toUpperCase()) {
-        //                 number = itemDWH.txCurr;
-        //             } else if (item === 'UNKNOWN') {
-        //                 number = itemDWH.txCurr;
-        //             }
-        //     });
-        //     return number;
-        // });
+            listDWH.map((itemDWH) => {
+                if (itemDWH.CTPartner !== null)
+                    if (item === itemDWH.CTPartner.toUpperCase()) {
+                        number = parseInt(itemDWH.positive);
+                    } else if (item === 'UNKNOWN') {
+                        number = parseInt(itemDWH.positive);
+                    }
+            });
+            return number;
+        });
 
         return {
             data,

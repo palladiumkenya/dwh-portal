@@ -5,8 +5,11 @@ const listUnfiltered = (state) => state.htsPosByGenderKHIS.listUnfiltered;
 const listFiltered = (state) => state.htsPosByGenderKHIS.listFiltered;
 const filtered = state => state.filters.filtered;
 
-const listUnfilteredDWH = state => state.currentOnArtByAgeSex.listUnfiltered;
-const listFilteredDWH = state => state.currentOnArtByAgeSex.listFiltered;
+const listUnfilteredDWH = (state) => state.htsPosByAgeDWH.listUnfiltered;
+const listFilteredDWH = (state) => state.htsPosByAgeDWH.listFiltered;
+
+const listUnfilteredDWHGender = (state) => state.htsPosByGenderDWH.listUnfiltered;
+const listFilteredDWHGender = (state) => state.htsPosByGenderDWH.listFiltered;
 
 let datimAgeGroups = (state) => state.filters.datimAgeGroups;
 
@@ -14,28 +17,37 @@ export const getHTSPOSKHIS = createSelector(
     [
         listUnfiltered,
         listFiltered,
+        listUnfilteredDWH,
+        listFilteredDWH,
+        listUnfilteredDWHGender,
+        listFilteredDWHGender,
         filtered,
         datimAgeGroups,
     ],
     (
         listUnfiltered,
         listFiltered,
+        listUnfilteredDWH,
+        listFilteredDWH,
+        listUnfilteredDWHGender,
+        listFilteredDWHGender,
         filtered,
         datimAgeGroups
     ) => {
         const list = filtered ? listFiltered : listUnfiltered;
+        const listDWH = filtered ? listFilteredDWH : listUnfilteredDWH;
+        const listDWHGender = filtered ? listFilteredDWHGender : listUnfilteredDWHGender;
 
         //KHIS
-        let totalPositive = 0
-        let malesPositive = 0
-        let femalesPositive = 0
-        let adultsPositive = 0
-        let childrenPositive = 0
-        let adolescentsPositive = 0
+        let totalPositive = 0;
+        let malesPositive = 0;
+        let femalesPositive = 0;
+        let adultsPositive = 0;
+        let childrenPositive = 0;
+        let adolescentsPositive = 0;
         let htsPosByAge = [0, 0, 0, 0, 0, 0];
 
-
-        if (filtered && datimAgeGroups.length>0) {
+        if (filtered && datimAgeGroups.length > 0) {
             for (let i = 0; i < datimAgeGroups.length; i++) {
                 if (datimAgeGroups[i] === 'Under 1') {
                     totalPositive += 0;
@@ -48,7 +60,8 @@ export const getHTSPOSKHIS = createSelector(
                     htsPosByAge.splice(1, 1, list.Positive_1_9 || 0);
                 }
                 if (datimAgeGroups[i] === '10 to 14') {
-                    totalPositive += list.Positive_10_14_M + list.Positive_10_14_F;
+                    totalPositive +=
+                        list.Positive_10_14_M + list.Positive_10_14_F;
                     malesPositive += list.Positive_10_14_M;
                     femalesPositive += list.Positive_10_14_F;
                     childrenPositive +=
@@ -63,7 +76,8 @@ export const getHTSPOSKHIS = createSelector(
                     );
                 }
                 if (datimAgeGroups[i] === '15 to 19') {
-                    totalPositive += list.Positive_15_19_F + list.Positive_15_19_M;
+                    totalPositive +=
+                        list.Positive_15_19_F + list.Positive_15_19_M;
                     malesPositive += list.Positive_15_19_M;
                     femalesPositive += list.Positive_15_19_F;
                     adolescentsPositive +=
@@ -78,7 +92,8 @@ export const getHTSPOSKHIS = createSelector(
                     );
                 }
                 if (datimAgeGroups[i] === '20 to 24') {
-                    totalPositive += list.Positive_20_24_F + list.Positive_20_24_M;
+                    totalPositive +=
+                        list.Positive_20_24_F + list.Positive_20_24_M;
                     malesPositive += list.Positive_20_24_M;
                     femalesPositive += list.Positive_20_24_F;
                     adultsPositive +=
@@ -107,15 +122,11 @@ export const getHTSPOSKHIS = createSelector(
             }
         } else {
             totalPositive = list.Positive_Total;
-            malesPositive =
-                list.Positive_Male
-            femalesPositive =
-                list.Positive_Female
-            adultsPositive =
-                list.adults
+            malesPositive = list.Positive_Male;
+            femalesPositive = list.Positive_Female;
+            adultsPositive = list.adults;
             childrenPositive = list.children;
-            adolescentsPositive =
-                list.adolescent
+            adolescentsPositive = list.adolescent;
 
             htsPosByAge = [
                 0,
@@ -128,73 +139,78 @@ export const getHTSPOSKHIS = createSelector(
         }
 
         //DWH
-        // let under1 = ['<1'];
-        // let oneToNine = ['1-4', '5-9'];
-        // let tenToFourteen = ['10-14'];
-        // let fifteenToNineteen = ['15-19'];
-        // let twentyToTwentyFour = ['20-24'];
-        // let twentyFivePlus = [
-        //     '25-29',
-        //     '30-34',
-        //     '35-39',
-        //     '40-44',
-        //     '45-49',
-        //     '50-54',
-        //     '55-59',
-        //     '60-64',
-        //     '65+',
-        // ];
+        let under1 = [];
+        let oneToNine = ['Under 5', '5 to 9'];
+        let tenToFourteen = ['10 to 14'];
+        let fifteenToNineteen = ['15 to 19'];
+        let twentyToTwentyFour = ['20 to 24'];
+        let twentyFivePlus = [
+            '25 to 29',
+            '30 to 34',
+            '35 to 39',
+            '40 to 44',
+            '45 to 49',
+            '50 to 54',
+            '55 to 59',
+            '60 to 64',
+            '65+',
+        ];
         let htsPosByAgeDWH = [0, 0, 0, 0, 0, 0];
-        
+
         // if (filtered && datimAgeGroups.length>0) {
         //     for (let i = 0; i < datimAgeGroups.length; i++) {
         //         if (datimAgeGroups[i] === 'Under 1') {
-        //             OnARTByAgeDWH.splice(0, 1, loopAgeGroups(listDWH, under1));}
+        //             htsPosByAgeDWH.splice(0, 1, loopAgeGroups(listDWH, under1));}
         //         if (datimAgeGroups[i] === '1 to 9') {
-        //             OnARTByAgeDWH.splice(
+        //             htsPosByAgeDWH.splice(
         //                 1,
         //                 1,
         //                 loopAgeGroups(listDWH, oneToNine)
         //             );
         //         }
         //         if (datimAgeGroups[i] === '10 to 14') {
-        //             OnARTByAgeDWH.splice(
+        //             htsPosByAgeDWH.splice(
         //                 2,
         //                 1,
         //                 loopAgeGroups(listDWH, tenToFourteen)
         //             );
         //         }
         //         if (datimAgeGroups[i] === '15 to 19') {
-        //             OnARTByAgeDWH.splice(
+        //             htsPosByAgeDWH.splice(
         //                 3,
         //                 1,
         //                 loopAgeGroups(listDWH, fifteenToNineteen)
         //             );
         //         }
         //         if (datimAgeGroups[i] === '20 to 24') {
-        //             OnARTByAgeDWH.splice(
+        //             htsPosByAgeDWH.splice(
         //                 4,
         //                 1,
         //                 loopAgeGroups(listDWH, twentyToTwentyFour)
         //             );
         //         }
         //         if (datimAgeGroups[i] === '25+') {
-        //             OnARTByAgeDWH.splice(
+        //             htsPosByAgeDWH.splice(
         //                 5,
         //                 1,
         //                 loopAgeGroups(listDWH, twentyFivePlus)
         //             );
         //         }
         //     }
-        // } else 
-        //     OnARTByAgeDWH = [
-        //         loopAgeGroups(listDWH, under1),
-        //         loopAgeGroups(listDWH, oneToNine),
-        //         loopAgeGroups(listDWH, tenToFourteen),
-        //         loopAgeGroups(listDWH, fifteenToNineteen),
-        //         loopAgeGroups(listDWH, twentyToTwentyFour),
-        //         loopAgeGroups(listDWH, twentyFivePlus),
-        //     ];
+        // } else
+        htsPosByAgeDWH = [
+            loopAgeGroups(listDWH, under1),
+            loopAgeGroups(listDWH, oneToNine),
+            loopAgeGroups(listDWH, tenToFourteen),
+            loopAgeGroups(listDWH, fifteenToNineteen),
+            loopAgeGroups(listDWH, twentyToTwentyFour),
+            loopAgeGroups(listDWH, twentyFivePlus),
+        ];
+        
+        let genderDWH = {
+            male : parseInt(listDWHGender.find(e => e.Gender === "MALE")?.positive ?? 0),
+            female : parseInt(listDWHGender.find(e => e.Gender === "FEMALE")?.positive ?? 0)
+        }
 
         return {
             totalPositive,
@@ -204,30 +220,23 @@ export const getHTSPOSKHIS = createSelector(
             childrenPositive,
             adolescentsPositive,
             htsPosByAge,
-            htsPosByAgeDWH
-
+            htsPosByAgeDWH,
+            genderDWH,
         };
     }
 );
 
 const loopAgeGroups = (list, ageGroup) => {
-    let currentOnArtMale = 0;
-    let currentOnArtFemale = 0;
+    let hts = 0;
 
     for (let i = 0; i < list.length; i++) {
-        if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
+        
             let index = ageGroup.indexOf(list[i].ageGroup);
             if(index === -1) {
                 continue;
             }
-            currentOnArtMale = currentOnArtMale + parseInt(list[i].txCurr, 10);
-        } else if (list[i].Gender.toLowerCase() === "F".toLowerCase() || list[i].Gender.toLowerCase() === "Female".toLowerCase()) {
-            let index = ageGroup.indexOf(list[i].ageGroup);
-            if(index === -1) {
-                continue;
-            }
-            currentOnArtFemale = currentOnArtFemale + parseInt(list[i].txCurr, 10);
-        }
+            hts = hts + parseInt(list[i].positive, 10);
+        
     }
-    return currentOnArtMale + currentOnArtFemale;
+    return hts;
 }

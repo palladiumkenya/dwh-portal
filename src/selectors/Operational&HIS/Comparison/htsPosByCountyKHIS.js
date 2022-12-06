@@ -4,8 +4,8 @@ const listUnfiltered = (state) => state.htsPosByCountyKHIS.listUnfiltered;
 const listFiltered = (state) => state.htsPosByCountyKHIS.listFiltered;
 const filtered = (state) => state.filters.filtered;
 
-const listUnfilteredDWH = (state) => state.currOnArtDWHByCounty.listUnfiltered;
-const listFilteredDWH = (state) => state.currOnArtDWHByCounty.listFiltered;
+const listUnfilteredDWH = (state) => state.htsPosByCountyDWH.listUnfiltered;
+const listFilteredDWH = (state) => state.htsPosByCountyDWH.listFiltered;
 
 let datimAgeGroups = state => state.filters.datimAgeGroups;
 
@@ -28,7 +28,7 @@ export const getHTSPOSByCountyKHIS = createSelector(
     ) => {
         const list = filtered ? listFiltered : listUnfiltered;
         const listDWH = filtered ? listFilteredDWH : listUnfilteredDWH;
-        
+
         list.sort((b, a) =>
             a.Positive_Total > b.Positive_Total
                 ? 1
@@ -83,20 +83,19 @@ export const getHTSPOSByCountyKHIS = createSelector(
             data = list.map((item) => item.Positive_Total);
         }
         //DWH
-        const dataDwh = []
-        // labels.map((item) => {
-        //     let number = 0;
+        const dataDwh = labels.map((item) => {
+            let number = 0;
 
-        //     listDWH.map((itemDWH) => {
-        //         if (itemDWH.County !== null)
-        //             if (item === itemDWH.County.toUpperCase()) {
-        //                 number = itemDWH.txCurr;
-        //             } else if (item === 'UNKNOWN') {
-        //                 number = itemDWH.txCurr;
-        //             }
-        //     });
-        //     return number;
-        // });
+            listDWH.map((itemDWH) => {
+                if (itemDWH.County !== null)
+                    if (item === itemDWH.County.toUpperCase()) {
+                        number = parseInt(itemDWH.positive);
+                    } else if (item === 'UNKNOWN') {
+                        number = itemDWH.positive;
+                    }
+            });
+            return number;
+        });
 
         return {
             data,

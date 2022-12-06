@@ -17,6 +17,7 @@ import ComparisonPosByAge from './ComparisonPosByAge';
 import ComparisonPosTrends from './ComparisonPosTrends';
 import ComparisonPosByPartner from './ComparisonPosByPartner';
 import ComparisonPosByCounty from './ComparisonPosByCounty';
+import ComparisonHTSPosByFacility from './ComparisonPosByFacility';
 
 
 const HTSPOS = () => {
@@ -56,6 +57,8 @@ const HTSPOS = () => {
                 <ComparisonPosByCounty />
                 <SectionFooter />
                 <ComparisonPosByPartner />
+                <SectionFooter />
+                <ComparisonHTSPosByFacility />
                 <SectionFooter />
             </>
         </>

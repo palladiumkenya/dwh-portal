@@ -60,16 +60,16 @@ const ComparisonOverview= () => {
             data.DWHHtsPosChildren =
                 data.DWHHtsPosChildren + parseInt(result[i].children);
             data.DWHHtsPosAdolecents =
-                data.DWHHtsPosAdolecents + parseInt(result[i].adolecent);
+                data.DWHHtsPosAdolecents + parseInt(result[i].adolescent);
         }
-        
+
         data.KHISHtsPos = posKHIS.totalPositive;
         data.KHISHtsPosAdult = posKHIS.adultsPositive;
-        data.KHISHtsPosChildren = posKHIS.childrenPositive
+        data.KHISHtsPosChildren = posKHIS.childrenPositive;
         data.KHISHtsPosAdolecents = posKHIS.adolescentsPositive;
-        
+
         setDWHHtsOverview(data);
-    }, [filters]);
+    }, [filters, posKHIS]);
 
     useEffect(() => {
         loadComparisonOverview();

@@ -56,22 +56,19 @@ const ComparisonPosByGender = () => {
             series: [
                 {
                     name: 'MALE',
-                    data: [posKHIS.malesPositive, 2000],
+                    data: [posKHIS.malesPositive, posKHIS.genderDWH.male],
                     color: '#14084D',
                     dataLabels: { enabled: true },
                 },
                 {
                     name: 'FEMALE',
-                    data: [posKHIS.femalesPositive, 3600],
+                    data: [posKHIS.femalesPositive, posKHIS.genderDWH.female],
                     color: '#EA4C8B',
                     dataLabels: { enabled: true },
                 },
             ],
         });
-    }, [
-        posKHIS.malesPositive,
-        posKHIS.femalesPositive,
-    ]);
+    }, [posKHIS.malesPositive, posKHIS.femalesPositive, posKHIS.genderDWH]);
 
     useEffect(() => {
         loadComparisonNewlyByGender();

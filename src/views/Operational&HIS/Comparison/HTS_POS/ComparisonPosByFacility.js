@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader, Col, Row, Spinner } from 'reactstrap';
 import DataTable from 'react-data-table-component';
 import CsvDownloader from 'react-csv-downloader';
-import { getCurrOnArtByFacilityPartnerKHIS } from '../../../../selectors/Operational&HIS/Comparison/currStartedOnArtByFacilityPartnerKHIS'
+import { getHTSPOSByFacilityPartnerKHIS } from '../../../../selectors/Operational&HIS/Comparison/htsPosByFacilityPartnerKHIS';
 
-const ComparisonHTSTestedByGender = () => {
-    const currOnArt = useSelector(getCurrOnArtByFacilityPartnerKHIS).data;
+const ComparisonHTSPosByFacility = () => {
+    const currOnArt = useSelector(getHTSPOSByFacilityPartnerKHIS).data;
     const loading = useSelector(state => state.currOnArtByFacilityKHIS.loading);
     return (
         <>
@@ -14,7 +14,8 @@ const ComparisonHTSTestedByGender = () => {
                 <Col>
                     <Card className="trends-card">
                         <CardHeader className="trends-header">
-                            COMPARISON OF HTS TESTED HIV POSITIVE BASED ON GENDER
+                            COMPARISON OF HTS TESTED HIV POSITIVE BASED ON
+                            GENDER
                             {loading === true ? (
                                 <Spinner className="pull-right" />
                             ) : (
@@ -48,7 +49,7 @@ const ComparisonHTSTestedByGender = () => {
                                     },
                                     {
                                         name: 'AGENCY',
-                                        selector: 'CTAgency',
+                                        selector: 'Agency',
                                         sortable: true,
                                     },
                                     {
@@ -58,12 +59,12 @@ const ComparisonHTSTestedByGender = () => {
                                     },
                                     {
                                         name: 'KHIS TOTAL',
-                                        selector: 'KHIStxCurr',
+                                        selector: 'Positive_Total',
                                         sortable: true,
                                     },
                                     {
                                         name: 'DWH TOTAL',
-                                        selector: 'DWHtxCurr',
+                                        selector: 'positive',
                                         sortable: true,
                                     },
                                     {
@@ -95,4 +96,4 @@ const ComparisonHTSTestedByGender = () => {
     );
 };
 
-export default ComparisonHTSTestedByGender;
+export default ComparisonHTSPosByFacility;
