@@ -3,11 +3,11 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader, Col, Row, Spinner } from 'reactstrap';
 import DataTable from 'react-data-table-component';
 import CsvDownloader from 'react-csv-downloader';
-import { getCurrOnArtByFacilityPartnerKHIS } from '../../../../selectors/Operational&HIS/Comparison/currStartedOnArtByFacilityPartnerKHIS'
+import { getHTSTestByFacilityPartnerKHIS } from '../../../../selectors/Operational&HIS/Comparison/htsTestByFacilityPartnerKHIS'
 
 const ComparisonHTSTestedByGender = () => {
-    const currOnArt = useSelector(getCurrOnArtByFacilityPartnerKHIS).data;
-    const loading = useSelector(state => state.currOnArtByFacilityKHIS.loading);
+    const currOnArt = useSelector(getHTSTestByFacilityPartnerKHIS).data;
+    const loading = useSelector((state) => state.htsTestByFacilityKHIS.loading);
     return (
         <>
             <Row>
@@ -48,7 +48,7 @@ const ComparisonHTSTestedByGender = () => {
                                     },
                                     {
                                         name: 'AGENCY',
-                                        selector: 'CTAgency',
+                                        selector: 'Agency',
                                         sortable: true,
                                     },
                                     {
@@ -58,12 +58,12 @@ const ComparisonHTSTestedByGender = () => {
                                     },
                                     {
                                         name: 'KHIS TOTAL',
-                                        selector: 'KHIStxCurr',
+                                        selector: 'Tested_Total',
                                         sortable: true,
                                     },
                                     {
                                         name: 'DWH TOTAL',
-                                        selector: 'DWHtxCurr',
+                                        selector: 'tested',
                                         sortable: true,
                                     },
                                     {

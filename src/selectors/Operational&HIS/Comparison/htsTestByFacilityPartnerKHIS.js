@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
-const listUnfiltered = (state) => state.htsPosByFacilityKHIS.listUnfiltered;
-const listFiltered = (state) => state.htsPosByFacilityKHIS.listFiltered;
+const listUnfiltered = (state) => state.htsTestByFacilityKHIS.listUnfiltered;
+const listFiltered = (state) => state.htsTestByFacilityKHIS.listFiltered;
 
 const listUnfilteredDWH = (state) => state.htsPosByFacilityDWH.listUnfiltered;
 const listFilteredDWH = (state) => state.htsPosByFacilityDWH.listFiltered;
@@ -10,7 +10,7 @@ const filtered = state => state.filters.filtered;
 let datimAgeGroups = (state) => state.filters.datimAgeGroups;
 
 
-export const getHTSPOSByFacilityPartnerKHIS = createSelector(
+export const getHTSTestByFacilityPartnerKHIS = createSelector(
     [
         listUnfiltered,
         listFiltered,
@@ -50,44 +50,44 @@ export const getHTSPOSByFacilityPartnerKHIS = createSelector(
                     list.map((item) => {
                         item.KHISMale1 += 0;
                         item.KHISFemale1 += 0;
-                        item.NewART1 += item.Positive_1_9;
+                        item.NewART1 += item.Tested_1_9;
                     });
                 }
                 if (datimAgeGroups[i] === '10 to 14') {
                     list.map((item) => {
-                        item.KHISMale1 += item.Positive_10_14_M;
-                        item.KHISFemale1 += item.Positive_10_14_F;
+                        item.KHISMale1 += item.Tested_10_14_M;
+                        item.KHISFemale1 += item.Tested_10_14_F;
                         item.NewART1 +=
-                            item.Positive_10_14_M + item.Positive_10_14_F;
+                            item.Tested_10_14_M + item.Tested_10_14_F;
                     });
                 }
                 if (datimAgeGroups[i] === '15 to 19') {
                     list.map((item) => {
-                        item.KHISMale1 += item.Positive_15_19_M;
-                        item.KHISFemale1 += item.Positive_15_19_F;
+                        item.KHISMale1 += item.Tested_15_19_M;
+                        item.KHISFemale1 += item.Tested_15_19_F;
                         item.NewART1 +=
-                            item.Positive_15_19_M + item.Positive_15_19_F;
+                            item.Tested_15_19_M + item.Tested_15_19_F;
                     });
                 }
                 if (datimAgeGroups[i] === '20 to 24') {
                     list.map((item) => {
-                        item.KHISMale1 += item.Positive_20_24_M;
-                        item.KHISFemale1 += item.Positive_20_24_F;
+                        item.KHISMale1 += item.Tested_20_24_M;
+                        item.KHISFemale1 += item.Tested_20_24_F;
                         item.NewART1 +=
-                            item.Positive_20_24_M + item.Positive_20_24_F;
+                            item.Tested_20_24_M + item.Tested_20_24_F;
                     });
                 }
                 if (datimAgeGroups[i] === '25+') {
                     list.map((item) => {
-                        item.KHISMale1 += item.Positive_25_Plus_M;
-                        item.KHISFemale1 += item.Positive_25_Plus_F;
+                        item.KHISMale1 += item.Tested_25_Plus_M;
+                        item.KHISFemale1 += item.Tested_25_Plus_F;
                         item.NewART1 +=
-                            item.Positive_25_Plus_M + item.Positive_25_Plus_F;
+                            item.Tested_25_Plus_M + item.Tested_25_Plus_F;
                     });
                 }
             }
             list.map((item) => {
-                item.Positive_Total = item.NewART1;
+                item.Tested_Total = item.NewART1;
                 item.KHISMale = item.KHISMale1;
                 item.KHISFemale = item.KHISFemale1;
             });
@@ -99,11 +99,11 @@ export const getHTSPOSByFacilityPartnerKHIS = createSelector(
                     ...item,
                     ...mfl,
                     concordance:
-                        item.Positive_Total > 0
+                        item.Tested_Total > 0
                             ? Math.round(
-                                  (((item.Positive_Total - parseInt(mfl.positive)) *
+                                  (((item.Tested_Total - parseInt(mfl.tested)) *
                                       100) /
-                                      item.Positive_Total) *
+                                      item.Tested_Total) *
                                       100
                               ) / 100
                             : null,

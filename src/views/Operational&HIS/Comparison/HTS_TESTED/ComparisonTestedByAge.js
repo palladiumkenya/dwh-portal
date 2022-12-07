@@ -4,11 +4,12 @@ import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import * as currentOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/currOnArtKHIS';
+import * as htsTestKHIS from '../../../../selectors/Operational&HIS/Comparison/htsTestByGenderKHIS';
 
 
 const ComparisonTestedByAge = () => {
     const [comparisonCurrByAge, setComparisonCurrByAge] = useState({});
-    let currKHIS =  useSelector(currentOnArtKHIS.getCurrOnArtKHIS);
+    let testKHIS = useSelector(htsTestKHIS.getHTSTESTKHIS);
 
     const loadComparisonCurrByAge = useCallback(async () => {
         setComparisonCurrByAge({
@@ -61,17 +62,17 @@ const ComparisonTestedByAge = () => {
             series: [
                 {
                     name: 'KHIS',
-                    data: currKHIS.OnARTByAge,
+                    data: testKHIS.htsTestByAge,
                     color: '#2F4050',
                 },
                 {
                     name: 'DWH',
-                    data: currKHIS.OnARTByAgeDWH,
+                    data: testKHIS.htsTestByAgeDWH,
                     color: '#1AB394',
                 },
             ],
         });
-    }, [currKHIS]);
+    }, [testKHIS]);
 
     useEffect(() => {
         loadComparisonCurrByAge();

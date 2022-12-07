@@ -3,14 +3,14 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as currentOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/currOnArtKHIS';
 import * as currentOnArtByAgeSexSelectors from '../../../../selectors/CT/CurrentOnArt/currentOnArtByAgeSex';
+import * as htsTestKHIS from '../../../../selectors/Operational&HIS/Comparison/htsTestByGenderKHIS';
 
 
 const ComparisonTestedByGender = () => {
-    const filters = useSelector((state) => state.filters);
+
     const [comparisonNewlyByGender, setComparisonNewlyByGender] = useState({});
-    let currKHIS = useSelector(currentOnArtKHIS.getCurrOnArtKHIS);
+    let testKHIS = useSelector(htsTestKHIS.getHTSTESTKHIS);
     const currentOnArtBySexData = useSelector(
         currentOnArtByAgeSexSelectors.getCurrentOnArtBySex
     ); // Sex info for DWH
@@ -59,30 +59,19 @@ const ComparisonTestedByGender = () => {
             series: [
                 {
                     name: 'MALE',
-                    data: [
-                        currKHIS.malesOnART,
-                        currentOnArtBySexData.currentOnArtMale,
-                    ],
+                    data: [testKHIS.malesTested, testKHIS.genderDWH.male],
                     color: '#14084D',
                     dataLabels: { enabled: true },
                 },
                 {
                     name: 'FEMALE',
-                    data: [
-                        currKHIS.femalesOnART,
-                        currentOnArtBySexData.currentOnArtFemale,
-                    ],
+                    data: [testKHIS.femalesTested, testKHIS.genderDWH.female],
                     color: '#EA4C8B',
                     dataLabels: { enabled: true },
                 },
             ],
         });
-    }, [
-        currKHIS.malesOnART,
-        currKHIS.femalesOnART,
-        currentOnArtBySexData.currentOnArtMale,
-        currentOnArtBySexData.currentOnArtFemale,
-    ]);
+    }, [testKHIS.malesTested, testKHIS.femalesTested, testKHIS.genderDWH]);
 
     useEffect(() => {
         loadComparisonNewlyByGender();

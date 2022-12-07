@@ -7,7 +7,6 @@ import * as htsPosKHIS from '../../../../selectors/Operational&HIS/Comparison/ht
 
 
 const ComparisonPosByGender = () => {
-    const filters = useSelector((state) => state.filters);
     const [comparisonPosByGender, setComparisonPosByGender] = useState({});
     let posKHIS = useSelector(htsPosKHIS.getHTSPOSKHIS);
     

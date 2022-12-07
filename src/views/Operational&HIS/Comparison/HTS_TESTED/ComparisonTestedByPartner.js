@@ -4,14 +4,15 @@ import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import * as currentOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/currOnARTByPartnerKHIS';
+import * as htsTest from '../../../../selectors/Operational&HIS/Comparison/htsTestByPartnerKHIS';
 
 
 const ComparisonTestedByPartner = () => {
-    const [comparisonCurrByPartner, setComparisonCurrByPartner] = useState({});
-    let currKHIS = useSelector(currentOnArtKHIS.getCurrentOnARTByPartnerKHIS);
+    const [comparisonTestByPartner, setComparisonTestByPartner] = useState({});
+    let testKHIS = useSelector(htsTest.getHTSTESTByPartnerKHIS);
 
     const loadComparisonCurrByPartner = useCallback(async () => {
-        setComparisonCurrByPartner({
+        setComparisonTestByPartner({
             chart: {
                 type: 'column',
             },
@@ -19,7 +20,7 @@ const ComparisonTestedByPartner = () => {
                 text: '',
             },
             xAxis: {
-                categories: currKHIS.labels,
+                categories: testKHIS.labels,
                 crosshair: true,
                 title: {
                     text: 'SERVICE DELIVERY PARTNER',
@@ -54,19 +55,19 @@ const ComparisonTestedByPartner = () => {
             series: [
                 {
                     name: 'KHIS',
-                    data: currKHIS.data,
+                    data: testKHIS.data,
                     color: '#2F4050',
                     dataLabels: { enabled: true },
                 },
                 {
                     name: 'DWH',
-                    data: currKHIS.dataDwh,
+                    data: testKHIS.dataDwh,
                     color: '#1AB394',
                     dataLabels: { enabled: true },
                 },
             ],
         });
-    }, [currKHIS]);
+    }, [testKHIS]);
 
     useEffect(() => {
         loadComparisonCurrByPartner();
@@ -80,7 +81,7 @@ const ComparisonTestedByPartner = () => {
             <CardBody>
                 <HighchartsReact
                     highcharts={Highcharts}
-                    options={comparisonCurrByPartner}
+                    options={comparisonTestByPartner}
                 />
             </CardBody>
         </Card>
