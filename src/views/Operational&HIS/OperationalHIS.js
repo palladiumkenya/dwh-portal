@@ -65,6 +65,10 @@ import { loadHTSPosByAgeDWH } from '../../actions/Operational&HIS/Comparison/hts
 import { loadHTSPosByCountyDWH } from '../../actions/Operational&HIS/Comparison/htsPosByCountyDWHActions';
 import { loadHTSPosByFacilityDWH } from '../../actions/Operational&HIS/Comparison/htsPosByFacilityDWHActions';
 import { loadHTSPosByGenderDWH } from '../../actions/Operational&HIS/Comparison/htsPosByGenderDWHActions';
+import { loadHTSTestByGenderKHIS } from '../../actions/Operational&HIS/Comparison/htsTestByGenderKHISActions';
+import { loadHTSTestByPartnerKHIS } from '../../actions/Operational&HIS/Comparison/htsTestByPartnerKHISActions';
+import { loadHTSTestByCountyKHIS } from '../../actions/Operational&HIS/Comparison/htsTestByCountyKHISActions';
+import { loadHTSTestByFacilityKHIS } from '../../actions/Operational&HIS/Comparison/htsTestByFacilityKHISActions';
 
 
 const Comparison = Loadable({
@@ -174,6 +178,10 @@ const OperationalHIS = () => {
         dispatch(loadHTSPosByPartnerKHIS());
         dispatch(loadHTSPosByCountyKHIS());
         dispatch(loadHTSPosByFacilityKHIS());
+        dispatch(loadHTSTestByGenderKHIS());
+        dispatch(loadHTSTestByPartnerKHIS());
+        dispatch(loadHTSTestByCountyKHIS());
+        dispatch(loadHTSTestByFacilityKHIS());
         dispatch(loadHTSPosByPartnerDWH());
         dispatch(loadHTSPosByAgeDWH());
         dispatch(loadHTSPosByCountyDWH());

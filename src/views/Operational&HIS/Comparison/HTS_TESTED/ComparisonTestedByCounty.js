@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as currentOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/currOnARTByCountyKHIS';
+import * as htsTestKHIS from '../../../../selectors/Operational&HIS/Comparison/htsTestByCountyKHIS';
 
 
 const ComparisonTestedByCounty = () => {
     const [comparisonCurrByCounty, setComparisonCurrByCounty] = useState({});
-    let currKHIS = useSelector(currentOnArtKHIS.getCurrentOnARTByCountyKHIS);
+    let testKHIS = useSelector(htsTestKHIS.getHTSTESTByCountyKHIS);
 
     const loadComparisonCurrByCounty = useCallback(async () => {
         setComparisonCurrByCounty({
@@ -19,7 +19,7 @@ const ComparisonTestedByCounty = () => {
                 text: '',
             },
             xAxis: {
-                categories: currKHIS.labels,
+                categories: testKHIS.labels,
                 crosshair: true,
                 title: {
                     text: 'COUNTY',
@@ -54,19 +54,19 @@ const ComparisonTestedByCounty = () => {
             series: [
                 {
                     name: 'KHIS',
-                    data: currKHIS.data,
+                    data: testKHIS.data,
                     color: '#2F4050',
                     dataLabels: { enabled: true },
                 },
                 {
                     name: 'DWH',
-                    data: currKHIS.dataDwh,
+                    data: testKHIS.dataDwh,
                     color: '#1AB394',
                     dataLabels: { enabled: true },
                 },
             ],
         });
-    }, [currKHIS]);
+    }, [testKHIS]);
 
     useEffect(() => {
         loadComparisonCurrByCounty();

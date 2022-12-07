@@ -240,16 +240,20 @@ import viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment
     from './CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
 
 
-import newlyStartedOnArtKHIS from './Operational&HIS/Comparison/newlyStartedOnArtKHIS';
 import htsPosByGenderKHIS from './Operational&HIS/Comparison/htsPosByGenderKHIS';
 import htsPosByCountyKHIS from './Operational&HIS/Comparison/htsPosByCountyKHIS';
 import htsPosByFacilityKHIS from './Operational&HIS/Comparison/htsPosByFacilityKHIS';
+import htsPosByPartnerKHIS from './Operational&HIS/Comparison/htsPosByPartnerKHIS';
+import htsTestByGenderKHIS from './Operational&HIS/Comparison/htsTestByGenderKHIS';
+import htsTestByCountyKHIS from './Operational&HIS/Comparison/htsTestByCountyKHIS';
+import htsTestByFacilityKHIS from './Operational&HIS/Comparison/htsTestByFacilityKHIS';
+import htsTestByPartnerKHIS from './Operational&HIS/Comparison/htsTestByPartnerKHIS';
 import htsPosByAgeDWH from './Operational&HIS/Comparison/htsPosByAgeDWH';
 import htsPosByGenderDWH from './Operational&HIS/Comparison/htsPosByGenderDWH';
 import htsPosByCountyDWH from './Operational&HIS/Comparison/htsPosByCountyDWH';
 import htsPosByFacilityDWH from './Operational&HIS/Comparison/htsPosByFacilityDWH';
 import htsPosByPartnerDWH from './Operational&HIS/Comparison/htsPosByPartnerDWH';
-import htsPosByPartnerKHIS from './Operational&HIS/Comparison/htsPosByPartnerKHIS';
+import newlyStartedOnArtKHIS from './Operational&HIS/Comparison/newlyStartedOnArtKHIS';
 import newlyStartedOnArtTrendsKHIS from './Operational&HIS/Comparison/newlyStartedOnArtTrendsKHIS';
 import htsPositivesTrendsKHIS from './Operational&HIS/Comparison/htsPositivesTrendsKHIS';
 import currOnArtKHIS from './Operational&HIS/Comparison/currOnArtKHIS';
@@ -504,6 +508,10 @@ export default combineReducers({
     htsPosByCountyKHIS,
     htsPosByPartnerKHIS,
     htsPosByFacilityKHIS,
+    htsTestByGenderKHIS,
+    htsTestByCountyKHIS,
+    htsTestByPartnerKHIS,
+    htsTestByFacilityKHIS,
     htsPosByAgeDWH,
     htsPosByGenderDWH,
     htsPosByFacilityDWH,

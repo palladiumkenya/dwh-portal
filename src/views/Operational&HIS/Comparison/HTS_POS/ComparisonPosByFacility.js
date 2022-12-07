@@ -7,7 +7,7 @@ import { getHTSPOSByFacilityPartnerKHIS } from '../../../../selectors/Operationa
 
 const ComparisonHTSPosByFacility = () => {
     const currOnArt = useSelector(getHTSPOSByFacilityPartnerKHIS).data;
-    const loading = useSelector(state => state.currOnArtByFacilityKHIS.loading);
+    const loading = useSelector((state) => state.htsPosByFacilityKHIS.loading);
     return (
         <>
             <Row>
