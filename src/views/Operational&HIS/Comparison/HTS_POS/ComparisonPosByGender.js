@@ -23,7 +23,7 @@ const ComparisonPosByGender = () => {
                 categories: ['KHIS', 'DWH'],
                 crosshair: true,
                 title: {
-                    text: 'Source',
+                    text: 'SOURCE',
                 },
             },
             yAxis: {

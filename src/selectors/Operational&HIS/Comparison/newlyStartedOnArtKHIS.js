@@ -205,7 +205,7 @@ export const getNewlyStartedOnArtTrendsKHIS = createSelector(
         let ReportingMonthYear = moment()
             .subtract(1, 'months')
             .add(16, 'days')
-            .format('YMM');
+            .format('YYYYMM');
 
         if (list.length >= 12) {
             list = list.filter((item) => {

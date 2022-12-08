@@ -6,19 +6,15 @@ const listFiltered = state => state.htsPositivesTrendsKHIS.listFiltered;
 const filtered = state => state.filters.filtered;
 
 
-export const getHTSPositivesTrendsKHIS = createSelector(
+export const getHTSTestTrendsKHIS = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
 
-        let reportMonth = moment()
-            .subtract(2, 'month')
-            .add(16, 'days')
-            .format('YYYYMM');
-        let lastyr = list.filter((i) => i.ReportMonth_Year <= reportMonth);
+        let reportMonth = moment().subtract(2, 'month').add(16, 'days').format('YYYYMM');
+        let lastyr = list.filter((i) => i.ReportMonth_Year <= reportMonth)
 
         if (lastyr.length >= 12) lastyr.length = 12;
-
 
         const labels = lastyr
             .map((item) => {
@@ -27,7 +23,7 @@ export const getHTSPositivesTrendsKHIS = createSelector(
                     .toUpperCase();
             })
             .reverse();
-        const data = lastyr.map((item) => item.positive).reverse();
+        const data = lastyr.map((item) => item.tested).reverse();
 
         return {
             data, labels
