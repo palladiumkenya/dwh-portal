@@ -13,18 +13,18 @@ const ComparisonOverviewTxCurr = () => {
     const currentOnArt = useSelector(
         currentOnArtOverviewSelectors.getCurrentOnArt
     );
-    const currentOnArtMale = useSelector(
-        currentOnArtByAgeSexSelectors.getCurrentOnArtBySex
-    ).currentOnArtMale;
-    const currentOnArtMalePercent = currentOnArt
-        ? (currentOnArtMale / currentOnArt) * 100
-        : 0;
-    const currentOnArtFemale = useSelector(
-        currentOnArtByAgeSexSelectors.getCurrentOnArtBySex
-    ).currentOnArtFemale;
-    const currentOnArtFemalePercent = currentOnArt
-        ? (currentOnArtFemale / currentOnArt) * 100
-        : 0;
+    // const currentOnArtMale = useSelector(
+    //     currentOnArtByAgeSexSelectors.getCurrentOnArtBySex
+    // ).currentOnArtMale;
+    // const currentOnArtMalePercent = currentOnArt
+    //     ? (currentOnArtMale / currentOnArt) * 100
+    //     : 0;
+    // const currentOnArtFemale = useSelector(
+    //     currentOnArtByAgeSexSelectors.getCurrentOnArtBySex
+    // ).currentOnArtFemale;
+    // const currentOnArtFemalePercent = currentOnArt
+    //     ? (currentOnArtFemale / currentOnArt) * 100
+    //     : 0;
     const currentOnArtAdults = useSelector(
         currentOnArtByAgeSexSelectors.getCurrentOnArtAdults
     ).currentOnArt;
@@ -45,7 +45,7 @@ const ComparisonOverviewTxCurr = () => {
         : 0;
 
     let percOfNewly = (curr, total) => {
-        if (total === 0) {
+        if (total === 0 || isNaN(total) || total === null) {
             return 0 + '%';
         }
         return roundNumber((curr / total) * 100) + '%';

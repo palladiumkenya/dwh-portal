@@ -69,6 +69,7 @@ import { loadHTSTestByGenderKHIS } from '../../actions/Operational&HIS/Compariso
 import { loadHTSTestByPartnerKHIS } from '../../actions/Operational&HIS/Comparison/htsTestByPartnerKHISActions';
 import { loadHTSTestByCountyKHIS } from '../../actions/Operational&HIS/Comparison/htsTestByCountyKHISActions';
 import { loadHTSTestByFacilityKHIS } from '../../actions/Operational&HIS/Comparison/htsTestByFacilityKHISActions';
+import { loadHTSTesthtsTestTrendsDWH } from './../../actions/Operational&HIS/Comparison/htsTestTrendsDWHActions';
 
 
 const Comparison = Loadable({
@@ -187,6 +188,7 @@ const OperationalHIS = () => {
         dispatch(loadHTSPosByCountyDWH());
         dispatch(loadHTSPosByFacilityDWH());
         dispatch(loadHTSPosByGenderDWH());
+        dispatch(loadHTSTesthtsTestTrendsDWH());
 
         dispatch(loadCurrentOnArtOverview(active_tab));
         dispatch(loadCurrentOnArtByAgeSex(active_tab));

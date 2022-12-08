@@ -77,7 +77,7 @@ const ComparisonOverview= () => {
     }, [loadComparisonOverview]);
 
     let percOfNewly = (curr, total) => {
-        if (total === 0 || isNaN(total)) {
+        if (total === 0 || isNaN(total) || total === null) {
             return 0 + '%';
         }
         return roundNumber((curr / total) * 100) + '%';

@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as newlyStartedOnArtKHIS from '../../../../selectors/Operational&HIS/Comparison/newlyStartedOnArtKHIS';
+import * as htsTestTrends from '../../../../selectors/Operational&HIS/Comparison/htsTestTrendsKHIS';
+import * as htsTestTrendsDWH from '../../../../selectors/Operational&HIS/Comparison/htsTestTrendsDWH';
 import * as newOnArtTrendsSelectors from '../../../../selectors/CT/NewOnArt/newOnArtTrends';
 
 
@@ -11,12 +12,8 @@ const ComparisonTestedTrends = () => {
     const filters = useSelector((state) => state.filters);
     const [comparisonNewlyTrends, setComparisonNewlyTrends] = useState({});
 
-    const newlyKHIS = useSelector(
-        newlyStartedOnArtKHIS.getNewlyStartedOnArtTrendsKHIS
-    );
-    const newOnArtTrendsData = useSelector(
-        newOnArtTrendsSelectors.getNewOnArtTrends
-    );
+    const testKHIS = useSelector(htsTestTrends.getHTSTestTrendsKHIS);
+    const testDWH = useSelector(htsTestTrendsDWH.getHtsTestTrends);
 
     const loadComparisonNewlyTrends = useCallback(async () => {
         setComparisonNewlyTrends({
@@ -27,7 +24,7 @@ const ComparisonTestedTrends = () => {
                 text: '',
             },
             xAxis: {
-                categories: newlyKHIS.labels,
+                categories: testKHIS.labels,
                 crosshair: true,
                 title: {
                     text: 'MONTHS',
@@ -62,7 +59,7 @@ const ComparisonTestedTrends = () => {
                         enabled: true,
                     },
                     name: 'KHIS',
-                    data: newlyKHIS.data,
+                    data: testKHIS.data,
                     color: '#2F4050',
                     dataLabels: { enabled: true },
                 },
@@ -73,13 +70,13 @@ const ComparisonTestedTrends = () => {
                         enabled: true,
                     },
                     name: 'DWH',
-                    data: newOnArtTrendsData.txNew,
+                    data: testDWH.tested,
                     color: '#1AB394',
                     dataLabels: { enabled: true },
                 },
             ],
         });
-    }, [newlyKHIS, newOnArtTrendsData]);
+    }, [testKHIS, testDWH]);
 
     useEffect(() => {
         loadComparisonNewlyTrends();

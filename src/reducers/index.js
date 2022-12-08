@@ -264,6 +264,7 @@ import currOnArtByFacilityKHIS from './Operational&HIS/Comparison/currOnArtByFac
 import newOnArtByFacilityKHIS from './Operational&HIS/Comparison/newOnArtByFacilityKHIS';
 import currOnArtByFacilityDWH from './Operational&HIS/Comparison/currOnArtByFacilityDWH';
 import newOnArtByFacilityDWH from './Operational&HIS/Comparison/newOnArtByFacilityDWH';
+import htsTestTrendsDWH from './Operational&HIS/Comparison/htsTestTrendsDWH';
 
 import newOnPrep from './HTS/Prep/newOnPrep';
 import prepDiscontinuation from './HTS/Prep/prepDiscontinuation'
@@ -517,6 +518,7 @@ export default combineReducers({
     htsPosByFacilityDWH,
     htsPosByCountyDWH,
     htsPosByPartnerDWH,
+    htsTestTrendsDWH,
 
     currentOnArtVerified,
     currentOnArtVerifiedByCounty,

@@ -5,20 +5,21 @@ import * as newlyStartedOnArtKHIS from '../../../../selectors/Operational&HIS/Co
 import { useSelector } from 'react-redux';
 import { formatNumber, roundNumber } from '../../../../utils/utils';
 import * as currentNewOnArtOverviewSelectors from '../../../../selectors/CT/NewOnArt/currentNewOnArtOverview';
+import { constSelector } from 'recoil';
 
 const ComparisonOverview = () => {
     let newlyKHIS = useSelector(newlyStartedOnArtKHIS.getNewlyStartedOnArtKHIS);
     const newOnArt = useSelector(currentNewOnArtOverviewSelectors.getNewOnArt);
-    const newOnArtMale = useSelector(
-        currentNewOnArtOverviewSelectors.getNewOnArtMale
-    );
-    const newOnArtMalePercent = newOnArt ? (newOnArtMale / newOnArt) * 100 : 0;
-    const newOnArtFemale = useSelector(
-        currentNewOnArtOverviewSelectors.getNewOnArtFemale
-    );
-    const newOnArtFemalePercent = newOnArt
-        ? (newOnArtFemale / newOnArt) * 100
-        : 0;
+    // const newOnArtMale = useSelector(
+    //     currentNewOnArtOverviewSelectors.getNewOnArtMale
+    // );
+    // const newOnArtMalePercent = newOnArt ? (newOnArtMale / newOnArt) * 100 : 0;
+    // const newOnArtFemale = useSelector(
+    //     currentNewOnArtOverviewSelectors.getNewOnArtFemale
+    // );
+    // const newOnArtFemalePercent = newOnArt
+    //     ? (newOnArtFemale / newOnArt) * 100
+    //     : 0;
     const newOnArtAdults = useSelector(
         currentNewOnArtOverviewSelectors.getNewOnArtAdults
     );
@@ -39,7 +40,7 @@ const ComparisonOverview = () => {
         : 0;
 
     let percOfNewly = (newly, total) => {
-        if (total === 0) {
+        if (total === 0 || isNaN(total) || total === null) {
             return 0 + '%';
         }
         return roundNumber((newly / total) * 100) + '%';
