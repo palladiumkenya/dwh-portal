@@ -17,7 +17,7 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           sudo git config --global --add safe.directory /apps/github-workflows/dwh-portal      
-          sudo cd /apps/github-workflows/dwh-portal
+          cd /apps/github-workflows/dwh-portal
           sudo git pull origin prod
           sudo git status
           sudo yarn install
