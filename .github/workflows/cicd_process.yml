@@ -20,7 +20,7 @@ jobs:
           cd /apps/github-workflows/dwh-portal
           sudo git pull origin prod
           sudo git status
-          sudo yarn install
+          sudo yarn install  --ignore-engines
           sudo yarn build
           sudo rm -rf /tmp/dwh
           sudo mv /var/www/dwh /tmp/
