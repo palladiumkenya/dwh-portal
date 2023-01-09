@@ -63,24 +63,24 @@ const dictionary = [
             'Represents  the total number of  ART patients that have been verified in Central registry',
     },
     {
+        Indicator: '% MOH Central Registry verified of KHIS TXCurr',
+        Description:
+            'Proportion of patients verified in MoH Central registry using KHIS TXCurr denominator',
+    },
+    {
         Indicator: '# MOH UPI for non-art clients',
         Description:
             'Represents  the total number of  non-ART patients that have been verified in Central registry',
     },
-    // {
-    //     Indicator: 'KHIS TXCurr (EMR Sites)',
-    //     Description:
-    //         'The CurrentOnART_Total indicator as reported in KHIS in the latest reporting month',
-    // },
+    {
+        Indicator: 'KHIS TXCurr (EMR Sites)',
+        Description:
+            'The CurrentOnART_Total indicator as reported in KHIS in the latest reporting month',
+    },
     {
         Indicator: '# MOH Central Registry Verified (EMR Sites)',
         Description:
             'The number of patients verified in Central Registry and whose CCC numbers and MFLCodes match in DWH',
-    },
-    {
-        Indicator: '% MOH Central Registry verified of KHIS TXCurr',
-        Description:
-            'The proportion of the patients verified from Central Registry : Total Number Central Registry/ KHIS TXCurr *100',
     },
     {
         Indicator: '# DWH verified & Matched',
@@ -118,6 +118,21 @@ const dictionary = [
         Indicator: '% Adults DWH verified of Adults TXCurr DWH',
         Description:
             'The proportion of the Adults  (>=18 years)  in DWH verified : Adults DWH Verified/ Adults DWH TXCurr',
+    },
+    {
+        Indicator: '#Unverified',
+        Description:
+            'The total number of ART Patients who have NOT yet been verified',
+    },
+    {
+        Indicator: 'SurveysReceived',
+        Description:
+            'The total number of unverified patients who have been been taken through the survey ',
+    },
+    {
+        Indicator: 'Pendingsurveys',
+        Description:
+            'The total number of unverified patients who have NOT yet been taken through the PSurvey',
     },
 ];
 
@@ -181,12 +196,12 @@ const NupiDataset = () => {
                             value="# MOH Central Registry Verified"
                         />
                         <ExcelColumn
-                            label="# MOH UPI for non-art clients"
-                            value="# MOH UPI for non-art clients"
-                        />
-                        <ExcelColumn
                             label="% MOH Central Registry verified of KHIS TXCurr"
                             value="% MOH Central Registry verified of KHIS TXCurr"
+                        />
+                        <ExcelColumn
+                            label="# MOH UPI for non-art clients"
+                            value="# MOH UPI for non-art clients"
                         />
                         <ExcelColumn
                             label="# DWH verified & Matched"
@@ -219,6 +234,15 @@ const NupiDataset = () => {
                         <ExcelColumn
                             label="% Adults DWH verified of Adults TXCurr DWH"
                             value="% Adults DWH verified of Adults TXCurr DWH"
+                        />
+                        <ExcelColumn label="#Unverified" value="#Unverified" />
+                        <ExcelColumn
+                            label="SurveysReceived"
+                            value="SurveysReceived"
+                        />
+                        <ExcelColumn
+                            label="Pendingsurveys"
+                            value="Pendingsurveys"
                         />
                     </ExcelSheet>
                 </ExcelFile>
