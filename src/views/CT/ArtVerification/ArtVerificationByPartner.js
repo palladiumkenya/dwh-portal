@@ -5,7 +5,7 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import * as currentOnArtByCountySelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtByCounty';
 
-const ArtVerificationByCounty = () => {
+const ArtVerificationByPartner = () => {
     const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState({});
     const currentOnArtByCountyData = useSelector(currentOnArtByCountySelectors.getCurrentOnArtByCounty);
 
@@ -67,7 +67,7 @@ const ArtVerificationByCounty = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ART VERIFICATION BY COUNTY
+                        ART VERIFICATION BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact highcharts={Highcharts} options={currentOnArtByCountyChart} />
@@ -78,4 +78,4 @@ const ArtVerificationByCounty = () => {
     );
 }
 
-export default ArtVerificationByCounty;
+export default ArtVerificationByPartner;

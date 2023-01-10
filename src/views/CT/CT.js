@@ -377,6 +377,11 @@ const ArtOptimization = Loadable({
 const OTZ = Loadable({ loader: () => import('./OTZ/OTZ'), loading: Loading, delay: LOADING_DELAY });
 const OVC = Loadable({ loader: () => import('./OVC/OVC'), loading: Loading, delay: LOADING_DELAY });
 const COVID = Loadable({ loader: () => import('./Covid/Covid'), loading: Loading, delay: LOADING_DELAY });
+const ArtVerification = Loadable({
+    loader: () => import('./ArtVerification/ArtVerification'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 
 const CT = () => {
     //new recoil store
@@ -747,42 +752,48 @@ const CT = () => {
 
     return (
         <div>
-            <Nav tabs>
-                {renderTabNavItems()}
-            </Nav>
+            <Nav tabs>{renderTabNavItems()}</Nav>
             <TabContent activeTab={active_tab}>
                 <TabPane tabId="newlyOnArt">
-                    {active_tab === 'newlyOnArt' ? <NewOnArt/> : null}
+                    {active_tab === 'newlyOnArt' ? <NewOnArt /> : null}
                 </TabPane>
                 <TabPane tabId="currentOnArt">
-                    {active_tab === "currentOnArt" ? <CurrentOnArt/> : null}
+                    {active_tab === 'currentOnArt' ? <CurrentOnArt /> : null}
                 </TabPane>
                 <TabPane tabId="artOptimization">
-                    {active_tab === "artOptimization" ? <ArtOptimization/> : null}
+                    {active_tab === 'artOptimization' ? (
+                        <ArtOptimization />
+                    ) : null}
                 </TabPane>
                 <TabPane tabId="adverseEvent">
-                    {active_tab === "adverseEvent" ? <AdverseEvents/> : null}
+                    {active_tab === 'adverseEvent' ? <AdverseEvents /> : null}
                 </TabPane>
                 <TabPane tabId="dsd">
-                    {active_tab === 'dsd' ? <DSD/> : null}
+                    {active_tab === 'dsd' ? <DSD /> : null}
                 </TabPane>
                 <TabPane tabId="vl">
-                    {active_tab === 'vl' ? <ViralLoad/> : null}
+                    {active_tab === 'vl' ? <ViralLoad /> : null}
                 </TabPane>
                 <TabPane tabId="treatmentOutcomes">
-                    {active_tab === "treatmentOutcomes" ? <TreatmentOutcomes/> : null}
+                    {active_tab === 'treatmentOutcomes' ? (
+                        <TreatmentOutcomes />
+                    ) : null}
                 </TabPane>
                 <TabPane tabId={'otz'}>
-                    {active_tab === 'otz' ? <OTZ/> : null}
+                    {active_tab === 'otz' ? <OTZ /> : null}
                 </TabPane>
                 <TabPane tabId={'ovc'}>
-                    {active_tab === 'ovc' ? <OVC/> : null}
+                    {active_tab === 'ovc' ? <OVC /> : null}
                 </TabPane>
                 <TabPane tabId={'covid'}>
-                    {active_tab === 'covid' ? <COVID/> : null}
+                    {active_tab === 'covid' ? <COVID /> : null}
                 </TabPane>
+                {/* <TabPane tabId={'artVerification'}>
+                    {active_tab === 'artVerification' ? <ArtVerification /> : null}
+                </TabPane> */}
             </TabContent>
-            <p></p><p></p>
+            <p></p>
+            <p></p>
         </div>
     );
 };
