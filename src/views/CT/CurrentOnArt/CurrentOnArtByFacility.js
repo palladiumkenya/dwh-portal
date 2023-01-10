@@ -57,17 +57,17 @@ const CurrentOnArtByFacility = () => {
                                         sortable: true,
                                     },
                                     {
-                                        name: 'VERIFIED',
+                                        name: 'TX_CURR',
+                                        selector: 'TXCURR',
+                                        sortable: true,
+                                    },
+                                    {
+                                        name: 'TX_CURR VERIFIED',
                                         selector: 'Nupi',
                                         sortable: true,
                                     },
                                     {
-                                        name: 'NOT VERIFIED',
-                                        selector: 'NotNupi',
-                                        sortable: true,
-                                    },
-                                    {
-                                        name: 'VERIFICATION STATUS(%)',
+                                        name: 'VERIFICATION STATUS (%)',
                                         selector: 'perc',
                                         sortable: true,
                                     },
