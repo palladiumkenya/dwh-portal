@@ -9,10 +9,15 @@ export const loadCurrOnARTKHIS = () => async (dispatch, getState) => {
         'minutes'
     );
 
-    if (getState().ui.currentPage !== PAGES.operationalHIS) {
+    if (
+        getState().ui.currentPage !== PAGES.ct &&
+        getState().ui.currentPage !== PAGES.operationalHIS
+    ) {
         return;
-    }
-    else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
+    } else if (
+        diffInMinutes < CACHING.MID &&
+        getState().filters.filtered === false
+    ) {
         return;
     } else {
         await dispatch(fetchCurrOnARTKHIS());

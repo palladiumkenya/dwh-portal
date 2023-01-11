@@ -15,30 +15,32 @@ import SectionHeader from './../../Shared/SectionHeader';
 import UniversalFilter from './../../Shared/UniversalFilter';
 import { useParams } from 'react-router-dom';
 
-import ArtVerificationOverview from './ArtVerificationOverview';
 import ArtVerificationSurveySubmission from './ArtVerificationSurveySubmission';
 import ArtVerificationStatus from './ArtVerificationStatus';
+import ArtVerificationByCounty from './ArtVerificationByCounty';
+import ArtVerificationByPartner from './ArtVerificationByPartner';
+import ArtVerificationPendingSurveysByPartner from './ArtVerificationPendingSurveysByPartner';
+import ArtVerificationPendingSurveysByCounty from './ArtVerificationPendingSurveysByCounty';
+import ArtVerificationReasonsUnverified from './ArtVerificationReasonsUnverified';
+import ArtVerificationSurveySubmissionByCounty from './ArtVerificationSurveySubmissionByCounty';
+import ArtVerificationSurveySubmissionByPartner from './ArtVerificationSurveySubmissionByPartner';
 
-const CurrentOnArtVerifiedByAgeSex = Loadable({
-    loader: () => import('./CurrentOnArtVerifiedByAgeSex'),
+
+const ArtVerificationOverview = Loadable({
+    loader: () => import('./ArtVerificationOverview'),
     loading: Loading,
     delay: LOADING_DELAY,
 });
-const CurrentOnArtVerifiedByCounty = Loadable({
-    loader: () => import('./CurrentOnArtVerifiedByCounty'),
-    loading: Loading,
-    delay: LOADING_DELAY,
-});
-const CurrentOnArtVerifiedByPartner = Loadable({
-    loader: () => import('./CurrentOnArtVerifiedByPartner'),
-    loading: Loading,
-    delay: LOADING_DELAY,
-});
-const CurrentOnArtByFacility = Loadable({
-    loader: () => import('./CurrentOnArtByFacility'),
-    loading: Loading,
-    delay: LOADING_DELAY,
-});
+// const CurrentOnArtVerifiedByPartner = Loadable({
+//     loader: () => import('./CurrentOnArtVerifiedByPartner'),
+//     loading: Loading,
+//     delay: LOADING_DELAY,
+// });
+// const CurrentOnArtByFacility = Loadable({
+//     loader: () => import('./CurrentOnArtByFacility'),
+//     loading: Loading,
+//     delay: LOADING_DELAY,
+// });
 
 const ArtVerification = () => {
     const branding = {
@@ -76,22 +78,30 @@ const ArtVerification = () => {
                         'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
                     }
                 >
-					<ArtVerificationStatus />
-				</Col>
+                    <ArtVerificationStatus />
+                </Col>
                 <Col
                     className={
                         'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
                     }
                 >
-					<ArtVerificationSurveySubmission />
-				</Col>
+                    <ArtVerificationSurveySubmission />
+                </Col>
             </Row>
             <SectionFooter overview={branding.overview} />
-            <CurrentOnArtVerifiedByCounty />
+            <ArtVerificationByCounty />
             <SectionFooter overview={branding.overview} />
-            <CurrentOnArtVerifiedByPartner />
+            <ArtVerificationByPartner />
             <SectionFooter overview={branding.overview} />
-            <CurrentOnArtByFacility />
+            <ArtVerificationPendingSurveysByPartner />
+            <SectionFooter overview={branding.overview} />
+            <ArtVerificationPendingSurveysByCounty />
+            <SectionFooter overview={branding.overview} />
+            <ArtVerificationReasonsUnverified />
+            <SectionFooter overview={branding.overview} />
+            <ArtVerificationSurveySubmissionByCounty />
+            <SectionFooter overview={branding.overview} />
+            <ArtVerificationSurveySubmissionByPartner />
             <SectionFooter overview={branding.overview} />
         </div>
     );

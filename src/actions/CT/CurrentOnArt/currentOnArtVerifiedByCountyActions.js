@@ -12,13 +12,17 @@ export const loadCurrentOnArtVerifiedByCounty = (tab) => async (dispatch, getSta
             'minutes'
         );
         if (
-            getState().ui.ctTab !== "currentOnArt" &&
-            tab !== "currentOnArt" &&
+            getState().ui.ctTab !== 'currentOnArt' &&
+            getState().ui.ctTab !== 'artVerification' &&
+            tab !== 'currentOnArt' &&
+            tab !== 'artVerification' &&
             getState().ui.currentPage !== PAGES.home
         ) {
             return;
-        }
-        else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
+        } else if (
+            diffInMinutes < CACHING.MID &&
+            getState().filters.filtered === false
+        ) {
             return;
         } else {
             await dispatch(fetchCurrentOnArtByAgeSex());

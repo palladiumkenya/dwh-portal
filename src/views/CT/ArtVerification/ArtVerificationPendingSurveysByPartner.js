@@ -3,25 +3,32 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import * as currentOnArtByCountySelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByCounty';
+import * as currentOnArtByPartnerSelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
 
-const ArtVerificationByCounty = () => {
-    const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState({});
-    const currentOnArtByCountyData = useSelector(
-        currentOnArtByCountySelectors.getCurrentOnArtByCounty
+
+const ArtVerificationPendingSurveysByPartner = () => {
+    const [pendingByPartnerChart, setCurrentOnArtByCountyChart] = useState({});
+    const currentOnArtByPartnerData = useSelector(
+        currentOnArtByPartnerSelectors.getArtVerificationByPartner
     );
 
-    const loadCurrentOnArtByCountyChart = useCallback(async () => {
+    const loadPendingByPartnerChart = useCallback(async () => {
         setCurrentOnArtByCountyChart({
             title: { text: '' },
             xAxis: [
                 {
-                    categories: currentOnArtByCountyData.counties,
+                    categories: currentOnArtByPartnerData.partners,
                     crosshair: true,
                 },
             ],
-            yAxis: [{ title: { text: '' } }],
-            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+            yAxis: [{ title: { text: '' }, min: 0 }],
+            legend: {
+                enabled: false,
+                align: 'left',
+                verticalAlign: 'top',
+                y: 0,
+                x: 80,
+            },
             tooltip: {
                 headerFormat:
                     '<span style="font-size:10px">{point.key}</span><table>',
@@ -34,7 +41,6 @@ const ArtVerificationByCounty = () => {
             },
             plotOptions: {
                 column: {
-                    stacking: 'percent',
                     pointPadding: 0.2,
                     borderWidth: 0,
                     dataLabels: {
@@ -46,34 +52,28 @@ const ArtVerificationByCounty = () => {
             },
             series: [
                 {
-                    name: 'TX CURR',
-                    data: currentOnArtByCountyData.currentOnArt,
+                    name: '',
+                    data: currentOnArtByPartnerData.pending,
                     color: '#01058A',
-                    type: 'column',
-                },
-                {
-                    name: 'VERIFIED CLIENTS',
-                    data: currentOnArtByCountyData.CurrentOnArtVerified,
-                    color: '#1AB394',
                     type: 'column',
                 },
             ],
         });
-    }, [currentOnArtByCountyData]);
+    }, [currentOnArtByPartnerData]);
 
     useEffect(() => {
-        loadCurrentOnArtByCountyChart();
-    }, [loadCurrentOnArtByCountyChart]);
+        loadPendingByPartnerChart();
+    }, [loadPendingByPartnerChart]);
 
     return (
         <div className="row">
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ART VERIFICATION BY COUNTY
+                        UNVERIFIED PENDING SURVEYS BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
-                        <HighchartsReact highcharts={Highcharts} options={currentOnArtByCountyChart} />
+                        <HighchartsReact highcharts={Highcharts} options={pendingByPartnerChart} />
                     </CardBody>
                 </Card>
             </div>
@@ -81,4 +81,4 @@ const ArtVerificationByCounty = () => {
     );
 }
 
-export default ArtVerificationByCounty;
+export default ArtVerificationPendingSurveysByPartner;

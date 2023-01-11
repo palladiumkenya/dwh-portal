@@ -9,19 +9,21 @@ export const loadCurrentOnArtOverview = (tab) => async (dispatch, getState) => {
         'minutes'
     );
     if (
-        getState().ui.ctTab !== "currentOnArt" &&
+        getState().ui.ctTab !== 'currentOnArt' &&
         getState().ui.ctTab !== 'dsd' &&
         getState().ui.ctTab !== 'vl' &&
+        getState().ui.ctTab !== 'artVerification' &&
         tab !== 'dsd' &&
         tab !== 'vl' &&
-        tab !== "currentOnArt" &&
-        tab !== "comparison" &&
+        tab !== 'currentOnArt' &&
+        tab !== 'artVerification' &&
+        tab !== 'comparison' &&
         getState().ui.currentPage !== PAGES.home
     ) {
         return;
-    // }
-    // else if ( getState().filters.filtered === false) {
-    //     return;
+        // }
+        // else if ( getState().filters.filtered === false) {
+        //     return;
     } else {
         await dispatch(fetchCurrentOnArtOverview());
     }

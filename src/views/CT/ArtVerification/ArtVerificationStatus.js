@@ -6,6 +6,7 @@ import HighchartsReact from 'highcharts-react-official';
 import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtByAgeSex';
 import * as currentOnArtAllSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArt';
 import * as currentOnArtSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
+import * as currOnArtKHIS from '../../../selectors/Operational&HIS/Comparison/currOnArtKHIS';
 
 const ArtVerificationStatus = () => {
     const [currentOnArtChart, setCurrentOnArtChart] = useState({});
@@ -15,10 +16,12 @@ const ArtVerificationStatus = () => {
     const currentOnArtVerified = useSelector(
         currentOnArtSelectors.getCurrentOnArtVerified
     );
+	const txcurrKHIS = useSelector(currOnArtKHIS.getCurrOnArtKHIS).totalOnART;
     const notVerified =
-        currentOnArtData - currentOnArtVerified < 0
+        txcurrKHIS - currentOnArtVerified < 0
             ? 0
-            : currentOnArtData - currentOnArtVerified;
+            : txcurrKHIS - currentOnArtVerified;
+    
 
     const loadCurrentOnArtBySexChart = useCallback(async () => {
         setCurrentOnArtChart({

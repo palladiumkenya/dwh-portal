@@ -3,22 +3,14 @@ import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
-import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtByAgeSex';
-import * as currentOnArtAllSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArt';
-import * as currentOnArtSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
+import * as statusSelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
 
 const ArtVerificationSurveySubmission = () => {
     const [currentOnArtChart, setCurrentOnArtChart] = useState({});
-    const currentOnArtData = useSelector(
-        currentOnArtAllSelectors.getCurrentOnArt
+    const status = useSelector(
+        statusSelectors.getArtVerificationByPartner
     );
-    const currentOnArtVerified = useSelector(
-        currentOnArtSelectors.getCurrentOnArtVerified
-    );
-    const notVerified =
-        currentOnArtData - currentOnArtVerified < 0
-            ? 0
-            : currentOnArtData - currentOnArtVerified;
+
 
     const loadCurrentOnArtBySexChart = useCallback(async () => {
         setCurrentOnArtChart({
@@ -51,12 +43,12 @@ const ArtVerificationSurveySubmission = () => {
                     data: [
                         {
                             name: 'SUBMITTED SURVEY',
-                            y: currentOnArtVerified,
+                            y: status.submitted,
                             color: '#01058A',
                         },
                         {
                             name: 'NOT SUBMITTED SURVEY',
-                            y: notVerified,
+                            y: status.notsubmitted,
                             sliced: true,
                             selected: true,
                             color: '#8E2C16',
@@ -65,7 +57,7 @@ const ArtVerificationSurveySubmission = () => {
                 },
             ],
         });
-    }, [notVerified, currentOnArtVerified]);
+    }, [status]);
 
     useEffect(() => {
         loadCurrentOnArtBySexChart();

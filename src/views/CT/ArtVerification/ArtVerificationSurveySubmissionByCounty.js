@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import * as currentOnArtByCountySelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByCounty';
+import * as artByCountySelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
 
-const ArtVerificationByCounty = () => {
+const ArtVerificationSurveySubmissionByCounty = () => {
     const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState({});
-    const currentOnArtByCountyData = useSelector(
-        currentOnArtByCountySelectors.getCurrentOnArtByCounty
+    const countyData = useSelector(
+        artByCountySelectors.getArtVerificationByCounty
     );
 
     const loadCurrentOnArtByCountyChart = useCallback(async () => {
@@ -16,7 +16,7 @@ const ArtVerificationByCounty = () => {
             title: { text: '' },
             xAxis: [
                 {
-                    categories: currentOnArtByCountyData.counties,
+                    categories: countyData.counties,
                     crosshair: true,
                 },
             ],
@@ -46,20 +46,20 @@ const ArtVerificationByCounty = () => {
             },
             series: [
                 {
-                    name: 'TX CURR',
-                    data: currentOnArtByCountyData.currentOnArt,
-                    color: '#01058A',
+                    name: 'UNVERIFIED CLIENTS',
+                    data: countyData.unverified,
+                    color: '#8E2C16',
                     type: 'column',
                 },
                 {
-                    name: 'VERIFIED CLIENTS',
-                    data: currentOnArtByCountyData.CurrentOnArtVerified,
-                    color: '#1AB394',
+                    name: 'UNVERIFIED SURVEYS SUBMITTED',
+                    data: countyData.received,
+                    color: '#01058A',
                     type: 'column',
                 },
             ],
         });
-    }, [currentOnArtByCountyData]);
+    }, [countyData]);
 
     useEffect(() => {
         loadCurrentOnArtByCountyChart();
@@ -70,10 +70,13 @@ const ArtVerificationByCounty = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ART VERIFICATION BY COUNTY
+                        SURVEYS SUBMISSION OF UNVERIFIED PATIENTS BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
-                        <HighchartsReact highcharts={Highcharts} options={currentOnArtByCountyChart} />
+                        <HighchartsReact
+                            highcharts={Highcharts}
+                            options={currentOnArtByCountyChart}
+                        />
                     </CardBody>
                 </Card>
             </div>
@@ -81,4 +84,4 @@ const ArtVerificationByCounty = () => {
     );
 }
 
-export default ArtVerificationByCounty;
+export default ArtVerificationSurveySubmissionByCounty;

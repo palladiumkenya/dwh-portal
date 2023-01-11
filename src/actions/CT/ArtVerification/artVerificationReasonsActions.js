@@ -3,18 +3,23 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING, PAGES } from '../../../constants';
 
-export const loadCurrentOnArt = () => async (dispatch, getState) => {
+export const loadArtVerificationReasons = () => async (dispatch, getState) => {
     if (getState().filters.noCache === true) {
-        await dispatch(fetchCurrentOnArt());
+        await dispatch(fetchArtVerificationReasons());
     } else {
-
-        await dispatch(fetchCurrentOnArt());
+        const diffInMinutes = moment().diff(
+            moment(getState().artVerificationReasons.lastFetch),
+            'minutes'
+        );
+        
+        await dispatch(fetchArtVerificationReasons());
+    
     }
 };
 
-export const fetchCurrentOnArt =
+export const fetchArtVerificationReasons =
     () => async (dispatch, getState) => {
-        dispatch({ type: actionTypes.CT_CURRENT_ON_ART_REQUEST });
+        dispatch({ type: actionTypes.ART_VERIFICATION_REASONS_REQUEST });
         const params = {
             county: getState().filters.counties,
             subCounty: getState().filters.subCounties,
@@ -22,9 +27,6 @@ export const fetchCurrentOnArt =
             partner: getState().filters.partners,
             agency: getState().filters.agencies,
             project: getState().filters.projects,
-            gender: getState().filters.genders,
-            datimAgeGroup: getState().filters.datimAgeGroups,
-            datimAgePopulations: getState().filters.datimAgePopulation,
             year: getState().filters.fromDate
                 ? moment(getState().filters.fromDate, 'MMM YYYY').format('YYYY')
                 : '',
@@ -33,11 +35,11 @@ export const fetchCurrentOnArt =
                 : '',
         };
         const response = await getAll(
-            'care-treatment/txCurr',
+            'care-treatment/getArtVerificationReasons',
             params
         );
         dispatch({
-            type: actionTypes.CT_CURRENT_ON_ART_FETCH,
+            type: actionTypes.ART_VERIFICATION_REASONS_FETCH,
             payload: { filtered: getState().filters.filtered, list: response },
         });
     };

@@ -270,6 +270,10 @@ import newOnPrep from './HTS/Prep/newOnPrep';
 import prepDiscontinuation from './HTS/Prep/prepDiscontinuation'
 import prepDiscontinuationReason from './HTS/Prep/prepDiscontinuationReason';
 
+import artVerificationByCounty from './CT/ArtVerification/artVerificationByCounty';
+import artVerificationByPartner from './CT/ArtVerification/artVerificationByPartner';
+import artVerificationReasons from './CT/ArtVerification/artVerificationReasons';
+
 export default combineReducers({
     auth: authReducer,
 
@@ -531,4 +535,9 @@ export default combineReducers({
     newOnPrep,
     prepDiscontinuation,
     prepDiscontinuationReason,
+
+
+    artVerificationByCounty,
+    artVerificationByPartner,
+    artVerificationReasons,
 });

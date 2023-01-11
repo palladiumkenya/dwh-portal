@@ -10,33 +10,7 @@ import DataCardCT from '../../Shared/DataCardCT';
 
 const CurrentOnArtOverview = () => {
     const currentOnArt = useSelector(currentOnArtSelectors.getCurrentOnArt);
-    const currentOnArtMale = useSelector(
-        currentOnArtByAgeSexSelectors.getCurrentOnArtBySex
-    ).currentOnArtMale;
-    const currentOnArtFemale = useSelector(
-        currentOnArtByAgeSexSelectors.getCurrentOnArtBySex
-    ).currentOnArtFemale;
-    const currentOnArtFemalePercent = currentOnArt
-        ? (currentOnArtFemale / currentOnArt) * 100
-        : 0;
-    const currentOnArtAdults = useSelector(
-        currentOnArtByAgeSexSelectors.getCurrentOnArtAdults
-    ).currentOnArt;
-    const currentOnArtAdultsPercent = currentOnArt
-        ? (currentOnArtAdults / currentOnArt) * 100
-        : 0;
-    const currentOnArtAdolescents = useSelector(
-        currentOnArtByAgeSexSelectors.getCurrentOnArtAdolescents
-    ).currentOnArt;
-    const currentOnArtAdolescentsPercent = currentOnArt
-        ? (currentOnArtAdolescents / currentOnArt) * 100
-        : 0;
-    const currentOnArtChildren = useSelector(
-        currentOnArtByAgeSexSelectors.getCurrentOnArtChildren
-    ).currentOnArt;
-    const currentOnArtChildrenPercent = currentOnArt
-        ? (currentOnArtChildren / currentOnArt) * 100
-        : 0;
+    
     const currentOnArtVerified = useSelector(
         currentOnArtOverviewSelectors.getCurrentOnArtVerified
     );
