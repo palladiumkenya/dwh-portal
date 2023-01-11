@@ -3,25 +3,31 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import * as currentOnArtByPartnerSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByPartner';
+import * as reasonsSelector from '../../../selectors/CT/ArtVerification/reasonsNonVerified';
 
-const ArtVerificationByPartner = () => {
-    const [currentOnArtByPartnerChart, setCurrentOnArtByPartnerChart] = useState({});
-    const currentOnArtByPartnerData = useSelector(
-        currentOnArtByPartnerSelectors.getCurrentOnArtByPartner
+const ArtVerificationReasonsUnverified = () => {
+    const [pendingByPartnerChart, setCurrentOnArtByCountyChart] = useState({});
+    const reasonsData = useSelector(
+        reasonsSelector.getArtVerificationReasons
     );
 
-    const loadCurrentOnArtByPartnerChart = useCallback(async () => {
-        setCurrentOnArtByPartnerChart({
+    const loadPendingByPartnerChart = useCallback(async () => {
+        setCurrentOnArtByCountyChart({
             title: { text: '' },
             xAxis: [
                 {
-                    categories: currentOnArtByPartnerData.partners,
+                    categories: reasonsData.reasons,
                     crosshair: true,
                 },
             ],
             yAxis: [{ title: { text: '' } }],
-            legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
+            legend: {
+                enabled: false,
+                align: 'left',
+                verticalAlign: 'top',
+                y: 0,
+                x: 80,
+            },
             tooltip: {
                 headerFormat:
                     '<span style="font-size:10px">{point.key}</span><table>',
@@ -34,7 +40,6 @@ const ArtVerificationByPartner = () => {
             },
             plotOptions: {
                 column: {
-                    stacking: 'percent',
                     pointPadding: 0.2,
                     borderWidth: 0,
                     dataLabels: {
@@ -46,34 +51,28 @@ const ArtVerificationByPartner = () => {
             },
             series: [
                 {
-                    name: 'TX CURR',
-                    data: currentOnArtByPartnerData.currentOnArt,
-                    color: '#01058A',
-                    type: 'column',
-                },
-                {
-                    name: 'VERIFIED CLIENTS',
-                    data: currentOnArtByPartnerData.currentOnArtVerified,
-                    color: '#1AB394',
+                    name: '',
+                    data: reasonsData.num,
+                    color: '#8E2C16',
                     type: 'column',
                 },
             ],
         });
-    }, [currentOnArtByPartnerData]);
+    }, [reasonsData]);
 
     useEffect(() => {
-        loadCurrentOnArtByPartnerChart();
-    }, [loadCurrentOnArtByPartnerChart]);
+        loadPendingByPartnerChart();
+    }, [loadPendingByPartnerChart]);
 
     return (
         <div className="row">
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ART VERIFICATION BY PARTNER
+                        REASONS WHY CLIENTS ARE NOT VERIFIED
                     </CardHeader>
                     <CardBody className="trends-body">
-                        <HighchartsReact highcharts={Highcharts} options={currentOnArtByPartnerChart} />
+                        <HighchartsReact highcharts={Highcharts} options={pendingByPartnerChart} />
                     </CardBody>
                 </Card>
             </div>
@@ -81,4 +80,4 @@ const ArtVerificationByPartner = () => {
     );
 }
 
-export default ArtVerificationByPartner;
+export default ArtVerificationReasonsUnverified;

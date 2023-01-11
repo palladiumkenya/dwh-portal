@@ -3,24 +3,24 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import * as currentOnArtByPartnerSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByPartner';
+import * as artByPartnerSelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
 
-const ArtVerificationByPartner = () => {
-    const [currentOnArtByPartnerChart, setCurrentOnArtByPartnerChart] = useState({});
-    const currentOnArtByPartnerData = useSelector(
-        currentOnArtByPartnerSelectors.getCurrentOnArtByPartner
+const ArtVerificationSurveySubmissionByPartner = () => {
+    const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState({});
+    const partnerData = useSelector(
+        artByPartnerSelectors.getArtVerificationByPartner
     );
 
-    const loadCurrentOnArtByPartnerChart = useCallback(async () => {
-        setCurrentOnArtByPartnerChart({
+    const loadCurrentOnArtByCountyChart = useCallback(async () => {
+        setCurrentOnArtByCountyChart({
             title: { text: '' },
             xAxis: [
                 {
-                    categories: currentOnArtByPartnerData.partners,
+                    categories: partnerData.partners,
                     crosshair: true,
                 },
             ],
-            yAxis: [{ title: { text: '' } }],
+            yAxis: [{ title: { text: '' }, min: 0 }],
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             tooltip: {
                 headerFormat:
@@ -46,34 +46,37 @@ const ArtVerificationByPartner = () => {
             },
             series: [
                 {
-                    name: 'TX CURR',
-                    data: currentOnArtByPartnerData.currentOnArt,
-                    color: '#01058A',
+                    name: 'UNVERIFIED CLIENTS',
+                    data: partnerData.unverified,
+                    color: '#8E2C16',
                     type: 'column',
                 },
                 {
-                    name: 'VERIFIED CLIENTS',
-                    data: currentOnArtByPartnerData.currentOnArtVerified,
-                    color: '#1AB394',
+                    name: 'UNVERIFIED SURVEYS SUBMITTED',
+                    data: partnerData.received,
+                    color: '#01058A',
                     type: 'column',
                 },
             ],
         });
-    }, [currentOnArtByPartnerData]);
+    }, [partnerData]);
 
     useEffect(() => {
-        loadCurrentOnArtByPartnerChart();
-    }, [loadCurrentOnArtByPartnerChart]);
+        loadCurrentOnArtByCountyChart();
+    }, [loadCurrentOnArtByCountyChart]);
 
     return (
         <div className="row">
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ART VERIFICATION BY PARTNER
+                        SURVEYS SUBMISSION OF UNVERIFIED PATIENTS BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
-                        <HighchartsReact highcharts={Highcharts} options={currentOnArtByPartnerChart} />
+                        <HighchartsReact
+                            highcharts={Highcharts}
+                            options={currentOnArtByCountyChart}
+                        />
                     </CardBody>
                 </Card>
             </div>
@@ -81,4 +84,4 @@ const ArtVerificationByPartner = () => {
     );
 }
 
-export default ArtVerificationByPartner;
+export default ArtVerificationSurveySubmissionByPartner;

@@ -15,18 +15,22 @@ import SectionHeader from './../../Shared/SectionHeader';
 import UniversalFilter from './../../Shared/UniversalFilter';
 import { useParams } from 'react-router-dom';
 
-import ArtVerificationOverview from './ArtVerificationOverview';
 import ArtVerificationSurveySubmission from './ArtVerificationSurveySubmission';
 import ArtVerificationStatus from './ArtVerificationStatus';
 import ArtVerificationByCounty from './ArtVerificationByCounty';
 import ArtVerificationByPartner from './ArtVerificationByPartner';
+import ArtVerificationPendingSurveysByPartner from './ArtVerificationPendingSurveysByPartner';
+import ArtVerificationPendingSurveysByCounty from './ArtVerificationPendingSurveysByCounty';
+import ArtVerificationReasonsUnverified from './ArtVerificationReasonsUnverified';
+import ArtVerificationSurveySubmissionByCounty from './ArtVerificationSurveySubmissionByCounty';
+import ArtVerificationSurveySubmissionByPartner from './ArtVerificationSurveySubmissionByPartner';
 
 
-// const CurrentOnArtVerifiedByCounty = Loadable({
-//     loader: () => import('./CurrentOnArtVerifiedByCounty'),
-//     loading: Loading,
-//     delay: LOADING_DELAY,
-// });
+const ArtVerificationOverview = Loadable({
+    loader: () => import('./ArtVerificationOverview'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 // const CurrentOnArtVerifiedByPartner = Loadable({
 //     loader: () => import('./CurrentOnArtVerifiedByPartner'),
 //     loading: Loading,
@@ -86,11 +90,18 @@ const ArtVerification = () => {
             </Row>
             <SectionFooter overview={branding.overview} />
             <ArtVerificationByCounty />
-            {/* <CurrentOnArtVerifiedByCounty /> */}
             <SectionFooter overview={branding.overview} />
             <ArtVerificationByPartner />
             <SectionFooter overview={branding.overview} />
-            {/* <CurrentOnArtByFacility /> */}
+            <ArtVerificationPendingSurveysByPartner />
+            <SectionFooter overview={branding.overview} />
+            <ArtVerificationPendingSurveysByCounty />
+            <SectionFooter overview={branding.overview} />
+            <ArtVerificationReasonsUnverified />
+            <SectionFooter overview={branding.overview} />
+            <ArtVerificationSurveySubmissionByCounty />
+            <SectionFooter overview={branding.overview} />
+            <ArtVerificationSurveySubmissionByPartner />
             <SectionFooter overview={branding.overview} />
         </div>
     );

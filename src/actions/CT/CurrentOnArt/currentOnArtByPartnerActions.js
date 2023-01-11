@@ -12,17 +12,21 @@ export const loadCurrentOnArtByPartner = (tab) => async (dispatch, getState) => 
             'minutes'
         );
         if (
-            getState().ui.ctTab !== "currentOnArt" &&
-            getState().ui.ctTab !== "artOptimization" &&
+            getState().ui.ctTab !== 'currentOnArt' &&
+            getState().ui.ctTab !== 'artOptimization' &&
             getState().ui.ctTab !== 'dsd' &&
+            getState().ui.ctTab !== 'artVerification' &&
             tab !== 'dsd' &&
-            tab !== "artOptimization" &&
-            tab !== "comparison" &&
-            tab !== "currentOnArt"
+            tab !== 'artOptimization' &&
+            tab !== 'artVerification' &&
+            tab !== 'comparison' &&
+            tab !== 'currentOnArt'
         ) {
             return;
-        }
-        else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
+        } else if (
+            diffInMinutes < CACHING.MID &&
+            getState().filters.filtered === false
+        ) {
             return;
         } else {
             await dispatch(fetchCurrentOnArtByPartner());

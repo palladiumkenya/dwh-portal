@@ -3,11 +3,13 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import * as currentOnArtByCountySelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtByCounty';
+import * as currentOnArtByCountySelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByCounty';
 
 const ArtVerificationByCounty = () => {
     const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState({});
-    const currentOnArtByCountyData = useSelector(currentOnArtByCountySelectors.getCurrentOnArtByCounty);
+    const currentOnArtByCountyData = useSelector(
+        currentOnArtByCountySelectors.getCurrentOnArtByCounty
+    );
 
     const loadCurrentOnArtByCountyChart = useCallback(async () => {
         setCurrentOnArtByCountyChart({
@@ -21,7 +23,8 @@ const ArtVerificationByCounty = () => {
             yAxis: [{ title: { text: '' } }],
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             tooltip: {
-                headerFormat:'<span style="font-size:10px">{point.key}</span><table>',
+                headerFormat:
+                    '<span style="font-size:10px">{point.key}</span><table>',
                 pointFormat:
                     '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
                     '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
@@ -44,13 +47,13 @@ const ArtVerificationByCounty = () => {
             series: [
                 {
                     name: 'TX CURR',
-                    data: [120, 89,77],
+                    data: currentOnArtByCountyData.currentOnArt,
                     color: '#01058A',
                     type: 'column',
                 },
                 {
                     name: 'VERIFIED CLIENTS',
-                    data: [234, 85,89],
+                    data: currentOnArtByCountyData.CurrentOnArtVerified,
                     color: '#1AB394',
                     type: 'column',
                 },

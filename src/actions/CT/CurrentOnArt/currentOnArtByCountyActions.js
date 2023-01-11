@@ -11,16 +11,22 @@ export const loadCurrentOnArtByCounty = (tab) => async (dispatch, getState) => {
             moment(getState().currentOnArtByCounty.lastFetch),
             'minutes'
         );
-        if (getState().ui.ctTab !== "currentOnArt" &&
-            getState().ui.ctTab !== "artOptimization" &&
+        if (
+            getState().ui.ctTab !== 'currentOnArt' &&
+            getState().ui.ctTab !== 'artOptimization' &&
             getState().ui.ctTab !== 'dsd' &&
+            getState().ui.ctTab !== 'artVerification' &&
             tab !== 'dsd' &&
-            tab !== "currentOnArt" &&
-            tab !== "comparison" &&
-            tab !== "artOptimization") {
+            tab !== 'currentOnArt' &&
+            tab !== 'artVerification' &&
+            tab !== 'comparison' &&
+            tab !== 'artOptimization'
+        ) {
             return;
-        }
-        else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
+        } else if (
+            diffInMinutes < CACHING.MID &&
+            getState().filters.filtered === false
+        ) {
             return;
         } else {
             await dispatch(fetchCurrentOnArtByCounty());
