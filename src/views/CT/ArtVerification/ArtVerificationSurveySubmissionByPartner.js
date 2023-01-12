@@ -70,7 +70,7 @@ const ArtVerificationSurveySubmissionByPartner = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        SURVEYS SUBMISSION OF UNVERIFIED PATIENTS BY PARTNER
+                        SURVEYS SUMBITTED FOR UNVERIFIED PATIENTS BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
                         <HighchartsReact
