@@ -14,7 +14,7 @@ const ArtVerificationStatus = () => {
     const currentOnArtVerified = useSelector(
         verifySelectors.getArtVerificationTotal
     );
-	const txcurrKHIS = useSelector(currOnArtKHIS.getCurrOnArtKHIS).totalOnART;
+	const txcurrKHIS = useSelector(verifySelectors.getArtVerificationTxTotal);
     const notVerified =
         txcurrKHIS - currentOnArtVerified < 0
             ? 0

@@ -105,12 +105,68 @@ export const getArtVerificationSubmissionByCounty = createSelector(
     }
 );
 
+export const getArtVerificationByCountyKHIS = createSelector(
+    [listUnfilteredCounty, listFilteredCounty, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        let list = filtered ? listFiltered : listUnfiltered;
+        let counties = [];
+        let txCurr = [];
+        let nupiVerified = [];
+
+        list.forEach(element => {
+            element.perc =
+                (element.NupiVerified * 100) /
+                (element.NupiVerified + element.TxCurr);
+        });
+        
+        list.sort((b, a) => a.perc - b.perc);
+
+        counties = list.map((p) => p.County);
+        txCurr = list.map((p) => p.TxCurr);
+        nupiVerified = list.map((p) => p.NupiVerified);
+
+        return { counties, txCurr, nupiVerified };
+    }
+);
+
+export const getArtVerificationByPartnerKHIS = createSelector(
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        let list = filtered ? listFiltered : listUnfiltered;
+        let partners = [];
+        let txCurr = [];
+        let nupiVerified = [];
+
+        list.forEach(element => {
+            element.perc =
+                (element.NupiVerified * 100) /
+                (element.NupiVerified + element.TxCurr);
+        });
+        
+        list.sort((b, a) => a.perc - b.perc);
+
+        partners = list.map((p) => p.SDIP);
+        txCurr = list.map((p) => p.TxCurr);
+        nupiVerified = list.map((p) => p.NupiVerified);
+
+        return { partners, txCurr, nupiVerified };
+    }
+);
+
 export const getArtVerificationTotal = createSelector(
     [listUnfilteredCounty, listFilteredCounty, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         let list = filtered ? listFiltered : listUnfiltered;
         let total = _.sum(list.map((p) => p.NupiVerified));
+        return total;
+    }
+);
 
+export const getArtVerificationTxTotal = createSelector(
+    [listUnfilteredCounty, listFilteredCounty, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        let list = filtered ? listFiltered : listUnfiltered;
+        let total = _.sum(list.map((p) => p.TxCurr));
         return total;
     }
 );
