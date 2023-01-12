@@ -8,7 +8,7 @@ import * as artByCountySelectors from '../../../selectors/CT/ArtVerification/pen
 const ArtVerificationSurveySubmissionByCounty = () => {
     const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState({});
     const countyData = useSelector(
-        artByCountySelectors.getArtVerificationByCounty
+        artByCountySelectors.getArtVerificationSubmissionByCounty
     );
 
     const loadCurrentOnArtByCountyChart = useCallback(async () => {
