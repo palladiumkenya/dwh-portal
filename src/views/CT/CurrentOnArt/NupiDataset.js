@@ -244,6 +244,10 @@ const NupiDataset = () => {
                             label="Pendingsurveys"
                             value="Pendingsurveys"
                         />
+                        <ExcelColumn
+                            label="# Patients verified but with survey"
+                            value="# Patients verified but with survey"
+                        />
                     </ExcelSheet>
                 </ExcelFile>
             )}
