@@ -3,18 +3,16 @@ import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
-import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtByAgeSex';
 import * as currentOnArtAllSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArt';
 import * as currentOnArtSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
 import * as currOnArtKHIS from '../../../selectors/Operational&HIS/Comparison/currOnArtKHIS';
+import * as verifySelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
 
 const ArtVerificationStatus = () => {
     const [currentOnArtChart, setCurrentOnArtChart] = useState({});
-    const currentOnArtData = useSelector(
-        currentOnArtAllSelectors.getCurrentOnArt
-    );
+    
     const currentOnArtVerified = useSelector(
-        currentOnArtSelectors.getCurrentOnArtVerified
+        verifySelectors.getArtVerificationTotal
     );
 	const txcurrKHIS = useSelector(currOnArtKHIS.getCurrOnArtKHIS).totalOnART;
     const notVerified =

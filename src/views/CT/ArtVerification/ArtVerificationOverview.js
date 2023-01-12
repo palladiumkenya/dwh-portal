@@ -1,18 +1,14 @@
 import { useSelector } from 'react-redux';
 import React from 'react';
 import { Col, Row } from 'reactstrap';
-import * as currentOnArtOverviewSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
 import * as currOnArtKHIS from '../../../selectors/Operational&HIS/Comparison/currOnArtKHIS';
-import * as currentOnArtSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArt';
+import * as verifySelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
 import { formatNumber, roundNumber } from '../../../utils/utils';
-import { Card, CardBody, CardHeader } from 'reactstrap';
 import DataCardCT from '../../Shared/DataCardCT';
 
 const ArtVerificationOverview = () => {
-    const currentOnArt = useSelector(currentOnArtSelectors.getCurrentOnArt);
-    
     const currentOnArtVerified = useSelector(
-        currentOnArtOverviewSelectors.getCurrentOnArtVerified
+        verifySelectors.getArtVerificationTotal
     );
 	const txcurrKHIS = useSelector(currOnArtKHIS.getCurrOnArtKHIS).totalOnART;
 
