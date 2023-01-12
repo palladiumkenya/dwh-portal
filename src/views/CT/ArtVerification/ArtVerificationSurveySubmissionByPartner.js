@@ -8,7 +8,7 @@ import * as artByPartnerSelectors from '../../../selectors/CT/ArtVerification/pe
 const ArtVerificationSurveySubmissionByPartner = () => {
     const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState({});
     const partnerData = useSelector(
-        artByPartnerSelectors.getArtVerificationByPartner
+        artByPartnerSelectors.getArtVerificationSubmissionByPartner
     );
 
     const loadCurrentOnArtByCountyChart = useCallback(async () => {
