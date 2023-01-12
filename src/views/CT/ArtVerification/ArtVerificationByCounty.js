@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
-import * as currentOnArtByCountySelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByCounty';
+import * as verifySelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
 
 const ArtVerificationByCounty = () => {
     const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState({});
     const currentOnArtByCountyData = useSelector(
-        currentOnArtByCountySelectors.getCurrentOnArtByCounty
+        verifySelectors.getArtVerificationByCountyKHIS
     );
 
     const loadCurrentOnArtByCountyChart = useCallback(async () => {
@@ -47,13 +47,13 @@ const ArtVerificationByCounty = () => {
             series: [
                 {
                     name: 'TX CURR',
-                    data: currentOnArtByCountyData.currentOnArt,
+                    data: currentOnArtByCountyData.txCurr,
                     color: '#01058A',
                     type: 'column',
                 },
                 {
                     name: 'VERIFIED CLIENTS',
-                    data: currentOnArtByCountyData.CurrentOnArtVerified,
+                    data: currentOnArtByCountyData.nupiVerified,
                     color: '#1AB394',
                     type: 'column',
                 },

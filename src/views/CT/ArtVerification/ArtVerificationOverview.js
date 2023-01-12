@@ -10,7 +10,7 @@ const ArtVerificationOverview = () => {
     const currentOnArtVerified = useSelector(
         verifySelectors.getArtVerificationTotal
     );
-	const txcurrKHIS = useSelector(currOnArtKHIS.getCurrOnArtKHIS).totalOnART;
+	const txcurrKHIS = useSelector(verifySelectors.getArtVerificationTxTotal);
 
     return (
         <>

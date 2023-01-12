@@ -4,11 +4,12 @@ import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import * as currentOnArtByPartnerSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByPartner';
+import * as verifySelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
 
 const ArtVerificationByPartner = () => {
     const [currentOnArtByPartnerChart, setCurrentOnArtByPartnerChart] = useState({});
     const currentOnArtByPartnerData = useSelector(
-        currentOnArtByPartnerSelectors.getCurrentOnArtByPartner
+        verifySelectors.getArtVerificationByPartnerKHIS
     );
 
     const loadCurrentOnArtByPartnerChart = useCallback(async () => {
@@ -47,13 +48,13 @@ const ArtVerificationByPartner = () => {
             series: [
                 {
                     name: 'TX CURR',
-                    data: currentOnArtByPartnerData.currentOnArt,
+                    data: currentOnArtByPartnerData.txCurr,
                     color: '#01058A',
                     type: 'column',
                 },
                 {
                     name: 'VERIFIED CLIENTS',
-                    data: currentOnArtByPartnerData.currentOnArtVerified,
+                    data: currentOnArtByPartnerData.nupiVerified,
                     color: '#1AB394',
                     type: 'column',
                 },
