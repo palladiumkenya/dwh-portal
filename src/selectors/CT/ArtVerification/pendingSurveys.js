@@ -12,11 +12,13 @@ const filtered = state => state.filters.filtered;
 export const getArtVerificationByPartner = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
-        const list = filtered ? listFiltered : listUnfiltered;
+        let list = filtered ? listFiltered : listUnfiltered;
         let partners = [];
         let pending = [];
         let unverified = [];
         let received = [];
+
+        list.sort((b, a) => a.Pendingsurveys - b.Pendingsurveys);
 
         partners = list.map(p=> p.SDIP)
         pending = list.map((p) => p.Pendingsurveys);
@@ -33,11 +35,13 @@ export const getArtVerificationByPartner = createSelector(
 export const getArtVerificationByCounty = createSelector(
     [listUnfilteredCounty, listFilteredCounty, filtered],
     (listUnfiltered, listFiltered, filtered) => {
-        const list = filtered ? listFiltered : listUnfiltered;
+        let list = filtered ? listFiltered : listUnfiltered;
         let counties = [];
         let pending = [];
         let unverified = [];
         let received = [];
+        
+        list.sort((b, a) => a.Pendingsurveys - b.Pendingsurveys);
 
         counties = list.map((p) => p.County);
         pending = list.map((p) => p.Pendingsurveys);
