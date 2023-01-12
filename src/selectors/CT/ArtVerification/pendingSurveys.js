@@ -104,3 +104,13 @@ export const getArtVerificationSubmissionByCounty = createSelector(
         return { counties, pending, received, unverified };
     }
 );
+
+export const getArtVerificationTotal = createSelector(
+    [listUnfilteredCounty, listFilteredCounty, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        let list = filtered ? listFiltered : listUnfiltered;
+        let total = _.sum(list.map((p) => p.NupiVerified));
+
+        return total;
+    }
+);

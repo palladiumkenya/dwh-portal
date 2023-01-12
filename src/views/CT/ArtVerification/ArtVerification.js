@@ -15,32 +15,56 @@ import SectionHeader from './../../Shared/SectionHeader';
 import UniversalFilter from './../../Shared/UniversalFilter';
 import { useParams } from 'react-router-dom';
 
-import ArtVerificationSurveySubmission from './ArtVerificationSurveySubmission';
-import ArtVerificationStatus from './ArtVerificationStatus';
-import ArtVerificationByCounty from './ArtVerificationByCounty';
-import ArtVerificationByPartner from './ArtVerificationByPartner';
-import ArtVerificationPendingSurveysByPartner from './ArtVerificationPendingSurveysByPartner';
-import ArtVerificationPendingSurveysByCounty from './ArtVerificationPendingSurveysByCounty';
-import ArtVerificationReasonsUnverified from './ArtVerificationReasonsUnverified';
-import ArtVerificationSurveySubmissionByCounty from './ArtVerificationSurveySubmissionByCounty';
-import ArtVerificationSurveySubmissionByPartner from './ArtVerificationSurveySubmissionByPartner';
-
-
 const ArtVerificationOverview = Loadable({
     loader: () => import('./ArtVerificationOverview'),
     loading: Loading,
     delay: LOADING_DELAY,
 });
-// const CurrentOnArtVerifiedByPartner = Loadable({
-//     loader: () => import('./CurrentOnArtVerifiedByPartner'),
-//     loading: Loading,
-//     delay: LOADING_DELAY,
-// });
-// const CurrentOnArtByFacility = Loadable({
-//     loader: () => import('./CurrentOnArtByFacility'),
-//     loading: Loading,
-//     delay: LOADING_DELAY,
-// });
+const ArtVerificationSurveySubmissionByPartner = Loadable({
+    loader: () => import('./ArtVerificationSurveySubmissionByPartner'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const ArtVerificationReasonsUnverified = Loadable({
+    loader: () => import('./ArtVerificationReasonsUnverified'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const ArtVerificationSurveySubmissionByCounty = Loadable({
+    loader: () => import('./ArtVerificationSurveySubmissionByCounty'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const ArtVerificationByCounty = Loadable({
+    loader: () => import('./ArtVerificationByCounty'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const ArtVerificationStatus = Loadable({
+    loader: () => import('./ArtVerificationStatus'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const ArtVerificationByPartner = Loadable({
+    loader: () => import('./ArtVerificationByPartner'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const ArtVerificationPendingSurveysByPartner = Loadable({
+    loader: () => import('./ArtVerificationPendingSurveysByPartner'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const ArtVerificationPendingSurveysByCounty = Loadable({
+    loader: () => import('./ArtVerificationPendingSurveysByCounty'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const ArtVerificationSurveySubmission = Loadable({
+    loader: () => import('./ArtVerificationSurveySubmission'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 
 const ArtVerification = () => {
     const branding = {
