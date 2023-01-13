@@ -98,8 +98,23 @@ export const getArtVerificationSubmissionByCounty = createSelector(
 
         counties = list.map((p) => p.County);
         pending = list.map((p) => p.Pendingsurveys);
-        unverified = list.map((p) => p.Unverified);
-        received = list.map((p) => p.SurveysReceived);
+        unverified = list.map((p) => {
+            return {
+                percent: Number(
+                    (p.Unverified * 100) / p.SurveysReceived + p.Unverified
+                ),
+                y: p.Unverified,
+            };
+        });
+        received = list.map((p) => {
+            return {
+                percent:
+                    Number((p.SurveysReceived * 100) / p.SurveysReceived +
+                    p.Unverified),
+                y: p.SurveysReceived,
+            };
+        });
+
 
         return { counties, pending, received, unverified };
     }
