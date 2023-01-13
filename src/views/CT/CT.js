@@ -355,6 +355,7 @@ import { loadArtVerificationByCounty } from '../../actions/CT/ArtVerification/ar
 import { loadArtVerificationByPartner } from './../../actions/CT/ArtVerification/artVerificationByPartnerActions';
 import { loadArtVerificationReasons } from './../../actions/CT/ArtVerification/artVerificationReasonsActions';
 
+
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({
     loader: () => import('./CurrentOnArt/CurrentOnArt'),
@@ -388,8 +389,6 @@ const ArtVerification = Loadable({
 });
 
 const CT = () => {
-    //new recoil store
-    const currOnARTHook = useCurrOnART();
 
     const dispatch = useDispatch();
     const ctTab = useSelector(state => state.ui.ctTab);
@@ -500,7 +499,6 @@ const CT = () => {
                 dispatch(loadArtOptimizationNewByYear(active_tab));
                 break;
             case 'currentOnArt':
-                currOnARTHook();
                 dispatch(loadCurrentOnArtVerifiedByAgeSex(active_tab));
                 dispatch(loadCurrentOnArtVerifiedByPartner(active_tab));
                 dispatch(loadCurrentOnArtVerifiedByCounty(active_tab));
