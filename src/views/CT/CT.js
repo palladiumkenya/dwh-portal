@@ -337,7 +337,6 @@ import { loadCurrentOnArtVerified } from './../../actions/CT/CurrentOnArt/curren
 import { loadCurrentOnArtVerifiedByPartner } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedByPartnerActions';
 import { loadCurrentOnArtVerifiedByCounty } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedByCountyActions';
 import { loadCurrentOnArtVerifiedByAgeSex } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedByAgeSexActions';
-import { useCurrOnART } from './../../hooks/CT/CurrOnART/useCurrOnART';
 import { loadOtzEnrollmentTrend } from '../../actions/CT/OTZ/OtzEnrollmentTrendsActions';
 import { loadOtzEnrollmentByAgeSex } from '../../actions/CT/OTZ/OtzEnrollmentByAgeSexActions';
 import { loadOtzNotEnrolledPartner } from '../../actions/CT/OTZ/OtzNotEnrolledByPartnerActions';
