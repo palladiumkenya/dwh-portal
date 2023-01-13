@@ -31,6 +31,7 @@ const ArtVerificationByCounty = () => {
                 footerFormat: '</table>',
                 shared: true,
                 useHTML: true,
+                valueSuffix: ' ({point.percentage:.0f}%)',
             },
             plotOptions: {
                 column: {
