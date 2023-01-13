@@ -4,11 +4,12 @@ import { Card, CardBody, CardHeader, Spinner } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import * as verifySelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
+import * as currentOnArtByCountySelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByCounty';
 
 const ArtVerificationByCounty = () => {
     const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState({});
     const currentOnArtByCountyData = useSelector(
-        verifySelectors.getArtVerificationByCountyKHIS
+        currentOnArtByCountySelectors.getCurrentOnArtByCounty
     );
 
     const loadCurrentOnArtByCountyChart = useCallback(async () => {
@@ -41,20 +42,19 @@ const ArtVerificationByCounty = () => {
             series: [
                 {
                     name: 'TX CURR',
-                    data: currentOnArtByCountyData.txCurr,
+                    data: currentOnArtByCountyData.currentOnArt,
                     color: '#01058A',
                     type: 'column',
                 },
                 {
                     name: 'VERIFIED CLIENTS',
-                    data: currentOnArtByCountyData.nupiVerified,
+                    data: currentOnArtByCountyData.CurrentOnArtVerified,
                     color: '#1AB394',
                     type: 'column',
                 },
             ],
         });
     }, [currentOnArtByCountyData]);
-    console.log(currentOnArtByCountyData.loadingC)
 
     useEffect(() => {
         loadCurrentOnArtByCountyChart();
@@ -68,14 +68,10 @@ const ArtVerificationByCounty = () => {
                         ART VERIFICATION BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
-                        {currentOnArtByCountyData.loadingC ? (
-                            <Spinner color="danger" />
-                        ) : (
-                            <HighchartsReact
-                                highcharts={Highcharts}
-                                options={currentOnArtByCountyChart}
-                            />
-                        )}
+                        <HighchartsReact
+                            highcharts={Highcharts}
+                            options={currentOnArtByCountyChart}
+                        />
                     </CardBody>
                 </Card>
             </div>
