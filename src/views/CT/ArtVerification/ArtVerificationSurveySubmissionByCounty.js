@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardHeader, Spinner } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import * as artByCountySelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
 
 const ArtVerificationSurveySubmissionByCounty = () => {
-    const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState({});
+    const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState(
+        {}
+    );
     const countyData = useSelector(
         artByCountySelectors.getArtVerificationSubmissionByCounty
     );
@@ -76,15 +78,19 @@ const ArtVerificationSurveySubmissionByCounty = () => {
                         SURVEYS SUMBITTED FOR UNVERIFIED PATIENTS BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
-                        <HighchartsReact
-                            highcharts={Highcharts}
-                            options={currentOnArtByCountyChart}
-                        />
+                        {countyData.loadingC ? (
+                            <Spinner color="danger" />
+                        ) : (
+                            <HighchartsReact
+                                highcharts={Highcharts}
+                                options={currentOnArtByCountyChart}
+                            />
+                        )}
                     </CardBody>
                 </Card>
             </div>
         </div>
     );
-}
+};
 
 export default ArtVerificationSurveySubmissionByCounty;

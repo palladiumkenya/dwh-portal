@@ -2,13 +2,13 @@ import { createSelector } from 'reselect';
 
 const listUnfiltered = state => state.artVerificationReasons.listUnfiltered;
 const listFiltered = (state) => state.artVerificationReasons.listFiltered;
-
+const loading = (state) => state.artVerificationReasons.loading;
 
 const filtered = state => state.filters.filtered;
 
 export const getArtVerificationReasons = createSelector(
-    [listUnfiltered, listFiltered, filtered],
-    (listUnfiltered, listFiltered, filtered) => {
+    [listUnfiltered, listFiltered, filtered, loading],
+    (listUnfiltered, listFiltered, filtered, loading) => {
         const list = filtered ? listFiltered : listUnfiltered;
         let reasons = [];
         let num = [];
@@ -22,6 +22,6 @@ export const getArtVerificationReasons = createSelector(
             );
         num = list.map((p) => p.NUM);
 
-        return { reasons, num };
+        return { reasons, num, loading };
     }
 );

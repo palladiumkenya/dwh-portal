@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardHeader, Spinner } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import * as currentOnArtByPartnerSelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
@@ -73,7 +73,14 @@ const ArtVerificationPendingSurveysByPartner = () => {
                         UNVERIFIED PENDING SURVEYS BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
-                        <HighchartsReact highcharts={Highcharts} options={pendingByPartnerChart} />
+                        {currentOnArtByPartnerData.loadingP ? (
+                            <Spinner color="danger" />
+                        ) : (
+                            <HighchartsReact
+                                highcharts={Highcharts}
+                                options={pendingByPartnerChart}
+                            />
+                        )}
                     </CardBody>
                 </Card>
             </div>

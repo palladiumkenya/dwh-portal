@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardHeader, Spinner } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import * as currentOnArtAllSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArt';
 import * as currentOnArtSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
@@ -14,7 +14,8 @@ const ArtVerificationStatus = () => {
     const currentOnArtVerified = useSelector(
         verifySelectors.getArtVerificationTotal
     );
-	const txcurrKHIS = useSelector(verifySelectors.getArtVerificationTxTotal);
+	const txcurrKHIS = useSelector(verifySelectors.getArtVerificationTxTotal).total;
+	let loading = useSelector(verifySelectors.getArtVerificationTxTotal).loadingC;
     const notVerified =
         txcurrKHIS - currentOnArtVerified < 0
             ? 0
@@ -81,7 +82,14 @@ const ArtVerificationStatus = () => {
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={currentOnArtChart} />
+                            {loading ? (
+                                <Spinner color="danger" />
+                            ) : (
+                                <HighchartsReact
+                                    highcharts={Highcharts}
+                                    options={currentOnArtChart}
+                                />
+                            )}
                         </div>
                     </CardBody>
                 </Card>
