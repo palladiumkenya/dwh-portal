@@ -29,8 +29,13 @@ export const fetchCurrentOnArtDistributionByPartner = () => async (dispatch, get
         project: getState().filters.projects,
         gender: getState().filters.genders,
         datimAgeGroup: getState().filters.datimAgeGroups,
-        year: getState().filters.fromDate ? moment(getState().filters.fromDate, 'MMM YYYY').format('YYYY') : '',
-        month: getState().filters.fromDate ? moment(getState().filters.fromDate, 'MMM YYYY').format('MM') : ''
+        datimAgePopulations: getState().filters.datimAgePopulation,
+        year: getState().filters.fromDate
+            ? moment(getState().filters.fromDate, 'MMM YYYY').format('YYYY')
+            : '',
+        month: getState().filters.fromDate
+            ? moment(getState().filters.fromDate, 'MMM YYYY').format('MM')
+            : '',
     };
     const response = await getAll('care-treatment/getTxCurrAgeGroupDistributionByPartner', params);
     dispatch({

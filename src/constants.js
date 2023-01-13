@@ -15,7 +15,7 @@ export const HTS_TABS = {
     uptake: 'HIV TESTING SERVICES UPTAKE',
     linkage: 'HIV TESTING SERVICES LINKAGE',
     pns: 'PARTNER NOTIFICATION SERVICES',
-    prep: 'PrEP',
+    // prep: 'PrEP',
 };
 
 export const CT_TABS = {
@@ -30,6 +30,7 @@ export const CT_TABS = {
     otz: 'OTZ',
     ovc: 'OVC',
     covid: 'COVID-19',
+    artVerification: 'ART VERIFICATION',
 };
 
 export const OPERATIONALHIS_TABS = {
@@ -58,10 +59,10 @@ export const CACHING = {
     EXTRA_LONG: 4320, // 3 days
 };
 
-export const LOADING_DELAY = 200;
+export const LOADING_DELAY = 400;
 
 export const GA_TRACKING_ID = 'UA-137589703-2';
 
 
-export const DWH_API_URL = 'https://prod.kenyahmis.org:8082';
+export const DWH_API_URL = process.env.REACT_APP_DWH_API_URL;
 export const HRH_API_URL = 'https://hrh.datacompanion.org';

@@ -114,17 +114,17 @@ const PrEP = () => {
             <PrEPEligibleVsNewInitiatedTrends />
             <SectionFooter />
             <Row>
-                <Col
+                {/* <Col
                     className={
                         'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
                     }
-                >
+                > */}
                     {/*<PrEPEligibleVsNewlyBySubPopulation />*/}
-                </Col>
+                {/* </Col> */}
                 <Col
-                    className={
-                        'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
-                    }
+                    // className={
+                    //     'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
+                    // }
                 >
                     <PrEPCurrentBySubPopulation />
                 </Col>

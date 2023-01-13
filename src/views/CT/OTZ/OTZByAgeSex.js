@@ -3,13 +3,16 @@ import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
+import * as ovcDistributionOVCByAgeSexSelector from '../../../selectors/CT/OTZ/otzDistributionOfPatientsByAgeSex';
+
 
 const OTZByAgeSex = () => {
     const [otzByAgeSex, setOtzByAgeSex] = useState(
         {}
     );
-    const male = [123, 232, 553, 634, 2242];
-    const female = [-223, -232, -553, -634, -2242];
+    let ovcAgeSex = useSelector(ovcDistributionOVCByAgeSexSelector.getOtzDistributionOfPatientsByAgeSex)
+    const male = ovcAgeSex.distributionMale;
+    const female = ovcAgeSex.distributionFemale;
 
     const loadOtzByAgeSex = useCallback(async () => {
         setOtzByAgeSex({
@@ -17,24 +20,12 @@ const OTZByAgeSex = () => {
             title: { text: '' },
             xAxis: [
                 {
-                    categories: [
-                        '10-12 YRS',
-                        '13-15 YRS',
-                        '16-18 YRS',
-                        '19-21 YRS',
-                        '22-24 YRS',
-                    ],
+                    categories: ovcAgeSex.otzAgeGroups,
                     title: { text: '' },
                     reversed: true,
                 },
                 {
-                    categories: [
-                        '10-12 YRS',
-                        '13-15 YRS',
-                        '16-18 YRS',
-                        '19-21 YRS',
-                        '22-24 YRS',
-                    ],
+                    categories: ovcAgeSex.otzAgeGroups,
                     title: { text: '' },
                     reversed: true,
                     linkedTo: 0,
@@ -43,9 +34,19 @@ const OTZByAgeSex = () => {
             ],
             yAxis: [
                 {
-                    // min: -currentOnArtByAgeSexData.max,
-                    // max: currentOnArtByAgeSexData.max,
-                    title: { text: 'CURRENT ON ART' },
+                    // min: -ovcAgeSex.distributionMale.max,
+                    // max: ovcAgeSex.distributionFemale.max,
+                    title: { text: 'CURRENT ON ART OTZ' },
+                    labels: {
+                        formatter: function () {
+                            return Math.abs(this.value);
+                        },
+                    },
+                },
+                {
+                    // min: -ovcAgeSex.distributionMale.max,
+                    // max: ovcAgeSex.distributionFemale.max,
+                    title: { text: 'MALE' },
                     labels: {
                         formatter: function () {
                             return Math.abs(this.value);
@@ -64,7 +65,7 @@ const OTZByAgeSex = () => {
                         ', Age Group ' +
                         this.point.category +
                         '</b><br/>' +
-                        'CURRENT ON ART: ' +
+                        'CURRENT ON ART OTZ: ' +
                         Highcharts.numberFormat(Math.abs(this.point.y), 1)
                     );
                 },
@@ -83,7 +84,7 @@ const OTZByAgeSex = () => {
                 },
             ],
         });
-    }, []);
+    }, [ovcAgeSex]);
 
     useEffect(() => {
         loadOtzByAgeSex();

@@ -4,10 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import { HTS_TABS, PAGES, LOADING_DELAY } from './../../constants';
 import { changeHtsTab, changeCurrentPage } from './../../actions/Shared/uiActions';
-import { enableFromDateFilter, disableFromDateFilter, enableAgencyFilter, enableToDateFilter } from './../../actions/Shared/filterActions';
+import { enableFromDateFilter, disableFromDateFilter, enableAgencyFilter, enableToDateFilter, disableDatimAgePopulationFilter } from './../../actions/Shared/filterActions';
 import { loadLinkageNumberNotLinkedByFacility } from '../../actions/HTS/Linkage/linkageNumberNotLinkedByFacilityActions';
+import { loadNewOnPrep } from '../../actions/HTS/Prep/newOnPrepAction';
 import Loading from './../Shared/Loading';
 import { useHistory, useParams } from 'react-router-dom';
+import { loadPrepDiscontinuation } from '../../actions/HTS/Prep/prepDiscontinuationAction';
+import { loadPrepDiscontinuationReason } from '../../actions/HTS/Prep/prepDiscontinuationReasonAction';
 
 const Uptake = Loadable({ loader: () => import('./Uptake/Uptake'), loading: Loading, delay: LOADING_DELAY });
 const Linkage = Loadable({ loader: () => import('./Linkage/Linkage'), loading: Loading, delay: LOADING_DELAY });
@@ -26,21 +29,26 @@ const HTS = () => {
     const projects = useSelector(state => state.filters.projects);
     const fromDate = useSelector(state => state.filters.fromDate);
 
+    const DEFAULT_ACTIVE_TAB = useSelector((state) => state.ui.htsTab);
+    const { active_tab } = useParams();
+    const history = useHistory();
+
     const renderTabNavItems = () => {
-        return (
-            Object.keys(HTS_TABS).map((value) => {
-                return (
-                    <NavItem key={value}>
-                        <NavLink active={active_tab === value} onClick={() => {
+        return Object.keys(HTS_TABS).map((value) => {
+            return (
+                <NavItem key={value}>
+                    <NavLink
+                        active={active_tab === value}
+                        onClick={() => {
                             dispatch(changeHtsTab(value));
                             toggle(value);
-                        }} replace >
-                            {HTS_TABS[value]}
-                        </NavLink>
-                    </NavItem>
-                );
-            })
-        );
+                        }}
+                    >
+                        {HTS_TABS[value]}
+                    </NavLink>
+                </NavItem>
+            );
+        });
     };
 
     useEffect(() => {
@@ -48,15 +56,23 @@ const HTS = () => {
         dispatch(enableFromDateFilter());
         dispatch(enableToDateFilter())
         dispatch(enableAgencyFilter());
+        dispatch(disableDatimAgePopulationFilter());
         return () => {
             dispatch(disableFromDateFilter());
         }
     }, [dispatch]);
 
     useEffect(() => {
-        switch (htsTab) {
+        switch (active_tab) {
             case 'linkage':
+                dispatch(changeHtsTab(active_tab));
                 dispatch(loadLinkageNumberNotLinkedByFacility());
+                break;
+            case 'prep':
+                dispatch(changeHtsTab(active_tab));
+                dispatch(loadNewOnPrep());
+                dispatch(loadPrepDiscontinuation());
+                dispatch(loadPrepDiscontinuationReason());
                 break;
             default:
                 break;
@@ -70,13 +86,9 @@ const HTS = () => {
         agencies,
         projects,
         fromDate,
-        htsTab,
-        noCache
+        active_tab,
+        noCache,
     ]);
-
-    const DEFAULT_ACTIVE_TAB = htsTab;
-    const { active_tab } = useParams();
-    const history = useHistory();
 
     useEffect(() => {
         if (!active_tab) {
@@ -85,7 +97,7 @@ const HTS = () => {
     }, []);
 
     if(!active_tab){
-        history.push(`/hiv-testing/${htsTab}`);
+        history.push(`/hiv-testing/${DEFAULT_ACTIVE_TAB}`);
     }
     const toggle = tab => {
         if (active_tab !== tab) {
@@ -108,9 +120,9 @@ const HTS = () => {
                 <TabPane tabId="pns">
                     { active_tab === 'pns' ? <PNS/>: null }
                 </TabPane>
-                <TabPane tabId="prep">
+                {/* <TabPane tabId="prep">
                     { active_tab === 'prep' ? <PrEP/>: null }
-                </TabPane>
+                </TabPane> */}
             </TabContent>
             <p></p><p></p>
         </div>

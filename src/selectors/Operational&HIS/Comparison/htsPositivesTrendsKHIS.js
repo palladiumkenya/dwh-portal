@@ -11,13 +11,23 @@ export const getHTSPositivesTrendsKHIS = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
 
-        if (list.length >= 12)
-            list.length = 12;
+        let reportMonth = moment()
+            .subtract(2, 'month')
+            .add(16, 'days')
+            .format('YYYYMM');
+        let lastyr = list.filter((i) => i.ReportMonth_Year <= reportMonth);
 
-        const labels = list.map((item) => {
-            return moment( item.ReportMonth_Year ).format('MMM YYYY').toUpperCase();
-        }).reverse();
-        const data = list.map(item => item.positive).reverse();
+        if (lastyr.length >= 12) lastyr.length = 12;
+
+
+        const labels = lastyr
+            .map((item) => {
+                return moment(item.ReportMonth_Year)
+                    .format('MMM YYYY')
+                    .toUpperCase();
+            })
+            .reverse();
+        const data = lastyr.map((item) => item.positive).reverse();
 
         return {
             data, labels

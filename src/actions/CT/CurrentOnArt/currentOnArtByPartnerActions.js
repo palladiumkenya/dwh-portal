@@ -12,17 +12,21 @@ export const loadCurrentOnArtByPartner = (tab) => async (dispatch, getState) => 
             'minutes'
         );
         if (
-            getState().ui.ctTab !== "currentOnArt" &&
-            getState().ui.ctTab !== "artOptimization" &&
+            getState().ui.ctTab !== 'currentOnArt' &&
+            getState().ui.ctTab !== 'artOptimization' &&
             getState().ui.ctTab !== 'dsd' &&
+            getState().ui.ctTab !== 'artVerification' &&
             tab !== 'dsd' &&
-            tab !== "artOptimization" &&
-            tab !== "comparison" &&
-            tab !== "currentOnArt"
+            tab !== 'artOptimization' &&
+            tab !== 'artVerification' &&
+            tab !== 'comparison' &&
+            tab !== 'currentOnArt'
         ) {
             return;
-        }
-        else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
+        } else if (
+            diffInMinutes < CACHING.MID &&
+            getState().filters.filtered === false
+        ) {
             return;
         } else {
             await dispatch(fetchCurrentOnArtByPartner());
@@ -41,8 +45,13 @@ export const fetchCurrentOnArtByPartner = () => async (dispatch, getState) => {
         project: getState().filters.projects,
         gender: getState().filters.genders,
         datimAgeGroup: getState().filters.datimAgeGroups,
-        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
-        month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
+        datimAgePopulations: getState().filters.datimAgePopulation,
+        year: getState().filters.fromDate
+            ? moment(getState().filters.fromDate, 'MMM YYYY').format('YYYY')
+            : '',
+        month: getState().filters.fromDate
+            ? moment(getState().filters.fromDate, 'MMM YYYY').format('MM')
+            : '',
     };
     const response = await getAll('care-treatment/txCurrDistributionByPartner', params);
     dispatch({ type: actionTypes.CT_CURRENT_ON_ART_BY_PARTNER_FETCH, payload: { filtered: getState().filters.filtered, list: response }});

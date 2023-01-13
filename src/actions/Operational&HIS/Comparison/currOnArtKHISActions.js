@@ -9,10 +9,15 @@ export const loadCurrOnARTKHIS = () => async (dispatch, getState) => {
         'minutes'
     );
 
-    if (getState().ui.currentPage !== PAGES.operationalHIS) {
+    if (
+        getState().ui.currentPage !== PAGES.ct &&
+        getState().ui.currentPage !== PAGES.operationalHIS
+    ) {
         return;
-    }
-    else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
+    } else if (
+        diffInMinutes < CACHING.MID &&
+        getState().filters.filtered === false
+    ) {
         return;
     } else {
         await dispatch(fetchCurrOnARTKHIS());
@@ -30,8 +35,8 @@ export const fetchCurrOnARTKHIS = () => async (dispatch, getState) => {
         project: getState().filters.projects,
         gender: getState().filters.genders,
         datimAgeGroup: getState().filters.datimAgeGroups,
-        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : moment().subtract(2, 'month').add(15, 'days').format("YYYY"),
-        month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") :  moment().subtract(2, 'month').add(15, 'days').format("MM"),
+        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : moment().subtract(2, 'month').add(16, 'days').format("YYYY"),
+        month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") :  moment().subtract(2, 'month').add(16, 'days').format("MM"),
     };
     const response = await getAll('operational-his/txCurrKHIS', params);
     dispatch({ type: actionTypes.KHIS_CURR_ON_ART_FETCH, payload: { filtered: getState().filters.filtered, list: response }});

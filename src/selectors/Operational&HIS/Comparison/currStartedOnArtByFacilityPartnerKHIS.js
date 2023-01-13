@@ -93,6 +93,10 @@ export const getCurrOnArtByFacilityPartnerKHIS = createSelector(
                 data.push({
                     ...item,
                     ...mfl,
+                    concordance: Math.round(
+                        ((item.KHIStxCurr - mfl.DWHtxCurr) * 100) /
+                            item.KHIStxCurr *100
+                    )/100,
                 });
             }
         });

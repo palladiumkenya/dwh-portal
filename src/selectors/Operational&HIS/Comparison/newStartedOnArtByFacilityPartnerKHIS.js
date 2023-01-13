@@ -96,6 +96,12 @@ export const getNewOnArtByFacilityPartnerKHIS = createSelector(
                 data.push({
                     ...item,
                     ...mfl,
+                    concordance:
+                        item.KHIStxNew > 0 ? Math.round(
+                            (((item.KHIStxNew - mfl.DWHtxNew) * 100) /
+                                item.KHIStxNew) *
+                                100
+                        ) / 100 : null,
                 });
             }
         });

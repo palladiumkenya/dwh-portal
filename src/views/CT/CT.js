@@ -17,7 +17,9 @@ import {
     disableLatestPregnancyFilter,
     enablePopulationTypeFilter,
     disablePopulationTypeFilter,
-    enableAgencyFilter
+    enableAgencyFilter,
+    enableDatimAgePopulationFilter,
+    disableDatimAgePopulationFilter
 } from '../../actions/Shared/filterActions';
 
 import { loadLinkagePositiveTrends } from '../../actions/HTS/Linkage/linkagePositiveTrendsActions';
@@ -331,6 +333,27 @@ import {
 import {
     loadViralLoadOverallNumberGt1000CopiesSecondlineRegiment
 } from '../../actions/CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
+import { loadCurrentOnArtVerified } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedActions';
+import { loadCurrentOnArtVerifiedByPartner } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedByPartnerActions';
+import { loadCurrentOnArtVerifiedByCounty } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedByCountyActions';
+import { loadCurrentOnArtVerifiedByAgeSex } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedByAgeSexActions';
+import { useCurrOnART } from './../../hooks/CT/CurrOnART/useCurrOnART';
+import { loadOtzEnrollmentTrend } from '../../actions/CT/OTZ/OtzEnrollmentTrendsActions';
+import { loadOtzEnrollmentByAgeSex } from '../../actions/CT/OTZ/OtzEnrollmentByAgeSexActions';
+import { loadOtzNotEnrolledPartner } from '../../actions/CT/OTZ/OtzNotEnrolledByPartnerActions';
+import { loadOtzNotEnrolledCounty } from './../../actions/CT/OTZ/OtzNotEnrolledByCountyActions';
+import { loadAlHivWithReSuppression } from '../../actions/CT/OTZ/AlHivWithReSuppressionActions';
+import { loadOtzVlSuppressionByAgeNotEnrolled } from '../../actions/CT/OTZ/OtzVlSuppressionByAgeNotEnrolledActions';
+import { loadOtzVlSuppressionBySexNotEnrolled } from '../../actions/CT/OTZ/OtzVlSuppressionBySexNotEnrolledActions';
+import { loadOtzVlSuppressionByPartnerNotEnrolled } from '../../actions/CT/OTZ/OtzVlSuppressionByPartnerNotEnrolledActions';
+import { loadOtzVlSuppressionByCountyNotEnrolled } from '../../actions/CT/OTZ/OtzVlSuppressionByCountyNotEnrolledActions';
+import { loadCurrentOnArtVerifiedByFacility } from '../../actions/CT/CurrentOnArt/currentOnArtVerifiedByFacilityActions';
+import { loadCurrentOnArtByFacility } from '../../actions/CT/CurrentOnArt/currentOnArtByFacilityActions';
+import { loadCurrentOnArt } from '../../actions/CT/CurrentOnArt/currentOnArtActions';
+import { loadCurrOnARTKHIS } from '../../actions/Operational&HIS/Comparison/currOnArtKHISActions';
+import { loadArtVerificationByCounty } from '../../actions/CT/ArtVerification/artVerificationByCountyActions';
+import { loadArtVerificationByPartner } from './../../actions/CT/ArtVerification/artVerificationByPartnerActions';
+import { loadArtVerificationReasons } from './../../actions/CT/ArtVerification/artVerificationReasonsActions';
 
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
@@ -359,6 +382,11 @@ const ArtOptimization = Loadable({
 const OTZ = Loadable({ loader: () => import('./OTZ/OTZ'), loading: Loading, delay: LOADING_DELAY });
 const OVC = Loadable({ loader: () => import('./OVC/OVC'), loading: Loading, delay: LOADING_DELAY });
 const COVID = Loadable({ loader: () => import('./Covid/Covid'), loading: Loading, delay: LOADING_DELAY });
+const ArtVerification = Loadable({
+    loader: () => import('./ArtVerification/ArtVerification'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 
 const CT = () => {
 
@@ -373,6 +401,7 @@ const CT = () => {
     const projects = useSelector(state => state.filters.projects);
     const genders = useSelector(state => state.filters.genders);
     const datimAgeGroups = useSelector(state => state.filters.datimAgeGroups);
+    const datimAgePopulation = useSelector(state => state.filters.datimAgePopulation);
     const latestPregnancies = useSelector(state => state.filters.latestPregnancies);
     const populationTypes = useSelector(state => state.filters.populationTypes);
     const fromDate = useSelector(state => state.filters.fromDate);
@@ -389,7 +418,7 @@ const CT = () => {
                 return (
                     <NavItem key={value}>
                         <NavLink active={active_tab === value} onClick={() => {
-                            dispatch(changeCtTab(value));
+                            dispatch(changeCtTab(active_tab));
                             toggle(value);
                         }}>
                             {CT_TABS[value]}
@@ -409,6 +438,13 @@ const CT = () => {
     }, [dispatch]);
 
     useEffect(() => {
+        if (
+            active_tab === 'currentOnArt'
+        ) {
+            dispatch(enableDatimAgePopulationFilter());
+        } else {
+            dispatch(disableDatimAgePopulationFilter());
+        }
         if (active_tab === 'newlyOnArt' || active_tab === "treatmentOutcomes") {
             dispatch(enableFromDateFilter());
         } else {
@@ -460,16 +496,25 @@ const CT = () => {
                 dispatch(loadTimeFromDiagnosisToArtStart());
                 dispatch(loadMissingDiagnosisDateByFacility());
                 dispatch(loadArtOptimizationCurrentByRegimen(active_tab));
+                dispatch(loadArtOptimizationNewByYear(active_tab));
                 break;
-            case "currentOnArt":
+            case 'currentOnArt':
+                dispatch(loadCurrentOnArtVerifiedByAgeSex(active_tab));
+                dispatch(loadCurrentOnArtVerifiedByPartner(active_tab));
+                dispatch(loadCurrentOnArtVerifiedByCounty(active_tab));
                 dispatch(loadCurrentOnArtOverview(active_tab));
                 dispatch(loadCurrentOnArtByAgeSex(active_tab));
                 dispatch(loadCurrentOnArtByCounty(active_tab));
                 dispatch(loadCurrentOnArtByPartner(active_tab));
                 dispatch(loadCurrentOnArtDistributionByCounty(active_tab));
                 dispatch(loadCurrentOnArtDistributionByPartner(active_tab));
+                dispatch(loadArtOptimizationNewByYear(active_tab));
+                dispatch(loadCurrentOnArtVerified(active_tab));
+                dispatch(loadCurrentOnArtVerifiedByFacility(active_tab));
+                dispatch(loadCurrentOnArtByFacility(active_tab));
+                dispatch(loadCurrentOnArt());
                 break;
-            case "artOptimization":
+            case 'artOptimization':
                 dispatch(loadCurrentOnArtByAgeSex(active_tab));
                 dispatch(loadCurrentOnArtByCounty(active_tab));
                 dispatch(loadCurrentOnArtByPartner(active_tab));
@@ -483,20 +528,40 @@ const CT = () => {
                 dispatch(loadRegimenDistributionByWeightBands(active_tab));
                 dispatch(loadRegimenDistributionByAgeBands(active_tab));
                 break;
-            case "adverseEvent":
+            case 'adverseEvent':
                 dispatch(loadCurrentOnArtByAgeSex(active_tab));
                 dispatch(loadAdverseEventsByAgeSex(active_tab));
                 dispatch(loadAdverseEventsClientsByAgeSex(active_tab));
                 dispatch(loadAdverseEventsSeverityGrading(active_tab));
                 dispatch(loadAdverseEventsSeverityActions(active_tab));
-                dispatch(loadAdverseEventsReportedWithSeverityLevels(active_tab));
+                dispatch(
+                    loadAdverseEventsReportedWithSeverityLevels(active_tab)
+                );
                 dispatch(loadAdverseEventsActionsByDrugs(active_tab));
                 dispatch(loadAdverseEventsActionsByDrugsNew(active_tab));
-                dispatch(loadAdverseEventsProportionOfPlHivWithAeByCausativeDrugs(active_tab));
-                dispatch(loadAdverseEventsProportionOfPlHivAeRelatedToArt(active_tab));
-                dispatch(loadAdverseEventsProportionOfPLHIVWithAeRegimenChanged(active_tab));
-                dispatch(loadAdverseEventsProportionOfPLHIVWithAeRegimenWasStopped(active_tab));
-                dispatch(loadAdverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered(active_tab));
+                dispatch(
+                    loadAdverseEventsProportionOfPlHivWithAeByCausativeDrugs(
+                        active_tab
+                    )
+                );
+                dispatch(
+                    loadAdverseEventsProportionOfPlHivAeRelatedToArt(active_tab)
+                );
+                dispatch(
+                    loadAdverseEventsProportionOfPLHIVWithAeRegimenChanged(
+                        active_tab
+                    )
+                );
+                dispatch(
+                    loadAdverseEventsProportionOfPLHIVWithAeRegimenWasStopped(
+                        active_tab
+                    )
+                );
+                dispatch(
+                    loadAdverseEventsProportionOfPLHIVWithAeRegimenWasNotAltered(
+                        active_tab
+                    )
+                );
                 break;
             case 'dsd':
                 dispatch(loadCurrentOnArtOverview(active_tab));
@@ -505,7 +570,9 @@ const CT = () => {
                 dispatch(loadDsdStabilityStatusByPartner(active_tab));
                 dispatch(loadDsdUnstable(active_tab));
                 dispatch(loadDsdStableMmdModels(active_tab));
-                dispatch(loadDsdAppointmentDurationByStabilityStatus(active_tab));
+                dispatch(
+                    loadDsdAppointmentDurationByStabilityStatus(active_tab)
+                );
                 dispatch(loadDsdAppointmentDurationBySex(active_tab));
                 dispatch(loadDsdAppointmentDurationByAge(active_tab));
                 dispatch(loadDsdAppointmentDurationByCounty(active_tab));
@@ -521,7 +588,9 @@ const CT = () => {
                 break;
             case 'vl':
                 dispatch(loadCurrentOnArtOverview(active_tab));
-                dispatch(loadViralLoadOverallUptakeSuppressionBySex(active_tab));
+                dispatch(
+                    loadViralLoadOverallUptakeSuppressionBySex(active_tab)
+                );
                 dispatch(loadMedianTimeTo1stVlByYear(active_tab));
                 dispatch(loadMedianTimeTo1stVlByCounty(active_tab));
                 dispatch(loadMedianTimeTo1stVlByPartner(active_tab));
@@ -533,21 +602,43 @@ const CT = () => {
                 dispatch(loadViralLoadSuppressionByAge(active_tab));
                 dispatch(loadViralLoadSuppressionByYear(active_tab));
                 dispatch(loadViralLoadSuppressionByRegimen(active_tab));
-                dispatch(loadViralLoadSuppressionByYearAndSuppressionCategory(active_tab));
-                dispatch(loadViralLoadOverallUptakeSuppressionByFacility(active_tab));
+                dispatch(
+                    loadViralLoadSuppressionByYearAndSuppressionCategory(
+                        active_tab
+                    )
+                );
+                dispatch(
+                    loadViralLoadOverallUptakeSuppressionByFacility(active_tab)
+                );
                 dispatch(load6MonthSuppressionByYearOfArtStart(active_tab));
                 dispatch(load12MonthSuppressionByYearOfArtStart(active_tab));
                 dispatch(load24MonthSuppressionByYearOfArtStart(active_tab));
                 dispatch(loadViralLoadOutcomesHvlByFacility(active_tab));
-                dispatch(loadViralLoadOverallUptakeSuppressionBySexVlDone(active_tab));
-                dispatch(loadViralLoadOverallUptakeSuppressionLessIntense(active_tab));
+                dispatch(
+                    loadViralLoadOverallUptakeSuppressionBySexVlDone(active_tab)
+                );
+                dispatch(
+                    loadViralLoadOverallUptakeSuppressionLessIntense(active_tab)
+                );
                 dispatch(loadViralLoadOverallUptakeGt1000Copies(active_tab));
                 dispatch(loadViralLoadOverallUptakeGt1000CopiesEac(active_tab));
-                dispatch(loadViralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll(active_tab));
-                dispatch(loadViralLoadOverallUptakeGt1000CopiesReceivedFollowTests(active_tab));
-                dispatch(loadViralLoadOverallNumberGt1000CopiesSecondlineRegiment(active_tab));
+                dispatch(
+                    loadViralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll(
+                        active_tab
+                    )
+                );
+                dispatch(
+                    loadViralLoadOverallUptakeGt1000CopiesReceivedFollowTests(
+                        active_tab
+                    )
+                );
+                dispatch(
+                    loadViralLoadOverallNumberGt1000CopiesSecondlineRegiment(
+                        active_tab
+                    )
+                );
                 break;
-            case "treatmentOutcomes":
+            case 'treatmentOutcomes':
                 dispatch(loadNewOnArtOverview(active_tab));
                 dispatch(loadTreatmentOutcomesOverallLast12m(active_tab));
                 dispatch(loadNewOnArtTrends(active_tab));
@@ -560,7 +651,9 @@ const CT = () => {
                 dispatch(loadSixMonthRetention(active_tab));
                 dispatch(loadTwelveMonthRetention(active_tab));
                 dispatch(loadTwentyFourMonthRetention(active_tab));
-                dispatch(loadTreatmentOutcomesUndocumentedByFacility(active_tab));
+                dispatch(
+                    loadTreatmentOutcomesUndocumentedByFacility(active_tab)
+                );
                 dispatch(loadTreatmentOutcomesNetCohort(active_tab));
                 break;
             case 'otz':
@@ -572,9 +665,15 @@ const CT = () => {
                 dispatch(loadOtzVlUptakeAmongAlHivEnrolledInOtzByAge());
                 dispatch(loadOtzVlUptakeAmongAlHivEnrolledInOtzByCounty());
                 dispatch(loadOtzVlUptakeAmongAlHivEnrolledInOtzByPartner());
-                dispatch(loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTraining());
-                dispatch(loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByCounty());
-                dispatch(loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByPartner());
+                dispatch(
+                    loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTraining()
+                );
+                dispatch(
+                    loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByCounty()
+                );
+                dispatch(
+                    loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingByPartner()
+                );
                 dispatch(loadOtzOutcomesAmongAlHivWithBaselineVL());
                 dispatch(loadOtzOutcomesAmongAlHivWithReSuppression());
                 dispatch(loadOtzOutcomesByGender());
@@ -589,12 +688,24 @@ const CT = () => {
                 dispatch(loadOtzEnrolledAdolescentsByAgeGroup());
                 dispatch(loadOtzEnrolledAdolescentsByCounty());
                 dispatch(loadOtzEnrolledAdolescentsByPartner());
-                dispatch(loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingBySex());
+                dispatch(
+                    loadProportionOfAlHivEnrolledInOtzWhoHaveCompletedTrainingBySex()
+                );
                 dispatch(loadOtzOutcomesByAgeGroup());
                 dispatch(loadOtzVlSuppressionBySex());
                 dispatch(loadOtzVlSuppressionByAge());
                 dispatch(loadOtzVlSuppressionByCounty());
                 dispatch(loadOtzVlSuppressionByPartner());
+                dispatch(loadOtzEnrollmentTrend());
+                dispatch(loadOtzEnrollmentByAgeSex());
+                dispatch(loadOvcDistributionOfCALHIVByAgeSex());
+                dispatch(loadOtzNotEnrolledPartner());
+                dispatch(loadOtzNotEnrolledCounty());
+                dispatch(loadAlHivWithReSuppression());
+                dispatch(loadOtzVlSuppressionByAgeNotEnrolled());
+                dispatch(loadOtzVlSuppressionBySexNotEnrolled());
+                dispatch(loadOtzVlSuppressionByPartnerNotEnrolled());
+                dispatch(loadOtzVlSuppressionByCountyNotEnrolled());
                 break;
             case 'ovc':
                 dispatch(loadOvcOverallServ());
@@ -659,6 +770,19 @@ const CT = () => {
                 dispatch(loadCovidAdmissionSymptomaticByAge());
                 dispatch(loadCovidManagementAdmitted());
                 break;
+            case 'artVerification':
+                dispatch(loadCurrOnARTKHIS());
+                dispatch(loadArtVerificationByCounty())
+                dispatch(loadArtVerificationByPartner())
+                dispatch(loadArtVerificationReasons())
+                
+                dispatch(loadCurrentOnArtVerifiedByCounty(active_tab));
+                dispatch(loadCurrentOnArtVerifiedByPartner(active_tab));
+                dispatch(loadCurrentOnArtByCounty(active_tab));
+                dispatch(loadCurrentOnArtByPartner(active_tab));
+                dispatch(loadCurrentOnArtVerified(active_tab));
+                dispatch(loadCurrentOnArt());
+                dispatch(loadCurrentOnArtOverview(active_tab));
             default:
                 break;
         }
@@ -674,6 +798,7 @@ const CT = () => {
         toDate,
         genders,
         datimAgeGroups,
+        datimAgePopulation,
         latestPregnancies,
         populationTypes,
         active_tab,
@@ -698,42 +823,48 @@ const CT = () => {
 
     return (
         <div>
-            <Nav tabs>
-                {renderTabNavItems()}
-            </Nav>
+            <Nav tabs>{renderTabNavItems()}</Nav>
             <TabContent activeTab={active_tab}>
                 <TabPane tabId="newlyOnArt">
-                    {active_tab === 'newlyOnArt' ? <NewOnArt/> : null}
+                    {active_tab === 'newlyOnArt' ? <NewOnArt /> : null}
                 </TabPane>
                 <TabPane tabId="currentOnArt">
-                    {active_tab === "currentOnArt" ? <CurrentOnArt/> : null}
+                    {active_tab === 'currentOnArt' ? <CurrentOnArt /> : null}
                 </TabPane>
                 <TabPane tabId="artOptimization">
-                    {active_tab === "artOptimization" ? <ArtOptimization/> : null}
+                    {active_tab === 'artOptimization' ? (
+                        <ArtOptimization />
+                    ) : null}
                 </TabPane>
                 <TabPane tabId="adverseEvent">
-                    {active_tab === "adverseEvent" ? <AdverseEvents/> : null}
+                    {active_tab === 'adverseEvent' ? <AdverseEvents /> : null}
                 </TabPane>
                 <TabPane tabId="dsd">
-                    {active_tab === 'dsd' ? <DSD/> : null}
+                    {active_tab === 'dsd' ? <DSD /> : null}
                 </TabPane>
                 <TabPane tabId="vl">
-                    {active_tab === 'vl' ? <ViralLoad/> : null}
+                    {active_tab === 'vl' ? <ViralLoad /> : null}
                 </TabPane>
                 <TabPane tabId="treatmentOutcomes">
-                    {active_tab === "treatmentOutcomes" ? <TreatmentOutcomes/> : null}
+                    {active_tab === 'treatmentOutcomes' ? (
+                        <TreatmentOutcomes />
+                    ) : null}
                 </TabPane>
                 <TabPane tabId={'otz'}>
-                    {active_tab === 'otz' ? <OTZ/> : null}
+                    {active_tab === 'otz' ? <OTZ /> : null}
                 </TabPane>
                 <TabPane tabId={'ovc'}>
-                    {active_tab === 'ovc' ? <OVC/> : null}
+                    {active_tab === 'ovc' ? <OVC /> : null}
                 </TabPane>
                 <TabPane tabId={'covid'}>
-                    {active_tab === 'covid' ? <COVID/> : null}
+                    {active_tab === 'covid' ? <COVID /> : null}
+                </TabPane>
+                <TabPane tabId={'artVerification'}>
+                    {active_tab === 'artVerification' ? <ArtVerification /> : null}
                 </TabPane>
             </TabContent>
-            <p></p><p></p>
+            <p></p>
+            <p></p>
         </div>
     );
 };

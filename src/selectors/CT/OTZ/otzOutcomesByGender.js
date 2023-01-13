@@ -8,7 +8,7 @@ export const getOtzOutcomesByGender = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        const categories = ['opt out of OTZ', 'Lost to follow up', 'DEAD', 'Transfer out', 'Transition to Adult Care', 'Active'];
+        const categories = ['opt out of OTZ', 'LTFU', 'DEAD', 'Transfer out', 'Transition to Adult Care', 'Active'];
         const ArrayValOptOut = [];
         const ArrayValLostToFollowUp = [];
         const ArrayValDead = [];
@@ -45,7 +45,7 @@ export const getOtzOutcomesByGender = createSelector(
                 }
             }
 
-            if (category === 'Lost to follow up') {
+            if (category === 'LTFU') {
                 if (catFilterMale.length > 0) {
                     ArrayValLostToFollowUp.push({
                         category,

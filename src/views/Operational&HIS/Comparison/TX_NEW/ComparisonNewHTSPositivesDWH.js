@@ -23,7 +23,7 @@ const ComparisonNewVsHTSPositivesDWH = () => {
                 text: '',
             },
             xAxis: {
-                categories: newOnArtTrendsData.months,
+                categories: newOnArtHtsPositiveData.months,
                 crosshair: true,
                 title: {
                     text: 'MONTHS',
@@ -64,7 +64,7 @@ const ComparisonNewVsHTSPositivesDWH = () => {
             series: [
                 {
                     name: 'TOTAL NEW ON TREATMENT',
-                    data: newOnArtTrendsData.txNew,
+                    data: newOnArtHtsPositiveData.txNew,
                     color: '#14084D',
                     dataLabels: { enabled: true },
                 },
@@ -73,7 +73,7 @@ const ComparisonNewVsHTSPositivesDWH = () => {
                     data: newOnArtHtsPositiveData.positives,
                     color: '#00a65a',
                     dataLabels: { enabled: true },
-                }
+                },
             ],
         });
     }, [newOnArtTrendsData, newOnArtHtsPositiveData]);

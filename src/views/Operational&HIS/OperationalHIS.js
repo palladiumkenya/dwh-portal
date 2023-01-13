@@ -15,7 +15,8 @@ import {
     enableIndicatorFilter,
     disableIndicatorFilter,
     enableGenderFilter,
-    enableDatimAgeGroupFilter
+    enableDatimAgeGroupFilter,
+    disableDatimAgePopulationFilter
 } from '../../actions/Shared/filterActions';
 import { LOADING_DELAY, OPERATIONALHIS_TABS, PAGES } from '../../constants';
 import Loading from '../Shared/Loading';
@@ -55,6 +56,20 @@ import {
 import {
     loadNewOnARTPartnerFacilityDWH
 } from '../../actions/Operational&HIS/Comparison/newOnArtByPartnerFacilityDWHActions';
+import { loadHTSPosByGenderKHIS } from '../../actions/Operational&HIS/Comparison/htsPosByGenderKHISActions';
+import { loadHTSPosByPartnerKHIS } from './../../actions/Operational&HIS/Comparison/htsPosByPartnerKHISActions';
+import { loadHTSPosByCountyKHIS } from './../../actions/Operational&HIS/Comparison/htsPosByCountyKHISActions';
+import { loadHTSPosByFacilityKHIS } from '../../actions/Operational&HIS/Comparison/htsPosByFacilityKHISActions';
+import { loadHTSPosByPartnerDWH } from '../../actions/Operational&HIS/Comparison/htsPosByPartnerDWHActions';
+import { loadHTSPosByAgeDWH } from '../../actions/Operational&HIS/Comparison/htsPosByAgeDWHActions';
+import { loadHTSPosByCountyDWH } from '../../actions/Operational&HIS/Comparison/htsPosByCountyDWHActions';
+import { loadHTSPosByFacilityDWH } from '../../actions/Operational&HIS/Comparison/htsPosByFacilityDWHActions';
+import { loadHTSPosByGenderDWH } from '../../actions/Operational&HIS/Comparison/htsPosByGenderDWHActions';
+import { loadHTSTestByGenderKHIS } from '../../actions/Operational&HIS/Comparison/htsTestByGenderKHISActions';
+import { loadHTSTestByPartnerKHIS } from '../../actions/Operational&HIS/Comparison/htsTestByPartnerKHISActions';
+import { loadHTSTestByCountyKHIS } from '../../actions/Operational&HIS/Comparison/htsTestByCountyKHISActions';
+import { loadHTSTestByFacilityKHIS } from '../../actions/Operational&HIS/Comparison/htsTestByFacilityKHISActions';
+import { loadHTSTesthtsTestTrendsDWH } from './../../actions/Operational&HIS/Comparison/htsTestTrendsDWHActions';
 
 
 const Comparison = Loadable({
@@ -86,6 +101,7 @@ const Consistency = Loadable({
 const DataQualityAssessment = Loadable({
     loader: () => import ('./Data Quality Assessment/DataQualityAssessment'),
     loading: Loading,
+
     delay: LOADING_DELAY
 });
 
@@ -129,6 +145,7 @@ const OperationalHIS = () => {
         dispatch(enableFromDateFilter());
         dispatch(enableGenderFilter());
         dispatch(enableDatimAgeGroupFilter());
+        dispatch(disableDatimAgePopulationFilter());
         if (active_tab === 'comparison') {
             dispatch(enableIndicatorFilter());
             dispatch(disableFacilityFilter());
@@ -158,6 +175,20 @@ const OperationalHIS = () => {
         dispatch(loadCurrOnARTKHISByCounty());
         dispatch(loadCurrOnARTKHISByPartner());
         dispatch(loadCurrentOnArtDistributionByCountyDWH());
+        dispatch(loadHTSPosByGenderKHIS());
+        dispatch(loadHTSPosByPartnerKHIS());
+        dispatch(loadHTSPosByCountyKHIS());
+        dispatch(loadHTSPosByFacilityKHIS());
+        dispatch(loadHTSTestByGenderKHIS());
+        dispatch(loadHTSTestByPartnerKHIS());
+        dispatch(loadHTSTestByCountyKHIS());
+        dispatch(loadHTSTestByFacilityKHIS());
+        dispatch(loadHTSPosByPartnerDWH());
+        dispatch(loadHTSPosByAgeDWH());
+        dispatch(loadHTSPosByCountyDWH());
+        dispatch(loadHTSPosByFacilityDWH());
+        dispatch(loadHTSPosByGenderDWH());
+        dispatch(loadHTSTesthtsTestTrendsDWH());
 
         dispatch(loadCurrentOnArtOverview(active_tab));
         dispatch(loadCurrentOnArtByAgeSex(active_tab));

@@ -22,7 +22,7 @@ export const loadCurrentNewOnArtOverview = () => async (dispatch, getState) => {
 
 export const fetchCurrentNewOnArtOverview = () => async (dispatch, getState) => {
     dispatch({ type: actionTypes.CT_CURRENT_NEW_ON_ART_OVERVIEW_REQUEST });
-    const previousMonth = moment().subtract(2, 'month').add(15, 'days');
+    const previousMonth = moment().subtract(2, 'month').add(16, 'days');
     const params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,
