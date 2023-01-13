@@ -1,16 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardHeader, Spinner } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import * as statusSelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
 
 const ArtVerificationSurveySubmission = () => {
     const [currentOnArtChart, setCurrentOnArtChart] = useState({});
-    const status = useSelector(
-        statusSelectors.getArtVerificationByPartner
-    );
-
+    const status = useSelector(statusSelectors.getArtVerificationByPartner);
 
     const loadCurrentOnArtBySexChart = useCallback(async () => {
         setCurrentOnArtChart({
@@ -72,7 +69,14 @@ const ArtVerificationSurveySubmission = () => {
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={currentOnArtChart} />
+                            {status.loadingP ? (
+                                <Spinner color="danger" />
+                            ) : (
+                                <HighchartsReact
+                                    highcharts={Highcharts}
+                                    options={currentOnArtChart}
+                                />
+                            )}
                         </div>
                     </CardBody>
                 </Card>

@@ -1,15 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardHeader, Spinner } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import * as reasonsSelector from '../../../selectors/CT/ArtVerification/reasonsNonVerified';
 
 const ArtVerificationReasonsUnverified = () => {
     const [pendingByPartnerChart, setCurrentOnArtByCountyChart] = useState({});
-    const reasonsData = useSelector(
-        reasonsSelector.getArtVerificationReasons
-    );
+    const reasonsData = useSelector(reasonsSelector.getArtVerificationReasons);
 
     const loadPendingByPartnerChart = useCallback(async () => {
         setCurrentOnArtByCountyChart({
@@ -72,12 +70,19 @@ const ArtVerificationReasonsUnverified = () => {
                         REASONS WHY CLIENTS ARE NOT VERIFIED
                     </CardHeader>
                     <CardBody className="trends-body">
-                        <HighchartsReact highcharts={Highcharts} options={pendingByPartnerChart} />
+                        {reasonsData.loading ? (
+                            <Spinner color="danger" />
+                        ) : (
+                            <HighchartsReact
+                                highcharts={Highcharts}
+                                options={pendingByPartnerChart}
+                            />
+                        )}
                     </CardBody>
                 </Card>
             </div>
         </div>
     );
-}
+};
 
 export default ArtVerificationReasonsUnverified;

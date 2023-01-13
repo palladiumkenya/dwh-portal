@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardHeader, Spinner } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import * as verifySelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
@@ -63,6 +63,7 @@ const ArtVerificationByCounty = () => {
             ],
         });
     }, [currentOnArtByCountyData]);
+    console.log(currentOnArtByCountyData.loadingC)
 
     useEffect(() => {
         loadCurrentOnArtByCountyChart();
@@ -76,7 +77,14 @@ const ArtVerificationByCounty = () => {
                         ART VERIFICATION BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
-                        <HighchartsReact highcharts={Highcharts} options={currentOnArtByCountyChart} />
+                        {currentOnArtByCountyData.loadingC ? (
+                            <Spinner color="danger" />
+                        ) : (
+                            <HighchartsReact
+                                highcharts={Highcharts}
+                                options={currentOnArtByCountyChart}
+                            />
+                        )}
                     </CardBody>
                 </Card>
             </div>
