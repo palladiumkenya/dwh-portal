@@ -13,7 +13,13 @@ export const getArtVerificationReasons = createSelector(
         let reasons = [];
         let num = [];
 
-        reasons = list.reverse().map((p) => p.non_verification_reason);
+        reasons = list
+            .reverse()
+            .map((p) =>
+                p.non_verification_reason === null
+                    ? 'None'
+                    : p.non_verification_reason
+            );
         num = list.map((p) => p.NUM);
 
         return { reasons, num };
