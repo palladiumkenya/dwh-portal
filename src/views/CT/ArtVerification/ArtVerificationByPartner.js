@@ -9,7 +9,7 @@ import * as verifySelectors from '../../../selectors/CT/ArtVerification/pendingS
 const ArtVerificationByPartner = () => {
     const [currentOnArtByPartnerChart, setCurrentOnArtByPartnerChart] = useState({});
     const currentOnArtByPartnerData = useSelector(
-        verifySelectors.getArtVerificationByPartnerKHIS
+        currentOnArtByPartnerSelectors.getCurrentOnArtByPartner
     );
 
     const loadCurrentOnArtByPartnerChart = useCallback(async () => {
@@ -42,13 +42,13 @@ const ArtVerificationByPartner = () => {
             series: [
                 {
                     name: 'TX CURR',
-                    data: currentOnArtByPartnerData.txCurr,
+                    data: currentOnArtByPartnerData.currentOnArt,
                     color: '#01058A',
                     type: 'column',
                 },
                 {
                     name: 'VERIFIED CLIENTS',
-                    data: currentOnArtByPartnerData.nupiVerified,
+                    data: currentOnArtByPartnerData.currentOnArtVerified,
                     color: '#1AB394',
                     type: 'column',
                 },
