@@ -4,7 +4,6 @@ import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByAgeSex';
-import { currentOnArtByAgeSexSelector } from '../../../atoms/CT/CurrOnART/currOnARTByAgeSexAtom';
 import { useRecoilValue } from 'recoil';
 import moment from 'moment';
 import { roundNumber } from '../../../utils/utils';
