@@ -17,8 +17,8 @@ export const getArtVerificationReasons = createSelector(
             .reverse()
             .map((p) =>
                 p.non_verification_reason === null
-                    ? 'None'
-                    : p.non_verification_reason
+                    ? 'NONE'
+                    : p.non_verification_reason.toUpperCase()
             );
         num = list.map((p) => p.NUM);
 
