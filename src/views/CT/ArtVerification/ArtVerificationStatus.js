@@ -4,23 +4,22 @@ import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader, Spinner } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import * as currentOnArtAllSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArt';
-import * as currentOnArtSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
 import * as currOnArtKHIS from '../../../selectors/Operational&HIS/Comparison/currOnArtKHIS';
+import * as currentOnArtSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArt';
+import * as currentOnArtOverviewSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
 import * as verifySelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
 
 const ArtVerificationStatus = () => {
     const [currentOnArtChart, setCurrentOnArtChart] = useState({});
     
+    const currentOnArt = useSelector(currentOnArtSelectors.getCurrentOnArt);
     const currentOnArtVerified = useSelector(
-        verifySelectors.getArtVerificationTotal
+        currentOnArtOverviewSelectors.getCurrentOnArtVerified
     );
 	const txcurrKHIS = useSelector(verifySelectors.getArtVerificationTxTotal).total;
 	let loading = useSelector(verifySelectors.getArtVerificationTxTotal).loadingC;
-    const notVerified =
-        txcurrKHIS - currentOnArtVerified < 0
-            ? 0
-            : txcurrKHIS - currentOnArtVerified;
-    
+    const notVerified = currentOnArt - currentOnArtVerified;
+
 
     const loadCurrentOnArtBySexChart = useCallback(async () => {
         setCurrentOnArtChart({
