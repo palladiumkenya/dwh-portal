@@ -54,14 +54,18 @@ const ArtVerificationByCounty = () => {
                     data: currentOnArtByCountyData.CurrentOnArtVerified,
                     color: '#1AB394',
                     type: 'column',
-                    formatter: function () {
-                        return (
-                            roundNumber(
-                                currentOnArtByCountyData.verifiedPerc[
-                                    this.point.index
-                                ]
-                            ) + '%'
-                        );
+                    dataLabels: {
+                        enabled: true,
+                        crop: false,
+                        formatter: function () {
+                            return (
+                                roundNumber(
+                                    currentOnArtByCountyData.verifiedPerc[
+                                        this.point.index
+                                    ]
+                                ) + '%'
+                            );
+                        },
                     },
                 },
             ],
