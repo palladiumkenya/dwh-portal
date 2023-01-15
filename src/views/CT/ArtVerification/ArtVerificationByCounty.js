@@ -25,17 +25,18 @@ const ArtVerificationByCounty = () => {
             yAxis: [{ title: { text: '' } }],
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             tooltip: {
-                formatter: function (i) {
-                            return (
-                                `<span style="font-size:10px">${this.x}</span><table>`+ 
-                                `<tr><td style="padding:0">${this.points[0].point.category}: </td>` +
-                                `<td style="padding:0"><b>${this.y}</b> </td></tr></table>`+
-                                roundNumber(currentOnArtByCountyData.verifiedPerc[
-                                    this.points[0].point.index
-                                ])
-                                 
-                                 + '% Verified'
-                            );
+                formatter: function () {
+                    console.log(this)
+                    return (
+                        `<span style="font-size:10px">${this.x}</span><table>`+ 
+                        `<tr><td style="padding:0">${this.points[0].point.category}: </td>` +
+                        `<td style="padding:0"><b>${this.y}</b> </td></tr></table>`+
+                        roundNumber(currentOnArtByCountyData.verifiedPerc[
+                            this.points[0].point.index
+                        ])
+
+                         + '% Verified'
+                    );
                         },
                 shared: true,
                 useHTML: true,
