@@ -5,6 +5,7 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import * as currentOnArtByPartnerSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByPartner';
 import * as verifySelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
+import { roundNumber } from '../../../utils/utils';
 
 const ArtVerificationByPartner = () => {
     const [currentOnArtByPartnerChart, setCurrentOnArtByPartnerChart] = useState({});
