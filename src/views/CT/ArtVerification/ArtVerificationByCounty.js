@@ -25,18 +25,7 @@ const ArtVerificationByCounty = () => {
             yAxis: [{ title: { text: '' } }],
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             tooltip: {
-                headerFormat:
-                    '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat:
-                    '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
-                footerFormat: `${roundNumber(
-                                    currentOnArtByCountyData.verifiedPerc[
-                                        this.point.index
-                                    ]
-                                )} % </table>`,
                 shared: true,
-                useHTML: true,
             },
             plotOptions: {
                 column: {
@@ -65,6 +54,15 @@ const ArtVerificationByCounty = () => {
                     data: currentOnArtByCountyData.CurrentOnArtVerified,
                     color: '#1AB394',
                     type: 'column',
+                    formatter: function () {
+                        return (
+                            roundNumber(
+                                currentOnArtByCountyData.verifiedPerc[
+                                    this.point.index
+                                ]
+                            ) + '%'
+                        );
+                    },
                 },
             ],
         });
