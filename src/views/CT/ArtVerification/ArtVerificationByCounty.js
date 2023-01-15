@@ -5,6 +5,8 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import * as verifySelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
 import * as currentOnArtByCountySelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByCounty';
+import { roundNumber } from '../../../utils/utils';
+
 
 const ArtVerificationByCounty = () => {
     const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState({});
@@ -23,13 +25,30 @@ const ArtVerificationByCounty = () => {
             ],
             yAxis: [{ title: { text: '' } }],
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
-            tooltip: { shared: true },
+            tooltip: {
+                formatter: function () {
+                    return (
+                        `<span style="font-size:10px">${this.x}</span><table>`+ 
+                        `<tr><td style="padding:0">${this.points[0].series.name}: </td>` +
+                        `<td style="padding:0"><b>${this.points[0].y}</b> </td></tr>`+ 
+                        `<tr><td style="padding:0">${this.points[1].series.name}: </td>` +
+                        `<td style="padding:0"><b>${this.points[1].y}</b> </td></tr></table>`+
+                        roundNumber(currentOnArtByCountyData.verifiedPerc[
+                            this.points[0].point.index
+                        ])
+
+                         + '% Verified'
+                    );
+                        },
+                shared: true,
+                useHTML: true,
+            },
             plotOptions: {
                 column: {
                     stacking: 'percent',
-                    tooltip: {
-                        valueSuffix: ' ({point.percentage:.0f}%)',
-                    },
+//                     tooltip: {
+//                         footerFormat: ' ({point.percentage:.0f}%)',
+//                     },
                     pointPadding: 0.2,
                     borderWidth: 0,
                     dataLabels: {
@@ -51,6 +70,19 @@ const ArtVerificationByCounty = () => {
                     data: currentOnArtByCountyData.CurrentOnArtVerified,
                     color: '#1AB394',
                     type: 'column',
+//                    dataLabels: {
+//                        enabled: true,
+//                        crop: false,
+//                         formatter: function () {
+//                             return (
+//                                 roundNumber(
+//                                     currentOnArtByCountyData.verifiedPerc[
+//                                         this.point.index
+//                                     ]
+//                                 ) + '%'
+//                             );
+//                         },
+//                    },
                 },
             ],
         });
