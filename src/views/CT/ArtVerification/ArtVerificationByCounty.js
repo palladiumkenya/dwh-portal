@@ -29,8 +29,10 @@ const ArtVerificationByCounty = () => {
                     console.log(this)
                     return (
                         `<span style="font-size:10px">${this.x}</span><table>`+ 
-                        `<tr><td style="padding:0">${this.points[0].point.category}: </td>` +
-                        `<td style="padding:0"><b>${this.y}</b> </td></tr></table>`+
+                        `<tr><td style="padding:0">${this.points[0].series.name}: </td>` +
+                        `<td style="padding:0"><b>${this.points[0].y}</b> </td></tr>`+ 
+                        `<tr><td style="padding:0">${this.points[1].series.name}: </td>` +
+                        `<td style="padding:0"><b>${this.points[1].y}</b> </td></tr></table>`+
                         roundNumber(currentOnArtByCountyData.verifiedPerc[
                             this.points[0].point.index
                         ])
@@ -68,9 +70,9 @@ const ArtVerificationByCounty = () => {
                     data: currentOnArtByCountyData.CurrentOnArtVerified,
                     color: '#1AB394',
                     type: 'column',
-                    dataLabels: {
-                        enabled: true,
-                        crop: false,
+//                    dataLabels: {
+//                        enabled: true,
+//                        crop: false,
 //                         formatter: function () {
 //                             return (
 //                                 roundNumber(
@@ -80,7 +82,7 @@ const ArtVerificationByCounty = () => {
 //                                 ) + '%'
 //                             );
 //                         },
-                    },
+//                    },
                 },
             ],
         });
