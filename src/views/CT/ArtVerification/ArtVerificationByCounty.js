@@ -7,6 +7,7 @@ import * as verifySelectors from '../../../selectors/CT/ArtVerification/pendingS
 import * as currentOnArtByCountySelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByCounty';
 import { roundNumber } from '../../../utils/utils';
 
+
 const ArtVerificationByCounty = () => {
     const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState({});
     const currentOnArtByCountyData = useSelector(
