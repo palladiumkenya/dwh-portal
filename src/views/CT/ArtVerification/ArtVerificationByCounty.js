@@ -5,6 +5,7 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import * as verifySelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
 import * as currentOnArtByCountySelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByCounty';
+import { roundNumber } from '../../../utils/utils';
 
 const ArtVerificationByCounty = () => {
     const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState({});
@@ -23,13 +24,26 @@ const ArtVerificationByCounty = () => {
             ],
             yAxis: [{ title: { text: '' } }],
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
-            tooltip: { shared: true },
+            tooltip: {
+                headerFormat:
+                    '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat:
+                    '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                footerFormat: `${roundNumber(
+                                    currentOnArtByCountyData.verifiedPerc[
+                                        this.point.index
+                                    ]
+                                )} % </table>`,
+                shared: true,
+                useHTML: true,
+            },
             plotOptions: {
                 column: {
                     stacking: 'percent',
-                    tooltip: {
-                        valueSuffix: ' ({point.percentage:.0f}%)',
-                    },
+//                     tooltip: {
+//                         footerFormat: ' ({point.percentage:.0f}%)',
+//                     },
                     pointPadding: 0.2,
                     borderWidth: 0,
                     dataLabels: {
