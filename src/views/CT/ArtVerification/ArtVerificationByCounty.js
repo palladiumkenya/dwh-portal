@@ -25,6 +25,18 @@ const ArtVerificationByCounty = () => {
             yAxis: [{ title: { text: '' } }],
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             tooltip: {
+                formatter: function (i) {
+                            return (
+                                `<span style="font-size:10px">${this.x}</span><table>`+ 
+                                `<tr><td style="padding:0">${this.points[0].point.category}: </td>` +
+                                `<td style="padding:0"><b>${this.y}</b> </td></tr></table>`+
+                                currentOnArtByCountyData.verifiedPerc[
+                                    this.points[0].point.index
+                                ]
+                                    
+                                 + '% Verified'
+                            );
+                        },
                 shared: true,
             },
             plotOptions: {
@@ -57,15 +69,15 @@ const ArtVerificationByCounty = () => {
                     dataLabels: {
                         enabled: true,
                         crop: false,
-                        formatter: function () {
-                            return (
-                                roundNumber(
-                                    currentOnArtByCountyData.verifiedPerc[
-                                        this.point.index
-                                    ]
-                                ) + '%'
-                            );
-                        },
+//                         formatter: function () {
+//                             return (
+//                                 roundNumber(
+//                                     currentOnArtByCountyData.verifiedPerc[
+//                                         this.point.index
+//                                     ]
+//                                 ) + '%'
+//                             );
+//                         },
                     },
                 },
             ],
