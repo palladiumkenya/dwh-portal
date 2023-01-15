@@ -30,14 +30,15 @@ const ArtVerificationByCounty = () => {
                                 `<span style="font-size:10px">${this.x}</span><table>`+ 
                                 `<tr><td style="padding:0">${this.points[0].point.category}: </td>` +
                                 `<td style="padding:0"><b>${this.y}</b> </td></tr></table>`+
-                                currentOnArtByCountyData.verifiedPerc[
+                                roundNumber(currentOnArtByCountyData.verifiedPerc[
                                     this.points[0].point.index
-                                ]
-                                    
+                                ])
+                                 
                                  + '% Verified'
                             );
                         },
                 shared: true,
+                useHTML: true,
             },
             plotOptions: {
                 column: {
