@@ -26,7 +26,6 @@ const ArtVerificationByCounty = () => {
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             tooltip: {
                 formatter: function () {
-                    console.log(this)
                     return (
                         `<span style="font-size:10px">${this.x}</span><table>`+ 
                         `<tr><td style="padding:0">${this.points[0].series.name}: </td>` +
