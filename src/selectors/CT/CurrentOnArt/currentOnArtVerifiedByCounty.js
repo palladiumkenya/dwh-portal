@@ -76,51 +76,64 @@ export const getCurrentOnArtByCountyPerc = createSelector(
         listFilteredTxCurr
     ) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        let counties = [];
-        let CurrentOnArtVerified = [];
         let listTxCurr = filtered ? listFilteredTxCurr : listUnfilteredTxCurr;
-        let currentOnArt = [];
-        let verifiedPerc = [];
-        let lessVerifiedPerc = [];
+        let newList = []
 
         for (let i = 0; i < listTxCurr.length; i++) {
             if (!listTxCurr[i].County) {
                 continue;
             }
-            verifiedPerc.push(
-                (((list.find(
-                    (x) =>
-                        x.County?.toUpperCase() ===
-                        listTxCurr[i].County?.toUpperCase()
-                )?.NumNupi ?? 0) / listTxCurr[i]?.txCurr) * 100) ?? 0
-            );
-            lessVerifiedPerc.push(
-                100 - (((list.find(
-                    (x) =>
-                        x.County?.toUpperCase() ===
-                        listTxCurr[i].County?.toUpperCase()
-                )?.NumNupi ?? 0) /
-                    listTxCurr[i]?.txCurr) *
-                    100 ?? 0)
-            );
-            counties.push(listTxCurr[i].County.toUpperCase());
-            currentOnArt.push(listTxCurr[i].txCurr);
-            CurrentOnArtVerified.push(
-                list.find(
-                    (x) =>
-                        x.County?.toUpperCase() ===
-                        listTxCurr[i]?.County.toUpperCase()
-                )?.NumNupi ?? 0 // 0 if NumNUPI isnt found
-            );
+
+            newList.push({
+                county: listTxCurr[i].County.toUpperCase(),
+                CurrentOnArtVerified:
+                    ((list.find(
+                        (x) =>
+                            x.County?.toUpperCase() ===
+                            listTxCurr[i].County?.toUpperCase()
+                    )?.NumNupi ?? 0) /
+                        listTxCurr[i]?.txCurr) *
+                        100 ?? 0,
+                currentOnArt:
+                    100 -
+                    (((list.find(
+                        (x) =>
+                            x.County?.toUpperCase() ===
+                            listTxCurr[i].County?.toUpperCase()
+                    )?.NumNupi ?? 0) /
+                        listTxCurr[i]?.txCurr) *
+                        100 ?? 0),
+                numcurrentOnArtVerified:
+                    list.find(
+                        (x) =>
+                            x.County?.toUpperCase() ===
+                            listTxCurr[i]?.County.toUpperCase()
+                    )?.NumNupi ?? 0,
+                numcurrentOnArt: listTxCurr[i].txCurr,
+                verifiedPerc:
+                    ((list.find(
+                        (x) =>
+                            x.County?.toUpperCase() ===
+                            listTxCurr[i].County?.toUpperCase()
+                    )?.NumNupi ?? 0) /
+                        listTxCurr[i]?.txCurr) *
+                        100 ?? 0,
+            });
         }
 
+        newList = newList.sort(
+            (b, a) => a.CurrentOnArtVerified - b.CurrentOnArtVerified
+        );
+
         return {
-            counties,
-            CurrentOnArtVerified: verifiedPerc,
-            currentOnArt: lessVerifiedPerc,
-            numcurrentOnArtVerified: CurrentOnArtVerified,
-            numcurrentOnArt: currentOnArt,
-            verifiedPerc,
+            counties: newList.map((e) => e.county),
+            CurrentOnArtVerified: newList.map((e) => e.CurrentOnArtVerified),
+            currentOnArt: newList.map((e) => e.currentOnArt),
+            numcurrentOnArtVerified: newList.map(
+                (e) => e.numcurrentOnArtVerified
+            ),
+            numcurrentOnArt: newList.map((e) => e.numcurrentOnArt),
+            verifiedPerc: newList.map((e) => e.verifiedPerc),
         };
     }
 );
