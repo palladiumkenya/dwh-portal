@@ -25,7 +25,7 @@ export const getCurrentOnArtByCounty = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         let counties = [];
         let CurrentOnArtVerified = [];
-        const listTxCurr = filtered ? listFilteredTxCurr : listUnfilteredTxCurr;
+        let listTxCurr = filtered ? listFilteredTxCurr : listUnfilteredTxCurr;
         let currentOnArt = [];
         let verifiedPerc = [];
 
@@ -51,6 +51,76 @@ export const getCurrentOnArtByCounty = createSelector(
             );
         }
 
-        return { counties, CurrentOnArtVerified, currentOnArt, verifiedPerc };
+        return {
+            counties,
+            CurrentOnArtVerified,
+            currentOnArt,
+            verifiedPerc,
+        };
+    }
+);
+
+export const getCurrentOnArtByCountyPerc = createSelector(
+    [
+        listUnfiltered,
+        listFiltered,
+        filtered,
+        listUnfilteredTxCurr,
+        listFilteredTxCurr,
+    ],
+    (
+        listUnfiltered,
+        listFiltered,
+        filtered,
+        listUnfilteredTxCurr,
+        listFilteredTxCurr
+    ) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        let counties = [];
+        let CurrentOnArtVerified = [];
+        let listTxCurr = filtered ? listFilteredTxCurr : listUnfilteredTxCurr;
+        let currentOnArt = [];
+        let verifiedPerc = [];
+        let lessVerifiedPerc = [];
+
+        for (let i = 0; i < listTxCurr.length; i++) {
+            if (!listTxCurr[i].County) {
+                continue;
+            }
+            verifiedPerc.push(
+                (((list.find(
+                    (x) =>
+                        x.County?.toUpperCase() ===
+                        listTxCurr[i].County?.toUpperCase()
+                )?.NumNupi ?? 0) / listTxCurr[i]?.txCurr) * 100) ?? 0
+            );
+            lessVerifiedPerc.push(
+                100 - (((list.find(
+                    (x) =>
+                        x.County?.toUpperCase() ===
+                        listTxCurr[i].County?.toUpperCase()
+                )?.NumNupi ?? 0) /
+                    listTxCurr[i]?.txCurr) *
+                    100 ?? 0)
+            );
+            counties.push(listTxCurr[i].County.toUpperCase());
+            currentOnArt.push(listTxCurr[i].txCurr);
+            CurrentOnArtVerified.push(
+                list.find(
+                    (x) =>
+                        x.County?.toUpperCase() ===
+                        listTxCurr[i]?.County.toUpperCase()
+                )?.NumNupi ?? 0 // 0 if NumNUPI isnt found
+            );
+        }
+
+        return {
+            counties,
+            CurrentOnArtVerified: verifiedPerc,
+            currentOnArt: lessVerifiedPerc,
+            numcurrentOnArtVerified: CurrentOnArtVerified,
+            numcurrentOnArt: currentOnArt,
+            verifiedPerc,
+        };
     }
 );

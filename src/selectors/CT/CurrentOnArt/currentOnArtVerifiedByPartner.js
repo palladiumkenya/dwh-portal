@@ -24,10 +24,9 @@ export const getCurrentOnArtByPartner = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         let partners = [];
         let currentOnArtVerified = [];
-        const listTxCurr = filtered ? listFilteredTxCurr : listUnfilteredTxCurr;
+        let listTxCurr = filtered ? listFilteredTxCurr : listUnfilteredTxCurr;
         let currentOnArt = [];
         let verifiedPerc = [];
-        
 
         for (let i = 0; i < listTxCurr.length; i++) {
             if (!listTxCurr[i].CTPartner) {
@@ -52,5 +51,66 @@ export const getCurrentOnArtByPartner = createSelector(
         }
 
         return { partners, currentOnArtVerified, currentOnArt, verifiedPerc };
+    }
+);
+
+export const getCurrentOnArtByPartnerPerc = createSelector(
+    [
+        listUnfiltered,
+        listFiltered,
+        filtered,
+        listUnfilteredTxCurr,
+        listFilteredTxCurr,
+    ],
+    (
+        listUnfiltered,
+        listFiltered,
+        filtered,
+        listUnfilteredTxCurr,
+        listFilteredTxCurr
+    ) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        let partners = [];
+        let currentOnArtVerified = [];
+        let listTxCurr = filtered ? listFilteredTxCurr : listUnfilteredTxCurr;
+        let currentOnArt = [];
+        let verifiedPerc = [];
+        let lessVerifiedPerc = [];
+
+        for (let i = 0; i < listTxCurr.length; i++) {
+            if (!listTxCurr[i].CTPartner) {
+                continue;
+            }
+            partners.push(listTxCurr[i].CTPartner.toUpperCase());
+            currentOnArt.push(listTxCurr[i].txCurr);
+            verifiedPerc.push(
+                (((list.find(
+                    (x) =>
+                        x.CTPartner.toUpperCase() ===
+                        listTxCurr[i].CTPartner.toUpperCase()
+                )?.NumNupi ?? 0 )/ listTxCurr[i].txCurr) * 100) ?? 0
+            );
+            lessVerifiedPerc.push(
+                100 - ((
+                    (list.find((x) => x.CTPartner.toUpperCase() === listTxCurr[i].CTPartner.toUpperCase())?.NumNupi ?? 0) /
+                    listTxCurr[i].txCurr) * 100 ?? 0)
+            );
+            currentOnArtVerified.push(
+                list.find(
+                    (x) =>
+                        x.CTPartner.toUpperCase() ===
+                        listTxCurr[i].CTPartner.toUpperCase()
+                )?.NumNupi ?? 0 // 0 if NumNUPI isnt found
+            );
+        }
+
+        return {
+            partners,
+            currentOnArtVerified: verifiedPerc,
+            currentOnArt: lessVerifiedPerc,
+            numcurrentOnArtVerified: currentOnArtVerified,
+            numcurrentOnArt: currentOnArt,
+            verifiedPerc,
+        };
     }
 );
