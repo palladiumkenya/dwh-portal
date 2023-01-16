@@ -11,7 +11,7 @@ import { roundNumber } from '../../../utils/utils';
 const ArtVerificationByCounty = () => {
     const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState({});
     const currentOnArtByCountyData = useSelector(
-        currentOnArtByCountySelectors.getCurrentOnArtByCounty
+        currentOnArtByCountySelectors.getCurrentOnArtByCountyPerc
     );
 
     const loadCurrentOnArtByCountyChart = useCallback(async () => {
@@ -28,16 +28,25 @@ const ArtVerificationByCounty = () => {
             tooltip: {
                 formatter: function () {
                     return (
-                        `<span style="font-size:10px">${this.x}</span><table>`+ 
+                        `<span style="font-size:10px">${this.x}</span><table>` +
                         `<tr><td style="padding:0">${this.points[0].series.name}: </td>` +
-                        `<td style="padding:0"><b>${this.points[0].y}</b> </td></tr>`+ 
+                        `<td style="padding:0"><b>${
+                            currentOnArtByCountyData.numcurrentOnArt[
+                                this.points[0].point.index
+                            ]
+                        }</b> </td></tr>` +
                         `<tr><td style="padding:0">${this.points[1].series.name}: </td>` +
-                        `<td style="padding:0"><b>${this.points[1].y}</b> </td></tr></table>`+
-                        roundNumber(currentOnArtByCountyData.verifiedPerc[
-                            this.points[0].point.index
-                        ])
-
-                         + '% Verified'
+                        `<td style="padding:0"><b>${
+                            currentOnArtByCountyData.numcurrentOnArtVerified[
+                                this.points[0].point.index
+                            ]
+                        }</b> </td></tr></table>` +
+                        roundNumber(
+                            currentOnArtByCountyData.verifiedPerc[
+                                this.points[0].point.index
+                            ]
+                        ) +
+                        '% Verified'
                     );
                         },
                 shared: true,
