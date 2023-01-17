@@ -4,10 +4,17 @@ import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader, Spinner } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import * as statusSelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
+import * as currentOnArtSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArt';
+import * as currentOnArtOverviewSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
 
 const ArtVerificationSurveySubmission = () => {
     const [currentOnArtChart, setCurrentOnArtChart] = useState({});
     const status = useSelector(statusSelectors.getArtVerificationByPartner);
+    const currentOnArt = useSelector(currentOnArtSelectors.getCurrentOnArt);
+    const currentOnArtVerified = useSelector(
+        currentOnArtOverviewSelectors.getCurrentOnArtVerified
+    );
+    const notVerified = currentOnArt - currentOnArtVerified;
 
     const loadCurrentOnArtBySexChart = useCallback(async () => {
         setCurrentOnArtChart({
@@ -45,7 +52,7 @@ const ArtVerificationSurveySubmission = () => {
                         },
                         {
                             name: 'NOT SUBMITTED SURVEY',
-                            y: status.notsubmitted,
+                            y: notVerified - status.submitted,
                             sliced: true,
                             selected: true,
                             color: '#8E2C16',
@@ -54,7 +61,7 @@ const ArtVerificationSurveySubmission = () => {
                 },
             ],
         });
-    }, [status]);
+    }, [status, notVerified, currentOnArtVerified, currentOnArt]);
 
     useEffect(() => {
         loadCurrentOnArtBySexChart();
