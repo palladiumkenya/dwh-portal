@@ -9,7 +9,7 @@ import * as currentOnArtByPartnerSelectors from '../../../selectors/CT/ArtVerifi
 const ArtVerificationPendingSurveysByPartner = () => {
     const [pendingByPartnerChart, setCurrentOnArtByCountyChart] = useState({});
     const currentOnArtByPartnerData = useSelector(
-        currentOnArtByPartnerSelectors.getArtVerificationByPartner
+        currentOnArtByPartnerSelectors.getArtPendingUnverifiedByPartner
     );
 
     const loadPendingByPartnerChart = useCallback(async () => {
@@ -21,7 +21,7 @@ const ArtVerificationPendingSurveysByPartner = () => {
                     crosshair: true,
                 },
             ],
-            yAxis: [{ title: { text: '' }, min: 0 }],
+            yAxis: [{ title: { text: '' } }],
             legend: {
                 enabled: false,
                 align: 'left',
@@ -64,14 +64,10 @@ const ArtVerificationPendingSurveysByPartner = () => {
                         UNVERIFIED PENDING SURVEYS BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
-                        {currentOnArtByPartnerData.loadingP ? (
-                            <Spinner color="danger" />
-                        ) : (
-                            <HighchartsReact
-                                highcharts={Highcharts}
-                                options={pendingByPartnerChart}
-                            />
-                        )}
+                        <HighchartsReact
+                            highcharts={Highcharts}
+                            options={pendingByPartnerChart}
+                        />
                     </CardBody>
                 </Card>
             </div>

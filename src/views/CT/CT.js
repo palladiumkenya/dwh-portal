@@ -416,11 +416,16 @@ const CT = () => {
             Object.keys(CT_TABS).map((value) => {
                 return (
                     <NavItem key={value}>
-                        <NavLink active={active_tab === value} onClick={() => {
-                            dispatch(changeCtTab(active_tab));
-                            toggle(value);
-                        }}>
-                            {CT_TABS[value]}
+                        <NavLink
+                            active={active_tab === value}
+                            onClick={() => {
+                                dispatch(changeCtTab(active_tab));
+                                toggle(value);
+                            }}
+                        >
+                            <div style={{ fontSize: '.78em' }}>
+                                {CT_TABS[value]}
+                            </div>
                         </NavLink>
                     </NavItem>
                 );

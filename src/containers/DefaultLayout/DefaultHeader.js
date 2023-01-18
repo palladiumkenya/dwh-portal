@@ -80,7 +80,7 @@ const DefaultHeader = () => {
                 full={{ src: logo, width: 'auto', height: 50, alt: 'DWH Logo' }}
                 minimized={{ src: sygnet, alt: 'DWH Logo' }}
             />
-            <Nav className="d-md-down-none navbar">
+            <Nav className="d-md-down-none navbar" style={{ fontSize: '.88em', padding: ".1rem !important" }}>
                 <NavItem className="px-3">
                     <NavLink to="/" className="nav-link active">
                         <strong>Home</strong>
