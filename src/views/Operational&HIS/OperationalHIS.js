@@ -132,7 +132,9 @@ const OperationalHIS = () => {
                             toggle(value);
                         }}
                     >
-                        {OPERATIONALHIS_TABS[value]}
+                        <div style={{ fontSize: '.78em' }}>
+                            {OPERATIONALHIS_TABS[value]}
+                        </div>
                     </NavLink>
                 </NavItem>
             );

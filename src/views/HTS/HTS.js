@@ -44,7 +44,9 @@ const HTS = () => {
                             toggle(value);
                         }}
                     >
-                        {HTS_TABS[value]}
+                        <div style={{ fontSize: '.78em' }}>
+                            {HTS_TABS[value]}
+                        </div>
                     </NavLink>
                 </NavItem>
             );
