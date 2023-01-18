@@ -59,7 +59,9 @@ const RR = () => {
                             dispatch(changeRRTab(value));
                             toggle(value);
                         }} >
-                            {RR_TABS[value]}
+                            <div style={{ fontSize: '.78em' }}>
+                                {RR_TABS[value]}
+                            </div>
                         </NavLink>
                     </NavItem>
                 );

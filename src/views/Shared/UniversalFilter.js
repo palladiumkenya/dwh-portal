@@ -264,7 +264,7 @@ const UniversalFilter = () => {
 
     return (
         <>
-            <Row>
+            <Row style={{ fontSize: '.78em' }}>
                 {filters.countyFilterEnabled ? (
                     <Col
                         className={
