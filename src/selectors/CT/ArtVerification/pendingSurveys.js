@@ -1,15 +1,33 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
 
-const listUnfiltered = state => state.artVerificationByPartner.listUnfiltered;
+const listUnfiltered = (state) => state.artVerificationByPartner.listUnfiltered;
 const listFiltered = (state) => state.artVerificationByPartner.listFiltered;
 const loadingP = (state) => state.artVerificationByPartner.loading;
 
-const listUnfilteredCounty = (state) => state.artVerificationByCounty.listUnfiltered;
-const listFilteredCounty = (state) => state.artVerificationByCounty.listFiltered;
+const listUnfilteredCounty = (state) =>
+    state.artVerificationByCounty.listUnfiltered;
+const listFilteredCounty = (state) =>
+    state.artVerificationByCounty.listFiltered;
 const loadingC = (state) => state.artVerificationByCounty.loading;
 
-const filtered = state => state.filters.filtered;
+const listUnfilteredTxCurr = (state) =>
+    state.currentOnArtByCounty.listUnfiltered;
+const listFilteredTxCurr = (state) => state.currentOnArtByCounty.listFiltered;
+const listUnfilteredVerified = (state) =>
+    state.currentOnArtVerifiedByCounty.listUnfiltered;
+const listFilteredVerified = (state) =>
+    state.currentOnArtVerifiedByCounty.listFiltered;
+    
+const listUnfilteredVerifiedPartner = (state) =>
+    state.currentOnArtVerifiedByPartner.listUnfiltered;
+const listFilteredVerifiedPartner = (state) =>
+    state.currentOnArtVerifiedByPartner.listFiltered;
+const listUnfilteredTxCurrPartner = (state) =>
+    state.currentOnArtByPartner.listUnfiltered;
+const listFilteredTxCurrPartner = (state) => state.currentOnArtByPartner.listFiltered;
+
+const filtered = (state) => state.filters.filtered;
 
 export const getArtVerificationByPartner = createSelector(
     [listUnfiltered, listFiltered, filtered, loadingP],
@@ -38,6 +56,80 @@ export const getArtVerificationByPartner = createSelector(
             submitted,
             notsubmitted,
             loadingP,
+        };
+    }
+);
+
+export const getArtPendingUnverifiedByPartner = createSelector(
+    [
+        listUnfiltered,
+        listFiltered,
+        filtered,
+        listUnfilteredTxCurrPartner,
+        listFilteredTxCurrPartner,
+        listUnfilteredVerifiedPartner,
+        listFilteredVerifiedPartner,
+    ],
+    (
+        listUnfiltered,
+        listFiltered,
+        filtered,
+        listUnfilteredTxCurr,
+        listFilteredTxCurr,
+        listUnfilteredVerified,
+        listFilteredVerified
+    ) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        let listTxCurr = filtered ? listFilteredTxCurr : listUnfilteredTxCurr;
+        let listVerified = filtered
+            ? listFilteredVerified
+            : listUnfilteredVerified;
+        let newList = [];
+
+        for (let i = 0; i < list.length; i++) {
+            if (!list[i].SDIP) {
+                continue;
+            }
+
+            newList.push({
+                partners: list[i].SDIP.toUpperCase(),
+                Pending: isNaN(
+                    listTxCurr.find((x) => {
+                        return (
+                            x.CTPartner?.toUpperCase() ===
+                            list[i].SDIP?.toUpperCase()
+                        );
+                    })?.txCurr -
+                        listVerified.find((x) => {
+                            return (
+                                x.CTPartner?.toUpperCase() ===
+                                list[i].SDIP?.toUpperCase()
+                            );
+                        })?.NumNupi -
+                        list[i].SurveysReceived
+                )
+                    ? 0
+                    : listTxCurr.find((x) => {
+                          return (
+                              x.CTPartner?.toUpperCase() ===
+                              list[i].SDIP?.toUpperCase()
+                          );
+                      })?.txCurr -
+                      listVerified.find((x) => {
+                          return (
+                              x.CTPartner?.toUpperCase() ===
+                              list[i].SDIP?.toUpperCase()
+                          );
+                      })?.NumNupi -
+                      list[i].SurveysReceived,
+            });
+        }
+
+        newList = newList.sort((b, a) => a.Pending - b.Pending);
+
+        return {
+            partners: newList.map((e) => e.partners),
+            pending: newList.map((e) => e.Pending),
         };
     }
 );
@@ -95,6 +187,68 @@ export const getArtVerificationByCounty = createSelector(
         received = list.map((p) => p.SurveysReceived);
 
         return { counties, pending, received, unverified, loadingC };
+    }
+);
+
+export const getArtPendingUnverifiedByCounty = createSelector(
+    [
+        listUnfilteredCounty,
+        listFilteredCounty,
+        filtered,
+        listUnfilteredTxCurr,
+        listFilteredTxCurr,
+        listUnfilteredVerified,
+        listFilteredVerified,
+    ],
+    (
+        listUnfiltered,
+        listFiltered,
+        filtered,
+        listUnfilteredTxCurr,
+        listFilteredTxCurr,
+        listUnfilteredVerified,
+        listFilteredVerified
+    ) => {
+        let list = filtered ? listFiltered : listUnfiltered;
+        let listTxCurr = filtered ? listFilteredTxCurr : listUnfilteredTxCurr;
+        let listVerified = filtered
+            ? listFilteredVerified
+            : listUnfilteredVerified;
+        let newList = [];
+
+        list.forEach((e) => e.County = e.County.split('-').join(' '));
+
+        for (let i = 0; i < list.length; i++) {
+            if (!list[i].County) {
+                continue;
+            }
+
+            newList.push({
+                county: list[i].County.toUpperCase(),
+                Pending:
+                    listTxCurr.find((x) => {
+                        return (
+                            x.County?.toUpperCase() ===
+                            list[i].County?.toUpperCase()
+                        );
+                    })?.txCurr -
+                    listVerified.find((x) => {
+                        return (
+                            x.County?.toUpperCase() ===
+                            list[i].County?.toUpperCase()
+                        );
+                    })?.NumNupi -
+                    list[i].SurveysReceived,
+            });
+        }
+
+        newList = newList.sort((b, a) => a.Pending - b.Pending);
+                console.log(newList);
+
+        return {
+            counties: newList.map((e) => e.county),
+            pending: newList.map((e) => e.Pending),
+        };
     }
 );
 

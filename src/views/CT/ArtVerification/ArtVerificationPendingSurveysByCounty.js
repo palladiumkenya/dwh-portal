@@ -6,9 +6,11 @@ import Highcharts from 'highcharts';
 import * as artByCountySelectors from '../../../selectors/CT/ArtVerification/pendingSurveys';
 
 const ArtVerificationPendingSurveysByCounty = () => {
-    const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState({});
+    const [currentOnArtByCountyChart, setCurrentOnArtByCountyChart] = useState(
+        {}
+    );
     const pendingByCountyData = useSelector(
-        artByCountySelectors.getArtVerificationByCounty
+        artByCountySelectors.getArtPendingUnverifiedByCounty
     );
 
     const loadCurrentOnArtByCountyChart = useCallback(async () => {
@@ -20,7 +22,7 @@ const ArtVerificationPendingSurveysByCounty = () => {
                     crosshair: true,
                 },
             ],
-            yAxis: [{ title: { text: '' }, min: 0 }],
+            yAxis: [{ title: { text: '' } }],
             legend: {
                 enabled: false,
                 align: 'left',
@@ -63,19 +65,15 @@ const ArtVerificationPendingSurveysByCounty = () => {
                         UNVERIFIED PENDING SURVEYS BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
-                        {pendingByCountyData.loadingC ? (
-                            <Spinner color="danger" />
-                        ) : (
-                            <HighchartsReact
-                                highcharts={Highcharts}
-                                options={currentOnArtByCountyChart}
-                            />
-                        )}
+                        <HighchartsReact
+                            highcharts={Highcharts}
+                            options={currentOnArtByCountyChart}
+                        />
                     </CardBody>
                 </Card>
             </div>
         </div>
     );
-}
+};
 
 export default ArtVerificationPendingSurveysByCounty;
