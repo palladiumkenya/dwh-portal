@@ -198,7 +198,7 @@ const Adhoc = () => {
             <DropdownItem href={process.env.REACT_APP_METABASE_URL} >
                 <strong>Metabase</strong>
             </DropdownItem>
-            <DropdownItem options={{disabled: true}} href={process.env.REACT_APP_METABASE_URL} >
+            <DropdownItem disabled={true} href={process.env.REACT_APP_METABASE_URL} >
                 <strong>Superset</strong>
             </DropdownItem>
         </DropdownMenu>
