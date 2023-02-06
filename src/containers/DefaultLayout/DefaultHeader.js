@@ -186,11 +186,11 @@ const Adhoc = () => {
     return (
         <UncontrolledDropdown nav direction="down">
         <DropdownToggle nav>
-            <strong>Adhoc</strong>
+            <strong>Self Service</strong>
         </DropdownToggle>
         <DropdownMenu right>
             <DropdownItem header tag="div">
-                <strong>Platforms supporting Adhoc</strong>
+                <strong>Platforms supporting Self Service</strong>
             </DropdownItem>
             <DropdownItem href={process.env.REACT_APP_ADHOC_URL} >
                 <strong>Flex monster</strong>
