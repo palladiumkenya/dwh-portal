@@ -13,8 +13,6 @@ export const getAdultPLHIVVaccinatedByAgeGroups = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         const listAgeGroup = filtered ? listFilteredAgeGroup : listUnfilteredAgeGroup;
 
-        console.log(list, listAgeGroup)
-
         let ageGroups = [
             "10 to 14",
             "15 to 19",
