@@ -19,7 +19,7 @@ jobs:
           cd /apps/githubworkflows/dwh-portal-temp
           sudo chown -R cicd:cicd /apps/githubworkflows/dwh-portal-temp
           git config --global --add safe.directory /apps/githubworkflows/dwh-portal-temp    
-          git pull -b feat/new-reporting-layer https://github.com/palladiumkenya/dwh-portal.git
+          git pull origin feat/new-reporting-layer
           sudo chown -R cicd:cicd /apps/githubworkflows/dwh-portal-temp
           git status
           yarn install --ignore-engines
