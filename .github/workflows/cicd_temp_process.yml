@@ -16,14 +16,10 @@ jobs:
         key: ${{ secrets.CICD_SECRET_TEST }}
         port: ${{ secrets.PORT_TEST }}
         script: |
-          cd /apps/githubworkflows/
-          sudo rm -rf dwh-portal-temp
-          sudo mkdir dwh-portal-temp
+          cd /apps/githubworkflows/dwh-portal-temp
           sudo chown -R cicd:cicd /apps/githubworkflows/dwh-portal-temp
           git config --global --add safe.directory /apps/githubworkflows/dwh-portal-temp    
-          cd /apps/githubworkflows/dwh-portal-temp
-          git clone -b feat/new-reporting-layer https://github.com/palladiumkenya/dwh-portal.git .
-          sudo cp /apps/dockerApps/dwh-portal-temp/.env.production /apps/githubworkflows/dwh-portal-temp/
+          git pull -b feat/new-reporting-layer https://github.com/palladiumkenya/dwh-portal.git
           sudo chown -R cicd:cicd /apps/githubworkflows/dwh-portal-temp
           git status
           yarn install --ignore-engines
