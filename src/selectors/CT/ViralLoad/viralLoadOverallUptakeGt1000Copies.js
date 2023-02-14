@@ -48,7 +48,8 @@ export const getViralLoadOverallUptakeGt1000CopiesReceivedFollowTestAllData = cr
 export const getViralLoadOverallUptakeGt1000CopiesReceivedFollowTestData = createSelector(
     [listUnfilteredFollowTests, listFilteredFollowTests, filtered],
     (listUnfiltered, listFiltered, filtered) => {
-        const list = filtered ? listFiltered : listUnfiltered;
+        let list = filtered ? listFiltered : listUnfiltered;
+        list = list.filter((a) => a.LastVLResult != null);
 
         return { data: list };
     }
