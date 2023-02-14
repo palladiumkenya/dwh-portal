@@ -33,7 +33,7 @@ export const fetchPrepDiscontinuation = () => async (dispatch, getState) => {
     };
     try {
         const response = await axios.get(
-            `${DWH_API_URL}/api/hts/getPrepDiscontinuation`,
+            `${DWH_API_URL}hts/getPrepDiscontinuation`,
             { params: params }
         );
         dispatch({
