@@ -35,7 +35,8 @@ const PNSContactsHivStatus = () => {
                       .format('YYYYMM'),
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const result = await getAll('hts/pnsKnowledgeHivStatusCascade', params);
+        let result = await getAll('hts/pnsKnowledgeHivStatusCascade', params);
+        result = result.pop()
         let pnsSexualContactsCascade = {
             elicited: result.elicited ? parseInt(result.elicited):0,
             tested: result.tested ? parseInt(result.tested):0,

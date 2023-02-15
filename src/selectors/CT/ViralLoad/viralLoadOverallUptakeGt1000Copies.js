@@ -1,6 +1,4 @@
 import { createSelector } from 'reselect';
-import viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment
-    from '../../../reducers/CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
 
 const listUnfiltered = state => state.viralLoadOverallUptakeGt1000Copies.listUnfiltered;
 const listFiltered = state => state.viralLoadOverallUptakeGt1000Copies.listFiltered;

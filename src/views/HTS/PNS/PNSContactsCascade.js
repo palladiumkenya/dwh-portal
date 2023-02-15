@@ -44,7 +44,8 @@ const PNSContactsCascade = () => {
                       .format('YYYYMM'),
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const result1 = await getAll('hts/pnsSexualContactsCascade', params);
+        let result1 = await getAll('hts/pnsSexualContactsCascade', params);
+        result1 = result1.pop()
         let pnsSexualContactsCascade = {
             elicited: result1.elicited ? result1.elicited:0,
             tested: result1.tested ? result1.tested:0,
@@ -52,7 +53,8 @@ const PNSContactsCascade = () => {
             linked: result1.linked ? result1.linked:0,
             knownPositive: result1.knownPositive ? result1.knownPositive:0
         };
-        const result2 = await getAll('hts/pnsIndex', params);
+        let result2 = await getAll('hts/pnsIndex', params);
+        result2 =result2.pop()
         let data = [
             result2.indexClients ? result2.indexClients : 0,
             pnsSexualContactsCascade.elicited ? pnsSexualContactsCascade.elicited : 0,
