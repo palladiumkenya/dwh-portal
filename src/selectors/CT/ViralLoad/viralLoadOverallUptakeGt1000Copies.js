@@ -1,6 +1,4 @@
 import { createSelector } from 'reselect';
-import viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment
-    from '../../../reducers/CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
 
 const listUnfiltered = state => state.viralLoadOverallUptakeGt1000Copies.listUnfiltered;
 const listFiltered = state => state.viralLoadOverallUptakeGt1000Copies.listFiltered;
@@ -48,7 +46,8 @@ export const getViralLoadOverallUptakeGt1000CopiesReceivedFollowTestAllData = cr
 export const getViralLoadOverallUptakeGt1000CopiesReceivedFollowTestData = createSelector(
     [listUnfilteredFollowTests, listFilteredFollowTests, filtered],
     (listUnfiltered, listFiltered, filtered) => {
-        const list = filtered ? listFiltered : listUnfiltered;
+        let list = filtered ? listFiltered : listUnfiltered;
+        list = list.filter((a) => a.LastVLResult != null);
 
         return { data: list };
     }

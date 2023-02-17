@@ -41,13 +41,14 @@ const PNSChildrenFamilyTestingCascade = () => {
                       .format('YYYYMM'),
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
-        const result = await getAll('hts/pnsChildrenCascade', params);
+        let result = await getAll('hts/pnsChildrenCascade', params);
+        result = result.pop()
         let pnsChildrenCascade = {
-            elicited: result.elicited ? result.elicited:0,
-            tested: result.tested ? result.tested:0,
-            positive: result.positive ? result.positive:0,
-            linked: result.linked ? result.linked:0,
-            knownPositive: result.knownPositive ? result.knownPositive:0
+            elicited: result?.elicited ? result.elicited:0,
+            tested: result?.tested ? result.tested:0,
+            positive: result?.positive ? result.positive:0,
+            linked: result?.linked ? result.linked:0,
+            knownPositive: result?.knownPositive ? result.knownPositive:0
         };
         let data = [
             pnsChildrenCascade.elicited ? pnsChildrenCascade.elicited : 0,

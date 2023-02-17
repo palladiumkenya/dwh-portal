@@ -12,7 +12,7 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
     const viralLoadUptakeGt1000Copies = useSelector(viralLoadOverallUptakeGt1000.getViralLoadOverallUptakeGt1000CopiesData).data;
     const viralLoadUptakeGt1000CopiesEac = useSelector(viralLoadOverallUptakeGt1000.getViralLoadOverallUptakeGt1000CopiesEacData).data;
     const viralLoadUptakeGt1000CopiesRecFollowTestAll = useSelector(viralLoadOverallUptakeGt1000.getViralLoadOverallUptakeGt1000CopiesReceivedFollowTestAllData).data;
-    const viralLoadUptakeGt1000CopiesRecFollowTest = useSelector(viralLoadOverallUptakeGt1000.getViralLoadOverallUptakeGt1000CopiesReceivedFollowTestData).data;
+    let viralLoadUptakeGt1000CopiesRecFollowTest = useSelector(viralLoadOverallUptakeGt1000.getViralLoadOverallUptakeGt1000CopiesReceivedFollowTestData).data;
     const viralLoadOverallNumberGt1000CopiesSecondlineRegimentData = useSelector(viralLoadOverallUptakeGt1000.getViralLoadOverallNumberGt1000CopiesSecondlineRegimentData).data;
 
     const loadViralLoadOverallUptakeAndSuppressionBySex = useCallback(async () => {
@@ -20,7 +20,6 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
         viralLoadUptakeGt1000CopiesRecFollowTest.forEach(element => {
             totalFollowTest += element.Num;
         });
-        console.log(viralLoadUptakeGt1000CopiesRecFollowTest[0]?.b);
 
         setViralLoadOverallUptakeAndSuppressionBySex({
             chart: {

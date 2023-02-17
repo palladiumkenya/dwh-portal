@@ -42,7 +42,8 @@ const PNSContactsTestingOverview = () => {
                       .add(17, 'days')
                       .format('YYYYMM'),
         };
-        const result = await getAll('hts/pnsIndex', params);
+        let result = await getAll('hts/pnsIndex', params);
+        result = result.pop()
         setPnsIndex(result.indexClients ? parseInt(result.indexClients) : 0);
     }, [filters]);
 
@@ -70,7 +71,8 @@ const PNSContactsTestingOverview = () => {
                       .add(17, 'days')
                       .format('YYYYMM'),
         };
-        const data = await getAll('hts/pnsSexualContactsCascade', params);
+        let data = await getAll('hts/pnsSexualContactsCascade', params);
+        data = data.pop()
         setPNSSexualContactsCascade({
             elicited: data.elicited ? data.elicited:0,
             tested: data.tested ? data.tested:0,

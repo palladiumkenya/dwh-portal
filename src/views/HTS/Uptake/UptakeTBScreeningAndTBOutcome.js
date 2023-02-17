@@ -45,8 +45,8 @@ const UptakeTBScreeningAndTBOutcome = () => {
         if(result.length > 0) {
             const notScreenedForTBArray = result.filter(obj => obj.TBSCreening_grp === "Not Screened for TB");
             const screenedForTBArray = result.filter(obj => obj.TBSCreening_grp === "Screened for TB");
-            NotScreenedTB = parseInt(notScreenedForTBArray[0].Tested, 10);
-            ScreenedTB = parseInt(screenedForTBArray[0].Tested, 10);
+            NotScreenedTB = parseInt(notScreenedForTBArray[0]?.Tested, 10);
+            ScreenedTB = parseInt(screenedForTBArray[0]?.Tested, 10);
         }
         setScreenedTB({
             title: { text: '' },
