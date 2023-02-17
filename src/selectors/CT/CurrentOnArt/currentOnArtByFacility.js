@@ -27,7 +27,8 @@ export const getCurrentOnArtByFacility = createSelector(
             : listUnfilteredVerified;
 
         const facilityData = list.map((e) => {
-            let data = listVerified.filter((f) => f.MFLCode === e.MFLCode);
+            let data = listVerified.filter((f) => parseInt(f.MFLCode, 10) === parseInt(e.MFLCode, 10));
+            console.log(data)
             return {
                 ...e,
                 Nupi: data[0]?.NumNupi ?? 0,
