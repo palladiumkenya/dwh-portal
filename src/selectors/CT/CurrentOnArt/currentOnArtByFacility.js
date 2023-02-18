@@ -33,7 +33,8 @@ export const getCurrentOnArtByFacility = createSelector(
                 ...e,
                 Nupi: data[0]?.NumNupi ?? 0,
                 NotNupi: e.TXCURR - (data[0]?.NumNupi ?? 0),
-                perc: Math.floor(((data[0]?.NumNupi ?? 0) * 100) / e.TXCURR),
+                perc: e.TXCURR > 0 ? (Math.floor(
+                    ((data[0]?.NumNupi ?? 0) * 100) / e.TXCURR)) : 0
             };
         });
         facilityData.sort(function (a, b) {
