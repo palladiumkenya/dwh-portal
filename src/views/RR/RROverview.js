@@ -124,10 +124,16 @@ const RROverview = () => {
                         </CardHeader>
                         <CardBody
                             className="align-items-center d-flex justify-content-center"
-                            style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
+                            style={{
+                                textAlign: 'center',
+                                backgroundColor: '#F6F6F6',
+                                height: '100px',
+                            }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{expected}</span>
+                                <span className="expected-uploads-text">
+                                    {expected}
+                                </span>
                             </div>
                         </CardBody>
                     </Card>
@@ -139,11 +145,29 @@ const RROverview = () => {
                         </CardHeader>
                         <CardBody
                             className="align-items-center justify-content-center"
-                            style={{ backgroundColor: '#F6F6F6', height: '100px' }}
+                            style={{
+                                backgroundColor: '#F6F6F6',
+                                height: '100px',
+                            }}
                         >
-                            <div className="col-12" style={{ textAlign: 'center' }}>
-                                <span className="overall-rates-figure">{recencyStats.stats}</span>&nbsp;
-                                <sup className="overall-rates-sup"> {recencyStats.statsPerc ? recencyStats.statsPerc:0}<span className="overall-rates-sup-perc"> %</span></sup>
+                            <div
+                                className="col-12"
+                                style={{ textAlign: 'center' }}
+                            >
+                                <span className="overall-rates-figure">
+                                    {recencyStats.stats}
+                                </span>
+                                &nbsp;
+                                <sup className="overall-rates-sup">
+                                    {' '}
+                                    {recencyStats.statsPerc
+                                        ? recencyStats.statsPerc
+                                        : 0}
+                                    <span className="overall-rates-sup-perc">
+                                        {' '}
+                                        %
+                                    </span>
+                                </sup>
                             </div>
                         </CardBody>
                     </Card>
@@ -155,11 +179,28 @@ const RROverview = () => {
                         </CardHeader>
                         <CardBody
                             className="align-items-center justify-content-center"
-                            style={{ backgroundColor: '#F6F6F6', height: '100px' }}
+                            style={{
+                                backgroundColor: '#F6F6F6',
+                                height: '100px',
+                            }}
                         >
-                            <div className="col-12" style={{ textAlign: 'center' }}>
-                                <span className="consistency-reporting-figure">{consistencyStats.stats}</span>
-                                <sup className="consistency-reporting-sup"> { consistencyStats.statsPerc ? consistencyStats.statsPerc:0 }<span className="consistency-reporting-sup-perc"> %</span></sup>
+                            <div
+                                className="col-12"
+                                style={{ textAlign: 'center' }}
+                            >
+                                <span className="consistency-reporting-figure">
+                                    {consistencyStats.stats}
+                                </span>
+                                <sup className="consistency-reporting-sup">
+                                    {' '}
+                                    {consistencyStats.statsPerc
+                                        ? consistencyStats.statsPerc
+                                        : 0}
+                                    <span className="consistency-reporting-sup-perc">
+                                        {' '}
+                                        %
+                                    </span>
+                                </sup>
                             </div>
                         </CardBody>
                     </Card>
@@ -167,73 +208,91 @@ const RROverview = () => {
             </div>
             <div className="row">
                 <div className="col-4">
-                    {
-                        overallReportingRatesByFacilityNotReportedLoading === true ?
-                        <Spinner/> :
+                    {overallReportingRatesByFacilityNotReportedLoading ===
+                    true ? (
+                        <Spinner />
+                    ) : (
                         <CsvDownloader
                             filename="ndwh_reporting_rates_not_reported"
                             separator=","
-                            datas={overallReportingRatesByFacilityNotReported.map(l => ({
-                                mfl: l.facilityId,
-                                name: l.FacilityName,
-                                county: l.county,
-                                sub_county: l.subcounty,
-                                agency: l.agency,
-                                partner: l.partner,
-                                reporting_date: filters.fromDate ? filters.fromDate : moment().startOf('month').subtract(1, 'month').format("MMM YYYY"),
-                            }))}
+                            datas={overallReportingRatesByFacilityNotReported.map(
+                                (l) => ({
+                                    mfl: l.FacilityId,
+                                    name: l.FacilityName,
+                                    county: l.County,
+                                    sub_county: l.subCounty,
+                                    agency: l.Agency,
+                                    partner: l.Partner,
+                                    reporting_date: filters.fromDate
+                                        ? filters.fromDate
+                                        : moment()
+                                              .startOf('month')
+                                              .subtract(1, 'month')
+                                              .format('MMM YYYY'),
+                                })
+                            )}
                             text="Download facilities not reporting"
                             className="btn btn-danger"
                         />
-                    }
+                    )}
                 </div>
                 <div className="col-4">
-                    {
-                        overallReportingRatesByFacilityReportedLoading === true ?
-                        <Spinner/> :
+                    {overallReportingRatesByFacilityReportedLoading === true ? (
+                        <Spinner />
+                    ) : (
                         <CsvDownloader
                             filename="ndwh_reporting_rates_reported"
                             separator=","
-                            datas={overallReportingRatesByFacilityReported.map(l => ({
-                                mfl: l.facilityId,
-                                name: l.FacilityName,
-                                county: l.county,
-                                sub_county: l.subcounty,
-                                agency: l.agency,
-                                partner: l.partner,
-                                upload_date: l.uploaddate ? l.uploaddate.substring(0,10) : '',
-                            }))}
+                            datas={overallReportingRatesByFacilityReported.map(
+                                (l) => ({
+                                    mfl: l.FacilityId,
+                                    name: l.FacilityName,
+                                    county: l.County,
+                                    sub_county: l.subCounty,
+                                    agency: l.Agency,
+                                    partner: l.Partner,
+                                    upload_date: l.uploaddate
+                                        ? l.uploaddate.substring(0, 10)
+                                        : '',
+                                })
+                            )}
                             text="Download facilities reporting"
                             className="btn btn-success"
                         />
-                    }
+                    )}
                 </div>
                 <div className="col-4">
-                    {
-                        consistencyByFacilityNotReportedLoading === true ?
-                        <Spinner/> :
+                    {consistencyByFacilityNotReportedLoading === true ? (
+                        <Spinner />
+                    ) : (
                         <CsvDownloader
                             filename="ndwh_reporting_rates_not_consistent"
                             separator=","
-                            datas={consistencyByFacilityNotReported.map(l => ({
-                                mfl: l.MFLCode,
-                                name: l.FacilityName,
-                                county: l.County,
-                                sub_county: l.Subcounty,
-                                agency: l.Agency,
-                                partner: l.Partner,
-                                reporting_date: filters.fromDate ? filters.fromDate : moment().startOf('month').subtract(1, 'month').format("MMM YYYY"),
-                                number_of_uploads: l.NumberOfUploads
-                            }))}
+                            datas={consistencyByFacilityNotReported.map(
+                                (l) => ({
+                                    mfl: l.MFLCode,
+                                    name: l.FacilityName,
+                                    county: l.County,
+                                    sub_county: l.Subcounty,
+                                    agency: l.Agency,
+                                    partner: l.Partner,
+                                    reporting_date: filters.fromDate
+                                        ? filters.fromDate
+                                        : moment()
+                                              .startOf('month')
+                                              .subtract(1, 'month')
+                                              .format('MMM YYYY'),
+                                    number_of_uploads: l.NumberOfUploads,
+                                })
+                            )}
                             text="Download facilities not consistent"
                             className="btn btn-warning"
                         />
-                    }
+                    )}
                 </div>
             </div>
             <br></br>
         </>
-
     );
 };
 
