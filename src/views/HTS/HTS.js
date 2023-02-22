@@ -122,9 +122,9 @@ const HTS = () => {
                 <TabPane tabId="pns">
                     { active_tab === 'pns' ? <PNS/>: null }
                 </TabPane>
-                {/* <TabPane tabId="prep">
+                <TabPane tabId="prep">
                     { active_tab === 'prep' ? <PrEP/>: null }
-                </TabPane> */}
+                </TabPane>
             </TabContent>
             <p></p><p></p>
         </div>
