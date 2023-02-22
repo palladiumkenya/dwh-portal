@@ -472,7 +472,7 @@ const UniversalFilter = () => {
                         }
                     >
                         <div className="form-group">
-                            <label htmlFor="toDate">ART Start Date</label>
+                            <label htmlFor="toDate">Period</label>
 
                             {/*<MonthRangeInput*/}
                             {/*    name="toDate"*/}
