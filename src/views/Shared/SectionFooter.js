@@ -14,7 +14,7 @@ const SectionFooter = ({ overview }) => {
                         </div>
                         <div className="col-6">
                             <div className="reporting-rates-overview-copyright">
-                                copyright 2022 Palladium Group
+                                copyright 2023 Palladium Group
                             </div>
                         </div>
                     </div>

@@ -204,8 +204,8 @@ export const getNewlyStartedOnArtTrendsKHIS = createSelector(
 
         let ReportingMonthYear = moment()
             .subtract(1, 'months')
-            .add(15, 'days')
-            .format('YMM');
+            .add(16, 'days')
+            .format('YYYYMM');
 
         if (list.length >= 12) {
             list = list.filter((item) => {
@@ -251,7 +251,6 @@ export const getNewlyStartedOnArtTrendsKHIS = createSelector(
                 if (datimAgeGroups[i] === '20 to 24') {
                     list.map((item) => {
                         item.StartART1 += item.Start_ART_20_24;
-                        console.log(item);
                     });
                 }
                 if (datimAgeGroups[i] === '25+') {

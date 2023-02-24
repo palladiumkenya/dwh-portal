@@ -1,7 +1,7 @@
-name: deploy to production
+name: deploy to test instance
 on:
   push:
-    branches: [ prod ]
+    branches: [ dev ]
 jobs:
 
   build:
@@ -11,17 +11,24 @@ jobs:
     - name: executing remote connection
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.CICD_SECRET }}
-        port: ${{ secrets.PORT }}
+        host: ${{ secrets.HOST_TEST }}
+        username: ${{ secrets.USERNAME_TEST }}
+        key: ${{ secrets.CICD_SECRET_TEST }}
+        port: ${{ secrets.PORT_TEST }}
         script: |
-          git config --global --add safe.directory /apps/github-workflows/dwh-portal      
-          cd /apps/github-workflows/dwh-portal
-          git pull origin prod
+          cd /apps/githubworkflows/
+          sudo rm -rf dwh-portal
+          sudo mkdir dwh-portal
+          sudo chown -R cicd:cicd /apps/githubworkflows/dwh-portal
+          git config --global --add safe.directory /apps/githubworkflows/dwh-portal      
+          cd /apps/githubworkflows/dwh-portal
+          git clone -b dev https://github.com/palladiumkenya/dwh-portal.git .
+          sudo cp /apps/dockerApps/dwh-portal/.env.production /apps/githubworkflows/dwh-portal/
+          sudo chown -R cicd:cicd /apps/githubworkflows/dwh-portal
           git status
-          yarn install
+          yarn install --ignore-engines
           yarn build
-          sudo rm -rf /tmp/dwh
-          sudo mv /var/www/dwh /tmp/
-          sudo mv build /var/www/dwh
+          sudo rm -rf /tmp/dwhtest
+          sudo mv /var/www/dwhtest /tmp/
+          sudo mv build /var/www/
+          sudo mv /var/www/build/ /var/www/dwhtest

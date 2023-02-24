@@ -1,0 +1,30 @@
+name: deploy to test instance
+on:
+  push:
+    branches: [ feat/new-reporting-layer ]
+jobs:
+
+  build:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote connection
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST_TEST }}
+        username: ${{ secrets.USERNAME_TEST }}
+        key: ${{ secrets.CICD_SECRET_TEST }}
+        port: ${{ secrets.PORT_TEST }}
+        script: |
+          cd /apps/githubworkflows/dwh-portal-temp
+          sudo chown -R cicd:cicd /apps/githubworkflows/dwh-portal-temp
+          git config --global --add safe.directory /apps/githubworkflows/dwh-portal-temp    
+          git pull origin feat/new-reporting-layer
+          sudo chown -R cicd:cicd /apps/githubworkflows/dwh-portal-temp
+          git status
+          yarn install --ignore-engines
+          yarn build
+          sudo rm -rf /tmp/dwhtemp
+          sudo mv /var/www/dwhtemp /tmp/
+          sudo cp -R build /var/www/
+          sudo mv /var/www/build/ /var/www/dwhtemp

@@ -34,7 +34,7 @@ const RRCounty = () => {
                 ? filters.fromDate
                 : moment()
                       .subtract(2, 'month')
-                      .add(15, 'days')
+                      .add(16, 'days')
                       .format('MMM YYYY'),
         };
         params.period = filters.fromDate
@@ -44,12 +44,12 @@ const RRCounty = () => {
                   .format('YYYY,M')
             : moment()
                   .subtract(2, 'month')
-                  .add(15, 'days')
+                  .add(16, 'days')
                   .format('YYYY,M');
         const overallReportingRateResult = await getAll('manifests/recencyreportingbycounty/' + rrTab, params);
         params.period = filters.fromDate ?
             moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M') :
-            moment().subtract(3, 'month').add(15, 'days').format('YYYY,M');
+            moment().subtract(3, 'month').add(16, 'days').format('YYYY,M');
         const consistencyResult = await getAll('manifests/consistencyreportingbycountypartner/' + rrTab + '?reportingType=county', params);
         const rrData = await getAll('manifests/expectedPartnerCounty/' + rrTab + '?reportingType=county', params);
         

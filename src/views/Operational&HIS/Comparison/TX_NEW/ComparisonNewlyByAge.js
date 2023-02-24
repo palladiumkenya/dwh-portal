@@ -13,31 +13,40 @@ const ComparisonNewlyByAge = () => {
     const loadComparisonNewlyByAge = useCallback(async () => {
         setComparisonNewlyByAge({
             chart: {
-                type: 'column'
+                type: 'column',
             },
             title: {
-                text: ''
+                text: '',
             },
             xAxis: {
-                categories: ['UNDER 1', '1-9', '10-14', '15-19', '20-24', '25+'],
+                categories: [
+                    'UNDER 1',
+                    '1-9',
+                    '10-14',
+                    '15-19',
+                    '20-24',
+                    '25+',
+                ],
                 crosshair: true,
                 title: {
-                    text: 'AGE GROUP'
-                }
+                    text: 'AGE GROUP',
+                },
             },
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'NUMBER OF PATIENTS'
-                }
+                    text: 'NUMBER OF PATIENTS',
+                },
             },
             tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                headerFormat:
+                    '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat:
+                    '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
                     '<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
-                useHTML: true
+                useHTML: true,
             },
             legend: {
                 align: 'left',
@@ -46,18 +55,21 @@ const ComparisonNewlyByAge = () => {
             plotOptions: {
                 column: {
                     pointPadding: 0.01,
-                    borderWidth: 0
-                }
+                    borderWidth: 0,
+                },
             },
-            series: [{
-                name: 'DWH',
-                data: newlyKHIS.newOnARTByAgeDWH,
-                color: '#2F4050'
-            }, {
-                name: 'KHIS',
-                data: newlyKHIS.newlyStartedByAge,
-                color: "#1AB394"
-            }]
+            series: [
+                {
+                    name: 'KHIS',
+                    data: newlyKHIS.newlyStartedByAge,
+                    color: '#2F4050',
+                },
+                {
+                    name: 'DWH',
+                    data: newlyKHIS.newOnARTByAgeDWH,
+                    color: '#1AB394',
+                },
+            ],
         });
     }, [newlyKHIS]);
 

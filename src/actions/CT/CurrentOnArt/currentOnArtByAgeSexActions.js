@@ -43,6 +43,7 @@ export const fetchCurrentOnArtByAgeSex = () => async (dispatch, getState) => {
         agency: getState().filters.agencies,
         project: getState().filters.projects,
         gender: getState().filters.genders,
+
         datimAgeGroup: getState().filters.datimAgeGroups
     };
     const response = await getAll('care-treatment/txCurrByAgeAndSex', params);

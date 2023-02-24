@@ -15,10 +15,13 @@ export const COVIDOverallAdmissionMale = () => {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
-                type: 'pie'
+                type: 'pie',
+                height: 280,
             },
             title: { text: '' },
-            tooltip: { pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>' },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>',
+            },
             accessibility: { point: { valueSuffix: '%' } },
             plotOptions: {
                 pie: {
@@ -26,18 +29,30 @@ export const COVIDOverallAdmissionMale = () => {
                     cursor: 'pointer',
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                    }
-                }
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    },
+                },
             },
-            series: [{
-                name:"OVERALL ADMISSION",
-                colorByPoint: true,
-                data: [
-                    { name: 'ADMITTED', y: overallAdmissionData.admittedTotal, color: "#1AB394" },
-                    { name: 'NOT ADMITTED', y: overallAdmissionData.notAdmittedTotal, sliced: true, selected: true, color: "#2F4050" },
-                ]
-            }]
+            series: [
+                {
+                    name: 'MALES ADMITTED',
+                    colorByPoint: true,
+                    data: [
+                        {
+                            name: 'ADMITTED',
+                            y: overallAdmissionData.admittedTotal,
+                            color: '#1AB394',
+                        },
+                        {
+                            name: 'NOT ADMITTED',
+                            y: overallAdmissionData.notAdmittedTotal,
+                            sliced: true,
+                            selected: true,
+                            color: '#2F4050',
+                        },
+                    ],
+                },
+            ],
         });
     }, [overallAdmissionData]);
 

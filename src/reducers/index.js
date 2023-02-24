@@ -134,6 +134,8 @@ import otzProportionOfAlHivWhoHaveCompletedOtzTrainingByPartner from './CT/OTZ/o
 import otzOutcomesAmongAlHivWithBaselineVL from './CT/OTZ/otzOutcomesAmongAlHivWithBaselineVL';
 import otzOutcomesAmongAlHivWithReSuppression from './CT/OTZ/otzOutcomesAmongAlHivWithReSuppression';
 import otzOutcomesByGender from './CT/OTZ/otzOutcomesByGender';
+import otzEnrollmentTrend from './CT/OTZ/otzEnrollmentTrend';
+import otzEnrollmentAgeSex from './CT/OTZ/otzEnrollmentAgeSex';
 import otzOutcomesByPopulationType from './CT/OTZ/otzOutcomesByPopulationType';
 import otzOutcomesByYearOfArtStart from './CT/OTZ/otzOutcomesByYearOfArtStart';
 import otzOutcomesByCounty from './CT/OTZ/otzOutcomesByCounty';
@@ -162,6 +164,13 @@ import otzVlSuppressionBySex from './CT/OTZ/otzVlSuppressionBySex';
 import otzVlSuppressionByAge from './CT/OTZ/otzVlSuppressionByAge';
 import otzVlSuppressionByCounty from './CT/OTZ/otzVlSuppressionByCounty';
 import otzVlSuppressionByPartner from './CT/OTZ/otzVlSuppressionByPartner';
+import otzNotEnrolledPartner from './CT/OTZ/otzNotEnrolledPartner';
+import otzNotEnrolledCounty from './CT/OTZ/otzNotEnrolledCounty';
+import alHivWithReSuppression from './CT/OTZ/alHivWithReSuppression';
+import otzVlSuppressionByAgeNotEnrolled from './CT/OTZ/otzVlSuppressionByAgeNotEnrolled';
+import otzVlSuppressionByCountyNotEnrolled from './CT/OTZ/otzVlSuppressionByCountyNotEnrolled';
+import otzVlSuppressionByPartnerNotEnrolled from './CT/OTZ/otzVlSuppressionByPartnerNotEnrolled';
+import otzVlSuppressionBySexNotEnrolled from './CT/OTZ/otzVlSuppressionBySexNotEnrolled';
 
 import CovidAdultPLHIVCurrentOnTreatment from './CT/Covid/covidAdultPLHIVCurrentOnTreatment';
 import CovidAdultPLHIVPartiallyVaccinated from './CT/Covid/covidAdultPLHIVPartiallyVaccinated';
@@ -212,6 +221,13 @@ import CovidNumberScreened from './CT/Covid/covidNumberScreened';
 import CovidCumulativeWithMissingDateGivenFirstDose from './CT/Covid/covidCumulativeWithMissingDateGivenFirstDose';
 import CovidAdmissionSymptomaticByAge from './CT/Covid/covidAdmissionSymptomaticByAge';
 import CovidManagementAdmitted from './CT/Covid/covidManagementAdmitted';
+import currentOnArtVerified from './CT/CurrentOnArt/currentOnArtVerified';
+import currentOnArtVerifiedByAgeSex from './CT/CurrentOnArt/currentOnArtVerifiedByAgeSex';
+import currentOnArt from './CT/CurrentOnArt/currentOnArt';
+import currentOnArtVerifiedByCounty from './CT/CurrentOnArt/currentOnArtVerifiedByCounty';
+import currentOnArtVerifiedByPartner from './CT/CurrentOnArt/currentOnArtVerifiedByPartner';
+import currentOnArtByFacility from './CT/CurrentOnArt/currentOnArtByFacility';
+import currentOnArtVerifiedByFacility from './CT/CurrentOnArt/currentOnArtVerifiedByFacility';
 import viralLoadOverallUptakeSuppressionReferredLessIntense
     from './CT/ViralLoad/viralLoadOverallUptakeSuppressionReferredLessIntense';
 import viralLoadOverallUptakeGt1000Copies from './CT/ViralLoad/viralLoadOverallUptakeGt1000Copies';
@@ -224,6 +240,19 @@ import viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment
     from './CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
 
 
+import htsPosByGenderKHIS from './Operational&HIS/Comparison/htsPosByGenderKHIS';
+import htsPosByCountyKHIS from './Operational&HIS/Comparison/htsPosByCountyKHIS';
+import htsPosByFacilityKHIS from './Operational&HIS/Comparison/htsPosByFacilityKHIS';
+import htsPosByPartnerKHIS from './Operational&HIS/Comparison/htsPosByPartnerKHIS';
+import htsTestByGenderKHIS from './Operational&HIS/Comparison/htsTestByGenderKHIS';
+import htsTestByCountyKHIS from './Operational&HIS/Comparison/htsTestByCountyKHIS';
+import htsTestByFacilityKHIS from './Operational&HIS/Comparison/htsTestByFacilityKHIS';
+import htsTestByPartnerKHIS from './Operational&HIS/Comparison/htsTestByPartnerKHIS';
+import htsPosByAgeDWH from './Operational&HIS/Comparison/htsPosByAgeDWH';
+import htsPosByGenderDWH from './Operational&HIS/Comparison/htsPosByGenderDWH';
+import htsPosByCountyDWH from './Operational&HIS/Comparison/htsPosByCountyDWH';
+import htsPosByFacilityDWH from './Operational&HIS/Comparison/htsPosByFacilityDWH';
+import htsPosByPartnerDWH from './Operational&HIS/Comparison/htsPosByPartnerDWH';
 import newlyStartedOnArtKHIS from './Operational&HIS/Comparison/newlyStartedOnArtKHIS';
 import newlyStartedOnArtTrendsKHIS from './Operational&HIS/Comparison/newlyStartedOnArtTrendsKHIS';
 import htsPositivesTrendsKHIS from './Operational&HIS/Comparison/htsPositivesTrendsKHIS';
@@ -235,7 +264,15 @@ import currOnArtByFacilityKHIS from './Operational&HIS/Comparison/currOnArtByFac
 import newOnArtByFacilityKHIS from './Operational&HIS/Comparison/newOnArtByFacilityKHIS';
 import currOnArtByFacilityDWH from './Operational&HIS/Comparison/currOnArtByFacilityDWH';
 import newOnArtByFacilityDWH from './Operational&HIS/Comparison/newOnArtByFacilityDWH';
+import htsTestTrendsDWH from './Operational&HIS/Comparison/htsTestTrendsDWH';
 
+import newOnPrep from './HTS/Prep/newOnPrep';
+import prepDiscontinuation from './HTS/Prep/prepDiscontinuation'
+import prepDiscontinuationReason from './HTS/Prep/prepDiscontinuationReason';
+
+import artVerificationByCounty from './CT/ArtVerification/artVerificationByCounty';
+import artVerificationByPartner from './CT/ArtVerification/artVerificationByPartner';
+import artVerificationReasons from './CT/ArtVerification/artVerificationReasons';
 
 export default combineReducers({
     auth: authReducer,
@@ -388,6 +425,15 @@ export default combineReducers({
     otzVlSuppressionByAge,
     otzVlSuppressionByCounty,
     otzVlSuppressionByPartner,
+    otzEnrollmentTrend,
+    otzEnrollmentAgeSex,
+    otzNotEnrolledPartner,
+    otzNotEnrolledCounty,
+    alHivWithReSuppression,
+    otzVlSuppressionByAgeNotEnrolled,
+    otzVlSuppressionBySexNotEnrolled,
+    otzVlSuppressionByPartnerNotEnrolled,
+    otzVlSuppressionByCountyNotEnrolled,
 
     ovcOverallServ,
     ovcServByGender,
@@ -462,4 +508,36 @@ export default combineReducers({
     currOnArtByFacilityDWH,
     newOnArtByFacilityDWH,
     currOnArtDWHByCounty,
+
+    htsPosByGenderKHIS,
+    htsPosByCountyKHIS,
+    htsPosByPartnerKHIS,
+    htsPosByFacilityKHIS,
+    htsTestByGenderKHIS,
+    htsTestByCountyKHIS,
+    htsTestByPartnerKHIS,
+    htsTestByFacilityKHIS,
+    htsPosByAgeDWH,
+    htsPosByGenderDWH,
+    htsPosByFacilityDWH,
+    htsPosByCountyDWH,
+    htsPosByPartnerDWH,
+    htsTestTrendsDWH,
+
+    currentOnArtVerified,
+    currentOnArtVerifiedByCounty,
+    currentOnArtVerifiedByPartner,
+    currentOnArtVerifiedByAgeSex,
+    currentOnArtByFacility,
+    currentOnArtVerifiedByFacility,
+    currentOnArt,
+
+    newOnPrep,
+    prepDiscontinuation,
+    prepDiscontinuationReason,
+
+
+    artVerificationByCounty,
+    artVerificationByPartner,
+    artVerificationReasons,
 });

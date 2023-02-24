@@ -68,7 +68,7 @@ const ComparisonCurrByPartner = () => {
     return (
         <Card>
             <CardHeader className="cardTitle">
-                DISTRIBUTION OF PATIENTS CURRENT ON ART BY SERVICE DELIVERY PARTNER
+                DISTRIBUTION OF PATIENTS CURRENT ON ART BY SERVICE DELIVERY PARTNERS
             </CardHeader>
             <CardBody>
                 <HighchartsReact highcharts={Highcharts} options={comparisonCurrByPartner}/>

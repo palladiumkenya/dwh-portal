@@ -16,7 +16,7 @@ export const getViralLoadUptakeByPartner = createSelector(
             data.push({
                 p: list[i].partner,
                 y: Number(((parseInt(list[i].vlDone)/parseInt(list[i].txCurr))*100).toFixed(0)),
-                absoluteY: list[i].vlDone.toLocaleString('en'),
+                absoluteY: list[i].vlDone ? list[i].vlDone.toLocaleString('en') : 0,
             });
         }
         data.sort(function(a, b) {

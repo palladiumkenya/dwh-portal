@@ -8,8 +8,7 @@ export const loadOvcDistributionOfCALHIVByAgeSex = () => async (dispatch, getSta
         moment(getState().OvcDistributionOfCALHIVByAgeSex.lastFetch),
         'minutes'
     );
-    if (getState().ui.ctTab !== 'ovc' &&
-        getState().ui.currentPage !== PAGES.ct) {
+    if (getState().ui.currentPage !== PAGES.ct) {
         return;
     }
     else if ((diffInMinutes < CACHING.LONG) && getState().filters.filtered === false) {

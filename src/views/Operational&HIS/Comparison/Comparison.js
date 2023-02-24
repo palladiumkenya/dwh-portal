@@ -5,27 +5,23 @@ import VisibilitySensor from 'react-visibility-sensor';
 import KHISComparisonFilter from '../../Shared/KHISComparisonFilter';
 import { useDispatch, useSelector } from 'react-redux';
 import { disableStickyFilter, enableStickyFilter } from '../../../actions/Shared/uiActions';
+import TxNew from './TX_NEW/TxNew'
+import TxCurr from './TX_CURR/TxCurr'
+import HTSTested from './HTS_TESTED/HTSTested';
 import { Col, Row } from 'reactstrap';
-import ComparisonIndicator from './TX_NEW/ComparisonIndicator';
-import ComparisonOverview from './TX_NEW/ComparisonOverview';
-import SectionFooter from '../../Shared/SectionFooter';
-import ComparisonNewlyByGender from './TX_NEW/ComparisonNewlyByGender';
-import ComparisonNewlyByAge from './TX_NEW/ComparisonNewlyByAge';
-import ComparisonNewlyTrends from './TX_NEW/ComparisonNewlyTrends';
-import ComparisonNewVsHTSPositivesKHIS from './TX_NEW/ComparisonNewHTSPositivesKHIS';
-import ComparisonNewVsHTSPositivesDWH from './TX_NEW/ComparisonNewHTSPositivesDWH';
-import ComparisonTXNewByGender from './TX_NEW/ComparisonTX_NewByGender';
-import ComparisonOverviewTxCurr from './TX_CURR/ComparisonOverview';
-import ComparisonIndicatorNotesTxCurr from './TX_CURR/ComparisonIndicator';
-import ComparisonCurrByAge from './TX_CURR/ComparisonCurrByAge';
-import ComparisonCurrByGender from './TX_CURR/ComparisonCurrByGender';
-import ComparisonCurrByCounty from './TX_CURR/ComparisonCurrByCounty';
-import ComparisonCurrByPartner from './TX_CURR/ComparisonCurrByPartner';
-import ComparisonTX_CurrNewByGender from './TX_CURR/ComparisonTX_CurrNewByGender';
+import HTSPOS from './HTS_POS/HTSPOS';
 
 const Comparison = () => {
     const dispatch = useDispatch();
     const indicator = useSelector(state => state.filters.indicators);
+
+    let selcetedIndicator = (i) => {
+        if (i === 'Tx_New') return <TxNew />;
+        else if (i === 'Tx_Curr') return <TxCurr />;
+        else if (i === 'HTS_TESTED') return <HTSTested />;
+        else if (i === 'HTS_POS') return <HTSPOS />;
+        else return <TxNew />;
+    }
 
     const onVisibilityChange = (isVisible) => {
         if (isVisible) {
@@ -34,69 +30,9 @@ const Comparison = () => {
             dispatch(enableStickyFilter());
         }
     };
+
     return (
-        <>
-            <SectionHeader
-                title={
-                    indicator === 'Tx_New' || indicator === ''
-                        ? 'NEWLY STARTED ON ART'
-                        : 'CURRENT ON ART'
-                }
-                description={`YEAR ${moment().year()}`}
-            />
-            <VisibilitySensor onChange={onVisibilityChange}>
-                <KHISComparisonFilter />
-            </VisibilitySensor>
-            {indicator === 'Tx_New' || indicator === '' ? (
-                <>
-                    <ComparisonOverview />
-                    <Row>
-                        <Col md={12}>
-                            <ComparisonIndicator />
-                        </Col>
-                    </Row>
-                    <SectionFooter />
-                    <Row>
-                        <Col md={6}>
-                            <ComparisonNewlyByGender />
-                        </Col>
-                        <Col md={6}>
-                            <ComparisonNewlyByAge />
-                        </Col>
-                    </Row>
-                    <SectionFooter />
-                    <ComparisonNewlyTrends />
-                    <SectionFooter />
-                    <ComparisonNewVsHTSPositivesKHIS />
-                    <SectionFooter />
-                    <ComparisonNewVsHTSPositivesDWH />
-                    <SectionFooter />
-                    <ComparisonTXNewByGender />
-                    <SectionFooter />
-                </>
-            ) : (
-                <>
-                    <ComparisonOverviewTxCurr />
-                    <ComparisonIndicatorNotesTxCurr />
-                    <SectionFooter />
-                    <Row>
-                        <Col md={6}>
-                            <ComparisonCurrByGender />
-                        </Col>
-                        <Col md={6}>
-                            <ComparisonCurrByAge />
-                        </Col>
-                    </Row>
-                    <SectionFooter />
-                    <ComparisonCurrByCounty />
-                    <SectionFooter />
-                    <ComparisonCurrByPartner />
-                    <SectionFooter />
-                    <ComparisonTX_CurrNewByGender />
-                    <SectionFooter />
-                </>
-            )}
-        </>
+        <>{selcetedIndicator(indicator)}</>
     );
 };
 

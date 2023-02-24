@@ -8,7 +8,6 @@ import * as htsPositivesTrendsKHIS from '../../../../selectors/Operational&HIS/C
 
 
 const ComparisonNewVsHTSPositivesKHIS = () => {
-    const filters = useSelector(state => state.filters);
     const [comparisonNewVsHTSPositivesKHIS, setComparisonNewVsHTSPositivesKHIS] = useState({});
 
     const newlyKHIS =  useSelector(newlyStartedOnArtKHIS.getNewlyStartedOnArtTrendsKHIS);
@@ -76,7 +75,7 @@ const ComparisonNewVsHTSPositivesKHIS = () => {
                 }
             ],
         });
-    }, [newlyKHIS]);
+    }, [newlyKHIS, htsKHIS]);
 
     useEffect(() => {
         loadComparisonNewVsHTSPositivesKHIS();

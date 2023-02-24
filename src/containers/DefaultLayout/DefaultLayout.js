@@ -12,6 +12,7 @@ import routes from './../../routes';
 import UniversalFilter from './../../views/Shared/UniversalFilter';
 import CovidFilter from './../../views/Shared/CovidFilter';
 import KHISComparisonFilter from './../../views/Shared/KHISComparisonFilter';
+import TestMessage from "./TestMessage";
 
 const DefaultFooter = Loadable({ loader: () => import('./DefaultFooter'), loading: Loading, delay: LOADING_DELAY });
 const DefaultHeader = Loadable({ loader: () => import('./DefaultHeader'), loading: Loading, delay: LOADING_DELAY });
@@ -30,6 +31,7 @@ const DefaultLayout = () => {
             return <UniversalFilter />;
         }
     }
+    let currentLocation = window.location.href.split('#')[0];
 
 
     return (
@@ -37,33 +39,46 @@ const DefaultLayout = () => {
             <AppHeader fixed>
                 <DefaultHeader />
             </AppHeader>
-            <Container fluid className={ui.stickyFilter === true ? 'stickyUniversalFilter':'hiddenUniversalFilter'}>
+            <Container
+                fluid
+                className={
+                    ui.stickyFilter === true
+                        ? 'stickyUniversalFilter'
+                        : 'hiddenUniversalFilter'
+                }
+            >
                 {filter()}
             </Container>
             <div className="app-body">
-                <main className={"main"}>
+                <main className={'main'}>
                     <AppBreadcrumb appRoutes={routes} router={router} />
                     <Container fluid>
+                        <TestMessage />
                         <Switch>
                             {routes.map((route, idx) => {
                                 return route.component ? (
-                                    route.private ? <PrivateRoute
+                                    route.private ? (
+                                        <PrivateRoute
                                             key={idx}
                                             path={route.path}
                                             exact={route.exact}
                                             name={route.name}
-                                            render={props => (
-                                                <route.component {...props}/>
-                                            )} /> :
-                                    <Route
-                                        key={idx}
-                                        path={route.path}
-                                        exact={route.exact}
-                                        name={route.name}
-                                        render={props => (
-                                            <route.component {...props}/>
-                                        )} />
-                                ) : (null);
+                                            render={(props) => (
+                                                <route.component {...props} />
+                                            )}
+                                        />
+                                    ) : (
+                                        <Route
+                                            key={idx}
+                                            path={route.path}
+                                            exact={route.exact}
+                                            name={route.name}
+                                            render={(props) => (
+                                                <route.component {...props} />
+                                            )}
+                                        />
+                                    )
+                                ) : null;
                             })}
                         </Switch>
                     </Container>

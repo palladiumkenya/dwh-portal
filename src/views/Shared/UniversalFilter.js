@@ -34,6 +34,7 @@ const UniversalFilter = () => {
     const [projects, setProjects] = useState([]);
     const [genders, setGenders] = useState([]);
     const [datimAgeGroups, setDatimAgeGroups] = useState([]);
+    const [datimAgePopulations, setDatimAgePopulations] = useState([]);
     const [populationTypes, setPopulationTypes] = useState([]);
     const [latestPregnancies, setLatestPregnancies] = useState([]);
     const [indicators, setIndicators] = useState([]);
@@ -60,7 +61,6 @@ const UniversalFilter = () => {
 
     const changeFromQuery = (len) => {
         if (len === 0) {
-            console.log("aaa")
             query.delete('partner');
             history.replace({
                 search: query.toString(),
@@ -205,6 +205,9 @@ const UniversalFilter = () => {
         setDatimAgeGroups(
             ageGroups.map((c) => ({ value: c, key: c, text: c }))
         );
+        setDatimAgePopulations(
+            ['<18', '>18'].map((c) => ({ value: c, key: c, text: c }))
+        );
         setPopulationTypes(
             [
                 ' FSW',
@@ -221,7 +224,7 @@ const UniversalFilter = () => {
             )
         );
         setIndicators(
-            ['Tx_New', 'Tx_Curr'].map((c) => ({ value: c, key: c, text: c }))
+            ['Tx_New', 'Tx_Curr', 'HTS_TESTED', 'HTS_POS'].map((c) => ({ value: c, key: c, text: c }))
         );
     }, [
         ui,
@@ -253,29 +256,15 @@ const UniversalFilter = () => {
         loadSites();
     }, [loadSites]);
     useEffect(() => {
-        console.log(filters.partners);
-        if (queried_partner) {
+        if (queried_partner.length > 0) {
             dispatch(actions.filterByPartner(queried_partner));
             return;
         }
     }, []);
-    let currentLocation = window.location.href.split('#')[0];
 
     return (
         <>
-            {currentLocation !== 'https://dwh.nascop.org/' &&
-            currentLocation !== 'https://prod.kenyahmis.org/' ? (
-                <Message warning>
-                    <Message.Header>This is the test site</Message.Header>
-                    <p>
-                        Numbers may vary from those in{' '}
-                        <a href={'https://dwh.nascop.org'}>
-                            https://dwh.nascop.org
-                        </a>
-                    </p>
-                </Message>
-            ) : null}
-            <Row>
+            <Row style={{ fontSize: '.78em' }}>
                 {filters.countyFilterEnabled ? (
                     <Col
                         className={
@@ -483,7 +472,7 @@ const UniversalFilter = () => {
                         }
                     >
                         <div className="form-group">
-                            <label htmlFor="toDate">Date Range</label>
+                            <label htmlFor="toDate">Period</label>
 
                             {/*<MonthRangeInput*/}
                             {/*    name="toDate"*/}
@@ -572,6 +561,37 @@ const UniversalFilter = () => {
                                 onChange={(e, data) => {
                                     dispatch(
                                         actions.filterByDatimAgeGroup(
+                                            data.value
+                                        )
+                                    );
+                                }}
+                            />
+                        </div>
+                    </Col>
+                ) : null}
+                {filters.datimAgePopulationFilterEnabled ? (
+                    <Col
+                        className={
+                            'col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2'
+                        }
+                    >
+                        <div className="form-group">
+                            <label htmlFor="datimAgeGroup">
+                                Age Population
+                            </label>
+                            <Dropdown
+                                id="datimAgePopulation"
+                                name="datimAgePopulation"
+                                placeholder="Select Age Population"
+                                fluid
+                                multiple
+                                selection
+                                search
+                                options={datimAgePopulations}
+                                value={filters.datimAgePopulation}
+                                onChange={(e, data) => {
+                                    dispatch(
+                                        actions.filterByDatimAgePopulation(
                                             data.value
                                         )
                                     );

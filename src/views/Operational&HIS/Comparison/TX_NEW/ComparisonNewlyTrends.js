@@ -21,23 +21,23 @@ const ComparisonNewlyTrends = () => {
     const loadComparisonNewlyTrends = useCallback(async () => {
         setComparisonNewlyTrends({
             chart: {
-                type: 'column'
+                type: 'column',
             },
             title: {
-                text: ''
+                text: '',
             },
             xAxis: {
                 categories: newlyKHIS.labels,
                 crosshair: true,
                 title: {
-                    text: 'MONTHS'
-                }
+                    text: 'MONTHS',
+                },
             },
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'PERCENTAGE OF PATIENTS'
-                }
+                    text: 'NUMBER OF PATIENTS',
+                },
             },
             tooltip: {
                 headerFormat:
@@ -47,11 +47,11 @@ const ComparisonNewlyTrends = () => {
                     '<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
-                useHTML: true
+                useHTML: true,
             },
             legend: {
                 align: 'left',
-                verticalAlign: 'top'
+                verticalAlign: 'top',
             },
             plotOptions: {},
             series: [
@@ -59,10 +59,10 @@ const ComparisonNewlyTrends = () => {
                     type: 'spline',
                     dashStyle: 'shortdot',
                     marker: {
-                        enabled: true
+                        enabled: true,
                     },
-                    name: 'DWH',
-                    data: newOnArtTrendsData.txNew,
+                    name: 'KHIS',
+                    data: newlyKHIS.data,
                     color: '#2F4050',
                     dataLabels: { enabled: true },
                 },
@@ -70,14 +70,14 @@ const ComparisonNewlyTrends = () => {
                     type: 'spline',
                     dashStyle: 'shortdot',
                     marker: {
-                        enabled: true
+                        enabled: true,
                     },
-                    name: 'KHIS',
-                    data: newlyKHIS.data,
+                    name: 'DWH',
+                    data: newOnArtTrendsData.txNew,
                     color: '#1AB394',
                     dataLabels: { enabled: true },
-                }
-            ]
+                },
+            ],
         });
     }, [newlyKHIS, newOnArtTrendsData]);
 

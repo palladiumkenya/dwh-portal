@@ -10,7 +10,6 @@ export const getTrendsPLHIVVaccinationInTheLast12Months = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
 
-        console.log(list);
 
         let yearMonthTrends = list.map(obj => obj.DategivenFirstDose + ' ' + obj.YearFirstDose);
         yearMonthTrends = [...new Set(yearMonthTrends)];

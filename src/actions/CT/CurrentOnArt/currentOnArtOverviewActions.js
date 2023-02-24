@@ -9,19 +9,21 @@ export const loadCurrentOnArtOverview = (tab) => async (dispatch, getState) => {
         'minutes'
     );
     if (
-        getState().ui.ctTab !== "currentOnArt" &&
+        getState().ui.ctTab !== 'currentOnArt' &&
         getState().ui.ctTab !== 'dsd' &&
         getState().ui.ctTab !== 'vl' &&
+        getState().ui.ctTab !== 'artVerification' &&
         tab !== 'dsd' &&
         tab !== 'vl' &&
-        tab !== "currentOnArt" &&
-        tab !== "comparison" &&
+        tab !== 'currentOnArt' &&
+        tab !== 'artVerification' &&
+        tab !== 'comparison' &&
         getState().ui.currentPage !== PAGES.home
     ) {
         return;
-    }
-    else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
-        return;
+        // }
+        // else if ( getState().filters.filtered === false) {
+        //     return;
     } else {
         await dispatch(fetchCurrentOnArtOverview());
     }
@@ -38,8 +40,13 @@ export const fetchCurrentOnArtOverview = () => async (dispatch, getState) => {
         project: getState().filters.projects,
         gender: getState().filters.genders,
         datimAgeGroup: getState().filters.datimAgeGroups,
-        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
-        month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
+        datimAgePopulations: getState().filters.datimAgePopulation,
+        year: getState().filters.fromDate
+            ? moment(getState().filters.fromDate, 'MMM YYYY').format('YYYY')
+            : '',
+        month: getState().filters.fromDate
+            ? moment(getState().filters.fromDate, 'MMM YYYY').format('MM')
+            : '',
     };
     const response = await getAll('care-treatment/viralLoadCascade', params);
     dispatch({ type: actionTypes.CT_CURRENT_ON_ART_OVERVIEW_FETCH, payload: { filtered: getState().filters.filtered, list: response }});

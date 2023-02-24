@@ -40,7 +40,8 @@ const PNSFamilyTestingOverview = () => {
                       .add(17, 'days')
                       .format('YYYYMM'),
         };
-        const data = await getAll('hts/pnsChildrenCascade', params);
+        let data = await getAll('hts/pnsChildrenCascade', params);
+        data = data.pop()
         setPNSChildrenCascade({
             elicited: data.elicited ? data.elicited:0,
             tested: data.tested ? data.tested:0,

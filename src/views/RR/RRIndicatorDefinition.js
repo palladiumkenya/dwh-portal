@@ -5,13 +5,13 @@ import moment from 'moment';
 const RRIndicatorDefinition = () => {
     const today = new Date();
     const year = today.getFullYear();
-    const month = moment().subtract(2, 'month').add(15, 'days').format('MMMM');
-    const previousMonthDate = moment().subtract(3, 'month').add(15, 'days');
+    const month = moment().subtract(2, 'month').add(16, 'days').format('MMMM');
+    const previousMonthDate = moment().subtract(3, 'month').add(16, 'days');
     const previousMonth = new Date(previousMonthDate).toLocaleString(
         'default',
         { month: 'long' }
     );
-    const twoMonthsBackDate = moment().subtract(4, 'month').add(15, 'days');
+    const twoMonthsBackDate = moment().subtract(4, 'month').add(16, 'days');
     const twoMonthsBackMonth = new Date(twoMonthsBackDate).toLocaleString(
         'default',
         { month: 'long' }

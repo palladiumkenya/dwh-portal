@@ -1,7 +1,7 @@
 import moment from 'moment';
 import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
-import { CACHING } from '../../../constants';
+import { CACHING, PAGES } from '../../../constants';
 
 export const loadArtOptimizationNewByYear = (tab) => async (dispatch, getState) => {
     if (getState().filters.noCache === true) {
@@ -11,11 +11,12 @@ export const loadArtOptimizationNewByYear = (tab) => async (dispatch, getState) 
             moment(getState().artOptimizationNewByYear.lastFetch),
             'minutes'
         );
-        if (getState().ui.ctTab !== "artOptimization" &&
-            tab !== "artOptimization") {
+        if (getState().ui.currentPage !== PAGES.ct) {
             return;
-        }
-        else if ((diffInMinutes < CACHING.MID) && getState().filters.filtered === false) {
+        } else if (
+            diffInMinutes < CACHING.MID &&
+            getState().filters.filtered === false
+        ) {
             return;
         } else {
             await dispatch(fetchArtOptimizationNewByYear());
