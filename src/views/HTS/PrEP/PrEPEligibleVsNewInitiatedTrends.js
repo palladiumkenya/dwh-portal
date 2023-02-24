@@ -3,10 +3,12 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
 
 
 const PrEPEligibleVsNewInitiatedTrends = () => {
     const filters = useSelector((state) => state.filters);
+    let eliVnew = useSelector(prepSelector.getPrepEligibleVnewTrend);
     const [
         prepEligibleVsNewInitiatedTrends,
         setPrepEligibleVsNewInitiatedTrends,
@@ -21,28 +23,34 @@ const PrEPEligibleVsNewInitiatedTrends = () => {
                 text: '',
             },
             xAxis: {
-                categories: [
-                    'MAY-2021',
-                    'JUN-2021',
-                    'JUL-2021',
-                    'AUG-2021',
-                    'SEP-2021',
-                    'OCT-2021',
-                    'NOV-2021',
-                    'DEC-2021',
-                    'JAN-2022',
-                ],
+                categories: eliVnew.label,
                 crosshair: true,
                 title: {
                     text: 'MONTHS',
                 },
             },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'PERCENTAGE OF PATIENTS',
+            yAxis: [
+                {
+                    min: 0,
+                    title: {
+                        text: 'NUMBER OF PATIENTS',
+                    },
                 },
-            },
+                {
+                    labels: {
+                        style: {
+                            color: 'orange',
+                        },
+                    },
+                    title: {
+                        text: 'PERCENTAGE OF PATIENTS',
+                        style: {
+                            color: 'orange',
+                        },
+                    },
+                    opposite: true,
+                },
+            ],
             tooltip: {
                 headerFormat:
                     '<span style="font-size:10px">{point.key}</span><table>',
@@ -67,13 +75,13 @@ const PrEPEligibleVsNewInitiatedTrends = () => {
                 {
                     type: 'column',
                     name: 'TOTAL ELIGIBLE',
-                    data: [23.6, 78.8, 98.5, 20, 10, 50, 70, 20, 90],
+                    data: eliVnew.eliList,
                     color: '#2F4050',
                 },
                 {
                     type: 'column',
                     name: 'TOTAL INITIATED (NEW)',
-                    data: [18, 45, 90, 27, 19, 70, 50, 70, 100],
+                    data: eliVnew.iniList,
                     color: 'rgb(124, 181, 236)',
                 },
                 {
@@ -82,14 +90,15 @@ const PrEPEligibleVsNewInitiatedTrends = () => {
                     marker: {
                         enabled: false,
                     },
+                    yAxis: 1,
                     crisp: false,
                     name: '% INITIATED',
-                    data: [32, 100, 90, 27, 19, 70, 50, 70, 100],
+                    data: eliVnew.perc,
                     color: 'orange',
                 },
             ],
         });
-    }, []);
+    }, [eliVnew]);
 
     useEffect(() => {
         loadPrepEligibleVsNewInitiatedTrends();

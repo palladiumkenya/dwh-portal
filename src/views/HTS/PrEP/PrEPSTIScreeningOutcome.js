@@ -3,10 +3,12 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import * as prepSelector from '../../../selectors/HTS/Prep/prepSTIOutcomeSelector';
 
 
 const PrEPSTIScreeningOutcome = () => {
     const filters = useSelector((state) => state.filters);
+    let outcomes = useSelector(prepSelector.getPrepScreeningOutcome);
     const [prepSTIScreeningOutcome, setPrepSTIScreeningOutcome] = useState({});
 
     const loadPrepSTIScreeningOutcome = useCallback(async () => {
@@ -45,10 +47,14 @@ const PrEPSTIScreeningOutcome = () => {
                 {
                     name: 'Tested',
                     data: [
-                        { name: 'POSITIVE', y: 66, color: '#af3131' },
+                        {
+                            name: 'POSITIVE',
+                            y: outcomes?.Positive,
+                            color: '#af3131',
+                        },
                         {
                             name: 'NEGATIVE',
-                            y: 83.6,
+                            y: outcomes?.Negative,
                             color: 'rgb(10, 150, 25)',
                         },
                     ],
@@ -58,7 +64,7 @@ const PrEPSTIScreeningOutcome = () => {
                 },
             ],
         });
-    }, []);
+    }, [outcomes]);
 
     useEffect(() => {
         loadPrepSTIScreeningOutcome();

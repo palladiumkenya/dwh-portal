@@ -3,10 +3,12 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import * as prepSelector from '../../../selectors/HTS/Prep/prepSTITreatmentSelector';
 
 
 const PrEPSTITreatmentOutcome = () => {
     const filters = useSelector((state) => state.filters);
+    let outcomes = useSelector(prepSelector.getPrepSTITreatmentOutcomes);
     const [prepSTITreatmentOutcome, setPrepSTITreatmentOutcome] = useState({});
 
     const loadPrepSTITreatmentOutcome = useCallback(async () => {
@@ -43,12 +45,16 @@ const PrEPSTITreatmentOutcome = () => {
             },
             series: [
                 {
-                    name: 'TREATMENT',
+                    name: 'Patients',
                     data: [
-                        { name: 'NOT TREATED', y: 36, color: '#af3131' },
+                        {
+                            name: 'NOT TREATED',
+                            y: outcomes?.NotTreated ?? 0,
+                            color: '#af3131',
+                        },
                         {
                             name: 'TREATED',
-                            y: 66,
+                            y: outcomes?.Treated ?? 0,
                             color: 'rgb(10, 150, 25)',
                         },
                     ],
@@ -58,7 +64,7 @@ const PrEPSTITreatmentOutcome = () => {
                 },
             ],
         });
-    }, []);
+    }, [outcomes]);
 
     useEffect(() => {
         loadPrepSTITreatmentOutcome();
