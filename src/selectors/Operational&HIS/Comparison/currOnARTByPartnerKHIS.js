@@ -61,7 +61,9 @@ export const getCurrentOnARTByPartnerKHIS = createSelector(
         const dataDwh = labels.map(item => {
             let number = 0;
             listDWH.map(itemDWH => {
-                if (item === itemDWH.CTPartner.toUpperCase()) {
+                if (
+                    itemDWH?.CTPartner != null && item === itemDWH?.CTPartner.toUpperCase()
+                ) {
                     number = itemDWH.txCurr;
                 }
             })
