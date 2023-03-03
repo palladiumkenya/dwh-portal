@@ -33,7 +33,7 @@ export const fetchNewOnPrep = () => async (dispatch, getState) => {
     };
     try {
         const response = await axios.get(
-            `${DWH_API_URL}/api/hts/getNewOnPrep`,
+            `${DWH_API_URL}hts/getNewOnPrep`,
             { params: params }
         );
         dispatch({ type: actionTypes.HTS_NEW_ON_PREP_FETCH, payload: { filtered: getState().filters.filtered, list: response.data }});

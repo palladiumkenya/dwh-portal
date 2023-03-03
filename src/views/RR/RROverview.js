@@ -227,7 +227,9 @@ const RROverview = () => {
                                         ? filters.fromDate
                                         : moment()
                                               .startOf('month')
-                                              .subtract(1, 'month')
+                                              .subtract(2, 'month')
+                                              .add(16, 'days')
+
                                               .format('MMM YYYY'),
                                 })
                             )}

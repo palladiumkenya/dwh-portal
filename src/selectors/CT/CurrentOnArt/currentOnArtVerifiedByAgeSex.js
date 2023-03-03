@@ -50,13 +50,13 @@ export const getCurrentOnArtByAgeSex = createSelector(
         for (const ageGroup of ageGroups) {
             const ageGroupMaleFilter = list.filter(
                 (obj) =>
-                    obj.DATIM_AgeGroup === ageGroup &&
+                    obj.AgeGroup === ageGroup &&
                     (obj.Gender.toLowerCase() === 'M'.toLowerCase() ||
                         obj.Gender.toLowerCase() === 'Male'.toLowerCase())
             );
             const ageGroupFemaleFilter = list.filter(
                 (obj) =>
-                    obj.DATIM_AgeGroup === ageGroup &&
+                    obj.AgeGroup === ageGroup &&
                     (obj.Gender.toLowerCase() === 'F'.toLowerCase() ||
                         obj.Gender.toLowerCase() === 'Female'.toLowerCase())
             );
@@ -158,14 +158,14 @@ export const getCurrentOnArtByAgeSexLT15 = createSelector(
         for (const ageGroup of ageGroups) {
             const ageGroupMaleFilter = list.filter(
                 (obj) =>
-                    obj.DATIM_AgeGroup === ageGroup &&
+                    obj.AgeGroup === ageGroup &&
                     (obj.Gender.toLowerCase() === 'M'.toLowerCase() ||
                         obj.Gender.toLowerCase() === 'Male'.toLowerCase())
             );
 
             const ageGroupFemaleFilter = list.filter(
                 (obj) =>
-                    obj.DATIM_AgeGroup === ageGroup &&
+                    obj.AgeGroup === ageGroup &&
                     (obj.Gender.toLowerCase() === 'F'.toLowerCase() ||
                         obj.Gender.toLowerCase() === 'Female'.toLowerCase())
             );
@@ -282,13 +282,13 @@ export const getCurrentOnArtByAgeSexGT15 = createSelector(
         for (const ageGroup of ageGroups) {
             const ageGroupMaleFilter = list.filter(
                 (obj) =>
-                    obj.DATIM_AgeGroup === ageGroup &&
+                    obj.AgeGroup === ageGroup &&
                     (obj.Gender.toLowerCase() === 'M'.toLowerCase() ||
                         obj.Gender.toLowerCase() === 'Male'.toLowerCase())
             );
             const ageGroupFemaleFilter = list.filter(
                 (obj) =>
-                    obj.DATIM_AgeGroup === ageGroup &&
+                    obj.AgeGroup === ageGroup &&
                     (obj.Gender.toLowerCase() === 'F'.toLowerCase() ||
                         obj.Gender.toLowerCase() === 'Female'.toLowerCase())
             );

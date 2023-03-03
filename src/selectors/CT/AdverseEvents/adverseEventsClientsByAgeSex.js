@@ -30,10 +30,10 @@ export const getAdverseEventsClientsByAgeSex = createSelector(
         
         for (let i = 0; i < list.length; i++) {
             if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
-                let index = ageGroups.indexOf(list[i].AgeGroup);
+                let index = ageGroups.indexOf(list[i].DATIMAgeGroup);
                 adverseEventsMale.splice(index, 0, parseInt(list[i].total));
             } else if (list[i].Gender.toLowerCase() === "F".toLowerCase() || list[i].Gender.toLowerCase() === "Female".toLowerCase()) {
-                let index = ageGroups.indexOf(list[i].AgeGroup);
+                let index = ageGroups.indexOf(list[i].DATIMAgeGroup);
                 adverseEventsFemale.splice(index, 0, parseInt(list[i].total));
             }
         }
@@ -68,13 +68,13 @@ export const getAdverseEventsClientsByAgeSexChildren = createSelector(
         
         for (let i = 0; i < list.length; i++) {
             if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
-                let index = ageGroups.indexOf(list[i].AgeGroup);
+                let index = ageGroups.indexOf(list[i].DATIMAgeGroup);
                 if(index === -1) {
                     continue;
                 }
                 adverseEventsMale.splice(index, 0, parseInt(list[i].total));
             } else if (list[i].Gender.toLowerCase() === "F".toLowerCase() || list[i].Gender.toLowerCase() === "Female".toLowerCase()) {
-                let index = ageGroups.indexOf(list[i].AgeGroup);
+                let index = ageGroups.indexOf(list[i].DATIMAgeGroup);
                 if(index === -1) {
                     continue;
                 }
@@ -112,13 +112,13 @@ export const getAdverseEventsClientsByAgeSexAdults = createSelector(
         
         for (let i = 0; i < list.length; i++) {
             if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
-                let index = ageGroups.indexOf(list[i].AgeGroup);
+                let index = ageGroups.indexOf(list[i].DATIMAgeGroup);
                 if(index === -1) {
                     continue;
                 }
                 adverseEventsMale.splice(index, 0, parseInt(list[i].total));
             } else if (list[i].Gender.toLowerCase() === "F".toLowerCase() || list[i].Gender.toLowerCase() === "Female".toLowerCase()) {
-                let index = ageGroups.indexOf(list[i].AgeGroup);
+                let index = ageGroups.indexOf(list[i].DATIMAgeGroup);
                 if(index === -1) {
                     continue;
                 }
@@ -183,13 +183,13 @@ export const getAdverseEventsClientsAdults = createSelector(
         
         for (let i = 0; i < list.length; i++) {
             if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
-                let index = ageGroups.indexOf(list[i].AgeGroup);
+                let index = ageGroups.indexOf(list[i].DATIMAgeGroup);
                 if(index === -1) {
                     continue;
                 }
                 adverseEventsMale = adverseEventsMale + parseInt(list[i].total, 10);
             } else if (list[i].Gender.toLowerCase() === "F".toLowerCase() || list[i].Gender.toLowerCase() === "Female".toLowerCase()) {
-                let index = ageGroups.indexOf(list[i].AgeGroup);
+                let index = ageGroups.indexOf(list[i].DATIMAgeGroup);
                 if(index === -1) {
                     continue;
                 }
@@ -229,13 +229,13 @@ export const getAdverseEventsClientsAdolescents = createSelector(
         
         for (let i = 0; i < list.length; i++) {
             if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
-                let index = ageGroups.indexOf(list[i].AgeGroup);
+                let index = ageGroups.indexOf(list[i].DATIMAgeGroup);
                 if(index === -1) {
                     continue;
                 }
                 adverseEventsMale = adverseEventsMale + parseInt(list[i].total, 10);
             } else if (list[i].Gender.toLowerCase() === "F".toLowerCase() || list[i].Gender.toLowerCase() === "Female".toLowerCase()) {
-                let index = ageGroups.indexOf(list[i].AgeGroup);
+                let index = ageGroups.indexOf(list[i].DATIMAgeGroup);
                 if(index === -1) {
                     continue;
                 }
@@ -275,13 +275,13 @@ export const getAdverseEventsClientsChildren = createSelector(
         
         for (let i = 0; i < list.length; i++) {
             if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
-                let index = ageGroups.indexOf(list[i].AgeGroup);
+                let index = ageGroups.indexOf(list[i].DATIMAgeGroup);
                 if(index === -1) {
                     continue;
                 }
                 adverseEventsMale = adverseEventsMale + parseInt(list[i].total, 10);
             } else if (list[i].Gender.toLowerCase() === "F".toLowerCase() || list[i].Gender.toLowerCase() === "Female".toLowerCase()) {
-                let index = ageGroups.indexOf(list[i].AgeGroup);
+                let index = ageGroups.indexOf(list[i].DATIMAgeGroup);
                 if(index === -1) {
                     continue;
                 }

@@ -31,7 +31,7 @@ export const fetchUptakeByCounty = () => async (dispatch, getState) => {
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
     try {
-        const response = await axios.get(`${DWH_API_URL}/api/hts/uptakeByCounty`, { params: params });
+        const response = await axios.get(`${DWH_API_URL}hts/uptakeByCounty`, { params: params });
         dispatch({ type: actionTypes.HTS_UPTAKE_BY_COUNTY_FETCH, payload: { filtered: getState().filters.filtered, list: response.data }});
     } catch (e) {
         dispatch({ type: actionTypes.HTS_UPTAKE_BY_COUNTY_REQUEST_FAILED });
