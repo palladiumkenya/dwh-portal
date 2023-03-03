@@ -15,7 +15,7 @@ export const loadOverallReportingRatesByFacilityNotReported = () => async (dispa
 export const fetchOverallReportingRatesByFacilityNotReported = () => async (dispatch, getState) => {
     const docket = getState().ui.rrTab;
     dispatch({ type: actionTypes.RR_OVERALL_REPORTING_RATES_BY_FACILITY_NOT_REPORTED_REQUEST, payload: { docket: docket }});
-    const params = {
+    let params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,
         facility: getState().filters.facilities,
@@ -33,11 +33,15 @@ export const fetchOverallReportingRatesByFacilityNotReported = () => async (disp
     params.period = getState().filters.fromDate
         ? moment(getState().filters.fromDate, 'MMM YYYY')
               .startOf('month')
+              .subtract(0, 'month')
+              .format('YYYY,M')
+        : moment()
+              .startOf('month')
               .subtract(2, 'month')
               .add(16, 'days')
-              .format('YYYY,M')
-        : moment().format('YYYY,M');
+              .format('YYYY,M');
     try {
+        console.log(params)
         const response = await axios.get(`${DWH_API_URL}manifests/overallReportingByFacility/${docket}`, { params: params });
         dispatch({ type: actionTypes.RR_OVERALL_REPORTING_RATES_BY_FACILITY_NOT_REPORTED_FETCH, payload: { filtered: getState().filters.filtered, docket: docket, list: response.data }});
     } catch (e) {
