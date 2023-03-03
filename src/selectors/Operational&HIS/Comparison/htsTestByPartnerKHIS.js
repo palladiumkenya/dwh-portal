@@ -39,7 +39,7 @@ export const getHTSTESTByPartnerKHIS = createSelector(
 
         //KHIS
         const labels = list.map((item) =>
-            item.SDP ? item.SDP.toUpperCase() : 'UNKNOWN'
+            item.PartnerName ? item.PartnerName.toUpperCase() : 'UNKNOWN'
         );
         let data = [];
 

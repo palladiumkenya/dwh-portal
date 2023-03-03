@@ -4,10 +4,13 @@ import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import moment from 'moment';
+import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
 
 
 const PrEPEligibleVsNewlyByAge = () => {
     const filters = useSelector((state) => state.filters);
+    let eliVnew = useSelector(prepSelector.getPrepEligibleAgeGroup);
+
     const [prepEligibleVsNewlyByAge, setPrepEligibleVsNewlyByAge] = useState(
         {}
     );
@@ -24,62 +27,74 @@ const PrEPEligibleVsNewlyByAge = () => {
                 categories: ['15 TO 19', '20 TO 24', '25+'],
                 crosshair: true,
             },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'NUMBER OF PATIENTS',
+            yAxis: [
+                {
+                    min: 0,
+                    title: {
+                        text: 'NUMBER OF PATIENTS',
+                    },
                 },
-            },
+                {
+                    labels: {
+                        style: {
+                            color: 'orange',
+                        },
+                    },
+                    title: {
+                        text: 'PERCENTAGE OF PATIENTS',
+                        style: {
+                            color: 'orange',
+                        },
+                    },
+                    opposite: true,
+                },
+            ],
             legend: {
                 align: 'left',
                 verticalAlign: 'top',
             },
             tooltip: {
-                headerFormat: '<b>{point.x}</b><br/>',
+                headerFormat:
+                    '<span style="font-size:10px">{point.key}</span><table>',
                 pointFormat:
-                    '{series.name}: {point.y}<br/>Total: {point.stackTotal}',
+                    '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
+                footerFormat: '</table>',
                 shared: true,
+                useHTML: true,
             },
             plotOptions: {
-                scatter: {
-                    dataLabels: {
-                        enabled: true,
-                        format: '{point.y}%',
-                    },
-                },
                 column: {
                     pointPadding: 0.01,
                     borderWidth: 0,
-                    dataLabels: {
-                        enabled: false,
-                    },
                 },
             },
             series: [
                 {
                     type: 'column',
                     name: 'ELIGIBLE',
-                    data: [12, 20, 43],
+                    data: eliVnew.eliList,
                     color: '#142459',
                 },
                 {
                     type: 'column',
                     name: 'NEWLY INITIATED',
-                    data: [53, 64, 14],
+                    data: eliVnew.iniList,
                     color: 'rgb(124, 181, 236)',
                 },
                 {
                     type: 'scatter',
                     name: '% of Patients Eligible',
-                    data: [83.6, 78.8, 98],
+                    data: eliVnew.perc,
                     color: 'orange',
+                    yAxis: 1,
                     marker: {
                         symbol: 'circle',
                     },
                 },
             ],
         });
-    }, []);
+    }, [eliVnew]);
 
     useEffect(() => {
         loadPrepEligibleVsNewlyByAge();

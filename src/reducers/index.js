@@ -269,6 +269,25 @@ import htsTestTrendsDWH from './Operational&HIS/Comparison/htsTestTrendsDWH';
 import newOnPrep from './HTS/Prep/newOnPrep';
 import prepDiscontinuation from './HTS/Prep/prepDiscontinuation'
 import prepDiscontinuationReason from './HTS/Prep/prepDiscontinuationReason';
+import ctPrep from './HTS/Prep/ctPrep';
+import ctPrepTrends from './HTS/Prep/ctPrepTrends';
+import ctPrepAgeSexTrends from './HTS/Prep/ctPrepAgeSexTrends';
+import prepScreenedTrends from './HTS/Prep/prepScreenedTrends';
+import prepEligibleTrends from './HTS/Prep/prepEligibleTrends';
+import prepEligibleAgegroup from './HTS/Prep/prepEligibleAgegroup';
+import newOnPrepTrends from './HTS/Prep/newOnPrepTrends';
+import newOnPrepAgeSex from './HTS/Prep/newOnPrepAgeSex';
+import prepDiscontinuationTrends from './HTS/Prep/prepDiscontinuationTrends';
+import prepSTITreatmentOutcomes from './HTS/Prep/prepSTITreatmentOutcomes';
+import prepTotalTested from './HTS/Prep/prepTotalTested';
+import prepMonth1Refill from './HTS/Prep/prepMonth1Refill';
+import prepMonth1RefillAgeSex from './HTS/Prep/prepMonth1RefillAgeSex';
+import prepMonth3Refill from './HTS/Prep/prepMonth3Refill';
+import prepMonth3RefillAgeSex from './HTS/Prep/prepMonth3RefillAgeSex';
+import prepTestedMonth3Refill from './HTS/Prep/prepTestedMonth3Refill';
+import prepTestedMonth1Refill from './HTS/Prep/prepTestedMonth1Refill';
+import prepScreeningOutcome from './HTS/Prep/prepScreeningOutcome';
+import prepDiagnosedSTITrends from './HTS/Prep/prepDiagnosedSTITrends';
 
 import artVerificationByCounty from './CT/ArtVerification/artVerificationByCounty';
 import artVerificationByPartner from './CT/ArtVerification/artVerificationByPartner';
@@ -535,6 +554,25 @@ export default combineReducers({
     newOnPrep,
     prepDiscontinuation,
     prepDiscontinuationReason,
+    ctPrep,
+    prepScreenedTrends,
+    prepEligibleTrends,
+    prepDiscontinuationTrends,
+    prepEligibleAgegroup,
+    newOnPrepTrends,
+    newOnPrepAgeSex,
+    prepSTITreatmentOutcomes,
+    ctPrepTrends,
+    prepTotalTested,
+    ctPrepAgeSexTrends,
+    prepMonth1Refill,
+    prepMonth3Refill,
+    prepMonth1RefillAgeSex,
+    prepMonth3RefillAgeSex,
+    prepTestedMonth3Refill,
+    prepTestedMonth1Refill,
+    prepScreeningOutcome,
+    prepDiagnosedSTITrends,
 
 
     artVerificationByCounty,
