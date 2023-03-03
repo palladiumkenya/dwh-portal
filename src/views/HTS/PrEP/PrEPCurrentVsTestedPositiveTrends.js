@@ -64,29 +64,29 @@ const PrEPCurrentVsTestedPositiveTrends = () => {
                 },
             },
             series: [
-                {
-                    type: 'column',
-                    name: 'CURRENT ON PREP',
-                    data: [23.6, 78.8, 98.5, 20, 10, 50, 70, 20, 90],
-                    color: '#142459',
-                },
+                // {
+                //     type: 'column',
+                //     name: 'CURRENT ON PREP',
+                //     data: [23.6, 78.8, 98.5, 20, 10, 50, 70, 20, 90],
+                //     color: '#142459',
+                // },
                 {
                     type: 'column',
                     name: 'TESTED HIV POSITIVE WHILE ON PREP',
                     data: [18, 45, 90, 27, 19, 70, 50, 70, 100],
                     color: 'maroon',
                 },
-                {
-                    type: 'spline',
-                    dashStyle: 'shortdot',
-                    marker: {
-                        enabled: false,
-                    },
-                    crisp: false,
-                    name: 'POSITIVITY',
-                    data: [32, 100, 90, 27, 19, 60, 80, 70, 100],
-                    color: 'orange',
-                },
+                // {
+                //     type: 'spline',
+                //     dashStyle: 'shortdot',
+                //     marker: {
+                //         enabled: false,
+                //     },
+                //     crisp: false,
+                //     name: 'POSITIVITY',
+                //     data: [32, 100, 90, 27, 19, 60, 80, 70, 100],
+                //     color: 'orange',
+                // },
             ],
         });
     }, []);

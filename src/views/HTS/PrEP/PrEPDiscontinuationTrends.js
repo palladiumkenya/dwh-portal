@@ -3,9 +3,12 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
 
 const PrEPDiscontinuationTrends = () => {
     const filters = useSelector((state) => state.filters);
+    let discList = useSelector(prepSelector.getPrepDiscTrend);
+
     const [prepDiscontinuationTrends, setPrepDiscontinuationTrends] = useState(
         {}
     );
@@ -19,17 +22,7 @@ const PrEPDiscontinuationTrends = () => {
                 text: '',
             },
             xAxis: {
-                categories: [
-                    'MAY 2021',
-                    'JUNE 2021',
-                    'JULY 2021',
-                    'AUGUST 2021',
-                    'SEPTEMBER 2021',
-                    'OCT 2021',
-                    'NOV 2021',
-                    'DEC 2021',
-                    'JAN 2022',
-                ],
+                categories: discList.label,
                 crosshair: true,
                 title: {
                     text: 'MONTHS',
@@ -53,8 +46,8 @@ const PrEPDiscontinuationTrends = () => {
             },
             series: [
                 {
-                    name: 'DISCORDANT COUPLES',
-                    data: [23.6, 46, 70, 22, 40, 32, 53, 64, 76],
+                    name: 'DISCONTINUED',
+                    data: discList.discList,
                     color: '#1AB394',
                     fillOpacity: 0.2,
                     marker: {
@@ -64,7 +57,7 @@ const PrEPDiscontinuationTrends = () => {
                 },
             ],
         });
-    }, []);
+    }, [discList]);
 
     useEffect(() => {
         loadPrepDiscontinuationTrends();

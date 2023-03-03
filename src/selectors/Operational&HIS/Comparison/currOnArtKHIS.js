@@ -132,20 +132,20 @@ export const getCurrOnArtKHIS = createSelector(
         }
 
         //DWH
-        let under1 = ['<1'];
-        let oneToNine = ['1-4', '5-9'];
-        let tenToFourteen = ['10-14'];
-        let fifteenToNineteen = ['15-19'];
-        let twentyToTwentyFour = ['20-24'];
+        let under1 = ['Under 1'];
+        let oneToNine = ['1 to 4', '5 to 9'];
+        let tenToFourteen = ['10 to 14'];
+        let fifteenToNineteen = ['15 to 19'];
+        let twentyToTwentyFour = ['20 to 24'];
         let twentyFivePlus = [
-            '25-29',
-            '30-34',
-            '35-39',
-            '40-44',
-            '45-49',
-            '50-54',
-            '55-59',
-            '60-64',
+            '25 to 29',
+            '30 to 34',
+            '35 to 39',
+            '40 to 44',
+            '45 to 49',
+            '50 to 54',
+            '55 to 59',
+            '60 to 64',
             '65+',
         ];
         let OnARTByAgeDWH = [0, 0, 0, 0, 0, 0];

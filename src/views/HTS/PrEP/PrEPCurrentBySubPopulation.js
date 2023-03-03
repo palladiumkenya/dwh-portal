@@ -3,9 +3,14 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
 
 const PrEPCurrentBySubPopulation = () => {
     const filters = useSelector((state) => state.filters);
+    let screenedList = useSelector(prepSelector.getPrepScreenedTrend)
+    let inVnewList = useSelector(prepSelector.getPrepEligibleVnewTrend);
+    let ctList = useSelector(prepSelector.getPrepCTTrend);
+    
     const [prepCurrentBySubPopulation, setPrepCurrentBySubPopulation] =
         useState({});
 
@@ -18,7 +23,7 @@ const PrEPCurrentBySubPopulation = () => {
                 text: '',
             },
             xAxis: {
-                categories: ['OCT 2021', 'NOV 2021', 'DEC 2021', 'JAN 2022'],
+                categories: screenedList.label,
                 crosshair: true,
                 title: {
                     text: 'MONTH',
@@ -51,32 +56,32 @@ const PrEPCurrentBySubPopulation = () => {
             series: [
                 {
                     name: 'SCREENED',
-                    data: [83.6, 66, 70, 22],
+                    data: screenedList.scList,
                     color: '#2F4050',
                 },
                 {
                     name: 'ELIGIBLE',
-                    data: [87, 78.8, 54, 12],
+                    data: inVnewList.eliList,
                     color: 'rgb(124, 181, 236)',
                 },
                 {
                     name: 'INITIATED TO PREP',
-                    data: [45, 70, 23, 43],
+                    data: inVnewList.iniList,
                     color: '#3281CC',
                 },
                 {
                     name: 'CONTINUING PREP',
-                    data: [50, 78.8, 88, 64],
+                    data: ctList.ctList,
                     color: '#1AB394',
                 },
-                {
-                    name: 'CURRENT ON PREP',
-                    data: [33.6, 68.8, 12, 33],
-                    color: 'rgb(144, 237, 125)',
-                },
+                // {
+                //     name: 'CURRENT ON PREP',
+                //     data: [33.6, 68.8, 12, 33],
+                //     color: 'rgb(144, 237, 125)',
+                // },
             ],
         });
-    }, []);
+    }, [screenedList, inVnewList, ctList]);
 
     useEffect(() => {
         loadPrepCurrentBySubPopulation();
@@ -85,7 +90,7 @@ const PrEPCurrentBySubPopulation = () => {
     return (
         <Card>
             <CardHeader className="cardTitle">
-                CURRENT ON PREP BY SUB-POPULATION
+                PREP CASCADE TREND
             </CardHeader>
             <CardBody>
                 <HighchartsReact

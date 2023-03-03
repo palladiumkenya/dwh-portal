@@ -15,7 +15,7 @@ export const HTS_TABS = {
     uptake: 'HIV TESTING SERVICES UPTAKE',
     linkage: 'HIV TESTING SERVICES LINKAGE',
     pns: 'PARTNER NOTIFICATION SERVICES',
-    // prep: 'PrEP',
+    prep: 'PrEP',
 };
 
 export const CT_TABS = {
