@@ -33,7 +33,8 @@ export const fetchOverallReportingRatesByFacilityNotReported = () => async (disp
     params.period = getState().filters.fromDate
         ? moment(getState().filters.fromDate, 'MMM YYYY')
               .startOf('month')
-              .subtract(0, 'month')
+              .subtract(2, 'month')
+              .add(16, 'days')
               .format('YYYY,M')
         : moment().format('YYYY,M');
     try {
