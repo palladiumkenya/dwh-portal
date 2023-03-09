@@ -90,16 +90,23 @@ export const getStabilityStatusByAgeSex = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         const listTXCurr = filtered ? listFilteredTXCurr : listUnfilteredTXCurr;
 
+        let totalMale = list
+            .filter((a) => a.gender === 'M' || a.gender === 'Male')
+            .reduce((acc, obj) => acc + obj.TXCurr, 0);
+        let totalFemale = list
+            .filter((a) => a.gender === 'F' || a.gender === 'Female')
+            .reduce((acc, obj) => acc + obj.TXCurr, 0);
+
         const ageArr = [
-            { "20 to 24" : "20-24" },
-            { "25 to 29" : "25-29" },
-            { "30 to 34" : "30-34" },
-            { "35 to 39" : "35-39" },
-            { "40 to 44" : "40-44" },
-            { "45 to 49" : "45-49" },
-            { "50 to 54" : "50-54" },
-            { "55 to 59" : "55-59" },
-            { "60 to 64" : "60-64" },
+            { "20 to 24" : "20 to 24" },
+            { "25 to 29" : "25 to 29" },
+            { "30 to 34" : "30 to 34" },
+            { "35 to 39" : "35 to 39" },
+            { "40 to 44" : "40 to 44" },
+            { "45 to 49" : "45 to 49" },
+            { "50 to 54" : "50 to 54" },
+            { "55 to 59" : "55 to 59" },
+            { "60 to 64" : "60 to 64" },
             {  "65+": "65+" }
         ];
         const ageGroups = [
@@ -131,12 +138,8 @@ export const getStabilityStatusByAgeSex = createSelector(
             const femaleValues = list.filter(obj => (obj.gender === "Female" || obj.gender === "F") && (obj.ageGroup === ageGroups[j]));
             const maleValues = list.filter(obj => (obj.gender === "Male" || obj.gender === "M") && (obj.ageGroup === ageGroups[j]));
 
-            const ageGroupFemaleVals =  listTXCurr.filter(obj => (obj.Gender === "Female" || obj.Gender === "F") && (obj.ageGroup === altAgeGroup));
-            const ageGroupMaleVals = listTXCurr.filter(obj => (obj.Gender === "Male" || obj.Gender === "M") && (obj.ageGroup === altAgeGroup));
 
-            let totalFemale = 0;
             let femaleValue = 0;
-            let totalMale = 0;
             let maleValue = 0;
             if (femaleValues.length > 0) {
                 femaleValue = femaleValues[0].patients;
@@ -145,13 +148,13 @@ export const getStabilityStatusByAgeSex = createSelector(
                 maleValue = maleValues[0].patients;
             }
 
-            if (ageGroupFemaleVals.length > 0) {
-                totalFemale = totalFemale + ageGroupFemaleVals[0].txCurr;
-            }
+            // if (ageGroupFemaleVals.length > 0) {
+            //     totalFemale = totalFemale + ageGroupFemaleVals[0].txCurr;
+            // }
 
-            if (ageGroupMaleVals.length > 0) {
-                totalMale = totalMale + ageGroupMaleVals[0].txCurr;
-            }
+            // if (ageGroupMaleVals.length > 0) {
+            //     totalMale = totalMale + ageGroupMaleVals[0].txCurr;
+            // }
 
             const malePercent = totalMale > 0 ? ((maleValue / totalMale)*100) : 0;
             const femalePercent = totalFemale > 0 ? ((femaleValue / totalFemale)*100) : 0;

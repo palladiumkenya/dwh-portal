@@ -65,7 +65,7 @@ const OVCMMDUptakeAmongOvcPatients = () => {
                             name: 'OVC TOTAL ON MMD',
                             y: ovcTotalOnMMD.ovcTotalOnMmd,
                             color: "#14084D",
-                            text: ovcTotalOnMMD.ovcTotalOnMmd.toLocaleString('en') + ' (' + parseFloat(((ovcTotalOnMMD.ovcTotalOnMmd/ovcCurrentOnArt.OVConART)*100).toString()).toFixed(0) + '%)',
+                            text: (ovcTotalOnMMD.ovcTotalOnMmd ? ovcTotalOnMMD.ovcTotalOnMmd.toLocaleString('en') : 0) + ' (' + parseFloat(((ovcTotalOnMMD?.ovcTotalOnMmd/ovcCurrentOnArt.OVConART)*100).toString()).toFixed(0) + '%)',
                             cText: 'OVC TOTAL ON MMD: ' + ovcTotalOnMMD.ovcTotalOnMmd
                         }
                     ]

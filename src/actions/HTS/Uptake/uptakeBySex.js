@@ -31,7 +31,7 @@ export const fetchUptakeBySex = () => async (dispatch, getState) => {
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
     };
     try {
-        const response = await axios.get(`${DWH_API_URL}/api/hts/uptakeBySex`, { params: params });
+        const response = await axios.get(`${DWH_API_URL}hts/uptakeBySex`, { params: params });
         dispatch({ type: actionTypes.HTS_UPTAKE_BY_SEX_FETCH, payload: { filtered: getState().filters.filtered, list: response.data }});
     } catch (e) {
         dispatch({ type: actionTypes.HTS_UPTAKE_BY_SEX_REQUEST_FAILED });

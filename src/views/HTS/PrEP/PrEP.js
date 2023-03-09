@@ -129,25 +129,25 @@ const PrEP = () => {
                     <PrEPCurrentBySubPopulation />
                 </Col>
             </Row>
+            {/* <SectionFooter />
+            <PrEPCurrentTrends /> */}
             <SectionFooter />
-            <PrEPCurrentTrends />
-            <SectionFooter />
-            <PrEPCurrentVsTestedPositiveTrends />
-            <SectionFooter />
+            {/* <PrEPCurrentVsTestedPositiveTrends />
+            <SectionFooter /> */}
             <PrEPContinuityByAgeSex />
             <SectionFooter />
             <Row>
-                <Col
+                {/* <Col
                     className={
                         'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
                     }
                 >
                     <PrEPUsePopulation1stMonth />
-                </Col>
+                </Col> */}
                 <Col
-                    className={
-                        'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
-                    }
+                    // className={
+                    //     'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
+                    // }
                 >
                     <PrEPHIVTesting1stMonth />
                 </Col>
@@ -156,17 +156,17 @@ const PrEP = () => {
             <PrEPHIV1STMonthRefill />
             <SectionFooter />
             <Row>
-                <Col
+                {/* <Col
                     className={
                         'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
                     }
                 >
                     <PrEPUsePopulation3RDMonth />
-                </Col>
+                </Col> */}
                 <Col
-                    className={
-                        'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
-                    }
+                    // className={
+                    //     'col-6 col-lg-6 col-md-6 col-sm-12 col-xs-12  col-xl-6'
+                    // }
                 >
                     <PrEPHIVTesting3RDMonth />
                 </Col>

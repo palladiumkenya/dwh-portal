@@ -3,10 +3,11 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-
+import * as prepSelector from '../../../selectors/HTS/Prep/prepMonth3RefillSelector';
 
 const PrEP3RDMonthRefill = () => {
-    const filters = useSelector(state => state.filters);
+    const filters = useSelector((state) => state.filters);
+    let month3 = useSelector(prepSelector.getPrepMonth3RefillAgeSex);
     const [prep3RDMonthRefill, setPrep3RDMonthRefill] = useState({});
 
     const loadPrep3RDMonthRefill = useCallback(async () => {
@@ -18,28 +19,34 @@ const PrEP3RDMonthRefill = () => {
                 text: '',
             },
             xAxis: {
-                categories: [
-                    '15-19 YRS',
-                    '20-24 YRS',
-                    '25-29 YRS',
-                    '30-34 YRS',
-                    '35-39 YRS',
-                    '40-44 YRS',
-                    '45-49 YRS',
-                    '50 +',
-                    'UNKNOWN AGE',
-                ],
+                categories: month3.agegrp,
                 crosshair: true,
                 title: {
                     text: 'AGE GROUP',
                 },
             },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'NUMBER OF PATIENTS',
+            yAxis: [
+                {
+                    min: 0,
+                    title: {
+                        text: 'NUMBER OF PATIENTS',
+                    },
                 },
-            },
+                {
+                    labels: {
+                        style: {
+                            color: 'orange',
+                        },
+                    },
+                    title: {
+                        text: 'PERCENTAGE OF PATIENTS',
+                        style: {
+                            color: 'orange',
+                        },
+                    },
+                    opposite: true,
+                },
+            ],
             tooltip: {
                 headerFormat:
                     '<span style="font-size:10px">{point.key}</span><table>',
@@ -69,26 +76,27 @@ const PrEP3RDMonthRefill = () => {
             series: [
                 {
                     name: 'TOTAL REFILL MONTH 1',
-                    data: [23.6, 78.8, 98.5, 20, 10, 50, 70, 20, 90],
+                    data: month3.iniListRefill,
                     color: '#14084D',
                 },
                 {
                     name: 'TOTAL TESTED',
-                    data: [18, 45, 90, 27, 19, 70, 50, 70, 100],
+                    data: month3.iniListTested,
                     color: '#00a65a',
                 },
                 {
                     type: 'scatter',
                     name: '% OF PATIENTS REFILLED',
-                    data: [83.6, 78.8, 98, 67, 97, 50, 70, 80, 90],
+                    data: month3.perc,
                     color: 'orange',
                     marker: {
                         symbol: 'circle',
                     },
+                    yAxis: 1,
                 },
             ],
         });
-    }, []);
+    }, [month3]);
 
     useEffect(() => {
         loadPrep3RDMonthRefill();
@@ -100,7 +108,10 @@ const PrEP3RDMonthRefill = () => {
                 HIV TESTING AT 3RD MONTH PREP REFILL
             </CardHeader>
             <CardBody>
-                <HighchartsReact highcharts={Highcharts} options={prep3RDMonthRefill}/>
+                <HighchartsReact
+                    highcharts={Highcharts}
+                    options={prep3RDMonthRefill}
+                />
             </CardBody>
         </Card>
     );

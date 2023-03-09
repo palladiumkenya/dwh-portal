@@ -28,6 +28,8 @@ export const getCurrentOnArtByPartner = createSelector(
         let currentOnArt = [];
         let verifiedPerc = [];
 
+        listTxCurr = listTxCurr.sort((a, b) => b.txCurr - a.txCurr);
+
         for (let i = 0; i < listTxCurr.length; i++) {
             if (!listTxCurr[i].CTPartner) {
                 continue;

@@ -27,12 +27,14 @@ export const getCurrentOnArtByFacility = createSelector(
             : listUnfilteredVerified;
 
         const facilityData = list.map((e) => {
-            let data = listVerified.filter((f) => f.MFLCode === e.MFLCode);
+            let data = listVerified.filter((f) => parseInt(f.MFLCode, 10) === parseInt(e.MFLCode, 10));
+            console.log(data)
             return {
                 ...e,
                 Nupi: data[0]?.NumNupi ?? 0,
                 NotNupi: e.TXCURR - (data[0]?.NumNupi ?? 0),
-                perc: Math.floor(((data[0]?.NumNupi ?? 0) * 100) / e.TXCURR),
+                perc: e.TXCURR > 0 ? (Math.floor(
+                    ((data[0]?.NumNupi ?? 0) * 100) / e.TXCURR)) : 0
             };
         });
         facilityData.sort(function (a, b) {

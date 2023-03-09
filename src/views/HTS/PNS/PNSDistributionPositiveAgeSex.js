@@ -36,7 +36,7 @@ const PNSDistributionPositiveAgeSex = () => {
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('hts/pnsSexualContactsByAgeSex', params);
-        const sexGroups = ['M', 'F'];
+        const sexGroups = ['Male', 'Female'];
         const ageGroups = [];
         let data = [];
         for(let i = 0; i < result.length; i++) {

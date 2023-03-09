@@ -3,10 +3,19 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from "reactstrap";
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import * as newOnPrepSelector from '../../../selectors/HTS/Prep/newOnPrepSelector';
+import * as ctPrepSelector from '../../../selectors/HTS/Prep/ctPrepSelector';
+import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
+import * as prepTestedSelector from '../../../selectors/HTS/Prep/prepTotalTestedSelector';
 
 
 const PrEPCascade = () => {
-    const filters = useSelector(state => state.filters);
+    let newOnPrep = useSelector(newOnPrepSelector.getNewOnPrepTotal);
+    let prepCT = useSelector(ctPrepSelector.getCTPrepTotal);
+    let screened = useSelector(prepSelector.getPrepScreenedTotal);
+    let eligible = useSelector(prepSelector.getPrepEligibleTotal);
+    let tested = useSelector(prepTestedSelector.getPrepTestTotal);
+
     const [prepOverall, setPrepOverall] = useState({});
 
     const loadPrepOverall = useCallback(async () => {
@@ -27,14 +36,14 @@ const PrEPCascade = () => {
                     'ELIGIBLE FOR PREP',
                     'INITIATED PREP',
                     'CONTINUING ON PREP',
-                    'CURRENT ON PREP',
+                    // 'CURRENT ON PREP',
                 ],
                 crosshair: true,
             },
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'PERCENTAGE OF PATIENTS',
+                    text: 'NUMBER OF PATIENTS',
                 },
             },
             tooltip: {
@@ -66,19 +75,19 @@ const PrEPCascade = () => {
             },
             series: [
                 {
-                    name: 'Percentage',
+                    name: '',
                     data: [
-                        { y: 83.6, color: '#00a65a' },
-                        { y: 78.8, color: '#142459' },
-                        { y: 58.5, color: 'rgb(124, 181, 236)' },
-                        { y: 20, color: '#3281CC' },
-                        { y: 30, color: '#1AB394' },
-                        { y: 40, color: 'rgb(144, 237, 125)' },
+                        { y: tested, color: '#00a65a' },
+                        { y: screened, color: '#142459' },
+                        { y: eligible, color: 'rgb(124, 181, 236)' },
+                        { y: newOnPrep, color: '#3281CC' },
+                        { y: prepCT, color: '#1AB394' },
+                        // { y: 40, color: 'rgb(144, 237, 125)' },
                     ],
                 },
             ],
         });
-    }, []);
+    }, [screened, newOnPrep, tested, eligible]);
 
     useEffect(() => {
         loadPrepOverall();
