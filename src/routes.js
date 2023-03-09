@@ -8,6 +8,7 @@ const Home = Loadable({ loader: () => import('./views/Home/Home'), loading: Load
 const RR = Loadable({ loader: () => import('./views/RR/RR'), loading: Loading, delay: LOADING_DELAY });
 const HTS = Loadable({ loader: () => import('./views/HTS/HTS'), loading: Loading, delay: LOADING_DELAY });
 const CT = Loadable({ loader: () => import('./views/CT/CT'), loading: Loading, delay: LOADING_DELAY });
+const SD = Loadable({ loader: () => import('./views/ServiceDesk/ServiceDesk'), loading: Loading, delay: LOADING_DELAY });
 const OperationalHIS = Loadable({ loader: () => import('./views/Operational&HIS/OperationalHIS'), loading: Loading, delay: LOADING_DELAY });
 const GIS = Loadable({ loader: () => import('./views/GIS/GIS'), loading: Loading, delay: LOADING_DELAY });
 const HRH = Loadable({ loader: () => import('./views/HRH/HRH'), loading: Loading, delay: LOADING_DELAY });
@@ -20,6 +21,7 @@ const routes = [
   { path: "/reporting-rates/:active_tab?", exact: true, name: "Reporting Rates", component: withTracker(RR), private: false },
   { path: "/hiv-testing/:active_tab?/:mini_tab?", exact: true, name: 'HIV Testing & Prevention', component: withTracker(HTS), private: false },
   { path: "/hiv-treatment/:active_tab?/:mini_tab?", exact: true, name: "HIV Treatment", component: withTracker(CT), private: false },
+  { path: "/service-desk/:active_tab?", exact: true, name: "Service Desk", component: withTracker(SD), private: false },
   { path: "/operational-and-his/:active_tab?/:mini_tab?", exact: true, name: "Operational & HIS Dashboards", component: withTracker(OperationalHIS), private: false },
   { path: "/gis", exact: true, name: "GIS", component: withTracker(GIS), private: false },
   { path: "/hrh", exact: true, name: "HRH", component: withTracker(HRH), private: false },
