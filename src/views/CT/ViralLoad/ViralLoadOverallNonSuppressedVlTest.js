@@ -20,7 +20,6 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
         viralLoadUptakeGt1000CopiesRecFollowTest.forEach(element => {
             totalFollowTest += element.Num;
         });
-        console.log(viralLoadUptakeGt1000CopiesRecFollowTest[0]?.b);
 
         setViralLoadOverallUptakeAndSuppressionBySex({
             chart: {

@@ -39,3 +39,8 @@ export const changeCtTab = tab => ({
     type: actionTypes.CHANGE_CT_TAB,
     payload: { tab }
 });
+
+export const changeSdTab = tab => ({
+    type: actionTypes.CHANGE_SD_TAB,
+    payload: { tab }
+});
