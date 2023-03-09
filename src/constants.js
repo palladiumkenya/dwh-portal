@@ -33,6 +33,11 @@ export const CT_TABS = {
     artVerification: 'ART VERIFICATION',
 };
 
+export const SD_TABS = {
+    serviceDesk: 'SERVICE DESK',
+    sdp: 'SERVICE DELIVERY PARTNER',
+};
+
 export const OPERATIONALHIS_TABS = {
     overview: 'OVERVIEW',
     completeness: 'COMPLETENESS',
@@ -48,6 +53,7 @@ export const PAGES = {
     hts: 'HIV_TESTING_SERVICES',
     ct: 'CARE_AND_TREATMENT',
     hrh: 'HRH',
+    sd: 'SERVICE_DESK',
     operationalHIS: 'OPERATIONAL_AND_HIS',
 };
 
