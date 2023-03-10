@@ -243,7 +243,6 @@ export const getArtPendingUnverifiedByCounty = createSelector(
         }
 
         newList = newList.sort((b, a) => a.Pending - b.Pending);
-                console.log(newList);
 
         return {
             counties: newList.map((e) => e.county),
