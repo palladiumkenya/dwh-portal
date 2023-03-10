@@ -1,13 +1,14 @@
 import * as actions from "../../actions/types";
 
 const initialState = {
-    currentPage: "",
+    currentPage: '',
     stickyFilter: false,
-    homeTab: "emr",
-    rrTab: "ct",
-    htsTab: "uptake",
-    ctTab: "newlyOnArt",
-    operationalHISTab: "overview",
+    homeTab: 'emr',
+    rrTab: 'ct',
+    htsTab: 'uptake',
+    ctTab: 'newlyOnArt',
+    operationalHISTab: 'overview',
+    sdTab: 'serviceDesk',
 };
 
 export default (state = initialState, action) => {
@@ -26,6 +27,8 @@ export default (state = initialState, action) => {
             return { ...state, htsTab: action.payload.tab }
         case actions.CHANGE_CT_TAB:
             return { ...state, ctTab: action.payload.tab }
+        case actions.CHANGE_SD_TAB:
+            return { ...state, sdTab: action.payload.tab }
         case actions.CHANGE_OPERATIONAL_AND_HIS_TAB:
             return { ...state, operationalHISTab: action.payload.tab }
         default:

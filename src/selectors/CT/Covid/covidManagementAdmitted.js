@@ -16,7 +16,6 @@ export const getCovidManagementAdmitted = createSelector(
             labels.push(d.AdmissionUnit.toUpperCase())
             data.push(d.Num)
         })
-        // console.log(Screened)
 
         return { data, labels };
     }
