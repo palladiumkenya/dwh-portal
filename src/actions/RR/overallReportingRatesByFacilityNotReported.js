@@ -41,7 +41,6 @@ export const fetchOverallReportingRatesByFacilityNotReported = () => async (disp
               .add(16, 'days')
               .format('YYYY,M');
     try {
-        console.log(params)
         const response = await axios.get(`${DWH_API_URL}manifests/overallReportingByFacility/${docket}`, { params: params });
         dispatch({ type: actionTypes.RR_OVERALL_REPORTING_RATES_BY_FACILITY_NOT_REPORTED_FETCH, payload: { filtered: getState().filters.filtered, docket: docket, list: response.data }});
     } catch (e) {
