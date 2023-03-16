@@ -21,7 +21,7 @@ import {
     disablePopulationTypeFilter,
     enableAgencyFilter,
     enableDatimAgePopulationFilter,
-    disableDatimAgePopulationFilter
+    disableDatimAgePopulationFilter,
 } from '../../actions/Shared/filterActions';
 
 import { SD_TABS, PAGES, LOADING_DELAY } from '../../constants';
@@ -147,7 +147,18 @@ const ServiceDesk = () => {
         },
         height: '500px', // set the height to 500 pixels
     };
-return <PowerBIEmbed embedConfig={embedConfig} />;
+    return (
+        <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+        <iframe
+            title="Report Section"
+            width="1240"
+            height="741.25"
+            src="https://app.powerbi.com/view?r=eyJrIjoiZDM0OGU1NmItZjgzNC00MDVlLThhYzctMTJkNGY0OWE3ZGY1IiwidCI6IjFmZmI3MTkzLTMyNjItNGYzNS04ZjczLWE1NWFmMTAxNDAxNyJ9"
+            frameborder="0"
+            allowFullScreen="true"
+        ></iframe>
+        </div>
+    );
     // return (
     //     <div>
     //         <Nav tabs>{renderTabNavItems()}</Nav>
