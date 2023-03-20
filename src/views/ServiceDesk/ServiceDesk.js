@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 import Loadable from 'react-loadable';
+import { PowerBIEmbed } from 'powerbi-client-react';
+import { models, Report } from 'powerbi-client';
 
 import { changeSdTab, changeCurrentPage } from '../../actions/Shared/uiActions';
 import {
@@ -19,7 +21,7 @@ import {
     disablePopulationTypeFilter,
     enableAgencyFilter,
     enableDatimAgePopulationFilter,
-    disableDatimAgePopulationFilter
+    disableDatimAgePopulationFilter,
 } from '../../actions/Shared/filterActions';
 
 import { SD_TABS, PAGES, LOADING_DELAY } from '../../constants';
@@ -53,7 +55,7 @@ const ServiceDesk = () => {
     const fromDate = useSelector((state) => state.filters.fromDate);
     const toDate = useSelector((state) => state.filters.toDate);
 
-    const DEFAULT_ACTIVE_TAB = useSelector((state) => state.ui.sdTab);
+    const DEFAULT_ACTIVE_TAB = 'serviceDesk';
     const { active_tab } = useParams();
     const history = useHistory();
     console.log(DEFAULT_ACTIVE_TAB);
@@ -131,22 +133,47 @@ const ServiceDesk = () => {
             history.push(`/service-desk/${tab}`);
         }
     };
-
+    const embedConfig = {
+        type: 'report',
+        embedUrl:
+            'https://app.powerbi.com/view?r=eyJrIjoiYWE1MmFkZmYtMDg2Ny00NzViLTg4NzQtMTE5ZDNlZmE1YTRlIiwidCI6IjFmZmI3MTkzLTMyNjItNGYzNS04ZjczLWE1NWFmMTAxNDAxNyJ9',
+        accessToken: '',
+        settings: {
+            panes: {
+                filters: {
+                    visible: true,
+                },
+            },
+        },
+        height: '500px', // set the height to 500 pixels
+    };
     return (
-        <div>
-            <Nav tabs>{renderTabNavItems()}</Nav>
-            <TabContent activeTab={active_tab}>
-                <TabPane tabId="serviceDesk">
-                    {active_tab === 'serviceDesk' ? <Service_Desk /> : null}
-                </TabPane>
-                <TabPane tabId="sdp">
-                    {active_tab === 'sdp' ? <SDP /> : null}
-                </TabPane>
-            </TabContent>
-            <p></p>
-            <p></p>
+        <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+        <iframe
+            title="Report Section"
+            width="1240"
+            height="741.25"
+            src="https://app.powerbi.com/view?r=eyJrIjoiZDM0OGU1NmItZjgzNC00MDVlLThhYzctMTJkNGY0OWE3ZGY1IiwidCI6IjFmZmI3MTkzLTMyNjItNGYzNS04ZjczLWE1NWFmMTAxNDAxNyJ9"
+            frameborder="0"
+            allowFullScreen="true"
+        ></iframe>
         </div>
     );
+    // return (
+    //     <div>
+    //         <Nav tabs>{renderTabNavItems()}</Nav>
+    //         <TabContent activeTab={active_tab}>
+    //             <TabPane tabId="serviceDesk">
+    //                 {active_tab === 'serviceDesk' ? <Service_Desk /> : null}
+    //             </TabPane>
+    //             <TabPane tabId="sdp">
+    //                 {active_tab === 'sdp' ? <SDP /> : null}
+    //             </TabPane>
+    //         </TabContent>
+    //         <p></p>
+    //         <p></p>
+    //     </div>
+    // );
 };
 
 export default ServiceDesk;
