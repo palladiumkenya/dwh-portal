@@ -53,7 +53,7 @@
         "styled-components": "^5.1.1"
     },
     "scripts": {
-        "start": "react-scripts --openssl-legacy-provider start",
+        "start": "react-scripts start",
         "start:dev": "env-cmd -f ./.env.development react-scripts start",
         "start:prod": "env-cmd -f ./.env.production react-scripts start",
         "start:nascop": "env-cmd -f ./.env.nascop react-scripts start",
@@ -61,7 +61,8 @@
         "build:testing": "env-cmd -f ./.env.testing react-scripts build",
         "build:nascop": "env-cmd -f ./.env.nascop react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+	"postinstall": "semantic-ui-css-patch"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -79,6 +80,7 @@
         ]
     },
     "devDependencies": {
+        "@semantic-ui-react/css-patch": "^1.1.2",
         "prettier": "^2.2.1"
     },
     "homepage": "."
