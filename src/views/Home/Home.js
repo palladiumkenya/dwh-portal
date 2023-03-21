@@ -27,6 +27,7 @@ import {
     disablePopulationTypeFilter,
     enableAgencyFilter
 } from "../../actions/Shared/filterActions";
+import { loadCurrentOnArt } from '../../actions/CT/CurrentOnArt/currentOnArtActions';
 
 const HomeVLCascade = Loadable({ loader: () => import('./HomeVLCascade'), loading: Loading, delay: LOADING_DELAY });
 const HomeAgeDistribution = Loadable({ loader: () => import('./HomeAgeDistribution'), loading: Loading, delay: LOADING_DELAY });
@@ -68,6 +69,7 @@ const Home = () => {
     useEffect(() => {
         dispatch(loadCurrentOnArtOverview());
         dispatch(loadCurrentOnArtByAgeSex());
+        dispatch(loadCurrentOnArt());
         dispatch(loadGpsSites());
     }, [
         dispatch,
