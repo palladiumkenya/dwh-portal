@@ -4,6 +4,9 @@ import _ from 'lodash';
 const listUnfiltered = state => state.currentOnArtOverview.listUnfiltered;
 const listFiltered = state => state.currentOnArtOverview.listFiltered;
 
+const listUnfilteredTX = (state) => state.currentOnArt.listUnfiltered;
+const listFilteredTX = (state) => state.currentOnArt.listFiltered;
+
 const listUnfilteredVerified = (state) =>
     state.currentOnArtVerified.listUnfiltered;
 const listFilteredVerified = (state) => state.currentOnArtVerified.listFiltered;
@@ -28,10 +31,10 @@ export const getCurrentOnARTOver20 = createSelector(
 )
 
 export const getCurrentOnArt = createSelector(
-    [listUnfiltered, listFiltered, filtered],
+    [listUnfilteredTX, listFilteredTX, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        return list.TX_CURR ? list.TX_CURR : 0;
+        return list.TXCURR ? list.TXCURR : 0;
     }
 );
 
