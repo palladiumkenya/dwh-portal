@@ -442,6 +442,7 @@ const CT = () => {
     }, [dispatch]);
 
     useEffect(() => {
+        dispatch(loadCurrentOnArt());
         if (
             active_tab === 'currentOnArt'
         ) {
