@@ -442,7 +442,6 @@ const CT = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        dispatch(loadCurrentOnArt());
         if (
             active_tab === 'currentOnArt'
         ) {
@@ -488,6 +487,7 @@ const CT = () => {
     }, [dispatch, active_tab]);
 
     useEffect(() => {
+        dispatch(loadCurrentOnArt());
         switch (active_tab) {
             case 'newlyOnArt':
                 dispatch(loadLinkagePositiveTrends());
