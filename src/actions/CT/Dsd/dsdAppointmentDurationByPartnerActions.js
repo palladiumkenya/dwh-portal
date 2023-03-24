@@ -27,8 +27,14 @@ export const fetchDsdAppointmentDurationByPartner = () => async (dispatch, getSt
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
         project: getState().filters.projects,
-        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
-        month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
+        gender: getState().filters.genders,
+        datimAgeGroup: getState().filters.datimAgeGroups,
+        year: getState().filters.fromDate
+            ? moment(getState().filters.fromDate, 'MMM YYYY').format('YYYY')
+            : '',
+        month: getState().filters.fromDate
+            ? moment(getState().filters.fromDate, 'MMM YYYY').format('MM')
+            : '',
     };
     const response = await getAll('care-treatment/dsdAppointmentDurationByPartner', params);
     dispatch({ type: actionTypes.CT_DSD_APPOINTMENT_DURATION_BY_PARTNER_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
