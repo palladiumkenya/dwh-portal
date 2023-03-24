@@ -27,8 +27,14 @@ export const fetchDsdStabilityStatusByPartner = () => async (dispatch, getState)
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
         project: getState().filters.projects,
-        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
-        month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
+        gender: getState().filters.genders,
+        datimAgeGroup: getState().filters.datimAgeGroups,
+        year: getState().filters.fromDate
+            ? moment(getState().filters.fromDate, 'MMM YYYY').format('YYYY')
+            : '',
+        month: getState().filters.fromDate
+            ? moment(getState().filters.fromDate, 'MMM YYYY').format('MM')
+            : '',
     };
     const response = await getAll('care-treatment/dsdStabilityStatusByPartner', params);
     dispatch({ type: actionTypes.CT_DSD_STABILITY_STATUS_BY_PARTNER_FETCH, payload: { filtered: getState().filters.filtered, list: response }});
