@@ -16,7 +16,7 @@ import { useParams } from 'react-router-dom';
 import moment from 'moment';
 
 import ServiceDeskOverview from './ServiceDeskOverview';
-import OpenTicketsByType from './OpenTicketsByType';
+import OpenTicketsByType from '../ServiceDesk/OpenTicketsByPartner';
 import TicketsByCategory from './TicketsByCategory';
 
 

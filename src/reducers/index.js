@@ -293,6 +293,17 @@ import artVerificationByCounty from './CT/ArtVerification/artVerificationByCount
 import artVerificationByPartner from './CT/ArtVerification/artVerificationByPartner';
 import artVerificationReasons from './CT/ArtVerification/artVerificationReasons';
 
+
+
+import openByCounty from './ServiceDesk/openByCounty';
+import openByPartner from './ServiceDesk/openByPartner';
+import openByProduct from './ServiceDesk/openByProduct';
+import openByMonth from './ServiceDesk/openByMonth';
+import statusByMonth from './ServiceDesk/statusByMonth';
+import statusByProduct from './ServiceDesk/statusByProduct';
+import ticketsOverview from './ServiceDesk/ticketsOverview';
+import partnerLevelIssues from './ServiceDesk/partnerLevelIssues';
+
 export default combineReducers({
     auth: authReducer,
 
@@ -578,4 +589,13 @@ export default combineReducers({
     artVerificationByCounty,
     artVerificationByPartner,
     artVerificationReasons,
+
+    openByCounty,
+    openByPartner,
+    openByProduct,
+    openByMonth,
+    statusByMonth,
+    statusByProduct,
+    ticketsOverview,
+    partnerLevelIssues,
 });

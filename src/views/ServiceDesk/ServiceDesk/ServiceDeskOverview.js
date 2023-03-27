@@ -1,11 +1,12 @@
 import { useSelector } from 'react-redux';
 import React from 'react';
 import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
-import * as currentNewOnArtOverviewSelectors from '../../../selectors/CT/NewOnArt/currentNewOnArtOverview';
 import { formatNumber, roundNumber } from '../../../utils/utils';
-import DataCard from '../../Shared/DataCard';
+import * as tickets from '../../../selectors/ServiceDesk/ticketsOverview';
+
 
 const ServiceDeskOverview = () => {
+    const overview = useSelector(tickets.getTicketsOverview);
 
     return (
         <>
@@ -20,7 +21,7 @@ const ServiceDeskOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{formatNumber(203)} </span>
+                                <span className="expected-uploads-text">{formatNumber(overview.total)} </span>
                             </div>
                         </CardBody>
                     </Card>
@@ -36,7 +37,7 @@ const ServiceDeskOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{formatNumber(432)} </span>
+                                <span className="expected-uploads-text">{formatNumber(overview.closed)} </span>
                             </div>
                         </CardBody>
                     </Card>
@@ -52,7 +53,7 @@ const ServiceDeskOverview = () => {
                             style={{ textAlign: 'center', backgroundColor: '#F6F6F6', height: '100px' }}
                         >
                             <div className="col-12">
-                                <span className="expected-uploads-text">{formatNumber(24)} </span>
+                                <span className="expected-uploads-text">{formatNumber(overview.opened)} </span>
                             </div>
                         </CardBody>
                     </Card>

@@ -16,8 +16,14 @@ import { useParams } from 'react-router-dom';
 import moment from 'moment';
 
 import ServiceDeskOverview from './ServiceDeskOverview';
-import OpenTicketsByType from './OpenTicketsByType';
-import TicketsByCategory from './TicketsByCategory';
+import TicketsByCategory from './IssueStatusByMonth';
+import IssueStatusByProduct from './IssueStatusByProduct';
+import OpenTicketsByProduct from './OpenTicketsByProduct';
+import OpenTicketsByPartner from './OpenTicketsByPartner';
+import OpenTicketsByCounty from './OpenTicketsByCounty';
+import OpenTicketsByMonth from './OpenTicketsByMonth';
+import IssueStatusByMonth from './IssueStatusByMonth';
+import PartnerLevelIssues from './PartnerLevelIssues';
 
 
 const Service_Desk = () => {
@@ -46,9 +52,19 @@ const Service_Desk = () => {
                 <UniversalFilter />
             </VisibilitySensor>
             <ServiceDeskOverview />
-            <OpenTicketsByType />
+            <IssueStatusByProduct />
             <SectionFooter overview={branding.overview} />
-            <TicketsByCategory />
+            <OpenTicketsByProduct />
+            <SectionFooter overview={branding.overview} />
+            <OpenTicketsByPartner />
+            <SectionFooter overview={branding.overview} />
+            <OpenTicketsByCounty />
+            <SectionFooter overview={branding.overview} />
+            <OpenTicketsByMonth />
+            <SectionFooter overview={branding.overview} />
+            <IssueStatusByMonth />
+            <SectionFooter overview={branding.overview} />
+            <PartnerLevelIssues />
             <SectionFooter overview={branding.overview} />
         </div>
     );
