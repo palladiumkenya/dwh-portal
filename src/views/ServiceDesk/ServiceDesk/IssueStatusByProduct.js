@@ -3,13 +3,11 @@ import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
-import * as newOnArtByAgeSexSelectors from '../../../selectors/CT/NewOnArt/newOnArtByAgeSex';
+import * as tickets from '../../../selectors/ServiceDesk/statusTickets';
 
-const OpenTicketsByType = () => {
+const IssueStatusByProduct = () => {
     const [newOnArtBySex, setNewOnArtBySex] = useState({});
-    const newOnArtBySexData = useSelector(
-        newOnArtByAgeSexSelectors.getNewOnArtBySex
-    );
+    const statusProduct = useSelector(tickets.getByProduct);
 
     const loadNewOnArtBySex = useCallback(async () => {
         setNewOnArtBySex({
@@ -21,20 +19,18 @@ const OpenTicketsByType = () => {
                 align: 'left',
             },
             xAxis: {
-                categories: [
-                    'unclassified',
-                    'dwapi issues',
-                    'mhealth issues',
-                    'kenyaemr support',
-                ],
+                title: {
+                    text: 'PROUDUCT',
+                },
+                categories: statusProduct.products,
             },
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'NUMBER OF ISSUES',
+                    text: 'PERCENTAGE OF ISSUES',
                 },
                 stackLabels: {
-                    enabled: true,
+                    enabled: false,
                     style: {
                         fontWeight: 'bold',
                         color:
@@ -61,7 +57,7 @@ const OpenTicketsByType = () => {
             },
             plotOptions: {
                 column: {
-                    stacking: 'normal',
+                    stacking: 'percent',
                     dataLabels: {
                         enabled: false,
                     },
@@ -69,33 +65,18 @@ const OpenTicketsByType = () => {
             },
             series: [
                 {
-                    name: 'BUG',
-                    data: [3, 5, 1, 13],
+                    name: 'OPEN',
+                    data: statusProduct.open,
                     color: '#2F4050',
                 },
                 {
-                    name: 'SUPPORT',
-                    data: [14, 8, 8, 12],
-                    color: '#A70709',
-                },
-                {
-                    name: 'ENHANCEMENT',
-                    data: [0, 2, 16, 3],
-                    color: '#5FA5E6',
-                },
-                {
-                    name: 'TRAINING',
-                    data: [20, 2, 6, 13],
-                    color: '#F28E2B',
-                },
-                {
-                    name: 'UNCLASSIFIED',
-                    data: [7, 12, 6, 3],
+                    name: 'CLOSED',
+                    data: statusProduct.closed,
                     color: '#1AB394',
                 },
             ],
         });
-    }, [newOnArtBySexData]);
+    }, [statusProduct]);
 
     useEffect(() => {
         loadNewOnArtBySex();
@@ -106,7 +87,7 @@ const OpenTicketsByType = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        OPEN ISSUES BY TYPE
+                        ISSUE STATUS BY PRODUCT
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -122,4 +103,4 @@ const OpenTicketsByType = () => {
     );
 };
 
-export default OpenTicketsByType;
+export default IssueStatusByProduct;
