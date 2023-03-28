@@ -229,6 +229,7 @@ const RROverview = () => {
                                               .startOf('month')
                                               .subtract(2, 'month')
                                               .add(16, 'days')
+
                                               .format('MMM YYYY'),
                                 })
                             )}

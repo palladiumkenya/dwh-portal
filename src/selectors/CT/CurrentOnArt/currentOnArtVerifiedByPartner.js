@@ -39,15 +39,17 @@ export const getCurrentOnArtByPartner = createSelector(
             verifiedPerc.push(
                 (((list.find(
                     (x) =>
-                        x.CTPartner.toUpperCase() ===
-                        listTxCurr[i].CTPartner.toUpperCase()
+                        x.CTPartner === null ? 
+                            x?.CTPartner === listTxCurr[i]?.CTPartner:
+                            x?.CTPartner.toUpperCase() === listTxCurr[i]?.CTPartner.toUpperCase()
                 )?.NumNupi ?? 0 )/ listTxCurr[i].txCurr) * 100) ?? 0
             );
             currentOnArtVerified.push(
                 list.find(
                     (x) =>
-                        x.CTPartner.toUpperCase() ===
-                        listTxCurr[i].CTPartner.toUpperCase()
+                        x.CTPartner === null ? 
+                            x.CTPartner === listTxCurr[i].CTPartner:
+                            x?.CTPartner.toUpperCase() === listTxCurr[i].CTPartner.toUpperCase()
                 )?.NumNupi ?? 0 // 0 if NumNUPI isnt found
             );
         }
@@ -85,8 +87,9 @@ export const getCurrentOnArtByPartnerPerc = createSelector(
                 currentOnArtVerified:
                     ((list.find(
                         (x) =>
-                            x.CTPartner.toUpperCase() ===
-                            listTxCurr[i].CTPartner.toUpperCase()
+                            x?.CTPartner === null ?
+                                x?.CTPartner === listTxCurr[i]?.CTPartner :
+                                x?.CTPartner.toUpperCase() === listTxCurr[i]?.CTPartner.toUpperCase()
                     )?.NumNupi ?? 0) /
                         listTxCurr[i].txCurr) *
                         100 ?? 0,
@@ -94,23 +97,26 @@ export const getCurrentOnArtByPartnerPerc = createSelector(
                     100 -
                     (((list.find(
                         (x) =>
-                            x.CTPartner.toUpperCase() ===
-                            listTxCurr[i].CTPartner.toUpperCase()
+                            x?.CTPartner === null ?
+                                x?.CTPartner === listTxCurr[i]?.CTPartner :
+                                x?.CTPartner.toUpperCase() === listTxCurr[i]?.CTPartner.toUpperCase()
                     )?.NumNupi ?? 0) /
                         listTxCurr[i].txCurr) *
                         100 ?? 0),
                 numcurrentOnArtVerified:
                     list.find(
                         (x) =>
-                            x.CTPartner.toUpperCase() ===
-                            listTxCurr[i].CTPartner.toUpperCase()
+                            x?.CTPartner === null ?
+                                x?.CTPartner === listTxCurr[i]?.CTPartner :
+                                x?.CTPartner.toUpperCase() === listTxCurr[i]?.CTPartner.toUpperCase()
                     )?.NumNupi ?? 0,
                 numcurrentOnArt: listTxCurr[i].txCurr,
                 verifiedPerc:
                     ((list.find(
                         (x) =>
-                            x.CTPartner.toUpperCase() ===
-                            listTxCurr[i].CTPartner.toUpperCase()
+                            x?.CTPartner === null ?
+                                x.CTPartner === listTxCurr[i].CTPartner :
+                                x.CTPartner.toUpperCase() === listTxCurr[i].CTPartner.toUpperCase()
                     )?.NumNupi ?? 0) /
                         listTxCurr[i].txCurr) *
                         100 ?? 0,

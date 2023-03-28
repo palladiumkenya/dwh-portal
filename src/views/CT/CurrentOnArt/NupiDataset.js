@@ -141,14 +141,14 @@ const NupiDataset = () => {
     const [nupiDataset, setNupiDataset] = useState([]);
 
     const loadDataset = useCallback(async () => {
-        // if (nupiDataset.length === 0)
-            // try {
-            //     let data = await getAll('care-treatment/nupiDataset', {});
-            //     setNupiDataset(data)
+        if (nupiDataset.length === 0)
+            try {
+                let data = await getAll('care-treatment/nupiDataset', {});
+                setNupiDataset(data)
 
-            // } catch (e){
-            //     console.log(e)
-            // }
+            } catch (e){
+                console.log(e)
+            }
     },)
     
     useEffect(() => {
