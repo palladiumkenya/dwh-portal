@@ -80,13 +80,16 @@ const DefaultHeader = () => {
                 full={{ src: logo, width: 'auto', height: 50, alt: 'DWH Logo' }}
                 minimized={{ src: sygnet, alt: 'DWH Logo' }}
             />
-            <Nav className="d-md-down-none navbar" style={{ fontSize: '.88em', padding: ".1rem !important" }}>
-                <NavItem className="px-3">
+            <Nav
+                className="d-md-down-none navbar"
+                style={{ fontSize: '.88em', padding: '.1rem !important' }}
+            >
+                <NavItem >
                     <NavLink to="/" className="nav-link active">
                         <strong>Home</strong>
                     </NavLink>
                 </NavItem>
-                <NavItem className="px-3">
+                <NavItem >
                     <NavLink to="/reporting-rates" className="nav-link active">
                         <strong>Reporting Rates</strong>
                     </NavLink>
@@ -94,14 +97,19 @@ const DefaultHeader = () => {
                 {/* <NavItem className="px-3">
                     <NavLink to="/hrh" className="nav-link">HRH</NavLink>
                 </NavItem> */}
-                <NavItem className="px-3">
+                <NavItem >
                     <NavLink to="/hiv-testing" className="nav-link active">
                         <strong>HIV Testing & Prevention</strong>
                     </NavLink>
                 </NavItem>
-                <NavItem className="px-3">
+                <NavItem >
                     <NavLink to="/hiv-treatment" className="nav-link active">
                         <strong>HIV Treatment</strong>
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink to="/service-desk" className="nav-link active">
+                        <strong>Service Desk</strong>
                     </NavLink>
                 </NavItem>
                 {/* <NavItem className="px-3">
@@ -113,7 +121,7 @@ const DefaultHeader = () => {
                     </NavLink>
                 </NavItem> */}
 
-                <NavItem className="px-3">
+                <NavItem>
                     <a
                         href="https://kenyahmis.org/documentation/data-dictionaries/"
                         className="nav-link active"
@@ -123,7 +131,7 @@ const DefaultHeader = () => {
                         <strong>Resources</strong>
                     </a>
                 </NavItem>
-                <NavItem className="px-3">
+                {/* <NavItem >
                     <a
                         href="https://national-data-warehouse-gis-analytics-dwh.hub.arcgis.com/"
                         className="nav-link active"
@@ -132,8 +140,8 @@ const DefaultHeader = () => {
                     >
                         <strong>GIS</strong>
                     </a>
-                </NavItem>
-                <NavItem className="px-3">
+                </NavItem> */}
+                <NavItem >
                     <NavLink
                         to="/"
                         className="nav-link active"
