@@ -31,6 +31,7 @@ const PartnerLevelIssues = () => {
         { name: 'sdp', label: 'Partner' },
         { name: 'type', label: 'Issue Type' },
         { name: 'product', label: 'Issue Product' },
+        { name: 'status', label: 'Issue Status' },
         {
             name: 'date',
             label: 'Date Reported',

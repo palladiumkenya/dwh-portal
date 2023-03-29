@@ -19,7 +19,7 @@ export const getByProduct = createSelector(
         let closed = []
 
         products = list.map((l) =>
-            l.product ? l.product.toUpperCase() : l.product
+            l.product ? l.product.toUpperCase() : "NOT PROVIDED"
         );
         open = list.map(l => l.opened)
         closed = list.map(l => l.closed)
