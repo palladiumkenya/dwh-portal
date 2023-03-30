@@ -386,6 +386,11 @@ const ArtVerification = Loadable({
     loading: Loading,
     delay: LOADING_DELAY,
 });
+const ContinuityOfTreatment = Loadable({
+    loader: () => import('./ContinuityOfTreatment/ContinuityOfTreatment'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 
 const CT = () => {
 
@@ -865,7 +870,14 @@ const CT = () => {
                     {active_tab === 'covid' ? <COVID /> : null}
                 </TabPane>
                 <TabPane tabId={'artVerification'}>
-                    {active_tab === 'artVerification' ? <ArtVerification /> : null}
+                    {active_tab === 'artVerification' ? (
+                        <ArtVerification />
+                    ) : null}
+                </TabPane>
+                <TabPane tabId={'ContinuityOfTreatment'}>
+                    {active_tab === 'ContinuityOfTreatment' ? (
+                        <ContinuityOfTreatment />
+                    ) : null}
                 </TabPane>
             </TabContent>
             <p></p>
