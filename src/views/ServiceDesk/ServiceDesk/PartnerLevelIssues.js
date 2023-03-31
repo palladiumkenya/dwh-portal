@@ -61,7 +61,7 @@ const PartnerLevelIssues = () => {
                                 <Spinner className="pull-right" />
                             ) : (
                                 <CsvDownloader
-                                    filename="verified vs txcurr by facility"
+                                    filename="service desk partner level issues"
                                     separator=","
                                     datas={partnerLevel}
                                     className="pull-right"
