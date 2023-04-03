@@ -874,11 +874,6 @@ const CT = () => {
                         <ArtVerification />
                     ) : null}
                 </TabPane>
-                <TabPane tabId={'ContinuityOfTreatment'}>
-                    {active_tab === 'ContinuityOfTreatment' ? (
-                        <ContinuityOfTreatment />
-                    ) : null}
-                </TabPane>
             </TabContent>
             <p></p>
             <p></p>
