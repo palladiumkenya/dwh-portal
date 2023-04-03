@@ -386,11 +386,6 @@ const ArtVerification = Loadable({
     loading: Loading,
     delay: LOADING_DELAY,
 });
-const ContinuityOfTreatment = Loadable({
-    loader: () => import('./ContinuityOfTreatment/ContinuityOfTreatment'),
-    loading: Loading,
-    delay: LOADING_DELAY,
-});
 
 const CT = () => {
 
