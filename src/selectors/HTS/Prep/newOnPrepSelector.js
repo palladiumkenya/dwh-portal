@@ -33,7 +33,6 @@ export const getPrEPDiscontinuationReason = createSelector(
 
         let discontinuations = list.map((r) => r.PrepDiscontinuations);
         let reasons = list.map((r) => r.ExitReason.toUpperCase());
-        console.log(list)
         return {reasons, discontinuations};
     }
 );

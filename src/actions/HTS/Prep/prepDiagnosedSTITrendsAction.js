@@ -29,8 +29,8 @@ export const fetchCTPrep = () => async (dispatch, getState) => {
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
         project: getState().filters.projects,
-        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
-        month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
+        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : null,
+        month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : null,
     };
     try {
         const response = await axios.get(

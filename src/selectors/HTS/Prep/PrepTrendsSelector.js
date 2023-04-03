@@ -207,12 +207,13 @@ export const getPrepNewAgeSexGroup = createSelector(
         listFiltered,
         filtered
     ) => {
-        const list = filtered ? listFiltered : listUnfiltered;
+        let list = filtered ? listFiltered : listUnfiltered;
 
         let iniListM = [];
         let iniListF = [];
         let agegrp = ['15 to 19', '20 to 24', '25 to 29', '30 to 34', '35 to 39', '40 to 44', '45 to 49', '50 to 54', '55 to 59', '60 to 64', '65+'];
 
+        list = list.filter((l) => l.Gender !== null);
         agegrp.forEach((el) => {
             iniListM.push(list.find(
                 (x) => x.Gender.toLowerCase() === 'male' && x.DatimAgeGroup === el

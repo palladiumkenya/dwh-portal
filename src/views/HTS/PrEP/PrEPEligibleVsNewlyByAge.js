@@ -47,6 +47,7 @@ const PrEPEligibleVsNewlyByAge = () => {
                         },
                     },
                     opposite: true,
+                    // max: 100
                 },
             ],
             legend: {
@@ -68,6 +69,9 @@ const PrEPEligibleVsNewlyByAge = () => {
                     pointPadding: 0.01,
                     borderWidth: 0,
                 },
+                spline: {
+                    lineWidth: 0,
+                },
             },
             series: [
                 {
@@ -83,7 +87,7 @@ const PrEPEligibleVsNewlyByAge = () => {
                     color: 'rgb(124, 181, 236)',
                 },
                 {
-                    type: 'scatter',
+                    type: 'spline',
                     name: '% of Patients Eligible',
                     data: eliVnew.perc,
                     color: 'orange',
@@ -104,7 +108,10 @@ const PrEPEligibleVsNewlyByAge = () => {
         <Card>
             <CardHeader className="cardTitle">
                 ELIGIBLE VS NEWLY INITIATED ON PrEP BY AGE AS AT{' '}
-                {moment(filters.date).format('MMM YYYY')}
+                {moment()
+                    .subtract(2, 'month')
+                    .add(17, 'days')
+                    .format('MMM YYYY')}
             </CardHeader>
             <CardBody>
                 <HighchartsReact

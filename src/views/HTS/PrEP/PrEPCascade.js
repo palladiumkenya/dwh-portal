@@ -87,7 +87,7 @@ const PrEPCascade = () => {
                 },
             ],
         });
-    }, [screened, newOnPrep, tested, eligible]);
+    }, [screened, newOnPrep, tested, eligible, prepCT]);
 
     useEffect(() => {
         loadPrepOverall();

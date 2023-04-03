@@ -9,7 +9,7 @@ const filtered = (state) => state.filters.filtered;
 export const getCTPrepAgeSex = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
-        const list = filtered ? listFiltered : listUnfiltered;
+        let list = filtered ? listFiltered : listUnfiltered;
         
         let iniListM = [];
         let iniListF = [];
@@ -26,6 +26,7 @@ export const getCTPrepAgeSex = createSelector(
             '60 to 64',
             '65+',
         ];
+        list = list.filter(l => l.Gender !== null)
 
         agegrp.forEach((el) => {
             iniListM.push(
