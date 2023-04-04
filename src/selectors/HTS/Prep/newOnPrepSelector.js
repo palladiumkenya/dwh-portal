@@ -14,7 +14,11 @@ export const getNewOnPrepTotal = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        return list.length;
+        let sum = list.reduce(function (acc, val) {
+            return acc + val.StartedPrep;
+        }, 0);
+        
+        return sum;
     }
 );
 
