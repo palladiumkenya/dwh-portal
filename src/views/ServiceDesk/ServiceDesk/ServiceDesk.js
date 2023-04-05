@@ -15,15 +15,46 @@ import UniversalFilter from '../../Shared/UniversalFilter';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 
-import ServiceDeskOverview from './ServiceDeskOverview';
-import TicketsByCategory from './IssueStatusByMonth';
-import IssueStatusByProduct from './IssueStatusByProduct';
-import OpenTicketsByProduct from './OpenTicketsByProduct';
-import OpenTicketsByPartner from './OpenTicketsByPartner';
-import OpenTicketsByCounty from './OpenTicketsByCounty';
-import OpenTicketsByMonth from './OpenTicketsByMonth';
-import IssueStatusByMonth from './IssueStatusByMonth';
-import PartnerLevelIssues from './PartnerLevelIssues';
+const ServiceDeskOverview = Loadable({
+    loader: () => import('./ServiceDeskOverview'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const IssueStatusByProduct = Loadable({
+    loader: () => import('./IssueStatusByProduct'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const OpenTicketsByProduct = Loadable({
+    loader: () => import('./OpenTicketsByProduct'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const OpenTicketsByPartner = Loadable({
+    loader: () => import('./OpenTicketsByPartner'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const OpenTicketsByCounty = Loadable({
+    loader: () => import('./OpenTicketsByCounty'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const OpenTicketsByMonth = Loadable({
+    loader: () => import('./OpenTicketsByMonth'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const IssueStatusByMonth = Loadable({
+    loader: () => import('./IssueStatusByMonth'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PartnerLevelIssues = Loadable({
+    loader: () => import('./PartnerLevelIssues'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 
 
 const Service_Desk = () => {

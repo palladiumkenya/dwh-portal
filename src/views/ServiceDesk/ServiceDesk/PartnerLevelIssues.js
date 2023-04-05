@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader, Col, Row, Spinner } from 'reactstrap';
-import DataTable from 'react-data-table-component-with-filter';
+
 import MuiDataTable from 'mui-datatables';
 import moment from 'moment';
 import CsvDownloader from 'react-csv-downloader';
@@ -19,7 +19,7 @@ const PartnerLevelIssues = () => {
         .toUpperCase();
     const month = useSelector((state) => state.filters.fromDate)
         ? filterMonth
-        : moment().format('MMMM');
+        : moment().subtract(1, 'months').format('MMMM');
 
     const columns = [
         {
