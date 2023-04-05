@@ -155,12 +155,14 @@ export const getPrepEligibleVnewTrend = createSelector(
         let eliList = [];
         let iniList = [];
         let label = [];
+        let monthRange = [];
         let perc = [];
 
-        for (let i = 1; i <= 12; i++) {
-            let date = moment().subtract(i, 'months');
+        for (let i = 2; i <= 13; i++) {
+            let date = moment().subtract(i, 'months').add(17, 'days');
             let month = date.format('MM');
             let year = date.format('YYYY');
+            monthRange.push(date.format('MMMM YYYY'));
 
             iniList.push(
                 listnew.find((x) => x.year == year && x.month == month)
@@ -192,7 +194,7 @@ export const getPrepEligibleVnewTrend = createSelector(
         perc.reverse()
         label.reverse()
 
-        return {eliList, iniList, perc, label};
+        return {eliList, iniList, perc, label, monthRange};
     }
 );
 
