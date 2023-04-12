@@ -4,13 +4,17 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import HighchartsMore from 'highcharts/highcharts-more';
 import { useSelector } from 'react-redux';
-import * as otzEnrollment from '../../../selectors/CT/OTZ/otzEnrollmentTrend';
+import * as appointmentKeepingSelector from '../../../selectors/CT/TreatmentOutcomes/appointmentKeepingWaterfall';
+
 HighchartsMore(Highcharts);
 
 const AppointmetKeeping = () => {
     const [appointmentKeeping, setAppointmentKeeping] = useState({});
 
-    const appointmentData = useSelector(otzEnrollment.getOtzEnrolled);
+    const appointmentData = useSelector(
+        appointmentKeepingSelector.getAppointmentKeepingWaterfall
+    );
+    console.log(appointmentData)
 
     const loadAppointmentKeeping = useCallback(async () => {
         setAppointmentKeeping({
@@ -73,61 +77,61 @@ const AppointmetKeeping = () => {
                     data: [
                         {
                             name: 'CAME BEFORE',
-                            y: 92000,
+                            y: appointmentData.camebefore,
                             color: 'green',
                         },
                         {
                             name: 'ON TIME',
-                            y: 369000,
+                            y: appointmentData.ontime,
                             color: 'green',
                         },
                         {
                             name: 'MISSED 1-7 DAYS',
-                            y: 21000,
+                            y: appointmentData.missed1_7,
                             color: 'green',
                         },
                         {
                             name: 'MISSED 8-14 DAYS',
-                            y: 31000,
+                            y: appointmentData.missed8_14,
                             color: 'green',
                         },
                         {
                             name: 'MISSED 15-30 DAYS',
-                            y: 41000,
+                            y: appointmentData.missed15_30,
                             color: 'green',
                         },
                         {
                             name: 'IIT AND RTT WITHIN 30 DAYS',
-                            y: 3700,
+                            y: appointmentData.rttw30,
                             color: 'green',
                         },
                         {
                             name: 'IIT AND RTT BEYOND 30 DAYS',
-                            y: 2900,
+                            y: appointmentData.rttb30,
                             color: 'green',
                         },
                         {
                             name: 'STILL IIT',
-                            y: -11000,
+                            y: -appointmentData.iit,
                             color: 'red',
                         },
                         {
                             name: 'LOST IN HMIS',
-                            y: -21000,
+                            y: -appointmentData.lost,
                             color: 'red',
                         },
                         {
                             name: 'DEAD',
-                            y: -31000,
+                            y: -appointmentData.dead,
                             color: 'red',
                         },
                         {
                             name: 'TRANSFERRED OUT',
-                            y: -81000,
+                            y: -appointmentData.trans,
                             color: 'red',
                         },
                         {
-                            y: -77000,
+                            y: -appointmentData.stopped,
                             color: 'red',
                         },
                         {
@@ -137,6 +141,13 @@ const AppointmetKeeping = () => {
                     ],
                     dataLabels: {
                         enabled: true,
+                        formatter: function () {
+                            return (
+                                Highcharts.numberFormat(
+                                    this.y,2,'.',','
+                                ) + '%'
+                            );
+                        },
                         style: {
                             fontWeight: 'bold',
                         },

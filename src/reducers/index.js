@@ -83,6 +83,8 @@ import viralLoadSuppressionByYearAndSuppressionCategory
     from './CT/ViralLoad/viralLoadSuppressionByYearAndSuppressionCategory';
 import viralLoadOutcomesHvlByFacility from "./CT/ViralLoad/viralLoadOutcomesHvlByFacility";
 
+import quaterlyIIT from './CT/TreatmentOutcomes/quaterlyIIT';
+import appointmentKeepingWaterfall from './CT/TreatmentOutcomes/appointmentKeepingWaterfall';
 import treatmentOutcomesOverallLast12m from "./CT/TreatmentOutcomes/treatmentOutcomesOverallLast12m";
 import treatmentOutcomesBySex from "./CT/TreatmentOutcomes/treatmentOutcomesBySex";
 import treatmentOutcomesByPopulationType from "./CT/TreatmentOutcomes/treatmentOutcomesByPopulationType";
@@ -293,8 +295,6 @@ import artVerificationByCounty from './CT/ArtVerification/artVerificationByCount
 import artVerificationByPartner from './CT/ArtVerification/artVerificationByPartner';
 import artVerificationReasons from './CT/ArtVerification/artVerificationReasons';
 
-
-
 import openByCounty from './ServiceDesk/openByCounty';
 import openByPartner from './ServiceDesk/openByPartner';
 import openByProduct from './ServiceDesk/openByProduct';
@@ -412,6 +412,8 @@ export default combineReducers({
     twentyFourMonthRetention,
     treatmentOutcomesUndocumentedByFacility,
     treatmentOutcomesNetCohort,
+    quaterlyIIT,
+    appointmentKeepingWaterfall,
 
     practitionersCountByCountyQualification,
     populationByCounty,

@@ -152,7 +152,7 @@ const QuaterlyIIT = () => {
                 className="trends-header"
                 style={{ textTransform: 'none' }}
             >
-                APPOINTMENT KEEPING WATERFALL ANALYSIS
+                QUATERLY INTERRUPTION IN TREATMENT(IIT)
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
