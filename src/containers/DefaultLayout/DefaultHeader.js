@@ -112,6 +112,11 @@ const DefaultHeader = () => {
                         <strong>Service Desk</strong>
                     </NavLink>
                 </NavItem>
+                <NavItem >
+                    <NavLink to="/pmtct-rri" className="nav-link active">
+                        <strong>PMTCT RRI</strong>
+                    </NavLink>
+                </NavItem>
                 {/* <NavItem className="px-3">
                     <NavLink
                         to="/operational-and-his"
