@@ -3,19 +3,20 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
-import moment from 'moment';
+import * as missedFirstANCSelectors from '../../../selectors/PMTCTRRI/MissedFirstANC';
 
 const KnownStatusANCPartner = () => {
-    let eliVnew = useSelector(prepSelector.getPrepEligibleVnewTrend);
+    const missedFirstANC = useSelector(
+        missedFirstANCSelectors.getMissedFirstANCSDP
+    );
     const [
-        prepEligibleVsNewInitiatedTrends,
-        setPrepEligibleVsNewInitiatedTrends,
+        missedFirstANCSDP,
+        setMissedFirstANCSDP,
     ] = useState({});
     
 
-    const loadPrepEligibleVsNewInitiatedTrends = useCallback(async () => {
-        setPrepEligibleVsNewInitiatedTrends({
+    const loadMissedFirstANCSDP = useCallback(async () => {
+        setMissedFirstANCSDP({
             chart: {
                 type: 'column',
             },
@@ -23,7 +24,7 @@ const KnownStatusANCPartner = () => {
                 text: '',
             },
             xAxis: {
-                categories: ['NA', 'BO', 'VV'],
+                categories: missedFirstANC.sdp,
                 crosshair: true,
                 title: {
                     text: 'PARTNER',
@@ -75,7 +76,7 @@ const KnownStatusANCPartner = () => {
                 {
                     type: 'column',
                     name: 'PREGNANT MOTHERS',
-                    data: [532, 432, 407, 70],
+                    data: missedFirstANC.FirstANC,
                     color: '#142459',
                 },
                 {
@@ -86,7 +87,7 @@ const KnownStatusANCPartner = () => {
                     },
                     crisp: false,
                     name: 'KNOWN HIV STATUS AT FIRST ANC',
-                    data: [132, 43, 65, 55],
+                    data: missedFirstANC.HIVTested,
                     color: 'maroon',
                 },
                 {
@@ -97,16 +98,16 @@ const KnownStatusANCPartner = () => {
                     },
                     crisp: false,
                     name: 'TESTED FOR SYPHYLIS',
-                    data: [13, 132, 267, 370],
+                    data: missedFirstANC.SyphilisTested,
                     color: 'teal',
                 },
             ],
         });
-    }, [eliVnew]);
+    }, [missedFirstANC]);
 
     useEffect(() => {
-        loadPrepEligibleVsNewInitiatedTrends();
-    }, [loadPrepEligibleVsNewInitiatedTrends]);
+        loadMissedFirstANCSDP();
+    }, [loadMissedFirstANCSDP]);
 
     return (
         <Card>
@@ -116,7 +117,7 @@ const KnownStatusANCPartner = () => {
             <CardBody>
                 <HighchartsReact
                     highcharts={Highcharts}
-                    options={prepEligibleVsNewInitiatedTrends}
+                    options={missedFirstANCSDP}
                 />
             </CardBody>
         </Card>

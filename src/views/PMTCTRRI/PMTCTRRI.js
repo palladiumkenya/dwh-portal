@@ -30,7 +30,10 @@ import {
 } from '../../actions/Operational&HIS/Comparison/newlyStartedOnArtTrendsKHISActions';
 import { loadCurrentNewOnArtOverview } from '../../actions/CT/NewOnArt/currentNewOnArtOverviewActions';
 import { loadNewOnArtTrends } from '../../actions/CT/NewOnArt/newOnArtTrendsActions';
-
+import { loadMissedFirstANCSDP } from '../../actions/PMTCTRRI/MissedFirstANC/missedFirstANCSDP';
+import { loadMissedFirstANCGaps } from '../../actions/PMTCTRRI/MissedFirstANC/missedFirstANCGaps';
+import { loadMissedFirstANCCounty } from '../../actions/PMTCTRRI/MissedFirstANC/missedFirstANCCounty';
+import { loadMissedFirstANCOverview } from '../../actions/PMTCTRRI/MissedFirstANC/missedFirstANCOverview';
 
 
 const MissedDTG = Loadable({
@@ -115,6 +118,11 @@ const PMTCTRRI = () => {
         dispatch(loadNewlyStartedOnArtTrendsKHIS());
         dispatch(loadCurrentNewOnArtOverview());
         dispatch(loadNewOnArtTrends());
+
+        dispatch(loadMissedFirstANCSDP());
+        dispatch(loadMissedFirstANCGaps());
+        dispatch(loadMissedFirstANCCounty());
+        dispatch(loadMissedFirstANCOverview());
     }, [
         dispatch,
         counties,

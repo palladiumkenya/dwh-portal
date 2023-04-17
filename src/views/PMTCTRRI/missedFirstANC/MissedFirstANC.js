@@ -10,6 +10,7 @@ import { disableStickyFilter, enableStickyFilter } from '../../../actions/Shared
 import MissedFirstANCOverview from './MissedFirstANCOverview';
 import KnownStatusANCCounty from './KnownStatusANCCounty';
 import KnownStatusANCPartner from './KnownStatusANCPartner';
+import MissingFirstANCGaps from './MissingFirstANCGaps';
 
 const MissedFirstANC = () => {
     const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const MissedFirstANC = () => {
             <SectionFooter overview={'Missed Testing at First ANC'} />
             <KnownStatusANCPartner />
             <SectionFooter overview={'Missed Testing at First ANC'} />
-            
+            <MissingFirstANCGaps />
             <SectionFooter overview={'Missed Testing at First ANC'} />
         </>
     );

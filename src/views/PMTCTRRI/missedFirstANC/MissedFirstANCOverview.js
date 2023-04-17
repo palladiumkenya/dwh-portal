@@ -3,12 +3,12 @@ import { Card, CardBody, CardHeader } from 'reactstrap/lib';
 import { Col, Row } from 'reactstrap';
 import { useSelector } from 'react-redux';
 import { formatNumber, roundNumber } from '../../../utils/utils';
-import * as currentOnArtOverviewSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
+import * as missedFirstANCSelectors from '../../../selectors/PMTCTRRI/MissedFirstANC';
 
 
 const MissedFirstANCOverview = () => {
-    const currentOnArt = useSelector(
-        currentOnArtOverviewSelectors.getCurrentOnArt
+    const missedFirstANC = useSelector(
+        missedFirstANCSelectors.getMissedFirstANCOverview
     );
 
     return (
@@ -17,7 +17,7 @@ const MissedFirstANCOverview = () => {
                 <Col md={4}>
                     <Card className="card-uploads-consistency-rates">
                         <CardHeader className="expected-uploads-header">
-                            FIRST AND ATTENDANCE
+                            FIRST ANC ATTENDANCE
                         </CardHeader>
                         <CardBody
                             className="align-items-center d-flex justify-content-center"
@@ -30,7 +30,7 @@ const MissedFirstANCOverview = () => {
                             <div>
                                 <div>
                                     <span className="expected-uploads-text">
-                                        {formatNumber(1204000)}
+                                        {formatNumber(missedFirstANC?.FirstANC)}
                                     </span>
                                 </div>
                             </div>
@@ -53,7 +53,7 @@ const MissedFirstANCOverview = () => {
                             <div>
                                 <div>
                                     <span className="expected-uploads-text">
-                                        {formatNumber(874663)}
+                                        {formatNumber(missedFirstANC?.HIVTested)}
                                     </span>
                                 </div>
                             </div>
@@ -76,7 +76,9 @@ const MissedFirstANCOverview = () => {
                             <div>
                                 <div>
                                     <span className="expected-uploads-text">
-                                        {formatNumber(90458)}
+                                        {formatNumber(
+                                            missedFirstANC?.SyphilisTested
+                                        )}
                                     </span>
                                 </div>
                             </div>

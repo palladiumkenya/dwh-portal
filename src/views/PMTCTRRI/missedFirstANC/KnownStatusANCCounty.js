@@ -3,18 +3,20 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
+import * as missedFirstANCSelectors from '../../../selectors/PMTCTRRI/MissedFirstANC';
 
 const KnownStatusANCCounty = () => {
-    let eliVnew = useSelector(prepSelector.getPrepEligibleVnewTrend);
+    const missedFirstANC = useSelector(
+        missedFirstANCSelectors.getMissedFirstANCCounty
+    );
     const [
-        prepEligibleVsNewInitiatedTrends,
-        setPrepEligibleVsNewInitiatedTrends,
+        missedFirstANCCounty,
+        setMissedFirstANCCounty,
     ] = useState({});
     
 
-    const loadPrepEligibleVsNewInitiatedTrends = useCallback(async () => {
-        setPrepEligibleVsNewInitiatedTrends({
+    const loadMissedFirstANCCounty = useCallback(async () => {
+        setMissedFirstANCCounty({
             chart: {
                 type: 'column',
             },
@@ -22,7 +24,7 @@ const KnownStatusANCCounty = () => {
                 text: '',
             },
             xAxis: {
-                categories: ['NA', 'BO', 'VV'],
+                categories: missedFirstANC.counties,
                 crosshair: true,
                 title: {
                     text: 'COUNTY',
@@ -74,7 +76,7 @@ const KnownStatusANCCounty = () => {
                 {
                     type: 'column',
                     name: 'PREGNANT MOTHERS',
-                    data: [132, 432, 657, 70],
+                    data: missedFirstANC.FirstANC,
                     color: '#142459',
                 },
                 {
@@ -85,8 +87,8 @@ const KnownStatusANCCounty = () => {
                     },
                     crisp: false,
                     name: 'KNOWN HIV STATUS AT FIRST ANC',
-                    data: [132, 43, 65, 55],
-                    color: 'maroon',
+                    data: missedFirstANC.HIVTested,
+                    color: '#BB1414',
                 },
                 {
                     type: 'spline',
@@ -96,16 +98,16 @@ const KnownStatusANCCounty = () => {
                     },
                     crisp: false,
                     name: 'TESTED FOR SYPHYLIS',
-                    data: [13, 132, 267, 370],
+                    data: missedFirstANC.SyphilisTested,
                     color: 'teal',
                 },
             ],
         });
-    }, []);
+    }, [missedFirstANC]);
 
     useEffect(() => {
-        loadPrepEligibleVsNewInitiatedTrends();
-    }, [loadPrepEligibleVsNewInitiatedTrends]);
+        loadMissedFirstANCCounty();
+    }, [loadMissedFirstANCCounty]);
 
     return (
         <Card>
@@ -115,7 +117,7 @@ const KnownStatusANCCounty = () => {
             <CardBody>
                 <HighchartsReact
                     highcharts={Highcharts}
-                    options={prepEligibleVsNewInitiatedTrends}
+                    options={missedFirstANCCounty}
                 />
             </CardBody>
         </Card>

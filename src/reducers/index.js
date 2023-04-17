@@ -304,6 +304,12 @@ import statusByProduct from './ServiceDesk/statusByProduct';
 import ticketsOverview from './ServiceDesk/ticketsOverview';
 import partnerLevelIssues from './ServiceDesk/partnerLevelIssues';
 
+
+import missedFirstANCCounty from './PMTCTRRI/MissedFirstANC/missedFirstANCCounty';
+import missedFirstANCOverview from './PMTCTRRI/MissedFirstANC/missedFirstANCOverview';
+import missedFirstANCGaps from './PMTCTRRI/MissedFirstANC/missedFirstANCGaps';
+import missedFirstANCSDP from './PMTCTRRI/MissedFirstANC/missedFirstANCSDP';
+
 export default combineReducers({
     auth: authReducer,
 
@@ -587,7 +593,6 @@ export default combineReducers({
     prepScreeningOutcome,
     prepDiagnosedSTITrends,
 
-
     artVerificationByCounty,
     artVerificationByPartner,
     artVerificationReasons,
@@ -600,4 +605,9 @@ export default combineReducers({
     statusByProduct,
     ticketsOverview,
     partnerLevelIssues,
+
+    missedFirstANCOverview,
+    missedFirstANCCounty,
+    missedFirstANCGaps,
+    missedFirstANCSDP,
 });
