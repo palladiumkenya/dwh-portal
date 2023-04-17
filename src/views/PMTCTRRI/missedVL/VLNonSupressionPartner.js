@@ -5,7 +5,7 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
 
-const NewlyDiagnosedNoInfantProfPartner = () => {
+const VLNonSupressionPartner = () => {
     let eliVnew = useSelector(prepSelector.getPrepEligibleVnewTrend);
     const [
         prepEligibleVsNewInitiatedTrends,
@@ -21,7 +21,7 @@ const NewlyDiagnosedNoInfantProfPartner = () => {
                 text: '',
             },
             xAxis: {
-                categories: ['NA', 'BO', 'VV', 'TE'],
+                categories: ['NA', 'BO', 'VV'],
                 crosshair: true,
                 title: {
                     text: 'PARTNER',
@@ -46,6 +46,7 @@ const NewlyDiagnosedNoInfantProfPartner = () => {
                 useHTML: true,
             },
             legend: {
+                enabled: false,
                 align: 'left',
                 verticalAlign: 'top',
             },
@@ -73,7 +74,7 @@ const NewlyDiagnosedNoInfantProfPartner = () => {
     return (
         <Card>
             <CardHeader className="cardTitle">
-                {`NUMBER NOT GIVEN INFANT PROPHYLAXIS AT FIRST ANC AMONG NEWLY DIAGNOSED MOTHERS BY PARTNER`}
+                {`NUMBER OF VIRAL LOAD NON SUPPRESION BY PARTNER`}
             </CardHeader>
             <CardBody>
                 <HighchartsReact
@@ -85,4 +86,4 @@ const NewlyDiagnosedNoInfantProfPartner = () => {
     );
 };
 
-export default NewlyDiagnosedNoInfantProfPartner;
+export default VLNonSupressionPartner;

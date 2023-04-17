@@ -3,12 +3,18 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
+import moment from 'moment';
 
-const PercentARTPatientsWithGoodQualityData = () => {
-    const [percentARTPatientsWithGoodQualityData, setPercentARTPatientsWithGoodQualityData] = useState({});
+const HeiAgeAtPCR = () => {
+    let eliVnew = useSelector(prepSelector.getPrepEligibleVnewTrend);
+    const [
+        prepEligibleVsNewInitiatedTrends,
+        setPrepEligibleVsNewInitiatedTrends,
+    ] = useState({});
 
-    const loadPercentARTPatientsWithGoodQualityData = useCallback(async () => {
-        setPercentARTPatientsWithGoodQualityData({
+    const loadPrepEligibleVsNewInitiatedTrends = useCallback(async () => {
+        setPrepEligibleVsNewInitiatedTrends({
             chart: {
                 type: 'column',
             },
@@ -17,21 +23,22 @@ const PercentARTPatientsWithGoodQualityData = () => {
             },
             xAxis: {
                 categories: [
-                    'VISIT TYPE', 'CCC', 'DATE OF BIRTH', 'SEX', 'CURRENT ART REGIMEN (LAST VISIT)', 'DRUG DOSAGE (DURATION)', 'WEIGHT (KGS)', 'HEIGHT (CMS)',
-                    'NUTRITION ASSESSMENT DONE', 'TPT/IPT INITIATED', 'DSD MODEL', 'LAST LATEST VALID VL RESULT DOCUMENTED', 'DATE OF LAST APPOINTMENT'
+                    '0 - 2 MONTHS',
+                    '2 - 12 MONTHS',
+                    'ABOVE 1 YR',
+                    'MISSING',
                 ],
                 crosshair: true,
-                title: {
-                    text: 'VARIABLE',
-                },
+                
             },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'PERCENTAGE',
+            yAxis: [
+                {
+                    min: 0,
+                    title: {
+                        text: 'NUMBER OF PATIENTS',
+                    },
                 },
-                max: 100
-            },
+            ],
             tooltip: {
                 headerFormat:
                     '<span style="font-size:10px">{point.key}</span><table>',
@@ -42,42 +49,46 @@ const PercentARTPatientsWithGoodQualityData = () => {
                 shared: true,
                 useHTML: true,
             },
-            legend: {
-                enabled: false,
-            },
+			legend: {
+				enabled: false
+			},
             plotOptions: {
                 column: {
-                    pointPadding: 0.2,
+                    pointPadding: 0.01,
                     borderWidth: 0,
                 },
             },
             series: [
                 {
-                    name: 'Patients',
-                    data: [90, 87,77,89,14,90,90,96,79,90,69,92],
-                    color: '#2F4050',
+                    type: 'column',
+                    data: [
+                        { y: 532, color: '#142459' },
+                        { y: 432, color: '#1AB394' },
+                        { y: 232, color: '#142459' },
+                        { y: 732, color: '#BB1414' },
+                    ],
                 },
             ],
         });
-    }, []);
+    }, [eliVnew]);
 
     useEffect(() => {
-        loadPercentARTPatientsWithGoodQualityData();
-    }, [loadPercentARTPatientsWithGoodQualityData]);
+        loadPrepEligibleVsNewInitiatedTrends();
+    }, [loadPrepEligibleVsNewInitiatedTrends]);
 
     return (
         <Card>
             <CardHeader className="cardTitle">
-                PERCENT OF ART PATIENTS WITH GOOD QUALITY DATA
+                {`HEI AGE AT FIRST PCR`}
             </CardHeader>
             <CardBody>
                 <HighchartsReact
                     highcharts={Highcharts}
-                    options={percentARTPatientsWithGoodQualityData}
+                    options={prepEligibleVsNewInitiatedTrends}
                 />
             </CardBody>
         </Card>
     );
 };
 
-export default PercentARTPatientsWithGoodQualityData;
+export default HeiAgeAtPCR;

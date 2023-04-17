@@ -3,13 +3,17 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
 
-const InvalidDataCategories = () => {
-    const filters = useSelector((state) => state.filters);
-    const [invalidDataCategories, setInvalidDataCategories] = useState({});
+const MissingVLCounty = () => {
+    let eliVnew = useSelector(prepSelector.getPrepEligibleVnewTrend);
+    const [
+        prepEligibleVsNewInitiatedTrends,
+        setPrepEligibleVsNewInitiatedTrends,
+    ] = useState({});
 
-    const loadInvalidDataCategories = useCallback(async () => {
-        setInvalidDataCategories({
+    const loadPrepEligibleVsNewInitiatedTrends = useCallback(async () => {
+        setPrepEligibleVsNewInitiatedTrends({
             chart: {
                 type: 'column',
             },
@@ -17,22 +21,20 @@ const InvalidDataCategories = () => {
                 text: '',
             },
             xAxis: {
-                categories: [
-                    'ACCURATE & COMPLETE',
-                    'INACCURATE & COMPLETE',
-                    'INACCURATE & INCOMPLETE',
-                ],
+                categories: ['NA', 'BO', 'VV'],
                 crosshair: true,
                 title: {
-                    text: '',
+                    text: 'COUNTY',
                 },
             },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'NUMBER OF PATIENTS',
+            yAxis: [
+                {
+                    min: 0,
+                    title: {
+                        text: 'NUMBER OF PATIENTS',
+                    },
                 },
-            },
+            ],
             tooltip: {
                 headerFormat:
                     '<span style="font-size:10px">{point.key}</span><table>',
@@ -45,40 +47,43 @@ const InvalidDataCategories = () => {
             },
             legend: {
                 enabled: false,
+                align: 'left',
+                verticalAlign: 'top',
             },
             plotOptions: {
                 column: {
-                    pointPadding: 0.2,
+                    pointPadding: 0.01,
                     borderWidth: 0,
                 },
             },
             series: [
                 {
-                    name: 'Patients',
-                    data: [893, 578, 120],
-                    color: '#2F4050',
+                    type: 'column',
+                    name: 'PREGNANT MOTHERS',
+                    data: [532, 432, 407, 70],
+                    color: '#142459',
                 },
             ],
         });
-    }, []);
+    }, [eliVnew]);
 
     useEffect(() => {
-        loadInvalidDataCategories();
-    }, [loadInvalidDataCategories]);
+        loadPrepEligibleVsNewInitiatedTrends();
+    }, [loadPrepEligibleVsNewInitiatedTrends]);
 
     return (
         <Card>
             <CardHeader className="cardTitle">
-                INVALID DATA - CATEGORIES
+                {`NUMBER MISSING VIRAL LOAD BY COUNTY`}
             </CardHeader>
             <CardBody>
                 <HighchartsReact
                     highcharts={Highcharts}
-                    options={invalidDataCategories}
+                    options={prepEligibleVsNewInitiatedTrends}
                 />
             </CardBody>
         </Card>
     );
 };
 
-export default InvalidDataCategories;
+export default MissingVLCounty;

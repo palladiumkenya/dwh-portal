@@ -54,7 +54,6 @@ export const PMTCT_RRI_TABS = {
     missedEID: 'MISSED EID TESTING',
     missedVL: 'MISSED VIRAL LOAD',
     missedDTG: 'MISSED DTG OPTIMIZATION',
-    missedProfCALHIV: 'MISSED PROPHYLAXIS CALHIV',
 };
 
 export const PAGES = {

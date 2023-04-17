@@ -33,12 +33,11 @@ import { loadNewOnArtTrends } from '../../actions/CT/NewOnArt/newOnArtTrendsActi
 
 
 
-const Comparison = Loadable({
-    loader: () => import('./missedInfantProf/MissedInfantProf'),
+const MissedDTG = Loadable({
+    loader: () => import('./missedDTG/MissedDTG'),
     loading: Loading,
     delay: LOADING_DELAY,
 });
-
 const MissedVL = Loadable({
     loader: () => import('./missedVL/MissedVL'),
     loading: Loading,
@@ -54,15 +53,14 @@ const MissedHAART = Loadable({
     loading: Loading,
     delay: LOADING_DELAY,
 });
-const Consistency = Loadable({
-    loader: () => import ('./missedEID/Consistency'),
+const MissedEID = Loadable({
+    loader: () => import('./missedEID/MissedEID'),
     loading: Loading,
-    delay: LOADING_DELAY
+    delay: LOADING_DELAY,
 });
 const MissedInfantProf = Loadable({
     loader: () => import('./missedInfantProf/MissedInfantProf'),
     loading: Loading,
-
     delay: LOADING_DELAY,
 });
 
@@ -174,13 +172,13 @@ const PMTCTRRI = () => {
                     ) : null}
                 </TabPane>
                 <TabPane tabId={'missedEID'}>
-                    {active_tab === 'missedEID' ? <Consistency /> : null}
+                    {active_tab === 'missedEID' ? <MissedEID /> : null}
                 </TabPane>
                 <TabPane tabId={'missedVL'}>
                     {active_tab === 'missedVL' ? <MissedVL /> : null}
                 </TabPane>
                 <TabPane tabId={'missedDTG'}>
-                    {active_tab === 'missedDTG' ? <Comparison /> : null}
+                    {active_tab === 'missedDTG' ? <MissedDTG /> : null}
                 </TabPane>
             </TabContent>
         </div>
