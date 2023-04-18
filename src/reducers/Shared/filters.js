@@ -268,7 +268,7 @@ export default (state = initialState, action) => {
                 filtered,
                 datimAgeGroups: action.payload.datimAgeGroups,
             };
-        case actionTypes.FILTER_BY_DATIM_AGE_GROUP:
+        case actionTypes.FILTER_BY_EMR_TYPE:
             filtered =
                 state.counties.length > 0 ||
                 state.subCounties.length > 0 ||
