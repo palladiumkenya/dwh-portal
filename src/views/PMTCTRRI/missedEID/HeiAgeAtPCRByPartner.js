@@ -4,10 +4,13 @@ import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
+import * as missedEIDTestingSelectors from '../../../selectors/PMTCTRRI/MissedEIDTesting';
 
 
 const HeiAgeAtPCRByPartner = () => {
-    let eliVnew = useSelector(prepSelector.getPrepEligibleVnewTrend);
+    const missedEIDTesting = useSelector(
+        missedEIDTestingSelectors.getMissedEIDTestingSDP
+    );
     const [
         prepEligibleVsNewInitiatedTrends,
         setPrepEligibleVsNewInitiatedTrends,
@@ -22,7 +25,7 @@ const HeiAgeAtPCRByPartner = () => {
                 text: '',
             },
             xAxis: {
-                categories: ['Siaya', 'Homabay', 'Nairobi', 'Iten', 'Nandi'],
+                categories: missedEIDTesting.sdp,
                 crosshair: true,
                 title: {
                     text: 'PARTNER',
@@ -59,30 +62,30 @@ const HeiAgeAtPCRByPartner = () => {
                 {
                     type: 'column',
                     name: '0 - 2 MONTHS',
-                    data: [132, 432, 232, 732, 443],
+                    data: missedEIDTesting.lesst2Months,
                     color: '#E06F07',
                 },
                 {
                     type: 'column',
                     name: '2 - 12 MONTHS',
-                    data: [300, 432, 232, 192, 443],
+                    data: missedEIDTesting.within12Months,
                     color: '#142459',
                 },
                 {
                     type: 'column',
                     name: 'ABOVE 1 YR',
-                    data: [532, 432, 432, 732, 443],
+                    data: missedEIDTesting.above1Year,
                     color: '#1AB394',
                 },
                 {
                     type: 'column',
                     name: 'MISSING',
-                    data: [532, 432, 432, 732, 553],
+                    data: missedEIDTesting.missingPCRTests,
                     color: '#BB1414',
                 },
             ],
         });
-    }, [eliVnew]);
+    }, [missedEIDTesting]);
 
     useEffect(() => {
         loadPrepEligibleVsNewInitiatedTrends();

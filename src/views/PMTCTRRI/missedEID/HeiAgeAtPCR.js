@@ -3,18 +3,19 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
-import moment from 'moment';
+import * as missedEIDTestingSelectors from '../../../selectors/PMTCTRRI/MissedEIDTesting';
 
 const HeiAgeAtPCR = () => {
-    let eliVnew = useSelector(prepSelector.getPrepEligibleVnewTrend);
+    const missedEIDTesting = useSelector(
+        missedEIDTestingSelectors.getMissedEIDTestingAgePCR
+    );
     const [
-        prepEligibleVsNewInitiatedTrends,
-        setPrepEligibleVsNewInitiatedTrends,
+        missedEIDTestingAtFirstPCR,
+        setMissedEIDTestingAtFirstPCR,
     ] = useState({});
 
-    const loadPrepEligibleVsNewInitiatedTrends = useCallback(async () => {
-        setPrepEligibleVsNewInitiatedTrends({
+    const loadMissedEIDTestingAtFirstPCR = useCallback(async () => {
+        setMissedEIDTestingAtFirstPCR({
             chart: {
                 type: 'column',
             },
@@ -29,7 +30,6 @@ const HeiAgeAtPCR = () => {
                     'MISSING',
                 ],
                 crosshair: true,
-                
             },
             yAxis: [
                 {
@@ -49,9 +49,9 @@ const HeiAgeAtPCR = () => {
                 shared: true,
                 useHTML: true,
             },
-			legend: {
-				enabled: false
-			},
+            legend: {
+                enabled: false,
+            },
             plotOptions: {
                 column: {
                     pointPadding: 0.01,
@@ -62,19 +62,31 @@ const HeiAgeAtPCR = () => {
                 {
                     type: 'column',
                     data: [
-                        { y: 532, color: '#142459' },
-                        { y: 432, color: '#1AB394' },
-                        { y: 232, color: '#142459' },
-                        { y: 732, color: '#BB1414' },
+                        {
+                            y: missedEIDTesting.lesst2Months,
+                            color: '#142459',
+                        },
+                        {
+                            y: missedEIDTesting.within12Months,
+                            color: '#1AB394',
+                        },
+                        {
+                            y: missedEIDTesting.above1Year,
+                            color: '#142459',
+                        },
+                        {
+                            y: missedEIDTesting.missingPCRTests,
+                            color: '#BB1414',
+                        },
                     ],
                 },
             ],
         });
-    }, [eliVnew]);
+    }, [missedEIDTesting]);
 
     useEffect(() => {
-        loadPrepEligibleVsNewInitiatedTrends();
-    }, [loadPrepEligibleVsNewInitiatedTrends]);
+        loadMissedEIDTestingAtFirstPCR();
+    }, [loadMissedEIDTestingAtFirstPCR]);
 
     return (
         <Card>
@@ -84,7 +96,7 @@ const HeiAgeAtPCR = () => {
             <CardBody>
                 <HighchartsReact
                     highcharts={Highcharts}
-                    options={prepEligibleVsNewInitiatedTrends}
+                    options={missedEIDTestingAtFirstPCR}
                 />
             </CardBody>
         </Card>

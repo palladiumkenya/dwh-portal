@@ -3,8 +3,8 @@ import * as actionTypes from '../../types';
 import { CACHING, PAGES } from '../../../constants';
 import { getAll } from '../../../views/Shared/Api';
 
-export const loadMissedHAARTCounty = () => async (dispatch, getState) => {
-    const lastFetch = getState().missedHAARTCounty.lastFetch;
+export const loadMissedEIDSDP = () => async (dispatch, getState) => {
+    const lastFetch = getState().missedEIDCounty.lastFetch;
     const diffInMinutes = moment().diff(moment(lastFetch), 'minutes');
     if (getState().ui.currentPage !== PAGES.pmtctRRI) return;
     else if (
@@ -12,16 +12,16 @@ export const loadMissedHAARTCounty = () => async (dispatch, getState) => {
         getState().filters.filtered === false
     )
         return;
-    await dispatch(fetchMissedHAART());
+    await dispatch(fetchMissedEID());
 };
 
-export const fetchMissedHAART = () => async (dispatch, getState) => {
+export const fetchMissedEID = () => async (dispatch, getState) => {
     const previousMonth = moment()
         .startOf('month')
         .subtract(2, 'month')
         .add(17, 'days');
     dispatch({
-        type: actionTypes.PMTCT_RRI_MISSED_MATERNAL_HAART_COUNTY_REQUEST
+        type: actionTypes.PMTCT_RRI_MISSED_EID_AGE_FIRST_PCR_PARTNER_REQUEST,
     });
     const params = {
         county: getState().filters.counties,
@@ -39,11 +39,11 @@ export const fetchMissedHAART = () => async (dispatch, getState) => {
     };
     try {
         const response = await getAll(
-            'pmtct-rri/getMissedHAARTByCounty',
+            'pmtct-rri/getMissedEIDAgeFirstPCRSDP',
             params
         );
         dispatch({
-            type: actionTypes.PMTCT_RRI_MISSED_MATERNAL_HAART_COUNTY_FETCH,
+            type: actionTypes.PMTCT_RRI_MISSED_EID_AGE_FIRST_PCR_PARTNER_FETCH,
             payload: {
                 filtered: getState().filters.filtered,
                 list: response,
@@ -51,7 +51,7 @@ export const fetchMissedHAART = () => async (dispatch, getState) => {
         });
     } catch (e) {
         dispatch({
-            type: actionTypes.PMTCT_RRI_MISSED_MATERNAL_HAART_COUNTY_FAILED,
+            type: actionTypes.PMTCT_RRI_MISSED_EID_AGE_FIRST_PCR_PARTNER_FAILED,
         });
     }
 };

@@ -40,6 +40,10 @@ import { loadMissedHAARTOverview } from '../../actions/PMTCTRRI/MissedHAART/miss
 import { loadMissedHAARTCounty } from './../../actions/PMTCTRRI/MissedHAART/missedHAARTCounty';
 import { loadMissedHAARTFacility } from './../../actions/PMTCTRRI/MissedHAART/missedHAARTFacility';
 import { loadMissedHAARTSDP } from './../../actions/PMTCTRRI/MissedHAART/missedHAARTSDP';
+import { loadMissedEIDAgeFirstPCR } from '../../actions/PMTCTRRI/MissedEID/missedEIDAgeFirstPCR';
+import { loadMissedEIDCounty } from '../../actions/PMTCTRRI/MissedEID/missedEIDCounty';
+import { loadMissedEIDSDP } from '../../actions/PMTCTRRI/MissedEID/missedEIDSDP';
+import { loadMissedEIDOverview } from './../../actions/PMTCTRRI/MissedEID/missedEIDOverview';
 
 
 const MissedDTG = Loadable({
@@ -138,6 +142,11 @@ const PMTCTRRI = () => {
         dispatch(loadMissedHAARTCounty());
         dispatch(loadMissedHAARTSDP());
         dispatch(loadMissedHAARTFacility());
+
+        dispatch(loadMissedEIDAgeFirstPCR());
+        dispatch(loadMissedEIDCounty());
+        dispatch(loadMissedEIDSDP());
+        dispatch(loadMissedEIDOverview());
     }, [
         dispatch,
         counties,

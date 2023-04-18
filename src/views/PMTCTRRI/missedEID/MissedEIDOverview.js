@@ -3,12 +3,11 @@ import { Card, CardBody, CardHeader } from 'reactstrap/lib';
 import { Col, Row } from 'reactstrap';
 import { useSelector } from 'react-redux';
 import { formatNumber, roundNumber } from '../../../utils/utils';
-import * as currentOnArtOverviewSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
-
+import * as missedEIDTestingSelectors from '../../../selectors/PMTCTRRI/MissedEIDTesting';
 
 const MissedEIDOverview = () => {
-    const currentOnArt = useSelector(
-        currentOnArtOverviewSelectors.getCurrentOnArt
+    const missedEIDTesting = useSelector(
+        missedEIDTestingSelectors.getMissedEIDTestingOverview
     );
 
     return (
@@ -30,7 +29,9 @@ const MissedEIDOverview = () => {
                             <div>
                                 <div>
                                     <span className="expected-uploads-text">
-                                        {formatNumber(1204000)}
+                                        {formatNumber(
+                                            missedEIDTesting.totalHEI
+                                        )}
                                     </span>
                                 </div>
                             </div>
@@ -53,7 +54,9 @@ const MissedEIDOverview = () => {
                             <div>
                                 <div>
                                     <span className="expected-uploads-text">
-                                        {formatNumber(874663)}
+                                        {formatNumber(
+                                            missedEIDTesting.lesst2Months
+                                        )}
                                     </span>
                                 </div>
                             </div>
@@ -76,7 +79,9 @@ const MissedEIDOverview = () => {
                             <div>
                                 <div>
                                     <span className="expected-uploads-text">
-                                        {formatNumber(90458)}
+                                        {formatNumber(
+                                            missedEIDTesting.missingPCRTests
+                                        )}
                                     </span>
                                 </div>
                             </div>

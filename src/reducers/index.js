@@ -314,6 +314,11 @@ import missedHAARTOverview from './PMTCTRRI/MissedHAART/missedHAARTOverview';
 import missedHAARTFacility from './PMTCTRRI/MissedHAART/missedHAARTFacility';
 import missedHAARTSDP from './PMTCTRRI/MissedHAART/missedHAARTSDP';
 
+import missedEIDAgeFirstPCR from './PMTCTRRI/MissedEID/missedEIDAgeFirstPCR';
+import missedEIDCounty from './PMTCTRRI/MissedEID/missedEIDCounty';
+import missedEIDOverview from './PMTCTRRI/MissedEID/missedEIDOverview';
+import missedEIDSDP from './PMTCTRRI/MissedEID/missedEIDSDP';
+
 export default combineReducers({
     auth: authReducer,
 
@@ -618,4 +623,8 @@ export default combineReducers({
     missedHAARTOverview,
     missedHAARTFacility,
     missedHAARTSDP,
+    missedEIDAgeFirstPCR,
+    missedEIDCounty,
+    missedEIDOverview,
+    missedEIDSDP,
 });
