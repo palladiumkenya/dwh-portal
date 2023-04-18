@@ -3,17 +3,12 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as newOnPrepSelector from '../../../selectors/HTS/Prep/newOnPrepSelector';
-import * as ctPrepSelector from '../../../selectors/HTS/Prep/ctPrepSelector';
-import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
-import * as prepTestedSelector from '../../../selectors/HTS/Prep/prepTotalTestedSelector';
+import * as missedHAARTSelectors from '../../../selectors/PMTCTRRI/MissedHAART';
 
 const PostiveMothesNotStartedHAARTCounty = () => {
-    let newOnPrep = useSelector(newOnPrepSelector.getNewOnPrepTotal);
-    let prepCT = useSelector(ctPrepSelector.getCTPrepTotal);
-    let screened = useSelector(prepSelector.getPrepScreenedTotal);
-    let eligible = useSelector(prepSelector.getPrepEligibleTotal);
-    let tested = useSelector(prepTestedSelector.getPrepTestTotal);
+    const missedHaart = useSelector(
+        missedHAARTSelectors.getMissedHAARTCounty
+    );
 
     const [prepOverall, setPrepOverall] = useState({});
 
@@ -29,7 +24,7 @@ const PostiveMothesNotStartedHAARTCounty = () => {
                 title: {
                     text: 'COUNTY',
                 },
-                categories: ['NAIROB', 'DES', 'GSFDO', 'RTIT', 'GSFGR'],
+                categories: missedHaart.counties,
                 crosshair: true,
             },
             yAxis: {
@@ -63,20 +58,16 @@ const PostiveMothesNotStartedHAARTCounty = () => {
                 {
                     name: 'NEW POSITIVE',
                     color: '#00a65a',
-                    data: [430, 130, 321, 543, 10],
+                    data: missedHaart.newpos,
                 },
                 {
                     name: 'KNOWN POSITIVE',
                     color: '#142459',
-                    data: [430, 130, 321, 65, 23],
+                    data: missedHaart.known,
                 },
-                //         { y: [430, 130, 321], color: '#142459' },
-                //         { y: [430, 130, 321], color: 'rgb(144, 237, 125)' },
-                //     ],
-                // },
             ],
         });
-    }, []);
+    }, [missedHaart]);
 
     useEffect(() => {
         loadPrepOverall();

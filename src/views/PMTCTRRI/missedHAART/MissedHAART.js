@@ -11,6 +11,7 @@ import UniversalFilter from '../../Shared/UniversalFilter';
 import MissedHAARTOverview from './MissedHAARTOverview';
 import PostiveMothesNotStartedHAARTCounty from './PostiveMothesNotStartedHAARTCounty';
 import PostiveMothesNotStartedHAARTPartner from './PostiveMothesNotStartedHAARTPartner';
+import MissingHAARTFacility from './MissingHAARTFacility';
 
 const MissedHAART = () => {
     const dispatch = useDispatch();
@@ -38,7 +39,8 @@ const MissedHAART = () => {
             <SectionFooter overview={'Missed Maternal HAART'} />
             <PostiveMothesNotStartedHAARTPartner />
             <SectionFooter overview={'Missed Maternal HAART'} />
-            <SectionFooter overview={'Missed Maternal HAART'} />
+            {/* <MissingHAARTFacility />
+            <SectionFooter overview={'Missed Maternal HAART'} /> */}
         </>
     );
 };

@@ -304,11 +304,15 @@ import statusByProduct from './ServiceDesk/statusByProduct';
 import ticketsOverview from './ServiceDesk/ticketsOverview';
 import partnerLevelIssues from './ServiceDesk/partnerLevelIssues';
 
-
 import missedFirstANCCounty from './PMTCTRRI/MissedFirstANC/missedFirstANCCounty';
 import missedFirstANCOverview from './PMTCTRRI/MissedFirstANC/missedFirstANCOverview';
 import missedFirstANCGaps from './PMTCTRRI/MissedFirstANC/missedFirstANCGaps';
 import missedFirstANCSDP from './PMTCTRRI/MissedFirstANC/missedFirstANCSDP';
+
+import missedHAARTCounty from './PMTCTRRI/MissedHAART/missedHAARTCounty';
+import missedHAARTOverview from './PMTCTRRI/MissedHAART/missedHAARTOverview';
+import missedHAARTFacility from './PMTCTRRI/MissedHAART/missedHAARTFacility';
+import missedHAARTSDP from './PMTCTRRI/MissedHAART/missedHAARTSDP';
 
 export default combineReducers({
     auth: authReducer,
@@ -610,4 +614,8 @@ export default combineReducers({
     missedFirstANCCounty,
     missedFirstANCGaps,
     missedFirstANCSDP,
+    missedHAARTCounty,
+    missedHAARTOverview,
+    missedHAARTFacility,
+    missedHAARTSDP,
 });
