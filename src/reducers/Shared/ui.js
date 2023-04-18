@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
         case actions.CHANGE_CURRENT_PAGE:
             return { ...state, currentPage: action.payload.page };
         case actions.ENABLE_STICKY_FILTER:
-            return { ...state, stickyFilter: true };
+            return { ...state, stickyFilter: false };// should be true if you want filter to follow charts
         case actions.DISABLE_STICKY_FILTER:
             return { ...state, stickyFilter: false };
         case actions.CHANGE_HOME_TAB:
