@@ -19,7 +19,9 @@ import {
     disableIndicatorFilter,
     enableGenderFilter,
     enableDatimAgeGroupFilter,
-    disableDatimAgePopulationFilter
+    disableDatimAgePopulationFilter,
+    enableEMRFilter,
+    disableEMRFilter
 } from '../../actions/Shared/filterActions';
 import { LOADING_DELAY, PMTCT_RRI_TABS, PAGES } from '../../constants';
 import Loading from '../Shared/Loading';
@@ -34,6 +36,10 @@ import { loadMissedFirstANCSDP } from '../../actions/PMTCTRRI/MissedFirstANC/mis
 import { loadMissedFirstANCGaps } from '../../actions/PMTCTRRI/MissedFirstANC/missedFirstANCGaps';
 import { loadMissedFirstANCCounty } from '../../actions/PMTCTRRI/MissedFirstANC/missedFirstANCCounty';
 import { loadMissedFirstANCOverview } from '../../actions/PMTCTRRI/MissedFirstANC/missedFirstANCOverview';
+import { loadMissedHAARTOverview } from '../../actions/PMTCTRRI/MissedHAART/missedHAARTOverview';
+import { loadMissedHAARTCounty } from './../../actions/PMTCTRRI/MissedHAART/missedHAARTCounty';
+import { loadMissedHAARTFacility } from './../../actions/PMTCTRRI/MissedHAART/missedHAARTFacility';
+import { loadMissedHAARTSDP } from './../../actions/PMTCTRRI/MissedHAART/missedHAARTSDP';
 
 
 const MissedDTG = Loadable({
@@ -80,7 +86,7 @@ const PMTCTRRI = () => {
     const toDate = useSelector((state) => state.filters.toDate);
     const genders = useSelector((state) => state.filters.genders);
     const datimAgeGroups = useSelector((state) => state.filters.datimAgeGroups);
-    const indicator = useSelector((state) => state.filters.indicator);
+    const emr = useSelector((state) => state.filters.emr);
 
     const renderTabNavItems = () => {
         return Object.keys(PMTCT_RRI_TABS).map((value) => {
@@ -107,10 +113,14 @@ const PMTCTRRI = () => {
         dispatch(changeCurrentPage(PAGES.pmtctRRI));
         dispatch(enableFromDateFilter());
         dispatch(enableAgencyFilter());
+        dispatch(enableEMRFilter());
         dispatch(disableGenderFilter());
         dispatch(disableDatimAgeGroupFilter());
         dispatch(disableDatimAgePopulationFilter());
-        
+
+        return () => {
+            dispatch(disableEMRFilter());
+        }
     }, [dispatch, active_tab]);
 
     useEffect(() => {
@@ -123,6 +133,11 @@ const PMTCTRRI = () => {
         dispatch(loadMissedFirstANCGaps());
         dispatch(loadMissedFirstANCCounty());
         dispatch(loadMissedFirstANCOverview());
+
+        dispatch(loadMissedHAARTOverview());
+        dispatch(loadMissedHAARTCounty());
+        dispatch(loadMissedHAARTSDP());
+        dispatch(loadMissedHAARTFacility());
     }, [
         dispatch,
         counties,
@@ -136,7 +151,7 @@ const PMTCTRRI = () => {
         genders,
         datimAgeGroups,
         pmtctRRItab,
-        indicator,
+        emr,
         active_tab,
     ]);
 
