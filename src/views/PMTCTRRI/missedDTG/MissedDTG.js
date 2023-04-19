@@ -12,6 +12,7 @@ import SectionFooter from './../../Shared/SectionFooter';
 import MissedDTGOverview from './MissedDTGOverview';
 import MissingDTGCounty from './MissingDTGCounty';
 import MissingDTGPartner from './MissingDTGPartner';
+import MissedDTGList from './MissedDTGList';
 
 const MissedDTG = () => {
     const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const MissedDTG = () => {
             <SectionFooter overview={'Missed DTG Optimization'} />
             <MissingDTGPartner />
             <SectionFooter overview={'Missed DTG Optimization'} />
+            <MissedDTGList />
             <SectionFooter overview={'Missed DTG Optimization'} />
         </>
     );

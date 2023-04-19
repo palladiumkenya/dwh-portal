@@ -324,6 +324,8 @@ import missedInfantProphylaxis from './PMTCTRRI/MissedInfantProphylaxis/missedIn
 
 import missedViralLoad from './PMTCTRRI/MissedViralLoad/missedViralLoad';
 
+import missedDTG from './PMTCTRRI/MissedDTG/missedDTG';
+
 export default combineReducers({
     auth: authReducer,
 
@@ -635,4 +637,5 @@ export default combineReducers({
     missedEIDMissingPCR,
     missedInfantProphylaxis,
     missedViralLoad,
+    missedDTG,
 });

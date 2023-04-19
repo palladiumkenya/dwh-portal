@@ -3,12 +3,11 @@ import { Card, CardBody, CardHeader } from 'reactstrap/lib';
 import { Col, Row } from 'reactstrap';
 import { useSelector } from 'react-redux';
 import { formatNumber, roundNumber } from '../../../utils/utils';
-import * as currentOnArtOverviewSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
-
+import * as missedEIDTestingSelectors from '../../../selectors/PMTCTRRI/MissedDTG';
 
 const MissedDTGOverview = () => {
-    const currentOnArt = useSelector(
-        currentOnArtOverviewSelectors.getCurrentOnArt
+    const missedDTG = useSelector(
+        missedEIDTestingSelectors.getMissedDTGOverview
     );
 
     return (
@@ -30,7 +29,7 @@ const MissedDTGOverview = () => {
                             <div>
                                 <div>
                                     <span className="expected-uploads-text">
-                                        {formatNumber(874663)}
+                                        {formatNumber(missedDTG.calhiv)}
                                     </span>
                                 </div>
                             </div>
@@ -53,7 +52,7 @@ const MissedDTGOverview = () => {
                             <div>
                                 <div>
                                     <span className="expected-uploads-text">
-                                        {formatNumber(874663)}
+                                        {formatNumber(missedDTG.ondtg)}
                                     </span>
                                 </div>
                             </div>
@@ -76,7 +75,7 @@ const MissedDTGOverview = () => {
                             <div>
                                 <div>
                                     <span className="expected-uploads-text">
-                                        {formatNumber(150458)}
+                                        {formatNumber(missedDTG.nondtg)}
                                     </span>
                                 </div>
                             </div>

@@ -3,10 +3,12 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
+import * as missedEIDTestingSelectors from '../../../selectors/PMTCTRRI/MissedDTG';
 
 const MissingDTGPartner = () => {
-    let eliVnew = useSelector(prepSelector.getPrepEligibleVnewTrend);
+    const missedDTG = useSelector(
+        missedEIDTestingSelectors.getMissedDTGSDP
+    );
     const [
         prepEligibleVsNewInitiatedTrends,
         setPrepEligibleVsNewInitiatedTrends,
@@ -21,7 +23,7 @@ const MissingDTGPartner = () => {
                 text: '',
             },
             xAxis: {
-                categories: ['NA', 'BO', 'VV'],
+                categories: missedDTG.sdp,
                 crosshair: true,
                 title: {
                     text: 'PARTNER',
@@ -59,13 +61,13 @@ const MissingDTGPartner = () => {
             series: [
                 {
                     type: 'column',
-                    name: 'PREGNANT MOTHERS',
-                    data: [532, 432, 407, 70],
+                    name: '',
+                    data: missedDTG.data,
                     color: '#142459',
                 },
             ],
         });
-    }, [eliVnew]);
+    }, [missedDTG]);
 
     useEffect(() => {
         loadPrepEligibleVsNewInitiatedTrends();
