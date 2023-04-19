@@ -12,6 +12,7 @@ import KnownPositivesNoInfantProfPartner from './KnownPositivesNoInfantProfPartn
 import KnownPositivesNoInfantProfCounty from './KnownPositivesNoInfantProfCounty';
 import NewlyDiagnosedNoInfantProfCounty from './NewlyDiagnosedNoInfantProfCounty';
 import NewlyDiagnosedNoInfantProfPartner from './NewlyDiagnosedNoInfantProfPartner';
+import MissingInfantProfList from './MissingInfantProfList';
 
 const MissedInfantProf = () => {
     const dispatch = useDispatch();
@@ -43,6 +44,7 @@ const MissedInfantProf = () => {
             <SectionFooter overview={'Missed Infant Prophylaxis'} />
             <NewlyDiagnosedNoInfantProfPartner />
             <SectionFooter overview={'Missed Infant Prophylaxis'} />
+            <MissingInfantProfList />
             <SectionFooter overview={'Missed Infant Prophylaxis'} />
         </>
     );

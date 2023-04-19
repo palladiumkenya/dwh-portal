@@ -3,8 +3,8 @@ import * as actionTypes from '../../types';
 import { CACHING, PAGES } from '../../../constants';
 import { getAll } from '../../../views/Shared/Api';
 
-export const loadMissedHAARTSDP = () => async (dispatch, getState) => {
-    const lastFetch = getState().missedHAARTSDP.lastFetch;
+export const loadMissedInfantProphylaxis = () => async (dispatch, getState) => {
+    const lastFetch = getState().missedInfantProphylaxis.lastFetch;
     const diffInMinutes = moment().diff(moment(lastFetch), 'minutes');
     if (getState().ui.currentPage !== PAGES.pmtctRRI) return;
     else if (
@@ -20,7 +20,7 @@ export const fetchMissedHAART = () => async (dispatch, getState) => {
         .subtract(2, 'month')
         .add(15, 'days');
     dispatch({
-        type: actionTypes.PMTCT_RRI_MISSED_MATERNAL_HAART_PARTNER_REQUEST
+        type: actionTypes.PMTCT_RRI_MISSED_INFANT_PROPHYLAXIS_REQUEST,
     });
     const params = {
         county: getState().filters.counties,
@@ -38,11 +38,11 @@ export const fetchMissedHAART = () => async (dispatch, getState) => {
     };
     try {
         const response = await getAll(
-            'pmtct-rri/getMissedHAARTBySDP',
+            'pmtct-rri/getMissedInfantProphylaxis',
             params
         );
         dispatch({
-            type: actionTypes.PMTCT_RRI_MISSED_MATERNAL_HAART_PARTNER_FETCH,
+            type: actionTypes.PMTCT_RRI_MISSED_INFANT_PROPHYLAXIS_FETCH,
             payload: {
                 filtered: getState().filters.filtered,
                 list: response,
@@ -50,7 +50,7 @@ export const fetchMissedHAART = () => async (dispatch, getState) => {
         });
     } catch (e) {
         dispatch({
-            type: actionTypes.PMTCT_RRI_MISSED_MATERNAL_HAART_PARTNER_FAILED,
+            type: actionTypes.PMTCT_RRI_MISSED_INFANT_PROPHYLAXIS_FAILED,
         });
     }
 };

@@ -3,12 +3,15 @@ import { Card, CardBody, CardHeader } from 'reactstrap/lib';
 import { Col, Row } from 'reactstrap';
 import { useSelector } from 'react-redux';
 import { formatNumber, roundNumber } from '../../../utils/utils';
-import * as currentOnArtOverviewSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
-
+import * as missedInfantProphylaxisSelectors from '../../../selectors/PMTCTRRI/MissedInfantProphylaxis';
+import * as missedHAARTSelectors from '../../../selectors/PMTCTRRI/MissedHAART';
 
 const MissedInfantProfOverview = () => {
-    const currentOnArt = useSelector(
-        currentOnArtOverviewSelectors.getCurrentOnArt
+    const missedHaart = useSelector(
+        missedHAARTSelectors.getMissedHAARTOverview
+    );
+    const missedInfantProf = useSelector(
+        missedInfantProphylaxisSelectors.getMissedInfantProphylaxisOverview
     );
 
     return (
@@ -30,7 +33,7 @@ const MissedInfantProfOverview = () => {
                             <div>
                                 <div>
                                     <span className="expected-uploads-text">
-                                        {formatNumber(1204000)}
+                                        {formatNumber(missedHaart.pospreg)}
                                     </span>
                                 </div>
                             </div>
@@ -53,7 +56,9 @@ const MissedInfantProfOverview = () => {
                             <div>
                                 <div>
                                     <span className="expected-uploads-text">
-                                        {formatNumber(874663)}
+                                        {formatNumber(
+                                            missedInfantProf.givenProph
+                                        )}
                                     </span>
                                 </div>
                             </div>
@@ -76,7 +81,9 @@ const MissedInfantProfOverview = () => {
                             <div>
                                 <div>
                                     <span className="expected-uploads-text">
-                                        {formatNumber(90458)}
+                                        {formatNumber(
+                                            missedInfantProf.notGivenProph
+                                        )}
                                     </span>
                                 </div>
                             </div>

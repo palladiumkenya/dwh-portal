@@ -319,6 +319,8 @@ import missedEIDCounty from './PMTCTRRI/MissedEID/missedEIDCounty';
 import missedEIDOverview from './PMTCTRRI/MissedEID/missedEIDOverview';
 import missedEIDSDP from './PMTCTRRI/MissedEID/missedEIDSDP';
 
+import missedInfantProphylaxis from './PMTCTRRI/MissedInfantProphylaxis/missedInfantProphylaxis';
+
 export default combineReducers({
     auth: authReducer,
 
@@ -627,4 +629,6 @@ export default combineReducers({
     missedEIDCounty,
     missedEIDOverview,
     missedEIDSDP,
+
+    missedInfantProphylaxis,
 });

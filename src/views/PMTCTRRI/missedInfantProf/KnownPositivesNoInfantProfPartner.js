@@ -3,11 +3,12 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
-import moment from 'moment';
+import * as missedInfantProphylaxisSelectors from '../../../selectors/PMTCTRRI/MissedInfantProphylaxis';
 
 const KnownPositivesNoInfantProfPartner = () => {
-    let eliVnew = useSelector(prepSelector.getPrepEligibleVnewTrend);
+    const missedInfantProf = useSelector(
+        missedInfantProphylaxisSelectors.getMissedInfantProphylaxisSDPAmongKnownPos
+    );
     const [
         prepEligibleVsNewInitiatedTrends,
         setPrepEligibleVsNewInitiatedTrends,
@@ -22,7 +23,7 @@ const KnownPositivesNoInfantProfPartner = () => {
                 text: '',
             },
             xAxis: {
-                categories: ['NA', 'BO', 'VV'],
+                categories: missedInfantProf.sdp,
                 crosshair: true,
                 title: {
                     text: 'PARTNER',
@@ -59,13 +60,13 @@ const KnownPositivesNoInfantProfPartner = () => {
             series: [
                 {
                     type: 'column',
-                    name: 'PREGNANT MOTHERS',
-                    data: [532, 432, 407, 70],
+                    name: '',
+                    data: missedInfantProf.data,
                     color: '#142459',
                 },
             ],
         });
-    }, [eliVnew]);
+    }, [missedInfantProf]);
 
     useEffect(() => {
         loadPrepEligibleVsNewInitiatedTrends();

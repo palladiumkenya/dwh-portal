@@ -17,9 +17,8 @@ export const loadMissedEIDOverview = () => async (dispatch, getState) => {
 
 export const fetchMissedEID = () => async (dispatch, getState) => {
     const previousMonth = moment()
-        .startOf('month')
         .subtract(2, 'month')
-        .add(17, 'days');
+        .add(15, 'days');
     dispatch({
         type: actionTypes.PMTCT_RRI_MISSED_EID_OVERVIEW_REQUEST,
     });
