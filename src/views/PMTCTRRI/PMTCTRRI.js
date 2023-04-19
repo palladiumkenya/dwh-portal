@@ -45,6 +45,7 @@ import { loadMissedEIDCounty } from '../../actions/PMTCTRRI/MissedEID/missedEIDC
 import { loadMissedEIDSDP } from '../../actions/PMTCTRRI/MissedEID/missedEIDSDP';
 import { loadMissedEIDOverview } from './../../actions/PMTCTRRI/MissedEID/missedEIDOverview';
 import { loadMissedInfantProphylaxis } from '../../actions/PMTCTRRI/MissedInfantProphylaxis/missedInfantProphylaxisAction';
+import { loadMissedEIDMissingPCR } from '../../actions/PMTCTRRI/MissedEID/missedEIDMissingPCR';
 
 
 const MissedDTG = Loadable({
@@ -148,6 +149,7 @@ const PMTCTRRI = () => {
         dispatch(loadMissedEIDCounty());
         dispatch(loadMissedEIDSDP());
         dispatch(loadMissedEIDOverview());
+        dispatch(loadMissedEIDMissingPCR());
 
         dispatch(loadMissedInfantProphylaxis());
     }, [
