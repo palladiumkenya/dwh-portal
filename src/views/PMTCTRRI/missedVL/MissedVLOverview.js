@@ -3,13 +3,11 @@ import { Card, CardBody, CardHeader } from 'reactstrap/lib';
 import { Col, Row } from 'reactstrap';
 import { useSelector } from 'react-redux';
 import { formatNumber, roundNumber } from '../../../utils/utils';
-import * as currentOnArtOverviewSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
+import * as missedVLSelectors from '../../../selectors/PMTCTRRI/MissedViralLoad';
 
 
 const MissedVLOverview = () => {
-    const currentOnArt = useSelector(
-        currentOnArtOverviewSelectors.getCurrentOnArt
-    );
+    const missedVL = useSelector(missedVLSelectors.getMissedViralLoadOverview);
 
     return (
         <>
@@ -30,7 +28,7 @@ const MissedVLOverview = () => {
                             <div>
                                 <div>
                                     <span className="expected-uploads-text">
-                                        {formatNumber(1204000)}
+                                        {formatNumber(missedVL.calhiv)}
                                     </span>
                                 </div>
                             </div>
@@ -53,7 +51,7 @@ const MissedVLOverview = () => {
                             <div>
                                 <div>
                                     <span className="expected-uploads-text">
-                                        {formatNumber(874663)}
+                                        {formatNumber(missedVL.eligibleVL)}
                                     </span>
                                 </div>
                             </div>
@@ -76,7 +74,7 @@ const MissedVLOverview = () => {
                             <div>
                                 <div>
                                     <span className="expected-uploads-text">
-                                        {formatNumber(874663)}
+                                        {formatNumber(missedVL.vlDone)}
                                     </span>
                                 </div>
                             </div>
@@ -99,7 +97,7 @@ const MissedVLOverview = () => {
                             <div>
                                 <div>
                                     <span className="expected-uploads-text">
-                                        {formatNumber(150458)}
+                                        {formatNumber(missedVL.suppressed)}
                                     </span>
                                 </div>
                             </div>

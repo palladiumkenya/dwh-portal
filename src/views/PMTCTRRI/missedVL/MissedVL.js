@@ -13,6 +13,7 @@ import MissingVLCounty from './MissingVLCounty';
 import MissingVLPartner from './MissingVLPartner';
 import VLNonSupressionCounty from './VLNonSupressionCounty';
 import VLNonSupressionPartner from './VLNonSupressionPartner';
+import MissingVLList from './MissingVLList';
 
 const MissedVL = () => {
     const dispatch = useDispatch();
@@ -43,6 +44,7 @@ const MissedVL = () => {
             <SectionFooter overview={'Missed Viral Load'} />
             <VLNonSupressionPartner />
             <SectionFooter overview={'Missed Viral Load'} />
+            <MissingVLList />
             <SectionFooter overview={'Missed Viral Load'} />
 
         </>

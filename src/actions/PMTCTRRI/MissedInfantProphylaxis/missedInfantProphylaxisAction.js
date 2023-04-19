@@ -12,10 +12,10 @@ export const loadMissedInfantProphylaxis = () => async (dispatch, getState) => {
         getState().filters.filtered === false
     )
         return;
-    await dispatch(fetchMissedHAART());
+    await dispatch(fetchMissed());
 };
 
-export const fetchMissedHAART = () => async (dispatch, getState) => {
+export const fetchMissed = () => async (dispatch, getState) => {
     const previousMonth = moment()
         .subtract(2, 'month')
         .add(15, 'days');

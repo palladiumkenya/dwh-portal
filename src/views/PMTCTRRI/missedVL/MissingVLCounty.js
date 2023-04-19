@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
+import * as missedVLSelectors from '../../../selectors/PMTCTRRI/MissedViralLoad';
 
 const MissingVLCounty = () => {
-    let eliVnew = useSelector(prepSelector.getPrepEligibleVnewTrend);
+    const missedVL = useSelector(missedVLSelectors.getMissedViralLoadCountyMissingVL);
     const [
         prepEligibleVsNewInitiatedTrends,
         setPrepEligibleVsNewInitiatedTrends,
@@ -21,7 +21,7 @@ const MissingVLCounty = () => {
                 text: '',
             },
             xAxis: {
-                categories: ['NA', 'BO', 'VV'],
+                categories: missedVL.counties,
                 crosshair: true,
                 title: {
                     text: 'COUNTY',
@@ -59,13 +59,13 @@ const MissingVLCounty = () => {
             series: [
                 {
                     type: 'column',
-                    name: 'PREGNANT MOTHERS',
-                    data: [532, 432, 407, 70],
+                    name: '',
+                    data: missedVL.data,
                     color: '#142459',
                 },
             ],
         });
-    }, [eliVnew]);
+    }, [missedVL]);
 
     useEffect(() => {
         loadPrepEligibleVsNewInitiatedTrends();

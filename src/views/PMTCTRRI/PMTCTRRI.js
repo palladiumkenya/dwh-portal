@@ -46,6 +46,7 @@ import { loadMissedEIDSDP } from '../../actions/PMTCTRRI/MissedEID/missedEIDSDP'
 import { loadMissedEIDOverview } from './../../actions/PMTCTRRI/MissedEID/missedEIDOverview';
 import { loadMissedInfantProphylaxis } from '../../actions/PMTCTRRI/MissedInfantProphylaxis/missedInfantProphylaxisAction';
 import { loadMissedEIDMissingPCR } from '../../actions/PMTCTRRI/MissedEID/missedEIDMissingPCR';
+import { loadMissedViralLoad } from '../../actions/PMTCTRRI/MissedViralLoad/missedViralLoadAction';
 
 
 const MissedDTG = Loadable({
@@ -123,6 +124,13 @@ const PMTCTRRI = () => {
         dispatch(disableGenderFilter());
         dispatch(disableDatimAgeGroupFilter());
         dispatch(disableDatimAgePopulationFilter());
+        if (active_tab === 'missedVL' || active_tab === 'missedDTG') {
+            dispatch(enableDatimAgeGroupFilter());
+            dispatch(disableFromDateFilter());
+        } else {
+            dispatch(disableDatimAgeGroupFilter());
+            dispatch(enableFromDateFilter());
+        }
 
         return () => {
             dispatch(disableEMRFilter());
@@ -152,6 +160,8 @@ const PMTCTRRI = () => {
         dispatch(loadMissedEIDMissingPCR());
 
         dispatch(loadMissedInfantProphylaxis());
+
+        dispatch(loadMissedViralLoad());
     }, [
         dispatch,
         counties,

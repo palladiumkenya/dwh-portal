@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
-import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
+import * as missedVLSelector from '../../../selectors/PMTCTRRI/MissedViralLoad';
 
 const VLNonSupressionPartner = () => {
-    let eliVnew = useSelector(prepSelector.getPrepEligibleVnewTrend);
+    let missedVL = useSelector(missedVLSelector.getMissedViralLoadSDPNonSup);
     const [
         prepEligibleVsNewInitiatedTrends,
         setPrepEligibleVsNewInitiatedTrends,
@@ -21,7 +21,7 @@ const VLNonSupressionPartner = () => {
                 text: '',
             },
             xAxis: {
-                categories: ['NA', 'BO', 'VV'],
+                categories: missedVL.sdp,
                 crosshair: true,
                 title: {
                     text: 'PARTNER',
@@ -59,13 +59,13 @@ const VLNonSupressionPartner = () => {
             series: [
                 {
                     type: 'column',
-                    name: 'PREGNANT MOTHERS',
-                    data: [532, 432, 407, 70],
+                    name: '',
+                    data: missedVL.data,
                     color: '#142459',
                 },
             ],
         });
-    }, [eliVnew]);
+    }, [missedVL]);
 
     useEffect(() => {
         loadPrepEligibleVsNewInitiatedTrends();
