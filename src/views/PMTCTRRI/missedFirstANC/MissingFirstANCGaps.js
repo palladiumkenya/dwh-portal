@@ -21,7 +21,7 @@ const MissingFirstANCGaps = () => {
                                 <Spinner className="pull-right" />
                             ) : (
                                 <CsvDownloader
-                                    filename="ndwh_patients_missing_hiv_diagnosis_date_by_facility"
+                                    filename="MISSED TESTING AT FIRST ANC GAPS"
                                     separator=","
                                     datas={missedFirstANC}
                                     className="pull-right"
@@ -87,8 +87,8 @@ const MissingFirstANCGaps = () => {
                                 data={missedFirstANC}
                                 noHeader
                                 dense
-                                defaultSortField="facility"
-                                defaultSortAsc={true}
+                                defaultSortField="FirstANC"
+                                defaultSortAsc={false}
                                 pagination
                                 responsive
                                 highlightOnHover

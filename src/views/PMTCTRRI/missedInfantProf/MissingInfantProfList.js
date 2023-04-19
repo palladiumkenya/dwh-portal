@@ -23,7 +23,7 @@ const MissingInfantProfList = () => {
                                 <Spinner className="pull-right" />
                             ) : (
                                 <CsvDownloader
-                                    filename="ndwh_patients_missing_hiv_diagnosis_date_by_facility"
+                                    filename="MISSING INFANT PROPHYLAXIS"
                                     separator=","
                                     datas={missedInfantProf}
                                     className="pull-right"
@@ -69,8 +69,8 @@ const MissingInfantProfList = () => {
                                 data={missedInfantProf}
                                 noHeader
                                 dense
-                                defaultSortField="facility"
-                                defaultSortAsc={true}
+                                defaultSortField="notGiven"
+                                defaultSortAsc={false}
                                 pagination
                                 responsive
                                 highlightOnHover

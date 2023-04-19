@@ -19,7 +19,7 @@ const MissingHAARTFacility = () => {
                                 <Spinner className="pull-right" />
                             ) : (
                                 <CsvDownloader
-                                    filename="ndwh_patients_missing_hiv_diagnosis_date_by_facility"
+                                    filename="HIV POSITVE MOTHERS NOT STARTED ON HAART"
                                     separator=","
                                     datas={missedHaart}
                                     className="pull-right"
@@ -70,8 +70,8 @@ const MissingHAARTFacility = () => {
                                 data={missedHaart}
                                 noHeader
                                 dense
-                                defaultSortField="facility"
-                                defaultSortAsc={true}
+                                defaultSortField="FirstANC"
+                                defaultSortAsc={false}
                                 pagination
                                 responsive
                                 highlightOnHover
