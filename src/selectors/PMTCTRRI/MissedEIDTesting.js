@@ -13,6 +13,9 @@ const listFilteredSDP = (state) => state.missedEIDSDP.listFiltered;
 const listUnfilteredAgePCR = (state) => state.missedEIDAgeFirstPCR.listUnfiltered;
 const listFilteredAgePCR = (state) => state.missedEIDAgeFirstPCR.listFiltered;
 
+const listUnfilteredMissingPCR = (state) => state.missedEIDMissingPCR.listUnfiltered;
+const listFilteredMissingPCR = (state) => state.missedEIDMissingPCR.listFiltered;
+
 const filtered = (state) => state.filters.filtered;
 
 
@@ -22,6 +25,14 @@ export const getMissedEIDTestingOverview = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
 		return list;
 	}
+);
+
+export const getMissedEIDTestingMissingPCR = createSelector(
+    [listUnfilteredMissingPCR, listFilteredMissingPCR, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        return list;
+    }
 );
 
 export const getMissedEIDTestingAgePCR = createSelector(

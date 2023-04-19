@@ -15,6 +15,7 @@ import MissedEIDOverview from './MissedEIDOverview';
 import HeiAgeAtPCR from './HeiAgeAtPCR';
 import HeiAgeAtPCRByCounty from './HeiAgeAtPCRByCounty';
 import HeiAgeAtPCRByPartner from './HeiAgeAtPCRByPartner';
+import MissedEIDList from './MissedEIDList';
 
 const MissedEID = () => {
     const dispatch = useDispatch();
@@ -44,6 +45,7 @@ const MissedEID = () => {
             <SectionFooter overview={'Missed EID Testing'} />
             <HeiAgeAtPCRByPartner />
             <SectionFooter overview={'Missed EID Testing'} />
+            <MissedEIDList />
             <SectionFooter overview={'Missed EID Testing'} />
         </>
     );
