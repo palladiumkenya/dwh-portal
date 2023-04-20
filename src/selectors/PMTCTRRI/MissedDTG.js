@@ -25,7 +25,7 @@ export const getMissedDTGCounty = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
 
         const groupedData = list.reduce((acc, curr) => {
-            const county = curr.County;
+            const county = curr.County ? curr.County.toUpperCase() : 'NO COUNTY';
             const knownPos = curr.CalHIVNotOnDTG;
             acc[county] = acc[county] || {
                 County: county,
@@ -62,7 +62,7 @@ export const getMissedDTGSDP = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
 
         const groupedData = list.reduce((acc, curr) => {
-            const sdp = curr.SDP;
+            const sdp = curr.SDP ? curr.SDP.toUpperCase() : 'NO PARTNER';
             const knownPos = curr.CalHIVNotOnDTG;
             acc[sdp] = acc[sdp] || {
                 SDP: sdp,
