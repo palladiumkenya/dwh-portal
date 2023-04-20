@@ -25,7 +25,9 @@ export const getMissedViralLoadCountyMissingVL = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
 
         const groupedData = list.reduce((acc, curr) => {
-            const county = curr.County;
+            const county = curr.County
+                ? curr.County.toUpperCase()
+                : 'NO COUNTY';
             const missing = curr.MissingVL;
             acc[county] = acc[county] || {
                 County: county,
@@ -56,7 +58,9 @@ export const getMissedViralLoadSDPMissingVL = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
 
         const groupedData = list.reduce((acc, curr) => {
-            const sdp = curr.PartnerName;
+            const sdp = curr.PartnerName
+                ? curr.PartnerName.toUpperCase()
+                : 'NO PARTNER';
             const missed = curr.MissingVL;
             acc[sdp] = acc[sdp] || {
                 SDP: sdp,
@@ -85,7 +89,9 @@ export const getMissedViralLoadCountyNonSup = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
 
         const groupedData = list.reduce((acc, curr) => {
-            const county = curr.County;
+            const county = curr.County
+                ? curr.County.toUpperCase()
+                : 'NO COUNTY';
             const missing = curr.NonSuppressed;
             acc[county] = acc[county] || {
                 County: county,
@@ -118,7 +124,9 @@ export const getMissedViralLoadSDPNonSup = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
 
         const groupedData = list.reduce((acc, curr) => {
-            const sdp = curr.PartnerName;
+            const sdp = curr.PartnerName
+                ? curr.PartnerName.toUpperCase()
+                : 'NO PARTNER';
             const missed = curr.NonSuppressed;
             acc[sdp] = acc[sdp] || {
                 SDP: sdp,

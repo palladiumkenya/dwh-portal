@@ -39,7 +39,9 @@ export const getMissedInfantProphylaxisCountyAmongKnownPos = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
 
         const groupedData = list.reduce((acc, curr) => {
-            const county = curr.County;
+            const county = curr.County
+                ? curr.County.toUpperCase()
+                : 'NO COUNTY';
             const knownPos = curr.NoOfInfantsNotGivenProphylaxisKnownPos;
             acc[county] = acc[county] || {
                 County: county,
@@ -76,7 +78,7 @@ export const getMissedInfantProphylaxisSDPAmongKnownPos = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
 
         const groupedData = list.reduce((acc, curr) => {
-            const sdp = curr.SDP;
+            const sdp = curr.SDP ? curr.SDP.toUpperCase() : 'NO PARTNER';
             const knownPos = curr.NoOfInfantsNotGivenProphylaxisKnownPos;
             acc[sdp] = acc[sdp] || {
                 SDP: sdp,
@@ -110,7 +112,9 @@ export const getMissedInfantProphylaxisCountyAmongNewPos = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
 
         const groupedData = list.reduce((acc, curr) => {
-            const county = curr.County;
+            const county = curr.County
+                ? curr.County.toUpperCase()
+                : 'NO COUNTY';
             const knownPos = curr.NoOfInfantsNotGivenProphylaxisNewPos;
             acc[county] = acc[county] || {
                 County: county,
@@ -147,7 +151,7 @@ export const getMissedInfantProphylaxisSDPAmongNewPos = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
 
         const groupedData = list.reduce((acc, curr) => {
-            const sdp = curr.SDP;
+            const sdp = curr.SDP ? curr.SDP.toUpperCase() : 'NO PARTNER';
             const knownPos = curr.NoOfInfantsNotGivenProphylaxisNewPos;
             acc[sdp] = acc[sdp] || {
                 SDP: sdp,
