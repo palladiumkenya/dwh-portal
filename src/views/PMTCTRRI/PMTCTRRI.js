@@ -185,7 +185,7 @@ const PMTCTRRI = () => {
         active_tab,
     ]);
 
-    const DEFAULT_ACTIVE_TAB = useSelector((state) => state.ui.pmtctRRITab);
+    const DEFAULT_ACTIVE_TAB = 'missedFirstANC';
     console.log(
         DEFAULT_ACTIVE_TAB,
         useSelector((state) => state.ui.pmtctRRITab)
