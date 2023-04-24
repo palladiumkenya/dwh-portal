@@ -10,7 +10,6 @@ const SectionHeader = ({ title, description}) => {
     const ctTab = useSelector(state => state.ui.ctTab);
     return (
         <>
-            <br></br>
             <div className="strip"></div>
             <Card className="pageHeading_reporting">
                 <CardBody>

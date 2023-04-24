@@ -28,8 +28,8 @@ export const fetchCTPrep = () => async (dispatch, getState) => {
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
         project: getState().filters.projects,
-        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : '',
-        month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
+        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : moment().subtract(2, 'month').add(17, 'days').format('YYYY'),
+        month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : moment().subtract(2, 'month').add(17, 'days').format('MM'),
     };
     try {
         const response = await axios.get(

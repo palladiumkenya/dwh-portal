@@ -155,12 +155,14 @@ export const getPrepEligibleVnewTrend = createSelector(
         let eliList = [];
         let iniList = [];
         let label = [];
+        let monthRange = [];
         let perc = [];
 
-        for (let i = 1; i <= 12; i++) {
-            let date = moment().subtract(i, 'months');
+        for (let i = 2; i <= 13; i++) {
+            let date = moment().subtract(i, 'months').add(17, 'days');
             let month = date.format('MM');
             let year = date.format('YYYY');
+            monthRange.push(date.format('MMMM YYYY'));
 
             iniList.push(
                 listnew.find((x) => x.year == year && x.month == month)
@@ -192,7 +194,7 @@ export const getPrepEligibleVnewTrend = createSelector(
         perc.reverse()
         label.reverse()
 
-        return {eliList, iniList, perc, label};
+        return {eliList, iniList, perc, label, monthRange};
     }
 );
 
@@ -207,12 +209,13 @@ export const getPrepNewAgeSexGroup = createSelector(
         listFiltered,
         filtered
     ) => {
-        const list = filtered ? listFiltered : listUnfiltered;
+        let list = filtered ? listFiltered : listUnfiltered;
 
         let iniListM = [];
         let iniListF = [];
         let agegrp = ['15 to 19', '20 to 24', '25 to 29', '30 to 34', '35 to 39', '40 to 44', '45 to 49', '50 to 54', '55 to 59', '60 to 64', '65+'];
 
+        list = list.filter((l) => l.Gender !== null);
         agegrp.forEach((el) => {
             iniListM.push(list.find(
                 (x) => x.Gender.toLowerCase() === 'male' && x.DatimAgeGroup === el

@@ -47,6 +47,15 @@ export const OPERATIONALHIS_TABS = {
     comparison: 'COMPARISON DWH & KHIS',
 }
 
+export const PMTCT_RRI_TABS = {
+    missedFirstANC: 'MISSED TESTING AT FIRST ANC',
+    missedHAART: 'MISSED MATERNAL HAART',
+    missedInfantProf: 'MISSED INFANT PROPHYLAXIS',
+    missedEID: 'MISSED EID TESTING',
+    missedVL: 'MISSED VIRAL LOAD',
+    missedDTG: 'MISSED DTG OPTIMIZATION',
+};
+
 export const PAGES = {
     home: 'HOME',
     rr: 'REPORTING_RATES',
@@ -55,6 +64,7 @@ export const PAGES = {
     hrh: 'HRH',
     sd: 'SERVICE_DESK',
     operationalHIS: 'OPERATIONAL_AND_HIS',
+    pmtctRRI: 'PMTCT_RRI',
 };
 
 export const CACHING = {
