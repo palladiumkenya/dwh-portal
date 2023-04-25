@@ -81,6 +81,7 @@ const MissedInfantProf = Loadable({
 const PMTCTRRI = () => {
     const dispatch = useDispatch();
     const pmtctRRItab = useSelector((state) => state.ui.pmtctRRITab);
+    const noCache = useSelector((state) => state.filters.noCache);
     const counties = useSelector((state) => state.filters.counties);
     const subCounties = useSelector((state) => state.filters.subCounties);
     const facilities = useSelector((state) => state.filters.facilities);
@@ -182,6 +183,7 @@ const PMTCTRRI = () => {
         pmtctRRItab,
         emr,
         active_tab,
+        noCache
     ]);
 
     const DEFAULT_ACTIVE_TAB = 'missedFirstANC';
