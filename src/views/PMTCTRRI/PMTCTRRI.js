@@ -15,9 +15,6 @@ import {
     disableFromDateFilter,
     disableGenderFilter,
     disableDatimAgeGroupFilter,
-    enableIndicatorFilter,
-    disableIndicatorFilter,
-    enableGenderFilter,
     enableDatimAgeGroupFilter,
     disableDatimAgePopulationFilter,
     enableEMRFilter,
@@ -121,6 +118,7 @@ const PMTCTRRI = () => {
         dispatch(changeCurrentPage(PAGES.pmtctRRI));
         dispatch(enableFromDateFilter());
         dispatch(enableAgencyFilter());
+        dispatch(enableFacilityFilter());
         dispatch(enableEMRFilter());
         dispatch(disableGenderFilter());
         dispatch(disableDatimAgeGroupFilter());
@@ -138,6 +136,7 @@ const PMTCTRRI = () => {
 
         return () => {
             dispatch(disableEMRFilter());
+            dispatch(disableFromDateFilter());
         }
     }, [dispatch, active_tab]);
 
