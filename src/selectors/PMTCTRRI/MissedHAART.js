@@ -36,15 +36,15 @@ export const getMissedHAARTCounty = createSelector(
     [listUnfilteredCounty, listFilteredCounty, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         let list = filtered ? listFiltered : listUnfiltered;
-        list = list.filter(e => e.known > 0 || e.new > 0)
 
         let counties = list.map((e) =>
             e.County ? e.County.toUpperCase() : 'NO COUNTY'
         );
         let known = list.map((e) => e.known);
         let newpos = list.map((e) => e.new);
+        let not = list.map((e) => e.notart);
 
-        return { counties, known, newpos };
+        return { counties, known, newpos, not };
 	}
 );
 
@@ -52,12 +52,12 @@ export const getMissedHAARTSDP = createSelector(
     [listUnfilteredSDP, listFilteredSDP, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         let list = filtered ? listFiltered : listUnfiltered;
-        list = list.filter((e) => e.known > 0 || e.new > 0);
 
         let sdp = list.map((e) => e.SDP? e.SDP.toUpperCase(): "NO PARTNER");
         let known = list.map((e) => e.known);
         let newpos = list.map((e) => e.new);
+        let not = list.map((e) => e.notart);
 
-        return { sdp, known, newpos };
+        return { sdp, known, newpos, not };
 	}
 );
