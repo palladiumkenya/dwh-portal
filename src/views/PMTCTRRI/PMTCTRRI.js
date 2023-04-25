@@ -180,9 +180,8 @@ const PMTCTRRI = () => {
         toDate,
         genders,
         datimAgeGroups,
-        pmtctRRItab,
         emr,
-        active_tab,
+        // active_tab,
         noCache
     ]);
 
