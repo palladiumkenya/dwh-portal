@@ -51,20 +51,19 @@ const PostiveMothesNotStartedHAARTCounty = () => {
                 column: {
                     pointPadding: 0.2,
                     borderWidth: 0,
-                    stacking: 'percent',
                 },
             },
             series: [
                 {
-                    name: 'NEW POSITIVE',
-                    color: '#00a65a',
-                    data: missedHaart.newpos,
-                },
-                {
-                    name: 'KNOWN POSITIVE',
+                    name: 'NOT GIVEN HAART',
                     color: '#142459',
-                    data: missedHaart.known,
+                    data: missedHaart.not,
                 },
+                // {
+                //     name: 'KNOWN POSITIVE',
+                //     color: '#142459',
+                //     data: missedHaart.known,
+                // },
             ],
         });
     }, [missedHaart]);

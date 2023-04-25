@@ -35,10 +35,10 @@ const MissedHAART = () => {
             </VisibilitySensor>
             <br />
             <MissedHAARTOverview />
-            {/* <PostiveMothesNotStartedHAARTCounty />
+            <PostiveMothesNotStartedHAARTCounty />
             <SectionFooter overview={'Missed Maternal HAART'} />
             <PostiveMothesNotStartedHAARTPartner />
-            <SectionFooter overview={'Missed Maternal HAART'} /> */}
+            <SectionFooter overview={'Missed Maternal HAART'} />
             {/* <MissingHAARTFacility />
             <SectionFooter overview={'Missed Maternal HAART'} /> */}
         </>
