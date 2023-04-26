@@ -22,14 +22,12 @@ export const getMissedInfantProphylaxisOverview = createSelector(
             0
         );
         let notGivenProph = list.reduce(
-            (a, b) =>
-                a +
-                b.NoOfInfantsNotGivenProphylaxisNewPos +
-                b.NoOfInfantsNotGivenProphylaxisKnownPos,
+            (a, b) => a + b.NoOfInfantsNotGivenProphylaxis,
             0
         );
+        let mothers = list.reduce((a, b) => a + b.NoOfPositiveMothers, 0);
 
-		return { posmothers, givenProph, notGivenProph };
+		return { posmothers, givenProph, notGivenProph, mothers };
 	}
 );
 
@@ -185,9 +183,7 @@ export const getMissedInfantProphylaxisList = createSelector(
         let list = filtered ? listFiltered : listUnfiltered;
         let newList = []
         newList = list.map(e => {
-            let notGiven =
-                e.NoOfInfantsNotGivenProphylaxisKnownPos +
-                e.NoOfInfantsNotGivenProphylaxisNewPos;
+            let notGiven = e.NoOfInfantsNotGivenProphylaxis;
             return {...e, notGiven}
         })
 

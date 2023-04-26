@@ -33,7 +33,7 @@ const MissedInfantProfOverview = () => {
                             <div>
                                 <div>
                                     <span className="expected-uploads-text">
-                                        {formatNumber(missedHaart.pospreg)}
+                                        {formatNumber(missedInfantProf.mothers)}
                                     </span>
                                 </div>
                             </div>
