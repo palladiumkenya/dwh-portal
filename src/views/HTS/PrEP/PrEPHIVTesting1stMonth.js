@@ -45,7 +45,7 @@ const PrEPHIVTesting1STMonth = () => {
             },
             series: [
                 {
-                    name: 'Tested',
+                    name: 'patients',
                     data: [
                         {
                             name: 'NOT TESTED',

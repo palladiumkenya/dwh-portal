@@ -52,10 +52,10 @@ export const getPrepMonth3RefillAgeSex = createSelector(
 
         agegrp.forEach((el) => {
             iniListRefill.push(
-                list.find((x) => x.DATIMAgeGroup === el)?.tested ?? 0
+                list.find((x) => x.DATIMAgeGroup === el)?.refilled  ?? 0
             );
             iniListTested.push(
-                listTested.find((x) => x.DATIMAgeGroup === el)?.TotalTested ?? 0
+                list.find((x) => x.DATIMAgeGroup === el)?.tested ?? 0
             );
 
             perc.push(
@@ -64,12 +64,13 @@ export const getPrepMonth3RefillAgeSex = createSelector(
                         ((list.find((x) => x.DATIMAgeGroup === el)?.tested ??
                             0) *
                             100) /
-                        (listTested.find((x) => x.DATIMAgeGroup === el)
-                            ?.TotalTested ?? 0)
+                        (list.find((x) => x.DATIMAgeGroup === el)
+                            ?.tested ?? 0)
                     ).toFixed(1)
                 )
             );
         });
+        console.log(iniListRefill);
 
         return { iniListTested, iniListRefill, agegrp, perc };
 

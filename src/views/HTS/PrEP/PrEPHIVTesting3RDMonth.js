@@ -44,9 +44,13 @@ const PrEPHIVTesting3RDMonth = () => {
             },
             series: [
                 {
-                    name: 'Tested',
+                    name: 'patients',
                     data: [
-                        { name: 'NOT TESTED', y: month3?.nottested, color: '#2F4050' },
+                        {
+                            name: 'NOT TESTED',
+                            y: month3?.nottested,
+                            color: '#2F4050',
+                        },
                         { name: 'TESTED', y: month3?.tested, color: '#1AB394' },
                     ],
                     size: '60%',
