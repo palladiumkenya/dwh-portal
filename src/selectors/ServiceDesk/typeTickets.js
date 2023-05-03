@@ -15,6 +15,7 @@ const listMonthUnfiltered = (state) => state.openByMonth.listUnfiltered;
 const listMonthFiltered = (state) => state.openByMonth.listFiltered;
 
 const filtered = state => state.filters.filtered;
+const fromDate = state => state.filters.fromDate;
 
 export const getByProduct = createSelector(
     [listUnfiltered, listFiltered, filtered],
@@ -69,8 +70,8 @@ export const getByProduct = createSelector(
 );
 
 export const getByMonth = createSelector(
-    [listMonthUnfiltered, listMonthFiltered, filtered],
-    (listUnfiltered, listFiltered, filtered) => {
+    [listMonthUnfiltered, listMonthFiltered, filtered, fromDate],
+    (listUnfiltered, listFiltered, filtered, fromDate) => {
         const list = filtered ? listFiltered : listUnfiltered;
         let categories = [];
 
@@ -80,7 +81,12 @@ export const getByMonth = createSelector(
                 `${entry.YEAR}-${entry.MONTH}-01`,
                 'YYYY-MM-DD'
             );
-            return entryDate.isSameOrAfter(twelveMonthsAgo, 'month');
+            if (fromDate)
+                return entryDate;
+            return (
+                entryDate.isSameOrAfter(twelveMonthsAgo, 'month') &&
+                entryDate.isSameOrBefore(moment(), 'month')
+            );
         });
 
         filteredData.forEach(function (d) {

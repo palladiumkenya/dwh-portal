@@ -409,10 +409,10 @@ const TreatmentOutcomes = () => {
                 <TabPane tabId={'ContinuityOfTreatment'}>
                     <AppointmetKeeping />
                     <SectionFooter />
-                    <QuaterlyIIT />
+                    {/* <QuaterlyIIT />
                     <SectionFooter />
                     <TrackingIIT />
-                    <SectionFooter />
+                    <SectionFooter /> */}
 
                     {/* <ContinuityOfTreatment /> */}
                 </TabPane>
