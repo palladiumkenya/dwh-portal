@@ -8,8 +8,17 @@ import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
 
 
 const PrEPEligibleVsNewlyByAge = () => {
-    const filters = useSelector((state) => state.filters);
     let eliVnew = useSelector(prepSelector.getPrepEligibleAgeGroup);
+    
+    let filterMonth = moment(
+        useSelector((state) => state.filters.fromDate),
+        'MMM YYYY'
+    )
+        .format('MMMM YYYY')
+        .toUpperCase();
+    let month = useSelector((state) => state.filters.fromDate)
+        ? filterMonth
+        : moment().subtract(2, 'month').add(17, 'days').format('MMM YYYY');
 
     const [prepEligibleVsNewlyByAge, setPrepEligibleVsNewlyByAge] = useState(
         {}
@@ -107,11 +116,7 @@ const PrEPEligibleVsNewlyByAge = () => {
     return (
         <Card>
             <CardHeader className="cardTitle">
-                ELIGIBLE VS NEWLY INITIATED ON PrEP BY AGE AS AT{' '}
-                {moment()
-                    .subtract(2, 'month')
-                    .add(17, 'days')
-                    .format('MMM YYYY')}
+                ELIGIBLE VS NEWLY INITIATED ON PrEP BY AGE AS AT {month.toUpperCase()}
             </CardHeader>
             <CardBody>
                 <HighchartsReact

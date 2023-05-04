@@ -61,16 +61,14 @@ export const getPrepMonth3RefillAgeSex = createSelector(
             perc.push(
                 parseFloat(
                     (
-                        ((list.find((x) => x.DATIMAgeGroup === el)?.tested ??
+                        ((list.find((x) => x.DATIMAgeGroup === el)?.refilled ??
                             0) *
                             100) /
-                        (list.find((x) => x.DATIMAgeGroup === el)
-                            ?.tested ?? 0)
+                        (list.find((x) => x.DATIMAgeGroup === el)?.tested ?? 0)
                     ).toFixed(1)
                 )
             );
         });
-        console.log(iniListRefill);
 
         return { iniListTested, iniListRefill, agegrp, perc };
 

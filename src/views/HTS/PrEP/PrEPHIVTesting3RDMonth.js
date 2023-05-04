@@ -6,7 +6,6 @@ import HighchartsReact from "highcharts-react-official";
 import * as prepSelector from '../../../selectors/HTS/Prep/prepMonth3RefillSelector';
 
 const PrEPHIVTesting3RDMonth = () => {
-    const filters = useSelector(state => state.filters);
     let month3 = useSelector(prepSelector.getPrepMonth3Refill);
     const [prepHIVTesting3RDMonth, setPrepHIVTesting3RDMonth] = useState({});
 
