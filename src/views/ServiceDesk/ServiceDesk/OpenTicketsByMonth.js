@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
-import * as newOnArtByAgeSexSelectors from '../../../selectors/CT/NewOnArt/newOnArtByAgeSex';
+import * as tickets from '../../../selectors/ServiceDesk/typeTickets';
 
-const OpenTicketsByType = () => {
+const OpenTicketsByMonth = () => {
     const [newOnArtBySex, setNewOnArtBySex] = useState({});
-    const newOnArtBySexData = useSelector(
-        newOnArtByAgeSexSelectors.getNewOnArtBySex
+    const byMonth = useSelector(
+        tickets.getByMonth
     );
 
     const loadNewOnArtBySex = useCallback(async () => {
@@ -21,14 +21,10 @@ const OpenTicketsByType = () => {
                 align: 'left',
             },
             xAxis: {
-                categories: [
-                    'unclassified',
-                    'afya+kamilisha',
-                    'ampathplus',
-                    'bomu',
-                    'chs shinda',
-                    'crissp',
-                ],
+                title: {
+                    text: 'MONTH',
+                },
+                categories: byMonth.months,
             },
             yAxis: {
                 min: 0,
@@ -36,7 +32,7 @@ const OpenTicketsByType = () => {
                     text: 'NUMBER OF ISSUES',
                 },
                 stackLabels: {
-                    enabled: true,
+                    enabled: false,
                     style: {
                         fontWeight: 'bold',
                         color:
@@ -71,33 +67,28 @@ const OpenTicketsByType = () => {
             },
             series: [
                 {
-                    name: 'BUG',
-                    data: [3, 5, 1, 13],
-                    color: '#2F4050',
-                },
-                {
-                    name: 'SUPPORT',
-                    data: [14, 8, 8, 12],
-                    color: '#A70709',
+                    name: 'TRAINING',
+                    data: byMonth.training,
+                    color: '#1AB394',
                 },
                 {
                     name: 'ENHANCEMENT',
-                    data: [0, 2, 16, 3],
-                    color: '#5FA5E6',
-                },
-                {
-                    name: 'TRAINING',
-                    data: [20, 2, 6, 13],
+                    data: byMonth.enhancement,
                     color: '#F28E2B',
                 },
                 {
-                    name: 'UNCLASSIFIED',
-                    data: [7, 12, 6, 3],
-                    color: '#1AB394',
+                    name: 'SUPPORT',
+                    data: byMonth.support,
+                    color: '#5FA5E6',
+                },
+                {
+                    name: 'BUG',
+                    data: byMonth.bug,
+                    color: '#2F4050',
                 },
             ],
         });
-    }, [newOnArtBySexData]);
+    }, [byMonth]);
 
     useEffect(() => {
         loadNewOnArtBySex();
@@ -108,7 +99,7 @@ const OpenTicketsByType = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        OPEN ISSUES BY TYPE
+                        OPEN ISSUES TYPE BY MONTH
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -124,4 +115,4 @@ const OpenTicketsByType = () => {
     );
 };
 
-export default OpenTicketsByType;
+export default OpenTicketsByMonth;

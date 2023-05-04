@@ -3,8 +3,8 @@ import { createSelector } from 'reselect';
 const listUnfiltered = (state) => state.prepMonth3Refill.listUnfiltered;
 const listFiltered = (state) => state.prepMonth3Refill.listFiltered;
 
-const listAgeSexUnfiltered = (state) => state.prepMonth1RefillAgeSex.listUnfiltered;
-const listAgeSexFiltered = (state) => state.prepMonth1RefillAgeSex.listFiltered;
+const listAgeSexUnfiltered = (state) => state.prepMonth3RefillAgeSex.listUnfiltered;
+const listAgeSexFiltered = (state) => state.prepMonth3RefillAgeSex.listFiltered;
 
 const listTestedAgeSexUnfiltered = (state) => state.prepTestedMonth3Refill.listUnfiltered;
 const listTestedAgeSexFiltered = (state) => state.prepTestedMonth3Refill.listFiltered;
@@ -52,20 +52,19 @@ export const getPrepMonth3RefillAgeSex = createSelector(
 
         agegrp.forEach((el) => {
             iniListRefill.push(
-                list.find((x) => x.DATIMAgeGroup === el)?.tested ?? 0
+                list.find((x) => x.DATIMAgeGroup === el)?.refilled  ?? 0
             );
             iniListTested.push(
-                listTested.find((x) => x.DATIMAgeGroup === el)?.TotalTested ?? 0
+                list.find((x) => x.DATIMAgeGroup === el)?.tested ?? 0
             );
 
             perc.push(
                 parseFloat(
                     (
-                        ((list.find((x) => x.DATIMAgeGroup === el)?.tested ??
+                        ((list.find((x) => x.DATIMAgeGroup === el)?.refilled ??
                             0) *
                             100) /
-                        (listTested.find((x) => x.DATIMAgeGroup === el)
-                            ?.TotalTested ?? 0)
+                        (list.find((x) => x.DATIMAgeGroup === el)?.tested ?? 0)
                     ).toFixed(1)
                 )
             );

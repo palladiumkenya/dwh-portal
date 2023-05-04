@@ -57,20 +57,20 @@ export const getPrepMonth1RefillAgeSex = createSelector(
 
         agegrp.forEach((el) => {
             iniListRefill.push(
-                list.find((x) => x.DATIMAgeGroup === el)?.tested ?? 0
+                list.find((x) => x.DATIMAgeGroup === el)?.refilled ?? 0
             );
             iniListTested.push(
-                listTested.find((x) => x.DATIMAgeGroup === el)?.TotalTested ?? 0
+                list.find((x) => x.DATIMAgeGroup === el)?.tested ?? 0
             );
 
             perc.push(
                 parseFloat(
                     (
                         ((list.find((x) => x.DATIMAgeGroup === el)
-                            ?.tested ?? 0) *
+                            ?.refilled ?? 0) *
                             100) /
-                        (listTested.find((x) => x.DATIMAgeGroup === el)
-                            ?.TotalTested ?? 0)
+                        (list.find((x) => x.DATIMAgeGroup === el)
+                            ?.tested ?? 0)
                     ).toFixed(1)
                 )
             );

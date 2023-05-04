@@ -33,6 +33,7 @@ const UniversalFilter = () => {
     const [agencies, setAgencies] = useState([]);
     const [projects, setProjects] = useState([]);
     const [genders, setGenders] = useState([]);
+    const [emr, setEmr] = useState([]);
     const [datimAgeGroups, setDatimAgeGroups] = useState([]);
     const [datimAgePopulations, setDatimAgePopulations] = useState([]);
     const [populationTypes, setPopulationTypes] = useState([]);
@@ -216,6 +217,13 @@ const UniversalFilter = () => {
                 ' PWID',
                 'General Population',
                 'Key population',
+            ].map((c) => ({ value: c, key: c, text: c }))
+        );
+        setEmr(
+            [
+                'EMR Based',
+                'Paper Based',
+                'Unclassified',
             ].map((c) => ({ value: c, key: c, text: c }))
         );
         setLatestPregnancies(
@@ -677,6 +685,31 @@ const UniversalFilter = () => {
                                     dispatch(
                                         actions.filterByIndicator(data.value)
                                     );
+                                }}
+                            />
+                        </div>
+                    </Col>
+                ) : null}
+                {filters.emrFilterEnabled ? (
+                    <Col
+                        className={
+                            'col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2'
+                        }
+                    >
+                        <div className="form-group">
+                            <label htmlFor="indicator">Facility Type</label>
+                            <Dropdown
+                                id="emr"
+                                name="emr"
+                                placeholder="Select Facility Type"
+                                fluid
+                                selection
+                                multiple
+                                search
+                                options={emr}
+                                value={filters.emr}
+                                onChange={(e, data) => {
+                                    dispatch(actions.filterByEMR(data.value));
                                 }}
                             />
                         </div>

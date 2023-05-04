@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
-import * as newOnArtByAgeSexSelectors from '../../../selectors/CT/NewOnArt/newOnArtByAgeSex';
+import * as tickets from '../../../selectors/ServiceDesk/typeTickets';
 
-const OpenTicketsByType = () => {
+const OpenTicketsByPartner = () => {
     const [newOnArtBySex, setNewOnArtBySex] = useState({});
-    const newOnArtBySexData = useSelector(
-        newOnArtByAgeSexSelectors.getNewOnArtBySex
+    const byPartner = useSelector(
+        tickets.getByPartner
     );
 
     const loadNewOnArtBySex = useCallback(async () => {
@@ -21,12 +21,10 @@ const OpenTicketsByType = () => {
                 align: 'left',
             },
             xAxis: {
-                categories: [
-                    'unclassified',
-                    'dwapi issues',
-                    'mhealth issues',
-                    'kenyaemr support',
-                ],
+                title: {
+                    text: 'SERVICE DELIVERY PARTNER',
+                },
+                categories: byPartner.sdp,
             },
             yAxis: {
                 min: 0,
@@ -69,33 +67,28 @@ const OpenTicketsByType = () => {
             },
             series: [
                 {
-                    name: 'BUG',
-                    data: [3, 5, 1, 13],
-                    color: '#2F4050',
-                },
-                {
-                    name: 'SUPPORT',
-                    data: [14, 8, 8, 12],
-                    color: '#A70709',
+                    name: 'TRAINING',
+                    data: byPartner.training,
+                    color: '#1AB394',
                 },
                 {
                     name: 'ENHANCEMENT',
-                    data: [0, 2, 16, 3],
-                    color: '#5FA5E6',
-                },
-                {
-                    name: 'TRAINING',
-                    data: [20, 2, 6, 13],
+                    data: byPartner.enhancement,
                     color: '#F28E2B',
                 },
                 {
-                    name: 'UNCLASSIFIED',
-                    data: [7, 12, 6, 3],
-                    color: '#1AB394',
+                    name: 'SUPPORT',
+                    data: byPartner.support,
+                    color: '#5FA5E6',
+                },
+                {
+                    name: 'BUG',
+                    data: byPartner.bug,
+                    color: '#2F4050',
                 },
             ],
         });
-    }, [newOnArtBySexData]);
+    }, [byPartner]);
 
     useEffect(() => {
         loadNewOnArtBySex();
@@ -106,7 +99,7 @@ const OpenTicketsByType = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        OPEN ISSUES BY TYPE
+                        OPEN ISSUES TYPE BY PARTNER
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -122,4 +115,4 @@ const OpenTicketsByType = () => {
     );
 };
 
-export default OpenTicketsByType;
+export default OpenTicketsByPartner;

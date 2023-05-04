@@ -12,6 +12,9 @@ import UniversalFilter from './../../Shared/UniversalFilter';
 import moment from 'moment';
 import classnames from 'classnames';
 import { useHistory, useParams } from 'react-router-dom';
+import AppointmetKeeping from './AppointmetKeeping';
+import QuaterlyIIT from './QuaterlyIIT';
+import TrackingIIT from './TrackingIIT';
 
 const SixMonthRetention = Loadable({ loader: () => import('./SixMonthRetention'), loading: Loading, delay: LOADING_DELAY });
 const ThreeMonthRetention = Loadable({ loader: () => import('./ThreeMonthRetention'), loading: Loading, delay: LOADING_DELAY });
@@ -99,6 +102,19 @@ const TreatmentOutcomes = () => {
                         }}
                     >
                         RETENTION
+                    </NavLink>
+                </NavItem>
+                <NavItem>
+                    <NavLink
+                        className={classnames({
+                            active: mini_tab === 'ContinuityOfTreatment',
+                        })}
+                        onClick={() => {
+                            setActiveTab('ContinuityOfTreatment');
+                            toggle('ContinuityOfTreatment');
+                        }}
+                    >
+                        CONTINUITY OF TREATMENT
                     </NavLink>
                 </NavItem>
             </Nav>
@@ -351,16 +367,24 @@ const TreatmentOutcomes = () => {
                         <CardBody>
                             <ul>
                                 <li>
-                                    {'Started on ART => Number of patients whose documented ART start date is in the specified year.'}
+                                    {
+                                        'Started on ART => Number of patients whose documented ART start date is in the specified year.'
+                                    }
                                 </li>
                                 <li>
-                                    {'Net Cohort =>Number of patients whose documented ART start date is in the specified year. This computed as "Started on ART" less "Stopped ART" and "Transfer Out"'}
+                                    {
+                                        'Net Cohort =>Number of patients whose documented ART start date is in the specified year. This computed as "Started on ART" less "Stopped ART" and "Transfer Out"'
+                                    }
                                 </li>
                                 <li>
-                                    {'Retention Outcomes are computed as at a point in time (e.g. 3/6/12/18 months after ART Start) for patients who started ART in the specified Year'}
+                                    {
+                                        'Retention Outcomes are computed as at a point in time (e.g. 3/6/12/18 months after ART Start) for patients who started ART in the specified Year'
+                                    }
                                 </li>
                                 <li>
-                                    {'Active and Retained => Number of adults and children who were receiving ART at a point in time(e.g. 3/6/12/18 months after ART Start) including those who have missed their appointment and 30 days had not passed since the last missed appointment.'}
+                                    {
+                                        'Active and Retained => Number of adults and children who were receiving ART at a point in time(e.g. 3/6/12/18 months after ART Start) including those who have missed their appointment and 30 days had not passed since the last missed appointment.'
+                                    }
                                 </li>
                                 <li>
                                     Retention = Active and Retained / Net Cohort
@@ -380,6 +404,17 @@ const TreatmentOutcomes = () => {
                     <SectionFooter overview={branding.overview} />
                     {/*<TreatmentOutcomesUndocumentedByFacility />
                     <SectionFooter overview={branding.overview}/>*/}
+                </TabPane>
+
+                <TabPane tabId={'ContinuityOfTreatment'}>
+                    <AppointmetKeeping />
+                    <SectionFooter />
+                    {/* <QuaterlyIIT />
+                    <SectionFooter />
+                    <TrackingIIT />
+                    <SectionFooter /> */}
+
+                    {/* <ContinuityOfTreatment /> */}
                 </TabPane>
             </TabContent>
         </div>

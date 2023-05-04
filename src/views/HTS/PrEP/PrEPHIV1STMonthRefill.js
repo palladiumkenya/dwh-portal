@@ -69,6 +69,9 @@ const PrEP1stMonthRefill = () => {
                         format: '{point.y}%',
                     },
                 },
+                spline: {
+                    lineWidth: 0,
+                },
                 column: {
                     pointPadding: 0.01,
                     borderWidth: 0,
@@ -86,7 +89,7 @@ const PrEP1stMonthRefill = () => {
                     color: '#00a65a',
                 },
                 {
-                    type: 'scatter',
+                    type: 'spline',
                     name: '% OF PATIENTS REFILLED',
                     data: month1.perc,
                     color: 'orange',

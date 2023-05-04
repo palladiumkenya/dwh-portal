@@ -5,38 +5,111 @@ import {
     Col
 } from 'reactstrap';
 import classnames from 'classnames';
+import Loadable from 'react-loadable';
 import VisibilitySensor from 'react-visibility-sensor';
 import UniversalFilter from '../../Shared/UniversalFilter';
 import SectionHeader from '../../Shared/SectionHeader';
 import SectionFooter from '../../Shared/SectionFooter';
+import { LOADING_DELAY } from '../../../constants';
+import Loading from '../../Shared/Loading';
 import {
     enableStickyFilter,
     disableStickyFilter
 } from '../../../actions/Shared/uiActions';
-import PrEPOverview from './PrEPOverview';
-import PrEPScreeningOverall from './PrEPScreeningOverall';
-import PrEPScreeningByAge from './PrEPScreeningByAge';
-import PrEPNewByAgeSex from './PrEPNewByAgeSex';
-import PrEPUsePopulation1stMonth from './PrEPUsePopulation1stMonth';
-import PrEPHIVTesting1stMonth from './PrEPHIVTesting1stMonth';
-import PrEPContinuityByAgeSex from './PrEPContinuityByAgeSex';
-import PrEPHIV1STMonthRefill from './PrEPHIV1STMonthRefill';
-import PrEPUsePopulation3RDMonth from './PrEPUsePopulation3RDMonth';
-import PrEPHIVTesting3RDMonth from './PrEPHIVTesting3RDMonth';
-import PrEPHIV3RDMonthRefill from './PrEPHIV3RDMonthRefill';
-import PrEPScreeningDiscontinuation from './PrEPScreeningDiscontinuation';
-import PrEPCascade from './PrEPCascade';
-import PrEPEligibleVsNewlyBySubPopulation from './PrEPEligibleVsNewlyBySubPopulation';
-import PrEPEligibleVsNewInitiatedTrends from './PrEPEligibleVsNewInitiatedTrends';
-import PrEPCurrentBySubPopulation from './PrEPCurrentBySubPopulation';
+
 import PrEPCurrentTrends from './PrEPCurrentTrends';
+import PrEPUsePopulation3RDMonth from './PrEPUsePopulation3RDMonth';
 import PrEPCurrentVsTestedPositiveTrends from './PrEPCurrentVsTestedPositiveTrends';
-import PrEPSTIScreeningOutcome from './PrEPSTIScreeningOutcome';
-import PrEPSTITreatmentOutcome from './PrEPSTITreatmentOutcome';
+import PrEPScreeningByAge from './PrEPScreeningByAge';
+import PrEPUsePopulation1stMonth from './PrEPUsePopulation1stMonth';
 import PrEPTestedPositiveBySubPopulation from './PrEPTestedPositiveBySubPopulation';
-import PrEPEligibleVsNewlyByAge from './PrEPEligibleVsNewlyByAge';
-import PrEPDiagnosedWithSTITrends from './PrEPDiagnosedWithSTITrends';
-import PrEPDiscontinuationTrends from './PrEPDiscontinuationTrends';
+import PrEPEligibleVsNewlyBySubPopulation from './PrEPEligibleVsNewlyBySubPopulation';
+
+const PrEPOverview = Loadable({
+    loader: () => import('./PrEPOverview'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PrEPScreeningOverall = Loadable({
+    loader: () => import('./PrEPScreeningOverall'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PrEPNewByAgeSex = Loadable({
+    loader: () => import('./PrEPNewByAgeSex'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PrEPHIVTesting1stMonth = Loadable({
+    loader: () => import('./PrEPHIVTesting1stMonth'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PrEPContinuityByAgeSex = Loadable({
+    loader: () => import('./PrEPContinuityByAgeSex'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PrEPHIV1STMonthRefill = Loadable({
+    loader: () => import('./PrEPHIV1STMonthRefill'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PrEPHIVTesting3RDMonth = Loadable({
+    loader: () => import('./PrEPHIVTesting3RDMonth'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PrEPHIV3RDMonthRefill = Loadable({
+    loader: () => import('./PrEPHIV3RDMonthRefill'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PrEPScreeningDiscontinuation = Loadable({
+    loader: () => import('./PrEPScreeningDiscontinuation'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PrEPCascade = Loadable({
+    loader: () => import('./PrEPCascade'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PrEPEligibleVsNewInitiatedTrends  = Loadable({
+    loader: () => import('./PrEPEligibleVsNewInitiatedTrends'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PrEPCurrentBySubPopulation = Loadable({
+    loader: () => import('./PrEPCurrentBySubPopulation'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PrEPSTIScreeningOutcome  = Loadable({
+    loader: () => import('./PrEPSTIScreeningOutcome'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PrEPSTITreatmentOutcome  = Loadable({
+    loader: () => import('./PrEPSTITreatmentOutcome'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PrEPEligibleVsNewlyByAge = Loadable({
+    loader: () => import('./PrEPEligibleVsNewlyByAge'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PrEPDiagnosedWithSTITrends = Loadable({
+    loader: () => import('./PrEPDiagnosedWithSTITrends'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PrEPDiscontinuationTrends = Loadable({
+    loader: () => import('./PrEPDiscontinuationTrends'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 
 const PrEP = () => {
     const dispatch = useDispatch();
