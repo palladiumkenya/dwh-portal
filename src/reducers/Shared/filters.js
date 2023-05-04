@@ -17,6 +17,7 @@ const initialState = {
     fromDate: '',
     toDate: '',
     indicators: 'Tx_Curr',
+    emr: [],
     countyFilterEnabled: true,
     subCountyFilterEnabled: true,
     facilityFilterEnabled: true,
@@ -31,6 +32,7 @@ const initialState = {
     latestPregnancyFilterEnabled: false,
     populationTypeFilterEnabled: false,
     indicatorFilterEnabled: false,
+    emrFilterEnabled: false,
 };
 
 export default (state = initialState, action) => {
@@ -266,6 +268,26 @@ export default (state = initialState, action) => {
                 filtered,
                 datimAgeGroups: action.payload.datimAgeGroups,
             };
+        case actionTypes.FILTER_BY_EMR_TYPE:
+            filtered =
+                state.counties.length > 0 ||
+                state.subCounties.length > 0 ||
+                state.facilities.length > 0 ||
+                state.partners.length > 0 ||
+                state.agencies.length > 0 ||
+                state.projects.length > 0 ||
+                state.genders.length > 0 ||
+                action.payload.emr.length > 0 ||
+                state.datimAgeGroups.length > 0 ||
+                state.populationTypes.length > 0 ||
+                state.fromDate !== '' ||
+                state.toDate !== '' ||
+                false;
+            return {
+                ...state,
+                filtered,
+                emr: action.payload.emr,
+            };
         case actionTypes.FILTER_BY_DATIM_AGE_POPULATION:
             filtered =
                 state.counties.length > 0 ||
@@ -383,6 +405,17 @@ export default (state = initialState, action) => {
                 ...state,
                 indicatorFilterEnabled: false,
                 indicators: '',
+            };
+        case actionTypes.ENABLE_EMR_TYPE_FILTER:
+            return {
+                ...state,
+                emrFilterEnabled: true,
+            };
+        case actionTypes.DISABLE_EMR_TYPE_FILTER:
+            return {
+                ...state,
+                emrFilterEnabled: false,
+                emr: [],
             };
         case actionTypes.ENABLE_AGENCY_FILTER:
             return {

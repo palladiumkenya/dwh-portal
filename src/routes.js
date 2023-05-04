@@ -10,6 +10,7 @@ const HTS = Loadable({ loader: () => import('./views/HTS/HTS'), loading: Loading
 const CT = Loadable({ loader: () => import('./views/CT/CT'), loading: Loading, delay: LOADING_DELAY });
 const SD = Loadable({ loader: () => import('./views/ServiceDesk/ServiceDesk'), loading: Loading, delay: LOADING_DELAY });
 const OperationalHIS = Loadable({ loader: () => import('./views/Operational&HIS/OperationalHIS'), loading: Loading, delay: LOADING_DELAY });
+const PMTCTRRI = Loadable({ loader: () => import('./views/PMTCTRRI/PMTCTRRI'), loading: Loading, delay: LOADING_DELAY,});
 const GIS = Loadable({ loader: () => import('./views/GIS/GIS'), loading: Loading, delay: LOADING_DELAY });
 const HRH = Loadable({ loader: () => import('./views/HRH/HRH'), loading: Loading, delay: LOADING_DELAY });
 const Resources = Loadable({ loader: () => import('./views/Resources/Resources'), loading: Loading, delay: LOADING_DELAY });
@@ -17,17 +18,90 @@ const Organizations = Loadable({ loader: () => import('./views/Administration/Or
 const Profile = Loadable({ loader: () => import('./views/Users/Profile'), loading: Loading, delay: LOADING_DELAY });
 
 const routes = [
-  { path: "/", exact: true, name: "Home", component: withTracker(Home), private: false },
-  { path: "/reporting-rates/:active_tab?", exact: true, name: "Reporting Rates", component: withTracker(RR), private: false },
-  { path: "/hiv-testing/:active_tab?/:mini_tab?", exact: true, name: 'HIV Testing & Prevention', component: withTracker(HTS), private: false },
-  { path: "/hiv-treatment/:active_tab?/:mini_tab?", exact: true, name: "HIV Treatment", component: withTracker(CT), private: false },
-  { path: "/service-desk/:active_tab?", exact: true, name: "Service Desk", component: withTracker(SD), private: false },
-  { path: "/operational-and-his/:active_tab?/:mini_tab?", exact: true, name: "Operational & HIS Dashboards", component: withTracker(OperationalHIS), private: false },
-  { path: "/gis", exact: true, name: "GIS", component: withTracker(GIS), private: false },
-  { path: "/hrh", exact: true, name: "HRH", component: withTracker(HRH), private: false },
-  { path: "/resources", exact: true, name: "Resources", component: withTracker(Resources), private: false },
-  { path: '/administration/organizations', exact: true, name: "Organizations", component: withTracker(Organizations), private: true },
-  { path: '/users/profile', exact: true, name: "Profile", component: withTracker(Profile), private: true }
+    {
+        path: '/',
+        exact: true,
+        name: 'Home',
+        component: withTracker(Home),
+        private: false,
+    },
+    {
+        path: '/reporting-rates/:active_tab?',
+        exact: true,
+        name: 'Reporting Rates',
+        component: withTracker(RR),
+        private: false,
+    },
+    {
+        path: '/hiv-testing/:active_tab?/:mini_tab?',
+        exact: true,
+        name: 'HIV Testing & Prevention',
+        component: withTracker(HTS),
+        private: false,
+    },
+    {
+        path: '/hiv-treatment/:active_tab?/:mini_tab?',
+        exact: true,
+        name: 'HIV Treatment',
+        component: withTracker(CT),
+        private: false,
+    },
+    {
+        path: '/service-desk/:active_tab?',
+        exact: true,
+        name: 'Service Desk',
+        component: withTracker(SD),
+        private: false,
+    },
+    {
+        path: '/operational-and-his/:active_tab?/:mini_tab?',
+        exact: true,
+        name: 'Operational & HIS Dashboards',
+        component: withTracker(OperationalHIS),
+        private: false,
+    },
+    {
+        path: '/pmtct-rri/:active_tab?/:mini_tab?',
+        exact: true,
+        name: 'PMTCT RRI',
+        component: withTracker(PMTCTRRI),
+        private: false,
+    },
+    {
+        path: '/gis',
+        exact: true,
+        name: 'GIS',
+        component: withTracker(GIS),
+        private: false,
+    },
+    {
+        path: '/hrh',
+        exact: true,
+        name: 'HRH',
+        component: withTracker(HRH),
+        private: false,
+    },
+    {
+        path: '/resources',
+        exact: true,
+        name: 'Resources',
+        component: withTracker(Resources),
+        private: false,
+    },
+    {
+        path: '/administration/organizations',
+        exact: true,
+        name: 'Organizations',
+        component: withTracker(Organizations),
+        private: true,
+    },
+    {
+        path: '/users/profile',
+        exact: true,
+        name: 'Profile',
+        component: withTracker(Profile),
+        private: true,
+    },
 ];
 
 export default routes;

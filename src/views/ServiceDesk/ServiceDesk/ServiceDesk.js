@@ -15,9 +15,46 @@ import UniversalFilter from '../../Shared/UniversalFilter';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 
-import ServiceDeskOverview from './ServiceDeskOverview';
-import OpenTicketsByType from './OpenTicketsByType';
-import TicketsByCategory from './TicketsByCategory';
+const ServiceDeskOverview = Loadable({
+    loader: () => import('./ServiceDeskOverview'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const IssueStatusByProduct = Loadable({
+    loader: () => import('./IssueStatusByProduct'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const OpenTicketsByProduct = Loadable({
+    loader: () => import('./OpenTicketsByProduct'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const OpenTicketsByPartner = Loadable({
+    loader: () => import('./OpenTicketsByPartner'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const OpenTicketsByCounty = Loadable({
+    loader: () => import('./OpenTicketsByCounty'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const OpenTicketsByMonth = Loadable({
+    loader: () => import('./OpenTicketsByMonth'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const IssueStatusByMonth = Loadable({
+    loader: () => import('./IssueStatusByMonth'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PartnerLevelIssues = Loadable({
+    loader: () => import('./PartnerLevelIssues'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 
 
 const Service_Desk = () => {
@@ -46,9 +83,19 @@ const Service_Desk = () => {
                 <UniversalFilter />
             </VisibilitySensor>
             <ServiceDeskOverview />
-            <OpenTicketsByType />
+            <IssueStatusByProduct />
             <SectionFooter overview={branding.overview} />
-            <TicketsByCategory />
+            <OpenTicketsByProduct />
+            <SectionFooter overview={branding.overview} />
+            <OpenTicketsByPartner />
+            <SectionFooter overview={branding.overview} />
+            <OpenTicketsByCounty />
+            <SectionFooter overview={branding.overview} />
+            <OpenTicketsByMonth />
+            <SectionFooter overview={branding.overview} />
+            <IssueStatusByMonth />
+            <SectionFooter overview={branding.overview} />
+            <PartnerLevelIssues />
             <SectionFooter overview={branding.overview} />
         </div>
     );

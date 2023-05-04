@@ -3,13 +3,11 @@ import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
-import * as newOnArtByAgeSexSelectors from '../../../selectors/CT/NewOnArt/newOnArtByAgeSex';
+import * as tickets from '../../../selectors/ServiceDesk/typeTickets';
 
-const TicketsByCategory = () => {
+const OpenTicketsByCounty = () => {
     const [newOnArtBySex, setNewOnArtBySex] = useState({});
-    const newOnArtBySexData = useSelector(
-        newOnArtByAgeSexSelectors.getNewOnArtBySex
-    );
+    const byCounty = useSelector(tickets.getByCounty);
 
     const loadNewOnArtBySex = useCallback(async () => {
         setNewOnArtBySex({
@@ -21,22 +19,18 @@ const TicketsByCategory = () => {
                 align: 'left',
             },
             xAxis: {
-                categories: [
-                    'UNCLASSIFIED',
-                    'muzima issues',
-                    'IT HARDWARE',
-                    'IQ CARE',
-                    'IL',
-                    'DWH',
-                ],
+                title: {
+                    text: 'COUNTY',
+                },
+                categories: byCounty.counties,
             },
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'PERCENTAGE OF ISSUES',
+                    text: 'NUMBER OF ISSUES',
                 },
                 stackLabels: {
-                    enabled: false,
+                    enabled: true,
                     style: {
                         fontWeight: 'bold',
                         color:
@@ -63,7 +57,7 @@ const TicketsByCategory = () => {
             },
             plotOptions: {
                 column: {
-                    stacking: 'percent',
+                    stacking: 'normal',
                     dataLabels: {
                         enabled: false,
                     },
@@ -71,18 +65,28 @@ const TicketsByCategory = () => {
             },
             series: [
                 {
-                    name: 'OPEN',
-                    data: [3, 5, 1, 13, 12, 5],
-                    color: '#2F4050',
+                    name: 'TRAINING',
+                    data: byCounty.training,
+                    color: '#1AB394',
                 },
                 {
-                    name: 'CLOSED',
-                    data: [7, 12, 6, 3, 14, 7],
-                    color: '#1AB394',
+                    name: 'ENHANCEMENT',
+                    data: byCounty.enhancement,
+                    color: '#F28E2B',
+                },
+                {
+                    name: 'SUPPORT',
+                    data: byCounty.support,
+                    color: '#5FA5E6',
+                },
+                {
+                    name: 'BUG',
+                    data: byCounty.bug,
+                    color: '#2F4050',
                 },
             ],
         });
-    }, [newOnArtBySexData]);
+    }, [byCounty]);
 
     useEffect(() => {
         loadNewOnArtBySex();
@@ -93,7 +97,7 @@ const TicketsByCategory = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TICKETS BY CATEGORY
+                        OPEN ISSUES TYPE BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -109,4 +113,4 @@ const TicketsByCategory = () => {
     );
 };
 
-export default TicketsByCategory;
+export default OpenTicketsByCounty;

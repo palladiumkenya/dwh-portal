@@ -6,7 +6,6 @@ import HighchartsReact from 'highcharts-react-official';
 import * as prepSelector from '../../../selectors/HTS/Prep/prepMonth3RefillSelector';
 
 const PrEP3RDMonthRefill = () => {
-    const filters = useSelector((state) => state.filters);
     let month3 = useSelector(prepSelector.getPrepMonth3RefillAgeSex);
     const [prep3RDMonthRefill, setPrep3RDMonthRefill] = useState({});
 
@@ -68,6 +67,9 @@ const PrEP3RDMonthRefill = () => {
                         format: '{point.y}%',
                     },
                 },
+                spline: {
+                    lineWidth: 0,
+                },
                 column: {
                     pointPadding: 0.01,
                     borderWidth: 0,
@@ -85,7 +87,7 @@ const PrEP3RDMonthRefill = () => {
                     color: '#00a65a',
                 },
                 {
-                    type: 'scatter',
+                    type: 'spline',
                     name: '% OF PATIENTS REFILLED',
                     data: month3.perc,
                     color: 'orange',

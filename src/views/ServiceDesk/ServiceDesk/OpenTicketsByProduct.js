@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
-import * as newOnArtByAgeSexSelectors from '../../../selectors/CT/NewOnArt/newOnArtByAgeSex';
+import * as tickets from '../../../selectors/ServiceDesk/typeTickets';
 
-const TicketsByCategory = () => {
+const OpenTicketsByProduct = () => {
     const [newOnArtBySex, setNewOnArtBySex] = useState({});
-    const newOnArtBySexData = useSelector(
-        newOnArtByAgeSexSelectors.getNewOnArtBySex
+    const byProduct = useSelector(
+        tickets.getByProduct
     );
 
     const loadNewOnArtBySex = useCallback(async () => {
@@ -20,20 +20,16 @@ const TicketsByCategory = () => {
                 text: '',
                 align: 'left',
             },
-            xAxis: { 
-                categories: [
-                    'UNCLASSIFIED',
-                    'muzima issues',
-                    'IT HARDWARE',
-                    'IQ CARE',
-                    'IL',
-                    'DWH',
-                ],
+            xAxis: {
+                title: {
+                    text: 'PRODUCT',
+                },
+                categories: byProduct.products,
             },
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'PERCENTAGE OF ISSUES',
+                    text: 'PRECENTAGE OF ISSUES',
                 },
                 stackLabels: {
                     enabled: false,
@@ -71,18 +67,28 @@ const TicketsByCategory = () => {
             },
             series: [
                 {
-                    name: 'OPEN',
-                    data: [3, 5, 1, 13,12,5],
-                    color: '#2F4050',
+                    name: 'TRAINING',
+                    data: byProduct.training,
+                    color: '#1AB394',
                 },
                 {
-                    name: 'CLOSED',
-                    data: [7, 12, 6, 3,14, 7],
-                    color: '#1AB394',
+                    name: 'ENHANCEMENT',
+                    data: byProduct.enhancement,
+                    color: '#F28E2B',
+                },
+                {
+                    name: 'SUPPORT',
+                    data: byProduct.support,
+                    color: '#5FA5E6',
+                },
+                {
+                    name: 'BUG',
+                    data: byProduct.bug,
+                    color: '#2F4050',
                 },
             ],
         });
-    }, [newOnArtBySexData]);
+    }, [byProduct]);
 
     useEffect(() => {
         loadNewOnArtBySex();
@@ -93,7 +99,7 @@ const TicketsByCategory = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        TICKETS BY CATEGORY
+                        OPEN ISSUE TYPE BY PRODUCT
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -109,4 +115,4 @@ const TicketsByCategory = () => {
     );
 };
 
-export default TicketsByCategory;
+export default OpenTicketsByProduct;

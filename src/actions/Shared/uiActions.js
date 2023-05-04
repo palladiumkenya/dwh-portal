@@ -44,3 +44,8 @@ export const changeSdTab = tab => ({
     type: actionTypes.CHANGE_SD_TAB,
     payload: { tab }
 });
+
+export const changePmtctRRITab = tab => ({
+    type: actionTypes.CHANGE_PMTCT_RRI_TAB,
+    payload: { tab }
+});

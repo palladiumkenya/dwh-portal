@@ -74,11 +74,11 @@ const PNSContactsTestingOverview = () => {
         let data = await getAll('hts/pnsSexualContactsCascade', params);
         data = data.pop()
         setPNSSexualContactsCascade({
-            elicited: data.elicited ? data.elicited:0,
-            tested: data.tested ? data.tested:0,
-            positive: data.positive ? data.positive:0,
-            linked: data.linked ? data.linked:0,
-            knownPositive: data.knownPositive ? data.knownPositive:0
+            elicited: data?.elicited ? data?.elicited:0,
+            tested: data?.tested ? data?.tested:0,
+            positive: data?.positive ? data?.positive:0,
+            linked: data?.linked ? data?.linked:0,
+            knownPositive: data?.knownPositive ? data?.knownPositive:0
         });
     }, [filters]);
 

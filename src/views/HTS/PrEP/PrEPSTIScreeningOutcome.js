@@ -20,14 +20,14 @@ const PrEPSTIScreeningOutcome = () => {
                 text: '',
             },
             xAxis: {
-                categories: ['TESTED', 'NOT TESTED'],
+                categories: ['POSITIVE', 'NEGATIVE'],
                 crosshair: true,
             },
             tooltip: {
                 headerFormat:
                     '<span style="font-size:10px">{point.key}</span><table>',
                 pointFormat:
-                    '<tr><td style="color:{series.color};padding:0">{point.key}: </td>' +
+                    '<tr><td style="color:{series.color};padding:0"></td>' +
                     '<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
@@ -45,7 +45,7 @@ const PrEPSTIScreeningOutcome = () => {
             },
             series: [
                 {
-                    name: 'Tested',
+                    name: 'patients',
                     data: [
                         {
                             name: 'POSITIVE',

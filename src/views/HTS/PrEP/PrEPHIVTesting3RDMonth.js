@@ -6,7 +6,6 @@ import HighchartsReact from "highcharts-react-official";
 import * as prepSelector from '../../../selectors/HTS/Prep/prepMonth3RefillSelector';
 
 const PrEPHIVTesting3RDMonth = () => {
-    const filters = useSelector(state => state.filters);
     let month3 = useSelector(prepSelector.getPrepMonth3Refill);
     const [prepHIVTesting3RDMonth, setPrepHIVTesting3RDMonth] = useState({});
 
@@ -44,9 +43,13 @@ const PrEPHIVTesting3RDMonth = () => {
             },
             series: [
                 {
-                    name: 'Tested',
+                    name: 'patients',
                     data: [
-                        { name: 'NOT TESTED', y: month3?.nottested, color: '#2F4050' },
+                        {
+                            name: 'NOT TESTED',
+                            y: month3?.nottested,
+                            color: '#2F4050',
+                        },
                         { name: 'TESTED', y: month3?.tested, color: '#1AB394' },
                     ],
                     size: '60%',
