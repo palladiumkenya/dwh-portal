@@ -415,7 +415,7 @@ const TreatmentOutcomes = () => {
                     <SectionFooter /> */}
 
                     {/* <ContinuityOfTreatment /> */}
-                </TabPane> */}
+{/* </TabPane> */}
             </TabContent>
         </div>
     );
