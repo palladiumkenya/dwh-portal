@@ -29,11 +29,17 @@ export const fetchMissedFirstANC = () => async (dispatch, getState) => {
         partner: getState().filters.partners,
         agency: getState().filters.agencies,
         emr: getState().filters.emr,
-        year: getState().filters.fromDate
-            ? moment(getState().filters.fromDate, 'MMM YYYY').format('YYYY')
+        year: getState().filters.toDate
+            ? moment(
+                  getState().filters.toDate.split(' - ')[0],
+                  'MMM YYYY'
+              ).format('YYYY')
             : previousMonth.format('YYYY'),
-        month: getState().filters.fromDate
-            ? moment(getState().filters.fromDate, 'MMM YYYY').format('MM')
+        month: getState().filters.toDate
+            ? moment(
+                  getState().filters.toDate.split(' - ')[0],
+                  'MMM YYYY'
+              ).format('MM')
             : previousMonth.format('MM'),
     };
     try {
