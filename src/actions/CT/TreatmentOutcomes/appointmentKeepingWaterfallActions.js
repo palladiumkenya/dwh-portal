@@ -25,7 +25,7 @@ export const loadAppointmentKeepingWaterfall = (tab) => async (dispatch, getStat
 
 export const fetchIIT = () => async (dispatch, getState) => {
     dispatch({ type: actionTypes.CT_APPOINTMENT_KEEPING_WATERFALL_REQUEST });
-    const previousMonth = moment().startOf('month').subtract(2, 'month').add(17, 'days');
+    const previousMonth = moment().subtract(2, 'month').add(17, 'days');
     const params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,

@@ -25,7 +25,7 @@ export const loadIITTracing = (tab) => async (dispatch, getState) => {
 
 export const fetchIIT = () => async (dispatch, getState) => {
     dispatch({ type: actionTypes.CT_IIT_TRACING_REQUEST });
-    const previousMonth = moment().startOf('month').subtract(2, 'month').add(17, 'days');
+    const previousMonth = moment().subtract(2, 'month').add(17, 'days');
     const params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,
