@@ -15,6 +15,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import AppointmetKeeping from './AppointmetKeeping';
 import QuaterlyIIT from './QuaterlyIIT';
 import TrackingIIT from './TrackingIIT';
+import { disableToDateFilter, enableToDateFilter } from '../../../actions/Shared/filterActions';
 
 const SixMonthRetention = Loadable({ loader: () => import('./SixMonthRetention'), loading: Loading, delay: LOADING_DELAY });
 const ThreeMonthRetention = Loadable({ loader: () => import('./ThreeMonthRetention'), loading: Loading, delay: LOADING_DELAY });
@@ -55,6 +56,14 @@ const TreatmentOutcomes = () => {
 
     const { mini_tab } = useParams();
     const history = useHistory();
+
+    useEffect(() => {
+        if (mini_tab === 'ContinuityOfTreatment') {
+            dispatch(disableToDateFilter());
+        } else {
+            dispatch(enableToDateFilter());
+        }
+    },[mini_tab])
 
     useEffect(() => {
         if (!mini_tab) {
@@ -409,10 +418,10 @@ const TreatmentOutcomes = () => {
                 <TabPane tabId={'ContinuityOfTreatment'}>
                     <AppointmetKeeping />
                     <SectionFooter />
-                    {/* <QuaterlyIIT />
+                    <QuaterlyIIT />
                     <SectionFooter />
                     <TrackingIIT />
-                    <SectionFooter /> */}
+                    <SectionFooter />
 
                     {/* <ContinuityOfTreatment /> */}
                 </TabPane>

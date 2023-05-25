@@ -14,7 +14,6 @@ const AppointmetKeeping = () => {
     const appointmentData = useSelector(
         appointmentKeepingSelector.getAppointmentKeepingWaterfall
     );
-    console.log(appointmentData)
 
     const loadAppointmentKeeping = useCallback(async () => {
         setAppointmentKeeping({
