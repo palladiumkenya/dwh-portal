@@ -29,7 +29,7 @@ const HomeEmrSitesMap = () => {
             let index = emrNames.indexOf(gpsSites[k].emr);
             let lat = parseFloat(gpsSites[k].latitude);
             let lon = parseFloat(gpsSites[k].longitude);
-            if (Number.isFinite(lat) && lat < 5 && lat > -5 && Number.isFinite(lon) && lon > 34 && lon < 41) {
+            if (Number.isFinite(lat) && lat < 5 && lat > -5 && Number.isFinite(lon) && lon > 30 && lon < 42) {
                 emrSites[index].push({ name: gpsSites[k].facility, lat: lat, lon: lon });
             }
         }
