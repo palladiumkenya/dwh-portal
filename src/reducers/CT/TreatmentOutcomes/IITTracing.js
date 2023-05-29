@@ -10,10 +10,10 @@ const initialState = {
 export default (state = initialState, action) => {
     let newState = { ...state };
     switch (action.type) {
-        case actionTypes.CT_QUATERLY_IIT_REQUEST:
+        case actionTypes.CT_IIT_TRACING_REQUEST:
             newState.loading = true;
             return newState;
-        case actionTypes.CT_QUATERLY_IIT_FETCH:
+        case actionTypes.CT_IIT_TRACING_FETCH:
             if (action.payload.filtered === true) {
                 newState.listFiltered = action.payload.list;
             } else {
@@ -22,11 +22,11 @@ export default (state = initialState, action) => {
             }
             newState.loading = false;
             return newState;
-        case actionTypes.CT_QUATERLY_IIT_FAILED:
+        case actionTypes.CT_IIT_TRACING_FAILED:
             newState.loading = false;
             newState.lastFetch = null;
             return newState;
         default:
-            return state
+            return state;
     }
 }

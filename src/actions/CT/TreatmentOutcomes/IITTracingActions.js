@@ -3,9 +3,9 @@ import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
 import { CACHING } from '../../../constants';
 
-export const loadAppointmentKeepingWaterfall = (tab) => async (dispatch, getState) => {
+export const loadIITTracing = (tab) => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
-        moment(getState().appointmentKeepingWaterfall.lastFetch),
+        moment(getState().IITTracing.lastFetch),
         'minutes'
     );
     if (
@@ -24,7 +24,7 @@ export const loadAppointmentKeepingWaterfall = (tab) => async (dispatch, getStat
 };
 
 export const fetchIIT = () => async (dispatch, getState) => {
-    dispatch({ type: actionTypes.CT_APPOINTMENT_KEEPING_WATERFALL_REQUEST });
+    dispatch({ type: actionTypes.CT_IIT_TRACING_REQUEST });
     const previousMonth = moment().subtract(2, 'month').add(17, 'days');
     const params = {
         county: getState().filters.counties,
@@ -35,16 +35,6 @@ export const fetchIIT = () => async (dispatch, getState) => {
         project: getState().filters.projects,
         gender: getState().filters.genders,
         datimAgeGroup: getState().filters.datimAgeGroups,
-        fromDate: getState().filters.fromDate
-            ? moment(getState().filters.fromDate, 'MMM YYYY').format(
-                  'YYYY-MM-DD'
-              )
-            : previousMonth.format('YYYY-MM-DD'),
-        toDate: getState().filters.toDate
-            ? moment(getState().filters.toDate, 'MMM YYYY')
-                  .endOf('month')
-                  .format('YYYY-MM-DD')
-            : previousMonth.endOf('month').format('YYYY-MM-DD'),
         year: getState().filters.fromDate
             ? moment(getState().filters.fromDate, 'MMM YYYY').format('YYYY')
             : previousMonth.format('YYYY'),
@@ -52,12 +42,9 @@ export const fetchIIT = () => async (dispatch, getState) => {
             ? moment(getState().filters.fromDate, 'MMM YYYY').format('MM')
             : previousMonth.format('MM'),
     };
-    const response = await getAll(
-        'care-treatment/getAppointmentKeepingWaterfall',
-        params
-    );
+    const response = await getAll('care-treatment/getIITTracing', params);
     dispatch({
-        type: actionTypes.CT_APPOINTMENT_KEEPING_WATERFALL_FETCH,
+        type: actionTypes.CT_IIT_TRACING_FETCH,
         payload: { filtered: getState().filters.filtered, list: response },
     });
 };

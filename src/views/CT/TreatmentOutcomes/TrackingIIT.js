@@ -4,13 +4,13 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import HighchartsMore from 'highcharts/highcharts-more';
 import { useSelector } from 'react-redux';
-import * as otzEnrollment from '../../../selectors/CT/OTZ/otzEnrollmentTrend';
+import * as tracing from '../../../selectors/CT/TreatmentOutcomes/tracingIIT';
 HighchartsMore(Highcharts);
 
 const TrackingIIT = () => {
     const [appointmentKeeping, setAppointmentKeeping] = useState({});
 
-    const appointmentData = useSelector(otzEnrollment.getOtzEnrolled);
+    const appointmentData = useSelector(tracing.getIITTracing);
 
     const loadAppointmentKeeping = useCallback(async () => {
         setAppointmentKeeping({
@@ -55,10 +55,10 @@ const TrackingIIT = () => {
                     cursor: 'pointer',
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.name}</b> <br/> {point.percentage:.1f} % <br/> ({point.y})'
+                        format: '<b>{point.name}</b> <br/> {point.percentage:.1f} % <br/> ({point.y})',
                     },
-                    showInLegend: true
-                }
+                    showInLegend: true,
+                },
             },
             series: [
                 {
@@ -66,14 +66,14 @@ const TrackingIIT = () => {
                     data: [
                         {
                             name: 'IIT TRACKED NO',
-                            y: 520,
-                            color: "#1AB394"
+                            y: appointmentData.data[0],
+                            color: '#1AB394',
                         },
                         {
                             name: 'IIT TRACKED YES',
-                            y: 430,
-                            color: "cyan"
-                        }
+                            y: appointmentData.data[1],
+                            color: 'cyan',
+                        },
                     ],
                 },
             ],
