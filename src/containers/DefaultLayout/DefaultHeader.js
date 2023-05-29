@@ -198,24 +198,27 @@ const DefaultHeader = () => {
 const Adhoc = () => {
     return (
         <UncontrolledDropdown nav direction="down">
-        <DropdownToggle nav>
-            <strong>Self Service</strong>
-        </DropdownToggle>
-        <DropdownMenu right>
-            <DropdownItem header tag="div">
-                <strong>Platforms supporting Self Service</strong>
-            </DropdownItem>
-            <DropdownItem href={process.env.REACT_APP_ADHOC_URL} >
-                <strong>Flex monster</strong>
-            </DropdownItem>
-            <DropdownItem href={process.env.REACT_APP_METABASE_URL} >
-                <strong>Metabase</strong>
-            </DropdownItem>
-            <DropdownItem disabled={true} href={process.env.REACT_APP_METABASE_URL} >
-                <strong>Superset</strong>
-            </DropdownItem>
-        </DropdownMenu>
-    </UncontrolledDropdown>
+            <DropdownToggle nav>
+                <strong>Self Service</strong>
+            </DropdownToggle>
+            <DropdownMenu right>
+                <DropdownItem header tag="div">
+                    <strong>Platforms supporting Self Service</strong>
+                </DropdownItem>
+                <DropdownItem href={process.env.REACT_APP_ADHOC_URL}>
+                    <strong>Flex monster</strong>
+                </DropdownItem>
+                <DropdownItem href={process.env.REACT_APP_METABASE_URL}>
+                    <strong>Metabase</strong>
+                </DropdownItem>
+                <DropdownItem
+                    disabled={false}
+                    href={'http://dwhanalytics.kenyahmis.org/'}
+                >
+                    <strong>Superset</strong>
+                </DropdownItem>
+            </DropdownMenu>
+        </UncontrolledDropdown>
     );
 };
 
