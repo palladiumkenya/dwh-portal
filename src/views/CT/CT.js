@@ -355,6 +355,7 @@ import { loadArtVerificationByPartner } from './../../actions/CT/ArtVerification
 import { loadArtVerificationReasons } from './../../actions/CT/ArtVerification/artVerificationReasonsActions';
 import { loadAppointmentKeepingWaterfall } from '../../actions/CT/TreatmentOutcomes/appointmentKeepingWaterfallActions';
 import { loadQuaterlyIIT } from '../../actions/CT/TreatmentOutcomes/quaterlyIITActions';
+import { loadIITTracing } from './../../actions/CT/TreatmentOutcomes/IITTracingActions';
 
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
@@ -664,6 +665,7 @@ const CT = () => {
                 dispatch(loadTreatmentOutcomesNetCohort(active_tab));
                 dispatch(loadAppointmentKeepingWaterfall(active_tab));
                 dispatch(loadQuaterlyIIT(active_tab));
+                dispatch(loadIITTracing(active_tab));
                 break;
             case 'otz':
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtBySex());
