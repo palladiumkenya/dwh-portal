@@ -36,7 +36,7 @@ export const fetchOverallReportingRatesByFacilityNotReported = () => async (disp
               .subtract(0, 'month')
               .format('YYYY,M')
         : moment()
-              .subtract(2, 'month')
+              .subtract(1, 'month')
               .add(16, 'days')
               .format('YYYY,M');
     try {
