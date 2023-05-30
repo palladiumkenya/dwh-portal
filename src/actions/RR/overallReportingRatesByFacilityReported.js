@@ -26,7 +26,12 @@ export const fetchOverallReportingRatesByFacilityReported = () => async (dispatc
         month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") : '',
         reportingType: '1',
     };
-    params.period = getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").startOf('month').subtract(0, 'month').format('YYYY,M') : '';
+    params.period = getState().filters.fromDate
+        ? moment(getState().filters.fromDate, 'MMM YYYY')
+              .startOf('month')
+              .subtract(0, 'month')
+              .format('YYYY,M')
+        : moment().subtract(1, 'month').add(16, 'days').format('YYYY,M');
     try {
         const response = await axios.get(`${DWH_API_URL}manifests/overallReportingByFacility/${docket}`, { params: params });
         dispatch({ type: actionTypes.RR_OVERALL_REPORTING_RATES_BY_FACILITY_REPORTED_FETCH, payload: { filtered: getState().filters.filtered, docket: docket, list: response.data }});
