@@ -7,59 +7,68 @@ import { useSelector } from 'react-redux';
 import * as tracing from '../../../selectors/CT/TreatmentOutcomes/tracingIIT';
 HighchartsMore(Highcharts);
 
-const TrackingIIT = () => {
+const IITTracingContact = () => {
     const [appointmentKeeping, setAppointmentKeeping] = useState({});
 
-    const appointmentData = useSelector(tracing.getIITTracing);
+    const appointmentData = useSelector(tracing.getIITTracingOutcomes).data;
 
     const loadAppointmentKeeping = useCallback(async () => {
         setAppointmentKeeping({
             chart: {
-                type: 'pie',
+                type: 'column',
             },
             title: {
                 text: '',
             },
+            xAxis: {
+                categories: appointmentData[1].labels,
+                crosshair: true,
+                title: {
+                    text: '',
+                },
+            },
+            yAxis: [
+                {
+                    min: 0,
+                    max: 100,
+                    title: {
+                        text: 'PERCENTAGE OF PATIENTS',
+                    },
+                },
+            ],
             tooltip: {
-                headerFormat:
-                    '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat:
-                    '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
-                footerFormat: '</table>',
+                pointFormat: '{series.name}: <b>{point.y}</b><br/>',
+                valueSuffix: ' %',
                 shared: true,
-                useHTML: true,
+                enabled: true,
             },
             legend: {
+                enabled: false,
                 align: 'left',
                 verticalAlign: 'top',
             },
             plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
+                column: {
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.name}</b> <br/> {point.percentage:.1f} % <br/> ({point.y})',
+                        crop: false,
+                        overflow: 'none',
+                        formatter: function () {
+                            // Append a suffix to the label's value
+                            return this.y + ' %';
+                        },
                     },
-                    showInLegend: true,
+                    pointPadding: 0.001,
+                    borderWidth: 0,
+                    enableMouseTracking: true,
+                    tooltip: { valueSuffix: '%' },
                 },
             },
             series: [
                 {
-                    name: 'PATIENTS',
-                    data: [
-                        {
-                            name: 'IIT TRACKED NO',
-                            y: appointmentData.data[0],
-                            color: '#1AB394',
-                        },
-                        {
-                            name: 'IIT TRACKED YES',
-                            y: appointmentData.data[1],
-                            color: 'cyan',
-                        },
-                    ],
+                    name: 'Patients',
+                    data: appointmentData[1].percentages,
+                    color: 'cyan',
                 },
             ],
         });
@@ -75,7 +84,7 @@ const TrackingIIT = () => {
                 className="trends-header"
                 style={{ textTransform: 'none' }}
             >
-                TRACKING OF IIT CLIENTS
+                OUTCOMES OF TRACKING IIT CLIENTS WHO WERE REACHED
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
@@ -89,4 +98,4 @@ const TrackingIIT = () => {
     );
 };
 
-export default TrackingIIT;
+export default IITTracingContact;
