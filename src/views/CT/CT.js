@@ -356,7 +356,7 @@ import { loadArtVerificationReasons } from './../../actions/CT/ArtVerification/a
 import { loadAppointmentKeepingWaterfall } from '../../actions/CT/TreatmentOutcomes/appointmentKeepingWaterfallActions';
 import { loadQuaterlyIIT } from '../../actions/CT/TreatmentOutcomes/quaterlyIITActions';
 import { loadIITTracing } from './../../actions/CT/TreatmentOutcomes/IITTracingActions';
-
+import { loadIITTracingOutcomes } from './../../actions/CT/TreatmentOutcomes/IITTracingOutcomesActions';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({
@@ -384,11 +384,7 @@ const ArtOptimization = Loadable({
 const OTZ = Loadable({ loader: () => import('./OTZ/OTZ'), loading: Loading, delay: LOADING_DELAY });
 const OVC = Loadable({ loader: () => import('./OVC/OVC'), loading: Loading, delay: LOADING_DELAY });
 const COVID = Loadable({ loader: () => import('./Covid/Covid'), loading: Loading, delay: LOADING_DELAY });
-const ArtVerification = Loadable({
-    loader: () => import('./ArtVerification/ArtVerification'),
-    loading: Loading,
-    delay: LOADING_DELAY,
-});
+const ArtVerification = Loadable({ loader: () => import('./ArtVerification/ArtVerification'), loading: Loading, delay: LOADING_DELAY });
 
 const CT = () => {
 
@@ -666,6 +662,7 @@ const CT = () => {
                 dispatch(loadAppointmentKeepingWaterfall(active_tab));
                 dispatch(loadQuaterlyIIT(active_tab));
                 dispatch(loadIITTracing(active_tab));
+                dispatch(loadIITTracingOutcomes(active_tab));
                 break;
             case 'otz':
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtBySex());

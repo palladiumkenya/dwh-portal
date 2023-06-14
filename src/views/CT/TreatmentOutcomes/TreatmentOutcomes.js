@@ -36,6 +36,8 @@ const TreatmentOutcomesRetentionOverview = Loadable({ loader: () => import('./Tr
 const TwelveMonthRetention = Loadable({ loader: () => import('./TwelveMonthRetention'), loading: Loading, delay: LOADING_DELAY });
 const TwentyFourMonthRetention = Loadable({ loader: () => import('./TwentyFourMonthRetention'), loading: Loading, delay: LOADING_DELAY });
 const TreatmentOutcomesUndocumentedByFacility = Loadable({ loader: () => import('./TreatmentOutcomesUndocumentedByFacility'), loading: Loading, delay: LOADING_DELAY });
+const IITTracingContact = Loadable({ loader: () => import('./IITTracingContact'), loading: Loading, delay: LOADING_DELAY });
+const IITTracingNoContact = Loadable({ loader: () => import('./IITTracingNoContact'), loading: Loading, delay: LOADING_DELAY });
 
 const TreatmentOutcomes = () => {
     const branding = { title: "TREATMENT OUTCOMES", description: "OVERVIEW", overview: "Treatment Outcomes" };
@@ -422,9 +424,11 @@ const TreatmentOutcomes = () => {
                     <SectionFooter />
                     <TrackingIIT />
                     <SectionFooter />
-
-                    {/* <ContinuityOfTreatment /> */}
-{/* </TabPane> */}
+                    <IITTracingContact />
+                    <SectionFooter />
+                    <IITTracingNoContact />
+                    <SectionFooter />
+ </TabPane> */}
             </TabContent>
         </div>
     );

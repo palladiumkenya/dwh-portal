@@ -84,6 +84,7 @@ import viralLoadSuppressionByYearAndSuppressionCategory
 import viralLoadOutcomesHvlByFacility from "./CT/ViralLoad/viralLoadOutcomesHvlByFacility";
 
 import quaterlyIIT from './CT/TreatmentOutcomes/quaterlyIIT';
+import IITTracingOutcomes from './CT/TreatmentOutcomes/IITTracingOutcomes';
 import IITTracing from './CT/TreatmentOutcomes/IITTracing';
 import appointmentKeepingWaterfall from './CT/TreatmentOutcomes/appointmentKeepingWaterfall';
 import treatmentOutcomesOverallLast12m from "./CT/TreatmentOutcomes/treatmentOutcomesOverallLast12m";
@@ -438,6 +439,7 @@ export default combineReducers({
     quaterlyIIT,
     appointmentKeepingWaterfall,
     IITTracing,
+    IITTracingOutcomes,
 
     practitionersCountByCountyQualification,
     populationByCounty,
