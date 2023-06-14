@@ -417,7 +417,7 @@ const TreatmentOutcomes = () => {
                     <SectionFooter overview={branding.overview}/>*/}
                 </TabPane>
 
-{/*<TabPane tabId={'ContinuityOfTreatment'}>
+                <TabPane tabId={'ContinuityOfTreatment'}>
                     <AppointmetKeeping />
                     <SectionFooter />
                     <QuaterlyIIT />
@@ -428,7 +428,7 @@ const TreatmentOutcomes = () => {
                     <SectionFooter />
                     <IITTracingNoContact />
                     <SectionFooter />
- </TabPane> */}
+                </TabPane> 
             </TabContent>
         </div>
     );
