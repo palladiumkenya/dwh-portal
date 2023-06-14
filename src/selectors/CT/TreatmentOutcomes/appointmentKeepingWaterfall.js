@@ -8,7 +8,6 @@ export const getAppointmentKeepingWaterfall = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        console.log(list)
 
         let data = {
             camebefore:

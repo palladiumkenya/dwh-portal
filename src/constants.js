@@ -8,7 +8,6 @@ export const HOME_TABS = {
 export const RR_TABS = {
     ct: 'CARE & TREATMENT',
     hts: 'HIV TESTING SERVICES',
-    pkv: 'PATIENT KEY VALUES',
 };
 
 export const HTS_TABS = {
