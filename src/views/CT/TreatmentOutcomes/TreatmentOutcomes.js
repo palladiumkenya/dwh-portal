@@ -115,7 +115,7 @@ const TreatmentOutcomes = () => {
                         RETENTION
                     </NavLink>
                 </NavItem>
-                {/* <NavItem>
+                <NavItem>
                     <NavLink
                         className={classnames({
                             active: mini_tab === 'ContinuityOfTreatment',
@@ -127,7 +127,7 @@ const TreatmentOutcomes = () => {
                     >
                         CONTINUITY OF TREATMENT
                     </NavLink>
-                </NavItem> */}
+                </NavItem> 
             </Nav>
             <TabContent activeTab={mini_tab}>
                 <TabPane tabId="outcomes">
