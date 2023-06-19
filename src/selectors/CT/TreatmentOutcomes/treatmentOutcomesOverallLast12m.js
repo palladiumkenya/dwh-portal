@@ -42,8 +42,8 @@ export const getLtfu = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
-            .filter(list => list.artOutcome === "LTFU")
-            .sumBy("totalOutcomes")
+            .filter((list) => list.artOutcome === 'Loss To Follow Up')
+            .sumBy('totalOutcomes')
             .value();
     }
 );
