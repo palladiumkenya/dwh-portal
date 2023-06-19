@@ -13,7 +13,7 @@ const ViralLoadOutcomesOverview = () => {
     const lowLevelViremia = useSelector(currentOnArtOverviewSelectors.getLowLevelViremia);
     const highViralLoad = useSelector(currentOnArtOverviewSelectors.getHighViralLoad);
     const suppressed = virallySuppressed + lowLevelViremia;
-    const totals = suppressed + highViralLoad;
+    const totals = suppressed + highViralLoad + lowLevelViremia;
     const lowLevelViremiaPercent = currentOnArt ? ((lowLevelViremia/totals)*100) : 0;
     const highViralLoadPercent = currentOnArt ? ((highViralLoad/totals)*100) : 0;
     const suppressedPercent = currentOnArt ? (suppressed / totals) * 100 : 0;
