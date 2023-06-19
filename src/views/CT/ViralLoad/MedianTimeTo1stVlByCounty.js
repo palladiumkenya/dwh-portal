@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { Card, CardBody, CardHeader } from 'reactstrap';
+import { Card, CardBody, CardFooter, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import * as medianTimeTo1stVlByCountySelectors from '../../../selectors/CT/ViralLoad/medianTimeTo1stVlByCounty';
@@ -35,9 +35,16 @@ const MedianTimeTo1stVlByCounty = () => {
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
-                            <HighchartsReact highcharts={Highcharts} options={medianTimeTo1stVlByCounty} />
+                            <HighchartsReact
+                                highcharts={Highcharts}
+                                options={medianTimeTo1stVlByCounty}
+                            />
                         </div>
                     </CardBody>
+                    <CardFooter>
+                        The population is all clients with a first viral load
+                        and an ART start date.
+                    </CardFooter>
                 </Card>
             </div>
             <div className="col-12">
