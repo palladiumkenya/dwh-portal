@@ -16,7 +16,7 @@ const ViralLoadOutcomesOverview = () => {
     const totals = suppressed + highViralLoad;
     const lowLevelViremiaPercent = currentOnArt ? ((lowLevelViremia/totals)*100) : 0;
     const highViralLoadPercent = currentOnArt ? ((highViralLoad/totals)*100) : 0;
-    const suppressedPercent = currentOnArt ? ((suppressed/hasCurrentVl)*100) : 0;
+    const suppressedPercent = currentOnArt ? (suppressed / totals) * 100 : 0;
 
     return (
         <Row>
