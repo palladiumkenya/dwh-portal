@@ -10,21 +10,21 @@ export const getTreatmentOutcomesByAge = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped', 'TransferOut'];
         const ageCategories = [
-            '<1',
-            '1-4',
-            '5-9',
-            '10-14',
-            '15-19',
-            '20-24',
-            '25-29',
-            '30-34',
-            '35-39',
-            '40-44',
-            '45-49',
-            '50-54',
-            '55-59',
-            '60-64',
-            '65+'
+            'Under 1',
+            '1 to 4',
+            '5 to 9',
+            '10 to 14',
+            '15 to 19',
+            '20 to 24',
+            '25 to 29',
+            '30 to 34',
+            '35 to 39',
+            '40 to 44',
+            '45 to 49',
+            '50 to 54',
+            '55 to 59',
+            '60 to 64',
+            '65+',
         ];
         let data = [];
         // seed all values sp that missing values default to 0
@@ -56,10 +56,10 @@ export const getTreatmentOutcomesByAge = createSelector(
             data[i].splice(12-4, 1);
         }
         ageCategories[1] = '<5';
-        ageCategories[7] = '25-34';
-        ageCategories[9] = '35-44';
-        ageCategories[11] = '45-54';
-        ageCategories[13] = '55-64';
+        ageCategories[7] = '25 to 34';
+        ageCategories[9] = '35 to 44';
+        ageCategories[11] = '45 to 54';
+        ageCategories[13] = '55 to 64';
         ageCategories.splice(0, 1);
         ageCategories.splice(6-1, 1);
         ageCategories.splice(8-2, 1);
