@@ -42,12 +42,20 @@ export const getLtfuByPopulationType = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         const generalPopulation = _.chain(list)
-            .filter(list => list.artOutcome === "LTFU" && list.populationType === "General Population")
-            .sumBy("totalOutcomes")
+            .filter(
+                (list) =>
+                    list.artOutcome === 'Loss To Follow Up' &&
+                    list.populationType === 'General Population'
+            )
+            .sumBy('totalOutcomes')
             .value();
         const keyPopulation = _.chain(list)
-            .filter(list => list.artOutcome === "LTFU" && list.populationType === "Key Population")
-            .sumBy("totalOutcomes")
+            .filter(
+                (list) =>
+                    list.artOutcome === 'Loss To Follow Up' &&
+                    list.populationType === 'Key Population'
+            )
+            .sumBy('totalOutcomes')
             .value();
         return [generalPopulation, keyPopulation];
     }
@@ -74,12 +82,20 @@ export const getTransferOutByPopulationType = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         const generalPopulation = _.chain(list)
-            .filter(list => list.artOutcome === "TransferOut" && list.populationType === "General Population")
-            .sumBy("totalOutcomes")
+            .filter(
+                (list) =>
+                    list.artOutcome === 'Transferred Out' &&
+                    list.populationType === 'General Population'
+            )
+            .sumBy('totalOutcomes')
             .value();
         const keyPopulation = _.chain(list)
-            .filter(list => list.artOutcome === "TransferOut" && list.populationType === "Key Population")
-            .sumBy("totalOutcomes")
+            .filter(
+                (list) =>
+                    list.artOutcome === 'Transferred Out' &&
+                    list.populationType === 'Key Population'
+            )
+            .sumBy('totalOutcomes')
             .value();
         return [generalPopulation, keyPopulation];
     }
@@ -90,12 +106,20 @@ export const getUndocumentedLtfuByPopulationType = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         const generalPopulation = _.chain(list)
-            .filter(list => list.artOutcome === "UndocumentedLTFU" && list.populationType === "General Population")
-            .sumBy("totalOutcomes")
+            .filter(
+                (list) =>
+                    list.artOutcome === 'Undocumented Loss' &&
+                    list.populationType === 'General Population'
+            )
+            .sumBy('totalOutcomes')
             .value();
         const keyPopulation = _.chain(list)
-            .filter(list => list.artOutcome === "UndocumentedLTFU" && list.populationType === "Key Population")
-            .sumBy("totalOutcomes")
+            .filter(
+                (list) =>
+                    list.artOutcome === 'Undocumented Loss' &&
+                    list.populationType === 'Key Population'
+            )
+            .sumBy('totalOutcomes')
             .value();
         return [generalPopulation, keyPopulation];
     }
