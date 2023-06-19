@@ -32,8 +32,8 @@ export const getLtfu = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
-            .filter(list => list.artOutcome === "LTFU")
-            .sumBy("totalOutcomes")
+            .filter((list) => list.artOutcome === 'Loss To Follow Up')
+            .sumBy('totalOutcomes')
             .value();
     }
 );
@@ -54,8 +54,8 @@ export const getTransferOut = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
-            .filter(list => list.artOutcome === "TransferOut")
-            .sumBy("totalOutcomes")
+            .filter((list) => list.artOutcome === 'Transferred Out')
+            .sumBy('totalOutcomes')
             .value();
     }
 );
@@ -65,8 +65,8 @@ export const getUndocumentedLtfu = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
-            .filter(list => list.artOutcome === "UndocumentedLTFU")
-            .sumBy("totalOutcomes")
+            .filter((list) => list.artOutcome === 'Undocumented Loss')
+            .sumBy('totalOutcomes')
             .value();
     }
 );
@@ -108,12 +108,20 @@ export const getLtfuBySex = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         const male = _.chain(list)
-            .filter(list => list.artOutcome === "LTFU" && list.gender === "Male")
-            .sumBy("totalOutcomes")
+            .filter(
+                (list) =>
+                    list.artOutcome === 'Loss To Follow Up' &&
+                    list.gender === 'Male'
+            )
+            .sumBy('totalOutcomes')
             .value();
         const female = _.chain(list)
-            .filter(list => list.artOutcome === "LTFU" && list.gender === "Female")
-            .sumBy("totalOutcomes")
+            .filter(
+                (list) =>
+                    list.artOutcome === 'Loss To Follow Up' &&
+                    list.gender === 'Female'
+            )
+            .sumBy('totalOutcomes')
             .value();
         return [male, female];
     }
@@ -140,12 +148,20 @@ export const getTransferOutBySex = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         const male = _.chain(list)
-            .filter(list => list.artOutcome === "TransferOut" && list.gender === "Male")
-            .sumBy("totalOutcomes")
+            .filter(
+                (list) =>
+                    list.artOutcome === 'Transferred Out' &&
+                    list.gender === 'Male'
+            )
+            .sumBy('totalOutcomes')
             .value();
         const female = _.chain(list)
-            .filter(list => list.artOutcome === "TransferOut" && list.gender === "Female")
-            .sumBy("totalOutcomes")
+            .filter(
+                (list) =>
+                    list.artOutcome === 'Transferred Out' &&
+                    list.gender === 'Female'
+            )
+            .sumBy('totalOutcomes')
             .value();
         return [male, female];
     }
@@ -156,12 +172,20 @@ export const getUndocumentedLtfuBySex = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         const male = _.chain(list)
-            .filter(list => list.artOutcome === "UndocumentedLTFU" && list.gender === "Male")
-            .sumBy("totalOutcomes")
+            .filter(
+                (list) =>
+                    list.artOutcome === 'Undocumented Loss' &&
+                    list.gender === 'Male'
+            )
+            .sumBy('totalOutcomes')
             .value();
         const female = _.chain(list)
-            .filter(list => list.artOutcome === "UndocumentedLTFU" && list.gender === "Female")
-            .sumBy("totalOutcomes")
+            .filter(
+                (list) =>
+                    list.artOutcome === 'Undocumented Loss' &&
+                    list.gender === 'Female'
+            )
+            .sumBy('totalOutcomes')
             .value();
         return [male, female];
     }

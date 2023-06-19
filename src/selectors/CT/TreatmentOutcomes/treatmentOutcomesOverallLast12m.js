@@ -64,8 +64,8 @@ export const getTransferOut = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
-            .filter(list => list.artOutcome === "TransferOut")
-            .sumBy("totalOutcomes")
+            .filter((list) => list.artOutcome === 'Transferred Out')
+            .sumBy('totalOutcomes')
             .value();
     }
 );
@@ -75,8 +75,8 @@ export const getUndocumentedLtfu = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
-            .filter(list => list.artOutcome === "UndocumentedLTFU")
-            .sumBy("totalOutcomes")
+            .filter((list) => list.artOutcome === 'Undocumented Loss')
+            .sumBy('totalOutcomes')
             .value();
     }
 );
