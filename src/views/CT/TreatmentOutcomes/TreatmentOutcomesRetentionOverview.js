@@ -40,7 +40,7 @@ const TreatmentOutcomesRetentionOverview = () => {
                 </Col>
                 <Col className={"col-3"}>
                     <DataCardCT
-                        title="LOST TO FOLLOW UP"
+                        title="IIT"
                         subtitle={roundNumber(ltfuPercent) + "%"}
                         data={formatNumber(ltfu)}
                     />
