@@ -85,3 +85,35 @@ export const getHighViralLoad = createSelector(
         return list.HighViremia ? list.HighViremia : 0;
     }
 );
+
+export const getHighRisk = createSelector(
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        return list.HighRisk ? list.HighRisk : 0;
+    }
+);
+
+export const getLDL = createSelector(
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        return list.LDL ? list.LDL : 0;
+    }
+);
+
+export const getLowRisk = createSelector(
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        return list.LowRisk ? list.LowRisk : 0;
+    }
+);
+
+export const getUnsuppressed = createSelector(
+    [listUnfiltered, listFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        return list.Unsuppressed ? list.Unsuppressed : 0;
+    }
+);

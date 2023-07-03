@@ -128,7 +128,7 @@ const ViralLoad = () => {
                 </TabPane>
                 <TabPane tabId="outcomes">
                     <SectionHeader title={branding.title + " OUTCOMES"}/>
-                    <Card>
+                    {/* <Card>
                         <CardHeader>Indicator Definition</CardHeader>
                         <CardBody>
                             <ul>
@@ -137,7 +137,7 @@ const ViralLoad = () => {
                                 <li>Low Level Viremia =&gt; Patients who are current on treatment with valid viral load results of 400 – 999 copies/ml</li>
                             </ul>
                         </CardBody>
-                    </Card>
+                    </Card> */}
                     <ViralLoadOutcomesOverview />
                     <Row>
                         <Col sm={4}>

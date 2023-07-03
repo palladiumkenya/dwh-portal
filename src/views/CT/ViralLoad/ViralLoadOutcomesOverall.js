@@ -12,7 +12,11 @@ const ViralLoadOutcomesOverall = () => {
     const loadViralLoadOutcomesOverall = useCallback(async () => {
         setViralLoadOutcomesOverall({
             chart: { type: 'pie' },
-            title: { text: 'OVERALL', align: 'center', verticalAlign: 'middle'},
+            title: {
+                text: 'OVERALL',
+                align: 'center',
+                verticalAlign: 'middle',
+            },
             subtitle: { text: '' },
             plotOptions: {
                 pie: {
@@ -20,20 +24,34 @@ const ViralLoadOutcomesOverall = () => {
                     cursor: 'pointer',
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                     },
                     innerSize: '75%',
-                }
+                },
             },
-            series: [{
-                name:"Overall VL Outcomes",
-                colorByPoint: true,
-                data: [
-                    { name: 'LDL', y: viralLoadOutcomesOverallData.data[0], color: "#142459" },
-                    { name: 'HVL', y: viralLoadOutcomesOverallData.data[2], color: "#1AB394" },
-                    { name: 'LLV', y: viralLoadOutcomesOverallData.data[1], color: "#BBE65F" },
-                ]
-            }]
+            series: [
+                {
+                    name: 'Overall VL Outcomes',
+                    colorByPoint: true,
+                    data: [
+                        {
+                            name: 'LDL',
+                            y: viralLoadOutcomesOverallData.data[0],
+                            color: '#142459',
+                        },
+                        {
+                            name: 'HIGH RISK LLV',
+                            y: viralLoadOutcomesOverallData.data[2],
+                            color: '#1AB394',
+                        },
+                        {
+                            name: 'LOW RISK LLV',
+                            y: viralLoadOutcomesOverallData.data[1],
+                            color: '#BBE65F',
+                        },
+                    ],
+                },
+            ],
         });
     }, [viralLoadOutcomesOverallData]);
 

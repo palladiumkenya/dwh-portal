@@ -8,7 +8,7 @@ export const getViralLoadOutcomesBySex = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        const outcomesCategories = ['SUPPRESSED', 'LLV', 'HVL'];
+        const outcomesCategories = ['LDL', 'Low Risk LLV', 'High Risk LLV '];
         const sexCategories = ['Male', 'Female'];
         let data = [];
         for(let i = 0; i < sexCategories.length; i++) {
@@ -33,7 +33,7 @@ export const getViralLoadOutcomesOverall = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        const outcomesCategories = ['SUPPRESSED', 'LLV', 'HVL'];
+        const outcomesCategories = ['LDL', 'Low Risk LLV', 'High Risk LLV '];
         let data = [];
         for(let i = 0; i < outcomesCategories.length; i++) {
             data[i] = 0;

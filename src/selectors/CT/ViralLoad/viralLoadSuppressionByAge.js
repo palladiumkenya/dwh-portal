@@ -8,7 +8,10 @@ export const getViralLoadSuppressionByAge = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        const suppressionCategories = ['SUPPRESSED', 'LLV', 'HVL'];
+        const suppressionCategories = [
+            'LDL',
+            'Low Risk LLV',
+        ];
         const ageCategories = [
             'Under 1',
             '1 to 4',
