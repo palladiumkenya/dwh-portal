@@ -132,8 +132,8 @@ export const getCurrOnArtKHIS = createSelector(
         }
 
         //DWH
-        let under1 = ['Under 1'];
-        let oneToNine = ['1 to 4', '5 to 9'];
+        let under1 = [' Under 1'];
+        let oneToNine = ['01 to 04', '05 to 09'];
         let tenToFourteen = ['10 to 14'];
         let fifteenToNineteen = ['15 to 19'];
         let twentyToTwentyFour = ['20 to 24'];

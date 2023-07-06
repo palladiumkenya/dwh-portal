@@ -66,9 +66,9 @@ export const getStable = createSelector(
     [listUnfilteredStable, listFilteredStable, filtered],
     (listUnfilteredStable, listFilteredStable, filtered) => {
         const list = filtered ? listFilteredStable : listUnfilteredStable;
-        const listExcluded = list.length > 0 ? list.filter(obj => obj.ageGroup !== 'Under 1'
-            && obj.ageGroup !== '1 to 4'
-            && obj.ageGroup !== '5 to 9'
+        const listExcluded = list.length > 0 ? list.filter(obj => obj.ageGroup !== ' Under 1'
+            && obj.ageGroup !== '01 to 04'
+            && obj.ageGroup !== '05 to 09'
             && obj.ageGroup !== '10 to 14'
             && obj.ageGroup !== '15 to 19') : [];
         const stable = _.sumBy(listExcluded, 'TXCurr');

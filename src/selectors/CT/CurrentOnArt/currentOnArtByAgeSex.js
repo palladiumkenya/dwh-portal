@@ -10,21 +10,21 @@ export const getCurrentOnArtByAgeSex = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         let ageGroups = [
-            "Under 1",
-            "1 to 4",
-            "5 to 9",
-            "10 to 14",
-            "10 to 19",
-            "20 to 24",
-            "20 to 29",
-            "30 to 34",
-            "30 to 39",
-            "40 to 44",
-            "40 to 49",
-            "50 to 54",
-            "50 to 59",
-            "60 to 64",
-            "65+"
+            ' Under 1',
+            '01 to 04',
+            '05 to 09',
+            '10 to 14',
+            '10 to 19',
+            '20 to 24',
+            '20 to 29',
+            '30 to 34',
+            '30 to 39',
+            '40 to 44',
+            '40 to 49',
+            '50 to 54',
+            '50 to 59',
+            '60 to 64',
+            '65+',
         ];
         let currentOnArtMale = [];
         let currentOnArtFemale = [];
@@ -195,10 +195,10 @@ export const getCurrentOnArtChildren = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         let ageGroups = [
-            "Under 1",
-            "1 to 4",
-            "5 to 9",
-            "10 to 14",
+            ' Under 1',
+            '01 to 04',
+            '05 to 09',
+            '10 to 14',
             // "15-19",
             // "20-24",
             // "25-29",
