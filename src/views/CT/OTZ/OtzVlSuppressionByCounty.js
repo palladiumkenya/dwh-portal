@@ -21,22 +21,22 @@ const OtzVlSuppressionByCounty = () => {
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 {
-                    name: 'HVL',
-                    data: vlSuppressionCounty.data[0],
+                    name: 'HIGH RISK LLV',
+                    data: vlSuppressionCounty.data[2],
                     type: 'column',
                     color: '#bb1414',
                     tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
                 },
                 {
-                    name: 'LLV',
+                    name: 'LOW RISK LLV',
                     data: vlSuppressionCounty.data[1],
                     type: 'column',
                     color: '#F08532',
                     tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
                 },
                 {
-                    name: 'VS',
-                    data: vlSuppressionCounty.data[2],
+                    name: 'LDL',
+                    data: vlSuppressionCounty.data[0],
                     type: 'column',
                     color: '#00AD30',
                     tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
