@@ -17,7 +17,7 @@ export const getOtzVlSuppressionByAge = createSelector(
         let ageGroups = list.map(obj => obj.ageGroup);
         ageGroups = _.uniq(ageGroups);
 
-        const suppressionCategories = ['HVL', 'LVL', 'VL'];
+        const suppressionCategories = ['LDL', 'Low Risk LLV', 'High Risk LLV '];
         const data = [];
         for (const suppressionCategory of suppressionCategories) {
             let vlSuppression = 0;
@@ -47,7 +47,7 @@ export const getOtzVlSuppressionByAgeNotEnrolled = createSelector(
         let ageGroups = list.map((obj) => obj.ageGroup);
         ageGroups = _.uniq(ageGroups);
 
-        const suppressionCategories = ['HVL', 'LVL', 'VL'];
+        const suppressionCategories = ['LDL', 'Low Risk LLV', 'High Risk LLV '];
         const data = [];
         for (const suppressionCategory of suppressionCategories) {
             let vlSuppression = 0;

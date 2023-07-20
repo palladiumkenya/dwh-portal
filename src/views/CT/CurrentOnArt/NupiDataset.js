@@ -136,21 +136,25 @@ const dictionary = [
     },
 ];
 
-
 const NupiDataset = () => {
     const [nupiDataset, setNupiDataset] = useState([]);
 
     const loadDataset = useCallback(async () => {
-        if (nupiDataset.length === 0)
-            try {
-                let data = await getAll('care-treatment/nupiDataset', {});
-                setNupiDataset(data)
-
-            } catch (e){
-                console.log(e)
+        if (nupiDataset.length === 0) {
+            let attempts = 0;
+            while (attempts < 2) {
+                try {
+                    let data = await getAll('care-treatment/nupiDataset', {});
+                    setNupiDataset(data);
+                    break; // Exit the loop if successful
+                } catch (e) {
+                    console.log(e);
+                    attempts++;
+                }
             }
-    },)
-    
+        }
+    });
+
     useEffect(() => {
         loadDataset();
     }, [loadDataset]);
@@ -253,7 +257,6 @@ const NupiDataset = () => {
             )}
         </>
     );
-
-}
+};
 
 export default NupiDataset;

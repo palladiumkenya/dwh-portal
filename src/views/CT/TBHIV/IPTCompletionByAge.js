@@ -23,9 +23,9 @@ const IPTCompletionByAge = () => {
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const sexCategories = ['Male', 'Female'];
         const ageCategories = [
-            'Under 1',
-            '1 to 4',
-            '5 to 9',
+            ' Under 1',
+            '01 to 04',
+            '05 to 09',
             '10 to 14',
             '15 to 19',
             '20 to 24',
@@ -37,7 +37,7 @@ const IPTCompletionByAge = () => {
             '50 to 54',
             '55 to 59',
             '60 to 64',
-            '65+'
+            '65+',
         ];
         const result = await getAll('care-treatment/vlUptakeByAge', params);
         let data = [];

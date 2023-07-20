@@ -11,9 +11,9 @@ export const getCovidAdmissionSymptomaticByAge = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
 
         let ageGroups = [
-            'Under 1',
-            '1 to 4',
-            '5 to 9',
+            ' Under 1',
+            '01 to 04',
+            '05 to 09',
             '10 to 14',
             '15 to 19',
             '20 to 24',
@@ -25,7 +25,7 @@ export const getCovidAdmissionSymptomaticByAge = createSelector(
             '50 to 54',
             '55 to 59',
             '60 to 64',
-            '65+'
+            '65+',
         ];
         let symptomaticPatients = [];
 

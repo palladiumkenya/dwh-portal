@@ -9,9 +9,9 @@ export const getAppointmentDurationByAge = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         const ageCategories = [
-            'Under 1',
-            '1 to 4',
-            '5 to 9',
+            ' Under 1',
+            '01 to 04',
+            '05 to 09',
             '10 to 14',
             '15 to 19',
             '20 to 24',
@@ -23,19 +23,18 @@ export const getAppointmentDurationByAge = createSelector(
             '50 to 54',
             '55 to 59',
             '60 to 64',
-            '65+'
+            '65+',
         ];
-        const arr =
-            {
-                '<15 YRS': ['Under 1', '1 to 4', '5 to 9', '10 to 14'],
-                '15-19 YRS': ['15 to 19'],
-                '20-24 YRS': ['20 to 24'],
-                '25-34 YRS': ['25 to 29', '30 to 34'],
-                '35-44 YRS': ['35 to 39', '40 to 44'],
-                '45-54 YRS': ['45 to 49', '50 to 54'],
-                '55-64 YRS': ['55 to 59', '60 to 64'],
-                '65+ YRS': ['65+']
-            };
+        const arr = {
+            '<15 YRS': [' Under 1', '01 to 04', '05 to 09', '10 to 14'],
+            '15-19 YRS': ['15 to 19'],
+            '20-24 YRS': ['20 to 24'],
+            '25-34 YRS': ['25 to 29', '30 to 34'],
+            '35-44 YRS': ['35 to 39', '40 to 44'],
+            '45-54 YRS': ['45 to 49', '50 to 54'],
+            '55-64 YRS': ['55 to 59', '60 to 64'],
+            '65+ YRS': ['65+'],
+        };
         const MMDarr = [];
         const NonMMDarr = [];
         const groupedVals = [];

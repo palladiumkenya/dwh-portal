@@ -13,15 +13,38 @@ const ViralLoadSuppressionByAge = () => {
         setViralLoadSuppressionByAge({
             title: { text: '' },
             plotOptions: { column: { stacking: 'percent' } },
-            xAxis: [{ categories: viralLoadSuppressionByAgeData.ageCategories, crosshair: true }],
-            yAxis: [{ title: { text: 'Percentage of Patients' }}],
+            xAxis: [
+                {
+                    categories: viralLoadSuppressionByAgeData.ageCategories,
+                    crosshair: true,
+                },
+            ],
+            yAxis: [{ title: { text: 'Percentage of Patients' } }],
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'HVL', data: viralLoadSuppressionByAgeData.data[2], type: 'column', color: "#E15759", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'LLV', data: viralLoadSuppressionByAgeData.data[1], type: 'column', color: "#F28E2B", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-                { name: 'LDL', data: viralLoadSuppressionByAgeData.data[0], type: 'column', color: "#3475B3", tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' } },
-            ]
+                // {
+                //     name: 'HVL',
+                //     data: viralLoadSuppressionByAgeData.data[2],
+                //     type: 'column',
+                //     color: '#E15759',
+                //     tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
+                // },
+                {
+                    name: 'LOW RISK LLV',
+                    data: viralLoadSuppressionByAgeData.data[1],
+                    type: 'column',
+                    color: '#F28E2B',
+                    tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
+                },
+                {
+                    name: 'LDL',
+                    data: viralLoadSuppressionByAgeData.data[0],
+                    type: 'column',
+                    color: '#3475B3',
+                    tooltip: { valueSuffix: ' ({point.percentage:.0f}%)' },
+                },
+            ],
         });
     }, [viralLoadSuppressionByAgeData]);
 
@@ -34,7 +57,7 @@ const ViralLoadSuppressionByAge = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VIRAL SUPPRESSION (LESS THAN 400 CPM) AMONG CURRENT ON ART PATIENTS BY AGE GROUP
+                        VIRAL SUPPRESSION (LESS THAN 200 CPM) AMONG CURRENT ON ART PATIENTS BY AGE GROUP
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
