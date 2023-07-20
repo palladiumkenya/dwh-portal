@@ -11,9 +11,9 @@ export const getViralLoadUptakeByAge = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         const sexCategories = ['Male', 'Female'];
         const ageCategories = [
-            'Under 1',
-            '1 to 4',
-            '5 to 9',
+            ' Under 1',
+            '01 to 04',
+            '05 to 09',
             '10 to 14',
             '15 to 19',
             '20 to 24',
@@ -46,9 +46,9 @@ export const getViralLoadUptakeByAge = createSelector(
         }
 
         const arr = {
-            'Under 1': [ 'Under 1' ],
-            '1 to 4': [ '1 to 4' ],
-            '5 to 9': [ '5 to 9' ],
+            'Under 1': [ ' Under 1' ],
+            '1 to 4': [ '01 to 04' ],
+            '5 to 9': [ '05 to 09' ],
             '10 to 14': [ '10 to 14' ],
             '15 to 19': [ '15 to 19' ],
             '20 to 24': [ '20 to 24' ],

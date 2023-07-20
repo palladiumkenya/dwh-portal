@@ -15,7 +15,7 @@ export const getOtzVlSuppressionByPartner = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
 
         const data = [];
-        const suppressionCategories = ['HVL', 'LVL', 'VL'];
+        const suppressionCategories = ['LDL', 'Low Risk LLV', 'High Risk LLV '];
         let partners = list.map(obj => obj ? obj.CTPartner.toUpperCase() : '');
         partners = _.uniq(partners);
         let build_list = [];
@@ -24,7 +24,7 @@ export const getOtzVlSuppressionByPartner = createSelector(
                 (x) => x.CTPartner.toUpperCase() === c
             );
             let partner_data_vl = partner_data.filter(
-                (x) => x.Last12MVLResult.toUpperCase() === 'VL'
+                (x) => x.Last12MVLResult.toUpperCase() === 'LDL'
             );
             let sum = partner_data.reduce(
                 (n, { vlSuppression }) => n + vlSuppression,
@@ -66,7 +66,7 @@ export const getOtzVlSuppressionByPartnerNotEnrolled = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
 
         const data = [];
-        const suppressionCategories = ['HVL', 'LVL', 'VL'];
+        const suppressionCategories = ['LDL', 'Low Risk LLV', 'High Risk LLV '];
         let partners = list.map(obj => obj ? obj.CTPartner.toUpperCase() : '');
         partners = _.uniq(partners);
         let build_list = [];
@@ -75,7 +75,7 @@ export const getOtzVlSuppressionByPartnerNotEnrolled = createSelector(
                 (x) => x.CTPartner.toUpperCase() === c
             );
             let partner_data_vl = partner_data.filter(
-                (x) => x.Last12MVLResult.toUpperCase() === 'VL'
+                (x) => x.Last12MVLResult.toUpperCase() === 'LDL'
             );
             let sum = partner_data.reduce(
                 (n, { vlSuppression }) => n + vlSuppression,

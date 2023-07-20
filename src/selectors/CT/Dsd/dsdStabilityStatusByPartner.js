@@ -31,9 +31,9 @@ export const getStabilityStatusByPartner = createSelector(
 
             const selectedPartner = currentOnARTExcludedAgeGroups.filter(obj => obj.CTPartner ? obj.CTPartner.toUpperCase() === partner : null);
 
-            const withExcludedAgeGroups = list.filter(obj => obj.ageGroup !== 'Under 1'
-                && obj.ageGroup !== '1 to 4'
-                && obj.ageGroup !== '5 to 9'
+            const withExcludedAgeGroups = list.filter(obj => obj.ageGroup !== ' Under 1'
+                && obj.ageGroup !== '01 to 04'
+                && obj.ageGroup !== '05 to 09'
                 && obj.ageGroup !== '10 to 14'
                 && obj.ageGroup !== '15 to 19');
 

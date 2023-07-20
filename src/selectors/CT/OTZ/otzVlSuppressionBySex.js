@@ -14,7 +14,7 @@ export const getOtzVlSuppressionBySex = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
 
         const data = [];
-        const suppressionCategories = ['HVL', 'LVL', 'VL'];
+        const suppressionCategories = ['LDL', 'Low Risk LLV', 'High Risk LLV '];
         const genders = ['Male','Female'];
         for (const suppressionCategory of suppressionCategories) {
             let vlSuppression = 0;
@@ -42,7 +42,7 @@ export const getOtzVlSuppressionBySexNotEnrolled = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
 
         const data = [];
-        const suppressionCategories = ['HVL', 'LVL', 'VL'];
+        const suppressionCategories = ['LDL', 'Low Risk LLV', 'High Risk LLV '];
         const genders = ['Male', 'Female'];
         for (const suppressionCategory of suppressionCategories) {
             let vlSuppression = 0;

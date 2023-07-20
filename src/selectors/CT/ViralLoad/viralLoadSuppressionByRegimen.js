@@ -9,7 +9,11 @@ export const getViralLoadSuppressionByRegimen = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         const regimenCategories = ['TLD', 'TLE', 'NVP', 'Other Regimen'];
-        const retentionCategories = ['VL', 'HVL', 'LVL'];
+        const retentionCategories = [
+            'LDL',
+            'Low Risk LLV',
+            'High Risk LLV ',
+        ];
         let data = [];
         for (const retentionCategory of retentionCategories) {
             const categoryData = [];

@@ -13,7 +13,7 @@ const ViralLoadOutcomesBySex = () => {
     const loadViralLoadOutcomesBySex = useCallback(async () => {
         setViralLoadOutcomesBySexMale({
             chart: { type: 'pie' },
-            title: { text: 'MALE', align: 'center', verticalAlign: 'middle'},
+            title: { text: 'MALE', align: 'center', verticalAlign: 'middle' },
             subtitle: { text: '' },
             plotOptions: {
                 pie: {
@@ -21,24 +21,38 @@ const ViralLoadOutcomesBySex = () => {
                     cursor: 'pointer',
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                     },
                     innerSize: '75%',
-                }
+                },
             },
-            series: [{
-                name:"VL Outcomes (Male)",
-                colorByPoint: true,
-                data: [
-                    { name: 'LDL', y: viralLoadOutcomesBySexData.data[0][0], color: "#142459" },
-                    { name: 'HVL', y: viralLoadOutcomesBySexData.data[0][2], color: "#1AB394" },
-                    { name: 'LLV', y: viralLoadOutcomesBySexData.data[0][1], color: "#BBE65F" },
-                ]
-            }]
+            series: [
+                {
+                    name: 'VL Outcomes (Male)',
+                    colorByPoint: true,
+                    data: [
+                        {
+                            name: 'LDL',
+                            y: viralLoadOutcomesBySexData.data[0][0],
+                            color: '#142459',
+                        },
+                        {
+                            name: 'HIGH RISK LLV',
+                            y: viralLoadOutcomesBySexData.data[0][2],
+                            color: '#1AB394',
+                        },
+                        {
+                            name: 'LOW RISK LLV',
+                            y: viralLoadOutcomesBySexData.data[0][1],
+                            color: '#BBE65F',
+                        },
+                    ],
+                },
+            ],
         });
         setViralLoadOutcomesBySexFemale({
             chart: { type: 'pie' },
-            title: { text: 'FEMALE', align: 'center', verticalAlign: 'middle'},
+            title: { text: 'FEMALE', align: 'center', verticalAlign: 'middle' },
             subtitle: { text: '' },
             plotOptions: {
                 pie: {
@@ -46,20 +60,34 @@ const ViralLoadOutcomesBySex = () => {
                     cursor: 'pointer',
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                     },
                     innerSize: '75%',
-                }
+                },
             },
-            series: [{
-                name:"VL Outcomes (Female)",
-                colorByPoint: true,
-                data: [
-                    { name: 'LDL', y: viralLoadOutcomesBySexData.data[1][0], color: "#142459" },
-                    { name: 'HVL', y: viralLoadOutcomesBySexData.data[1][2], color: "#1AB394" },
-                    { name: 'LLV', y: viralLoadOutcomesBySexData.data[1][1], color: "#BBE65F" },
-                ]
-            }]
+            series: [
+                {
+                    name: 'VL Outcomes (Female)',
+                    colorByPoint: true,
+                    data: [
+                        {
+                            name: 'LDL',
+                            y: viralLoadOutcomesBySexData.data[1][0],
+                            color: '#142459',
+                        },
+                        {
+                            name: 'HIGH RISK LLV',
+                            y: viralLoadOutcomesBySexData.data[1][2],
+                            color: '#1AB394',
+                        },
+                        {
+                            name: 'LOW RISK LLV',
+                            y: viralLoadOutcomesBySexData.data[1][1],
+                            color: '#BBE65F',
+                        },
+                    ],
+                },
+            ],
         });
     }, [viralLoadOutcomesBySexData]);
 

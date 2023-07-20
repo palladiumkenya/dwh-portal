@@ -16,9 +16,9 @@ const OVCDistributionOfCALHIVByAgeSex = () => {
             xAxis: [
                 {
                     categories: [
-                        'Under 1',
-                        '1 to 4',
-                        '5 to 9',
+                        ' Under 1',
+                        '01 to 04',
+                        '05 to 09',
                         '10 to 14',
                         '15 to 17',
                     ],
@@ -27,9 +27,9 @@ const OVCDistributionOfCALHIVByAgeSex = () => {
                 },
                 {
                     categories: [
-                        'Under 1',
-                        '1 to 4',
-                        '5 to 9',
+                        ' Under 1',
+                        '01 to 04',
+                        '05 to 09',
                         '10 to 14',
                         '15 to 17',
                     ],
