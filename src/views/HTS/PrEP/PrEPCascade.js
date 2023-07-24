@@ -18,7 +18,7 @@ const PrEPCascade = () => {
     let month1 = useSelector(prepSelectorMonth1.getPrepMonth1Refill);
     let month3 = useSelector(prepSelectorMonth3.getPrepMonth3Refill);
     
-    let tested = month1.tested + month3.tested;
+    let tested = month1?.tested + month3?.tested;
 
     const [prepOverall, setPrepOverall] = useState({});
 
