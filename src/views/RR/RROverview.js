@@ -73,7 +73,7 @@ const RROverview = () => {
                   .subtract(1, 'month')
                   .format('YYYY,M')
             : moment()
-                  .subtract(3, 'month')
+                  .subtract(2, 'month')
                   .add(16, 'days')
                   .format('YYYY,M');
         const data = await getAll('manifests/consistency/' + rrTab, params);
