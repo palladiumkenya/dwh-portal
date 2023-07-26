@@ -73,7 +73,7 @@ const RROverview = () => {
                   .subtract(1, 'month')
                   .format('YYYY,M')
             : moment()
-                  .subtract(3, 'month')
+                  .subtract(2, 'month')
                   .add(16, 'days')
                   .format('YYYY,M');
         const data = await getAll('manifests/consistency/' + rrTab, params);
@@ -91,18 +91,16 @@ const RROverview = () => {
             fromDate: filters.fromDate
                 ? filters.fromDate
                 : moment()
-                      .subtract(2, 'month')
-                      .add(16, 'days')
+                      .subtract(16, 'days')
                       .format('MMM YYYY'),
         };
         params.period = filters.fromDate
             ? moment(params.fromDate, 'MMM YYYY')
                   .startOf('month')
-                  .subtract(0, 'month')
+                  .add(1, 'month')
                   .format('YYYY,M')
             : moment()
-                  .subtract(2, 'month')
-                  .add(16, 'days')
+                  .subtract(16, 'days')
                   .format('YYYY,M');
         const data = await getAll('manifests/recency/' + rrTab, params);
         setRecency({ recency: [], stats: data.recency ? data.recency.toLocaleString('en') : [], statsPerc: getPerc(data.recency , expected) });
