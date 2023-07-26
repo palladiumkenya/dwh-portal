@@ -4,7 +4,6 @@ import { Col, Row } from 'reactstrap';
 import Loadable from 'react-loadable';
 import Loading from '../../Shared/Loading';
 import { LOADING_DELAY } from '../../../constants';
-import { useSelector } from 'react-redux';
 import COVIDPLHIVCurrentOnART from './COVIDPLHIVCurrentOnART';
 import COVIDPLHIVEverHadInfection from './COVIDPLHIVEverHadInfection';
 import COVIDPLHIVWhoHadSymptomaticInfection from './COVIDPLHIVWhoHadSymptomaticInfection';
