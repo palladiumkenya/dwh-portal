@@ -72,12 +72,10 @@ const LinkageNumberPositive = () => {
                     positive[0].push(0);
                     positive[1].push(parseInt(monthYearFilterRetest[0].positive, 10));
                 }
-            } else if (monthYearFilterNew.length === 1 && monthYearFilterRetest.length === 0) {
-                if (!months.includes(monthNames[result[i].month] + ' ' + result_year.toString())) {
-                    months.push(monthNames[result[i].month] + ' ' + result_year.toString());
-                    positive[0].push(parseInt(monthYearFilterNew[0].positive, 10));
-                    positive[1].push(0);
-                }
+            } else if (monthYearFilterNew.length === 1 && monthYearFilterRetest.length === 0 && !months.includes(monthNames[result[i].month] + ' ' + result_year.toString())) {
+                months.push(monthNames[result[i].month] + ' ' + result_year.toString());
+                positive[0].push(parseInt(monthYearFilterNew[0].positive, 10));
+                positive[1].push(0);
             }
         }
         for(let i = 0; i < result2.length; i++) {
