@@ -13,7 +13,9 @@ const COVIDAdultPLHIVVaccinatedByCounty = () => {
     const loadVaccinatedByCounty = useCallback(async () => {
         setCovidVaccinatedByCounty({
             title: { text: '' },
-            plotOptions: { column: { stacking: 'percent',
+            plotOptions: { 
+                column: { 
+                    stacking: 'percent',
                     tooltip: {
                         valueSuffix: ' ({point.percentage:.0f}%)'
                     },

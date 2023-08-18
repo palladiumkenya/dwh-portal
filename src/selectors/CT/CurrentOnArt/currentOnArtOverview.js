@@ -66,7 +66,7 @@ export const getVirallySuppressed = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        return list.Last12MVLSup ? list.Last12MVLSup : 0;
+        return list.Last12MVLSup || 0;
     }
 );
 
