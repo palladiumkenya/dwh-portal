@@ -112,11 +112,11 @@ const DefaultHeader = () => {
                         <strong>Service Desk</strong>
                     </NavLink>
                 </NavItem> */}
-                <NavItem >
+                {/* <NavItem >
                     <NavLink to="/pmtct-rri" className="nav-link active">
                         <strong>PMTCT RRI</strong>
                     </NavLink>
-                </NavItem>
+                </NavItem> */}
                 {/* <NavItem className="px-3">
                     <NavLink
                         to="/operational-and-his"
@@ -229,7 +229,7 @@ const Administration = (userType) => {
             <DropdownMenu right>
                 { userType.userType === 1 ? <DropdownItem><Link to="/administration/organizations" className="nav-link">Organizations</Link></DropdownItem> : '' }
 
-                <DropdownItem><a href="https://auth.kenyahmis.org/nascop/Users" className="nav-link">Users</a></DropdownItem>
+                <DropdownItem><a href="https://identity.kenyahmis.org/nascop/Users" className="nav-link">Users</a></DropdownItem>
             </DropdownMenu>
         </UncontrolledDropdown>
     );
