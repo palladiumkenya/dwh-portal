@@ -7,14 +7,18 @@ import * as newOnPrepSelector from '../../../selectors/HTS/Prep/newOnPrepSelecto
 import * as ctPrepSelector from '../../../selectors/HTS/Prep/ctPrepSelector';
 import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
 import * as prepTestedSelector from '../../../selectors/HTS/Prep/prepTotalTestedSelector';
-
+import * as prepSelectorMonth1 from '../../../selectors/HTS/Prep/prepMonth1RefillSelector';
+import * as prepSelectorMonth3 from '../../../selectors/HTS/Prep/prepMonth3RefillSelector';
 
 const PrEPCascade = () => {
     let newOnPrep = useSelector(newOnPrepSelector.getNewOnPrepTotal);
     let prepCT = useSelector(ctPrepSelector.getCTPrepTotal);
     let screened = useSelector(prepSelector.getPrepScreenedTotal);
     let eligible = useSelector(prepSelector.getPrepEligibleTotal);
-    let tested = useSelector(prepTestedSelector.getPrepTestTotal);
+    let month1 = useSelector(prepSelectorMonth1.getPrepMonth1Refill);
+    let month3 = useSelector(prepSelectorMonth3.getPrepMonth3Refill);
+    
+    let tested = month1?.tested + month3?.tested;
 
     const [prepOverall, setPrepOverall] = useState({});
 
@@ -87,7 +91,7 @@ const PrEPCascade = () => {
                 },
             ],
         });
-    }, [screened, newOnPrep, tested, eligible]);
+    }, [screened, newOnPrep, tested, eligible, prepCT, month1, month3]);
 
     useEffect(() => {
         loadPrepOverall();

@@ -4,11 +4,23 @@ import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
+import moment from 'moment';
 
 const PrEPDiagnosedWithSTITrends = () => {
-    const filters = useSelector((state) => state.filters);
     const [prepDiagnosedWithSTITrends, setPrepDiagnosedWithSTITrends] = useState({});
     let discList = useSelector(prepSelector.getPrepDiagTrend);
+    let filterMonth = moment(
+        useSelector((state) => state.filters.fromDate),
+        'MMM YYYY'
+    )
+        .format('MMMM YYYY')
+        .toUpperCase();
+
+    let month = useSelector((state) => state.filters.fromDate)
+        ? filterMonth
+        : `${discList.monthRange.at(-1).toUpperCase()} - ${discList.monthRange
+              .at(0)
+              .toUpperCase()}`;
 
     const loadPrepDiagnosedWithSTITrends = useCallback(async () => {
         setPrepDiagnosedWithSTITrends({
@@ -64,7 +76,7 @@ const PrEPDiagnosedWithSTITrends = () => {
     return (
         <Card>
             <CardHeader className="cardTitle">
-                DIAGNOSED WITH STI TRENDS (MAY 2021 - JAN 2022)
+                {`DIAGNOSED WITH STI TRENDS (${month})`}
             </CardHeader>
             <CardBody>
                 <HighchartsReact

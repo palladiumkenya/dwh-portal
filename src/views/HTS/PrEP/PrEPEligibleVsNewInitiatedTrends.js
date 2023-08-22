@@ -4,15 +4,25 @@ import { Card, CardHeader, CardBody } from 'reactstrap';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import * as prepSelector from '../../../selectors/HTS/Prep/PrepTrendsSelector';
+import moment from 'moment';
 
 
 const PrEPEligibleVsNewInitiatedTrends = () => {
-    const filters = useSelector((state) => state.filters);
     let eliVnew = useSelector(prepSelector.getPrepEligibleVnewTrend);
     const [
         prepEligibleVsNewInitiatedTrends,
         setPrepEligibleVsNewInitiatedTrends,
     ] = useState({});
+    let filterMonth = moment(
+        useSelector((state) => state.filters.fromDate),
+        'MMM YYYY'
+    )
+        .format('MMMM YYYY')
+        .toUpperCase();
+
+    let month = useSelector((state) => state.filters.fromDate)
+        ? filterMonth
+        : `${eliVnew.monthRange.at(-1).toUpperCase()} - ${eliVnew.monthRange.at(0).toUpperCase()}`;
 
     const loadPrepEligibleVsNewInitiatedTrends = useCallback(async () => {
         setPrepEligibleVsNewInitiatedTrends({
@@ -107,7 +117,7 @@ const PrEPEligibleVsNewInitiatedTrends = () => {
     return (
         <Card>
             <CardHeader className="cardTitle">
-                ELIGIBLE VS NEWLY INITIATED ON PREP TRENDS (MAY 2021 - JAN 2022)
+                {`ELIGIBLE VS NEWLY INITIATED ON PREP TRENDS (${month})`}
             </CardHeader>
             <CardBody>
                 <HighchartsReact

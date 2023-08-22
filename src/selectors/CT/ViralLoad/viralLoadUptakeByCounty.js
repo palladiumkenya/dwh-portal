@@ -16,7 +16,7 @@ export const getViralLoadUptakeByCounty = createSelector(
             data.push({
                 c: list[i].county,
                 y: Number(((parseInt(list[i].vlDone)/parseInt(list[i].txCurr))*100).toFixed(0)),
-                absoluteY: list[i].vlDone.toLocaleString('en'),
+                absoluteY: list[i]?.vlDone?.toLocaleString('en'),
             });
         }
 

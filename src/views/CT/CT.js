@@ -353,7 +353,10 @@ import { loadCurrOnARTKHIS } from '../../actions/Operational&HIS/Comparison/curr
 import { loadArtVerificationByCounty } from '../../actions/CT/ArtVerification/artVerificationByCountyActions';
 import { loadArtVerificationByPartner } from './../../actions/CT/ArtVerification/artVerificationByPartnerActions';
 import { loadArtVerificationReasons } from './../../actions/CT/ArtVerification/artVerificationReasonsActions';
-
+import { loadAppointmentKeepingWaterfall } from '../../actions/CT/TreatmentOutcomes/appointmentKeepingWaterfallActions';
+import { loadQuaterlyIIT } from '../../actions/CT/TreatmentOutcomes/quaterlyIITActions';
+import { loadIITTracing } from './../../actions/CT/TreatmentOutcomes/IITTracingActions';
+import { loadIITTracingOutcomes } from './../../actions/CT/TreatmentOutcomes/IITTracingOutcomesActions';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({
@@ -381,11 +384,7 @@ const ArtOptimization = Loadable({
 const OTZ = Loadable({ loader: () => import('./OTZ/OTZ'), loading: Loading, delay: LOADING_DELAY });
 const OVC = Loadable({ loader: () => import('./OVC/OVC'), loading: Loading, delay: LOADING_DELAY });
 const COVID = Loadable({ loader: () => import('./Covid/Covid'), loading: Loading, delay: LOADING_DELAY });
-const ArtVerification = Loadable({
-    loader: () => import('./ArtVerification/ArtVerification'),
-    loading: Loading,
-    delay: LOADING_DELAY,
-});
+const ArtVerification = Loadable({ loader: () => import('./ArtVerification/ArtVerification'), loading: Loading, delay: LOADING_DELAY });
 
 const CT = () => {
 
@@ -660,6 +659,10 @@ const CT = () => {
                     loadTreatmentOutcomesUndocumentedByFacility(active_tab)
                 );
                 dispatch(loadTreatmentOutcomesNetCohort(active_tab));
+                dispatch(loadAppointmentKeepingWaterfall(active_tab));
+                dispatch(loadQuaterlyIIT(active_tab));
+                dispatch(loadIITTracing(active_tab));
+                dispatch(loadIITTracingOutcomes(active_tab));
                 break;
             case 'otz':
                 dispatch(loadOtzEnrollmentAmongAlhivOnArtBySex());
@@ -865,7 +868,9 @@ const CT = () => {
                     {active_tab === 'covid' ? <COVID /> : null}
                 </TabPane>
                 <TabPane tabId={'artVerification'}>
-                    {active_tab === 'artVerification' ? <ArtVerification /> : null}
+                    {active_tab === 'artVerification' ? (
+                        <ArtVerification />
+                    ) : null}
                 </TabPane>
             </TabContent>
             <p></p>

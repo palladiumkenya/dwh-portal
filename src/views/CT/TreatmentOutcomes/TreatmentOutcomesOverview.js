@@ -39,7 +39,7 @@ const TreatmentOutcomesOverview = () => {
                 </Col>
                 <Col>
                     <DataCardCT
-                        title="LOST TO FOLLOW UP"
+                        title="IIT"
                         subtitle={roundNumber(ltfuPercent) + "%"}
                         data={formatNumber(ltfu)}
                     />

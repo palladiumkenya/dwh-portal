@@ -9,6 +9,7 @@ const listMonthUnfiltered = (state) => state.statusByMonth.listUnfiltered;
 const listMonthFiltered = (state) => state.statusByMonth.listFiltered;
 
 const filtered = state => state.filters.filtered;
+const fromDate = (state) => state.filters.fromDate;
 
 export const getByProduct = createSelector(
     [listUnfiltered, listFiltered, filtered],
@@ -19,7 +20,7 @@ export const getByProduct = createSelector(
         let closed = []
 
         products = list.map((l) =>
-            l.product ? l.product.toUpperCase() : l.product
+            l.product ? l.product.toUpperCase() : "NOT PROVIDED"
         );
         open = list.map(l => l.opened)
         closed = list.map(l => l.closed)
@@ -28,22 +29,29 @@ export const getByProduct = createSelector(
 );
 
 export const getByMonth = createSelector(
-    [listMonthUnfiltered, listMonthFiltered, filtered],
-    (listUnfiltered, listFiltered, filtered) => {
+    [listMonthUnfiltered, listMonthFiltered, filtered, fromDate],
+    (listUnfiltered, listFiltered, filtered, fromDate) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        
+
         const twelveMonthsAgo = moment().subtract(12, 'months');
         const filteredData = list.filter((entry) => {
             const entryDate = moment(
                 `${entry.YEAR}-${entry.MONTH}-01`,
                 'YYYY-MM-DD'
             );
-            return entryDate.isSameOrAfter(twelveMonthsAgo, 'month');
+
+            if (fromDate) return entryDate;
+            return (
+                entryDate.isSameOrAfter(twelveMonthsAgo, 'month') &&
+                entryDate.isSameOrBefore(moment(), 'month')
+            );
         });
 
         let months = filteredData.map(
-            (l) => `${moment(l.MONTH, 'M').format('MMM').toUpperCase()} ${l.YEAR}`
+            (l) =>
+                `${moment(l.MONTH, 'M').format('MMM').toUpperCase()} ${l.YEAR}`
         );
+
         let open = filteredData.map((l) => l.opened);
         let closed = filteredData.map((l) => l.closed);
         return { months, open, closed };

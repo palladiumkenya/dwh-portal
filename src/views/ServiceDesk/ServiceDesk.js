@@ -69,31 +69,33 @@ const ServiceDesk = () => {
     const DEFAULT_ACTIVE_TAB = 'serviceDesk';
     const { active_tab } = useParams();
     const history = useHistory();
-    console.log(DEFAULT_ACTIVE_TAB);
 
-    const renderTabNavItems = () => {
-        return Object.keys(SD_TABS).map((value) => {
-            return (
-                <NavItem key={value}>
-                    <NavLink
-                        active={active_tab === value}
-                        onClick={() => {
-                            dispatch(changeSdTab(active_tab));
-                            toggle(value);
-                        }}
-                    >
-                        <div style={{ fontSize: '.78em' }}>
-                            {SD_TABS[value]}
-                        </div>
-                    </NavLink>
-                </NavItem>
-            );
-        });
-    };
+    // const renderTabNavItems = () => {
+    //     return Object.keys(SD_TABS).map((value) => {
+    //         return (
+    //             <NavItem key={value}>
+    //                 <NavLink
+    //                     active={active_tab === value}
+    //                     onClick={() => {
+    //                         dispatch(changeSdTab(active_tab));
+    //                         toggle(value);
+    //                     }}
+    //                 >
+    //                     <div style={{ fontSize: '.78em' }}>
+    //                         {SD_TABS[value]}
+    //                     </div>
+    //                 </NavLink>
+    //             </NavItem>
+    //         );
+    //     });
+    // };
 
     useEffect(() => {
         dispatch(changeCurrentPage(PAGES.sd));
         dispatch(enableFromDateFilter());
+        dispatch(disableGenderFilter());
+        dispatch(disableAgencyFilter());
+        dispatch(disableDatimAgeGroupFilter());
         return () => {
             dispatch(enableFromDateFilter());
             dispatch(disableGenderFilter());
@@ -140,21 +142,21 @@ const ServiceDesk = () => {
         noCache,
     ]);
 
-    useEffect(() => {
-        if (!active_tab) {
-            history.push(`/service-desk/${DEFAULT_ACTIVE_TAB}`);
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (!active_tab) {
+    //         history.push(`/service-desk/${DEFAULT_ACTIVE_TAB}`);
+    //     }
+    // }, []);
 
-    if (!active_tab) {
-        history.push(`/service-desk/${DEFAULT_ACTIVE_TAB}`);
-    }
+    // if (!active_tab) {
+    //     history.push(`/service-desk/${DEFAULT_ACTIVE_TAB}`);
+    // }
 
-    const toggle = (tab) => {
-        if (active_tab !== tab) {
-            history.push(`/service-desk/${tab}`);
-        }
-    };
+    // const toggle = (tab) => {
+    //     if (active_tab !== tab) {
+    //         history.push(`/service-desk/${tab}`);
+    //     }
+    // };
     
     // return (
     //     <div style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
@@ -170,15 +172,16 @@ const ServiceDesk = () => {
     // );
     return (
         <div>
-            <Nav tabs>{renderTabNavItems()}</Nav>
+            <Service_Desk />
+            {/* <Nav tabs>{renderTabNavItems()}</Nav>
             <TabContent activeTab={active_tab}>
                 <TabPane tabId="serviceDesk">
                     {active_tab === 'serviceDesk' ? <Service_Desk /> : null}
                 </TabPane>
-                {/* <TabPane tabId="sdp">
+                <TabPane tabId="sdp">
                     {active_tab === 'sdp' ? <SDP /> : null}
-                </TabPane> */}
-            </TabContent>
+                </TabPane> 
+            </TabContent> */}
             <p></p>
             <p></p>
         </div>

@@ -30,8 +30,12 @@ export const fetchServiceDeskOverview = () => async (dispatch, getState) => {
         subCounty: getState().filters.subCounties,
         facility: getState().filters.facilities,
         partner: getState().filters.partners,
-        year: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("YYYY") : moment().format("YYYY"),
-        month: getState().filters.fromDate ? moment(getState().filters.fromDate, "MMM YYYY").format("MM") :  moment().format("MM"),
+        year: getState().filters.fromDate
+            ? moment(getState().filters.fromDate, 'MMM YYYY').format('YYYY')
+            : moment().subtract(1, 'month').format('YYYY'),
+        month: getState().filters.fromDate
+            ? moment(getState().filters.fromDate, 'MMM YYYY').format('MM')
+            : moment().subtract(1, 'month').format('MM'),
     };
     const response = await getAll(
         'operational-his/getPartnerLevelIssues',

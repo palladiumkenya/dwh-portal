@@ -26,9 +26,9 @@ export const getCurrentOnArtByAgeSex = createSelector(
         const listAll = filtered ? listFilteredAll : listUnfilteredAll;
 
         let ageGroups = [
-            'Under 1',
-            '1 to 4',
-            '5 to 9',
+            ' Under 1',
+            '01 to 04',
+            '05 to 09',
             '10 to 14',
             '15 to 19',
             '20 to 24',
@@ -150,11 +150,7 @@ export const getCurrentOnArtByAge = createSelector(
     ) => {
         const list = filtered ? listFiltered : listUnfiltered;
         
-        let ageGroupsLt15 = [
-            'Under 1',
-            '1 to 4',
-            '5 to 9',
-            '10 to 14',]
+        let ageGroupsLt15 = [' Under 1', '01 to 04', '05 to 09', '10 to 14'];
         let ageGroupGt15 = [
             '15 to 19',
             '20 to 24',
@@ -233,12 +229,7 @@ export const getCurrentOnArtByAgeSexLT15 = createSelector(
         const listAll = filtered ? listFilteredAll : listUnfilteredAll;
 
         let sum = 0
-        let ageGroups = [
-            "Under 1",
-            "1 to 4",
-            "5 to 9",
-            "10 to 14"
-        ];
+        let ageGroups = [' Under 1', '01 to 04', '05 to 09', '10 to 14'];
         let currentOnArtMale = [];
         let currentOnArtFemale = [];
         let verifiedPercFemale = [];

@@ -73,28 +73,68 @@ const ViralLoad = () => {
     return (
         <div className="animated fadeIn">
             <VisibilitySensor onChange={onVisibilityChange}>
-                <UniversalFilter/>
+                <UniversalFilter />
             </VisibilitySensor>
             <Nav tabs>
                 <NavItem>
-                    <NavLink className={classnames({ active: mini_tab === 'uptake' })} onClick={() => { setActiveTab('uptake'); toggle("uptake") }}>VIRAL LOAD UPTAKE</NavLink>
+                    <NavLink
+                        className={classnames({
+                            active: mini_tab === 'uptake',
+                        })}
+                        onClick={() => {
+                            setActiveTab('uptake');
+                            toggle('uptake');
+                        }}
+                    >
+                        VIRAL LOAD UPTAKE
+                    </NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink className={classnames({ active: mini_tab === 'outcomes' })} onClick={() => { setActiveTab('outcomes'); toggle("outcomes") }}>VIRAL LOAD OUTCOMES</NavLink>
+                    <NavLink
+                        className={classnames({
+                            active: mini_tab === 'outcomes',
+                        })}
+                        onClick={() => {
+                            setActiveTab('outcomes');
+                            toggle('outcomes');
+                        }}
+                    >
+                        VIRAL LOAD OUTCOMES
+                    </NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink className={classnames({ active: mini_tab === 'unsuppressed' })} onClick={() => { setActiveTab('unsuppressed'); toggle("unsuppressed") }}>VIRAL LOAD OUTCOMES UNSUPPRESSED</NavLink>
+                    <NavLink
+                        className={classnames({
+                            active: mini_tab === 'unsuppressed',
+                        })}
+                        onClick={() => {
+                            setActiveTab('unsuppressed');
+                            toggle('unsuppressed');
+                        }}
+                    >
+                        VIRAL LOAD OUTCOMES UNSUPPRESSED
+                    </NavLink>
                 </NavItem>
             </Nav>
             <TabContent activeTab={mini_tab}>
                 <TabPane tabId="uptake">
-                    <SectionHeader title={branding.title + " UPTAKE"}/>
+                    <SectionHeader title={branding.title + ' UPTAKE'} />
                     <Card>
                         <CardHeader>Indicator Definition</CardHeader>
                         <CardBody>
                             <ul>
-                                <li>Eligible for Viral Load =&gt; Patients who are current on treatment for more than 12 months</li>
-                                <li>Valid Viral Load =&gt; Patients who are current on treatment for more than 12 months and have a viral load result whose sample was taken within the last 14 months of the latest visit.</li>
+                                <li>
+                                    Eligible for Viral Load =&gt; Patients who
+                                    are current on treatment for more than 12
+                                    months
+                                </li>
+                                <li>
+                                    Valid Viral Load =&gt; Patients who are
+                                    current on treatment for more than 12 months
+                                    and have a viral load result whose sample
+                                    was taken within the last 14 months of the
+                                    latest visit.
+                                </li>
                             </ul>
                         </CardBody>
                     </Card>
@@ -107,11 +147,11 @@ const ViralLoad = () => {
                             <MedianTimeTo1stVlByYear />
                         </Col>
                     </Row>
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                     <MedianTimeTo1stVlByCounty />
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                     <MedianTimeTo1stVlByPartner />
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                     <Row>
                         <Col sm={4}>
                             <ViralLoadUptakeBySex />
@@ -120,21 +160,38 @@ const ViralLoad = () => {
                             <ViralLoadUptakeByAge />
                         </Col>
                     </Row>
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                     <ViralLoadUptakeByCounty />
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                     <ViralLoadUptakeByPartner />
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                 </TabPane>
                 <TabPane tabId="outcomes">
-                    <SectionHeader title={branding.title + " OUTCOMES"}/>
+                    <SectionHeader title={branding.title + ' OUTCOMES'} />
                     <Card>
                         <CardHeader>Indicator Definition</CardHeader>
                         <CardBody>
                             <ul>
-                                <li>Virally suppressed =&gt; Patients who are current on treatment with valid viral load results of &lt;1000 copies/ml</li>
-                                <li>High Viral Load =&gt; Patients who are current on treatment with valid viral load results of ≥1,000 copies/ml</li>
-                                <li>Low Level Viremia =&gt; Patients who are current on treatment with valid viral load results of 400 – 999 copies/ml</li>
+                                <li>
+                                    LDL =&gt; Patients who are current on
+                                    treatment with valid viral load results of
+                                    &lt;50 copies/ml
+                                </li>
+                                <li>
+                                    Low Risk LLV =&gt; Patients who are current
+                                    on treatment with valid viral load results
+                                    of 50 – 199 copies/ml
+                                </li>
+                                <li>
+                                    Highl Risk LLV =&gt; Patients who are
+                                    current on treatment with valid viral load
+                                    results of 200 – 999 copies/ml
+                                </li>
+                                <li>
+                                    UNSUPPRESSED =&gt; Patients who are current
+                                    on treatment with valid viral load results
+                                    of ≥1,000 copies/ml
+                                </li>
                             </ul>
                         </CardBody>
                     </Card>
@@ -147,9 +204,9 @@ const ViralLoad = () => {
                             <ViralLoadOutcomesBySex />
                         </Col>
                     </Row>
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                     <ViralLoadSuppressionByAge />
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                     <Row>
                         <Col sm={4}>
                             <ViralLoadSuppressionByRegimen />
@@ -158,24 +215,26 @@ const ViralLoad = () => {
                             <ViralLoadSuppressionByYear />
                         </Col>
                     </Row>
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                     <ViralLoadSuppressionByCounty />
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                     <ViralLoadSuppressionByPartner />
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                     <ViralLoadSuppressionByYear6Month />
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                     <ViralLoadSuppressionByYear12Month />
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                     <ViralLoadSuppressionByYear24Month />
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                 </TabPane>
                 <TabPane tabId="unsuppressed">
-                    <SectionHeader title={branding.title + " OUTCOMES UNSUPPRESSED"}/>
+                    <SectionHeader
+                        title={branding.title + ' OUTCOMES UNSUPPRESSED'}
+                    />
                     <ViralLoadOverallNonSuppressedVlTest />
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                     <ViralLoadOutcomesHvlByFacility />
-                    <SectionFooter overview={branding.overview}/>
+                    <SectionFooter overview={branding.overview} />
                 </TabPane>
             </TabContent>
         </div>

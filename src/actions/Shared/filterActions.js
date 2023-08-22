@@ -70,6 +70,11 @@ export const filterByIndicator = indicators => ({
     payload: { indicators }
 });
 
+export const filterByEMR = emr => ({
+    type: actionTypes.FILTER_BY_EMR_TYPE,
+    payload: { emr }
+});
+
 export const enableFromDateFilter = () => ({
     type: actionTypes.ENABLE_FROM_DATE_FILTER
 });
@@ -148,6 +153,14 @@ export const enablePopulationTypeFilter = () => ({
 
 export const disablePopulationTypeFilter = () => ({
     type: actionTypes.DISABLE_POPULATION_TYPE_FILTER
+});
+
+export const enableEMRFilter = () => ({
+    type: actionTypes.ENABLE_EMR_TYPE_FILTER
+});
+
+export const disableEMRFilter = () => ({
+    type: actionTypes.DISABLE_EMR_TYPE_FILTER
 });
 
 export const enableCache = () => ({

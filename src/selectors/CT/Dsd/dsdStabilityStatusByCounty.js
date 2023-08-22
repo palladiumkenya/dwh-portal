@@ -30,9 +30,9 @@ export const getStabilityStatusByCounty = createSelector(
 
             const selectedCounty = currentOnARTExcludedAgeGroups.filter(obj => obj.County ? obj.County.toUpperCase() === county : null);
 
-            const withExcludedAgeGroups = list.filter(obj => obj.DATIM_AgeGroup !== 'Under 1'
-                && obj.DATIM_AgeGroup !== '1 to 4'
-                && obj.DATIM_AgeGroup !== '5 to 9'
+            const withExcludedAgeGroups = list.filter(obj => obj.DATIM_AgeGroup !== ' Under 1'
+                && obj.DATIM_AgeGroup !== '01 to 04'
+                && obj.DATIM_AgeGroup !== '05 to 09'
                 && obj.DATIM_AgeGroup !== '10 to 14'
                 && obj.DATIM_AgeGroup !== '15 to 19');
 

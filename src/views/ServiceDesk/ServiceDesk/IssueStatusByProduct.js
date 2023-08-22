@@ -20,7 +20,7 @@ const IssueStatusByProduct = () => {
             },
             xAxis: {
                 title: {
-                    text: 'PROUDUCT',
+                    text: 'PRODUCT',
                 },
                 categories: statusProduct.products,
             },

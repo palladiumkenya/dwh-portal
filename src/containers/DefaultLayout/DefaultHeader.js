@@ -80,13 +80,16 @@ const DefaultHeader = () => {
                 full={{ src: logo, width: 'auto', height: 50, alt: 'DWH Logo' }}
                 minimized={{ src: sygnet, alt: 'DWH Logo' }}
             />
-            <Nav className="d-md-down-none navbar" style={{ fontSize: '.88em', padding: ".1rem !important" }}>
-                <NavItem className="px-3">
+            <Nav
+                className="d-md-down-none navbar"
+                style={{ fontSize: '.88em', padding: '.1rem !important' }}
+            >
+                <NavItem >
                     <NavLink to="/" className="nav-link active">
                         <strong>Home</strong>
                     </NavLink>
                 </NavItem>
-                <NavItem className="px-3">
+                <NavItem >
                     <NavLink to="/reporting-rates" className="nav-link active">
                         <strong>Reporting Rates</strong>
                     </NavLink>
@@ -94,16 +97,26 @@ const DefaultHeader = () => {
                 {/* <NavItem className="px-3">
                     <NavLink to="/hrh" className="nav-link">HRH</NavLink>
                 </NavItem> */}
-                <NavItem className="px-3">
+                <NavItem >
                     <NavLink to="/hiv-testing" className="nav-link active">
                         <strong>HIV Testing & Prevention</strong>
                     </NavLink>
                 </NavItem>
-                <NavItem className="px-3">
+                <NavItem >
                     <NavLink to="/hiv-treatment" className="nav-link active">
                         <strong>HIV Treatment</strong>
                     </NavLink>
                 </NavItem>
+{/* <NavItem>
+                    <NavLink to="/service-desk" className="nav-link active">
+                        <strong>Service Desk</strong>
+                    </NavLink>
+                </NavItem> */}
+                {/* <NavItem >
+                    <NavLink to="/pmtct-rri" className="nav-link active">
+                        <strong>PMTCT RRI</strong>
+                    </NavLink>
+                </NavItem> */}
                 {/* <NavItem className="px-3">
                     <NavLink
                         to="/operational-and-his"
@@ -113,7 +126,7 @@ const DefaultHeader = () => {
                     </NavLink>
                 </NavItem> */}
 
-                <NavItem className="px-3">
+                <NavItem>
                     <a
                         href="https://kenyahmis.org/documentation/data-dictionaries/"
                         className="nav-link active"
@@ -123,7 +136,7 @@ const DefaultHeader = () => {
                         <strong>Resources</strong>
                     </a>
                 </NavItem>
-                <NavItem className="px-3">
+                {/* <NavItem >
                     <a
                         href="https://national-data-warehouse-gis-analytics-dwh.hub.arcgis.com/"
                         className="nav-link active"
@@ -132,8 +145,8 @@ const DefaultHeader = () => {
                     >
                         <strong>GIS</strong>
                     </a>
-                </NavItem>
-                <NavItem className="px-3">
+                </NavItem> */}
+                <NavItem >
                     <NavLink
                         to="/"
                         className="nav-link active"
@@ -185,24 +198,27 @@ const DefaultHeader = () => {
 const Adhoc = () => {
     return (
         <UncontrolledDropdown nav direction="down">
-        <DropdownToggle nav>
-            <strong>Self Service</strong>
-        </DropdownToggle>
-        <DropdownMenu right>
-            <DropdownItem header tag="div">
-                <strong>Platforms supporting Self Service</strong>
-            </DropdownItem>
-            <DropdownItem href={process.env.REACT_APP_ADHOC_URL} >
-                <strong>Flex monster</strong>
-            </DropdownItem>
-            <DropdownItem href={process.env.REACT_APP_METABASE_URL} >
-                <strong>Metabase</strong>
-            </DropdownItem>
-            <DropdownItem disabled={true} href={process.env.REACT_APP_METABASE_URL} >
-                <strong>Superset</strong>
-            </DropdownItem>
-        </DropdownMenu>
-    </UncontrolledDropdown>
+            <DropdownToggle nav>
+                <strong>Self Service</strong>
+            </DropdownToggle>
+            <DropdownMenu right>
+                <DropdownItem header tag="div">
+                    <strong>Platforms supporting Self Service</strong>
+                </DropdownItem>
+                <DropdownItem href={process.env.REACT_APP_ADHOC_URL}>
+                    <strong>Flex monster</strong>
+                </DropdownItem>
+                <DropdownItem href={process.env.REACT_APP_METABASE_URL}>
+                    <strong>Metabase</strong>
+                </DropdownItem>
+                <DropdownItem
+                    disabled={false}
+                    href={'http://dwhanalytics.kenyahmis.org/'}
+                >
+                    <strong>Superset</strong>
+                </DropdownItem>
+            </DropdownMenu>
+        </UncontrolledDropdown>
     );
 };
 
@@ -213,7 +229,7 @@ const Administration = (userType) => {
             <DropdownMenu right>
                 { userType.userType === 1 ? <DropdownItem><Link to="/administration/organizations" className="nav-link">Organizations</Link></DropdownItem> : '' }
 
-                <DropdownItem><a href="https://auth.kenyahmis.org/nascop/Users" className="nav-link">Users</a></DropdownItem>
+                <DropdownItem><a href="https://identity.kenyahmis.org/nascop/Users" className="nav-link">Users</a></DropdownItem>
             </DropdownMenu>
         </UncontrolledDropdown>
     );

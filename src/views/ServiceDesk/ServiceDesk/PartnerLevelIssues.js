@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader, Col, Row, Spinner } from 'reactstrap';
-import DataTable from 'react-data-table-component-with-filter';
+
 import MuiDataTable from 'mui-datatables';
 import moment from 'moment';
 import CsvDownloader from 'react-csv-downloader';
@@ -19,7 +19,7 @@ const PartnerLevelIssues = () => {
         .toUpperCase();
     const month = useSelector((state) => state.filters.fromDate)
         ? filterMonth
-        : moment().format('MMMM');
+        : moment().subtract(1, 'months').format('MMMM');
 
     const columns = [
         {
@@ -31,6 +31,7 @@ const PartnerLevelIssues = () => {
         { name: 'sdp', label: 'Partner' },
         { name: 'type', label: 'Issue Type' },
         { name: 'product', label: 'Issue Product' },
+        { name: 'status', label: 'Issue Status' },
         {
             name: 'date',
             label: 'Date Reported',
@@ -60,7 +61,7 @@ const PartnerLevelIssues = () => {
                                 <Spinner className="pull-right" />
                             ) : (
                                 <CsvDownloader
-                                    filename="verified vs txcurr by facility"
+                                    filename="service desk partner level issues"
                                     separator=","
                                     datas={partnerLevel}
                                     className="pull-right"

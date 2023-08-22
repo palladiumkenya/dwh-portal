@@ -83,6 +83,10 @@ import viralLoadSuppressionByYearAndSuppressionCategory
     from './CT/ViralLoad/viralLoadSuppressionByYearAndSuppressionCategory';
 import viralLoadOutcomesHvlByFacility from "./CT/ViralLoad/viralLoadOutcomesHvlByFacility";
 
+import quaterlyIIT from './CT/TreatmentOutcomes/quaterlyIIT';
+import IITTracingOutcomes from './CT/TreatmentOutcomes/IITTracingOutcomes';
+import IITTracing from './CT/TreatmentOutcomes/IITTracing';
+import appointmentKeepingWaterfall from './CT/TreatmentOutcomes/appointmentKeepingWaterfall';
 import treatmentOutcomesOverallLast12m from "./CT/TreatmentOutcomes/treatmentOutcomesOverallLast12m";
 import treatmentOutcomesBySex from "./CT/TreatmentOutcomes/treatmentOutcomesBySex";
 import treatmentOutcomesByPopulationType from "./CT/TreatmentOutcomes/treatmentOutcomesByPopulationType";
@@ -293,8 +297,6 @@ import artVerificationByCounty from './CT/ArtVerification/artVerificationByCount
 import artVerificationByPartner from './CT/ArtVerification/artVerificationByPartner';
 import artVerificationReasons from './CT/ArtVerification/artVerificationReasons';
 
-
-
 import openByCounty from './ServiceDesk/openByCounty';
 import openByPartner from './ServiceDesk/openByPartner';
 import openByProduct from './ServiceDesk/openByProduct';
@@ -303,6 +305,28 @@ import statusByMonth from './ServiceDesk/statusByMonth';
 import statusByProduct from './ServiceDesk/statusByProduct';
 import ticketsOverview from './ServiceDesk/ticketsOverview';
 import partnerLevelIssues from './ServiceDesk/partnerLevelIssues';
+
+import missedFirstANCCounty from './PMTCTRRI/MissedFirstANC/missedFirstANCCounty';
+import missedFirstANCOverview from './PMTCTRRI/MissedFirstANC/missedFirstANCOverview';
+import missedFirstANCGaps from './PMTCTRRI/MissedFirstANC/missedFirstANCGaps';
+import missedFirstANCSDP from './PMTCTRRI/MissedFirstANC/missedFirstANCSDP';
+
+import missedHAARTCounty from './PMTCTRRI/MissedHAART/missedHAARTCounty';
+import missedHAARTOverview from './PMTCTRRI/MissedHAART/missedHAARTOverview';
+import missedHAARTFacility from './PMTCTRRI/MissedHAART/missedHAARTFacility';
+import missedHAARTSDP from './PMTCTRRI/MissedHAART/missedHAARTSDP';
+
+import missedEIDAgeFirstPCR from './PMTCTRRI/MissedEID/missedEIDAgeFirstPCR';
+import missedEIDCounty from './PMTCTRRI/MissedEID/missedEIDCounty';
+import missedEIDOverview from './PMTCTRRI/MissedEID/missedEIDOverview';
+import missedEIDSDP from './PMTCTRRI/MissedEID/missedEIDSDP';
+import missedEIDMissingPCR from './PMTCTRRI/MissedEID/missedEIDMissingPCR';
+
+import missedInfantProphylaxis from './PMTCTRRI/MissedInfantProphylaxis/missedInfantProphylaxis';
+
+import missedViralLoad from './PMTCTRRI/MissedViralLoad/missedViralLoad';
+
+import missedDTG from './PMTCTRRI/MissedDTG/missedDTG';
 
 export default combineReducers({
     auth: authReducer,
@@ -412,6 +436,10 @@ export default combineReducers({
     twentyFourMonthRetention,
     treatmentOutcomesUndocumentedByFacility,
     treatmentOutcomesNetCohort,
+    quaterlyIIT,
+    appointmentKeepingWaterfall,
+    IITTracing,
+    IITTracingOutcomes,
 
     practitionersCountByCountyQualification,
     populationByCounty,
@@ -585,7 +613,6 @@ export default combineReducers({
     prepScreeningOutcome,
     prepDiagnosedSTITrends,
 
-
     artVerificationByCounty,
     artVerificationByPartner,
     artVerificationReasons,
@@ -598,4 +625,21 @@ export default combineReducers({
     statusByProduct,
     ticketsOverview,
     partnerLevelIssues,
+
+    missedFirstANCOverview,
+    missedFirstANCCounty,
+    missedFirstANCGaps,
+    missedFirstANCSDP,
+    missedHAARTCounty,
+    missedHAARTOverview,
+    missedHAARTFacility,
+    missedHAARTSDP,
+    missedEIDAgeFirstPCR,
+    missedEIDCounty,
+    missedEIDOverview,
+    missedEIDSDP,
+    missedEIDMissingPCR,
+    missedInfantProphylaxis,
+    missedViralLoad,
+    missedDTG,
 });

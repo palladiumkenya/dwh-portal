@@ -34,7 +34,7 @@ const HomeVLCascade = () => {
     const lowLevelViremia = useSelector(
         currentOnArtOverviewSelectors.getLowLevelViremia
     );
-    const suppressed = virallySuppressed + lowLevelViremia;
+    const suppressed = virallySuppressed;
     const suppressedPercent = currentOnArt
         ? (suppressed / hasCurrentVl) * 100
         : 0;

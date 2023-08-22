@@ -206,7 +206,6 @@ export const getHTSTESTKHIS = createSelector(
             loopAgeGroups(listDWH, twentyToTwentyFour),
             loopAgeGroups(listDWH, twentyFivePlus),
         ];
-        console.log(listDWHGender);
         
         let genderDWH = {
             male : parseInt(listDWHGender.find(e => e.Gender === "Male")?.tested ?? 0),

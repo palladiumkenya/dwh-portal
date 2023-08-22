@@ -15,9 +15,21 @@ const AdultTldUptakeByAgeGender = () => {
     const currentOnArtByAgeSexData = useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtByAgeSexList);
 
     const loadAdultTldUptakeByAgeGender = useCallback(async () => {
-        let ageGroups = _.remove(_.uniq(['Under 1', '1 to 4', '5 to 9', '10 to 14'].concat(ageGroupsOriginal)), function(element) {
-            return element !== 'Under 1' && element !== '1 to 4' && element !== '5 to 9' && element !== '10 to 14';
-        });
+        let ageGroups = _.remove(
+            _.uniq(
+                [' Under 1', '01 to 04', '05 to 09', '10 to 14'].concat(
+                    ageGroupsOriginal
+                )
+            ),
+            function (element) {
+                return (
+                    element !== ' Under 1' &&
+                    element !== '01 to 04' &&
+                    element !== '05 to 09' &&
+                    element !== '10 to 14'
+                );
+            }
+        );
         let data = [];
         let dataCurrent = [];
         for(let i = 0; i < sexGroups.length; i++) {

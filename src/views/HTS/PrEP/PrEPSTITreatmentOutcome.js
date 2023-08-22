@@ -27,7 +27,7 @@ const PrEPSTITreatmentOutcome = () => {
                 headerFormat:
                     '<span style="font-size:10px">{point.key}</span><table>',
                 pointFormat:
-                    '<tr><td style="color:{series.color};padding:0">{point.key}: </td>' +
+                    '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
                     '<td style="padding:0"><b>{point.y:.1f} %</b></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
@@ -45,7 +45,7 @@ const PrEPSTITreatmentOutcome = () => {
             },
             series: [
                 {
-                    name: 'Patients',
+                    name: 'patients',
                     data: [
                         {
                             name: 'NOT TREATED',
