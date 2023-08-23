@@ -165,38 +165,54 @@ const OTZTabs = () => {
                                     <strong>
                                         Adolescents Current on ART &#8594;
                                     </strong>{' '}
-                                    Number of adolescents currently receiving
-                                    ART including those who have missed their
-                                    appointment and 30 days have not passed
-                                    since the last missed appointment.
+                                    Number of adolescents (10-24 years)
+                                    currently receiving ART including those who
+                                    have missed their appointment and 30 days
+                                    have not passed since the last missed
+                                    appointment.
                                 </li>
                                 <li>
                                     <strong>Valid Viral Load &#8594;</strong>{' '}
                                     Adolescents on OTZ (10-24 years) current on
-                                    treatment for more than 6 months and have a
+                                    treatment for more than 3 months and have a
                                     viral load result whose sample was taken
-                                    within the last 14 months of the latest
+                                    within the last 6 months of the latest
                                     visit.
                                 </li>
                                 <li>
                                     <strong>Virally suppressed &#8594;</strong>{' '}
                                     Adolescents on OTZ (10-24 years) who are
                                     current on treatment with valid viral load
-                                    results of &#60;1000 copies/ml.
+                                    results of &#60;200 copies/ml.
                                 </li>
                                 <li>
-                                    <strong>
-                                        High Viral Load (HVL) &#8594;
-                                    </strong>{' '}
+                                    <strong>LDL &#8594;</strong>{' '}
                                     Adolescents on OTZ (10-24 years) who are
                                     current on treatment with valid viral load
-                                    results of &#8805;1,000 copies/ml.
+                                    results of &lt;50 copies/ml
+                                </li>
+                                <li>
+                                    <strong>Low Risk LLV &#8594;</strong>{' '}
+                                    Adolescents on OTZ (10-24 years) who are
+                                    current on treatment with valid viral load
+                                    results of 50 – 199 copies/ml
+                                </li>
+                                <li>
+                                    <strong>High Risk LLV &#8594;</strong>{' '}
+                                    Adolescents on OTZ (10-24 years) who are
+                                    current on treatment with valid viral load
+                                    results of 200 – 999 copies/ml
+                                </li>
+                                <li>
+                                    <strong>UNSUPPRESSED &#8594;</strong>{' '}
+                                    Adolescents on OTZ (10-24 years) who are
+                                    current on treatment with valid viral load
+                                    results of &gt; 1,000 copies/ml
                                 </li>
                                 <li>
                                     <strong>Completed Training &#8594;</strong>{' '}
                                     Computed as having completed 7 out of 8 of
-                                    the
-                                    modules:OTZ_Orientation,OTZ_Participation,OTZ_MakingDecisions,OTZ_Transition,OTZ_Leadership,OTZ_TreatmentLiteracy,OTZ_SRH,OTZ_Beyond
+                                    the modules:OTZ_Orientation,OTZ_Participation,OTZ_MakingDecisions,OTZ_Transition,OTZ_Leadership,OTZ_TreatmentLiteracy,OTZ_SRH,OTZ_Beyond
                                 </li>
                             </ul>
                         </CardBody>
@@ -279,7 +295,7 @@ const OTZTabs = () => {
                     <Row>{/* TODO: 2 charts here on MMD col6 */}</Row>
                     <Row>
                         <Col className={'col-6'}>
-                            <OtzAlhivWithBaselineVl/>
+                            <OtzAlhivWithBaselineVl />
                         </Col>
                         <Col className={'col-6'}>
                             <OtzOutcomesAmongAlhivWithBaselineVl />
