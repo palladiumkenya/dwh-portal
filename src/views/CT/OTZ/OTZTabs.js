@@ -212,7 +212,7 @@ const OTZTabs = () => {
                                 <li>
                                     <strong>Completed Training &#8594;</strong>{' '}
                                     Computed as having completed 7 out of 8 of
-                                    the modules:OTZ_Orientation,OTZ_Participation,OTZ_MakingDecisions,OTZ_Transition,OTZ_Leadership,OTZ_TreatmentLiteracy,OTZ_SRH,OTZ_Beyond
+                                    the modules: OTZ_Orientation, OTZ_Participation, OTZ_MakingDecisions, OTZ_Transition, OTZ_Leadership, OTZ_TreatmentLiteracy, OTZ_SRH, OTZ_Beyond
                                 </li>
                             </ul>
                         </CardBody>
