@@ -20,6 +20,11 @@ const DefaultLayout = Loadable({ loader: () => import('./containers/DefaultLayou
 const Login = Loadable({ loader: () => import('./views/Pages/Login'), loading: Loading, delay: LOADING_DELAY });
 const SigninOidc = Loadable({ loader: () => import('./views/Pages/Login/signin-oidc'), loading: Loading, delay: LOADING_DELAY });
 const SignoutOidc = Loadable({ loader: () => import('./views/Pages/Login/signout-oidc'), loading: Loading, delay: LOADING_DELAY });
+const Resources = Loadable({
+    loader: () => import('./views/Pages/Resources/Resources'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 
 if (typeof Highcharts === 'object') {
     HighchartsExporting(Highcharts);
@@ -43,10 +48,20 @@ const App = () => {
         <AuthProvider userManager={userManager} store={store}>
             <HashRouter history={history}>
                 <Switch>
-                    <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
+                    <Route
+                        exact
+                        path="/login"
+                        name="Login Page"
+                        render={(props) => <Login {...props} />}
+                    />
                     <Route path="/signout-oidc" component={SignoutOidc} />
                     <Route path="/signin-oidc" component={SigninOidc} />
-                    <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>} />
+                    <Route path="/resources" component={Resources} />
+                    <Route
+                        path="/"
+                        name="Home"
+                        render={(props) => <DefaultLayout {...props} />}
+                    />
                 </Switch>
             </HashRouter>
         </AuthProvider>
