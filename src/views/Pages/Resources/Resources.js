@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button, Menu } from 'semantic-ui-react';
+import { Card, Button, Menu, Icon } from 'semantic-ui-react';
 
 const Resources = ()=>{
 
@@ -79,13 +79,19 @@ let applications = [
                             <Card.Content extra>
                                 <div className="ui two buttons">
                                     <Button
+                                        animated
                                         basic
                                         color="green"
                                         href={app.link}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        Open
+                                        <Button.Content hidden>
+                                            <Icon name="globe" />
+                                        </Button.Content>
+                                        <Button.Content visible>
+                                            Open
+                                        </Button.Content>
                                     </Button>
                                 </div>
                             </Card.Content>
