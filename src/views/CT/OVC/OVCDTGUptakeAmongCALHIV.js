@@ -65,7 +65,7 @@ const OVCDTGUptakeAmongCALHIV = () => {
                             name: 'CALHIV TOTAL ON DTG',
                             y: CALHIVOnDTG.CALHIVonDTG,
                             color: "#14084D",
-                            text: CALHIVOnDTG.CALHIVonDTG.toLocaleString('en') + ' (' + parseFloat(((CALHIVOnDTG.CALHIVonDTG/CALHIVCurrentOnArt.CALHIVonART)*100).toString()).toFixed(0) + '%)',
+                            text: CALHIVOnDTG.CALHIVonDTG?.toLocaleString('en') + ' (' + parseFloat(((CALHIVOnDTG.CALHIVonDTG/CALHIVCurrentOnArt.CALHIVonART)*100).toString()).toFixed(0) + '%)',
                             cText: 'CALHIV TOTAL ON DTG: ' + CALHIVOnDTG.CALHIVonDTG
                         }
                     ]

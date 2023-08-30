@@ -9,8 +9,7 @@ const listUnfilteredNotInOvc = state => state.CALHIVCurrentOnArtNotInOvc.listUnf
 export const getCALHIVCurrentOnArt = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
-        const list = filtered ? listFiltered : listUnfiltered;
-        return list;
+        return filtered ? listFiltered : listUnfiltered;
     }
 );
 

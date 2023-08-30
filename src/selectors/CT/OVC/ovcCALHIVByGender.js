@@ -7,7 +7,6 @@ const listUnfiltered = state => state.OvcCALHIVByGender.listUnfiltered;
 export const getOvcCALHIVByGender = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
-        const list = filtered ? listFiltered : listUnfiltered;
-        return list;
+        return filtered ? listFiltered : listUnfiltered;
     }
 );

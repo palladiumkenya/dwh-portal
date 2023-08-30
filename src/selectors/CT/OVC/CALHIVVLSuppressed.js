@@ -7,7 +7,6 @@ const listUnfiltered = state => state.CALHIVVLSuppressed.listUnfiltered;
 export const getCALHIVVLSuppressed = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
-        const list = filtered ? listFiltered : listUnfiltered;
-        return list;
+        return filtered ? listFiltered : listUnfiltered;
     }
 );
