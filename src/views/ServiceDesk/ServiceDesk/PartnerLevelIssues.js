@@ -45,9 +45,13 @@ const PartnerLevelIssues = () => {
                 ),
             },
         },
-        { name: 'Description', label: 'Description', options: {
-            filter: false
-        } },
+        {
+            name: 'Summary',
+            label: 'Summary',
+            options: {
+                filter: false,
+            },
+        },
     ];
 
     return (
