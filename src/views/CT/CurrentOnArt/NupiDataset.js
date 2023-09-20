@@ -252,6 +252,14 @@ const NupiDataset = () => {
                             label="# Patients verified but with survey"
                             value="# Patients verified but with survey"
                         />
+                        <ExcelColumn
+                            label="# Patients with survey but not verified among DWH TXCurr"
+                            value="# Patients with survey but not verified among DWH TXCurr"
+                        />
+                        <ExcelColumn
+                            label=" # Patients with survey but no nupi in Non-EMR Sites"
+                            value=" # Patients with survey but no nupi in Non-EMR Sites"
+                        />
                     </ExcelSheet>
                 </ExcelFile>
             )}
