@@ -260,6 +260,10 @@ const NupiDataset = () => {
                             label=" # Patients with survey but no nupi in Non-EMR Sites"
                             value=" # Patients with survey but no nupi in Non-EMR Sites"
                         />
+                        <ExcelColumn
+                            label="# Patients with surveys and with nupi in all sites"
+                            value="# Patients with surveys and with nupi in all sites"
+                        />
                     </ExcelSheet>
                 </ExcelFile>
             )}
