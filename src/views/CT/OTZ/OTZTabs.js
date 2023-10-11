@@ -165,7 +165,7 @@ const OTZTabs = () => {
                                     <strong>
                                         Adolescents Current on ART &#8594;
                                     </strong>{' '}
-                                    Number of adolescents (10-24 years)
+                                    Number of adolescents (10-19 years)
                                     currently receiving ART including those who
                                     have missed their appointment and 30 days
                                     have not passed since the last missed
@@ -173,7 +173,7 @@ const OTZTabs = () => {
                                 </li>
                                 <li>
                                     <strong>Valid Viral Load &#8594;</strong>{' '}
-                                    Adolescents on OTZ (10-24 years) current on
+                                    Adolescents on OTZ (10-19 years) current on
                                     treatment for more than 3 months and have a
                                     viral load result whose sample was taken
                                     within the last 6 months of the latest
@@ -181,31 +181,31 @@ const OTZTabs = () => {
                                 </li>
                                 <li>
                                     <strong>Virally suppressed &#8594;</strong>{' '}
-                                    Adolescents on OTZ (10-24 years) who are
+                                    Adolescents on OTZ (10-19 years) who are
                                     current on treatment with valid viral load
                                     results of &#60;200 copies/ml.
                                 </li>
                                 <li>
                                     <strong>LDL &#8594;</strong>{' '}
-                                    Adolescents on OTZ (10-24 years) who are
+                                    Adolescents on OTZ (10-19 years) who are
                                     current on treatment with valid viral load
                                     results of &lt;50 copies/ml
                                 </li>
                                 <li>
                                     <strong>Low Risk LLV &#8594;</strong>{' '}
-                                    Adolescents on OTZ (10-24 years) who are
+                                    Adolescents on OTZ (10-19 years) who are
                                     current on treatment with valid viral load
                                     results of 50 – 199 copies/ml
                                 </li>
                                 <li>
                                     <strong>High Risk LLV &#8594;</strong>{' '}
-                                    Adolescents on OTZ (10-24 years) who are
+                                    Adolescents on OTZ (10-19 years) who are
                                     current on treatment with valid viral load
                                     results of 200 – 999 copies/ml
                                 </li>
                                 <li>
                                     <strong>UNSUPPRESSED &#8594;</strong>{' '}
-                                    Adolescents on OTZ (10-24 years) who are
+                                    Adolescents on OTZ (10-19 years) who are
                                     current on treatment with valid viral load
                                     results of &gt; 1,000 copies/ml
                                 </li>
