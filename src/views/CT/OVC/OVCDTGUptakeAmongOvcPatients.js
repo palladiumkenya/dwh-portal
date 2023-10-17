@@ -65,7 +65,7 @@ const OVCDTGUptakeAmongOvcPatients = () => {
                             name: 'OVC TOTAL ON TLD',
                             y: ovcTotalOnTld.OVConDTG,
                             color: "#14084D",
-                            text: ovcTotalOnTld.OVConDTG.toLocaleString('en') + ' (' + parseFloat(((ovcTotalOnTld.OVConDTG/ovcCurrentOnArt.OVConART)*100).toString()).toFixed(0) + '%)',
+                            text: ovcTotalOnTld.OVConDTG?.toLocaleString('en') + ' (' + parseFloat(((ovcTotalOnTld.OVConDTG/ovcCurrentOnArt.OVConART)*100).toString()).toFixed(0) + '%)',
                             cText: 'OVC TOTAL ON TLD: ' + ovcTotalOnTld.OVConDTG
                         }
                     ]

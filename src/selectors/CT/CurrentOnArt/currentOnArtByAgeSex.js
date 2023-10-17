@@ -123,13 +123,13 @@ export const getCurrentOnArtAdults = createSelector(
         let currentOnArtFemale = 0;
 
         for (let i = 0; i < list.length; i++) {
-            if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
+            if (list[i].Gender?.toLowerCase() === "M".toLowerCase() || list[i].Gender?.toLowerCase() === "Male".toLowerCase()) {
                 let index = ageGroups.indexOf(list[i].ageGroup);
                 if(index === -1) {
                     continue;
                 }
                 currentOnArtMale = currentOnArtMale + parseInt(list[i].txCurr, 10);
-            } else if (list[i].Gender.toLowerCase() === "F".toLowerCase() || list[i].Gender.toLowerCase() === "Female".toLowerCase()) {
+            } else if (list[i].Gender?.toLowerCase() === "F".toLowerCase() || list[i].Gender?.toLowerCase() === "Female".toLowerCase()) {
                 let index = ageGroups.indexOf(list[i].ageGroup);
                 if(index === -1) {
                     continue;
@@ -169,13 +169,13 @@ export const getCurrentOnArtAdolescents = createSelector(
         let currentOnArtFemale = 0;
 
         for (let i = 0; i < list.length; i++) {
-            if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
+            if (list[i].Gender?.toLowerCase() === "M".toLowerCase() || list[i].Gender?.toLowerCase() === "Male".toLowerCase()) {
                 let index = ageGroups.indexOf(list[i].ageGroup);
                 if(index === -1) {
                     continue;
                 }
                 currentOnArtMale = currentOnArtMale + parseInt(list[i].txCurr, 10);
-            } else if (list[i].Gender.toLowerCase() === "F".toLowerCase() || list[i].Gender.toLowerCase() === "Female".toLowerCase()) {
+            } else if (list[i].Gender?.toLowerCase() === "F".toLowerCase() || list[i].Gender?.toLowerCase() === "Female".toLowerCase()) {
                 let index = ageGroups.indexOf(list[i].ageGroup);
                 if(index === -1) {
                     continue;
@@ -215,13 +215,13 @@ export const getCurrentOnArtChildren = createSelector(
         let currentOnArtFemale = 0;
 
         for (let i = 0; i < list.length; i++) {
-            if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
+            if (list[i].Gender?.toLowerCase() === "M".toLowerCase() || list[i].Gender?.toLowerCase() === "Male".toLowerCase()) {
                 let index = ageGroups.indexOf(list[i].ageGroup);
                 if(index === -1) {
                     continue;
                 }
                 currentOnArtMale = currentOnArtMale + parseInt(list[i].txCurr, 10);
-            } else if (list[i].Gender.toLowerCase() === "F".toLowerCase() || list[i].Gender.toLowerCase() === "Female".toLowerCase()) {
+            } else if (list[i].Gender?.toLowerCase() === "F".toLowerCase() || list[i].Gender?.toLowerCase() === "Female".toLowerCase()) {
                 let index = ageGroups.indexOf(list[i].ageGroup);
                 if(index === -1) {
                     continue;

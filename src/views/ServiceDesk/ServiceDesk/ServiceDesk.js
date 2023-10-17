@@ -89,11 +89,11 @@ const Service_Desk = () => {
             <SectionFooter overview={branding.overview} />
             <OpenTicketsByPartner />
             <SectionFooter overview={branding.overview} />
-            <OpenTicketsByCounty />
+            {/* <OpenTicketsByCounty />
+            <SectionFooter overview={branding.overview} /> */}
+            <IssueStatusByMonth />
             <SectionFooter overview={branding.overview} />
             <OpenTicketsByMonth />
-            <SectionFooter overview={branding.overview} />
-            <IssueStatusByMonth />
             <SectionFooter overview={branding.overview} />
             <PartnerLevelIssues />
             <SectionFooter overview={branding.overview} />

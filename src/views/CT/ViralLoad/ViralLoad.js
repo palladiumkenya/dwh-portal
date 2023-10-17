@@ -125,15 +125,13 @@ const ViralLoad = () => {
                             <ul>
                                 <li>
                                     Eligible for Viral Load =&gt; Patients who
-                                    are current on treatment for more than 12
-                                    months
+                                    are current on treatment for more than 3
+                                    months.
                                 </li>
                                 <li>
-                                    Valid Viral Load =&gt; Patients who are
-                                    current on treatment for more than 12 months
-                                    and have a viral load result whose sample
-                                    was taken within the last 14 months of the
-                                    latest visit.
+                                    Valid Viral Load =&gt; 0 - 24 Years (New) -
+                                    6 months from Viral load date 25 Years and
+                                    Older (New) - 12 months from Viral load date.
                                 </li>
                             </ul>
                         </CardBody>
@@ -183,7 +181,7 @@ const ViralLoad = () => {
                                     of 50 – 199 copies/ml
                                 </li>
                                 <li>
-                                    Highl Risk LLV =&gt; Patients who are
+                                    High Risk LLV =&gt; Patients who are
                                     current on treatment with valid viral load
                                     results of 200 – 999 copies/ml
                                 </li>
