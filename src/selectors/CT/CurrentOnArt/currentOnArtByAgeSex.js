@@ -32,14 +32,14 @@ export const getCurrentOnArtByAgeSex = createSelector(
             const ageGroupMaleFilter = list.filter(
                 (obj) =>
                     obj.ageGroup === ageGroup &&
-                    (obj.Gender.toLowerCase() === 'M'.toLowerCase() ||
-                        obj.Gender.toLowerCase() === 'Male'.toLowerCase())
+                    (obj?.Gender?.toLowerCase() === 'M'.toLowerCase() ||
+                        obj?.Gender?.toLowerCase() === 'Male'.toLowerCase())
             );
             const ageGroupFemaleFilter = list.filter(
                 (obj) =>
-                    obj.ageGroup === ageGroup &&
-                    (obj.Gender.toLowerCase() === 'F'.toLowerCase() ||
-                        obj.Gender.toLowerCase() === 'Female'.toLowerCase())
+                    obj?.ageGroup === ageGroup &&
+                    (obj?.Gender?.toLowerCase() === 'F'.toLowerCase() ||
+                        obj?.Gender?.toLowerCase() === 'Female'.toLowerCase())
             );
             if (ageGroupMaleFilter.length > 0) {
                 currentOnArtMale.push(ageGroupMaleFilter[0].txCurr);
@@ -79,9 +79,9 @@ export const getCurrentOnArtBySex = createSelector(
         let currentOnArtFemale = 0;
 
         for (let i = 0; i < list.length; i++) {
-            if (list[i].Gender.toLowerCase() === "M".toLowerCase() || list[i].Gender.toLowerCase() === "Male".toLowerCase()) {
+            if (list[i].Gender?.toLowerCase() === "M".toLowerCase() || list[i].Gender?.toLowerCase() === "Male".toLowerCase()) {
                 currentOnArtMale = currentOnArtMale + parseInt(list[i].txCurr);
-            } else if (list[i].Gender.toLowerCase() === "F".toLowerCase() || list[i].Gender.toLowerCase() === "Female".toLowerCase()) {
+            } else if (list[i].Gender?.toLowerCase() === "F".toLowerCase() || list[i].Gender?.toLowerCase() === "Female".toLowerCase()) {
                 currentOnArtFemale = currentOnArtFemale + parseInt(list[i].txCurr);
             }
         }
