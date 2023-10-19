@@ -51,14 +51,14 @@ export const getCurrentOnArtByAgeSex = createSelector(
             const ageGroupMaleFilter = list.filter(
                 (obj) =>
                     obj.AgeGroup === ageGroup &&
-                    (obj.Gender.toLowerCase() === 'M'.toLowerCase() ||
-                        obj.Gender.toLowerCase() === 'Male'.toLowerCase())
+                    (obj.Gender?.toLowerCase() === 'M'.toLowerCase() ||
+                        obj.Gender?.toLowerCase() === 'Male'.toLowerCase())
             );
             const ageGroupFemaleFilter = list.filter(
                 (obj) =>
                     obj.AgeGroup === ageGroup &&
-                    (obj.Gender.toLowerCase() === 'F'.toLowerCase() ||
-                        obj.Gender.toLowerCase() === 'Female'.toLowerCase())
+                    (obj.Gender?.toLowerCase() === 'F'.toLowerCase() ||
+                        obj.Gender?.toLowerCase() === 'Female'.toLowerCase())
             );
             if (ageGroupMaleFilter.length > 0) {
                 let txcurr = isNaN(
@@ -68,9 +68,9 @@ export const getCurrentOnArtByAgeSex = createSelector(
                                 obj.ageGroup
                                     ?.replace('-', ' to ')
                                     .replace('<', 'Under ') === ageGroup &&
-                                (obj.Gender.toLowerCase() ===
+                                (obj.Gender?.toLowerCase() ===
                                     'M'.toLowerCase() ||
-                                    obj.Gender.toLowerCase() ===
+                                    obj.Gender?.toLowerCase() ===
                                         'Male'.toLowerCase())
                         )?.txCurr
                 ) ? 0 : (ageGroupMaleFilter[0].NumNupi * 100) /
@@ -79,9 +79,9 @@ export const getCurrentOnArtByAgeSex = createSelector(
                                 obj.ageGroup
                                     ?.replace('-', ' to ')
                                     .replace('<', 'Under ') === ageGroup &&
-                                (obj.Gender.toLowerCase() ===
+                                (obj.Gender?.toLowerCase() ===
                                     'M'.toLowerCase() ||
-                                    obj.Gender.toLowerCase() ===
+                                    obj.Gender?.toLowerCase() ===
                                         'Male'.toLowerCase())
                         )?.txCurr;
                 verifiedPercMale.push(
@@ -101,8 +101,8 @@ export const getCurrentOnArtByAgeSex = createSelector(
                             obj.ageGroup
                                 .replace('-', ' to ')
                                 .replace('<', 'Under ') === ageGroup &&
-                            (obj.Gender.toLowerCase() === 'F'.toLowerCase() ||
-                                obj.Gender.toLowerCase() ===
+                            (obj.Gender?.toLowerCase() === 'F'.toLowerCase() ||
+                                obj.Gender?.toLowerCase() ===
                                     'Female'.toLowerCase())
                     )?.txCurr)? 0 :(ageGroupFemaleFilter[0]?.NumNupi * 100) /
                         listAll.find(
@@ -110,9 +110,9 @@ export const getCurrentOnArtByAgeSex = createSelector(
                                 obj.ageGroup
                                     .replace('-', ' to ')
                                     .replace('<', 'Under ') === ageGroup &&
-                                (obj.Gender.toLowerCase() ===
+                                (obj.Gender?.toLowerCase() ===
                                     'F'.toLowerCase() ||
-                                    obj.Gender.toLowerCase() ===
+                                    obj.Gender?.toLowerCase() ===
                                         'Female'.toLowerCase())
                         )?.txCurr ;
                 verifiedPercFemale.push(txcurr);
@@ -239,15 +239,15 @@ export const getCurrentOnArtByAgeSexLT15 = createSelector(
             const ageGroupMaleFilter = list.filter(
                 (obj) =>
                     obj.AgeGroup === ageGroup &&
-                    (obj.Gender.toLowerCase() === 'M'.toLowerCase() ||
-                        obj.Gender.toLowerCase() === 'Male'.toLowerCase())
+                    (obj.Gender?.toLowerCase() === 'M'.toLowerCase() ||
+                        obj.Gender?.toLowerCase() === 'Male'.toLowerCase())
             );
 
             const ageGroupFemaleFilter = list.filter(
                 (obj) =>
                     obj.AgeGroup === ageGroup &&
-                    (obj.Gender.toLowerCase() === 'F'.toLowerCase() ||
-                        obj.Gender.toLowerCase() === 'Female'.toLowerCase())
+                    (obj.Gender?.toLowerCase() === 'F'.toLowerCase() ||
+                        obj.Gender?.toLowerCase() === 'Female'.toLowerCase())
             );
 
             if (ageGroupMaleFilter.length > 0) {
@@ -258,9 +258,9 @@ export const getCurrentOnArtByAgeSexLT15 = createSelector(
                                 obj.ageGroup
                                     ?.replace('-', ' to ')
                                     .replace('<', 'Under ') === ageGroup &&
-                                (obj.Gender.toLowerCase() ===
+                                (obj.Gender?.toLowerCase() ===
                                     'M'.toLowerCase() ||
-                                    obj.Gender.toLowerCase() ===
+                                    obj.Gender?.toLowerCase() ===
                                         'Male'.toLowerCase())
                         )?.txCurr
                 )
@@ -271,8 +271,8 @@ export const getCurrentOnArtByAgeSexLT15 = createSelector(
                               obj.ageGroup
                                   ?.replace('-', ' to ')
                                   .replace('<', 'Under ') === ageGroup &&
-                              (obj.Gender.toLowerCase() === 'M'.toLowerCase() ||
-                                  obj.Gender.toLowerCase() ===
+                              (obj.Gender?.toLowerCase() === 'M'.toLowerCase() ||
+                                  obj.Gender?.toLowerCase() ===
                                       'Male'.toLowerCase())
                       )?.txCurr;
                 verifiedPercMale.push(txcurr);
@@ -291,9 +291,9 @@ export const getCurrentOnArtByAgeSexLT15 = createSelector(
                                 obj.ageGroup
                                     .replace('-', ' to ')
                                     .replace('<', 'Under ') === ageGroup &&
-                                (obj.Gender.toLowerCase() ===
+                                (obj.Gender?.toLowerCase() ===
                                     'F'.toLowerCase() ||
-                                    obj.Gender.toLowerCase() ===
+                                    obj.Gender?.toLowerCase() ===
                                         'Female'.toLowerCase())
                         )?.txCurr
                 )
@@ -304,8 +304,8 @@ export const getCurrentOnArtByAgeSexLT15 = createSelector(
                               obj.ageGroup
                                   .replace('-', ' to ')
                                   .replace('<', 'Under ') === ageGroup &&
-                              (obj.Gender.toLowerCase() === 'F'.toLowerCase() ||
-                                  obj.Gender.toLowerCase() ===
+                              (obj.Gender?.toLowerCase() === 'F'.toLowerCase() ||
+                                  obj.Gender?.toLowerCase() ===
                                       'Female'.toLowerCase())
                       )?.txCurr;
                 verifiedPercFemale.push(txcurr);
@@ -363,14 +363,14 @@ export const getCurrentOnArtByAgeSexGT15 = createSelector(
             const ageGroupMaleFilter = list.filter(
                 (obj) =>
                     obj.AgeGroup === ageGroup &&
-                    (obj.Gender.toLowerCase() === 'M'.toLowerCase() ||
-                        obj.Gender.toLowerCase() === 'Male'.toLowerCase())
+                    (obj.Gender?.toLowerCase() === 'M'.toLowerCase() ||
+                        obj.Gender?.toLowerCase() === 'Male'.toLowerCase())
             );
             const ageGroupFemaleFilter = list.filter(
                 (obj) =>
                     obj.AgeGroup === ageGroup &&
-                    (obj.Gender.toLowerCase() === 'F'.toLowerCase() ||
-                        obj.Gender.toLowerCase() === 'Female'.toLowerCase())
+                    (obj.Gender?.toLowerCase() === 'F'.toLowerCase() ||
+                        obj.Gender?.toLowerCase() === 'Female'.toLowerCase())
             );
             if (ageGroupMaleFilter.length > 0) {
                 let txcurr = isNaN(
@@ -380,9 +380,9 @@ export const getCurrentOnArtByAgeSexGT15 = createSelector(
                                 obj.ageGroup
                                     ?.replace('-', ' to ')
                                     .replace('<', 'Under ') === ageGroup &&
-                                (obj.Gender.toLowerCase() ===
+                                (obj.Gender?.toLowerCase() ===
                                     'M'.toLowerCase() ||
-                                    obj.Gender.toLowerCase() ===
+                                    obj.Gender?.toLowerCase() ===
                                         'Male'.toLowerCase())
                         )?.txCurr
                 )
@@ -393,8 +393,8 @@ export const getCurrentOnArtByAgeSexGT15 = createSelector(
                               obj.ageGroup
                                   ?.replace('-', ' to ')
                                   .replace('<', 'Under ') === ageGroup &&
-                              (obj.Gender.toLowerCase() === 'M'.toLowerCase() ||
-                                  obj.Gender.toLowerCase() ===
+                              (obj.Gender?.toLowerCase() === 'M'.toLowerCase() ||
+                                  obj.Gender?.toLowerCase() ===
                                       'Male'.toLowerCase())
                       )?.txCurr;
                 verifiedPercMale.push(txcurr);
@@ -413,9 +413,9 @@ export const getCurrentOnArtByAgeSexGT15 = createSelector(
                                 obj.ageGroup
                                     .replace('-', ' to ')
                                     .replace('<', 'Under ') === ageGroup &&
-                                (obj.Gender.toLowerCase() ===
+                                (obj.Gender?.toLowerCase() ===
                                     'F'.toLowerCase() ||
-                                    obj.Gender.toLowerCase() ===
+                                    obj.Gender?.toLowerCase() ===
                                         'Female'.toLowerCase())
                         )?.txCurr
                 )
@@ -426,8 +426,8 @@ export const getCurrentOnArtByAgeSexGT15 = createSelector(
                               obj.ageGroup
                                   .replace('-', ' to ')
                                   .replace('<', 'Under ') === ageGroup &&
-                              (obj.Gender.toLowerCase() === 'F'.toLowerCase() ||
-                                  obj.Gender.toLowerCase() ===
+                              (obj.Gender?.toLowerCase() === 'F'.toLowerCase() ||
+                                  obj.Gender?.toLowerCase() ===
                                       'Female'.toLowerCase())
                       )?.txCurr;
                 verifiedPercFemale.push(txcurr);
