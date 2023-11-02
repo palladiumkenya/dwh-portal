@@ -84,12 +84,12 @@ const DefaultHeader = () => {
                 className="d-md-down-none navbar"
                 style={{ fontSize: '.88em', padding: '.1rem !important' }}
             >
-                <NavItem >
+                <NavItem>
                     <NavLink to="/" className="nav-link active">
                         <strong>Home</strong>
                     </NavLink>
                 </NavItem>
-                <NavItem >
+                <NavItem>
                     <NavLink to="/reporting-rates" className="nav-link active">
                         <strong>Reporting Rates</strong>
                     </NavLink>
@@ -97,17 +97,17 @@ const DefaultHeader = () => {
                 {/* <NavItem className="px-3">
                     <NavLink to="/hrh" className="nav-link">HRH</NavLink>
                 </NavItem> */}
-                <NavItem >
+                <NavItem>
                     <NavLink to="/hiv-testing" className="nav-link active">
                         <strong>HIV Testing & Prevention</strong>
                     </NavLink>
                 </NavItem>
-                <NavItem >
+                <NavItem>
                     <NavLink to="/hiv-treatment" className="nav-link active">
                         <strong>HIV Treatment</strong>
                     </NavLink>
                 </NavItem>
-{/* <NavItem>
+                {/* <NavItem>
                     <NavLink to="/service-desk" className="nav-link active">
                         <strong>Service Desk</strong>
                     </NavLink>
@@ -128,7 +128,7 @@ const DefaultHeader = () => {
 
                 <NavItem>
                     <a
-                        href="https://kenyahmis.org/documentation/data-dictionaries/"
+                        href="/resources"
                         className="nav-link active"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -146,7 +146,7 @@ const DefaultHeader = () => {
                         <strong>GIS</strong>
                     </a>
                 </NavItem> */}
-                <NavItem >
+                <NavItem>
                     <NavLink
                         to="/"
                         className="nav-link active"
