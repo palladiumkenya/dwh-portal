@@ -127,14 +127,9 @@ const DefaultHeader = () => {
                 </NavItem> */}
 
                 <NavItem>
-                    <a
-                        href="/resources"
-                        className="nav-link active"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
+                    <NavLink to="/resources" className="nav-link active">
                         <strong>Resources</strong>
-                    </a>
+                    </NavLink>
                 </NavItem>
                 {/* <NavItem >
                     <a
