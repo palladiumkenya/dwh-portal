@@ -107,11 +107,11 @@ const DefaultHeader = () => {
                         <strong>HIV Treatment</strong>
                     </NavLink>
                 </NavItem>
-                {/* <NavItem>
+                <NavItem>
                     <NavLink to="/service-desk" className="nav-link active">
                         <strong>Service Desk</strong>
                     </NavLink>
-                </NavItem> */}
+                </NavItem>
                 {/* <NavItem >
                     <NavLink to="/pmtct-rri" className="nav-link active">
                         <strong>PMTCT RRI</strong>
