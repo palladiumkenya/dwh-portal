@@ -34,6 +34,7 @@ const ViralLoadSuppressionByYear12Month = Loadable({ loader: () => import('./Vir
 const ViralLoadSuppressionByYear24Month = Loadable({ loader: () => import('./ViralLoadSuppressionByYear24Month'), loading: Loading, delay: LOADING_DELAY });
 const ViralLoadOutcomesOverview = Loadable({ loader: () => import('./ViralLoadOutcomesOverview'), loading: Loading, delay: LOADING_DELAY });
 const ViralLoadOutcomesHvlByFacility = Loadable({ loader: () => import('./ViralLoadOutcomesHvlByFacility'), loading: Loading, delay: LOADING_DELAY });
+const ViralLoadU_U = Loadable({loader: () => import('./ViralLoadU_U'), loading: Loading, delay: LOADING_DELAY,});
 
 const ViralLoad = () => {
     const branding = { title: "VIRAL LOAD", description: "OVERVIEW", overview: "Viral Load Monitoring" };
@@ -115,6 +116,19 @@ const ViralLoad = () => {
                         VIRAL LOAD OUTCOMES UNSUPPRESSED
                     </NavLink>
                 </NavItem>
+                <NavItem>
+                    <NavLink
+                        className={classnames({
+                            active: mini_tab === 'undetectable_untransmittable',
+                        })}
+                        onClick={() => {
+                            setActiveTab('undetectable_untransmittable');
+                            toggle('undetectable_untransmittable');
+                        }}
+                    >
+                        {`UNDETECTABLE=UNTRAMITTABLE (U=U)`}
+                    </NavLink>
+                </NavItem>
             </Nav>
             <TabContent activeTab={mini_tab}>
                 <TabPane tabId="uptake">
@@ -131,7 +145,8 @@ const ViralLoad = () => {
                                 <li>
                                     Valid Viral Load =&gt; 0 - 24 Years (New) -
                                     6 months from Viral load date 25 Years and
-                                    Older (New) - 12 months from Viral load date.
+                                    Older (New) - 12 months from Viral load
+                                    date.
                                 </li>
                             </ul>
                         </CardBody>
@@ -181,9 +196,9 @@ const ViralLoad = () => {
                                     of 50 – 199 copies/ml
                                 </li>
                                 <li>
-                                    High Risk LLV =&gt; Patients who are
-                                    current on treatment with valid viral load
-                                    results of 200 – 999 copies/ml
+                                    High Risk LLV =&gt; Patients who are current
+                                    on treatment with valid viral load results
+                                    of 200 – 999 copies/ml
                                 </li>
                                 <li>
                                     UNSUPPRESSED =&gt; Patients who are current
@@ -233,6 +248,9 @@ const ViralLoad = () => {
                     <SectionFooter overview={branding.overview} />
                     <ViralLoadOutcomesHvlByFacility />
                     <SectionFooter overview={branding.overview} />
+                </TabPane>
+                <TabPane tabId={'undetectable_untransmittable'}>
+                    <ViralLoadU_U/>
                 </TabPane>
             </TabContent>
         </div>

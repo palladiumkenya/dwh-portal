@@ -15,7 +15,7 @@ const HomeVLCascade = () => {
     const currentOnArt = useSelector(currentOnArtSelectors.getCurrentOnArt);
     const currentOnArtText =
         'CURRENT ON ART as at ' +
-        moment().subtract(2, 'month').add(16, 'days').format('MMM YYYY');
+        moment().subtract(2, 'month').add(20, 'days').format('MMM YYYY');
     const eligibleForVl = useSelector(
         currentOnArtOverviewSelectors.getEligibleForVl
     );
