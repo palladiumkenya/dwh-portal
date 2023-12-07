@@ -112,6 +112,8 @@ import viralLoad6MonthSuppressionByYearOfArtStart from './CT/ViralLoad/viralLoad
 import viralLoad12MonthSuppressionByYearOfArtStart from './CT/ViralLoad/viralLoad12MonthSuppressionByYearOfArtStart';
 import viralLoad24MonthSuppressionByYearOfArtStart from './CT/ViralLoad/viralLoad24MonthSuppressionByYearOfArtStart';
 import viralLoadOverallUptakeSuppressionBySexVlDone from './CT/ViralLoad/viralLoadOverallUptakeSuppressionBySexVlDone';
+import viralLoadUptakeUToU from './CT/ViralLoad/viralLoadUptakeUToU';
+import viralLoadCategorizationUToU from './CT/ViralLoad/viralLoadCategorizationUToU';
 
 import practitionersCountByCountyQualification from './HRH/practitionersCountByCountyQualification';
 import populationByCounty from './HRH/populationByCounty';
@@ -423,6 +425,8 @@ export default combineReducers({
     viralLoadOverallUptakeGt1000CopiesReceivedFollowTests,
     viralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll,
     viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment,
+    viralLoadUptakeUToU,
+    viralLoadCategorizationUToU,
 
     treatmentOutcomesOverallLast12m,
     treatmentOutcomesBySex,
