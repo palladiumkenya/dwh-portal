@@ -3,15 +3,11 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import * as viralLoadSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
+import * as vlSelectors from '../../../selectors/CT/ViralLoad/viralLoadUToU';
 
 const ViralLoadCategorizationU_U = () => {
     const [viralLoadUptake, setViralLoadUptake] = useState({});
-    const highRisk = useSelector(viralLoadSelectors.getHighRisk);
-
-    const lowRisk = useSelector(viralLoadSelectors.getLowRisk);
-    const ldl = useSelector(viralLoadSelectors.getLDL);
-    const unsuppressed = useSelector(viralLoadSelectors.getUnsuppressed);
+    const data = useSelector(vlSelectors.getViralLoadCategorizationUToU);
 
     const loadViralLoadUptake = useCallback(async () => {
         setViralLoadUptake({
@@ -38,29 +34,29 @@ const ViralLoadCategorizationU_U = () => {
                     data: [
                         {
                             name: '< 50 COPIES',
-                            y: ldl,
+                            y: data[0],
                             color: '#57A14D',
                         },
                         {
                             name: '50-199 COPIES',
-                            y: lowRisk,
+                            y: data[1],
                             color: '#F69323',
                         },
                         {
                             name: '200-999 COPIES',
-                            y: highRisk,
+                            y: data[2],
                             color: '#8E2B15',
                         },
                         {
                             name: '1000+ COPIES',
-                            y: unsuppressed,
+                            y: data[3],
                             color: '#142359',
                         },
                     ],
                 },
             ],
         });
-    }, [unsuppressed, ldl, lowRisk, highRisk]);
+    }, [data]);
 
     useEffect(() => {
         loadViralLoadUptake();
