@@ -3,12 +3,11 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import * as vlSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
+import * as vlSelectors from '../../../selectors/CT/ViralLoad/viralLoadUToU';
 
 const ViralLoadPropotionU_U = () => {
     const [viralLoadUptake, setViralLoadUptake] = useState({});
-    const eligibleForVl = useSelector(vlSelectors.getEligibleForVl);
-    const hasCurrentVl = useSelector(vlSelectors.getHasCurrentVl);
+    const vl = useSelector(vlSelectors.getViralLoadUptakeUToU);
 
     const loadViralLoadUptake = useCallback(async () => {
         setViralLoadUptake({
@@ -48,25 +47,25 @@ const ViralLoadPropotionU_U = () => {
             series: [
                 {
                     name: 'ELIGIBLE FOR AT LEAST 2 VL TEST',
-                    data: [903329],
+                    data: [vl?.TwoEligibleTests],
                     type: 'column',
                     color: '#F69323',
                 },
                 {
                     name: 'LDL (LAST ONE TEST)',
-                    data: [null, 430435],
+                    data: [null, vl?.LDLLastOneTest],
                     type: 'column',
                     color: '#19A367',
                 },
                 {
                     name: 'DURABLE LDL (U=U)',
-                    data: [null, null, 123844],
+                    data: [null, null, vl?.DurableLDL],
                     type: 'column',
                     color: '#142359',
                 },
             ],
         });
-    }, []);
+    }, [vl]);
 
     useEffect(() => {
         loadViralLoadUptake();

@@ -1,18 +1,16 @@
+import { useSelector } from "react-redux";
 import { Card, Col, Row } from "reactstrap";
 import SectionHeader from "../../Shared/SectionHeader";
 import ViralLoadUptakeU_U from "./ViralLoadUptakeU_U";
 import ViralLoadCategorizationU_U from "./ViralLoadCategorizationU_U";
 import DataCardCT from "../../Shared/DataCardCT";
 import { formatNumber } from "../../../utils/utils";
-import * as vlSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
-import { useSelector } from "react-redux";
+import * as vlSelectors from '../../../selectors/CT/ViralLoad/viralLoadUToU';
 import ViralLoadPropotionU_U from "./ViralLoadPropotionU_U";
 
 
 const ViralLoadU_U = () => {
-    const currentOnArt = useSelector(vlSelectors.getCurrentOnArt);
-    const eligibleForVl = useSelector(vlSelectors.getEligibleForVl);
-    const hasCurrentVl = useSelector(vlSelectors.getHasCurrentVl);
+    const vl = useSelector(vlSelectors.getViralLoadUptakeUToU);
 
 	return (
         <>
@@ -22,21 +20,21 @@ const ViralLoadU_U = () => {
                     <DataCardCT
                         title="CURRENTLY ON ART"
                         subtitle={null}
-                        data={formatNumber(currentOnArt)}
+                        data={formatNumber(vl?.TXCurr)}
                     />
                 </Col>
                 <Col>
                     <DataCardCT
                         title="ELIGIBLE FOR VIRAL LOAD TEST"
                         subtitle={null}
-                        data={formatNumber(eligibleForVl)}
+                        data={formatNumber(vl?.EligibleVL)}
                     />
                 </Col>
                 <Col>
                     <DataCardCT
                         title="VALID VIRAL LOAD RESULTS"
                         subtitle={null}
-                        data={formatNumber(hasCurrentVl)}
+                        data={formatNumber(vl?.HasValidVL)}
                     />
                 </Col>
             </Row>
@@ -53,25 +51,25 @@ const ViralLoadU_U = () => {
                     <DataCardCT
                         title="NUMBER ELIGIBLE FOR AT LEAST 2 VL TESTS"
                         subtitle={null}
-                        data={formatNumber(hasCurrentVl)}
+                        data={formatNumber(vl?.TwoEligibleTests)}
                     />
                 </Col>
                 <Col>
                     <DataCardCT
                         title="NUMBER WITH TWO CONSECUTIVE VALID VL RESULTS"
                         subtitle={null}
-                        data={formatNumber(hasCurrentVl)}
+                        data={formatNumber(vl?.TwoConsTests)}
                     />
                 </Col>
                 <Col>
                     <DataCardCT
                         title="BOTH VIRAL LOAD TESTS ARE <50 COPIES /ML"
                         subtitle={null}
-                        data={formatNumber(hasCurrentVl)}
+                        data={formatNumber(vl?.DurableLDL)}
                     />
                 </Col>
             </Row>
-			<ViralLoadPropotionU_U />
+            <ViralLoadPropotionU_U />
         </>
     );
 

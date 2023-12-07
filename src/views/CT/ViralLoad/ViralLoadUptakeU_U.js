@@ -3,12 +3,11 @@ import { useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
-import * as vlSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtOverview';
+import * as vlSelectors from '../../../selectors/CT/ViralLoad/viralLoadUToU';
 
 const ViralLoadUptakeU_U = () => {
     const [viralLoadUptake, setViralLoadUptake] = useState({});
-    const eligibleForVl = useSelector(vlSelectors.getEligibleForVl);
-    const hasCurrentVl = useSelector(vlSelectors.getHasCurrentVl);
+    const vl = useSelector(vlSelectors.getViralLoadUptakeUToU);
 
     const loadViralLoadUptake = useCallback(async () => {
         setViralLoadUptake({
@@ -47,19 +46,19 @@ const ViralLoadUptakeU_U = () => {
             series: [
                 {
                     name: 'ELIGIBLE FOR VL TEST',
-                    data: [eligibleForVl],
+                    data: [vl?.EligibleVL],
                     type: 'column',
                     color: '#F69323',
                 },
                 {
                     name: 'VALID VIRAL LOAD RESULTS',
-                    data: [null, hasCurrentVl],
+                    data: [null, vl?.HasValidVL],
                     type: 'column',
                     color: '#19A367',
                 },
             ],
         });
-    }, [eligibleForVl, hasCurrentVl]);
+    }, [vl]);
 
     useEffect(() => {
         loadViralLoadUptake();
