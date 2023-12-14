@@ -126,7 +126,7 @@ const ViralLoad = () => {
                             toggle('undetectable_untransmittable');
                         }}
                     >
-                        {`UNDETECTABLE=UNTRAMITTABLE (U=U)`}
+                        {`UNDETECTABLE=UNTRANSMITTABLE (U=U)`}
                     </NavLink>
                 </NavItem>
             </Nav>

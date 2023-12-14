@@ -14,7 +14,7 @@ const ViralLoadU_U = () => {
 
 	return (
         <>
-            <SectionHeader title={`UNDETECTABLE=UNTRAMITTABLE`} />
+            <SectionHeader title={`UNDETECTABLE=UNTRANSMITTABLE`} />
             <Row>
                 <Col>
                     <DataCardCT
