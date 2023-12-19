@@ -105,7 +105,7 @@ const RROverview = () => {
                   .subtract(16, 'days')
                   .format('YYYY,M');
         const data = await getAll('manifests/recency/' + rrTab, params);
-        setRecency({ recency: [], stats: data.recency ? data.recency.toLocaleString('en') : [], statsPerc: getPerc(data.recency , expected) });
+        setRecency({ recency: [], stats: data.recency ? data.recency.toLocaleString('en') : 0, statsPerc: getPerc(data.recency , expected) });
     }, [filters, rrTab, expected]);
 
     const loadFacilityInfrastructureType = useCallback(async () => {
@@ -178,9 +178,7 @@ const RROverview = () => {
             'manifests/implementationDate/' + rrTab,
             params
         );
-        console.log(data)
         setImplementationStats(data?.facilities_number);
-        console.log(implementationStats);
     }, [filters, rrTab, expected]);
 
     useEffect(() => {
