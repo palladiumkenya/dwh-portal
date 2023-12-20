@@ -103,7 +103,80 @@ const RROverview = () => {
                   .subtract(16, 'days')
                   .format('YYYY,M');
         const data = await getAll('manifests/recency/' + rrTab, params);
-        setRecency({ recency: [], stats: data.recency ? data.recency.toLocaleString('en') : [], statsPerc: getPerc(data.recency , expected) });
+        setRecency({ recency: [], stats: data.recency ? data.recency.toLocaleString('en') : 0, statsPerc: getPerc(data.recency , expected) });
+    }, [filters, rrTab, expected]);
+
+    const loadFacilityInfrastructureType = useCallback(async () => {
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            fromDate: filters.fromDate
+                ? filters.fromDate
+                : moment()
+                      .subtract(16, 'days')
+                      .format('MMM YYYY'),
+        };
+        params.period = filters.fromDate
+            ? moment(params.fromDate, 'MMM YYYY')
+                  .startOf('month')
+                  .add(1, 'month')
+                  .format('YYYY,M')
+            : moment()
+                  .subtract(16, 'days')
+                  .format('YYYY,M');
+        const data = await getAll('manifests/emrinfo/' + rrTab, params);
+        setInfrastructure({
+            onCloud: data.find((e) => e?.infrastructure_type === 'On Cloud'),
+            onPremises: data.find(
+                (e) => e?.infrastructure_type === 'On Premises'
+            ),
+        });
+    }, [filters, rrTab, expected]);
+
+    const loadImplementationDate = useCallback(async () => {
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            fromDate: filters.fromDate
+                ? filters.fromDate
+                : moment()
+                      .subtract(16, 'days')
+                      .format('MMM YYYY'),
+        };
+        params.period = filters.fromDate
+            ? moment(params.fromDate, 'MMM YYYY')
+                  .startOf('month')
+                  .add(1, 'month')
+                  .format('YYYY,M')
+            : moment()
+                  .subtract(16, 'days')
+                  .format('YYYY,M');
+        params.year = filters.fromDate
+                ? moment(params.fromDate, 'MMM YYYY')
+                    .startOf('month')
+                    .format('YYYY')
+                : moment()
+                    .subtract(16, 'days')
+                    .format('YYYY')
+        params.month = filters.fromDate
+                ? moment(params.fromDate, 'MMM YYYY')
+                    .format('M')
+                : moment()
+                    .subtract(16, 'days')
+                    .format('M')
+        const data = await getAll(
+            'manifests/implementationDate/' + rrTab,
+            params
+        );
+        setImplementationStats(data?.facilities_number);
     }, [filters, rrTab, expected]);
 
     useEffect(() => {
