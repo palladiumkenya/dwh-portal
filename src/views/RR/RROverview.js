@@ -12,6 +12,8 @@ const RROverview = () => {
     const [expected, setExpected] = useState('0');
     const [consistencyStats, setConsistnecy] = useState({ consistency: [], stats: '0', statsPerc: 0 });
     const [recencyStats, setRecency] = useState({ recency: [], stats: '0', statsPerc: 0 });
+    const [infrastructureStats, setInfrastructure] = useState({});
+    const [implementationStats, setImplementationStats] = useState(0);
 
     const overallReportingRatesByFacilityReportedFiltered = useSelector(state => state.overallReportingRatesByFacilityReported.listFiltered);
     const overallReportingRatesByFacilityReportedUnFiltered = useSelector(state => state.overallReportingRatesByFacilityReported.listUnfiltered);
