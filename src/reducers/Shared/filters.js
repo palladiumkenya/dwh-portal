@@ -8,6 +8,7 @@ const initialState = {
     facilities: [],
     partners: [],
     agencies: [],
+    pbfws: [],
     projects: [],
     genders: [],
     datimAgeGroups: [],
@@ -23,6 +24,7 @@ const initialState = {
     facilityFilterEnabled: true,
     partnerFilterEnabled: true,
     agencyFilterEnabled: true,
+    pbfwFilterEnabled: false,
     projectFilterEnabled: false,
     fromDateFilterEnabled: false,
     toDateFilterEnabled: false,
@@ -45,6 +47,7 @@ export default (state = initialState, action) => {
                 state.facilities.length > 0 ||
                 state.partners.length > 0 ||
                 state.agencies.length > 0 ||
+                state.pbfws.length > 0 ||
                 state.projects.length > 0 ||
                 state.genders.length > 0 ||
                 state.datimAgeGroups.length > 0 ||
@@ -66,6 +69,7 @@ export default (state = initialState, action) => {
                 state.facilities.length > 0 ||
                 state.partners.length > 0 ||
                 state.agencies.length > 0 ||
+                state.pbfws.length > 0 ||
                 state.projects.length > 0 ||
                 state.genders.length > 0 ||
                 state.datimAgeGroups.length > 0 ||
@@ -87,6 +91,7 @@ export default (state = initialState, action) => {
                 action.payload.facilities.length > 0 ||
                 state.partners.length > 0 ||
                 state.agencies.length > 0 ||
+                state.pbfws.length > 0 ||
                 state.projects.length > 0 ||
                 state.genders.length > 0 ||
                 state.datimAgeGroups.length > 0 ||
@@ -102,11 +107,13 @@ export default (state = initialState, action) => {
                 facilities: action.payload.facilities,
             };
         case actionTypes.FILTER_BY_PARTNER:
-            filtered = state.counties.length > 0 ||
+            filtered =
+                state.counties.length > 0 ||
                 state.subCounties.length > 0 ||
                 state.facilities.length > 0 ||
                 action.payload.partners.length > 0 ||
                 state.agencies.length > 0 ||
+                state.pbfws.length > 0 ||
                 state.projects.length > 0 ||
                 state.genders.length > 0 ||
                 state.datimAgeGroups.length > 0 ||
@@ -128,6 +135,7 @@ export default (state = initialState, action) => {
                 state.facilities.length > 0 ||
                 state.partners.length > 0 ||
                 action.payload.agencies.length > 0 ||
+                state.pbfws.length > 0 ||
                 state.projects.length > 0 ||
                 state.genders.length > 0 ||
                 state.datimAgeGroups.length > 0 ||
@@ -141,6 +149,24 @@ export default (state = initialState, action) => {
                 ...state,
                 filtered,
                 agencies: action.payload.agencies,
+            };
+        case actionTypes.FILTER_BY_PBFW:
+            filtered =
+                state.counties.length > 0 ||
+                state.subCounties.length > 0 ||
+                state.facilities.length > 0 ||
+                state.partners.length > 0 ||
+                state.agencies.length > 0 ||
+                action.payload.pbfws.length > 0 ||
+                state.pbfws.length > 0 ||
+                state.projects.length > 0 ||
+                state.genders.length > 0 ||
+                state.datimAgeGroups.length > 0 ||
+                false;
+            return {
+                ...state,
+                filtered,
+                pbfws: action.payload.pbfws,
             };
         case actionTypes.FILTER_BY_PROJECT:
             filtered =
@@ -212,6 +238,7 @@ export default (state = initialState, action) => {
                 state.facilities.length > 0 ||
                 state.partners.length > 0 ||
                 state.agencies.length > 0 ||
+                state.pbfws.length > 0 ||
                 state.projects.length > 0 ||
                 action.payload.genders.length > 0 ||
                 state.datimAgeGroups.length > 0 ||
@@ -254,6 +281,7 @@ export default (state = initialState, action) => {
                 state.facilities.length > 0 ||
                 state.partners.length > 0 ||
                 state.agencies.length > 0 ||
+                state.pbfws.length > 0 ||
                 state.projects.length > 0 ||
                 state.genders.length > 0 ||
                 action.payload.datimAgeGroups.length > 0 ||
@@ -427,6 +455,17 @@ export default (state = initialState, action) => {
                 ...state,
                 agencyFilterEnabled: false,
                 agencies: [],
+            };
+        case actionTypes.ENABLE_PBFW_FILTER:
+            return {
+                ...state,
+                pbfwFilterEnabled: true,
+            };
+        case actionTypes.DISABLE_PBFW_FILTER:
+            return {
+                ...state,
+                pbfwFilterEnabled: false,
+                pbfws: [],
             };
         case actionTypes.ENABLE_PROJECT_FILTER:
             return {

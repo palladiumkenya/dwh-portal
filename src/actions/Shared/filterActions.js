@@ -25,6 +25,11 @@ export const filterByAgency = agencies => ({
     payload: { agencies }
 });
 
+export const filterByPBFW = (pbfws) => ({
+    type: actionTypes.FILTER_BY_PBFW,
+    payload: { pbfws },
+});
+
 export const filterByProject = projects => ({
     type: actionTypes.FILTER_BY_PROJECT,
     payload: { projects }
@@ -97,6 +102,14 @@ export const enableAgencyFilter = () => ({
 
 export const disableAgencyFilter = () => ({
     type: actionTypes.DISABLE_AGENCY_FILTER
+});
+
+export const enablePBFWFilter = () => ({
+    type: actionTypes.ENABLE_PBFW_FILTER,
+});
+
+export const disablePBFWFilter = () => ({
+    type: actionTypes.DISABLE_PBFW_FILTER,
 });
 
 export const enableFacilityFilter = () => ({
