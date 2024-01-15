@@ -12,11 +12,14 @@ export const getOtzEnrollmentAmongAlHivOnArtByAge = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         const listAgeGroup = filtered ? listFilteredByAgeGroup : listUnfilteredByAgeGroup;
 
+        //get sum of clients
+        let totalAdolescents =  listAgeGroup.reduce((a, b) => a + b.totalAdolescents, 0)
+
         const arrayVal = [];
         for (const listAgeGroupElement of listAgeGroup) {
             const listItem = list.filter(obj => obj.ageGroup === listAgeGroupElement.ageGroup);
             if (listItem.length > 0) {
-                const percentage = ((listItem[0].TXCurr / listAgeGroupElement.totalAdolescents) * 100);
+                const percentage = ((listItem[0].TXCurr / totalAdolescents) * 100);
                 arrayVal.push(
                     {
                         y: Math.round((percentage + Number.EPSILON) * 100) / 100,
