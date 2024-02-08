@@ -34,7 +34,7 @@ const Resources = ()=>{
         },
         {
             app: 'HIS Sites Portal',
-            link: 'https://prod.kenyahmis.org:3001/',
+            link: 'https://hisportal.kenyahmis.org/',
             description:
                 'HIS List management portal is a platform where partners can manage information about their supported HIS sites.',
             logo: kenyahmis,
