@@ -4,7 +4,7 @@ import SectionHeader from "../../Shared/SectionHeader";
 import ViralLoadUptakeU_U from "./ViralLoadUptakeU_U";
 import ViralLoadCategorizationU_U from "./ViralLoadCategorizationU_U";
 import DataCardCT from "../../Shared/DataCardCT";
-import { formatNumber } from "../../../utils/utils";
+import { formatNumber, roundNumber } from '../../../utils/utils';
 import * as vlSelectors from '../../../selectors/CT/ViralLoad/viralLoadUToU';
 import ViralLoadPropotionU_U from "./ViralLoadPropotionU_U";
 
@@ -26,14 +26,14 @@ const ViralLoadU_U = () => {
                 <Col>
                     <DataCardCT
                         title="ELIGIBLE FOR VIRAL LOAD TEST"
-                        subtitle={null}
+                        subtitle={`${roundNumber((vl?.EligibleVL * 100/vl?.TXCurr), 2)}%`}
                         data={formatNumber(vl?.EligibleVL)}
                     />
                 </Col>
                 <Col>
                     <DataCardCT
                         title="VALID VIRAL LOAD RESULTS"
-                        subtitle={null}
+                        subtitle={`${roundNumber((vl?.HasValidVL * 100/vl?.EligibleVL), 2)}%`}
                         data={formatNumber(vl?.HasValidVL)}
                     />
                 </Col>

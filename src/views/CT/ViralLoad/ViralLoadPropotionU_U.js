@@ -37,7 +37,7 @@ const ViralLoadPropotionU_U = () => {
                         crop: false,
                         overflow: 'none',
                         color: 'black',
-                        format: '{y}',
+                        format: '{point.y:,.0f}',
                         verticalAlign: 'top',
                         y: -20,
                     },
