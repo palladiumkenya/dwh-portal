@@ -19,7 +19,9 @@ import {
     disablePopulationTypeFilter,
     enableAgencyFilter,
     enableDatimAgePopulationFilter,
-    disableDatimAgePopulationFilter
+    disableDatimAgePopulationFilter,
+    enablePBFWFilter,
+    disablePBFWFilter
 } from '../../actions/Shared/filterActions';
 
 import { loadLinkagePositiveTrends } from '../../actions/HTS/Linkage/linkagePositiveTrendsActions';
@@ -357,6 +359,8 @@ import { loadAppointmentKeepingWaterfall } from '../../actions/CT/TreatmentOutco
 import { loadQuaterlyIIT } from '../../actions/CT/TreatmentOutcomes/quaterlyIITActions';
 import { loadIITTracing } from './../../actions/CT/TreatmentOutcomes/IITTracingActions';
 import { loadIITTracingOutcomes } from './../../actions/CT/TreatmentOutcomes/IITTracingOutcomesActions';
+import { loadViralLoadUptakeUToU } from '../../actions/CT/ViralLoad/viralLoadUptakeUToUActions';
+import { loadViralLoadCategorizationUToU } from '../../actions/CT/ViralLoad/viralLoadCategorizationUToUActions';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({
@@ -398,6 +402,7 @@ const CT = () => {
     const agencies = useSelector(state => state.filters.agencies);
     const projects = useSelector(state => state.filters.projects);
     const genders = useSelector(state => state.filters.genders);
+    const pbfws = useSelector((state) => state.filters.pbfws);
     const datimAgeGroups = useSelector(state => state.filters.datimAgeGroups);
     const datimAgePopulation = useSelector(state => state.filters.datimAgePopulation);
     const latestPregnancies = useSelector(state => state.filters.latestPregnancies);
@@ -406,7 +411,7 @@ const CT = () => {
     const toDate = useSelector(state => state.filters.toDate);
 
     const DEFAULT_ACTIVE_TAB = useSelector(state => state.ui.ctTab);
-    const { active_tab } = useParams();
+    const { active_tab, mini_tab } = useParams();
     const history = useHistory();
 
 
@@ -483,7 +488,15 @@ const CT = () => {
             dispatch(enableGenderFilter());
             dispatch(enableDatimAgeGroupFilter());
         }
-    }, [dispatch, active_tab]);
+        if (
+            active_tab === 'vl' &&
+            mini_tab === 'undetectable_untransmittable'
+        ) {
+            dispatch(enablePBFWFilter());
+        } else {
+            dispatch(disablePBFWFilter());
+        }
+    }, [dispatch, active_tab, mini_tab]);
 
     useEffect(() => {
         dispatch(loadCurrentOnArt());
@@ -618,6 +631,8 @@ const CT = () => {
                 dispatch(load12MonthSuppressionByYearOfArtStart(active_tab));
                 dispatch(load24MonthSuppressionByYearOfArtStart(active_tab));
                 dispatch(loadViralLoadOutcomesHvlByFacility(active_tab));
+                dispatch(loadViralLoadUptakeUToU(active_tab));
+                dispatch(loadViralLoadCategorizationUToU(active_tab));
                 dispatch(
                     loadViralLoadOverallUptakeSuppressionBySexVlDone(active_tab)
                 );
@@ -805,6 +820,7 @@ const CT = () => {
         fromDate,
         toDate,
         genders,
+        pbfws,
         datimAgeGroups,
         datimAgePopulation,
         latestPregnancies,

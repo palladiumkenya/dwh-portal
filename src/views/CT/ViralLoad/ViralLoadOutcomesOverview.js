@@ -7,11 +7,6 @@ import DataCard from '../../Shared/DataCard';
 import DataCardCT from '../../Shared/DataCardCT';
 
 const ViralLoadOutcomesOverview = () => {
-    const currentOnArt = useSelector(currentOnArtOverviewSelectors.getCurrentOnArt);
-    const hasCurrentVl = useSelector(currentOnArtOverviewSelectors.getHasCurrentVl);
-    const virallySuppressed = useSelector(currentOnArtOverviewSelectors.getVirallySuppressed);
-    const lowLevelViremia = useSelector(currentOnArtOverviewSelectors.getLowLevelViremia);
-    const suppressed = virallySuppressed;
     const highRisk = useSelector(currentOnArtOverviewSelectors.getHighRisk);
     const lowRisk = useSelector(currentOnArtOverviewSelectors.getLowRisk);
     const ldl = useSelector(currentOnArtOverviewSelectors.getLDL);

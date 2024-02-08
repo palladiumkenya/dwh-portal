@@ -26,7 +26,7 @@ const ViralLoadPropotionU_U = () => {
             yAxis: [
                 {
                     title: { text: 'NUMBER OF PATIENTS' },
-                    // labels: { format: '{value}' },
+                    labels: { format: '{value}' },
                 },
             ],
             plotOptions: {

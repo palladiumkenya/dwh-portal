@@ -12,6 +12,7 @@ export const getOtzEnrollmentAmongAlHivOnArtByAge = createSelector(
         const list = filtered ? listFiltered : listUnfiltered;
         const listAgeGroup = filtered ? listFilteredByAgeGroup : listUnfilteredByAgeGroup;
 
+
         const arrayVal = [];
         for (const listAgeGroupElement of listAgeGroup) {
             const listItem = list.filter(obj => obj.ageGroup === listAgeGroupElement.ageGroup);

@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import Loadable from 'react-loadable';
 import VisibilitySensor from 'react-visibility-sensor';
 import { useDispatch, useSelector } from 'react-redux';
-import { Nav, NavItem, NavLink, TabContent, TabPane, Col, Row } from 'reactstrap';
+import { Nav, NavItem, NavLink, TabContent, TabPane, Col, Row, CardHeader, CardBody, Card } from 'reactstrap';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
 import { LOADING_DELAY } from "../../../constants";
 import Loading from './../../Shared/Loading';
@@ -97,6 +97,25 @@ const AdverseEvents = () => {
             </Nav>
             <TabContent activeTab={mini_tab}>
                 <TabPane tabId="adults">
+                    <Card>
+                        <CardHeader className="covid-definition-header">
+                            Indicator Definition
+                        </CardHeader>
+                        <CardBody>
+                            <ul>
+                                <li>
+                                    {
+                                        'ADULTS 15+ ON ART AND DEVELOPED AEs => This is the total no. of distinct patients (15+) who are currently on ART and ever developed AEs.'
+                                    }
+                                </li>
+                                <li>
+                                    {
+                                        'NUMBER OF AEs REPORTED CASES IN ADULTS 15+ => This is the total no. of AE cases ever reported among clients who are currently on ART (15+).'
+                                    }
+                                </li>
+                            </ul>
+                        </CardBody>
+                    </Card>
                     <SectionHeader title={branding.title + ' - ADULTS'} />
                     <AdverseEventsOverviewAdults />
                     <AdverseEventsClientsByAgeSexAdults />
