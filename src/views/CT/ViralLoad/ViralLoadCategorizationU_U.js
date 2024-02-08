@@ -20,7 +20,7 @@ const ViralLoadCategorizationU_U = () => {
                     innerSize: '80%',
                     dataLabels: {
                         enabled: true,
-                        format: '{point.name}: <br/>{point.percentage:.1f}% <br/>({point.y})',
+                        format: '{point.name}: <br/>{point.percentage:.1f}% <br/>({point.y:,.0f})',
                         style: {
                             textAlign: 'center',
                         },

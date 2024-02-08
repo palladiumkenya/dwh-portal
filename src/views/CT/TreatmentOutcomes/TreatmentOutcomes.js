@@ -115,6 +115,7 @@ const TreatmentOutcomes = () => {
                         RETENTION
                     </NavLink>
                 </NavItem>
+{/*
                 <NavItem>
                     <NavLink
                         className={classnames({
@@ -128,6 +129,7 @@ const TreatmentOutcomes = () => {
                         CONTINUITY OF TREATMENT
                     </NavLink>
                 </NavItem> 
+*/}
             </Nav>
             <TabContent activeTab={mini_tab}>
                 <TabPane tabId="outcomes">
@@ -416,7 +418,7 @@ const TreatmentOutcomes = () => {
                     {/*<TreatmentOutcomesUndocumentedByFacility />
                     <SectionFooter overview={branding.overview}/>*/}
                 </TabPane>
-
+{/*
                 <TabPane tabId={'ContinuityOfTreatment'}>
                     <AppointmetKeeping />
                     <SectionFooter />
@@ -429,6 +431,7 @@ const TreatmentOutcomes = () => {
                     <IITTracingNoContact />
                     <SectionFooter />
                 </TabPane> 
+*/}
             </TabContent>
         </div>
     );
