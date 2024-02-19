@@ -19,15 +19,15 @@ export const getTreatmentOutcomesByFacility = createSelector(
                     partner: list[i].partner,
                 };
             }
-            if (list[i].artOutcome === "Active") {
+            if (list[i].artOutcome === "ACTIVE") {
                 outcomes[list[i].facility].active = parseInt(list[i].totalOutcomes, 10);
-            } else if (list[i].artOutcome === "Dead") {
+            } else if (list[i].artOutcome === "DEAD") {
                 outcomes[list[i].facility].dead = parseInt(list[i].totalOutcomes, 10);
-            } else if (list[i].artOutcome === "LTFU") {
+            } else if (list[i].artOutcome === 'LOSS TO FOLLOW UP') {
                 outcomes[list[i].facility].ltfu = parseInt(list[i].totalOutcomes, 10);
-            } else if (list[i].artOutcome === "Stopped") {
+            } else if (list[i].artOutcome === "STOPPED") {
                 outcomes[list[i].facility].stopped = parseInt(list[i].totalOutcomes, 10);
-            } else if (list[i].artOutcome === "TransferOut") {
+            } else if (list[i].artOutcome === 'TRANSFERRED OUT') {
                 outcomes[list[i].facility].to = parseInt(list[i].totalOutcomes, 10);
             }
         }
@@ -51,9 +51,10 @@ export const getTreatmentOutcomesByCounty = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped', 'TransferOut'];
+        const treatmentOutcomesCategories =
+            ['ACTIVE', 'DEAD', 'LOSS TO FOLLOW UP', 'STOPPED', 'TRANSFERRED OUT'];
         const countyCategories = _.chain(list)
-            .filter(l => l.county && l.artOutcome === 'Active')
+            .filter(l => l.county && l.artOutcome === 'ACTIVE')
             .map(l => ({ ...l, county: l.county.toUpperCase() }))
             .groupBy('county')
             .map((objs, key) => ({
@@ -81,7 +82,7 @@ export const getTreatmentOutcomesByCounty = createSelector(
             if(outcomeIndex === -1 || countyIndex === -1 ) { // unsupported
                 continue;
             }
-            data[outcomeIndex][countyIndex] = data[outcomeIndex][countyIndex] + parseInt(list[i].totalOutcomes);
+            data[outcomeIndex][countyIndex] += parseInt(list[i].totalOutcomes);
         }
         return { data, countyCategories };
     }
@@ -91,9 +92,10 @@ export const getTreatmentOutcomesByPartner = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped', 'TransferOut'];
+        const treatmentOutcomesCategories =
+            ['ACTIVE', 'DEAD', 'LOSS TO FOLLOW UP', 'STOPPED', 'TRANSFERRED OUT']
         const partnerCategories = _.chain(list)
-            .filter(l => l.partner && l.artOutcome === 'Active')
+            .filter(l => l.partner && l.artOutcome === 'ACTIVE')
             .map(l => ({ ...l, partner: l.partner.toUpperCase() }))
             .groupBy('partner')
             .map((objs, key) => ({
@@ -120,7 +122,7 @@ export const getTreatmentOutcomesByPartner = createSelector(
             if(outcomeIndex === -1 || partnerIndex === -1 ) { // unsupported
                 continue;
             }
-            data[outcomeIndex][partnerIndex] = data[outcomeIndex][partnerIndex] + parseInt(list[i].totalOutcomes);
+            data[outcomeIndex][partnerIndex] += parseInt(list[i].totalOutcomes);
         }
         return { data, partnerCategories };
     }
