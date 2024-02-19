@@ -30,12 +30,10 @@ const RRCounty = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            fromDate: filters.fromDate
-                ? filters.fromDate
-                : moment()
-                      .subtract(2, 'month')
-                      .add(16, 'days')
-                      .format('MMM YYYY'),
+            fromDate: filters.fromDate || moment()
+                                            .subtract(2, 'month')
+                                            .add(16, 'days')
+                                            .format('MMM YYYY'),
         };
         params.period = filters.fromDate
             ? moment(params.fromDate, 'MMM YYYY')
@@ -52,7 +50,7 @@ const RRCounty = () => {
             moment().subtract(3, 'month').add(16, 'days').format('YYYY,M');
         const consistencyResult = await getAll('manifests/consistencyreportingbycountypartner/' + rrTab + '?reportingType=county', params);
         const rrData = await getAll('manifests/expectedPartnerCounty/' + rrTab + '?reportingType=county', params);
-        
+
 
         /* Overall reporting */
         const overAllReportingData = _.orderBy(overallReportingRateResult, [function(resultItem) { return parseInt(resultItem.Percentage, 10); }], ['desc']);
@@ -80,12 +78,13 @@ const RRCounty = () => {
         const consistency_values = [];
         let expected = 0;
         for (const [key, value] of Object.entries(consistencyResult)) {
-            const expectedCounty =  rrData.filter(obj => obj.county === key);
+            const expectedCounty =  rrData.filter(obj => obj.county.toUpperCase() === key.toUpperCase());
             if (expectedCounty.length > 0) {
                 expected = expectedCounty[0].totalexpected;
             }
 
             const cos = expected === 0 ? 0 : parseInt(((value/expected)*100).toString());
+            
             if (cos <= 50) {
                 consistency_values.push({
                     county: key,
