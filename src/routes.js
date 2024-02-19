@@ -102,6 +102,12 @@ const routes = [
         component: withTracker(Profile),
         private: true,
     },
+    {
+        path: '/highlight/monthly',
+        exact: true,
+        name: 'Highlight of the month',
+        private: false,
+    },
 ];
 
 export default routes;

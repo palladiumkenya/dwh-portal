@@ -9,7 +9,8 @@ export const getTreatmentOutcomesByYear = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped', 'TransferOut'];
+        const treatmentOutcomesCategories =
+            ['ACTIVE', 'DEAD', 'LOSS TO FOLLOW UP', 'STOPPED', 'TRANSFERRED OUT'];
         const yearCategories = _.chain(list).map(l => parseInt(l.year)).filter(l => l >= 2011).uniq().sort().value();
         let data = [];
         for(let i = 0; i < treatmentOutcomesCategories.length; i++) {
@@ -24,7 +25,7 @@ export const getTreatmentOutcomesByYear = createSelector(
             if(treatmentOutcomesIndex === -1 || yearIndex === -1 ) { // unsupported
                 continue;
             }
-            data[treatmentOutcomesIndex][yearIndex] = data[treatmentOutcomesIndex][yearIndex] + parseInt(list[i].totalOutcomes);
+            data[treatmentOutcomesIndex][yearIndex] += parseInt(list[i].totalOutcomes);
         }
         return { yearCategories, data };
     }
