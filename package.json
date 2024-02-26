@@ -23,7 +23,7 @@
         "highcharts": "^8.2.2",
         "highcharts-react-official": "^3.0.0",
         "lodash": "^4.17.20",
-        "moment": "^2.27.0",
+        "moment": "^2.29.4",
         "mui-datatables": "^4.3.0",
         "oidc-client": "^1.10.1",
         "powerbi-client": "^2.22.2",
