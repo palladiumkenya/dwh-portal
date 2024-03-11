@@ -20,7 +20,7 @@ const ViralLoadDurableU_UComparison = () => {
                     innerSize: '80%',
                     dataLabels: {
                         enabled: true,
-                        format: '{point.name}: <br/>{point.percentage:.1f}% <br/>({point.y:,.0f})',
+                        format: '{point.name}: <br/>{point.percentage:.2f}% <br/>({point.y:,.0f})',
                         style: {
                             textAlign: 'center',
                         },
@@ -39,7 +39,7 @@ const ViralLoadDurableU_UComparison = () => {
                         },
                         {
                             name: 'NON-DURABLE LDL',
-                            y: vl?.TXCurr - vl?.DurableLDL,
+                            y: vl?.TwoConsTests - vl?.DurableLDL,
                             color: '#8E2B15',
                         }
                     ],
