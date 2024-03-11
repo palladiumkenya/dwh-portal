@@ -57,14 +57,14 @@ const ViralLoadU_U = () => {
                 <Col>
                     <DataCardCT
                         title="NUMBER WITH TWO CONSECUTIVE VALID VL RESULTS"
-                        subtitle={null}
+                        subtitle={`${roundNumber((vl?.TwoConsTests * 100/vl?.TwoEligibleTests), 2)}%`}
                         data={formatNumber(vl?.TwoConsTests)}
                     />
                 </Col>
                 <Col>
                     <DataCardCT
                         title="BOTH VIRAL LOAD TESTS ARE <50 COPIES /ML"
-                        subtitle={null}
+                        subtitle={`${roundNumber((vl?.DurableLDL * 100/vl?.TwoConsTests), 2)}%`}
                         data={formatNumber(vl?.DurableLDL)}
                     />
                 </Col>
