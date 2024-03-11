@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Card, Col, Row } from "reactstrap";
+import { Col, Row } from "reactstrap";
 import SectionHeader from "../../Shared/SectionHeader";
 import ViralLoadUptakeU_U from "./ViralLoadUptakeU_U";
 import ViralLoadCategorizationU_U from "./ViralLoadCategorizationU_U";
@@ -7,6 +7,7 @@ import DataCardCT from "../../Shared/DataCardCT";
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import * as vlSelectors from '../../../selectors/CT/ViralLoad/viralLoadUToU';
 import ViralLoadPropotionU_U from "./ViralLoadPropotionU_U";
+import ViralLoadDurableU_UComparison from './ViralLoadDurableU_UComparison';
 
 
 const ViralLoadU_U = () => {
@@ -69,7 +70,8 @@ const ViralLoadU_U = () => {
                     />
                 </Col>
             </Row>
-            <ViralLoadPropotionU_U />
+            <ViralLoadDurableU_UComparison />
+            {/*<ViralLoadPropotionU_U />*/}
         </>
     );
 
