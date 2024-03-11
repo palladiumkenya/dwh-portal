@@ -10,15 +10,15 @@ import DataCardCT from '../../Shared/DataCardCT';
 
 const CurrentOnArtOverview = () => {
     const currentOnArt = useSelector(currentOnArtSelectors.getCurrentOnArt);
-    
+
     const currentOnArtVerified = useSelector(
         currentOnArtOverviewSelectors.getCurrentOnArtVerified
     );
     const currentOnArtVerifiedPercent = currentOnArt
-        ? (currentOnArtVerified / currentOnArt) * 100
+        ? roundNumber(((currentOnArtVerified / currentOnArt) * 100), 2)
         : 0;
     const currentOnArtNotVerifiedPercent = currentOnArt
-        ? ((currentOnArt - currentOnArtVerified) / currentOnArt) * 100
+        ? roundNumber((((currentOnArt - currentOnArtVerified) / currentOnArt) * 100), 2)
         : 0;
 
     return (
