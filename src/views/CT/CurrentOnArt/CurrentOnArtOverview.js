@@ -15,10 +15,10 @@ const CurrentOnArtOverview = () => {
         currentOnArtOverviewSelectors.getCurrentOnArtVerified
     );
     const currentOnArtVerifiedPercent = currentOnArt
-        ? roundNumber(((currentOnArtVerified / currentOnArt) * 100), 2)
+        ? (currentOnArtVerified / currentOnArt) * 100
         : 0;
     const currentOnArtNotVerifiedPercent = currentOnArt
-        ? roundNumber((((currentOnArt - currentOnArtVerified) / currentOnArt) * 100), 2)
+        ? ((currentOnArt - currentOnArtVerified) / currentOnArt) * 100
         : 0;
 
     return (
@@ -42,7 +42,7 @@ const CurrentOnArtOverview = () => {
                     <DataCardCT
                         title={'VERIFIED AND CURRENT ON ART'}
                         subtitle={
-                            roundNumber(currentOnArtVerifiedPercent) + '%'
+                            roundNumber(currentOnArtVerifiedPercent, 2) + '%'
                         }
                         data={formatNumber(currentOnArtVerified)}
                     />
@@ -55,7 +55,7 @@ const CurrentOnArtOverview = () => {
                     <DataCardCT
                         title="NOT VERIFIED AND CURRENT ON ART"
                         subtitle={
-                            roundNumber(currentOnArtNotVerifiedPercent) + '%'
+                            roundNumber(currentOnArtNotVerifiedPercent, 2) + '%'
                         }
                         data={formatNumber(currentOnArt - currentOnArtVerified)}
                     />
