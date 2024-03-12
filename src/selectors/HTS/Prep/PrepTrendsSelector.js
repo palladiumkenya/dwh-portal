@@ -219,11 +219,11 @@ export const getPrepEligibleVnewTrend = createSelector(
                     parseFloat(
                         (
                             ((listnew.find(
-                                (x) => x.year == year && x.month == month
+                                (x) => x.year === year && x.month === month
                             )?.StartedPrep ?? 0) *
                                 100) /
                             (list.find(
-                                (x) => x.year == year && x.month == month
+                                (x) => x.year === year && x.month === month
                             )?.EligiblePrep ?? 0)
                         ).toFixed(1)
                     )

@@ -10,7 +10,7 @@ import DataCardCT from '../../Shared/DataCardCT';
 
 const CurrentOnArtOverview = () => {
     const currentOnArt = useSelector(currentOnArtSelectors.getCurrentOnArt);
-    
+
     const currentOnArtVerified = useSelector(
         currentOnArtOverviewSelectors.getCurrentOnArtVerified
     );
@@ -42,7 +42,7 @@ const CurrentOnArtOverview = () => {
                     <DataCardCT
                         title={'VERIFIED AND CURRENT ON ART'}
                         subtitle={
-                            roundNumber(currentOnArtVerifiedPercent) + '%'
+                            roundNumber(currentOnArtVerifiedPercent, 2) + '%'
                         }
                         data={formatNumber(currentOnArtVerified)}
                     />
@@ -55,7 +55,7 @@ const CurrentOnArtOverview = () => {
                     <DataCardCT
                         title="NOT VERIFIED AND CURRENT ON ART"
                         subtitle={
-                            roundNumber(currentOnArtNotVerifiedPercent) + '%'
+                            roundNumber(currentOnArtNotVerifiedPercent, 2) + '%'
                         }
                         data={formatNumber(currentOnArt - currentOnArtVerified)}
                     />
