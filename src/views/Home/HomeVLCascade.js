@@ -14,7 +14,7 @@ const HomeVLCascade = () => {
     const currentDate = moment();
 
     // Check if the current date is before the 20th of the month
-    if (currentDate.date() < 20) {
+    if (currentDate.date() < 18) {
         // If true, subtract 2 months
         currentDate.subtract(2, 'months');
     } else {
