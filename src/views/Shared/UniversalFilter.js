@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'; 
+import React, { useEffect, useState, useCallback } from 'react';
 import { BrowserRouter as Router, Link, useLocation } from 'react-router-dom';
 import { useHistory, useParams } from 'react-router-dom';
 import moment from 'moment';
@@ -211,12 +211,20 @@ const UniversalFilter = () => {
         setPbfws(
             [
                 {
-                    val: 'Known Positives',
-                    txt: 'Pregnant & Breastfeeding Known Positives',
+                    val: 'Known Positives|Yes',
+                    txt: 'Pregnant Known Positives',
                 },
                 {
-                    val: 'New Positives',
-                    txt: 'Pregnant & Breastfeeding New Positives',
+                    val: 'Known Positives|No',
+                    txt: 'Breastfeeding Known Positives',
+                },
+                {
+                    val: 'New Positives|Yes',
+                    txt: 'Pregnant New Positives',
+                },
+                {
+                    val: 'New Positives|No',
+                    txt: 'Breastfeeding New Positives',
                 },
             ].map((c) => ({ value: c.val, key: c.val, text: c.txt }))
         );
