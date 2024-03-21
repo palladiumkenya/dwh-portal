@@ -30,7 +30,7 @@ const ViralLoadCategorizationU_U = () => {
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 {
-                    name: 'Percentage of Patients',
+                    name: 'Number of Patients',
                     data: [
                         {
                             name: '< 50 COPIES',
