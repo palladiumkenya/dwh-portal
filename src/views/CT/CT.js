@@ -496,6 +496,9 @@ const CT = () => {
         } else {
             dispatch(disablePBFWFilter());
         }
+        return () => {
+            disablePBFWFilter();
+        }
     }, [dispatch, active_tab, mini_tab]);
 
     useEffect(() => {
@@ -798,7 +801,7 @@ const CT = () => {
                 dispatch(loadArtVerificationByCounty())
                 dispatch(loadArtVerificationByPartner())
                 dispatch(loadArtVerificationReasons())
-                
+
                 dispatch(loadCurrentOnArtVerifiedByCounty(active_tab));
                 dispatch(loadCurrentOnArtVerifiedByPartner(active_tab));
                 dispatch(loadCurrentOnArtByCounty(active_tab));

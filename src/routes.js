@@ -16,6 +16,7 @@ const HRH = Loadable({ loader: () => import('./views/HRH/HRH'), loading: Loading
 const Resources = Loadable({ loader: () => import('./views/Resources/Resources'), loading: Loading, delay: LOADING_DELAY });
 const Organizations = Loadable({ loader: () => import('./views/Administration/Organizations/Organizations'), loading: Loading, delay: LOADING_DELAY });
 const Profile = Loadable({ loader: () => import('./views/Users/Profile'), loading: Loading, delay: LOADING_DELAY });
+const Highlight = Loadable({ loader: () => import('./views/Highlight/Highlight'), loading: Loading, delay: LOADING_DELAY });
 
 const routes = [
     {
@@ -107,6 +108,7 @@ const routes = [
         exact: true,
         name: 'Highlight of the month',
         private: false,
+        component: withTracker(Highlight),
     },
 ];
 
