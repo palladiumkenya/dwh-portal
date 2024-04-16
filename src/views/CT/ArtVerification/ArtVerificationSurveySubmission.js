@@ -47,12 +47,12 @@ const ArtVerificationSurveySubmission = () => {
                     data: [
                         {
                             name: 'SUBMITTED SURVEY',
-                            y: status.submitted,
+                            y: notVerified - (status.submitted - notVerified),
                             color: '#01058A',
                         },
                         {
                             name: 'NOT SUBMITTED SURVEY',
-                            y: notVerified - status.submitted,
+                            y: status.submitted - notVerified,
                             sliced: true,
                             selected: true,
                             color: '#8E2C16',
