@@ -66,7 +66,7 @@ const ArtVerificationSurveySubmissionByCounty = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        SURVEYS SUMBITTED FOR UNVERIFIED PATIENTS BY COUNTY
+                        SURVEYS SUBMITTED FOR UNVERIFIED PATIENTS BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
                         {countyData.loadingC ? (
