@@ -18,7 +18,7 @@ const listUnfilteredVerified = (state) =>
     state.currentOnArtVerifiedByCounty.listUnfiltered;
 const listFilteredVerified = (state) =>
     state.currentOnArtVerifiedByCounty.listFiltered;
-    
+
 const listUnfilteredVerifiedPartner = (state) =>
     state.currentOnArtVerifiedByPartner.listUnfiltered;
 const listFilteredVerifiedPartner = (state) =>
@@ -129,7 +129,7 @@ export const getArtPendingUnverifiedByPartner = createSelector(
 
         return {
             partners: newList.map((e) => e.partners),
-            pending: newList.map((e) => e.Pending),
+            pending: newList.map((e) => e.Pending < 0 ? 0 : e.Pending),
         };
     }
 );
@@ -152,7 +152,7 @@ export const getArtVerificationSubmissionByPartner = createSelector(
 
         partners = list.map((p) => p.SDIP);
         pending = list.map((p) => p.Pendingsurveys);
-        unverified = list.map((p) => p.Unverified);
+        unverified = list.map((p) => (p.TxCurr - p.NupiVerified));
         received = list.map((p) => p.SurveysReceived);
 
         let submitted = _.sum(received);
@@ -246,7 +246,7 @@ export const getArtPendingUnverifiedByCounty = createSelector(
 
         return {
             counties: newList.map((e) => e.county),
-            pending: newList.map((e) => e.Pending),
+            pending: newList.map((e) => e.Pending < 0 ? 0 : e.Pending),
         };
     }
 );
@@ -272,9 +272,9 @@ export const getArtVerificationSubmissionByCounty = createSelector(
         unverified = list.map((p) => {
             return {
                 percent: Number(
-                    (p.Unverified * 100) / p.SurveysReceived + p.Unverified
+                    ((p.TxCurr - p.NupiVerified) * 100) / p.SurveysReceived + p.Unverified
                 ),
-                y: p.Unverified,
+                y: (p.TxCurr - p.NupiVerified),
             };
         });
         received = list.map((p) => {
