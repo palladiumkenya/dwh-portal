@@ -81,3 +81,5 @@ export const GA_TRACKING_ID = 'UA-137589703-2';
 
 export const DWH_API_URL = process.env.REACT_APP_ENDPOINT;
 export const HRH_API_URL = 'https://hrh.datacompanion.org';
+
+export const ETL_DAY = 10;

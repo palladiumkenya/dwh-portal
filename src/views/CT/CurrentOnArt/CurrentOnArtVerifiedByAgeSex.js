@@ -7,6 +7,7 @@ import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnA
 import { useRecoilValue } from 'recoil';
 import moment from 'moment';
 import { roundNumber } from '../../../utils/utils';
+import { ETL_DAY } from '../../../constants';
 
 const CurrentOnArtVerifiedByAgeSex = () => {
     const [currentOnArtByAgeSexChart, setCurrentOnArtByAgeSexChart] = useState(
@@ -122,7 +123,7 @@ const CurrentOnArtVerifiedByAgeSex = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VERIFIED AND CURRENT ON ART BY AGE GROUP AND GENDER - {moment().subtract(2, 'months').add(16, 'days').format('MMMM')}
+                        VERIFIED AND CURRENT ON ART BY AGE GROUP AND GENDER - {moment().subtract(2, 'months').add(ETL_DAY, 'days').format('MMMM')}
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

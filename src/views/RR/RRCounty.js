@@ -5,6 +5,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { capitalize, getAll } from '../Shared/Api';
 import { Card, CardBody, CardHeader } from 'reactstrap';
+import { ETL_DAY } from '../../constants';
 const _ = require("lodash");
 
 const RRCounty = () => {
@@ -32,7 +33,7 @@ const RRCounty = () => {
             project: filters.projects,
             fromDate: filters.fromDate || moment()
                                             .subtract(2, 'month')
-                                            .add(16, 'days')
+                                            .add(ETL_DAY, 'days')
                                             .format('MMM YYYY'),
         };
         params.period = filters.fromDate
@@ -42,12 +43,12 @@ const RRCounty = () => {
                   .format('YYYY,M')
             : moment()
                   .subtract(2, 'month')
-                  .add(16, 'days')
+                  .add(ETL_DAY, 'days')
                   .format('YYYY,M');
         const overallReportingRateResult = await getAll('manifests/recencyreportingbycounty/' + rrTab, params);
         params.period = filters.fromDate ?
             moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M') :
-            moment().subtract(3, 'month').add(16, 'days').format('YYYY,M');
+            moment().subtract(3, 'month').add(ETL_DAY, 'days').format('YYYY,M');
         const consistencyResult = await getAll('manifests/consistencyreportingbycountypartner/' + rrTab + '?reportingType=county', params);
         const rrData = await getAll('manifests/expectedPartnerCounty/' + rrTab + '?reportingType=county', params);
 
@@ -84,7 +85,7 @@ const RRCounty = () => {
             }
 
             const cos = expected === 0 ? 0 : parseInt(((value/expected)*100).toString());
-            
+
             if (cos <= 50) {
                 consistency_values.push({
                     county: key,

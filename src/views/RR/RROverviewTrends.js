@@ -5,6 +5,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import moment from 'moment';
 import { getAll } from '../Shared/Api';
+import { ETL_DAY } from '../../constants';
 
 const RROverviewTrends = () => {
     const filters = useSelector(state => state.filters);
@@ -98,13 +99,13 @@ const RROverviewTrends = () => {
         let endDate = moment()
             .endOf('month');
         if (filters.toDate || filters.fromDate) {
-            endDate = moment(filters.toDate ? filters.toDate: filters.fromDate, 'MMM YYYY').endOf('month');
+            endDate = moment(filters.toDate || filters.fromDate, 'MMM YYYY').endOf('month');
         }
         const startDate = endDate
             .clone()
             .subtract(numberOfMonths, 'month')
             .subtract(2, 'month')
-            .add(16, 'days')
+            .add(ETL_DAY, 'days')
             .startOf('month');
         params.startDate = startDate.format('YYYY-MM-DD');
         params.endDate = endDate.format('YYYY-MM-DD');
