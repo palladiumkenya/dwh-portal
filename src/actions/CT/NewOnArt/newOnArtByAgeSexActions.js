@@ -1,7 +1,7 @@
 import moment from 'moment';
 import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
-import { CACHING, PAGES } from '../../../constants';
+import { CACHING, ETL_DAY, PAGES } from '../../../constants';
 
 export const loadNewOnArtByAgeSex = () => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
@@ -21,7 +21,7 @@ export const loadNewOnArtByAgeSex = () => async (dispatch, getState) => {
 
 export const fetchNewOnArtByAgeSex = () => async (dispatch, getState) => {
     dispatch({ type: actionTypes.CT_NEW_ON_ART_BY_AGE_SEX_REQUEST });
-    const previousMonth = moment().subtract(2, 'month').add(16, 'days');
+    const previousMonth = moment().subtract(2, 'month').add(ETL_DAY, 'days');
     const params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,

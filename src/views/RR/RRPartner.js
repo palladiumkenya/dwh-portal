@@ -5,6 +5,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { capitalize, getAll } from '../Shared/Api';
 import { Card, CardBody, CardHeader } from 'reactstrap';
+import { ETL_DAY } from '../../constants';
 const _ = require("lodash");
 
 const RRPartner = () => {
@@ -31,16 +32,14 @@ const RRPartner = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            fromDate: filters.fromDate
-                ? filters.fromDate
-                : moment()
-                      .subtract(2, 'month')
-                      .add(16, 'days')
-                      .format('MMM YYYY'),
+            fromDate: filters.fromDate || moment()
+                .subtract(2, 'month')
+                .add(ETL_DAY, 'days')
+                .format('MMM YYYY'),
         };
         params.period = filters.fromDate ?
             moment(params.fromDate, "MMM YYYY").startOf('month').subtract(0, 'month').format('YYYY,M') :
-            moment().subtract(2, 'month').add(16, 'days').format('YYYY,M');
+            moment().subtract(2, 'month').add(ETL_DAY, 'days').format('YYYY,M');
         const overallReportingRateResult = await getAll('manifests/recencyreportingbypartner/' + rrTab, params);
         params.period = filters.fromDate
             ? moment(params.fromDate, 'MMM YYYY')
@@ -49,7 +48,7 @@ const RRPartner = () => {
                   .format('YYYY,M')
             : moment()
                   .subtract(3, 'month')
-                  .add(16, 'days')
+                  .add(ETL_DAY, 'days')
                   .format('YYYY,M');
         const consistencyResult = await getAll('manifests/consistencyreportingbycountypartner/' + rrTab + '?reportingType=partner', params);
         const rrData = await getAll('manifests/expectedPartnerCounty/' + rrTab + '?reportingType=partner', params);

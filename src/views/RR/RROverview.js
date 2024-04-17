@@ -5,6 +5,7 @@ import moment from 'moment';
 import { getAll } from '../Shared/Api';
 import CsvDownloader from 'react-csv-downloader';
 import { Spinner } from 'reactstrap';
+import { ETL_DAY } from '../../constants';
 
 const RROverview = () => {
     const filters = useSelector(state => state.filters);
@@ -67,7 +68,7 @@ const RROverview = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            fromDate: filters.fromDate ? filters.fromDate : moment().subtract(2, 'month').add(16, 'days').format('MMM YYYY')
+            fromDate: filters.fromDate || moment().subtract(2, 'month').add(ETL_DAY, 'days').format('MMM YYYY')
         };
         params.period = filters.fromDate
             ? moment(params.fromDate, 'MMM YYYY')
@@ -76,7 +77,7 @@ const RROverview = () => {
                   .format('YYYY,M')
             : moment()
                   .subtract(2, 'month')
-                  .add(16, 'days')
+                  .add(ETL_DAY, 'days')
                   .format('YYYY,M');
         const data = await getAll('manifests/consistency/' + rrTab, params);
         setConsistnecy({ consistency: [], stats: data.consistency ? data.consistency.toLocaleString('en') : [], statsPerc: getPerc(data.consistency , expected) });
@@ -102,7 +103,7 @@ const RROverview = () => {
                   .add(1, 'month')
                   .format('YYYY,M')
             : moment()
-                  .subtract(16, 'days')
+                  .subtract(19, 'days')
                   .format('YYYY,M');
         const data = await getAll('manifests/recency/' + rrTab, params);
         setRecency({ recency: [], stats: data.recency ? data.recency.toLocaleString('en') : 0, statsPerc: getPerc(data.recency , expected) });
@@ -233,9 +234,7 @@ const RROverview = () => {
                                 &nbsp;
                                 <sup className="overall-rates-sup">
                                     {' '}
-                                    {recencyStats.statsPerc
-                                        ? recencyStats.statsPerc
-                                        : 0}
+                                    {recencyStats.statsPerc || 0}
                                     <span className="overall-rates-sup-perc">
                                         {' '}
                                         %
@@ -367,7 +366,7 @@ const RROverview = () => {
                                     partner: l.Partner,
                                     reporting_date: filters.fromDate || moment()
                                         .subtract(2, 'month')
-                                        .add(16, 'days')
+                                        .add(ETL_DAY, 'days')
                                         .format('MMM YYYY'),
                                 })
                             )}
