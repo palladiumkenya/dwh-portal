@@ -29,7 +29,7 @@ export const fetchOverallReportingRatesByFacilityReported = () => async (dispatc
     params.period = getState().filters.fromDate
         ? moment(getState().filters.fromDate, 'MMM YYYY')
               .startOf('month')
-              .subtract(0, 'month')
+              .add(1, 'month')
               .format('YYYY,M')
         : moment().subtract(1, 'month').add(ETL_DAY, 'days').format('YYYY,M');
     try {
