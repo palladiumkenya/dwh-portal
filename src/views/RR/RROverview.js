@@ -50,7 +50,7 @@ const RROverview = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
+            fromDate: filters.fromDate || moment().format("MMM YYYY")
         };
         params.period = filters.fromDate ?
             moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M') :
@@ -147,11 +147,9 @@ const RROverview = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            fromDate: filters.fromDate
-                ? filters.fromDate
-                : moment()
-                      .subtract(16, 'days')
-                      .format('MMM YYYY'),
+            fromDate: filters.fromDate || moment()
+                .subtract(16, 'days')
+                .format('MMM YYYY'),
         };
         params.period = filters.fromDate
             ? moment(params.fromDate, 'MMM YYYY')
@@ -367,14 +365,10 @@ const RROverview = () => {
                                     sub_county: l.subCounty,
                                     agency: l.Agency,
                                     partner: l.Partner,
-                                    reporting_date: filters.fromDate
-                                        ? filters.fromDate
-                                        : moment()
-                                              .startOf('month')
-                                              .subtract(2, 'month')
-                                              .add(16, 'days')
-
-                                              .format('MMM YYYY'),
+                                    reporting_date: filters.fromDate || moment()
+                                        .subtract(2, 'month')
+                                        .add(16, 'days')
+                                        .format('MMM YYYY'),
                                 })
                             )}
                             text="Download facilities not reporting"
@@ -422,12 +416,10 @@ const RROverview = () => {
                                     sub_county: l.Subcounty,
                                     agency: l.Agency,
                                     partner: l.Partner,
-                                    reporting_date: filters.fromDate
-                                        ? filters.fromDate
-                                        : moment()
-                                              .startOf('month')
-                                              .subtract(1, 'month')
-                                              .format('MMM YYYY'),
+                                    reporting_date: filters.fromDate || moment()
+                                        .startOf('month')
+                                        .subtract(1, 'month')
+                                        .format('MMM YYYY'),
                                     number_of_uploads: l.NumberOfUploads,
                                 })
                             )}
