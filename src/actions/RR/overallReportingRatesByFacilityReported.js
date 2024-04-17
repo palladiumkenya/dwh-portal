@@ -1,7 +1,7 @@
 import axios from 'axios';
 import moment from 'moment';
 import * as actionTypes from '../types';
-import { CACHING, DWH_API_URL, PAGES } from '../../constants';
+import { CACHING, DWH_API_URL, ETL_DAY, PAGES } from '../../constants';
 
 export const loadOverallReportingRatesByFacilityReported = () => async (dispatch, getState) => {
     const docket = getState().ui.rrTab;
@@ -31,7 +31,7 @@ export const fetchOverallReportingRatesByFacilityReported = () => async (dispatc
               .startOf('month')
               .subtract(0, 'month')
               .format('YYYY,M')
-        : moment().subtract(1, 'month').add(16, 'days').format('YYYY,M');
+        : moment().subtract(1, 'month').add(ETL_DAY, 'days').format('YYYY,M');
     try {
         const response = await axios.get(`${DWH_API_URL}manifests/overallReportingByFacility/${docket}`, { params: params });
         dispatch({ type: actionTypes.RR_OVERALL_REPORTING_RATES_BY_FACILITY_REPORTED_FETCH, payload: { filtered: getState().filters.filtered, docket: docket, list: response.data }});

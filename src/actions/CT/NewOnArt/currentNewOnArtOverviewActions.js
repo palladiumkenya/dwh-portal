@@ -1,7 +1,7 @@
 import moment from 'moment';
 import * as actionTypes from '../../types';
 import { getAll } from '../../../views/Shared/Api';
-import { CACHING, PAGES } from '../../../constants';
+import { CACHING, ETL_DAY, PAGES } from '../../../constants';
 
 export const loadCurrentNewOnArtOverview = () => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
@@ -22,7 +22,7 @@ export const loadCurrentNewOnArtOverview = () => async (dispatch, getState) => {
 
 export const fetchCurrentNewOnArtOverview = () => async (dispatch, getState) => {
     dispatch({ type: actionTypes.CT_CURRENT_NEW_ON_ART_OVERVIEW_REQUEST });
-    const previousMonth = moment().subtract(2, 'month').add(16, 'days');
+    const previousMonth = moment().subtract(2, 'month').add(ETL_DAY, 'days');
     const params = {
         county: getState().filters.counties,
         subCounty: getState().filters.subCounties,

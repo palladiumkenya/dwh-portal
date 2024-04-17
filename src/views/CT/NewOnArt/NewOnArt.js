@@ -7,7 +7,7 @@ import {
     enableStickyFilter,
     disableStickyFilter,
 } from '../../../actions/Shared/uiActions';
-import { LOADING_DELAY } from '../../../constants';
+import { ETL_DAY, LOADING_DELAY } from '../../../constants';
 import Loading from './../../Shared/Loading';
 import SectionFooter from '../../Shared/SectionFooter';
 import SectionHeader from '../../Shared/SectionHeader';
@@ -105,7 +105,7 @@ const NewOnArt = () => {
                             were started on ART within the month of{' '}
                             {moment()
                                 .subtract(2, 'month')
-                                .add(16, 'days')
+                                .add(ETL_DAY, 'days')
                                 .format('MMMM YYYY')}
                         </li>
                     </ul>
