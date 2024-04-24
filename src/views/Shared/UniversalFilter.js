@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useCallback } from 'react'; 
+import React, { useEffect, useState, useCallback } from 'react';
 import { BrowserRouter as Router, Link, useLocation } from 'react-router-dom';
 import { useHistory, useParams } from 'react-router-dom';
 import moment from 'moment';
-import { DateInput, MonthInput, MonthRangeInput, YearInput } from 'semantic-ui-calendar-react';
+import { MonthRangeInput } from 'semantic-ui-calendar-react';
 import { Dropdown, Message } from 'semantic-ui-react';
 import { PAGES } from '../../constants';
 import { Row, Col } from 'reactstrap';
@@ -33,6 +33,7 @@ const UniversalFilter = () => {
     const [agencies, setAgencies] = useState([]);
     const [projects, setProjects] = useState([]);
     const [genders, setGenders] = useState([]);
+    const [pbfws, setPbfws] = useState([]);
     const [emr, setEmr] = useState([]);
     const [datimAgeGroups, setDatimAgeGroups] = useState([]);
     const [datimAgePopulations, setDatimAgePopulations] = useState([]);
@@ -70,7 +71,7 @@ const UniversalFilter = () => {
 
     }
     let ageGroups;
-    if (active_tab === 'comparison')
+    if (active_tab === 'comparison') {
         ageGroups = [
             'Under 1',
             '1 to 9',
@@ -79,7 +80,7 @@ const UniversalFilter = () => {
             '20 to 24',
             '25+',
         ];
-    else
+    } else {
         ageGroups = [
             'Under 1',
             '1 to 4',
@@ -97,6 +98,7 @@ const UniversalFilter = () => {
             '60 to 64',
             '65+',
         ];
+    }
 
     const loadSites = useCallback(async () => {
         switch (ui.currentPage) {
@@ -205,6 +207,26 @@ const UniversalFilter = () => {
         );
         setDatimAgeGroups(
             ageGroups.map((c) => ({ value: c, key: c, text: c }))
+        );
+        setPbfws(
+            [
+                {
+                    val: 'Known Positives|Yes',
+                    txt: 'Pregnant Known Positives',
+                },
+                {
+                    val: 'Known Positives|No',
+                    txt: 'Breastfeeding Known Positives',
+                },
+                {
+                    val: 'New Positives|Yes',
+                    txt: 'Pregnant New Positives',
+                },
+                {
+                    val: 'New Positives|No',
+                    txt: 'Breastfeeding New Positives',
+                },
+            ].map((c) => ({ value: c.val, key: c.val, text: c.txt }))
         );
         setDatimAgePopulations(
             ['<18', '>18'].map((c) => ({ value: c, key: c, text: c }))
@@ -577,6 +599,33 @@ const UniversalFilter = () => {
                         </div>
                     </Col>
                 ) : null}
+                {filters.pbfwFilterEnabled ? (
+                    <Col
+                        className={
+                            'col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2'
+                        }
+                    >
+                        <div className="form-group">
+                            <label htmlFor="pbfw">
+                                Pregnant & Breastfeeding
+                            </label>
+                            <Dropdown
+                                id="pbfw"
+                                name="pbfw"
+                                placeholder="All"
+                                fluid
+                                multiple
+                                selection
+                                search
+                                options={pbfws}
+                                value={filters.pbfws}
+                                onChange={(e, data) => {
+                                    dispatch(actions.filterByPBFW(data.value));
+                                }}
+                            />
+                        </div>
+                    </Col>
+                ) : null}
                 {filters.datimAgePopulationFilterEnabled ? (
                     <Col
                         className={
@@ -676,11 +725,7 @@ const UniversalFilter = () => {
                                 selection
                                 search
                                 options={indicators}
-                                value={
-                                    filters.indicators
-                                        ? filters.indicators
-                                        : 'Tx_New'
-                                }
+                                value={filters.indicators || 'Tx_New'}
                                 onChange={(e, data) => {
                                     dispatch(
                                         actions.filterByIndicator(data.value)

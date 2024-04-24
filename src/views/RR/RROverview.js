@@ -5,6 +5,7 @@ import moment from 'moment';
 import { getAll } from '../Shared/Api';
 import CsvDownloader from 'react-csv-downloader';
 import { Spinner } from 'reactstrap';
+import { ETL_DAY } from '../../constants';
 
 const RROverview = () => {
     const filters = useSelector(state => state.filters);
@@ -12,6 +13,8 @@ const RROverview = () => {
     const [expected, setExpected] = useState('0');
     const [consistencyStats, setConsistnecy] = useState({ consistency: [], stats: '0', statsPerc: 0 });
     const [recencyStats, setRecency] = useState({ recency: [], stats: '0', statsPerc: 0 });
+    const [infrastructureStats, setInfrastructure] = useState({});
+    const [implementationStats, setImplementationStats] = useState(0);
 
     const overallReportingRatesByFacilityReportedFiltered = useSelector(state => state.overallReportingRatesByFacilityReported.listFiltered);
     const overallReportingRatesByFacilityReportedUnFiltered = useSelector(state => state.overallReportingRatesByFacilityReported.listUnfiltered);
@@ -48,7 +51,7 @@ const RROverview = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            fromDate: filters.fromDate ? filters.fromDate : moment().format("MMM YYYY")
+            fromDate: filters.fromDate || moment().format("MMM YYYY")
         };
         params.period = filters.fromDate ?
             moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M') :
@@ -65,7 +68,7 @@ const RROverview = () => {
             partner: filters.partners,
             agency: filters.agencies,
             project: filters.projects,
-            fromDate: filters.fromDate ? filters.fromDate : moment().subtract(2, 'month').add(16, 'days').format('MMM YYYY')
+            fromDate: filters.fromDate || moment().subtract(2, 'month').add(ETL_DAY, 'days').format('MMM YYYY')
         };
         params.period = filters.fromDate
             ? moment(params.fromDate, 'MMM YYYY')
@@ -74,7 +77,7 @@ const RROverview = () => {
                   .format('YYYY,M')
             : moment()
                   .subtract(2, 'month')
-                  .add(16, 'days')
+                  .add(ETL_DAY, 'days')
                   .format('YYYY,M');
         const data = await getAll('manifests/consistency/' + rrTab, params);
         setConsistnecy({ consistency: [], stats: data.consistency ? data.consistency.toLocaleString('en') : [], statsPerc: getPerc(data.consistency , expected) });
@@ -100,10 +103,81 @@ const RROverview = () => {
                   .add(1, 'month')
                   .format('YYYY,M')
             : moment()
-                  .subtract(16, 'days')
+                  .subtract(19, 'days')
                   .format('YYYY,M');
         const data = await getAll('manifests/recency/' + rrTab, params);
-        setRecency({ recency: [], stats: data.recency ? data.recency.toLocaleString('en') : [], statsPerc: getPerc(data.recency , expected) });
+        setRecency({ recency: [], stats: data.recency ? data.recency.toLocaleString('en') : 0, statsPerc: getPerc(data.recency , expected) });
+    }, [filters, rrTab, expected]);
+
+    const loadFacilityInfrastructureType = useCallback(async () => {
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            fromDate: filters.fromDate
+                ? filters.fromDate
+                : moment()
+                      .subtract(16, 'days')
+                      .format('MMM YYYY'),
+        };
+        params.period = filters.fromDate
+            ? moment(params.fromDate, 'MMM YYYY')
+                  .startOf('month')
+                  .add(1, 'month')
+                  .format('YYYY,M')
+            : moment()
+                  .subtract(16, 'days')
+                  .format('YYYY,M');
+        const data = await getAll('manifests/emrinfo/' + rrTab, params);
+        setInfrastructure({
+            onCloud: data.find((e) => e?.infrastructure_type === 'On Cloud'),
+            onPremises: data.find(
+                (e) => e?.infrastructure_type === 'On Premises'
+            ),
+        });
+    }, [filters, rrTab, expected]);
+
+    const loadImplementationDate = useCallback(async () => {
+        let params = {
+            county: filters.counties,
+            subCounty: filters.subCounties,
+            facility: filters.facilities,
+            partner: filters.partners,
+            agency: filters.agencies,
+            project: filters.projects,
+            fromDate: filters.fromDate || moment()
+                .subtract(16, 'days')
+                .format('MMM YYYY'),
+        };
+        params.period = filters.fromDate
+            ? moment(params.fromDate, 'MMM YYYY')
+                  .startOf('month')
+                  .add(1, 'month')
+                  .format('YYYY,M')
+            : moment()
+                  .subtract(16, 'days')
+                  .format('YYYY,M');
+        params.year = filters.fromDate
+                ? moment(params.fromDate, 'MMM YYYY')
+                    .startOf('month')
+                    .format('YYYY')
+                : moment()
+                    .subtract(16, 'days')
+                    .format('YYYY')
+        params.month = filters.fromDate
+                ? moment(params.fromDate, 'MMM YYYY')
+                    .format('M')
+                : moment()
+                    .subtract(16, 'days')
+                    .format('M')
+        const data = await getAll(
+            'manifests/implementationDate/' + rrTab,
+            params
+        );
+        setImplementationStats(data?.facilities_number);
     }, [filters, rrTab, expected]);
 
     useEffect(() => {
@@ -158,9 +232,7 @@ const RROverview = () => {
                                 &nbsp;
                                 <sup className="overall-rates-sup">
                                     {' '}
-                                    {recencyStats.statsPerc
-                                        ? recencyStats.statsPerc
-                                        : 0}
+                                    {recencyStats.statsPerc || 0}
                                     <span className="overall-rates-sup-perc">
                                         {' '}
                                         %
@@ -221,14 +293,10 @@ const RROverview = () => {
                                     sub_county: l.subCounty,
                                     agency: l.Agency,
                                     partner: l.Partner,
-                                    reporting_date: filters.fromDate
-                                        ? filters.fromDate
-                                        : moment()
-                                              .startOf('month')
-                                              .subtract(2, 'month')
-                                              .add(16, 'days')
-
-                                              .format('MMM YYYY'),
+                                    reporting_date: filters.fromDate || moment()
+                                        .subtract(2, 'month')
+                                        .add(ETL_DAY, 'days')
+                                        .format('MMM YYYY'),
                                 })
                             )}
                             text="Download facilities not reporting"
@@ -276,12 +344,10 @@ const RROverview = () => {
                                     sub_county: l.Subcounty,
                                     agency: l.Agency,
                                     partner: l.Partner,
-                                    reporting_date: filters.fromDate
-                                        ? filters.fromDate
-                                        : moment()
-                                              .startOf('month')
-                                              .subtract(1, 'month')
-                                              .format('MMM YYYY'),
+                                    reporting_date: filters.fromDate || moment()
+                                        .startOf('month')
+                                        .subtract(1, 'month')
+                                        .format('MMM YYYY'),
                                     number_of_uploads: l.NumberOfUploads,
                                 })
                             )}

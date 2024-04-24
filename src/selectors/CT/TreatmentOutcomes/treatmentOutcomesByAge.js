@@ -8,7 +8,7 @@ export const getTreatmentOutcomesByAge = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        const treatmentOutcomesCategories = ['Active', 'Dead', 'LTFU', 'Stopped', 'TransferOut'];
+        const treatmentOutcomesCategories = ['ACTIVE', 'DEAD', 'LOSS TO FOLLOW UP', 'STOPPED', 'TRANSFERRED OUT'];
         const ageCategories = [
             ' Under 1',
             '01 to 04',
@@ -40,15 +40,15 @@ export const getTreatmentOutcomesByAge = createSelector(
             if(treatmentOutcomesIndex === -1 || ageIndex === -1 ) { // unsupported
                 continue;
             }
-            data[treatmentOutcomesIndex][ageIndex] = data[treatmentOutcomesIndex][ageIndex] + parseInt(list[i].totalOutcomes);
+            data[treatmentOutcomesIndex][ageIndex] += parseInt(list[i].totalOutcomes);
         }
         // combine and cleanup
         for(let i = 0; i < data.length; i++) {
-            data[i][1] = data[i][1] + data[i][0];
-            data[i][7] = data[i][7] + data[i][6];
-            data[i][9] = data[i][9] + data[i][8];
-            data[i][11] = data[i][11] + data[i][10];
-            data[i][13] = data[i][13] + data[i][12];
+            data[i][1] += data[i][0];
+            data[i][7] += data[i][6];
+            data[i][9] += data[i][8];
+            data[i][11] += data[i][10];
+            data[i][13] += data[i][12];
             data[i].splice(0, 1);
             data[i].splice(6-1, 1);
             data[i].splice(8-2, 1);

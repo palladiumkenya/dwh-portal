@@ -20,7 +20,7 @@ export const getActive = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
-            .filter(list => list.artOutcome === "Active")
+            .filter(list => list.artOutcome === "ACTIVE")
             .sumBy("totalOutcomes")
             .value();
     }
@@ -31,7 +31,7 @@ export const getDead = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
-            .filter(list => list.artOutcome === "Dead")
+            .filter(list => list.artOutcome === "DEAD")
             .sumBy("totalOutcomes")
             .value();
     }
@@ -42,7 +42,7 @@ export const getLtfu = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
-            .filter((list) => list.artOutcome === 'Loss To Follow Up')
+            .filter((list) => list.artOutcome === 'LOSS TO FOLLOW UP')
             .sumBy('totalOutcomes')
             .value();
     }
@@ -53,7 +53,7 @@ export const getStopped = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
-            .filter(list => list.artOutcome === "Stopped")
+            .filter(list => list.artOutcome === "STOPPED")
             .sumBy("totalOutcomes")
             .value();
     }
@@ -64,7 +64,7 @@ export const getTransferOut = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
-            .filter((list) => list.artOutcome === 'Transferred Out')
+            .filter((list) => list.artOutcome === 'TRANSFERRED OUT')
             .sumBy('totalOutcomes')
             .value();
     }
@@ -75,7 +75,7 @@ export const getUndocumentedLtfu = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
         return _.chain(list)
-            .filter((list) => list.artOutcome === 'Undocumented Loss')
+            .filter((list) => list.artOutcome === 'UNDOCUMENTED LOSS')
             .sumBy('totalOutcomes')
             .value();
     }

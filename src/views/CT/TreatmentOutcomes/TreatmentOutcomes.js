@@ -4,7 +4,7 @@ import VisibilitySensor from 'react-visibility-sensor';
 import { useDispatch, useSelector } from 'react-redux';
 import { Card, CardBody, CardHeader, Col, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
 import { enableStickyFilter, disableStickyFilter } from "../../../actions/Shared/uiActions";
-import { LOADING_DELAY } from "../../../constants";
+import { ETL_DAY, LOADING_DELAY } from '../../../constants';
 import Loading from './../../Shared/Loading';
 import SectionFooter from '../../Shared/SectionFooter';
 import SectionHeader from '../../Shared/SectionHeader';
@@ -128,7 +128,7 @@ const TreatmentOutcomes = () => {
                     >
                         CONTINUITY OF TREATMENT
                     </NavLink>
-                </NavItem> 
+                </NavItem>
 */}
             </Nav>
             <TabContent activeTab={mini_tab}>
@@ -145,7 +145,7 @@ const TreatmentOutcomes = () => {
                                             : moment()
                                                   .startOf('month')
                                                   .subtract(13, 'month')
-                                                  .add(16, 'days') // Because refresh happens on the 15th date should change on the 16th day of the month
+                                                  .add(ETL_DAY, 'days') // Because refresh happens on the 15th date should change on the ETL_DAYth day of the month
                                                   .format('MMM YYYY')}
                                     </strong>{' '}
                                     to &nbsp;
@@ -155,7 +155,7 @@ const TreatmentOutcomes = () => {
                                             : moment()
                                                   .startOf('month')
                                                   .subtract(2, 'month')
-                                                  .add(16, 'days')
+                                                  .add(ETL_DAY, 'days')
                                                   .format('MMM YYYY')}
                                     </strong>
                                 </span>
@@ -167,7 +167,7 @@ const TreatmentOutcomes = () => {
                                         {moment()
                                             .startOf('month')
                                             .subtract(2, 'month')
-                                            .add(16, 'days')
+                                            .add(ETL_DAY, 'days')
                                             .format('MMM YYYY')}
                                     </strong>
                                 </span>
@@ -430,7 +430,7 @@ const TreatmentOutcomes = () => {
                     <SectionFooter />
                     <IITTracingNoContact />
                     <SectionFooter />
-                </TabPane> 
+                </TabPane>
 */}
             </TabContent>
         </div>

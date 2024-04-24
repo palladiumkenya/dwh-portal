@@ -6,16 +6,27 @@ import * as currentOnArtSelectors from '../../selectors/CT/CurrentOnArt/currentO
 import { formatNumber, roundNumber } from '../../utils/utils';
 import DataCard from '../Shared/DataCard';
 import moment from 'moment';
+import { ETL_DAY } from '../../constants';
 
 const HomeVLCascade = () => {
     // const currentOnArt = useSelector(
     //     currentOnArtOverviewSelectors.getCurrentOnArt
     // );
-    
+    const currentDate = moment();
+
+    // Check if the current date is before the 20th of the month
+    if (currentDate.date() < 19) {
+        // If true, subtract 2 months
+        currentDate.subtract(2, 'months');
+    } else {
+        // If false, subtract 1 month
+        currentDate.subtract(1, 'months');
+    }
+    // Format the date
+    const reporting_month = currentDate.format('MMM YYYY');
+
     const currentOnArt = useSelector(currentOnArtSelectors.getCurrentOnArt);
-    const currentOnArtText =
-        'CURRENT ON ART as at ' +
-        moment().subtract(2, 'month').add(16, 'days').format('MMM YYYY');
+    const currentOnArtText = 'CURRENT ON ART as at ' + reporting_month;
     const eligibleForVl = useSelector(
         currentOnArtOverviewSelectors.getEligibleForVl
     );

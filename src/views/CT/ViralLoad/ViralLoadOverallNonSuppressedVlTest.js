@@ -95,7 +95,7 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
                             name: 'NUMBER OF PLHIV ON ART WITH VL > 1000 COPIES/ML WHO RECEIVED FOLLOW UP VL TESTS',
                             y: viralLoadUptakeGt1000CopiesRecFollowTestAll,
                             color: '#fad53f',
-                            text: viralLoadUptakeGt1000CopiesRecFollowTestAll.toLocaleString('en') 
+                            text: viralLoadUptakeGt1000CopiesRecFollowTestAll.toLocaleString('en')
                         },
                         {
                             name: 'NUMBER VIRALLY SUPPRESSED ON FOLLOW UP VL TEST',
@@ -103,12 +103,11 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
                             color: '#1c943e',
                             text: '  NUMBER VIRALLY SUPPRESSED <br/> ON FOLLOW UP VL TEST ' + viralLoadUptakeGt1000CopiesRecFollowTest[0]?.Num.toLocaleString('en') + ' (' + parseFloat(((viralLoadUptakeGt1000CopiesRecFollowTest[0]?.Num / totalFollowTest) * 100).toString()).toFixed(0) + '%)'
                         },
-                        // TODO:: Last bar of the chart
                         {
                             name: 'NUMBER WITH FOLLOW UP VL TEST AT VL > 1000 COPIES/ML SWITCHED TO SECOND LINE REGIMENT',
                             y: viralLoadOverallNumberGt1000CopiesSecondlineRegimentData ?? 0,
                             color: '#142459',
-                            text: viralLoadOverallNumberGt1000CopiesSecondlineRegimentData?.toLocaleString('en') 
+                            text: viralLoadOverallNumberGt1000CopiesSecondlineRegimentData?.toLocaleString('en')
                         }
                     ]
                 },

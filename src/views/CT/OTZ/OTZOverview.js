@@ -9,6 +9,7 @@ import { formatNumber, roundNumber } from '../../../utils/utils';
 import DataCard from '../../Shared/DataCard';
 import moment from 'moment';
 import DataCardCT from '../../Shared/DataCardCT';
+import { ETL_DAY } from '../../../constants';
 
 const OTZOverview = () => {
     const [otzTotalAdolescents, setOtzTotalAdolescents] = useState({});
@@ -26,7 +27,7 @@ const OTZOverview = () => {
         'ADOLESCENTS CURRENT ON ART as at ' +
         moment()
             .subtract(2, 'month')
-            .add(16, 'days')
+            .add(ETL_DAY, 'days')
             .format('MMM YYYY');
 
     const loadOtzTotalAdolescents = useCallback(async () => {
