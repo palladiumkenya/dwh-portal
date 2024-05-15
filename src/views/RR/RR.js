@@ -20,15 +20,11 @@ import { LOADING_DELAY, RR_TABS, PAGES } from "../../constants";
 import Loading from './../Shared/Loading';
 import UniversalFilter from '../Shared/UniversalFilter';
 import SectionHeader from './../Shared/SectionHeader';
-import SectionFooter from './../Shared/SectionFooter';
-import moment from 'moment';
 import { useHistory, useParams } from 'react-router-dom';
 
-const RROverview = Loadable({ loader: () => import('./RROverview'), loading: Loading, delay: LOADING_DELAY });
-const RROverviewTrends = Loadable({ loader: () => import('./RROverviewTrends'), loading: Loading, delay: LOADING_DELAY });
-const RRCounty = Loadable({ loader: () => import('./RRCounty'), loading: Loading, delay: LOADING_DELAY });
-const RRPartner = Loadable({ loader: () => import('./RRPartner'), loading: Loading, delay: LOADING_DELAY });
-const RRIndicatorDefinition = Loadable({ loader: () => import('./RRIndicatorDefinition'), loading: Loading, delay: LOADING_DELAY });
+
+const RRTab = Loadable({ loader: () => import('./RRTab'), loading: Loading, delay: LOADING_DELAY });
+const HisDeployments = Loadable({ loader: () => import('./HisDeployments'), loading: Loading, delay: LOADING_DELAY });
 
 const RR = () => {
     const dispatch = useDispatch();
@@ -126,25 +122,24 @@ const RR = () => {
                 {renderTabNavItems()}
             </Nav>
             <TabContent activeTab={active_tab}>
-                <TabPane tabId={active_tab}>
+                <TabPane tabId={'ct'}>
                     <SectionHeader title="REPORTING RATES" description="OVERVIEW"/>
                     <VisibilitySensor onChange={onVisibilityChange}>
                         <UniversalFilter/>
                     </VisibilitySensor>
-                    <RRIndicatorDefinition />
-                    <RROverview/>
-                    <RROverviewTrends/>
-                    <SectionFooter overview={"The Overall reporting rates refers to the proportion of EMR sites that submitted the most recent i.e. The "+ moment().format('MMMM, YYYY') + " Overall reporting rates in the number of EMR sites that uploaded data to the NDW in " + moment().format('MMMM, YYYY') + " and so forth."}
-                    />
-                    {/*<SectionHeader title="REPORTING RATES" description="BY COUNTY"/>*/}
-                    <RRCounty/>
-                    <SectionFooter overview={"The overall reporting rate for "+ moment().format('MMMM, YYYY') +" is the number of EMR sites that uploaded data in "+ moment().format('MMMM, YYYY') }
-                    />
-                    {/*<SectionHeader title="REPORTING RATES" description="BY PARTNER"/>*/}
-                    <RRPartner/>
-                    <SectionFooter overview={'The overall reporting rate for ' + moment().format('MMMM, YYYY') +",is the number of EMR sites that uploaded data in " + moment().format('MMMM, YYYY') }
-
-                    />
+                    <RRTab/>
+                </TabPane>
+                <TabPane tabId={'hts'}>
+                    <SectionHeader title="REPORTING RATES" description="OVERVIEW"/>
+                    <VisibilitySensor onChange={onVisibilityChange}>
+                        <UniversalFilter/>
+                    </VisibilitySensor>
+                    <RRTab/>
+                </TabPane>
+                <TabPane tabId={'his'}>
+                    {active_tab === 'his' ? (
+                        <HisDeployments/>
+                    ) : null}
                 </TabPane>
             </TabContent>
             <p></p><p></p>
