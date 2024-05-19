@@ -3,7 +3,7 @@ import axios from 'axios';
 import { embedDashboard } from "@superset-ui/embedded-sdk";
 
 
-const supersetUrl = 'https://dwhanalytics.kenyahmis.org'
+const supersetUrl = 'http://10.230.50.64:8088'
 const supersetApiUrl = supersetUrl + '/api/v1/security'
 const dashboardId = "7aa9c6c5-2904-4d6f-87e3-9a36a0b51e6e"
 
