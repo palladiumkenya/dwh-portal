@@ -1,12 +1,17 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
-import HighchartsReact from 'highcharts-react-official';;
+import HighchartsReact from 'highcharts-react-official';
+import { useSelector } from 'react-redux';
+import * as hisSelector from '../../selectors/RR/HisDeploymentsSelector';
 
 const HisDeploymentsFacilityLevelByOwnershipCounty = () => {
     const [hisDeployments, setHisDeployments] = useState({});
+    const hisStatusData = useSelector(
+        hisSelector.getFacilityLevelByCounty
+    );
 
-    const loadNewOnArtBySex = useCallback(async () => {
+    const loadHisLevelByCounty = useCallback(async () => {
         setHisDeployments({
             chart: {
                 type: 'column',
@@ -19,7 +24,7 @@ const HisDeploymentsFacilityLevelByOwnershipCounty = () => {
                 title: {
                     text: 'COUNTY',
                 },
-                categories: ['ampath', 'afh', 'edarp', 'wrp', 'CHAK', 'AFYA NYOTA', 'AMREF'],
+                categories: hisStatusData.counties,
             },
             yAxis: {
                 min: 0,
@@ -64,41 +69,41 @@ const HisDeploymentsFacilityLevelByOwnershipCounty = () => {
             series: [
                 {
                     name: 'LEVEL 1',
-                    data: [10, 70, 34, 90, 43,324,210],
+                    data: hisStatusData.lvl1,
                     color: '#00AD30',
                 },
                 {
                     name: 'LEVEL 2',
-                    data: [90,23,54,77,2, 60,63],
+                    data: hisStatusData.lvl2,
                     color: '#152459',
                 },
                 {
                     name: 'LEVEL 3',
-                    data: [10,3,1,18,2, 0,6],
+                    data: hisStatusData.lvl3,
                     color: '#F6941C',
                 },
                 {
                     name: 'LEVEL 4',
-                    data: [0,3,4,27,7, 0,6],
+                    data: hisStatusData.lvl4,
                     color: '#D21D7F',
                 },
                 {
                     name: 'LEVEL 5',
-                    data: [9,3,0,7,2, 0,3],
+                    data: hisStatusData.lvl5,
                     color: '#8E2C16',
                 },
                 {
                     name: 'LEVEL 6',
-                    data: [1,2,1,3, 1, 0, 3],
+                    data: hisStatusData.lvl6,
                     color: '#5FA5E6',
                 },
             ],
         });
-    }, []);
+    }, [hisStatusData]);
 
     useEffect(() => {
-        loadNewOnArtBySex();
-    }, [loadNewOnArtBySex]);
+        loadHisLevelByCounty();
+    }, [loadHisLevelByCounty]);
 
     return (
         <div className="row">

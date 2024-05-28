@@ -353,12 +353,12 @@ import { loadCurrentOnArtByFacility } from '../../actions/CT/CurrentOnArt/curren
 import { loadCurrentOnArt } from '../../actions/CT/CurrentOnArt/currentOnArtActions';
 import { loadCurrOnARTKHIS } from '../../actions/Operational&HIS/Comparison/currOnArtKHISActions';
 import { loadArtVerificationByCounty } from '../../actions/CT/ArtVerification/artVerificationByCountyActions';
-import { loadArtVerificationByPartner } from './../../actions/CT/ArtVerification/artVerificationByPartnerActions';
-import { loadArtVerificationReasons } from './../../actions/CT/ArtVerification/artVerificationReasonsActions';
+import { loadArtVerificationByPartner } from '../../actions/CT/ArtVerification/artVerificationByPartnerActions';
+import { loadArtVerificationReasons } from '../../actions/CT/ArtVerification/artVerificationReasonsActions';
 import { loadAppointmentKeepingWaterfall } from '../../actions/CT/TreatmentOutcomes/appointmentKeepingWaterfallActions';
 import { loadQuaterlyIIT } from '../../actions/CT/TreatmentOutcomes/quaterlyIITActions';
-import { loadIITTracing } from './../../actions/CT/TreatmentOutcomes/IITTracingActions';
-import { loadIITTracingOutcomes } from './../../actions/CT/TreatmentOutcomes/IITTracingOutcomesActions';
+import { loadIITTracing } from '../../actions/CT/TreatmentOutcomes/IITTracingActions';
+import { loadIITTracingOutcomes } from '../../actions/CT/TreatmentOutcomes/IITTracingOutcomesActions';
 import { loadViralLoadUptakeUToU } from '../../actions/CT/ViralLoad/viralLoadUptakeUToUActions';
 import { loadViralLoadCategorizationUToU } from '../../actions/CT/ViralLoad/viralLoadCategorizationUToUActions';
 

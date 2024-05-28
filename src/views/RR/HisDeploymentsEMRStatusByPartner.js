@@ -1,12 +1,17 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
-import HighchartsReact from 'highcharts-react-official';;
+import HighchartsReact from 'highcharts-react-official';
+import * as hisSelector from '../../selectors/RR/HisDeploymentsSelector';
+import { useSelector } from 'react-redux';
 
 const HISDeploymentsByPartner = () => {
+    const hisStatusData = useSelector(
+        hisSelector.getFacilityStatusByPartner
+    );
     const [hisDeployments, setHisDeployments] = useState({});
 
-    const loadNewOnArtBySex = useCallback(async () => {
+    const loadHisDeployments = useCallback(async () => {
         setHisDeployments({
             chart: {
                 type: 'column',
@@ -19,7 +24,7 @@ const HISDeploymentsByPartner = () => {
                 title: {
                     text: 'SERVICE DELIVERY PARTNER',
                 },
-                categories: ['ampath', 'afh', 'edarp', 'wrp', 'CHAK', 'AFYA NYOTA', 'AMREF'],
+                categories: hisStatusData.partnerNames,
             },
             yAxis: {
                 min: 0,
@@ -64,26 +69,26 @@ const HISDeploymentsByPartner = () => {
             series: [
                 {
                     name: 'ACTIVE',
-                    data: [10, 70, 34, 90, 43,324,210],
+                    data: hisStatusData.actives,
                     color: '#00AD30',
                 },
                 {
                     name: 'DISCONTINUED',
-                    data: [90,23,54,77,2, 60,63],
+                    data: hisStatusData.discontinueds,
                     color: '#152459',
                 },
                 {
                     name: 'STALLED/INACTIVE',
-                    data: [10,3,1,18,2, 0,6],
+                    data: hisStatusData.inactives,
                     color: '#F6941C',
                 }
             ],
         });
-    }, []);
+    }, [hisStatusData]);
 
     useEffect(() => {
-        loadNewOnArtBySex();
-    }, [loadNewOnArtBySex]);
+        loadHisDeployments();
+    }, [loadHisDeployments]);
 
     return (
         <div className="row">

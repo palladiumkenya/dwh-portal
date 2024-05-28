@@ -1,12 +1,17 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
-import HighchartsReact from 'highcharts-react-official';;
+import HighchartsReact from 'highcharts-react-official';
+import { useSelector } from 'react-redux';
+import * as hisSelector from '../../selectors/RR/HisDeploymentsSelector';
 
 const HisDeploymentsFacilityByInfrastructure = () => {
     const [hisDeployments, setHisDeployments] = useState({});
+    const hisStatusData = useSelector(
+        hisSelector.getFacilityByInfrastructure
+    );
 
-    const loadNewOnArtBySex = useCallback(async () => {
+    const loadHisByInfrastructure = useCallback(async () => {
         setHisDeployments({
             chart: {
                 type: 'column',
@@ -19,7 +24,7 @@ const HisDeploymentsFacilityByInfrastructure = () => {
                 title: {
                     text: 'SERVICE DELIVERY PARTNER',
                 },
-                categories: ['ampath', 'afh', 'edarp', 'wrp', 'CHAK', 'AFYA NYOTA', 'AMREF'],
+                categories: hisStatusData.partnerNames,
             },
             yAxis: {
                 min: 0,
@@ -64,21 +69,21 @@ const HisDeploymentsFacilityByInfrastructure = () => {
             series: [
                 {
                     name: 'ON PREMISES',
-                    data: [80, 70, 34, 90, 43,24,110],
+                    data: hisStatusData.onPremises,
                     color: '#00AD30',
                 },
                 {
                     name: 'ON CLOUD',
-                    data: [9,23,54,77,2, 60,63],
+                    data: hisStatusData.onCloud,
                     color: '#152459',
                 }
             ],
         });
-    }, []);
+    }, [hisStatusData]);
 
     useEffect(() => {
-        loadNewOnArtBySex();
-    }, [loadNewOnArtBySex]);
+        loadHisByInfrastructure();
+    }, [loadHisByInfrastructure]);
 
     return (
         <div className="row">

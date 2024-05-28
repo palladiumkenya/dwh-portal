@@ -324,6 +324,13 @@ import missedEIDOverview from './PMTCTRRI/MissedEID/missedEIDOverview';
 import missedEIDSDP from './PMTCTRRI/MissedEID/missedEIDSDP';
 import missedEIDMissingPCR from './PMTCTRRI/MissedEID/missedEIDMissingPCR';
 
+import hisFacilityByInfrastructure from './RR/hisFacilityByInfrastructure';
+import hisFacilityLinelist from './RR/hisFacilityLinelist';
+import hisFacilityLevelByCounty from './RR/hisFacilityLevelByCounty';
+import hisFacilityStatus from './RR/hisFacilityStatus';
+import hisFacilityStatusByPartner from './RR/hisFacilityStatusByPartner';
+import hisFacilityLevelByPartner from './RR/hisFacilityLevelByPartner';
+
 import missedInfantProphylaxis from './PMTCTRRI/MissedInfantProphylaxis/missedInfantProphylaxis';
 
 import missedViralLoad from './PMTCTRRI/MissedViralLoad/missedViralLoad';
@@ -646,4 +653,11 @@ export default combineReducers({
     missedInfantProphylaxis,
     missedViralLoad,
     missedDTG,
+
+    hisFacilityByInfrastructure,
+    hisFacilityLevelByCounty,
+    hisFacilityLevelByPartner,
+    hisFacilityLinelist,
+    hisFacilityStatus,
+    hisFacilityStatusByPartner,
 });
