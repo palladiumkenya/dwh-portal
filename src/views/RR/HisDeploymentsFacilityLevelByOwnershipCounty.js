@@ -110,7 +110,7 @@ const HisDeploymentsFacilityLevelByOwnershipCounty = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        FACILITY LEVEL BY OWNERSHIP (COUNTY)
+                        ACTIVE FACILITY LEVEL BY OWNERSHIP (COUNTY)
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

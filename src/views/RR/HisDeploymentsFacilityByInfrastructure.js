@@ -90,7 +90,7 @@ const HisDeploymentsFacilityByInfrastructure = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        FACILITY BY INFRASTRUCTURE DEPLOYMENT
+                        ACTIVE FACILITY BY INFRASTRUCTURE DEPLOYMENT
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
