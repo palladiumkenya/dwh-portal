@@ -8,7 +8,7 @@ export const HOME_TABS = {
 export const RR_TABS = {
     ct: 'CARE & TREATMENT',
     hts: 'HIV TESTING SERVICES',
-    his: 'HIS Deployments'
+    his: 'HIS DEPLOYMENTS'
 };
 
 export const HTS_TABS = {

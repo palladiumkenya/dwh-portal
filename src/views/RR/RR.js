@@ -115,6 +115,7 @@ const RR = () => {
             history.push(`/reporting-rates/${tab}`);
         }
     };
+    console.log(active_tab)
 
     return (
         <div>
@@ -137,9 +138,7 @@ const RR = () => {
                     <RRTab/>
                 </TabPane>
                 <TabPane tabId={'his'}>
-                    {active_tab === 'his' ? (
-                        <HisDeployments/>
-                    ) : null}
+                    <HisDeployments/>
                 </TabPane>
             </TabContent>
             <p></p><p></p>
