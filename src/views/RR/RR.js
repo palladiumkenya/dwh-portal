@@ -21,13 +21,6 @@ import Loading from './../Shared/Loading';
 import UniversalFilter from '../Shared/UniversalFilter';
 import SectionHeader from './../Shared/SectionHeader';
 import { useHistory, useParams } from 'react-router-dom';
-import { loadHisFacilityStatusAction } from '../../actions/RR/hisFacilityStatusActions';
-import { loadHisFacilityLevelByPartnerAction } from '../../actions/RR/hisFacilityLevelByPartnerActions';
-import { loadHisFacilityStatusByPartnerAction } from '../../actions/RR/hisFacilityStatusByPartnerActions';
-import { loadHisFacilityLevelByCountyAction } from '../../actions/RR/hisFacilityLevelByCountyActions';
-import { loadHisFacilityByInfrastructureActions } from '../../actions/RR/hisFacilityByInfrastructureActions';
-import { loadHisFacilityLinelistAction } from '../../actions/RR/hisFacilityLinelistActions';
-import moment from 'moment/moment';
 
 
 const RRTab = Loadable({ loader: () => import('./RRTab'), loading: Loading, delay: LOADING_DELAY });
@@ -91,13 +84,6 @@ const RR = () => {
         dispatch(loadOverallReportingRatesByFacilityReported());
         dispatch(loadOverallReportingRatesByFacilityNotReported());
         dispatch(loadConsistencyByFacilityNotReported());
-
-        dispatch(loadHisFacilityStatusAction());
-        dispatch(loadHisFacilityLevelByPartnerAction());
-        dispatch(loadHisFacilityStatusByPartnerAction());
-        dispatch(loadHisFacilityLevelByCountyAction());
-        dispatch(loadHisFacilityByInfrastructureActions());
-        dispatch(loadHisFacilityLinelistAction());
     }, [
         dispatch,
         counties,
@@ -129,7 +115,6 @@ const RR = () => {
             history.push(`/reporting-rates/${tab}`);
         }
     };
-    console.log(active_tab)
 
     return (
         <div>
@@ -152,10 +137,6 @@ const RR = () => {
                     <RRTab/>
                 </TabPane>
                 <TabPane tabId={'his'}>
-                    <SectionHeader title="HIS Deployments" description={`Year ${moment().format('YYYY')}`}/>
-                    <VisibilitySensor onChange={onVisibilityChange}>
-                        <UniversalFilter/>
-                    </VisibilitySensor>
                     <HisDeployments/>
                 </TabPane>
             </TabContent>

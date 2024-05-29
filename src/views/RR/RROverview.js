@@ -19,19 +19,19 @@ const RROverview = () => {
     const overallReportingRatesByFacilityReportedFiltered = useSelector(state => state.overallReportingRatesByFacilityReported.listFiltered);
     const overallReportingRatesByFacilityReportedUnFiltered = useSelector(state => state.overallReportingRatesByFacilityReported.listUnfiltered);
     const overallReportingRatesByFacilityReportedList = filters.filtered ? overallReportingRatesByFacilityReportedFiltered[rrTab] : overallReportingRatesByFacilityReportedUnFiltered[rrTab];
-    const overallReportingRatesByFacilityReported = overallReportingRatesByFacilityReportedList.length ? overallReportingRatesByFacilityReportedList : [];
+    const overallReportingRatesByFacilityReported = overallReportingRatesByFacilityReportedList?.length ? overallReportingRatesByFacilityReportedList : [];
     const overallReportingRatesByFacilityReportedLoading = useSelector(state => state.overallReportingRatesByFacilityReported.loading)[rrTab];
 
     const overallReportingRatesByFacilityNotReportedFiltered = useSelector(state => state.overallReportingRatesByFacilityNotReported.listFiltered);
     const overallReportingRatesByFacilityNotReportedUnFiltered = useSelector(state => state.overallReportingRatesByFacilityNotReported.listUnfiltered);
     const overallReportingRatesByFacilityNotReportedList = filters.filtered ? overallReportingRatesByFacilityNotReportedFiltered[rrTab] : overallReportingRatesByFacilityNotReportedUnFiltered[rrTab];
-    const overallReportingRatesByFacilityNotReported = overallReportingRatesByFacilityNotReportedList.length ? overallReportingRatesByFacilityNotReportedList : [];
+    const overallReportingRatesByFacilityNotReported = overallReportingRatesByFacilityNotReportedList?.length ? overallReportingRatesByFacilityNotReportedList : [];
     const overallReportingRatesByFacilityNotReportedLoading = useSelector(state => state.overallReportingRatesByFacilityNotReported.loading)[rrTab];
 
     const consistencyByFacilityNotReportedFiltered = useSelector(state => state.consistencyByFacilityNotReported.listFiltered);
     const consistencyByFacilityNotReportedUnFiltered = useSelector(state => state.consistencyByFacilityNotReported.listUnfiltered);
     const consistencyByFacilityNotReportedList = filters.filtered ? consistencyByFacilityNotReportedFiltered[rrTab] : consistencyByFacilityNotReportedUnFiltered[rrTab];
-    const consistencyByFacilityNotReported = consistencyByFacilityNotReportedList.length ? consistencyByFacilityNotReportedList : [];
+    const consistencyByFacilityNotReported = consistencyByFacilityNotReportedList?.length ? consistencyByFacilityNotReportedList : [];
     const consistencyByFacilityNotReportedLoading = useSelector(state => state.consistencyByFacilityNotReported.loading)[rrTab];
 
     const getPerc = (count, total) => {
