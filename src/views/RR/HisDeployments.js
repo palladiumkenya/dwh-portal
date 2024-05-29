@@ -19,29 +19,8 @@ import { loadHisFacilityLevelByPartnerAction } from '../../actions/RR/hisFacilit
 import { loadHisFacilityStatusAction } from '../../actions/RR/hisFacilityStatusActions';
 
 const HisDeployments = () =>{
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(loadHisFacilityStatusAction());
-        dispatch(loadHisFacilityLevelByPartnerAction());
-        dispatch(loadHisFacilityStatusByPartnerAction());
-        dispatch(loadHisFacilityLevelByCountyAction());
-        dispatch(loadHisFacilityByInfrastructureActions());
-        dispatch(loadHisFacilityLinelistAction());
-    }, [dispatch])
-    const onVisibilityChange = (isVisible) => {
-        if (isVisible) {
-            dispatch(disableStickyFilter());
-        } else {
-            dispatch(enableStickyFilter());
-        }
-    };
     return (
         <>
-            <SectionHeader title="HIS Deployments" description={`Year ${moment().format('YYYY')}`}/>
-            <VisibilitySensor onChange={onVisibilityChange}>
-                <UniversalFilter/>
-            </VisibilitySensor>
             <HisDeploymentsOverview />
             <HisDeploymentsEMRStatusByPartner />
             <HisDeploymentsFacilityLevelByOwnershipPartner />
