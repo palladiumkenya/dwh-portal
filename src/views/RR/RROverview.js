@@ -279,71 +279,71 @@ const RROverview = () => {
                 </div>
                 {(rrTab === 'ct') ? (
                     <>
-                        <div className="col">
-                            <Card className="card-uploads-consistency-rates">
-                                <CardHeader className="expected-uploads-header">
-                                    FACILITIES RECENTLY MIGRATED FROM PAPER
-                                </CardHeader>
-                                <CardBody
-                                    className="align-items-center d-flex justify-content-center"
-                                    style={{
-                                        textAlign: 'center',
-                                        backgroundColor: '#F6F6F6',
-                                        height: '100px',
-                                    }}
-                                >
-                                    <div className="col-12">
-                                        <span className="expected-uploads-text">
-                                            {implementationStats}
-                                        </span>
-                                    </div>
-                                </CardBody>
-                            </Card>
-                        </div>
-                        <div className="col">
-                            <Card className="card-uploads-consistency-rates">
-                                <CardHeader className="expected-uploads-header">
-                                    FACILITIES ON CLOUD
-                                </CardHeader>
-                                <CardBody
-                                    className="align-items-center d-flex justify-content-center"
-                                    style={{
-                                        textAlign: 'center',
-                                        backgroundColor: '#F6F6F6',
-                                        height: '100px',
-                                    }}
-                                >
-                                    <div className="col-12">
-                                        <span className="expected-uploads-text">
-                                            {infrastructureStats.onCloud?.facilities_number.toLocaleString(
-                                                'en'
-                                            ) || 0}
-                                        </span>
-                                    </div>
-                                </CardBody>
-                            </Card>
-                        </div>
-                        <div className="col">
-                            <Card className="card-uploads-consistency-rates">
-                                <CardHeader className="expected-uploads-header">
-                                    FACILITIES ON PREMISES
-                                </CardHeader>
-                                <CardBody
-                                    className="align-items-center d-flex justify-content-center"
-                                    style={{
-                                        textAlign: 'center',
-                                        backgroundColor: '#F6F6F6',
-                                        height: '100px',
-                                    }}
-                                >
-                                    <div className="col-12">
-                                        <span className="expected-uploads-text">
-                                            {infrastructureStats.onPremises?.facilities_number.toLocaleString('en') || 0}
-                                        </span>
-                                    </div>
-                                </CardBody>
-                            </Card>
-                        </div>
+                        {/*<div className="col">*/}
+                        {/*    <Card className="card-uploads-consistency-rates">*/}
+                        {/*        <CardHeader className="expected-uploads-header">*/}
+                        {/*            FACILITIES RECENTLY MIGRATED FROM PAPER*/}
+                        {/*        </CardHeader>*/}
+                        {/*        <CardBody*/}
+                        {/*            className="align-items-center d-flex justify-content-center"*/}
+                        {/*            style={{*/}
+                        {/*                textAlign: 'center',*/}
+                        {/*                backgroundColor: '#F6F6F6',*/}
+                        {/*                height: '100px',*/}
+                        {/*            }}*/}
+                        {/*        >*/}
+                        {/*            <div className="col-12">*/}
+                        {/*                <span className="expected-uploads-text">*/}
+                        {/*                    {implementationStats}*/}
+                        {/*                </span>*/}
+                        {/*            </div>*/}
+                        {/*        </CardBody>*/}
+                        {/*    </Card>*/}
+                        {/*</div>*/}
+                        {/*<div className="col">*/}
+                        {/*    <Card className="card-uploads-consistency-rates">*/}
+                        {/*        <CardHeader className="expected-uploads-header">*/}
+                        {/*            FACILITIES ON CLOUD*/}
+                        {/*        </CardHeader>*/}
+                        {/*        <CardBody*/}
+                        {/*            className="align-items-center d-flex justify-content-center"*/}
+                        {/*            style={{*/}
+                        {/*                textAlign: 'center',*/}
+                        {/*                backgroundColor: '#F6F6F6',*/}
+                        {/*                height: '100px',*/}
+                        {/*            }}*/}
+                        {/*        >*/}
+                        {/*            <div className="col-12">*/}
+                        {/*                <span className="expected-uploads-text">*/}
+                        {/*                    {infrastructureStats.onCloud?.facilities_number.toLocaleString(*/}
+                        {/*                        'en'*/}
+                        {/*                    ) || 0}*/}
+                        {/*                </span>*/}
+                        {/*            </div>*/}
+                        {/*        </CardBody>*/}
+                        {/*    </Card>*/}
+                        {/*</div>*/}
+                        {/*<div className="col">*/}
+                        {/*    <Card className="card-uploads-consistency-rates">*/}
+                        {/*        <CardHeader className="expected-uploads-header">*/}
+                        {/*            FACILITIES ON PREMISES*/}
+                        {/*        </CardHeader>*/}
+                        {/*        <CardBody*/}
+                        {/*            className="align-items-center d-flex justify-content-center"*/}
+                        {/*            style={{*/}
+                        {/*                textAlign: 'center',*/}
+                        {/*                backgroundColor: '#F6F6F6',*/}
+                        {/*                height: '100px',*/}
+                        {/*            }}*/}
+                        {/*        >*/}
+                        {/*            <div className="col-12">*/}
+                        {/*                <span className="expected-uploads-text">*/}
+                        {/*                    {infrastructureStats.onPremises?.facilities_number.toLocaleString('en') || 0}*/}
+                        {/*                </span>*/}
+                        {/*            </div>*/}
+                        {/*        </CardBody>*/}
+                        {/*    </Card>*/}
+                        {/*</div>*/}
                     </>
                 ): (<></>)}
             </div>

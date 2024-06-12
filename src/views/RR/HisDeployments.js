@@ -44,8 +44,8 @@ const HisDeployments = () =>{
             </VisibilitySensor>
             <HisDeploymentsOverview />
             <HisDeploymentsEMRStatusByPartner />
-            <HisDeploymentsFacilityLevelByOwnershipPartner />
             <HisDeploymentsFacilityLevelByOwnershipCounty />
+            <HisDeploymentsFacilityLevelByOwnershipPartner />
             <HisDeploymentsFacilityByInfrastructure />
             <HisDeploymentsLinelist />
         </>
