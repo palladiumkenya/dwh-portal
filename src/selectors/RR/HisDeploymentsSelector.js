@@ -205,7 +205,7 @@ export const getFacilityTxCurr = createSelector(
     (listUnfiltered, listFiltered, filtered, loading) => {
         const list = filtered ? listFiltered : listUnfiltered;
 
-        let data = list.map((d) => d.KEPH_Level === null ? { 'KEPH_Level': 'Missing', ...d} : {...d})
+        let data = list.map((d) => d.KEPH_Level === null ? {...d, 'KEPH_Level': 'Missing' } : { ...d })
 
         return { 'list': data, loading };
     }
