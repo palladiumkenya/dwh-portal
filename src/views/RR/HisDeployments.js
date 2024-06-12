@@ -4,6 +4,7 @@ import HisDeploymentsFacilityLevelByOwnershipPartner from './HisDeploymentsFacil
 import HisDeploymentsFacilityLevelByOwnershipCounty from './HisDeploymentsFacilityLevelByOwnershipCounty';
 import HisDeploymentsFacilityByInfrastructure from './HisDeploymentsFacilityByInfrastructure';
 import HisDeploymentsLinelist from './HisDeploymentsLinelist';
+import HisDeploymentsTxCurr from './HisDeploymentsTxcurr';
 import SectionHeader from '../Shared/SectionHeader';
 import React, { useEffect } from 'react';
 import moment from 'moment';
@@ -17,6 +18,7 @@ import { loadHisFacilityStatusByPartnerAction } from '../../actions/RR/hisFacili
 import { loadHisFacilityLevelByCountyAction } from '../../actions/RR/hisFacilityLevelByCountyActions';
 import { loadHisFacilityLevelByPartnerAction } from '../../actions/RR/hisFacilityLevelByPartnerActions';
 import { loadHisFacilityStatusAction } from '../../actions/RR/hisFacilityStatusActions';
+import { loadHisFacilityTxcurrAction } from '../../actions/RR/hisFacilityTxcurrActions';
 
 const HisDeployments = () =>{
     const dispatch = useDispatch();
@@ -28,6 +30,7 @@ const HisDeployments = () =>{
         dispatch(loadHisFacilityLevelByCountyAction());
         dispatch(loadHisFacilityByInfrastructureActions());
         dispatch(loadHisFacilityLinelistAction());
+        dispatch(loadHisFacilityTxcurrAction());
     }, [dispatch])
     const onVisibilityChange = (isVisible) => {
         if (isVisible) {
@@ -48,6 +51,7 @@ const HisDeployments = () =>{
             <HisDeploymentsFacilityLevelByOwnershipPartner />
             <HisDeploymentsFacilityByInfrastructure />
             <HisDeploymentsLinelist />
+            <HisDeploymentsTxCurr />
         </>
     )
 }

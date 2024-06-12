@@ -20,6 +20,10 @@ const listLinelistUnfiltered = state => state.hisFacilityLinelist.listUnfiltered
 const listLinelistFiltered = state => state.hisFacilityLinelist.listFiltered;
 const listLinelistLoading = state => state.hisFacilityLinelist.loading;
 
+const listTxcurrUnfiltered = state => state.hisFacilityTxcurr.listUnfiltered;
+const listTxcurrFiltered = state => state.hisFacilityTxcurr.listFiltered;
+const listTxcurrLoading = state => state.hisFacilityTxcurr.loading;
+
 export const getFacilityStatus = createSelector(
     [listStatusUnfiltered, listStatusFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
@@ -196,3 +200,11 @@ export const getFacilityLinelist = createSelector(
     }
 );
 
+export const getFacilityTxCurr = createSelector(
+    [listTxcurrUnfiltered, listTxcurrFiltered, filtered, listTxcurrLoading],
+    (listUnfiltered, listFiltered, filtered, loading) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+
+        return { list, loading };
+    }
+);
