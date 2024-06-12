@@ -40,7 +40,6 @@ const HisDeploymentsTxCurr = () =>{
                         data={hisTxcurr.list}
                         noHeader
                         dense
-                        defaultSortField="MFLCode"
                         defaultSortAsc={true}
                         pagination
                         paginationPerPage={20}
