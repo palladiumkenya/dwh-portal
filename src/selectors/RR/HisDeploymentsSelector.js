@@ -7,6 +7,9 @@ const filtered = state => state.filters.filtered;
 const listStatusByPartnerUnfiltered = state => state.hisFacilityStatusByPartner.listUnfiltered;
 const listStatusByPartnerFiltered = state => state.hisFacilityStatusByPartner.listFiltered;
 
+const listStatusByCountyUnfiltered = state => state.hisFacilityStatusByCounty.listUnfiltered;
+const listStatusByCountyFiltered = state => state.hisFacilityStatusByCounty.listFiltered;
+
 const listLevelByPartnerUnfiltered = state => state.hisFacilityLevelByPartner.listUnfiltered;
 const listLevelByPartnerFiltered = state => state.hisFacilityLevelByPartner.listFiltered;
 
@@ -15,6 +18,9 @@ const listLevelByCountyFiltered = state => state.hisFacilityLevelByCounty.listFi
 
 const listByInfrastructureUnfiltered = state => state.hisFacilityByInfrastructure.listUnfiltered;
 const listByInfrastructureFiltered = state => state.hisFacilityByInfrastructure.listFiltered;
+
+const listByInfrastructureCountyUnfiltered = state => state.hisFacilityByInfrastructureCounty.listUnfiltered;
+const listByInfrastructureCountyFiltered = state => state.hisFacilityByInfrastructureCounty.listFiltered;
 
 const listLinelistUnfiltered = state => state.hisFacilityLinelist.listUnfiltered;
 const listLinelistFiltered = state => state.hisFacilityLinelist.listFiltered;
@@ -73,6 +79,44 @@ export const getFacilityStatusByPartner = createSelector(
     }
 );
 
+export const getFacilityStatusByCounty = createSelector(
+    [listStatusByCountyUnfiltered, listStatusByCountyFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        let data = list.reduce((acc, curr) => {
+            const { facilities, EMR_Status, County } = curr
+            if(!acc[County]) {
+                acc[County] = {
+                    "County": County,
+                    "Active": 0,
+                    "Discontinued": 0,
+                    "Inactive/Stalled": 0,
+                    "Total": 0
+                }
+            }
+
+            const statusKey = (EMR_Status === "Stalled/Inactive" || EMR_Status === "Inactive") ? "Inactive/Stalled" : EMR_Status;
+
+            acc[County][statusKey] += parseInt(facilities);
+            acc[County].Total += parseInt(facilities);
+            return acc
+        }, {});
+        let formattedResult = Object.values(data);
+        formattedResult.sort((a, b) => b.Active - a.Active);
+        formattedResult = formattedResult.map(partner => {
+            partner.activePerc = partner.Total ? (partner.Active/partner.Total)*100 : 0
+            return partner
+        }).sort((a, b) => b.activePerc - a.activePerc)
+
+        const counties = formattedResult.map(i => i.County?.toUpperCase())
+        const actives = formattedResult.map(i => i.Active)
+        const discontinueds = formattedResult.map(i => i.Discontinued)
+        const inactives = formattedResult.map(i => i["Inactive/Stalled"])
+
+        return { counties, actives, discontinueds, inactives }
+    }
+);
+
 export const getFacilityByInfrastructure = createSelector(
     [listByInfrastructureUnfiltered, listByInfrastructureFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
@@ -104,6 +148,40 @@ export const getFacilityByInfrastructure = createSelector(
         const onCloud = formattedResult.map(i => i["On Cloud"])
 
         return { partnerNames, onPremises, onCloud }
+    }
+);
+
+export const getFacilityByInfrastructureCounty = createSelector(
+    [listByInfrastructureCountyUnfiltered, listByInfrastructureCountyFiltered, filtered],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        let data = list.reduce((acc, curr) => {
+            const { facilities, InfrastructureType, County } = curr
+            if(!acc[County]) {
+                acc[County] = {
+                    "County": County,
+                    "On Premises": 0,
+                    "On Cloud": 0,
+                    "Total": 0
+                }
+            }
+
+            acc[County][InfrastructureType] += parseInt(facilities);
+            acc[County].Total += parseInt(facilities);
+            return acc
+        }, {});
+        let formattedResult = Object.values(data);
+        formattedResult.sort((a, b) => b["On Premises"] - a["On Premises"]);
+        formattedResult = formattedResult.map(partner => {
+            partner.onPremPerc = partner.Total ? (partner["On Premises"]/partner.Total)*100 : 0
+            return partner
+        }).sort((a, b) => b.onPremPerc - a.onPremPerc)
+
+        const counties = formattedResult.map(i => i.County?.toUpperCase())
+        const onPremises = formattedResult.map(i => i["On Premises"])
+        const onCloud = formattedResult.map(i => i["On Cloud"])
+
+        return { counties, onPremises, onCloud }
     }
 );
 
@@ -205,7 +283,7 @@ export const getFacilityTxCurr = createSelector(
     (listUnfiltered, listFiltered, filtered, loading) => {
         const list = filtered ? listFiltered : listUnfiltered;
 
-        let data = list.map((d) => d.KEPH_Level === null ? {...d, 'KEPH_Level': 'Missing' } : { ...d })
+        let data = list.map((d) => d.KEPH_Level === null ? {...d, 'KEPH_Level': 'Missing' } : d)
 
         return { 'list': data, loading };
     }

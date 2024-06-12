@@ -2,16 +2,16 @@ import React, { useEffect, useState, useCallback } from 'react';
 import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
-import { useSelector } from 'react-redux';
 import * as hisSelector from '../../selectors/RR/HisDeploymentsSelector';
+import { useSelector } from 'react-redux';
 
-const HisDeploymentsFacilityByInfrastructure = () => {
-    const [hisDeployments, setHisDeployments] = useState({});
+const HISDeploymentsByCounty = () => {
     const hisStatusData = useSelector(
-        hisSelector.getFacilityByInfrastructure
+        hisSelector.getFacilityStatusByCounty
     );
+    const [hisDeployments, setHisDeployments] = useState({});
 
-    const loadHisByInfrastructure = useCallback(async () => {
+    const loadHisDeployments = useCallback(async () => {
         setHisDeployments({
             chart: {
                 type: 'column',
@@ -22,9 +22,9 @@ const HisDeploymentsFacilityByInfrastructure = () => {
             },
             xAxis: {
                 title: {
-                    text: 'SERVICE DELIVERY PARTNER',
+                    text: 'COUNTY',
                 },
-                categories: hisStatusData.partnerNames,
+                categories: hisStatusData.counties,
             },
             yAxis: {
                 min: 0,
@@ -37,7 +37,6 @@ const HisDeploymentsFacilityByInfrastructure = () => {
                     style: {
                         fontWeight: 'bold',
                         color:
-                        // theme
                             (Highcharts.defaultOptions.title.style &&
                                 Highcharts.defaultOptions.title.style.color) ||
                             'gray',
@@ -68,29 +67,34 @@ const HisDeploymentsFacilityByInfrastructure = () => {
             },
             series: [
                 {
-                    name: 'ON PREMISES',
-                    data: hisStatusData.onPremises,
+                    name: 'ACTIVE',
+                    data: hisStatusData.actives,
                     color: '#00AD30',
                 },
                 {
-                    name: 'ON CLOUD',
-                    data: hisStatusData.onCloud,
+                    name: 'DISCONTINUED',
+                    data: hisStatusData.discontinueds,
                     color: '#152459',
+                },
+                {
+                    name: 'STALLED/INACTIVE',
+                    data: hisStatusData.inactives,
+                    color: '#F6941C',
                 }
             ],
         });
     }, [hisStatusData]);
 
     useEffect(() => {
-        loadHisByInfrastructure();
-    }, [loadHisByInfrastructure]);
+        loadHisDeployments();
+    }, [loadHisDeployments]);
 
     return (
         <div className="row">
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ACTIVE FACILITY BY INFRASTRUCTURE DEPLOYMENT(PARTNER)
+                        EMR STATUS BY COUNTY
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -106,4 +110,4 @@ const HisDeploymentsFacilityByInfrastructure = () => {
     );
 };
 
-export default HisDeploymentsFacilityByInfrastructure;
+export default HISDeploymentsByCounty;

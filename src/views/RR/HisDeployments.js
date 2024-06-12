@@ -19,6 +19,12 @@ import { loadHisFacilityLevelByCountyAction } from '../../actions/RR/hisFacility
 import { loadHisFacilityLevelByPartnerAction } from '../../actions/RR/hisFacilityLevelByPartnerActions';
 import { loadHisFacilityStatusAction } from '../../actions/RR/hisFacilityStatusActions';
 import { loadHisFacilityTxcurrAction } from '../../actions/RR/hisFacilityTxcurrActions';
+import { loadHisFacilityStatusByCountyAction } from '../../actions/RR/hisFacilityStatusByCountyActions';
+import {
+    loadHisFacilityByInfrastructureCountyActions
+} from '../../actions/RR/hisFacilityByInfrastructureCountyActions';
+import HisDeploymentsEMRStatusByCounty from './HisDeploymentsEMRStatusByCounty';
+import HisDeploymentsFacilityByInfrastructureCounty from './HisDeploymentsFacilityByInfrastructureCounty';
 
 const HisDeployments = () =>{
     const dispatch = useDispatch();
@@ -31,6 +37,8 @@ const HisDeployments = () =>{
         dispatch(loadHisFacilityByInfrastructureActions());
         dispatch(loadHisFacilityLinelistAction());
         dispatch(loadHisFacilityTxcurrAction());
+        dispatch(loadHisFacilityStatusByCountyAction());
+        dispatch(loadHisFacilityByInfrastructureCountyActions());
     }, [dispatch])
     const onVisibilityChange = (isVisible) => {
         if (isVisible) {
@@ -46,9 +54,11 @@ const HisDeployments = () =>{
                 <UniversalFilter/>
             </VisibilitySensor>
             <HisDeploymentsOverview />
+            <HisDeploymentsEMRStatusByCounty/>
             <HisDeploymentsEMRStatusByPartner />
             <HisDeploymentsFacilityLevelByOwnershipCounty />
             <HisDeploymentsFacilityLevelByOwnershipPartner />
+            <HisDeploymentsFacilityByInfrastructureCounty />
             <HisDeploymentsFacilityByInfrastructure />
             <HisDeploymentsLinelist />
             <HisDeploymentsTxCurr />

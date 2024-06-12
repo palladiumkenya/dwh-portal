@@ -5,10 +5,10 @@ import HighchartsReact from 'highcharts-react-official';
 import { useSelector } from 'react-redux';
 import * as hisSelector from '../../selectors/RR/HisDeploymentsSelector';
 
-const HisDeploymentsFacilityByInfrastructure = () => {
+const HisDeploymentsFacilityByInfrastructureCounty = () => {
     const [hisDeployments, setHisDeployments] = useState({});
     const hisStatusData = useSelector(
-        hisSelector.getFacilityByInfrastructure
+        hisSelector.getFacilityByInfrastructureCounty
     );
 
     const loadHisByInfrastructure = useCallback(async () => {
@@ -22,9 +22,9 @@ const HisDeploymentsFacilityByInfrastructure = () => {
             },
             xAxis: {
                 title: {
-                    text: 'SERVICE DELIVERY PARTNER',
+                    text: 'COUNTY',
                 },
-                categories: hisStatusData.partnerNames,
+                categories: hisStatusData.counties,
             },
             yAxis: {
                 min: 0,
@@ -90,7 +90,7 @@ const HisDeploymentsFacilityByInfrastructure = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        ACTIVE FACILITY BY INFRASTRUCTURE DEPLOYMENT(PARTNER)
+                        ACTIVE FACILITY BY INFRASTRUCTURE DEPLOYMENT(COUNTY)
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
@@ -106,4 +106,4 @@ const HisDeploymentsFacilityByInfrastructure = () => {
     );
 };
 
-export default HisDeploymentsFacilityByInfrastructure;
+export default HisDeploymentsFacilityByInfrastructureCounty;

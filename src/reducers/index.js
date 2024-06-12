@@ -331,6 +331,8 @@ import hisFacilityStatus from './RR/hisFacilityStatus';
 import hisFacilityStatusByPartner from './RR/hisFacilityStatusByPartner';
 import hisFacilityLevelByPartner from './RR/hisFacilityLevelByPartner';
 import hisFacilityTxcurr from './RR/hisFacilityTxcurr';
+import hisFacilityByInfrastructureCounty from './RR/hisFacilityByInfrastructureCounty';
+import hisFacilityStatusByCounty from './RR/hisFacilityStatusByCounty';
 
 import missedInfantProphylaxis from './PMTCTRRI/MissedInfantProphylaxis/missedInfantProphylaxis';
 
@@ -662,4 +664,6 @@ export default combineReducers({
     hisFacilityStatus,
     hisFacilityStatusByPartner,
     hisFacilityTxcurr,
+    hisFacilityByInfrastructureCounty,
+    hisFacilityStatusByCounty
 });
