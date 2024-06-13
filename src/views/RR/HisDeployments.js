@@ -20,11 +20,11 @@ import { loadHisFacilityLevelByPartnerAction } from '../../actions/RR/hisFacilit
 import { loadHisFacilityStatusAction } from '../../actions/RR/hisFacilityStatusActions';
 import { loadHisFacilityTxcurrAction } from '../../actions/RR/hisFacilityTxcurrActions';
 import { loadHisFacilityStatusByCountyAction } from '../../actions/RR/hisFacilityStatusByCountyActions';
-import {
-    loadHisFacilityByInfrastructureCountyActions
-} from '../../actions/RR/hisFacilityByInfrastructureCountyActions';
+import { loadHisFacilityByInfrastructureCountyActions } from '../../actions/RR/hisFacilityByInfrastructureCountyActions';
 import HisDeploymentsEMRStatusByCounty from './HisDeploymentsEMRStatusByCounty';
 import HisDeploymentsFacilityByInfrastructureCounty from './HisDeploymentsFacilityByInfrastructureCounty';
+import { loadHisFacilityArtHtsMnchAction } from '../../actions/RR/hisFacilityArtHtsMnchActions';
+import HisDeploymentsArtHtsMnchLinelist from './HisDeploymentsArtHtsMnchLinelist';
 
 const HisDeployments = () =>{
     const dispatch = useDispatch();
@@ -39,6 +39,7 @@ const HisDeployments = () =>{
         dispatch(loadHisFacilityTxcurrAction());
         dispatch(loadHisFacilityStatusByCountyAction());
         dispatch(loadHisFacilityByInfrastructureCountyActions());
+        dispatch(loadHisFacilityArtHtsMnchAction());
     }, [dispatch])
     const onVisibilityChange = (isVisible) => {
         if (isVisible) {
@@ -60,8 +61,9 @@ const HisDeployments = () =>{
             <HisDeploymentsFacilityLevelByOwnershipPartner />
             <HisDeploymentsFacilityByInfrastructureCounty />
             <HisDeploymentsFacilityByInfrastructure />
-            <HisDeploymentsLinelist />
             <HisDeploymentsTxCurr />
+            <HisDeploymentsArtHtsMnchLinelist />
+            <HisDeploymentsLinelist />
         </>
     )
 }

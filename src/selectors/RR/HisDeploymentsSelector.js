@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { formatNumber } from '../../utils/utils';
 
 const listStatusUnfiltered = state => state.hisFacilityStatus.listUnfiltered;
 const listStatusFiltered = state => state.hisFacilityStatus.listFiltered;
@@ -29,6 +30,10 @@ const listLinelistLoading = state => state.hisFacilityLinelist.loading;
 const listTxcurrUnfiltered = state => state.hisFacilityTxcurr.listUnfiltered;
 const listTxcurrFiltered = state => state.hisFacilityTxcurr.listFiltered;
 const listTxcurrLoading = state => state.hisFacilityTxcurr.loading;
+
+const listFacilityArtHtsMnchUnfiltered = state => state.hisFacilityArtHtsMnch.listUnfiltered;
+const listFacilityArtHtsMnchFiltered = state => state.hisFacilityArtHtsMnch.listFiltered;
+const listFacilityArtHtsMnchLoading = state => state.hisFacilityArtHtsMnch.loading;
 
 export const getFacilityStatus = createSelector(
     [listStatusUnfiltered, listStatusFiltered, filtered],
@@ -278,12 +283,27 @@ export const getFacilityLinelist = createSelector(
     }
 );
 
+export const getFacilityArtHtsMnchLinelist = createSelector(
+    [listFacilityArtHtsMnchUnfiltered, listFacilityArtHtsMnchFiltered, filtered, listFacilityArtHtsMnchLoading],
+    (listUnfiltered, listFiltered, filtered, loading) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+        let data = list.map(d => {
+            return { ...d, 'CurrentOnART_Total': formatNumber(d.CurrentOnART_Total), 'Tested_Total': formatNumber(d.Tested_Total), 'onMaternalHAARTtotal': formatNumber(d.onMaternalHAARTtotal) };
+        })
+
+        return { 'list': data, loading };
+    }
+);
+
 export const getFacilityTxCurr = createSelector(
     [listTxcurrUnfiltered, listTxcurrFiltered, filtered, listTxcurrLoading],
     (listUnfiltered, listFiltered, filtered, loading) => {
         const list = filtered ? listFiltered : listUnfiltered;
 
-        let data = list.map((d) => d.KEPH_Level === null ? {...d, 'KEPH_Level': 'Missing' } : d)
+        let data = list.map((d) => {
+            d = d.KEPH_Level === null ? { ...d, 'KEPH_Level': 'Missing' } : d;
+            return {...d, 'TxCurr': formatNumber(d.TxCurr)}
+        })
 
         return { 'list': data, loading };
     }

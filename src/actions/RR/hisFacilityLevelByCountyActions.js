@@ -5,7 +5,7 @@ import { getAll } from '../../views/Shared/Api';
 
 export const loadHisFacilityLevelByCountyAction = () => async (dispatch, getState) => {
     const diffInMinutes = moment().diff(
-        moment(getState().hisFacilityStatusByPartner.lastFetch),
+        moment(getState().hisFacilityStatusByCounty.lastFetch),
         'minutes'
     );
     if (getState().ui.currentPage !== PAGES.rr) {
