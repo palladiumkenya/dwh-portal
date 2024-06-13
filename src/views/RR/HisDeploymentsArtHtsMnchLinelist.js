@@ -16,7 +16,7 @@ const HisDeploymentsArtHtsMnchLinelist = () =>{
         <>
             <Card className="trends-card">
                 <CardHeader className="trends-header">
-                    HIS FACILITY LINELIST
+                    KEPH LEVELS FOR EMR SITES FOR KHIS INDICATORS
                     {
                         hisLinelist.loading === true ?
                             <Spinner className="pull-right"/> :
