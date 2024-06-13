@@ -17,7 +17,7 @@ const HisDeploymentsTxCurr = () =>{
 
             <Card className="trends-card">
                 <CardHeader className="trends-header">
-                    HIS TXCURR BY KEPH LEVEL LINELIST
+                    HIS TXCURR BY KEPH LEVEL FOR EMR SITES LINELIST
                     {
                         hisTxcurr.loading === true ?
                             <Spinner className="pull-right"/> :
