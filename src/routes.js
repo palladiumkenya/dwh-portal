@@ -1,4 +1,3 @@
-import React from 'react';
 import Loadable from 'react-loadable';
 import withTracker from './withTracker';
 import Loading from './views/Shared/Loading';
@@ -16,7 +15,7 @@ const HRH = Loadable({ loader: () => import('./views/HRH/HRH'), loading: Loading
 const Resources = Loadable({ loader: () => import('./views/Resources/Resources'), loading: Loading, delay: LOADING_DELAY });
 const Organizations = Loadable({ loader: () => import('./views/Administration/Organizations/Organizations'), loading: Loading, delay: LOADING_DELAY });
 const Profile = Loadable({ loader: () => import('./views/Users/Profile'), loading: Loading, delay: LOADING_DELAY });
-const Highlight = Loadable({ loader: () => import('./views/Highlight/Highlight'), loading: Loading, delay: LOADING_DELAY });
+const Text2Sql = Loadable({ loader: () => import('./views/Text2Sql/Text2Sql'), loading: Loading, delay: LOADING_DELAY });
 
 const routes = [
     {
@@ -108,8 +107,14 @@ const routes = [
         exact: true,
         name: 'Highlight of the month',
         private: false,
-        component: withTracker(Highlight),
     },
+    {
+        path: '/text2sql',
+        exact: true,
+        name: 'Text2Sql',
+        private: false,
+        component: withTracker(Text2Sql)
+    }
 ];
 
 export default routes;
