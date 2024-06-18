@@ -89,7 +89,8 @@
         ]
     },
     "devDependencies": {
-        "prettier": "^2.2.1"
+        "prettier": "^2.2.1",
+        "react-syntax-highlighter": "^15.5.0"
     },
     "homepage": "."
 }
