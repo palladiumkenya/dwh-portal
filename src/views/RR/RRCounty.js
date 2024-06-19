@@ -114,7 +114,7 @@ const RRCounty = () => {
 
         setReportingByCounty({
             title: { text: '' },
-            xAxis: [{ categories: counties.map(name=> name?name.toUpperCase(): name), title: { text: 'Counties'.toUpperCase() }, crosshair: true }],
+            xAxis: [{ categories: counties?.map(name=> name?name.toUpperCase(): name), title: { text: 'COUNTIES' }, crosshair: true }],
             yAxis: [
                 { title: { text: 'NUMBER OF EMR SITES' } }
             ],
