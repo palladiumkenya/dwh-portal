@@ -84,13 +84,14 @@ const HisDeploymentsHTSMap = () => {
         setHtsPosCoverageByCountyMap({
             chart: { map: 'custom/ke-county' },
             title: { text: '' },
-            colors: ['#F5542D', '#F17B25', '#F7DB00', '#8CC63F', '#009245'],
+            colors: ['#62c1e5', '#E28C78', '#F17B25', '#F7DB00', '#8CC63F', '#009245'],
             colorAxis: { dataClassColor: 'category', dataClasses: [
                 { to: 0 },
-                { from: 0, to: 10 },
-                { from: 10, to: 20 },
-                { from: 20, to: 50 },
-                { from: 50000 }
+                { from: 0.01, to: 10 },
+                { from: 10, to: 25 },
+                { from: 25, to: 45 },
+                { from: 45, to: 80 },
+                { from: 80 }
             ]},
             tooltip: {
                 formatter: function () {
