@@ -37,7 +37,7 @@ const Text2Sql = () => {
     setError('');     // Clear previous error
     setQueryGenerated(false);
     try {
-      const response = await fetch(BACKEND_URL + '/api/query_from_natural_language', {
+      const response = await fetch(BACKEND_URL + '/api/text2sql/query_from_natural_language', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
