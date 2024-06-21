@@ -7,7 +7,7 @@ import { FileCopy as FileCopyIcon } from '@mui/icons-material';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { materialLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-const BACKEND_URL = process.env.BACKEND_URL;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 const Text2Sql = () => {
   const [query, setQuery] = useState('');
@@ -37,7 +37,7 @@ const Text2Sql = () => {
     setError('');     // Clear previous error
     setQueryGenerated(false);
     try {
-      const response = await fetch(BACKEND_URL + '/query_from_natural_language', {
+      const response = await fetch(BACKEND_URL + '/api/query_from_natural_language', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
