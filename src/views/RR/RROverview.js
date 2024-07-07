@@ -57,7 +57,7 @@ const RROverview = () => {
             moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M') :
             moment().startOf('month').subtract(2, 'month').format('YYYY,M');
         const data = await getAll('manifests/expected/' + rrTab, params);
-        setExpected(data.expected.toLocaleString('en'));
+        setExpected(data?.expected?.toLocaleString('en'));
     }, [filters, rrTab]);
 
     const loadConsistnecy = useCallback(async () => {

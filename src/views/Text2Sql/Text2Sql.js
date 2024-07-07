@@ -11,7 +11,6 @@ import RateReviewIcon from '@mui/icons-material/RateReview';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-
 const Text2Sql = () => {
   const [query, setQuery] = useState('');
   const [sqlQuery, setSqlQuery] = useState('');
@@ -58,7 +57,7 @@ const Text2Sql = () => {
     console.log("Backend BACKEND_URL" + BACKEND_URL);
     setQueryGenerated(false);
     try {
-      const response = await fetch(BACKEND_URL + '/query_from_natural_language', {
+      const response = await fetch(BACKEND_URL + '/api/text2sql/query_from_natural_language', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -25,6 +25,7 @@ import HisDeploymentsEMRStatusByCounty from './HisDeploymentsEMRStatusByCounty';
 import HisDeploymentsFacilityByInfrastructureCounty from './HisDeploymentsFacilityByInfrastructureCounty';
 import { loadHisFacilityArtHtsMnchAction } from '../../actions/RR/hisFacilityArtHtsMnchActions';
 import HisDeploymentsArtHtsMnchLinelist from './HisDeploymentsArtHtsMnchLinelist';
+import HisDeploymentsHTSMap from './HisDeploymentsHTSMap';
 
 const HisDeployments = () =>{
     const dispatch = useDispatch();
@@ -64,6 +65,7 @@ const HisDeployments = () =>{
             <HisDeploymentsTxCurr />
             <HisDeploymentsArtHtsMnchLinelist />
             <HisDeploymentsLinelist />
+            <HisDeploymentsHTSMap />
         </>
     )
 }
