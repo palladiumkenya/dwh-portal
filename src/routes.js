@@ -15,7 +15,7 @@ const HRH = Loadable({ loader: () => import('./views/HRH/HRH'), loading: Loading
 const Resources = Loadable({ loader: () => import('./views/Resources/Resources'), loading: Loading, delay: LOADING_DELAY });
 const Organizations = Loadable({ loader: () => import('./views/Administration/Organizations/Organizations'), loading: Loading, delay: LOADING_DELAY });
 const Profile = Loadable({ loader: () => import('./views/Users/Profile'), loading: Loading, delay: LOADING_DELAY });
-const Text2Sql = Loadable({ loader: () => import('./views/Text2Sql/Text2Sql'), loading: Loading, delay: LOADING_DELAY });
+const Tafsiri = Loadable({ loader: () => import('./views/Tafsiri/Tafsiri'), loading: Loading, delay: LOADING_DELAY });
 
 const routes = [
     {
@@ -109,11 +109,11 @@ const routes = [
         private: false,
     },
     {
-        path: '/text2sql',
+        path: '/tafsiri',
         exact: true,
-        name: 'Text2Sql',
+        name: 'TAFSIRI',
         private: false,
-        component: withTracker(Text2Sql)
+        component: withTracker(Tafsiri)
     }
 ];
 
