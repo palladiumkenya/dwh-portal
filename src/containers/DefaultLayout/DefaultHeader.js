@@ -34,7 +34,7 @@ const DefaultHeader = () => {
                 setCookie('metabase.SESSION', sessionId, { path: '/' });
             }
         }
-    }, []); 
+    }, []);
     const login = async () => {
         const res = await getUserType();
         if (user && !user.expired) {
@@ -62,7 +62,7 @@ const DefaultHeader = () => {
     const clearCacheData = async () => {
         await localStorage.clear();
         if (localStorage.length === 0){
-            alert('Complete Cache Cleared'); 
+            alert('Complete Cache Cleared');
             window.location.reload();
         }
     };
@@ -211,6 +211,9 @@ const Adhoc = () => {
                     href={'http://dwhanalytics.kenyahmis.org/'}
                 >
                     <strong>Superset</strong>
+                </DropdownItem>
+                <DropdownItem disabled={false} tag={Link} to="/tafsiri">
+                    <strong>TAFSIRI</strong>
                 </DropdownItem>
             </DropdownMenu>
         </UncontrolledDropdown>
