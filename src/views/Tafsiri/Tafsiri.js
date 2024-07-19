@@ -75,6 +75,7 @@ const Tafsiri = () => {
                 console.error('Failed to copy text: ', err);
             });
     };
+    // Variable that will store objectId
 
     const handleGenerateSQL = async () => {
         setLoading(true);
@@ -105,6 +106,9 @@ const Tafsiri = () => {
                 }
             );
             const result = await response.json();
+            const responseId = result.saved_response_id;
+            // Save responseId to local storage
+            localStorage.setItem('responseId', responseId);
             if (response.ok) {
                 setSqlQuery(result.sql_query || ''); // Set SQL query or empty if not available
                 setQueryGenerated(true);
@@ -137,19 +141,23 @@ const Tafsiri = () => {
     };
 
     const handleSendFeedback = async () => {
+        const responseId = localStorage.getItem('responseId');
         if (!feedback) {
             setFeedbackError('Feedback cannot be empty.');
             return;
         }
 
         try {
-            const response = await fetch(BACKEND_URL + '/send_feedback', {
+            const response = await fetch(BACKEND_URL + `/rate/${responseId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: '*/*',
                 },
-                body: JSON.stringify({ feedback }),
+                body: JSON.stringify({
+                    response_rating: ratingValue,
+                    response_rating_feedback: feedback,
+                }),
             });
             if (response.ok) {
                 setFeedbackSent(true);
