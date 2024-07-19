@@ -26,8 +26,9 @@ import { FileCopy as FileCopyIcon } from '@mui/icons-material';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { materialLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import RateReviewIcon from '@mui/icons-material/RateReview';
+import userManager from '../../services/UserService';
 
-const BACKEND_URL = process.env.REACT_APP_TEXT2SQL;
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const SUPERSET_URL = process.env.REACT_APP_SUPERSET_URL;
 const SUPERSET_USERNAME = process.env.REACT_APP_SUPERSET_USERNAME;
 const SUPERSET_PASSWORD = process.env.REACT_APP_SUPERSET_PASSWORD;
@@ -85,6 +86,10 @@ const Tafsiri = () => {
         console.log('Backend URL:' + BACKEND_URL);
         console.log('Superset URL' + SUPERSET_URL);
         try {
+            // Fetch the user and get user_id
+            const user = await userManager.getUser();
+            const user_id = user.profile.sub;
+
             const response = await fetch(
                 BACKEND_URL + '/query_from_natural_language',
                 {
@@ -93,7 +98,10 @@ const Tafsiri = () => {
                         'Content-Type': 'application/json',
                         Accept: '*/*',
                     },
-                    body: JSON.stringify({ question: query }),
+                    body: JSON.stringify({
+                        question: query,
+                        user_id: user_id,
+                    }),
                 }
             );
             const result = await response.json();
