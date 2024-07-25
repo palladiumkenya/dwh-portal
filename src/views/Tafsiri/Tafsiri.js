@@ -205,7 +205,7 @@ const Tafsiri = () => {
                     .replace(/[-:.]/g, '')
                     .replace('T', '_')
                     .split('.')[0];
-                // Save Query on Superset
+                // Save Query on Superset instance
                 const response2 = await fetch(
                     SUPERSET_URL + '/api/v1/saved_query/',
                     {
