@@ -67,7 +67,7 @@ const RROverviewTrends = () => {
                 data[monthYear] = parseInt(element.recency);
             }
         }
-        const categories = Object.values(months).slice(-12);
+        const categories = filters.fromDate ? Object.values(months).slice(-12) : Object.values(months).slice(-13, -1);
         const dataRecent = Object.values(data).slice(-12);
         const dataProcessed = dataRecent.map(d => Math.round((d/expected) * 100));
         setOverallReportingTrend({
@@ -97,6 +97,8 @@ const RROverviewTrends = () => {
         params.period = moment(params.fromDate, 'MMM YYYY')
             .format('YYYY,M');
         let endDate = moment()
+            .subtract(1, 'month')
+            .add(ETL_DAY, 'days')
             .endOf('month');
         if (filters.toDate || filters.fromDate) {
             endDate = moment(filters.toDate || filters.fromDate, 'MMM YYYY').endOf('month');
@@ -121,7 +123,7 @@ const RROverviewTrends = () => {
                 data[monthYear] = parseInt(element.consistency);
             }
         }
-        const categories = Object.values(months).slice(-12);
+        const categories = filters.fromDate ? Object.values(months).slice(-12) : Object.values(months).slice(-13, -1);
         const dataRecent = Object.values(data).slice(-12);
         const dataProcessed = dataRecent.map(d => Math.round((d/expected) * 100));
         setConsistencyTrend({
