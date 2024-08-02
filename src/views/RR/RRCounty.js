@@ -109,8 +109,8 @@ const RRCounty = () => {
         });
         const consistency_counties = consistency_values.map(obj => capitalize(obj.county));
 
-        const counties = overallReportingRateResult.map(({ county  }) => county);
-        const emrResultSeries = overallReportingRateResult.map(({ expected }) => parseInt(expected, 10));
+        const counties = overallReportingRateResult?.map(({ county  }) => county);
+        const emrResultSeries = overallReportingRateResult?.map(({ expected }) => parseInt(expected, 10));
 
         setReportingByCounty({
             title: { text: '' },
