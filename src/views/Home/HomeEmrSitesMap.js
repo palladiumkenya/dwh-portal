@@ -16,7 +16,7 @@ const HomeEmrSitesMap = () => {
         const emrNames = [];
         let emrSites = [];
         if (gpsSites === undefined || gpsSites === null) gpsSites = [];
-        
+
         for (let i = 0; i < gpsSites.length; i++) {
             if (emrNames.indexOf(gpsSites[i].emr) === -1) {
                 emrNames.push(gpsSites[i].emr);
@@ -34,7 +34,7 @@ const HomeEmrSitesMap = () => {
             }
         }
         data.push({
-            mapData: Highcharts.maps['custom/ke-province'],
+            mapData: Highcharts.maps['custom/ke-county'],
             name: 'Basemap',
             borderColor: '#A0A0A0',
             nullColor: 'rgba(200, 200, 200, 0.3)',
