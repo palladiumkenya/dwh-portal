@@ -4,6 +4,7 @@ import HighchartsMap from 'highcharts/modules/map';
 import ke from './map-ke.json';
 import keAll from './map-ke-all.json';
 import keCounty from './map-ke-county.json';
+import keCountyAll from './map-ke-county-all.json';
 import keProvince from './map-ke-province.json';
 
 if (typeof window !== 'undefined') {
@@ -11,6 +12,7 @@ if (typeof window !== 'undefined') {
     Highcharts.maps["custom/ke"] = ke;
     Highcharts.maps["custom/ke-all"] = keAll;
     Highcharts.maps["custom/ke-county"] = keCounty;
+    Highcharts.maps["custom/ke-county-all"] = keCountyAll;
     Highcharts.maps["custom/ke-province"] = keProvince;
 }
 

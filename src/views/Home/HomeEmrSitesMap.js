@@ -34,12 +34,13 @@ const HomeEmrSitesMap = () => {
             }
         }
         data.push({
-            mapData: Highcharts.maps['custom/ke-county'],
+            mapData: Highcharts.maps['custom/ke-county-all'],
             name: 'Basemap',
             borderColor: '#A0A0A0',
             nullColor: 'rgba(200, 200, 200, 0.3)',
             showInLegend: false
         });
+
         for (let j = 0; j < emrNames.length; j++) {
             data.push({
                 name: emrNames[j] === null ? 'Unknown' : emrNames[j],
