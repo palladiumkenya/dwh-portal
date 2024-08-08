@@ -335,14 +335,14 @@ import {
 import {
     loadViralLoadOverallNumberGt1000CopiesSecondlineRegiment
 } from '../../actions/CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
-import { loadCurrentOnArtVerified } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedActions';
+import { loadCurrentOnArtVerified } from '../../actions/CT/CurrentOnArt/currentOnArtVerifiedActions';
 import { loadCurrentOnArtVerifiedByPartner } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedByPartnerActions';
 import { loadCurrentOnArtVerifiedByCounty } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedByCountyActions';
-import { loadCurrentOnArtVerifiedByAgeSex } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedByAgeSexActions';
+import { loadCurrentOnArtVerifiedByAgeSex } from '../../actions/CT/CurrentOnArt/currentOnArtVerifiedByAgeSexActions';
 import { loadOtzEnrollmentTrend } from '../../actions/CT/OTZ/OtzEnrollmentTrendsActions';
 import { loadOtzEnrollmentByAgeSex } from '../../actions/CT/OTZ/OtzEnrollmentByAgeSexActions';
 import { loadOtzNotEnrolledPartner } from '../../actions/CT/OTZ/OtzNotEnrolledByPartnerActions';
-import { loadOtzNotEnrolledCounty } from './../../actions/CT/OTZ/OtzNotEnrolledByCountyActions';
+import { loadOtzNotEnrolledCounty } from '../../actions/CT/OTZ/OtzNotEnrolledByCountyActions';
 import { loadAlHivWithReSuppression } from '../../actions/CT/OTZ/AlHivWithReSuppressionActions';
 import { loadOtzVlSuppressionByAgeNotEnrolled } from '../../actions/CT/OTZ/OtzVlSuppressionByAgeNotEnrolledActions';
 import { loadOtzVlSuppressionBySexNotEnrolled } from '../../actions/CT/OTZ/OtzVlSuppressionBySexNotEnrolledActions';
@@ -361,6 +361,7 @@ import { loadIITTracing } from './../../actions/CT/TreatmentOutcomes/IITTracingA
 import { loadIITTracingOutcomes } from './../../actions/CT/TreatmentOutcomes/IITTracingOutcomesActions';
 import { loadViralLoadUptakeUToU } from '../../actions/CT/ViralLoad/viralLoadUptakeUToUActions';
 import { loadViralLoadCategorizationUToU } from '../../actions/CT/ViralLoad/viralLoadCategorizationUToUActions';
+import { loadAlhivOnArtByAgeSex } from '../../actions/CT/OTZ/OtzAlhivOnArtByAgeSexActions';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({
@@ -729,6 +730,7 @@ const CT = () => {
                 dispatch(loadOtzVlSuppressionBySexNotEnrolled());
                 dispatch(loadOtzVlSuppressionByPartnerNotEnrolled());
                 dispatch(loadOtzVlSuppressionByCountyNotEnrolled());
+                dispatch(loadAlhivOnArtByAgeSex());
                 break;
             case 'ovc':
                 dispatch(loadOvcOverallServ());
