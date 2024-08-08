@@ -50,7 +50,7 @@ const OtzNotEnrolledAmongAlhivOnArtByPartner = () => {
             },
             series: [
                 {
-                    name: 'ADOLESCENTS RECIEVING HIV CARE, NOT ENROLLED IN OTZ BY PARTNER',
+                    name: 'ADOLESCENTS RECEIVING HIV CARE, NOT ENROLLED IN OTZ BY PARTNER',
                     data: otzEnrollmentsByPartner,
                     color: '#14084D',
                 },
@@ -68,7 +68,7 @@ const OtzNotEnrolledAmongAlhivOnArtByPartner = () => {
                 className="trends-header"
                 style={{ textTransform: 'none' }}
             >
-                ADOLESCENTS RECIEVING HIV CARE, NOT ENROLLED IN OTZ BY PARTNER
+                ADOLESCENTS RECEIVING HIV CARE, NOT ENROLLED IN OTZ BY PARTNER
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">

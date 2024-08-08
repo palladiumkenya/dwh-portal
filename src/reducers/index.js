@@ -149,6 +149,7 @@ import otzOutcomesByPartner from './CT/OTZ/otzOutcomesByPartner';
 import otzTotalAdolescents from './CT/OTZ/otzTotalAdolescents';
 import otzEnrolled from './CT/OTZ/otzEnrolled';
 import otzTotalWithVlResults from './CT/OTZ/otzTotalWithVlResults';
+import otzAlhivOnArtByAgeSex from './CT/OTZ/otzAlhivOnArtByAgeSex';
 import otzTotalWithWithResultsLessThan1000 from './CT/OTZ/otzTotalWithWithResultsLessThan1000';
 import ovcOverallServ from './CT/OVC/ovcOverallServ';
 import ovcServByGender from './CT/OVC/ovcServByGender';
@@ -456,6 +457,7 @@ export default combineReducers({
 
     consistencyByFacilityNotReported,
 
+    otzAlhivOnArtByAgeSex,
     otzEnrollmentAmongAlhivOnArtBySex,
     otzEnrollmentAmongAlhivOnArtByAge,
     otzEnrollmentAmongAlhivOnArtByCounty,

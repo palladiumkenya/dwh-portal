@@ -19,7 +19,7 @@ export const getOtzNotEnrolledAmongAlHivOnArtByPartner = createSelector(
                 (obj) =>{
                     return obj.partner === listElement.CTPartner;
             });
-            
+
             if (filterTotalAdolescents.length > 0) {
                 const percentage =
                     (listElement.Num /
@@ -33,7 +33,7 @@ export const getOtzNotEnrolledAmongAlHivOnArtByPartner = createSelector(
                 });
             }
         }
-        
+
         arrayVal.sort((a, b) => {
             return b.y - a.y;
         });
