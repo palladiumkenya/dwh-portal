@@ -17,7 +17,7 @@ const OtzEnrollmentTrends = Loadable({
     loading: Loading,
     delay: LOADING_DELAY,
 });
-const OVCDistributionOfCALHIVByAgeSex = Loadable({ loader: () => import('../OVC/OVCDistributionOfCALHIVByAgeSex'), loading: Loading, delay: LOADING_DELAY });
+const OTZDistributionOfCALHIVByAgeSex = Loadable({ loader: () => import('./OTZDistributionOfCALHIVByAgeSex'), loading: Loading, delay: LOADING_DELAY });
 const OtzEnrollmentAmongAlhivOnArtByPartner = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtByPartner'), loading: Loading, delay: LOADING_DELAY });
 const OtzNotEnrolledAmongAlhivOnArtByCounty = Loadable({
     loader: () => import('./OtzNotEnrolledAmongAlhivOnArtByCounty'),
@@ -207,7 +207,7 @@ const OTZTabs = () => {
                                     <strong>UNSUPPRESSED &#8594;</strong>{' '}
                                     Adolescents on OTZ (10-19 years) who are
                                     current on treatment with valid viral load
-                                    results of &gt; 1,000 copies/ml
+                                    results of ≥ 200 copies/ml
                                 </li>
                                 <li>
                                     <strong>Completed Training &#8594;</strong>{' '}
@@ -242,7 +242,7 @@ const OTZTabs = () => {
                     </Row>
                     <Row>
                         <Col className={'col-6'}>
-                            <OVCDistributionOfCALHIVByAgeSex />
+                            <OTZDistributionOfCALHIVByAgeSex />
                         </Col>
                         <Col className={'col-6'}>
                             <OTZByAgeSex />

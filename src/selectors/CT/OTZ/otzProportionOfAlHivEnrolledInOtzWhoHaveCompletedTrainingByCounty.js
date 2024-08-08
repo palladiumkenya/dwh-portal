@@ -17,7 +17,7 @@ export const getProportionOfAlhivEnrolledInOtzWhoHaveCompletedTrainingByCounty =
             let percent = 0;
             const selectedCounty = listCounty.filter(obj => obj.County === listElement.County);
             if (selectedCounty.length > 0) {
-                percent = ((listElement.count_training / selectedCounty[0].count_training) * 100);
+                percent = ((listElement.count_training / selectedCounty[0].alhiv) * 100);
             }
             ArrayList.push(
                 {

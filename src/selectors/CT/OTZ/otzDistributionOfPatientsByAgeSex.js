@@ -11,8 +11,8 @@ export const getOtzDistributionOfPatientsByAgeSex = createSelector(
     [listUnfiltered, listFiltered, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        
-        let otzAgeGroups = ['10 to 14', '15 to 19', '20 to 24'];
+
+        let otzAgeGroups = ['10 to 14', '15 to 19'];
 
         let distributionMale = [];
         let distributionFemale = [];

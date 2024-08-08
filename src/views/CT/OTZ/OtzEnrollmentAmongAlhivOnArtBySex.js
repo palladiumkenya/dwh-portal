@@ -56,7 +56,6 @@ const OtzEnrollmentAmongAlhivOnArtBySex = () => {
                 crosshair: true
             },
             yAxis: {
-                type: 'logarithmic',
                 minorTickInterval: 0.1,
                 title: {
                     text: 'PERCENTAGE OF PATIENTS'
