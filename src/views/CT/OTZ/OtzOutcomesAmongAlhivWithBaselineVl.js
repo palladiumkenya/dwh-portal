@@ -4,12 +4,10 @@ import HighchartsReact from 'highcharts-react-official';
 import Highcharts from 'highcharts';
 import { useSelector } from 'react-redux';
 import * as otzOutcomesAmongAlhivWithBaselineVL from '../../../selectors/CT/OTZ/otzOutcomesAmongAlhivWithBaselineVL';
-import * as otzTotalAdolescentsSelector from '../../../selectors/CT/OTZ/otzTotalAdolescents';
 
 const OtzOutcomesAmongAlhivWithBaselineVl = () => {
     const [otzOutcomesAmongAlHivWithBaselineVL, setOtzOutcomesAmongAlHivWithBaselineVL] = useState({});
     const otzOutcomesWithBaselineVl = useSelector(otzOutcomesAmongAlhivWithBaselineVL.getOtzOutcomesAmongAlHivWithBaselineVL);
-    const adolescents = useSelector(otzTotalAdolescentsSelector.getOtzTotalAdolescents);
 
     const loadOtzOutcomesAmongAlhivWithBaselineVl = useCallback(async () => {
         setOtzOutcomesAmongAlHivWithBaselineVL({
@@ -21,7 +19,6 @@ const OtzOutcomesAmongAlhivWithBaselineVl = () => {
             },
             xAxis: {
                 categories: [
-                    'ADOLECENTS IN CARE',
                     'ENROLLED IN ANY OTZ PROGRAM',
                     'BASELINE VL AVAILABLE',
                     'VIRALLY SUPPRESSED',
@@ -48,7 +45,7 @@ const OtzOutcomesAmongAlhivWithBaselineVl = () => {
                         formatter: function () {
                             if (this.point.text)
                                 return '' + this.point.y + '(' + this.point.text + '%)'
-                            else return '' + this.point.y; 
+                            else return '' + this.point.y;
                         },
                     },
                     tooltip: { valueSuffix: '({point.text:.0f})' },
@@ -58,15 +55,6 @@ const OtzOutcomesAmongAlhivWithBaselineVl = () => {
                 {
                     name: 'OTZ OUTCOMES AMONG ALHIV WITH BASELINE VL',
                     data: [
-                        // TODO: adolocents in care bar here
-                        {
-                            name: 'Adolecentes in care',
-                            color: '#14084D',
-                            y:
-                                adolescents.totalAdolescents > 0
-                                    ? adolescents.totalAdolescents
-                                    : 0,
-                        },
                         {
                             name: 'Enrolled in OTZ',
                             color: '#1AB394',
@@ -87,12 +75,12 @@ const OtzOutcomesAmongAlhivWithBaselineVl = () => {
                             y:
                                 otzOutcomesWithBaselineVl.length > 0
                                     ? otzOutcomesWithBaselineVl[0]
-                                          .AlHivWithBaselineVl
+                                          .AlHivWithBaselineVlEnrolled
                                     : 0,
                             text:
                                 otzOutcomesWithBaselineVl.length > 0
                                     ? otzOutcomesWithBaselineVl[0]
-                                          .AlHivWithBaselineVlPerc
+                                          .AlHivWithBaselineVlEnrolledPerc
                                     : 0,
                         },
                         {
@@ -101,12 +89,12 @@ const OtzOutcomesAmongAlhivWithBaselineVl = () => {
                             y:
                                 otzOutcomesWithBaselineVl.length > 0
                                     ? otzOutcomesWithBaselineVl[0]
-                                          .AlHivWithVlLessThan1000
+                                          .AlHivWithVlLessThan1000Enrolled
                                     : 0,
                             text:
                                 otzOutcomesWithBaselineVl.length > 0
                                     ? otzOutcomesWithBaselineVl[0]
-                                          .AlHivWithVlLessThan1000Perc
+                                          .AlHivWithVlLessThan1000EnrolledPerc
                                     : 0,
                         },
                         // TODO: LOW LEVEL VIREMIA bar here
@@ -116,12 +104,12 @@ const OtzOutcomesAmongAlhivWithBaselineVl = () => {
                             y:
                                 otzOutcomesWithBaselineVl.length > 0
                                     ? otzOutcomesWithBaselineVl[0]
-                                          .AlHivWithVlGreaterThan1000
+                                          .AlHivWithVlGreaterThan1000Enrolled
                                     : 0,
                             text:
                                 otzOutcomesWithBaselineVl.length > 0
                                     ? otzOutcomesWithBaselineVl[0]
-                                          .AlHivWithVlGreaterThan1000Perc
+                                          .AlHivWithVlGreaterThan1000EnrolledPerc
                                     : 0,
                         },
                     ],
