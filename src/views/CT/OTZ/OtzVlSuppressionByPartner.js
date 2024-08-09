@@ -52,7 +52,7 @@ const OtzVlSuppressionByPartner = () => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                VL SUPPRESSION AMONG CALHIV ENROLLED IN OTZ BY PARTNER
+                VL SUPPRESSION AMONG ALHIV ENROLLED IN OTZ BY PARTNER
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">

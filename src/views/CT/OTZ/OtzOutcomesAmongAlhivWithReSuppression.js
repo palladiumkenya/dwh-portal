@@ -19,9 +19,9 @@ const OtzOutcomesAmongAlhivWithReSuppression = () => {
             },
             xAxis: {
                 categories: [
-                    'OTZ WITH VL >1000 AT BASELINE',
-                    'OTZ WITH VL <1000 WITH REPEAT VLS',
-                    'NUMBER WITH VL >1000 UPON REPEAT',
+                    'OTZ WITH VL >=200 AT BASELINE',
+                    'OTZ WITH VL <200 WITH REPEAT VLS',
+                    'NUMBER WITH VL >=200 UPON REPEAT',
                 ],
                 crosshair: true,
             },
@@ -55,7 +55,7 @@ const OtzOutcomesAmongAlhivWithReSuppression = () => {
                     name: 'OTZ OUTCOMES AMONG ALHIV WITH RE-SUPPRESSION',
                     data: [
                         {
-                            name: 'ALHIV WITH VL >1000 AT BASELINE',
+                            name: 'ALHIV WITH VL >=200 AT BASELINE',
                             color: '#00AD30',
                             y:
                                 otzOutcomesWithReSuppression.length > 0
@@ -69,7 +69,7 @@ const OtzOutcomesAmongAlhivWithReSuppression = () => {
                                     : 0,
                         },
                         {
-                            name: 'ALHIV WITH VL <1000 WITH REPEAT VL',
+                            name: 'ALHIV WITH VL <200 WITH REPEAT VL',
                             color: '#fad53f',
                             y:
                                 otzOutcomesWithReSuppression.length > 0
@@ -83,7 +83,7 @@ const OtzOutcomesAmongAlhivWithReSuppression = () => {
                                     : 0,
                         },
                         {
-                            name: 'NUMBER WITH VL >1000 UPON REPEAT',
+                            name: 'NUMBER WITH VL >=200 UPON REPEAT',
                             color: '#bb1414',
                             y:
                                 otzOutcomesWithReSuppression.length > 0
