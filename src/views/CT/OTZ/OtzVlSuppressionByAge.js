@@ -60,7 +60,7 @@ const OtzVlSuppressionByAge = () => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                VL SUPPRESSION AMONG CALHIV ENROLLED IN OTZ BY AGE
+                VL SUPPRESSION AMONG ALHIV ENROLLED IN OTZ BY AGE
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
