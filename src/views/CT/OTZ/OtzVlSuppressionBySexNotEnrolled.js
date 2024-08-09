@@ -70,7 +70,7 @@ const OtzVlSuppressionBySexNotEnrolled = () => {
                 className="trends-header"
                 style={{ textTransform: 'none' }}
             >
-                VL SUPPRESSION AMONG CALHIV NOT ENROLLED IN OTZ BY GENDER
+                VL SUPPRESSION AMONG ALHIV NOT ENROLLED IN OTZ BY GENDER
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">

@@ -21,9 +21,9 @@ const OtzAlhivWithReSuppression = () => {
             },
             xAxis: {
                 categories: [
-                    'ALHIV WITH VL >1000 AT BASELINE',
-                    'ALHIV WITH VL <1000 WITH REPEAT VLS',
-                    'NUMBER WITH VL >1000 UPON REPEAT',
+                    'ALHIV WITH VL >=200 AT BASELINE',
+                    'ALHIV WITH VL <200 WITH REPEAT VLS',
+                    'NUMBER WITH VL >=200 UPON REPEAT',
                 ],
                 crosshair: true,
             },
@@ -57,7 +57,7 @@ const OtzAlhivWithReSuppression = () => {
                     name: 'OTZ OUTCOMES AMONG ALHIV WITH RE-SUPPRESSION',
                     data: [
                         {
-                            name: 'ALHIV WITH VL >1000 AT BASELINE',
+                            name: 'ALHIV WITH VL >=200 AT BASELINE',
                             color: '#00AD30',
                             y:
                                 otzOutcomesWithReSuppression.AlHivWithVlGreaterThan1000
@@ -67,7 +67,7 @@ const OtzAlhivWithReSuppression = () => {
                                     ?? 0,
                         },
                         {
-                            name: 'ALHIV WITH VL <1000 WITH REPEAT VL',
+                            name: 'ALHIV WITH VL <200 WITH REPEAT VL',
                             color: '#fad53f',
                             y:
                                 otzOutcomesWithReSuppression.ALHivWithVLLessThan1000WithRepeatVL
@@ -77,7 +77,7 @@ const OtzAlhivWithReSuppression = () => {
                                     ?? 0,
                         },
                         {
-                            name: 'NUMBER WITH VL >1000 UPON REPEAT',
+                            name: 'NUMBER WITH VL >=200 UPON REPEAT',
                             color: '#bb1414',
                             y:
                                 otzOutcomesWithReSuppression.ALHivWithVLGreaterThan1000WithRepeatVL
@@ -102,7 +102,7 @@ const OtzAlhivWithReSuppression = () => {
                 className="trends-header"
                 style={{ textTransform: 'none' }}
             >
-                SUPPRESSION AMONG CALHIV WITH REPEAT VLS (RESUPPRESSING)
+                SUPPRESSION AMONG ALHIV WITH REPEAT VLS (RESUPPRESSING)
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
