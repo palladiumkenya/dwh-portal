@@ -10,6 +10,7 @@ import OTZByAgeSex from './OTZByAgeSex';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 
 const OtzEnrollmentAmongAlhivOnArtBySex = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtBySex'), loading: Loading, delay: LOADING_DELAY });
+const OtzEnrollmentOnOTZBySex = Loadable({ loader: () => import('./OtzEnrollmentOnOTZBySex'), loading: Loading, delay: LOADING_DELAY });
 const OtzEnrollmentAmongAlhivOnArtByAge = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtByAge'), loading: Loading, delay: LOADING_DELAY });
 const OtzEnrollmentAmongAlhivOnArtByCounty = Loadable({ loader: () => import('./OtzEnrollmentAmongAlhivOnArtByCounty'), loading: Loading, delay: LOADING_DELAY });
 const OtzEnrollmentTrends = Loadable({
@@ -218,10 +219,13 @@ const OTZTabs = () => {
                         </CardBody>
                     </Card>
                     <Row>
-                        <Col className={'col-6'}>
+                        <Col className={'col-4'}>
                             <OtzEnrollmentAmongAlhivOnArtBySex />
                         </Col>
-                        <Col className={'col-6'}>
+                        <Col className={'col-4'}>
+                            <OtzEnrollmentOnOTZBySex />
+                        </Col>
+                        <Col className={'col-4'}>
                             <OtzEnrollmentAmongAlhivOnArtByAge />
                         </Col>
                     </Row>
