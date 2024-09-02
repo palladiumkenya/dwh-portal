@@ -362,6 +362,7 @@ import { loadIITTracingOutcomes } from './../../actions/CT/TreatmentOutcomes/IIT
 import { loadViralLoadUptakeUToU } from '../../actions/CT/ViralLoad/viralLoadUptakeUToUActions';
 import { loadViralLoadCategorizationUToU } from '../../actions/CT/ViralLoad/viralLoadCategorizationUToUActions';
 import { loadAlhivOnArtByAgeSex } from '../../actions/CT/OTZ/OtzAlhivOnArtByAgeSexActions';
+import { loadOtzTotalWithDurableVLResults } from '../../actions/CT/OTZ/OtzTotalWithDurableVlResultsActions';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({
@@ -730,6 +731,7 @@ const CT = () => {
                 dispatch(loadOtzVlSuppressionBySexNotEnrolled());
                 dispatch(loadOtzVlSuppressionByPartnerNotEnrolled());
                 dispatch(loadOtzVlSuppressionByCountyNotEnrolled());
+                dispatch(loadOtzTotalWithDurableVLResults());
                 dispatch(loadAlhivOnArtByAgeSex());
                 break;
             case 'ovc':
