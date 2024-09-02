@@ -16,7 +16,7 @@ const OtzEnrollmentTrends = () => {
     const loadOtzEnrollmentAmongAlhivOnArtByMonth = useCallback(async () => {
         setEnrollmentAmongAlhivOnArtByMonth({
             chart: {
-                type: 'column',
+                type: 'line',
             },
             title: {
                 text: '',
@@ -28,8 +28,6 @@ const OtzEnrollmentTrends = () => {
                 crosshair: true,
             },
             yAxis: {
-                // type: 'logarithmic',
-                // minorTickInterval: 0.1,
                 title: {
                     text: 'NUMBER OF PATIENTS',
                 },

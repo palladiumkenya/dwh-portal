@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import * as otzTotalAdolescentsSelector from '../../../selectors/CT/OTZ/otzTotalAdolescents';
 import * as otzEnrolledSelector from '../../../selectors/CT/OTZ/otzEnrolled';
 import * as otzTotalWithVlResultsSelector from '../../../selectors/CT/OTZ/otzTotalWithVlResults';
+import * as otzTotalWithDurableVlResultsSelector from '../../../selectors/CT/OTZ/otzTotalWithDurableVlResults';
 import * as otzTotalWithWithResultsLessThan1000Selector from '../../../selectors/CT/OTZ/otzTotalWithWithResultsLessThan1000';
 import { formatNumber, roundNumber } from '../../../utils/utils';
 import DataCard from '../../Shared/DataCard';
@@ -19,6 +20,9 @@ const OTZOverview = () => {
     const otzEnrolled = useSelector(otzEnrolledSelector.getOtzEnrolled);
     const otzTotalWithVlResults = useSelector(
         otzTotalWithVlResultsSelector.getOtzTotalWithVlResults
+    );
+    const otzTotalWithDurableVlResults = useSelector(
+        otzTotalWithDurableVlResultsSelector.getOtzTotalWithDurableVlResults
     );
     const otzTotalWithVlResultsLessThan1000 = useSelector(
         otzTotalWithWithResultsLessThan1000Selector.getOtzTotalWithVlResultsLessThan1000
@@ -48,6 +52,15 @@ const OTZOverview = () => {
                           otzEnrolled.enrolledInOTZ) *
                       100
                     : 0,
+
+            totalWithDurableVlResults: otzTotalWithDurableVlResults?.totalDurable,
+            totalWithDurableVlResultsPerc:
+                parseInt(otzTotalWithVlResultsLessThan1000.totalWithVlLessThan1000, 10) > 0
+                    ? (otzTotalWithDurableVlResults?.totalDurable /
+                        otzTotalWithVlResultsLessThan1000.totalWithVlLessThan1000) *
+                      100
+                    : 0,
+
             totalWithVlLessThan1000:
                 otzTotalWithVlResultsLessThan1000.totalWithVlLessThan1000,
             totalWithVlLessThan1000Perc:
@@ -62,6 +75,7 @@ const OTZOverview = () => {
         otzEnrolled,
         otzTotalWithVlResults,
         otzTotalWithVlResultsLessThan1000,
+        otzTotalWithDurableVlResults,
     ]);
 
     useEffect(() => {
@@ -69,48 +83,65 @@ const OTZOverview = () => {
     }, [loadOtzTotalAdolescents]);
 
     return (
-        <Row>
-            <Col>
-                <DataCardCT
-                    title={currentOnArtText}
-                    subtitle={null}
-                    data={formatNumber(otzTotalAdolescents.otzTotalAdolescents)}
-                />
-            </Col>
-            <Col>
-                <DataCardCT
-                    title="ENROLLED ON OTZ"
-                    subtitle={
-                        roundNumber(otzTotalAdolescents.enrolledInOTZPerc) + '%'
-                    }
-                    data={formatNumber(otzTotalAdolescents.enrolledInOTZ)}
-                />
-            </Col>
-            <Col>
-                <DataCardCT
-                    title="ADOLESCENTS ON OTZ WITH VALID VL"
-                    subtitle={
-                        roundNumber(
-                            otzTotalAdolescents.totalWithVlResultsPerc
-                        ) + '%'
-                    }
-                    data={formatNumber(otzTotalAdolescents.totalWithVlResults)}
-                />
-            </Col>
-            <Col>
-                <DataCardCT
-                    title="ADOLESCENTS ON OTZ VIRALLY SUPPRESSED"
-                    subtitle={
-                        roundNumber(
-                            otzTotalAdolescents.totalWithVlLessThan1000Perc
-                        ) + '%'
-                    }
-                    data={formatNumber(
-                        otzTotalAdolescents.totalWithVlLessThan1000
-                    )}
-                />
-            </Col>
-        </Row>
+        <>
+            <Row>
+                <Col>
+                    <DataCardCT
+                        title={currentOnArtText}
+                        subtitle={null}
+                        data={formatNumber(otzTotalAdolescents.otzTotalAdolescents)}
+                    />
+                </Col>
+                <Col>
+                    <DataCardCT
+                        title="ENROLLED ON OTZ"
+                        subtitle={
+                            roundNumber(otzTotalAdolescents.enrolledInOTZPerc) + '%'
+                        }
+                        data={formatNumber(otzTotalAdolescents.enrolledInOTZ)}
+                    />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <DataCardCT
+                        title="ADOLESCENTS ON OTZ WITH VALID VL"
+                        subtitle={
+                            roundNumber(
+                                otzTotalAdolescents.totalWithVlResultsPerc
+                            ) + '%'
+                        }
+                        data={formatNumber(otzTotalAdolescents.totalWithVlResults)}
+                    />
+                </Col>
+                <Col>
+                    <DataCardCT
+                        title="ADOLESCENTS ON OTZ VIRALLY SUPPRESSED"
+                        subtitle={
+                            roundNumber(
+                                otzTotalAdolescents.totalWithVlLessThan1000Perc
+                            ) + '%'
+                        }
+                        data={formatNumber(
+                            otzTotalAdolescents.totalWithVlLessThan1000
+                        )}
+                    />
+                </Col>
+                <Col>
+                    <DataCardCT
+                        title="ADOLESCENTS ON OTZ DURABLY SUPPRESSED"
+                        subtitle={
+                            roundNumber(
+                                otzTotalAdolescents.totalWithDurableVlResultsPerc
+                            ) + '%'
+                        }
+                        data={formatNumber(
+                            otzTotalAdolescents.totalWithDurableVlResults
+                        )}
+                    />
+                </Col>
+            </Row>
+        </>
     );
 };
 
