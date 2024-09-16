@@ -115,7 +115,7 @@ const RRPartner = () => {
 
         setReportingByPartner({
             title: { text: '' },
-            xAxis: [{ categories: partners.map(name => name.toUpperCase()), title: { text: 'Partners'.toUpperCase() }, crosshair: true }],
+            xAxis: [{ categories: partners?.map(name => name?.toUpperCase()), title: { text: 'Partners'.toUpperCase() }, crosshair: true }],
             yAxis: [
                 { title: { text: 'Number of EMR Sites'.toUpperCase() } },
                 // { title: { text: 'Percentage (%) Reporting Rate'}, opposite: true, min: 0, max: 100 },

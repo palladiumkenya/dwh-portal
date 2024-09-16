@@ -107,14 +107,14 @@ const RRCounty = () => {
         consistency_values.sort(function(a, b) {
             return b.y - a.y;
         });
-        const consistency_counties = consistency_values.map(obj => capitalize(obj.county));
+        const consistency_counties = consistency_values?.map(obj => capitalize(obj.county));
 
         const counties = overallReportingRateResult?.map(({ county  }) => county);
         const emrResultSeries = overallReportingRateResult?.map(({ expected }) => parseInt(expected, 10));
 
         setReportingByCounty({
             title: { text: '' },
-            xAxis: [{ categories: counties?.map(name=> name?name.toUpperCase(): name), title: { text: 'COUNTIES' }, crosshair: true }],
+            xAxis: [{ categories: counties?.map(name=> name ? name?.toUpperCase() : name), title: { text: 'COUNTIES' }, crosshair: true }],
             yAxis: [
                 { title: { text: 'NUMBER OF EMR SITES' } }
             ],

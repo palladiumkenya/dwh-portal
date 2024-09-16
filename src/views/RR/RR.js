@@ -104,7 +104,7 @@ const RR = () => {
         if (!active_tab) {
             history.push(`/reporting-rates/${DEFAULT_ACTIVE_TAB}`);
         }
-    }, []);
+    }, [DEFAULT_ACTIVE_TAB]);
 
     if(!active_tab){
         history.push(`/reporting-rates/${rrTab}`);
