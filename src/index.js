@@ -1,17 +1,17 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import "./index.css";
-import App from "./App";
-import Loading from "./views/Shared/Loading";
+import './index.css';
+import App from './App';
+import Loading from './views/Shared/Loading';
 import { store, persistor } from './store';
 import {
     RecoilRoot,
     atom,
     selector,
     useRecoilState,
-    useRecoilValue,
+    useRecoilValue
 } from 'recoil';
 import { CookiesProvider } from 'react-cookie';
 
@@ -25,5 +25,5 @@ ReactDOM.render(
             </RecoilRoot>
         </PersistGate>
     </Provider>,
-    document.getElementById("root")
-)
+    document.getElementById('root')
+);

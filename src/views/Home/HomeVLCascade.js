@@ -8,9 +8,6 @@ import DataCard from '../Shared/DataCard';
 import moment from 'moment';
 
 const HomeVLCascade = () => {
-    // const currentOnArt = useSelector(
-    //     currentOnArtOverviewSelectors.getCurrentOnArt
-    // );
     const currentDate = moment();
 
     // Check if the current date is before the 20th of the month
