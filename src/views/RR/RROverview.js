@@ -19,19 +19,19 @@ const RROverview = () => {
     const overallReportingRatesByFacilityReportedFiltered = useSelector(state => state.overallReportingRatesByFacilityReported.listFiltered);
     const overallReportingRatesByFacilityReportedUnFiltered = useSelector(state => state.overallReportingRatesByFacilityReported.listUnfiltered);
     const overallReportingRatesByFacilityReportedList = filters.filtered ? overallReportingRatesByFacilityReportedFiltered[rrTab] : overallReportingRatesByFacilityReportedUnFiltered[rrTab];
-    const overallReportingRatesByFacilityReported = overallReportingRatesByFacilityReportedList.length ? overallReportingRatesByFacilityReportedList : [];
+    const overallReportingRatesByFacilityReported = overallReportingRatesByFacilityReportedList?.length ? overallReportingRatesByFacilityReportedList : [];
     const overallReportingRatesByFacilityReportedLoading = useSelector(state => state.overallReportingRatesByFacilityReported.loading)[rrTab];
 
     const overallReportingRatesByFacilityNotReportedFiltered = useSelector(state => state.overallReportingRatesByFacilityNotReported.listFiltered);
     const overallReportingRatesByFacilityNotReportedUnFiltered = useSelector(state => state.overallReportingRatesByFacilityNotReported.listUnfiltered);
     const overallReportingRatesByFacilityNotReportedList = filters.filtered ? overallReportingRatesByFacilityNotReportedFiltered[rrTab] : overallReportingRatesByFacilityNotReportedUnFiltered[rrTab];
-    const overallReportingRatesByFacilityNotReported = overallReportingRatesByFacilityNotReportedList.length ? overallReportingRatesByFacilityNotReportedList : [];
+    const overallReportingRatesByFacilityNotReported = overallReportingRatesByFacilityNotReportedList?.length ? overallReportingRatesByFacilityNotReportedList : [];
     const overallReportingRatesByFacilityNotReportedLoading = useSelector(state => state.overallReportingRatesByFacilityNotReported.loading)[rrTab];
 
     const consistencyByFacilityNotReportedFiltered = useSelector(state => state.consistencyByFacilityNotReported.listFiltered);
     const consistencyByFacilityNotReportedUnFiltered = useSelector(state => state.consistencyByFacilityNotReported.listUnfiltered);
     const consistencyByFacilityNotReportedList = filters.filtered ? consistencyByFacilityNotReportedFiltered[rrTab] : consistencyByFacilityNotReportedUnFiltered[rrTab];
-    const consistencyByFacilityNotReported = consistencyByFacilityNotReportedList.length ? consistencyByFacilityNotReportedList : [];
+    const consistencyByFacilityNotReported = consistencyByFacilityNotReportedList?.length ? consistencyByFacilityNotReportedList : [];
     const consistencyByFacilityNotReportedLoading = useSelector(state => state.consistencyByFacilityNotReported.loading)[rrTab];
 
     const getPerc = (count, total) => {
@@ -57,7 +57,7 @@ const RROverview = () => {
             moment(params.fromDate, "MMM YYYY").startOf('month').subtract(1, 'month').format('YYYY,M') :
             moment().startOf('month').subtract(2, 'month').format('YYYY,M');
         const data = await getAll('manifests/expected/' + rrTab, params);
-        setExpected(data.expected.toLocaleString('en'));
+        setExpected(data?.expected?.toLocaleString('en'));
     }, [filters, rrTab]);
 
     const loadConsistnecy = useCallback(async () => {
@@ -184,6 +184,8 @@ const RROverview = () => {
         loadExpected();
         loadConsistnecy();
         loadRecency();
+        loadFacilityInfrastructureType();
+        loadImplementationDate();
     }, [loadExpected, loadConsistnecy, loadRecency]);
 
     return (
@@ -275,6 +277,75 @@ const RROverview = () => {
                         </CardBody>
                     </Card>
                 </div>
+                {(rrTab === 'ct') ? (
+                    <>
+                        {/*<div className="col">*/}
+                        {/*    <Card className="card-uploads-consistency-rates">*/}
+                        {/*        <CardHeader className="expected-uploads-header">*/}
+                        {/*            FACILITIES RECENTLY MIGRATED FROM PAPER*/}
+                        {/*        </CardHeader>*/}
+                        {/*        <CardBody*/}
+                        {/*            className="align-items-center d-flex justify-content-center"*/}
+                        {/*            style={{*/}
+                        {/*                textAlign: 'center',*/}
+                        {/*                backgroundColor: '#F6F6F6',*/}
+                        {/*                height: '100px',*/}
+                        {/*            }}*/}
+                        {/*        >*/}
+                        {/*            <div className="col-12">*/}
+                        {/*                <span className="expected-uploads-text">*/}
+                        {/*                    {implementationStats}*/}
+                        {/*                </span>*/}
+                        {/*            </div>*/}
+                        {/*        </CardBody>*/}
+                        {/*    </Card>*/}
+                        {/*</div>*/}
+                        {/*<div className="col">*/}
+                        {/*    <Card className="card-uploads-consistency-rates">*/}
+                        {/*        <CardHeader className="expected-uploads-header">*/}
+                        {/*            FACILITIES ON CLOUD*/}
+                        {/*        </CardHeader>*/}
+                        {/*        <CardBody*/}
+                        {/*            className="align-items-center d-flex justify-content-center"*/}
+                        {/*            style={{*/}
+                        {/*                textAlign: 'center',*/}
+                        {/*                backgroundColor: '#F6F6F6',*/}
+                        {/*                height: '100px',*/}
+                        {/*            }}*/}
+                        {/*        >*/}
+                        {/*            <div className="col-12">*/}
+                        {/*                <span className="expected-uploads-text">*/}
+                        {/*                    {infrastructureStats.onCloud?.facilities_number.toLocaleString(*/}
+                        {/*                        'en'*/}
+                        {/*                    ) || 0}*/}
+                        {/*                </span>*/}
+                        {/*            </div>*/}
+                        {/*        </CardBody>*/}
+                        {/*    </Card>*/}
+                        {/*</div>*/}
+                        {/*<div className="col">*/}
+                        {/*    <Card className="card-uploads-consistency-rates">*/}
+                        {/*        <CardHeader className="expected-uploads-header">*/}
+                        {/*            FACILITIES ON PREMISES*/}
+                        {/*        </CardHeader>*/}
+                        {/*        <CardBody*/}
+                        {/*            className="align-items-center d-flex justify-content-center"*/}
+                        {/*            style={{*/}
+                        {/*                textAlign: 'center',*/}
+                        {/*                backgroundColor: '#F6F6F6',*/}
+                        {/*                height: '100px',*/}
+                        {/*            }}*/}
+                        {/*        >*/}
+                        {/*            <div className="col-12">*/}
+                        {/*                <span className="expected-uploads-text">*/}
+                        {/*                    {infrastructureStats.onPremises?.facilities_number.toLocaleString('en') || 0}*/}
+                        {/*                </span>*/}
+                        {/*            </div>*/}
+                        {/*        </CardBody>*/}
+                        {/*    </Card>*/}
+                        {/*</div>*/}
+                    </>
+                ): (<></>)}
             </div>
             <div className="row">
                 <div className="col-4">

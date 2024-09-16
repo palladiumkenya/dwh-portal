@@ -72,7 +72,7 @@ const RROverviewTrends = () => {
         const dataProcessed = dataRecent.map(d => Math.round((d/expected) * 100));
         setOverallReportingTrend({
             title: { text: '', },
-            xAxis: [{ labels: { style: { fontSize: '9px' } },categories: categories.map(name => name ? name.toUpperCase() : name), crosshair: true }],
+            xAxis: [{ labels: { style: { fontSize: '9px' } },categories: categories?.map(name => name ? name.toUpperCase() : name), crosshair: true }],
             yAxis: [{ title: { text: 'Percentage'.toUpperCase() }, labels: { format: '{value}' } }],
             plotOptions: { column: { dataLabels: { enabled: true, format: '<b>{point.y} %</b>' } } },
             legend: { enabled: false },

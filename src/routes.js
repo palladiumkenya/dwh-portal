@@ -1,21 +1,73 @@
-import React from 'react';
 import Loadable from 'react-loadable';
 import withTracker from './withTracker';
 import Loading from './views/Shared/Loading';
-import { LOADING_DELAY } from "./constants";
+import { LOADING_DELAY } from './constants';
 
-const Home = Loadable({ loader: () => import('./views/Home/Home'), loading: Loading, delay: LOADING_DELAY });
-const RR = Loadable({ loader: () => import('./views/RR/RR'), loading: Loading, delay: LOADING_DELAY });
-const HTS = Loadable({ loader: () => import('./views/HTS/HTS'), loading: Loading, delay: LOADING_DELAY });
-const CT = Loadable({ loader: () => import('./views/CT/CT'), loading: Loading, delay: LOADING_DELAY });
-const SD = Loadable({ loader: () => import('./views/ServiceDesk/ServiceDesk'), loading: Loading, delay: LOADING_DELAY });
-const OperationalHIS = Loadable({ loader: () => import('./views/Operational&HIS/OperationalHIS'), loading: Loading, delay: LOADING_DELAY });
-const PMTCTRRI = Loadable({ loader: () => import('./views/PMTCTRRI/PMTCTRRI'), loading: Loading, delay: LOADING_DELAY,});
-const GIS = Loadable({ loader: () => import('./views/GIS/GIS'), loading: Loading, delay: LOADING_DELAY });
-const HRH = Loadable({ loader: () => import('./views/HRH/HRH'), loading: Loading, delay: LOADING_DELAY });
-const Resources = Loadable({ loader: () => import('./views/Resources/Resources'), loading: Loading, delay: LOADING_DELAY });
-const Organizations = Loadable({ loader: () => import('./views/Administration/Organizations/Organizations'), loading: Loading, delay: LOADING_DELAY });
-const Profile = Loadable({ loader: () => import('./views/Users/Profile'), loading: Loading, delay: LOADING_DELAY });
+const Home = Loadable({
+    loader: () => import('./views/Home/Home'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const RR = Loadable({
+    loader: () => import('./views/RR/RR'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const HTS = Loadable({
+    loader: () => import('./views/HTS/HTS'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const CT = Loadable({
+    loader: () => import('./views/CT/CT'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const SD = Loadable({
+    loader: () => import('./views/ServiceDesk/ServiceDesk'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const OperationalHIS = Loadable({
+    loader: () => import('./views/Operational&HIS/OperationalHIS'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const PMTCTRRI = Loadable({
+    loader: () => import('./views/PMTCTRRI/PMTCTRRI'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const GIS = Loadable({
+    loader: () => import('./views/GIS/GIS'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const HRH = Loadable({
+    loader: () => import('./views/HRH/HRH'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const Resources = Loadable({
+    loader: () => import('./views/Resources/Resources'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const Organizations = Loadable({
+    loader: () => import('./views/Administration/Organizations/Organizations'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const Profile = Loadable({
+    loader: () => import('./views/Users/Profile'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const Tafsiri = Loadable({
+    loader: () => import('./views/Tafsiri/Tafsiri'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 
 const routes = [
     {
@@ -107,6 +159,13 @@ const routes = [
         exact: true,
         name: 'Highlight of the month',
         private: false,
+    },
+    {
+        path: '/tafsiri',
+        exact: true,
+        name: 'TAFSIRI',
+        private: true,
+        component: withTracker(Tafsiri),
     },
 ];
 

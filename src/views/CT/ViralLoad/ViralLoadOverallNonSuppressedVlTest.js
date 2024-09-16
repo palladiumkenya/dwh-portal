@@ -27,9 +27,10 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
             },
             title: { text: '' },
             xAxis: [{
-                categories: ['NUMBER OF PLHIV WITH > 1000cpm', 'NUMBER OF PLHIV ON ART WITH VL > 1000 COPIES/ML WHO RECEIVED EAC',
-                    'NUMBER OF PLHIV ON ART WITH VL > 1000 COPIES/ML WHO RECEIVED FOLLOW UP VL TESTS', 'NUMBER OF PLHIV ON ART WITH VL > 1000 COPIES/ML WHO RECEIVED FOLLOW UP VL TESTS',
-                    'NUMBER WITH FOLLOW UP VL TEST AT VL > 1000 COPIES/ML SWITCHED TO SECOND LINE REGIMENT'],
+                categories: ['NUMBER OF PLHIV WITH > 200 COPIES/ML', 'NUMBER OF PLHIV ON ART WITH VL > 200 COPIES/ML WHO RECEIVED EAC',
+                    'NUMBER OF PLHIV ON ART WITH VL > 200 COPIES/ML WHO RECEIVED FOLLOW UP VL TESTS',
+                    'NUMBER OF PLHIV ON ART WITH VL > 200 COPIES/ML WHO RECEIVED FOLLOW UP VL TESTS',
+                    'NUMBER WITH FOLLOW UP VL TEST AT VL > 200 COPIES/ML SWITCHED TO SECOND LINE REGIMENT'],
                 crosshair: true
             }],
             yAxis: [
@@ -43,11 +44,8 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
                         returnString = '<b>' + this.x + '</b><br/>';
 
                     allSeries.forEach(function(ser) {
-                        if (ser.options.stack === thisPoint.series.options.stack) {
-                            if (ser.data[thisIndex].y !== null) {
-                                returnString += ser.points[thisIndex].name + ': ' + ser.points[thisIndex].y + '<br/>';
-                            }
-
+                        if (ser.options.stack === thisPoint.series.options.stack && ser.data[thisIndex].y !== null) {
+                              returnString += ser.points[thisIndex].name + ': ' + ser.points[thisIndex].y + '<br/>';
                         }
                     });
 
@@ -79,7 +77,7 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
                     name: 'VIRAL LOAD CASCADE',
                     data: [
                         {
-                            name: 'NUMBER OF PLHIV WITH > 1000cpm',
+                            name: 'NUMBER OF PLHIV WITH > 200cpm',
                             y: viralLoadUptakeGt1000Copies,
                             color: '#bb1414',
                             text: viralLoadUptakeGt1000Copies.toLocaleString('en'),
@@ -92,7 +90,7 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
                             text: 'EAC 3<br/>' + viralLoadUptakeGt1000CopiesEac.EACVisitDate_3?.toLocaleString('en') + ' (' + parseFloat(((viralLoadUptakeGt1000CopiesEac.EACVisitDate_3 / Object.values(viralLoadUptakeGt1000CopiesEac).reduce((a, b) => a + b, 0)) * 100).toString()).toFixed(0) + '%)'
                         },
                         {
-                            name: 'NUMBER OF PLHIV ON ART WITH VL > 1000 COPIES/ML WHO RECEIVED FOLLOW UP VL TESTS',
+                            name: 'NUMBER OF PLHIV ON ART WITH VL > 200 COPIES/ML WHO RECEIVED FOLLOW UP VL TESTS',
                             y: viralLoadUptakeGt1000CopiesRecFollowTestAll,
                             color: '#fad53f',
                             text: viralLoadUptakeGt1000CopiesRecFollowTestAll.toLocaleString('en')
@@ -104,7 +102,7 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
                             text: '  NUMBER VIRALLY SUPPRESSED <br/> ON FOLLOW UP VL TEST ' + viralLoadUptakeGt1000CopiesRecFollowTest[0]?.Num.toLocaleString('en') + ' (' + parseFloat(((viralLoadUptakeGt1000CopiesRecFollowTest[0]?.Num / totalFollowTest) * 100).toString()).toFixed(0) + '%)'
                         },
                         {
-                            name: 'NUMBER WITH FOLLOW UP VL TEST AT VL > 1000 COPIES/ML SWITCHED TO SECOND LINE REGIMENT',
+                            name: 'NUMBER WITH FOLLOW UP VL TEST AT VL > 200 COPIES/ML SWITCHED TO SECOND LINE REGIMENT',
                             y: viralLoadOverallNumberGt1000CopiesSecondlineRegimentData ?? 0,
                             color: '#142459',
                             text: viralLoadOverallNumberGt1000CopiesSecondlineRegimentData?.toLocaleString('en')
@@ -123,10 +121,10 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
                         },
                         null,
                         {
-                            name: 'NUMBER WHO HAD > 1000 COPIES/ML ON A FOLLOW UP TEST',
+                            name: 'NUMBER WHO HAD > 200 COPIES/ML ON A FOLLOW UP TEST',
                             y: viralLoadUptakeGt1000CopiesRecFollowTest[1]?.Num ?? 0,
                             color: '#bb1414',
-                            text: 'NUMBER WHO HAD > 1000 COPIES/ML <br/> ON A FOLLOW UP TEST ' + viralLoadUptakeGt1000CopiesRecFollowTest[1]?.Num.toLocaleString('en') + ' (' + parseFloat(((viralLoadUptakeGt1000CopiesRecFollowTest[1]?.Num / totalFollowTest) * 100).toString()).toFixed(0) + '%)'
+                            text: 'NUMBER WHO HAD > 200 COPIES/ML <br/> ON A FOLLOW UP TEST ' + viralLoadUptakeGt1000CopiesRecFollowTest[1]?.Num.toLocaleString('en') + ' (' + parseFloat(((viralLoadUptakeGt1000CopiesRecFollowTest[1]?.Num / totalFollowTest) * 100).toString()).toFixed(0) + '%)'
                         },
                         null
                     ]
@@ -159,7 +157,7 @@ const ViralLoadOverallNonSuppressedVlTest = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        {'VL CASCADE FOR PATIENTS WITH A NON-SUPPRESSED VL TEST RESULT FOR THE LAST 12 MONTHS (VL > 1000 copies/ml)'}
+                        {'VL CASCADE FOR PATIENTS WITH A NON-SUPPRESSED VL TEST RESULT FOR THE LAST 12 MONTHS (VL > 200 copies/ml)'}
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">
