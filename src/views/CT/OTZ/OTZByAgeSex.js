@@ -43,16 +43,7 @@ const OTZByAgeSex = () => {
                         },
                     },
                 },
-                {
-                    // min: -ovcAgeSex.distributionMale.max,
-                    // max: ovcAgeSex.distributionFemale.max,
-                    title: { text: 'MALE' },
-                    labels: {
-                        formatter: function () {
-                            return Math.abs(this.value);
-                        },
-                    },
-                },
+
             ],
             plotOptions: {
                 series: { stacking: 'normal' },
@@ -107,7 +98,7 @@ const OTZByAgeSex = () => {
                     </CardBody>
                 </Card>
             </div>
-            
+
         </div>
     );
 };

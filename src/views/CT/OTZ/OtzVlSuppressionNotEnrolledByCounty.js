@@ -63,7 +63,7 @@ const OtzVlSuppressionNotEnrolledByCounty = () => {
                 className="trends-header"
                 style={{ textTransform: 'none' }}
             >
-                VL SUPPRESSION AMONG CALHIV NOT ENROLLED IN OTZ BY COUNTY
+                VL SUPPRESSION AMONG ALHIV NOT ENROLLED IN OTZ BY COUNTY
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">

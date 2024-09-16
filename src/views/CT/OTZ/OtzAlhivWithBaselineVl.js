@@ -28,8 +28,7 @@ const OtzAlhivWithBaselineVl = () => {
             },
             xAxis: {
                 categories: [
-                    'ADOLECENTS IN CARE',
-                    'ENROLLED IN ANY OTZ PROGRAM',
+                    'ADOLESCENTS IN CARE',
                     'BASELINE VL AVAILABLE',
                     'VIRALLY SUPPRESSED',
                     'HIGH VIRAL LOAD',
@@ -71,27 +70,13 @@ const OtzAlhivWithBaselineVl = () => {
                 {
                     name: 'OTZ OUTCOMES AMONG ALHIV WITH BASELINE VL',
                     data: [
-                        // TODO: adolocents in care bar here
+                        // TODO: adolescents in care bar here
                         {
-                            name: 'Adolecentes in care',
+                            name: 'Adolescents in care',
                             color: '#14084D',
                             y:
                                 adolescents.totalAdolescents > 0
                                     ? adolescents.totalAdolescents
-                                    : 0,
-                        },
-                        {
-                            name: 'Enrolled in OTZ',
-                            color: '#1AB394',
-                            y:
-                                otzOutcomesWithBaselineVl.length > 0
-                                    ? otzOutcomesWithBaselineVl[0]
-                                          .AlHivEnrolledInOTZ
-                                    : 0,
-                            text:
-                                otzOutcomesWithBaselineVl.length > 0
-                                    ? otzOutcomesWithBaselineVl[0]
-                                          .AlHivEnrolledInOTZPerc
                                     : 0,
                         },
                         {
@@ -153,7 +138,7 @@ const OtzAlhivWithBaselineVl = () => {
                 className="trends-header"
                 style={{ textTransform: 'none' }}
             >
-                OVERALL VL UPTAKE AND SUPPRESSION AMONG CALHIV PATIENTS
+                OVERALL VL UPTAKE AND SUPPRESSION AMONG ALHIV PATIENTS
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">

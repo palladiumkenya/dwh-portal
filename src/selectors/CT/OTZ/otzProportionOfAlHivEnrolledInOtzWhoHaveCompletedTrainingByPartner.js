@@ -17,7 +17,7 @@ export const getProportionOfAlhivEnrolledInOtzWhoHaveCompletedTrainingByPartner 
             let percent = 0;
             const selectedPartner = listPartner.filter(obj => obj.partner === listElement.partner);
             if (selectedPartner.length > 0) {
-                percent = ((listElement.count_training / selectedPartner[0].count_training) * 100);
+                percent = ((listElement.count_training / selectedPartner[0].alhiv) * 100);
             }
             ArrayList.push(
                 {

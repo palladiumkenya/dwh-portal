@@ -149,6 +149,7 @@ import otzOutcomesByPartner from './CT/OTZ/otzOutcomesByPartner';
 import otzTotalAdolescents from './CT/OTZ/otzTotalAdolescents';
 import otzEnrolled from './CT/OTZ/otzEnrolled';
 import otzTotalWithVlResults from './CT/OTZ/otzTotalWithVlResults';
+import otzAlhivOnArtByAgeSex from './CT/OTZ/otzAlhivOnArtByAgeSex';
 import otzTotalWithWithResultsLessThan1000 from './CT/OTZ/otzTotalWithWithResultsLessThan1000';
 import ovcOverallServ from './CT/OVC/ovcOverallServ';
 import ovcServByGender from './CT/OVC/ovcServByGender';
@@ -177,6 +178,7 @@ import otzVlSuppressionByAgeNotEnrolled from './CT/OTZ/otzVlSuppressionByAgeNotE
 import otzVlSuppressionByCountyNotEnrolled from './CT/OTZ/otzVlSuppressionByCountyNotEnrolled';
 import otzVlSuppressionByPartnerNotEnrolled from './CT/OTZ/otzVlSuppressionByPartnerNotEnrolled';
 import otzVlSuppressionBySexNotEnrolled from './CT/OTZ/otzVlSuppressionBySexNotEnrolled';
+import otzTotalWithDurableVlResults from './CT/OTZ/otzTotalWithDurableVlResults';
 
 import CovidAdultPLHIVCurrentOnTreatment from './CT/Covid/covidAdultPLHIVCurrentOnTreatment';
 import CovidAdultPLHIVPartiallyVaccinated from './CT/Covid/covidAdultPLHIVPartiallyVaccinated';
@@ -324,6 +326,17 @@ import missedEIDOverview from './PMTCTRRI/MissedEID/missedEIDOverview';
 import missedEIDSDP from './PMTCTRRI/MissedEID/missedEIDSDP';
 import missedEIDMissingPCR from './PMTCTRRI/MissedEID/missedEIDMissingPCR';
 
+import hisFacilityByInfrastructure from './RR/hisFacilityByInfrastructure';
+import hisFacilityLinelist from './RR/hisFacilityLinelist';
+import hisFacilityLevelByCounty from './RR/hisFacilityLevelByCounty';
+import hisFacilityStatus from './RR/hisFacilityStatus';
+import hisFacilityStatusByPartner from './RR/hisFacilityStatusByPartner';
+import hisFacilityLevelByPartner from './RR/hisFacilityLevelByPartner';
+import hisFacilityTxcurr from './RR/hisFacilityTxcurr';
+import hisFacilityByInfrastructureCounty from './RR/hisFacilityByInfrastructureCounty';
+import hisFacilityStatusByCounty from './RR/hisFacilityStatusByCounty';
+import hisFacilityArtHtsMnch from './RR/hisFacilityArtHtsMnch';
+
 import missedInfantProphylaxis from './PMTCTRRI/MissedInfantProphylaxis/missedInfantProphylaxis';
 
 import missedViralLoad from './PMTCTRRI/MissedViralLoad/missedViralLoad';
@@ -456,6 +469,7 @@ export default combineReducers({
 
     consistencyByFacilityNotReported,
 
+    otzAlhivOnArtByAgeSex,
     otzEnrollmentAmongAlhivOnArtBySex,
     otzEnrollmentAmongAlhivOnArtByAge,
     otzEnrollmentAmongAlhivOnArtByCounty,
@@ -496,6 +510,7 @@ export default combineReducers({
     otzVlSuppressionBySexNotEnrolled,
     otzVlSuppressionByPartnerNotEnrolled,
     otzVlSuppressionByCountyNotEnrolled,
+    otzTotalWithDurableVlResults,
 
     ovcOverallServ,
     ovcServByGender,
@@ -646,4 +661,15 @@ export default combineReducers({
     missedInfantProphylaxis,
     missedViralLoad,
     missedDTG,
+
+    hisFacilityByInfrastructure,
+    hisFacilityLevelByCounty,
+    hisFacilityLevelByPartner,
+    hisFacilityLinelist,
+    hisFacilityStatus,
+    hisFacilityStatusByPartner,
+    hisFacilityTxcurr,
+    hisFacilityByInfrastructureCounty,
+    hisFacilityStatusByCounty,
+    hisFacilityArtHtsMnch,
 });
