@@ -31,6 +31,7 @@ export const CT_TABS = {
     ovc: 'OVC',
     covid: 'COVID-19',
     artVerification: 'ART VERIFICATION',
+    ahd: 'AHD'
 };
 
 export const SD_TABS = {
