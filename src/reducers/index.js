@@ -246,6 +246,7 @@ import viralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll
     from './CT/ViralLoad/viralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll';
 import viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment
     from './CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
+import ahdScreening from './CT/AHD/ahdScreening'
 
 
 import htsPosByGenderKHIS from './Operational&HIS/Comparison/htsPosByGenderKHIS';
@@ -672,4 +673,6 @@ export default combineReducers({
     hisFacilityByInfrastructureCounty,
     hisFacilityStatusByCounty,
     hisFacilityArtHtsMnch,
+
+    ahdScreening,
 });
