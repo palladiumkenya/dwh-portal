@@ -14,7 +14,7 @@ const AHDScreening = () => {
             title: { text: '' },
             xAxis: [{ categories: [
                     'PATIENTS ON CARE(TREATMENT NEW/RTT/CTF)',
-                    // 'NO. SCREENED',
+                    'NO. SCREENED',
                     'NO. WITH AHD'
                 ], title: { text: 'AHD SCREENING' }, crosshair: true }],
             yAxis: [{ title: { text: '' }}],
@@ -24,7 +24,7 @@ const AHDScreening = () => {
             series: [
                 { name: 'AHD SCREENED', data: [
                         ahdScreeningData?.NewPatient,
-                        // 100,
+                        ahdScreeningData?.AHDScreened,
                         ahdScreeningData?.AHD
                     ], type: 'column', color: "#142459" },
             ]
