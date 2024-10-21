@@ -6,18 +6,12 @@ import * as currentOnArtSelectors from '../../selectors/CT/CurrentOnArt/currentO
 import { formatNumber, roundNumber } from '../../utils/utils';
 import DataCard from '../Shared/DataCard';
 import moment from 'moment';
+import { getTxDate } from '../../selectors/CT/CurrentOnArt/currentOnArt';
 
 const HomeVLCascade = () => {
-    const currentDate = moment();
+    const dateEOM = useSelector(currentOnArtOverviewSelectors.getTxDate);
+    const currentDate = moment(dateEOM);
 
-    // Check if the current date is before the 20th of the month
-    if (currentDate.date() < 19) {
-        // If true, subtract 2 months
-        currentDate.subtract(2, 'months');
-    } else {
-        // If false, subtract 1 month
-        currentDate.subtract(1, 'months');
-    }
     // Format the date
     const reporting_month = currentDate.format('MMM YYYY');
 
