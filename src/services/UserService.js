@@ -16,7 +16,7 @@ if(process.env) {
 } else {
 //         client_id: process.env.REACT_APP_CLIENT,
     config = {
-        authority: "https://auth.kenyahmis.org/dwhidentity",
+        authority: "https://identity.kenyahmis.org/nascop",
         client_id: "dwh.spa",
         redirect_uri: "https://data.kenyahmis.org:9000/#/signin-oidc#",
         response_type: "id_token token",
