@@ -216,7 +216,7 @@ const Tafsiri = () => {
                             Authorization: `Bearer ${accessToken}`,
                         },
                         body: JSON.stringify({
-                            db_id: 2,
+                            db_id: 6,
                             description: '',
                             label: 'tafsiriquery' + date,
                             sql: sqlQuery,
