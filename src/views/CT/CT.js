@@ -901,11 +901,11 @@ const CT = () => {
                         <ArtVerification />
                     ) : null}
                 </TabPane>
-                <TabPane tabId={'ahd'}>
-                    {active_tab === 'ahd' ? (
-                        <AHD />
-                    ) : null}
-                </TabPane>
+                {/*<TabPane tabId={'ahd'}>*/}
+                {/*    {active_tab === 'ahd' ? (*/}
+                {/*        <AHD />*/}
+                {/*    ) : null}*/}
+                {/*</TabPane>*/}
             </TabContent>
             <p></p>
             <p></p>
