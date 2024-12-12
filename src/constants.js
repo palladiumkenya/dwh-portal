@@ -31,7 +31,7 @@ export const CT_TABS = {
     ovc: 'OVC',
     covid: 'COVID-19',
     artVerification: 'ART VERIFICATION',
-    // ahd: 'AHD'
+    ahd: 'AHD'
 };
 
 export const SD_TABS = {
@@ -45,7 +45,7 @@ export const OPERATIONALHIS_TABS = {
     accuracy: 'ACCURACY',
     // consistency: 'CONSISTENCY',
     dataQualityAssessment: 'DATA QUALITY ASSESSMENT',
-    comparison: 'COMPARISON DWH, KHIS & SMART',
+    comparison: 'COMPARISON DWH & KHIS',
 }
 
 export const PMTCT_RRI_TABS = {
