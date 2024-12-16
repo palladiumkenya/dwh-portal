@@ -25,13 +25,13 @@ const LinkageByAgeSex = () => {
                 ? moment(filters.fromDate, 'MMM YYYY').format('YYYYMM')
                 : moment()
                       .subtract(2, 'month')
-                      .add(17, 'days')
+                      .add(10, 'days')
                       .format('YYYYMM'),
             toDate: filters.toDate
                 ? moment(filters.toDate, 'MMM YYYY').format('YYYYMM')
                 : moment()
                       .subtract(2, 'month')
-                      .add(17, 'days')
+                      .add(10, 'days')
                       .format('YYYYMM'),
         };
         params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
@@ -65,8 +65,14 @@ const LinkageByAgeSex = () => {
             }
         }
         for(let i = 0; i < result.length; i++) {
+            let ageGroup = result[i].AgeGroup
+            if([" Under 1", "01 to 04"].includes(result[i].AgeGroup)){
+                ageGroup = "Under 5"
+            }else if(["05 to 09"].includes(result[i].AgeGroup)){
+                ageGroup = "5 to 9"
+            }
             let sexIndex = sexCategories.indexOf(result[i].Gender.toUpperCase());
-            let ageIndex = ageCategories.indexOf(result[i].AgeGroup);
+            let ageIndex = ageCategories.indexOf(ageGroup);
             if(sexIndex === -1 || ageIndex === -1) { // unsupported
                 continue;
             }
