@@ -56,8 +56,8 @@ const PNSPositivityTrends = () => {
             if((year.toString() === fullYear.toString()) && (result_month <= lastYearMonth && result_year.toString() === lastFullYear.toString())) {
                 continue;
             }
-            let positiveR = parseInt(result[i].positive, 10) + parseInt(result2[i] ? result2[i].positive:0, 10);
-            let positiveRT = parseInt(result3[i].positive ? result3[i].positive:0, 10);
+            let positiveR = parseInt(result[i].positive, 10) + parseInt(result2[i] ? result2[i]?.positive:0, 10);
+            let positiveRT = parseInt(result3[i]?.positive ? result3[i]?.positive:0, 10);
             tested.push(positiveRT);
             months.push(monthNames[result[i].month] + ' ' + result_year.toString());
             linked.push(positiveR);

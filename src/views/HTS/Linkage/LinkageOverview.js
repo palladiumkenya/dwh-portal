@@ -37,13 +37,13 @@ const LinkageOverview = () => {
                 ? moment(filters.fromDate, 'MMM YYYY').format('YYYYMM')
                 : moment()
                       .subtract(2, 'month')
-                      .add(17, 'days')
+                      .add(10, 'days')
                       .format('YYYYMM'),
             toDate: filters.toDate
                 ? moment(filters.toDate, 'MMM YYYY').format('YYYYMM')
                 : moment()
                       .subtract(2, 'month')
-                      .add(17, 'days')
+                      .add(10, 'days')
                       .format('YYYYMM'),
         };
         const result = await getAll('hts/linkageBySex', params);
@@ -60,7 +60,7 @@ const LinkageOverview = () => {
             femaleLinked: 0,
             femaleLinkedPercent: 0,
         }
-        
+
         for(let i = 0; i < result.length; i++) {
             data.totalPositive = data.totalPositive + parseInt(result[i].positive);
             data.totalLinked = data.totalLinked + parseInt(result[i].linked);
