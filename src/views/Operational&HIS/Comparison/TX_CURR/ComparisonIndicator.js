@@ -13,7 +13,7 @@ const ComparisonIndicatorNotesTxCurr = () => {
                 <CardBody>
                     <ul>
                         <li>
-                            <strong>CURRENT ON ART:</strong> Number of adults and children currently receiving ART including those who have missed their appointment and30 days have not passed since the last appointment.
+                            <strong>CURRENT ON ART:</strong> Number of adults and children currently receiving ART including those who have missed their appointment and 30 days have not passed since the last appointment.
                         </li>
                     </ul>
                     <span><i><strong>Indicator notes:</strong></i></span>

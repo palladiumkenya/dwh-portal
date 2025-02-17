@@ -45,10 +45,10 @@ const Tafsiri = () => {
     const [feedback, setFeedback] = useState('');
     const [feedbackSent, setFeedbackSent] = useState(false);
     const [feedbackError, setFeedbackError] = useState('');
-    const [vizType, setVizType] = useState('table');
-    const handleChange = (event) => {
-        setVizType(event.target.value);
-    };
+    // const [vizType, setVizType] = useState('table');
+    // const handleChange = (event) => {
+    //     setVizType(event.target.value);
+    // };
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
