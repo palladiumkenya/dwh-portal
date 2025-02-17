@@ -99,8 +99,8 @@ export const getCurrentOnArtByAgeSex = createSelector(
                     listAll.find(
                         (obj) =>
                             obj.ageGroup
-                                .replace('-', ' to ')
-                                .replace('<', 'Under ') === ageGroup &&
+                                .replace(/-/g, ' to ')
+                                .replace(/</g, 'Under ') === ageGroup &&
                             (obj.Gender?.toLowerCase() === 'F'.toLowerCase() ||
                                 obj.Gender?.toLowerCase() ===
                                     'Female'.toLowerCase())
@@ -108,8 +108,8 @@ export const getCurrentOnArtByAgeSex = createSelector(
                         listAll.find(
                             (obj) =>
                                 obj.ageGroup
-                                    .replace('-', ' to ')
-                                    .replace('<', 'Under ') === ageGroup &&
+                                    .replace(/-/g, ' to ')
+                                    .replace(/</g, 'Under ') === ageGroup &&
                                 (obj.Gender?.toLowerCase() ===
                                     'F'.toLowerCase() ||
                                     obj.Gender?.toLowerCase() ===
