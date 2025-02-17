@@ -1,9 +1,9 @@
 import React from 'react';
 import Loadable from 'react-loadable';
 import VisibilitySensor from 'react-visibility-sensor';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import { Card, CardBody, CardHeader, Col, Row } from 'reactstrap';
+import { Col, Row } from 'reactstrap';
 import {
     enableStickyFilter,
     disableStickyFilter,
