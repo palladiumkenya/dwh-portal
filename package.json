@@ -52,7 +52,7 @@
         "redux": "^4.2.0",
         "redux-persist": "^6.0.0",
         "redux-thunk": "^2.4.1",
-        "reselect": "^4.0.0",
+        "reselect": "^5.1.1",
         "sass": "^1.43.4",
         "semantic-ui-calendar-react": "^0.15.3",
         "semantic-ui-css": "^2.4.1",
