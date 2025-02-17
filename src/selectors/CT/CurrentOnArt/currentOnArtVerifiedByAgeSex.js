@@ -392,7 +392,7 @@ export const getCurrentOnArtByAgeSexGT15 = createSelector(
                           (obj) =>
                               obj.ageGroup
                                   ?.replace('-', ' to ')
-                                  .replace('<', 'Under ') === ageGroup &&
+                                  .replace(/</g, 'Under ') === ageGroup &&
                               (obj.Gender?.toLowerCase() === 'M'.toLowerCase() ||
                                   obj.Gender?.toLowerCase() ===
                                       'Male'.toLowerCase())
@@ -425,7 +425,7 @@ export const getCurrentOnArtByAgeSexGT15 = createSelector(
                           (obj) =>
                               obj.ageGroup
                                   .replace('-', ' to ')
-                                  .replace('<', 'Under ') === ageGroup &&
+                                  .replace(/</g, 'Under ') === ageGroup &&
                               (obj.Gender?.toLowerCase() === 'F'.toLowerCase() ||
                                   obj.Gender?.toLowerCase() ===
                                       'Female'.toLowerCase())
