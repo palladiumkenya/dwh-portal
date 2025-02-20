@@ -247,6 +247,8 @@ import viralLoadOverallUptakeGt1000CopiesReceivedFollowTestsAll
 import viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment
     from './CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
 import ahdScreening from './CT/AHD/ahdScreening'
+import ahdOutcomes from './CT/AHD/ahdOutcomes'
+import ahdNutritionAssessment from './CT/AHD/ahdNutritionAssessment'
 
 
 import htsPosByGenderKHIS from './Operational&HIS/Comparison/htsPosByGenderKHIS';
@@ -675,4 +677,6 @@ export default combineReducers({
     hisFacilityArtHtsMnch,
 
     ahdScreening,
+    ahdOutcomes,
+    ahdNutritionAssessment,
 });

@@ -3,7 +3,6 @@ import Loadable from 'react-loadable';
 import VisibilitySensor from 'react-visibility-sensor';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
-import { Col, Row } from 'reactstrap';
 import {
     enableStickyFilter,
     disableStickyFilter,
@@ -32,6 +31,16 @@ const TBScreeningAndManagement = Loadable({
 });
 const CryptococcalMeningitis = Loadable({
     loader: () => import('./CryptococcalMeningitis'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const AHDNutritionAssessment = Loadable({
+    loader: () => import('./AHDNutritionAssessment'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const AHDOutcomes = Loadable({
+    loader: () => import('./AHDOutcomes'),
     loading: Loading,
     delay: LOADING_DELAY,
 });
@@ -71,6 +80,10 @@ const ArtVerification = () => {
             <TBScreeningAndManagement />
             <SectionFooter overview={branding.overview} />
             <CryptococcalMeningitis />
+            <SectionFooter overview={branding.overview} />
+            <AHDNutritionAssessment />
+            <SectionFooter overview={branding.overview} />
+            <AHDOutcomes />
             <SectionFooter overview={branding.overview} />
         </div>
     );
