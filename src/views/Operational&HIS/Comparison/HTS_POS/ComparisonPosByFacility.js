@@ -14,8 +14,7 @@ const ComparisonHTSPosByFacility = () => {
                 <Col>
                     <Card className="trends-card">
                         <CardHeader className="trends-header">
-                            COMPARISON OF HTS TESTED HIV POSITIVE BASED ON
-                            GENDER
+                            COMPARISON OF HTS TESTED HIV POSITIVE BASED ON SEX
                             {loading === true ? (
                                 <Spinner className="pull-right" />
                             ) : (

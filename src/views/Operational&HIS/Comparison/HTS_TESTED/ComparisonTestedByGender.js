@@ -79,7 +79,7 @@ const ComparisonTestedByGender = () => {
 
     return (
         <Card>
-            <CardHeader className="cardTitle">HTS TESTED BY GENDER</CardHeader>
+            <CardHeader className="cardTitle">HTS TESTED BY SEX</CardHeader>
             <CardBody>
                 <HighchartsReact
                     highcharts={Highcharts}
