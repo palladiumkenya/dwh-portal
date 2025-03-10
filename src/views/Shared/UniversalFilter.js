@@ -550,11 +550,11 @@ const UniversalFilter = () => {
                         }
                     >
                         <div className="form-group">
-                            <label htmlFor="gender">Gender</label>
+                            <label htmlFor="gender">Sex</label>
                             <Dropdown
                                 id="gender"
                                 name="gender"
-                                placeholder="Select Gender"
+                                placeholder="Select Sex"
                                 fluid
                                 multiple
                                 selection

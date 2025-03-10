@@ -91,7 +91,7 @@ const OtzOutcomesByGender = () => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                OTZ OUTCOMES BY GENDER
+                OTZ OUTCOMES BY SEX
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">

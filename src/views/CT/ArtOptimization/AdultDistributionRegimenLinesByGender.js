@@ -87,7 +87,7 @@ const AdultDistributionRegimenLinesByGender = () => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header">
-                DISTRIBUTION OF REGIMEN LINES - ADULTS BY GENDER
+                DISTRIBUTION OF REGIMEN LINES - ADULTS BY SEX
             </CardHeader>
             <CardBody className="trends-body">
                 <Row>

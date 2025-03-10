@@ -123,7 +123,7 @@ const CurrentOnArtVerifiedByAgeSex = () => {
             <div className="col-12">
                 <Card className="trends-card">
                     <CardHeader className="trends-header">
-                        VERIFIED AND CURRENT ON ART BY AGE GROUP AND GENDER - {moment().subtract(2, 'months').add(ETL_DAY, 'days').format('MMMM')}
+                        VERIFIED AND CURRENT ON ART BY AGE GROUP AND SEX - {moment().subtract(2, 'months').add(ETL_DAY, 'days').format('MMMM')}
                     </CardHeader>
                     <CardBody className="trends-body">
                         <div className="col-12">

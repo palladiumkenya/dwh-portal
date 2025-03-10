@@ -14,7 +14,7 @@ const ComparisonTXNewByGender = () => {
                 <Col>
                     <Card className="trends-card">
                         <CardHeader className="trends-header">
-                            COMPARISON OF TX_NEW BASED ON GENDER
+                            COMPARISON OF TX_NEW BASED ON SEX
                             {loading === true ? (
                                 <Spinner className="pull-right" />
                             ) : (

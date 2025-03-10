@@ -14,12 +14,12 @@ const ComparisonHTSTestedByGender = () => {
                 <Col>
                     <Card className="trends-card">
                         <CardHeader className="trends-header">
-                            COMPARISON OF HTS TESTED BASED ON GENDER
+                            COMPARISON OF HTS TESTED BASED ON SEX
                             {loading === true ? (
                                 <Spinner className="pull-right" />
                             ) : (
                                 <CsvDownloader
-                                    filename="COMPARISON_OF_TX_CURR_BASED_ON_GENDER"
+                                    filename="COMPARISON_OF_TX_CURR_BASED_ON_SEX"
                                     separator=","
                                     datas={currOnArt}
                                     className="pull-right"
