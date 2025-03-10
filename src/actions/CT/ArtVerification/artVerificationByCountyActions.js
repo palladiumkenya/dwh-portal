@@ -11,9 +11,9 @@ export const loadArtVerificationByCounty = () => async (dispatch, getState) => {
             moment(getState().artVerificationByCounty.lastFetch),
             'minutes'
         );
-        
+
         await dispatch(fetchArtVerificationByCounty());
-        
+
     }
 };
 
@@ -38,8 +38,14 @@ export const fetchArtVerificationByCounty =
             'care-treatment/getArtVerificationByCounty',
             params
         );
-        dispatch({
-            type: actionTypes.ART_VERIFICATION_BY_COUNTY_FETCH,
-            payload: { filtered: getState().filters.filtered, list: response },
-        });
+        if (response.error) {
+            dispatch({
+                type: actionTypes.ART_VERIFICATION_BY_COUNTY_FAILED,
+            });
+        } else {
+            dispatch({
+                type: actionTypes.ART_VERIFICATION_BY_COUNTY_FETCH,
+                payload: { filtered: getState().filters.filtered, list: response },
+            });
+        }
     };

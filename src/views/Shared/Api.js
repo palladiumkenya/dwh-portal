@@ -24,6 +24,7 @@ export const getAll = async (endpoint, params) => {
         return response.data;
     } catch (e) {
         console.error(e);
+        return { error: 'There was an issue retrieving the data. Please try again later.' };
     }
     return [];
 };
