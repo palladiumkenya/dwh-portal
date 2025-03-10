@@ -14,12 +14,13 @@ if(process.env) {
 }
 
 export const getAll = async (endpoint, params) => {
-    let request
-    if (params) request = axios.get(`${url}${endpoint}`,{ params: params });
-    else request = axios.get(`${url}${endpoint}`);
-    
     try {
-        const response = await request;
+        let response
+        if (params) {
+            response = await axios.get(`${url}${endpoint}`,{ params: params });
+        } else {
+            response = await axios.get(`${url}${endpoint}`);
+        }
         return response.data;
     } catch (e) {
         console.error(e);
