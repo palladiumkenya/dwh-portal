@@ -31,16 +31,16 @@ const HisDeployments = () =>{
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(loadHisFacilityStatusAction());
-        dispatch(loadHisFacilityLevelByPartnerAction());
-        dispatch(loadHisFacilityStatusByPartnerAction());
-        dispatch(loadHisFacilityLevelByCountyAction());
-        dispatch(loadHisFacilityByInfrastructureActions());
-        dispatch(loadHisFacilityLinelistAction());
-        dispatch(loadHisFacilityTxcurrAction());
-        dispatch(loadHisFacilityStatusByCountyAction());
-        dispatch(loadHisFacilityByInfrastructureCountyActions());
-        dispatch(loadHisFacilityArtHtsMnchAction());
+        // dispatch(loadHisFacilityStatusAction());
+        // dispatch(loadHisFacilityLevelByPartnerAction());
+        // dispatch(loadHisFacilityStatusByPartnerAction());
+        // dispatch(loadHisFacilityLevelByCountyAction());
+        // dispatch(loadHisFacilityByInfrastructureActions());
+        // dispatch(loadHisFacilityLinelistAction());
+        // dispatch(loadHisFacilityTxcurrAction());
+        // dispatch(loadHisFacilityStatusByCountyAction());
+        // dispatch(loadHisFacilityByInfrastructureCountyActions());
+        // dispatch(loadHisFacilityArtHtsMnchAction());
     }, [dispatch])
     const onVisibilityChange = (isVisible) => {
         if (isVisible) {
