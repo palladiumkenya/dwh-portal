@@ -38,12 +38,12 @@ export const getArtVerificationByPartner = createSelector(
         let unverified = [];
         let received = [];
 
-        list.sort((b, a) => a.Pendingsurveys - b.Pendingsurveys);
+        list.sort((b, a) => a?.Pendingsurveys - b?.Pendingsurveys);
 
-        partners = list.map((p) => p.SDIP);
-        pending = list.map((p) => p.Pendingsurveys);
-        unverified = list.map((p) => p.Unverified);
-        received = list.map((p) => p.SurveysReceived);
+        partners = list.map((p) => p?.SDIP);
+        pending = list.map((p) => p?.Pendingsurveys);
+        unverified = list.map((p) => p?.Unverified);
+        received = list.map((p) => p?.SurveysReceived);
 
         let submitted = _.sum(received);
         let notsubmitted = _.sum(pending);

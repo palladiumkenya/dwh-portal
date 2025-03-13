@@ -257,7 +257,7 @@ export const getFacilityLevelByCounty = createSelector(
         }, {});
         let formattedResult = Object.values(data);
         formattedResult.sort((a, b) => b["Level 2"] - a["Level 2"]);
-        formattedResult = formattedResult.map(partner => {
+        formattedResult = formattedResult?.map(partner => {
             partner.lvl2Perc = partner.Total ? (partner["Level 2"]/partner.Total)*100 : 0
             return partner
         }).sort((a, b) => b.lvl2Perc - a.lvl2Perc)
@@ -287,8 +287,8 @@ export const getFacilityArtHtsMnchLinelist = createSelector(
     [listFacilityArtHtsMnchUnfiltered, listFacilityArtHtsMnchFiltered, filtered, listFacilityArtHtsMnchLoading],
     (listUnfiltered, listFiltered, filtered, loading) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        let data = list.map(d => {
-            return { ...d, 'CurrentOnART_Total': formatNumber(d.CurrentOnART_Total), 'Tested_Total': formatNumber(d.Tested_Total), 'onMaternalHAARTtotal': formatNumber(d.onMaternalHAARTtotal) };
+        let data = list?.map(d => {
+            return { ...d, 'CurrentOnART_Total': formatNumber(d?.CurrentOnART_Total), 'Tested_Total': formatNumber(d?.Tested_Total), 'onMaternalHAARTtotal': formatNumber(d?.onMaternalHAARTtotal) };
         })
 
         return { 'list': data, loading };
@@ -300,8 +300,8 @@ export const getFacilityTxCurr = createSelector(
     (listUnfiltered, listFiltered, filtered, loading) => {
         const list = filtered ? listFiltered : listUnfiltered;
 
-        let data = list.map((d) => {
-            d = d.KEPH_Level === null ? { ...d, 'KEPH_Level': 'Missing' } : d;
+        let data = list?.map((d) => {
+            d = d?.KEPH_Level === null ? { ...d, 'KEPH_Level': 'Missing' } : d;
             return {...d, 'TxCurr': formatNumber(d.TxCurr)}
         })
 
