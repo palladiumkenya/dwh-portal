@@ -136,9 +136,9 @@ const RR = () => {
                     </VisibilitySensor>
                     <RRTab/>
                 </TabPane>
-                <TabPane tabId={'his'}>
-                    <HisDeployments/>
-                </TabPane>
+                {/*<TabPane tabId={'his'}>*/}
+                {/*    <HisDeployments/>*/}
+                {/*</TabPane>*/}
             </TabContent>
             <p></p><p></p>
         </div>
