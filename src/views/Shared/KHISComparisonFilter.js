@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'; 
+import React, { useEffect, useState, useCallback } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import moment from 'moment';
 import { DateInput, MonthInput, MonthRangeInput } from 'semantic-ui-calendar-react';
@@ -365,11 +365,11 @@ const KHISComparisonFilter = () => {
                     filters.genderFilterEnabled ?
                         <Col className={'col-12 col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xl-2'}>
                             <div className="form-group">
-                                <label htmlFor="gender">Gender</label>
+                                <label htmlFor="gender">Sex</label>
                                 <Dropdown
                                     id="gender"
                                     name="gender"
-                                    placeholder="Select Gender"
+                                    placeholder="Select Sex"
                                     fluid
                                     multiple
                                     selection

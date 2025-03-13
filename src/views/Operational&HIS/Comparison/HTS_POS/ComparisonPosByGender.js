@@ -9,7 +9,7 @@ import * as htsPosKHIS from '../../../../selectors/Operational&HIS/Comparison/ht
 const ComparisonPosByGender = () => {
     const [comparisonPosByGender, setComparisonPosByGender] = useState({});
     let posKHIS = useSelector(htsPosKHIS.getHTSPOSKHIS);
-    
+
 
     const loadComparisonNewlyByGender = useCallback(async () => {
         setComparisonPosByGender({
@@ -75,7 +75,7 @@ const ComparisonPosByGender = () => {
 
     return (
         <Card>
-            <CardHeader className="cardTitle">TESTED HIV POSITIVE BY GENDER</CardHeader>
+            <CardHeader className="cardTitle">TESTED HIV POSITIVE BY SEX</CardHeader>
             <CardBody>
                 <HighchartsReact
                     highcharts={Highcharts}

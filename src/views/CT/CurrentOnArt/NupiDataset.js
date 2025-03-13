@@ -1,4 +1,3 @@
-import { set } from 'lodash';
 import React, { useEffect, useState, useCallback } from 'react';
 import ReactExport from 'react-export-excel';
 import { getAll } from '../../Shared/Api';
@@ -6,9 +5,8 @@ import Loading from '../../Shared/Loading';
 import { Button } from 'semantic-ui-react';
 import moment from 'moment';
 
-const ExcelFile = ReactExport.ExcelFile;
-const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
-const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
+const {ExcelFile} = ReactExport;
+const {ExcelSheet, ExcelColumn} = ReactExport.ExcelFile;
 
 const dictionary = [
     {

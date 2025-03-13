@@ -200,15 +200,12 @@ const Adhoc = () => {
                 <DropdownItem header tag="div">
                     <strong>Platforms supporting Self Service</strong>
                 </DropdownItem>
-                <DropdownItem href={process.env.REACT_APP_ADHOC_URL}>
-                    <strong>Flex monster</strong>
-                </DropdownItem>
                 <DropdownItem href={process.env.REACT_APP_METABASE_URL}>
                     <strong>Metabase</strong>
                 </DropdownItem>
                 <DropdownItem
                     disabled={false}
-                    href={'http://dwhanalytics.kenyahmis.org/'}
+                    href={'https://dwhanalytics.kenyahmis.org/'}
                 >
                     <strong>Superset</strong>
                 </DropdownItem>

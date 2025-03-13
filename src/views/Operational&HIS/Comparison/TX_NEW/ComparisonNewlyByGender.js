@@ -74,7 +74,7 @@ const ComparisonNewlyByGender = () => {
     return (
         <Card>
             <CardHeader className="cardTitle">
-                DISTRIBUTION OF PATIENTS NEWLY STARTED ON ART BY GENDER
+                DISTRIBUTION OF PATIENTS NEWLY STARTED ON ART BY SEX
             </CardHeader>
             <CardBody>
                 <HighchartsReact highcharts={Highcharts} options={comparisonNewlyByGender}/>

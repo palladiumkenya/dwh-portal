@@ -8,7 +8,6 @@ import UptakeOverview from './UptakeOverview';
 import UptakeByAgeSex from './UptakeByAgeSex';
 import UptakeByCounty from './UptakeByCounty';
 import UptakeByPartner from './UptakeByPartner';
-import UptakeByPopulationType from './UptakeByPopulationType';
 import UptakeMonthsSinceLastTest from './UptakeMonthsSinceLastTest';
 import UptakeTBScreeningAndTBOutcome from './UptakeTBScreeningAndTBOutcome';
 import UptakeTestingStrategy from './UptakeTestingStrategy';

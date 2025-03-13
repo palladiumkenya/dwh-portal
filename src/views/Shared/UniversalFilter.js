@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { BrowserRouter as Router, Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useHistory, useParams } from 'react-router-dom';
 import moment from 'moment';
 import { MonthRangeInput } from 'semantic-ui-calendar-react';
-import { Dropdown, Message } from 'semantic-ui-react';
+import { Dropdown } from 'semantic-ui-react';
 import { PAGES } from '../../constants';
 import { Row, Col } from 'reactstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -550,11 +550,11 @@ const UniversalFilter = () => {
                         }
                     >
                         <div className="form-group">
-                            <label htmlFor="gender">Gender</label>
+                            <label htmlFor="gender">Sex</label>
                             <Dropdown
                                 id="gender"
                                 name="gender"
-                                placeholder="Select Gender"
+                                placeholder="Select Sex"
                                 fluid
                                 multiple
                                 selection

@@ -336,8 +336,8 @@ import {
     loadViralLoadOverallNumberGt1000CopiesSecondlineRegiment
 } from '../../actions/CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
 import { loadCurrentOnArtVerified } from '../../actions/CT/CurrentOnArt/currentOnArtVerifiedActions';
-import { loadCurrentOnArtVerifiedByPartner } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedByPartnerActions';
-import { loadCurrentOnArtVerifiedByCounty } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedByCountyActions';
+import { loadCurrentOnArtVerifiedByPartner } from '../../actions/CT/CurrentOnArt/currentOnArtVerifiedByPartnerActions';
+import { loadCurrentOnArtVerifiedByCounty } from '../../actions/CT/CurrentOnArt/currentOnArtVerifiedByCountyActions';
 import { loadCurrentOnArtVerifiedByAgeSex } from '../../actions/CT/CurrentOnArt/currentOnArtVerifiedByAgeSexActions';
 import { loadOtzEnrollmentTrend } from '../../actions/CT/OTZ/OtzEnrollmentTrendsActions';
 import { loadOtzEnrollmentByAgeSex } from '../../actions/CT/OTZ/OtzEnrollmentByAgeSexActions';
@@ -363,6 +363,9 @@ import { loadViralLoadUptakeUToU } from '../../actions/CT/ViralLoad/viralLoadUpt
 import { loadViralLoadCategorizationUToU } from '../../actions/CT/ViralLoad/viralLoadCategorizationUToUActions';
 import { loadAlhivOnArtByAgeSex } from '../../actions/CT/OTZ/OtzAlhivOnArtByAgeSexActions';
 import { loadOtzTotalWithDurableVLResults } from '../../actions/CT/OTZ/OtzTotalWithDurableVlResultsActions';
+import { loadAhdScreening } from '../../actions/CT/AHD/AhdSceeningActions';
+import { loadAhdOutcomes } from '../../actions/CT/AHD/AhdOutcomesActions';
+import { loadAhdNutritionAssessment } from '../../actions/CT/AHD/AhdNutritionAssessmentActions';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({
@@ -391,6 +394,7 @@ const OTZ = Loadable({ loader: () => import('./OTZ/OTZ'), loading: Loading, dela
 const OVC = Loadable({ loader: () => import('./OVC/OVC'), loading: Loading, delay: LOADING_DELAY });
 const COVID = Loadable({ loader: () => import('./Covid/Covid'), loading: Loading, delay: LOADING_DELAY });
 const ArtVerification = Loadable({ loader: () => import('./ArtVerification/ArtVerification'), loading: Loading, delay: LOADING_DELAY });
+const AHD = Loadable({ loader: () => import('./AHD/AHD'), loading: Loading, delay: LOADING_DELAY });
 
 const CT = () => {
 
@@ -813,6 +817,12 @@ const CT = () => {
                 dispatch(loadCurrentOnArtVerified(active_tab));
                 dispatch(loadCurrentOnArt());
                 dispatch(loadCurrentOnArtOverview(active_tab));
+                break;
+            case 'ahd':
+                dispatch(loadAhdScreening())
+                dispatch(loadAhdOutcomes())
+                dispatch(loadAhdNutritionAssessment())
+                break;
             default:
                 break;
         }
@@ -893,6 +903,11 @@ const CT = () => {
                 <TabPane tabId={'artVerification'}>
                     {active_tab === 'artVerification' ? (
                         <ArtVerification />
+                    ) : null}
+                </TabPane>
+                <TabPane tabId={'ahd'}>
+                    {active_tab === 'ahd' ? (
+                        <AHD />
                     ) : null}
                 </TabPane>
             </TabContent>

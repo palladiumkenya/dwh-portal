@@ -31,7 +31,7 @@ export const COVIDSeverityOfInfectionByGender = () => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                SEVERITY OF COVID-19 INFECTION BY GENDER
+                SEVERITY OF COVID-19 INFECTION BY SEX
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">

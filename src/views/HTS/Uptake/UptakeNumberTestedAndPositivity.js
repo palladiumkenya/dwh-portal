@@ -24,11 +24,11 @@ const UptakeNumberTestedAndPositivity = () => {
             fromDate: filters.fromDate
                 ? moment(filters.fromDate, 'MMM YYYY').format('YYYYMM')
                 : moment().subtract(2, 'month')
-                      .add(17, 'days')
+                      .add(10, 'days')
                       .format('YYYYMM'),
             toDate: filters.toDate
                 ? moment(filters.toDate, 'MMM YYYY').format('YYYYMM')
-                : moment().subtract(2, 'month').add(17, 'days').format('YYYYMM'),
+                : moment().subtract(2, 'month').add(10, 'days').format('YYYYMM'),
         };
         // params.month = filters.fromDate ? moment(filters.fromDate, "MMM YYYY").format("MM") : '';
         const result = await getAll('hts/numberTestedAndPositivity', params);

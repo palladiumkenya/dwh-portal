@@ -73,7 +73,7 @@ const ComparisonCurrByGender = () => {
     return (
         <Card>
             <CardHeader className="cardTitle">
-                CURRENT ON ART BY GENDER
+                CURRENT ON ART BY SEX
             </CardHeader>
             <CardBody>
                 <HighchartsReact highcharts={Highcharts} options={comparisonNewlyByGender}/>
