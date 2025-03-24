@@ -28,7 +28,7 @@ export const getHTSPOSByPartnerKHIS = createSelector(
     ) => {
         const list = filtered ? listFiltered : listUnfiltered;
         const listDWH = filtered ? listFilteredDWH : listUnfilteredDWH;
-        
+
         list.sort((b, a) =>
             a.Positive_Total > b.Positive_Total
                 ? 1
@@ -90,7 +90,7 @@ export const getHTSPOSByPartnerKHIS = createSelector(
         const dataDwh = labels.map((item) => {
             let number = 0;
 
-            listDWH.map((itemDWH) => {
+            listDWH.length && listDWH.map((itemDWH) => {
                 if (itemDWH.CTPartner !== null)
                     if (item === itemDWH.CTPartner.toUpperCase()) {
                         number = parseInt(itemDWH.positive);

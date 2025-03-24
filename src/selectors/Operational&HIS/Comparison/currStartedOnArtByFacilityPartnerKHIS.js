@@ -30,12 +30,12 @@ export const getCurrOnArtByFacilityPartnerKHIS = createSelector(
         const listDWH = filtered ? listFilteredDWH : listUnfilteredDWH;
 
         let data = [];
-        
+
         if (filtered && datimAgeGroups.length>0) {
             list.map((item) => {
                 item.KHISMale1 = 0;
                 item.KHISFemale1 = 0;
-                item.OnART1 = 0 
+                item.OnART1 = 0
             })
             for (let i = 0; i < datimAgeGroups.length; i++) {
                 if (datimAgeGroups[i] === 'Under 1') {
@@ -81,14 +81,15 @@ export const getCurrOnArtByFacilityPartnerKHIS = createSelector(
                     });
                 }
             }
-            list.map((item) => {
+            list.length && list.map((item) => {
                 item.KHIStxCurr = item.OnART1
                 item.KHISMale = item.KHISMale1
                 item.KHISFemale = item.KHISFemale1
             });
         }
-        list.forEach((item) => {
-            const mfl = listDWH.find((code) => code?.MFLCode === item.SiteCode);
+
+        list.length && list.forEach((item) => {
+            const mfl = listDWH?.find((code) => code?.MFLCode === item.SiteCode);
             if (mfl) {
                 data.push({
                     ...item,
