@@ -102,7 +102,7 @@ const ComparisonOverview= () => {
                         >
                             <div>
                                 <Row>
-                                    <Col md={6}>
+                                    <Col md={4}>
                                         <div>
                                             <span className="comparison-card-text">
                                                 KHIS
@@ -122,10 +122,28 @@ const ComparisonOverview= () => {
                                             </span>
                                         </div>
                                     </Col>
-                                    <Col md={6}>
+                                    <Col md={4}>
                                         <div>
                                             <span className="comparison-card-text">
                                                 DWH
+                                            </span>
+                                            <br />
+                                            <span
+                                                className="comparison-card-numbers"
+                                                style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                {formatNumber(DWHHts.DWHHtsPos)}
+                                            </span>
+                                        </div>
+                                    </Col>
+                                    <Col md={4}>
+                                        <div>
+                                            <span className="comparison-card-text">
+                                                SMART
                                             </span>
                                             <br />
                                             <span
@@ -164,7 +182,7 @@ const ComparisonOverview= () => {
                                 >
                                     <div>
                                         <Row>
-                                            <Col md={6}>
+                                            <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
                                                         KHIS
@@ -184,10 +202,30 @@ const ComparisonOverview= () => {
                                                     </sup>
                                                 </div>
                                             </Col>
-                                            <Col md={6}>
+                                            <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
                                                         DWH
+                                                    </span>
+                                                    <br />
+                                                    <span className="comparison-card-numbers">
+                                                        {formatNumber(
+                                                            DWHHts.DWHHtsPosAdult
+                                                        )}
+                                                    </span>
+                                                    <sup className="comparison-sup comparison-sup-perc">
+                                                        {' '}
+                                                        {percOfNewly(
+                                                            DWHHts.DWHHtsPosAdult,
+                                                            DWHHts.DWHHtsPos
+                                                        )}
+                                                    </sup>
+                                                </div>
+                                            </Col>
+                                            <Col md={4}>
+                                                <div>
+                                                    <span className="comparison-card-text">
+                                                        SMART
                                                     </span>
                                                     <br />
                                                     <span className="comparison-card-numbers">
@@ -228,7 +266,7 @@ const ComparisonOverview= () => {
                                 >
                                     <div>
                                         <Row>
-                                            <Col md={6}>
+                                            <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
                                                         KHIS
@@ -248,10 +286,30 @@ const ComparisonOverview= () => {
                                                     </sup>
                                                 </div>
                                             </Col>
-                                            <Col md={6}>
+                                            <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
                                                         DWH
+                                                    </span>
+                                                    <br />
+                                                    <span className="comparison-card-numbers">
+                                                        {formatNumber(
+                                                            DWHHts.DWHHtsPosChildren
+                                                        )}
+                                                    </span>
+                                                    <sup className="comparison-sup comparison-sup-perc">
+                                                        {' '}
+                                                        {percOfNewly(
+                                                            DWHHts.DWHHtsPosChildren,
+                                                            DWHHts.DWHHtsPos
+                                                        )}
+                                                    </sup>
+                                                </div>
+                                            </Col>
+                                            <Col md={4}>
+                                                <div>
+                                                    <span className="comparison-card-text">
+                                                        SMART
                                                     </span>
                                                     <br />
                                                     <span className="comparison-card-numbers">
@@ -291,10 +349,10 @@ const ComparisonOverview= () => {
                                 >
                                     <div>
                                         <Row>
-                                            <Col md={6}>
+                                            <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
-                                                        KHIS
+                                                        SMART
                                                     </span>
                                                     <br />
                                                     <span className="comparison-card-numbers">
@@ -311,10 +369,30 @@ const ComparisonOverview= () => {
                                                     </sup>
                                                 </div>
                                             </Col>
-                                            <Col md={6}>
+                                            <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
                                                         DWH
+                                                    </span>
+                                                    <br />
+                                                    <span className="comparison-card-numbers">
+                                                        {formatNumber(
+                                                            DWHHts.DWHHtsPosAdolecents
+                                                        )}
+                                                    </span>
+                                                    <sup className="comparison-sup comparison-sup-perc">
+                                                        {' '}
+                                                        {percOfNewly(
+                                                            DWHHts.DWHHtsPosAdolecents,
+                                                            DWHHts.DWHHtsPos
+                                                        )}
+                                                    </sup>
+                                                </div>
+                                            </Col>
+                                            <Col md={4}>
+                                                <div>
+                                                    <span className="comparison-card-text">
+                                                        SMART
                                                     </span>
                                                     <br />
                                                     <span className="comparison-card-numbers">

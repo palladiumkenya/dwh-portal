@@ -22,7 +22,7 @@ const ComparisonCurrByGender = () => {
                 text: ''
             },
             xAxis: {
-                categories: ['KHIS', 'DWH'],
+                categories: ['KHIS', 'DWH', 'SMART'],
                 crosshair: true,
                 title: {
                     text: 'SOURCE'
@@ -54,12 +54,12 @@ const ComparisonCurrByGender = () => {
             },
             series: [{
                 name: 'MALE',
-                data: [currKHIS.malesOnART, currentOnArtBySexData.currentOnArtMale],
+                data: [currKHIS.malesOnART, currentOnArtBySexData.currentOnArtMale, currentOnArtBySexData.currentOnArtMale],
                 color: '#14084D',
                 dataLabels: { enabled: true },
             }, {
                 name: 'FEMALE',
-                data: [currKHIS.femalesOnART, currentOnArtBySexData.currentOnArtFemale],
+                data: [currKHIS.femalesOnART, currentOnArtBySexData.currentOnArtFemale, currentOnArtBySexData.currentOnArtFemale],
                 color: "#EA4C8B",
                 dataLabels: { enabled: true },
             }]

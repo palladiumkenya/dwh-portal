@@ -71,7 +71,7 @@ const ComparisonOverviewTxCurr = () => {
                         >
                             <div>
                                 <Row>
-                                    <Col md={6}>
+                                    <Col md={4}>
                                         <div>
                                             <span className="comparison-card-text">
                                                 KHIS
@@ -91,10 +91,28 @@ const ComparisonOverviewTxCurr = () => {
                                             </span>
                                         </div>
                                     </Col>
-                                    <Col md={6}>
+                                    <Col md={4}>
                                         <div>
                                             <span className="comparison-card-text">
                                                 DWH
+                                            </span>
+                                            <br />
+                                            <span
+                                                className="comparison-card-numbers"
+                                                style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    justifyContent: 'center',
+                                                }}
+                                            >
+                                                {formatNumber(currentOnArt)}
+                                            </span>
+                                        </div>
+                                    </Col>
+                                    <Col md={4}>
+                                        <div>
+                                            <span className="comparison-card-text">
+                                                SMART
                                             </span>
                                             <br />
                                             <span
@@ -133,7 +151,7 @@ const ComparisonOverviewTxCurr = () => {
                                 >
                                     <div>
                                         <Row>
-                                            <Col md={6}>
+                                            <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
                                                         KHIS
@@ -153,10 +171,29 @@ const ComparisonOverviewTxCurr = () => {
                                                     </sup>
                                                 </div>
                                             </Col>
-                                            <Col md={6}>
+                                            <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
                                                         DWH
+                                                    </span>
+                                                    <br />
+                                                    <span className="comparison-card-numbers">
+                                                        {formatNumber(
+                                                            currentOnArtAdults
+                                                        )}
+                                                    </span>
+                                                    <sup className="comparison-sup comparison-sup-perc">
+                                                        {' '}
+                                                        {roundNumber(
+                                                            currentOnArtAdultsPercent
+                                                        ) + '%'}
+                                                    </sup>
+                                                </div>
+                                            </Col>
+                                            <Col md={4}>
+                                                <div>
+                                                    <span className="comparison-card-text">
+                                                        SMART
                                                     </span>
                                                     <br />
                                                     <span className="comparison-card-numbers">
@@ -196,7 +233,7 @@ const ComparisonOverviewTxCurr = () => {
                                 >
                                     <div>
                                         <Row>
-                                            <Col md={6}>
+                                            <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
                                                         KHIS
@@ -216,10 +253,29 @@ const ComparisonOverviewTxCurr = () => {
                                                     </sup>
                                                 </div>
                                             </Col>
-                                            <Col md={6}>
+                                            <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
                                                         DWH
+                                                    </span>
+                                                    <br />
+                                                    <span className="comparison-card-numbers">
+                                                        {formatNumber(
+                                                            currentOnArtChildren
+                                                        )}
+                                                    </span>
+                                                    <sup className="comparison-sup comparison-sup-perc">
+                                                        {' '}
+                                                        {roundNumber(
+                                                            currentOnArtChildrenPercent
+                                                        ) + '%'}
+                                                    </sup>
+                                                </div>
+                                            </Col>
+                                            <Col md={4}>
+                                                <div>
+                                                    <span className="comparison-card-text">
+                                                        SMART
                                                     </span>
                                                     <br />
                                                     <span className="comparison-card-numbers">
@@ -257,7 +313,7 @@ const ComparisonOverviewTxCurr = () => {
                                 >
                                     <div>
                                         <Row>
-                                            <Col md={6}>
+                                            <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
                                                         KHIS
@@ -277,10 +333,29 @@ const ComparisonOverviewTxCurr = () => {
                                                     </sup>
                                                 </div>
                                             </Col>
-                                            <Col md={6}>
+                                            <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
                                                         DWH
+                                                    </span>
+                                                    <br />
+                                                    <span className="comparison-card-numbers">
+                                                        {formatNumber(
+                                                            currentOnArtAdolescents
+                                                        )}
+                                                    </span>
+                                                    <sup className="comparison-sup comparison-sup-perc">
+                                                        {' '}
+                                                        {roundNumber(
+                                                            currentOnArtAdolescentsPercent
+                                                        ) + '%'}
+                                                    </sup>
+                                                </div>
+                                            </Col>
+                                            <Col md={4}>
+                                                <div>
+                                                    <span className="comparison-card-text">
+                                                        SMART
                                                     </span>
                                                     <br />
                                                     <span className="comparison-card-numbers">

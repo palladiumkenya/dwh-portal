@@ -66,7 +66,7 @@ const ComparisonOverview = () => {
                         >
                             <div>
                                 <Row>
-                                    <Col md={6}>
+                                    <Col md={4}>
                                         <div>
                                             <span className="comparison-card-text">
                                                 KHIS
@@ -79,10 +79,21 @@ const ComparisonOverview = () => {
                                             </span>
                                         </div>
                                     </Col>
-                                    <Col md={6}>
+                                    <Col md={4}>
                                         <div>
                                             <span className="comparison-card-text">
                                                 DWH
+                                            </span>
+                                            <br />
+                                            <span className="comparison-card-numbers">
+                                                {formatNumber(newOnArt)}
+                                            </span>
+                                        </div>
+                                    </Col>
+                                    <Col md={4}>
+                                        <div>
+                                            <span className="comparison-card-text">
+                                                SMART
                                             </span>
                                             <br />
                                             <span className="comparison-card-numbers">
@@ -114,7 +125,7 @@ const ComparisonOverview = () => {
                                 >
                                     <div>
                                         <Row>
-                                            <Col md={6}>
+                                            <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
                                                         KHIS
@@ -134,10 +145,29 @@ const ComparisonOverview = () => {
                                                     </sup>
                                                 </div>
                                             </Col>
-                                            <Col md={6}>
+                                            <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
                                                         DWH
+                                                    </span>
+                                                    <br />
+                                                    <span className="comparison-card-numbers">
+                                                        {formatNumber(
+                                                            newOnArtAdults
+                                                        )}
+                                                    </span>
+                                                    <sup className="comparison-sup comparison-sup-perc">
+                                                        {' '}
+                                                        {roundNumber(
+                                                            newOnArtAdultsPercent
+                                                        ) + '%'}
+                                                    </sup>
+                                                </div>
+                                            </Col>
+                                            <Col md={4}>
+                                                <div>
+                                                    <span className="comparison-card-text">
+                                                        SMART
                                                     </span>
                                                     <br />
                                                     <span className="comparison-card-numbers">
@@ -175,7 +205,7 @@ const ComparisonOverview = () => {
                                 >
                                     <div>
                                         <Row>
-                                            <Col md={6}>
+                                            <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
                                                         KHIS
@@ -195,10 +225,29 @@ const ComparisonOverview = () => {
                                                     </sup>
                                                 </div>
                                             </Col>
-                                            <Col md={6}>
+                                            <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
                                                         DWH
+                                                    </span>
+                                                    <br />
+                                                    <span className="comparison-card-numbers">
+                                                        {formatNumber(
+                                                            newOnArtChildren
+                                                        )}
+                                                    </span>
+                                                    <sup className="comparison-sup comparison-sup-perc">
+                                                        {' '}
+                                                        {roundNumber(
+                                                            newOnArtChildrenPercent
+                                                        ) + '%'}
+                                                    </sup>
+                                                </div>
+                                            </Col>
+                                            <Col md={4}>
+                                                <div>
+                                                    <span className="comparison-card-text">
+                                                        SMART
                                                     </span>
                                                     <br />
                                                     <span className="comparison-card-numbers">
@@ -236,7 +285,7 @@ const ComparisonOverview = () => {
                                 >
                                     <div>
                                         <Row>
-                                            <Col md={6}>
+                                            <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
                                                         KHIS
@@ -256,10 +305,29 @@ const ComparisonOverview = () => {
                                                     </sup>
                                                 </div>
                                             </Col>
-                                            <Col md={6}>
+                                            <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
                                                         DWH
+                                                    </span>
+                                                    <br />
+                                                    <span className="comparison-card-numbers">
+                                                        {formatNumber(
+                                                            newOnArtAdolescents
+                                                        )}
+                                                    </span>
+                                                    <sup className="comparison-sup comparison-sup-perc">
+                                                        {' '}
+                                                        {roundNumber(
+                                                            newOnArtAdolescentsPercent
+                                                        ) + '%'}
+                                                    </sup>
+                                                </div>
+                                            </Col>
+                                            <Col md={4}>
+                                                <div>
+                                                    <span className="comparison-card-text">
+                                                        SMART
                                                     </span>
                                                     <br />
                                                     <span className="comparison-card-numbers">

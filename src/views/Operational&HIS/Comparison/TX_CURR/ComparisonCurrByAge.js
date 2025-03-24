@@ -69,6 +69,11 @@ const ComparisonCurrByAge = () => {
                     data: currKHIS.OnARTByAgeDWH,
                     color: '#1AB394',
                 },
+                {
+                    name: 'SMART',
+                    data: currKHIS.OnARTByAgeDWH,
+                    color: '#a36a36',
+                },
             ],
         });
     }, [currKHIS]);

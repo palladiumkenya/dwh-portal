@@ -23,7 +23,7 @@ const ComparisonNewlyByGender = () => {
                 text: ''
             },
             xAxis: {
-                categories: ['KHIS', 'DWH'],
+                categories: ['KHIS', 'DWH', 'SMART'],
                 crosshair: true,
                 title: {
                     text: 'Source'
@@ -55,12 +55,12 @@ const ComparisonNewlyByGender = () => {
             },
             series: [{
                 name: 'MALE',
-                data: [newlyKHIS.malesNewlyStarted, newOnArtMale],
+                data: [newlyKHIS.malesNewlyStarted, newOnArtMale, newOnArtMale],
                 color: '#14084D',
                 dataLabels: { enabled: true },
             }, {
                 name: 'FEMALE',
-                data: [newlyKHIS.femalesNewlyStarted, newOnArtFemale],
+                data: [newlyKHIS.femalesNewlyStarted, newOnArtFemale, newOnArtFemale],
                 color: "#EA4C8B",
                 dataLabels: { enabled: true },
             }]
