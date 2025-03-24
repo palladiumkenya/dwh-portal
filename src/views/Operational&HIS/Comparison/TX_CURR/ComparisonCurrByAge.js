@@ -71,7 +71,7 @@ const ComparisonCurrByAge = () => {
                 },
                 {
                     name: 'SMART',
-                    data: currKHIS.OnARTByAgeDWH,
+                    data: currKHIS.OnARTByAgeDWH.map((d) => 0),
                     color: '#a36a36',
                 },
             ],

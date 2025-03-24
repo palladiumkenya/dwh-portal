@@ -154,7 +154,7 @@ const ComparisonOverview= () => {
                                                     justifyContent: 'center',
                                                 }}
                                             >
-                                                {formatNumber(DWHHts.DWHHtsPos)}
+                                                {formatNumber(0)}
                                             </span>
                                         </div>
                                     </Col>
@@ -229,16 +229,11 @@ const ComparisonOverview= () => {
                                                     </span>
                                                     <br />
                                                     <span className="comparison-card-numbers">
-                                                        {formatNumber(
-                                                            DWHHts.DWHHtsPosAdult
-                                                        )}
+                                                        {0}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
-                                                        {percOfNewly(
-                                                            DWHHts.DWHHtsPosAdult,
-                                                            DWHHts.DWHHtsPos
-                                                        )}
+                                                        {0}
                                                     </sup>
                                                 </div>
                                             </Col>
@@ -313,16 +308,11 @@ const ComparisonOverview= () => {
                                                     </span>
                                                     <br />
                                                     <span className="comparison-card-numbers">
-                                                        {formatNumber(
-                                                            DWHHts.DWHHtsPosChildren
-                                                        )}
+                                                        {0}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
-                                                        {percOfNewly(
-                                                            DWHHts.DWHHtsPosChildren,
-                                                            DWHHts.DWHHtsPos
-                                                        )}
+                                                        {0}
                                                     </sup>
                                                 </div>
                                             </Col>
@@ -352,7 +342,7 @@ const ComparisonOverview= () => {
                                             <Col md={4}>
                                                 <div>
                                                     <span className="comparison-card-text">
-                                                        SMART
+                                                        KHIS
                                                     </span>
                                                     <br />
                                                     <span className="comparison-card-numbers">
@@ -396,16 +386,11 @@ const ComparisonOverview= () => {
                                                     </span>
                                                     <br />
                                                     <span className="comparison-card-numbers">
-                                                        {formatNumber(
-                                                            DWHHts.DWHHtsPosAdolecents
-                                                        )}
+                                                        {0}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
-                                                        {percOfNewly(
-                                                            DWHHts.DWHHtsPosAdolecents,
-                                                            DWHHts.DWHHtsPos
-                                                        )}
+                                                        {0}
                                                     </sup>
                                                 </div>
                                             </Col>

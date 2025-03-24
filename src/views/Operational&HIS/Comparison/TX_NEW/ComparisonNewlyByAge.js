@@ -71,7 +71,7 @@ const ComparisonNewlyByAge = () => {
                 },
                 {
                     name: 'SMART',
-                    data: newlyKHIS.newOnARTByAgeDWH,
+                    data: newlyKHIS.newOnARTByAgeDWH.map((d) => 0),
                     color: '#b36a36',
                 },
             ],

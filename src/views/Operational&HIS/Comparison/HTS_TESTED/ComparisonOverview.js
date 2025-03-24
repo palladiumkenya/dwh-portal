@@ -158,7 +158,7 @@ const ComparisonOverview= () => {
                                                 }}
                                             >
                                                 {formatNumber(
-                                                    DWHHts.DWHHtsTest
+                                                    0
                                                 )}
                                             </span>
                                         </div>
@@ -235,15 +235,12 @@ const ComparisonOverview= () => {
                                                     <br />
                                                     <span className="comparison-card-numbers">
                                                         {formatNumber(
-                                                            DWHHts.DWHHtsTestAdult
+                                                            0
                                                         )}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
-                                                        {percOfNewly(
-                                                            DWHHts.DWHHtsTestAdult,
-                                                            DWHHts.DWHHtsTest
-                                                        )}
+                                                        0
                                                     </sup>
                                                 </div>
                                             </Col>
@@ -319,15 +316,12 @@ const ComparisonOverview= () => {
                                                     <br />
                                                     <span className="comparison-card-numbers">
                                                         {formatNumber(
-                                                            DWHHts.DWHHtsTestChildren
+                                                            0
                                                         )}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
-                                                        {percOfNewly(
-                                                            DWHHts.DWHHtsTestChildren,
-                                                            DWHHts.DWHHtsTest
-                                                        )}
+                                                        {0}
                                                     </sup>
                                                 </div>
                                             </Col>
@@ -401,15 +395,12 @@ const ComparisonOverview= () => {
                                                     <br />
                                                     <span className="comparison-card-numbers">
                                                         {formatNumber(
-                                                            DWHHts.DWHHtsTestAdolecents
+                                                            0
                                                         )}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
-                                                        {percOfNewly(
-                                                            DWHHts.DWHHtsTestAdolecents,
-                                                            DWHHts.DWHHtsTest
-                                                        )}
+                                                        {0}
                                                     </sup>
                                                 </div>
                                             </Col>

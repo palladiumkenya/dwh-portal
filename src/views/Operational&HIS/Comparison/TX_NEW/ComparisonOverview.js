@@ -97,7 +97,7 @@ const ComparisonOverview = () => {
                                             </span>
                                             <br />
                                             <span className="comparison-card-numbers">
-                                                {formatNumber(newOnArt)}
+                                                {formatNumber(0)}
                                             </span>
                                         </div>
                                     </Col>
@@ -172,13 +172,13 @@ const ComparisonOverview = () => {
                                                     <br />
                                                     <span className="comparison-card-numbers">
                                                         {formatNumber(
-                                                            newOnArtAdults
+                                                            0
                                                         )}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
                                                         {roundNumber(
-                                                            newOnArtAdultsPercent
+                                                            0
                                                         ) + '%'}
                                                     </sup>
                                                 </div>
@@ -252,13 +252,13 @@ const ComparisonOverview = () => {
                                                     <br />
                                                     <span className="comparison-card-numbers">
                                                         {formatNumber(
-                                                            newOnArtChildren
+                                                            0
                                                         )}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
                                                         {roundNumber(
-                                                            newOnArtChildrenPercent
+                                                            0
                                                         ) + '%'}
                                                     </sup>
                                                 </div>
@@ -332,13 +332,13 @@ const ComparisonOverview = () => {
                                                     <br />
                                                     <span className="comparison-card-numbers">
                                                         {formatNumber(
-                                                            newOnArtAdolescents
+                                                            0
                                                         )}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
                                                         {roundNumber(
-                                                            newOnArtAdolescentsPercent
+                                                            0
                                                         ) + '%'}
                                                     </sup>
                                                 </div>

@@ -123,7 +123,7 @@ const ComparisonOverviewTxCurr = () => {
                                                     justifyContent: 'center',
                                                 }}
                                             >
-                                                {formatNumber(currentOnArt)}
+                                                {formatNumber(0)}
                                             </span>
                                         </div>
                                     </Col>
@@ -198,13 +198,13 @@ const ComparisonOverviewTxCurr = () => {
                                                     <br />
                                                     <span className="comparison-card-numbers">
                                                         {formatNumber(
-                                                            currentOnArtAdults
+                                                            0
                                                         )}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
                                                         {roundNumber(
-                                                            currentOnArtAdultsPercent
+                                                            0
                                                         ) + '%'}
                                                     </sup>
                                                 </div>
@@ -261,13 +261,13 @@ const ComparisonOverviewTxCurr = () => {
                                                     <br />
                                                     <span className="comparison-card-numbers">
                                                         {formatNumber(
-                                                            currentOnArtChildren
+                                                            0
                                                         )}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
                                                         {roundNumber(
-                                                            currentOnArtChildrenPercent
+                                                            0
                                                         ) + '%'}
                                                     </sup>
                                                 </div>
@@ -280,13 +280,13 @@ const ComparisonOverviewTxCurr = () => {
                                                     <br />
                                                     <span className="comparison-card-numbers">
                                                         {formatNumber(
-                                                            currentOnArtChildren
+                                                            0
                                                         )}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
                                                         {roundNumber(
-                                                            currentOnArtChildrenPercent
+                                                            0
                                                         ) + '%'}
                                                     </sup>
                                                 </div>
@@ -360,13 +360,13 @@ const ComparisonOverviewTxCurr = () => {
                                                     <br />
                                                     <span className="comparison-card-numbers">
                                                         {formatNumber(
-                                                            currentOnArtAdolescents
+                                                            0
                                                         )}
                                                     </span>
                                                     <sup className="comparison-sup comparison-sup-perc">
                                                         {' '}
                                                         {roundNumber(
-                                                            currentOnArtAdolescentsPercent
+                                                            0
                                                         ) + '%'}
                                                     </sup>
                                                 </div>
