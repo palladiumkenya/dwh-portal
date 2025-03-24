@@ -37,12 +37,15 @@ export const getHtsTestTrends = createSelector(
                     ' ' +
                     previousYearDate.getFullYear()
             );
+            let filteredPositives = []
 
-            const filteredPositives = list.filter(
-                (obj) =>
-                    obj.month === previousYearDate.getMonth() + 1 &&
-                    obj.year === previousYearDate.getFullYear()
-            );
+            if (list.length) {
+                filteredPositives = list.filter(
+                    (obj) =>
+                        obj.month === previousYearDate.getMonth() + 1 &&
+                        obj.year === previousYearDate.getFullYear()
+                );
+            }
             for (const filteredPositive of filteredPositives) {
                 tested.push(parseInt(filteredPositive.tested.toString(), 10));
             }

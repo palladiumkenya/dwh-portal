@@ -206,10 +206,16 @@ export const getHTSTESTKHIS = createSelector(
             loopAgeGroups(listDWH, twentyToTwentyFour),
             loopAgeGroups(listDWH, twentyFivePlus),
         ];
-        
+
         let genderDWH = {
-            male : parseInt(listDWHGender.find(e => e.Gender === "Male")?.tested ?? 0),
-            female : parseInt(listDWHGender.find(e => e.Gender === "Female")?.tested ?? 0)
+            male:0, female:0
+        }
+
+        if (listDWHGender.length) {
+             genderDWH = {
+                male: parseInt(listDWHGender?.find(e => e.Gender === "Male")?.tested ?? 0),
+                female: parseInt(listDWHGender?.find(e => e.Gender === "Female")?.tested ?? 0)
+            }
         }
 
         return {
@@ -230,13 +236,13 @@ const loopAgeGroups = (list, ageGroup) => {
     let hts = 0;
 
     for (let i = 0; i < list.length; i++) {
-        
+
             let index = ageGroup.indexOf(list[i].AgeGroup);
             if(index === -1) {
                 continue;
             }
             hts = hts + parseInt(list[i].tested, 10);
-        
+
     }
     return hts;
 }
