@@ -86,7 +86,7 @@ export const getHTSTESTByCountyKHIS = createSelector(
         const dataDwh = labels.map((item) => {
             let number = 0;
 
-            listDWH.map((itemDWH) => {
+            listDWH.length && listDWH.map((itemDWH) => {
                 if (itemDWH.County !== null)
                     if (item === itemDWH.County.toUpperCase()) {
                         number = parseInt(itemDWH.tested);

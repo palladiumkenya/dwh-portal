@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import moment from 'moment';
 
 const listUnfiltered = (state) => state.htsPosByGenderKHIS.listUnfiltered;
 const listFiltered = (state) => state.htsPosByGenderKHIS.listFiltered;
@@ -206,10 +205,15 @@ export const getHTSPOSKHIS = createSelector(
             loopAgeGroups(listDWH, twentyToTwentyFour),
             loopAgeGroups(listDWH, twentyFivePlus),
         ];
-        
-        let genderDWH = {
-            male : parseInt(listDWHGender.find(e => e.Gender === "MALE")?.positive ?? 0),
-            female : parseInt(listDWHGender.find(e => e.Gender === "FEMALE")?.positive ?? 0)
+
+        let genderDWH= {
+            male: 0, female: 0
+        }
+        if (listDWHGender.length) {
+            genderDWH = {
+                male: parseInt(listDWHGender.find(e => e.Gender === 'MALE')?.positive ?? 0),
+                female: parseInt(listDWHGender.find(e => e.Gender === 'FEMALE')?.positive ?? 0)
+            };
         }
 
         return {
@@ -230,13 +234,13 @@ const loopAgeGroups = (list, ageGroup) => {
     let hts = 0;
 
     for (let i = 0; i < list.length; i++) {
-        
+
             let index = ageGroup.indexOf(list[i].ageGroup);
             if(index === -1) {
                 continue;
             }
             hts = hts + parseInt(list[i].positive, 10);
-        
+
     }
     return hts;
 }
