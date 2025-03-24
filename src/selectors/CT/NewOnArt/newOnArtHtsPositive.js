@@ -50,31 +50,29 @@ export const getNewOnArtHtsPositive = createSelector(
         const today = moment().subtract(2, 'month').add(16, 'days');
         let previousYearDate = moment(today).subtract(1, 'years').toDate();
         previousYearDate = moment(previousYearDate).add(1, 'month').toDate();
-        let data = []
+
         // combining the 2 lists where Report month year match
-        if (list.length) {
-            data = list?.map(item => {
-                let positive =
-                    listPositiveTrends.find(
-                        ({ year, month }) =>
-                            year == item.year && month == item.month
-                    )?.positive ?? 0;
-                let txNew = list.filter(
+        let data = list.map(item => {
+            let positive =
+                listPositiveTrends.find(
                     ({ year, month }) =>
                         year == item.year && month == item.month
-                ).reduce(function(prev, cur) {
-                    return prev + cur.txNew;
-                }, 0);
-
-                return { year: item.year, month: item.month, txNew, positive };
-            });
-        }
+                )?.positive ?? 0;
+            let txNew = list.filter(
+                    ({ year, month }) =>
+                        year == item.year && month == item.month
+                ).reduce(function (prev, cur) {
+                return prev + cur.txNew;
+            }, 0);
+            
+            return { year: item.year, month: item.month, txNew, positive}
+        })
         data.reverse()
         data = _.uniqWith(data, _.isEqual);
         // minimizing the data
         // only getting the last 12 data for initial load
         if (data.length >= 12) data.length = 12;
-
+        
         while (previousYearDate <= today) {
             months.push(
                 monthNames[previousYearDate.getMonth() + 1] +

@@ -92,7 +92,7 @@ export const getHTSTestByFacilityPartnerKHIS = createSelector(
                 item.KHISFemale = item.KHISFemale1;
             });
         }
-        list.length && list.forEach((item) => {
+        list.forEach((item) => {
             const mfl = listDWH.find((code) => code?.Mflcode == item.SiteCode);
             if (mfl) {
                 data.push({

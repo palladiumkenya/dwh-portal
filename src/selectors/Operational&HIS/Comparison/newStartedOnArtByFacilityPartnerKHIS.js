@@ -90,7 +90,7 @@ export const getNewOnArtByFacilityPartnerKHIS = createSelector(
                 item.KHISFemale = item.KHISFemale1;
             });
         }
-        list.length && list.forEach((item) => {
+        list.forEach((item) => {
             const mfl = listDWH.find((code) => code?.MFLCode === item.SiteCode);
             if (mfl) {
                 data.push({
