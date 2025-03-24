@@ -55,12 +55,12 @@ const ComparisonNewlyByGender = () => {
             },
             series: [{
                 name: 'MALE',
-                data: [newlyKHIS.malesNewlyStarted, newOnArtMale, newOnArtMale],
+                data: [newlyKHIS.malesNewlyStarted, newOnArtMale, 0],
                 color: '#14084D',
                 dataLabels: { enabled: true },
             }, {
                 name: 'FEMALE',
-                data: [newlyKHIS.femalesNewlyStarted, newOnArtFemale, newOnArtFemale],
+                data: [newlyKHIS.femalesNewlyStarted, newOnArtFemale, 0],
                 color: "#EA4C8B",
                 dataLabels: { enabled: true },
             }]

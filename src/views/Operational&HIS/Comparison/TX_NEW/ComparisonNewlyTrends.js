@@ -84,7 +84,7 @@ const ComparisonNewlyTrends = () => {
                         enabled: true,
                     },
                     name: 'SMART',
-                    data: newOnArtTrendsData.txNew,
+                    data: newOnArtTrendsData.txNew.map((d) => 0),
                     color: '#b36a36',
                     dataLabels: { enabled: true },
                 },

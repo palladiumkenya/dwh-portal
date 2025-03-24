@@ -54,17 +54,17 @@ const ComparisonCurrByGender = () => {
             },
             series: [{
                 name: 'MALE',
-                data: [currKHIS.malesOnART, currentOnArtBySexData.currentOnArtMale, currentOnArtBySexData.currentOnArtMale],
+                data: [currKHIS.malesOnART, currentOnArtBySexData.currentOnArtMale, 0],
                 color: '#14084D',
                 dataLabels: { enabled: true },
             }, {
                 name: 'FEMALE',
-                data: [currKHIS.femalesOnART, currentOnArtBySexData.currentOnArtFemale, currentOnArtBySexData.currentOnArtFemale],
+                data: [currKHIS.femalesOnART, currentOnArtBySexData.currentOnArtFemale, 0],
                 color: "#EA4C8B",
                 dataLabels: { enabled: true },
             }]
         });
-    }, [currKHIS.malesOnART, currKHIS.femalesOnART, currentOnArtBySexData.currentOnArtMale, currentOnArtBySexData.currentOnArtFemale]);
+    }, [currKHIS.malesOnART, currKHIS.femalesOnART, currentOnArtBySexData.currentOnArtMale, 0]);
 
     useEffect(() => {
         loadComparisonNewlyByGender();
