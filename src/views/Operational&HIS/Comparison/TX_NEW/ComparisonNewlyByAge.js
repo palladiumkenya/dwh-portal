@@ -69,6 +69,11 @@ const ComparisonNewlyByAge = () => {
                     data: newlyKHIS.newOnARTByAgeDWH,
                     color: '#1AB394',
                 },
+                {
+                    name: 'SMART',
+                    data: newlyKHIS.newOnARTByAgeDWH,
+                    color: '#b36a36',
+                },
             ],
         });
     }, [newlyKHIS]);

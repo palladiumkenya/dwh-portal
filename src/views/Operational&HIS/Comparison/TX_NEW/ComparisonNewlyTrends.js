@@ -77,6 +77,17 @@ const ComparisonNewlyTrends = () => {
                     color: '#1AB394',
                     dataLabels: { enabled: true },
                 },
+                {
+                    type: 'spline',
+                    dashStyle: 'shortdot',
+                    marker: {
+                        enabled: true,
+                    },
+                    name: 'SMART',
+                    data: newOnArtTrendsData.txNew,
+                    color: '#b36a36',
+                    dataLabels: { enabled: true },
+                },
             ],
         });
     }, [newlyKHIS, newOnArtTrendsData]);

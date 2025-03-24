@@ -54,6 +54,10 @@ const ComparisonCurrByCounty = () => {
                 data: currKHIS.dataDwh,
                 color: '#2F4050', dataLabels: { enabled: true }
             }, {
+                name: 'SMART',
+                data: currKHIS.dataDwh,
+                color: '#a36a36', dataLabels: { enabled: true }
+            }, {
                 name: 'KHIS',
                 data: currKHIS.data,
                 color: '#1AB394', dataLabels: { enabled: true }
