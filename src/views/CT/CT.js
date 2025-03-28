@@ -666,7 +666,7 @@ const CT = () => {
                 break;
             case 'treatmentOutcomes':
                 dispatch(loadNewOnArtOverview(active_tab));
-                dispatch(loadTreatmentOutcomesOverallLast12m(active_tab));
+                // dispatch(loadTreatmentOutcomesOverallLast12m(active_tab));
                 dispatch(loadNewOnArtTrends(active_tab));
                 dispatch(loadTreatmentOutcomesBySex(active_tab));
                 dispatch(loadTreatmentOutcomesByPopulationType(active_tab));
@@ -802,20 +802,20 @@ const CT = () => {
                 dispatch(loadCovidAdmissionSymptomaticByAge());
                 dispatch(loadCovidManagementAdmitted());
                 break;
-            case 'artVerification':
-                dispatch(loadCurrOnARTKHIS());
-                dispatch(loadArtVerificationByCounty())
-                dispatch(loadArtVerificationByPartner())
-                dispatch(loadArtVerificationReasons())
-
-                dispatch(loadCurrentOnArtVerifiedByCounty(active_tab));
-                dispatch(loadCurrentOnArtVerifiedByPartner(active_tab));
-                dispatch(loadCurrentOnArtByCounty(active_tab));
-                dispatch(loadCurrentOnArtByPartner(active_tab));
-                dispatch(loadCurrentOnArtVerified(active_tab));
-                dispatch(loadCurrentOnArt());
-                dispatch(loadCurrentOnArtOverview(active_tab));
-                break;
+            // case 'artVerification':
+            //     dispatch(loadCurrOnARTKHIS());
+            //     dispatch(loadArtVerificationByCounty())
+            //     dispatch(loadArtVerificationByPartner())
+            //     dispatch(loadArtVerificationReasons())
+            //
+            //     dispatch(loadCurrentOnArtVerifiedByCounty(active_tab));
+            //     dispatch(loadCurrentOnArtVerifiedByPartner(active_tab));
+            //     dispatch(loadCurrentOnArtByCounty(active_tab));
+            //     dispatch(loadCurrentOnArtByPartner(active_tab));
+            //     dispatch(loadCurrentOnArtVerified(active_tab));
+            //     dispatch(loadCurrentOnArt());
+            //     dispatch(loadCurrentOnArtOverview(active_tab));
+            //     break;
             case 'ahd':
                 dispatch(loadAhdScreening())
                 break;
@@ -896,11 +896,11 @@ const CT = () => {
                 <TabPane tabId={'covid'}>
                     {active_tab === 'covid' ? <COVID /> : null}
                 </TabPane>
-                <TabPane tabId={'artVerification'}>
-                    {active_tab === 'artVerification' ? (
-                        <ArtVerification />
-                    ) : null}
-                </TabPane>
+                {/*<TabPane tabId={'artVerification'}>*/}
+                {/*    {active_tab === 'artVerification' ? (*/}
+                {/*        <ArtVerification />*/}
+                {/*    ) : null}*/}
+                {/*</TabPane>*/}
                 <TabPane tabId={'ahd'}>
                     {active_tab === 'ahd' ? (
                         <AHD />
