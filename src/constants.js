@@ -30,7 +30,7 @@ export const CT_TABS = {
     otz: 'OTZ',
     ovc: 'OVC',
     covid: 'COVID-19',
-    artVerification: 'ART VERIFICATION',
+    // artVerification: 'ART VERIFICATION',
     ahd: 'AHD'
 };
 

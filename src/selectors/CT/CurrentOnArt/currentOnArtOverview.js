@@ -34,7 +34,7 @@ export const getCurrentOnArt = createSelector(
     [listUnfilteredTX, listFilteredTX, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
-        return list.TXCURR ? list.TXCURR : 0;
+        return list.TXCURR || 0;
     }
 );
 
