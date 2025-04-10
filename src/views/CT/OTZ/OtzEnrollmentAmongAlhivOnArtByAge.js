@@ -50,7 +50,7 @@ const OtzEnrollmentAmongAlhivOnArtByAge = () => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header" style={{textTransform: 'none'}}>
-                OTZ ENROLlMENT AMONG ALHIV AND ON ART BY AGE
+                OTZ ENROLLMENT AMONG ALHIV AND ON ART BY AGE
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">

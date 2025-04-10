@@ -9,7 +9,7 @@ export const getOtzOutcomesAmongAlHivWithBaselineVL = createSelector(
     (listUnfiltered, listFiltered, filtered) => {
         const list = filtered ? listFiltered : listUnfiltered;
 
-        return list.map(val => ({
+        return list?.map(val => ({
                     AlHivEnrolledInOTZ: val.AlHivEnrolledInOTZ,
                     AlHivEnrolledInOTZPerc: 100,
 
