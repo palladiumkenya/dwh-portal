@@ -2079,10 +2079,10 @@
   resolved "https://registry.npmmirror.com/@superset-ui/switchboard/-/switchboard-0.20.3.tgz#9037c64408dfb6b0291671fa0a136fb32b9511db"
   integrity sha512-qEMXFwdRLfXug4gXXdBEGpFtBWZoxdZkCJLBVxj1IR8cQvSqjkWAQOzSSYYdcIeREWqi8iP+iK6apNV1ZQCKcA==
 
-"@superset-ui/switchboard@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.npmmirror.com/@superset-ui/switchboard/-/switchboard-1.5.0.tgz#1f785a63167196cb319e7582062934660b2d99cb"
-  integrity sha512-t1bvVJP0dYXObkJRMiL3oBClg+vaih1kOSA7E1Ym3RWfPaLJYVr1vDzgnxKkMD4DXhNg9HPOeOzkBNbGqRwgCg==
+"@superset-ui/switchboard@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@superset-ui/switchboard/-/switchboard-2.1.0.tgz#d5b546428105367b514181216995b78f00bbc8fd"
+  integrity sha512-GJ91OLuu3csYK8q/MBBZ4oE/Y12RQa7vR1ayeMH+7Mp4MdBPv+TSnbW+sEqmld4ewdb0ObFWqjSM4tpxUp9NtA==
 
 "@surma/rollup-plugin-off-main-thread@^2.2.3":
   version "2.2.3"
