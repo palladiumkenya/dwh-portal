@@ -50,7 +50,7 @@ const Resources = ()=>{
         {
             app: 'Apache Superset',
             login: true,
-            link: 'https://dwhanalytics.kenyahmis.org/superset/welcome/',
+            link: 'https://analytics.nascop.org/superset/welcome/',
             description:
                 'Apache Superset is a modern data exploration and visualization platform. It enables you to create interactive charts, dashboards, and more.',
             logo: superset,
