@@ -13,19 +13,19 @@ const AHDScreening = () => {
         setAhdScreeningChart({
             title: { text: '' },
             xAxis: [{ categories: [
-                    'PATIENTS ON CARE(TREATMENT NEW/RTT/CTF)',
+                    'PLHIV AT RISK OF AHD',
                     'NO. SCREENED',
                     'NO. WITH AHD'
                 ], title: { text: 'AHD SCREENING' }, crosshair: true }],
             yAxis: [{ title: { text: '' }}],
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
+            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none', format: '{point.y:,.0f}{point.text}' } } },
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'AHD SCREENED', data: [
-                        ahdScreeningData?.NewPatient,
-                        ahdScreeningData?.AHDScreened,
-                        ahdScreeningData?.AHD
+                        { y: ahdScreeningData?.NewPatient },
+                        { y: ahdScreeningData?.AHDScreened, text: ' (' + parseFloat(((ahdScreeningData?.AHDScreened/ahdScreeningData?.NewPatient)*100).toString()).toFixed(0) + '%)' },
+                        { y: ahdScreeningData?.AHD, text: ' (' + parseFloat(((ahdScreeningData?.AHD/ahdScreeningData?.AHDScreened)*100).toString()).toFixed(0) + '%)' },
                     ], type: 'column', color: "#142459" },
             ]
         });

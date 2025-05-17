@@ -20,15 +20,15 @@ const AHDNutritionAssessment = () => {
                     // 'NO. WITH NUTRITIONAL ',
                 ], title: { text: 'AHD NUTRITION ASSESSMENT & MANAGEMENT' }, crosshair: true }],
             yAxis: [{ title: { text: '' }}],
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
+            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none', format: '{point.y:,.0f}{point.text}' } } },
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'AHD SCREENED', data: [
-                        ahdScreeningData?.ChildrenWithAHD,
-                        ahdScreeningData?.ScreenedForMalnutrition,
-                        ahdScreeningData?.NumberWithSAM,
-                        ahdScreeningData?.NumberWithMAM,
+                        { y: ahdScreeningData?.ChildrenWithAHD },
+                        { y: ahdScreeningData?.ScreenedForMalnutrition, text: ahdScreeningData?.ChildrenWithAHD ? ' (' + parseFloat(((ahdScreeningData?.ScreenedForMalnutrition/ahdScreeningData?.ChildrenWithAHD)*100).toString()).toFixed(0) + '%)' : '' },
+                        { y: ahdScreeningData?.NumberWithSAM, text: ahdScreeningData?.ScreenedForMalnutrition ? ' (' + parseFloat(((ahdScreeningData?.NumberWithSAM/ahdScreeningData?.ScreenedForMalnutrition)*100).toString()).toFixed(0) + '%)' : '' },
+                        { y: ahdScreeningData?.NumberWithMAM, text: ahdScreeningData?.NumberWithSAM ? ' (' + parseFloat(((ahdScreeningData?.NumberWithMAM/ahdScreeningData?.NumberWithSAM)*100).toString()).toFixed(0) + '%)': '' },
                     ], type: 'column', color: "#142459" },
             ]
         });

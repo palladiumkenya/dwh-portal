@@ -205,7 +205,7 @@ const Adhoc = () => {
                 </DropdownItem>
                 <DropdownItem
                     disabled={false}
-                    href={'https://dwhanalytics.kenyahmis.org/'}
+                    href={'https://analytics.nascop.org/'}
                 >
                     <strong>Superset</strong>
                 </DropdownItem>
