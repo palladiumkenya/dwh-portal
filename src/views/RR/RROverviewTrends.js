@@ -112,6 +112,7 @@ const RROverviewTrends = () => {
         params.startDate = startDate.format('YYYY-MM-DD');
         params.endDate = endDate.format('YYYY-MM-DD');
         let result = await getAll('manifests/consistency/trends/' + rrTab, params);
+        result = Array.isArray(result) ? result : [];
         const months = {};
         const data = {};
         for (const element of result) {
