@@ -336,8 +336,8 @@ import {
     loadViralLoadOverallNumberGt1000CopiesSecondlineRegiment
 } from '../../actions/CT/ViralLoad/viralLoadOverallNumberTestsGt1000CopiesSecondlineRegiment';
 import { loadCurrentOnArtVerified } from '../../actions/CT/CurrentOnArt/currentOnArtVerifiedActions';
-import { loadCurrentOnArtVerifiedByPartner } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedByPartnerActions';
-import { loadCurrentOnArtVerifiedByCounty } from './../../actions/CT/CurrentOnArt/currentOnArtVerifiedByCountyActions';
+import { loadCurrentOnArtVerifiedByPartner } from '../../actions/CT/CurrentOnArt/currentOnArtVerifiedByPartnerActions';
+import { loadCurrentOnArtVerifiedByCounty } from '../../actions/CT/CurrentOnArt/currentOnArtVerifiedByCountyActions';
 import { loadCurrentOnArtVerifiedByAgeSex } from '../../actions/CT/CurrentOnArt/currentOnArtVerifiedByAgeSexActions';
 import { loadOtzEnrollmentTrend } from '../../actions/CT/OTZ/OtzEnrollmentTrendsActions';
 import { loadOtzEnrollmentByAgeSex } from '../../actions/CT/OTZ/OtzEnrollmentByAgeSexActions';
@@ -364,6 +364,8 @@ import { loadViralLoadCategorizationUToU } from '../../actions/CT/ViralLoad/vira
 import { loadAlhivOnArtByAgeSex } from '../../actions/CT/OTZ/OtzAlhivOnArtByAgeSexActions';
 import { loadOtzTotalWithDurableVLResults } from '../../actions/CT/OTZ/OtzTotalWithDurableVlResultsActions';
 import { loadAhdScreening } from '../../actions/CT/AHD/AhdSceeningActions';
+import { loadAhdOutcomes } from '../../actions/CT/AHD/AhdOutcomesActions';
+import { loadAhdNutritionAssessment } from '../../actions/CT/AHD/AhdNutritionAssessmentActions';
 
 const NewOnArt = Loadable({ loader: () => import('./NewOnArt/NewOnArt'), loading: Loading, delay: LOADING_DELAY });
 const CurrentOnArt = Loadable({
@@ -818,6 +820,8 @@ const CT = () => {
             //     break;
             case 'ahd':
                 dispatch(loadAhdScreening())
+                dispatch(loadAhdOutcomes())
+                dispatch(loadAhdNutritionAssessment())
                 break;
             default:
                 break;

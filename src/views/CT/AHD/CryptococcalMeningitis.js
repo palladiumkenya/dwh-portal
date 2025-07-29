@@ -12,13 +12,58 @@ const CryptococcalMeningitis = () => {
     const loadCryptococcalMeningitis = useCallback(async () => {
         setCryptococcalMeningitisChart({
             title: { text: '' },
-            xAxis: [{ categories: ['PATIENTS WITH AHD', 'DONE CrAg TEST', 'CrAg POSITIVE', 'DONE CSF CrAg', 'CSF CrAg POS', 'INITIATED CM TREATMENT', 'PATIENTS DUE FOR PRE-EMPTIVE CM THERAPY'], title: { text: 'CrAg' }, crosshair: true }],
+            xAxis: [{ categories: ['PATIENTS WITH AHD', 'DONE CrAg TEST', 'CrAg POSITIVE', 'DONE CSF CrAg', 'CSF CrAg POS', 'INITIATED CM TREATMENT'], title: { text: 'CrAg' }, crosshair: true }],
             yAxis: [{ title: { text: '' }}],
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
+            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none', format: '{point.y:,.0f}{point.text}' } } },
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'CrAg', data: [cryptococcalMeningitisData?.AHD, cryptococcalMeningitisData?.DoneCrAgTest, cryptococcalMeningitisData?.CrAgPositive, cryptococcalMeningitisData?.CSFCrAg, cryptococcalMeningitisData?.CSFCrAgPositive, cryptococcalMeningitisData?.InitiatedCMTreatment, cryptococcalMeningitisData?.PreemtiveCMTheraphy], type: 'column', color: "#142459" },
+                { name: 'CrAg', data: [
+                        { y: cryptococcalMeningitisData?.AHD },
+
+                        {
+                            y: cryptococcalMeningitisData?.DoneCrAgTest,
+                            text: cryptococcalMeningitisData?.AHD
+                                ? ` (${((cryptococcalMeningitisData.DoneCrAgTest / cryptococcalMeningitisData.AHD) * 100).toFixed(0)}%)`
+                                : ''
+                        },
+
+                        {
+                            y: cryptococcalMeningitisData?.CrAgPositive,
+                            text: cryptococcalMeningitisData?.DoneCrAgTest
+                                ? ` (${((cryptococcalMeningitisData.CrAgPositive / cryptococcalMeningitisData.DoneCrAgTest) * 100).toFixed(0)}%)`
+                                : ''
+                        },
+
+                        {
+                            y: cryptococcalMeningitisData?.CSFCrAg,
+                            text: cryptococcalMeningitisData?.CrAgPositive
+                                ? ` (${((cryptococcalMeningitisData.CSFCrAg / cryptococcalMeningitisData.CrAgPositive) * 100).toFixed(0)}%)`
+                                : ''
+                        },
+
+                        {
+                            y: cryptococcalMeningitisData?.CSFCrAgPositive,
+                            text: cryptococcalMeningitisData?.CSFCrAg
+                                ? ` (${((cryptococcalMeningitisData.CSFCrAgPositive / cryptococcalMeningitisData.CSFCrAg) * 100).toFixed(0)}%)`
+                                : ''
+                        },
+
+                        {
+                            y: cryptococcalMeningitisData?.InitiatedCMTreatment,
+                            text: cryptococcalMeningitisData?.CSFCrAgPositive
+                                ? ` (${((cryptococcalMeningitisData.InitiatedCMTreatment / cryptococcalMeningitisData.CSFCrAgPositive) * 100).toFixed(0)}%)`
+                                : ''
+                        },
+
+                        // {
+                        //     y: cryptococcalMeningitisData?.PreemtiveCMTheraphy,
+                        //     text: cryptococcalMeningitisData?.InitiatedCMTreatment
+                        //         ? ` (${((cryptococcalMeningitisData.PreemtiveCMTheraphy / cryptococcalMeningitisData.InitiatedCMTreatment) * 100).toFixed(0)}%)`
+                        //         : ''
+                        // }
+                    ],
+                type: 'column', color: "#142459" },
             ]
         });
     }, [cryptococcalMeningitisData]);

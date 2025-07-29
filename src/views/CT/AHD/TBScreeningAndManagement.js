@@ -12,13 +12,17 @@ const TBScreeningAndManagement = () => {
     const loadTBScreeningAndManagement = useCallback(async () => {
         setTbScreeningAndManagementChart({
             title: { text: '' },
-            xAxis: [{ categories: ['PATIENTS WITH AHD', 'DONE TB LAM TEST', 'TB LAM POS', 'INITIATED ON TB TREATMENT'], title: { text: 'TB SCREENING & MANAGEMENT' }, crosshair: true }],
+            xAxis: [{ categories: ['PATIENTS WITH AHD', 'DONE LF LAM TEST', 'LF LAM POS', 'INITIATED ON TB TREATMENT'], title: { text: 'TB SCREENING & MANAGEMENT' }, crosshair: true }],
             yAxis: [{ title: { text: '' }}],
-            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none' } } },
+            plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none', format: '{point.y:,.0f}{point.text}' } } },
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
-                { name: 'PATIENTS', data: [tbScreeningAndManagementData?.AHD, tbScreeningAndManagementData?.DoneTBLamTest, tbScreeningAndManagementData?.TBLamPositive, tbScreeningAndManagementData?.tbInitiated ], type: 'column', color: "#142459" },
+                { name: 'PATIENTS', data: [
+                        { y: tbScreeningAndManagementData?.AHD },
+                        { y: tbScreeningAndManagementData?.DoneTBLamTest, text: ' (' + parseFloat(((tbScreeningAndManagementData?.DoneTBLamTest/tbScreeningAndManagementData?.AHD)*100).toString()).toFixed(0) + '%)' },
+                        { y: tbScreeningAndManagementData?.TBLamPositive, text: ' (' + parseFloat(((tbScreeningAndManagementData?.TBLamPositive/tbScreeningAndManagementData?.DoneTBLamTest)*100).toString()).toFixed(0) + '%)' },
+                        { y: tbScreeningAndManagementData?.tbInitiated, text: ' (' + parseFloat(((tbScreeningAndManagementData?.tbInitiated/tbScreeningAndManagementData?.TBLamPositive)*100).toString()).toFixed(0) + '%)' } ], type: 'column', color: "#142459" },
             ]
         });
     }, [tbScreeningAndManagementData]);

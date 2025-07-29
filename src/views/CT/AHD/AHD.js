@@ -35,6 +35,16 @@ const CryptococcalMeningitis = Loadable({
     loading: Loading,
     delay: LOADING_DELAY,
 });
+const AHDNutritionAssessment = Loadable({
+    loader: () => import('./AHDNutritionAssessment'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
+const AHDOutcomes = Loadable({
+    loader: () => import('./AHDOutcomes'),
+    loading: Loading,
+    delay: LOADING_DELAY,
+});
 
 const ArtVerification = () => {
     const branding = {
@@ -71,6 +81,10 @@ const ArtVerification = () => {
             <TBScreeningAndManagement />
             <SectionFooter overview={branding.overview} />
             <CryptococcalMeningitis />
+            <SectionFooter overview={branding.overview} />
+            <AHDNutritionAssessment />
+            <SectionFooter overview={branding.overview} />
+            <AHDOutcomes />
             <SectionFooter overview={branding.overview} />
         </div>
     );

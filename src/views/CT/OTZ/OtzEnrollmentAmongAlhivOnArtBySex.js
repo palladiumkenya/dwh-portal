@@ -18,10 +18,10 @@ const OtzEnrollmentAmongAlhivOnArtBySex = () => {
     let malePercentage = 0;
     let maleTxCurr = 0;
 
-    const femaleVals = otzEnrollmentsBySex.filter(obj => obj.Gender === 'Female');
-    const maleVals = otzEnrollmentsBySex.filter(obj => obj.Gender === 'Male');
+    const femaleVals = Array.isArray(otzEnrollmentsBySex) ? otzEnrollmentsBySex.filter(obj => obj.Gender === 'Female') : [];
+    const maleVals = Array.isArray(otzEnrollmentsBySex) ? otzEnrollmentsBySex.filter(obj => obj.Gender === 'Male') : [];
     if (femaleVals.length > 0) {
-        const femaleAdolescents = adolescents.filter(obj => obj.Gender === 'Female');
+        const femaleAdolescents = Array.isArray(adolescents) ? adolescents.filter(obj => obj.Gender === 'Female') : [];
         if (femaleAdolescents.length > 0) {
             const totalFemaleAdolescents = femaleAdolescents[0].totalAdolescents;
             if (totalFemaleAdolescents > 0) {
@@ -32,7 +32,7 @@ const OtzEnrollmentAmongAlhivOnArtBySex = () => {
     }
 
     if (maleVals.length > 0) {
-        const maleAdolescents = adolescents.filter(obj => obj.Gender === 'Male');
+        const maleAdolescents = Array.isArray(adolescents) ? adolescents.filter(obj => obj.Gender === 'Male') : [];
         if (maleAdolescents.length > 0) {
             const totalMaleAdolescents = maleAdolescents[0].totalAdolescents;
             if (totalMaleAdolescents > 0) {

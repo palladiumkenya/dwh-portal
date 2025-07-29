@@ -249,9 +249,10 @@ const ViralLoad = () => {
                     <ViralLoadOutcomesHvlByFacility />
                     <SectionFooter overview={branding.overview} />
                 </TabPane>
-                {/*<TabPane tabId={'undetectable_untransmittable'}>*/}
-                {/*    <ViralLoadU_U/>*/}
-                {/*</TabPane>*/}
+                <TabPane tabId={'undetectable_untransmittable'}>
+                    {/* eslint-disable-next-line react/jsx-pascal-case */}
+                    <ViralLoadU_U/>
+                </TabPane>
             </TabContent>
         </div>
     );

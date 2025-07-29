@@ -5,27 +5,30 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import * as ahdSelectors from '../../../selectors/CT/AHD/ahdSelectors';
 
-const AHDScreening = () => {
+const AHDNutritionAssessment = () => {
     const [ahdScreeningChart, setAhdScreeningChart] = useState({});
-    const ahdScreeningData = useSelector(ahdSelectors.getAHDIndicators);
+    const ahdScreeningData = useSelector(ahdSelectors.getAHDNutritionAssessment);
 
     const loadAHDScreening = useCallback(async () => {
         setAhdScreeningChart({
             title: { text: '' },
             xAxis: [{ categories: [
-                    'PLHIV AT RISK OF AHD',
-                    'NO. SCREENED',
-                    'NO. WITH AHD'
-                ], title: { text: 'AHD SCREENING' }, crosshair: true }],
+                    'CHILDREN WITH AHD',
+                    'SCREENED FOR MALNUTRITION',
+                    'NO. WITH SAM',
+                    'NO. WITH MAM',
+                    // 'NO. WITH NUTRITIONAL ',
+                ], title: { text: 'AHD NUTRITION ASSESSMENT & MANAGEMENT' }, crosshair: true }],
             yAxis: [{ title: { text: '' }}],
             plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none', format: '{point.y:,.0f}{point.text}' } } },
             tooltip: { shared: true },
             legend: { align: 'left', verticalAlign: 'top', y: 0, x: 80 },
             series: [
                 { name: 'AHD SCREENED', data: [
-                        { y: ahdScreeningData?.NewPatient },
-                        { y: ahdScreeningData?.AHDScreened, text: ' (' + parseFloat(((ahdScreeningData?.AHDScreened/ahdScreeningData?.NewPatient)*100).toString()).toFixed(0) + '%)' },
-                        { y: ahdScreeningData?.AHD, text: ' (' + parseFloat(((ahdScreeningData?.AHD/ahdScreeningData?.AHDScreened)*100).toString()).toFixed(0) + '%)' },
+                        { y: ahdScreeningData?.ChildrenWithAHD },
+                        { y: ahdScreeningData?.ScreenedForMalnutrition, text: ahdScreeningData?.ChildrenWithAHD ? ' (' + parseFloat(((ahdScreeningData?.ScreenedForMalnutrition/ahdScreeningData?.ChildrenWithAHD)*100).toString()).toFixed(0) + '%)' : '' },
+                        { y: ahdScreeningData?.NumberWithSAM, text: ahdScreeningData?.ScreenedForMalnutrition ? ' (' + parseFloat(((ahdScreeningData?.NumberWithSAM/ahdScreeningData?.ScreenedForMalnutrition)*100).toString()).toFixed(0) + '%)' : '' },
+                        { y: ahdScreeningData?.NumberWithMAM, text: ahdScreeningData?.NumberWithSAM ? ' (' + parseFloat(((ahdScreeningData?.NumberWithMAM/ahdScreeningData?.NumberWithSAM)*100).toString()).toFixed(0) + '%)': '' },
                     ], type: 'column', color: "#142459" },
             ]
         });
@@ -38,7 +41,7 @@ const AHDScreening = () => {
     return (
         <Card className="trends-card">
             <CardHeader className="trends-header">
-                AHD SCREENING
+                NUTRITION ASSESSMENT & MANAGEMENT
             </CardHeader>
             <CardBody className="trends-body">
                 <div className="col-12">
@@ -49,4 +52,4 @@ const AHDScreening = () => {
     );
 };
 
-export default AHDScreening;
+export default AHDNutritionAssessment;

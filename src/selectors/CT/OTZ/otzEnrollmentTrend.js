@@ -22,14 +22,17 @@ export const getOtzEnrolled = createSelector(
             'November',
             'December',
         ];
-        let months = []
-        let data = []
-        list = list.slice(0, 12);
-        list.map((r) => { 
-            months.push(monthNames[r.month - 1])
+        let months = [];
+        let data = [];
+
+        // Sort the list based on the month property
+        list = list.slice(0, 12).sort((a, b) => a.month - b.month);
+
+        list.map((r) => {
+            months.push(monthNames[r.month - 1]);
             data.push(r.enrolledInOTZ);
         });
-        
+
         return {data, months};
     }
 );
