@@ -3,6 +3,7 @@ import Loadable from 'react-loadable';
 import VisibilitySensor from 'react-visibility-sensor';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
+import { Col, Row } from 'reactstrap';
 import {
     enableStickyFilter,
     disableStickyFilter,

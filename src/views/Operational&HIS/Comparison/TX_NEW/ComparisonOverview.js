@@ -5,7 +5,7 @@ import * as newlyStartedOnArtKHIS from '../../../../selectors/Operational&HIS/Co
 import { useSelector } from 'react-redux';
 import { formatNumber, roundNumber } from '../../../../utils/utils';
 import * as currentNewOnArtOverviewSelectors from '../../../../selectors/CT/NewOnArt/currentNewOnArtOverview';
-import { constSelector } from 'recoil';
+
 
 const ComparisonOverview = () => {
     let newlyKHIS = useSelector(newlyStartedOnArtKHIS.getNewlyStartedOnArtKHIS);

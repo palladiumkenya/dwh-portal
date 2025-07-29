@@ -117,3 +117,13 @@ export const getUnsuppressed = createSelector(
         return list.Unsuppressed ? list.Unsuppressed : 0;
     }
 );
+
+
+export const getTxDate = createSelector(
+    [listUnfiltered, listFiltered, filtered,],
+    (listUnfiltered, listFiltered, filtered) => {
+        const list = filtered ? listFiltered : listUnfiltered;
+
+        return list.EndofMonthDate;
+    }
+)

@@ -136,22 +136,28 @@ const dictionary = [
 
 const NupiDataset = () => {
     const [nupiDataset, setNupiDataset] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
 
     const loadDataset = useCallback(async () => {
+        setLoading(true)
         if (nupiDataset.length === 0) {
             let attempts = 0;
             while (attempts < 2) {
                 try {
                     let data = await getAll('care-treatment/nupiDataset', {});
                     setNupiDataset(data);
+                    setError(false)
+                    setLoading(false)
                     break; // Exit the loop if successful
                 } catch (e) {
-                    console.log(e);
                     attempts++;
+                    setLoading(false)
+                    setError(true)
                 }
             }
         }
-    });
+    }, [nupiDataset.length]);
 
     useEffect(() => {
         loadDataset();
@@ -159,9 +165,9 @@ const NupiDataset = () => {
 
     return (
         <>
-            {nupiDataset.length === 0 ? (
+            {nupiDataset.length === 0 && loading ? (
                 <Loading />
-            ) : (
+            ) : !error && (
                 <ExcelFile
                     filename={`NUPI dataset ${moment().format(
                         'DD-MM-YYYY HH:mm:ss a'

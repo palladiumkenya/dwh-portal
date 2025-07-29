@@ -4,11 +4,9 @@ import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtByAgeSex';
-import { useRecoilValue } from 'recoil';
 
 const CurrentOnArtByAgeSex = () => {
     const [currentOnArtByAgeSexChart, setCurrentOnArtByAgeSexChart] = useState({});
-    // const currentOnArtByAgeSexData = useRecoilValue(currentOnArtByAgeSexSelector)
     // useSelector(currentOnArtByAgeSexSelectors.getCurrentOnArtByAgeSex);
     const currentOnArtByAgeSexData = useSelector(
         currentOnArtByAgeSexSelectors.getCurrentOnArtByAgeSex

@@ -4,17 +4,13 @@ import Highcharts from 'highcharts';
 import { Card, CardBody, CardHeader } from 'reactstrap';
 import HighchartsReact from 'highcharts-react-official';
 import * as currentOnArtByAgeSexSelectors from '../../../selectors/CT/CurrentOnArt/currentOnArtVerifiedByAgeSex';
-import { useRecoilValue } from 'recoil';
-import moment from 'moment';
 import { formatNumber, roundNumber } from '../../../utils/utils';
 
 const CurrentOnArtVerifiedByAgeSexLT15 = () => {
     const [currentOnArtByAgeSexChart, setCurrentOnArtByAgeSexChart] = useState(
         {}
     );
-    // const currentOnArtByAgeSexData = useRecoilValue(
-    //     currentOnArtByAgeSexSelector
-    // );
+
     const currentOnArtByAgeSexData = useSelector(
         currentOnArtByAgeSexSelectors.getCurrentOnArtByAgeSexLT15
     );

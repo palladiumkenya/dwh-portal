@@ -38,6 +38,7 @@ export const getAHDNutritionAssessment = createSelector(
     [listUnfilteredNutrition, listFilteredNutrition, filtered],
     (listUnfiltered, listFiltered, filtered) => {
         console.log(listUnfiltered)
+        console.log(listUnfiltered, listFiltered)
         return filtered ? listFiltered : listUnfiltered;
     }
 )

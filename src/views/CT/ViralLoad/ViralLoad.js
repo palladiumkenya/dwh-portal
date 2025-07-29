@@ -116,19 +116,19 @@ const ViralLoad = () => {
                         VIRAL LOAD OUTCOMES UNSUPPRESSED
                     </NavLink>
                 </NavItem>
-                <NavItem>
-                    <NavLink
-                        className={classnames({
-                            active: mini_tab === 'undetectable_untransmittable',
-                        })}
-                        onClick={() => {
-                            setActiveTab('undetectable_untransmittable');
-                            toggle('undetectable_untransmittable');
-                        }}
-                    >
-                        {`UNDETECTABLE=UNTRANSMITTABLE (U=U)`}
-                    </NavLink>
-                </NavItem>
+                {/*<NavItem>*/}
+                {/*    <NavLink*/}
+                {/*        className={classnames({*/}
+                {/*            active: mini_tab === 'undetectable_untransmittable',*/}
+                {/*        })}*/}
+                {/*        onClick={() => {*/}
+                {/*            setActiveTab('undetectable_untransmittable');*/}
+                {/*            toggle('undetectable_untransmittable');*/}
+                {/*        }}*/}
+                {/*    >*/}
+                {/*        {`UNDETECTABLE=UNTRANSMITTABLE (U=U)`}*/}
+                {/*    </NavLink>*/}
+                {/*</NavItem>*/}
             </Nav>
             <TabContent activeTab={mini_tab}>
                 <TabPane tabId="uptake">
