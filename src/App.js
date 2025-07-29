@@ -16,6 +16,11 @@ import Loading from './views/Shared/Loading';
 import userManager, { loadUserFromStorage } from './services/UserService';
 import './App.scss';
 
+// External CSS libraries (imported via JS, not SCSS)
+import '@coreui/icons/css/all.min.css';
+import 'font-awesome/css/font-awesome.min.css';
+import 'semantic-ui-css/semantic.min.css';
+
 const DefaultLayout = Loadable({ loader: () => import('./containers/DefaultLayout'), loading: Loading, delay: LOADING_DELAY });
 const Login = Loadable({ loader: () => import('./views/Pages/Login'), loading: Loading, delay: LOADING_DELAY });
 const SigninOidc = Loadable({ loader: () => import('./views/Pages/Login/signin-oidc'), loading: Loading, delay: LOADING_DELAY });
