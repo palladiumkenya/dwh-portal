@@ -12,7 +12,7 @@ const CryptococcalMeningitis = () => {
     const loadCryptococcalMeningitis = useCallback(async () => {
         setCryptococcalMeningitisChart({
             title: { text: '' },
-            xAxis: [{ categories: ['PATIENTS WITH AHD', 'DONE CrAg TEST', 'CrAg POSITIVE', 'DONE CSF CrAg', 'CSF CrAg POS', 'INITIATED CM TREATMENT', 'PATIENTS DUE FOR PRE-EMPTIVE CM THERAPY'], title: { text: 'CrAg' }, crosshair: true }],
+            xAxis: [{ categories: ['PATIENTS WITH AHD', 'DONE CrAg TEST', 'CrAg POSITIVE', 'DONE CSF CrAg', 'CSF CrAg POS', 'INITIATED CM TREATMENT'], title: { text: 'CrAg' }, crosshair: true }],
             yAxis: [{ title: { text: '' }}],
             plotOptions: { column: { dataLabels: { enabled: true, crop: false, overflow: 'none', format: '{point.y:,.0f}{point.text}' } } },
             tooltip: { shared: true },
@@ -56,12 +56,12 @@ const CryptococcalMeningitis = () => {
                                 : ''
                         },
 
-                        {
-                            y: cryptococcalMeningitisData?.PreemtiveCMTheraphy,
-                            text: cryptococcalMeningitisData?.InitiatedCMTreatment
-                                ? ` (${((cryptococcalMeningitisData.PreemtiveCMTheraphy / cryptococcalMeningitisData.InitiatedCMTreatment) * 100).toFixed(0)}%)`
-                                : ''
-                        }
+                        // {
+                        //     y: cryptococcalMeningitisData?.PreemtiveCMTheraphy,
+                        //     text: cryptococcalMeningitisData?.InitiatedCMTreatment
+                        //         ? ` (${((cryptococcalMeningitisData.PreemtiveCMTheraphy / cryptococcalMeningitisData.InitiatedCMTreatment) * 100).toFixed(0)}%)`
+                        //         : ''
+                        // }
                     ],
                 type: 'column', color: "#142459" },
             ]

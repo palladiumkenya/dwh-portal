@@ -21,10 +21,23 @@ export const getCurrentOnArtByFacility = createSelector(
         listFilteredVerified,
         filtered
     ) => {
-        const list = filtered ? listFiltered : listUnfiltered;
-        const listVerified = filtered
-            ? listFilteredVerified
-            : listUnfilteredVerified;
+        const list = Array.isArray(filtered ? listFiltered : listUnfiltered)
+            ? (filtered ? listFiltered : listUnfiltered)
+            : [];
+
+        const listVerified = Array.isArray(filtered ? listFilteredVerified : listUnfilteredVerified)
+            ? (filtered ? listFilteredVerified : listUnfilteredVerified)
+            : [];
+
+        // Log warnings in development if something is wrong
+        if (!Array.isArray(list)) {
+            console.warn("Expected 'list' to be an array but got:", list);
+        }
+        if (!Array.isArray(listVerified)) {
+            console.warn("Expected 'listVerified' to be an array but got:", listVerified);
+        }
+
+        console.log(`reached the place`);
 
         const facilityData = list.map((e) => {
             let data = listVerified.filter((f) => parseInt(f.MFLCode, 10) === parseInt(e.MFLCode, 10));
