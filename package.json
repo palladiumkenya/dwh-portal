@@ -93,5 +93,10 @@
         "prettier": "^3.3.3",
         "react-syntax-highlighter": "^15.5.0"
     },
+    "overrides": {
+        "react-export-excel": {
+            "xlsx": "^0.18.5"
+        }
+    },
     "homepage": "."
 }
