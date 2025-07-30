@@ -49,11 +49,12 @@ const App = () => {
 
     useEffect(() => {
         // fetch current user from cookies
+        const params = { period };
         loadUserFromStorage(store);
         dispatch(loadRrSites());
         dispatch(loadHtsSites());
         dispatch(loadCtSites());
-        dispatch(loadDWHSummary("CT", period));
+        dispatch(loadDWHSummary("CT", params));
     }, [dispatch, period]);
 
     return (
