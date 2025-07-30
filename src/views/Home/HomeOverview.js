@@ -7,7 +7,10 @@ const HomeOverview = () => {
     const counties = useSelector(state => state.ctSites.counties);
     const facilities = useSelector(state => state.ctSites.facilities);
     const partners = useSelector(state => state.ctSites.partners);
-    
+    const totalCounties = useSelector(state => state.dwhSummary.totalCounties);
+    const totalFacilities = useSelector(state => state.dwhSummary.totalFacilities);
+    const totalPartners = useSelector(state => state.dwhSummary.totalPartners);
+
     return (
         <Row>
             <Col>
@@ -15,10 +18,14 @@ const HomeOverview = () => {
                     <CardBody className="primary-card-body">
                         <CardTitle tag="h4" className="pb-2">WELCOME</CardTitle>
                         <CardText className="mb-5">
-                            <strong>{facilities.length}</strong> Health Facilities in <strong>{counties.length}</strong> counties in Kenya,
-                            supported by <strong>{partners.length}</strong> SDPs have ever uploaded care & treatment data to the
-                            warehouse since it’s inception. As at {moment().format('MMM YYYY')},
-                            <strong> {facilities.length}</strong> facilities had reported patients current on ART
+                            <p>
+                                Since the inception of the National Data Warehouse(NDWH), a cumulative total of <strong>{facilities.length}</strong> Health Facilities across <strong>{counties.length}</strong> counties in Kenya,
+                                supported by various <strong>Service Delivery Partners(SDPs)</strong> have uploaded <strong>Care and Treatment</strong> data to the platform.
+                            </p>
+                            <p>
+                                As of <strong>{moment().format('MMMM YYYY')}</strong>, <strong>{totalFacilities}</strong> facilities submitted Care and Treatment datasets to the NDWH,
+                                supported by <strong>{totalPartners}</strong> SDPs operating in <strong>{totalCounties}</strong> counties.
+                            </p>
                         </CardText>
                         <CardTitle tag="h4" className="pb-2">KEY HIGHLIGHTS</CardTitle>
                         <ol>
