@@ -7,6 +7,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import { loadCtSites } from './actions/Shared/ctSitesActions';
 import { loadHtsSites } from './actions/Shared/htsSitesActions';
 import { loadRrSites } from './actions/Shared/rrSitesActions';
+import { loadDWHSummary } from './actions/Shared/dwhSummaryActions';
 import { store } from './store';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -41,13 +42,19 @@ const App = () => {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth() + 1;
+    const period = `${year},${month}`;
+
     useEffect(() => {
         // fetch current user from cookies
         loadUserFromStorage(store);
         dispatch(loadRrSites());
         dispatch(loadHtsSites());
         dispatch(loadCtSites());
-    }, [dispatch]);
+        dispatch(loadDWHSummary("CT", period));
+    }, [dispatch, period]);
 
     return (
         <AuthProvider userManager={userManager} store={store}>

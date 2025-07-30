@@ -6,6 +6,7 @@ import filters from "./Shared/filters";
 import rrSites from "./Shared/rrSites";
 import htsSites from "./Shared/htsSites";
 import ctSites from "./Shared/ctSites";
+import dwhSummary from "./Shared/dwhSummary";
 
 import gpsSites from "./Home/gpsSites";
 
@@ -354,6 +355,7 @@ export default combineReducers({
     rrSites,
     htsSites,
     ctSites,
+    dwhSummary,
 
     gpsSites,
 
