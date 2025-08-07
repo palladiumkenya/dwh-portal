@@ -10,6 +10,7 @@ const HomeOverview = () => {
     const totalCounties = useSelector(state => state.dwhSummary.totalCounties);
     const totalFacilities = useSelector(state => state.dwhSummary.totalFacilities);
     const totalPartners = useSelector(state => state.dwhSummary.totalPartners);
+    const previousMonth = moment().subtract(1, 'months').format('MMMM YYYY');
 
     return (
         <Row>
@@ -23,7 +24,7 @@ const HomeOverview = () => {
                                 supported by various <strong>Service Delivery Partners(SDPs)</strong> have uploaded <strong>Care and Treatment</strong> data to the platform.
                             </p>
                             <p>
-                                As of <strong>{moment().format('MMMM YYYY')}</strong>, <strong>{totalFacilities}</strong> facilities submitted Care and Treatment datasets to the NDWH,
+                                As of <strong>{previousMonth}</strong>, <strong>{totalFacilities}</strong> facilities submitted Care and Treatment datasets to the NDWH,
                                 supported by <strong>{totalPartners}</strong> SDPs operating in <strong>{totalCounties}</strong> counties.
                             </p>
                         </CardText>
