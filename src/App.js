@@ -43,6 +43,7 @@ const App = () => {
     const history = useHistory();
 
     const now = new Date();
+    now.setMonth(now.getMonth() - 1);
     const year = now.getFullYear();
     const month = now.getMonth() + 1;
     const period = `${year},${month}`;
