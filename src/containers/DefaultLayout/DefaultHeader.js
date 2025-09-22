@@ -142,6 +142,16 @@ const DefaultHeader = () => {
                     </a>
                 </NavItem> */}
                 <NavItem>
+                    <a
+                        href="https://analytics.nascop.org/superset/dashboard/1307"
+                        className="nav-link active"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <strong>Case Surveillance Dashboard</strong>
+                    </a>
+                </NavItem>
+                <NavItem>
                     <NavLink
                         to="/"
                         className="nav-link active"
